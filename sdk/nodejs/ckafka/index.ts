@@ -6,21 +6,45 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./acl";
+export * from "./aclRule";
 export * from "./connectResource";
+export * from "./consumerGroup";
+export * from "./consumerGroupModifyOffset";
+export * from "./datahubTask";
 export * from "./datahubTopic";
 export * from "./getAcls";
+export * from "./getConnectResource";
+export * from "./getDatahubGroupOffsets";
+export * from "./getDatahubTask";
+export * from "./getDatahubTopic";
+export * from "./getGroup";
+export * from "./getGroupInfo";
+export * from "./getGroupOffsets";
 export * from "./getInstances";
+export * from "./getRegion";
+export * from "./getTaskStatus";
+export * from "./getTopicFlowRanking";
+export * from "./getTopicProduceConnection";
+export * from "./getTopicSubscribeGroup";
+export * from "./getTopicSyncReplica";
 export * from "./getTopics";
 export * from "./getUsers";
+export * from "./getZone";
 export * from "./instance";
+export * from "./renewInstance";
 export * from "./topic";
 export * from "./user";
 
 // Import resources to register:
 import { Acl } from "./acl";
+import { AclRule } from "./aclRule";
 import { ConnectResource } from "./connectResource";
+import { ConsumerGroup } from "./consumerGroup";
+import { ConsumerGroupModifyOffset } from "./consumerGroupModifyOffset";
+import { DatahubTask } from "./datahubTask";
 import { DatahubTopic } from "./datahubTopic";
 import { Instance } from "./instance";
+import { RenewInstance } from "./renewInstance";
 import { Topic } from "./topic";
 import { User } from "./user";
 
@@ -30,12 +54,22 @@ const _module = {
         switch (type) {
             case "tencentcloud:Ckafka/acl:Acl":
                 return new Acl(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/aclRule:AclRule":
+                return new AclRule(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/connectResource:ConnectResource":
                 return new ConnectResource(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/consumerGroup:ConsumerGroup":
+                return new ConsumerGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/consumerGroupModifyOffset:ConsumerGroupModifyOffset":
+                return new ConsumerGroupModifyOffset(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/datahubTask:DatahubTask":
+                return new DatahubTask(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/datahubTopic:DatahubTopic":
                 return new DatahubTopic(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/renewInstance:RenewInstance":
+                return new RenewInstance(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/user:User":
@@ -46,8 +80,13 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/acl", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/aclRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/connectResource", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/consumerGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/consumerGroupModifyOffset", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/datahubTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/datahubTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/renewInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/user", _module)

@@ -14,8 +14,8 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const basic = new tencentcloud.Mariadb.HourDbInstance("basic", {
- *     dbVersionId: "8.0",
- *     instanceName: "db-test-2",
+ *     dbVersionId: "10.0",
+ *     instanceName: "db-test-del",
  *     memory: 2,
  *     nodeCount: 2,
  *     storage: 10,
@@ -23,9 +23,10 @@ import * as utilities from "../utilities";
  *     tags: {
  *         createdBy: "terraform",
  *     },
+ *     vip: "10.0.0.197",
  *     vpcId: "vpc-k1t8ickr",
  *     zones: [
- *         "ap-guangzhou-7",
+ *         "ap-guangzhou-6",
  *         "ap-guangzhou-7",
  *     ],
  * });
@@ -84,6 +85,10 @@ export class HourDbInstance extends pulumi.CustomResource {
      */
     public readonly nodeCount!: pulumi.Output<number>;
     /**
+     * project id.
+     */
+    public readonly projectId!: pulumi.Output<number | undefined>;
+    /**
      * instance disk storage.
      */
     public readonly storage!: pulumi.Output<number>;
@@ -95,6 +100,10 @@ export class HourDbInstance extends pulumi.CustomResource {
      * Tag description list.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
+     * vip.
+     */
+    public readonly vip!: pulumi.Output<string>;
     /**
      * vpc id.
      */
@@ -121,9 +130,11 @@ export class HourDbInstance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["nodeCount"] = state ? state.nodeCount : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["storage"] = state ? state.storage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["vip"] = state ? state.vip : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["zones"] = state ? state.zones : undefined;
         } else {
@@ -144,9 +155,11 @@ export class HourDbInstance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["nodeCount"] = args ? args.nodeCount : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zones"] = args ? args.zones : undefined;
         }
@@ -176,6 +189,10 @@ export interface HourDbInstanceState {
      */
     nodeCount?: pulumi.Input<number>;
     /**
+     * project id.
+     */
+    projectId?: pulumi.Input<number>;
+    /**
      * instance disk storage.
      */
     storage?: pulumi.Input<number>;
@@ -187,6 +204,10 @@ export interface HourDbInstanceState {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * vip.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * vpc id.
      */
@@ -218,6 +239,10 @@ export interface HourDbInstanceArgs {
      */
     nodeCount: pulumi.Input<number>;
     /**
+     * project id.
+     */
+    projectId?: pulumi.Input<number>;
+    /**
      * instance disk storage.
      */
     storage: pulumi.Input<number>;
@@ -229,6 +254,10 @@ export interface HourDbInstanceArgs {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * vip.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * vpc id.
      */

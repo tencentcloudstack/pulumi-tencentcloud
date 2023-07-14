@@ -10,6 +10,1400 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AlarmAlarmTarget struct {
+	// search end time of offset.
+	EndTimeOffset int `pulumi:"endTimeOffset"`
+	// logset id.
+	LogsetId string `pulumi:"logsetId"`
+	// the number of alarm object.
+	Number int `pulumi:"number"`
+	// query rules.
+	Query string `pulumi:"query"`
+	// search start time of offset.
+	StartTimeOffset int `pulumi:"startTimeOffset"`
+	// topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// AlarmAlarmTargetInput is an input type that accepts AlarmAlarmTargetArgs and AlarmAlarmTargetOutput values.
+// You can construct a concrete instance of `AlarmAlarmTargetInput` via:
+//
+//          AlarmAlarmTargetArgs{...}
+type AlarmAlarmTargetInput interface {
+	pulumi.Input
+
+	ToAlarmAlarmTargetOutput() AlarmAlarmTargetOutput
+	ToAlarmAlarmTargetOutputWithContext(context.Context) AlarmAlarmTargetOutput
+}
+
+type AlarmAlarmTargetArgs struct {
+	// search end time of offset.
+	EndTimeOffset pulumi.IntInput `pulumi:"endTimeOffset"`
+	// logset id.
+	LogsetId pulumi.StringInput `pulumi:"logsetId"`
+	// the number of alarm object.
+	Number pulumi.IntInput `pulumi:"number"`
+	// query rules.
+	Query pulumi.StringInput `pulumi:"query"`
+	// search start time of offset.
+	StartTimeOffset pulumi.IntInput `pulumi:"startTimeOffset"`
+	// topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (AlarmAlarmTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAlarmTarget)(nil)).Elem()
+}
+
+func (i AlarmAlarmTargetArgs) ToAlarmAlarmTargetOutput() AlarmAlarmTargetOutput {
+	return i.ToAlarmAlarmTargetOutputWithContext(context.Background())
+}
+
+func (i AlarmAlarmTargetArgs) ToAlarmAlarmTargetOutputWithContext(ctx context.Context) AlarmAlarmTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAlarmTargetOutput)
+}
+
+// AlarmAlarmTargetArrayInput is an input type that accepts AlarmAlarmTargetArray and AlarmAlarmTargetArrayOutput values.
+// You can construct a concrete instance of `AlarmAlarmTargetArrayInput` via:
+//
+//          AlarmAlarmTargetArray{ AlarmAlarmTargetArgs{...} }
+type AlarmAlarmTargetArrayInput interface {
+	pulumi.Input
+
+	ToAlarmAlarmTargetArrayOutput() AlarmAlarmTargetArrayOutput
+	ToAlarmAlarmTargetArrayOutputWithContext(context.Context) AlarmAlarmTargetArrayOutput
+}
+
+type AlarmAlarmTargetArray []AlarmAlarmTargetInput
+
+func (AlarmAlarmTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAlarmTarget)(nil)).Elem()
+}
+
+func (i AlarmAlarmTargetArray) ToAlarmAlarmTargetArrayOutput() AlarmAlarmTargetArrayOutput {
+	return i.ToAlarmAlarmTargetArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmAlarmTargetArray) ToAlarmAlarmTargetArrayOutputWithContext(ctx context.Context) AlarmAlarmTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAlarmTargetArrayOutput)
+}
+
+type AlarmAlarmTargetOutput struct{ *pulumi.OutputState }
+
+func (AlarmAlarmTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAlarmTarget)(nil)).Elem()
+}
+
+func (o AlarmAlarmTargetOutput) ToAlarmAlarmTargetOutput() AlarmAlarmTargetOutput {
+	return o
+}
+
+func (o AlarmAlarmTargetOutput) ToAlarmAlarmTargetOutputWithContext(ctx context.Context) AlarmAlarmTargetOutput {
+	return o
+}
+
+// search end time of offset.
+func (o AlarmAlarmTargetOutput) EndTimeOffset() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) int { return v.EndTimeOffset }).(pulumi.IntOutput)
+}
+
+// logset id.
+func (o AlarmAlarmTargetOutput) LogsetId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) string { return v.LogsetId }).(pulumi.StringOutput)
+}
+
+// the number of alarm object.
+func (o AlarmAlarmTargetOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) int { return v.Number }).(pulumi.IntOutput)
+}
+
+// query rules.
+func (o AlarmAlarmTargetOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) string { return v.Query }).(pulumi.StringOutput)
+}
+
+// search start time of offset.
+func (o AlarmAlarmTargetOutput) StartTimeOffset() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) int { return v.StartTimeOffset }).(pulumi.IntOutput)
+}
+
+// topic id.
+func (o AlarmAlarmTargetOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type AlarmAlarmTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmAlarmTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAlarmTarget)(nil)).Elem()
+}
+
+func (o AlarmAlarmTargetArrayOutput) ToAlarmAlarmTargetArrayOutput() AlarmAlarmTargetArrayOutput {
+	return o
+}
+
+func (o AlarmAlarmTargetArrayOutput) ToAlarmAlarmTargetArrayOutputWithContext(ctx context.Context) AlarmAlarmTargetArrayOutput {
+	return o
+}
+
+func (o AlarmAlarmTargetArrayOutput) Index(i pulumi.IntInput) AlarmAlarmTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmAlarmTarget {
+		return vs[0].([]AlarmAlarmTarget)[vs[1].(int)]
+	}).(AlarmAlarmTargetOutput)
+}
+
+type AlarmAnalysis struct {
+	// configuration.
+	ConfigInfos []AlarmAnalysisConfigInfo `pulumi:"configInfos"`
+	// analysis content.
+	Content string `pulumi:"content"`
+	// analysis name.
+	Name string `pulumi:"name"`
+	// analysis type.
+	Type string `pulumi:"type"`
+}
+
+// AlarmAnalysisInput is an input type that accepts AlarmAnalysisArgs and AlarmAnalysisOutput values.
+// You can construct a concrete instance of `AlarmAnalysisInput` via:
+//
+//          AlarmAnalysisArgs{...}
+type AlarmAnalysisInput interface {
+	pulumi.Input
+
+	ToAlarmAnalysisOutput() AlarmAnalysisOutput
+	ToAlarmAnalysisOutputWithContext(context.Context) AlarmAnalysisOutput
+}
+
+type AlarmAnalysisArgs struct {
+	// configuration.
+	ConfigInfos AlarmAnalysisConfigInfoArrayInput `pulumi:"configInfos"`
+	// analysis content.
+	Content pulumi.StringInput `pulumi:"content"`
+	// analysis name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// analysis type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (AlarmAnalysisArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAnalysis)(nil)).Elem()
+}
+
+func (i AlarmAnalysisArgs) ToAlarmAnalysisOutput() AlarmAnalysisOutput {
+	return i.ToAlarmAnalysisOutputWithContext(context.Background())
+}
+
+func (i AlarmAnalysisArgs) ToAlarmAnalysisOutputWithContext(ctx context.Context) AlarmAnalysisOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAnalysisOutput)
+}
+
+// AlarmAnalysisArrayInput is an input type that accepts AlarmAnalysisArray and AlarmAnalysisArrayOutput values.
+// You can construct a concrete instance of `AlarmAnalysisArrayInput` via:
+//
+//          AlarmAnalysisArray{ AlarmAnalysisArgs{...} }
+type AlarmAnalysisArrayInput interface {
+	pulumi.Input
+
+	ToAlarmAnalysisArrayOutput() AlarmAnalysisArrayOutput
+	ToAlarmAnalysisArrayOutputWithContext(context.Context) AlarmAnalysisArrayOutput
+}
+
+type AlarmAnalysisArray []AlarmAnalysisInput
+
+func (AlarmAnalysisArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAnalysis)(nil)).Elem()
+}
+
+func (i AlarmAnalysisArray) ToAlarmAnalysisArrayOutput() AlarmAnalysisArrayOutput {
+	return i.ToAlarmAnalysisArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmAnalysisArray) ToAlarmAnalysisArrayOutputWithContext(ctx context.Context) AlarmAnalysisArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAnalysisArrayOutput)
+}
+
+type AlarmAnalysisOutput struct{ *pulumi.OutputState }
+
+func (AlarmAnalysisOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAnalysis)(nil)).Elem()
+}
+
+func (o AlarmAnalysisOutput) ToAlarmAnalysisOutput() AlarmAnalysisOutput {
+	return o
+}
+
+func (o AlarmAnalysisOutput) ToAlarmAnalysisOutputWithContext(ctx context.Context) AlarmAnalysisOutput {
+	return o
+}
+
+// configuration.
+func (o AlarmAnalysisOutput) ConfigInfos() AlarmAnalysisConfigInfoArrayOutput {
+	return o.ApplyT(func(v AlarmAnalysis) []AlarmAnalysisConfigInfo { return v.ConfigInfos }).(AlarmAnalysisConfigInfoArrayOutput)
+}
+
+// analysis content.
+func (o AlarmAnalysisOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAnalysis) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// analysis name.
+func (o AlarmAnalysisOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAnalysis) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// analysis type.
+func (o AlarmAnalysisOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAnalysis) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type AlarmAnalysisArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmAnalysisArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAnalysis)(nil)).Elem()
+}
+
+func (o AlarmAnalysisArrayOutput) ToAlarmAnalysisArrayOutput() AlarmAnalysisArrayOutput {
+	return o
+}
+
+func (o AlarmAnalysisArrayOutput) ToAlarmAnalysisArrayOutputWithContext(ctx context.Context) AlarmAnalysisArrayOutput {
+	return o
+}
+
+func (o AlarmAnalysisArrayOutput) Index(i pulumi.IntInput) AlarmAnalysisOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmAnalysis {
+		return vs[0].([]AlarmAnalysis)[vs[1].(int)]
+	}).(AlarmAnalysisOutput)
+}
+
+type AlarmAnalysisConfigInfo struct {
+	// key.
+	Key string `pulumi:"key"`
+	// value.
+	Value string `pulumi:"value"`
+}
+
+// AlarmAnalysisConfigInfoInput is an input type that accepts AlarmAnalysisConfigInfoArgs and AlarmAnalysisConfigInfoOutput values.
+// You can construct a concrete instance of `AlarmAnalysisConfigInfoInput` via:
+//
+//          AlarmAnalysisConfigInfoArgs{...}
+type AlarmAnalysisConfigInfoInput interface {
+	pulumi.Input
+
+	ToAlarmAnalysisConfigInfoOutput() AlarmAnalysisConfigInfoOutput
+	ToAlarmAnalysisConfigInfoOutputWithContext(context.Context) AlarmAnalysisConfigInfoOutput
+}
+
+type AlarmAnalysisConfigInfoArgs struct {
+	// key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (AlarmAnalysisConfigInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAnalysisConfigInfo)(nil)).Elem()
+}
+
+func (i AlarmAnalysisConfigInfoArgs) ToAlarmAnalysisConfigInfoOutput() AlarmAnalysisConfigInfoOutput {
+	return i.ToAlarmAnalysisConfigInfoOutputWithContext(context.Background())
+}
+
+func (i AlarmAnalysisConfigInfoArgs) ToAlarmAnalysisConfigInfoOutputWithContext(ctx context.Context) AlarmAnalysisConfigInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAnalysisConfigInfoOutput)
+}
+
+// AlarmAnalysisConfigInfoArrayInput is an input type that accepts AlarmAnalysisConfigInfoArray and AlarmAnalysisConfigInfoArrayOutput values.
+// You can construct a concrete instance of `AlarmAnalysisConfigInfoArrayInput` via:
+//
+//          AlarmAnalysisConfigInfoArray{ AlarmAnalysisConfigInfoArgs{...} }
+type AlarmAnalysisConfigInfoArrayInput interface {
+	pulumi.Input
+
+	ToAlarmAnalysisConfigInfoArrayOutput() AlarmAnalysisConfigInfoArrayOutput
+	ToAlarmAnalysisConfigInfoArrayOutputWithContext(context.Context) AlarmAnalysisConfigInfoArrayOutput
+}
+
+type AlarmAnalysisConfigInfoArray []AlarmAnalysisConfigInfoInput
+
+func (AlarmAnalysisConfigInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAnalysisConfigInfo)(nil)).Elem()
+}
+
+func (i AlarmAnalysisConfigInfoArray) ToAlarmAnalysisConfigInfoArrayOutput() AlarmAnalysisConfigInfoArrayOutput {
+	return i.ToAlarmAnalysisConfigInfoArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmAnalysisConfigInfoArray) ToAlarmAnalysisConfigInfoArrayOutputWithContext(ctx context.Context) AlarmAnalysisConfigInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmAnalysisConfigInfoArrayOutput)
+}
+
+type AlarmAnalysisConfigInfoOutput struct{ *pulumi.OutputState }
+
+func (AlarmAnalysisConfigInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmAnalysisConfigInfo)(nil)).Elem()
+}
+
+func (o AlarmAnalysisConfigInfoOutput) ToAlarmAnalysisConfigInfoOutput() AlarmAnalysisConfigInfoOutput {
+	return o
+}
+
+func (o AlarmAnalysisConfigInfoOutput) ToAlarmAnalysisConfigInfoOutputWithContext(ctx context.Context) AlarmAnalysisConfigInfoOutput {
+	return o
+}
+
+// key.
+func (o AlarmAnalysisConfigInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAnalysisConfigInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// value.
+func (o AlarmAnalysisConfigInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmAnalysisConfigInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type AlarmAnalysisConfigInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmAnalysisConfigInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmAnalysisConfigInfo)(nil)).Elem()
+}
+
+func (o AlarmAnalysisConfigInfoArrayOutput) ToAlarmAnalysisConfigInfoArrayOutput() AlarmAnalysisConfigInfoArrayOutput {
+	return o
+}
+
+func (o AlarmAnalysisConfigInfoArrayOutput) ToAlarmAnalysisConfigInfoArrayOutputWithContext(ctx context.Context) AlarmAnalysisConfigInfoArrayOutput {
+	return o
+}
+
+func (o AlarmAnalysisConfigInfoArrayOutput) Index(i pulumi.IntInput) AlarmAnalysisConfigInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmAnalysisConfigInfo {
+		return vs[0].([]AlarmAnalysisConfigInfo)[vs[1].(int)]
+	}).(AlarmAnalysisConfigInfoOutput)
+}
+
+type AlarmCallBack struct {
+	// callback body.
+	Body string `pulumi:"body"`
+	// callback headers.
+	Headers []string `pulumi:"headers"`
+}
+
+// AlarmCallBackInput is an input type that accepts AlarmCallBackArgs and AlarmCallBackOutput values.
+// You can construct a concrete instance of `AlarmCallBackInput` via:
+//
+//          AlarmCallBackArgs{...}
+type AlarmCallBackInput interface {
+	pulumi.Input
+
+	ToAlarmCallBackOutput() AlarmCallBackOutput
+	ToAlarmCallBackOutputWithContext(context.Context) AlarmCallBackOutput
+}
+
+type AlarmCallBackArgs struct {
+	// callback body.
+	Body pulumi.StringInput `pulumi:"body"`
+	// callback headers.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+}
+
+func (AlarmCallBackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmCallBack)(nil)).Elem()
+}
+
+func (i AlarmCallBackArgs) ToAlarmCallBackOutput() AlarmCallBackOutput {
+	return i.ToAlarmCallBackOutputWithContext(context.Background())
+}
+
+func (i AlarmCallBackArgs) ToAlarmCallBackOutputWithContext(ctx context.Context) AlarmCallBackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmCallBackOutput)
+}
+
+func (i AlarmCallBackArgs) ToAlarmCallBackPtrOutput() AlarmCallBackPtrOutput {
+	return i.ToAlarmCallBackPtrOutputWithContext(context.Background())
+}
+
+func (i AlarmCallBackArgs) ToAlarmCallBackPtrOutputWithContext(ctx context.Context) AlarmCallBackPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmCallBackOutput).ToAlarmCallBackPtrOutputWithContext(ctx)
+}
+
+// AlarmCallBackPtrInput is an input type that accepts AlarmCallBackArgs, AlarmCallBackPtr and AlarmCallBackPtrOutput values.
+// You can construct a concrete instance of `AlarmCallBackPtrInput` via:
+//
+//          AlarmCallBackArgs{...}
+//
+//  or:
+//
+//          nil
+type AlarmCallBackPtrInput interface {
+	pulumi.Input
+
+	ToAlarmCallBackPtrOutput() AlarmCallBackPtrOutput
+	ToAlarmCallBackPtrOutputWithContext(context.Context) AlarmCallBackPtrOutput
+}
+
+type alarmCallBackPtrType AlarmCallBackArgs
+
+func AlarmCallBackPtr(v *AlarmCallBackArgs) AlarmCallBackPtrInput {
+	return (*alarmCallBackPtrType)(v)
+}
+
+func (*alarmCallBackPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmCallBack)(nil)).Elem()
+}
+
+func (i *alarmCallBackPtrType) ToAlarmCallBackPtrOutput() AlarmCallBackPtrOutput {
+	return i.ToAlarmCallBackPtrOutputWithContext(context.Background())
+}
+
+func (i *alarmCallBackPtrType) ToAlarmCallBackPtrOutputWithContext(ctx context.Context) AlarmCallBackPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmCallBackPtrOutput)
+}
+
+type AlarmCallBackOutput struct{ *pulumi.OutputState }
+
+func (AlarmCallBackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmCallBack)(nil)).Elem()
+}
+
+func (o AlarmCallBackOutput) ToAlarmCallBackOutput() AlarmCallBackOutput {
+	return o
+}
+
+func (o AlarmCallBackOutput) ToAlarmCallBackOutputWithContext(ctx context.Context) AlarmCallBackOutput {
+	return o
+}
+
+func (o AlarmCallBackOutput) ToAlarmCallBackPtrOutput() AlarmCallBackPtrOutput {
+	return o.ToAlarmCallBackPtrOutputWithContext(context.Background())
+}
+
+func (o AlarmCallBackOutput) ToAlarmCallBackPtrOutputWithContext(ctx context.Context) AlarmCallBackPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AlarmCallBack) *AlarmCallBack {
+		return &v
+	}).(AlarmCallBackPtrOutput)
+}
+
+// callback body.
+func (o AlarmCallBackOutput) Body() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmCallBack) string { return v.Body }).(pulumi.StringOutput)
+}
+
+// callback headers.
+func (o AlarmCallBackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmCallBack) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+type AlarmCallBackPtrOutput struct{ *pulumi.OutputState }
+
+func (AlarmCallBackPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmCallBack)(nil)).Elem()
+}
+
+func (o AlarmCallBackPtrOutput) ToAlarmCallBackPtrOutput() AlarmCallBackPtrOutput {
+	return o
+}
+
+func (o AlarmCallBackPtrOutput) ToAlarmCallBackPtrOutputWithContext(ctx context.Context) AlarmCallBackPtrOutput {
+	return o
+}
+
+func (o AlarmCallBackPtrOutput) Elem() AlarmCallBackOutput {
+	return o.ApplyT(func(v *AlarmCallBack) AlarmCallBack {
+		if v != nil {
+			return *v
+		}
+		var ret AlarmCallBack
+		return ret
+	}).(AlarmCallBackOutput)
+}
+
+// callback body.
+func (o AlarmCallBackPtrOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlarmCallBack) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Body
+	}).(pulumi.StringPtrOutput)
+}
+
+// callback headers.
+func (o AlarmCallBackPtrOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AlarmCallBack) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(pulumi.StringArrayOutput)
+}
+
+type AlarmMonitorTime struct {
+	// time period or point in time.
+	Time int `pulumi:"time"`
+	// Period for periodic execution, Fixed for regular execution.
+	Type string `pulumi:"type"`
+}
+
+// AlarmMonitorTimeInput is an input type that accepts AlarmMonitorTimeArgs and AlarmMonitorTimeOutput values.
+// You can construct a concrete instance of `AlarmMonitorTimeInput` via:
+//
+//          AlarmMonitorTimeArgs{...}
+type AlarmMonitorTimeInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorTimeOutput() AlarmMonitorTimeOutput
+	ToAlarmMonitorTimeOutputWithContext(context.Context) AlarmMonitorTimeOutput
+}
+
+type AlarmMonitorTimeArgs struct {
+	// time period or point in time.
+	Time pulumi.IntInput `pulumi:"time"`
+	// Period for periodic execution, Fixed for regular execution.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (AlarmMonitorTimeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorTime)(nil)).Elem()
+}
+
+func (i AlarmMonitorTimeArgs) ToAlarmMonitorTimeOutput() AlarmMonitorTimeOutput {
+	return i.ToAlarmMonitorTimeOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorTimeArgs) ToAlarmMonitorTimeOutputWithContext(ctx context.Context) AlarmMonitorTimeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorTimeOutput)
+}
+
+func (i AlarmMonitorTimeArgs) ToAlarmMonitorTimePtrOutput() AlarmMonitorTimePtrOutput {
+	return i.ToAlarmMonitorTimePtrOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorTimeArgs) ToAlarmMonitorTimePtrOutputWithContext(ctx context.Context) AlarmMonitorTimePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorTimeOutput).ToAlarmMonitorTimePtrOutputWithContext(ctx)
+}
+
+// AlarmMonitorTimePtrInput is an input type that accepts AlarmMonitorTimeArgs, AlarmMonitorTimePtr and AlarmMonitorTimePtrOutput values.
+// You can construct a concrete instance of `AlarmMonitorTimePtrInput` via:
+//
+//          AlarmMonitorTimeArgs{...}
+//
+//  or:
+//
+//          nil
+type AlarmMonitorTimePtrInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorTimePtrOutput() AlarmMonitorTimePtrOutput
+	ToAlarmMonitorTimePtrOutputWithContext(context.Context) AlarmMonitorTimePtrOutput
+}
+
+type alarmMonitorTimePtrType AlarmMonitorTimeArgs
+
+func AlarmMonitorTimePtr(v *AlarmMonitorTimeArgs) AlarmMonitorTimePtrInput {
+	return (*alarmMonitorTimePtrType)(v)
+}
+
+func (*alarmMonitorTimePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmMonitorTime)(nil)).Elem()
+}
+
+func (i *alarmMonitorTimePtrType) ToAlarmMonitorTimePtrOutput() AlarmMonitorTimePtrOutput {
+	return i.ToAlarmMonitorTimePtrOutputWithContext(context.Background())
+}
+
+func (i *alarmMonitorTimePtrType) ToAlarmMonitorTimePtrOutputWithContext(ctx context.Context) AlarmMonitorTimePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorTimePtrOutput)
+}
+
+type AlarmMonitorTimeOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorTimeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorTime)(nil)).Elem()
+}
+
+func (o AlarmMonitorTimeOutput) ToAlarmMonitorTimeOutput() AlarmMonitorTimeOutput {
+	return o
+}
+
+func (o AlarmMonitorTimeOutput) ToAlarmMonitorTimeOutputWithContext(ctx context.Context) AlarmMonitorTimeOutput {
+	return o
+}
+
+func (o AlarmMonitorTimeOutput) ToAlarmMonitorTimePtrOutput() AlarmMonitorTimePtrOutput {
+	return o.ToAlarmMonitorTimePtrOutputWithContext(context.Background())
+}
+
+func (o AlarmMonitorTimeOutput) ToAlarmMonitorTimePtrOutputWithContext(ctx context.Context) AlarmMonitorTimePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AlarmMonitorTime) *AlarmMonitorTime {
+		return &v
+	}).(AlarmMonitorTimePtrOutput)
+}
+
+// time period or point in time.
+func (o AlarmMonitorTimeOutput) Time() pulumi.IntOutput {
+	return o.ApplyT(func(v AlarmMonitorTime) int { return v.Time }).(pulumi.IntOutput)
+}
+
+// Period for periodic execution, Fixed for regular execution.
+func (o AlarmMonitorTimeOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmMonitorTime) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type AlarmMonitorTimePtrOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorTimePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmMonitorTime)(nil)).Elem()
+}
+
+func (o AlarmMonitorTimePtrOutput) ToAlarmMonitorTimePtrOutput() AlarmMonitorTimePtrOutput {
+	return o
+}
+
+func (o AlarmMonitorTimePtrOutput) ToAlarmMonitorTimePtrOutputWithContext(ctx context.Context) AlarmMonitorTimePtrOutput {
+	return o
+}
+
+func (o AlarmMonitorTimePtrOutput) Elem() AlarmMonitorTimeOutput {
+	return o.ApplyT(func(v *AlarmMonitorTime) AlarmMonitorTime {
+		if v != nil {
+			return *v
+		}
+		var ret AlarmMonitorTime
+		return ret
+	}).(AlarmMonitorTimeOutput)
+}
+
+// time period or point in time.
+func (o AlarmMonitorTimePtrOutput) Time() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AlarmMonitorTime) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Time
+	}).(pulumi.IntPtrOutput)
+}
+
+// Period for periodic execution, Fixed for regular execution.
+func (o AlarmMonitorTimePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlarmMonitorTime) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeReceiver struct {
+	// end time allowed to receive messages.
+	EndTime *string `pulumi:"endTime"`
+	// index.
+	Index *int `pulumi:"index"`
+	// receiver channels, Email,Sms,WeChat or Phone.
+	ReceiverChannels []string `pulumi:"receiverChannels"`
+	// receiver id.
+	ReceiverIds []int `pulumi:"receiverIds"`
+	// receiver type, Uin or Group.
+	ReceiverType string `pulumi:"receiverType"`
+	// start time allowed to receive messages.
+	StartTime *string `pulumi:"startTime"`
+}
+
+// AlarmNoticeNoticeReceiverInput is an input type that accepts AlarmNoticeNoticeReceiverArgs and AlarmNoticeNoticeReceiverOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeReceiverInput` via:
+//
+//          AlarmNoticeNoticeReceiverArgs{...}
+type AlarmNoticeNoticeReceiverInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeReceiverOutput() AlarmNoticeNoticeReceiverOutput
+	ToAlarmNoticeNoticeReceiverOutputWithContext(context.Context) AlarmNoticeNoticeReceiverOutput
+}
+
+type AlarmNoticeNoticeReceiverArgs struct {
+	// end time allowed to receive messages.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// index.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// receiver channels, Email,Sms,WeChat or Phone.
+	ReceiverChannels pulumi.StringArrayInput `pulumi:"receiverChannels"`
+	// receiver id.
+	ReceiverIds pulumi.IntArrayInput `pulumi:"receiverIds"`
+	// receiver type, Uin or Group.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// start time allowed to receive messages.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+}
+
+func (AlarmNoticeNoticeReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeReceiverArgs) ToAlarmNoticeNoticeReceiverOutput() AlarmNoticeNoticeReceiverOutput {
+	return i.ToAlarmNoticeNoticeReceiverOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeReceiverArgs) ToAlarmNoticeNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeReceiverOutput)
+}
+
+// AlarmNoticeNoticeReceiverArrayInput is an input type that accepts AlarmNoticeNoticeReceiverArray and AlarmNoticeNoticeReceiverArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeReceiverArrayInput` via:
+//
+//          AlarmNoticeNoticeReceiverArray{ AlarmNoticeNoticeReceiverArgs{...} }
+type AlarmNoticeNoticeReceiverArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeReceiverArrayOutput
+	ToAlarmNoticeNoticeReceiverArrayOutputWithContext(context.Context) AlarmNoticeNoticeReceiverArrayOutput
+}
+
+type AlarmNoticeNoticeReceiverArray []AlarmNoticeNoticeReceiverInput
+
+func (AlarmNoticeNoticeReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeReceiverArray) ToAlarmNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeReceiverArrayOutput {
+	return i.ToAlarmNoticeNoticeReceiverArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeReceiverArray) ToAlarmNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeReceiverArrayOutput)
+}
+
+type AlarmNoticeNoticeReceiverOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeReceiverOutput) ToAlarmNoticeNoticeReceiverOutput() AlarmNoticeNoticeReceiverOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeReceiverOutput) ToAlarmNoticeNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeReceiverOutput {
+	return o
+}
+
+// end time allowed to receive messages.
+func (o AlarmNoticeNoticeReceiverOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// index.
+func (o AlarmNoticeNoticeReceiverOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// receiver channels, Email,Sms,WeChat or Phone.
+func (o AlarmNoticeNoticeReceiverOutput) ReceiverChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) []string { return v.ReceiverChannels }).(pulumi.StringArrayOutput)
+}
+
+// receiver id.
+func (o AlarmNoticeNoticeReceiverOutput) ReceiverIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) []int { return v.ReceiverIds }).(pulumi.IntArrayOutput)
+}
+
+// receiver type, Uin or Group.
+func (o AlarmNoticeNoticeReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// start time allowed to receive messages.
+func (o AlarmNoticeNoticeReceiverOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeReceiver) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeReceiverArrayOutput) ToAlarmNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeReceiverArrayOutput) ToAlarmNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeReceiverArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeReceiver {
+		return vs[0].([]AlarmNoticeNoticeReceiver)[vs[1].(int)]
+	}).(AlarmNoticeNoticeReceiverOutput)
+}
+
+type AlarmNoticeWebCallback struct {
+	// abandoned.
+	Body *string `pulumi:"body"`
+	// callback type, WeCom or Http.
+	CallbackType string `pulumi:"callbackType"`
+	// abandoned.
+	Headers []string `pulumi:"headers"`
+	// index.
+	Index *int `pulumi:"index"`
+	// Method, POST or PUT.
+	Method *string `pulumi:"method"`
+	// callback url.
+	Url string `pulumi:"url"`
+}
+
+// AlarmNoticeWebCallbackInput is an input type that accepts AlarmNoticeWebCallbackArgs and AlarmNoticeWebCallbackOutput values.
+// You can construct a concrete instance of `AlarmNoticeWebCallbackInput` via:
+//
+//          AlarmNoticeWebCallbackArgs{...}
+type AlarmNoticeWebCallbackInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeWebCallbackOutput() AlarmNoticeWebCallbackOutput
+	ToAlarmNoticeWebCallbackOutputWithContext(context.Context) AlarmNoticeWebCallbackOutput
+}
+
+type AlarmNoticeWebCallbackArgs struct {
+	// abandoned.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// callback type, WeCom or Http.
+	CallbackType pulumi.StringInput `pulumi:"callbackType"`
+	// abandoned.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// index.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Method, POST or PUT.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// callback url.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (AlarmNoticeWebCallbackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeWebCallbackArgs) ToAlarmNoticeWebCallbackOutput() AlarmNoticeWebCallbackOutput {
+	return i.ToAlarmNoticeWebCallbackOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeWebCallbackArgs) ToAlarmNoticeWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeWebCallbackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeWebCallbackOutput)
+}
+
+// AlarmNoticeWebCallbackArrayInput is an input type that accepts AlarmNoticeWebCallbackArray and AlarmNoticeWebCallbackArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeWebCallbackArrayInput` via:
+//
+//          AlarmNoticeWebCallbackArray{ AlarmNoticeWebCallbackArgs{...} }
+type AlarmNoticeWebCallbackArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeWebCallbackArrayOutput() AlarmNoticeWebCallbackArrayOutput
+	ToAlarmNoticeWebCallbackArrayOutputWithContext(context.Context) AlarmNoticeWebCallbackArrayOutput
+}
+
+type AlarmNoticeWebCallbackArray []AlarmNoticeWebCallbackInput
+
+func (AlarmNoticeWebCallbackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeWebCallbackArray) ToAlarmNoticeWebCallbackArrayOutput() AlarmNoticeWebCallbackArrayOutput {
+	return i.ToAlarmNoticeWebCallbackArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeWebCallbackArray) ToAlarmNoticeWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeWebCallbackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeWebCallbackArrayOutput)
+}
+
+type AlarmNoticeWebCallbackOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeWebCallbackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeWebCallbackOutput) ToAlarmNoticeWebCallbackOutput() AlarmNoticeWebCallbackOutput {
+	return o
+}
+
+func (o AlarmNoticeWebCallbackOutput) ToAlarmNoticeWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeWebCallbackOutput {
+	return o
+}
+
+// abandoned.
+func (o AlarmNoticeWebCallbackOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+// callback type, WeCom or Http.
+func (o AlarmNoticeWebCallbackOutput) CallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) string { return v.CallbackType }).(pulumi.StringOutput)
+}
+
+// abandoned.
+func (o AlarmNoticeWebCallbackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// index.
+func (o AlarmNoticeWebCallbackOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// Method, POST or PUT.
+func (o AlarmNoticeWebCallbackOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+// callback url.
+func (o AlarmNoticeWebCallbackOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeWebCallback) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type AlarmNoticeWebCallbackArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeWebCallbackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeWebCallbackArrayOutput) ToAlarmNoticeWebCallbackArrayOutput() AlarmNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeWebCallbackArrayOutput) ToAlarmNoticeWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeWebCallbackArrayOutput) Index(i pulumi.IntInput) AlarmNoticeWebCallbackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeWebCallback {
+		return vs[0].([]AlarmNoticeWebCallback)[vs[1].(int)]
+	}).(AlarmNoticeWebCallbackOutput)
+}
+
+type CkafkaConsumerCkafka struct {
+	// instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// topic id of ckafka.
+	TopicId string `pulumi:"topicId"`
+	// topic name of ckafka.
+	TopicName string `pulumi:"topicName"`
+	// vip.
+	Vip string `pulumi:"vip"`
+	// vport.
+	Vport string `pulumi:"vport"`
+}
+
+// CkafkaConsumerCkafkaInput is an input type that accepts CkafkaConsumerCkafkaArgs and CkafkaConsumerCkafkaOutput values.
+// You can construct a concrete instance of `CkafkaConsumerCkafkaInput` via:
+//
+//          CkafkaConsumerCkafkaArgs{...}
+type CkafkaConsumerCkafkaInput interface {
+	pulumi.Input
+
+	ToCkafkaConsumerCkafkaOutput() CkafkaConsumerCkafkaOutput
+	ToCkafkaConsumerCkafkaOutputWithContext(context.Context) CkafkaConsumerCkafkaOutput
+}
+
+type CkafkaConsumerCkafkaArgs struct {
+	// instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// topic id of ckafka.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+	// topic name of ckafka.
+	TopicName pulumi.StringInput `pulumi:"topicName"`
+	// vip.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// vport.
+	Vport pulumi.StringInput `pulumi:"vport"`
+}
+
+func (CkafkaConsumerCkafkaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CkafkaConsumerCkafka)(nil)).Elem()
+}
+
+func (i CkafkaConsumerCkafkaArgs) ToCkafkaConsumerCkafkaOutput() CkafkaConsumerCkafkaOutput {
+	return i.ToCkafkaConsumerCkafkaOutputWithContext(context.Background())
+}
+
+func (i CkafkaConsumerCkafkaArgs) ToCkafkaConsumerCkafkaOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerCkafkaOutput)
+}
+
+func (i CkafkaConsumerCkafkaArgs) ToCkafkaConsumerCkafkaPtrOutput() CkafkaConsumerCkafkaPtrOutput {
+	return i.ToCkafkaConsumerCkafkaPtrOutputWithContext(context.Background())
+}
+
+func (i CkafkaConsumerCkafkaArgs) ToCkafkaConsumerCkafkaPtrOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerCkafkaOutput).ToCkafkaConsumerCkafkaPtrOutputWithContext(ctx)
+}
+
+// CkafkaConsumerCkafkaPtrInput is an input type that accepts CkafkaConsumerCkafkaArgs, CkafkaConsumerCkafkaPtr and CkafkaConsumerCkafkaPtrOutput values.
+// You can construct a concrete instance of `CkafkaConsumerCkafkaPtrInput` via:
+//
+//          CkafkaConsumerCkafkaArgs{...}
+//
+//  or:
+//
+//          nil
+type CkafkaConsumerCkafkaPtrInput interface {
+	pulumi.Input
+
+	ToCkafkaConsumerCkafkaPtrOutput() CkafkaConsumerCkafkaPtrOutput
+	ToCkafkaConsumerCkafkaPtrOutputWithContext(context.Context) CkafkaConsumerCkafkaPtrOutput
+}
+
+type ckafkaConsumerCkafkaPtrType CkafkaConsumerCkafkaArgs
+
+func CkafkaConsumerCkafkaPtr(v *CkafkaConsumerCkafkaArgs) CkafkaConsumerCkafkaPtrInput {
+	return (*ckafkaConsumerCkafkaPtrType)(v)
+}
+
+func (*ckafkaConsumerCkafkaPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CkafkaConsumerCkafka)(nil)).Elem()
+}
+
+func (i *ckafkaConsumerCkafkaPtrType) ToCkafkaConsumerCkafkaPtrOutput() CkafkaConsumerCkafkaPtrOutput {
+	return i.ToCkafkaConsumerCkafkaPtrOutputWithContext(context.Background())
+}
+
+func (i *ckafkaConsumerCkafkaPtrType) ToCkafkaConsumerCkafkaPtrOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerCkafkaPtrOutput)
+}
+
+type CkafkaConsumerCkafkaOutput struct{ *pulumi.OutputState }
+
+func (CkafkaConsumerCkafkaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CkafkaConsumerCkafka)(nil)).Elem()
+}
+
+func (o CkafkaConsumerCkafkaOutput) ToCkafkaConsumerCkafkaOutput() CkafkaConsumerCkafkaOutput {
+	return o
+}
+
+func (o CkafkaConsumerCkafkaOutput) ToCkafkaConsumerCkafkaOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaOutput {
+	return o
+}
+
+func (o CkafkaConsumerCkafkaOutput) ToCkafkaConsumerCkafkaPtrOutput() CkafkaConsumerCkafkaPtrOutput {
+	return o.ToCkafkaConsumerCkafkaPtrOutputWithContext(context.Background())
+}
+
+func (o CkafkaConsumerCkafkaOutput) ToCkafkaConsumerCkafkaPtrOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CkafkaConsumerCkafka) *CkafkaConsumerCkafka {
+		return &v
+	}).(CkafkaConsumerCkafkaPtrOutput)
+}
+
+// instance id.
+func (o CkafkaConsumerCkafkaOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// instance name.
+func (o CkafkaConsumerCkafkaOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// topic id of ckafka.
+func (o CkafkaConsumerCkafkaOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+// topic name of ckafka.
+func (o CkafkaConsumerCkafkaOutput) TopicName() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.TopicName }).(pulumi.StringOutput)
+}
+
+// vip.
+func (o CkafkaConsumerCkafkaOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// vport.
+func (o CkafkaConsumerCkafkaOutput) Vport() pulumi.StringOutput {
+	return o.ApplyT(func(v CkafkaConsumerCkafka) string { return v.Vport }).(pulumi.StringOutput)
+}
+
+type CkafkaConsumerCkafkaPtrOutput struct{ *pulumi.OutputState }
+
+func (CkafkaConsumerCkafkaPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CkafkaConsumerCkafka)(nil)).Elem()
+}
+
+func (o CkafkaConsumerCkafkaPtrOutput) ToCkafkaConsumerCkafkaPtrOutput() CkafkaConsumerCkafkaPtrOutput {
+	return o
+}
+
+func (o CkafkaConsumerCkafkaPtrOutput) ToCkafkaConsumerCkafkaPtrOutputWithContext(ctx context.Context) CkafkaConsumerCkafkaPtrOutput {
+	return o
+}
+
+func (o CkafkaConsumerCkafkaPtrOutput) Elem() CkafkaConsumerCkafkaOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) CkafkaConsumerCkafka {
+		if v != nil {
+			return *v
+		}
+		var ret CkafkaConsumerCkafka
+		return ret
+	}).(CkafkaConsumerCkafkaOutput)
+}
+
+// instance id.
+func (o CkafkaConsumerCkafkaPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// instance name.
+func (o CkafkaConsumerCkafkaPtrOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.InstanceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// topic id of ckafka.
+func (o CkafkaConsumerCkafkaPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
+// topic name of ckafka.
+func (o CkafkaConsumerCkafkaPtrOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicName
+	}).(pulumi.StringPtrOutput)
+}
+
+// vip.
+func (o CkafkaConsumerCkafkaPtrOutput) Vip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Vip
+	}).(pulumi.StringPtrOutput)
+}
+
+// vport.
+func (o CkafkaConsumerCkafkaPtrOutput) Vport() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerCkafka) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Vport
+	}).(pulumi.StringPtrOutput)
+}
+
+type CkafkaConsumerContent struct {
+	// whether to deliver the TAG info.
+	EnableTag bool `pulumi:"enableTag"`
+	// metadata info list.
+	MetaFields []string `pulumi:"metaFields"`
+	// whether to tiling tag json.
+	TagJsonNotTiled *bool `pulumi:"tagJsonNotTiled"`
+	// delivery timestamp precision,1 for second, 2 for millisecond.
+	TimestampAccuracy *int `pulumi:"timestampAccuracy"`
+}
+
+// CkafkaConsumerContentInput is an input type that accepts CkafkaConsumerContentArgs and CkafkaConsumerContentOutput values.
+// You can construct a concrete instance of `CkafkaConsumerContentInput` via:
+//
+//          CkafkaConsumerContentArgs{...}
+type CkafkaConsumerContentInput interface {
+	pulumi.Input
+
+	ToCkafkaConsumerContentOutput() CkafkaConsumerContentOutput
+	ToCkafkaConsumerContentOutputWithContext(context.Context) CkafkaConsumerContentOutput
+}
+
+type CkafkaConsumerContentArgs struct {
+	// whether to deliver the TAG info.
+	EnableTag pulumi.BoolInput `pulumi:"enableTag"`
+	// metadata info list.
+	MetaFields pulumi.StringArrayInput `pulumi:"metaFields"`
+	// whether to tiling tag json.
+	TagJsonNotTiled pulumi.BoolPtrInput `pulumi:"tagJsonNotTiled"`
+	// delivery timestamp precision,1 for second, 2 for millisecond.
+	TimestampAccuracy pulumi.IntPtrInput `pulumi:"timestampAccuracy"`
+}
+
+func (CkafkaConsumerContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CkafkaConsumerContent)(nil)).Elem()
+}
+
+func (i CkafkaConsumerContentArgs) ToCkafkaConsumerContentOutput() CkafkaConsumerContentOutput {
+	return i.ToCkafkaConsumerContentOutputWithContext(context.Background())
+}
+
+func (i CkafkaConsumerContentArgs) ToCkafkaConsumerContentOutputWithContext(ctx context.Context) CkafkaConsumerContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerContentOutput)
+}
+
+func (i CkafkaConsumerContentArgs) ToCkafkaConsumerContentPtrOutput() CkafkaConsumerContentPtrOutput {
+	return i.ToCkafkaConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (i CkafkaConsumerContentArgs) ToCkafkaConsumerContentPtrOutputWithContext(ctx context.Context) CkafkaConsumerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerContentOutput).ToCkafkaConsumerContentPtrOutputWithContext(ctx)
+}
+
+// CkafkaConsumerContentPtrInput is an input type that accepts CkafkaConsumerContentArgs, CkafkaConsumerContentPtr and CkafkaConsumerContentPtrOutput values.
+// You can construct a concrete instance of `CkafkaConsumerContentPtrInput` via:
+//
+//          CkafkaConsumerContentArgs{...}
+//
+//  or:
+//
+//          nil
+type CkafkaConsumerContentPtrInput interface {
+	pulumi.Input
+
+	ToCkafkaConsumerContentPtrOutput() CkafkaConsumerContentPtrOutput
+	ToCkafkaConsumerContentPtrOutputWithContext(context.Context) CkafkaConsumerContentPtrOutput
+}
+
+type ckafkaConsumerContentPtrType CkafkaConsumerContentArgs
+
+func CkafkaConsumerContentPtr(v *CkafkaConsumerContentArgs) CkafkaConsumerContentPtrInput {
+	return (*ckafkaConsumerContentPtrType)(v)
+}
+
+func (*ckafkaConsumerContentPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CkafkaConsumerContent)(nil)).Elem()
+}
+
+func (i *ckafkaConsumerContentPtrType) ToCkafkaConsumerContentPtrOutput() CkafkaConsumerContentPtrOutput {
+	return i.ToCkafkaConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (i *ckafkaConsumerContentPtrType) ToCkafkaConsumerContentPtrOutputWithContext(ctx context.Context) CkafkaConsumerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CkafkaConsumerContentPtrOutput)
+}
+
+type CkafkaConsumerContentOutput struct{ *pulumi.OutputState }
+
+func (CkafkaConsumerContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CkafkaConsumerContent)(nil)).Elem()
+}
+
+func (o CkafkaConsumerContentOutput) ToCkafkaConsumerContentOutput() CkafkaConsumerContentOutput {
+	return o
+}
+
+func (o CkafkaConsumerContentOutput) ToCkafkaConsumerContentOutputWithContext(ctx context.Context) CkafkaConsumerContentOutput {
+	return o
+}
+
+func (o CkafkaConsumerContentOutput) ToCkafkaConsumerContentPtrOutput() CkafkaConsumerContentPtrOutput {
+	return o.ToCkafkaConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (o CkafkaConsumerContentOutput) ToCkafkaConsumerContentPtrOutputWithContext(ctx context.Context) CkafkaConsumerContentPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CkafkaConsumerContent) *CkafkaConsumerContent {
+		return &v
+	}).(CkafkaConsumerContentPtrOutput)
+}
+
+// whether to deliver the TAG info.
+func (o CkafkaConsumerContentOutput) EnableTag() pulumi.BoolOutput {
+	return o.ApplyT(func(v CkafkaConsumerContent) bool { return v.EnableTag }).(pulumi.BoolOutput)
+}
+
+// metadata info list.
+func (o CkafkaConsumerContentOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CkafkaConsumerContent) []string { return v.MetaFields }).(pulumi.StringArrayOutput)
+}
+
+// whether to tiling tag json.
+func (o CkafkaConsumerContentOutput) TagJsonNotTiled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CkafkaConsumerContent) *bool { return v.TagJsonNotTiled }).(pulumi.BoolPtrOutput)
+}
+
+// delivery timestamp precision,1 for second, 2 for millisecond.
+func (o CkafkaConsumerContentOutput) TimestampAccuracy() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CkafkaConsumerContent) *int { return v.TimestampAccuracy }).(pulumi.IntPtrOutput)
+}
+
+type CkafkaConsumerContentPtrOutput struct{ *pulumi.OutputState }
+
+func (CkafkaConsumerContentPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CkafkaConsumerContent)(nil)).Elem()
+}
+
+func (o CkafkaConsumerContentPtrOutput) ToCkafkaConsumerContentPtrOutput() CkafkaConsumerContentPtrOutput {
+	return o
+}
+
+func (o CkafkaConsumerContentPtrOutput) ToCkafkaConsumerContentPtrOutputWithContext(ctx context.Context) CkafkaConsumerContentPtrOutput {
+	return o
+}
+
+func (o CkafkaConsumerContentPtrOutput) Elem() CkafkaConsumerContentOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) CkafkaConsumerContent {
+		if v != nil {
+			return *v
+		}
+		var ret CkafkaConsumerContent
+		return ret
+	}).(CkafkaConsumerContentOutput)
+}
+
+// whether to deliver the TAG info.
+func (o CkafkaConsumerContentPtrOutput) EnableTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.EnableTag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// metadata info list.
+func (o CkafkaConsumerContentPtrOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) []string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaFields
+	}).(pulumi.StringArrayOutput)
+}
+
+// whether to tiling tag json.
+func (o CkafkaConsumerContentPtrOutput) TagJsonNotTiled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.TagJsonNotTiled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// delivery timestamp precision,1 for second, 2 for millisecond.
+func (o CkafkaConsumerContentPtrOutput) TimestampAccuracy() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimestampAccuracy
+	}).(pulumi.IntPtrOutput)
+}
+
 type ConfigExcludePath struct {
 	// Type. Valid values: File, Path.
 	Type *string `pulumi:"type"`
@@ -1632,6 +3026,8 @@ func (o ConfigExtraHostFilePtrOutput) LogPath() pulumi.StringPtrOutput {
 }
 
 type ConfigExtractRule struct {
+	// syslog system log collection specifies the address and port that the collector listens to.
+	Address *string `pulumi:"address"`
 	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 	Backtracking *int `pulumi:"backtracking"`
 	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
@@ -1640,10 +3036,24 @@ type ConfigExtractRule struct {
 	Delimiter *string `pulumi:"delimiter"`
 	// Log keys to be filtered and the corresponding regex.
 	FilterKeyRegexes []ConfigExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
+	// GBK encoding. Default 0.
+	IsGbk *int `pulumi:"isGbk"`
+	// standard json. Default 0.
+	JsonStandard *int `pulumi:"jsonStandard"`
 	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 	Keys []string `pulumi:"keys"`
 	// Full log matching rule, which is valid only if logType is fullregex_log.
 	LogRegex *string `pulumi:"logRegex"`
+	// metadata tags.
+	MetaTags []ConfigExtractRuleMetaTag `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType *int `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol *string `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex *string `pulumi:"pathRegex"`
+	// syslog protocol, tcp or udp.
+	Protocol *string `pulumi:"protocol"`
 	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 	TimeFormat *string `pulumi:"timeFormat"`
 	// Time field key name. timeKey and timeFormat must appear in pair.
@@ -1666,6 +3076,8 @@ type ConfigExtractRuleInput interface {
 }
 
 type ConfigExtractRuleArgs struct {
+	// syslog system log collection specifies the address and port that the collector listens to.
+	Address pulumi.StringPtrInput `pulumi:"address"`
 	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 	Backtracking pulumi.IntPtrInput `pulumi:"backtracking"`
 	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
@@ -1674,10 +3086,24 @@ type ConfigExtractRuleArgs struct {
 	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
 	// Log keys to be filtered and the corresponding regex.
 	FilterKeyRegexes ConfigExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
+	// GBK encoding. Default 0.
+	IsGbk pulumi.IntPtrInput `pulumi:"isGbk"`
+	// standard json. Default 0.
+	JsonStandard pulumi.IntPtrInput `pulumi:"jsonStandard"`
 	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 	Keys pulumi.StringArrayInput `pulumi:"keys"`
 	// Full log matching rule, which is valid only if logType is fullregex_log.
 	LogRegex pulumi.StringPtrInput `pulumi:"logRegex"`
+	// metadata tags.
+	MetaTags ConfigExtractRuleMetaTagArrayInput `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType pulumi.IntPtrInput `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol pulumi.StringPtrInput `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex pulumi.StringPtrInput `pulumi:"pathRegex"`
+	// syslog protocol, tcp or udp.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
 	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
 	// Time field key name. timeKey and timeFormat must appear in pair.
@@ -1765,6 +3191,11 @@ func (o ConfigExtractRuleOutput) ToConfigExtractRulePtrOutputWithContext(ctx con
 	}).(ConfigExtractRulePtrOutput)
 }
 
+// syslog system log collection specifies the address and port that the collector listens to.
+func (o ConfigExtractRuleOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *string { return v.Address }).(pulumi.StringPtrOutput)
+}
+
 // Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtractRuleOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *int { return v.Backtracking }).(pulumi.IntPtrOutput)
@@ -1785,6 +3216,16 @@ func (o ConfigExtractRuleOutput) FilterKeyRegexes() ConfigExtractRuleFilterKeyRe
 	return o.ApplyT(func(v ConfigExtractRule) []ConfigExtractRuleFilterKeyRegex { return v.FilterKeyRegexes }).(ConfigExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// GBK encoding. Default 0.
+func (o ConfigExtractRuleOutput) IsGbk() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *int { return v.IsGbk }).(pulumi.IntPtrOutput)
+}
+
+// standard json. Default 0.
+func (o ConfigExtractRuleOutput) JsonStandard() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *int { return v.JsonStandard }).(pulumi.IntPtrOutput)
+}
+
 // Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtractRuleOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtractRule) []string { return v.Keys }).(pulumi.StringArrayOutput)
@@ -1793,6 +3234,31 @@ func (o ConfigExtractRuleOutput) Keys() pulumi.StringArrayOutput {
 // Full log matching rule, which is valid only if logType is fullregex_log.
 func (o ConfigExtractRuleOutput) LogRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.LogRegex }).(pulumi.StringPtrOutput)
+}
+
+// metadata tags.
+func (o ConfigExtractRuleOutput) MetaTags() ConfigExtractRuleMetaTagArrayOutput {
+	return o.ApplyT(func(v ConfigExtractRule) []ConfigExtractRuleMetaTag { return v.MetaTags }).(ConfigExtractRuleMetaTagArrayOutput)
+}
+
+// metadata type.
+func (o ConfigExtractRuleOutput) MetadataType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *int { return v.MetadataType }).(pulumi.IntPtrOutput)
+}
+
+// parse protocol.
+func (o ConfigExtractRuleOutput) ParseProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *string { return v.ParseProtocol }).(pulumi.StringPtrOutput)
+}
+
+// metadata path regex.
+func (o ConfigExtractRuleOutput) PathRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *string { return v.PathRegex }).(pulumi.StringPtrOutput)
+}
+
+// syslog protocol, tcp or udp.
+func (o ConfigExtractRuleOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
 // Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
@@ -1839,6 +3305,16 @@ func (o ConfigExtractRulePtrOutput) Elem() ConfigExtractRuleOutput {
 	}).(ConfigExtractRuleOutput)
 }
 
+// syslog system log collection specifies the address and port that the collector listens to.
+func (o ConfigExtractRulePtrOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Address
+	}).(pulumi.StringPtrOutput)
+}
+
 // Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtractRulePtrOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *int {
@@ -1879,6 +3355,26 @@ func (o ConfigExtractRulePtrOutput) FilterKeyRegexes() ConfigExtractRuleFilterKe
 	}).(ConfigExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// GBK encoding. Default 0.
+func (o ConfigExtractRulePtrOutput) IsGbk() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.IsGbk
+	}).(pulumi.IntPtrOutput)
+}
+
+// standard json. Default 0.
+func (o ConfigExtractRulePtrOutput) JsonStandard() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.JsonStandard
+	}).(pulumi.IntPtrOutput)
+}
+
 // Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtractRulePtrOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) []string {
@@ -1896,6 +3392,56 @@ func (o ConfigExtractRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.LogRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// metadata tags.
+func (o ConfigExtractRulePtrOutput) MetaTags() ConfigExtractRuleMetaTagArrayOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) []ConfigExtractRuleMetaTag {
+		if v == nil {
+			return nil
+		}
+		return v.MetaTags
+	}).(ConfigExtractRuleMetaTagArrayOutput)
+}
+
+// metadata type.
+func (o ConfigExtractRulePtrOutput) MetadataType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MetadataType
+	}).(pulumi.IntPtrOutput)
+}
+
+// parse protocol.
+func (o ConfigExtractRulePtrOutput) ParseProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ParseProtocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// metadata path regex.
+func (o ConfigExtractRulePtrOutput) PathRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PathRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// syslog protocol, tcp or udp.
+func (o ConfigExtractRulePtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConfigExtractRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2043,6 +3589,786 @@ func (o ConfigExtractRuleFilterKeyRegexArrayOutput) Index(i pulumi.IntInput) Con
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConfigExtractRuleFilterKeyRegex {
 		return vs[0].([]ConfigExtractRuleFilterKeyRegex)[vs[1].(int)]
 	}).(ConfigExtractRuleFilterKeyRegexOutput)
+}
+
+type ConfigExtractRuleMetaTag struct {
+	// tag key.
+	Key *string `pulumi:"key"`
+	// tag value.
+	Value *string `pulumi:"value"`
+}
+
+// ConfigExtractRuleMetaTagInput is an input type that accepts ConfigExtractRuleMetaTagArgs and ConfigExtractRuleMetaTagOutput values.
+// You can construct a concrete instance of `ConfigExtractRuleMetaTagInput` via:
+//
+//          ConfigExtractRuleMetaTagArgs{...}
+type ConfigExtractRuleMetaTagInput interface {
+	pulumi.Input
+
+	ToConfigExtractRuleMetaTagOutput() ConfigExtractRuleMetaTagOutput
+	ToConfigExtractRuleMetaTagOutputWithContext(context.Context) ConfigExtractRuleMetaTagOutput
+}
+
+type ConfigExtractRuleMetaTagArgs struct {
+	// tag key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// tag value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ConfigExtractRuleMetaTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (i ConfigExtractRuleMetaTagArgs) ToConfigExtractRuleMetaTagOutput() ConfigExtractRuleMetaTagOutput {
+	return i.ToConfigExtractRuleMetaTagOutputWithContext(context.Background())
+}
+
+func (i ConfigExtractRuleMetaTagArgs) ToConfigExtractRuleMetaTagOutputWithContext(ctx context.Context) ConfigExtractRuleMetaTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigExtractRuleMetaTagOutput)
+}
+
+// ConfigExtractRuleMetaTagArrayInput is an input type that accepts ConfigExtractRuleMetaTagArray and ConfigExtractRuleMetaTagArrayOutput values.
+// You can construct a concrete instance of `ConfigExtractRuleMetaTagArrayInput` via:
+//
+//          ConfigExtractRuleMetaTagArray{ ConfigExtractRuleMetaTagArgs{...} }
+type ConfigExtractRuleMetaTagArrayInput interface {
+	pulumi.Input
+
+	ToConfigExtractRuleMetaTagArrayOutput() ConfigExtractRuleMetaTagArrayOutput
+	ToConfigExtractRuleMetaTagArrayOutputWithContext(context.Context) ConfigExtractRuleMetaTagArrayOutput
+}
+
+type ConfigExtractRuleMetaTagArray []ConfigExtractRuleMetaTagInput
+
+func (ConfigExtractRuleMetaTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (i ConfigExtractRuleMetaTagArray) ToConfigExtractRuleMetaTagArrayOutput() ConfigExtractRuleMetaTagArrayOutput {
+	return i.ToConfigExtractRuleMetaTagArrayOutputWithContext(context.Background())
+}
+
+func (i ConfigExtractRuleMetaTagArray) ToConfigExtractRuleMetaTagArrayOutputWithContext(ctx context.Context) ConfigExtractRuleMetaTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConfigExtractRuleMetaTagArrayOutput)
+}
+
+type ConfigExtractRuleMetaTagOutput struct{ *pulumi.OutputState }
+
+func (ConfigExtractRuleMetaTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (o ConfigExtractRuleMetaTagOutput) ToConfigExtractRuleMetaTagOutput() ConfigExtractRuleMetaTagOutput {
+	return o
+}
+
+func (o ConfigExtractRuleMetaTagOutput) ToConfigExtractRuleMetaTagOutputWithContext(ctx context.Context) ConfigExtractRuleMetaTagOutput {
+	return o
+}
+
+// tag key.
+func (o ConfigExtractRuleMetaTagOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRuleMetaTag) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// tag value.
+func (o ConfigExtractRuleMetaTagOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConfigExtractRuleMetaTag) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ConfigExtractRuleMetaTagArrayOutput struct{ *pulumi.OutputState }
+
+func (ConfigExtractRuleMetaTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (o ConfigExtractRuleMetaTagArrayOutput) ToConfigExtractRuleMetaTagArrayOutput() ConfigExtractRuleMetaTagArrayOutput {
+	return o
+}
+
+func (o ConfigExtractRuleMetaTagArrayOutput) ToConfigExtractRuleMetaTagArrayOutputWithContext(ctx context.Context) ConfigExtractRuleMetaTagArrayOutput {
+	return o
+}
+
+func (o ConfigExtractRuleMetaTagArrayOutput) Index(i pulumi.IntInput) ConfigExtractRuleMetaTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConfigExtractRuleMetaTag {
+		return vs[0].([]ConfigExtractRuleMetaTag)[vs[1].(int)]
+	}).(ConfigExtractRuleMetaTagOutput)
+}
+
+type CosRechargeExtractRuleInfo struct {
+	// syslog address.
+	Address *string `pulumi:"address"`
+	// backtracking data volume in incremental acquisition mode.
+	Backtracking *int `pulumi:"backtracking"`
+	// begin line regex.
+	BeginRegex *string `pulumi:"beginRegex"`
+	// log delimiter.
+	Delimiter *string `pulumi:"delimiter"`
+	// rules that need to filter logs.
+	FilterKeyRegexes []CosRechargeExtractRuleInfoFilterKeyRegex `pulumi:"filterKeyRegexes"`
+	// gbk encoding.
+	IsGbk *int `pulumi:"isGbk"`
+	// is standard json.
+	JsonStandard *int `pulumi:"jsonStandard"`
+	// key list.
+	Keys []string `pulumi:"keys"`
+	// log regex.
+	LogRegex *string `pulumi:"logRegex"`
+	// metadata tag list.
+	MetaTags []CosRechargeExtractRuleInfoMetaTag `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType *int `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol *string `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex *string `pulumi:"pathRegex"`
+	// syslog protocol.
+	Protocol *string `pulumi:"protocol"`
+	// time format.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// time key.
+	TimeKey *string `pulumi:"timeKey"`
+	// parsing failure log key.
+	UnMatchLogKey *string `pulumi:"unMatchLogKey"`
+	// whether to upload the parsing failure log.
+	UnMatchUpLoadSwitch *bool `pulumi:"unMatchUpLoadSwitch"`
+}
+
+// CosRechargeExtractRuleInfoInput is an input type that accepts CosRechargeExtractRuleInfoArgs and CosRechargeExtractRuleInfoOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoInput` via:
+//
+//          CosRechargeExtractRuleInfoArgs{...}
+type CosRechargeExtractRuleInfoInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoOutput() CosRechargeExtractRuleInfoOutput
+	ToCosRechargeExtractRuleInfoOutputWithContext(context.Context) CosRechargeExtractRuleInfoOutput
+}
+
+type CosRechargeExtractRuleInfoArgs struct {
+	// syslog address.
+	Address pulumi.StringPtrInput `pulumi:"address"`
+	// backtracking data volume in incremental acquisition mode.
+	Backtracking pulumi.IntPtrInput `pulumi:"backtracking"`
+	// begin line regex.
+	BeginRegex pulumi.StringPtrInput `pulumi:"beginRegex"`
+	// log delimiter.
+	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
+	// rules that need to filter logs.
+	FilterKeyRegexes CosRechargeExtractRuleInfoFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
+	// gbk encoding.
+	IsGbk pulumi.IntPtrInput `pulumi:"isGbk"`
+	// is standard json.
+	JsonStandard pulumi.IntPtrInput `pulumi:"jsonStandard"`
+	// key list.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// log regex.
+	LogRegex pulumi.StringPtrInput `pulumi:"logRegex"`
+	// metadata tag list.
+	MetaTags CosRechargeExtractRuleInfoMetaTagArrayInput `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType pulumi.IntPtrInput `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol pulumi.StringPtrInput `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex pulumi.StringPtrInput `pulumi:"pathRegex"`
+	// syslog protocol.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// time format.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// time key.
+	TimeKey pulumi.StringPtrInput `pulumi:"timeKey"`
+	// parsing failure log key.
+	UnMatchLogKey pulumi.StringPtrInput `pulumi:"unMatchLogKey"`
+	// whether to upload the parsing failure log.
+	UnMatchUpLoadSwitch pulumi.BoolPtrInput `pulumi:"unMatchUpLoadSwitch"`
+}
+
+func (CosRechargeExtractRuleInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfo)(nil)).Elem()
+}
+
+func (i CosRechargeExtractRuleInfoArgs) ToCosRechargeExtractRuleInfoOutput() CosRechargeExtractRuleInfoOutput {
+	return i.ToCosRechargeExtractRuleInfoOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoArgs) ToCosRechargeExtractRuleInfoOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoOutput)
+}
+
+func (i CosRechargeExtractRuleInfoArgs) ToCosRechargeExtractRuleInfoPtrOutput() CosRechargeExtractRuleInfoPtrOutput {
+	return i.ToCosRechargeExtractRuleInfoPtrOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoArgs) ToCosRechargeExtractRuleInfoPtrOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoOutput).ToCosRechargeExtractRuleInfoPtrOutputWithContext(ctx)
+}
+
+// CosRechargeExtractRuleInfoPtrInput is an input type that accepts CosRechargeExtractRuleInfoArgs, CosRechargeExtractRuleInfoPtr and CosRechargeExtractRuleInfoPtrOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoPtrInput` via:
+//
+//          CosRechargeExtractRuleInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type CosRechargeExtractRuleInfoPtrInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoPtrOutput() CosRechargeExtractRuleInfoPtrOutput
+	ToCosRechargeExtractRuleInfoPtrOutputWithContext(context.Context) CosRechargeExtractRuleInfoPtrOutput
+}
+
+type cosRechargeExtractRuleInfoPtrType CosRechargeExtractRuleInfoArgs
+
+func CosRechargeExtractRuleInfoPtr(v *CosRechargeExtractRuleInfoArgs) CosRechargeExtractRuleInfoPtrInput {
+	return (*cosRechargeExtractRuleInfoPtrType)(v)
+}
+
+func (*cosRechargeExtractRuleInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CosRechargeExtractRuleInfo)(nil)).Elem()
+}
+
+func (i *cosRechargeExtractRuleInfoPtrType) ToCosRechargeExtractRuleInfoPtrOutput() CosRechargeExtractRuleInfoPtrOutput {
+	return i.ToCosRechargeExtractRuleInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *cosRechargeExtractRuleInfoPtrType) ToCosRechargeExtractRuleInfoPtrOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoPtrOutput)
+}
+
+type CosRechargeExtractRuleInfoOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfo)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoOutput) ToCosRechargeExtractRuleInfoOutput() CosRechargeExtractRuleInfoOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoOutput) ToCosRechargeExtractRuleInfoOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoOutput) ToCosRechargeExtractRuleInfoPtrOutput() CosRechargeExtractRuleInfoPtrOutput {
+	return o.ToCosRechargeExtractRuleInfoPtrOutputWithContext(context.Background())
+}
+
+func (o CosRechargeExtractRuleInfoOutput) ToCosRechargeExtractRuleInfoPtrOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CosRechargeExtractRuleInfo) *CosRechargeExtractRuleInfo {
+		return &v
+	}).(CosRechargeExtractRuleInfoPtrOutput)
+}
+
+// syslog address.
+func (o CosRechargeExtractRuleInfoOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.Address }).(pulumi.StringPtrOutput)
+}
+
+// backtracking data volume in incremental acquisition mode.
+func (o CosRechargeExtractRuleInfoOutput) Backtracking() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *int { return v.Backtracking }).(pulumi.IntPtrOutput)
+}
+
+// begin line regex.
+func (o CosRechargeExtractRuleInfoOutput) BeginRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.BeginRegex }).(pulumi.StringPtrOutput)
+}
+
+// log delimiter.
+func (o CosRechargeExtractRuleInfoOutput) Delimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.Delimiter }).(pulumi.StringPtrOutput)
+}
+
+// rules that need to filter logs.
+func (o CosRechargeExtractRuleInfoOutput) FilterKeyRegexes() CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) []CosRechargeExtractRuleInfoFilterKeyRegex {
+		return v.FilterKeyRegexes
+	}).(CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput)
+}
+
+// gbk encoding.
+func (o CosRechargeExtractRuleInfoOutput) IsGbk() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *int { return v.IsGbk }).(pulumi.IntPtrOutput)
+}
+
+// is standard json.
+func (o CosRechargeExtractRuleInfoOutput) JsonStandard() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *int { return v.JsonStandard }).(pulumi.IntPtrOutput)
+}
+
+// key list.
+func (o CosRechargeExtractRuleInfoOutput) Keys() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) []string { return v.Keys }).(pulumi.StringArrayOutput)
+}
+
+// log regex.
+func (o CosRechargeExtractRuleInfoOutput) LogRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.LogRegex }).(pulumi.StringPtrOutput)
+}
+
+// metadata tag list.
+func (o CosRechargeExtractRuleInfoOutput) MetaTags() CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) []CosRechargeExtractRuleInfoMetaTag { return v.MetaTags }).(CosRechargeExtractRuleInfoMetaTagArrayOutput)
+}
+
+// metadata type.
+func (o CosRechargeExtractRuleInfoOutput) MetadataType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *int { return v.MetadataType }).(pulumi.IntPtrOutput)
+}
+
+// parse protocol.
+func (o CosRechargeExtractRuleInfoOutput) ParseProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.ParseProtocol }).(pulumi.StringPtrOutput)
+}
+
+// metadata path regex.
+func (o CosRechargeExtractRuleInfoOutput) PathRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.PathRegex }).(pulumi.StringPtrOutput)
+}
+
+// syslog protocol.
+func (o CosRechargeExtractRuleInfoOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// time format.
+func (o CosRechargeExtractRuleInfoOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+}
+
+// time key.
+func (o CosRechargeExtractRuleInfoOutput) TimeKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.TimeKey }).(pulumi.StringPtrOutput)
+}
+
+// parsing failure log key.
+func (o CosRechargeExtractRuleInfoOutput) UnMatchLogKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *string { return v.UnMatchLogKey }).(pulumi.StringPtrOutput)
+}
+
+// whether to upload the parsing failure log.
+func (o CosRechargeExtractRuleInfoOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfo) *bool { return v.UnMatchUpLoadSwitch }).(pulumi.BoolPtrOutput)
+}
+
+type CosRechargeExtractRuleInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CosRechargeExtractRuleInfo)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoPtrOutput) ToCosRechargeExtractRuleInfoPtrOutput() CosRechargeExtractRuleInfoPtrOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoPtrOutput) ToCosRechargeExtractRuleInfoPtrOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoPtrOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoPtrOutput) Elem() CosRechargeExtractRuleInfoOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) CosRechargeExtractRuleInfo {
+		if v != nil {
+			return *v
+		}
+		var ret CosRechargeExtractRuleInfo
+		return ret
+	}).(CosRechargeExtractRuleInfoOutput)
+}
+
+// syslog address.
+func (o CosRechargeExtractRuleInfoPtrOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Address
+	}).(pulumi.StringPtrOutput)
+}
+
+// backtracking data volume in incremental acquisition mode.
+func (o CosRechargeExtractRuleInfoPtrOutput) Backtracking() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Backtracking
+	}).(pulumi.IntPtrOutput)
+}
+
+// begin line regex.
+func (o CosRechargeExtractRuleInfoPtrOutput) BeginRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BeginRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// log delimiter.
+func (o CosRechargeExtractRuleInfoPtrOutput) Delimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Delimiter
+	}).(pulumi.StringPtrOutput)
+}
+
+// rules that need to filter logs.
+func (o CosRechargeExtractRuleInfoPtrOutput) FilterKeyRegexes() CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) []CosRechargeExtractRuleInfoFilterKeyRegex {
+		if v == nil {
+			return nil
+		}
+		return v.FilterKeyRegexes
+	}).(CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput)
+}
+
+// gbk encoding.
+func (o CosRechargeExtractRuleInfoPtrOutput) IsGbk() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.IsGbk
+	}).(pulumi.IntPtrOutput)
+}
+
+// is standard json.
+func (o CosRechargeExtractRuleInfoPtrOutput) JsonStandard() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.JsonStandard
+	}).(pulumi.IntPtrOutput)
+}
+
+// key list.
+func (o CosRechargeExtractRuleInfoPtrOutput) Keys() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Keys
+	}).(pulumi.StringArrayOutput)
+}
+
+// log regex.
+func (o CosRechargeExtractRuleInfoPtrOutput) LogRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LogRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// metadata tag list.
+func (o CosRechargeExtractRuleInfoPtrOutput) MetaTags() CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) []CosRechargeExtractRuleInfoMetaTag {
+		if v == nil {
+			return nil
+		}
+		return v.MetaTags
+	}).(CosRechargeExtractRuleInfoMetaTagArrayOutput)
+}
+
+// metadata type.
+func (o CosRechargeExtractRuleInfoPtrOutput) MetadataType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MetadataType
+	}).(pulumi.IntPtrOutput)
+}
+
+// parse protocol.
+func (o CosRechargeExtractRuleInfoPtrOutput) ParseProtocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ParseProtocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// metadata path regex.
+func (o CosRechargeExtractRuleInfoPtrOutput) PathRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PathRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// syslog protocol.
+func (o CosRechargeExtractRuleInfoPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// time format.
+func (o CosRechargeExtractRuleInfoPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// time key.
+func (o CosRechargeExtractRuleInfoPtrOutput) TimeKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// parsing failure log key.
+func (o CosRechargeExtractRuleInfoPtrOutput) UnMatchLogKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UnMatchLogKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// whether to upload the parsing failure log.
+func (o CosRechargeExtractRuleInfoPtrOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CosRechargeExtractRuleInfo) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UnMatchUpLoadSwitch
+	}).(pulumi.BoolPtrOutput)
+}
+
+type CosRechargeExtractRuleInfoFilterKeyRegex struct {
+	// need filter log key.
+	Key string `pulumi:"key"`
+	// need filter log regex.
+	Regex string `pulumi:"regex"`
+}
+
+// CosRechargeExtractRuleInfoFilterKeyRegexInput is an input type that accepts CosRechargeExtractRuleInfoFilterKeyRegexArgs and CosRechargeExtractRuleInfoFilterKeyRegexOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoFilterKeyRegexInput` via:
+//
+//          CosRechargeExtractRuleInfoFilterKeyRegexArgs{...}
+type CosRechargeExtractRuleInfoFilterKeyRegexInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoFilterKeyRegexOutput() CosRechargeExtractRuleInfoFilterKeyRegexOutput
+	ToCosRechargeExtractRuleInfoFilterKeyRegexOutputWithContext(context.Context) CosRechargeExtractRuleInfoFilterKeyRegexOutput
+}
+
+type CosRechargeExtractRuleInfoFilterKeyRegexArgs struct {
+	// need filter log key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// need filter log regex.
+	Regex pulumi.StringInput `pulumi:"regex"`
+}
+
+func (CosRechargeExtractRuleInfoFilterKeyRegexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfoFilterKeyRegex)(nil)).Elem()
+}
+
+func (i CosRechargeExtractRuleInfoFilterKeyRegexArgs) ToCosRechargeExtractRuleInfoFilterKeyRegexOutput() CosRechargeExtractRuleInfoFilterKeyRegexOutput {
+	return i.ToCosRechargeExtractRuleInfoFilterKeyRegexOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoFilterKeyRegexArgs) ToCosRechargeExtractRuleInfoFilterKeyRegexOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoFilterKeyRegexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoFilterKeyRegexOutput)
+}
+
+// CosRechargeExtractRuleInfoFilterKeyRegexArrayInput is an input type that accepts CosRechargeExtractRuleInfoFilterKeyRegexArray and CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoFilterKeyRegexArrayInput` via:
+//
+//          CosRechargeExtractRuleInfoFilterKeyRegexArray{ CosRechargeExtractRuleInfoFilterKeyRegexArgs{...} }
+type CosRechargeExtractRuleInfoFilterKeyRegexArrayInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutput() CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput
+	ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutputWithContext(context.Context) CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput
+}
+
+type CosRechargeExtractRuleInfoFilterKeyRegexArray []CosRechargeExtractRuleInfoFilterKeyRegexInput
+
+func (CosRechargeExtractRuleInfoFilterKeyRegexArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosRechargeExtractRuleInfoFilterKeyRegex)(nil)).Elem()
+}
+
+func (i CosRechargeExtractRuleInfoFilterKeyRegexArray) ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutput() CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return i.ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoFilterKeyRegexArray) ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput)
+}
+
+type CosRechargeExtractRuleInfoFilterKeyRegexOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoFilterKeyRegexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfoFilterKeyRegex)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoFilterKeyRegexOutput) ToCosRechargeExtractRuleInfoFilterKeyRegexOutput() CosRechargeExtractRuleInfoFilterKeyRegexOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoFilterKeyRegexOutput) ToCosRechargeExtractRuleInfoFilterKeyRegexOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoFilterKeyRegexOutput {
+	return o
+}
+
+// need filter log key.
+func (o CosRechargeExtractRuleInfoFilterKeyRegexOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfoFilterKeyRegex) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// need filter log regex.
+func (o CosRechargeExtractRuleInfoFilterKeyRegexOutput) Regex() pulumi.StringOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfoFilterKeyRegex) string { return v.Regex }).(pulumi.StringOutput)
+}
+
+type CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosRechargeExtractRuleInfoFilterKeyRegex)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput) ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutput() CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput) ToCosRechargeExtractRuleInfoFilterKeyRegexArrayOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput) Index(i pulumi.IntInput) CosRechargeExtractRuleInfoFilterKeyRegexOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosRechargeExtractRuleInfoFilterKeyRegex {
+		return vs[0].([]CosRechargeExtractRuleInfoFilterKeyRegex)[vs[1].(int)]
+	}).(CosRechargeExtractRuleInfoFilterKeyRegexOutput)
+}
+
+type CosRechargeExtractRuleInfoMetaTag struct {
+	// metadata key.
+	Key *string `pulumi:"key"`
+	// metadata value.
+	Value *string `pulumi:"value"`
+}
+
+// CosRechargeExtractRuleInfoMetaTagInput is an input type that accepts CosRechargeExtractRuleInfoMetaTagArgs and CosRechargeExtractRuleInfoMetaTagOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoMetaTagInput` via:
+//
+//          CosRechargeExtractRuleInfoMetaTagArgs{...}
+type CosRechargeExtractRuleInfoMetaTagInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoMetaTagOutput() CosRechargeExtractRuleInfoMetaTagOutput
+	ToCosRechargeExtractRuleInfoMetaTagOutputWithContext(context.Context) CosRechargeExtractRuleInfoMetaTagOutput
+}
+
+type CosRechargeExtractRuleInfoMetaTagArgs struct {
+	// metadata key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// metadata value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CosRechargeExtractRuleInfoMetaTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfoMetaTag)(nil)).Elem()
+}
+
+func (i CosRechargeExtractRuleInfoMetaTagArgs) ToCosRechargeExtractRuleInfoMetaTagOutput() CosRechargeExtractRuleInfoMetaTagOutput {
+	return i.ToCosRechargeExtractRuleInfoMetaTagOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoMetaTagArgs) ToCosRechargeExtractRuleInfoMetaTagOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoMetaTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoMetaTagOutput)
+}
+
+// CosRechargeExtractRuleInfoMetaTagArrayInput is an input type that accepts CosRechargeExtractRuleInfoMetaTagArray and CosRechargeExtractRuleInfoMetaTagArrayOutput values.
+// You can construct a concrete instance of `CosRechargeExtractRuleInfoMetaTagArrayInput` via:
+//
+//          CosRechargeExtractRuleInfoMetaTagArray{ CosRechargeExtractRuleInfoMetaTagArgs{...} }
+type CosRechargeExtractRuleInfoMetaTagArrayInput interface {
+	pulumi.Input
+
+	ToCosRechargeExtractRuleInfoMetaTagArrayOutput() CosRechargeExtractRuleInfoMetaTagArrayOutput
+	ToCosRechargeExtractRuleInfoMetaTagArrayOutputWithContext(context.Context) CosRechargeExtractRuleInfoMetaTagArrayOutput
+}
+
+type CosRechargeExtractRuleInfoMetaTagArray []CosRechargeExtractRuleInfoMetaTagInput
+
+func (CosRechargeExtractRuleInfoMetaTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosRechargeExtractRuleInfoMetaTag)(nil)).Elem()
+}
+
+func (i CosRechargeExtractRuleInfoMetaTagArray) ToCosRechargeExtractRuleInfoMetaTagArrayOutput() CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return i.ToCosRechargeExtractRuleInfoMetaTagArrayOutputWithContext(context.Background())
+}
+
+func (i CosRechargeExtractRuleInfoMetaTagArray) ToCosRechargeExtractRuleInfoMetaTagArrayOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosRechargeExtractRuleInfoMetaTagArrayOutput)
+}
+
+type CosRechargeExtractRuleInfoMetaTagOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoMetaTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosRechargeExtractRuleInfoMetaTag)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoMetaTagOutput) ToCosRechargeExtractRuleInfoMetaTagOutput() CosRechargeExtractRuleInfoMetaTagOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoMetaTagOutput) ToCosRechargeExtractRuleInfoMetaTagOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoMetaTagOutput {
+	return o
+}
+
+// metadata key.
+func (o CosRechargeExtractRuleInfoMetaTagOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfoMetaTag) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// metadata value.
+func (o CosRechargeExtractRuleInfoMetaTagOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosRechargeExtractRuleInfoMetaTag) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CosRechargeExtractRuleInfoMetaTagArrayOutput struct{ *pulumi.OutputState }
+
+func (CosRechargeExtractRuleInfoMetaTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosRechargeExtractRuleInfoMetaTag)(nil)).Elem()
+}
+
+func (o CosRechargeExtractRuleInfoMetaTagArrayOutput) ToCosRechargeExtractRuleInfoMetaTagArrayOutput() CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoMetaTagArrayOutput) ToCosRechargeExtractRuleInfoMetaTagArrayOutputWithContext(ctx context.Context) CosRechargeExtractRuleInfoMetaTagArrayOutput {
+	return o
+}
+
+func (o CosRechargeExtractRuleInfoMetaTagArrayOutput) Index(i pulumi.IntInput) CosRechargeExtractRuleInfoMetaTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosRechargeExtractRuleInfoMetaTag {
+		return vs[0].([]CosRechargeExtractRuleInfoMetaTag)[vs[1].(int)]
+	}).(CosRechargeExtractRuleInfoMetaTagOutput)
 }
 
 type CosShipperCompress struct {
@@ -4263,7 +6589,1113 @@ func (o MachineGroupMachineGroupTypePtrOutput) Values() pulumi.StringArrayOutput
 	}).(pulumi.StringArrayOutput)
 }
 
+type GetMachineGroupConfigsConfig struct {
+	// scrape config id.
+	ConfigId string `pulumi:"configId"`
+	// create time.
+	CreateTime string `pulumi:"createTime"`
+	// Collection path blocklist.
+	ExcludePaths []GetMachineGroupConfigsConfigExcludePath `pulumi:"excludePaths"`
+	// Extraction rule. If ExtractRule is set, LogType must be set.
+	ExtractRules []GetMachineGroupConfigsConfigExtractRule `pulumi:"extractRules"`
+	// style of log format.
+	LogFormat string `pulumi:"logFormat"`
+	// log type.
+	LogType string `pulumi:"logType"`
+	// scrape config name.
+	Name string `pulumi:"name"`
+	// topicid.
+	Output string `pulumi:"output"`
+	// scrape log path.
+	Path string `pulumi:"path"`
+	// update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// user define rule.
+	UserDefineRule string `pulumi:"userDefineRule"`
+}
+
+// GetMachineGroupConfigsConfigInput is an input type that accepts GetMachineGroupConfigsConfigArgs and GetMachineGroupConfigsConfigOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigInput` via:
+//
+//          GetMachineGroupConfigsConfigArgs{...}
+type GetMachineGroupConfigsConfigInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigOutput() GetMachineGroupConfigsConfigOutput
+	ToGetMachineGroupConfigsConfigOutputWithContext(context.Context) GetMachineGroupConfigsConfigOutput
+}
+
+type GetMachineGroupConfigsConfigArgs struct {
+	// scrape config id.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Collection path blocklist.
+	ExcludePaths GetMachineGroupConfigsConfigExcludePathArrayInput `pulumi:"excludePaths"`
+	// Extraction rule. If ExtractRule is set, LogType must be set.
+	ExtractRules GetMachineGroupConfigsConfigExtractRuleArrayInput `pulumi:"extractRules"`
+	// style of log format.
+	LogFormat pulumi.StringInput `pulumi:"logFormat"`
+	// log type.
+	LogType pulumi.StringInput `pulumi:"logType"`
+	// scrape config name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// topicid.
+	Output pulumi.StringInput `pulumi:"output"`
+	// scrape log path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// user define rule.
+	UserDefineRule pulumi.StringInput `pulumi:"userDefineRule"`
+}
+
+func (GetMachineGroupConfigsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfig)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigArgs) ToGetMachineGroupConfigsConfigOutput() GetMachineGroupConfigsConfigOutput {
+	return i.ToGetMachineGroupConfigsConfigOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigArgs) ToGetMachineGroupConfigsConfigOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigOutput)
+}
+
+// GetMachineGroupConfigsConfigArrayInput is an input type that accepts GetMachineGroupConfigsConfigArray and GetMachineGroupConfigsConfigArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigArrayInput` via:
+//
+//          GetMachineGroupConfigsConfigArray{ GetMachineGroupConfigsConfigArgs{...} }
+type GetMachineGroupConfigsConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigArrayOutput() GetMachineGroupConfigsConfigArrayOutput
+	ToGetMachineGroupConfigsConfigArrayOutputWithContext(context.Context) GetMachineGroupConfigsConfigArrayOutput
+}
+
+type GetMachineGroupConfigsConfigArray []GetMachineGroupConfigsConfigInput
+
+func (GetMachineGroupConfigsConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfig)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigArray) ToGetMachineGroupConfigsConfigArrayOutput() GetMachineGroupConfigsConfigArrayOutput {
+	return i.ToGetMachineGroupConfigsConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigArray) ToGetMachineGroupConfigsConfigArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigArrayOutput)
+}
+
+type GetMachineGroupConfigsConfigOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfig)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigOutput) ToGetMachineGroupConfigsConfigOutput() GetMachineGroupConfigsConfigOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigOutput) ToGetMachineGroupConfigsConfigOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigOutput {
+	return o
+}
+
+// scrape config id.
+func (o GetMachineGroupConfigsConfigOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// create time.
+func (o GetMachineGroupConfigsConfigOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Collection path blocklist.
+func (o GetMachineGroupConfigsConfigOutput) ExcludePaths() GetMachineGroupConfigsConfigExcludePathArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) []GetMachineGroupConfigsConfigExcludePath { return v.ExcludePaths }).(GetMachineGroupConfigsConfigExcludePathArrayOutput)
+}
+
+// Extraction rule. If ExtractRule is set, LogType must be set.
+func (o GetMachineGroupConfigsConfigOutput) ExtractRules() GetMachineGroupConfigsConfigExtractRuleArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) []GetMachineGroupConfigsConfigExtractRule { return v.ExtractRules }).(GetMachineGroupConfigsConfigExtractRuleArrayOutput)
+}
+
+// style of log format.
+func (o GetMachineGroupConfigsConfigOutput) LogFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.LogFormat }).(pulumi.StringOutput)
+}
+
+// log type.
+func (o GetMachineGroupConfigsConfigOutput) LogType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.LogType }).(pulumi.StringOutput)
+}
+
+// scrape config name.
+func (o GetMachineGroupConfigsConfigOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// topicid.
+func (o GetMachineGroupConfigsConfigOutput) Output() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.Output }).(pulumi.StringOutput)
+}
+
+// scrape log path.
+func (o GetMachineGroupConfigsConfigOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// update time.
+func (o GetMachineGroupConfigsConfigOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// user define rule.
+func (o GetMachineGroupConfigsConfigOutput) UserDefineRule() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfig) string { return v.UserDefineRule }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupConfigsConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfig)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigArrayOutput) ToGetMachineGroupConfigsConfigArrayOutput() GetMachineGroupConfigsConfigArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigArrayOutput) ToGetMachineGroupConfigsConfigArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigArrayOutput) Index(i pulumi.IntInput) GetMachineGroupConfigsConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupConfigsConfig {
+		return vs[0].([]GetMachineGroupConfigsConfig)[vs[1].(int)]
+	}).(GetMachineGroupConfigsConfigOutput)
+}
+
+type GetMachineGroupConfigsConfigExcludePath struct {
+	// Type. Valid values: File, Path.
+	Type string `pulumi:"type"`
+	// tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetMachineGroupConfigsConfigExcludePathInput is an input type that accepts GetMachineGroupConfigsConfigExcludePathArgs and GetMachineGroupConfigsConfigExcludePathOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExcludePathInput` via:
+//
+//          GetMachineGroupConfigsConfigExcludePathArgs{...}
+type GetMachineGroupConfigsConfigExcludePathInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExcludePathOutput() GetMachineGroupConfigsConfigExcludePathOutput
+	ToGetMachineGroupConfigsConfigExcludePathOutputWithContext(context.Context) GetMachineGroupConfigsConfigExcludePathOutput
+}
+
+type GetMachineGroupConfigsConfigExcludePathArgs struct {
+	// Type. Valid values: File, Path.
+	Type pulumi.StringInput `pulumi:"type"`
+	// tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetMachineGroupConfigsConfigExcludePathArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePath)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExcludePathArgs) ToGetMachineGroupConfigsConfigExcludePathOutput() GetMachineGroupConfigsConfigExcludePathOutput {
+	return i.ToGetMachineGroupConfigsConfigExcludePathOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExcludePathArgs) ToGetMachineGroupConfigsConfigExcludePathOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExcludePathOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExcludePathOutput)
+}
+
+// GetMachineGroupConfigsConfigExcludePathArrayInput is an input type that accepts GetMachineGroupConfigsConfigExcludePathArray and GetMachineGroupConfigsConfigExcludePathArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExcludePathArrayInput` via:
+//
+//          GetMachineGroupConfigsConfigExcludePathArray{ GetMachineGroupConfigsConfigExcludePathArgs{...} }
+type GetMachineGroupConfigsConfigExcludePathArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExcludePathArrayOutput() GetMachineGroupConfigsConfigExcludePathArrayOutput
+	ToGetMachineGroupConfigsConfigExcludePathArrayOutputWithContext(context.Context) GetMachineGroupConfigsConfigExcludePathArrayOutput
+}
+
+type GetMachineGroupConfigsConfigExcludePathArray []GetMachineGroupConfigsConfigExcludePathInput
+
+func (GetMachineGroupConfigsConfigExcludePathArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExcludePath)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExcludePathArray) ToGetMachineGroupConfigsConfigExcludePathArrayOutput() GetMachineGroupConfigsConfigExcludePathArrayOutput {
+	return i.ToGetMachineGroupConfigsConfigExcludePathArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExcludePathArray) ToGetMachineGroupConfigsConfigExcludePathArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExcludePathArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExcludePathArrayOutput)
+}
+
+type GetMachineGroupConfigsConfigExcludePathOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExcludePathOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePath)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExcludePathOutput) ToGetMachineGroupConfigsConfigExcludePathOutput() GetMachineGroupConfigsConfigExcludePathOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExcludePathOutput) ToGetMachineGroupConfigsConfigExcludePathOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExcludePathOutput {
+	return o
+}
+
+// Type. Valid values: File, Path.
+func (o GetMachineGroupConfigsConfigExcludePathOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExcludePath) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// tag value.
+func (o GetMachineGroupConfigsConfigExcludePathOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExcludePath) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupConfigsConfigExcludePathArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExcludePathArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExcludePath)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExcludePathArrayOutput) ToGetMachineGroupConfigsConfigExcludePathArrayOutput() GetMachineGroupConfigsConfigExcludePathArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExcludePathArrayOutput) ToGetMachineGroupConfigsConfigExcludePathArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExcludePathArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExcludePathArrayOutput) Index(i pulumi.IntInput) GetMachineGroupConfigsConfigExcludePathOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupConfigsConfigExcludePath {
+		return vs[0].([]GetMachineGroupConfigsConfigExcludePath)[vs[1].(int)]
+	}).(GetMachineGroupConfigsConfigExcludePathOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRule struct {
+	// syslog system log collection specifies the address and port that the collector listens to.
+	Address string `pulumi:"address"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking int `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex string `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter string `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes []GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
+	// GBK encoding. Default 0.
+	IsGbk int `pulumi:"isGbk"`
+	// standard json. Default 0.
+	JsonStandard int `pulumi:"jsonStandard"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys []string `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex string `pulumi:"logRegex"`
+	// metadata tags.
+	MetaTags []GetMachineGroupConfigsConfigExtractRuleMetaTag `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType int `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol string `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex string `pulumi:"pathRegex"`
+	// syslog protocol, tcp or udp.
+	Protocol string `pulumi:"protocol"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat string `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey string `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey string `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch bool `pulumi:"unMatchUpLoadSwitch"`
+}
+
+// GetMachineGroupConfigsConfigExtractRuleInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleArgs and GetMachineGroupConfigsConfigExtractRuleOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleArgs{...}
+type GetMachineGroupConfigsConfigExtractRuleInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleOutput() GetMachineGroupConfigsConfigExtractRuleOutput
+	ToGetMachineGroupConfigsConfigExtractRuleOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleArgs struct {
+	// syslog system log collection specifies the address and port that the collector listens to.
+	Address pulumi.StringInput `pulumi:"address"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking pulumi.IntInput `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex pulumi.StringInput `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter pulumi.StringInput `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
+	// GBK encoding. Default 0.
+	IsGbk pulumi.IntInput `pulumi:"isGbk"`
+	// standard json. Default 0.
+	JsonStandard pulumi.IntInput `pulumi:"jsonStandard"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex pulumi.StringInput `pulumi:"logRegex"`
+	// metadata tags.
+	MetaTags GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput `pulumi:"metaTags"`
+	// metadata type.
+	MetadataType pulumi.IntInput `pulumi:"metadataType"`
+	// parse protocol.
+	ParseProtocol pulumi.StringInput `pulumi:"parseProtocol"`
+	// metadata path regex.
+	PathRegex pulumi.StringInput `pulumi:"pathRegex"`
+	// syslog protocol, tcp or udp.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat pulumi.StringInput `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey pulumi.StringInput `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey pulumi.StringInput `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch pulumi.BoolInput `pulumi:"unMatchUpLoadSwitch"`
+}
+
+func (GetMachineGroupConfigsConfigExtractRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRule)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleArgs) ToGetMachineGroupConfigsConfigExtractRuleOutput() GetMachineGroupConfigsConfigExtractRuleOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleArgs) ToGetMachineGroupConfigsConfigExtractRuleOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleOutput)
+}
+
+// GetMachineGroupConfigsConfigExtractRuleArrayInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleArray and GetMachineGroupConfigsConfigExtractRuleArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleArrayInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleArray{ GetMachineGroupConfigsConfigExtractRuleArgs{...} }
+type GetMachineGroupConfigsConfigExtractRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleArrayOutput() GetMachineGroupConfigsConfigExtractRuleArrayOutput
+	ToGetMachineGroupConfigsConfigExtractRuleArrayOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleArrayOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleArray []GetMachineGroupConfigsConfigExtractRuleInput
+
+func (GetMachineGroupConfigsConfigExtractRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRule)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleArray) ToGetMachineGroupConfigsConfigExtractRuleArrayOutput() GetMachineGroupConfigsConfigExtractRuleArrayOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleArray) ToGetMachineGroupConfigsConfigExtractRuleArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleArrayOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRule)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) ToGetMachineGroupConfigsConfigExtractRuleOutput() GetMachineGroupConfigsConfigExtractRuleOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) ToGetMachineGroupConfigsConfigExtractRuleOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleOutput {
+	return o
+}
+
+// syslog system log collection specifies the address and port that the collector listens to.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) Backtracking() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) int { return v.Backtracking }).(pulumi.IntOutput)
+}
+
+// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) BeginRegex() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.BeginRegex }).(pulumi.StringOutput)
+}
+
+// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) Delimiter() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.Delimiter }).(pulumi.StringOutput)
+}
+
+// Log keys to be filtered and the corresponding regex.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) FilterKeyRegexes() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) []GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex {
+		return v.FilterKeyRegexes
+	}).(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput)
+}
+
+// GBK encoding. Default 0.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) IsGbk() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) int { return v.IsGbk }).(pulumi.IntOutput)
+}
+
+// standard json. Default 0.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) JsonStandard() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) int { return v.JsonStandard }).(pulumi.IntOutput)
+}
+
+// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) Keys() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) []string { return v.Keys }).(pulumi.StringArrayOutput)
+}
+
+// Full log matching rule, which is valid only if logType is fullregex_log.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) LogRegex() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.LogRegex }).(pulumi.StringOutput)
+}
+
+// metadata tags.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) MetaTags() GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) []GetMachineGroupConfigsConfigExtractRuleMetaTag {
+		return v.MetaTags
+	}).(GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput)
+}
+
+// metadata type.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) MetadataType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) int { return v.MetadataType }).(pulumi.IntOutput)
+}
+
+// parse protocol.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) ParseProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.ParseProtocol }).(pulumi.StringOutput)
+}
+
+// metadata path regex.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) PathRegex() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.PathRegex }).(pulumi.StringOutput)
+}
+
+// syslog protocol, tcp or udp.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) TimeFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.TimeFormat }).(pulumi.StringOutput)
+}
+
+// Time field key name. timeKey and timeFormat must appear in pair.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) TimeKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.TimeKey }).(pulumi.StringOutput)
+}
+
+// Unmatched log key.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) UnMatchLogKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) string { return v.UnMatchLogKey }).(pulumi.StringOutput)
+}
+
+// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+func (o GetMachineGroupConfigsConfigExtractRuleOutput) UnMatchUpLoadSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRule) bool { return v.UnMatchUpLoadSwitch }).(pulumi.BoolOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRule)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleArrayOutput() GetMachineGroupConfigsConfigExtractRuleArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleArrayOutput) Index(i pulumi.IntInput) GetMachineGroupConfigsConfigExtractRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupConfigsConfigExtractRule {
+		return vs[0].([]GetMachineGroupConfigsConfigExtractRule)[vs[1].(int)]
+	}).(GetMachineGroupConfigsConfigExtractRuleOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex struct {
+	// tag key.
+	Key string `pulumi:"key"`
+	// Filter rule regex corresponding to key.
+	Regex string `pulumi:"regex"`
+}
+
+// GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs and GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs{...}
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput
+	ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs struct {
+	// tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Filter rule regex corresponding to key.
+	Regex pulumi.StringInput `pulumi:"regex"`
+}
+
+func (GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput)
+}
+
+// GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray and GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray{ GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs{...} }
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput
+	ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray []GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexInput
+
+func (GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput {
+	return o
+}
+
+// tag key.
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Filter rule regex corresponding to key.
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput) Regex() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex) string { return v.Regex }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput() GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput) Index(i pulumi.IntInput) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex {
+		return vs[0].([]GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex)[vs[1].(int)]
+	}).(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleMetaTag struct {
+	// tag key.
+	Key string `pulumi:"key"`
+	// tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetMachineGroupConfigsConfigExtractRuleMetaTagInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleMetaTagArgs and GetMachineGroupConfigsConfigExtractRuleMetaTagOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleMetaTagInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleMetaTagArgs{...}
+type GetMachineGroupConfigsConfigExtractRuleMetaTagInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagOutput
+	ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleMetaTagArgs struct {
+	// tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetMachineGroupConfigsConfigExtractRuleMetaTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleMetaTagArgs) ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleMetaTagArgs) ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleMetaTagOutput)
+}
+
+// GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput is an input type that accepts GetMachineGroupConfigsConfigExtractRuleMetaTagArray and GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput` via:
+//
+//          GetMachineGroupConfigsConfigExtractRuleMetaTagArray{ GetMachineGroupConfigsConfigExtractRuleMetaTagArgs{...} }
+type GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput
+	ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutputWithContext(context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput
+}
+
+type GetMachineGroupConfigsConfigExtractRuleMetaTagArray []GetMachineGroupConfigsConfigExtractRuleMetaTagInput
+
+func (GetMachineGroupConfigsConfigExtractRuleMetaTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleMetaTagArray) ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput {
+	return i.ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupConfigsConfigExtractRuleMetaTagArray) ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleMetaTagOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleMetaTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagOutput) ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagOutput) ToGetMachineGroupConfigsConfigExtractRuleMetaTagOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagOutput {
+	return o
+}
+
+// tag key.
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRuleMetaTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// tag value.
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupConfigsConfigExtractRuleMetaTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupConfigsConfigExtractRuleMetaTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput() GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput) ToGetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutputWithContext(ctx context.Context) GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput) Index(i pulumi.IntInput) GetMachineGroupConfigsConfigExtractRuleMetaTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupConfigsConfigExtractRuleMetaTag {
+		return vs[0].([]GetMachineGroupConfigsConfigExtractRuleMetaTag)[vs[1].(int)]
+	}).(GetMachineGroupConfigsConfigExtractRuleMetaTagOutput)
+}
+
+type GetMachinesMachine struct {
+	// if open auto update flag.
+	AutoUpdate int `pulumi:"autoUpdate"`
+	// code of update operation.
+	ErrCode int `pulumi:"errCode"`
+	// msg of update operation.
+	ErrMsg string `pulumi:"errMsg"`
+	// ip of machine.
+	Ip string `pulumi:"ip"`
+	// offline time of machine.
+	OfflineTime string `pulumi:"offlineTime"`
+	// status of machine.
+	Status int `pulumi:"status"`
+	// machine update status.
+	UpdateStatus int `pulumi:"updateStatus"`
+	// current machine version.
+	Version string `pulumi:"version"`
+}
+
+// GetMachinesMachineInput is an input type that accepts GetMachinesMachineArgs and GetMachinesMachineOutput values.
+// You can construct a concrete instance of `GetMachinesMachineInput` via:
+//
+//          GetMachinesMachineArgs{...}
+type GetMachinesMachineInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineOutput() GetMachinesMachineOutput
+	ToGetMachinesMachineOutputWithContext(context.Context) GetMachinesMachineOutput
+}
+
+type GetMachinesMachineArgs struct {
+	// if open auto update flag.
+	AutoUpdate pulumi.IntInput `pulumi:"autoUpdate"`
+	// code of update operation.
+	ErrCode pulumi.IntInput `pulumi:"errCode"`
+	// msg of update operation.
+	ErrMsg pulumi.StringInput `pulumi:"errMsg"`
+	// ip of machine.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// offline time of machine.
+	OfflineTime pulumi.StringInput `pulumi:"offlineTime"`
+	// status of machine.
+	Status pulumi.IntInput `pulumi:"status"`
+	// machine update status.
+	UpdateStatus pulumi.IntInput `pulumi:"updateStatus"`
+	// current machine version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetMachinesMachineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachine)(nil)).Elem()
+}
+
+func (i GetMachinesMachineArgs) ToGetMachinesMachineOutput() GetMachinesMachineOutput {
+	return i.ToGetMachinesMachineOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineArgs) ToGetMachinesMachineOutputWithContext(ctx context.Context) GetMachinesMachineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineOutput)
+}
+
+// GetMachinesMachineArrayInput is an input type that accepts GetMachinesMachineArray and GetMachinesMachineArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineArrayInput` via:
+//
+//          GetMachinesMachineArray{ GetMachinesMachineArgs{...} }
+type GetMachinesMachineArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput
+	ToGetMachinesMachineArrayOutputWithContext(context.Context) GetMachinesMachineArrayOutput
+}
+
+type GetMachinesMachineArray []GetMachinesMachineInput
+
+func (GetMachinesMachineArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachine)(nil)).Elem()
+}
+
+func (i GetMachinesMachineArray) ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput {
+	return i.ToGetMachinesMachineArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineArray) ToGetMachinesMachineArrayOutputWithContext(ctx context.Context) GetMachinesMachineArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineArrayOutput)
+}
+
+type GetMachinesMachineOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachine)(nil)).Elem()
+}
+
+func (o GetMachinesMachineOutput) ToGetMachinesMachineOutput() GetMachinesMachineOutput {
+	return o
+}
+
+func (o GetMachinesMachineOutput) ToGetMachinesMachineOutputWithContext(ctx context.Context) GetMachinesMachineOutput {
+	return o
+}
+
+// if open auto update flag.
+func (o GetMachinesMachineOutput) AutoUpdate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.AutoUpdate }).(pulumi.IntOutput)
+}
+
+// code of update operation.
+func (o GetMachinesMachineOutput) ErrCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.ErrCode }).(pulumi.IntOutput)
+}
+
+// msg of update operation.
+func (o GetMachinesMachineOutput) ErrMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.ErrMsg }).(pulumi.StringOutput)
+}
+
+// ip of machine.
+func (o GetMachinesMachineOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// offline time of machine.
+func (o GetMachinesMachineOutput) OfflineTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.OfflineTime }).(pulumi.StringOutput)
+}
+
+// status of machine.
+func (o GetMachinesMachineOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// machine update status.
+func (o GetMachinesMachineOutput) UpdateStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.UpdateStatus }).(pulumi.IntOutput)
+}
+
+// current machine version.
+func (o GetMachinesMachineOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetMachinesMachineArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachine)(nil)).Elem()
+}
+
+func (o GetMachinesMachineArrayOutput) ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineArrayOutput) ToGetMachinesMachineArrayOutputWithContext(ctx context.Context) GetMachinesMachineArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachine {
+		return vs[0].([]GetMachinesMachine)[vs[1].(int)]
+	}).(GetMachinesMachineOutput)
+}
+
+type GetShipperTasksTask struct {
+	// end time(ms).
+	EndTime int `pulumi:"endTime"`
+	// detail info.
+	Message string `pulumi:"message"`
+	// end time of current task (ms).
+	RangeEnd int `pulumi:"rangeEnd"`
+	// start time of current task (ms).
+	RangeStart int `pulumi:"rangeStart"`
+	// shipper id.
+	ShipperId string `pulumi:"shipperId"`
+	// start time(ms).
+	StartTime int `pulumi:"startTime"`
+	// status of current shipper task.
+	Status string `pulumi:"status"`
+	// task id.
+	TaskId string `pulumi:"taskId"`
+	// topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// GetShipperTasksTaskInput is an input type that accepts GetShipperTasksTaskArgs and GetShipperTasksTaskOutput values.
+// You can construct a concrete instance of `GetShipperTasksTaskInput` via:
+//
+//          GetShipperTasksTaskArgs{...}
+type GetShipperTasksTaskInput interface {
+	pulumi.Input
+
+	ToGetShipperTasksTaskOutput() GetShipperTasksTaskOutput
+	ToGetShipperTasksTaskOutputWithContext(context.Context) GetShipperTasksTaskOutput
+}
+
+type GetShipperTasksTaskArgs struct {
+	// end time(ms).
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// detail info.
+	Message pulumi.StringInput `pulumi:"message"`
+	// end time of current task (ms).
+	RangeEnd pulumi.IntInput `pulumi:"rangeEnd"`
+	// start time of current task (ms).
+	RangeStart pulumi.IntInput `pulumi:"rangeStart"`
+	// shipper id.
+	ShipperId pulumi.StringInput `pulumi:"shipperId"`
+	// start time(ms).
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// status of current shipper task.
+	Status pulumi.StringInput `pulumi:"status"`
+	// task id.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (GetShipperTasksTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShipperTasksTask)(nil)).Elem()
+}
+
+func (i GetShipperTasksTaskArgs) ToGetShipperTasksTaskOutput() GetShipperTasksTaskOutput {
+	return i.ToGetShipperTasksTaskOutputWithContext(context.Background())
+}
+
+func (i GetShipperTasksTaskArgs) ToGetShipperTasksTaskOutputWithContext(ctx context.Context) GetShipperTasksTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShipperTasksTaskOutput)
+}
+
+// GetShipperTasksTaskArrayInput is an input type that accepts GetShipperTasksTaskArray and GetShipperTasksTaskArrayOutput values.
+// You can construct a concrete instance of `GetShipperTasksTaskArrayInput` via:
+//
+//          GetShipperTasksTaskArray{ GetShipperTasksTaskArgs{...} }
+type GetShipperTasksTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetShipperTasksTaskArrayOutput() GetShipperTasksTaskArrayOutput
+	ToGetShipperTasksTaskArrayOutputWithContext(context.Context) GetShipperTasksTaskArrayOutput
+}
+
+type GetShipperTasksTaskArray []GetShipperTasksTaskInput
+
+func (GetShipperTasksTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShipperTasksTask)(nil)).Elem()
+}
+
+func (i GetShipperTasksTaskArray) ToGetShipperTasksTaskArrayOutput() GetShipperTasksTaskArrayOutput {
+	return i.ToGetShipperTasksTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetShipperTasksTaskArray) ToGetShipperTasksTaskArrayOutputWithContext(ctx context.Context) GetShipperTasksTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShipperTasksTaskArrayOutput)
+}
+
+type GetShipperTasksTaskOutput struct{ *pulumi.OutputState }
+
+func (GetShipperTasksTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShipperTasksTask)(nil)).Elem()
+}
+
+func (o GetShipperTasksTaskOutput) ToGetShipperTasksTaskOutput() GetShipperTasksTaskOutput {
+	return o
+}
+
+func (o GetShipperTasksTaskOutput) ToGetShipperTasksTaskOutputWithContext(ctx context.Context) GetShipperTasksTaskOutput {
+	return o
+}
+
+// end time(ms).
+func (o GetShipperTasksTaskOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// detail info.
+func (o GetShipperTasksTaskOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// end time of current task (ms).
+func (o GetShipperTasksTaskOutput) RangeEnd() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) int { return v.RangeEnd }).(pulumi.IntOutput)
+}
+
+// start time of current task (ms).
+func (o GetShipperTasksTaskOutput) RangeStart() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) int { return v.RangeStart }).(pulumi.IntOutput)
+}
+
+// shipper id.
+func (o GetShipperTasksTaskOutput) ShipperId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) string { return v.ShipperId }).(pulumi.StringOutput)
+}
+
+// start time(ms).
+func (o GetShipperTasksTaskOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// status of current shipper task.
+func (o GetShipperTasksTaskOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// task id.
+func (o GetShipperTasksTaskOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// topic id.
+func (o GetShipperTasksTaskOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShipperTasksTask) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type GetShipperTasksTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetShipperTasksTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShipperTasksTask)(nil)).Elem()
+}
+
+func (o GetShipperTasksTaskArrayOutput) ToGetShipperTasksTaskArrayOutput() GetShipperTasksTaskArrayOutput {
+	return o
+}
+
+func (o GetShipperTasksTaskArrayOutput) ToGetShipperTasksTaskArrayOutputWithContext(ctx context.Context) GetShipperTasksTaskArrayOutput {
+	return o
+}
+
+func (o GetShipperTasksTaskArrayOutput) Index(i pulumi.IntInput) GetShipperTasksTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetShipperTasksTask {
+		return vs[0].([]GetShipperTasksTask)[vs[1].(int)]
+	}).(GetShipperTasksTaskOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAlarmTargetInput)(nil)).Elem(), AlarmAlarmTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAlarmTargetArrayInput)(nil)).Elem(), AlarmAlarmTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAnalysisInput)(nil)).Elem(), AlarmAnalysisArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAnalysisArrayInput)(nil)).Elem(), AlarmAnalysisArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAnalysisConfigInfoInput)(nil)).Elem(), AlarmAnalysisConfigInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAnalysisConfigInfoArrayInput)(nil)).Elem(), AlarmAnalysisConfigInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmCallBackInput)(nil)).Elem(), AlarmCallBackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmCallBackPtrInput)(nil)).Elem(), AlarmCallBackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorTimeInput)(nil)).Elem(), AlarmMonitorTimeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorTimePtrInput)(nil)).Elem(), AlarmMonitorTimeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeReceiverInput)(nil)).Elem(), AlarmNoticeNoticeReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeReceiverArrayInput)(nil)).Elem(), AlarmNoticeNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeWebCallbackInput)(nil)).Elem(), AlarmNoticeWebCallbackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeWebCallbackArrayInput)(nil)).Elem(), AlarmNoticeWebCallbackArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CkafkaConsumerCkafkaInput)(nil)).Elem(), CkafkaConsumerCkafkaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CkafkaConsumerCkafkaPtrInput)(nil)).Elem(), CkafkaConsumerCkafkaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CkafkaConsumerContentInput)(nil)).Elem(), CkafkaConsumerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CkafkaConsumerContentPtrInput)(nil)).Elem(), CkafkaConsumerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExcludePathInput)(nil)).Elem(), ConfigExcludePathArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExcludePathArrayInput)(nil)).Elem(), ConfigExcludePathArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtraContainerFileInput)(nil)).Elem(), ConfigExtraContainerFileArgs{})
@@ -4286,6 +7718,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRulePtrInput)(nil)).Elem(), ConfigExtractRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleFilterKeyRegexInput)(nil)).Elem(), ConfigExtractRuleFilterKeyRegexArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleFilterKeyRegexArrayInput)(nil)).Elem(), ConfigExtractRuleFilterKeyRegexArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleMetaTagInput)(nil)).Elem(), ConfigExtractRuleMetaTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleMetaTagArrayInput)(nil)).Elem(), ConfigExtractRuleMetaTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoInput)(nil)).Elem(), CosRechargeExtractRuleInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoPtrInput)(nil)).Elem(), CosRechargeExtractRuleInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoFilterKeyRegexInput)(nil)).Elem(), CosRechargeExtractRuleInfoFilterKeyRegexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoFilterKeyRegexArrayInput)(nil)).Elem(), CosRechargeExtractRuleInfoFilterKeyRegexArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoMetaTagInput)(nil)).Elem(), CosRechargeExtractRuleInfoMetaTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoMetaTagArrayInput)(nil)).Elem(), CosRechargeExtractRuleInfoMetaTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperCompressInput)(nil)).Elem(), CosShipperCompressArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperCompressPtrInput)(nil)).Elem(), CosShipperCompressArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentInput)(nil)).Elem(), CosShipperContentArgs{})
@@ -4314,6 +7754,38 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigInput)(nil)).Elem(), GetMachineGroupConfigsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePathInput)(nil)).Elem(), GetMachineGroupConfigsConfigExcludePathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePathArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExcludePathArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTagInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleMetaTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleMetaTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineInput)(nil)).Elem(), GetMachinesMachineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineArrayInput)(nil)).Elem(), GetMachinesMachineArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShipperTasksTaskInput)(nil)).Elem(), GetShipperTasksTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShipperTasksTaskArrayInput)(nil)).Elem(), GetShipperTasksTaskArray{})
+	pulumi.RegisterOutputType(AlarmAlarmTargetOutput{})
+	pulumi.RegisterOutputType(AlarmAlarmTargetArrayOutput{})
+	pulumi.RegisterOutputType(AlarmAnalysisOutput{})
+	pulumi.RegisterOutputType(AlarmAnalysisArrayOutput{})
+	pulumi.RegisterOutputType(AlarmAnalysisConfigInfoOutput{})
+	pulumi.RegisterOutputType(AlarmAnalysisConfigInfoArrayOutput{})
+	pulumi.RegisterOutputType(AlarmCallBackOutput{})
+	pulumi.RegisterOutputType(AlarmCallBackPtrOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorTimeOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorTimePtrOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeReceiverOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeWebCallbackOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeWebCallbackArrayOutput{})
+	pulumi.RegisterOutputType(CkafkaConsumerCkafkaOutput{})
+	pulumi.RegisterOutputType(CkafkaConsumerCkafkaPtrOutput{})
+	pulumi.RegisterOutputType(CkafkaConsumerContentOutput{})
+	pulumi.RegisterOutputType(CkafkaConsumerContentPtrOutput{})
 	pulumi.RegisterOutputType(ConfigExcludePathOutput{})
 	pulumi.RegisterOutputType(ConfigExcludePathArrayOutput{})
 	pulumi.RegisterOutputType(ConfigExtraContainerFileOutput{})
@@ -4336,6 +7808,14 @@ func init() {
 	pulumi.RegisterOutputType(ConfigExtractRulePtrOutput{})
 	pulumi.RegisterOutputType(ConfigExtractRuleFilterKeyRegexOutput{})
 	pulumi.RegisterOutputType(ConfigExtractRuleFilterKeyRegexArrayOutput{})
+	pulumi.RegisterOutputType(ConfigExtractRuleMetaTagOutput{})
+	pulumi.RegisterOutputType(ConfigExtractRuleMetaTagArrayOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoPtrOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoFilterKeyRegexOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoFilterKeyRegexArrayOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoMetaTagOutput{})
+	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoMetaTagArrayOutput{})
 	pulumi.RegisterOutputType(CosShipperCompressOutput{})
 	pulumi.RegisterOutputType(CosShipperCompressPtrOutput{})
 	pulumi.RegisterOutputType(CosShipperContentOutput{})
@@ -4364,4 +7844,18 @@ func init() {
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueValuePtrOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExcludePathOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExcludePathArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleMetaTagOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineArrayOutput{})
+	pulumi.RegisterOutputType(GetShipperTasksTaskOutput{})
+	pulumi.RegisterOutputType(GetShipperTasksTaskArrayOutput{})
 }

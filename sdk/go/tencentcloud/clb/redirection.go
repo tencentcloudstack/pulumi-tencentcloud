@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a CLB redirection.
 //
 // ## Example Usage
-//
-// Manual Rewrite
+// ### Manual Rewrite
 //
 // ```go
 // package main
@@ -41,8 +40,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Auto Rewrite
+// ### Auto Rewrite
 //
 // ```go
 // package main

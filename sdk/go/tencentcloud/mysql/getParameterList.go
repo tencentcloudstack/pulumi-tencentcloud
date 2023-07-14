@@ -27,7 +27,7 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Mysql.GetParameterList(ctx, &mysql.GetParameterListArgs{
 // 			EngineVersion:    pulumi.StringRef("5.5"),
-// 			MysqlId:          pulumi.StringRef("my-test-database"),
+// 			MysqlId:          pulumi.StringRef("terraform-test-local-database"),
 // 			ResultOutputFile: pulumi.StringRef("mytestpath"),
 // 		}, nil)
 // 		if err != nil {

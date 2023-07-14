@@ -7,17 +7,43 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./function";
 export * from "./functionAlias";
+export * from "./functionEventInvokeConfig";
+export * from "./functionVersion";
+export * from "./getAccountInfo";
+export * from "./getAsyncEventManagement";
+export * from "./getAsyncEventStatus";
+export * from "./getFunctionAddress";
+export * from "./getFunctionAliases";
+export * from "./getFunctionVersions";
 export * from "./getFunctions";
+export * from "./getLayerVersions";
+export * from "./getLayers";
 export * from "./getLogs";
 export * from "./getNamespaces";
+export * from "./getRequestStatus";
+export * from "./getTriggers";
+export * from "./invokeFunction";
 export * from "./layer";
 export * from "./namespace";
+export * from "./provisionedConcurrencyConfig";
+export * from "./reservedConcurrencyConfig";
+export * from "./syncInvokeFunction";
+export * from "./terminateAsyncEvent";
+export * from "./triggerConfig";
 
 // Import resources to register:
 import { Function } from "./function";
 import { FunctionAlias } from "./functionAlias";
+import { FunctionEventInvokeConfig } from "./functionEventInvokeConfig";
+import { FunctionVersion } from "./functionVersion";
+import { InvokeFunction } from "./invokeFunction";
 import { Layer } from "./layer";
 import { Namespace } from "./namespace";
+import { ProvisionedConcurrencyConfig } from "./provisionedConcurrencyConfig";
+import { ReservedConcurrencyConfig } from "./reservedConcurrencyConfig";
+import { SyncInvokeFunction } from "./syncInvokeFunction";
+import { TerminateAsyncEvent } from "./terminateAsyncEvent";
+import { TriggerConfig } from "./triggerConfig";
 
 const _module = {
     version: utilities.getVersion(),
@@ -27,10 +53,26 @@ const _module = {
                 return new Function(name, <any>undefined, { urn })
             case "tencentcloud:Scf/functionAlias:FunctionAlias":
                 return new FunctionAlias(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig":
+                return new FunctionEventInvokeConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/functionVersion:FunctionVersion":
+                return new FunctionVersion(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/invokeFunction:InvokeFunction":
+                return new InvokeFunction(name, <any>undefined, { urn })
             case "tencentcloud:Scf/layer:Layer":
                 return new Layer(name, <any>undefined, { urn })
             case "tencentcloud:Scf/namespace:Namespace":
                 return new Namespace(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/provisionedConcurrencyConfig:ProvisionedConcurrencyConfig":
+                return new ProvisionedConcurrencyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig":
+                return new ReservedConcurrencyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/syncInvokeFunction:SyncInvokeFunction":
+                return new SyncInvokeFunction(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/terminateAsyncEvent:TerminateAsyncEvent":
+                return new TerminateAsyncEvent(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/triggerConfig:TriggerConfig":
+                return new TriggerConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -38,5 +80,13 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/function", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionAlias", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionEventInvokeConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionVersion", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/invokeFunction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/layer", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/namespace", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/provisionedConcurrencyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/reservedConcurrencyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/syncInvokeFunction", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/terminateAsyncEvent", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/triggerConfig", _module)

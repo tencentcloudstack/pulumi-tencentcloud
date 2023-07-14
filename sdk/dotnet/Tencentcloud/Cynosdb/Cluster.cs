@@ -169,6 +169,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<double?> MinCpu { get; private set; } = null!;
 
         /// <summary>
+        /// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        /// </summary>
+        [Output("oldIpReserveHours")]
+        public Output<int?> OldIpReserveHours { get; private set; } = null!;
+
+        /// <summary>
         /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         [Output("paramItems")]
@@ -265,10 +271,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<string?> ServerlessStatusFlag { get; private set; } = null!;
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Output("storageLimit")]
         public Output<int?> StorageLimit { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        /// </summary>
+        [Output("storagePayMode")]
+        public Output<int> StoragePayMode { get; private set; } = null!;
 
         /// <summary>
         /// Used storage of CynosDB cluster, unit in MB.
@@ -449,6 +461,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("minCpu")]
         public Input<double>? MinCpu { get; set; }
 
+        /// <summary>
+        /// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        /// </summary>
+        [Input("oldIpReserveHours")]
+        public Input<int>? OldIpReserveHours { get; set; }
+
         [Input("paramItems")]
         private InputList<Inputs.ClusterParamItemArgs>? _paramItems;
 
@@ -522,10 +540,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? ServerlessStatusFlag { get; set; }
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Input("storageLimit")]
         public Input<int>? StorageLimit { get; set; }
+
+        /// <summary>
+        /// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        /// </summary>
+        [Input("storagePayMode")]
+        public Input<int>? StoragePayMode { get; set; }
 
         /// <summary>
         /// ID of the subnet within this VPC.
@@ -708,6 +732,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("minCpu")]
         public Input<double>? MinCpu { get; set; }
 
+        /// <summary>
+        /// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        /// </summary>
+        [Input("oldIpReserveHours")]
+        public Input<int>? OldIpReserveHours { get; set; }
+
         [Input("paramItems")]
         private InputList<Inputs.ClusterParamItemGetArgs>? _paramItems;
 
@@ -847,10 +877,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? ServerlessStatusFlag { get; set; }
 
         /// <summary>
-        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         /// </summary>
         [Input("storageLimit")]
         public Input<int>? StorageLimit { get; set; }
+
+        /// <summary>
+        /// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        /// </summary>
+        [Input("storagePayMode")]
+        public Input<int>? StoragePayMode { get; set; }
 
         /// <summary>
         /// Used storage of CynosDB cluster, unit in MB.

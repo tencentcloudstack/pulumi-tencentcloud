@@ -26,7 +26,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.String("postgres-f44wlfdv"),
+// 			MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
 // 			MaxReplayLag:             pulumi.Int(100),
 // 			MaxReplayLatency:         pulumi.Int(512),
 // 			MinDelayEliminateReserve: pulumi.Int(1),

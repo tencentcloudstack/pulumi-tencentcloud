@@ -14,6 +14,7 @@ import (
 // Provide a resource to create a SSM secret.
 //
 // ## Example Usage
+// ### Create user defined secret
 //
 // ```go
 // package main
@@ -26,13 +27,66 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
-// 			Description:          pulumi.String("test secret"),
+// 			Description:          pulumi.String("user defined secret"),
 // 			IsEnabled:            pulumi.Bool(true),
 // 			RecoveryWindowInDays: pulumi.Int(0),
 // 			SecretName:           pulumi.String("test"),
 // 			Tags: pulumi.AnyMap{
 // 				"test-tag": pulumi.Any("test"),
 // 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Create redis secret
+//
+// ```go
+// package main
+//
+// import (
+// 	"encoding/json"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		instance, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
+// 			Zone: pulumi.StringRef("ap-guangzhou-6"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
+// 			"Region":     "ap-guangzhou",
+// 			"Privilege":  "r",
+// 			"InstanceId": instance.InstanceLists[0].RedisId,
+// 			"ReadonlyPolicy": []string{
+// 				"master",
+// 			},
+// 			"Remark": "for tf test",
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		json0 := string(tmpJSON0)
+// 		_, err = Ssm.NewSecret(ctx, "secret", &Ssm.SecretArgs{
+// 			SecretName:       pulumi.String("for-redis-test"),
+// 			Description:      pulumi.String("redis secret"),
+// 			IsEnabled:        pulumi.Bool(false),
+// 			SecretType:       pulumi.Int(4),
+// 			AdditionalConfig: pulumi.String(json0),
+// 			Tags: pulumi.AnyMap{
+// 				"test-tag": pulumi.Any("test"),
+// 			},
+// 			RecoveryWindowInDays: pulumi.Int(0),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -52,6 +106,8 @@ import (
 type Secret struct {
 	pulumi.CustomResourceState
 
+	// Additional config for specific secret types in JSON string format.
+	AdditionalConfig pulumi.StringPtrOutput `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
@@ -62,6 +118,8 @@ type Secret struct {
 	RecoveryWindowInDays pulumi.IntPtrOutput `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
+	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	SecretType pulumi.IntOutput `pulumi:"secretType"`
 	// Status of secret.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Tags of secret.
@@ -101,6 +159,8 @@ func GetSecret(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Secret resources.
 type secretState struct {
+	// Additional config for specific secret types in JSON string format.
+	AdditionalConfig *string `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description *string `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
@@ -111,6 +171,8 @@ type secretState struct {
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName *string `pulumi:"secretName"`
+	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	SecretType *int `pulumi:"secretType"`
 	// Status of secret.
 	Status *string `pulumi:"status"`
 	// Tags of secret.
@@ -118,6 +180,8 @@ type secretState struct {
 }
 
 type SecretState struct {
+	// Additional config for specific secret types in JSON string format.
+	AdditionalConfig pulumi.StringPtrInput
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrInput
 	// Specify whether to enable secret. Default value is `true`.
@@ -128,6 +192,8 @@ type SecretState struct {
 	RecoveryWindowInDays pulumi.IntPtrInput
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringPtrInput
+	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	SecretType pulumi.IntPtrInput
 	// Status of secret.
 	Status pulumi.StringPtrInput
 	// Tags of secret.
@@ -139,6 +205,8 @@ func (SecretState) ElementType() reflect.Type {
 }
 
 type secretArgs struct {
+	// Additional config for specific secret types in JSON string format.
+	AdditionalConfig *string `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description *string `pulumi:"description"`
 	// Specify whether to enable secret. Default value is `true`.
@@ -149,12 +217,16 @@ type secretArgs struct {
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName string `pulumi:"secretName"`
+	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	SecretType *int `pulumi:"secretType"`
 	// Tags of secret.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Secret resource.
 type SecretArgs struct {
+	// Additional config for specific secret types in JSON string format.
+	AdditionalConfig pulumi.StringPtrInput
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrInput
 	// Specify whether to enable secret. Default value is `true`.
@@ -165,6 +237,8 @@ type SecretArgs struct {
 	RecoveryWindowInDays pulumi.IntPtrInput
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringInput
+	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	SecretType pulumi.IntPtrInput
 	// Tags of secret.
 	Tags pulumi.MapInput
 }
@@ -256,6 +330,11 @@ func (o SecretOutput) ToSecretOutputWithContext(ctx context.Context) SecretOutpu
 	return o
 }
 
+// Additional config for specific secret types in JSON string format.
+func (o SecretOutput) AdditionalConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Secret) pulumi.StringPtrOutput { return v.AdditionalConfig }).(pulumi.StringPtrOutput)
+}
+
 // Description of secret. The maximum is 2048 bytes.
 func (o SecretOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -279,6 +358,11 @@ func (o SecretOutput) RecoveryWindowInDays() pulumi.IntPtrOutput {
 // Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 func (o SecretOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
+}
+
+// Type of secret. `0`: user-defined secret. `4`: redis secret.
+func (o SecretOutput) SecretType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Secret) pulumi.IntOutput { return v.SecretType }).(pulumi.IntOutput)
 }
 
 // Status of secret.

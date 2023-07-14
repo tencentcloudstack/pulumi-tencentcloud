@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  *
  * const mysql = pulumi.output(tencentcloud.Mysql.getParameterList({
  *     engineVersion: "5.5",
- *     mysqlId: "my-test-database",
+ *     mysqlId: "terraform-test-local-database",
  *     resultOutputFile: "mytestpath",
  * }));
  * ```

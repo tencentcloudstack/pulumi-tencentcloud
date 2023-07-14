@@ -13,6 +13,66 @@ import (
 
 // Provide a resource to create a VPC.
 //
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 			DnsServers: pulumi.StringArray{
+// 				pulumi.String("119.29.29.29"),
+// 				pulumi.String("8.8.8.8"),
+// 			},
+// 			IsMulticast: pulumi.Bool(false),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Using Assistant CIDR
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+// 			AssistantCidrs: pulumi.StringArray{
+// 				pulumi.String("172.16.0.0/24"),
+// 			},
+// 			CidrBlock:   pulumi.String("10.0.0.0/16"),
+// 			IsMulticast: pulumi.Bool(false),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
 // ## Import
 //
 // Vpc instance can be imported, e.g.

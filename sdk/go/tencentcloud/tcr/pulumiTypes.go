@@ -1062,6 +1062,112 @@ func (o NamespaceCveWhitelistItemArrayOutput) Index(i pulumi.IntInput) Namespace
 	}).(NamespaceCveWhitelistItemOutput)
 }
 
+type ServiceAccountPermission struct {
+	// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+	Actions []string `pulumi:"actions"`
+	// resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+	Resource string `pulumi:"resource"`
+}
+
+// ServiceAccountPermissionInput is an input type that accepts ServiceAccountPermissionArgs and ServiceAccountPermissionOutput values.
+// You can construct a concrete instance of `ServiceAccountPermissionInput` via:
+//
+//          ServiceAccountPermissionArgs{...}
+type ServiceAccountPermissionInput interface {
+	pulumi.Input
+
+	ToServiceAccountPermissionOutput() ServiceAccountPermissionOutput
+	ToServiceAccountPermissionOutputWithContext(context.Context) ServiceAccountPermissionOutput
+}
+
+type ServiceAccountPermissionArgs struct {
+	// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+	Actions pulumi.StringArrayInput `pulumi:"actions"`
+	// resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+	Resource pulumi.StringInput `pulumi:"resource"`
+}
+
+func (ServiceAccountPermissionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServiceAccountPermission)(nil)).Elem()
+}
+
+func (i ServiceAccountPermissionArgs) ToServiceAccountPermissionOutput() ServiceAccountPermissionOutput {
+	return i.ToServiceAccountPermissionOutputWithContext(context.Background())
+}
+
+func (i ServiceAccountPermissionArgs) ToServiceAccountPermissionOutputWithContext(ctx context.Context) ServiceAccountPermissionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServiceAccountPermissionOutput)
+}
+
+// ServiceAccountPermissionArrayInput is an input type that accepts ServiceAccountPermissionArray and ServiceAccountPermissionArrayOutput values.
+// You can construct a concrete instance of `ServiceAccountPermissionArrayInput` via:
+//
+//          ServiceAccountPermissionArray{ ServiceAccountPermissionArgs{...} }
+type ServiceAccountPermissionArrayInput interface {
+	pulumi.Input
+
+	ToServiceAccountPermissionArrayOutput() ServiceAccountPermissionArrayOutput
+	ToServiceAccountPermissionArrayOutputWithContext(context.Context) ServiceAccountPermissionArrayOutput
+}
+
+type ServiceAccountPermissionArray []ServiceAccountPermissionInput
+
+func (ServiceAccountPermissionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServiceAccountPermission)(nil)).Elem()
+}
+
+func (i ServiceAccountPermissionArray) ToServiceAccountPermissionArrayOutput() ServiceAccountPermissionArrayOutput {
+	return i.ToServiceAccountPermissionArrayOutputWithContext(context.Background())
+}
+
+func (i ServiceAccountPermissionArray) ToServiceAccountPermissionArrayOutputWithContext(ctx context.Context) ServiceAccountPermissionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServiceAccountPermissionArrayOutput)
+}
+
+type ServiceAccountPermissionOutput struct{ *pulumi.OutputState }
+
+func (ServiceAccountPermissionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServiceAccountPermission)(nil)).Elem()
+}
+
+func (o ServiceAccountPermissionOutput) ToServiceAccountPermissionOutput() ServiceAccountPermissionOutput {
+	return o
+}
+
+func (o ServiceAccountPermissionOutput) ToServiceAccountPermissionOutputWithContext(ctx context.Context) ServiceAccountPermissionOutput {
+	return o
+}
+
+// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+func (o ServiceAccountPermissionOutput) Actions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ServiceAccountPermission) []string { return v.Actions }).(pulumi.StringArrayOutput)
+}
+
+// resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+func (o ServiceAccountPermissionOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v ServiceAccountPermission) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+type ServiceAccountPermissionArrayOutput struct{ *pulumi.OutputState }
+
+func (ServiceAccountPermissionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServiceAccountPermission)(nil)).Elem()
+}
+
+func (o ServiceAccountPermissionArrayOutput) ToServiceAccountPermissionArrayOutput() ServiceAccountPermissionArrayOutput {
+	return o
+}
+
+func (o ServiceAccountPermissionArrayOutput) ToServiceAccountPermissionArrayOutputWithContext(ctx context.Context) ServiceAccountPermissionArrayOutput {
+	return o
+}
+
+func (o ServiceAccountPermissionArrayOutput) Index(i pulumi.IntInput) ServiceAccountPermissionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServiceAccountPermission {
+		return vs[0].([]ServiceAccountPermission)[vs[1].(int)]
+	}).(ServiceAccountPermissionOutput)
+}
+
 type TagRetentionRuleRetentionRule struct {
 	// The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
 	Key string `pulumi:"key"`
@@ -2108,6 +2214,290 @@ func (o GetNamespacesNamespaceListArrayOutput) Index(i pulumi.IntInput) GetNames
 	}).(GetNamespacesNamespaceListOutput)
 }
 
+type GetReplicationInstanceCreateTasksTaskDetail struct {
+	// task start name.
+	CreatedTime string `pulumi:"createdTime"`
+	// task end time. Note: This field may return null, indicating that no valid value can be obtained.
+	FinishedTime string `pulumi:"finishedTime"`
+	// Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+	TaskMessage string `pulumi:"taskMessage"`
+	// task name.
+	TaskName string `pulumi:"taskName"`
+	// task status.
+	TaskStatus string `pulumi:"taskStatus"`
+	// task UUID.
+	TaskUuid string `pulumi:"taskUuid"`
+}
+
+// GetReplicationInstanceCreateTasksTaskDetailInput is an input type that accepts GetReplicationInstanceCreateTasksTaskDetailArgs and GetReplicationInstanceCreateTasksTaskDetailOutput values.
+// You can construct a concrete instance of `GetReplicationInstanceCreateTasksTaskDetailInput` via:
+//
+//          GetReplicationInstanceCreateTasksTaskDetailArgs{...}
+type GetReplicationInstanceCreateTasksTaskDetailInput interface {
+	pulumi.Input
+
+	ToGetReplicationInstanceCreateTasksTaskDetailOutput() GetReplicationInstanceCreateTasksTaskDetailOutput
+	ToGetReplicationInstanceCreateTasksTaskDetailOutputWithContext(context.Context) GetReplicationInstanceCreateTasksTaskDetailOutput
+}
+
+type GetReplicationInstanceCreateTasksTaskDetailArgs struct {
+	// task start name.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// task end time. Note: This field may return null, indicating that no valid value can be obtained.
+	FinishedTime pulumi.StringInput `pulumi:"finishedTime"`
+	// Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+	TaskMessage pulumi.StringInput `pulumi:"taskMessage"`
+	// task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// task status.
+	TaskStatus pulumi.StringInput `pulumi:"taskStatus"`
+	// task UUID.
+	TaskUuid pulumi.StringInput `pulumi:"taskUuid"`
+}
+
+func (GetReplicationInstanceCreateTasksTaskDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReplicationInstanceCreateTasksTaskDetail)(nil)).Elem()
+}
+
+func (i GetReplicationInstanceCreateTasksTaskDetailArgs) ToGetReplicationInstanceCreateTasksTaskDetailOutput() GetReplicationInstanceCreateTasksTaskDetailOutput {
+	return i.ToGetReplicationInstanceCreateTasksTaskDetailOutputWithContext(context.Background())
+}
+
+func (i GetReplicationInstanceCreateTasksTaskDetailArgs) ToGetReplicationInstanceCreateTasksTaskDetailOutputWithContext(ctx context.Context) GetReplicationInstanceCreateTasksTaskDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReplicationInstanceCreateTasksTaskDetailOutput)
+}
+
+// GetReplicationInstanceCreateTasksTaskDetailArrayInput is an input type that accepts GetReplicationInstanceCreateTasksTaskDetailArray and GetReplicationInstanceCreateTasksTaskDetailArrayOutput values.
+// You can construct a concrete instance of `GetReplicationInstanceCreateTasksTaskDetailArrayInput` via:
+//
+//          GetReplicationInstanceCreateTasksTaskDetailArray{ GetReplicationInstanceCreateTasksTaskDetailArgs{...} }
+type GetReplicationInstanceCreateTasksTaskDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetReplicationInstanceCreateTasksTaskDetailArrayOutput() GetReplicationInstanceCreateTasksTaskDetailArrayOutput
+	ToGetReplicationInstanceCreateTasksTaskDetailArrayOutputWithContext(context.Context) GetReplicationInstanceCreateTasksTaskDetailArrayOutput
+}
+
+type GetReplicationInstanceCreateTasksTaskDetailArray []GetReplicationInstanceCreateTasksTaskDetailInput
+
+func (GetReplicationInstanceCreateTasksTaskDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReplicationInstanceCreateTasksTaskDetail)(nil)).Elem()
+}
+
+func (i GetReplicationInstanceCreateTasksTaskDetailArray) ToGetReplicationInstanceCreateTasksTaskDetailArrayOutput() GetReplicationInstanceCreateTasksTaskDetailArrayOutput {
+	return i.ToGetReplicationInstanceCreateTasksTaskDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetReplicationInstanceCreateTasksTaskDetailArray) ToGetReplicationInstanceCreateTasksTaskDetailArrayOutputWithContext(ctx context.Context) GetReplicationInstanceCreateTasksTaskDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReplicationInstanceCreateTasksTaskDetailArrayOutput)
+}
+
+type GetReplicationInstanceCreateTasksTaskDetailOutput struct{ *pulumi.OutputState }
+
+func (GetReplicationInstanceCreateTasksTaskDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReplicationInstanceCreateTasksTaskDetail)(nil)).Elem()
+}
+
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) ToGetReplicationInstanceCreateTasksTaskDetailOutput() GetReplicationInstanceCreateTasksTaskDetailOutput {
+	return o
+}
+
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) ToGetReplicationInstanceCreateTasksTaskDetailOutputWithContext(ctx context.Context) GetReplicationInstanceCreateTasksTaskDetailOutput {
+	return o
+}
+
+// task start name.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// task end time. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) FinishedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.FinishedTime }).(pulumi.StringOutput)
+}
+
+// Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) TaskMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.TaskMessage }).(pulumi.StringOutput)
+}
+
+// task name.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// task status.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) TaskStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.TaskStatus }).(pulumi.StringOutput)
+}
+
+// task UUID.
+func (o GetReplicationInstanceCreateTasksTaskDetailOutput) TaskUuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceCreateTasksTaskDetail) string { return v.TaskUuid }).(pulumi.StringOutput)
+}
+
+type GetReplicationInstanceCreateTasksTaskDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReplicationInstanceCreateTasksTaskDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReplicationInstanceCreateTasksTaskDetail)(nil)).Elem()
+}
+
+func (o GetReplicationInstanceCreateTasksTaskDetailArrayOutput) ToGetReplicationInstanceCreateTasksTaskDetailArrayOutput() GetReplicationInstanceCreateTasksTaskDetailArrayOutput {
+	return o
+}
+
+func (o GetReplicationInstanceCreateTasksTaskDetailArrayOutput) ToGetReplicationInstanceCreateTasksTaskDetailArrayOutputWithContext(ctx context.Context) GetReplicationInstanceCreateTasksTaskDetailArrayOutput {
+	return o
+}
+
+func (o GetReplicationInstanceCreateTasksTaskDetailArrayOutput) Index(i pulumi.IntInput) GetReplicationInstanceCreateTasksTaskDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReplicationInstanceCreateTasksTaskDetail {
+		return vs[0].([]GetReplicationInstanceCreateTasksTaskDetail)[vs[1].(int)]
+	}).(GetReplicationInstanceCreateTasksTaskDetailOutput)
+}
+
+type GetReplicationInstanceSyncStatusReplicationLog struct {
+	// destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+	Destination string `pulumi:"destination"`
+	// end time. Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime string `pulumi:"endTime"`
+	// resource type. Note: This field may return null, indicating that no valid value can be obtained.
+	ResourceType string `pulumi:"resourceType"`
+	// Source image. Note: This field may return null, indicating that no valid value can be obtained.
+	Source string `pulumi:"source"`
+	// start time. Note: This field may return null, indicating that no valid value can be obtained.
+	StartTime string `pulumi:"startTime"`
+	// sync status. Note: This field may return null, indicating that no valid value can be obtained.
+	Status string `pulumi:"status"`
+}
+
+// GetReplicationInstanceSyncStatusReplicationLogInput is an input type that accepts GetReplicationInstanceSyncStatusReplicationLogArgs and GetReplicationInstanceSyncStatusReplicationLogOutput values.
+// You can construct a concrete instance of `GetReplicationInstanceSyncStatusReplicationLogInput` via:
+//
+//          GetReplicationInstanceSyncStatusReplicationLogArgs{...}
+type GetReplicationInstanceSyncStatusReplicationLogInput interface {
+	pulumi.Input
+
+	ToGetReplicationInstanceSyncStatusReplicationLogOutput() GetReplicationInstanceSyncStatusReplicationLogOutput
+	ToGetReplicationInstanceSyncStatusReplicationLogOutputWithContext(context.Context) GetReplicationInstanceSyncStatusReplicationLogOutput
+}
+
+type GetReplicationInstanceSyncStatusReplicationLogArgs struct {
+	// destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+	Destination pulumi.StringInput `pulumi:"destination"`
+	// end time. Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// resource type. Note: This field may return null, indicating that no valid value can be obtained.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Source image. Note: This field may return null, indicating that no valid value can be obtained.
+	Source pulumi.StringInput `pulumi:"source"`
+	// start time. Note: This field may return null, indicating that no valid value can be obtained.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// sync status. Note: This field may return null, indicating that no valid value can be obtained.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetReplicationInstanceSyncStatusReplicationLogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReplicationInstanceSyncStatusReplicationLog)(nil)).Elem()
+}
+
+func (i GetReplicationInstanceSyncStatusReplicationLogArgs) ToGetReplicationInstanceSyncStatusReplicationLogOutput() GetReplicationInstanceSyncStatusReplicationLogOutput {
+	return i.ToGetReplicationInstanceSyncStatusReplicationLogOutputWithContext(context.Background())
+}
+
+func (i GetReplicationInstanceSyncStatusReplicationLogArgs) ToGetReplicationInstanceSyncStatusReplicationLogOutputWithContext(ctx context.Context) GetReplicationInstanceSyncStatusReplicationLogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReplicationInstanceSyncStatusReplicationLogOutput)
+}
+
+// GetReplicationInstanceSyncStatusReplicationLogArrayInput is an input type that accepts GetReplicationInstanceSyncStatusReplicationLogArray and GetReplicationInstanceSyncStatusReplicationLogArrayOutput values.
+// You can construct a concrete instance of `GetReplicationInstanceSyncStatusReplicationLogArrayInput` via:
+//
+//          GetReplicationInstanceSyncStatusReplicationLogArray{ GetReplicationInstanceSyncStatusReplicationLogArgs{...} }
+type GetReplicationInstanceSyncStatusReplicationLogArrayInput interface {
+	pulumi.Input
+
+	ToGetReplicationInstanceSyncStatusReplicationLogArrayOutput() GetReplicationInstanceSyncStatusReplicationLogArrayOutput
+	ToGetReplicationInstanceSyncStatusReplicationLogArrayOutputWithContext(context.Context) GetReplicationInstanceSyncStatusReplicationLogArrayOutput
+}
+
+type GetReplicationInstanceSyncStatusReplicationLogArray []GetReplicationInstanceSyncStatusReplicationLogInput
+
+func (GetReplicationInstanceSyncStatusReplicationLogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReplicationInstanceSyncStatusReplicationLog)(nil)).Elem()
+}
+
+func (i GetReplicationInstanceSyncStatusReplicationLogArray) ToGetReplicationInstanceSyncStatusReplicationLogArrayOutput() GetReplicationInstanceSyncStatusReplicationLogArrayOutput {
+	return i.ToGetReplicationInstanceSyncStatusReplicationLogArrayOutputWithContext(context.Background())
+}
+
+func (i GetReplicationInstanceSyncStatusReplicationLogArray) ToGetReplicationInstanceSyncStatusReplicationLogArrayOutputWithContext(ctx context.Context) GetReplicationInstanceSyncStatusReplicationLogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReplicationInstanceSyncStatusReplicationLogArrayOutput)
+}
+
+type GetReplicationInstanceSyncStatusReplicationLogOutput struct{ *pulumi.OutputState }
+
+func (GetReplicationInstanceSyncStatusReplicationLogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReplicationInstanceSyncStatusReplicationLog)(nil)).Elem()
+}
+
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) ToGetReplicationInstanceSyncStatusReplicationLogOutput() GetReplicationInstanceSyncStatusReplicationLogOutput {
+	return o
+}
+
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) ToGetReplicationInstanceSyncStatusReplicationLogOutputWithContext(ctx context.Context) GetReplicationInstanceSyncStatusReplicationLogOutput {
+	return o
+}
+
+// destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) Destination() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.Destination }).(pulumi.StringOutput)
+}
+
+// end time. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// resource type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Source image. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// start time. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// sync status. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReplicationInstanceSyncStatusReplicationLogOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReplicationInstanceSyncStatusReplicationLog) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetReplicationInstanceSyncStatusReplicationLogArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReplicationInstanceSyncStatusReplicationLogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReplicationInstanceSyncStatusReplicationLog)(nil)).Elem()
+}
+
+func (o GetReplicationInstanceSyncStatusReplicationLogArrayOutput) ToGetReplicationInstanceSyncStatusReplicationLogArrayOutput() GetReplicationInstanceSyncStatusReplicationLogArrayOutput {
+	return o
+}
+
+func (o GetReplicationInstanceSyncStatusReplicationLogArrayOutput) ToGetReplicationInstanceSyncStatusReplicationLogArrayOutputWithContext(ctx context.Context) GetReplicationInstanceSyncStatusReplicationLogArrayOutput {
+	return o
+}
+
+func (o GetReplicationInstanceSyncStatusReplicationLogArrayOutput) Index(i pulumi.IntInput) GetReplicationInstanceSyncStatusReplicationLogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReplicationInstanceSyncStatusReplicationLog {
+		return vs[0].([]GetReplicationInstanceSyncStatusReplicationLog)[vs[1].(int)]
+	}).(GetReplicationInstanceSyncStatusReplicationLogOutput)
+}
+
 type GetRepositoriesRepositoryList struct {
 	// Brief description of the repository.
 	BriefDesc string `pulumi:"briefDesc"`
@@ -2266,6 +2656,299 @@ func (o GetRepositoriesRepositoryListArrayOutput) Index(i pulumi.IntInput) GetRe
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRepositoriesRepositoryList {
 		return vs[0].([]GetRepositoriesRepositoryList)[vs[1].(int)]
 	}).(GetRepositoriesRepositoryListOutput)
+}
+
+type GetTagRetentionExecutionTasksRetentionTaskList struct {
+	// task end time.
+	EndTime string `pulumi:"endTime"`
+	// execution id.
+	ExecutionId int `pulumi:"executionId"`
+	// repository name.
+	Repository string `pulumi:"repository"`
+	// Total number of retained tags.
+	Retained int `pulumi:"retained"`
+	// task start time.
+	StartTime string `pulumi:"startTime"`
+	// the execution status of the task: Failed, Succeed, Stopped, InProgress.
+	Status string `pulumi:"status"`
+	// task id.
+	TaskId int `pulumi:"taskId"`
+	// Total number of tags.
+	Total int `pulumi:"total"`
+}
+
+// GetTagRetentionExecutionTasksRetentionTaskListInput is an input type that accepts GetTagRetentionExecutionTasksRetentionTaskListArgs and GetTagRetentionExecutionTasksRetentionTaskListOutput values.
+// You can construct a concrete instance of `GetTagRetentionExecutionTasksRetentionTaskListInput` via:
+//
+//          GetTagRetentionExecutionTasksRetentionTaskListArgs{...}
+type GetTagRetentionExecutionTasksRetentionTaskListInput interface {
+	pulumi.Input
+
+	ToGetTagRetentionExecutionTasksRetentionTaskListOutput() GetTagRetentionExecutionTasksRetentionTaskListOutput
+	ToGetTagRetentionExecutionTasksRetentionTaskListOutputWithContext(context.Context) GetTagRetentionExecutionTasksRetentionTaskListOutput
+}
+
+type GetTagRetentionExecutionTasksRetentionTaskListArgs struct {
+	// task end time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// execution id.
+	ExecutionId pulumi.IntInput `pulumi:"executionId"`
+	// repository name.
+	Repository pulumi.StringInput `pulumi:"repository"`
+	// Total number of retained tags.
+	Retained pulumi.IntInput `pulumi:"retained"`
+	// task start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// the execution status of the task: Failed, Succeed, Stopped, InProgress.
+	Status pulumi.StringInput `pulumi:"status"`
+	// task id.
+	TaskId pulumi.IntInput `pulumi:"taskId"`
+	// Total number of tags.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetTagRetentionExecutionTasksRetentionTaskListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTagRetentionExecutionTasksRetentionTaskList)(nil)).Elem()
+}
+
+func (i GetTagRetentionExecutionTasksRetentionTaskListArgs) ToGetTagRetentionExecutionTasksRetentionTaskListOutput() GetTagRetentionExecutionTasksRetentionTaskListOutput {
+	return i.ToGetTagRetentionExecutionTasksRetentionTaskListOutputWithContext(context.Background())
+}
+
+func (i GetTagRetentionExecutionTasksRetentionTaskListArgs) ToGetTagRetentionExecutionTasksRetentionTaskListOutputWithContext(ctx context.Context) GetTagRetentionExecutionTasksRetentionTaskListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTagRetentionExecutionTasksRetentionTaskListOutput)
+}
+
+// GetTagRetentionExecutionTasksRetentionTaskListArrayInput is an input type that accepts GetTagRetentionExecutionTasksRetentionTaskListArray and GetTagRetentionExecutionTasksRetentionTaskListArrayOutput values.
+// You can construct a concrete instance of `GetTagRetentionExecutionTasksRetentionTaskListArrayInput` via:
+//
+//          GetTagRetentionExecutionTasksRetentionTaskListArray{ GetTagRetentionExecutionTasksRetentionTaskListArgs{...} }
+type GetTagRetentionExecutionTasksRetentionTaskListArrayInput interface {
+	pulumi.Input
+
+	ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutput() GetTagRetentionExecutionTasksRetentionTaskListArrayOutput
+	ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutputWithContext(context.Context) GetTagRetentionExecutionTasksRetentionTaskListArrayOutput
+}
+
+type GetTagRetentionExecutionTasksRetentionTaskListArray []GetTagRetentionExecutionTasksRetentionTaskListInput
+
+func (GetTagRetentionExecutionTasksRetentionTaskListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTagRetentionExecutionTasksRetentionTaskList)(nil)).Elem()
+}
+
+func (i GetTagRetentionExecutionTasksRetentionTaskListArray) ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutput() GetTagRetentionExecutionTasksRetentionTaskListArrayOutput {
+	return i.ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTagRetentionExecutionTasksRetentionTaskListArray) ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutputWithContext(ctx context.Context) GetTagRetentionExecutionTasksRetentionTaskListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTagRetentionExecutionTasksRetentionTaskListArrayOutput)
+}
+
+type GetTagRetentionExecutionTasksRetentionTaskListOutput struct{ *pulumi.OutputState }
+
+func (GetTagRetentionExecutionTasksRetentionTaskListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTagRetentionExecutionTasksRetentionTaskList)(nil)).Elem()
+}
+
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) ToGetTagRetentionExecutionTasksRetentionTaskListOutput() GetTagRetentionExecutionTasksRetentionTaskListOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) ToGetTagRetentionExecutionTasksRetentionTaskListOutputWithContext(ctx context.Context) GetTagRetentionExecutionTasksRetentionTaskListOutput {
+	return o
+}
+
+// task end time.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// execution id.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) ExecutionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) int { return v.ExecutionId }).(pulumi.IntOutput)
+}
+
+// repository name.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) Repository() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) string { return v.Repository }).(pulumi.StringOutput)
+}
+
+// Total number of retained tags.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) Retained() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) int { return v.Retained }).(pulumi.IntOutput)
+}
+
+// task start time.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// the execution status of the task: Failed, Succeed, Stopped, InProgress.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// task id.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) TaskId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) int { return v.TaskId }).(pulumi.IntOutput)
+}
+
+// Total number of tags.
+func (o GetTagRetentionExecutionTasksRetentionTaskListOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionTasksRetentionTaskList) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetTagRetentionExecutionTasksRetentionTaskListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTagRetentionExecutionTasksRetentionTaskListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTagRetentionExecutionTasksRetentionTaskList)(nil)).Elem()
+}
+
+func (o GetTagRetentionExecutionTasksRetentionTaskListArrayOutput) ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutput() GetTagRetentionExecutionTasksRetentionTaskListArrayOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionTasksRetentionTaskListArrayOutput) ToGetTagRetentionExecutionTasksRetentionTaskListArrayOutputWithContext(ctx context.Context) GetTagRetentionExecutionTasksRetentionTaskListArrayOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionTasksRetentionTaskListArrayOutput) Index(i pulumi.IntInput) GetTagRetentionExecutionTasksRetentionTaskListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTagRetentionExecutionTasksRetentionTaskList {
+		return vs[0].([]GetTagRetentionExecutionTasksRetentionTaskList)[vs[1].(int)]
+	}).(GetTagRetentionExecutionTasksRetentionTaskListOutput)
+}
+
+type GetTagRetentionExecutionsRetentionExecutionList struct {
+	// execution end time.
+	EndTime string `pulumi:"endTime"`
+	// execution id.
+	ExecutionId int `pulumi:"executionId"`
+	// retention id.
+	RetentionId int `pulumi:"retentionId"`
+	// execution start time.
+	StartTime string `pulumi:"startTime"`
+	// execution status: Failed, Succeed, Stopped, InProgress.
+	Status string `pulumi:"status"`
+}
+
+// GetTagRetentionExecutionsRetentionExecutionListInput is an input type that accepts GetTagRetentionExecutionsRetentionExecutionListArgs and GetTagRetentionExecutionsRetentionExecutionListOutput values.
+// You can construct a concrete instance of `GetTagRetentionExecutionsRetentionExecutionListInput` via:
+//
+//          GetTagRetentionExecutionsRetentionExecutionListArgs{...}
+type GetTagRetentionExecutionsRetentionExecutionListInput interface {
+	pulumi.Input
+
+	ToGetTagRetentionExecutionsRetentionExecutionListOutput() GetTagRetentionExecutionsRetentionExecutionListOutput
+	ToGetTagRetentionExecutionsRetentionExecutionListOutputWithContext(context.Context) GetTagRetentionExecutionsRetentionExecutionListOutput
+}
+
+type GetTagRetentionExecutionsRetentionExecutionListArgs struct {
+	// execution end time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// execution id.
+	ExecutionId pulumi.IntInput `pulumi:"executionId"`
+	// retention id.
+	RetentionId pulumi.IntInput `pulumi:"retentionId"`
+	// execution start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// execution status: Failed, Succeed, Stopped, InProgress.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetTagRetentionExecutionsRetentionExecutionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTagRetentionExecutionsRetentionExecutionList)(nil)).Elem()
+}
+
+func (i GetTagRetentionExecutionsRetentionExecutionListArgs) ToGetTagRetentionExecutionsRetentionExecutionListOutput() GetTagRetentionExecutionsRetentionExecutionListOutput {
+	return i.ToGetTagRetentionExecutionsRetentionExecutionListOutputWithContext(context.Background())
+}
+
+func (i GetTagRetentionExecutionsRetentionExecutionListArgs) ToGetTagRetentionExecutionsRetentionExecutionListOutputWithContext(ctx context.Context) GetTagRetentionExecutionsRetentionExecutionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTagRetentionExecutionsRetentionExecutionListOutput)
+}
+
+// GetTagRetentionExecutionsRetentionExecutionListArrayInput is an input type that accepts GetTagRetentionExecutionsRetentionExecutionListArray and GetTagRetentionExecutionsRetentionExecutionListArrayOutput values.
+// You can construct a concrete instance of `GetTagRetentionExecutionsRetentionExecutionListArrayInput` via:
+//
+//          GetTagRetentionExecutionsRetentionExecutionListArray{ GetTagRetentionExecutionsRetentionExecutionListArgs{...} }
+type GetTagRetentionExecutionsRetentionExecutionListArrayInput interface {
+	pulumi.Input
+
+	ToGetTagRetentionExecutionsRetentionExecutionListArrayOutput() GetTagRetentionExecutionsRetentionExecutionListArrayOutput
+	ToGetTagRetentionExecutionsRetentionExecutionListArrayOutputWithContext(context.Context) GetTagRetentionExecutionsRetentionExecutionListArrayOutput
+}
+
+type GetTagRetentionExecutionsRetentionExecutionListArray []GetTagRetentionExecutionsRetentionExecutionListInput
+
+func (GetTagRetentionExecutionsRetentionExecutionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTagRetentionExecutionsRetentionExecutionList)(nil)).Elem()
+}
+
+func (i GetTagRetentionExecutionsRetentionExecutionListArray) ToGetTagRetentionExecutionsRetentionExecutionListArrayOutput() GetTagRetentionExecutionsRetentionExecutionListArrayOutput {
+	return i.ToGetTagRetentionExecutionsRetentionExecutionListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTagRetentionExecutionsRetentionExecutionListArray) ToGetTagRetentionExecutionsRetentionExecutionListArrayOutputWithContext(ctx context.Context) GetTagRetentionExecutionsRetentionExecutionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTagRetentionExecutionsRetentionExecutionListArrayOutput)
+}
+
+type GetTagRetentionExecutionsRetentionExecutionListOutput struct{ *pulumi.OutputState }
+
+func (GetTagRetentionExecutionsRetentionExecutionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTagRetentionExecutionsRetentionExecutionList)(nil)).Elem()
+}
+
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) ToGetTagRetentionExecutionsRetentionExecutionListOutput() GetTagRetentionExecutionsRetentionExecutionListOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) ToGetTagRetentionExecutionsRetentionExecutionListOutputWithContext(ctx context.Context) GetTagRetentionExecutionsRetentionExecutionListOutput {
+	return o
+}
+
+// execution end time.
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionsRetentionExecutionList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// execution id.
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) ExecutionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionsRetentionExecutionList) int { return v.ExecutionId }).(pulumi.IntOutput)
+}
+
+// retention id.
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) RetentionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionsRetentionExecutionList) int { return v.RetentionId }).(pulumi.IntOutput)
+}
+
+// execution start time.
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionsRetentionExecutionList) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// execution status: Failed, Succeed, Stopped, InProgress.
+func (o GetTagRetentionExecutionsRetentionExecutionListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTagRetentionExecutionsRetentionExecutionList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetTagRetentionExecutionsRetentionExecutionListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTagRetentionExecutionsRetentionExecutionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTagRetentionExecutionsRetentionExecutionList)(nil)).Elem()
+}
+
+func (o GetTagRetentionExecutionsRetentionExecutionListArrayOutput) ToGetTagRetentionExecutionsRetentionExecutionListArrayOutput() GetTagRetentionExecutionsRetentionExecutionListArrayOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionsRetentionExecutionListArrayOutput) ToGetTagRetentionExecutionsRetentionExecutionListArrayOutputWithContext(ctx context.Context) GetTagRetentionExecutionsRetentionExecutionListArrayOutput {
+	return o
+}
+
+func (o GetTagRetentionExecutionsRetentionExecutionListArrayOutput) Index(i pulumi.IntInput) GetTagRetentionExecutionsRetentionExecutionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTagRetentionExecutionsRetentionExecutionList {
+		return vs[0].([]GetTagRetentionExecutionsRetentionExecutionList)[vs[1].(int)]
+	}).(GetTagRetentionExecutionsRetentionExecutionListOutput)
 }
 
 type GetTokensTokenList struct {
@@ -2709,6 +3392,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleFilterArrayInput)(nil)).Elem(), ManageReplicationOperationRuleFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemInput)(nil)).Elem(), NamespaceCveWhitelistItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemArrayInput)(nil)).Elem(), NamespaceCveWhitelistItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServiceAccountPermissionInput)(nil)).Elem(), ServiceAccountPermissionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServiceAccountPermissionArrayInput)(nil)).Elem(), ServiceAccountPermissionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRuleInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRulePtrInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerInput)(nil)).Elem(), WebhookTriggerTriggerArgs{})
@@ -2723,8 +3408,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceListInput)(nil)).Elem(), GetNamespacesNamespaceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceListArrayInput)(nil)).Elem(), GetNamespacesNamespaceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReplicationInstanceCreateTasksTaskDetailInput)(nil)).Elem(), GetReplicationInstanceCreateTasksTaskDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReplicationInstanceCreateTasksTaskDetailArrayInput)(nil)).Elem(), GetReplicationInstanceCreateTasksTaskDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReplicationInstanceSyncStatusReplicationLogInput)(nil)).Elem(), GetReplicationInstanceSyncStatusReplicationLogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReplicationInstanceSyncStatusReplicationLogArrayInput)(nil)).Elem(), GetReplicationInstanceSyncStatusReplicationLogArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoriesRepositoryListInput)(nil)).Elem(), GetRepositoriesRepositoryListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoriesRepositoryListArrayInput)(nil)).Elem(), GetRepositoriesRepositoryListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTagRetentionExecutionTasksRetentionTaskListInput)(nil)).Elem(), GetTagRetentionExecutionTasksRetentionTaskListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTagRetentionExecutionTasksRetentionTaskListArrayInput)(nil)).Elem(), GetTagRetentionExecutionTasksRetentionTaskListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTagRetentionExecutionsRetentionExecutionListInput)(nil)).Elem(), GetTagRetentionExecutionsRetentionExecutionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTagRetentionExecutionsRetentionExecutionListArrayInput)(nil)).Elem(), GetTagRetentionExecutionsRetentionExecutionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenListInput)(nil)).Elem(), GetTokensTokenListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenListArrayInput)(nil)).Elem(), GetTokensTokenListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentListInput)(nil)).Elem(), GetVpcAttachmentsVpcAttachmentListArgs{})
@@ -2745,6 +3438,8 @@ func init() {
 	pulumi.RegisterOutputType(ManageReplicationOperationRuleFilterArrayOutput{})
 	pulumi.RegisterOutputType(NamespaceCveWhitelistItemOutput{})
 	pulumi.RegisterOutputType(NamespaceCveWhitelistItemArrayOutput{})
+	pulumi.RegisterOutputType(ServiceAccountPermissionOutput{})
+	pulumi.RegisterOutputType(ServiceAccountPermissionArrayOutput{})
 	pulumi.RegisterOutputType(TagRetentionRuleRetentionRuleOutput{})
 	pulumi.RegisterOutputType(TagRetentionRuleRetentionRulePtrOutput{})
 	pulumi.RegisterOutputType(WebhookTriggerTriggerOutput{})
@@ -2759,8 +3454,16 @@ func init() {
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetNamespacesNamespaceListOutput{})
 	pulumi.RegisterOutputType(GetNamespacesNamespaceListArrayOutput{})
+	pulumi.RegisterOutputType(GetReplicationInstanceCreateTasksTaskDetailOutput{})
+	pulumi.RegisterOutputType(GetReplicationInstanceCreateTasksTaskDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetReplicationInstanceSyncStatusReplicationLogOutput{})
+	pulumi.RegisterOutputType(GetReplicationInstanceSyncStatusReplicationLogArrayOutput{})
 	pulumi.RegisterOutputType(GetRepositoriesRepositoryListOutput{})
 	pulumi.RegisterOutputType(GetRepositoriesRepositoryListArrayOutput{})
+	pulumi.RegisterOutputType(GetTagRetentionExecutionTasksRetentionTaskListOutput{})
+	pulumi.RegisterOutputType(GetTagRetentionExecutionTasksRetentionTaskListArrayOutput{})
+	pulumi.RegisterOutputType(GetTagRetentionExecutionsRetentionExecutionListOutput{})
+	pulumi.RegisterOutputType(GetTagRetentionExecutionsRetentionExecutionListArrayOutput{})
 	pulumi.RegisterOutputType(GetTokensTokenListOutput{})
 	pulumi.RegisterOutputType(GetTokensTokenListArrayOutput{})
 	pulumi.RegisterOutputType(GetVpcAttachmentsVpcAttachmentListOutput{})

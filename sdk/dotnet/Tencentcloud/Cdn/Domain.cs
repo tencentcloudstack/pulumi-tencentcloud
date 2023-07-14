@@ -63,8 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// }
     /// ```
-    /// 
-    /// Example Usage of cdn uses cache and request headers
+    /// ### Example Usage of cdn uses cache and request headers
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -143,8 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// }
     /// ```
-    /// 
-    /// Example Usage of COS bucket url as origin
+    /// ### Example Usage of COS bucket url as origin
     /// 
     /// ```csharp
     /// using Pulumi;

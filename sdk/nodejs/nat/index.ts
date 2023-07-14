@@ -7,12 +7,15 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./gateway";
 export * from "./gatewaySnat";
+export * from "./getDcRoute";
 export * from "./getGatewaySnats";
 export * from "./getGateways";
+export * from "./refreshNatDcRoute";
 
 // Import resources to register:
 import { Gateway } from "./gateway";
 import { GatewaySnat } from "./gatewaySnat";
+import { RefreshNatDcRoute } from "./refreshNatDcRoute";
 
 const _module = {
     version: utilities.getVersion(),
@@ -22,6 +25,8 @@ const _module = {
                 return new Gateway(name, <any>undefined, { urn })
             case "tencentcloud:Nat/gatewaySnat:GatewaySnat":
                 return new GatewaySnat(name, <any>undefined, { urn })
+            case "tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute":
+                return new RefreshNatDcRoute(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -29,3 +34,4 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Nat/gateway", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Nat/gatewaySnat", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Nat/refreshNatDcRoute", _module)

@@ -16,8 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// &gt; **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
     /// 
     /// ## Example Usage
-    /// 
-    /// Use blackbox-exporter
+    /// ### Use blackbox-exporter
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -39,8 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// }
     /// ```
-    /// 
-    /// Use es-exporter
+    /// ### Use es-exporter
     /// 
     /// ```csharp
     /// using System.Collections.Generic;

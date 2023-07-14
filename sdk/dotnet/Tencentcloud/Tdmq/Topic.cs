@@ -85,6 +85,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<int> Partitions { get; private set; } = null!;
 
         /// <summary>
+        /// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+        /// </summary>
+        [Output("pulsarTopicType")]
+        public Output<int> PulsarTopicType { get; private set; } = null!;
+
+        /// <summary>
         /// Description of the namespace.
         /// </summary>
         [Output("remark")]
@@ -97,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<string> TopicName { get; private set; } = null!;
 
         /// <summary>
-        /// The type of topic.
+        /// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         /// </summary>
         [Output("topicType")]
         public Output<int> TopicType { get; private set; } = null!;
@@ -168,6 +174,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int> Partitions { get; set; } = null!;
 
         /// <summary>
+        /// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+        /// </summary>
+        [Input("pulsarTopicType")]
+        public Input<int>? PulsarTopicType { get; set; }
+
+        /// <summary>
         /// Description of the namespace.
         /// </summary>
         [Input("remark")]
@@ -180,10 +192,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<string> TopicName { get; set; } = null!;
 
         /// <summary>
-        /// The type of topic.
+        /// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         /// </summary>
-        [Input("topicType", required: true)]
-        public Input<int> TopicType { get; set; } = null!;
+        [Input("topicType")]
+        public Input<int>? TopicType { get; set; }
 
         public TopicArgs()
         {
@@ -217,6 +229,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int>? Partitions { get; set; }
 
         /// <summary>
+        /// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+        /// </summary>
+        [Input("pulsarTopicType")]
+        public Input<int>? PulsarTopicType { get; set; }
+
+        /// <summary>
         /// Description of the namespace.
         /// </summary>
         [Input("remark")]
@@ -229,7 +247,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<string>? TopicName { get; set; }
 
         /// <summary>
-        /// The type of topic.
+        /// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         /// </summary>
         [Input("topicType")]
         public Input<int>? TopicType { get; set; }

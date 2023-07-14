@@ -9,12 +9,103 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'LoadBalancerForwardLoadBalancerArgs',
+    'LoadBalancerForwardLoadBalancerTargetAttributeArgs',
     'ScalingConfigDataDiskArgs',
     'ScalingConfigInstanceNameSettingsArgs',
     'ScalingGroupForwardBalancerIdArgs',
     'ScalingGroupForwardBalancerIdTargetAttributeArgs',
     'GetInstancesFilterArgs',
 ]
+
+@pulumi.input_type
+class LoadBalancerForwardLoadBalancerArgs:
+    def __init__(__self__, *,
+                 listener_id: pulumi.Input[str],
+                 load_balancer_id: pulumi.Input[str],
+                 target_attributes: pulumi.Input[Sequence[pulumi.Input['LoadBalancerForwardLoadBalancerTargetAttributeArgs']]],
+                 location_id: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "target_attributes", target_attributes)
+        if location_id is not None:
+            pulumi.set(__self__, "location_id", location_id)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "listener_id")
+
+    @listener_id.setter
+    def listener_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "listener_id", value)
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "load_balancer_id")
+
+    @load_balancer_id.setter
+    def load_balancer_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "load_balancer_id", value)
+
+    @property
+    @pulumi.getter(name="targetAttributes")
+    def target_attributes(self) -> pulumi.Input[Sequence[pulumi.Input['LoadBalancerForwardLoadBalancerTargetAttributeArgs']]]:
+        return pulumi.get(self, "target_attributes")
+
+    @target_attributes.setter
+    def target_attributes(self, value: pulumi.Input[Sequence[pulumi.Input['LoadBalancerForwardLoadBalancerTargetAttributeArgs']]]):
+        pulumi.set(self, "target_attributes", value)
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "location_id")
+
+    @location_id.setter
+    def location_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "location_id", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class LoadBalancerForwardLoadBalancerTargetAttributeArgs:
+    def __init__(__self__, *,
+                 port: pulumi.Input[int],
+                 weight: pulumi.Input[int]):
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
 
 @pulumi.input_type
 class ScalingConfigDataDiskArgs:

@@ -39,8 +39,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///     public Output&lt;string&gt; Result { get; set; }
         /// }
         /// ```
-        /// 
-        /// Use verbose filter
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Use verbose filter
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -99,8 +100,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///     public Output&lt;string&gt; Result { get; set; }
         /// }
         /// ```
-        /// 
-        /// Use verbose filter
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Use verbose filter
         /// 
         /// ```csharp
         /// using Pulumi;

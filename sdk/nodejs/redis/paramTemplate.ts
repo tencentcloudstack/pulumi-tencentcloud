@@ -23,8 +23,7 @@ import * as utilities from "../utilities";
  *     productType: 6,
  * });
  * ```
- *
- * Copy from another template
+ * ### Copy from another template
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

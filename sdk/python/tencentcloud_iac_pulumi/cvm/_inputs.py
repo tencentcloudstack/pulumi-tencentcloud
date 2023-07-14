@@ -11,6 +11,8 @@ from .. import _utilities
 __all__ = [
     'ChcConfigBmcVirtualPrivateCloudArgs',
     'ChcConfigDeployVirtualPrivateCloudArgs',
+    'ImportImageTagSpecificationArgs',
+    'ImportImageTagSpecificationTagArgs',
     'LaunchTemplateActionTimerArgs',
     'LaunchTemplateActionTimerExternalsArgs',
     'LaunchTemplateActionTimerExternalsStorageBlockAttrArgs',
@@ -47,6 +49,10 @@ __all__ = [
     'LaunchTemplateVersionTagSpecificationTagArgs',
     'LaunchTemplateVersionVirtualPrivateCloudArgs',
     'LaunchTemplateVirtualPrivateCloudArgs',
+    'ModifyInstanceDiskTypeDataDiskArgs',
+    'ModifyInstanceDiskTypeSystemDiskArgs',
+    'RenewHostHostChargePrepaidArgs',
+    'RenewInstanceInstanceChargePrepaidArgs',
     'GetChcHostsFilterArgs',
     'GetInstancesModificationFilterArgs',
 ]
@@ -219,6 +225,60 @@ class ChcConfigDeployVirtualPrivateCloudArgs:
     @private_ip_addresses.setter
     def private_ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "private_ip_addresses", value)
+
+
+@pulumi.input_type
+class ImportImageTagSpecificationArgs:
+    def __init__(__self__, *,
+                 resource_type: pulumi.Input[str],
+                 tags: pulumi.Input[Sequence[pulumi.Input['ImportImageTagSpecificationTagArgs']]]):
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "resource_type")
+
+    @resource_type.setter
+    def resource_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource_type", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Sequence[pulumi.Input['ImportImageTagSpecificationTagArgs']]]:
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Sequence[pulumi.Input['ImportImageTagSpecificationTagArgs']]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class ImportImageTagSpecificationTagArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
 
 
 @pulumi.input_type
@@ -2171,6 +2231,245 @@ class LaunchTemplateVirtualPrivateCloudArgs:
     @private_ip_addresses.setter
     def private_ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "private_ip_addresses", value)
+
+
+@pulumi.input_type
+class ModifyInstanceDiskTypeDataDiskArgs:
+    def __init__(__self__, *,
+                 disk_size: pulumi.Input[int],
+                 cdc_id: Optional[pulumi.Input[str]] = None,
+                 delete_with_instance: Optional[pulumi.Input[bool]] = None,
+                 disk_id: Optional[pulumi.Input[str]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 encrypt: Optional[pulumi.Input[bool]] = None,
+                 kms_key_id: Optional[pulumi.Input[str]] = None,
+                 snapshot_id: Optional[pulumi.Input[str]] = None,
+                 throughput_performance: Optional[pulumi.Input[int]] = None):
+        pulumi.set(__self__, "disk_size", disk_size)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
+        if delete_with_instance is not None:
+            pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+        if disk_id is not None:
+            pulumi.set(__self__, "disk_id", disk_id)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if kms_key_id is not None:
+            pulumi.set(__self__, "kms_key_id", kms_key_id)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if throughput_performance is not None:
+            pulumi.set(__self__, "throughput_performance", throughput_performance)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "disk_size")
+
+    @disk_size.setter
+    def disk_size(self, value: pulumi.Input[int]):
+        pulumi.set(self, "disk_size", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
+
+    @property
+    @pulumi.getter(name="deleteWithInstance")
+    def delete_with_instance(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "delete_with_instance")
+
+    @delete_with_instance.setter
+    def delete_with_instance(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_with_instance", value)
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "disk_id")
+
+    @disk_id.setter
+    def disk_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_id", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter
+    def encrypt(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "encrypt")
+
+    @encrypt.setter
+    def encrypt(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "encrypt", value)
+
+    @property
+    @pulumi.getter(name="kmsKeyId")
+    def kms_key_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "kms_key_id")
+
+    @kms_key_id.setter
+    def kms_key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "kms_key_id", value)
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "snapshot_id")
+
+    @snapshot_id.setter
+    def snapshot_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_id", value)
+
+    @property
+    @pulumi.getter(name="throughputPerformance")
+    def throughput_performance(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "throughput_performance")
+
+    @throughput_performance.setter
+    def throughput_performance(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "throughput_performance", value)
+
+
+@pulumi.input_type
+class ModifyInstanceDiskTypeSystemDiskArgs:
+    def __init__(__self__, *,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
+                 disk_id: Optional[pulumi.Input[str]] = None,
+                 disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None):
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
+        if disk_id is not None:
+            pulumi.set(__self__, "disk_id", disk_id)
+        if disk_size is not None:
+            pulumi.set(__self__, "disk_size", disk_size)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "disk_id")
+
+    @disk_id.setter
+    def disk_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_id", value)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "disk_size")
+
+    @disk_size.setter
+    def disk_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_size", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+
+@pulumi.input_type
+class RenewHostHostChargePrepaidArgs:
+    def __init__(__self__, *,
+                 period: pulumi.Input[int],
+                 renew_flag: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[int]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "renew_flag")
+
+    @renew_flag.setter
+    def renew_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "renew_flag", value)
+
+
+@pulumi.input_type
+class RenewInstanceInstanceChargePrepaidArgs:
+    def __init__(__self__, *,
+                 period: pulumi.Input[int],
+                 renew_flag: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] period: Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+        :param pulumi.Input[str] renew_flag: Auto renewal flag. Valid values:
+               - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+               - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+               - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+               Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> pulumi.Input[int]:
+        """
+        Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[int]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Auto renewal flag. Valid values:
+        - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+        - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+        - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+        Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @renew_flag.setter
+    def renew_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "renew_flag", value)
 
 
 @pulumi.input_type

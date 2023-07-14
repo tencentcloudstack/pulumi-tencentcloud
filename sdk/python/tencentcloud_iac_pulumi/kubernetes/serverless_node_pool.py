@@ -250,28 +250,90 @@ class ServerlessNodePool(pulumi.CustomResource):
         Provide a resource to create serverless node pool of cluster.
 
         ## Example Usage
+        ### Add serverless node pool to a cluster
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        sg = tencentcloud.Security.get_groups(name="default")
+        sg_id = sg.security_groups[0].security_group_id
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="tf example cluster",
+            cluster_max_service_num=32,
+            cluster_version="1.18.4",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool",
+            cluster_id=example_cluster.id,
+            serverless_nodes=[
+                tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
+                    display_name="tf_example_serverless_node1",
+                    subnet_id=subnet_id,
+                ),
+                tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
+                    display_name="tf_example_serverless_node2",
+                    subnet_id=subnet_id,
+                ),
+            ],
+            security_group_ids=[sg_id],
+            labels={
+                "label1": "value1",
+                "label2": "value2",
+            })
+        ```
+        ### Adding taints to the virtual nodes under this node pool
+
+        The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool",
+        example = tencentcloud.kubernetes.ServerlessNodePool("example",
             cluster_id=tencentcloud_kubernetes_cluster["example"]["id"],
             serverless_nodes=[
                 tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-                    display_name="serverless_node1",
-                    subnet_id="subnet-xxx",
+                    display_name="tf_example_serverless_node1",
+                    subnet_id=local["subnet_id"],
                 ),
                 tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-                    display_name="serverless_node2",
-                    subnet_id="subnet-xxx",
+                    display_name="tf_example_serverless_node2",
+                    subnet_id=local["subnet_id"],
                 ),
             ],
-            security_group_ids=["sg-xxx"],
+            security_group_ids=[local["sg_id"]],
             labels={
-                "example1": "test1",
-                "example2": "test2",
-            })
+                "label1": "value1",
+                "label2": "value2",
+            },
+            taints=[
+                tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
+                    key="key1",
+                    value="value1",
+                    effect="NoSchedule",
+                ),
+                tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
+                    key="key1",
+                    value="value1",
+                    effect="NoExecute",
+                ),
+            ])
         ```
 
         ## Import
@@ -301,28 +363,90 @@ class ServerlessNodePool(pulumi.CustomResource):
         Provide a resource to create serverless node pool of cluster.
 
         ## Example Usage
+        ### Add serverless node pool to a cluster
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        sg = tencentcloud.Security.get_groups(name="default")
+        sg_id = sg.security_groups[0].security_group_id
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="tf example cluster",
+            cluster_max_service_num=32,
+            cluster_version="1.18.4",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool",
+            cluster_id=example_cluster.id,
+            serverless_nodes=[
+                tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
+                    display_name="tf_example_serverless_node1",
+                    subnet_id=subnet_id,
+                ),
+                tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
+                    display_name="tf_example_serverless_node2",
+                    subnet_id=subnet_id,
+                ),
+            ],
+            security_group_ids=[sg_id],
+            labels={
+                "label1": "value1",
+                "label2": "value2",
+            })
+        ```
+        ### Adding taints to the virtual nodes under this node pool
+
+        The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool",
+        example = tencentcloud.kubernetes.ServerlessNodePool("example",
             cluster_id=tencentcloud_kubernetes_cluster["example"]["id"],
             serverless_nodes=[
                 tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-                    display_name="serverless_node1",
-                    subnet_id="subnet-xxx",
+                    display_name="tf_example_serverless_node1",
+                    subnet_id=local["subnet_id"],
                 ),
                 tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-                    display_name="serverless_node2",
-                    subnet_id="subnet-xxx",
+                    display_name="tf_example_serverless_node2",
+                    subnet_id=local["subnet_id"],
                 ),
             ],
-            security_group_ids=["sg-xxx"],
+            security_group_ids=[local["sg_id"]],
             labels={
-                "example1": "test1",
-                "example2": "test2",
-            })
+                "label1": "value1",
+                "label2": "value2",
+            },
+            taints=[
+                tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
+                    key="key1",
+                    value="value1",
+                    effect="NoSchedule",
+                ),
+                tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
+                    key="key1",
+                    value="value1",
+                    effect="NoExecute",
+                ),
+            ])
         ```
 
         ## Import

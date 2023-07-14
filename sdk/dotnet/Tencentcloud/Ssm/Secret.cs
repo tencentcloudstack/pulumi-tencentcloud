@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// Provide a resource to create a SSM secret.
     /// 
     /// ## Example Usage
+    /// ### Create user defined secret
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -25,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     ///     {
     ///         var foo = new Tencentcloud.Ssm.Secret("foo", new Tencentcloud.Ssm.SecretArgs
     ///         {
-    ///             Description = "test secret",
+    ///             Description = "user defined secret",
     ///             IsEnabled = true,
     ///             RecoveryWindowInDays = 0,
     ///             SecretName = "test",
@@ -33,6 +34,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     ///             {
     ///                 { "test-tag", "test" },
     ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create redis secret
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var instance = Output.Create(Tencentcloud.Redis.GetInstances.InvokeAsync(new Tencentcloud.Redis.GetInstancesArgs
+    ///         {
+    ///             Zone = "ap-guangzhou-6",
+    ///         }));
+    ///         var secret = new Tencentcloud.Ssm.Secret("secret", new Tencentcloud.Ssm.SecretArgs
+    ///         {
+    ///             SecretName = "for-redis-test",
+    ///             Description = "redis secret",
+    ///             IsEnabled = false,
+    ///             SecretType = 4,
+    ///             AdditionalConfig = instance.Apply(instance =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 { "Region", "ap-guangzhou" },
+    ///                 { "Privilege", "r" },
+    ///                 { "InstanceId", instance.InstanceLists?[0]?.RedisId },
+    ///                 { "ReadonlyPolicy", new[]
+    ///                     {
+    ///                         "master",
+    ///                     }
+    ///                  },
+    ///                 { "Remark", "for tf test" },
+    ///             })),
+    ///             Tags = 
+    ///             {
+    ///                 { "test-tag", "test" },
+    ///             },
+    ///             RecoveryWindowInDays = 0,
     ///         });
     ///     }
     /// 
@@ -50,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     [TencentcloudResourceType("tencentcloud:Ssm/secret:Secret")]
     public partial class Secret : Pulumi.CustomResource
     {
+        /// <summary>
+        /// Additional config for specific secret types in JSON string format.
+        /// </summary>
+        [Output("additionalConfig")]
+        public Output<string?> AdditionalConfig { get; private set; } = null!;
+
         /// <summary>
         /// Description of secret. The maximum is 2048 bytes.
         /// </summary>
@@ -79,6 +131,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Output("secretName")]
         public Output<string> SecretName { get; private set; } = null!;
+
+        /// <summary>
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// </summary>
+        [Output("secretType")]
+        public Output<int> SecretType { get; private set; } = null!;
 
         /// <summary>
         /// Status of secret.
@@ -140,6 +198,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     public sealed class SecretArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Additional config for specific secret types in JSON string format.
+        /// </summary>
+        [Input("additionalConfig")]
+        public Input<string>? AdditionalConfig { get; set; }
+
+        /// <summary>
         /// Description of secret. The maximum is 2048 bytes.
         /// </summary>
         [Input("description")]
@@ -169,6 +233,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         [Input("secretName", required: true)]
         public Input<string> SecretName { get; set; } = null!;
 
+        /// <summary>
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// </summary>
+        [Input("secretType")]
+        public Input<int>? SecretType { get; set; }
+
         [Input("tags")]
         private InputMap<object>? _tags;
 
@@ -188,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
 
     public sealed class SecretState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Additional config for specific secret types in JSON string format.
+        /// </summary>
+        [Input("additionalConfig")]
+        public Input<string>? AdditionalConfig { get; set; }
+
         /// <summary>
         /// Description of secret. The maximum is 2048 bytes.
         /// </summary>
@@ -217,6 +293,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("secretName")]
         public Input<string>? SecretName { get; set; }
+
+        /// <summary>
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// </summary>
+        [Input("secretType")]
+        public Input<int>? SecretType { get; set; }
 
         /// <summary>
         /// Status of secret.

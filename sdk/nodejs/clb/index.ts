@@ -9,17 +9,32 @@ export * from "./attachment";
 export * from "./customizedConfig";
 export * from "./functionTargetsAttachment";
 export * from "./getAttachments";
+export * from "./getClusterResources";
+export * from "./getCrossTargets";
+export * from "./getExclusiveClusters";
+export * from "./getIdleInstances";
+export * from "./getInstanceByCertId";
+export * from "./getInstanceDetail";
+export * from "./getInstanceTraffic";
 export * from "./getInstances";
 export * from "./getListenerRules";
 export * from "./getListeners";
+export * from "./getListenersByTargets";
 export * from "./getRedirections";
+export * from "./getResources";
+export * from "./getTargetGroupList";
 export * from "./getTargetGroups";
+export * from "./getTargetHealth";
 export * from "./instance";
+export * from "./instanceMixIpTargetConfig";
+export * from "./instanceSlaConfig";
 export * from "./listener";
 export * from "./listenerRule";
 export * from "./logSet";
 export * from "./logTopic";
 export * from "./redirection";
+export * from "./replaceCertForLbs";
+export * from "./securityGroupAttachment";
 export * from "./snatIp";
 export * from "./targetGroup";
 export * from "./targetGroupAttachment";
@@ -30,11 +45,15 @@ import { Attachment } from "./attachment";
 import { CustomizedConfig } from "./customizedConfig";
 import { FunctionTargetsAttachment } from "./functionTargetsAttachment";
 import { Instance } from "./instance";
+import { InstanceMixIpTargetConfig } from "./instanceMixIpTargetConfig";
+import { InstanceSlaConfig } from "./instanceSlaConfig";
 import { Listener } from "./listener";
 import { ListenerRule } from "./listenerRule";
 import { LogSet } from "./logSet";
 import { LogTopic } from "./logTopic";
 import { Redirection } from "./redirection";
+import { ReplaceCertForLbs } from "./replaceCertForLbs";
+import { SecurityGroupAttachment } from "./securityGroupAttachment";
 import { SnatIp } from "./snatIp";
 import { TargetGroup } from "./targetGroup";
 import { TargetGroupAttachment } from "./targetGroupAttachment";
@@ -52,6 +71,10 @@ const _module = {
                 return new FunctionTargetsAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Clb/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig":
+                return new InstanceMixIpTargetConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig":
+                return new InstanceSlaConfig(name, <any>undefined, { urn })
             case "tencentcloud:Clb/listener:Listener":
                 return new Listener(name, <any>undefined, { urn })
             case "tencentcloud:Clb/listenerRule:ListenerRule":
@@ -62,6 +85,10 @@ const _module = {
                 return new LogTopic(name, <any>undefined, { urn })
             case "tencentcloud:Clb/redirection:Redirection":
                 return new Redirection(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/replaceCertForLbs:ReplaceCertForLbs":
+                return new ReplaceCertForLbs(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment":
+                return new SecurityGroupAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Clb/snatIp:SnatIp":
                 return new SnatIp(name, <any>undefined, { urn })
             case "tencentcloud:Clb/targetGroup:TargetGroup":
@@ -79,11 +106,15 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Clb/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/customizedConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/functionTargetsAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instanceMixIpTargetConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instanceSlaConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listener", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listenerRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logSet", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/redirection", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/replaceCertForLbs", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/securityGroupAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/snatIp", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupAttachment", _module)

@@ -16,6 +16,7 @@ export * from "./gatewaySslClientCert";
 export * from "./getConnections";
 export * from "./getCustomerGatewayVendors";
 export * from "./getCustomerGateways";
+export * from "./getDefaultHealthCheckIp";
 export * from "./getGatewayRoutes";
 export * from "./getGateways";
 export * from "./sslClient";

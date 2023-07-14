@@ -230,8 +230,7 @@ def get_storages(availability_zone: Optional[str] = None,
     storages = tencentcloud.Cbs.get_storages(result_output_file="mytestpath",
         storage_id="disk-kdt0sq6m")
     ```
-
-    The following snippet shows the new supported query params
+    ### The following snippet shows the new supported query params
 
     ```python
     import pulumi
@@ -338,8 +337,7 @@ def get_storages_output(availability_zone: Optional[pulumi.Input[Optional[str]]]
     storages = tencentcloud.Cbs.get_storages(result_output_file="mytestpath",
         storage_id="disk-kdt0sq6m")
     ```
-
-    The following snippet shows the new supported query params
+    ### The following snippet shows the new supported query params
 
     ```python
     import pulumi

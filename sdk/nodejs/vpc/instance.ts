@@ -25,15 +25,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Using Assistant CIDR
+ * ### Using Assistant CIDR
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Vpc.Instance("foo", {
- *     assistantCidr: ["172.16.0.0/24"],
+ *     assistantCidrs: ["172.16.0.0/24"],
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  *     tags: {

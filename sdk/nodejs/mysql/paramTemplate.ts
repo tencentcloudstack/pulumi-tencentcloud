@@ -18,6 +18,20 @@ import * as utilities from "../utilities";
  *     description: "terraform-test",
  *     engineType: "InnoDB",
  *     engineVersion: "8.0",
+ *     paramLists: [
+ *         {
+ *             currentValue: "1",
+ *             name: "auto_increment_increment",
+ *         },
+ *         {
+ *             currentValue: "1",
+ *             name: "auto_increment_offset",
+ *         },
+ *         {
+ *             currentValue: "ON",
+ *             name: "automatic_sp_privileges",
+ *         },
+ *     ],
  *     templateType: "HIGH_STABILITY",
  * });
  * ```
@@ -77,11 +91,11 @@ export class ParamTemplate extends pulumi.CustomResource {
     /**
      * parameter list.
      */
-    public /*out*/ readonly paramLists!: pulumi.Output<outputs.Mysql.ParamTemplateParamList[]>;
+    public readonly paramLists!: pulumi.Output<outputs.Mysql.ParamTemplateParamList[]>;
     /**
      * The ID of source parameter template.
      */
-    public /*out*/ readonly templateId!: pulumi.Output<number>;
+    public readonly templateId!: pulumi.Output<number>;
     /**
      * The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
      */
@@ -113,9 +127,9 @@ export class ParamTemplate extends pulumi.CustomResource {
             resourceInputs["engineType"] = args ? args.engineType : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["paramLists"] = args ? args.paramLists : undefined;
+            resourceInputs["templateId"] = args ? args.templateId : undefined;
             resourceInputs["templateType"] = args ? args.templateType : undefined;
-            resourceInputs["paramLists"] = undefined /*out*/;
-            resourceInputs["templateId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ParamTemplate.__pulumiType, name, resourceInputs, opts);
@@ -176,6 +190,14 @@ export interface ParamTemplateArgs {
      * The name of parameter template.
      */
     name?: pulumi.Input<string>;
+    /**
+     * parameter list.
+     */
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.ParamTemplateParamList>[]>;
+    /**
+     * The ID of source parameter template.
+     */
+    templateId?: pulumi.Input<number>;
     /**
      * The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
      */

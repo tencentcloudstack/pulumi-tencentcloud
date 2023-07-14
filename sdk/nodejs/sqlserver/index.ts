@@ -8,32 +8,100 @@ import * as utilities from "../utilities";
 export * from "./account";
 export * from "./accountDbAttachment";
 export * from "./basicInstance";
+export * from "./businessIntelligenceFile";
+export * from "./businessIntelligenceInstance";
+export * from "./completeExpansion";
 export * from "./configBackupStrategy";
+export * from "./configDatabaseCdc";
+export * from "./configDatabaseCt";
+export * from "./configDatabaseMdf";
+export * from "./configInstanceParam";
+export * from "./configInstanceRoGroup";
+export * from "./configInstanceSecurityGroups";
+export * from "./configTerminateDbInstance";
+export * from "./databaseTde";
 export * from "./db";
+export * from "./fullBackupMigration";
+export * from "./generalBackup";
+export * from "./generalClone";
+export * from "./generalCloudInstance";
+export * from "./generalCloudRoInstance";
+export * from "./generalCommunication";
 export * from "./getAccountDbAttachments";
 export * from "./getAccounts";
+export * from "./getBackupByFlowId";
+export * from "./getBackupCommands";
+export * from "./getBackupUploadSize";
 export * from "./getBackups";
 export * from "./getBasicInstances";
+export * from "./getCrossRegionZone";
+export * from "./getDbCharsets";
 export * from "./getDbs";
+export * from "./getInsAttribute";
+export * from "./getInstanceParamRecords";
 export * from "./getInstances";
+export * from "./getProjectSecurityGroups";
 export * from "./getPublishSubscribes";
+export * from "./getQueryXevent";
 export * from "./getReadonlyGroups";
+export * from "./getRegions";
+export * from "./getRollbackTime";
+export * from "./getSlowlogs";
+export * from "./getUploadBackupInfo";
+export * from "./getUploadIncrementalInfo";
 export * from "./getZoneConfig";
+export * from "./increBackupMigration";
 export * from "./instance";
+export * from "./instanceTde";
 export * from "./migration";
 export * from "./publishSubscribe";
 export * from "./readonlyInstance";
+export * from "./renewDbInstance";
+export * from "./renewPostpaidDbInstance";
+export * from "./restartDbInstance";
+export * from "./restoreInstance";
+export * from "./rollbackInstance";
+export * from "./startBackupFullMigration";
+export * from "./startBackupIncrementalMigration";
+export * from "./startXevent";
 
 // Import resources to register:
 import { Account } from "./account";
 import { AccountDbAttachment } from "./accountDbAttachment";
 import { BasicInstance } from "./basicInstance";
+import { BusinessIntelligenceFile } from "./businessIntelligenceFile";
+import { BusinessIntelligenceInstance } from "./businessIntelligenceInstance";
+import { CompleteExpansion } from "./completeExpansion";
 import { ConfigBackupStrategy } from "./configBackupStrategy";
+import { ConfigDatabaseCdc } from "./configDatabaseCdc";
+import { ConfigDatabaseCt } from "./configDatabaseCt";
+import { ConfigDatabaseMdf } from "./configDatabaseMdf";
+import { ConfigInstanceParam } from "./configInstanceParam";
+import { ConfigInstanceRoGroup } from "./configInstanceRoGroup";
+import { ConfigInstanceSecurityGroups } from "./configInstanceSecurityGroups";
+import { ConfigTerminateDbInstance } from "./configTerminateDbInstance";
+import { DatabaseTde } from "./databaseTde";
 import { Db } from "./db";
+import { FullBackupMigration } from "./fullBackupMigration";
+import { GeneralBackup } from "./generalBackup";
+import { GeneralClone } from "./generalClone";
+import { GeneralCloudInstance } from "./generalCloudInstance";
+import { GeneralCloudRoInstance } from "./generalCloudRoInstance";
+import { GeneralCommunication } from "./generalCommunication";
+import { IncreBackupMigration } from "./increBackupMigration";
 import { Instance } from "./instance";
+import { InstanceTde } from "./instanceTde";
 import { Migration } from "./migration";
 import { PublishSubscribe } from "./publishSubscribe";
 import { ReadonlyInstance } from "./readonlyInstance";
+import { RenewDbInstance } from "./renewDbInstance";
+import { RenewPostpaidDbInstance } from "./renewPostpaidDbInstance";
+import { RestartDbInstance } from "./restartDbInstance";
+import { RestoreInstance } from "./restoreInstance";
+import { RollbackInstance } from "./rollbackInstance";
+import { StartBackupFullMigration } from "./startBackupFullMigration";
+import { StartBackupIncrementalMigration } from "./startBackupIncrementalMigration";
+import { StartXevent } from "./startXevent";
 
 const _module = {
     version: utilities.getVersion(),
@@ -45,18 +113,72 @@ const _module = {
                 return new AccountDbAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
                 return new BasicInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile":
+                return new BusinessIntelligenceFile(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance":
+                return new BusinessIntelligenceInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/completeExpansion:CompleteExpansion":
+                return new CompleteExpansion(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy":
                 return new ConfigBackupStrategy(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc":
+                return new ConfigDatabaseCdc(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configDatabaseCt:ConfigDatabaseCt":
+                return new ConfigDatabaseCt(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configDatabaseMdf:ConfigDatabaseMdf":
+                return new ConfigDatabaseMdf(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configInstanceParam:ConfigInstanceParam":
+                return new ConfigInstanceParam(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup":
+                return new ConfigInstanceRoGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups":
+                return new ConfigInstanceSecurityGroups(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/configTerminateDbInstance:ConfigTerminateDbInstance":
+                return new ConfigTerminateDbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/databaseTde:DatabaseTde":
+                return new DatabaseTde(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/db:Db":
                 return new Db(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration":
+                return new FullBackupMigration(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/generalBackup:GeneralBackup":
+                return new GeneralBackup(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/generalClone:GeneralClone":
+                return new GeneralClone(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance":
+                return new GeneralCloudInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/generalCloudRoInstance:GeneralCloudRoInstance":
+                return new GeneralCloudRoInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/generalCommunication:GeneralCommunication":
+                return new GeneralCommunication(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration":
+                return new IncreBackupMigration(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/instanceTde:InstanceTde":
+                return new InstanceTde(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/migration:Migration":
                 return new Migration(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
                 return new PublishSubscribe(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance":
                 return new ReadonlyInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance":
+                return new RenewDbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/renewPostpaidDbInstance:RenewPostpaidDbInstance":
+                return new RenewPostpaidDbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/restartDbInstance:RestartDbInstance":
+                return new RestartDbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/restoreInstance:RestoreInstance":
+                return new RestoreInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/rollbackInstance:RollbackInstance":
+                return new RollbackInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/startBackupFullMigration:StartBackupFullMigration":
+                return new StartBackupFullMigration(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/startBackupIncrementalMigration:StartBackupIncrementalMigration":
+                return new StartBackupIncrementalMigration(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/startXevent:StartXevent":
+                return new StartXevent(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -65,9 +187,36 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/accountDbAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/basicInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/businessIntelligenceFile", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/businessIntelligenceInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/completeExpansion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configBackupStrategy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configDatabaseCdc", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configDatabaseCt", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configDatabaseMdf", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configInstanceParam", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configInstanceRoGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configInstanceSecurityGroups", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configTerminateDbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/databaseTde", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/db", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/fullBackupMigration", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalBackup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalClone", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalCloudInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalCloudRoInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalCommunication", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/increBackupMigration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instanceTde", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/migration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/publishSubscribe", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/readonlyInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/renewDbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/renewPostpaidDbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/restartDbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/restoreInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/rollbackInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/startBackupFullMigration", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/startBackupIncrementalMigration", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/startXevent", _module)

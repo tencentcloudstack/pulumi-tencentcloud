@@ -95,6 +95,8 @@ type DbInstance struct {
 	DcnInstanceId pulumi.StringPtrOutput `pulumi:"dcnInstanceId"`
 	// DCN source region.
 	DcnRegion pulumi.StringPtrOutput `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrOutput `pulumi:"extranetAccess"`
 	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 	InitParams DbInstanceInitParamArrayOutput `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
@@ -119,10 +121,16 @@ type DbInstance struct {
 	ShardStorage pulumi.IntOutput `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip pulumi.StringOutput `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringOutput `pulumi:"vipv6"`
 	// Voucher ID list, currently only supports specifying one voucher.
 	VoucherIds pulumi.StringArrayOutput `pulumi:"voucherIds"`
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
+	// Intranet port.
+	Vport pulumi.IntOutput `pulumi:"vport"`
 	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
 	Zones pulumi.StringArrayOutput `pulumi:"zones"`
 }
@@ -185,6 +193,8 @@ type dbInstanceState struct {
 	DcnInstanceId *string `pulumi:"dcnInstanceId"`
 	// DCN source region.
 	DcnRegion *string `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess *bool `pulumi:"extranetAccess"`
 	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 	InitParams []DbInstanceInitParam `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
@@ -209,10 +219,16 @@ type dbInstanceState struct {
 	ShardStorage *int `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId *string `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip *string `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 *string `pulumi:"vipv6"`
 	// Voucher ID list, currently only supports specifying one voucher.
 	VoucherIds []string `pulumi:"voucherIds"`
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 	VpcId *string `pulumi:"vpcId"`
+	// Intranet port.
+	Vport *int `pulumi:"vport"`
 	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
 	Zones []string `pulumi:"zones"`
 }
@@ -228,6 +244,8 @@ type DbInstanceState struct {
 	DcnInstanceId pulumi.StringPtrInput
 	// DCN source region.
 	DcnRegion pulumi.StringPtrInput
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrInput
 	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 	InitParams DbInstanceInitParamArrayInput
 	// Instance name, you can set the name of the instance independently through this field.
@@ -252,10 +270,16 @@ type DbInstanceState struct {
 	ShardStorage pulumi.IntPtrInput
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrInput
+	// The field is required to specify VIP.
+	Vip pulumi.StringPtrInput
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringPtrInput
 	// Voucher ID list, currently only supports specifying one voucher.
 	VoucherIds pulumi.StringArrayInput
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 	VpcId pulumi.StringPtrInput
+	// Intranet port.
+	Vport pulumi.IntPtrInput
 	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
 	Zones pulumi.StringArrayInput
 }
@@ -275,6 +299,8 @@ type dbInstanceArgs struct {
 	DcnInstanceId *string `pulumi:"dcnInstanceId"`
 	// DCN source region.
 	DcnRegion *string `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess *bool `pulumi:"extranetAccess"`
 	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 	InitParams []DbInstanceInitParam `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
@@ -299,6 +325,10 @@ type dbInstanceArgs struct {
 	ShardStorage int `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId *string `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip *string `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 *string `pulumi:"vipv6"`
 	// Voucher ID list, currently only supports specifying one voucher.
 	VoucherIds []string `pulumi:"voucherIds"`
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
@@ -319,6 +349,8 @@ type DbInstanceArgs struct {
 	DcnInstanceId pulumi.StringPtrInput
 	// DCN source region.
 	DcnRegion pulumi.StringPtrInput
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrInput
 	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 	InitParams DbInstanceInitParamArrayInput
 	// Instance name, you can set the name of the instance independently through this field.
@@ -343,6 +375,10 @@ type DbInstanceArgs struct {
 	ShardStorage pulumi.IntInput
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrInput
+	// The field is required to specify VIP.
+	Vip pulumi.StringPtrInput
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringPtrInput
 	// Voucher ID list, currently only supports specifying one voucher.
 	VoucherIds pulumi.StringArrayInput
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
@@ -463,6 +499,11 @@ func (o DbInstanceOutput) DcnRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringPtrOutput { return v.DcnRegion }).(pulumi.StringPtrOutput)
 }
 
+// Whether to open the extranet access.
+func (o DbInstanceOutput) ExtranetAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DbInstance) pulumi.BoolPtrOutput { return v.ExtranetAccess }).(pulumi.BoolPtrOutput)
+}
+
 // &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
 func (o DbInstanceOutput) InitParams() DbInstanceInitParamArrayOutput {
 	return o.ApplyT(func(v *DbInstance) DbInstanceInitParamArrayOutput { return v.InitParams }).(DbInstanceInitParamArrayOutput)
@@ -523,6 +564,16 @@ func (o DbInstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
 
+// The field is required to specify VIP.
+func (o DbInstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *DbInstance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
+}
+
+// The field is required to specify VIPv6.
+func (o DbInstanceOutput) Vipv6() pulumi.StringOutput {
+	return o.ApplyT(func(v *DbInstance) pulumi.StringOutput { return v.Vipv6 }).(pulumi.StringOutput)
+}
+
 // Voucher ID list, currently only supports specifying one voucher.
 func (o DbInstanceOutput) VoucherIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringArrayOutput { return v.VoucherIds }).(pulumi.StringArrayOutput)
@@ -531,6 +582,11 @@ func (o DbInstanceOutput) VoucherIds() pulumi.StringArrayOutput {
 // Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 func (o DbInstanceOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+// Intranet port.
+func (o DbInstanceOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.Vport }).(pulumi.IntOutput)
 }
 
 // &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.

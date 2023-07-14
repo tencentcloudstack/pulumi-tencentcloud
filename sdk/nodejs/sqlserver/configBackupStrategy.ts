@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver configBackupStrategy
  *
  * ## Example Usage
- *
- * Daily backup
+ * ### Daily backup
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -29,8 +28,7 @@ import * as utilities from "../utilities";
  *     regularBackupCounts: 1,
  * });
  * ```
- *
- * Weekly backup
+ * ### Weekly backup
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -53,8 +51,7 @@ import * as utilities from "../utilities";
  *     regularBackupCounts: 1,
  * });
  * ```
- *
- * Regular backup
+ * ### Regular backup
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

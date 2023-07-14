@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const group = new tencentcloud.Postgresql.ReadonlyGroup("group", {
- *     masterDbInstanceId: "postgres-f44wlfdv",
+ *     masterDbInstanceId: "postgres-gzg9jb2n",
  *     maxReplayLag: 100,
  *     maxReplayLatency: 512,
  *     minDelayEliminateReserve: 1,

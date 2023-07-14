@@ -50,10 +50,6 @@ import * as utilities from "../utilities";
  *         adjDarMethod: "scale",
  *         audioBitrateAdjMethod: "0",
  *         deleteMetadata: "false",
- *         hlsEncrypt: {
- *             isHlsEncrypt: "false",
- *             uriKey: "",
- *         },
  *         isCheckAudioBitrate: "false",
  *         isCheckReso: "false",
  *         isCheckVideoBitrate: "false",

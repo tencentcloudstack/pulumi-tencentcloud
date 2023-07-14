@@ -6,8 +6,18 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .gateway import *
+from .gateway_attachment import *
 from .gateway_ccn_route import *
+from .get_access_points import *
 from .get_gateway_ccn_routes import *
 from .get_gateway_instances import *
 from .get_instances import *
+from .get_internet_address_quota import *
+from .get_internet_address_statistics import *
+from .get_public_direct_connect_tunnel_routes import *
+from .instance import *
+from .internet_address import *
+from .internet_address_config import *
+from .share_dcx_config import *
+from ._inputs import *
 from . import outputs

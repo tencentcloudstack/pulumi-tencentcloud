@@ -7,9 +7,11 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./getInstances";
 export * from "./instance";
+export * from "./securityGroup";
 
 // Import resources to register:
 import { Instance } from "./instance";
+import { SecurityGroup } from "./securityGroup";
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,9 +19,12 @@ const _module = {
         switch (type) {
             case "tencentcloud:Elasticsearch/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/securityGroup:SecurityGroup":
+                return new SecurityGroup(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/securityGroup", _module)

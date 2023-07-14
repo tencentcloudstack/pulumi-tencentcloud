@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CLB redirection.
  *
  * ## Example Usage
- *
- * Manual Rewrite
+ * ### Manual Rewrite
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -23,8 +22,7 @@ import * as utilities from "../utilities";
  *     targetRuleId: "loc-4xxr2cy7",
  * });
  * ```
- *
- * Auto Rewrite
+ * ### Auto Rewrite
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

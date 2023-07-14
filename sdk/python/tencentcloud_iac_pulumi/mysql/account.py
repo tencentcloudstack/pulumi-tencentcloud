@@ -17,6 +17,7 @@ class AccountArgs:
                  password: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
+                 max_user_connections: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Account resource.
@@ -24,6 +25,7 @@ class AccountArgs:
         :param pulumi.Input[str] password: Operation password.
         :param pulumi.Input[str] description: Database description.
         :param pulumi.Input[str] host: Account host, default is `%`.
+        :param pulumi.Input[int] max_user_connections: The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
         :param pulumi.Input[str] name: Account name.
         """
         pulumi.set(__self__, "mysql_id", mysql_id)
@@ -32,6 +34,8 @@ class AccountArgs:
             pulumi.set(__self__, "description", description)
         if host is not None:
             pulumi.set(__self__, "host", host)
+        if max_user_connections is not None:
+            pulumi.set(__self__, "max_user_connections", max_user_connections)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -84,6 +88,18 @@ class AccountArgs:
         pulumi.set(self, "host", value)
 
     @property
+    @pulumi.getter(name="maxUserConnections")
+    def max_user_connections(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        """
+        return pulumi.get(self, "max_user_connections")
+
+    @max_user_connections.setter
+    def max_user_connections(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_user_connections", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -101,6 +117,7 @@ class _AccountState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
+                 max_user_connections: Optional[pulumi.Input[int]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None):
@@ -108,6 +125,7 @@ class _AccountState:
         Input properties used for looking up and filtering Account resources.
         :param pulumi.Input[str] description: Database description.
         :param pulumi.Input[str] host: Account host, default is `%`.
+        :param pulumi.Input[int] max_user_connections: The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
         :param pulumi.Input[str] mysql_id: Instance ID to which the account belongs.
         :param pulumi.Input[str] name: Account name.
         :param pulumi.Input[str] password: Operation password.
@@ -116,6 +134,8 @@ class _AccountState:
             pulumi.set(__self__, "description", description)
         if host is not None:
             pulumi.set(__self__, "host", host)
+        if max_user_connections is not None:
+            pulumi.set(__self__, "max_user_connections", max_user_connections)
         if mysql_id is not None:
             pulumi.set(__self__, "mysql_id", mysql_id)
         if name is not None:
@@ -146,6 +166,18 @@ class _AccountState:
     @host.setter
     def host(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter(name="maxUserConnections")
+    def max_user_connections(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        """
+        return pulumi.get(self, "max_user_connections")
+
+    @max_user_connections.setter
+    def max_user_connections(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_user_connections", value)
 
     @property
     @pulumi.getter(name="mysqlId")
@@ -191,6 +223,7 @@ class Account(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
+                 max_user_connections: Optional[pulumi.Input[int]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -206,7 +239,8 @@ class Account(pulumi.CustomResource):
 
         default = tencentcloud.mysql.Account("default",
             description="My test account",
-            mysql_id="my-test-database",
+            max_user_connections=10,
+            mysql_id="terraform-test-local-database",
             password="********")
         ```
 
@@ -222,6 +256,7 @@ class Account(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Database description.
         :param pulumi.Input[str] host: Account host, default is `%`.
+        :param pulumi.Input[int] max_user_connections: The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
         :param pulumi.Input[str] mysql_id: Instance ID to which the account belongs.
         :param pulumi.Input[str] name: Account name.
         :param pulumi.Input[str] password: Operation password.
@@ -243,7 +278,8 @@ class Account(pulumi.CustomResource):
 
         default = tencentcloud.mysql.Account("default",
             description="My test account",
-            mysql_id="my-test-database",
+            max_user_connections=10,
+            mysql_id="terraform-test-local-database",
             password="********")
         ```
 
@@ -272,6 +308,7 @@ class Account(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
+                 max_user_connections: Optional[pulumi.Input[int]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -291,6 +328,7 @@ class Account(pulumi.CustomResource):
 
             __props__.__dict__["description"] = description
             __props__.__dict__["host"] = host
+            __props__.__dict__["max_user_connections"] = max_user_connections
             if mysql_id is None and not opts.urn:
                 raise TypeError("Missing required property 'mysql_id'")
             __props__.__dict__["mysql_id"] = mysql_id
@@ -310,6 +348,7 @@ class Account(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[str]] = None,
             host: Optional[pulumi.Input[str]] = None,
+            max_user_connections: Optional[pulumi.Input[int]] = None,
             mysql_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             password: Optional[pulumi.Input[str]] = None) -> 'Account':
@@ -322,6 +361,7 @@ class Account(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Database description.
         :param pulumi.Input[str] host: Account host, default is `%`.
+        :param pulumi.Input[int] max_user_connections: The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
         :param pulumi.Input[str] mysql_id: Instance ID to which the account belongs.
         :param pulumi.Input[str] name: Account name.
         :param pulumi.Input[str] password: Operation password.
@@ -332,6 +372,7 @@ class Account(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["host"] = host
+        __props__.__dict__["max_user_connections"] = max_user_connections
         __props__.__dict__["mysql_id"] = mysql_id
         __props__.__dict__["name"] = name
         __props__.__dict__["password"] = password
@@ -352,6 +393,14 @@ class Account(pulumi.CustomResource):
         Account host, default is `%`.
         """
         return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="maxUserConnections")
+    def max_user_connections(self) -> pulumi.Output[int]:
+        """
+        The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        """
+        return pulumi.get(self, "max_user_connections")
 
     @property
     @pulumi.getter(name="mysqlId")

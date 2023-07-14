@@ -12,6 +12,8 @@ from . import outputs
 __all__ = [
     'ChcConfigBmcVirtualPrivateCloud',
     'ChcConfigDeployVirtualPrivateCloud',
+    'ImportImageTagSpecification',
+    'ImportImageTagSpecificationTag',
     'LaunchTemplateActionTimer',
     'LaunchTemplateActionTimerExternals',
     'LaunchTemplateActionTimerExternalsStorageBlockAttr',
@@ -48,12 +50,19 @@ __all__ = [
     'LaunchTemplateVersionTagSpecificationTag',
     'LaunchTemplateVersionVirtualPrivateCloud',
     'LaunchTemplateVirtualPrivateCloud',
+    'ModifyInstanceDiskTypeDataDisk',
+    'ModifyInstanceDiskTypeSystemDisk',
+    'RenewHostHostChargePrepaid',
+    'RenewInstanceInstanceChargePrepaid',
     'GetChcDeniedActionsChcHostDeniedActionSetResult',
     'GetChcHostsChcHostSetResult',
     'GetChcHostsChcHostSetBmcVirtualPrivateCloudResult',
     'GetChcHostsChcHostSetDeployVirtualPrivateCloudResult',
     'GetChcHostsChcHostSetPlacementResult',
     'GetChcHostsFilterResult',
+    'GetImageSharePermissionSharePermissionSetResult',
+    'GetImportImageOsImportImageOsListSupportedResult',
+    'GetImportImageOsImportImageOsVersionSetResult',
     'GetInstancesModificationFilterResult',
     'GetInstancesModificationInstanceTypeConfigStatusListResult',
     'GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigResult',
@@ -237,6 +246,61 @@ class ChcConfigDeployVirtualPrivateCloud(dict):
         Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
         """
         return pulumi.get(self, "private_ip_addresses")
+
+
+@pulumi.output_type
+class ImportImageTagSpecification(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceType":
+            suggest = "resource_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ImportImageTagSpecification. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ImportImageTagSpecification.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ImportImageTagSpecification.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 resource_type: str,
+                 tags: Sequence['outputs.ImportImageTagSpecificationTag']):
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.ImportImageTagSpecificationTag']:
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class ImportImageTagSpecificationTag(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -2348,6 +2412,265 @@ class LaunchTemplateVirtualPrivateCloud(dict):
 
 
 @pulumi.output_type
+class ModifyInstanceDiskTypeDataDisk(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "diskSize":
+            suggest = "disk_size"
+        elif key == "cdcId":
+            suggest = "cdc_id"
+        elif key == "deleteWithInstance":
+            suggest = "delete_with_instance"
+        elif key == "diskId":
+            suggest = "disk_id"
+        elif key == "diskType":
+            suggest = "disk_type"
+        elif key == "kmsKeyId":
+            suggest = "kms_key_id"
+        elif key == "snapshotId":
+            suggest = "snapshot_id"
+        elif key == "throughputPerformance":
+            suggest = "throughput_performance"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ModifyInstanceDiskTypeDataDisk. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ModifyInstanceDiskTypeDataDisk.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ModifyInstanceDiskTypeDataDisk.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 disk_size: int,
+                 cdc_id: Optional[str] = None,
+                 delete_with_instance: Optional[bool] = None,
+                 disk_id: Optional[str] = None,
+                 disk_type: Optional[str] = None,
+                 encrypt: Optional[bool] = None,
+                 kms_key_id: Optional[str] = None,
+                 snapshot_id: Optional[str] = None,
+                 throughput_performance: Optional[int] = None):
+        pulumi.set(__self__, "disk_size", disk_size)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
+        if delete_with_instance is not None:
+            pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+        if disk_id is not None:
+            pulumi.set(__self__, "disk_id", disk_id)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if kms_key_id is not None:
+            pulumi.set(__self__, "kms_key_id", kms_key_id)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if throughput_performance is not None:
+            pulumi.set(__self__, "throughput_performance", throughput_performance)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[str]:
+        return pulumi.get(self, "cdc_id")
+
+    @property
+    @pulumi.getter(name="deleteWithInstance")
+    def delete_with_instance(self) -> Optional[bool]:
+        return pulumi.get(self, "delete_with_instance")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[str]:
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter
+    def encrypt(self) -> Optional[bool]:
+        return pulumi.get(self, "encrypt")
+
+    @property
+    @pulumi.getter(name="kmsKeyId")
+    def kms_key_id(self) -> Optional[str]:
+        return pulumi.get(self, "kms_key_id")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[str]:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter(name="throughputPerformance")
+    def throughput_performance(self) -> Optional[int]:
+        return pulumi.get(self, "throughput_performance")
+
+
+@pulumi.output_type
+class ModifyInstanceDiskTypeSystemDisk(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cdcId":
+            suggest = "cdc_id"
+        elif key == "diskId":
+            suggest = "disk_id"
+        elif key == "diskSize":
+            suggest = "disk_size"
+        elif key == "diskType":
+            suggest = "disk_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ModifyInstanceDiskTypeSystemDisk. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ModifyInstanceDiskTypeSystemDisk.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ModifyInstanceDiskTypeSystemDisk.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cdc_id: Optional[str] = None,
+                 disk_id: Optional[str] = None,
+                 disk_size: Optional[int] = None,
+                 disk_type: Optional[str] = None):
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
+        if disk_id is not None:
+            pulumi.set(__self__, "disk_id", disk_id)
+        if disk_size is not None:
+            pulumi.set(__self__, "disk_size", disk_size)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[str]:
+        return pulumi.get(self, "cdc_id")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> Optional[int]:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[str]:
+        return pulumi.get(self, "disk_type")
+
+
+@pulumi.output_type
+class RenewHostHostChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "renewFlag":
+            suggest = "renew_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RenewHostHostChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RenewHostHostChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RenewHostHostChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: Optional[str] = None):
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class RenewInstanceInstanceChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "renewFlag":
+            suggest = "renew_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RenewInstanceInstanceChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RenewInstanceInstanceChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RenewInstanceInstanceChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: Optional[str] = None):
+        """
+        :param int period: Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+        :param str renew_flag: Auto renewal flag. Valid values:
+               - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+               - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+               - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+               Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        """
+        Auto renewal flag. Valid values:
+        - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+        - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+        - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+        Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
 class GetChcDeniedActionsChcHostDeniedActionSetResult(dict):
     def __init__(__self__, *,
                  chc_id: str,
@@ -2838,6 +3161,104 @@ class GetChcHostsFilterResult(dict):
         Filter values.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetImageSharePermissionSharePermissionSetResult(dict):
+    def __init__(__self__, *,
+                 account_id: str,
+                 created_time: str):
+        """
+        :param str account_id: ID of the account with which the image is shared.
+        :param str created_time: Time when an image was shared.
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "created_time", created_time)
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> str:
+        """
+        ID of the account with which the image is shared.
+        """
+        return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Time when an image was shared.
+        """
+        return pulumi.get(self, "created_time")
+
+
+@pulumi.output_type
+class GetImportImageOsImportImageOsListSupportedResult(dict):
+    def __init__(__self__, *,
+                 linuxes: Sequence[str],
+                 windows: Sequence[str]):
+        """
+        :param Sequence[str] linuxes: Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] windows: Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "linuxes", linuxes)
+        pulumi.set(__self__, "windows", windows)
+
+    @property
+    @pulumi.getter
+    def linuxes(self) -> Sequence[str]:
+        """
+        Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "linuxes")
+
+    @property
+    @pulumi.getter
+    def windows(self) -> Sequence[str]:
+        """
+        Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "windows")
+
+
+@pulumi.output_type
+class GetImportImageOsImportImageOsVersionSetResult(dict):
+    def __init__(__self__, *,
+                 architectures: Sequence[str],
+                 os_name: str,
+                 os_versions: Sequence[str]):
+        """
+        :param Sequence[str] architectures: Supported operating system architecture.
+        :param str os_name: Operating system type.
+        :param Sequence[str] os_versions: Supported operating system versions.
+        """
+        pulumi.set(__self__, "architectures", architectures)
+        pulumi.set(__self__, "os_name", os_name)
+        pulumi.set(__self__, "os_versions", os_versions)
+
+    @property
+    @pulumi.getter
+    def architectures(self) -> Sequence[str]:
+        """
+        Supported operating system architecture.
+        """
+        return pulumi.get(self, "architectures")
+
+    @property
+    @pulumi.getter(name="osName")
+    def os_name(self) -> str:
+        """
+        Operating system type.
+        """
+        return pulumi.get(self, "os_name")
+
+    @property
+    @pulumi.getter(name="osVersions")
+    def os_versions(self) -> Sequence[str]:
+        """
+        Supported operating system versions.
+        """
+        return pulumi.get(self, "os_versions")
 
 
 @pulumi.output_type

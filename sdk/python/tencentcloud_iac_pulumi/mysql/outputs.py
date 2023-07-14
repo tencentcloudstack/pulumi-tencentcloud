@@ -11,18 +11,41 @@ from . import outputs
 
 __all__ = [
     'AuditLogFileFilter',
+    'BackupDownloadRestrictionLimitVpc',
     'ParamTemplateParamList',
+    'PasswordComplexityParamList',
     'PrivilegeColumn',
     'PrivilegeDatabase',
     'PrivilegeTable',
+    'ProxyProxyNodeCustom',
+    'RoGroupRoGroupInfo',
+    'RoGroupRoWeightValue',
+    'RollbackDatabase',
+    'RollbackTable',
+    'RollbackTableTable',
     'GetBackupListListResult',
     'GetBackupSummariesItemResult',
     'GetBinLogItemResult',
     'GetBinLogItemRemoteInfoResult',
     'GetCloneListItemResult',
+    'GetDatabasesDatabaseListResult',
     'GetDefaultParamsParamListResult',
+    'GetErrorLogItemResult',
     'GetInstanceInstanceListResult',
+    'GetInstanceParamRecordItemResult',
+    'GetInstanceRebootTimeItemResult',
     'GetParameterListParameterListResult',
+    'GetProjectSecurityGroupGroupResult',
+    'GetProjectSecurityGroupGroupInboundResult',
+    'GetProjectSecurityGroupGroupOutboundResult',
+    'GetProxyCustomCustomConfResult',
+    'GetProxyCustomWeightRuleResult',
+    'GetRollbackRangeTimeItemResult',
+    'GetRollbackRangeTimeItemTimeResult',
+    'GetSlowLogDataItemResult',
+    'GetSlowLogItemResult',
+    'GetSwitchRecordItemResult',
+    'GetUserTaskItemResult',
     'GetZoneConfigListResult',
     'GetZoneConfigListSellResult',
 ]
@@ -196,6 +219,52 @@ class AuditLogFileFilter(dict):
 
 
 @pulumi.output_type
+class BackupDownloadRestrictionLimitVpc(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "vpcLists":
+            suggest = "vpc_lists"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BackupDownloadRestrictionLimitVpc. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BackupDownloadRestrictionLimitVpc.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BackupDownloadRestrictionLimitVpc.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 region: str,
+                 vpc_lists: Sequence[str]):
+        """
+        :param str region: Restrict downloads from regions. Currently only the current region is supported.
+        :param Sequence[str] vpc_lists: List of vpcs to limit downloads.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_lists", vpc_lists)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Restrict downloads from regions. Currently only the current region is supported.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="vpcLists")
+    def vpc_lists(self) -> Sequence[str]:
+        """
+        List of vpcs to limit downloads.
+        """
+        return pulumi.get(self, "vpc_lists")
+
+
+@pulumi.output_type
 class ParamTemplateParamList(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -219,7 +288,7 @@ class ParamTemplateParamList(dict):
                  name: Optional[str] = None):
         """
         :param str current_value: The value of parameter.
-        :param str name: The name of parameter template.
+        :param str name: The name of parameter.
         """
         if current_value is not None:
             pulumi.set(__self__, "current_value", current_value)
@@ -238,7 +307,55 @@ class ParamTemplateParamList(dict):
     @pulumi.getter
     def name(self) -> Optional[str]:
         """
-        The name of parameter template.
+        The name of parameter.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class PasswordComplexityParamList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PasswordComplexityParamList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PasswordComplexityParamList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PasswordComplexityParamList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str current_value: Parameter value.
+        :param str name: Parameter name.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[str]:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Parameter name.
         """
         return pulumi.get(self, "name")
 
@@ -416,6 +533,362 @@ class PrivilegeTable(dict):
     def table_name(self) -> str:
         """
         Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+
+@pulumi.output_type
+class ProxyProxyNodeCustom(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "nodeCount":
+            suggest = "node_count"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProxyProxyNodeCustom. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProxyProxyNodeCustom.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProxyProxyNodeCustom.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cpu: int,
+                 mem: int,
+                 node_count: int,
+                 region: str,
+                 zone: str):
+        """
+        :param int cpu: Number of CPU cores.
+        :param int mem: Memory size.
+        :param int node_count: Number of nodes.
+        :param str region: Region.
+        :param str zone: Zone.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "mem", mem)
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of CPU cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def mem(self) -> int:
+        """
+        Memory size.
+        """
+        return pulumi.get(self, "mem")
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        """
+        Number of nodes.
+        """
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class RoGroupRoGroupInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "minRoInGroup":
+            suggest = "min_ro_in_group"
+        elif key == "replicationDelayTime":
+            suggest = "replication_delay_time"
+        elif key == "roGroupName":
+            suggest = "ro_group_name"
+        elif key == "roMaxDelayTime":
+            suggest = "ro_max_delay_time"
+        elif key == "roOfflineDelay":
+            suggest = "ro_offline_delay"
+        elif key == "weightMode":
+            suggest = "weight_mode"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RoGroupRoGroupInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RoGroupRoGroupInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RoGroupRoGroupInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 min_ro_in_group: Optional[int] = None,
+                 replication_delay_time: Optional[int] = None,
+                 ro_group_name: Optional[str] = None,
+                 ro_max_delay_time: Optional[int] = None,
+                 ro_offline_delay: Optional[int] = None,
+                 weight_mode: Optional[str] = None):
+        """
+        :param int min_ro_in_group: The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+        :param int replication_delay_time: Delayed replication time.
+        :param str ro_group_name: RO group name.
+        :param int ro_max_delay_time: RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+        :param int ro_offline_delay: Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+        :param str weight_mode: weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+        """
+        if min_ro_in_group is not None:
+            pulumi.set(__self__, "min_ro_in_group", min_ro_in_group)
+        if replication_delay_time is not None:
+            pulumi.set(__self__, "replication_delay_time", replication_delay_time)
+        if ro_group_name is not None:
+            pulumi.set(__self__, "ro_group_name", ro_group_name)
+        if ro_max_delay_time is not None:
+            pulumi.set(__self__, "ro_max_delay_time", ro_max_delay_time)
+        if ro_offline_delay is not None:
+            pulumi.set(__self__, "ro_offline_delay", ro_offline_delay)
+        if weight_mode is not None:
+            pulumi.set(__self__, "weight_mode", weight_mode)
+
+    @property
+    @pulumi.getter(name="minRoInGroup")
+    def min_ro_in_group(self) -> Optional[int]:
+        """
+        The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+        """
+        return pulumi.get(self, "min_ro_in_group")
+
+    @property
+    @pulumi.getter(name="replicationDelayTime")
+    def replication_delay_time(self) -> Optional[int]:
+        """
+        Delayed replication time.
+        """
+        return pulumi.get(self, "replication_delay_time")
+
+    @property
+    @pulumi.getter(name="roGroupName")
+    def ro_group_name(self) -> Optional[str]:
+        """
+        RO group name.
+        """
+        return pulumi.get(self, "ro_group_name")
+
+    @property
+    @pulumi.getter(name="roMaxDelayTime")
+    def ro_max_delay_time(self) -> Optional[int]:
+        """
+        RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+        """
+        return pulumi.get(self, "ro_max_delay_time")
+
+    @property
+    @pulumi.getter(name="roOfflineDelay")
+    def ro_offline_delay(self) -> Optional[int]:
+        """
+        Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+        """
+        return pulumi.get(self, "ro_offline_delay")
+
+    @property
+    @pulumi.getter(name="weightMode")
+    def weight_mode(self) -> Optional[str]:
+        """
+        weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+        """
+        return pulumi.get(self, "weight_mode")
+
+
+@pulumi.output_type
+class RoGroupRoWeightValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RoGroupRoWeightValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RoGroupRoWeightValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RoGroupRoWeightValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 weight: int):
+        """
+        :param str instance_id: RO instance ID.
+        :param int weight: Weights. The value range is [0, 100].
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        RO instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Weights. The value range is [0, 100].
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class RollbackDatabase(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "databaseName":
+            suggest = "database_name"
+        elif key == "newDatabaseName":
+            suggest = "new_database_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollbackDatabase. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollbackDatabase.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollbackDatabase.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database_name: str,
+                 new_database_name: str):
+        """
+        :param str database_name: The original database name before rollback.
+        :param str new_database_name: The new database name after rollback.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "new_database_name", new_database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        The original database name before rollback.
+        """
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter(name="newDatabaseName")
+    def new_database_name(self) -> str:
+        """
+        The new database name after rollback.
+        """
+        return pulumi.get(self, "new_database_name")
+
+
+@pulumi.output_type
+class RollbackTable(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 tables: Sequence['outputs.RollbackTableTable']):
+        """
+        :param str database: Database name.
+        :param Sequence['RollbackTableTableArgs'] tables: Database table details.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "tables", tables)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def tables(self) -> Sequence['outputs.RollbackTableTable']:
+        """
+        Database table details.
+        """
+        return pulumi.get(self, "tables")
+
+
+@pulumi.output_type
+class RollbackTableTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newTableName":
+            suggest = "new_table_name"
+        elif key == "tableName":
+            suggest = "table_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollbackTableTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollbackTableTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollbackTableTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_table_name: str,
+                 table_name: str):
+        """
+        :param str new_table_name: New database table name after rollback.
+        :param str table_name: The original database table name before rollback.
+        """
+        pulumi.set(__self__, "new_table_name", new_table_name)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="newTableName")
+    def new_table_name(self) -> str:
+        """
+        New database table name after rollback.
+        """
+        return pulumi.get(self, "new_table_name")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        The original database table name before rollback.
         """
         return pulumi.get(self, "table_name")
 
@@ -973,6 +1446,35 @@ class GetCloneListItemResult(dict):
 
 
 @pulumi.output_type
+class GetDatabasesDatabaseListResult(dict):
+    def __init__(__self__, *,
+                 character_set: str,
+                 database_name: str):
+        """
+        :param str character_set: character set type.
+        :param str database_name: The name of database.
+        """
+        pulumi.set(__self__, "character_set", character_set)
+        pulumi.set(__self__, "database_name", database_name)
+
+    @property
+    @pulumi.getter(name="characterSet")
+    def character_set(self) -> str:
+        """
+        character set type.
+        """
+        return pulumi.get(self, "character_set")
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        The name of database.
+        """
+        return pulumi.get(self, "database_name")
+
+
+@pulumi.output_type
 class GetDefaultParamsParamListResult(dict):
     def __init__(__self__, *,
                  current_value: str,
@@ -1076,6 +1578,35 @@ class GetDefaultParamsParamListResult(dict):
         Type of param.
         """
         return pulumi.get(self, "param_type")
+
+
+@pulumi.output_type
+class GetErrorLogItemResult(dict):
+    def __init__(__self__, *,
+                 content: str,
+                 timestamp: int):
+        """
+        :param str content: error details.
+        :param int timestamp: The time the error occurred.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "timestamp", timestamp)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        error details.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        """
+        The time the error occurred.
+        """
+        return pulumi.get(self, "timestamp")
 
 
 @pulumi.output_type
@@ -1394,6 +1925,108 @@ class GetInstanceInstanceListResult(dict):
 
 
 @pulumi.output_type
+class GetInstanceParamRecordItemResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 is_success: bool,
+                 modify_time: str,
+                 new_value: str,
+                 old_value: str,
+                 param_name: str):
+        """
+        :param str instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        :param bool is_success: Whether the parameter is modified successfully.
+        :param str modify_time: Change the time.
+        :param str new_value: The modified value of the parameter.
+        :param str old_value: The value of the parameter before modification.
+        :param str param_name: parameter name.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "is_success", is_success)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+        pulumi.set(__self__, "param_name", param_name)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="isSuccess")
+    def is_success(self) -> bool:
+        """
+        Whether the parameter is modified successfully.
+        """
+        return pulumi.get(self, "is_success")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Change the time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> str:
+        """
+        The modified value of the parameter.
+        """
+        return pulumi.get(self, "new_value")
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> str:
+        """
+        The value of the parameter before modification.
+        """
+        return pulumi.get(self, "old_value")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        parameter name.
+        """
+        return pulumi.get(self, "param_name")
+
+
+@pulumi.output_type
+class GetInstanceRebootTimeItemResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 time_in_seconds: int):
+        """
+        :param str instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
+        :param int time_in_seconds: expected restart time.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "time_in_seconds", time_in_seconds)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="timeInSeconds")
+    def time_in_seconds(self) -> int:
+        """
+        expected restart time.
+        """
+        return pulumi.get(self, "time_in_seconds")
+
+
+@pulumi.output_type
 class GetParameterListParameterListResult(dict):
     def __init__(__self__, *,
                  current_value: str,
@@ -1497,6 +2130,722 @@ class GetParameterListParameterListResult(dict):
         Parameter type.
         """
         return pulumi.get(self, "parameter_type")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupGroupResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 inbounds: Sequence['outputs.GetProjectSecurityGroupGroupInboundResult'],
+                 outbounds: Sequence['outputs.GetProjectSecurityGroupGroupOutboundResult'],
+                 project_id: int,
+                 security_group_id: str,
+                 security_group_name: str,
+                 security_group_remark: str):
+        """
+        :param str create_time: Creation time, time format: yyyy-mm-dd hh:mm:sss.
+        :param Sequence['GetProjectSecurityGroupGroupInboundArgs'] inbounds: inbound rules.
+        :param Sequence['GetProjectSecurityGroupGroupOutboundArgs'] outbounds: outbound rules.
+        :param int project_id: project id.
+        :param str security_group_id: Security group ID.
+        :param str security_group_name: Security group name.
+        :param str security_group_remark: Security group remark.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "inbounds", inbounds)
+        pulumi.set(__self__, "outbounds", outbounds)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "security_group_name", security_group_name)
+        pulumi.set(__self__, "security_group_remark", security_group_remark)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time, time format: yyyy-mm-dd hh:mm:sss.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def inbounds(self) -> Sequence['outputs.GetProjectSecurityGroupGroupInboundResult']:
+        """
+        inbound rules.
+        """
+        return pulumi.get(self, "inbounds")
+
+    @property
+    @pulumi.getter
+    def outbounds(self) -> Sequence['outputs.GetProjectSecurityGroupGroupOutboundResult']:
+        """
+        outbound rules.
+        """
+        return pulumi.get(self, "outbounds")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="securityGroupName")
+    def security_group_name(self) -> str:
+        """
+        Security group name.
+        """
+        return pulumi.get(self, "security_group_name")
+
+    @property
+    @pulumi.getter(name="securityGroupRemark")
+    def security_group_remark(self) -> str:
+        """
+        Security group remark.
+        """
+        return pulumi.get(self, "security_group_remark")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupGroupInboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 desc: str,
+                 dir: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, ACCEPT or DROP.
+        :param str cidr_ip: Destination IP or IP segment, such as 172.16.0.0/12.
+        :param str desc: Rule description.
+        :param str dir: The direction defined by the rule, the inbound rule is OUTPUT.
+        :param str ip_protocol: Network protocol, support UDP, TCP, etc.
+        :param str port_range: port or port range.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "dir", dir)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Destination IP or IP segment, such as 172.16.0.0/12.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Rule description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def dir(self) -> str:
+        """
+        The direction defined by the rule, the inbound rule is OUTPUT.
+        """
+        return pulumi.get(self, "dir")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol, support UDP, TCP, etc.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        port or port range.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupGroupOutboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 desc: str,
+                 dir: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, ACCEPT or DROP.
+        :param str cidr_ip: Destination IP or IP segment, such as 172.16.0.0/12.
+        :param str desc: Rule description.
+        :param str dir: The direction defined by the rule, the inbound rule is OUTPUT.
+        :param str ip_protocol: Network protocol, support UDP, TCP, etc.
+        :param str port_range: port or port range.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "dir", dir)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Destination IP or IP segment, such as 172.16.0.0/12.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Rule description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def dir(self) -> str:
+        """
+        The direction defined by the rule, the inbound rule is OUTPUT.
+        """
+        return pulumi.get(self, "dir")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol, support UDP, TCP, etc.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        port or port range.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetProxyCustomCustomConfResult(dict):
+    def __init__(__self__, *,
+                 cpu: int,
+                 device: str,
+                 device_type: str,
+                 memory: int,
+                 type: str):
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "device", device)
+        pulumi.set(__self__, "device_type", device_type)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def device(self) -> str:
+        return pulumi.get(self, "device")
+
+    @property
+    @pulumi.getter(name="deviceType")
+    def device_type(self) -> str:
+        return pulumi.get(self, "device_type")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetProxyCustomWeightRuleResult(dict):
+    def __init__(__self__, *,
+                 less_than: int,
+                 weight: int):
+        pulumi.set(__self__, "less_than", less_than)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="lessThan")
+    def less_than(self) -> int:
+        return pulumi.get(self, "less_than")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetRollbackRangeTimeItemResult(dict):
+    def __init__(__self__, *,
+                 code: int,
+                 instance_id: str,
+                 message: str,
+                 times: Sequence['outputs.GetRollbackRangeTimeItemTimeResult']):
+        """
+        :param int code: Query database error code.
+        :param str instance_id: A list of instance IDs. The format of a single instance ID is: cdb-c1nl9rpv. Same as the instance ID displayed in the cloud database console page.
+        :param str message: Query database error information.
+        :param Sequence['GetRollbackRangeTimeItemTimeArgs'] times: Retrievable time range.
+        """
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "times", times)
+
+    @property
+    @pulumi.getter
+    def code(self) -> int:
+        """
+        Query database error code.
+        """
+        return pulumi.get(self, "code")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        A list of instance IDs. The format of a single instance ID is: cdb-c1nl9rpv. Same as the instance ID displayed in the cloud database console page.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        Query database error information.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter
+    def times(self) -> Sequence['outputs.GetRollbackRangeTimeItemTimeResult']:
+        """
+        Retrievable time range.
+        """
+        return pulumi.get(self, "times")
+
+
+@pulumi.output_type
+class GetRollbackRangeTimeItemTimeResult(dict):
+    def __init__(__self__, *,
+                 begin: str,
+                 end: str):
+        """
+        :param str begin: Instance rollback start time, time format: 2016-10-29 01:06:04.
+        :param str end: End time of instance rollback, time format: 2016-11-02 11:44:47.
+        """
+        pulumi.set(__self__, "begin", begin)
+        pulumi.set(__self__, "end", end)
+
+    @property
+    @pulumi.getter
+    def begin(self) -> str:
+        """
+        Instance rollback start time, time format: 2016-10-29 01:06:04.
+        """
+        return pulumi.get(self, "begin")
+
+    @property
+    @pulumi.getter
+    def end(self) -> str:
+        """
+        End time of instance rollback, time format: 2016-11-02 11:44:47.
+        """
+        return pulumi.get(self, "end")
+
+
+@pulumi.output_type
+class GetSlowLogDataItemResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 lock_time: float,
+                 md5: str,
+                 query_time: float,
+                 rows_examined: int,
+                 rows_sent: int,
+                 sql_template: str,
+                 sql_text: str,
+                 timestamp: int,
+                 user_host: str,
+                 user_name: str):
+        """
+        :param str database: database name.
+        :param float lock_time: Lock duration (seconds).
+        :param str md5: The md5 of the Sql statement.
+        :param float query_time: Sql execution time (seconds).
+        :param int rows_examined: The number of rows to scan.
+        :param int rows_sent: The number of rows in the result set.
+        :param str sql_template: Sql template.
+        :param str sql_text: Sql statement.
+        :param int timestamp: Sql execution time.
+        :param str user_host: client address.
+        :param str user_name: user name.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "lock_time", lock_time)
+        pulumi.set(__self__, "md5", md5)
+        pulumi.set(__self__, "query_time", query_time)
+        pulumi.set(__self__, "rows_examined", rows_examined)
+        pulumi.set(__self__, "rows_sent", rows_sent)
+        pulumi.set(__self__, "sql_template", sql_template)
+        pulumi.set(__self__, "sql_text", sql_text)
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "user_host", user_host)
+        pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter(name="lockTime")
+    def lock_time(self) -> float:
+        """
+        Lock duration (seconds).
+        """
+        return pulumi.get(self, "lock_time")
+
+    @property
+    @pulumi.getter
+    def md5(self) -> str:
+        """
+        The md5 of the Sql statement.
+        """
+        return pulumi.get(self, "md5")
+
+    @property
+    @pulumi.getter(name="queryTime")
+    def query_time(self) -> float:
+        """
+        Sql execution time (seconds).
+        """
+        return pulumi.get(self, "query_time")
+
+    @property
+    @pulumi.getter(name="rowsExamined")
+    def rows_examined(self) -> int:
+        """
+        The number of rows to scan.
+        """
+        return pulumi.get(self, "rows_examined")
+
+    @property
+    @pulumi.getter(name="rowsSent")
+    def rows_sent(self) -> int:
+        """
+        The number of rows in the result set.
+        """
+        return pulumi.get(self, "rows_sent")
+
+    @property
+    @pulumi.getter(name="sqlTemplate")
+    def sql_template(self) -> str:
+        """
+        Sql template.
+        """
+        return pulumi.get(self, "sql_template")
+
+    @property
+    @pulumi.getter(name="sqlText")
+    def sql_text(self) -> str:
+        """
+        Sql statement.
+        """
+        return pulumi.get(self, "sql_text")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        """
+        Sql execution time.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter(name="userHost")
+    def user_host(self) -> str:
+        """
+        client address.
+        """
+        return pulumi.get(self, "user_host")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        user name.
+        """
+        return pulumi.get(self, "user_name")
+
+
+@pulumi.output_type
+class GetSlowLogItemResult(dict):
+    def __init__(__self__, *,
+                 date: str,
+                 internet_url: str,
+                 intranet_url: str,
+                 name: str,
+                 size: int,
+                 type: str):
+        """
+        :param str date: Backup snapshot time, time format: 2016-03-17 02:10:37.
+        :param str internet_url: External network download address.
+        :param str intranet_url: Intranet download address.
+        :param str name: backup file name.
+        :param int size: Backup file size, unit: Byte.
+        :param str type: Log specific type, possible values: slowlog - slow log.
+        """
+        pulumi.set(__self__, "date", date)
+        pulumi.set(__self__, "internet_url", internet_url)
+        pulumi.set(__self__, "intranet_url", intranet_url)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def date(self) -> str:
+        """
+        Backup snapshot time, time format: 2016-03-17 02:10:37.
+        """
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter(name="internetUrl")
+    def internet_url(self) -> str:
+        """
+        External network download address.
+        """
+        return pulumi.get(self, "internet_url")
+
+    @property
+    @pulumi.getter(name="intranetUrl")
+    def intranet_url(self) -> str:
+        """
+        Intranet download address.
+        """
+        return pulumi.get(self, "intranet_url")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        backup file name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        Backup file size, unit: Byte.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Log specific type, possible values: slowlog - slow log.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetSwitchRecordItemResult(dict):
+    def __init__(__self__, *,
+                 switch_time: str,
+                 switch_type: str):
+        """
+        :param str switch_time: Switching time, the format is: 2017-09-03 01:34:31.
+        :param str switch_type: Switch type, possible return values: TRANSFER - data migration; MASTER2SLAVE - master-standby switch; RECOVERY - master-slave recovery.
+        """
+        pulumi.set(__self__, "switch_time", switch_time)
+        pulumi.set(__self__, "switch_type", switch_type)
+
+    @property
+    @pulumi.getter(name="switchTime")
+    def switch_time(self) -> str:
+        """
+        Switching time, the format is: 2017-09-03 01:34:31.
+        """
+        return pulumi.get(self, "switch_time")
+
+    @property
+    @pulumi.getter(name="switchType")
+    def switch_type(self) -> str:
+        """
+        Switch type, possible return values: TRANSFER - data migration; MASTER2SLAVE - master-standby switch; RECOVERY - master-slave recovery.
+        """
+        return pulumi.get(self, "switch_type")
+
+
+@pulumi.output_type
+class GetUserTaskItemResult(dict):
+    def __init__(__self__, *,
+                 async_request_id: str,
+                 code: int,
+                 end_time: str,
+                 instance_ids: Sequence[str],
+                 job_id: int,
+                 message: str,
+                 progress: int,
+                 start_time: str,
+                 task_status: str,
+                 task_type: str):
+        """
+        :param str async_request_id: Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
+        :param int code: error code.
+        :param str end_time: Instance task end time.
+        :param Sequence[str] instance_ids: The instance ID associated with the task. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int job_id: Instance task ID.
+        :param str message: error message.
+        :param int progress: Instance task progress.
+        :param str start_time: Instance task start time.
+        :param str task_status: Task status. If no value is passed, all task statuses will be queried. Supported values include: `UNDEFINED` - undefined; `INITIAL` - initialization; `RUNNING` - running; `SUCCEED` - the execution was successful; `FAILED` - execution failed; `KILLED` - terminated; `REMOVED` - removed; `PAUSED` - Paused.
+        :param str task_type: Instance task type, possible values include:ROLLBACK - database rollback;SQL OPERATION - SQL operation;IMPORT DATA - data import;MODIFY PARAM - parameter setting;INITIAL - initialize the cloud database instance;REBOOT - restarts the cloud database instance;OPEN GTID - open the cloud database instance GTID;UPGRADE RO - read-only instance upgrade;BATCH ROLLBACK - database batch rollback;UPGRADE MASTER - master upgrade;DROP TABLES - delete cloud database tables;SWITCH DR TO MASTER - The disaster recovery instance.
+        """
+        pulumi.set(__self__, "async_request_id", async_request_id)
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "instance_ids", instance_ids)
+        pulumi.set(__self__, "job_id", job_id)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "task_status", task_status)
+        pulumi.set(__self__, "task_type", task_type)
+
+    @property
+    @pulumi.getter(name="asyncRequestId")
+    def async_request_id(self) -> str:
+        """
+        Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
+        """
+        return pulumi.get(self, "async_request_id")
+
+    @property
+    @pulumi.getter
+    def code(self) -> int:
+        """
+        error code.
+        """
+        return pulumi.get(self, "code")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Instance task end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="instanceIds")
+    def instance_ids(self) -> Sequence[str]:
+        """
+        The instance ID associated with the task. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "instance_ids")
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> int:
+        """
+        Instance task ID.
+        """
+        return pulumi.get(self, "job_id")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        error message.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> int:
+        """
+        Instance task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Instance task start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> str:
+        """
+        Task status. If no value is passed, all task statuses will be queried. Supported values include: `UNDEFINED` - undefined; `INITIAL` - initialization; `RUNNING` - running; `SUCCEED` - the execution was successful; `FAILED` - execution failed; `KILLED` - terminated; `REMOVED` - removed; `PAUSED` - Paused.
+        """
+        return pulumi.get(self, "task_status")
+
+    @property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> str:
+        """
+        Instance task type, possible values include:ROLLBACK - database rollback;SQL OPERATION - SQL operation;IMPORT DATA - data import;MODIFY PARAM - parameter setting;INITIAL - initialize the cloud database instance;REBOOT - restarts the cloud database instance;OPEN GTID - open the cloud database instance GTID;UPGRADE RO - read-only instance upgrade;BATCH ROLLBACK - database batch rollback;UPGRADE MASTER - master upgrade;DROP TABLES - delete cloud database tables;SWITCH DR TO MASTER - The disaster recovery instance.
+        """
+        return pulumi.get(self, "task_type")
 
 
 @pulumi.output_type

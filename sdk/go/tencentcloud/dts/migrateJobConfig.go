@@ -113,32 +113,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Continue the a migration job
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("continue"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
-// Complete a migration job when the status is readyComplete
+// ### Continue the a migration job
 //
 // ```go
 // package main
@@ -161,8 +136,30 @@ import (
 // 	})
 // }
 // ```
+// ### Complete a migration job when the status is readyComplete
 //
-// Stop a running migration job
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+// 			Action: pulumi.String("continue"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Stop a running migration job
 //
 // ```go
 // package main
@@ -185,8 +182,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Isolate a stopped/canceled migration job
+// ### Isolate a stopped/canceled migration job
 //
 // ```go
 // package main
@@ -209,8 +205,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Recover a isolated migration job
+// ### Recover a isolated migration job
 //
 // ```go
 // package main

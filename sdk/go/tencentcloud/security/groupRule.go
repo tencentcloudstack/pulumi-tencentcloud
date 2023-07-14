@@ -16,8 +16,7 @@ import (
 // > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
 //
 // ## Example Usage
-//
-// Source is CIDR ip
+// ### Source is CIDR ip
 //
 // ```go
 // package main
@@ -52,8 +51,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Source is a security group id
+// ### Source is a security group id
 //
 // ```go
 // package main

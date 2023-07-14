@@ -65,7 +65,17 @@ class SyncJobResumeOperation(pulumi.CustomResource):
                  job_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SyncJobResumeOperation resource with the given unique name, props, and options.
+        Provides a resource to create a dts sync_job_resume_operation
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        sync_job_resume_operation = tencentcloud.dts.SyncJobResumeOperation("syncJobResumeOperation", job_id="sync-werwfs23")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] job_id: Synchronization instance id (i.e. identifies a synchronization job).
@@ -77,7 +87,17 @@ class SyncJobResumeOperation(pulumi.CustomResource):
                  args: SyncJobResumeOperationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SyncJobResumeOperation resource with the given unique name, props, and options.
+        Provides a resource to create a dts sync_job_resume_operation
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        sync_job_resume_operation = tencentcloud.dts.SyncJobResumeOperation("syncJobResumeOperation", job_id="sync-werwfs23")
+        ```
+
         :param str resource_name: The name of the resource.
         :param SyncJobResumeOperationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

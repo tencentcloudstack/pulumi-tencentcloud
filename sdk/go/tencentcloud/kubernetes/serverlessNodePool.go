@@ -14,6 +14,92 @@ import (
 // Provide a resource to create serverless node pool of cluster.
 //
 // ## Example Usage
+// ### Add serverless node pool to a cluster
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		exampleClusterCidr := "10.31.0.0/16"
+// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
+// 			exampleClusterCidr = param
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpcId := vpc.InstanceLists[0].VpcId
+// 		subnetId := vpc.InstanceLists[0].SubnetId
+// 		sg, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
+// 			Name: pulumi.StringRef("default"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		sgId := sg.SecurityGroups[0].SecurityGroupId
+// 		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
+// 			VpcId:                pulumi.String(vpcId),
+// 			ClusterCidr:          pulumi.String(exampleClusterCidr),
+// 			ClusterMaxPodNum:     pulumi.Int(32),
+// 			ClusterName:          pulumi.String("tf_example_cluster"),
+// 			ClusterDesc:          pulumi.String("tf example cluster"),
+// 			ClusterMaxServiceNum: pulumi.Int(32),
+// 			ClusterVersion:       pulumi.String("1.18.4"),
+// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Kubernetes.NewServerlessNodePool(ctx, "exampleServerlessNodePool", &Kubernetes.ServerlessNodePoolArgs{
+// 			ClusterId: exampleCluster.ID(),
+// 			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
+// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+// 					DisplayName: pulumi.String("tf_example_serverless_node1"),
+// 					SubnetId:    pulumi.String(subnetId),
+// 				},
+// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+// 					DisplayName: pulumi.String("tf_example_serverless_node2"),
+// 					SubnetId:    pulumi.String(subnetId),
+// 				},
+// 			},
+// 			SecurityGroupIds: pulumi.StringArray{
+// 				pulumi.String(sgId),
+// 			},
+// 			Labels: pulumi.AnyMap{
+// 				"label1": pulumi.Any("value1"),
+// 				"label2": pulumi.Any("value2"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Adding taints to the virtual nodes under this node pool
+//
+// The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
 //
 // ```go
 // package main
@@ -26,24 +112,36 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.NewServerlessNodePool(ctx, "exampleServerlessNodePool", &Kubernetes.ServerlessNodePoolArgs{
+// 		_, err := Kubernetes.NewServerlessNodePool(ctx, "example", &Kubernetes.ServerlessNodePoolArgs{
 // 			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Example.Id),
 // 			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
 // 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("serverless_node1"),
-// 					SubnetId:    pulumi.String("subnet-xxx"),
+// 					DisplayName: pulumi.String("tf_example_serverless_node1"),
+// 					SubnetId:    pulumi.Any(local.Subnet_id),
 // 				},
 // 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("serverless_node2"),
-// 					SubnetId:    pulumi.String("subnet-xxx"),
+// 					DisplayName: pulumi.String("tf_example_serverless_node2"),
+// 					SubnetId:    pulumi.Any(local.Subnet_id),
 // 				},
 // 			},
 // 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-xxx"),
+// 				pulumi.Any(local.Sg_id),
 // 			},
 // 			Labels: pulumi.AnyMap{
-// 				"example1": pulumi.Any("test1"),
-// 				"example2": pulumi.Any("test2"),
+// 				"label1": pulumi.Any("value1"),
+// 				"label2": pulumi.Any("value2"),
+// 			},
+// 			Taints: kubernetes.ServerlessNodePoolTaintArray{
+// 				&kubernetes.ServerlessNodePoolTaintArgs{
+// 					Key:    pulumi.String("key1"),
+// 					Value:  pulumi.String("value1"),
+// 					Effect: pulumi.String("NoSchedule"),
+// 				},
+// 				&kubernetes.ServerlessNodePoolTaintArgs{
+// 					Key:    pulumi.String("key1"),
+// 					Value:  pulumi.String("value1"),
+// 					Effect: pulumi.String("NoExecute"),
+// 				},
 // 			},
 // 		})
 // 		if err != nil {

@@ -13,8 +13,16 @@ __all__ = [
     'FunctionTargetsAttachmentFunctionTargetsArgs',
     'FunctionTargetsAttachmentFunctionTargetsFunctionArgs',
     'InstanceSnatIpArgs',
+    'ReplaceCertForLbsCertificateArgs',
     'SnatIpIpArgs',
     'TargetGroupTargetGroupInstanceArgs',
+    'GetClusterResourcesFilterArgs',
+    'GetCrossTargetsFilterArgs',
+    'GetExclusiveClustersFilterArgs',
+    'GetInstanceDetailFilterArgs',
+    'GetListenersByTargetsBackendArgs',
+    'GetResourcesFilterArgs',
+    'GetTargetGroupListFilterArgs',
 ]
 
 @pulumi.input_type
@@ -232,6 +240,141 @@ class InstanceSnatIpArgs:
 
 
 @pulumi.input_type
+class ReplaceCertForLbsCertificateArgs:
+    def __init__(__self__, *,
+                 cert_ca_content: Optional[pulumi.Input[str]] = None,
+                 cert_ca_id: Optional[pulumi.Input[str]] = None,
+                 cert_ca_name: Optional[pulumi.Input[str]] = None,
+                 cert_content: Optional[pulumi.Input[str]] = None,
+                 cert_id: Optional[pulumi.Input[str]] = None,
+                 cert_key: Optional[pulumi.Input[str]] = None,
+                 cert_name: Optional[pulumi.Input[str]] = None,
+                 ssl_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cert_ca_content: Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        :param pulumi.Input[str] cert_ca_id: ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+        :param pulumi.Input[str] cert_ca_name: Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        :param pulumi.Input[str] cert_content: Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param pulumi.Input[str] cert_id: ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+        :param pulumi.Input[str] cert_key: Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param pulumi.Input[str] cert_name: Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param pulumi.Input[str] ssl_mode: Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+        """
+        if cert_ca_content is not None:
+            pulumi.set(__self__, "cert_ca_content", cert_ca_content)
+        if cert_ca_id is not None:
+            pulumi.set(__self__, "cert_ca_id", cert_ca_id)
+        if cert_ca_name is not None:
+            pulumi.set(__self__, "cert_ca_name", cert_ca_name)
+        if cert_content is not None:
+            pulumi.set(__self__, "cert_content", cert_content)
+        if cert_id is not None:
+            pulumi.set(__self__, "cert_id", cert_id)
+        if cert_key is not None:
+            pulumi.set(__self__, "cert_key", cert_key)
+        if cert_name is not None:
+            pulumi.set(__self__, "cert_name", cert_name)
+        if ssl_mode is not None:
+            pulumi.set(__self__, "ssl_mode", ssl_mode)
+
+    @property
+    @pulumi.getter(name="certCaContent")
+    def cert_ca_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_ca_content")
+
+    @cert_ca_content.setter
+    def cert_ca_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_ca_content", value)
+
+    @property
+    @pulumi.getter(name="certCaId")
+    def cert_ca_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+        """
+        return pulumi.get(self, "cert_ca_id")
+
+    @cert_ca_id.setter
+    def cert_ca_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_ca_id", value)
+
+    @property
+    @pulumi.getter(name="certCaName")
+    def cert_ca_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_ca_name")
+
+    @cert_ca_name.setter
+    def cert_ca_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_ca_name", value)
+
+    @property
+    @pulumi.getter(name="certContent")
+    def cert_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_content")
+
+    @cert_content.setter
+    def cert_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_content", value)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @cert_id.setter
+    def cert_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_id", value)
+
+    @property
+    @pulumi.getter(name="certKey")
+    def cert_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_key")
+
+    @cert_key.setter
+    def cert_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_key", value)
+
+    @property
+    @pulumi.getter(name="certName")
+    def cert_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_name")
+
+    @cert_name.setter
+    def cert_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_name", value)
+
+    @property
+    @pulumi.getter(name="sslMode")
+    def ssl_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+        """
+        return pulumi.get(self, "ssl_mode")
+
+    @ssl_mode.setter
+    def ssl_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ssl_mode", value)
+
+
+@pulumi.input_type
 class SnatIpIpArgs:
     def __init__(__self__, *,
                  ip: pulumi.Input[str],
@@ -335,5 +478,264 @@ class TargetGroupTargetGroupInstanceArgs:
     @weight.setter
     def weight(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class GetClusterResourcesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetCrossTargetsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetExclusiveClustersFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetInstanceDetailFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetListenersByTargetsBackendArgs:
+    def __init__(__self__, *,
+                 private_ip: str,
+                 vpc_id: str):
+        """
+        :param str private_ip: Private network IP to be queried, which can be of the CVM or ENI.
+        :param str vpc_id: VPC ID.
+        """
+        pulumi.set(__self__, "private_ip", private_ip)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="privateIp")
+    def private_ip(self) -> str:
+        """
+        Private network IP to be queried, which can be of the CVM or ENI.
+        """
+        return pulumi.get(self, "private_ip")
+
+    @private_ip.setter
+    def private_ip(self, value: str):
+        pulumi.set(self, "private_ip", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: str):
+        pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class GetResourcesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetTargetGroupListFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

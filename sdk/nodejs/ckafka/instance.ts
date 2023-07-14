@@ -11,42 +11,85 @@ import * as utilities from "../utilities";
  * > **NOTE:** It only support create prepaid ckafka instance.
  *
  * ## Example Usage
+ * ### Basic Instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Ckafka.Instance("foo", {
- *     bandWidth: 40,
+ * const config = new pulumi.Config();
+ * const vpcId = config.get("vpcId") || "vpc-68vi2d3h";
+ * const subnetId = config.get("subnetId") || "subnet-ob6clqwk";
+ * const gz = tencentcloud.Availability.getZonesByProduct({
+ *     name: "ap-guangzhou-3",
+ *     product: "ckafka",
+ * });
+ * const kafkaInstance = new tencentcloud.ckafka.Instance("kafkaInstance", {
+ *     instanceName: "ckafka-instance-type-tf-test",
+ *     zoneId: gz.then(gz => gz.zones?[0]?.id),
+ *     period: 1,
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     msgRetentionTime: 1300,
+ *     renewFlag: 0,
+ *     kafkaVersion: "2.4.1",
+ *     diskSize: 1000,
+ *     diskType: "CLOUD_BASIC",
+ *     specificationsType: "standard",
+ *     instanceType: 2,
  *     config: {
  *         autoCreateTopicEnable: true,
  *         defaultNumPartitions: 3,
  *         defaultReplicationFactor: 3,
  *     },
+ *     dynamicRetentionConfig: {
+ *         enable: 1,
+ *     },
+ * });
+ * ```
+ * ### Multi zone Instance
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const vpcId = config.get("vpcId") || "vpc-68vi2d3h";
+ * const subnetId = config.get("subnetId") || "subnet-ob6clqwk";
+ * const gz3 = tencentcloud.Availability.getZonesByProduct({
+ *     name: "ap-guangzhou-3",
+ *     product: "ckafka",
+ * });
+ * const gz6 = tencentcloud.Availability.getZonesByProduct({
+ *     name: "ap-guangzhou-6",
+ *     product: "ckafka",
+ * });
+ * const kafkaInstance = new tencentcloud.ckafka.Instance("kafkaInstance", {
+ *     instanceName: "ckafka-instance-maz-tf-test",
+ *     zoneId: gz3.then(gz3 => gz3.zones?[0]?.id),
+ *     multiZoneFlag: true,
+ *     zoneIds: [
+ *         gz3.then(gz3 => gz3.zones?[0]?.id),
+ *         gz6.then(gz6 => gz6.zones?[0]?.id),
+ *     ],
+ *     period: 1,
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     msgRetentionTime: 1300,
+ *     renewFlag: 0,
+ *     kafkaVersion: "1.1.1",
  *     diskSize: 500,
  *     diskType: "CLOUD_BASIC",
- *     dynamicRetentionConfig: {
- *         bottomRetention: 0,
- *         diskQuotaPercentage: 0,
- *         enable: 1,
- *         stepForwardPercentage: 0,
+ *     config: {
+ *         autoCreateTopicEnable: true,
+ *         defaultNumPartitions: 3,
+ *         defaultReplicationFactor: 3,
  *     },
- *     instanceName: "ckafka-instance-tf-test",
- *     kafkaVersion: "1.1.1",
- *     msgRetentionTime: 1300,
- *     multiZoneFlag: true,
- *     partition: 800,
- *     period: 1,
- *     publicNetwork: 3,
- *     renewFlag: 0,
- *     specificationsType: "profession",
- *     subnetId: "subnet-4vwihrzk",
- *     vpcId: "vpc-82p1t1nv",
- *     zoneId: 100006,
- *     zoneIds: [
- *         100006,
- *         100007,
- *     ],
+ *     dynamicRetentionConfig: {
+ *         enable: 1,
+ *     },
  * });
  * ```
  *
@@ -119,6 +162,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly kafkaVersion!: pulumi.Output<string>;
     /**
+     * The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+     */
+    public readonly maxMessageByte!: pulumi.Output<number>;
+    /**
      * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     public readonly msgRetentionTime!: pulumi.Output<number>;
@@ -135,7 +182,9 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
-     * Bandwidth of the public network.
+     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+     *
+     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
      */
     public readonly publicNetwork!: pulumi.Output<number>;
     /**
@@ -206,6 +255,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["instanceType"] = state ? state.instanceType : undefined;
             resourceInputs["kafkaVersion"] = state ? state.kafkaVersion : undefined;
+            resourceInputs["maxMessageByte"] = state ? state.maxMessageByte : undefined;
             resourceInputs["msgRetentionTime"] = state ? state.msgRetentionTime : undefined;
             resourceInputs["multiZoneFlag"] = state ? state.multiZoneFlag : undefined;
             resourceInputs["partition"] = state ? state.partition : undefined;
@@ -238,6 +288,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["instanceType"] = args ? args.instanceType : undefined;
             resourceInputs["kafkaVersion"] = args ? args.kafkaVersion : undefined;
+            resourceInputs["maxMessageByte"] = args ? args.maxMessageByte : undefined;
             resourceInputs["msgRetentionTime"] = args ? args.msgRetentionTime : undefined;
             resourceInputs["multiZoneFlag"] = args ? args.multiZoneFlag : undefined;
             resourceInputs["partition"] = args ? args.partition : undefined;
@@ -297,6 +348,10 @@ export interface InstanceState {
      */
     kafkaVersion?: pulumi.Input<string>;
     /**
+     * The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+     */
+    maxMessageByte?: pulumi.Input<number>;
+    /**
      * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     msgRetentionTime?: pulumi.Input<number>;
@@ -313,7 +368,9 @@ export interface InstanceState {
      */
     period?: pulumi.Input<number>;
     /**
-     * Bandwidth of the public network.
+     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+     *
+     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
      */
     publicNetwork?: pulumi.Input<number>;
     /**
@@ -401,6 +458,10 @@ export interface InstanceArgs {
      */
     kafkaVersion?: pulumi.Input<string>;
     /**
+     * The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+     */
+    maxMessageByte?: pulumi.Input<number>;
+    /**
      * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
     msgRetentionTime?: pulumi.Input<number>;
@@ -417,7 +478,9 @@ export interface InstanceArgs {
      */
     period?: pulumi.Input<number>;
     /**
-     * Bandwidth of the public network.
+     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+     *
+     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
      */
     publicNetwork?: pulumi.Input<number>;
     /**

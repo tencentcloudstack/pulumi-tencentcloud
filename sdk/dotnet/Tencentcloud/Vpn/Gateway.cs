@@ -12,8 +12,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
 {
     /// <summary>
     /// ## Example Usage
+    /// ### VPC SSL VPN gateway
     /// 
-    /// POSTPAID_BY_HOUR VPN gateway
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         {
+    ///             Bandwidth = 5,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             Type = "SSL",
+    ///             VpcId = "vpc-86v957zb",
+    ///             Zone = "ap-guangzhou-3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### CCN IPEC VPN gateway
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         {
+    ///             Bandwidth = 5,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             Type = "CCN",
+    ///             Zone = "ap-guangzhou-3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### CCN SSL VPN gateway
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         {
+    ///             Bandwidth = 5,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             Type = "SSL_CCN",
+    ///             Zone = "ap-guangzhou-3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### POSTPAID_BY_HOUR VPN gateway
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -37,8 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// }
     /// ```
-    /// 
-    /// PREPAID VPN gateway
+    /// ### PREPAID VPN gateway
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -167,13 +238,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        /// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        /// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         /// </summary>
         [Output("vpcId")]
         public Output<string?> VpcId { get; private set; } = null!;
@@ -286,13 +357,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
 
         /// <summary>
-        /// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        /// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        /// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
@@ -407,13 +478,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
 
         /// <summary>
-        /// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        /// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        /// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

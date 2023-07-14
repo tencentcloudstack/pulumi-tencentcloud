@@ -17,6 +17,7 @@ __all__ = [
     'ManageReplicationOperationRule',
     'ManageReplicationOperationRuleFilter',
     'NamespaceCveWhitelistItem',
+    'ServiceAccountPermission',
     'TagRetentionRuleRetentionRule',
     'WebhookTriggerTrigger',
     'WebhookTriggerTriggerTarget',
@@ -24,7 +25,11 @@ __all__ = [
     'GetImagesImageInfoListResult',
     'GetInstancesInstanceListResult',
     'GetNamespacesNamespaceListResult',
+    'GetReplicationInstanceCreateTasksTaskDetailResult',
+    'GetReplicationInstanceSyncStatusReplicationLogResult',
     'GetRepositoriesRepositoryListResult',
+    'GetTagRetentionExecutionTasksRetentionTaskListResult',
+    'GetTagRetentionExecutionsRetentionExecutionListResult',
     'GetTokensTokenListResult',
     'GetVpcAttachmentsVpcAttachmentListResult',
     'GetWebhookTriggerLogsLogResult',
@@ -460,6 +465,35 @@ class NamespaceCveWhitelistItem(dict):
 
 
 @pulumi.output_type
+class ServiceAccountPermission(dict):
+    def __init__(__self__, *,
+                 actions: Sequence[str],
+                 resource: str):
+        """
+        :param Sequence[str] actions: Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str resource: resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "actions", actions)
+        pulumi.set(__self__, "resource", resource)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Sequence[str]:
+        """
+        Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "actions")
+
+    @property
+    @pulumi.getter
+    def resource(self) -> str:
+        """
+        resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource")
+
+
+@pulumi.output_type
 class TagRetentionRuleRetentionRule(dict):
     def __init__(__self__, *,
                  key: str,
@@ -862,6 +896,152 @@ class GetNamespacesNamespaceListResult(dict):
 
 
 @pulumi.output_type
+class GetReplicationInstanceCreateTasksTaskDetailResult(dict):
+    def __init__(__self__, *,
+                 created_time: str,
+                 finished_time: str,
+                 task_message: str,
+                 task_name: str,
+                 task_status: str,
+                 task_uuid: str):
+        """
+        :param str created_time: task start name.
+        :param str finished_time: task end time. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str task_message: Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str task_name: task name.
+        :param str task_status: task status.
+        :param str task_uuid: task UUID.
+        """
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "finished_time", finished_time)
+        pulumi.set(__self__, "task_message", task_message)
+        pulumi.set(__self__, "task_name", task_name)
+        pulumi.set(__self__, "task_status", task_status)
+        pulumi.set(__self__, "task_uuid", task_uuid)
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        task start name.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="finishedTime")
+    def finished_time(self) -> str:
+        """
+        task end time. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "finished_time")
+
+    @property
+    @pulumi.getter(name="taskMessage")
+    def task_message(self) -> str:
+        """
+        Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "task_message")
+
+    @property
+    @pulumi.getter(name="taskName")
+    def task_name(self) -> str:
+        """
+        task name.
+        """
+        return pulumi.get(self, "task_name")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> str:
+        """
+        task status.
+        """
+        return pulumi.get(self, "task_status")
+
+    @property
+    @pulumi.getter(name="taskUuid")
+    def task_uuid(self) -> str:
+        """
+        task UUID.
+        """
+        return pulumi.get(self, "task_uuid")
+
+
+@pulumi.output_type
+class GetReplicationInstanceSyncStatusReplicationLogResult(dict):
+    def __init__(__self__, *,
+                 destination: str,
+                 end_time: str,
+                 resource_type: str,
+                 source: str,
+                 start_time: str,
+                 status: str):
+        """
+        :param str destination: destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str end_time: end time. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str resource_type: resource type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str source: Source image. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str start_time: start time. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str status: sync status. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> str:
+        """
+        destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        end time. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        resource type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter
+    def source(self) -> str:
+        """
+        Source image. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        start time. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        sync status. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
 class GetRepositoriesRepositoryListResult(dict):
     def __init__(__self__, *,
                  brief_desc: str,
@@ -954,6 +1134,163 @@ class GetRepositoriesRepositoryListResult(dict):
         URL of the repository.
         """
         return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetTagRetentionExecutionTasksRetentionTaskListResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 execution_id: int,
+                 repository: str,
+                 retained: int,
+                 start_time: str,
+                 status: str,
+                 task_id: int,
+                 total: int):
+        """
+        :param str end_time: task end time.
+        :param int execution_id: execution id.
+        :param str repository: repository name.
+        :param int retained: Total number of retained tags.
+        :param str start_time: task start time.
+        :param str status: the execution status of the task: Failed, Succeed, Stopped, InProgress.
+        :param int task_id: task id.
+        :param int total: Total number of tags.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "execution_id", execution_id)
+        pulumi.set(__self__, "repository", repository)
+        pulumi.set(__self__, "retained", retained)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        task end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="executionId")
+    def execution_id(self) -> int:
+        """
+        execution id.
+        """
+        return pulumi.get(self, "execution_id")
+
+    @property
+    @pulumi.getter
+    def repository(self) -> str:
+        """
+        repository name.
+        """
+        return pulumi.get(self, "repository")
+
+    @property
+    @pulumi.getter
+    def retained(self) -> int:
+        """
+        Total number of retained tags.
+        """
+        return pulumi.get(self, "retained")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        task start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        the execution status of the task: Failed, Succeed, Stopped, InProgress.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> int:
+        """
+        task id.
+        """
+        return pulumi.get(self, "task_id")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total number of tags.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetTagRetentionExecutionsRetentionExecutionListResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 execution_id: int,
+                 retention_id: int,
+                 start_time: str,
+                 status: str):
+        """
+        :param str end_time: execution end time.
+        :param int execution_id: execution id.
+        :param int retention_id: retention id.
+        :param str start_time: execution start time.
+        :param str status: execution status: Failed, Succeed, Stopped, InProgress.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "execution_id", execution_id)
+        pulumi.set(__self__, "retention_id", retention_id)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        execution end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="executionId")
+    def execution_id(self) -> int:
+        """
+        execution id.
+        """
+        return pulumi.get(self, "execution_id")
+
+    @property
+    @pulumi.getter(name="retentionId")
+    def retention_id(self) -> int:
+        """
+        retention id.
+        """
+        return pulumi.get(self, "retention_id")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        execution start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        execution status: Failed, Succeed, Stopped, InProgress.
+        """
+        return pulumi.get(self, "status")
 
 
 @pulumi.output_type

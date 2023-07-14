@@ -244,8 +244,7 @@ class Role(pulumi.CustomResource):
         Provides a resource to create a CAM role.
 
         ## Example Usage
-
-        Create normally
+        ### Create normally
 
         ```python
         import pulumi
@@ -272,8 +271,7 @@ class Role(pulumi.CustomResource):
                 "test": "tf-cam-role",
             })
         ```
-
-        Create with SAML provider
+        ### Create with SAML provider
 
         ```python
         import pulumi
@@ -327,8 +325,7 @@ class Role(pulumi.CustomResource):
         Provides a resource to create a CAM role.
 
         ## Example Usage
-
-        Create normally
+        ### Create normally
 
         ```python
         import pulumi
@@ -355,8 +352,7 @@ class Role(pulumi.CustomResource):
                 "test": "tf-cam-role",
             })
         ```
-
-        Create with SAML provider
+        ### Create with SAML provider
 
         ```python
         import pulumi

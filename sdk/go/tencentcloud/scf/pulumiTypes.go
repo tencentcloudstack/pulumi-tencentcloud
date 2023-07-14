@@ -560,6 +560,261 @@ func (o FunctionCfsConfigArrayOutput) Index(i pulumi.IntInput) FunctionCfsConfig
 	}).(FunctionCfsConfigOutput)
 }
 
+type FunctionEventInvokeConfigAsyncTriggerConfig struct {
+	// Message retention period.
+	MsgTtl int `pulumi:"msgTtl"`
+	// Async retry configuration of function upon user error.
+	RetryConfigs []FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig `pulumi:"retryConfigs"`
+}
+
+// FunctionEventInvokeConfigAsyncTriggerConfigInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigArgs and FunctionEventInvokeConfigAsyncTriggerConfigOutput values.
+// You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigInput` via:
+//
+//          FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
+type FunctionEventInvokeConfigAsyncTriggerConfigInput interface {
+	pulumi.Input
+
+	ToFunctionEventInvokeConfigAsyncTriggerConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigOutput
+	ToFunctionEventInvokeConfigAsyncTriggerConfigOutputWithContext(context.Context) FunctionEventInvokeConfigAsyncTriggerConfigOutput
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigArgs struct {
+	// Message retention period.
+	MsgTtl pulumi.IntInput `pulumi:"msgTtl"`
+	// Async retry configuration of function upon user error.
+	RetryConfigs FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput `pulumi:"retryConfigs"`
+}
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfig)(nil)).Elem()
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigOutput {
+	return i.ToFunctionEventInvokeConfigAsyncTriggerConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionEventInvokeConfigAsyncTriggerConfigOutput)
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutput() FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return i.ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionEventInvokeConfigAsyncTriggerConfigOutput).ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(ctx)
+}
+
+// FunctionEventInvokeConfigAsyncTriggerConfigPtrInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigArgs, FunctionEventInvokeConfigAsyncTriggerConfigPtr and FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput values.
+// You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigPtrInput` via:
+//
+//          FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type FunctionEventInvokeConfigAsyncTriggerConfigPtrInput interface {
+	pulumi.Input
+
+	ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutput() FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput
+	ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(context.Context) FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput
+}
+
+type functionEventInvokeConfigAsyncTriggerConfigPtrType FunctionEventInvokeConfigAsyncTriggerConfigArgs
+
+func FunctionEventInvokeConfigAsyncTriggerConfigPtr(v *FunctionEventInvokeConfigAsyncTriggerConfigArgs) FunctionEventInvokeConfigAsyncTriggerConfigPtrInput {
+	return (*functionEventInvokeConfigAsyncTriggerConfigPtrType)(v)
+}
+
+func (*functionEventInvokeConfigAsyncTriggerConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionEventInvokeConfigAsyncTriggerConfig)(nil)).Elem()
+}
+
+func (i *functionEventInvokeConfigAsyncTriggerConfigPtrType) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutput() FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return i.ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *functionEventInvokeConfigAsyncTriggerConfigPtrType) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput)
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfig)(nil)).Elem()
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutput() FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return o.ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionEventInvokeConfigAsyncTriggerConfig) *FunctionEventInvokeConfigAsyncTriggerConfig {
+		return &v
+	}).(FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput)
+}
+
+// Message retention period.
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) MsgTtl() pulumi.IntOutput {
+	return o.ApplyT(func(v FunctionEventInvokeConfigAsyncTriggerConfig) int { return v.MsgTtl }).(pulumi.IntOutput)
+}
+
+// Async retry configuration of function upon user error.
+func (o FunctionEventInvokeConfigAsyncTriggerConfigOutput) RetryConfigs() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return o.ApplyT(func(v FunctionEventInvokeConfigAsyncTriggerConfig) []FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig {
+		return v.RetryConfigs
+	}).(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput)
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionEventInvokeConfigAsyncTriggerConfig)(nil)).Elem()
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutput() FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigPtrOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) Elem() FunctionEventInvokeConfigAsyncTriggerConfigOutput {
+	return o.ApplyT(func(v *FunctionEventInvokeConfigAsyncTriggerConfig) FunctionEventInvokeConfigAsyncTriggerConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionEventInvokeConfigAsyncTriggerConfig
+		return ret
+	}).(FunctionEventInvokeConfigAsyncTriggerConfigOutput)
+}
+
+// Message retention period.
+func (o FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) MsgTtl() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionEventInvokeConfigAsyncTriggerConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MsgTtl
+	}).(pulumi.IntPtrOutput)
+}
+
+// Async retry configuration of function upon user error.
+func (o FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput) RetryConfigs() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return o.ApplyT(func(v *FunctionEventInvokeConfigAsyncTriggerConfig) []FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig {
+		if v == nil {
+			return nil
+		}
+		return v.RetryConfigs
+	}).(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput)
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig struct {
+	// Number of retry attempts.
+	RetryNum int `pulumi:"retryNum"`
+}
+
+// FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs and FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput values.
+// You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput` via:
+//
+//          FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...}
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput interface {
+	pulumi.Input
+
+	ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput
+	ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutputWithContext(context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs struct {
+	// Number of retry attempts.
+	RetryNum pulumi.IntInput `pulumi:"retryNum"`
+}
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig)(nil)).Elem()
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput {
+	return i.ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput)
+}
+
+// FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray and FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput values.
+// You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput` via:
+//
+//          FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{ FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...} }
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput interface {
+	pulumi.Input
+
+	ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput
+	ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutputWithContext(context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray []FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig)(nil)).Elem()
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return i.ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput)
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig)(nil)).Elem()
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput {
+	return o
+}
+
+// Number of retry attempts.
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput) RetryNum() pulumi.IntOutput {
+	return o.ApplyT(func(v FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig) int { return v.RetryNum }).(pulumi.IntOutput)
+}
+
+type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig)(nil)).Elem()
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput() FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput) ToFunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutputWithContext(ctx context.Context) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput {
+	return o
+}
+
+func (o FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput) Index(i pulumi.IntInput) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig {
+		return vs[0].([]FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig)[vs[1].(int)]
+	}).(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput)
+}
+
 type FunctionImageConfig struct {
 	// the parameters of command.
 	Args *string `pulumi:"args"`
@@ -1277,6 +1532,1759 @@ func (o LayerContentPtrOutput) ZipFile() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProvisionedConcurrencyConfigTriggerAction struct {
+	// The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+	ProvisionedType *string `pulumi:"provisionedType"`
+	// Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerCronConfig string `pulumi:"triggerCronConfig"`
+	// Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerName string `pulumi:"triggerName"`
+	// Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerProvisionedConcurrencyNum int `pulumi:"triggerProvisionedConcurrencyNum"`
+}
+
+// ProvisionedConcurrencyConfigTriggerActionInput is an input type that accepts ProvisionedConcurrencyConfigTriggerActionArgs and ProvisionedConcurrencyConfigTriggerActionOutput values.
+// You can construct a concrete instance of `ProvisionedConcurrencyConfigTriggerActionInput` via:
+//
+//          ProvisionedConcurrencyConfigTriggerActionArgs{...}
+type ProvisionedConcurrencyConfigTriggerActionInput interface {
+	pulumi.Input
+
+	ToProvisionedConcurrencyConfigTriggerActionOutput() ProvisionedConcurrencyConfigTriggerActionOutput
+	ToProvisionedConcurrencyConfigTriggerActionOutputWithContext(context.Context) ProvisionedConcurrencyConfigTriggerActionOutput
+}
+
+type ProvisionedConcurrencyConfigTriggerActionArgs struct {
+	// The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+	ProvisionedType pulumi.StringPtrInput `pulumi:"provisionedType"`
+	// Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerCronConfig pulumi.StringInput `pulumi:"triggerCronConfig"`
+	// Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerName pulumi.StringInput `pulumi:"triggerName"`
+	// Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerProvisionedConcurrencyNum pulumi.IntInput `pulumi:"triggerProvisionedConcurrencyNum"`
+}
+
+func (ProvisionedConcurrencyConfigTriggerActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProvisionedConcurrencyConfigTriggerAction)(nil)).Elem()
+}
+
+func (i ProvisionedConcurrencyConfigTriggerActionArgs) ToProvisionedConcurrencyConfigTriggerActionOutput() ProvisionedConcurrencyConfigTriggerActionOutput {
+	return i.ToProvisionedConcurrencyConfigTriggerActionOutputWithContext(context.Background())
+}
+
+func (i ProvisionedConcurrencyConfigTriggerActionArgs) ToProvisionedConcurrencyConfigTriggerActionOutputWithContext(ctx context.Context) ProvisionedConcurrencyConfigTriggerActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProvisionedConcurrencyConfigTriggerActionOutput)
+}
+
+// ProvisionedConcurrencyConfigTriggerActionArrayInput is an input type that accepts ProvisionedConcurrencyConfigTriggerActionArray and ProvisionedConcurrencyConfigTriggerActionArrayOutput values.
+// You can construct a concrete instance of `ProvisionedConcurrencyConfigTriggerActionArrayInput` via:
+//
+//          ProvisionedConcurrencyConfigTriggerActionArray{ ProvisionedConcurrencyConfigTriggerActionArgs{...} }
+type ProvisionedConcurrencyConfigTriggerActionArrayInput interface {
+	pulumi.Input
+
+	ToProvisionedConcurrencyConfigTriggerActionArrayOutput() ProvisionedConcurrencyConfigTriggerActionArrayOutput
+	ToProvisionedConcurrencyConfigTriggerActionArrayOutputWithContext(context.Context) ProvisionedConcurrencyConfigTriggerActionArrayOutput
+}
+
+type ProvisionedConcurrencyConfigTriggerActionArray []ProvisionedConcurrencyConfigTriggerActionInput
+
+func (ProvisionedConcurrencyConfigTriggerActionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProvisionedConcurrencyConfigTriggerAction)(nil)).Elem()
+}
+
+func (i ProvisionedConcurrencyConfigTriggerActionArray) ToProvisionedConcurrencyConfigTriggerActionArrayOutput() ProvisionedConcurrencyConfigTriggerActionArrayOutput {
+	return i.ToProvisionedConcurrencyConfigTriggerActionArrayOutputWithContext(context.Background())
+}
+
+func (i ProvisionedConcurrencyConfigTriggerActionArray) ToProvisionedConcurrencyConfigTriggerActionArrayOutputWithContext(ctx context.Context) ProvisionedConcurrencyConfigTriggerActionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProvisionedConcurrencyConfigTriggerActionArrayOutput)
+}
+
+type ProvisionedConcurrencyConfigTriggerActionOutput struct{ *pulumi.OutputState }
+
+func (ProvisionedConcurrencyConfigTriggerActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProvisionedConcurrencyConfigTriggerAction)(nil)).Elem()
+}
+
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) ToProvisionedConcurrencyConfigTriggerActionOutput() ProvisionedConcurrencyConfigTriggerActionOutput {
+	return o
+}
+
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) ToProvisionedConcurrencyConfigTriggerActionOutputWithContext(ctx context.Context) ProvisionedConcurrencyConfigTriggerActionOutput {
+	return o
+}
+
+// The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) ProvisionedType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProvisionedConcurrencyConfigTriggerAction) *string { return v.ProvisionedType }).(pulumi.StringPtrOutput)
+}
+
+// Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) TriggerCronConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v ProvisionedConcurrencyConfigTriggerAction) string { return v.TriggerCronConfig }).(pulumi.StringOutput)
+}
+
+// Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) TriggerName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProvisionedConcurrencyConfigTriggerAction) string { return v.TriggerName }).(pulumi.StringOutput)
+}
+
+// Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+func (o ProvisionedConcurrencyConfigTriggerActionOutput) TriggerProvisionedConcurrencyNum() pulumi.IntOutput {
+	return o.ApplyT(func(v ProvisionedConcurrencyConfigTriggerAction) int { return v.TriggerProvisionedConcurrencyNum }).(pulumi.IntOutput)
+}
+
+type ProvisionedConcurrencyConfigTriggerActionArrayOutput struct{ *pulumi.OutputState }
+
+func (ProvisionedConcurrencyConfigTriggerActionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProvisionedConcurrencyConfigTriggerAction)(nil)).Elem()
+}
+
+func (o ProvisionedConcurrencyConfigTriggerActionArrayOutput) ToProvisionedConcurrencyConfigTriggerActionArrayOutput() ProvisionedConcurrencyConfigTriggerActionArrayOutput {
+	return o
+}
+
+func (o ProvisionedConcurrencyConfigTriggerActionArrayOutput) ToProvisionedConcurrencyConfigTriggerActionArrayOutputWithContext(ctx context.Context) ProvisionedConcurrencyConfigTriggerActionArrayOutput {
+	return o
+}
+
+func (o ProvisionedConcurrencyConfigTriggerActionArrayOutput) Index(i pulumi.IntInput) ProvisionedConcurrencyConfigTriggerActionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProvisionedConcurrencyConfigTriggerAction {
+		return vs[0].([]ProvisionedConcurrencyConfigTriggerAction)[vs[1].(int)]
+	}).(ProvisionedConcurrencyConfigTriggerActionOutput)
+}
+
+type GetAccountInfoAccountLimit struct {
+	// Namespace name.
+	Namespaces []GetAccountInfoAccountLimitNamespace `pulumi:"namespaces"`
+	// Number of namespaces.
+	NamespacesCount int `pulumi:"namespacesCount"`
+}
+
+// GetAccountInfoAccountLimitInput is an input type that accepts GetAccountInfoAccountLimitArgs and GetAccountInfoAccountLimitOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitInput` via:
+//
+//          GetAccountInfoAccountLimitArgs{...}
+type GetAccountInfoAccountLimitInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitOutput() GetAccountInfoAccountLimitOutput
+	ToGetAccountInfoAccountLimitOutputWithContext(context.Context) GetAccountInfoAccountLimitOutput
+}
+
+type GetAccountInfoAccountLimitArgs struct {
+	// Namespace name.
+	Namespaces GetAccountInfoAccountLimitNamespaceArrayInput `pulumi:"namespaces"`
+	// Number of namespaces.
+	NamespacesCount pulumi.IntInput `pulumi:"namespacesCount"`
+}
+
+func (GetAccountInfoAccountLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimit)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitArgs) ToGetAccountInfoAccountLimitOutput() GetAccountInfoAccountLimitOutput {
+	return i.ToGetAccountInfoAccountLimitOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitArgs) ToGetAccountInfoAccountLimitOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitOutput)
+}
+
+// GetAccountInfoAccountLimitArrayInput is an input type that accepts GetAccountInfoAccountLimitArray and GetAccountInfoAccountLimitArrayOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitArrayInput` via:
+//
+//          GetAccountInfoAccountLimitArray{ GetAccountInfoAccountLimitArgs{...} }
+type GetAccountInfoAccountLimitArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitArrayOutput() GetAccountInfoAccountLimitArrayOutput
+	ToGetAccountInfoAccountLimitArrayOutputWithContext(context.Context) GetAccountInfoAccountLimitArrayOutput
+}
+
+type GetAccountInfoAccountLimitArray []GetAccountInfoAccountLimitInput
+
+func (GetAccountInfoAccountLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimit)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitArray) ToGetAccountInfoAccountLimitArrayOutput() GetAccountInfoAccountLimitArrayOutput {
+	return i.ToGetAccountInfoAccountLimitArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitArray) ToGetAccountInfoAccountLimitArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitArrayOutput)
+}
+
+type GetAccountInfoAccountLimitOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimit)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitOutput) ToGetAccountInfoAccountLimitOutput() GetAccountInfoAccountLimitOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitOutput) ToGetAccountInfoAccountLimitOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitOutput {
+	return o
+}
+
+// Namespace name.
+func (o GetAccountInfoAccountLimitOutput) Namespaces() GetAccountInfoAccountLimitNamespaceArrayOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimit) []GetAccountInfoAccountLimitNamespace { return v.Namespaces }).(GetAccountInfoAccountLimitNamespaceArrayOutput)
+}
+
+// Number of namespaces.
+func (o GetAccountInfoAccountLimitOutput) NamespacesCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimit) int { return v.NamespacesCount }).(pulumi.IntOutput)
+}
+
+type GetAccountInfoAccountLimitArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimit)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitArrayOutput) ToGetAccountInfoAccountLimitArrayOutput() GetAccountInfoAccountLimitArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitArrayOutput) ToGetAccountInfoAccountLimitArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitArrayOutput) Index(i pulumi.IntInput) GetAccountInfoAccountLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountInfoAccountLimit {
+		return vs[0].([]GetAccountInfoAccountLimit)[vs[1].(int)]
+	}).(GetAccountInfoAccountLimitOutput)
+}
+
+type GetAccountInfoAccountLimitNamespace struct {
+	// Concurrency.
+	ConcurrentExecutions int `pulumi:"concurrentExecutions"`
+	// Number of functions in namespace.
+	FunctionsCount int `pulumi:"functionsCount"`
+	// Initialization timeout limit.
+	InitTimeoutLimit int `pulumi:"initTimeoutLimit"`
+	// Upper limit of message retention time for async retry.
+	MaxMsgTtl int `pulumi:"maxMsgTtl"`
+	// Lower limit of message retention time for async retry.
+	MinMsgTtl int `pulumi:"minMsgTtl"`
+	// Namespace name.
+	Namespace string `pulumi:"namespace"`
+	// Limit of async retry attempt quantity.
+	RetryNumLimit int `pulumi:"retryNumLimit"`
+	// Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+	TestModelLimit int `pulumi:"testModelLimit"`
+	// Timeout limit.
+	TimeoutLimit int `pulumi:"timeoutLimit"`
+	// Trigger information.
+	Triggers []GetAccountInfoAccountLimitNamespaceTrigger `pulumi:"triggers"`
+}
+
+// GetAccountInfoAccountLimitNamespaceInput is an input type that accepts GetAccountInfoAccountLimitNamespaceArgs and GetAccountInfoAccountLimitNamespaceOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceInput` via:
+//
+//          GetAccountInfoAccountLimitNamespaceArgs{...}
+type GetAccountInfoAccountLimitNamespaceInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitNamespaceOutput() GetAccountInfoAccountLimitNamespaceOutput
+	ToGetAccountInfoAccountLimitNamespaceOutputWithContext(context.Context) GetAccountInfoAccountLimitNamespaceOutput
+}
+
+type GetAccountInfoAccountLimitNamespaceArgs struct {
+	// Concurrency.
+	ConcurrentExecutions pulumi.IntInput `pulumi:"concurrentExecutions"`
+	// Number of functions in namespace.
+	FunctionsCount pulumi.IntInput `pulumi:"functionsCount"`
+	// Initialization timeout limit.
+	InitTimeoutLimit pulumi.IntInput `pulumi:"initTimeoutLimit"`
+	// Upper limit of message retention time for async retry.
+	MaxMsgTtl pulumi.IntInput `pulumi:"maxMsgTtl"`
+	// Lower limit of message retention time for async retry.
+	MinMsgTtl pulumi.IntInput `pulumi:"minMsgTtl"`
+	// Namespace name.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Limit of async retry attempt quantity.
+	RetryNumLimit pulumi.IntInput `pulumi:"retryNumLimit"`
+	// Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+	TestModelLimit pulumi.IntInput `pulumi:"testModelLimit"`
+	// Timeout limit.
+	TimeoutLimit pulumi.IntInput `pulumi:"timeoutLimit"`
+	// Trigger information.
+	Triggers GetAccountInfoAccountLimitNamespaceTriggerArrayInput `pulumi:"triggers"`
+}
+
+func (GetAccountInfoAccountLimitNamespaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimitNamespace)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitNamespaceArgs) ToGetAccountInfoAccountLimitNamespaceOutput() GetAccountInfoAccountLimitNamespaceOutput {
+	return i.ToGetAccountInfoAccountLimitNamespaceOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitNamespaceArgs) ToGetAccountInfoAccountLimitNamespaceOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitNamespaceOutput)
+}
+
+// GetAccountInfoAccountLimitNamespaceArrayInput is an input type that accepts GetAccountInfoAccountLimitNamespaceArray and GetAccountInfoAccountLimitNamespaceArrayOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceArrayInput` via:
+//
+//          GetAccountInfoAccountLimitNamespaceArray{ GetAccountInfoAccountLimitNamespaceArgs{...} }
+type GetAccountInfoAccountLimitNamespaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitNamespaceArrayOutput() GetAccountInfoAccountLimitNamespaceArrayOutput
+	ToGetAccountInfoAccountLimitNamespaceArrayOutputWithContext(context.Context) GetAccountInfoAccountLimitNamespaceArrayOutput
+}
+
+type GetAccountInfoAccountLimitNamespaceArray []GetAccountInfoAccountLimitNamespaceInput
+
+func (GetAccountInfoAccountLimitNamespaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimitNamespace)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitNamespaceArray) ToGetAccountInfoAccountLimitNamespaceArrayOutput() GetAccountInfoAccountLimitNamespaceArrayOutput {
+	return i.ToGetAccountInfoAccountLimitNamespaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitNamespaceArray) ToGetAccountInfoAccountLimitNamespaceArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitNamespaceArrayOutput)
+}
+
+type GetAccountInfoAccountLimitNamespaceOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitNamespaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimitNamespace)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitNamespaceOutput) ToGetAccountInfoAccountLimitNamespaceOutput() GetAccountInfoAccountLimitNamespaceOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceOutput) ToGetAccountInfoAccountLimitNamespaceOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceOutput {
+	return o
+}
+
+// Concurrency.
+func (o GetAccountInfoAccountLimitNamespaceOutput) ConcurrentExecutions() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.ConcurrentExecutions }).(pulumi.IntOutput)
+}
+
+// Number of functions in namespace.
+func (o GetAccountInfoAccountLimitNamespaceOutput) FunctionsCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.FunctionsCount }).(pulumi.IntOutput)
+}
+
+// Initialization timeout limit.
+func (o GetAccountInfoAccountLimitNamespaceOutput) InitTimeoutLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.InitTimeoutLimit }).(pulumi.IntOutput)
+}
+
+// Upper limit of message retention time for async retry.
+func (o GetAccountInfoAccountLimitNamespaceOutput) MaxMsgTtl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.MaxMsgTtl }).(pulumi.IntOutput)
+}
+
+// Lower limit of message retention time for async retry.
+func (o GetAccountInfoAccountLimitNamespaceOutput) MinMsgTtl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.MinMsgTtl }).(pulumi.IntOutput)
+}
+
+// Namespace name.
+func (o GetAccountInfoAccountLimitNamespaceOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Limit of async retry attempt quantity.
+func (o GetAccountInfoAccountLimitNamespaceOutput) RetryNumLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.RetryNumLimit }).(pulumi.IntOutput)
+}
+
+// Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetAccountInfoAccountLimitNamespaceOutput) TestModelLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.TestModelLimit }).(pulumi.IntOutput)
+}
+
+// Timeout limit.
+func (o GetAccountInfoAccountLimitNamespaceOutput) TimeoutLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) int { return v.TimeoutLimit }).(pulumi.IntOutput)
+}
+
+// Trigger information.
+func (o GetAccountInfoAccountLimitNamespaceOutput) Triggers() GetAccountInfoAccountLimitNamespaceTriggerArrayOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespace) []GetAccountInfoAccountLimitNamespaceTrigger {
+		return v.Triggers
+	}).(GetAccountInfoAccountLimitNamespaceTriggerArrayOutput)
+}
+
+type GetAccountInfoAccountLimitNamespaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitNamespaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimitNamespace)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitNamespaceArrayOutput) ToGetAccountInfoAccountLimitNamespaceArrayOutput() GetAccountInfoAccountLimitNamespaceArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceArrayOutput) ToGetAccountInfoAccountLimitNamespaceArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceArrayOutput) Index(i pulumi.IntInput) GetAccountInfoAccountLimitNamespaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountInfoAccountLimitNamespace {
+		return vs[0].([]GetAccountInfoAccountLimitNamespace)[vs[1].(int)]
+	}).(GetAccountInfoAccountLimitNamespaceOutput)
+}
+
+type GetAccountInfoAccountLimitNamespaceTrigger struct {
+	// Number of API Gateway triggers.
+	Apigw int `pulumi:"apigw"`
+	// Number of CKafka triggers.
+	Ckafka int `pulumi:"ckafka"`
+	// Number of CLB triggers.
+	Clb int `pulumi:"clb"`
+	// Number of CLS triggers.
+	Cls int `pulumi:"cls"`
+	// Number of CM triggers.
+	Cm int `pulumi:"cm"`
+	// Number of CMQ triggers.
+	Cmq int `pulumi:"cmq"`
+	// Number of COS triggers.
+	Cos int `pulumi:"cos"`
+	// Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+	Eb int `pulumi:"eb"`
+	// Number of MPS triggers.
+	Mps int `pulumi:"mps"`
+	// Number of timer triggers.
+	Timer int `pulumi:"timer"`
+	// Total number of triggers.
+	Total int `pulumi:"total"`
+	// Number of VOD triggers.
+	Vod int `pulumi:"vod"`
+}
+
+// GetAccountInfoAccountLimitNamespaceTriggerInput is an input type that accepts GetAccountInfoAccountLimitNamespaceTriggerArgs and GetAccountInfoAccountLimitNamespaceTriggerOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceTriggerInput` via:
+//
+//          GetAccountInfoAccountLimitNamespaceTriggerArgs{...}
+type GetAccountInfoAccountLimitNamespaceTriggerInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitNamespaceTriggerOutput() GetAccountInfoAccountLimitNamespaceTriggerOutput
+	ToGetAccountInfoAccountLimitNamespaceTriggerOutputWithContext(context.Context) GetAccountInfoAccountLimitNamespaceTriggerOutput
+}
+
+type GetAccountInfoAccountLimitNamespaceTriggerArgs struct {
+	// Number of API Gateway triggers.
+	Apigw pulumi.IntInput `pulumi:"apigw"`
+	// Number of CKafka triggers.
+	Ckafka pulumi.IntInput `pulumi:"ckafka"`
+	// Number of CLB triggers.
+	Clb pulumi.IntInput `pulumi:"clb"`
+	// Number of CLS triggers.
+	Cls pulumi.IntInput `pulumi:"cls"`
+	// Number of CM triggers.
+	Cm pulumi.IntInput `pulumi:"cm"`
+	// Number of CMQ triggers.
+	Cmq pulumi.IntInput `pulumi:"cmq"`
+	// Number of COS triggers.
+	Cos pulumi.IntInput `pulumi:"cos"`
+	// Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+	Eb pulumi.IntInput `pulumi:"eb"`
+	// Number of MPS triggers.
+	Mps pulumi.IntInput `pulumi:"mps"`
+	// Number of timer triggers.
+	Timer pulumi.IntInput `pulumi:"timer"`
+	// Total number of triggers.
+	Total pulumi.IntInput `pulumi:"total"`
+	// Number of VOD triggers.
+	Vod pulumi.IntInput `pulumi:"vod"`
+}
+
+func (GetAccountInfoAccountLimitNamespaceTriggerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceTrigger)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitNamespaceTriggerArgs) ToGetAccountInfoAccountLimitNamespaceTriggerOutput() GetAccountInfoAccountLimitNamespaceTriggerOutput {
+	return i.ToGetAccountInfoAccountLimitNamespaceTriggerOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitNamespaceTriggerArgs) ToGetAccountInfoAccountLimitNamespaceTriggerOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceTriggerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitNamespaceTriggerOutput)
+}
+
+// GetAccountInfoAccountLimitNamespaceTriggerArrayInput is an input type that accepts GetAccountInfoAccountLimitNamespaceTriggerArray and GetAccountInfoAccountLimitNamespaceTriggerArrayOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceTriggerArrayInput` via:
+//
+//          GetAccountInfoAccountLimitNamespaceTriggerArray{ GetAccountInfoAccountLimitNamespaceTriggerArgs{...} }
+type GetAccountInfoAccountLimitNamespaceTriggerArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutput() GetAccountInfoAccountLimitNamespaceTriggerArrayOutput
+	ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutputWithContext(context.Context) GetAccountInfoAccountLimitNamespaceTriggerArrayOutput
+}
+
+type GetAccountInfoAccountLimitNamespaceTriggerArray []GetAccountInfoAccountLimitNamespaceTriggerInput
+
+func (GetAccountInfoAccountLimitNamespaceTriggerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimitNamespaceTrigger)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountLimitNamespaceTriggerArray) ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutput() GetAccountInfoAccountLimitNamespaceTriggerArrayOutput {
+	return i.ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountLimitNamespaceTriggerArray) ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceTriggerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountLimitNamespaceTriggerArrayOutput)
+}
+
+type GetAccountInfoAccountLimitNamespaceTriggerOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitNamespaceTriggerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceTrigger)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) ToGetAccountInfoAccountLimitNamespaceTriggerOutput() GetAccountInfoAccountLimitNamespaceTriggerOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) ToGetAccountInfoAccountLimitNamespaceTriggerOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceTriggerOutput {
+	return o
+}
+
+// Number of API Gateway triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Apigw() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Apigw }).(pulumi.IntOutput)
+}
+
+// Number of CKafka triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Ckafka() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Ckafka }).(pulumi.IntOutput)
+}
+
+// Number of CLB triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Clb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Clb }).(pulumi.IntOutput)
+}
+
+// Number of CLS triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Cls() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Cls }).(pulumi.IntOutput)
+}
+
+// Number of CM triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Cm() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Cm }).(pulumi.IntOutput)
+}
+
+// Number of CMQ triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Cmq() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Cmq }).(pulumi.IntOutput)
+}
+
+// Number of COS triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Cos() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Cos }).(pulumi.IntOutput)
+}
+
+// Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Eb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Eb }).(pulumi.IntOutput)
+}
+
+// Number of MPS triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Mps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Mps }).(pulumi.IntOutput)
+}
+
+// Number of timer triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Timer() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Timer }).(pulumi.IntOutput)
+}
+
+// Total number of triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Total }).(pulumi.IntOutput)
+}
+
+// Number of VOD triggers.
+func (o GetAccountInfoAccountLimitNamespaceTriggerOutput) Vod() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountLimitNamespaceTrigger) int { return v.Vod }).(pulumi.IntOutput)
+}
+
+type GetAccountInfoAccountLimitNamespaceTriggerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountLimitNamespaceTriggerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountLimitNamespaceTrigger)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountLimitNamespaceTriggerArrayOutput) ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutput() GetAccountInfoAccountLimitNamespaceTriggerArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceTriggerArrayOutput) ToGetAccountInfoAccountLimitNamespaceTriggerArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountLimitNamespaceTriggerArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountLimitNamespaceTriggerArrayOutput) Index(i pulumi.IntInput) GetAccountInfoAccountLimitNamespaceTriggerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountInfoAccountLimitNamespaceTrigger {
+		return vs[0].([]GetAccountInfoAccountLimitNamespaceTrigger)[vs[1].(int)]
+	}).(GetAccountInfoAccountLimitNamespaceTriggerOutput)
+}
+
+type GetAccountInfoAccountUsage struct {
+	// Namespace name.
+	Namespaces []GetAccountInfoAccountUsageNamespace `pulumi:"namespaces"`
+	// Number of namespaces.
+	NamespacesCount int `pulumi:"namespacesCount"`
+	// Quota of configured user concurrency memory in the current region.
+	TotalAllocatedConcurrencyMem int `pulumi:"totalAllocatedConcurrencyMem"`
+	// Upper limit of user concurrency memory in the current region.
+	TotalConcurrencyMem int `pulumi:"totalConcurrencyMem"`
+	// Quota of account concurrency actually configured by user.
+	UserConcurrencyMemLimit int `pulumi:"userConcurrencyMemLimit"`
+}
+
+// GetAccountInfoAccountUsageInput is an input type that accepts GetAccountInfoAccountUsageArgs and GetAccountInfoAccountUsageOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountUsageInput` via:
+//
+//          GetAccountInfoAccountUsageArgs{...}
+type GetAccountInfoAccountUsageInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountUsageOutput() GetAccountInfoAccountUsageOutput
+	ToGetAccountInfoAccountUsageOutputWithContext(context.Context) GetAccountInfoAccountUsageOutput
+}
+
+type GetAccountInfoAccountUsageArgs struct {
+	// Namespace name.
+	Namespaces GetAccountInfoAccountUsageNamespaceArrayInput `pulumi:"namespaces"`
+	// Number of namespaces.
+	NamespacesCount pulumi.IntInput `pulumi:"namespacesCount"`
+	// Quota of configured user concurrency memory in the current region.
+	TotalAllocatedConcurrencyMem pulumi.IntInput `pulumi:"totalAllocatedConcurrencyMem"`
+	// Upper limit of user concurrency memory in the current region.
+	TotalConcurrencyMem pulumi.IntInput `pulumi:"totalConcurrencyMem"`
+	// Quota of account concurrency actually configured by user.
+	UserConcurrencyMemLimit pulumi.IntInput `pulumi:"userConcurrencyMemLimit"`
+}
+
+func (GetAccountInfoAccountUsageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountUsage)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountUsageArgs) ToGetAccountInfoAccountUsageOutput() GetAccountInfoAccountUsageOutput {
+	return i.ToGetAccountInfoAccountUsageOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountUsageArgs) ToGetAccountInfoAccountUsageOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountUsageOutput)
+}
+
+// GetAccountInfoAccountUsageArrayInput is an input type that accepts GetAccountInfoAccountUsageArray and GetAccountInfoAccountUsageArrayOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountUsageArrayInput` via:
+//
+//          GetAccountInfoAccountUsageArray{ GetAccountInfoAccountUsageArgs{...} }
+type GetAccountInfoAccountUsageArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountUsageArrayOutput() GetAccountInfoAccountUsageArrayOutput
+	ToGetAccountInfoAccountUsageArrayOutputWithContext(context.Context) GetAccountInfoAccountUsageArrayOutput
+}
+
+type GetAccountInfoAccountUsageArray []GetAccountInfoAccountUsageInput
+
+func (GetAccountInfoAccountUsageArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountUsage)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountUsageArray) ToGetAccountInfoAccountUsageArrayOutput() GetAccountInfoAccountUsageArrayOutput {
+	return i.ToGetAccountInfoAccountUsageArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountUsageArray) ToGetAccountInfoAccountUsageArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountUsageArrayOutput)
+}
+
+type GetAccountInfoAccountUsageOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountUsageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountUsage)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountUsageOutput) ToGetAccountInfoAccountUsageOutput() GetAccountInfoAccountUsageOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageOutput) ToGetAccountInfoAccountUsageOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageOutput {
+	return o
+}
+
+// Namespace name.
+func (o GetAccountInfoAccountUsageOutput) Namespaces() GetAccountInfoAccountUsageNamespaceArrayOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsage) []GetAccountInfoAccountUsageNamespace { return v.Namespaces }).(GetAccountInfoAccountUsageNamespaceArrayOutput)
+}
+
+// Number of namespaces.
+func (o GetAccountInfoAccountUsageOutput) NamespacesCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsage) int { return v.NamespacesCount }).(pulumi.IntOutput)
+}
+
+// Quota of configured user concurrency memory in the current region.
+func (o GetAccountInfoAccountUsageOutput) TotalAllocatedConcurrencyMem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsage) int { return v.TotalAllocatedConcurrencyMem }).(pulumi.IntOutput)
+}
+
+// Upper limit of user concurrency memory in the current region.
+func (o GetAccountInfoAccountUsageOutput) TotalConcurrencyMem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsage) int { return v.TotalConcurrencyMem }).(pulumi.IntOutput)
+}
+
+// Quota of account concurrency actually configured by user.
+func (o GetAccountInfoAccountUsageOutput) UserConcurrencyMemLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsage) int { return v.UserConcurrencyMemLimit }).(pulumi.IntOutput)
+}
+
+type GetAccountInfoAccountUsageArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountUsageArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountUsage)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountUsageArrayOutput) ToGetAccountInfoAccountUsageArrayOutput() GetAccountInfoAccountUsageArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageArrayOutput) ToGetAccountInfoAccountUsageArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageArrayOutput) Index(i pulumi.IntInput) GetAccountInfoAccountUsageOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountInfoAccountUsage {
+		return vs[0].([]GetAccountInfoAccountUsage)[vs[1].(int)]
+	}).(GetAccountInfoAccountUsageOutput)
+}
+
+type GetAccountInfoAccountUsageNamespace struct {
+	// Function array.
+	Functions []string `pulumi:"functions"`
+	// Number of functions in namespace.
+	FunctionsCount int `pulumi:"functionsCount"`
+	// Namespace name.
+	Namespace string `pulumi:"namespace"`
+	// Quota of configured user concurrency memory in the current region.
+	TotalAllocatedConcurrencyMem int `pulumi:"totalAllocatedConcurrencyMem"`
+	// Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+	TotalAllocatedProvisionedMem int `pulumi:"totalAllocatedProvisionedMem"`
+	// Upper limit of user concurrency memory in the current region.
+	TotalConcurrencyMem int `pulumi:"totalConcurrencyMem"`
+}
+
+// GetAccountInfoAccountUsageNamespaceInput is an input type that accepts GetAccountInfoAccountUsageNamespaceArgs and GetAccountInfoAccountUsageNamespaceOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountUsageNamespaceInput` via:
+//
+//          GetAccountInfoAccountUsageNamespaceArgs{...}
+type GetAccountInfoAccountUsageNamespaceInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountUsageNamespaceOutput() GetAccountInfoAccountUsageNamespaceOutput
+	ToGetAccountInfoAccountUsageNamespaceOutputWithContext(context.Context) GetAccountInfoAccountUsageNamespaceOutput
+}
+
+type GetAccountInfoAccountUsageNamespaceArgs struct {
+	// Function array.
+	Functions pulumi.StringArrayInput `pulumi:"functions"`
+	// Number of functions in namespace.
+	FunctionsCount pulumi.IntInput `pulumi:"functionsCount"`
+	// Namespace name.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Quota of configured user concurrency memory in the current region.
+	TotalAllocatedConcurrencyMem pulumi.IntInput `pulumi:"totalAllocatedConcurrencyMem"`
+	// Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+	TotalAllocatedProvisionedMem pulumi.IntInput `pulumi:"totalAllocatedProvisionedMem"`
+	// Upper limit of user concurrency memory in the current region.
+	TotalConcurrencyMem pulumi.IntInput `pulumi:"totalConcurrencyMem"`
+}
+
+func (GetAccountInfoAccountUsageNamespaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountUsageNamespace)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountUsageNamespaceArgs) ToGetAccountInfoAccountUsageNamespaceOutput() GetAccountInfoAccountUsageNamespaceOutput {
+	return i.ToGetAccountInfoAccountUsageNamespaceOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountUsageNamespaceArgs) ToGetAccountInfoAccountUsageNamespaceOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageNamespaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountUsageNamespaceOutput)
+}
+
+// GetAccountInfoAccountUsageNamespaceArrayInput is an input type that accepts GetAccountInfoAccountUsageNamespaceArray and GetAccountInfoAccountUsageNamespaceArrayOutput values.
+// You can construct a concrete instance of `GetAccountInfoAccountUsageNamespaceArrayInput` via:
+//
+//          GetAccountInfoAccountUsageNamespaceArray{ GetAccountInfoAccountUsageNamespaceArgs{...} }
+type GetAccountInfoAccountUsageNamespaceArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountInfoAccountUsageNamespaceArrayOutput() GetAccountInfoAccountUsageNamespaceArrayOutput
+	ToGetAccountInfoAccountUsageNamespaceArrayOutputWithContext(context.Context) GetAccountInfoAccountUsageNamespaceArrayOutput
+}
+
+type GetAccountInfoAccountUsageNamespaceArray []GetAccountInfoAccountUsageNamespaceInput
+
+func (GetAccountInfoAccountUsageNamespaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountUsageNamespace)(nil)).Elem()
+}
+
+func (i GetAccountInfoAccountUsageNamespaceArray) ToGetAccountInfoAccountUsageNamespaceArrayOutput() GetAccountInfoAccountUsageNamespaceArrayOutput {
+	return i.ToGetAccountInfoAccountUsageNamespaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountInfoAccountUsageNamespaceArray) ToGetAccountInfoAccountUsageNamespaceArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageNamespaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountInfoAccountUsageNamespaceArrayOutput)
+}
+
+type GetAccountInfoAccountUsageNamespaceOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountUsageNamespaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountInfoAccountUsageNamespace)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountUsageNamespaceOutput) ToGetAccountInfoAccountUsageNamespaceOutput() GetAccountInfoAccountUsageNamespaceOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageNamespaceOutput) ToGetAccountInfoAccountUsageNamespaceOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageNamespaceOutput {
+	return o
+}
+
+// Function array.
+func (o GetAccountInfoAccountUsageNamespaceOutput) Functions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) []string { return v.Functions }).(pulumi.StringArrayOutput)
+}
+
+// Number of functions in namespace.
+func (o GetAccountInfoAccountUsageNamespaceOutput) FunctionsCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) int { return v.FunctionsCount }).(pulumi.IntOutput)
+}
+
+// Namespace name.
+func (o GetAccountInfoAccountUsageNamespaceOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Quota of configured user concurrency memory in the current region.
+func (o GetAccountInfoAccountUsageNamespaceOutput) TotalAllocatedConcurrencyMem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) int { return v.TotalAllocatedConcurrencyMem }).(pulumi.IntOutput)
+}
+
+// Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountInfoAccountUsageNamespaceOutput) TotalAllocatedProvisionedMem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) int { return v.TotalAllocatedProvisionedMem }).(pulumi.IntOutput)
+}
+
+// Upper limit of user concurrency memory in the current region.
+func (o GetAccountInfoAccountUsageNamespaceOutput) TotalConcurrencyMem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountInfoAccountUsageNamespace) int { return v.TotalConcurrencyMem }).(pulumi.IntOutput)
+}
+
+type GetAccountInfoAccountUsageNamespaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountInfoAccountUsageNamespaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountInfoAccountUsageNamespace)(nil)).Elem()
+}
+
+func (o GetAccountInfoAccountUsageNamespaceArrayOutput) ToGetAccountInfoAccountUsageNamespaceArrayOutput() GetAccountInfoAccountUsageNamespaceArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageNamespaceArrayOutput) ToGetAccountInfoAccountUsageNamespaceArrayOutputWithContext(ctx context.Context) GetAccountInfoAccountUsageNamespaceArrayOutput {
+	return o
+}
+
+func (o GetAccountInfoAccountUsageNamespaceArrayOutput) Index(i pulumi.IntInput) GetAccountInfoAccountUsageNamespaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountInfoAccountUsageNamespace {
+		return vs[0].([]GetAccountInfoAccountUsageNamespace)[vs[1].(int)]
+	}).(GetAccountInfoAccountUsageNamespaceOutput)
+}
+
+type GetAsyncEventManagementEventList struct {
+	// Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+	EndTime string `pulumi:"endTime"`
+	// Filter (event invocation request ID).
+	InvokeRequestId string `pulumi:"invokeRequestId"`
+	// Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+	InvokeType string `pulumi:"invokeType"`
+	// Filter (function version).
+	Qualifier string `pulumi:"qualifier"`
+	// Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+	StartTime string `pulumi:"startTime"`
+	// Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+	Status string `pulumi:"status"`
+}
+
+// GetAsyncEventManagementEventListInput is an input type that accepts GetAsyncEventManagementEventListArgs and GetAsyncEventManagementEventListOutput values.
+// You can construct a concrete instance of `GetAsyncEventManagementEventListInput` via:
+//
+//          GetAsyncEventManagementEventListArgs{...}
+type GetAsyncEventManagementEventListInput interface {
+	pulumi.Input
+
+	ToGetAsyncEventManagementEventListOutput() GetAsyncEventManagementEventListOutput
+	ToGetAsyncEventManagementEventListOutputWithContext(context.Context) GetAsyncEventManagementEventListOutput
+}
+
+type GetAsyncEventManagementEventListArgs struct {
+	// Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Filter (event invocation request ID).
+	InvokeRequestId pulumi.StringInput `pulumi:"invokeRequestId"`
+	// Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+	InvokeType pulumi.StringInput `pulumi:"invokeType"`
+	// Filter (function version).
+	Qualifier pulumi.StringInput `pulumi:"qualifier"`
+	// Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetAsyncEventManagementEventListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAsyncEventManagementEventList)(nil)).Elem()
+}
+
+func (i GetAsyncEventManagementEventListArgs) ToGetAsyncEventManagementEventListOutput() GetAsyncEventManagementEventListOutput {
+	return i.ToGetAsyncEventManagementEventListOutputWithContext(context.Background())
+}
+
+func (i GetAsyncEventManagementEventListArgs) ToGetAsyncEventManagementEventListOutputWithContext(ctx context.Context) GetAsyncEventManagementEventListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAsyncEventManagementEventListOutput)
+}
+
+// GetAsyncEventManagementEventListArrayInput is an input type that accepts GetAsyncEventManagementEventListArray and GetAsyncEventManagementEventListArrayOutput values.
+// You can construct a concrete instance of `GetAsyncEventManagementEventListArrayInput` via:
+//
+//          GetAsyncEventManagementEventListArray{ GetAsyncEventManagementEventListArgs{...} }
+type GetAsyncEventManagementEventListArrayInput interface {
+	pulumi.Input
+
+	ToGetAsyncEventManagementEventListArrayOutput() GetAsyncEventManagementEventListArrayOutput
+	ToGetAsyncEventManagementEventListArrayOutputWithContext(context.Context) GetAsyncEventManagementEventListArrayOutput
+}
+
+type GetAsyncEventManagementEventListArray []GetAsyncEventManagementEventListInput
+
+func (GetAsyncEventManagementEventListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAsyncEventManagementEventList)(nil)).Elem()
+}
+
+func (i GetAsyncEventManagementEventListArray) ToGetAsyncEventManagementEventListArrayOutput() GetAsyncEventManagementEventListArrayOutput {
+	return i.ToGetAsyncEventManagementEventListArrayOutputWithContext(context.Background())
+}
+
+func (i GetAsyncEventManagementEventListArray) ToGetAsyncEventManagementEventListArrayOutputWithContext(ctx context.Context) GetAsyncEventManagementEventListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAsyncEventManagementEventListArrayOutput)
+}
+
+type GetAsyncEventManagementEventListOutput struct{ *pulumi.OutputState }
+
+func (GetAsyncEventManagementEventListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAsyncEventManagementEventList)(nil)).Elem()
+}
+
+func (o GetAsyncEventManagementEventListOutput) ToGetAsyncEventManagementEventListOutput() GetAsyncEventManagementEventListOutput {
+	return o
+}
+
+func (o GetAsyncEventManagementEventListOutput) ToGetAsyncEventManagementEventListOutputWithContext(ctx context.Context) GetAsyncEventManagementEventListOutput {
+	return o
+}
+
+// Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+func (o GetAsyncEventManagementEventListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Filter (event invocation request ID).
+func (o GetAsyncEventManagementEventListOutput) InvokeRequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.InvokeRequestId }).(pulumi.StringOutput)
+}
+
+// Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+func (o GetAsyncEventManagementEventListOutput) InvokeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.InvokeType }).(pulumi.StringOutput)
+}
+
+// Filter (function version).
+func (o GetAsyncEventManagementEventListOutput) Qualifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.Qualifier }).(pulumi.StringOutput)
+}
+
+// Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+func (o GetAsyncEventManagementEventListOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+func (o GetAsyncEventManagementEventListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventManagementEventList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetAsyncEventManagementEventListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAsyncEventManagementEventListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAsyncEventManagementEventList)(nil)).Elem()
+}
+
+func (o GetAsyncEventManagementEventListArrayOutput) ToGetAsyncEventManagementEventListArrayOutput() GetAsyncEventManagementEventListArrayOutput {
+	return o
+}
+
+func (o GetAsyncEventManagementEventListArrayOutput) ToGetAsyncEventManagementEventListArrayOutputWithContext(ctx context.Context) GetAsyncEventManagementEventListArrayOutput {
+	return o
+}
+
+func (o GetAsyncEventManagementEventListArrayOutput) Index(i pulumi.IntInput) GetAsyncEventManagementEventListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAsyncEventManagementEventList {
+		return vs[0].([]GetAsyncEventManagementEventList)[vs[1].(int)]
+	}).(GetAsyncEventManagementEventListOutput)
+}
+
+type GetAsyncEventStatusResult struct {
+	// ID of the async execution request.
+	InvokeRequestId string `pulumi:"invokeRequestId"`
+	// Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+	Status string `pulumi:"status"`
+	// Request status code.
+	StatusCode int `pulumi:"statusCode"`
+}
+
+// GetAsyncEventStatusResultInput is an input type that accepts GetAsyncEventStatusResultArgs and GetAsyncEventStatusResultOutput values.
+// You can construct a concrete instance of `GetAsyncEventStatusResultInput` via:
+//
+//          GetAsyncEventStatusResultArgs{...}
+type GetAsyncEventStatusResultInput interface {
+	pulumi.Input
+
+	ToGetAsyncEventStatusResultOutput() GetAsyncEventStatusResultOutput
+	ToGetAsyncEventStatusResultOutputWithContext(context.Context) GetAsyncEventStatusResultOutput
+}
+
+type GetAsyncEventStatusResultArgs struct {
+	// ID of the async execution request.
+	InvokeRequestId pulumi.StringInput `pulumi:"invokeRequestId"`
+	// Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+	Status pulumi.StringInput `pulumi:"status"`
+	// Request status code.
+	StatusCode pulumi.IntInput `pulumi:"statusCode"`
+}
+
+func (GetAsyncEventStatusResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAsyncEventStatusResult)(nil)).Elem()
+}
+
+func (i GetAsyncEventStatusResultArgs) ToGetAsyncEventStatusResultOutput() GetAsyncEventStatusResultOutput {
+	return i.ToGetAsyncEventStatusResultOutputWithContext(context.Background())
+}
+
+func (i GetAsyncEventStatusResultArgs) ToGetAsyncEventStatusResultOutputWithContext(ctx context.Context) GetAsyncEventStatusResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAsyncEventStatusResultOutput)
+}
+
+// GetAsyncEventStatusResultArrayInput is an input type that accepts GetAsyncEventStatusResultArray and GetAsyncEventStatusResultArrayOutput values.
+// You can construct a concrete instance of `GetAsyncEventStatusResultArrayInput` via:
+//
+//          GetAsyncEventStatusResultArray{ GetAsyncEventStatusResultArgs{...} }
+type GetAsyncEventStatusResultArrayInput interface {
+	pulumi.Input
+
+	ToGetAsyncEventStatusResultArrayOutput() GetAsyncEventStatusResultArrayOutput
+	ToGetAsyncEventStatusResultArrayOutputWithContext(context.Context) GetAsyncEventStatusResultArrayOutput
+}
+
+type GetAsyncEventStatusResultArray []GetAsyncEventStatusResultInput
+
+func (GetAsyncEventStatusResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAsyncEventStatusResult)(nil)).Elem()
+}
+
+func (i GetAsyncEventStatusResultArray) ToGetAsyncEventStatusResultArrayOutput() GetAsyncEventStatusResultArrayOutput {
+	return i.ToGetAsyncEventStatusResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetAsyncEventStatusResultArray) ToGetAsyncEventStatusResultArrayOutputWithContext(ctx context.Context) GetAsyncEventStatusResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAsyncEventStatusResultArrayOutput)
+}
+
+type GetAsyncEventStatusResultOutput struct{ *pulumi.OutputState }
+
+func (GetAsyncEventStatusResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAsyncEventStatusResult)(nil)).Elem()
+}
+
+func (o GetAsyncEventStatusResultOutput) ToGetAsyncEventStatusResultOutput() GetAsyncEventStatusResultOutput {
+	return o
+}
+
+func (o GetAsyncEventStatusResultOutput) ToGetAsyncEventStatusResultOutputWithContext(ctx context.Context) GetAsyncEventStatusResultOutput {
+	return o
+}
+
+// ID of the async execution request.
+func (o GetAsyncEventStatusResultOutput) InvokeRequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventStatusResult) string { return v.InvokeRequestId }).(pulumi.StringOutput)
+}
+
+// Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+func (o GetAsyncEventStatusResultOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAsyncEventStatusResult) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Request status code.
+func (o GetAsyncEventStatusResultOutput) StatusCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAsyncEventStatusResult) int { return v.StatusCode }).(pulumi.IntOutput)
+}
+
+type GetAsyncEventStatusResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAsyncEventStatusResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAsyncEventStatusResult)(nil)).Elem()
+}
+
+func (o GetAsyncEventStatusResultArrayOutput) ToGetAsyncEventStatusResultArrayOutput() GetAsyncEventStatusResultArrayOutput {
+	return o
+}
+
+func (o GetAsyncEventStatusResultArrayOutput) ToGetAsyncEventStatusResultArrayOutputWithContext(ctx context.Context) GetAsyncEventStatusResultArrayOutput {
+	return o
+}
+
+func (o GetAsyncEventStatusResultArrayOutput) Index(i pulumi.IntInput) GetAsyncEventStatusResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAsyncEventStatusResult {
+		return vs[0].([]GetAsyncEventStatusResult)[vs[1].(int)]
+	}).(GetAsyncEventStatusResultOutput)
+}
+
+type GetFunctionAliasesAlias struct {
+	// Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+	AddTime string `pulumi:"addTime"`
+	// DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// If this parameter is provided, only aliases associated with this function version will be returned.
+	FunctionVersion string `pulumi:"functionVersion"`
+	// Update timeNote: this field may return null, indicating that no valid values can be obtained.
+	ModTime string `pulumi:"modTime"`
+	// Alias name.
+	Name string `pulumi:"name"`
+	// Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+	RoutingConfigs []GetFunctionAliasesAliasRoutingConfig `pulumi:"routingConfigs"`
+}
+
+// GetFunctionAliasesAliasInput is an input type that accepts GetFunctionAliasesAliasArgs and GetFunctionAliasesAliasOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasInput` via:
+//
+//          GetFunctionAliasesAliasArgs{...}
+type GetFunctionAliasesAliasInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasOutput() GetFunctionAliasesAliasOutput
+	ToGetFunctionAliasesAliasOutputWithContext(context.Context) GetFunctionAliasesAliasOutput
+}
+
+type GetFunctionAliasesAliasArgs struct {
+	// Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// If this parameter is provided, only aliases associated with this function version will be returned.
+	FunctionVersion pulumi.StringInput `pulumi:"functionVersion"`
+	// Update timeNote: this field may return null, indicating that no valid values can be obtained.
+	ModTime pulumi.StringInput `pulumi:"modTime"`
+	// Alias name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+	RoutingConfigs GetFunctionAliasesAliasRoutingConfigArrayInput `pulumi:"routingConfigs"`
+}
+
+func (GetFunctionAliasesAliasArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAlias)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasArgs) ToGetFunctionAliasesAliasOutput() GetFunctionAliasesAliasOutput {
+	return i.ToGetFunctionAliasesAliasOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasArgs) ToGetFunctionAliasesAliasOutputWithContext(ctx context.Context) GetFunctionAliasesAliasOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasOutput)
+}
+
+// GetFunctionAliasesAliasArrayInput is an input type that accepts GetFunctionAliasesAliasArray and GetFunctionAliasesAliasArrayOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasArrayInput` via:
+//
+//          GetFunctionAliasesAliasArray{ GetFunctionAliasesAliasArgs{...} }
+type GetFunctionAliasesAliasArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasArrayOutput() GetFunctionAliasesAliasArrayOutput
+	ToGetFunctionAliasesAliasArrayOutputWithContext(context.Context) GetFunctionAliasesAliasArrayOutput
+}
+
+type GetFunctionAliasesAliasArray []GetFunctionAliasesAliasInput
+
+func (GetFunctionAliasesAliasArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAlias)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasArray) ToGetFunctionAliasesAliasArrayOutput() GetFunctionAliasesAliasArrayOutput {
+	return i.ToGetFunctionAliasesAliasArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasArray) ToGetFunctionAliasesAliasArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasArrayOutput)
+}
+
+type GetFunctionAliasesAliasOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAlias)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasOutput) ToGetFunctionAliasesAliasOutput() GetFunctionAliasesAliasOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasOutput) ToGetFunctionAliasesAliasOutputWithContext(ctx context.Context) GetFunctionAliasesAliasOutput {
+	return o
+}
+
+// Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetFunctionAliasesAliasOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetFunctionAliasesAliasOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// If this parameter is provided, only aliases associated with this function version will be returned.
+func (o GetFunctionAliasesAliasOutput) FunctionVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) string { return v.FunctionVersion }).(pulumi.StringOutput)
+}
+
+// Update timeNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetFunctionAliasesAliasOutput) ModTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) string { return v.ModTime }).(pulumi.StringOutput)
+}
+
+// Alias name.
+func (o GetFunctionAliasesAliasOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetFunctionAliasesAliasOutput) RoutingConfigs() GetFunctionAliasesAliasRoutingConfigArrayOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAlias) []GetFunctionAliasesAliasRoutingConfig { return v.RoutingConfigs }).(GetFunctionAliasesAliasRoutingConfigArrayOutput)
+}
+
+type GetFunctionAliasesAliasArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAlias)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasArrayOutput) ToGetFunctionAliasesAliasArrayOutput() GetFunctionAliasesAliasArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasArrayOutput) ToGetFunctionAliasesAliasArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasArrayOutput) Index(i pulumi.IntInput) GetFunctionAliasesAliasOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionAliasesAlias {
+		return vs[0].([]GetFunctionAliasesAlias)[vs[1].(int)]
+	}).(GetFunctionAliasesAliasOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfig struct {
+	// Additional version with rule-based routing.
+	AdditionVersionMatchs []GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch `pulumi:"additionVersionMatchs"`
+	// Additional version with random weight-based routing.
+	AdditionalVersionWeights []GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight `pulumi:"additionalVersionWeights"`
+}
+
+// GetFunctionAliasesAliasRoutingConfigInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigArgs and GetFunctionAliasesAliasRoutingConfigOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigArgs{...}
+type GetFunctionAliasesAliasRoutingConfigInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigOutput() GetFunctionAliasesAliasRoutingConfigOutput
+	ToGetFunctionAliasesAliasRoutingConfigOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigArgs struct {
+	// Additional version with rule-based routing.
+	AdditionVersionMatchs GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput `pulumi:"additionVersionMatchs"`
+	// Additional version with random weight-based routing.
+	AdditionalVersionWeights GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput `pulumi:"additionalVersionWeights"`
+}
+
+func (GetFunctionAliasesAliasRoutingConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfig)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigArgs) ToGetFunctionAliasesAliasRoutingConfigOutput() GetFunctionAliasesAliasRoutingConfigOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigArgs) ToGetFunctionAliasesAliasRoutingConfigOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigOutput)
+}
+
+// GetFunctionAliasesAliasRoutingConfigArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigArray and GetFunctionAliasesAliasRoutingConfigArrayOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigArrayInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigArray{ GetFunctionAliasesAliasRoutingConfigArgs{...} }
+type GetFunctionAliasesAliasRoutingConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigArrayOutput() GetFunctionAliasesAliasRoutingConfigArrayOutput
+	ToGetFunctionAliasesAliasRoutingConfigArrayOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigArrayOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigArray []GetFunctionAliasesAliasRoutingConfigInput
+
+func (GetFunctionAliasesAliasRoutingConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfig)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigArray) ToGetFunctionAliasesAliasRoutingConfigArrayOutput() GetFunctionAliasesAliasRoutingConfigArrayOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigArray) ToGetFunctionAliasesAliasRoutingConfigArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigArrayOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfig)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigOutput) ToGetFunctionAliasesAliasRoutingConfigOutput() GetFunctionAliasesAliasRoutingConfigOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigOutput) ToGetFunctionAliasesAliasRoutingConfigOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigOutput {
+	return o
+}
+
+// Additional version with rule-based routing.
+func (o GetFunctionAliasesAliasRoutingConfigOutput) AdditionVersionMatchs() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfig) []GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch {
+		return v.AdditionVersionMatchs
+	}).(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput)
+}
+
+// Additional version with random weight-based routing.
+func (o GetFunctionAliasesAliasRoutingConfigOutput) AdditionalVersionWeights() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfig) []GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight {
+		return v.AdditionalVersionWeights
+	}).(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfig)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigArrayOutput) ToGetFunctionAliasesAliasRoutingConfigArrayOutput() GetFunctionAliasesAliasRoutingConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigArrayOutput) ToGetFunctionAliasesAliasRoutingConfigArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigArrayOutput) Index(i pulumi.IntInput) GetFunctionAliasesAliasRoutingConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionAliasesAliasRoutingConfig {
+		return vs[0].([]GetFunctionAliasesAliasRoutingConfig)[vs[1].(int)]
+	}).(GetFunctionAliasesAliasRoutingConfigOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch struct {
+	// Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+	Expression string `pulumi:"expression"`
+	// Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+	Key string `pulumi:"key"`
+	// Match method. Valid values:range: range matchexact: exact string match.
+	Method string `pulumi:"method"`
+	// Function version name.
+	Version string `pulumi:"version"`
+}
+
+// GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs and GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...}
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput
+	ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs struct {
+	// Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+	Expression pulumi.StringInput `pulumi:"expression"`
+	// Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Match method. Valid values:range: range matchexact: exact string match.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Function version name.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput)
+}
+
+// GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray and GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray{ GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...} }
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput
+	ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray []GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput {
+	return o
+}
+
+// Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) Expression() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch) string { return v.Expression }).(pulumi.StringOutput)
+}
+
+// Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Match method. Valid values:range: range matchexact: exact string match.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Function version name.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput) Index(i pulumi.IntInput) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch {
+		return vs[0].([]GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch)[vs[1].(int)]
+	}).(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight struct {
+	// Function version name.
+	Version string `pulumi:"version"`
+	// Version weight.
+	Weight float64 `pulumi:"weight"`
+}
+
+// GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs and GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...}
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput
+	ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs struct {
+	// Function version name.
+	Version pulumi.StringInput `pulumi:"version"`
+	// Version weight.
+	Weight pulumi.Float64Input `pulumi:"weight"`
+}
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput)
+}
+
+// GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray and GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput values.
+// You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput` via:
+//
+//          GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray{ GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...} }
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput
+	ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray []GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return i.ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput {
+	return o
+}
+
+// Function version name.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight) string { return v.Version }).(pulumi.StringOutput)
+}
+
+// Version weight.
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput) Weight() pulumi.Float64Output {
+	return o.ApplyT(func(v GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight) float64 { return v.Weight }).(pulumi.Float64Output)
+}
+
+type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight)(nil)).Elem()
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput() GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput) ToGetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutputWithContext(ctx context.Context) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput {
+	return o
+}
+
+func (o GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput) Index(i pulumi.IntInput) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight {
+		return vs[0].([]GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight)[vs[1].(int)]
+	}).(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput)
+}
+
+type GetFunctionVersionsVersion struct {
+	// The creation timeNote: This field may return null, indicating that no valid value was found.
+	AddTime string `pulumi:"addTime"`
+	// Version descriptionNote: This field may return null, indicating that no valid values is found.
+	Description string `pulumi:"description"`
+	// Update timeNote: This field may return null, indicating that no valid value was found.
+	ModTime string `pulumi:"modTime"`
+	// Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+	Status string `pulumi:"status"`
+	// Function version name.
+	Version string `pulumi:"version"`
+}
+
+// GetFunctionVersionsVersionInput is an input type that accepts GetFunctionVersionsVersionArgs and GetFunctionVersionsVersionOutput values.
+// You can construct a concrete instance of `GetFunctionVersionsVersionInput` via:
+//
+//          GetFunctionVersionsVersionArgs{...}
+type GetFunctionVersionsVersionInput interface {
+	pulumi.Input
+
+	ToGetFunctionVersionsVersionOutput() GetFunctionVersionsVersionOutput
+	ToGetFunctionVersionsVersionOutputWithContext(context.Context) GetFunctionVersionsVersionOutput
+}
+
+type GetFunctionVersionsVersionArgs struct {
+	// The creation timeNote: This field may return null, indicating that no valid value was found.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Version descriptionNote: This field may return null, indicating that no valid values is found.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Update timeNote: This field may return null, indicating that no valid value was found.
+	ModTime pulumi.StringInput `pulumi:"modTime"`
+	// Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Function version name.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetFunctionVersionsVersionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionVersionsVersion)(nil)).Elem()
+}
+
+func (i GetFunctionVersionsVersionArgs) ToGetFunctionVersionsVersionOutput() GetFunctionVersionsVersionOutput {
+	return i.ToGetFunctionVersionsVersionOutputWithContext(context.Background())
+}
+
+func (i GetFunctionVersionsVersionArgs) ToGetFunctionVersionsVersionOutputWithContext(ctx context.Context) GetFunctionVersionsVersionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionVersionsVersionOutput)
+}
+
+// GetFunctionVersionsVersionArrayInput is an input type that accepts GetFunctionVersionsVersionArray and GetFunctionVersionsVersionArrayOutput values.
+// You can construct a concrete instance of `GetFunctionVersionsVersionArrayInput` via:
+//
+//          GetFunctionVersionsVersionArray{ GetFunctionVersionsVersionArgs{...} }
+type GetFunctionVersionsVersionArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionVersionsVersionArrayOutput() GetFunctionVersionsVersionArrayOutput
+	ToGetFunctionVersionsVersionArrayOutputWithContext(context.Context) GetFunctionVersionsVersionArrayOutput
+}
+
+type GetFunctionVersionsVersionArray []GetFunctionVersionsVersionInput
+
+func (GetFunctionVersionsVersionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionVersionsVersion)(nil)).Elem()
+}
+
+func (i GetFunctionVersionsVersionArray) ToGetFunctionVersionsVersionArrayOutput() GetFunctionVersionsVersionArrayOutput {
+	return i.ToGetFunctionVersionsVersionArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionVersionsVersionArray) ToGetFunctionVersionsVersionArrayOutputWithContext(ctx context.Context) GetFunctionVersionsVersionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionVersionsVersionArrayOutput)
+}
+
+type GetFunctionVersionsVersionOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionVersionsVersionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionVersionsVersion)(nil)).Elem()
+}
+
+func (o GetFunctionVersionsVersionOutput) ToGetFunctionVersionsVersionOutput() GetFunctionVersionsVersionOutput {
+	return o
+}
+
+func (o GetFunctionVersionsVersionOutput) ToGetFunctionVersionsVersionOutputWithContext(ctx context.Context) GetFunctionVersionsVersionOutput {
+	return o
+}
+
+// The creation timeNote: This field may return null, indicating that no valid value was found.
+func (o GetFunctionVersionsVersionOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionVersionsVersion) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Version descriptionNote: This field may return null, indicating that no valid values is found.
+func (o GetFunctionVersionsVersionOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionVersionsVersion) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Update timeNote: This field may return null, indicating that no valid value was found.
+func (o GetFunctionVersionsVersionOutput) ModTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionVersionsVersion) string { return v.ModTime }).(pulumi.StringOutput)
+}
+
+// Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetFunctionVersionsVersionOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionVersionsVersion) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Function version name.
+func (o GetFunctionVersionsVersionOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionVersionsVersion) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetFunctionVersionsVersionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionVersionsVersionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionVersionsVersion)(nil)).Elem()
+}
+
+func (o GetFunctionVersionsVersionArrayOutput) ToGetFunctionVersionsVersionArrayOutput() GetFunctionVersionsVersionArrayOutput {
+	return o
+}
+
+func (o GetFunctionVersionsVersionArrayOutput) ToGetFunctionVersionsVersionArrayOutputWithContext(ctx context.Context) GetFunctionVersionsVersionArrayOutput {
+	return o
+}
+
+func (o GetFunctionVersionsVersionArrayOutput) Index(i pulumi.IntInput) GetFunctionVersionsVersionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionVersionsVersion {
+		return vs[0].([]GetFunctionVersionsVersion)[vs[1].(int)]
+	}).(GetFunctionVersionsVersionOutput)
+}
+
 type GetFunctionsFunction struct {
 	// CLS logset ID of the SCF function.
 	ClsLogsetId string `pulumi:"clsLogsetId"`
@@ -1795,6 +3803,326 @@ func (o GetFunctionsFunctionTriggerInfoArrayOutput) Index(i pulumi.IntInput) Get
 	}).(GetFunctionsFunctionTriggerInfoOutput)
 }
 
+type GetLayerVersionsLayerVersion struct {
+	// Creation time.
+	AddTime string `pulumi:"addTime"`
+	// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+	CompatibleRuntimes []string `pulumi:"compatibleRuntimes"`
+	// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// Layer name.
+	LayerName string `pulumi:"layerName"`
+	// Version number.
+	LayerVersion int `pulumi:"layerVersion"`
+	// License informationNote: This field may return null, indicating that no valid values can be obtained.
+	LicenseInfo string `pulumi:"licenseInfo"`
+	// StampNote: This field may return null, indicating that no valid values can be obtained.
+	Stamp string `pulumi:"stamp"`
+	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+	Status string `pulumi:"status"`
+}
+
+// GetLayerVersionsLayerVersionInput is an input type that accepts GetLayerVersionsLayerVersionArgs and GetLayerVersionsLayerVersionOutput values.
+// You can construct a concrete instance of `GetLayerVersionsLayerVersionInput` via:
+//
+//          GetLayerVersionsLayerVersionArgs{...}
+type GetLayerVersionsLayerVersionInput interface {
+	pulumi.Input
+
+	ToGetLayerVersionsLayerVersionOutput() GetLayerVersionsLayerVersionOutput
+	ToGetLayerVersionsLayerVersionOutputWithContext(context.Context) GetLayerVersionsLayerVersionOutput
+}
+
+type GetLayerVersionsLayerVersionArgs struct {
+	// Creation time.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+	CompatibleRuntimes pulumi.StringArrayInput `pulumi:"compatibleRuntimes"`
+	// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Layer name.
+	LayerName pulumi.StringInput `pulumi:"layerName"`
+	// Version number.
+	LayerVersion pulumi.IntInput `pulumi:"layerVersion"`
+	// License informationNote: This field may return null, indicating that no valid values can be obtained.
+	LicenseInfo pulumi.StringInput `pulumi:"licenseInfo"`
+	// StampNote: This field may return null, indicating that no valid values can be obtained.
+	Stamp pulumi.StringInput `pulumi:"stamp"`
+	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetLayerVersionsLayerVersionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayerVersionsLayerVersion)(nil)).Elem()
+}
+
+func (i GetLayerVersionsLayerVersionArgs) ToGetLayerVersionsLayerVersionOutput() GetLayerVersionsLayerVersionOutput {
+	return i.ToGetLayerVersionsLayerVersionOutputWithContext(context.Background())
+}
+
+func (i GetLayerVersionsLayerVersionArgs) ToGetLayerVersionsLayerVersionOutputWithContext(ctx context.Context) GetLayerVersionsLayerVersionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayerVersionsLayerVersionOutput)
+}
+
+// GetLayerVersionsLayerVersionArrayInput is an input type that accepts GetLayerVersionsLayerVersionArray and GetLayerVersionsLayerVersionArrayOutput values.
+// You can construct a concrete instance of `GetLayerVersionsLayerVersionArrayInput` via:
+//
+//          GetLayerVersionsLayerVersionArray{ GetLayerVersionsLayerVersionArgs{...} }
+type GetLayerVersionsLayerVersionArrayInput interface {
+	pulumi.Input
+
+	ToGetLayerVersionsLayerVersionArrayOutput() GetLayerVersionsLayerVersionArrayOutput
+	ToGetLayerVersionsLayerVersionArrayOutputWithContext(context.Context) GetLayerVersionsLayerVersionArrayOutput
+}
+
+type GetLayerVersionsLayerVersionArray []GetLayerVersionsLayerVersionInput
+
+func (GetLayerVersionsLayerVersionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayerVersionsLayerVersion)(nil)).Elem()
+}
+
+func (i GetLayerVersionsLayerVersionArray) ToGetLayerVersionsLayerVersionArrayOutput() GetLayerVersionsLayerVersionArrayOutput {
+	return i.ToGetLayerVersionsLayerVersionArrayOutputWithContext(context.Background())
+}
+
+func (i GetLayerVersionsLayerVersionArray) ToGetLayerVersionsLayerVersionArrayOutputWithContext(ctx context.Context) GetLayerVersionsLayerVersionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayerVersionsLayerVersionArrayOutput)
+}
+
+type GetLayerVersionsLayerVersionOutput struct{ *pulumi.OutputState }
+
+func (GetLayerVersionsLayerVersionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayerVersionsLayerVersion)(nil)).Elem()
+}
+
+func (o GetLayerVersionsLayerVersionOutput) ToGetLayerVersionsLayerVersionOutput() GetLayerVersionsLayerVersionOutput {
+	return o
+}
+
+func (o GetLayerVersionsLayerVersionOutput) ToGetLayerVersionsLayerVersionOutputWithContext(ctx context.Context) GetLayerVersionsLayerVersionOutput {
+	return o
+}
+
+// Creation time.
+func (o GetLayerVersionsLayerVersionOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayerVersionsLayerVersionOutput) CompatibleRuntimes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) []string { return v.CompatibleRuntimes }).(pulumi.StringArrayOutput)
+}
+
+// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayerVersionsLayerVersionOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Layer name.
+func (o GetLayerVersionsLayerVersionOutput) LayerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.LayerName }).(pulumi.StringOutput)
+}
+
+// Version number.
+func (o GetLayerVersionsLayerVersionOutput) LayerVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) int { return v.LayerVersion }).(pulumi.IntOutput)
+}
+
+// License informationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayerVersionsLayerVersionOutput) LicenseInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.LicenseInfo }).(pulumi.StringOutput)
+}
+
+// StampNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayerVersionsLayerVersionOutput) Stamp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.Stamp }).(pulumi.StringOutput)
+}
+
+// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+func (o GetLayerVersionsLayerVersionOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayerVersionsLayerVersion) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetLayerVersionsLayerVersionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLayerVersionsLayerVersionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayerVersionsLayerVersion)(nil)).Elem()
+}
+
+func (o GetLayerVersionsLayerVersionArrayOutput) ToGetLayerVersionsLayerVersionArrayOutput() GetLayerVersionsLayerVersionArrayOutput {
+	return o
+}
+
+func (o GetLayerVersionsLayerVersionArrayOutput) ToGetLayerVersionsLayerVersionArrayOutputWithContext(ctx context.Context) GetLayerVersionsLayerVersionArrayOutput {
+	return o
+}
+
+func (o GetLayerVersionsLayerVersionArrayOutput) Index(i pulumi.IntInput) GetLayerVersionsLayerVersionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLayerVersionsLayerVersion {
+		return vs[0].([]GetLayerVersionsLayerVersion)[vs[1].(int)]
+	}).(GetLayerVersionsLayerVersionOutput)
+}
+
+type GetLayersLayer struct {
+	// Creation time.
+	AddTime string `pulumi:"addTime"`
+	// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+	CompatibleRuntimes []string `pulumi:"compatibleRuntimes"`
+	// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// Layer name.
+	LayerName string `pulumi:"layerName"`
+	// Version number.
+	LayerVersion int `pulumi:"layerVersion"`
+	// License informationNote: This field may return null, indicating that no valid values can be obtained.
+	LicenseInfo string `pulumi:"licenseInfo"`
+	// StampNote: This field may return null, indicating that no valid values can be obtained.
+	Stamp string `pulumi:"stamp"`
+	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+	Status string `pulumi:"status"`
+}
+
+// GetLayersLayerInput is an input type that accepts GetLayersLayerArgs and GetLayersLayerOutput values.
+// You can construct a concrete instance of `GetLayersLayerInput` via:
+//
+//          GetLayersLayerArgs{...}
+type GetLayersLayerInput interface {
+	pulumi.Input
+
+	ToGetLayersLayerOutput() GetLayersLayerOutput
+	ToGetLayersLayerOutputWithContext(context.Context) GetLayersLayerOutput
+}
+
+type GetLayersLayerArgs struct {
+	// Creation time.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+	CompatibleRuntimes pulumi.StringArrayInput `pulumi:"compatibleRuntimes"`
+	// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Layer name.
+	LayerName pulumi.StringInput `pulumi:"layerName"`
+	// Version number.
+	LayerVersion pulumi.IntInput `pulumi:"layerVersion"`
+	// License informationNote: This field may return null, indicating that no valid values can be obtained.
+	LicenseInfo pulumi.StringInput `pulumi:"licenseInfo"`
+	// StampNote: This field may return null, indicating that no valid values can be obtained.
+	Stamp pulumi.StringInput `pulumi:"stamp"`
+	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetLayersLayerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayersLayer)(nil)).Elem()
+}
+
+func (i GetLayersLayerArgs) ToGetLayersLayerOutput() GetLayersLayerOutput {
+	return i.ToGetLayersLayerOutputWithContext(context.Background())
+}
+
+func (i GetLayersLayerArgs) ToGetLayersLayerOutputWithContext(ctx context.Context) GetLayersLayerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayersLayerOutput)
+}
+
+// GetLayersLayerArrayInput is an input type that accepts GetLayersLayerArray and GetLayersLayerArrayOutput values.
+// You can construct a concrete instance of `GetLayersLayerArrayInput` via:
+//
+//          GetLayersLayerArray{ GetLayersLayerArgs{...} }
+type GetLayersLayerArrayInput interface {
+	pulumi.Input
+
+	ToGetLayersLayerArrayOutput() GetLayersLayerArrayOutput
+	ToGetLayersLayerArrayOutputWithContext(context.Context) GetLayersLayerArrayOutput
+}
+
+type GetLayersLayerArray []GetLayersLayerInput
+
+func (GetLayersLayerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayersLayer)(nil)).Elem()
+}
+
+func (i GetLayersLayerArray) ToGetLayersLayerArrayOutput() GetLayersLayerArrayOutput {
+	return i.ToGetLayersLayerArrayOutputWithContext(context.Background())
+}
+
+func (i GetLayersLayerArray) ToGetLayersLayerArrayOutputWithContext(ctx context.Context) GetLayersLayerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayersLayerArrayOutput)
+}
+
+type GetLayersLayerOutput struct{ *pulumi.OutputState }
+
+func (GetLayersLayerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayersLayer)(nil)).Elem()
+}
+
+func (o GetLayersLayerOutput) ToGetLayersLayerOutput() GetLayersLayerOutput {
+	return o
+}
+
+func (o GetLayersLayerOutput) ToGetLayersLayerOutputWithContext(ctx context.Context) GetLayersLayerOutput {
+	return o
+}
+
+// Creation time.
+func (o GetLayersLayerOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayersLayerOutput) CompatibleRuntimes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLayersLayer) []string { return v.CompatibleRuntimes }).(pulumi.StringArrayOutput)
+}
+
+// Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayersLayerOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Layer name.
+func (o GetLayersLayerOutput) LayerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.LayerName }).(pulumi.StringOutput)
+}
+
+// Version number.
+func (o GetLayersLayerOutput) LayerVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayersLayer) int { return v.LayerVersion }).(pulumi.IntOutput)
+}
+
+// License informationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayersLayerOutput) LicenseInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.LicenseInfo }).(pulumi.StringOutput)
+}
+
+// StampNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetLayersLayerOutput) Stamp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.Stamp }).(pulumi.StringOutput)
+}
+
+// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+func (o GetLayersLayerOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayersLayer) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetLayersLayerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLayersLayerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayersLayer)(nil)).Elem()
+}
+
+func (o GetLayersLayerArrayOutput) ToGetLayersLayerArrayOutput() GetLayersLayerArrayOutput {
+	return o
+}
+
+func (o GetLayersLayerArrayOutput) ToGetLayersLayerArrayOutputWithContext(ctx context.Context) GetLayersLayerArrayOutput {
+	return o
+}
+
+func (o GetLayersLayerArrayOutput) Index(i pulumi.IntInput) GetLayersLayerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLayersLayer {
+		return vs[0].([]GetLayersLayer)[vs[1].(int)]
+	}).(GetLayersLayerOutput)
+}
+
 type GetLogsLog struct {
 	// Function billing time, according to duration up to the last 100ms, unit is ms.
 	BillDuration int `pulumi:"billDuration"`
@@ -2124,6 +4452,468 @@ func (o GetNamespacesNamespaceArrayOutput) Index(i pulumi.IntInput) GetNamespace
 	}).(GetNamespacesNamespaceOutput)
 }
 
+type GetRequestStatusData struct {
+	// Time consumed for the request in ms.
+	Duration float64 `pulumi:"duration"`
+	// Function name.
+	FunctionName string `pulumi:"functionName"`
+	// Time consumed by the request in MB.
+	MemUsage float64 `pulumi:"memUsage"`
+	// Request ID.
+	RequestId string `pulumi:"requestId"`
+	// Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+	RetCode int `pulumi:"retCode"`
+	// Return value after the function is executed.
+	RetMsg string `pulumi:"retMsg"`
+	// Retry Attempts.
+	RetryNum int `pulumi:"retryNum"`
+	// Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+	StartTime string `pulumi:"startTime"`
+}
+
+// GetRequestStatusDataInput is an input type that accepts GetRequestStatusDataArgs and GetRequestStatusDataOutput values.
+// You can construct a concrete instance of `GetRequestStatusDataInput` via:
+//
+//          GetRequestStatusDataArgs{...}
+type GetRequestStatusDataInput interface {
+	pulumi.Input
+
+	ToGetRequestStatusDataOutput() GetRequestStatusDataOutput
+	ToGetRequestStatusDataOutputWithContext(context.Context) GetRequestStatusDataOutput
+}
+
+type GetRequestStatusDataArgs struct {
+	// Time consumed for the request in ms.
+	Duration pulumi.Float64Input `pulumi:"duration"`
+	// Function name.
+	FunctionName pulumi.StringInput `pulumi:"functionName"`
+	// Time consumed by the request in MB.
+	MemUsage pulumi.Float64Input `pulumi:"memUsage"`
+	// Request ID.
+	RequestId pulumi.StringInput `pulumi:"requestId"`
+	// Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+	RetCode pulumi.IntInput `pulumi:"retCode"`
+	// Return value after the function is executed.
+	RetMsg pulumi.StringInput `pulumi:"retMsg"`
+	// Retry Attempts.
+	RetryNum pulumi.IntInput `pulumi:"retryNum"`
+	// Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+}
+
+func (GetRequestStatusDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRequestStatusData)(nil)).Elem()
+}
+
+func (i GetRequestStatusDataArgs) ToGetRequestStatusDataOutput() GetRequestStatusDataOutput {
+	return i.ToGetRequestStatusDataOutputWithContext(context.Background())
+}
+
+func (i GetRequestStatusDataArgs) ToGetRequestStatusDataOutputWithContext(ctx context.Context) GetRequestStatusDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRequestStatusDataOutput)
+}
+
+// GetRequestStatusDataArrayInput is an input type that accepts GetRequestStatusDataArray and GetRequestStatusDataArrayOutput values.
+// You can construct a concrete instance of `GetRequestStatusDataArrayInput` via:
+//
+//          GetRequestStatusDataArray{ GetRequestStatusDataArgs{...} }
+type GetRequestStatusDataArrayInput interface {
+	pulumi.Input
+
+	ToGetRequestStatusDataArrayOutput() GetRequestStatusDataArrayOutput
+	ToGetRequestStatusDataArrayOutputWithContext(context.Context) GetRequestStatusDataArrayOutput
+}
+
+type GetRequestStatusDataArray []GetRequestStatusDataInput
+
+func (GetRequestStatusDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRequestStatusData)(nil)).Elem()
+}
+
+func (i GetRequestStatusDataArray) ToGetRequestStatusDataArrayOutput() GetRequestStatusDataArrayOutput {
+	return i.ToGetRequestStatusDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetRequestStatusDataArray) ToGetRequestStatusDataArrayOutputWithContext(ctx context.Context) GetRequestStatusDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRequestStatusDataArrayOutput)
+}
+
+type GetRequestStatusDataOutput struct{ *pulumi.OutputState }
+
+func (GetRequestStatusDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRequestStatusData)(nil)).Elem()
+}
+
+func (o GetRequestStatusDataOutput) ToGetRequestStatusDataOutput() GetRequestStatusDataOutput {
+	return o
+}
+
+func (o GetRequestStatusDataOutput) ToGetRequestStatusDataOutputWithContext(ctx context.Context) GetRequestStatusDataOutput {
+	return o
+}
+
+// Time consumed for the request in ms.
+func (o GetRequestStatusDataOutput) Duration() pulumi.Float64Output {
+	return o.ApplyT(func(v GetRequestStatusData) float64 { return v.Duration }).(pulumi.Float64Output)
+}
+
+// Function name.
+func (o GetRequestStatusDataOutput) FunctionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRequestStatusData) string { return v.FunctionName }).(pulumi.StringOutput)
+}
+
+// Time consumed by the request in MB.
+func (o GetRequestStatusDataOutput) MemUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetRequestStatusData) float64 { return v.MemUsage }).(pulumi.Float64Output)
+}
+
+// Request ID.
+func (o GetRequestStatusDataOutput) RequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRequestStatusData) string { return v.RequestId }).(pulumi.StringOutput)
+}
+
+// Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+func (o GetRequestStatusDataOutput) RetCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRequestStatusData) int { return v.RetCode }).(pulumi.IntOutput)
+}
+
+// Return value after the function is executed.
+func (o GetRequestStatusDataOutput) RetMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRequestStatusData) string { return v.RetMsg }).(pulumi.StringOutput)
+}
+
+// Retry Attempts.
+func (o GetRequestStatusDataOutput) RetryNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRequestStatusData) int { return v.RetryNum }).(pulumi.IntOutput)
+}
+
+// Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+func (o GetRequestStatusDataOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRequestStatusData) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+type GetRequestStatusDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRequestStatusDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRequestStatusData)(nil)).Elem()
+}
+
+func (o GetRequestStatusDataArrayOutput) ToGetRequestStatusDataArrayOutput() GetRequestStatusDataArrayOutput {
+	return o
+}
+
+func (o GetRequestStatusDataArrayOutput) ToGetRequestStatusDataArrayOutputWithContext(ctx context.Context) GetRequestStatusDataArrayOutput {
+	return o
+}
+
+func (o GetRequestStatusDataArrayOutput) Index(i pulumi.IntInput) GetRequestStatusDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRequestStatusData {
+		return vs[0].([]GetRequestStatusData)[vs[1].(int)]
+	}).(GetRequestStatusDataOutput)
+}
+
+type GetTriggersFilter struct {
+	// Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+	Name string `pulumi:"name"`
+	// Filter values of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetTriggersFilterInput is an input type that accepts GetTriggersFilterArgs and GetTriggersFilterOutput values.
+// You can construct a concrete instance of `GetTriggersFilterInput` via:
+//
+//          GetTriggersFilterArgs{...}
+type GetTriggersFilterInput interface {
+	pulumi.Input
+
+	ToGetTriggersFilterOutput() GetTriggersFilterOutput
+	ToGetTriggersFilterOutputWithContext(context.Context) GetTriggersFilterOutput
+}
+
+type GetTriggersFilterArgs struct {
+	// Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter values of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetTriggersFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggersFilter)(nil)).Elem()
+}
+
+func (i GetTriggersFilterArgs) ToGetTriggersFilterOutput() GetTriggersFilterOutput {
+	return i.ToGetTriggersFilterOutputWithContext(context.Background())
+}
+
+func (i GetTriggersFilterArgs) ToGetTriggersFilterOutputWithContext(ctx context.Context) GetTriggersFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggersFilterOutput)
+}
+
+// GetTriggersFilterArrayInput is an input type that accepts GetTriggersFilterArray and GetTriggersFilterArrayOutput values.
+// You can construct a concrete instance of `GetTriggersFilterArrayInput` via:
+//
+//          GetTriggersFilterArray{ GetTriggersFilterArgs{...} }
+type GetTriggersFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggersFilterArrayOutput() GetTriggersFilterArrayOutput
+	ToGetTriggersFilterArrayOutputWithContext(context.Context) GetTriggersFilterArrayOutput
+}
+
+type GetTriggersFilterArray []GetTriggersFilterInput
+
+func (GetTriggersFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggersFilter)(nil)).Elem()
+}
+
+func (i GetTriggersFilterArray) ToGetTriggersFilterArrayOutput() GetTriggersFilterArrayOutput {
+	return i.ToGetTriggersFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggersFilterArray) ToGetTriggersFilterArrayOutputWithContext(ctx context.Context) GetTriggersFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggersFilterArrayOutput)
+}
+
+type GetTriggersFilterOutput struct{ *pulumi.OutputState }
+
+func (GetTriggersFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggersFilter)(nil)).Elem()
+}
+
+func (o GetTriggersFilterOutput) ToGetTriggersFilterOutput() GetTriggersFilterOutput {
+	return o
+}
+
+func (o GetTriggersFilterOutput) ToGetTriggersFilterOutputWithContext(ctx context.Context) GetTriggersFilterOutput {
+	return o
+}
+
+// Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+func (o GetTriggersFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter values of the field.
+func (o GetTriggersFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggersFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetTriggersFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggersFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggersFilter)(nil)).Elem()
+}
+
+func (o GetTriggersFilterArrayOutput) ToGetTriggersFilterArrayOutput() GetTriggersFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggersFilterArrayOutput) ToGetTriggersFilterArrayOutputWithContext(ctx context.Context) GetTriggersFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggersFilterArrayOutput) Index(i pulumi.IntInput) GetTriggersFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggersFilter {
+		return vs[0].([]GetTriggersFilter)[vs[1].(int)]
+	}).(GetTriggersFilterOutput)
+}
+
+type GetTriggersTrigger struct {
+	// Trigger creation time.
+	AddTime string `pulumi:"addTime"`
+	// Whether the trigger is available.
+	AvailableStatus string `pulumi:"availableStatus"`
+	// Trigger-Function binding status.
+	BindStatus string `pulumi:"bindStatus"`
+	// Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+	CustomArgument string `pulumi:"customArgument"`
+	// Whether to enable.
+	Enable int `pulumi:"enable"`
+	// Trigger last modified time.
+	ModTime string `pulumi:"modTime"`
+	// Function version or alias.
+	Qualifier string `pulumi:"qualifier"`
+	// Minimum resource ID of trigger.
+	ResourceId string `pulumi:"resourceId"`
+	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+	TriggerAttribute string `pulumi:"triggerAttribute"`
+	// Detailed configuration of trigger.
+	TriggerDesc string `pulumi:"triggerDesc"`
+	// Trigger name.
+	TriggerName string `pulumi:"triggerName"`
+	// Trigger type.
+	Type string `pulumi:"type"`
+}
+
+// GetTriggersTriggerInput is an input type that accepts GetTriggersTriggerArgs and GetTriggersTriggerOutput values.
+// You can construct a concrete instance of `GetTriggersTriggerInput` via:
+//
+//          GetTriggersTriggerArgs{...}
+type GetTriggersTriggerInput interface {
+	pulumi.Input
+
+	ToGetTriggersTriggerOutput() GetTriggersTriggerOutput
+	ToGetTriggersTriggerOutputWithContext(context.Context) GetTriggersTriggerOutput
+}
+
+type GetTriggersTriggerArgs struct {
+	// Trigger creation time.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Whether the trigger is available.
+	AvailableStatus pulumi.StringInput `pulumi:"availableStatus"`
+	// Trigger-Function binding status.
+	BindStatus pulumi.StringInput `pulumi:"bindStatus"`
+	// Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+	CustomArgument pulumi.StringInput `pulumi:"customArgument"`
+	// Whether to enable.
+	Enable pulumi.IntInput `pulumi:"enable"`
+	// Trigger last modified time.
+	ModTime pulumi.StringInput `pulumi:"modTime"`
+	// Function version or alias.
+	Qualifier pulumi.StringInput `pulumi:"qualifier"`
+	// Minimum resource ID of trigger.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+	TriggerAttribute pulumi.StringInput `pulumi:"triggerAttribute"`
+	// Detailed configuration of trigger.
+	TriggerDesc pulumi.StringInput `pulumi:"triggerDesc"`
+	// Trigger name.
+	TriggerName pulumi.StringInput `pulumi:"triggerName"`
+	// Trigger type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetTriggersTriggerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggersTrigger)(nil)).Elem()
+}
+
+func (i GetTriggersTriggerArgs) ToGetTriggersTriggerOutput() GetTriggersTriggerOutput {
+	return i.ToGetTriggersTriggerOutputWithContext(context.Background())
+}
+
+func (i GetTriggersTriggerArgs) ToGetTriggersTriggerOutputWithContext(ctx context.Context) GetTriggersTriggerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggersTriggerOutput)
+}
+
+// GetTriggersTriggerArrayInput is an input type that accepts GetTriggersTriggerArray and GetTriggersTriggerArrayOutput values.
+// You can construct a concrete instance of `GetTriggersTriggerArrayInput` via:
+//
+//          GetTriggersTriggerArray{ GetTriggersTriggerArgs{...} }
+type GetTriggersTriggerArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggersTriggerArrayOutput() GetTriggersTriggerArrayOutput
+	ToGetTriggersTriggerArrayOutputWithContext(context.Context) GetTriggersTriggerArrayOutput
+}
+
+type GetTriggersTriggerArray []GetTriggersTriggerInput
+
+func (GetTriggersTriggerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggersTrigger)(nil)).Elem()
+}
+
+func (i GetTriggersTriggerArray) ToGetTriggersTriggerArrayOutput() GetTriggersTriggerArrayOutput {
+	return i.ToGetTriggersTriggerArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggersTriggerArray) ToGetTriggersTriggerArrayOutputWithContext(ctx context.Context) GetTriggersTriggerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggersTriggerArrayOutput)
+}
+
+type GetTriggersTriggerOutput struct{ *pulumi.OutputState }
+
+func (GetTriggersTriggerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggersTrigger)(nil)).Elem()
+}
+
+func (o GetTriggersTriggerOutput) ToGetTriggersTriggerOutput() GetTriggersTriggerOutput {
+	return o
+}
+
+func (o GetTriggersTriggerOutput) ToGetTriggersTriggerOutputWithContext(ctx context.Context) GetTriggersTriggerOutput {
+	return o
+}
+
+// Trigger creation time.
+func (o GetTriggersTriggerOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Whether the trigger is available.
+func (o GetTriggersTriggerOutput) AvailableStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.AvailableStatus }).(pulumi.StringOutput)
+}
+
+// Trigger-Function binding status.
+func (o GetTriggersTriggerOutput) BindStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.BindStatus }).(pulumi.StringOutput)
+}
+
+// Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetTriggersTriggerOutput) CustomArgument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.CustomArgument }).(pulumi.StringOutput)
+}
+
+// Whether to enable.
+func (o GetTriggersTriggerOutput) Enable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) int { return v.Enable }).(pulumi.IntOutput)
+}
+
+// Trigger last modified time.
+func (o GetTriggersTriggerOutput) ModTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.ModTime }).(pulumi.StringOutput)
+}
+
+// Function version or alias.
+func (o GetTriggersTriggerOutput) Qualifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.Qualifier }).(pulumi.StringOutput)
+}
+
+// Minimum resource ID of trigger.
+func (o GetTriggersTriggerOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+func (o GetTriggersTriggerOutput) TriggerAttribute() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.TriggerAttribute }).(pulumi.StringOutput)
+}
+
+// Detailed configuration of trigger.
+func (o GetTriggersTriggerOutput) TriggerDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.TriggerDesc }).(pulumi.StringOutput)
+}
+
+// Trigger name.
+func (o GetTriggersTriggerOutput) TriggerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.TriggerName }).(pulumi.StringOutput)
+}
+
+// Trigger type.
+func (o GetTriggersTriggerOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggersTrigger) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetTriggersTriggerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggersTriggerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggersTrigger)(nil)).Elem()
+}
+
+func (o GetTriggersTriggerArrayOutput) ToGetTriggersTriggerArrayOutput() GetTriggersTriggerArrayOutput {
+	return o
+}
+
+func (o GetTriggersTriggerArrayOutput) ToGetTriggersTriggerArrayOutputWithContext(ctx context.Context) GetTriggersTriggerArrayOutput {
+	return o
+}
+
+func (o GetTriggersTriggerArrayOutput) Index(i pulumi.IntInput) GetTriggersTriggerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggersTrigger {
+		return vs[0].([]GetTriggersTrigger)[vs[1].(int)]
+	}).(GetTriggersTriggerOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigInput)(nil)).Elem(), FunctionAliasRoutingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigPtrInput)(nil)).Elem(), FunctionAliasRoutingConfigArgs{})
@@ -2133,6 +4923,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput)(nil)).Elem(), FunctionAliasRoutingConfigAdditionalVersionWeightArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionCfsConfigInput)(nil)).Elem(), FunctionCfsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionCfsConfigArrayInput)(nil)).Elem(), FunctionCfsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigPtrInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigInput)(nil)).Elem(), FunctionImageConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigArrayInput)(nil)).Elem(), FunctionImageConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionLayerInput)(nil)).Elem(), FunctionLayerArgs{})
@@ -2143,14 +4937,50 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTriggerInfoArrayInput)(nil)).Elem(), FunctionTriggerInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LayerContentInput)(nil)).Elem(), LayerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LayerContentPtrInput)(nil)).Elem(), LayerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProvisionedConcurrencyConfigTriggerActionInput)(nil)).Elem(), ProvisionedConcurrencyConfigTriggerActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProvisionedConcurrencyConfigTriggerActionArrayInput)(nil)).Elem(), ProvisionedConcurrencyConfigTriggerActionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitInput)(nil)).Elem(), GetAccountInfoAccountLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitArrayInput)(nil)).Elem(), GetAccountInfoAccountLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceInput)(nil)).Elem(), GetAccountInfoAccountLimitNamespaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceArrayInput)(nil)).Elem(), GetAccountInfoAccountLimitNamespaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceTriggerInput)(nil)).Elem(), GetAccountInfoAccountLimitNamespaceTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountLimitNamespaceTriggerArrayInput)(nil)).Elem(), GetAccountInfoAccountLimitNamespaceTriggerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountUsageInput)(nil)).Elem(), GetAccountInfoAccountUsageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountUsageArrayInput)(nil)).Elem(), GetAccountInfoAccountUsageArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountUsageNamespaceInput)(nil)).Elem(), GetAccountInfoAccountUsageNamespaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountInfoAccountUsageNamespaceArrayInput)(nil)).Elem(), GetAccountInfoAccountUsageNamespaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAsyncEventManagementEventListInput)(nil)).Elem(), GetAsyncEventManagementEventListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAsyncEventManagementEventListArrayInput)(nil)).Elem(), GetAsyncEventManagementEventListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAsyncEventStatusResultInput)(nil)).Elem(), GetAsyncEventStatusResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAsyncEventStatusResultArrayInput)(nil)).Elem(), GetAsyncEventStatusResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasInput)(nil)).Elem(), GetFunctionAliasesAliasArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasArrayInput)(nil)).Elem(), GetFunctionAliasesAliasArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigArrayInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput)(nil)).Elem(), GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionVersionsVersionInput)(nil)).Elem(), GetFunctionVersionsVersionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionVersionsVersionArrayInput)(nil)).Elem(), GetFunctionVersionsVersionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionInput)(nil)).Elem(), GetFunctionsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionArrayInput)(nil)).Elem(), GetFunctionsFunctionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoArrayInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayerVersionsLayerVersionInput)(nil)).Elem(), GetLayerVersionsLayerVersionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayerVersionsLayerVersionArrayInput)(nil)).Elem(), GetLayerVersionsLayerVersionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayersLayerInput)(nil)).Elem(), GetLayersLayerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayersLayerArrayInput)(nil)).Elem(), GetLayersLayerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsLogInput)(nil)).Elem(), GetLogsLogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsLogArrayInput)(nil)).Elem(), GetLogsLogArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceInput)(nil)).Elem(), GetNamespacesNamespaceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceArrayInput)(nil)).Elem(), GetNamespacesNamespaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRequestStatusDataInput)(nil)).Elem(), GetRequestStatusDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRequestStatusDataArrayInput)(nil)).Elem(), GetRequestStatusDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggersFilterInput)(nil)).Elem(), GetTriggersFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggersFilterArrayInput)(nil)).Elem(), GetTriggersFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggersTriggerInput)(nil)).Elem(), GetTriggersTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggersTriggerArrayInput)(nil)).Elem(), GetTriggersTriggerArray{})
 	pulumi.RegisterOutputType(FunctionAliasRoutingConfigOutput{})
 	pulumi.RegisterOutputType(FunctionAliasRoutingConfigPtrOutput{})
 	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionMatchOutput{})
@@ -2159,6 +4989,10 @@ func init() {
 	pulumi.RegisterOutputType(FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput{})
 	pulumi.RegisterOutputType(FunctionCfsConfigOutput{})
 	pulumi.RegisterOutputType(FunctionCfsConfigArrayOutput{})
+	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigOutput{})
+	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput{})
+	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput{})
+	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionLayerOutput{})
@@ -2169,12 +5003,48 @@ func init() {
 	pulumi.RegisterOutputType(FunctionTriggerInfoArrayOutput{})
 	pulumi.RegisterOutputType(LayerContentOutput{})
 	pulumi.RegisterOutputType(LayerContentPtrOutput{})
+	pulumi.RegisterOutputType(ProvisionedConcurrencyConfigTriggerActionOutput{})
+	pulumi.RegisterOutputType(ProvisionedConcurrencyConfigTriggerActionArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitNamespaceOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitNamespaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitNamespaceTriggerOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountLimitNamespaceTriggerArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountUsageOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountUsageArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountUsageNamespaceOutput{})
+	pulumi.RegisterOutputType(GetAccountInfoAccountUsageNamespaceArrayOutput{})
+	pulumi.RegisterOutputType(GetAsyncEventManagementEventListOutput{})
+	pulumi.RegisterOutputType(GetAsyncEventManagementEventListArrayOutput{})
+	pulumi.RegisterOutputType(GetAsyncEventStatusResultOutput{})
+	pulumi.RegisterOutputType(GetAsyncEventStatusResultArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput{})
+	pulumi.RegisterOutputType(GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionVersionsVersionOutput{})
+	pulumi.RegisterOutputType(GetFunctionVersionsVersionArrayOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionArrayOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLayerVersionsLayerVersionOutput{})
+	pulumi.RegisterOutputType(GetLayerVersionsLayerVersionArrayOutput{})
+	pulumi.RegisterOutputType(GetLayersLayerOutput{})
+	pulumi.RegisterOutputType(GetLayersLayerArrayOutput{})
 	pulumi.RegisterOutputType(GetLogsLogOutput{})
 	pulumi.RegisterOutputType(GetLogsLogArrayOutput{})
 	pulumi.RegisterOutputType(GetNamespacesNamespaceOutput{})
 	pulumi.RegisterOutputType(GetNamespacesNamespaceArrayOutput{})
+	pulumi.RegisterOutputType(GetRequestStatusDataOutput{})
+	pulumi.RegisterOutputType(GetRequestStatusDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggersFilterOutput{})
+	pulumi.RegisterOutputType(GetTriggersFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggersTriggerOutput{})
+	pulumi.RegisterOutputType(GetTriggersTriggerArrayOutput{})
 }

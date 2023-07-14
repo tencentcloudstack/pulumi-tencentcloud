@@ -30,7 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         ///         var @default = Output.Create(Tencentcloud.Mysql.GetBackupList.InvokeAsync(new Tencentcloud.Mysql.GetBackupListArgs
         ///         {
         ///             MaxNumber = 10,
-        ///             MysqlId = "my-test-database",
+        ///             MysqlId = "terraform-test-local-database",
         ///             ResultOutputFile = "mytestpath",
         ///         }));
         ///     }
@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         ///         var @default = Output.Create(Tencentcloud.Mysql.GetBackupList.InvokeAsync(new Tencentcloud.Mysql.GetBackupListArgs
         ///         {
         ///             MaxNumber = 10,
-        ///             MysqlId = "my-test-database",
+        ///             MysqlId = "terraform-test-local-database",
         ///             ResultOutputFile = "mytestpath",
         ///         }));
         ///     }

@@ -28,7 +28,8 @@ class ReadonlyInstanceArgs:
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 vpc_id: Optional[pulumi.Input[str]] = None):
+                 vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] master_instance_id: Indicates the master instance ID of recovery instances.
@@ -47,6 +48,7 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[str] vpc_id: ID of VPC.
+        :param pulumi.Input[int] wait_switch: It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
         """
         pulumi.set(__self__, "master_instance_id", master_instance_id)
         pulumi.set(__self__, "memory", memory)
@@ -76,6 +78,11 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if wait_switch is not None:
+            warnings.warn("""It has been deprecated from version 1.81.2.""", DeprecationWarning)
+            pulumi.log.warn("""wait_switch is deprecated: It has been deprecated from version 1.81.2.""")
+        if wait_switch is not None:
+            pulumi.set(__self__, "wait_switch", wait_switch)
 
     @property
     @pulumi.getter(name="masterInstanceId")
@@ -269,6 +276,18 @@ class ReadonlyInstanceArgs:
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
 
+    @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> Optional[pulumi.Input[int]]:
+        """
+        It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        """
+        return pulumi.get(self, "wait_switch")
+
+    @wait_switch.setter
+    def wait_switch(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "wait_switch", value)
+
 
 @pulumi.input_type
 class _ReadonlyInstanceState:
@@ -293,7 +312,8 @@ class _ReadonlyInstanceState:
                  vip: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
-                 vport: Optional[pulumi.Input[int]] = None):
+                 vport: Optional[pulumi.Input[int]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering ReadonlyInstance resources.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
@@ -317,6 +337,7 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         :param pulumi.Input[int] vport: Port for private access.
+        :param pulumi.Input[int] wait_switch: It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
         """
         if auto_voucher is not None:
             pulumi.set(__self__, "auto_voucher", auto_voucher)
@@ -360,6 +381,11 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if vport is not None:
             pulumi.set(__self__, "vport", vport)
+        if wait_switch is not None:
+            warnings.warn("""It has been deprecated from version 1.81.2.""", DeprecationWarning)
+            pulumi.log.warn("""wait_switch is deprecated: It has been deprecated from version 1.81.2.""")
+        if wait_switch is not None:
+            pulumi.set(__self__, "wait_switch", wait_switch)
 
     @property
     @pulumi.getter(name="autoVoucher")
@@ -613,6 +639,18 @@ class _ReadonlyInstanceState:
     def vport(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "vport", value)
 
+    @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> Optional[pulumi.Input[int]]:
+        """
+        It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        """
+        return pulumi.get(self, "wait_switch")
+
+    @wait_switch.setter
+    def wait_switch(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "wait_switch", value)
+
 
 class ReadonlyInstance(pulumi.CustomResource):
     @overload
@@ -635,6 +673,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Provides a SQL Server instance resource to create read-only database instances.
@@ -683,6 +722,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[str] vpc_id: ID of VPC.
+        :param pulumi.Input[int] wait_switch: It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
         """
         ...
     @overload
@@ -750,6 +790,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -788,6 +829,10 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["voucher_ids"] = voucher_ids
             __props__.__dict__["vpc_id"] = vpc_id
+            if wait_switch is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.2.""", DeprecationWarning)
+                pulumi.log.warn("""wait_switch is deprecated: It has been deprecated from version 1.81.2.""")
+            __props__.__dict__["wait_switch"] = wait_switch
             __props__.__dict__["create_time"] = None
             __props__.__dict__["ro_flag"] = None
             __props__.__dict__["status"] = None
@@ -823,7 +868,8 @@ class ReadonlyInstance(pulumi.CustomResource):
             vip: Optional[pulumi.Input[str]] = None,
             voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
-            vport: Optional[pulumi.Input[int]] = None) -> 'ReadonlyInstance':
+            vport: Optional[pulumi.Input[int]] = None,
+            wait_switch: Optional[pulumi.Input[int]] = None) -> 'ReadonlyInstance':
         """
         Get an existing ReadonlyInstance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -852,6 +898,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[str] vpc_id: ID of VPC.
         :param pulumi.Input[int] vport: Port for private access.
+        :param pulumi.Input[int] wait_switch: It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -878,6 +925,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["voucher_ids"] = voucher_ids
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["vport"] = vport
+        __props__.__dict__["wait_switch"] = wait_switch
         return ReadonlyInstance(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -1047,4 +1095,12 @@ class ReadonlyInstance(pulumi.CustomResource):
         Port for private access.
         """
         return pulumi.get(self, "vport")
+
+    @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> pulumi.Output[Optional[int]]:
+        """
+        It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        """
+        return pulumi.get(self, "wait_switch")
 

@@ -8,19 +8,48 @@ import * as utilities from "../utilities";
  * Provide a resource to create a SSM secret.
  *
  * ## Example Usage
+ * ### Create user defined secret
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Ssm.Secret("foo", {
- *     description: "test secret",
+ *     description: "user defined secret",
  *     isEnabled: true,
  *     recoveryWindowInDays: 0,
  *     secretName: "test",
  *     tags: {
  *         "test-tag": "test",
  *     },
+ * });
+ * ```
+ * ### Create redis secret
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instance = tencentcloud.Redis.getInstances({
+ *     zone: "ap-guangzhou-6",
+ * });
+ * const secret = new tencentcloud.ssm.Secret("secret", {
+ *     secretName: "for-redis-test",
+ *     description: "redis secret",
+ *     isEnabled: false,
+ *     secretType: 4,
+ *     additionalConfig: instance.then(instance => JSON.stringify({
+ *         Region: "ap-guangzhou",
+ *         Privilege: "r",
+ *         InstanceId: instance.instanceLists?[0]?.redisId,
+ *         ReadonlyPolicy: ["master"],
+ *         Remark: "for tf test",
+ *     })),
+ *     tags: {
+ *         "test-tag": "test",
+ *     },
+ *     recoveryWindowInDays: 0,
  * });
  * ```
  *
@@ -61,6 +90,10 @@ export class Secret extends pulumi.CustomResource {
     }
 
     /**
+     * Additional config for specific secret types in JSON string format.
+     */
+    public readonly additionalConfig!: pulumi.Output<string | undefined>;
+    /**
      * Description of secret. The maximum is 2048 bytes.
      */
     public readonly description!: pulumi.Output<string | undefined>;
@@ -80,6 +113,10 @@ export class Secret extends pulumi.CustomResource {
      * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     public readonly secretName!: pulumi.Output<string>;
+    /**
+     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     */
+    public readonly secretType!: pulumi.Output<number>;
     /**
      * Status of secret.
      */
@@ -102,11 +139,13 @@ export class Secret extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SecretState | undefined;
+            resourceInputs["additionalConfig"] = state ? state.additionalConfig : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["isEnabled"] = state ? state.isEnabled : undefined;
             resourceInputs["kmsKeyId"] = state ? state.kmsKeyId : undefined;
             resourceInputs["recoveryWindowInDays"] = state ? state.recoveryWindowInDays : undefined;
             resourceInputs["secretName"] = state ? state.secretName : undefined;
+            resourceInputs["secretType"] = state ? state.secretType : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
@@ -114,11 +153,13 @@ export class Secret extends pulumi.CustomResource {
             if ((!args || args.secretName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'secretName'");
             }
+            resourceInputs["additionalConfig"] = args ? args.additionalConfig : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["isEnabled"] = args ? args.isEnabled : undefined;
             resourceInputs["kmsKeyId"] = args ? args.kmsKeyId : undefined;
             resourceInputs["recoveryWindowInDays"] = args ? args.recoveryWindowInDays : undefined;
             resourceInputs["secretName"] = args ? args.secretName : undefined;
+            resourceInputs["secretType"] = args ? args.secretType : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -131,6 +172,10 @@ export class Secret extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Secret resources.
  */
 export interface SecretState {
+    /**
+     * Additional config for specific secret types in JSON string format.
+     */
+    additionalConfig?: pulumi.Input<string>;
     /**
      * Description of secret. The maximum is 2048 bytes.
      */
@@ -152,6 +197,10 @@ export interface SecretState {
      */
     secretName?: pulumi.Input<string>;
     /**
+     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     */
+    secretType?: pulumi.Input<number>;
+    /**
      * Status of secret.
      */
     status?: pulumi.Input<string>;
@@ -165,6 +214,10 @@ export interface SecretState {
  * The set of arguments for constructing a Secret resource.
  */
 export interface SecretArgs {
+    /**
+     * Additional config for specific secret types in JSON string format.
+     */
+    additionalConfig?: pulumi.Input<string>;
     /**
      * Description of secret. The maximum is 2048 bytes.
      */
@@ -185,6 +238,10 @@ export interface SecretArgs {
      * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     secretName: pulumi.Input<string>;
+    /**
+     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     */
+    secretType?: pulumi.Input<number>;
     /**
      * Tags of secret.
      */

@@ -135,7 +135,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<ImmutableDictionary<string, object>> Placement { get; private set; } = null!;
 
         /// <summary>
-        /// The product id of EMR instance.
+        /// Product ID. Different products ID represents different EMR product versions. Value range:
+        /// - 16: represents EMR-V2.3.0
+        /// - 20: indicates EMR-V2.5.0
+        /// - 25: represents EMR-V3.1.0
+        /// - 27: represents KAFKA-V1.0.0
+        /// - 30: indicates EMR-V2.6.0
+        /// - 33: represents EMR-V3.2.1
+        /// - 34: stands for EMR-V3.3.0
+        /// - 36: represents STARROCKS-V1.0.0
+        /// - 37: indicates EMR-V3.4.0
+        /// - 38: represents EMR-V2.7.0
+        /// - 39: stands for STARROCKS-V1.1.0
+        /// - 41: represents DRUID-V1.1.0.
         /// </summary>
         [Output("productId")]
         public Output<int> ProductId { get; private set; } = null!;
@@ -288,7 +300,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         }
 
         /// <summary>
-        /// The product id of EMR instance.
+        /// Product ID. Different products ID represents different EMR product versions. Value range:
+        /// - 16: represents EMR-V2.3.0
+        /// - 20: indicates EMR-V2.5.0
+        /// - 25: represents EMR-V3.1.0
+        /// - 27: represents KAFKA-V1.0.0
+        /// - 30: indicates EMR-V2.6.0
+        /// - 33: represents EMR-V3.2.1
+        /// - 34: stands for EMR-V3.3.0
+        /// - 36: represents STARROCKS-V1.0.0
+        /// - 37: indicates EMR-V3.4.0
+        /// - 38: represents EMR-V2.7.0
+        /// - 39: stands for STARROCKS-V1.1.0
+        /// - 41: represents DRUID-V1.1.0.
         /// </summary>
         [Input("productId", required: true)]
         public Input<int> ProductId { get; set; } = null!;
@@ -419,7 +443,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         }
 
         /// <summary>
-        /// The product id of EMR instance.
+        /// Product ID. Different products ID represents different EMR product versions. Value range:
+        /// - 16: represents EMR-V2.3.0
+        /// - 20: indicates EMR-V2.5.0
+        /// - 25: represents EMR-V3.1.0
+        /// - 27: represents KAFKA-V1.0.0
+        /// - 30: indicates EMR-V2.6.0
+        /// - 33: represents EMR-V3.2.1
+        /// - 34: stands for EMR-V3.3.0
+        /// - 36: represents STARROCKS-V1.0.0
+        /// - 37: indicates EMR-V3.4.0
+        /// - 38: represents EMR-V2.7.0
+        /// - 39: stands for STARROCKS-V1.1.0
+        /// - 41: represents DRUID-V1.1.0.
         /// </summary>
         [Input("productId")]
         public Input<int>? ProductId { get; set; }

@@ -400,8 +400,7 @@ class GroupRule(pulumi.CustomResource):
         > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
 
         ## Example Usage
-
-        Source is CIDR ip
+        ### Source is CIDR ip
 
         ```python
         import pulumi
@@ -419,8 +418,7 @@ class GroupRule(pulumi.CustomResource):
             policy="ACCEPT",
             description="favourite sg rule_1")
         ```
-
-        Source is a security group id
+        ### Source is a security group id
 
         ```python
         import pulumi
@@ -468,8 +466,7 @@ class GroupRule(pulumi.CustomResource):
         > **NOTE:** Single security rule is hardly ordered, use Security.GroupLiteRule instead.
 
         ## Example Usage
-
-        Source is CIDR ip
+        ### Source is CIDR ip
 
         ```python
         import pulumi
@@ -487,8 +484,7 @@ class GroupRule(pulumi.CustomResource):
             policy="ACCEPT",
             description="favourite sg rule_1")
         ```
-
-        Source is a security group id
+        ### Source is a security group id
 
         ```python
         import pulumi

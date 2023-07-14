@@ -97,7 +97,7 @@ def get_backup_list(max_number: Optional[int] = None,
     import pulumi_tencentcloud as tencentcloud
 
     default = tencentcloud.Mysql.get_backup_list(max_number=10,
-        mysql_id="my-test-database",
+        mysql_id="terraform-test-local-database",
         result_output_file="mytestpath")
     ```
 
@@ -141,7 +141,7 @@ def get_backup_list_output(max_number: Optional[pulumi.Input[Optional[int]]] = N
     import pulumi_tencentcloud as tencentcloud
 
     default = tencentcloud.Mysql.get_backup_list(max_number=10,
-        mysql_id="my-test-database",
+        mysql_id="terraform-test-local-database",
         result_output_file="mytestpath")
     ```
 

@@ -50,6 +50,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// mysql read-only database instances can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+// ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
 
@@ -60,7 +68,7 @@ type ReadonlyInstance struct {
 	// CPU cores.
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-	DeviceType pulumi.StringPtrOutput `pulumi:"deviceType"`
+	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -470,8 +478,8 @@ func (o ReadonlyInstanceOutput) Cpu() pulumi.IntOutput {
 }
 
 // Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-func (o ReadonlyInstanceOutput) DeviceType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.DeviceType }).(pulumi.StringPtrOutput)
+func (o ReadonlyInstanceOutput) DeviceType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
 }
 
 // Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.

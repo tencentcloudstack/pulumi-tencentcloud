@@ -23,6 +23,7 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";

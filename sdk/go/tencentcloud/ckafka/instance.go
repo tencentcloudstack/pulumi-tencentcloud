@@ -16,48 +16,129 @@ import (
 // > **NOTE:** It only support create prepaid ckafka instance.
 //
 // ## Example Usage
+// ### Basic Instance
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewInstance(ctx, "foo", &Ckafka.InstanceArgs{
-// 			BandWidth: pulumi.Int(40),
+// 		cfg := config.New(ctx, "")
+// 		vpcId := "vpc-68vi2d3h"
+// 		if param := cfg.Get("vpcId"); param != "" {
+// 			vpcId = param
+// 		}
+// 		subnetId := "subnet-ob6clqwk"
+// 		if param := cfg.Get("subnetId"); param != "" {
+// 			subnetId = param
+// 		}
+// 		gz, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Name:    pulumi.StringRef("ap-guangzhou-3"),
+// 			Product: "ckafka",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
+// 			InstanceName:       pulumi.String("ckafka-instance-type-tf-test"),
+// 			ZoneId:             pulumi.String(gz.Zones[0].Id),
+// 			Period:             pulumi.Int(1),
+// 			VpcId:              pulumi.String(vpcId),
+// 			SubnetId:           pulumi.String(subnetId),
+// 			MsgRetentionTime:   pulumi.Int(1300),
+// 			RenewFlag:          pulumi.Int(0),
+// 			KafkaVersion:       pulumi.String("2.4.1"),
+// 			DiskSize:           pulumi.Int(1000),
+// 			DiskType:           pulumi.String("CLOUD_BASIC"),
+// 			SpecificationsType: pulumi.String("standard"),
+// 			InstanceType:       pulumi.Int(2),
 // 			Config: &ckafka.InstanceConfigArgs{
 // 				AutoCreateTopicEnable:    pulumi.Bool(true),
 // 				DefaultNumPartitions:     pulumi.Int(3),
 // 				DefaultReplicationFactor: pulumi.Int(3),
 // 			},
-// 			DiskSize: pulumi.Int(500),
-// 			DiskType: pulumi.String("CLOUD_BASIC"),
 // 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				BottomRetention:       pulumi.Int(0),
-// 				DiskQuotaPercentage:   pulumi.Int(0),
-// 				Enable:                pulumi.Int(1),
-// 				StepForwardPercentage: pulumi.Int(0),
+// 				Enable: pulumi.Int(1),
 // 			},
-// 			InstanceName:       pulumi.String("ckafka-instance-tf-test"),
-// 			KafkaVersion:       pulumi.String("1.1.1"),
-// 			MsgRetentionTime:   pulumi.Int(1300),
-// 			MultiZoneFlag:      pulumi.Bool(true),
-// 			Partition:          pulumi.Int(800),
-// 			Period:             pulumi.Int(1),
-// 			PublicNetwork:      pulumi.Int(3),
-// 			RenewFlag:          pulumi.Int(0),
-// 			SpecificationsType: pulumi.String("profession"),
-// 			SubnetId:           pulumi.String("subnet-4vwihrzk"),
-// 			VpcId:              pulumi.String("vpc-82p1t1nv"),
-// 			ZoneId:             pulumi.Int(100006),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Multi zone Instance
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		vpcId := "vpc-68vi2d3h"
+// 		if param := cfg.Get("vpcId"); param != "" {
+// 			vpcId = param
+// 		}
+// 		subnetId := "subnet-ob6clqwk"
+// 		if param := cfg.Get("subnetId"); param != "" {
+// 			subnetId = param
+// 		}
+// 		gz3, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Name:    pulumi.StringRef("ap-guangzhou-3"),
+// 			Product: "ckafka",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		gz6, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Name:    pulumi.StringRef("ap-guangzhou-6"),
+// 			Product: "ckafka",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
+// 			InstanceName:  pulumi.String("ckafka-instance-maz-tf-test"),
+// 			ZoneId:        pulumi.String(gz3.Zones[0].Id),
+// 			MultiZoneFlag: pulumi.Bool(true),
 // 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(100006),
-// 				pulumi.Int(100007),
+// 				pulumi.String(gz3.Zones[0].Id),
+// 				pulumi.String(gz6.Zones[0].Id),
+// 			},
+// 			Period:           pulumi.Int(1),
+// 			VpcId:            pulumi.String(vpcId),
+// 			SubnetId:         pulumi.String(subnetId),
+// 			MsgRetentionTime: pulumi.Int(1300),
+// 			RenewFlag:        pulumi.Int(0),
+// 			KafkaVersion:     pulumi.String("1.1.1"),
+// 			DiskSize:         pulumi.Int(500),
+// 			DiskType:         pulumi.String("CLOUD_BASIC"),
+// 			Config: &ckafka.InstanceConfigArgs{
+// 				AutoCreateTopicEnable:    pulumi.Bool(true),
+// 				DefaultNumPartitions:     pulumi.Int(3),
+// 				DefaultReplicationFactor: pulumi.Int(3),
+// 			},
+// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+// 				Enable: pulumi.Int(1),
 // 			},
 // 		})
 // 		if err != nil {
@@ -94,6 +175,8 @@ type Instance struct {
 	InstanceType pulumi.IntOutput `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringOutput `pulumi:"kafkaVersion"`
+	// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+	MaxMessageByte pulumi.IntOutput `pulumi:"maxMessageByte"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntOutput `pulumi:"msgRetentionTime"`
 	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
@@ -102,7 +185,9 @@ type Instance struct {
 	Partition pulumi.IntOutput `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
-	// Bandwidth of the public network.
+	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+	//
+	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 	PublicNetwork pulumi.IntOutput `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrOutput `pulumi:"rebalanceTime"`
@@ -182,6 +267,8 @@ type instanceState struct {
 	InstanceType *int `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
+	// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+	MaxMessageByte *int `pulumi:"maxMessageByte"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime *int `pulumi:"msgRetentionTime"`
 	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
@@ -190,7 +277,9 @@ type instanceState struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// Bandwidth of the public network.
+	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+	//
+	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
@@ -235,6 +324,8 @@ type InstanceState struct {
 	InstanceType pulumi.IntPtrInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
+	// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+	MaxMessageByte pulumi.IntPtrInput
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntPtrInput
 	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
@@ -243,7 +334,9 @@ type InstanceState struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// Bandwidth of the public network.
+	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+	//
+	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
@@ -292,6 +385,8 @@ type instanceArgs struct {
 	InstanceType *int `pulumi:"instanceType"`
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion *string `pulumi:"kafkaVersion"`
+	// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+	MaxMessageByte *int `pulumi:"maxMessageByte"`
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime *int `pulumi:"msgRetentionTime"`
 	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
@@ -300,7 +395,9 @@ type instanceArgs struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// Bandwidth of the public network.
+	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+	//
+	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
@@ -342,6 +439,8 @@ type InstanceArgs struct {
 	InstanceType pulumi.IntPtrInput
 	// Kafka version (0.10.2/1.1.1/2.4.1).
 	KafkaVersion pulumi.StringPtrInput
+	// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+	MaxMessageByte pulumi.IntPtrInput
 	// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 	MsgRetentionTime pulumi.IntPtrInput
 	// Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
@@ -350,7 +449,9 @@ type InstanceArgs struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// Bandwidth of the public network.
+	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+	//
+	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
@@ -501,6 +602,11 @@ func (o InstanceOutput) KafkaVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KafkaVersion }).(pulumi.StringOutput)
 }
 
+// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+func (o InstanceOutput) MaxMessageByte() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MaxMessageByte }).(pulumi.IntOutput)
+}
+
 // The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
 func (o InstanceOutput) MsgRetentionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MsgRetentionTime }).(pulumi.IntOutput)
@@ -521,7 +627,9 @@ func (o InstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
-// Bandwidth of the public network.
+// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+//
+// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
 func (o InstanceOutput) PublicNetwork() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.PublicNetwork }).(pulumi.IntOutput)
 }

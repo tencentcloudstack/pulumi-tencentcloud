@@ -23,15 +23,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// {
     ///     public MyStack()
     ///     {
+    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         {
+    ///             LogsetName = "tf-config-extra-test",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
+    ///         {
+    ///             AutoSplit = true,
+    ///             LogsetId = logset.Id,
+    ///             MaxSplitPartitions = 20,
+    ///             PartitionCount = 1,
+    ///             Period = 10,
+    ///             StorageType = "hot",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             TopicName = "tf-config-extra-test",
+    ///         });
+    ///         var @group = new Tencentcloud.Cls.MachineGroup("group", new Tencentcloud.Cls.MachineGroupArgs
+    ///         {
+    ///             GroupName = "tf-config-extra-test",
+    ///             ServiceLogging = true,
+    ///             AutoUpdate = true,
+    ///             UpdateEndTime = "19:05:00",
+    ///             UpdateStartTime = "17:05:00",
+    ///             MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
+    ///             {
+    ///                 Type = "ip",
+    ///                 Values = 
+    ///                 {
+    ///                     "192.168.1.1",
+    ///                     "192.168.1.2",
+    ///                 },
+    ///             },
+    ///         });
     ///         var extra = new Tencentcloud.Cls.ConfigExtra("extra", new Tencentcloud.Cls.ConfigExtraArgs
     ///         {
-    ///             TopicId = tencentcloud_cls_topic.Topic.Id,
+    ///             TopicId = topic.Id,
     ///             Type = "container_file",
     ///             LogType = "json_log",
     ///             ConfigFlag = "label_k8s",
-    ///             LogsetId = tencentcloud_cls_logset.Logset.Id,
-    ///             LogsetName = tencentcloud_cls_logset.Logset.Logset_name,
-    ///             TopicName = tencentcloud_cls_topic.Topic.Topic_name,
+    ///             LogsetId = logset.Id,
+    ///             LogsetName = logset.LogsetName,
+    ///             TopicName = topic.TopicName,
     ///             ContainerFile = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileArgs
     ///             {
     ///                 Container = "nginx",
@@ -46,11 +85,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///                     Namespace = "default",
     ///                 },
     ///             },
-    ///             GroupId = "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+    ///             GroupId = @group.Id,
     ///         });
     ///     }
     /// 
     /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// cls config_extra can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configExtra:ConfigExtra")]
@@ -72,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// Container stdout info.
         /// </summary>
         [Output("containerStdout")]
-        public Output<Outputs.ConfigExtraContainerStdout?> ContainerStdout { get; private set; } = null!;
+        public Output<Outputs.ConfigExtraContainerStdout> ContainerStdout { get; private set; } = null!;
 
         /// <summary>
         /// Collection path blocklist.
@@ -84,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// Extraction rule. If ExtractRule is set, LogType must be set.
         /// </summary>
         [Output("extractRule")]
-        public Output<Outputs.ConfigExtraExtractRule?> ExtractRule { get; private set; } = null!;
+        public Output<Outputs.ConfigExtraExtractRule> ExtractRule { get; private set; } = null!;
 
         /// <summary>
         /// Binding group id.
@@ -102,7 +149,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// Node file config info.
         /// </summary>
         [Output("hostFile")]
-        public Output<Outputs.ConfigExtraHostFile?> HostFile { get; private set; } = null!;
+        public Output<Outputs.ConfigExtraHostFile> HostFile { get; private set; } = null!;
+
+        /// <summary>
+        /// Log format.
+        /// </summary>
+        [Output("logFormat")]
+        public Output<string?> LogFormat { get; private set; } = null!;
 
         /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
@@ -260,6 +313,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<Inputs.ConfigExtraHostFileArgs>? HostFile { get; set; }
 
         /// <summary>
+        /// Log format.
+        /// </summary>
+        [Input("logFormat")]
+        public Input<string>? LogFormat { get; set; }
+
+        /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType", required: true)]
@@ -373,6 +432,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Input("hostFile")]
         public Input<Inputs.ConfigExtraHostFileGetArgs>? HostFile { get; set; }
+
+        /// <summary>
+        /// Log format.
+        /// </summary>
+        [Input("logFormat")]
+        public Input<string>? LogFormat { get; set; }
 
         /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.

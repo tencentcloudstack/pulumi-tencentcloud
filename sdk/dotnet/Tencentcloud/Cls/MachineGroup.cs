@@ -96,7 +96,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<string?> UpdateEndTime { get; private set; } = null!;
 
         /// <summary>
-        /// pdate start time. We recommend you update LogListener during off-peak hours.
+        /// Update start time. We recommend you update LogListener during off-peak hours.
         /// </summary>
         [Output("updateStartTime")]
         public Output<string?> UpdateStartTime { get; private set; } = null!;
@@ -191,7 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? UpdateEndTime { get; set; }
 
         /// <summary>
-        /// pdate start time. We recommend you update LogListener during off-peak hours.
+        /// Update start time. We recommend you update LogListener during off-peak hours.
         /// </summary>
         [Input("updateStartTime")]
         public Input<string>? UpdateStartTime { get; set; }
@@ -246,7 +246,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? UpdateEndTime { get; set; }
 
         /// <summary>
-        /// pdate start time. We recommend you update LogListener during off-peak hours.
+        /// Update start time. We recommend you update LogListener during off-peak hours.
         /// </summary>
         [Input("updateStartTime")]
         public Input<string>? UpdateStartTime { get; set; }

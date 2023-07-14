@@ -28,6 +28,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     ///             Description = "terraform-test",
     ///             EngineType = "InnoDB",
     ///             EngineVersion = "8.0",
+    ///             ParamLists = 
+    ///             {
+    ///                 new Tencentcloud.Mysql.Inputs.ParamTemplateParamListArgs
+    ///                 {
+    ///                     CurrentValue = "1",
+    ///                     Name = "auto_increment_increment",
+    ///                 },
+    ///                 new Tencentcloud.Mysql.Inputs.ParamTemplateParamListArgs
+    ///                 {
+    ///                     CurrentValue = "1",
+    ///                     Name = "auto_increment_offset",
+    ///                 },
+    ///                 new Tencentcloud.Mysql.Inputs.ParamTemplateParamListArgs
+    ///                 {
+    ///                     CurrentValue = "ON",
+    ///                     Name = "automatic_sp_privileges",
+    ///                 },
+    ///             },
     ///             TemplateType = "HIGH_STABILITY",
     ///         });
     ///     }
@@ -158,6 +176,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("paramLists")]
+        private InputList<Inputs.ParamTemplateParamListArgs>? _paramLists;
+
+        /// <summary>
+        /// parameter list.
+        /// </summary>
+        public InputList<Inputs.ParamTemplateParamListArgs> ParamLists
+        {
+            get => _paramLists ?? (_paramLists = new InputList<Inputs.ParamTemplateParamListArgs>());
+            set => _paramLists = value;
+        }
+
+        /// <summary>
+        /// The ID of source parameter template.
+        /// </summary>
+        [Input("templateId")]
+        public Input<int>? TemplateId { get; set; }
 
         /// <summary>
         /// The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.

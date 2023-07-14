@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// Provides a COS resource to create a COS bucket and set its attributes.
     /// 
     /// ## Example Usage
-    /// 
-    /// Private Bucket
+    /// ### Private Bucket
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -34,8 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Creation of multiple available zone bucket
+    /// ### Creation of multiple available zone bucket
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -57,8 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Using verbose acl
+    /// ### Using verbose acl
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -71,31 +68,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///         var withAclBody = new Tencentcloud.Cos.Bucket("withAclBody", new Tencentcloud.Cos.BucketArgs
     ///         {
     ///             AclBody = @"&lt;AccessControlPolicy&gt;
-    ///     &lt;Owner&gt;
-    ///         &lt;ID&gt;qcs::cam::uin/100000000001:uin/100000000001&lt;/ID&gt;
-    ///     &lt;/Owner&gt;
-    ///     &lt;AccessControlList&gt;
-    ///         &lt;Grant&gt;
-    ///             &lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group""&gt;
-    ///                 &lt;URI&gt;http://cam.qcloud.com/groups/global/AllUsers&lt;/URI&gt;
-    ///             &lt;/Grantee&gt;
-    ///             &lt;Permission&gt;READ&lt;/Permission&gt;
-    ///         &lt;/Grant&gt;
-    ///         &lt;Grant&gt;
-    ///             &lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
-    ///                 &lt;ID&gt;qcs::cam::uin/100000000001:uin/100000000001&lt;/ID&gt;
-    ///                 &lt;DisplayName&gt;qcs::cam::uin/100000000001:uin/100000000001&lt;/DisplayName&gt;
-    ///             &lt;/Grantee&gt;
-    ///             &lt;Permission&gt;WRITE&lt;/Permission&gt;
-    ///         &lt;/Grant&gt;
-    ///         &lt;Grant&gt;
-    ///             &lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
-    ///                 &lt;ID&gt;qcs::cam::uin/100000000001:uin/100000000001&lt;/ID&gt;
-    ///                 &lt;DisplayName&gt;qcs::cam::uin/100000000001:uin/100000000001&lt;/DisplayName&gt;
-    ///             &lt;/Grantee&gt;
-    ///             &lt;Permission&gt;READ_ACP&lt;/Permission&gt;
-    ///         &lt;/Grant&gt;
-    ///     &lt;/AccessControlList&gt;
+    /// 	&lt;Owner&gt;
+    /// 		&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
+    /// 		&lt;DisplayName&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/DisplayName&gt;
+    /// 	&lt;/Owner&gt;
+    /// 	&lt;AccessControlList&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group""&gt;
+    /// 				&lt;URI&gt;http://cam.qcloud.com/groups/global/AllUsers&lt;/URI&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;READ&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
+    /// 				&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
+    /// 				&lt;DisplayName&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/DisplayName&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;FULL_CONTROL&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
+    /// 				&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
+    /// 				&lt;DisplayName&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/DisplayName&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;WRITE_ACP&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group""&gt;
+    /// 				&lt;URI&gt;http://cam.qcloud.com/groups/global/AllUsers&lt;/URI&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;READ_ACP&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group""&gt;
+    /// 				&lt;URI&gt;http://cam.qcloud.com/groups/global/AllUsers&lt;/URI&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;WRITE_ACP&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
+    /// 				&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
+    /// 				&lt;DisplayName&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/DisplayName&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;READ&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""CanonicalUser""&gt;
+    /// 				&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
+    /// 				&lt;DisplayName&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/DisplayName&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;WRITE&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 		&lt;Grant&gt;
+    /// 			&lt;Grantee xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:type=""Group""&gt;
+    /// 				&lt;URI&gt;http://cam.qcloud.com/groups/global/AllUsers&lt;/URI&gt;
+    /// 			&lt;/Grantee&gt;
+    /// 			&lt;Permission&gt;FULL_CONTROL&lt;/Permission&gt;
+    /// 		&lt;/Grant&gt;
+    /// 	&lt;/AccessControlList&gt;
     /// &lt;/AccessControlPolicy&gt;
     /// 
     /// ",
@@ -105,8 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Static Website
+    /// ### Static Website
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -132,8 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///     public Output&lt;string&gt; EndpointTest { get; set; }
     /// }
     /// ```
-    /// 
-    /// Using CORS
+    /// ### Using CORS
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -176,8 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Using object lifecycle
+    /// ### Using object lifecycle
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -215,8 +242,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Using custom origin domain settings
+    /// ### Using custom origin domain settings
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -244,8 +270,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Using origin-pull settings
+    /// ### Using origin-pull settings
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -286,8 +311,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Using replication
+    /// ### Using replication
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -324,8 +348,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Setting log status
+    /// ### Setting log status
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -432,6 +455,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string> CosBucketUrl { get; private set; } = null!;
 
         /// <summary>
+        /// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        /// </summary>
+        [Output("enableIntelligentTiering")]
+        public Output<bool> EnableIntelligentTiering { get; private set; } = null!;
+
+        /// <summary>
         /// The server-side encryption algorithm to use. Valid value is `AES256`.
         /// </summary>
         [Output("encryptionAlgorithm")]
@@ -442,6 +471,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Output("forceClean")]
         public Output<bool?> ForceClean { get; private set; } = null!;
+
+        /// <summary>
+        /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        /// </summary>
+        [Output("intelligentTieringDays")]
+        public Output<int> IntelligentTieringDays { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        /// </summary>
+        [Output("intelligentTieringRequestFrequent")]
+        public Output<int> IntelligentTieringRequestFrequent { get; private set; } = null!;
 
         /// <summary>
         /// A configuration of object lifecycle management (documented below).
@@ -468,7 +509,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string> LogTargetBucket { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        /// Indicates whether to create a bucket of multi available zone.
         /// </summary>
         [Output("multiAz")]
         public Output<bool?> MultiAz { get; private set; } = null!;
@@ -504,7 +545,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Enable bucket versioning.
+        /// Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         /// </summary>
         [Output("versioningEnable")]
         public Output<bool?> VersioningEnable { get; private set; } = null!;
@@ -599,6 +640,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
 
         /// <summary>
+        /// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        /// </summary>
+        [Input("enableIntelligentTiering")]
+        public Input<bool>? EnableIntelligentTiering { get; set; }
+
+        /// <summary>
         /// The server-side encryption algorithm to use. Valid value is `AES256`.
         /// </summary>
         [Input("encryptionAlgorithm")]
@@ -609,6 +656,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("forceClean")]
         public Input<bool>? ForceClean { get; set; }
+
+        /// <summary>
+        /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        /// </summary>
+        [Input("intelligentTieringDays")]
+        public Input<int>? IntelligentTieringDays { get; set; }
+
+        /// <summary>
+        /// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        /// </summary>
+        [Input("intelligentTieringRequestFrequent")]
+        public Input<int>? IntelligentTieringRequestFrequent { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleArgs>? _lifecycleRules;
@@ -641,7 +700,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? LogTargetBucket { get; set; }
 
         /// <summary>
-        /// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        /// Indicates whether to create a bucket of multi available zone.
         /// </summary>
         [Input("multiAz")]
         public Input<bool>? MultiAz { get; set; }
@@ -701,7 +760,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
 
         /// <summary>
-        /// Enable bucket versioning.
+        /// Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         /// </summary>
         [Input("versioningEnable")]
         public Input<bool>? VersioningEnable { get; set; }
@@ -762,6 +821,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? CosBucketUrl { get; set; }
 
         /// <summary>
+        /// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        /// </summary>
+        [Input("enableIntelligentTiering")]
+        public Input<bool>? EnableIntelligentTiering { get; set; }
+
+        /// <summary>
         /// The server-side encryption algorithm to use. Valid value is `AES256`.
         /// </summary>
         [Input("encryptionAlgorithm")]
@@ -772,6 +837,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("forceClean")]
         public Input<bool>? ForceClean { get; set; }
+
+        /// <summary>
+        /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        /// </summary>
+        [Input("intelligentTieringDays")]
+        public Input<int>? IntelligentTieringDays { get; set; }
+
+        /// <summary>
+        /// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        /// </summary>
+        [Input("intelligentTieringRequestFrequent")]
+        public Input<int>? IntelligentTieringRequestFrequent { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleGetArgs>? _lifecycleRules;
@@ -804,7 +881,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? LogTargetBucket { get; set; }
 
         /// <summary>
-        /// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        /// Indicates whether to create a bucket of multi available zone.
         /// </summary>
         [Input("multiAz")]
         public Input<bool>? MultiAz { get; set; }
@@ -864,7 +941,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
 
         /// <summary>
-        /// Enable bucket versioning.
+        /// Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         /// </summary>
         [Input("versioningEnable")]
         public Input<bool>? VersioningEnable { get; set; }

@@ -86,6 +86,10 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly partitions!: pulumi.Output<number>;
     /**
+     * Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+     */
+    public readonly pulsarTopicType!: pulumi.Output<number>;
+    /**
      * Description of the namespace.
      */
     public readonly remark!: pulumi.Output<string | undefined>;
@@ -94,7 +98,9 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly topicName!: pulumi.Output<string>;
     /**
-     * The type of topic.
+     * This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+     *
+     * @deprecated This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
      */
     public readonly topicType!: pulumi.Output<number>;
 
@@ -115,6 +121,7 @@ export class Topic extends pulumi.CustomResource {
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["environId"] = state ? state.environId : undefined;
             resourceInputs["partitions"] = state ? state.partitions : undefined;
+            resourceInputs["pulsarTopicType"] = state ? state.pulsarTopicType : undefined;
             resourceInputs["remark"] = state ? state.remark : undefined;
             resourceInputs["topicName"] = state ? state.topicName : undefined;
             resourceInputs["topicType"] = state ? state.topicType : undefined;
@@ -132,12 +139,10 @@ export class Topic extends pulumi.CustomResource {
             if ((!args || args.topicName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'topicName'");
             }
-            if ((!args || args.topicType === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'topicType'");
-            }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["environId"] = args ? args.environId : undefined;
             resourceInputs["partitions"] = args ? args.partitions : undefined;
+            resourceInputs["pulsarTopicType"] = args ? args.pulsarTopicType : undefined;
             resourceInputs["remark"] = args ? args.remark : undefined;
             resourceInputs["topicName"] = args ? args.topicName : undefined;
             resourceInputs["topicType"] = args ? args.topicType : undefined;
@@ -169,6 +174,10 @@ export interface TopicState {
      */
     partitions?: pulumi.Input<number>;
     /**
+     * Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+     */
+    pulsarTopicType?: pulumi.Input<number>;
+    /**
      * Description of the namespace.
      */
     remark?: pulumi.Input<string>;
@@ -177,7 +186,9 @@ export interface TopicState {
      */
     topicName?: pulumi.Input<string>;
     /**
-     * The type of topic.
+     * This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+     *
+     * @deprecated This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
      */
     topicType?: pulumi.Input<number>;
 }
@@ -199,6 +210,10 @@ export interface TopicArgs {
      */
     partitions: pulumi.Input<number>;
     /**
+     * Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+     */
+    pulsarTopicType?: pulumi.Input<number>;
+    /**
      * Description of the namespace.
      */
     remark?: pulumi.Input<string>;
@@ -207,7 +222,9 @@ export interface TopicArgs {
      */
     topicName: pulumi.Input<string>;
     /**
-     * The type of topic.
+     * This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+     *
+     * @deprecated This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
      */
-    topicType: pulumi.Input<number>;
+    topicType?: pulumi.Input<number>;
 }

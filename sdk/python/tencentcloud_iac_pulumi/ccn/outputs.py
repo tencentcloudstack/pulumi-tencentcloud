@@ -11,6 +11,7 @@ from . import outputs
 
 __all__ = [
     'InstancesAcceptAttachInstance',
+    'InstancesRejectAttachInstance',
     'InstancesResetAttachInstance',
     'GetBandwidthLimitsLimitResult',
     'GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataResult',
@@ -44,6 +45,94 @@ class InstancesAcceptAttachInstance(dict):
 
     def get(self, key: str, default = None) -> Any:
         InstancesAcceptAttachInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_region: str,
+                 description: Optional[str] = None,
+                 instance_type: Optional[str] = None,
+                 route_table_id: Optional[str] = None):
+        """
+        :param str instance_id: Attachment Instance ID.
+        :param str instance_region: Instance Region.
+        :param str description: Description.
+        :param str instance_type: InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        :param str route_table_id: ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_region", instance_region)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if instance_type is not None:
+            pulumi.set(__self__, "instance_type", instance_type)
+        if route_table_id is not None:
+            pulumi.set(__self__, "route_table_id", route_table_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Attachment Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        Instance Region.
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> Optional[str]:
+        """
+        InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> Optional[str]:
+        """
+        ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "route_table_id")
+
+
+@pulumi.output_type
+class InstancesRejectAttachInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceRegion":
+            suggest = "instance_region"
+        elif key == "instanceType":
+            suggest = "instance_type"
+        elif key == "routeTableId":
+            suggest = "route_table_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstancesRejectAttachInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstancesRejectAttachInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstancesRejectAttachInstance.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,

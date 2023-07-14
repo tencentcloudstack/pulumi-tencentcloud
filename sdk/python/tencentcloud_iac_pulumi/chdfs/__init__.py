@@ -9,6 +9,7 @@ from .access_group import *
 from .access_rule import *
 from .file_system import *
 from .get_access_groups import *
+from .get_file_systems import *
 from .get_mount_points import *
 from .life_cycle_rule import *
 from .mount_point import *

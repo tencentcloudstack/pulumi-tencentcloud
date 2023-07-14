@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Secret{}
 	case "tencentcloud:Ssm/secretVersion:SecretVersion":
 		r = &SecretVersion{}
+	case "tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret":
+		r = &SshKeyPairSecret{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -46,6 +48,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ssm/secretVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssm/sshKeyPairSecret",
 		&module{version},
 	)
 }

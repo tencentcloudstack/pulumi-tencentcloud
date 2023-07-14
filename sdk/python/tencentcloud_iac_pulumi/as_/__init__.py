@@ -6,16 +6,25 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .attachment import *
+from .complete_lifecycle import *
+from .execute_scaling_policy import *
+from .get_advices import *
 from .get_instances import *
+from .get_last_activity import *
+from .get_limits import *
 from .get_scaling_configs import *
 from .get_scaling_groups import *
 from .get_scaling_policies import *
 from .lifecycle_hook import *
+from .load_balancer import *
 from .notification import *
 from .protect_instances import *
 from .remove_instances import *
+from .scale_in_instances import *
+from .scale_out_instances import *
 from .scaling_config import *
 from .scaling_group import *
+from .scaling_group_status import *
 from .scaling_policy import *
 from .schedule import *
 from .start_instances import *

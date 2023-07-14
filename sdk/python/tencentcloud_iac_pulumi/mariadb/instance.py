@@ -32,6 +32,7 @@ class InstanceArgs:
                  security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
@@ -53,6 +54,7 @@ class InstanceArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security group ID list.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
         :param pulumi.Input[Mapping[str, Any]] tags: tag list.
+        :param pulumi.Input[str] vip: Intranet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: A list of voucher IDs. Currently, only one voucher can be specified.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed, it means that it is created as a basic network.
         """
@@ -86,6 +88,8 @@ class InstanceArgs:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if voucher_ids is not None:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
@@ -294,6 +298,18 @@ class InstanceArgs:
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Intranet IP address.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
 
     @property
     @pulumi.getter(name="voucherIds")
@@ -1213,6 +1229,7 @@ class Instance(pulumi.CustomResource):
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -1289,6 +1306,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] storage: Storage size, unit: GB. You can query instance specifications through DescribeDBInstanceSpecs to obtain the lower and upper limits of disk specifications corresponding to different memory sizes.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
         :param pulumi.Input[Mapping[str, Any]] tags: tag list.
+        :param pulumi.Input[str] vip: Intranet IP address.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: A list of voucher IDs. Currently, only one voucher can be specified.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed, it means that it is created as a basic network.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: Instance node availability zone distribution, up to two availability zones can be filled. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.
@@ -1384,6 +1402,7 @@ class Instance(pulumi.CustomResource):
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -1423,6 +1442,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["storage"] = storage
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["vip"] = vip
             __props__.__dict__["voucher_ids"] = voucher_ids
             __props__.__dict__["vpc_id"] = vpc_id
             if zones is None and not opts.urn:
@@ -1453,7 +1473,6 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["tdsql_version"] = None
             __props__.__dict__["uin"] = None
             __props__.__dict__["update_time"] = None
-            __props__.__dict__["vip"] = None
             __props__.__dict__["vipv6"] = None
             __props__.__dict__["vport"] = None
             __props__.__dict__["wan_domain"] = None

@@ -14,17 +14,65 @@ __all__ = [
     'FunctionTargetsAttachmentFunctionTargets',
     'FunctionTargetsAttachmentFunctionTargetsFunction',
     'InstanceSnatIp',
+    'ReplaceCertForLbsCertificate',
     'SnatIpIp',
     'TargetGroupTargetGroupInstance',
     'GetAttachmentsAttachmentListResult',
     'GetAttachmentsAttachmentListTargetResult',
+    'GetClusterResourcesClusterResourceSetResult',
+    'GetClusterResourcesClusterResourceSetClustersZoneResult',
+    'GetClusterResourcesFilterResult',
+    'GetCrossTargetsCrossTargetSetResult',
+    'GetCrossTargetsFilterResult',
+    'GetExclusiveClustersClusterSetResult',
+    'GetExclusiveClustersClusterSetClustersZoneResult',
+    'GetExclusiveClustersFilterResult',
+    'GetIdleInstancesIdleLoadBalancerResult',
+    'GetInstanceByCertIdCertSetResult',
+    'GetInstanceByCertIdCertSetLoadBalancerResult',
+    'GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetResult',
+    'GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterResult',
+    'GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterResult',
+    'GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterResult',
+    'GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterResult',
+    'GetInstanceByCertIdCertSetLoadBalancerExtraInfoResult',
+    'GetInstanceByCertIdCertSetLoadBalancerMasterZoneResult',
+    'GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeResult',
+    'GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeResult',
+    'GetInstanceByCertIdCertSetLoadBalancerSnatIpResult',
+    'GetInstanceByCertIdCertSetLoadBalancerTagResult',
+    'GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoResult',
+    'GetInstanceDetailFilterResult',
+    'GetInstanceDetailLoadBalancerDetailSetResult',
+    'GetInstanceDetailLoadBalancerDetailSetExtraInfoResult',
+    'GetInstanceDetailLoadBalancerDetailSetNetworkAttributeResult',
+    'GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeResult',
+    'GetInstanceDetailLoadBalancerDetailSetTagResult',
+    'GetInstanceTrafficLoadBalancerTrafficResult',
     'GetInstancesClbListResult',
     'GetListenerRulesRuleListResult',
+    'GetListenersByTargetsBackendResult',
+    'GetListenersByTargetsLoadBalancerResult',
+    'GetListenersByTargetsLoadBalancerListenerResult',
+    'GetListenersByTargetsLoadBalancerListenerRuleResult',
+    'GetListenersByTargetsLoadBalancerListenerRuleTargetResult',
+    'GetListenersByTargetsLoadBalancerListenerTargetResult',
     'GetListenersListenerListResult',
     'GetRedirectionsRedirectionListResult',
+    'GetResourcesFilterResult',
+    'GetResourcesZoneResourceSetResult',
+    'GetResourcesZoneResourceSetResourceSetResult',
+    'GetResourcesZoneResourceSetResourceSetAvailabilitySetResult',
+    'GetTargetGroupListFilterResult',
+    'GetTargetGroupListTargetGroupSetResult',
+    'GetTargetGroupListTargetGroupSetAssociatedRuleResult',
     'GetTargetGroupsListResult',
     'GetTargetGroupsListAssociatedRuleListResult',
     'GetTargetGroupsListTargetGroupInstanceListResult',
+    'GetTargetHealthLoadBalancerResult',
+    'GetTargetHealthLoadBalancerListenerResult',
+    'GetTargetHealthLoadBalancerListenerRuleResult',
+    'GetTargetHealthLoadBalancerListenerRuleTargetResult',
 ]
 
 @pulumi.output_type
@@ -253,6 +301,140 @@ class InstanceSnatIp(dict):
 
 
 @pulumi.output_type
+class ReplaceCertForLbsCertificate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "certCaContent":
+            suggest = "cert_ca_content"
+        elif key == "certCaId":
+            suggest = "cert_ca_id"
+        elif key == "certCaName":
+            suggest = "cert_ca_name"
+        elif key == "certContent":
+            suggest = "cert_content"
+        elif key == "certId":
+            suggest = "cert_id"
+        elif key == "certKey":
+            suggest = "cert_key"
+        elif key == "certName":
+            suggest = "cert_name"
+        elif key == "sslMode":
+            suggest = "ssl_mode"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ReplaceCertForLbsCertificate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ReplaceCertForLbsCertificate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ReplaceCertForLbsCertificate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cert_ca_content: Optional[str] = None,
+                 cert_ca_id: Optional[str] = None,
+                 cert_ca_name: Optional[str] = None,
+                 cert_content: Optional[str] = None,
+                 cert_id: Optional[str] = None,
+                 cert_key: Optional[str] = None,
+                 cert_name: Optional[str] = None,
+                 ssl_mode: Optional[str] = None):
+        """
+        :param str cert_ca_content: Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        :param str cert_ca_id: ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+        :param str cert_ca_name: Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        :param str cert_content: Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param str cert_id: ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+        :param str cert_key: Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param str cert_name: Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+        :param str ssl_mode: Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+        """
+        if cert_ca_content is not None:
+            pulumi.set(__self__, "cert_ca_content", cert_ca_content)
+        if cert_ca_id is not None:
+            pulumi.set(__self__, "cert_ca_id", cert_ca_id)
+        if cert_ca_name is not None:
+            pulumi.set(__self__, "cert_ca_name", cert_ca_name)
+        if cert_content is not None:
+            pulumi.set(__self__, "cert_content", cert_content)
+        if cert_id is not None:
+            pulumi.set(__self__, "cert_id", cert_id)
+        if cert_key is not None:
+            pulumi.set(__self__, "cert_key", cert_key)
+        if cert_name is not None:
+            pulumi.set(__self__, "cert_name", cert_name)
+        if ssl_mode is not None:
+            pulumi.set(__self__, "ssl_mode", ssl_mode)
+
+    @property
+    @pulumi.getter(name="certCaContent")
+    def cert_ca_content(self) -> Optional[str]:
+        """
+        Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_ca_content")
+
+    @property
+    @pulumi.getter(name="certCaId")
+    def cert_ca_id(self) -> Optional[str]:
+        """
+        ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+        """
+        return pulumi.get(self, "cert_ca_id")
+
+    @property
+    @pulumi.getter(name="certCaName")
+    def cert_ca_name(self) -> Optional[str]:
+        """
+        Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_ca_name")
+
+    @property
+    @pulumi.getter(name="certContent")
+    def cert_content(self) -> Optional[str]:
+        """
+        Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_content")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> Optional[str]:
+        """
+        ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="certKey")
+    def cert_key(self) -> Optional[str]:
+        """
+        Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_key")
+
+    @property
+    @pulumi.getter(name="certName")
+    def cert_name(self) -> Optional[str]:
+        """
+        Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+        """
+        return pulumi.get(self, "cert_name")
+
+    @property
+    @pulumi.getter(name="sslMode")
+    def ssl_mode(self) -> Optional[str]:
+        """
+        Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+        """
+        return pulumi.get(self, "ssl_mode")
+
+
+@pulumi.output_type
 class SnatIpIp(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -470,6 +652,2460 @@ class GetAttachmentsAttachmentListTargetResult(dict):
         Forwarding weight of the backend service, the range of [0, 100], defaults to `10`.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetClusterResourcesClusterResourceSetResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 clusters_zones: Sequence['outputs.GetClusterResourcesClusterResourceSetClustersZoneResult'],
+                 idle: str,
+                 isp: str,
+                 load_balancer_id: str,
+                 vip: str):
+        """
+        :param str cluster_id: Cluster ID.
+        :param str cluster_name: cluster name.
+        :param Sequence['GetClusterResourcesClusterResourceSetClustersZoneArgs'] clusters_zones: clusters zone.
+        :param str idle: Is it idle.
+        :param str isp: Isp.
+        :param str load_balancer_id: Loadbalance Id.
+        :param str vip: vip.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "clusters_zones", clusters_zones)
+        pulumi.set(__self__, "idle", idle)
+        pulumi.set(__self__, "isp", isp)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "vip", vip)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        cluster name.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clustersZones")
+    def clusters_zones(self) -> Sequence['outputs.GetClusterResourcesClusterResourceSetClustersZoneResult']:
+        """
+        clusters zone.
+        """
+        return pulumi.get(self, "clusters_zones")
+
+    @property
+    @pulumi.getter
+    def idle(self) -> str:
+        """
+        Is it idle.
+        """
+        return pulumi.get(self, "idle")
+
+    @property
+    @pulumi.getter
+    def isp(self) -> str:
+        """
+        Isp.
+        """
+        return pulumi.get(self, "isp")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        Loadbalance Id.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+
+@pulumi.output_type
+class GetClusterResourcesClusterResourceSetClustersZoneResult(dict):
+    def __init__(__self__, *,
+                 master_zones: Sequence[str],
+                 slave_zones: Sequence[str]):
+        """
+        :param Sequence[str] master_zones: Availability master zone where the cluster is located.
+        :param Sequence[str] slave_zones: Availability slave zone where the cluster is located.
+        """
+        pulumi.set(__self__, "master_zones", master_zones)
+        pulumi.set(__self__, "slave_zones", slave_zones)
+
+    @property
+    @pulumi.getter(name="masterZones")
+    def master_zones(self) -> Sequence[str]:
+        """
+        Availability master zone where the cluster is located.
+        """
+        return pulumi.get(self, "master_zones")
+
+    @property
+    @pulumi.getter(name="slaveZones")
+    def slave_zones(self) -> Sequence[str]:
+        """
+        Availability slave zone where the cluster is located.
+        """
+        return pulumi.get(self, "slave_zones")
+
+
+@pulumi.output_type
+class GetClusterResourcesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetCrossTargetsCrossTargetSetResult(dict):
+    def __init__(__self__, *,
+                 eni_id: str,
+                 instance_id: str,
+                 instance_name: str,
+                 ip: str,
+                 local_vpc_id: str,
+                 region: str,
+                 vpc_id: str,
+                 vpc_name: str):
+        """
+        :param str eni_id: ENI ID of the CVM instance.
+        :param str instance_id: ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+        :param str instance_name: Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+        :param str ip: IP address of the CVM or ENI instance.
+        :param str local_vpc_id: VPC ID of the CLB instance.
+        :param str region: Region of the CVM or ENI instance.
+        :param str vpc_id: VPC ID of the CVM or ENI instance.
+        :param str vpc_name: VPC name of the CVM or ENI instance.
+        """
+        pulumi.set(__self__, "eni_id", eni_id)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "local_vpc_id", local_vpc_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vpc_name", vpc_name)
+
+    @property
+    @pulumi.getter(name="eniId")
+    def eni_id(self) -> str:
+        """
+        ENI ID of the CVM instance.
+        """
+        return pulumi.get(self, "eni_id")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP address of the CVM or ENI instance.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="localVpcId")
+    def local_vpc_id(self) -> str:
+        """
+        VPC ID of the CLB instance.
+        """
+        return pulumi.get(self, "local_vpc_id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region of the CVM or ENI instance.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID of the CVM or ENI instance.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter(name="vpcName")
+    def vpc_name(self) -> str:
+        """
+        VPC name of the CVM or ENI instance.
+        """
+        return pulumi.get(self, "vpc_name")
+
+
+@pulumi.output_type
+class GetCrossTargetsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetExclusiveClustersClusterSetResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_tag: str,
+                 cluster_type: str,
+                 clusters_version: str,
+                 clusters_zones: Sequence['outputs.GetExclusiveClustersClusterSetClustersZoneResult'],
+                 disaster_recovery_type: str,
+                 http_max_new_conn: int,
+                 http_qps: int,
+                 https_max_new_conn: int,
+                 https_qps: int,
+                 idle_resource_count: int,
+                 isp: str,
+                 load_balance_director_count: int,
+                 max_conn: int,
+                 max_in_flow: int,
+                 max_in_pkg: int,
+                 max_new_conn: int,
+                 max_out_flow: int,
+                 max_out_pkg: int,
+                 network: str,
+                 resource_count: int,
+                 zone: str):
+        """
+        :param str cluster_id: cluster ID.
+        :param str cluster_name: cluster name.
+        :param str cluster_tag: Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str cluster_type: cluster type: TGW, STGW, VPCGW.
+        :param str clusters_version: clusters version.
+        :param Sequence['GetExclusiveClustersClusterSetClustersZoneArgs'] clusters_zones: Availability zone where the cluster is located.
+        :param str disaster_recovery_type: Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+        :param int http_max_new_conn: Maximum number of new http connections.
+        :param int http_qps: Http Qps.
+        :param int https_max_new_conn: Maximum number of new https connections.
+        :param int https_qps: Https Qps.
+        :param int idle_resource_count: The total number of free resources in the cluster.
+        :param str isp: Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+        :param int load_balance_director_count: Total number of forwarders in the cluster.
+        :param int max_conn: Maximum number of connections.
+        :param int max_in_flow: Maximum incoming Bandwidth.
+        :param int max_in_pkg: Maximum incoming packet.
+        :param int max_new_conn: Maximum number of new connections.
+        :param int max_out_flow: Maximum output bandwidth.
+        :param int max_out_pkg: Maximum output packet.
+        :param str network: cluster network type.
+        :param int resource_count: The total number of resources in the cluster.
+        :param str zone: .
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_tag", cluster_tag)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "clusters_version", clusters_version)
+        pulumi.set(__self__, "clusters_zones", clusters_zones)
+        pulumi.set(__self__, "disaster_recovery_type", disaster_recovery_type)
+        pulumi.set(__self__, "http_max_new_conn", http_max_new_conn)
+        pulumi.set(__self__, "http_qps", http_qps)
+        pulumi.set(__self__, "https_max_new_conn", https_max_new_conn)
+        pulumi.set(__self__, "https_qps", https_qps)
+        pulumi.set(__self__, "idle_resource_count", idle_resource_count)
+        pulumi.set(__self__, "isp", isp)
+        pulumi.set(__self__, "load_balance_director_count", load_balance_director_count)
+        pulumi.set(__self__, "max_conn", max_conn)
+        pulumi.set(__self__, "max_in_flow", max_in_flow)
+        pulumi.set(__self__, "max_in_pkg", max_in_pkg)
+        pulumi.set(__self__, "max_new_conn", max_new_conn)
+        pulumi.set(__self__, "max_out_flow", max_out_flow)
+        pulumi.set(__self__, "max_out_pkg", max_out_pkg)
+        pulumi.set(__self__, "network", network)
+        pulumi.set(__self__, "resource_count", resource_count)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        cluster name.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterTag")
+    def cluster_tag(self) -> str:
+        """
+        Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_tag")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        cluster type: TGW, STGW, VPCGW.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="clustersVersion")
+    def clusters_version(self) -> str:
+        """
+        clusters version.
+        """
+        return pulumi.get(self, "clusters_version")
+
+    @property
+    @pulumi.getter(name="clustersZones")
+    def clusters_zones(self) -> Sequence['outputs.GetExclusiveClustersClusterSetClustersZoneResult']:
+        """
+        Availability zone where the cluster is located.
+        """
+        return pulumi.get(self, "clusters_zones")
+
+    @property
+    @pulumi.getter(name="disasterRecoveryType")
+    def disaster_recovery_type(self) -> str:
+        """
+        Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+        """
+        return pulumi.get(self, "disaster_recovery_type")
+
+    @property
+    @pulumi.getter(name="httpMaxNewConn")
+    def http_max_new_conn(self) -> int:
+        """
+        Maximum number of new http connections.
+        """
+        return pulumi.get(self, "http_max_new_conn")
+
+    @property
+    @pulumi.getter(name="httpQps")
+    def http_qps(self) -> int:
+        """
+        Http Qps.
+        """
+        return pulumi.get(self, "http_qps")
+
+    @property
+    @pulumi.getter(name="httpsMaxNewConn")
+    def https_max_new_conn(self) -> int:
+        """
+        Maximum number of new https connections.
+        """
+        return pulumi.get(self, "https_max_new_conn")
+
+    @property
+    @pulumi.getter(name="httpsQps")
+    def https_qps(self) -> int:
+        """
+        Https Qps.
+        """
+        return pulumi.get(self, "https_qps")
+
+    @property
+    @pulumi.getter(name="idleResourceCount")
+    def idle_resource_count(self) -> int:
+        """
+        The total number of free resources in the cluster.
+        """
+        return pulumi.get(self, "idle_resource_count")
+
+    @property
+    @pulumi.getter
+    def isp(self) -> str:
+        """
+        Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+        """
+        return pulumi.get(self, "isp")
+
+    @property
+    @pulumi.getter(name="loadBalanceDirectorCount")
+    def load_balance_director_count(self) -> int:
+        """
+        Total number of forwarders in the cluster.
+        """
+        return pulumi.get(self, "load_balance_director_count")
+
+    @property
+    @pulumi.getter(name="maxConn")
+    def max_conn(self) -> int:
+        """
+        Maximum number of connections.
+        """
+        return pulumi.get(self, "max_conn")
+
+    @property
+    @pulumi.getter(name="maxInFlow")
+    def max_in_flow(self) -> int:
+        """
+        Maximum incoming Bandwidth.
+        """
+        return pulumi.get(self, "max_in_flow")
+
+    @property
+    @pulumi.getter(name="maxInPkg")
+    def max_in_pkg(self) -> int:
+        """
+        Maximum incoming packet.
+        """
+        return pulumi.get(self, "max_in_pkg")
+
+    @property
+    @pulumi.getter(name="maxNewConn")
+    def max_new_conn(self) -> int:
+        """
+        Maximum number of new connections.
+        """
+        return pulumi.get(self, "max_new_conn")
+
+    @property
+    @pulumi.getter(name="maxOutFlow")
+    def max_out_flow(self) -> int:
+        """
+        Maximum output bandwidth.
+        """
+        return pulumi.get(self, "max_out_flow")
+
+    @property
+    @pulumi.getter(name="maxOutPkg")
+    def max_out_pkg(self) -> int:
+        """
+        Maximum output packet.
+        """
+        return pulumi.get(self, "max_out_pkg")
+
+    @property
+    @pulumi.getter
+    def network(self) -> str:
+        """
+        cluster network type.
+        """
+        return pulumi.get(self, "network")
+
+    @property
+    @pulumi.getter(name="resourceCount")
+    def resource_count(self) -> int:
+        """
+        The total number of resources in the cluster.
+        """
+        return pulumi.get(self, "resource_count")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        .
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetExclusiveClustersClusterSetClustersZoneResult(dict):
+    def __init__(__self__, *,
+                 master_zones: Sequence[str],
+                 slave_zones: Sequence[str]):
+        """
+        :param Sequence[str] master_zones: Availability master zone where the cluster is located.
+        :param Sequence[str] slave_zones: Availability slave zone where the cluster is located.
+        """
+        pulumi.set(__self__, "master_zones", master_zones)
+        pulumi.set(__self__, "slave_zones", slave_zones)
+
+    @property
+    @pulumi.getter(name="masterZones")
+    def master_zones(self) -> Sequence[str]:
+        """
+        Availability master zone where the cluster is located.
+        """
+        return pulumi.get(self, "master_zones")
+
+    @property
+    @pulumi.getter(name="slaveZones")
+    def slave_zones(self) -> Sequence[str]:
+        """
+        Availability slave zone where the cluster is located.
+        """
+        return pulumi.get(self, "slave_zones")
+
+
+@pulumi.output_type
+class GetExclusiveClustersFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetIdleInstancesIdleLoadBalancerResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 forward: int,
+                 idle_reason: str,
+                 load_balancer_id: str,
+                 load_balancer_name: str,
+                 region: str,
+                 status: int,
+                 vip: str):
+        """
+        :param str domain: The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int forward: CLB type. Value range: 1 (CLB); 0 (classic CLB).
+        :param str idle_reason: The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name.
+        :param str region: CLB instance region.
+        :param int status: CLB instance status, including:0: Creating; 1: Running.
+        :param str vip: CLB instance VIP.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "forward", forward)
+        pulumi.set(__self__, "idle_reason", idle_reason)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "vip", vip)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def forward(self) -> int:
+        """
+        CLB type. Value range: 1 (CLB); 0 (classic CLB).
+        """
+        return pulumi.get(self, "forward")
+
+    @property
+    @pulumi.getter(name="idleReason")
+    def idle_reason(self) -> str:
+        """
+        The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+        """
+        return pulumi.get(self, "idle_reason")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        CLB instance region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        CLB instance status, including:0: Creating; 1: Running.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        CLB instance VIP.
+        """
+        return pulumi.get(self, "vip")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 load_balancers: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerResult']):
+        """
+        :param str cert_id: Certificate ID.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerArgs'] load_balancers: List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "load_balancers", load_balancers)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="loadBalancers")
+    def load_balancers(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerResult']:
+        """
+        List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancers")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerResult(dict):
+    def __init__(__self__, *,
+                 address_ip_version: str,
+                 address_i_pv6: str,
+                 anycast_zone: str,
+                 attribute_flags: Sequence[str],
+                 backup_zone_sets: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetResult'],
+                 charge_type: str,
+                 cluster_ids: Sequence[str],
+                 cluster_tag: str,
+                 config_id: str,
+                 create_time: str,
+                 domain: str,
+                 exclusive_clusters: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterResult'],
+                 expire_time: str,
+                 extra_infos: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExtraInfoResult'],
+                 forward: int,
+                 health_log_set_id: str,
+                 health_log_topic_id: str,
+                 ipv6_mode: str,
+                 is_block: bool,
+                 is_block_time: str,
+                 is_ddos: bool,
+                 isolated_time: str,
+                 isolation: int,
+                 load_balancer_domain: str,
+                 load_balancer_id: str,
+                 load_balancer_name: str,
+                 load_balancer_pass_to_target: bool,
+                 load_balancer_type: str,
+                 load_balancer_vips: Sequence[str],
+                 local_bgp: bool,
+                 log: str,
+                 log_set_id: str,
+                 log_topic_id: str,
+                 master_zones: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerMasterZoneResult'],
+                 mix_ip_target: bool,
+                 network_attributes: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeResult'],
+                 nfv_info: str,
+                 numerical_vpc_id: int,
+                 open_bgp: int,
+                 prepaid_attributes: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeResult'],
+                 project_id: int,
+                 secure_groups: Sequence[str],
+                 sla_type: str,
+                 snat: bool,
+                 snat_ips: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerSnatIpResult'],
+                 snat_pro: bool,
+                 status: int,
+                 status_time: str,
+                 subnet_id: str,
+                 tags: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerTagResult'],
+                 target_region_infos: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoResult'],
+                 vip_isp: str,
+                 vpc_id: str,
+                 zones: Sequence[str]):
+        """
+        :param str address_ip_version: IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str address_i_pv6: IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str anycast_zone: Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] attribute_flags: Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs'] backup_zone_sets: backup zone.
+        :param str charge_type: Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] cluster_ids: Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_tag: Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str config_id: Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str create_time: CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str domain: Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs'] exclusive_clusters: Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str expire_time: CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs'] extra_infos: Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int forward: CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+        :param str health_log_set_id: Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str health_log_topic_id: Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str ipv6_mode: This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+        :param bool is_block: Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str is_block_time: Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+        :param bool is_ddos: Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str isolated_time: CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int isolation: 0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_domain: Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name.
+        :param bool load_balancer_pass_to_target: Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_type: CLB instance network type:OPEN: public network; INTERNAL: private network.
+        :param Sequence[str] load_balancer_vips: List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool local_bgp: Whether the IP type is the local BGP.
+        :param str log: Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str log_set_id: Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+        :param str log_topic_id: Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs'] master_zones: Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool mix_ip_target: If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs'] network_attributes: CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str nfv_info: Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+        :param int numerical_vpc_id: VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int open_bgp: Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs'] prepaid_attributes: Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int project_id: ID of the project to which a CLB instance belongs. 0: default project.
+        :param Sequence[str] secure_groups: Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str sla_type: Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool snat: SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs'] snat_ips: SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+        :param bool snat_pro: Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+        :param int status: CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str status_time: Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str subnet_id: Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerTagArgs'] tags: CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs'] target_region_infos: Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str vip_isp: ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str vpc_id: VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] zones: Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "address_ip_version", address_ip_version)
+        pulumi.set(__self__, "address_i_pv6", address_i_pv6)
+        pulumi.set(__self__, "anycast_zone", anycast_zone)
+        pulumi.set(__self__, "attribute_flags", attribute_flags)
+        pulumi.set(__self__, "backup_zone_sets", backup_zone_sets)
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "cluster_ids", cluster_ids)
+        pulumi.set(__self__, "cluster_tag", cluster_tag)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "exclusive_clusters", exclusive_clusters)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "extra_infos", extra_infos)
+        pulumi.set(__self__, "forward", forward)
+        pulumi.set(__self__, "health_log_set_id", health_log_set_id)
+        pulumi.set(__self__, "health_log_topic_id", health_log_topic_id)
+        pulumi.set(__self__, "ipv6_mode", ipv6_mode)
+        pulumi.set(__self__, "is_block", is_block)
+        pulumi.set(__self__, "is_block_time", is_block_time)
+        pulumi.set(__self__, "is_ddos", is_ddos)
+        pulumi.set(__self__, "isolated_time", isolated_time)
+        pulumi.set(__self__, "isolation", isolation)
+        pulumi.set(__self__, "load_balancer_domain", load_balancer_domain)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+        pulumi.set(__self__, "load_balancer_pass_to_target", load_balancer_pass_to_target)
+        pulumi.set(__self__, "load_balancer_type", load_balancer_type)
+        pulumi.set(__self__, "load_balancer_vips", load_balancer_vips)
+        pulumi.set(__self__, "local_bgp", local_bgp)
+        pulumi.set(__self__, "log", log)
+        pulumi.set(__self__, "log_set_id", log_set_id)
+        pulumi.set(__self__, "log_topic_id", log_topic_id)
+        pulumi.set(__self__, "master_zones", master_zones)
+        pulumi.set(__self__, "mix_ip_target", mix_ip_target)
+        pulumi.set(__self__, "network_attributes", network_attributes)
+        pulumi.set(__self__, "nfv_info", nfv_info)
+        pulumi.set(__self__, "numerical_vpc_id", numerical_vpc_id)
+        pulumi.set(__self__, "open_bgp", open_bgp)
+        pulumi.set(__self__, "prepaid_attributes", prepaid_attributes)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "secure_groups", secure_groups)
+        pulumi.set(__self__, "sla_type", sla_type)
+        pulumi.set(__self__, "snat", snat)
+        pulumi.set(__self__, "snat_ips", snat_ips)
+        pulumi.set(__self__, "snat_pro", snat_pro)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_time", status_time)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "target_region_infos", target_region_infos)
+        pulumi.set(__self__, "vip_isp", vip_isp)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter(name="addressIPVersion")
+    def address_ip_version(self) -> str:
+        """
+        IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address_ip_version")
+
+    @property
+    @pulumi.getter(name="addressIPv6")
+    def address_i_pv6(self) -> str:
+        """
+        IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address_i_pv6")
+
+    @property
+    @pulumi.getter(name="anycastZone")
+    def anycast_zone(self) -> str:
+        """
+        Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "anycast_zone")
+
+    @property
+    @pulumi.getter(name="attributeFlags")
+    def attribute_flags(self) -> Sequence[str]:
+        """
+        Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_flags")
+
+    @property
+    @pulumi.getter(name="backupZoneSets")
+    def backup_zone_sets(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetResult']:
+        """
+        backup zone.
+        """
+        return pulumi.get(self, "backup_zone_sets")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="clusterIds")
+    def cluster_ids(self) -> Sequence[str]:
+        """
+        Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_ids")
+
+    @property
+    @pulumi.getter(name="clusterTag")
+    def cluster_tag(self) -> str:
+        """
+        Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_tag")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="exclusiveClusters")
+    def exclusive_clusters(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterResult']:
+        """
+        Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "exclusive_clusters")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="extraInfos")
+    def extra_infos(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExtraInfoResult']:
+        """
+        Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "extra_infos")
+
+    @property
+    @pulumi.getter
+    def forward(self) -> int:
+        """
+        CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+        """
+        return pulumi.get(self, "forward")
+
+    @property
+    @pulumi.getter(name="healthLogSetId")
+    def health_log_set_id(self) -> str:
+        """
+        Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "health_log_set_id")
+
+    @property
+    @pulumi.getter(name="healthLogTopicId")
+    def health_log_topic_id(self) -> str:
+        """
+        Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "health_log_topic_id")
+
+    @property
+    @pulumi.getter(name="ipv6Mode")
+    def ipv6_mode(self) -> str:
+        """
+        This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "ipv6_mode")
+
+    @property
+    @pulumi.getter(name="isBlock")
+    def is_block(self) -> bool:
+        """
+        Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_block")
+
+    @property
+    @pulumi.getter(name="isBlockTime")
+    def is_block_time(self) -> str:
+        """
+        Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_block_time")
+
+    @property
+    @pulumi.getter(name="isDdos")
+    def is_ddos(self) -> bool:
+        """
+        Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_ddos")
+
+    @property
+    @pulumi.getter(name="isolatedTime")
+    def isolated_time(self) -> str:
+        """
+        CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "isolated_time")
+
+    @property
+    @pulumi.getter
+    def isolation(self) -> int:
+        """
+        0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "isolation")
+
+    @property
+    @pulumi.getter(name="loadBalancerDomain")
+    def load_balancer_domain(self) -> str:
+        """
+        Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_domain")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+    @property
+    @pulumi.getter(name="loadBalancerPassToTarget")
+    def load_balancer_pass_to_target(self) -> bool:
+        """
+        Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_pass_to_target")
+
+    @property
+    @pulumi.getter(name="loadBalancerType")
+    def load_balancer_type(self) -> str:
+        """
+        CLB instance network type:OPEN: public network; INTERNAL: private network.
+        """
+        return pulumi.get(self, "load_balancer_type")
+
+    @property
+    @pulumi.getter(name="loadBalancerVips")
+    def load_balancer_vips(self) -> Sequence[str]:
+        """
+        List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_vips")
+
+    @property
+    @pulumi.getter(name="localBgp")
+    def local_bgp(self) -> bool:
+        """
+        Whether the IP type is the local BGP.
+        """
+        return pulumi.get(self, "local_bgp")
+
+    @property
+    @pulumi.getter
+    def log(self) -> str:
+        """
+        Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "log")
+
+    @property
+    @pulumi.getter(name="logSetId")
+    def log_set_id(self) -> str:
+        """
+        Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "log_set_id")
+
+    @property
+    @pulumi.getter(name="logTopicId")
+    def log_topic_id(self) -> str:
+        """
+        Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "log_topic_id")
+
+    @property
+    @pulumi.getter(name="masterZones")
+    def master_zones(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerMasterZoneResult']:
+        """
+        Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "master_zones")
+
+    @property
+    @pulumi.getter(name="mixIpTarget")
+    def mix_ip_target(self) -> bool:
+        """
+        If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "mix_ip_target")
+
+    @property
+    @pulumi.getter(name="networkAttributes")
+    def network_attributes(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeResult']:
+        """
+        CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "network_attributes")
+
+    @property
+    @pulumi.getter(name="nfvInfo")
+    def nfv_info(self) -> str:
+        """
+        Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "nfv_info")
+
+    @property
+    @pulumi.getter(name="numericalVpcId")
+    def numerical_vpc_id(self) -> int:
+        """
+        VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "numerical_vpc_id")
+
+    @property
+    @pulumi.getter(name="openBgp")
+    def open_bgp(self) -> int:
+        """
+        Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "open_bgp")
+
+    @property
+    @pulumi.getter(name="prepaidAttributes")
+    def prepaid_attributes(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeResult']:
+        """
+        Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "prepaid_attributes")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        ID of the project to which a CLB instance belongs. 0: default project.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="secureGroups")
+    def secure_groups(self) -> Sequence[str]:
+        """
+        Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "secure_groups")
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> str:
+        """
+        Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "sla_type")
+
+    @property
+    @pulumi.getter
+    def snat(self) -> bool:
+        """
+        SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "snat")
+
+    @property
+    @pulumi.getter(name="snatIps")
+    def snat_ips(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerSnatIpResult']:
+        """
+        SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "snat_ips")
+
+    @property
+    @pulumi.getter(name="snatPro")
+    def snat_pro(self) -> bool:
+        """
+        Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "snat_pro")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="statusTime")
+    def status_time(self) -> str:
+        """
+        Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status_time")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerTagResult']:
+        """
+        CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="targetRegionInfos")
+    def target_region_infos(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoResult']:
+        """
+        Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_region_infos")
+
+    @property
+    @pulumi.getter(name="vipIsp")
+    def vip_isp(self) -> str:
+        """
+        ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "vip_isp")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        """
+        Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zones")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetResult(dict):
+    def __init__(__self__, *,
+                 edge_zone: bool,
+                 local_zone: bool,
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str,
+                 zone_region: str):
+        """
+        :param bool edge_zone: Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool local_zone: Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone: Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int zone_id: .
+        :param str zone_name: AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone_region: AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "edge_zone", edge_zone)
+        pulumi.set(__self__, "local_zone", local_zone)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+        pulumi.set(__self__, "zone_region", zone_region)
+
+    @property
+    @pulumi.getter(name="edgeZone")
+    def edge_zone(self) -> bool:
+        """
+        Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "edge_zone")
+
+    @property
+    @pulumi.getter(name="localZone")
+    def local_zone(self) -> bool:
+        """
+        Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "local_zone")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        .
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone_name")
+
+    @property
+    @pulumi.getter(name="zoneRegion")
+    def zone_region(self) -> str:
+        """
+        AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone_region")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterResult(dict):
+    def __init__(__self__, *,
+                 classical_clusters: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterResult'],
+                 l4_clusters: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterResult'],
+                 l7_clusters: Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterResult']):
+        """
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs'] classical_clusters: vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs'] l4_clusters: Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs'] l7_clusters: Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "classical_clusters", classical_clusters)
+        pulumi.set(__self__, "l4_clusters", l4_clusters)
+        pulumi.set(__self__, "l7_clusters", l7_clusters)
+
+    @property
+    @pulumi.getter(name="classicalClusters")
+    def classical_clusters(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterResult']:
+        """
+        vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "classical_clusters")
+
+    @property
+    @pulumi.getter(name="l4Clusters")
+    def l4_clusters(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterResult']:
+        """
+        Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "l4_clusters")
+
+    @property
+    @pulumi.getter(name="l7Clusters")
+    def l7_clusters(self) -> Sequence['outputs.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterResult']:
+        """
+        Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "l7_clusters")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 zone: str):
+        """
+        :param str cluster_id: Unique cluster ID.
+        :param str cluster_name: Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str zone: Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Unique cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 zone: str):
+        """
+        :param str cluster_id: Unique cluster ID.
+        :param str cluster_name: Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str zone: Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Unique cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 zone: str):
+        """
+        :param str cluster_id: Unique cluster ID.
+        :param str cluster_name: Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str zone: Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Unique cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerExtraInfoResult(dict):
+    def __init__(__self__, *,
+                 tgw_group_name: str,
+                 zhi_tong: bool):
+        """
+        :param str tgw_group_name: TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool zhi_tong: Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "tgw_group_name", tgw_group_name)
+        pulumi.set(__self__, "zhi_tong", zhi_tong)
+
+    @property
+    @pulumi.getter(name="tgwGroupName")
+    def tgw_group_name(self) -> str:
+        """
+        TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tgw_group_name")
+
+    @property
+    @pulumi.getter(name="zhiTong")
+    def zhi_tong(self) -> bool:
+        """
+        Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zhi_tong")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerMasterZoneResult(dict):
+    def __init__(__self__, *,
+                 edge_zone: bool,
+                 local_zone: bool,
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str,
+                 zone_region: str):
+        """
+        :param bool edge_zone: Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool local_zone: Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone: Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int zone_id: .
+        :param str zone_name: AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone_region: AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "edge_zone", edge_zone)
+        pulumi.set(__self__, "local_zone", local_zone)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+        pulumi.set(__self__, "zone_region", zone_region)
+
+    @property
+    @pulumi.getter(name="edgeZone")
+    def edge_zone(self) -> bool:
+        """
+        Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "edge_zone")
+
+    @property
+    @pulumi.getter(name="localZone")
+    def local_zone(self) -> bool:
+        """
+        Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "local_zone")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        .
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone_name")
+
+    @property
+    @pulumi.getter(name="zoneRegion")
+    def zone_region(self) -> str:
+        """
+        AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone_region")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeResult(dict):
+    def __init__(__self__, *,
+                 bandwidthpkg_sub_type: str,
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int):
+        """
+        :param str bandwidthpkg_sub_type: Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str internet_charge_type: TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+        :param int internet_max_bandwidth_out: Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+        """
+        pulumi.set(__self__, "bandwidthpkg_sub_type", bandwidthpkg_sub_type)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+
+    @property
+    @pulumi.getter(name="bandwidthpkgSubType")
+    def bandwidthpkg_sub_type(self) -> str:
+        """
+        Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "bandwidthpkg_sub_type")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeResult(dict):
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: str):
+        """
+        :param int period: Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+        :param str renew_flag: Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> str:
+        """
+        Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerSnatIpResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 subnet_id: str):
+        """
+        :param str ip: IP address, such as 192.168.0.1.
+        :param str subnet_id: Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP address, such as 192.168.0.1.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 vpc_id: str):
+        """
+        :param str region: Region of the target, such as ap-guangzhou.
+        :param str vpc_id: VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region of the target, such as ap-guangzhou.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetInstanceDetailFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetInstanceDetailLoadBalancerDetailSetResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 address_ip_version: str,
+                 address_ipv6: str,
+                 address_isp: str,
+                 charge_type: str,
+                 config_id: str,
+                 create_time: str,
+                 domain: str,
+                 domains: str,
+                 extra_infos: Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetExtraInfoResult'],
+                 ipv6_mode: str,
+                 isolation: int,
+                 listener_id: str,
+                 load_balancer_domain: str,
+                 load_balancer_id: str,
+                 load_balancer_name: str,
+                 load_balancer_pass_to_target: int,
+                 load_balancer_type: str,
+                 location_id: str,
+                 network_attributes: Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetNetworkAttributeResult'],
+                 port: int,
+                 prepaid_attributes: Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeResult'],
+                 project_id: int,
+                 protocol: str,
+                 security_groups: Sequence[str],
+                 slave_zones: Sequence[str],
+                 sni_switch: int,
+                 status: int,
+                 tags: Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetTagResult'],
+                 target_address: str,
+                 target_health: str,
+                 target_id: str,
+                 target_port: int,
+                 target_weight: int,
+                 url: str,
+                 vpc_id: str,
+                 zone: str,
+                 zones: Sequence[str]):
+        """
+        :param str address: CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str address_ip_version: IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str address_ipv6: IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str address_isp: ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str charge_type: CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str config_id: Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+        :param str create_time: CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str domain: Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str domains: List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs'] extra_infos: Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str ipv6_mode: IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int isolation: 0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str listener_id: CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_domain: Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name.
+        :param int load_balancer_pass_to_target: Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str load_balancer_type: CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str location_id: Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs'] network_attributes: CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int port: Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs'] prepaid_attributes: Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int project_id: ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str protocol: Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] security_groups: List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence[str] slave_zones: The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+        :param int sni_switch: Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+        :param int status: CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetInstanceDetailLoadBalancerDetailSetTagArgs'] tags: CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str target_address: Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str target_health: Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str target_id: ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int target_port: Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int target_weight: Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str url: Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str vpc_id: ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str zone: Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] zones: The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "address_ip_version", address_ip_version)
+        pulumi.set(__self__, "address_ipv6", address_ipv6)
+        pulumi.set(__self__, "address_isp", address_isp)
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "domains", domains)
+        pulumi.set(__self__, "extra_infos", extra_infos)
+        pulumi.set(__self__, "ipv6_mode", ipv6_mode)
+        pulumi.set(__self__, "isolation", isolation)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "load_balancer_domain", load_balancer_domain)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+        pulumi.set(__self__, "load_balancer_pass_to_target", load_balancer_pass_to_target)
+        pulumi.set(__self__, "load_balancer_type", load_balancer_type)
+        pulumi.set(__self__, "location_id", location_id)
+        pulumi.set(__self__, "network_attributes", network_attributes)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "prepaid_attributes", prepaid_attributes)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "security_groups", security_groups)
+        pulumi.set(__self__, "slave_zones", slave_zones)
+        pulumi.set(__self__, "sni_switch", sni_switch)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "target_address", target_address)
+        pulumi.set(__self__, "target_health", target_health)
+        pulumi.set(__self__, "target_id", target_id)
+        pulumi.set(__self__, "target_port", target_port)
+        pulumi.set(__self__, "target_weight", target_weight)
+        pulumi.set(__self__, "url", url)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="addressIpVersion")
+    def address_ip_version(self) -> str:
+        """
+        IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address_ip_version")
+
+    @property
+    @pulumi.getter(name="addressIpv6")
+    def address_ipv6(self) -> str:
+        """
+        IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address_ipv6")
+
+    @property
+    @pulumi.getter(name="addressIsp")
+    def address_isp(self) -> str:
+        """
+        ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "address_isp")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def domains(self) -> str:
+        """
+        List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domains")
+
+    @property
+    @pulumi.getter(name="extraInfos")
+    def extra_infos(self) -> Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetExtraInfoResult']:
+        """
+        Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "extra_infos")
+
+    @property
+    @pulumi.getter(name="ipv6Mode")
+    def ipv6_mode(self) -> str:
+        """
+        IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "ipv6_mode")
+
+    @property
+    @pulumi.getter
+    def isolation(self) -> int:
+        """
+        0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "isolation")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerDomain")
+    def load_balancer_domain(self) -> str:
+        """
+        Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_domain")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+    @property
+    @pulumi.getter(name="loadBalancerPassToTarget")
+    def load_balancer_pass_to_target(self) -> int:
+        """
+        Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_pass_to_target")
+
+    @property
+    @pulumi.getter(name="loadBalancerType")
+    def load_balancer_type(self) -> str:
+        """
+        CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_type")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> str:
+        """
+        Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter(name="networkAttributes")
+    def network_attributes(self) -> Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetNetworkAttributeResult']:
+        """
+        CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "network_attributes")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="prepaidAttributes")
+    def prepaid_attributes(self) -> Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeResult']:
+        """
+        Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "prepaid_attributes")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="securityGroups")
+    def security_groups(self) -> Sequence[str]:
+        """
+        List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "security_groups")
+
+    @property
+    @pulumi.getter(name="slaveZones")
+    def slave_zones(self) -> Sequence[str]:
+        """
+        The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "slave_zones")
+
+    @property
+    @pulumi.getter(name="sniSwitch")
+    def sni_switch(self) -> int:
+        """
+        Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "sni_switch")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetInstanceDetailLoadBalancerDetailSetTagResult']:
+        """
+        CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="targetAddress")
+    def target_address(self) -> str:
+        """
+        Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_address")
+
+    @property
+    @pulumi.getter(name="targetHealth")
+    def target_health(self) -> str:
+        """
+        Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_health")
+
+    @property
+    @pulumi.getter(name="targetId")
+    def target_id(self) -> str:
+        """
+        ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_id")
+
+    @property
+    @pulumi.getter(name="targetPort")
+    def target_port(self) -> int:
+        """
+        Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_port")
+
+    @property
+    @pulumi.getter(name="targetWeight")
+    def target_weight(self) -> int:
+        """
+        Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "target_weight")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        """
+        The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zones")
+
+
+@pulumi.output_type
+class GetInstanceDetailLoadBalancerDetailSetExtraInfoResult(dict):
+    def __init__(__self__, *,
+                 tgw_group_name: str,
+                 zhi_tong: bool):
+        """
+        :param str tgw_group_name: TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param bool zhi_tong: Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "tgw_group_name", tgw_group_name)
+        pulumi.set(__self__, "zhi_tong", zhi_tong)
+
+    @property
+    @pulumi.getter(name="tgwGroupName")
+    def tgw_group_name(self) -> str:
+        """
+        TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tgw_group_name")
+
+    @property
+    @pulumi.getter(name="zhiTong")
+    def zhi_tong(self) -> bool:
+        """
+        Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zhi_tong")
+
+
+@pulumi.output_type
+class GetInstanceDetailLoadBalancerDetailSetNetworkAttributeResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_pkg_sub_type: str,
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int):
+        """
+        :param str bandwidth_pkg_sub_type: Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+        :param str internet_charge_type: TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+        :param int internet_max_bandwidth_out: Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+        """
+        pulumi.set(__self__, "bandwidth_pkg_sub_type", bandwidth_pkg_sub_type)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+
+    @property
+    @pulumi.getter(name="bandwidthPkgSubType")
+    def bandwidth_pkg_sub_type(self) -> str:
+        """
+        Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "bandwidth_pkg_sub_type")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+
+@pulumi.output_type
+class GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeResult(dict):
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: str):
+        """
+        :param int period: Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+        :param str renew_flag: Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> str:
+        """
+        Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class GetInstanceDetailLoadBalancerDetailSetTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetInstanceTrafficLoadBalancerTrafficResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 load_balancer_id: str,
+                 load_balancer_name: str,
+                 out_bandwidth: float,
+                 region: str,
+                 vip: str):
+        """
+        :param str domain: CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name.
+        :param float out_bandwidth: Maximum outbound bandwidth in Mbps.
+        :param str region: CLB instance region.
+        :param str vip: CLB instance VIP.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+        pulumi.set(__self__, "out_bandwidth", out_bandwidth)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vip", vip)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+    @property
+    @pulumi.getter(name="outBandwidth")
+    def out_bandwidth(self) -> float:
+        """
+        Maximum outbound bandwidth in Mbps.
+        """
+        return pulumi.get(self, "out_bandwidth")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        CLB instance region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        CLB instance VIP.
+        """
+        return pulumi.get(self, "vip")
 
 
 @pulumi.output_type
@@ -764,7 +3400,7 @@ class GetListenerRulesRuleListResult(dict):
         :param str health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
         :param str health_check_http_method: Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.
         :param str health_check_http_path: Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
-        :param int health_check_interval_time: Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int health_check_interval_time: Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param bool health_check_switch: Indicates whether health check is enabled.
         :param int health_check_unhealth_num: Unhealth threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param bool http2_switch: Indicate to set HTTP2 protocol or not.
@@ -873,7 +3509,7 @@ class GetListenerRulesRuleListResult(dict):
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> int:
         """
-        Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
         return pulumi.get(self, "health_check_interval_time")
 
@@ -951,6 +3587,334 @@ class GetListenerRulesRuleListResult(dict):
 
 
 @pulumi.output_type
+class GetListenersByTargetsBackendResult(dict):
+    def __init__(__self__, *,
+                 private_ip: str,
+                 vpc_id: str):
+        """
+        :param str private_ip: Private network IP to be queried, which can be of the CVM or ENI.
+        :param str vpc_id: VPC ID.
+        """
+        pulumi.set(__self__, "private_ip", private_ip)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="privateIp")
+    def private_ip(self) -> str:
+        """
+        Private network IP to be queried, which can be of the CVM or ENI.
+        """
+        return pulumi.get(self, "private_ip")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetListenersByTargetsLoadBalancerResult(dict):
+    def __init__(__self__, *,
+                 listeners: Sequence['outputs.GetListenersByTargetsLoadBalancerListenerResult'],
+                 load_balancer_id: str,
+                 region: str,
+                 vip: str):
+        """
+        :param Sequence['GetListenersByTargetsLoadBalancerListenerArgs'] listeners: Listener rule.
+        :param str load_balancer_id: String ID of the CLB instance.
+        :param str region: CLB instance region.
+        :param str vip: VIP of the CLB instance.
+        """
+        pulumi.set(__self__, "listeners", listeners)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vip", vip)
+
+    @property
+    @pulumi.getter
+    def listeners(self) -> Sequence['outputs.GetListenersByTargetsLoadBalancerListenerResult']:
+        """
+        Listener rule.
+        """
+        return pulumi.get(self, "listeners")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        String ID of the CLB instance.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        CLB instance region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        VIP of the CLB instance.
+        """
+        return pulumi.get(self, "vip")
+
+
+@pulumi.output_type
+class GetListenersByTargetsLoadBalancerListenerResult(dict):
+    def __init__(__self__, *,
+                 end_port: int,
+                 listener_id: str,
+                 port: int,
+                 protocol: str,
+                 rules: Sequence['outputs.GetListenersByTargetsLoadBalancerListenerRuleResult'],
+                 targets: Sequence['outputs.GetListenersByTargetsLoadBalancerListenerTargetResult']):
+        """
+        :param int end_port: End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str listener_id: Listener ID.
+        :param int port: Port bound to the real server.
+        :param str protocol: Listener protocol.
+        :param Sequence['GetListenersByTargetsLoadBalancerListenerRuleArgs'] rules: Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetListenersByTargetsLoadBalancerListenerTargetArgs'] targets: Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "end_port", end_port)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "rules", rules)
+        pulumi.set(__self__, "targets", targets)
+
+    @property
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> int:
+        """
+        End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "end_port")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Listener ID.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port bound to the real server.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Listener protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetListenersByTargetsLoadBalancerListenerRuleResult']:
+        """
+        Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.GetListenersByTargetsLoadBalancerListenerTargetResult']:
+        """
+        Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "targets")
+
+
+@pulumi.output_type
+class GetListenersByTargetsLoadBalancerListenerRuleResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 location_id: str,
+                 targets: Sequence['outputs.GetListenersByTargetsLoadBalancerListenerRuleTargetResult'],
+                 url: str):
+        """
+        :param str domain: Domain name.
+        :param str location_id: Rule ID.
+        :param Sequence['GetListenersByTargetsLoadBalancerListenerRuleTargetArgs'] targets: Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str url: url.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "location_id", location_id)
+        pulumi.set(__self__, "targets", targets)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> str:
+        """
+        Rule ID.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.GetListenersByTargetsLoadBalancerListenerRuleTargetResult']:
+        """
+        Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "targets")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        url.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetListenersByTargetsLoadBalancerListenerRuleTargetResult(dict):
+    def __init__(__self__, *,
+                 port: int,
+                 private_ip: str,
+                 type: str,
+                 vpc_id: int,
+                 weight: int):
+        """
+        :param int port: Port bound to the real server.
+        :param str private_ip: Private network IP to be queried, which can be of the CVM or ENI.
+        :param str type: Private network IP type, which can be cvm or eni.
+        :param int vpc_id: VPC ID.
+        :param int weight: Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "private_ip", private_ip)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port bound to the real server.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="privateIp")
+    def private_ip(self) -> str:
+        """
+        Private network IP to be queried, which can be of the CVM or ENI.
+        """
+        return pulumi.get(self, "private_ip")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Private network IP type, which can be cvm or eni.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> int:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetListenersByTargetsLoadBalancerListenerTargetResult(dict):
+    def __init__(__self__, *,
+                 port: int,
+                 private_ip: str,
+                 type: str,
+                 vpc_id: int,
+                 weight: int):
+        """
+        :param int port: Port bound to the real server.
+        :param str private_ip: Private network IP to be queried, which can be of the CVM or ENI.
+        :param str type: Private network IP type, which can be cvm or eni.
+        :param int vpc_id: VPC ID.
+        :param int weight: Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "private_ip", private_ip)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port bound to the real server.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="privateIp")
+    def private_ip(self) -> str:
+        """
+        Private network IP to be queried, which can be of the CVM or ENI.
+        """
+        return pulumi.get(self, "private_ip")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Private network IP type, which can be cvm or eni.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> int:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
 class GetListenersListenerListResult(dict):
     def __init__(__self__, *,
                  certificate_ca_id: str,
@@ -991,7 +3955,7 @@ class GetListenersListenerListResult(dict):
         :param str health_check_http_method: HTTP health check method of TCP listener.
         :param str health_check_http_path: HTTP health check path of TCP listener.
         :param str health_check_http_version: The HTTP version of the backend service.
-        :param int health_check_interval_time: Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int health_check_interval_time: Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param int health_check_port: The health check port is the port of the backend service.
         :param str health_check_recv_context: It represents the result returned by the health check.
         :param str health_check_send_context: It represents the content of the request sent by the health check.
@@ -1126,7 +4090,7 @@ class GetListenersListenerListResult(dict):
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> int:
         """
-        Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
         return pulumi.get(self, "health_check_interval_time")
 
@@ -1303,6 +4267,418 @@ class GetRedirectionsRedirectionListResult(dict):
         Rule ID of target listener to be queried.
         """
         return pulumi.get(self, "target_rule_id")
+
+
+@pulumi.output_type
+class GetResourcesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetResourcesZoneResourceSetResult(dict):
+    def __init__(__self__, *,
+                 edge_zone: bool,
+                 ip_version: str,
+                 local_zone: bool,
+                 master_zone: str,
+                 resource_sets: Sequence['outputs.GetResourcesZoneResourceSetResourceSetResult'],
+                 slave_zone: str,
+                 zone_region: str,
+                 zone_resource_type: str):
+        """
+        :param bool edge_zone: Whether the AZ is an edge zone. Values: true, false.
+        :param str ip_version: IP version. Values: IPv4, IPv6, and IPv6_Nat.
+        :param bool local_zone: Whether the AZ is a LocalZone. Values: true, false.
+        :param str master_zone: Primary AZ, such as ap-guangzhou-1.
+        :param Sequence['GetResourcesZoneResourceSetResourceSetArgs'] resource_sets: List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str slave_zone: Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone_region: Region of the AZ, such as ap-guangzhou.
+        :param str zone_resource_type: Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+        """
+        pulumi.set(__self__, "edge_zone", edge_zone)
+        pulumi.set(__self__, "ip_version", ip_version)
+        pulumi.set(__self__, "local_zone", local_zone)
+        pulumi.set(__self__, "master_zone", master_zone)
+        pulumi.set(__self__, "resource_sets", resource_sets)
+        pulumi.set(__self__, "slave_zone", slave_zone)
+        pulumi.set(__self__, "zone_region", zone_region)
+        pulumi.set(__self__, "zone_resource_type", zone_resource_type)
+
+    @property
+    @pulumi.getter(name="edgeZone")
+    def edge_zone(self) -> bool:
+        """
+        Whether the AZ is an edge zone. Values: true, false.
+        """
+        return pulumi.get(self, "edge_zone")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> str:
+        """
+        IP version. Values: IPv4, IPv6, and IPv6_Nat.
+        """
+        return pulumi.get(self, "ip_version")
+
+    @property
+    @pulumi.getter(name="localZone")
+    def local_zone(self) -> bool:
+        """
+        Whether the AZ is a LocalZone. Values: true, false.
+        """
+        return pulumi.get(self, "local_zone")
+
+    @property
+    @pulumi.getter(name="masterZone")
+    def master_zone(self) -> str:
+        """
+        Primary AZ, such as ap-guangzhou-1.
+        """
+        return pulumi.get(self, "master_zone")
+
+    @property
+    @pulumi.getter(name="resourceSets")
+    def resource_sets(self) -> Sequence['outputs.GetResourcesZoneResourceSetResourceSetResult']:
+        """
+        List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "resource_sets")
+
+    @property
+    @pulumi.getter(name="slaveZone")
+    def slave_zone(self) -> str:
+        """
+        Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "slave_zone")
+
+    @property
+    @pulumi.getter(name="zoneRegion")
+    def zone_region(self) -> str:
+        """
+        Region of the AZ, such as ap-guangzhou.
+        """
+        return pulumi.get(self, "zone_region")
+
+    @property
+    @pulumi.getter(name="zoneResourceType")
+    def zone_resource_type(self) -> str:
+        """
+        Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+        """
+        return pulumi.get(self, "zone_resource_type")
+
+
+@pulumi.output_type
+class GetResourcesZoneResourceSetResourceSetResult(dict):
+    def __init__(__self__, *,
+                 availability_sets: Sequence['outputs.GetResourcesZoneResourceSetResourceSetAvailabilitySetResult'],
+                 isp: str,
+                 types: Sequence[str]):
+        """
+        :param Sequence['GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs'] availability_sets: Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+        :param str isp: ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        :param Sequence[str] types: Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        """
+        pulumi.set(__self__, "availability_sets", availability_sets)
+        pulumi.set(__self__, "isp", isp)
+        pulumi.set(__self__, "types", types)
+
+    @property
+    @pulumi.getter(name="availabilitySets")
+    def availability_sets(self) -> Sequence['outputs.GetResourcesZoneResourceSetResourceSetAvailabilitySetResult']:
+        """
+        Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+        """
+        return pulumi.get(self, "availability_sets")
+
+    @property
+    @pulumi.getter
+    def isp(self) -> str:
+        """
+        ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        """
+        return pulumi.get(self, "isp")
+
+    @property
+    @pulumi.getter
+    def types(self) -> Sequence[str]:
+        """
+        Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        """
+        return pulumi.get(self, "types")
+
+
+@pulumi.output_type
+class GetResourcesZoneResourceSetResourceSetAvailabilitySetResult(dict):
+    def __init__(__self__, *,
+                 availability: str,
+                 type: str):
+        """
+        :param str availability: Whether the resource is available. Values: Available, Unavailable.
+        :param str type: Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        """
+        pulumi.set(__self__, "availability", availability)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def availability(self) -> str:
+        """
+        Whether the resource is available. Values: Available, Unavailable.
+        """
+        return pulumi.get(self, "availability")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetTargetGroupListFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter value array.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value array.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetTargetGroupListTargetGroupSetResult(dict):
+    def __init__(__self__, *,
+                 associated_rules: Sequence['outputs.GetTargetGroupListTargetGroupSetAssociatedRuleResult'],
+                 created_time: str,
+                 port: int,
+                 target_group_id: str,
+                 target_group_name: str,
+                 updated_time: str,
+                 vpc_id: str):
+        """
+        :param Sequence['GetTargetGroupListTargetGroupSetAssociatedRuleArgs'] associated_rules: Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str created_time: Target group creation time.
+        :param int port: Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str target_group_id: Target group ID.
+        :param str target_group_name: Target group name.
+        :param str updated_time: Target group modification time.
+        :param str vpc_id: vpcid of target group.
+        """
+        pulumi.set(__self__, "associated_rules", associated_rules)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "target_group_id", target_group_id)
+        pulumi.set(__self__, "target_group_name", target_group_name)
+        pulumi.set(__self__, "updated_time", updated_time)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="associatedRules")
+    def associated_rules(self) -> Sequence['outputs.GetTargetGroupListTargetGroupSetAssociatedRuleResult']:
+        """
+        Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "associated_rules")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Target group creation time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> str:
+        """
+        Target group ID.
+        """
+        return pulumi.get(self, "target_group_id")
+
+    @property
+    @pulumi.getter(name="targetGroupName")
+    def target_group_name(self) -> str:
+        """
+        Target group name.
+        """
+        return pulumi.get(self, "target_group_name")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> str:
+        """
+        Target group modification time.
+        """
+        return pulumi.get(self, "updated_time")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        vpcid of target group.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetTargetGroupListTargetGroupSetAssociatedRuleResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 listener_id: str,
+                 listener_name: str,
+                 load_balancer_id: str,
+                 load_balancer_name: str,
+                 location_id: str,
+                 port: int,
+                 protocol: str,
+                 url: str):
+        """
+        :param str domain: Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str listener_id: ID of associated listener.
+        :param str listener_name: Listener name.
+        :param str load_balancer_id: ID of associated CLB instance.
+        :param str load_balancer_name: CLB instance name.
+        :param str location_id: ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        :param int port: Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str protocol: Protocol type of associated listener, such as HTTP or TCP.
+        :param str url: URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+        pulumi.set(__self__, "location_id", location_id)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        ID of associated listener.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Listener name.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        ID of associated CLB instance.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> str:
+        """
+        ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol type of associated listener, such as HTTP or TCP.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "url")
 
 
 @pulumi.output_type
@@ -1610,5 +4986,220 @@ class GetTargetGroupsListTargetGroupInstanceListResult(dict):
         Forwarding weight of back-end services.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetTargetHealthLoadBalancerResult(dict):
+    def __init__(__self__, *,
+                 listeners: Sequence['outputs.GetTargetHealthLoadBalancerListenerResult'],
+                 load_balancer_id: str,
+                 load_balancer_name: str):
+        """
+        :param Sequence['GetTargetHealthLoadBalancerListenerArgs'] listeners: List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "listeners", listeners)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+
+    @property
+    @pulumi.getter
+    def listeners(self) -> Sequence['outputs.GetTargetHealthLoadBalancerListenerResult']:
+        """
+        List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "listeners")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+
+@pulumi.output_type
+class GetTargetHealthLoadBalancerListenerResult(dict):
+    def __init__(__self__, *,
+                 listener_id: str,
+                 listener_name: str,
+                 port: int,
+                 protocol: str,
+                 rules: Sequence['outputs.GetTargetHealthLoadBalancerListenerRuleResult']):
+        """
+        :param str listener_id: Listener ID.
+        :param str listener_name: Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int port: Port bound to the target.
+        :param str protocol: Listener protocol.
+        :param Sequence['GetTargetHealthLoadBalancerListenerRuleArgs'] rules: List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "rules", rules)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Listener ID.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port bound to the target.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Listener protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetTargetHealthLoadBalancerListenerRuleResult']:
+        """
+        List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+
+@pulumi.output_type
+class GetTargetHealthLoadBalancerListenerRuleResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 location_id: str,
+                 targets: Sequence['outputs.GetTargetHealthLoadBalancerListenerRuleTargetResult'],
+                 url: str):
+        """
+        :param str domain: Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str location_id: Forwarding rule ID.
+        :param Sequence['GetTargetHealthLoadBalancerListenerRuleTargetArgs'] targets: Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str url: Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "location_id", location_id)
+        pulumi.set(__self__, "targets", targets)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> str:
+        """
+        Forwarding rule ID.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.GetTargetHealthLoadBalancerListenerRuleTargetResult']:
+        """
+        Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "targets")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetTargetHealthLoadBalancerListenerRuleTargetResult(dict):
+    def __init__(__self__, *,
+                 health_status: bool,
+                 health_status_detail: str,
+                 ip: str,
+                 port: int,
+                 target_id: str):
+        """
+        :param bool health_status: Current health status. true: healthy; false: unhealthy.
+        :param str health_status_detail: Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+        :param str ip: Private IP of the target.
+        :param int port: Port bound to the target.
+        :param str target_id: Instance ID of the target, such as ins-12345678.
+        """
+        pulumi.set(__self__, "health_status", health_status)
+        pulumi.set(__self__, "health_status_detail", health_status_detail)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "target_id", target_id)
+
+    @property
+    @pulumi.getter(name="healthStatus")
+    def health_status(self) -> bool:
+        """
+        Current health status. true: healthy; false: unhealthy.
+        """
+        return pulumi.get(self, "health_status")
+
+    @property
+    @pulumi.getter(name="healthStatusDetail")
+    def health_status_detail(self) -> str:
+        """
+        Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+        """
+        return pulumi.get(self, "health_status_detail")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Private IP of the target.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port bound to the target.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="targetId")
+    def target_id(self) -> str:
+        """
+        Instance ID of the target, such as ins-12345678.
+        """
+        return pulumi.get(self, "target_id")
 
 

@@ -27,6 +27,7 @@ class FunctionArgs:
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 func_type: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
                  layers: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]]] = None,
@@ -54,6 +55,7 @@ class FunctionArgs:
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
+        :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]] layers: The list of association layers.
@@ -90,6 +92,8 @@ class FunctionArgs:
             pulumi.set(__self__, "enable_public_net", enable_public_net)
         if environment is not None:
             pulumi.set(__self__, "environment", environment)
+        if func_type is not None:
+            pulumi.set(__self__, "func_type", func_type)
         if image_configs is not None:
             pulumi.set(__self__, "image_configs", image_configs)
         if l5_enable is not None:
@@ -260,6 +264,18 @@ class FunctionArgs:
     @environment.setter
     def environment(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "environment", value)
+
+    @property
+    @pulumi.getter(name="funcType")
+    def func_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        """
+        return pulumi.get(self, "func_type")
+
+    @func_type.setter
+    def func_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "func_type", value)
 
     @property
     @pulumi.getter(name="imageConfigs")
@@ -437,6 +453,7 @@ class _FunctionState:
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  err_no: Optional[pulumi.Input[int]] = None,
+                 func_type: Optional[pulumi.Input[str]] = None,
                  handler: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]] = None,
@@ -477,6 +494,7 @@ class _FunctionState:
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
+        :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
@@ -532,6 +550,8 @@ class _FunctionState:
             pulumi.set(__self__, "environment", environment)
         if err_no is not None:
             pulumi.set(__self__, "err_no", err_no)
+        if func_type is not None:
+            pulumi.set(__self__, "func_type", func_type)
         if handler is not None:
             pulumi.set(__self__, "handler", handler)
         if host is not None:
@@ -768,6 +788,18 @@ class _FunctionState:
     @err_no.setter
     def err_no(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "err_no", value)
+
+    @property
+    @pulumi.getter(name="funcType")
+    def func_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        """
+        return pulumi.get(self, "func_type")
+
+    @func_type.setter
+    def func_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "func_type", value)
 
     @property
     @pulumi.getter
@@ -1049,6 +1081,7 @@ class Function(pulumi.CustomResource):
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 func_type: Optional[pulumi.Input[str]] = None,
                  handler: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
@@ -1081,8 +1114,7 @@ class Function(pulumi.CustomResource):
             handler="main.do_it",
             runtime="Python3.6")
         ```
-
-        Using CFS config
+        ### Using CFS config
 
         ```python
         import pulumi
@@ -1121,6 +1153,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
+        :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
@@ -1159,8 +1192,7 @@ class Function(pulumi.CustomResource):
             handler="main.do_it",
             runtime="Python3.6")
         ```
-
-        Using CFS config
+        ### Using CFS config
 
         ```python
         import pulumi
@@ -1212,6 +1244,7 @@ class Function(pulumi.CustomResource):
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 func_type: Optional[pulumi.Input[str]] = None,
                  handler: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
@@ -1251,6 +1284,7 @@ class Function(pulumi.CustomResource):
             __props__.__dict__["enable_eip_config"] = enable_eip_config
             __props__.__dict__["enable_public_net"] = enable_public_net
             __props__.__dict__["environment"] = environment
+            __props__.__dict__["func_type"] = func_type
             if handler is None and not opts.urn:
                 raise TypeError("Missing required property 'handler'")
             __props__.__dict__["handler"] = handler
@@ -1309,6 +1343,7 @@ class Function(pulumi.CustomResource):
             enable_public_net: Optional[pulumi.Input[bool]] = None,
             environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             err_no: Optional[pulumi.Input[int]] = None,
+            func_type: Optional[pulumi.Input[str]] = None,
             handler: Optional[pulumi.Input[str]] = None,
             host: Optional[pulumi.Input[str]] = None,
             image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
@@ -1354,6 +1389,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
+        :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
@@ -1397,6 +1433,7 @@ class Function(pulumi.CustomResource):
         __props__.__dict__["enable_public_net"] = enable_public_net
         __props__.__dict__["environment"] = environment
         __props__.__dict__["err_no"] = err_no
+        __props__.__dict__["func_type"] = func_type
         __props__.__dict__["handler"] = handler
         __props__.__dict__["host"] = host
         __props__.__dict__["image_configs"] = image_configs
@@ -1548,6 +1585,14 @@ class Function(pulumi.CustomResource):
         SCF function code error code.
         """
         return pulumi.get(self, "err_no")
+
+    @property
+    @pulumi.getter(name="funcType")
+    def func_type(self) -> pulumi.Output[str]:
+        """
+        Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        """
+        return pulumi.get(self, "func_type")
 
     @property
     @pulumi.getter

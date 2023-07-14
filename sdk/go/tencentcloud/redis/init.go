@@ -25,6 +25,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Account{}
 	case "tencentcloud:Redis/backupConfig:BackupConfig":
 		r = &BackupConfig{}
+	case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
+		r = &BackupDownloadRestriction{}
+	case "tencentcloud:Redis/backupOperation:BackupOperation":
+		r = &BackupOperation{}
+	case "tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation":
+		r = &ClearInstanceOperation{}
 	case "tencentcloud:Redis/connectionConfig:ConnectionConfig":
 		r = &ConnectionConfig{}
 	case "tencentcloud:Redis/instance:Instance":
@@ -37,10 +43,26 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ParamTemplate{}
 	case "tencentcloud:Redis/readOnly:ReadOnly":
 		r = &ReadOnly{}
+	case "tencentcloud:Redis/renewInstanceOperation:RenewInstanceOperation":
+		r = &RenewInstanceOperation{}
 	case "tencentcloud:Redis/replicaReadonly:ReplicaReadonly":
 		r = &ReplicaReadonly{}
+	case "tencentcloud:Redis/replicateAttachment:ReplicateAttachment":
+		r = &ReplicateAttachment{}
+	case "tencentcloud:Redis/securityGroupAttachment:SecurityGroupAttachment":
+		r = &SecurityGroupAttachment{}
 	case "tencentcloud:Redis/ssl:Ssl":
 		r = &Ssl{}
+	case "tencentcloud:Redis/startupInstanceOperation:StartupInstanceOperation":
+		r = &StartupInstanceOperation{}
+	case "tencentcloud:Redis/switchMaster:SwitchMaster":
+		r = &SwitchMaster{}
+	case "tencentcloud:Redis/upgradeCacheVersionOperation:UpgradeCacheVersionOperation":
+		r = &UpgradeCacheVersionOperation{}
+	case "tencentcloud:Redis/upgradeMultiZoneOperation:UpgradeMultiZoneOperation":
+		r = &UpgradeMultiZoneOperation{}
+	case "tencentcloud:Redis/upgradeProxyVersionOperation:UpgradeProxyVersionOperation":
+		r = &UpgradeProxyVersionOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -62,6 +84,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Redis/backupConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/backupDownloadRestriction",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/backupOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/clearInstanceOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -96,12 +133,52 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Redis/renewInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Redis/replicaReadonly",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Redis/replicateAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/securityGroupAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Redis/ssl",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/startupInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/switchMaster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/upgradeCacheVersionOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/upgradeMultiZoneOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/upgradeProxyVersionOperation",
 		&module{version},
 	)
 }

@@ -5,20 +5,33 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./alarm";
+export * from "./alarmNotice";
+export * from "./ckafkaConsumer";
 export * from "./config";
 export * from "./configAttachment";
 export * from "./configExtra";
+export * from "./cosRecharge";
 export * from "./cosShipper";
+export * from "./export";
+export * from "./getMachineGroupConfigs";
+export * from "./getMachines";
+export * from "./getShipperTasks";
 export * from "./index_";
 export * from "./logset";
 export * from "./machineGroup";
 export * from "./topic";
 
 // Import resources to register:
+import { Alarm } from "./alarm";
+import { AlarmNotice } from "./alarmNotice";
+import { CkafkaConsumer } from "./ckafkaConsumer";
 import { Config } from "./config";
 import { ConfigAttachment } from "./configAttachment";
 import { ConfigExtra } from "./configExtra";
+import { CosRecharge } from "./cosRecharge";
 import { CosShipper } from "./cosShipper";
+import { Export } from "./export";
 import { Index } from "./index_";
 import { Logset } from "./logset";
 import { MachineGroup } from "./machineGroup";
@@ -28,14 +41,24 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cls/alarm:Alarm":
+                return new Alarm(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/alarmNotice:AlarmNotice":
+                return new AlarmNotice(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer":
+                return new CkafkaConsumer(name, <any>undefined, { urn })
             case "tencentcloud:Cls/config:Config":
                 return new Config(name, <any>undefined, { urn })
             case "tencentcloud:Cls/configAttachment:ConfigAttachment":
                 return new ConfigAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cls/configExtra:ConfigExtra":
                 return new ConfigExtra(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/cosRecharge:CosRecharge":
+                return new CosRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/cosShipper:CosShipper":
                 return new CosShipper(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/export:Export":
+                return new Export(name, <any>undefined, { urn })
             case "tencentcloud:Cls/index:Index":
                 return new Index(name, <any>undefined, { urn })
             case "tencentcloud:Cls/logset:Logset":
@@ -49,10 +72,15 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/alarm", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/alarmNotice", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/ckafkaConsumer", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/config", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configExtra", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/export", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/logset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _module)

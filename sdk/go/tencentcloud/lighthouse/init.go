@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplyInstanceSnapshot{}
 	case "tencentcloud:Lighthouse/blueprint:Blueprint":
 		r = &Blueprint{}
+	case "tencentcloud:Lighthouse/disk:Disk":
+		r = &Disk{}
 	case "tencentcloud:Lighthouse/diskAttachment:DiskAttachment":
 		r = &DiskAttachment{}
 	case "tencentcloud:Lighthouse/diskBackup:DiskBackup":
@@ -37,8 +39,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Lighthouse/keyPair:KeyPair":
 		r = &KeyPair{}
+	case "tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment":
+		r = &KeyPairAttachment{}
+	case "tencentcloud:Lighthouse/rebootInstance:RebootInstance":
+		r = &RebootInstance{}
+	case "tencentcloud:Lighthouse/renewDisk:RenewDisk":
+		r = &RenewDisk{}
+	case "tencentcloud:Lighthouse/renewInstance:RenewInstance":
+		r = &RenewInstance{}
 	case "tencentcloud:Lighthouse/snapshot:Snapshot":
 		r = &Snapshot{}
+	case "tencentcloud:Lighthouse/startInstance:StartInstance":
+		r = &StartInstance{}
+	case "tencentcloud:Lighthouse/stopInstance:StopInstance":
+		r = &StopInstance{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -69,6 +83,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Lighthouse/disk",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Lighthouse/diskAttachment",
 		&module{version},
 	)
@@ -94,7 +113,37 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Lighthouse/keyPairAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/rebootInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/renewDisk",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Lighthouse/snapshot",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/startInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/stopInstance",
 		&module{version},
 	)
 }

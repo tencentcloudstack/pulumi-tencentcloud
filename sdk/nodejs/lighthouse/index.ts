@@ -8,25 +8,51 @@ import * as utilities from "../utilities";
 export * from "./applyDiskBackup";
 export * from "./applyInstanceSnapshot";
 export * from "./blueprint";
+export * from "./disk";
 export * from "./diskAttachment";
 export * from "./diskBackup";
 export * from "./firewallRule";
+export * from "./getAllScene";
 export * from "./getBundle";
+export * from "./getDiskConfig";
+export * from "./getDisks";
 export * from "./getFirewallRulesTemplate";
+export * from "./getInstanceBlueprint";
+export * from "./getInstanceDiskNum";
+export * from "./getInstanceTrafficPackage";
+export * from "./getInstanceVncUrl";
+export * from "./getModifyInstanceBundle";
+export * from "./getRegion";
+export * from "./getResetInstanceBlueprint";
+export * from "./getScene";
+export * from "./getZone";
 export * from "./instance";
 export * from "./keyPair";
+export * from "./keyPairAttachment";
+export * from "./rebootInstance";
+export * from "./renewDisk";
+export * from "./renewInstance";
 export * from "./snapshot";
+export * from "./startInstance";
+export * from "./stopInstance";
 
 // Import resources to register:
 import { ApplyDiskBackup } from "./applyDiskBackup";
 import { ApplyInstanceSnapshot } from "./applyInstanceSnapshot";
 import { Blueprint } from "./blueprint";
+import { Disk } from "./disk";
 import { DiskAttachment } from "./diskAttachment";
 import { DiskBackup } from "./diskBackup";
 import { FirewallRule } from "./firewallRule";
 import { Instance } from "./instance";
 import { KeyPair } from "./keyPair";
+import { KeyPairAttachment } from "./keyPairAttachment";
+import { RebootInstance } from "./rebootInstance";
+import { RenewDisk } from "./renewDisk";
+import { RenewInstance } from "./renewInstance";
 import { Snapshot } from "./snapshot";
+import { StartInstance } from "./startInstance";
+import { StopInstance } from "./stopInstance";
 
 const _module = {
     version: utilities.getVersion(),
@@ -38,6 +64,8 @@ const _module = {
                 return new ApplyInstanceSnapshot(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/blueprint:Blueprint":
                 return new Blueprint(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/disk:Disk":
+                return new Disk(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/diskAttachment:DiskAttachment":
                 return new DiskAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/diskBackup:DiskBackup":
@@ -48,8 +76,20 @@ const _module = {
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/keyPair:KeyPair":
                 return new KeyPair(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment":
+                return new KeyPairAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/rebootInstance:RebootInstance":
+                return new RebootInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/renewDisk:RenewDisk":
+                return new RenewDisk(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/renewInstance:RenewInstance":
+                return new RenewInstance(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/snapshot:Snapshot":
                 return new Snapshot(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/startInstance:StartInstance":
+                return new StartInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/stopInstance:StopInstance":
+                return new StopInstance(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -58,9 +98,16 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/applyDiskBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/applyInstanceSnapshot", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/blueprint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/disk", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/firewallRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPair", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPairAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/rebootInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/renewDisk", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/renewInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/snapshot", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/startInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/stopInstance", _module)

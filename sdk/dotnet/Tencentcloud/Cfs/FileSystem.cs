@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// Provides a resource to create a cloud file system(CFS).
     /// 
     /// ## Example Usage
+    /// ### Standard Nfs CFS
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -30,6 +31,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     ///             Protocol = "NFS",
     ///             SubnetId = "subnet-9mu2t9iw",
     ///             VpcId = "vpc-ah9fbkap",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### High-Performance Nfs CFS
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
+    ///         {
+    ///             AccessGroupId = "pgroup-drwt29od",
+    ///             AvailabilityZone = "ap-guangzhou-6",
+    ///             Protocol = "NFS",
+    ///             StorageType = "HP",
+    ///             SubnetId = "subnet-enm92y0m",
+    ///             VpcId = "vpc-86v957zb",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Standard Turbo CFS
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
+    ///         {
+    ///             AccessGroupId = "pgroup-drwt29od",
+    ///             AvailabilityZone = "ap-guangzhou-6",
+    ///             Capacity = 20480,
+    ///             CcnId = "ccn-39lqkygf",
+    ///             CidrBlock = "11.0.0.0/24",
+    ///             NetInterface = "CCN",
+    ///             Protocol = "TURBO",
+    ///             StorageType = "TB",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### High-Performance Turbo CFS
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
+    ///         {
+    ///             AccessGroupId = "pgroup-drwt29od",
+    ///             AvailabilityZone = "ap-guangzhou-6",
+    ///             Capacity = 10240,
+    ///             CcnId = "ccn-39lqkygf",
+    ///             CidrBlock = "11.0.0.0/24",
+    ///             NetInterface = "CCN",
+    ///             Protocol = "TURBO",
+    ///             StorageType = "TP",
     ///         });
     ///     }
     /// 
@@ -60,6 +134,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
+        /// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        /// </summary>
+        [Output("capacity")]
+        public Output<int> Capacity { get; private set; } = null!;
+
+        /// <summary>
+        /// CCN instance ID (required if the network type is CCN).
+        /// </summary>
+        [Output("ccnId")]
+        public Output<string> CcnId { get; private set; } = null!;
+
+        /// <summary>
+        /// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        /// </summary>
+        [Output("cidrBlock")]
+        public Output<string> CidrBlock { get; private set; } = null!;
+
+        /// <summary>
         /// Create time of the file system.
         /// </summary>
         [Output("createTime")]
@@ -84,13 +176,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        /// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        /// </summary>
+        [Output("netInterface")]
+        public Output<string?> NetInterface { get; private set; } = null!;
+
+        /// <summary>
+        /// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         /// </summary>
         [Output("protocol")]
         public Output<string?> Protocol { get; private set; } = null!;
 
         /// <summary>
-        /// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        /// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         /// </summary>
         [Output("storageType")]
         public Output<string?> StorageType { get; private set; } = null!;
@@ -173,6 +271,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
+        /// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        /// </summary>
+        [Input("capacity")]
+        public Input<int>? Capacity { get; set; }
+
+        /// <summary>
+        /// CCN instance ID (required if the network type is CCN).
+        /// </summary>
+        [Input("ccnId")]
+        public Input<string>? CcnId { get; set; }
+
+        /// <summary>
+        /// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        /// </summary>
+        [Input("cidrBlock")]
+        public Input<string>? CidrBlock { get; set; }
+
+        /// <summary>
         /// IP of mount point.
         /// </summary>
         [Input("mountIp")]
@@ -185,13 +301,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        /// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        /// </summary>
+        [Input("netInterface")]
+        public Input<string>? NetInterface { get; set; }
+
+        /// <summary>
+        /// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
         /// <summary>
-        /// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        /// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -199,8 +321,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// ID of a subnet.
         /// </summary>
-        [Input("subnetId", required: true)]
-        public Input<string> SubnetId { get; set; } = null!;
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
 
         [Input("tags")]
         private InputMap<object>? _tags;
@@ -217,8 +339,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// ID of a VPC network.
         /// </summary>
-        [Input("vpcId", required: true)]
-        public Input<string> VpcId { get; set; } = null!;
+        [Input("vpcId")]
+        public Input<string>? VpcId { get; set; }
 
         public FileSystemArgs()
         {
@@ -238,6 +360,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// </summary>
         [Input("availabilityZone")]
         public Input<string>? AvailabilityZone { get; set; }
+
+        /// <summary>
+        /// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        /// </summary>
+        [Input("capacity")]
+        public Input<int>? Capacity { get; set; }
+
+        /// <summary>
+        /// CCN instance ID (required if the network type is CCN).
+        /// </summary>
+        [Input("ccnId")]
+        public Input<string>? CcnId { get; set; }
+
+        /// <summary>
+        /// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        /// </summary>
+        [Input("cidrBlock")]
+        public Input<string>? CidrBlock { get; set; }
 
         /// <summary>
         /// Create time of the file system.
@@ -264,13 +404,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        /// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        /// </summary>
+        [Input("netInterface")]
+        public Input<string>? NetInterface { get; set; }
+
+        /// <summary>
+        /// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
         /// <summary>
-        /// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        /// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }

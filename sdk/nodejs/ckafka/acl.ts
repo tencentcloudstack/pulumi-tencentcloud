@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a Ckafka Acl.
  *
  * ## Example Usage
- *
- * Ckafka Acl
+ * ### Ckafka Acl
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

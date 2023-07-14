@@ -412,7 +412,7 @@ class ReadonlyGroup(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         group = tencentcloud.postgresql.ReadonlyGroup("group",
-            master_db_instance_id="postgres-f44wlfdv",
+            master_db_instance_id="postgres-gzg9jb2n",
             max_replay_lag=100,
             max_replay_latency=512,
             min_delay_eliminate_reserve=1,
@@ -453,7 +453,7 @@ class ReadonlyGroup(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         group = tencentcloud.postgresql.ReadonlyGroup("group",
-            master_db_instance_id="postgres-f44wlfdv",
+            master_db_instance_id="postgres-gzg9jb2n",
             max_replay_lag=100,
             max_replay_latency=512,
             min_delay_eliminate_reserve=1,

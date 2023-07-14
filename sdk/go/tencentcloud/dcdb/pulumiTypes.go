@@ -2091,6 +2091,121 @@ func (o GetDatabasesListArrayOutput) Index(i pulumi.IntInput) GetDatabasesListOu
 	}).(GetDatabasesListOutput)
 }
 
+type GetInstanceNodeInfoNodesInfo struct {
+	// Node ID.
+	NodeId string `pulumi:"nodeId"`
+	// Node role. Valid values: `master`, `slave`.
+	Role string `pulumi:"role"`
+	// Instance shard ID.
+	ShardId string `pulumi:"shardId"`
+}
+
+// GetInstanceNodeInfoNodesInfoInput is an input type that accepts GetInstanceNodeInfoNodesInfoArgs and GetInstanceNodeInfoNodesInfoOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoNodesInfoInput` via:
+//
+//          GetInstanceNodeInfoNodesInfoArgs{...}
+type GetInstanceNodeInfoNodesInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput
+	ToGetInstanceNodeInfoNodesInfoOutputWithContext(context.Context) GetInstanceNodeInfoNodesInfoOutput
+}
+
+type GetInstanceNodeInfoNodesInfoArgs struct {
+	// Node ID.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Node role. Valid values: `master`, `slave`.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Instance shard ID.
+	ShardId pulumi.StringInput `pulumi:"shardId"`
+}
+
+func (GetInstanceNodeInfoNodesInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoNodesInfoArgs) ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput {
+	return i.ToGetInstanceNodeInfoNodesInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoNodesInfoArgs) ToGetInstanceNodeInfoNodesInfoOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoNodesInfoOutput)
+}
+
+// GetInstanceNodeInfoNodesInfoArrayInput is an input type that accepts GetInstanceNodeInfoNodesInfoArray and GetInstanceNodeInfoNodesInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoNodesInfoArrayInput` via:
+//
+//          GetInstanceNodeInfoNodesInfoArray{ GetInstanceNodeInfoNodesInfoArgs{...} }
+type GetInstanceNodeInfoNodesInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput
+	ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(context.Context) GetInstanceNodeInfoNodesInfoArrayOutput
+}
+
+type GetInstanceNodeInfoNodesInfoArray []GetInstanceNodeInfoNodesInfoInput
+
+func (GetInstanceNodeInfoNodesInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoNodesInfoArray) ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput {
+	return i.ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoNodesInfoArray) ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoNodesInfoArrayOutput)
+}
+
+type GetInstanceNodeInfoNodesInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoNodesInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) ToGetInstanceNodeInfoNodesInfoOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoOutput {
+	return o
+}
+
+// Node ID.
+func (o GetInstanceNodeInfoNodesInfoOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoNodesInfo) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Node role. Valid values: `master`, `slave`.
+func (o GetInstanceNodeInfoNodesInfoOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoNodesInfo) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Instance shard ID.
+func (o GetInstanceNodeInfoNodesInfoOutput) ShardId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoNodesInfo) string { return v.ShardId }).(pulumi.StringOutput)
+}
+
+type GetInstanceNodeInfoNodesInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoNodesInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceNodeInfoNodesInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceNodeInfoNodesInfo {
+		return vs[0].([]GetInstanceNodeInfoNodesInfo)[vs[1].(int)]
+	}).(GetInstanceNodeInfoNodesInfoOutput)
+}
+
 type GetInstancesList struct {
 	// app id.
 	AppId int `pulumi:"appId"`
@@ -2751,6 +2866,272 @@ func (o GetInstancesListShardDetailArrayOutput) Index(i pulumi.IntInput) GetInst
 	}).(GetInstancesListShardDetailOutput)
 }
 
+type GetLogFilesFile struct {
+	// Filename.
+	FileName string `pulumi:"fileName"`
+	// File length.
+	Length int `pulumi:"length"`
+	// Last modified time of log.
+	Mtime int `pulumi:"mtime"`
+	// Uniform resource identifier (URI) used during log download.
+	Uri string `pulumi:"uri"`
+}
+
+// GetLogFilesFileInput is an input type that accepts GetLogFilesFileArgs and GetLogFilesFileOutput values.
+// You can construct a concrete instance of `GetLogFilesFileInput` via:
+//
+//          GetLogFilesFileArgs{...}
+type GetLogFilesFileInput interface {
+	pulumi.Input
+
+	ToGetLogFilesFileOutput() GetLogFilesFileOutput
+	ToGetLogFilesFileOutputWithContext(context.Context) GetLogFilesFileOutput
+}
+
+type GetLogFilesFileArgs struct {
+	// Filename.
+	FileName pulumi.StringInput `pulumi:"fileName"`
+	// File length.
+	Length pulumi.IntInput `pulumi:"length"`
+	// Last modified time of log.
+	Mtime pulumi.IntInput `pulumi:"mtime"`
+	// Uniform resource identifier (URI) used during log download.
+	Uri pulumi.StringInput `pulumi:"uri"`
+}
+
+func (GetLogFilesFileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogFilesFile)(nil)).Elem()
+}
+
+func (i GetLogFilesFileArgs) ToGetLogFilesFileOutput() GetLogFilesFileOutput {
+	return i.ToGetLogFilesFileOutputWithContext(context.Background())
+}
+
+func (i GetLogFilesFileArgs) ToGetLogFilesFileOutputWithContext(ctx context.Context) GetLogFilesFileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogFilesFileOutput)
+}
+
+// GetLogFilesFileArrayInput is an input type that accepts GetLogFilesFileArray and GetLogFilesFileArrayOutput values.
+// You can construct a concrete instance of `GetLogFilesFileArrayInput` via:
+//
+//          GetLogFilesFileArray{ GetLogFilesFileArgs{...} }
+type GetLogFilesFileArrayInput interface {
+	pulumi.Input
+
+	ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput
+	ToGetLogFilesFileArrayOutputWithContext(context.Context) GetLogFilesFileArrayOutput
+}
+
+type GetLogFilesFileArray []GetLogFilesFileInput
+
+func (GetLogFilesFileArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogFilesFile)(nil)).Elem()
+}
+
+func (i GetLogFilesFileArray) ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput {
+	return i.ToGetLogFilesFileArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogFilesFileArray) ToGetLogFilesFileArrayOutputWithContext(ctx context.Context) GetLogFilesFileArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogFilesFileArrayOutput)
+}
+
+type GetLogFilesFileOutput struct{ *pulumi.OutputState }
+
+func (GetLogFilesFileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogFilesFile)(nil)).Elem()
+}
+
+func (o GetLogFilesFileOutput) ToGetLogFilesFileOutput() GetLogFilesFileOutput {
+	return o
+}
+
+func (o GetLogFilesFileOutput) ToGetLogFilesFileOutputWithContext(ctx context.Context) GetLogFilesFileOutput {
+	return o
+}
+
+// Filename.
+func (o GetLogFilesFileOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogFilesFile) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+// File length.
+func (o GetLogFilesFileOutput) Length() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogFilesFile) int { return v.Length }).(pulumi.IntOutput)
+}
+
+// Last modified time of log.
+func (o GetLogFilesFileOutput) Mtime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogFilesFile) int { return v.Mtime }).(pulumi.IntOutput)
+}
+
+// Uniform resource identifier (URI) used during log download.
+func (o GetLogFilesFileOutput) Uri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogFilesFile) string { return v.Uri }).(pulumi.StringOutput)
+}
+
+type GetLogFilesFileArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogFilesFileArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogFilesFile)(nil)).Elem()
+}
+
+func (o GetLogFilesFileArrayOutput) ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput {
+	return o
+}
+
+func (o GetLogFilesFileArrayOutput) ToGetLogFilesFileArrayOutputWithContext(ctx context.Context) GetLogFilesFileArrayOutput {
+	return o
+}
+
+func (o GetLogFilesFileArrayOutput) Index(i pulumi.IntInput) GetLogFilesFileOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogFilesFile {
+		return vs[0].([]GetLogFilesFile)[vs[1].(int)]
+	}).(GetLogFilesFileOutput)
+}
+
+type GetOrdersDeal struct {
+	// Number of items.
+	Count int `pulumi:"count"`
+	// Order number.
+	DealName string `pulumi:"dealName"`
+	// ID of the associated process, which can be used to query the process execution status.
+	FlowId int `pulumi:"flowId"`
+	// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIds []string `pulumi:"instanceIds"`
+	// Account.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+	PayMode int `pulumi:"payMode"`
+}
+
+// GetOrdersDealInput is an input type that accepts GetOrdersDealArgs and GetOrdersDealOutput values.
+// You can construct a concrete instance of `GetOrdersDealInput` via:
+//
+//          GetOrdersDealArgs{...}
+type GetOrdersDealInput interface {
+	pulumi.Input
+
+	ToGetOrdersDealOutput() GetOrdersDealOutput
+	ToGetOrdersDealOutputWithContext(context.Context) GetOrdersDealOutput
+}
+
+type GetOrdersDealArgs struct {
+	// Number of items.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Order number.
+	DealName pulumi.StringInput `pulumi:"dealName"`
+	// ID of the associated process, which can be used to query the process execution status.
+	FlowId pulumi.IntInput `pulumi:"flowId"`
+	// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+	// Account.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+}
+
+func (GetOrdersDealArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrdersDeal)(nil)).Elem()
+}
+
+func (i GetOrdersDealArgs) ToGetOrdersDealOutput() GetOrdersDealOutput {
+	return i.ToGetOrdersDealOutputWithContext(context.Background())
+}
+
+func (i GetOrdersDealArgs) ToGetOrdersDealOutputWithContext(ctx context.Context) GetOrdersDealOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrdersDealOutput)
+}
+
+// GetOrdersDealArrayInput is an input type that accepts GetOrdersDealArray and GetOrdersDealArrayOutput values.
+// You can construct a concrete instance of `GetOrdersDealArrayInput` via:
+//
+//          GetOrdersDealArray{ GetOrdersDealArgs{...} }
+type GetOrdersDealArrayInput interface {
+	pulumi.Input
+
+	ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput
+	ToGetOrdersDealArrayOutputWithContext(context.Context) GetOrdersDealArrayOutput
+}
+
+type GetOrdersDealArray []GetOrdersDealInput
+
+func (GetOrdersDealArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrdersDeal)(nil)).Elem()
+}
+
+func (i GetOrdersDealArray) ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput {
+	return i.ToGetOrdersDealArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrdersDealArray) ToGetOrdersDealArrayOutputWithContext(ctx context.Context) GetOrdersDealArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrdersDealArrayOutput)
+}
+
+type GetOrdersDealOutput struct{ *pulumi.OutputState }
+
+func (GetOrdersDealOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrdersDeal)(nil)).Elem()
+}
+
+func (o GetOrdersDealOutput) ToGetOrdersDealOutput() GetOrdersDealOutput {
+	return o
+}
+
+func (o GetOrdersDealOutput) ToGetOrdersDealOutputWithContext(ctx context.Context) GetOrdersDealOutput {
+	return o
+}
+
+// Number of items.
+func (o GetOrdersDealOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// Order number.
+func (o GetOrdersDealOutput) DealName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrdersDeal) string { return v.DealName }).(pulumi.StringOutput)
+}
+
+// ID of the associated process, which can be used to query the process execution status.
+func (o GetOrdersDealOutput) FlowId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.FlowId }).(pulumi.IntOutput)
+}
+
+// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetOrdersDealOutput) InstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetOrdersDeal) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Account.
+func (o GetOrdersDealOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrdersDeal) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+func (o GetOrdersDealOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+type GetOrdersDealArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrdersDealArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrdersDeal)(nil)).Elem()
+}
+
+func (o GetOrdersDealArrayOutput) ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput {
+	return o
+}
+
+func (o GetOrdersDealArrayOutput) ToGetOrdersDealArrayOutputWithContext(ctx context.Context) GetOrdersDealArrayOutput {
+	return o
+}
+
+func (o GetOrdersDealArrayOutput) Index(i pulumi.IntInput) GetOrdersDealOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrdersDeal {
+		return vs[0].([]GetOrdersDeal)[vs[1].(int)]
+	}).(GetOrdersDealOutput)
+}
+
 type GetParametersList struct {
 	// params constraint.
 	Constraints []GetParametersListConstraint `pulumi:"constraints"`
@@ -3121,6 +3502,1207 @@ func (o GetParametersListConstraintRangeArrayOutput) Index(i pulumi.IntInput) Ge
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParametersListConstraintRange {
 		return vs[0].([]GetParametersListConstraintRange)[vs[1].(int)]
 	}).(GetParametersListConstraintRangeOutput)
+}
+
+type GetProjectSecurityGroupsGroup struct {
+	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+	CreateTime string `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds []GetProjectSecurityGroupsGroupInbound `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds []GetProjectSecurityGroupsGroupOutbound `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Security group ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName string `pulumi:"securityGroupName"`
+	// Security group remarks.
+	SecurityGroupRemark string `pulumi:"securityGroupRemark"`
+}
+
+// GetProjectSecurityGroupsGroupInput is an input type that accepts GetProjectSecurityGroupsGroupArgs and GetProjectSecurityGroupsGroupOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInput` via:
+//
+//          GetProjectSecurityGroupsGroupArgs{...}
+type GetProjectSecurityGroupsGroupInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput
+	ToGetProjectSecurityGroupsGroupOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutput
+}
+
+type GetProjectSecurityGroupsGroupArgs struct {
+	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds GetProjectSecurityGroupsGroupInboundArrayInput `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds GetProjectSecurityGroupsGroupOutboundArrayInput `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Security group ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName pulumi.StringInput `pulumi:"securityGroupName"`
+	// Security group remarks.
+	SecurityGroupRemark pulumi.StringInput `pulumi:"securityGroupRemark"`
+}
+
+func (GetProjectSecurityGroupsGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupArgs) ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupArgs) ToGetProjectSecurityGroupsGroupOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutput)
+}
+
+// GetProjectSecurityGroupsGroupArrayInput is an input type that accepts GetProjectSecurityGroupsGroupArray and GetProjectSecurityGroupsGroupArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupArray{ GetProjectSecurityGroupsGroupArgs{...} }
+type GetProjectSecurityGroupsGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput
+	ToGetProjectSecurityGroupsGroupArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupArray []GetProjectSecurityGroupsGroupInput
+
+func (GetProjectSecurityGroupsGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupArray) ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupArray) ToGetProjectSecurityGroupsGroupArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutput) ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutput) ToGetProjectSecurityGroupsGroupOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutput {
+	return o
+}
+
+// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+func (o GetProjectSecurityGroupsGroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Inbound rule.
+func (o GetProjectSecurityGroupsGroupOutput) Inbounds() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) []GetProjectSecurityGroupsGroupInbound { return v.Inbounds }).(GetProjectSecurityGroupsGroupInboundArrayOutput)
+}
+
+// Outbound rule.
+func (o GetProjectSecurityGroupsGroupOutput) Outbounds() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) []GetProjectSecurityGroupsGroupOutbound { return v.Outbounds }).(GetProjectSecurityGroupsGroupOutboundArrayOutput)
+}
+
+// Project ID.
+func (o GetProjectSecurityGroupsGroupOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Security group ID.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+// Security group name.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupName }).(pulumi.StringOutput)
+}
+
+// Security group remarks.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupRemark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupRemark }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) ToGetProjectSecurityGroupsGroupArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroup {
+		return vs[0].([]GetProjectSecurityGroupsGroup)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupOutput)
+}
+
+type GetProjectSecurityGroupsGroupInbound struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action string `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp string `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetProjectSecurityGroupsGroupInboundInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArgs and GetProjectSecurityGroupsGroupInboundOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundInput` via:
+//
+//          GetProjectSecurityGroupsGroupInboundArgs{...}
+type GetProjectSecurityGroupsGroupInboundInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput
+	ToGetProjectSecurityGroupsGroupInboundOutputWithContext(context.Context) GetProjectSecurityGroupsGroupInboundOutput
+}
+
+type GetProjectSecurityGroupsGroupInboundArgs struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetProjectSecurityGroupsGroupInboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArgs) ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput {
+	return i.ToGetProjectSecurityGroupsGroupInboundOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArgs) ToGetProjectSecurityGroupsGroupInboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupInboundOutput)
+}
+
+// GetProjectSecurityGroupsGroupInboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArray and GetProjectSecurityGroupsGroupInboundArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupInboundArray{ GetProjectSecurityGroupsGroupInboundArgs{...} }
+type GetProjectSecurityGroupsGroupInboundArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput
+	ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupInboundArray []GetProjectSecurityGroupsGroupInboundInput
+
+func (GetProjectSecurityGroupsGroupInboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArray) ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArray) ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupInboundArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupInboundOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupInboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupInboundOutput) ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundOutput) ToGetProjectSecurityGroupsGroupInboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundOutput {
+	return o
+}
+
+// Policy, which can be `ACCEPT` or `DROP`.
+func (o GetProjectSecurityGroupsGroupInboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source IP or source IP range, such as 192.168.0.0/16.
+func (o GetProjectSecurityGroupsGroupInboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Network protocol. UDP and TCP are supported.
+func (o GetProjectSecurityGroupsGroupInboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetProjectSecurityGroupsGroupInboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupInboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupInboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupInboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroupInbound {
+		return vs[0].([]GetProjectSecurityGroupsGroupInbound)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupInboundOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutbound struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action string `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp string `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetProjectSecurityGroupsGroupOutboundInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArgs and GetProjectSecurityGroupsGroupOutboundOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundInput` via:
+//
+//          GetProjectSecurityGroupsGroupOutboundArgs{...}
+type GetProjectSecurityGroupsGroupOutboundInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput
+	ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutboundOutput
+}
+
+type GetProjectSecurityGroupsGroupOutboundArgs struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetProjectSecurityGroupsGroupOutboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArgs) ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArgs) ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutboundOutput)
+}
+
+// GetProjectSecurityGroupsGroupOutboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArray and GetProjectSecurityGroupsGroupOutboundArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupOutboundArray{ GetProjectSecurityGroupsGroupOutboundArgs{...} }
+type GetProjectSecurityGroupsGroupOutboundArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput
+	ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupOutboundArray []GetProjectSecurityGroupsGroupOutboundInput
+
+func (GetProjectSecurityGroupsGroupOutboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArray) ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArray) ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutboundArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutboundOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundOutput) ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundOutput) ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundOutput {
+	return o
+}
+
+// Policy, which can be `ACCEPT` or `DROP`.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source IP or source IP range, such as 192.168.0.0/16.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Network protocol. UDP and TCP are supported.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupOutboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroupOutbound {
+		return vs[0].([]GetProjectSecurityGroupsGroupOutbound)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupOutboundOutput)
+}
+
+type GetProjectsProject struct {
+	// Application ID.
+	AppId int `pulumi:"appId"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Creator UIN.
+	CreatorUin int `pulumi:"creatorUin"`
+	// Description.
+	Info string `pulumi:"info"`
+	// Whether it is the default project. Valid values: `1` (yes), `0` (no).
+	IsDefault int `pulumi:"isDefault"`
+	// Project name.
+	Name string `pulumi:"name"`
+	// The UIN of the resource owner (root account).
+	OwnerUin int `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Source APPID.
+	SrcAppId int `pulumi:"srcAppId"`
+	// Source platform.
+	SrcPlat string `pulumi:"srcPlat"`
+	// Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+	Status int `pulumi:"status"`
+}
+
+// GetProjectsProjectInput is an input type that accepts GetProjectsProjectArgs and GetProjectsProjectOutput values.
+// You can construct a concrete instance of `GetProjectsProjectInput` via:
+//
+//          GetProjectsProjectArgs{...}
+type GetProjectsProjectInput interface {
+	pulumi.Input
+
+	ToGetProjectsProjectOutput() GetProjectsProjectOutput
+	ToGetProjectsProjectOutputWithContext(context.Context) GetProjectsProjectOutput
+}
+
+type GetProjectsProjectArgs struct {
+	// Application ID.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Creator UIN.
+	CreatorUin pulumi.IntInput `pulumi:"creatorUin"`
+	// Description.
+	Info pulumi.StringInput `pulumi:"info"`
+	// Whether it is the default project. Valid values: `1` (yes), `0` (no).
+	IsDefault pulumi.IntInput `pulumi:"isDefault"`
+	// Project name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The UIN of the resource owner (root account).
+	OwnerUin pulumi.IntInput `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Source APPID.
+	SrcAppId pulumi.IntInput `pulumi:"srcAppId"`
+	// Source platform.
+	SrcPlat pulumi.StringInput `pulumi:"srcPlat"`
+	// Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetProjectsProjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectsProject)(nil)).Elem()
+}
+
+func (i GetProjectsProjectArgs) ToGetProjectsProjectOutput() GetProjectsProjectOutput {
+	return i.ToGetProjectsProjectOutputWithContext(context.Background())
+}
+
+func (i GetProjectsProjectArgs) ToGetProjectsProjectOutputWithContext(ctx context.Context) GetProjectsProjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectsProjectOutput)
+}
+
+// GetProjectsProjectArrayInput is an input type that accepts GetProjectsProjectArray and GetProjectsProjectArrayOutput values.
+// You can construct a concrete instance of `GetProjectsProjectArrayInput` via:
+//
+//          GetProjectsProjectArray{ GetProjectsProjectArgs{...} }
+type GetProjectsProjectArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectsProjectArrayOutput() GetProjectsProjectArrayOutput
+	ToGetProjectsProjectArrayOutputWithContext(context.Context) GetProjectsProjectArrayOutput
+}
+
+type GetProjectsProjectArray []GetProjectsProjectInput
+
+func (GetProjectsProjectArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectsProject)(nil)).Elem()
+}
+
+func (i GetProjectsProjectArray) ToGetProjectsProjectArrayOutput() GetProjectsProjectArrayOutput {
+	return i.ToGetProjectsProjectArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectsProjectArray) ToGetProjectsProjectArrayOutputWithContext(ctx context.Context) GetProjectsProjectArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectsProjectArrayOutput)
+}
+
+type GetProjectsProjectOutput struct{ *pulumi.OutputState }
+
+func (GetProjectsProjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectsProject)(nil)).Elem()
+}
+
+func (o GetProjectsProjectOutput) ToGetProjectsProjectOutput() GetProjectsProjectOutput {
+	return o
+}
+
+func (o GetProjectsProjectOutput) ToGetProjectsProjectOutputWithContext(ctx context.Context) GetProjectsProjectOutput {
+	return o
+}
+
+// Application ID.
+func (o GetProjectsProjectOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Creation time.
+func (o GetProjectsProjectOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectsProject) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Creator UIN.
+func (o GetProjectsProjectOutput) CreatorUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.CreatorUin }).(pulumi.IntOutput)
+}
+
+// Description.
+func (o GetProjectsProjectOutput) Info() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectsProject) string { return v.Info }).(pulumi.StringOutput)
+}
+
+// Whether it is the default project. Valid values: `1` (yes), `0` (no).
+func (o GetProjectsProjectOutput) IsDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.IsDefault }).(pulumi.IntOutput)
+}
+
+// Project name.
+func (o GetProjectsProjectOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectsProject) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The UIN of the resource owner (root account).
+func (o GetProjectsProjectOutput) OwnerUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.OwnerUin }).(pulumi.IntOutput)
+}
+
+// Project ID.
+func (o GetProjectsProjectOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Source APPID.
+func (o GetProjectsProjectOutput) SrcAppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.SrcAppId }).(pulumi.IntOutput)
+}
+
+// Source platform.
+func (o GetProjectsProjectOutput) SrcPlat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectsProject) string { return v.SrcPlat }).(pulumi.StringOutput)
+}
+
+// Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+func (o GetProjectsProjectOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectsProject) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetProjectsProjectArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectsProjectArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectsProject)(nil)).Elem()
+}
+
+func (o GetProjectsProjectArrayOutput) ToGetProjectsProjectArrayOutput() GetProjectsProjectArrayOutput {
+	return o
+}
+
+func (o GetProjectsProjectArrayOutput) ToGetProjectsProjectArrayOutputWithContext(ctx context.Context) GetProjectsProjectArrayOutput {
+	return o
+}
+
+func (o GetProjectsProjectArrayOutput) Index(i pulumi.IntInput) GetProjectsProjectOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectsProject {
+		return vs[0].([]GetProjectsProject)[vs[1].(int)]
+	}).(GetProjectsProjectOutput)
+}
+
+type GetSaleInfoRegionList struct {
+	// available zone choice.
+	AvailableChoices []GetSaleInfoRegionListAvailableChoice `pulumi:"availableChoices"`
+	// region name(en).
+	Region string `pulumi:"region"`
+	// region id.
+	RegionId int `pulumi:"regionId"`
+	// region name(zh).
+	RegionName string `pulumi:"regionName"`
+	// list of az zone.
+	ZoneLists []GetSaleInfoRegionListZoneList `pulumi:"zoneLists"`
+}
+
+// GetSaleInfoRegionListInput is an input type that accepts GetSaleInfoRegionListArgs and GetSaleInfoRegionListOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListInput` via:
+//
+//          GetSaleInfoRegionListArgs{...}
+type GetSaleInfoRegionListInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput
+	ToGetSaleInfoRegionListOutputWithContext(context.Context) GetSaleInfoRegionListOutput
+}
+
+type GetSaleInfoRegionListArgs struct {
+	// available zone choice.
+	AvailableChoices GetSaleInfoRegionListAvailableChoiceArrayInput `pulumi:"availableChoices"`
+	// region name(en).
+	Region pulumi.StringInput `pulumi:"region"`
+	// region id.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// region name(zh).
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// list of az zone.
+	ZoneLists GetSaleInfoRegionListZoneListArrayInput `pulumi:"zoneLists"`
+}
+
+func (GetSaleInfoRegionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListArgs) ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput {
+	return i.ToGetSaleInfoRegionListOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListArgs) ToGetSaleInfoRegionListOutputWithContext(ctx context.Context) GetSaleInfoRegionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListOutput)
+}
+
+// GetSaleInfoRegionListArrayInput is an input type that accepts GetSaleInfoRegionListArray and GetSaleInfoRegionListArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListArrayInput` via:
+//
+//          GetSaleInfoRegionListArray{ GetSaleInfoRegionListArgs{...} }
+type GetSaleInfoRegionListArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput
+	ToGetSaleInfoRegionListArrayOutputWithContext(context.Context) GetSaleInfoRegionListArrayOutput
+}
+
+type GetSaleInfoRegionListArray []GetSaleInfoRegionListInput
+
+func (GetSaleInfoRegionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListArray) ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput {
+	return i.ToGetSaleInfoRegionListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListArray) ToGetSaleInfoRegionListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListArrayOutput)
+}
+
+type GetSaleInfoRegionListOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListOutput) ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListOutput) ToGetSaleInfoRegionListOutputWithContext(ctx context.Context) GetSaleInfoRegionListOutput {
+	return o
+}
+
+// available zone choice.
+func (o GetSaleInfoRegionListOutput) AvailableChoices() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) []GetSaleInfoRegionListAvailableChoice { return v.AvailableChoices }).(GetSaleInfoRegionListAvailableChoiceArrayOutput)
+}
+
+// region name(en).
+func (o GetSaleInfoRegionListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// region id.
+func (o GetSaleInfoRegionListOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// region name(zh).
+func (o GetSaleInfoRegionListOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// list of az zone.
+func (o GetSaleInfoRegionListOutput) ZoneLists() GetSaleInfoRegionListZoneListArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) []GetSaleInfoRegionListZoneList { return v.ZoneLists }).(GetSaleInfoRegionListZoneListArrayOutput)
+}
+
+type GetSaleInfoRegionListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListArrayOutput) ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListArrayOutput) ToGetSaleInfoRegionListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionList {
+		return vs[0].([]GetSaleInfoRegionList)[vs[1].(int)]
+	}).(GetSaleInfoRegionListOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoice struct {
+	// master zone.
+	MasterZones []GetSaleInfoRegionListAvailableChoiceMasterZone `pulumi:"masterZones"`
+	// slave zones.
+	SlaveZones []GetSaleInfoRegionListAvailableChoiceSlaveZone `pulumi:"slaveZones"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceArgs and GetSaleInfoRegionListAvailableChoiceOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceArgs{...}
+type GetSaleInfoRegionListAvailableChoiceInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput
+	ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceArgs struct {
+	// master zone.
+	MasterZones GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput `pulumi:"masterZones"`
+	// slave zones.
+	SlaveZones GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput `pulumi:"slaveZones"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArgs) ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArgs) ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceArray and GetSaleInfoRegionListAvailableChoiceArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceArray{ GetSaleInfoRegionListAvailableChoiceArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceArray []GetSaleInfoRegionListAvailableChoiceInput
+
+func (GetSaleInfoRegionListAvailableChoiceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArray) ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArray) ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceOutput) ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceOutput) ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceOutput {
+	return o
+}
+
+// master zone.
+func (o GetSaleInfoRegionListAvailableChoiceOutput) MasterZones() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoice) []GetSaleInfoRegionListAvailableChoiceMasterZone {
+		return v.MasterZones
+	}).(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput)
+}
+
+// slave zones.
+func (o GetSaleInfoRegionListAvailableChoiceOutput) SlaveZones() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoice) []GetSaleInfoRegionListAvailableChoiceSlaveZone {
+		return v.SlaveZones
+	}).(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoice {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoice)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZone struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceMasterZoneInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceMasterZoneArgs and GetSaleInfoRegionListAvailableChoiceMasterZoneOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceMasterZoneInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{...}
+type GetSaleInfoRegionListAvailableChoiceMasterZoneInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceMasterZoneArray and GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceMasterZoneArray{ GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArray []GetSaleInfoRegionListAvailableChoiceMasterZoneInput
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoiceMasterZone {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoiceMasterZone)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZone struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceSlaveZoneInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs and GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceSlaveZoneInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{...}
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceSlaveZoneArray and GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceSlaveZoneArray{ GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArray []GetSaleInfoRegionListAvailableChoiceSlaveZoneInput
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoiceSlaveZone {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoiceSlaveZone)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput)
+}
+
+type GetSaleInfoRegionListZoneList struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListZoneListInput is an input type that accepts GetSaleInfoRegionListZoneListArgs and GetSaleInfoRegionListZoneListOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListZoneListInput` via:
+//
+//          GetSaleInfoRegionListZoneListArgs{...}
+type GetSaleInfoRegionListZoneListInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput
+	ToGetSaleInfoRegionListZoneListOutputWithContext(context.Context) GetSaleInfoRegionListZoneListOutput
+}
+
+type GetSaleInfoRegionListZoneListArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListZoneListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListZoneListArgs) ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput {
+	return i.ToGetSaleInfoRegionListZoneListOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListZoneListArgs) ToGetSaleInfoRegionListZoneListOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListZoneListOutput)
+}
+
+// GetSaleInfoRegionListZoneListArrayInput is an input type that accepts GetSaleInfoRegionListZoneListArray and GetSaleInfoRegionListZoneListArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListZoneListArrayInput` via:
+//
+//          GetSaleInfoRegionListZoneListArray{ GetSaleInfoRegionListZoneListArgs{...} }
+type GetSaleInfoRegionListZoneListArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput
+	ToGetSaleInfoRegionListZoneListArrayOutputWithContext(context.Context) GetSaleInfoRegionListZoneListArrayOutput
+}
+
+type GetSaleInfoRegionListZoneListArray []GetSaleInfoRegionListZoneListInput
+
+func (GetSaleInfoRegionListZoneListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListZoneListArray) ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput {
+	return i.ToGetSaleInfoRegionListZoneListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListZoneListArray) ToGetSaleInfoRegionListZoneListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListZoneListArrayOutput)
+}
+
+type GetSaleInfoRegionListZoneListOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListZoneListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListZoneListOutput) ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListOutput) ToGetSaleInfoRegionListZoneListOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListZoneListOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListZoneListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListZoneListOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListZoneListOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListZoneListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListZoneListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) ToGetSaleInfoRegionListZoneListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListZoneListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListZoneList {
+		return vs[0].([]GetSaleInfoRegionListZoneList)[vs[1].(int)]
+	}).(GetSaleInfoRegionListZoneListOutput)
 }
 
 type GetSecurityGroupsList struct {
@@ -3513,6 +5095,272 @@ func (o GetSecurityGroupsListOutboundArrayOutput) Index(i pulumi.IntInput) GetSe
 	}).(GetSecurityGroupsListOutboundOutput)
 }
 
+type GetShardSpecSpecConfig struct {
+	// machine type.
+	Machine string `pulumi:"machine"`
+	// list of machine specifications.
+	SpecConfigInfos []GetShardSpecSpecConfigSpecConfigInfo `pulumi:"specConfigInfos"`
+}
+
+// GetShardSpecSpecConfigInput is an input type that accepts GetShardSpecSpecConfigArgs and GetShardSpecSpecConfigOutput values.
+// You can construct a concrete instance of `GetShardSpecSpecConfigInput` via:
+//
+//          GetShardSpecSpecConfigArgs{...}
+type GetShardSpecSpecConfigInput interface {
+	pulumi.Input
+
+	ToGetShardSpecSpecConfigOutput() GetShardSpecSpecConfigOutput
+	ToGetShardSpecSpecConfigOutputWithContext(context.Context) GetShardSpecSpecConfigOutput
+}
+
+type GetShardSpecSpecConfigArgs struct {
+	// machine type.
+	Machine pulumi.StringInput `pulumi:"machine"`
+	// list of machine specifications.
+	SpecConfigInfos GetShardSpecSpecConfigSpecConfigInfoArrayInput `pulumi:"specConfigInfos"`
+}
+
+func (GetShardSpecSpecConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShardSpecSpecConfig)(nil)).Elem()
+}
+
+func (i GetShardSpecSpecConfigArgs) ToGetShardSpecSpecConfigOutput() GetShardSpecSpecConfigOutput {
+	return i.ToGetShardSpecSpecConfigOutputWithContext(context.Background())
+}
+
+func (i GetShardSpecSpecConfigArgs) ToGetShardSpecSpecConfigOutputWithContext(ctx context.Context) GetShardSpecSpecConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShardSpecSpecConfigOutput)
+}
+
+// GetShardSpecSpecConfigArrayInput is an input type that accepts GetShardSpecSpecConfigArray and GetShardSpecSpecConfigArrayOutput values.
+// You can construct a concrete instance of `GetShardSpecSpecConfigArrayInput` via:
+//
+//          GetShardSpecSpecConfigArray{ GetShardSpecSpecConfigArgs{...} }
+type GetShardSpecSpecConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetShardSpecSpecConfigArrayOutput() GetShardSpecSpecConfigArrayOutput
+	ToGetShardSpecSpecConfigArrayOutputWithContext(context.Context) GetShardSpecSpecConfigArrayOutput
+}
+
+type GetShardSpecSpecConfigArray []GetShardSpecSpecConfigInput
+
+func (GetShardSpecSpecConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShardSpecSpecConfig)(nil)).Elem()
+}
+
+func (i GetShardSpecSpecConfigArray) ToGetShardSpecSpecConfigArrayOutput() GetShardSpecSpecConfigArrayOutput {
+	return i.ToGetShardSpecSpecConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetShardSpecSpecConfigArray) ToGetShardSpecSpecConfigArrayOutputWithContext(ctx context.Context) GetShardSpecSpecConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShardSpecSpecConfigArrayOutput)
+}
+
+type GetShardSpecSpecConfigOutput struct{ *pulumi.OutputState }
+
+func (GetShardSpecSpecConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShardSpecSpecConfig)(nil)).Elem()
+}
+
+func (o GetShardSpecSpecConfigOutput) ToGetShardSpecSpecConfigOutput() GetShardSpecSpecConfigOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigOutput) ToGetShardSpecSpecConfigOutputWithContext(ctx context.Context) GetShardSpecSpecConfigOutput {
+	return o
+}
+
+// machine type.
+func (o GetShardSpecSpecConfigOutput) Machine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfig) string { return v.Machine }).(pulumi.StringOutput)
+}
+
+// list of machine specifications.
+func (o GetShardSpecSpecConfigOutput) SpecConfigInfos() GetShardSpecSpecConfigSpecConfigInfoArrayOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfig) []GetShardSpecSpecConfigSpecConfigInfo { return v.SpecConfigInfos }).(GetShardSpecSpecConfigSpecConfigInfoArrayOutput)
+}
+
+type GetShardSpecSpecConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetShardSpecSpecConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShardSpecSpecConfig)(nil)).Elem()
+}
+
+func (o GetShardSpecSpecConfigArrayOutput) ToGetShardSpecSpecConfigArrayOutput() GetShardSpecSpecConfigArrayOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigArrayOutput) ToGetShardSpecSpecConfigArrayOutputWithContext(ctx context.Context) GetShardSpecSpecConfigArrayOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigArrayOutput) Index(i pulumi.IntInput) GetShardSpecSpecConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetShardSpecSpecConfig {
+		return vs[0].([]GetShardSpecSpecConfig)[vs[1].(int)]
+	}).(GetShardSpecSpecConfigOutput)
+}
+
+type GetShardSpecSpecConfigSpecConfigInfo struct {
+	// CPU cores.
+	Cpu int `pulumi:"cpu"`
+	// maximum storage size, inGB.
+	MaxStorage int `pulumi:"maxStorage"`
+	// memory, in GB.
+	Memory int `pulumi:"memory"`
+	// minimum storage size, in GB.
+	MinStorage int `pulumi:"minStorage"`
+	// node count.
+	NodeCount int `pulumi:"nodeCount"`
+	// product price id.
+	Pid int `pulumi:"pid"`
+	// maximum QPS.
+	Qps int `pulumi:"qps"`
+	// recommended usage scenarios.
+	SuitInfo string `pulumi:"suitInfo"`
+}
+
+// GetShardSpecSpecConfigSpecConfigInfoInput is an input type that accepts GetShardSpecSpecConfigSpecConfigInfoArgs and GetShardSpecSpecConfigSpecConfigInfoOutput values.
+// You can construct a concrete instance of `GetShardSpecSpecConfigSpecConfigInfoInput` via:
+//
+//          GetShardSpecSpecConfigSpecConfigInfoArgs{...}
+type GetShardSpecSpecConfigSpecConfigInfoInput interface {
+	pulumi.Input
+
+	ToGetShardSpecSpecConfigSpecConfigInfoOutput() GetShardSpecSpecConfigSpecConfigInfoOutput
+	ToGetShardSpecSpecConfigSpecConfigInfoOutputWithContext(context.Context) GetShardSpecSpecConfigSpecConfigInfoOutput
+}
+
+type GetShardSpecSpecConfigSpecConfigInfoArgs struct {
+	// CPU cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// maximum storage size, inGB.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// memory, in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// minimum storage size, in GB.
+	MinStorage pulumi.IntInput `pulumi:"minStorage"`
+	// node count.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// product price id.
+	Pid pulumi.IntInput `pulumi:"pid"`
+	// maximum QPS.
+	Qps pulumi.IntInput `pulumi:"qps"`
+	// recommended usage scenarios.
+	SuitInfo pulumi.StringInput `pulumi:"suitInfo"`
+}
+
+func (GetShardSpecSpecConfigSpecConfigInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShardSpecSpecConfigSpecConfigInfo)(nil)).Elem()
+}
+
+func (i GetShardSpecSpecConfigSpecConfigInfoArgs) ToGetShardSpecSpecConfigSpecConfigInfoOutput() GetShardSpecSpecConfigSpecConfigInfoOutput {
+	return i.ToGetShardSpecSpecConfigSpecConfigInfoOutputWithContext(context.Background())
+}
+
+func (i GetShardSpecSpecConfigSpecConfigInfoArgs) ToGetShardSpecSpecConfigSpecConfigInfoOutputWithContext(ctx context.Context) GetShardSpecSpecConfigSpecConfigInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShardSpecSpecConfigSpecConfigInfoOutput)
+}
+
+// GetShardSpecSpecConfigSpecConfigInfoArrayInput is an input type that accepts GetShardSpecSpecConfigSpecConfigInfoArray and GetShardSpecSpecConfigSpecConfigInfoArrayOutput values.
+// You can construct a concrete instance of `GetShardSpecSpecConfigSpecConfigInfoArrayInput` via:
+//
+//          GetShardSpecSpecConfigSpecConfigInfoArray{ GetShardSpecSpecConfigSpecConfigInfoArgs{...} }
+type GetShardSpecSpecConfigSpecConfigInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetShardSpecSpecConfigSpecConfigInfoArrayOutput() GetShardSpecSpecConfigSpecConfigInfoArrayOutput
+	ToGetShardSpecSpecConfigSpecConfigInfoArrayOutputWithContext(context.Context) GetShardSpecSpecConfigSpecConfigInfoArrayOutput
+}
+
+type GetShardSpecSpecConfigSpecConfigInfoArray []GetShardSpecSpecConfigSpecConfigInfoInput
+
+func (GetShardSpecSpecConfigSpecConfigInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShardSpecSpecConfigSpecConfigInfo)(nil)).Elem()
+}
+
+func (i GetShardSpecSpecConfigSpecConfigInfoArray) ToGetShardSpecSpecConfigSpecConfigInfoArrayOutput() GetShardSpecSpecConfigSpecConfigInfoArrayOutput {
+	return i.ToGetShardSpecSpecConfigSpecConfigInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetShardSpecSpecConfigSpecConfigInfoArray) ToGetShardSpecSpecConfigSpecConfigInfoArrayOutputWithContext(ctx context.Context) GetShardSpecSpecConfigSpecConfigInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetShardSpecSpecConfigSpecConfigInfoArrayOutput)
+}
+
+type GetShardSpecSpecConfigSpecConfigInfoOutput struct{ *pulumi.OutputState }
+
+func (GetShardSpecSpecConfigSpecConfigInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetShardSpecSpecConfigSpecConfigInfo)(nil)).Elem()
+}
+
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) ToGetShardSpecSpecConfigSpecConfigInfoOutput() GetShardSpecSpecConfigSpecConfigInfoOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) ToGetShardSpecSpecConfigSpecConfigInfoOutputWithContext(ctx context.Context) GetShardSpecSpecConfigSpecConfigInfoOutput {
+	return o
+}
+
+// CPU cores.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// maximum storage size, inGB.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+// memory, in GB.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// minimum storage size, in GB.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) MinStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.MinStorage }).(pulumi.IntOutput)
+}
+
+// node count.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+// product price id.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) Pid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.Pid }).(pulumi.IntOutput)
+}
+
+// maximum QPS.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) Qps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) int { return v.Qps }).(pulumi.IntOutput)
+}
+
+// recommended usage scenarios.
+func (o GetShardSpecSpecConfigSpecConfigInfoOutput) SuitInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetShardSpecSpecConfigSpecConfigInfo) string { return v.SuitInfo }).(pulumi.StringOutput)
+}
+
+type GetShardSpecSpecConfigSpecConfigInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetShardSpecSpecConfigSpecConfigInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetShardSpecSpecConfigSpecConfigInfo)(nil)).Elem()
+}
+
+func (o GetShardSpecSpecConfigSpecConfigInfoArrayOutput) ToGetShardSpecSpecConfigSpecConfigInfoArrayOutput() GetShardSpecSpecConfigSpecConfigInfoArrayOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigSpecConfigInfoArrayOutput) ToGetShardSpecSpecConfigSpecConfigInfoArrayOutputWithContext(ctx context.Context) GetShardSpecSpecConfigSpecConfigInfoArrayOutput {
+	return o
+}
+
+func (o GetShardSpecSpecConfigSpecConfigInfoArrayOutput) Index(i pulumi.IntInput) GetShardSpecSpecConfigSpecConfigInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetShardSpecSpecConfigSpecConfigInfo {
+		return vs[0].([]GetShardSpecSpecConfigSpecConfigInfo)[vs[1].(int)]
+	}).(GetShardSpecSpecConfigSpecConfigInfoOutput)
+}
+
 type GetShardsList struct {
 	// cpu cores.
 	Cpu int `pulumi:"cpu"`
@@ -3808,6 +5656,828 @@ func (o GetShardsListArrayOutput) Index(i pulumi.IntInput) GetShardsListOutput {
 	}).(GetShardsListOutput)
 }
 
+type GetSlowLogsData struct {
+	// Statement checksum for querying details.
+	CheckSum string `pulumi:"checkSum"`
+	// Specific name of the database to be queried.
+	Db string `pulumi:"db"`
+	// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+	ExampleSql string `pulumi:"exampleSql"`
+	// Abstracted SQL statement.
+	FingerPrint string `pulumi:"fingerPrint"`
+	// Host address of account.
+	Host string `pulumi:"host"`
+	// Average lock time.
+	LockTimeAvg string `pulumi:"lockTimeAvg"`
+	// Maximum lock time.
+	LockTimeMax string `pulumi:"lockTimeMax"`
+	// Minimum lock time.
+	LockTimeMin string `pulumi:"lockTimeMin"`
+	// Total statement lock time.
+	LockTimeSum string `pulumi:"lockTimeSum"`
+	// Total number of statement queries.
+	QueryCount string `pulumi:"queryCount"`
+	// Average query time.
+	QueryTimeAvg string `pulumi:"queryTimeAvg"`
+	// Maximum query time.
+	QueryTimeMax string `pulumi:"queryTimeMax"`
+	// Minimum query time.
+	QueryTimeMin string `pulumi:"queryTimeMin"`
+	// Total statement query time.
+	QueryTimeSum string `pulumi:"queryTimeSum"`
+	// Number of scanned rows.
+	RowsExaminedSum string `pulumi:"rowsExaminedSum"`
+	// Number of sent rows.
+	RowsSentSum string `pulumi:"rowsSentSum"`
+	// Last execution time.
+	TsMax string `pulumi:"tsMax"`
+	// First execution time.
+	TsMin string `pulumi:"tsMin"`
+	// Account.
+	User string `pulumi:"user"`
+}
+
+// GetSlowLogsDataInput is an input type that accepts GetSlowLogsDataArgs and GetSlowLogsDataOutput values.
+// You can construct a concrete instance of `GetSlowLogsDataInput` via:
+//
+//          GetSlowLogsDataArgs{...}
+type GetSlowLogsDataInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsDataOutput() GetSlowLogsDataOutput
+	ToGetSlowLogsDataOutputWithContext(context.Context) GetSlowLogsDataOutput
+}
+
+type GetSlowLogsDataArgs struct {
+	// Statement checksum for querying details.
+	CheckSum pulumi.StringInput `pulumi:"checkSum"`
+	// Specific name of the database to be queried.
+	Db pulumi.StringInput `pulumi:"db"`
+	// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+	ExampleSql pulumi.StringInput `pulumi:"exampleSql"`
+	// Abstracted SQL statement.
+	FingerPrint pulumi.StringInput `pulumi:"fingerPrint"`
+	// Host address of account.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Average lock time.
+	LockTimeAvg pulumi.StringInput `pulumi:"lockTimeAvg"`
+	// Maximum lock time.
+	LockTimeMax pulumi.StringInput `pulumi:"lockTimeMax"`
+	// Minimum lock time.
+	LockTimeMin pulumi.StringInput `pulumi:"lockTimeMin"`
+	// Total statement lock time.
+	LockTimeSum pulumi.StringInput `pulumi:"lockTimeSum"`
+	// Total number of statement queries.
+	QueryCount pulumi.StringInput `pulumi:"queryCount"`
+	// Average query time.
+	QueryTimeAvg pulumi.StringInput `pulumi:"queryTimeAvg"`
+	// Maximum query time.
+	QueryTimeMax pulumi.StringInput `pulumi:"queryTimeMax"`
+	// Minimum query time.
+	QueryTimeMin pulumi.StringInput `pulumi:"queryTimeMin"`
+	// Total statement query time.
+	QueryTimeSum pulumi.StringInput `pulumi:"queryTimeSum"`
+	// Number of scanned rows.
+	RowsExaminedSum pulumi.StringInput `pulumi:"rowsExaminedSum"`
+	// Number of sent rows.
+	RowsSentSum pulumi.StringInput `pulumi:"rowsSentSum"`
+	// Last execution time.
+	TsMax pulumi.StringInput `pulumi:"tsMax"`
+	// First execution time.
+	TsMin pulumi.StringInput `pulumi:"tsMin"`
+	// Account.
+	User pulumi.StringInput `pulumi:"user"`
+}
+
+func (GetSlowLogsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsData)(nil)).Elem()
+}
+
+func (i GetSlowLogsDataArgs) ToGetSlowLogsDataOutput() GetSlowLogsDataOutput {
+	return i.ToGetSlowLogsDataOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsDataArgs) ToGetSlowLogsDataOutputWithContext(ctx context.Context) GetSlowLogsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsDataOutput)
+}
+
+// GetSlowLogsDataArrayInput is an input type that accepts GetSlowLogsDataArray and GetSlowLogsDataArrayOutput values.
+// You can construct a concrete instance of `GetSlowLogsDataArrayInput` via:
+//
+//          GetSlowLogsDataArray{ GetSlowLogsDataArgs{...} }
+type GetSlowLogsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput
+	ToGetSlowLogsDataArrayOutputWithContext(context.Context) GetSlowLogsDataArrayOutput
+}
+
+type GetSlowLogsDataArray []GetSlowLogsDataInput
+
+func (GetSlowLogsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsData)(nil)).Elem()
+}
+
+func (i GetSlowLogsDataArray) ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput {
+	return i.ToGetSlowLogsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsDataArray) ToGetSlowLogsDataArrayOutputWithContext(ctx context.Context) GetSlowLogsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsDataArrayOutput)
+}
+
+type GetSlowLogsDataOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsData)(nil)).Elem()
+}
+
+func (o GetSlowLogsDataOutput) ToGetSlowLogsDataOutput() GetSlowLogsDataOutput {
+	return o
+}
+
+func (o GetSlowLogsDataOutput) ToGetSlowLogsDataOutputWithContext(ctx context.Context) GetSlowLogsDataOutput {
+	return o
+}
+
+// Statement checksum for querying details.
+func (o GetSlowLogsDataOutput) CheckSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.CheckSum }).(pulumi.StringOutput)
+}
+
+// Specific name of the database to be queried.
+func (o GetSlowLogsDataOutput) Db() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.Db }).(pulumi.StringOutput)
+}
+
+// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetSlowLogsDataOutput) ExampleSql() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.ExampleSql }).(pulumi.StringOutput)
+}
+
+// Abstracted SQL statement.
+func (o GetSlowLogsDataOutput) FingerPrint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.FingerPrint }).(pulumi.StringOutput)
+}
+
+// Host address of account.
+func (o GetSlowLogsDataOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Average lock time.
+func (o GetSlowLogsDataOutput) LockTimeAvg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeAvg }).(pulumi.StringOutput)
+}
+
+// Maximum lock time.
+func (o GetSlowLogsDataOutput) LockTimeMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeMax }).(pulumi.StringOutput)
+}
+
+// Minimum lock time.
+func (o GetSlowLogsDataOutput) LockTimeMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeMin }).(pulumi.StringOutput)
+}
+
+// Total statement lock time.
+func (o GetSlowLogsDataOutput) LockTimeSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeSum }).(pulumi.StringOutput)
+}
+
+// Total number of statement queries.
+func (o GetSlowLogsDataOutput) QueryCount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryCount }).(pulumi.StringOutput)
+}
+
+// Average query time.
+func (o GetSlowLogsDataOutput) QueryTimeAvg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeAvg }).(pulumi.StringOutput)
+}
+
+// Maximum query time.
+func (o GetSlowLogsDataOutput) QueryTimeMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeMax }).(pulumi.StringOutput)
+}
+
+// Minimum query time.
+func (o GetSlowLogsDataOutput) QueryTimeMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeMin }).(pulumi.StringOutput)
+}
+
+// Total statement query time.
+func (o GetSlowLogsDataOutput) QueryTimeSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeSum }).(pulumi.StringOutput)
+}
+
+// Number of scanned rows.
+func (o GetSlowLogsDataOutput) RowsExaminedSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.RowsExaminedSum }).(pulumi.StringOutput)
+}
+
+// Number of sent rows.
+func (o GetSlowLogsDataOutput) RowsSentSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.RowsSentSum }).(pulumi.StringOutput)
+}
+
+// Last execution time.
+func (o GetSlowLogsDataOutput) TsMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.TsMax }).(pulumi.StringOutput)
+}
+
+// First execution time.
+func (o GetSlowLogsDataOutput) TsMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.TsMin }).(pulumi.StringOutput)
+}
+
+// Account.
+func (o GetSlowLogsDataOutput) User() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.User }).(pulumi.StringOutput)
+}
+
+type GetSlowLogsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsData)(nil)).Elem()
+}
+
+func (o GetSlowLogsDataArrayOutput) ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsDataArrayOutput) ToGetSlowLogsDataArrayOutputWithContext(ctx context.Context) GetSlowLogsDataArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsDataArrayOutput) Index(i pulumi.IntInput) GetSlowLogsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSlowLogsData {
+		return vs[0].([]GetSlowLogsData)[vs[1].(int)]
+	}).(GetSlowLogsDataOutput)
+}
+
+type GetUpgradePriceAddShardConfig struct {
+	// The number of new shards.
+	ShardCount int `pulumi:"shardCount"`
+	// Shard memory size in GB.
+	ShardMemory int `pulumi:"shardMemory"`
+	// Shard storage capacity in GB.
+	ShardStorage int `pulumi:"shardStorage"`
+}
+
+// GetUpgradePriceAddShardConfigInput is an input type that accepts GetUpgradePriceAddShardConfigArgs and GetUpgradePriceAddShardConfigOutput values.
+// You can construct a concrete instance of `GetUpgradePriceAddShardConfigInput` via:
+//
+//          GetUpgradePriceAddShardConfigArgs{...}
+type GetUpgradePriceAddShardConfigInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceAddShardConfigOutput() GetUpgradePriceAddShardConfigOutput
+	ToGetUpgradePriceAddShardConfigOutputWithContext(context.Context) GetUpgradePriceAddShardConfigOutput
+}
+
+type GetUpgradePriceAddShardConfigArgs struct {
+	// The number of new shards.
+	ShardCount pulumi.IntInput `pulumi:"shardCount"`
+	// Shard memory size in GB.
+	ShardMemory pulumi.IntInput `pulumi:"shardMemory"`
+	// Shard storage capacity in GB.
+	ShardStorage pulumi.IntInput `pulumi:"shardStorage"`
+}
+
+func (GetUpgradePriceAddShardConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceAddShardConfig)(nil)).Elem()
+}
+
+func (i GetUpgradePriceAddShardConfigArgs) ToGetUpgradePriceAddShardConfigOutput() GetUpgradePriceAddShardConfigOutput {
+	return i.ToGetUpgradePriceAddShardConfigOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceAddShardConfigArgs) ToGetUpgradePriceAddShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceAddShardConfigOutput)
+}
+
+func (i GetUpgradePriceAddShardConfigArgs) ToGetUpgradePriceAddShardConfigPtrOutput() GetUpgradePriceAddShardConfigPtrOutput {
+	return i.ToGetUpgradePriceAddShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceAddShardConfigArgs) ToGetUpgradePriceAddShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceAddShardConfigOutput).ToGetUpgradePriceAddShardConfigPtrOutputWithContext(ctx)
+}
+
+// GetUpgradePriceAddShardConfigPtrInput is an input type that accepts GetUpgradePriceAddShardConfigArgs, GetUpgradePriceAddShardConfigPtr and GetUpgradePriceAddShardConfigPtrOutput values.
+// You can construct a concrete instance of `GetUpgradePriceAddShardConfigPtrInput` via:
+//
+//          GetUpgradePriceAddShardConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type GetUpgradePriceAddShardConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceAddShardConfigPtrOutput() GetUpgradePriceAddShardConfigPtrOutput
+	ToGetUpgradePriceAddShardConfigPtrOutputWithContext(context.Context) GetUpgradePriceAddShardConfigPtrOutput
+}
+
+type getUpgradePriceAddShardConfigPtrType GetUpgradePriceAddShardConfigArgs
+
+func GetUpgradePriceAddShardConfigPtr(v *GetUpgradePriceAddShardConfigArgs) GetUpgradePriceAddShardConfigPtrInput {
+	return (*getUpgradePriceAddShardConfigPtrType)(v)
+}
+
+func (*getUpgradePriceAddShardConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceAddShardConfig)(nil)).Elem()
+}
+
+func (i *getUpgradePriceAddShardConfigPtrType) ToGetUpgradePriceAddShardConfigPtrOutput() GetUpgradePriceAddShardConfigPtrOutput {
+	return i.ToGetUpgradePriceAddShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getUpgradePriceAddShardConfigPtrType) ToGetUpgradePriceAddShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceAddShardConfigPtrOutput)
+}
+
+type GetUpgradePriceAddShardConfigOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceAddShardConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceAddShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceAddShardConfigOutput) ToGetUpgradePriceAddShardConfigOutput() GetUpgradePriceAddShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceAddShardConfigOutput) ToGetUpgradePriceAddShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceAddShardConfigOutput) ToGetUpgradePriceAddShardConfigPtrOutput() GetUpgradePriceAddShardConfigPtrOutput {
+	return o.ToGetUpgradePriceAddShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetUpgradePriceAddShardConfigOutput) ToGetUpgradePriceAddShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetUpgradePriceAddShardConfig) *GetUpgradePriceAddShardConfig {
+		return &v
+	}).(GetUpgradePriceAddShardConfigPtrOutput)
+}
+
+// The number of new shards.
+func (o GetUpgradePriceAddShardConfigOutput) ShardCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceAddShardConfig) int { return v.ShardCount }).(pulumi.IntOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceAddShardConfigOutput) ShardMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceAddShardConfig) int { return v.ShardMemory }).(pulumi.IntOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceAddShardConfigOutput) ShardStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceAddShardConfig) int { return v.ShardStorage }).(pulumi.IntOutput)
+}
+
+type GetUpgradePriceAddShardConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceAddShardConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceAddShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceAddShardConfigPtrOutput) ToGetUpgradePriceAddShardConfigPtrOutput() GetUpgradePriceAddShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceAddShardConfigPtrOutput) ToGetUpgradePriceAddShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceAddShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceAddShardConfigPtrOutput) Elem() GetUpgradePriceAddShardConfigOutput {
+	return o.ApplyT(func(v *GetUpgradePriceAddShardConfig) GetUpgradePriceAddShardConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetUpgradePriceAddShardConfig
+		return ret
+	}).(GetUpgradePriceAddShardConfigOutput)
+}
+
+// The number of new shards.
+func (o GetUpgradePriceAddShardConfigPtrOutput) ShardCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceAddShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceAddShardConfigPtrOutput) ShardMemory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceAddShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardMemory
+	}).(pulumi.IntPtrOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceAddShardConfigPtrOutput) ShardStorage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceAddShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardStorage
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetUpgradePriceExpandShardConfig struct {
+	// List of shard ID.
+	ShardInstanceIds []string `pulumi:"shardInstanceIds"`
+	// Shard memory size in GB.
+	ShardMemory int `pulumi:"shardMemory"`
+	// Shard node count.
+	ShardNodeCount *int `pulumi:"shardNodeCount"`
+	// Shard storage capacity in GB.
+	ShardStorage int `pulumi:"shardStorage"`
+}
+
+// GetUpgradePriceExpandShardConfigInput is an input type that accepts GetUpgradePriceExpandShardConfigArgs and GetUpgradePriceExpandShardConfigOutput values.
+// You can construct a concrete instance of `GetUpgradePriceExpandShardConfigInput` via:
+//
+//          GetUpgradePriceExpandShardConfigArgs{...}
+type GetUpgradePriceExpandShardConfigInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceExpandShardConfigOutput() GetUpgradePriceExpandShardConfigOutput
+	ToGetUpgradePriceExpandShardConfigOutputWithContext(context.Context) GetUpgradePriceExpandShardConfigOutput
+}
+
+type GetUpgradePriceExpandShardConfigArgs struct {
+	// List of shard ID.
+	ShardInstanceIds pulumi.StringArrayInput `pulumi:"shardInstanceIds"`
+	// Shard memory size in GB.
+	ShardMemory pulumi.IntInput `pulumi:"shardMemory"`
+	// Shard node count.
+	ShardNodeCount pulumi.IntPtrInput `pulumi:"shardNodeCount"`
+	// Shard storage capacity in GB.
+	ShardStorage pulumi.IntInput `pulumi:"shardStorage"`
+}
+
+func (GetUpgradePriceExpandShardConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceExpandShardConfig)(nil)).Elem()
+}
+
+func (i GetUpgradePriceExpandShardConfigArgs) ToGetUpgradePriceExpandShardConfigOutput() GetUpgradePriceExpandShardConfigOutput {
+	return i.ToGetUpgradePriceExpandShardConfigOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceExpandShardConfigArgs) ToGetUpgradePriceExpandShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceExpandShardConfigOutput)
+}
+
+func (i GetUpgradePriceExpandShardConfigArgs) ToGetUpgradePriceExpandShardConfigPtrOutput() GetUpgradePriceExpandShardConfigPtrOutput {
+	return i.ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceExpandShardConfigArgs) ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceExpandShardConfigOutput).ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(ctx)
+}
+
+// GetUpgradePriceExpandShardConfigPtrInput is an input type that accepts GetUpgradePriceExpandShardConfigArgs, GetUpgradePriceExpandShardConfigPtr and GetUpgradePriceExpandShardConfigPtrOutput values.
+// You can construct a concrete instance of `GetUpgradePriceExpandShardConfigPtrInput` via:
+//
+//          GetUpgradePriceExpandShardConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type GetUpgradePriceExpandShardConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceExpandShardConfigPtrOutput() GetUpgradePriceExpandShardConfigPtrOutput
+	ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(context.Context) GetUpgradePriceExpandShardConfigPtrOutput
+}
+
+type getUpgradePriceExpandShardConfigPtrType GetUpgradePriceExpandShardConfigArgs
+
+func GetUpgradePriceExpandShardConfigPtr(v *GetUpgradePriceExpandShardConfigArgs) GetUpgradePriceExpandShardConfigPtrInput {
+	return (*getUpgradePriceExpandShardConfigPtrType)(v)
+}
+
+func (*getUpgradePriceExpandShardConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceExpandShardConfig)(nil)).Elem()
+}
+
+func (i *getUpgradePriceExpandShardConfigPtrType) ToGetUpgradePriceExpandShardConfigPtrOutput() GetUpgradePriceExpandShardConfigPtrOutput {
+	return i.ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getUpgradePriceExpandShardConfigPtrType) ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceExpandShardConfigPtrOutput)
+}
+
+type GetUpgradePriceExpandShardConfigOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceExpandShardConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceExpandShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceExpandShardConfigOutput) ToGetUpgradePriceExpandShardConfigOutput() GetUpgradePriceExpandShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceExpandShardConfigOutput) ToGetUpgradePriceExpandShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceExpandShardConfigOutput) ToGetUpgradePriceExpandShardConfigPtrOutput() GetUpgradePriceExpandShardConfigPtrOutput {
+	return o.ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetUpgradePriceExpandShardConfigOutput) ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetUpgradePriceExpandShardConfig) *GetUpgradePriceExpandShardConfig {
+		return &v
+	}).(GetUpgradePriceExpandShardConfigPtrOutput)
+}
+
+// List of shard ID.
+func (o GetUpgradePriceExpandShardConfigOutput) ShardInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetUpgradePriceExpandShardConfig) []string { return v.ShardInstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceExpandShardConfigOutput) ShardMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceExpandShardConfig) int { return v.ShardMemory }).(pulumi.IntOutput)
+}
+
+// Shard node count.
+func (o GetUpgradePriceExpandShardConfigOutput) ShardNodeCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetUpgradePriceExpandShardConfig) *int { return v.ShardNodeCount }).(pulumi.IntPtrOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceExpandShardConfigOutput) ShardStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceExpandShardConfig) int { return v.ShardStorage }).(pulumi.IntOutput)
+}
+
+type GetUpgradePriceExpandShardConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceExpandShardConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceExpandShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ToGetUpgradePriceExpandShardConfigPtrOutput() GetUpgradePriceExpandShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ToGetUpgradePriceExpandShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceExpandShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceExpandShardConfigPtrOutput) Elem() GetUpgradePriceExpandShardConfigOutput {
+	return o.ApplyT(func(v *GetUpgradePriceExpandShardConfig) GetUpgradePriceExpandShardConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetUpgradePriceExpandShardConfig
+		return ret
+	}).(GetUpgradePriceExpandShardConfigOutput)
+}
+
+// List of shard ID.
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ShardInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetUpgradePriceExpandShardConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ShardInstanceIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ShardMemory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceExpandShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardMemory
+	}).(pulumi.IntPtrOutput)
+}
+
+// Shard node count.
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ShardNodeCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceExpandShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ShardNodeCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceExpandShardConfigPtrOutput) ShardStorage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceExpandShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardStorage
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetUpgradePriceSplitShardConfig struct {
+	// List of shard ID.
+	ShardInstanceIds []string `pulumi:"shardInstanceIds"`
+	// Shard memory size in GB.
+	ShardMemory int `pulumi:"shardMemory"`
+	// Shard storage capacity in GB.
+	ShardStorage int `pulumi:"shardStorage"`
+	// Data split ratio, fixed at 50%.
+	SplitRate int `pulumi:"splitRate"`
+}
+
+// GetUpgradePriceSplitShardConfigInput is an input type that accepts GetUpgradePriceSplitShardConfigArgs and GetUpgradePriceSplitShardConfigOutput values.
+// You can construct a concrete instance of `GetUpgradePriceSplitShardConfigInput` via:
+//
+//          GetUpgradePriceSplitShardConfigArgs{...}
+type GetUpgradePriceSplitShardConfigInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceSplitShardConfigOutput() GetUpgradePriceSplitShardConfigOutput
+	ToGetUpgradePriceSplitShardConfigOutputWithContext(context.Context) GetUpgradePriceSplitShardConfigOutput
+}
+
+type GetUpgradePriceSplitShardConfigArgs struct {
+	// List of shard ID.
+	ShardInstanceIds pulumi.StringArrayInput `pulumi:"shardInstanceIds"`
+	// Shard memory size in GB.
+	ShardMemory pulumi.IntInput `pulumi:"shardMemory"`
+	// Shard storage capacity in GB.
+	ShardStorage pulumi.IntInput `pulumi:"shardStorage"`
+	// Data split ratio, fixed at 50%.
+	SplitRate pulumi.IntInput `pulumi:"splitRate"`
+}
+
+func (GetUpgradePriceSplitShardConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceSplitShardConfig)(nil)).Elem()
+}
+
+func (i GetUpgradePriceSplitShardConfigArgs) ToGetUpgradePriceSplitShardConfigOutput() GetUpgradePriceSplitShardConfigOutput {
+	return i.ToGetUpgradePriceSplitShardConfigOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceSplitShardConfigArgs) ToGetUpgradePriceSplitShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceSplitShardConfigOutput)
+}
+
+func (i GetUpgradePriceSplitShardConfigArgs) ToGetUpgradePriceSplitShardConfigPtrOutput() GetUpgradePriceSplitShardConfigPtrOutput {
+	return i.ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetUpgradePriceSplitShardConfigArgs) ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceSplitShardConfigOutput).ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(ctx)
+}
+
+// GetUpgradePriceSplitShardConfigPtrInput is an input type that accepts GetUpgradePriceSplitShardConfigArgs, GetUpgradePriceSplitShardConfigPtr and GetUpgradePriceSplitShardConfigPtrOutput values.
+// You can construct a concrete instance of `GetUpgradePriceSplitShardConfigPtrInput` via:
+//
+//          GetUpgradePriceSplitShardConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type GetUpgradePriceSplitShardConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetUpgradePriceSplitShardConfigPtrOutput() GetUpgradePriceSplitShardConfigPtrOutput
+	ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(context.Context) GetUpgradePriceSplitShardConfigPtrOutput
+}
+
+type getUpgradePriceSplitShardConfigPtrType GetUpgradePriceSplitShardConfigArgs
+
+func GetUpgradePriceSplitShardConfigPtr(v *GetUpgradePriceSplitShardConfigArgs) GetUpgradePriceSplitShardConfigPtrInput {
+	return (*getUpgradePriceSplitShardConfigPtrType)(v)
+}
+
+func (*getUpgradePriceSplitShardConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceSplitShardConfig)(nil)).Elem()
+}
+
+func (i *getUpgradePriceSplitShardConfigPtrType) ToGetUpgradePriceSplitShardConfigPtrOutput() GetUpgradePriceSplitShardConfigPtrOutput {
+	return i.ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getUpgradePriceSplitShardConfigPtrType) ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradePriceSplitShardConfigPtrOutput)
+}
+
+type GetUpgradePriceSplitShardConfigOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceSplitShardConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradePriceSplitShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceSplitShardConfigOutput) ToGetUpgradePriceSplitShardConfigOutput() GetUpgradePriceSplitShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceSplitShardConfigOutput) ToGetUpgradePriceSplitShardConfigOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigOutput {
+	return o
+}
+
+func (o GetUpgradePriceSplitShardConfigOutput) ToGetUpgradePriceSplitShardConfigPtrOutput() GetUpgradePriceSplitShardConfigPtrOutput {
+	return o.ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetUpgradePriceSplitShardConfigOutput) ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetUpgradePriceSplitShardConfig) *GetUpgradePriceSplitShardConfig {
+		return &v
+	}).(GetUpgradePriceSplitShardConfigPtrOutput)
+}
+
+// List of shard ID.
+func (o GetUpgradePriceSplitShardConfigOutput) ShardInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetUpgradePriceSplitShardConfig) []string { return v.ShardInstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceSplitShardConfigOutput) ShardMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceSplitShardConfig) int { return v.ShardMemory }).(pulumi.IntOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceSplitShardConfigOutput) ShardStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceSplitShardConfig) int { return v.ShardStorage }).(pulumi.IntOutput)
+}
+
+// Data split ratio, fixed at 50%.
+func (o GetUpgradePriceSplitShardConfigOutput) SplitRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradePriceSplitShardConfig) int { return v.SplitRate }).(pulumi.IntOutput)
+}
+
+type GetUpgradePriceSplitShardConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradePriceSplitShardConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetUpgradePriceSplitShardConfig)(nil)).Elem()
+}
+
+func (o GetUpgradePriceSplitShardConfigPtrOutput) ToGetUpgradePriceSplitShardConfigPtrOutput() GetUpgradePriceSplitShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceSplitShardConfigPtrOutput) ToGetUpgradePriceSplitShardConfigPtrOutputWithContext(ctx context.Context) GetUpgradePriceSplitShardConfigPtrOutput {
+	return o
+}
+
+func (o GetUpgradePriceSplitShardConfigPtrOutput) Elem() GetUpgradePriceSplitShardConfigOutput {
+	return o.ApplyT(func(v *GetUpgradePriceSplitShardConfig) GetUpgradePriceSplitShardConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetUpgradePriceSplitShardConfig
+		return ret
+	}).(GetUpgradePriceSplitShardConfigOutput)
+}
+
+// List of shard ID.
+func (o GetUpgradePriceSplitShardConfigPtrOutput) ShardInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetUpgradePriceSplitShardConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ShardInstanceIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Shard memory size in GB.
+func (o GetUpgradePriceSplitShardConfigPtrOutput) ShardMemory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceSplitShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardMemory
+	}).(pulumi.IntPtrOutput)
+}
+
+// Shard storage capacity in GB.
+func (o GetUpgradePriceSplitShardConfigPtrOutput) ShardStorage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceSplitShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ShardStorage
+	}).(pulumi.IntPtrOutput)
+}
+
+// Data split ratio, fixed at 50%.
+func (o GetUpgradePriceSplitShardConfigPtrOutput) SplitRate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetUpgradePriceSplitShardConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.SplitRate
+	}).(pulumi.IntPtrOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesAccountInput)(nil)).Elem(), AccountPrivilegesAccountArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesAccountPtrInput)(nil)).Elem(), AccountPrivilegesAccountArgs{})
@@ -3841,26 +6511,62 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseTablesColArrayInput)(nil)).Elem(), GetDatabaseTablesColArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesListInput)(nil)).Elem(), GetDatabasesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesListArrayInput)(nil)).Elem(), GetDatabasesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoNodesInfoInput)(nil)).Elem(), GetInstanceNodeInfoNodesInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoNodesInfoArrayInput)(nil)).Elem(), GetInstanceNodeInfoNodesInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListInput)(nil)).Elem(), GetInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListArrayInput)(nil)).Elem(), GetInstancesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListResourceTagInput)(nil)).Elem(), GetInstancesListResourceTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListResourceTagArrayInput)(nil)).Elem(), GetInstancesListResourceTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListShardDetailInput)(nil)).Elem(), GetInstancesListShardDetailArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesListShardDetailArrayInput)(nil)).Elem(), GetInstancesListShardDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogFilesFileInput)(nil)).Elem(), GetLogFilesFileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogFilesFileArrayInput)(nil)).Elem(), GetLogFilesFileArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrdersDealInput)(nil)).Elem(), GetOrdersDealArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrdersDealArrayInput)(nil)).Elem(), GetOrdersDealArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListInput)(nil)).Elem(), GetParametersListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListArrayInput)(nil)).Elem(), GetParametersListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListConstraintInput)(nil)).Elem(), GetParametersListConstraintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListConstraintArrayInput)(nil)).Elem(), GetParametersListConstraintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListConstraintRangeInput)(nil)).Elem(), GetParametersListConstraintRangeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParametersListConstraintRangeArrayInput)(nil)).Elem(), GetParametersListConstraintRangeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInput)(nil)).Elem(), GetProjectSecurityGroupsGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInboundInput)(nil)).Elem(), GetProjectSecurityGroupsGroupInboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInboundArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupInboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupOutboundInput)(nil)).Elem(), GetProjectSecurityGroupsGroupOutboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupOutboundArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupOutboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectsProjectInput)(nil)).Elem(), GetProjectsProjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectsProjectArrayInput)(nil)).Elem(), GetProjectsProjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListInput)(nil)).Elem(), GetSaleInfoRegionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListArrayInput)(nil)).Elem(), GetSaleInfoRegionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZoneInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceMasterZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZoneInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceSlaveZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListZoneListInput)(nil)).Elem(), GetSaleInfoRegionListZoneListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListZoneListArrayInput)(nil)).Elem(), GetSaleInfoRegionListZoneListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInput)(nil)).Elem(), GetSecurityGroupsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListArrayInput)(nil)).Elem(), GetSecurityGroupsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInboundInput)(nil)).Elem(), GetSecurityGroupsListInboundArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInboundArrayInput)(nil)).Elem(), GetSecurityGroupsListInboundArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListOutboundInput)(nil)).Elem(), GetSecurityGroupsListOutboundArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListOutboundArrayInput)(nil)).Elem(), GetSecurityGroupsListOutboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShardSpecSpecConfigInput)(nil)).Elem(), GetShardSpecSpecConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShardSpecSpecConfigArrayInput)(nil)).Elem(), GetShardSpecSpecConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShardSpecSpecConfigSpecConfigInfoInput)(nil)).Elem(), GetShardSpecSpecConfigSpecConfigInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetShardSpecSpecConfigSpecConfigInfoArrayInput)(nil)).Elem(), GetShardSpecSpecConfigSpecConfigInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetShardsListInput)(nil)).Elem(), GetShardsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetShardsListArrayInput)(nil)).Elem(), GetShardsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsDataInput)(nil)).Elem(), GetSlowLogsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsDataArrayInput)(nil)).Elem(), GetSlowLogsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceAddShardConfigInput)(nil)).Elem(), GetUpgradePriceAddShardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceAddShardConfigPtrInput)(nil)).Elem(), GetUpgradePriceAddShardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceExpandShardConfigInput)(nil)).Elem(), GetUpgradePriceExpandShardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceExpandShardConfigPtrInput)(nil)).Elem(), GetUpgradePriceExpandShardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceSplitShardConfigInput)(nil)).Elem(), GetUpgradePriceSplitShardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradePriceSplitShardConfigPtrInput)(nil)).Elem(), GetUpgradePriceSplitShardConfigArgs{})
 	pulumi.RegisterOutputType(AccountPrivilegesAccountOutput{})
 	pulumi.RegisterOutputType(AccountPrivilegesAccountPtrOutput{})
 	pulumi.RegisterOutputType(AccountPrivilegesColumnPrivilegesOutput{})
@@ -3893,24 +6599,60 @@ func init() {
 	pulumi.RegisterOutputType(GetDatabaseTablesColArrayOutput{})
 	pulumi.RegisterOutputType(GetDatabasesListOutput{})
 	pulumi.RegisterOutputType(GetDatabasesListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoNodesInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoNodesInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesListOutput{})
 	pulumi.RegisterOutputType(GetInstancesListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesListResourceTagOutput{})
 	pulumi.RegisterOutputType(GetInstancesListResourceTagArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesListShardDetailOutput{})
 	pulumi.RegisterOutputType(GetInstancesListShardDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetLogFilesFileOutput{})
+	pulumi.RegisterOutputType(GetLogFilesFileArrayOutput{})
+	pulumi.RegisterOutputType(GetOrdersDealOutput{})
+	pulumi.RegisterOutputType(GetOrdersDealArrayOutput{})
 	pulumi.RegisterOutputType(GetParametersListOutput{})
 	pulumi.RegisterOutputType(GetParametersListArrayOutput{})
 	pulumi.RegisterOutputType(GetParametersListConstraintOutput{})
 	pulumi.RegisterOutputType(GetParametersListConstraintArrayOutput{})
 	pulumi.RegisterOutputType(GetParametersListConstraintRangeOutput{})
 	pulumi.RegisterOutputType(GetParametersListConstraintRangeArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupInboundOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupInboundArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutboundOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutboundArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectsProjectOutput{})
+	pulumi.RegisterOutputType(GetProjectsProjectArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListZoneListOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListZoneListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListInboundOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListInboundArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutboundOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutboundArrayOutput{})
+	pulumi.RegisterOutputType(GetShardSpecSpecConfigOutput{})
+	pulumi.RegisterOutputType(GetShardSpecSpecConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetShardSpecSpecConfigSpecConfigInfoOutput{})
+	pulumi.RegisterOutputType(GetShardSpecSpecConfigSpecConfigInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetShardsListOutput{})
 	pulumi.RegisterOutputType(GetShardsListArrayOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsDataOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceAddShardConfigOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceAddShardConfigPtrOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceExpandShardConfigOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceExpandShardConfigPtrOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceSplitShardConfigOutput{})
+	pulumi.RegisterOutputType(GetUpgradePriceSplitShardConfigPtrOutput{})
 }

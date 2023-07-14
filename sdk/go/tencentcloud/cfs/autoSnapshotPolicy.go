@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a cfs autoSnapshotPolicy
 //
 // ## Example Usage
-//
-// use day of week
+// ### use day of week
 //
 // ```go
 // package main
@@ -40,8 +39,7 @@ import (
 // 	})
 // }
 // ```
-//
-// use day of month
+// ### use day of month
 //
 // ```go
 // package main
@@ -66,8 +64,7 @@ import (
 // 	})
 // }
 // ```
-//
-// use interval days
+// ### use interval days
 //
 // ```go
 // package main

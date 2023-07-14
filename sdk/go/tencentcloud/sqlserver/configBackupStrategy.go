@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a sqlserver configBackupStrategy
 //
 // ## Example Usage
-//
-// Daily backup
+// ### Daily backup
 //
 // ```go
 // package main
@@ -49,8 +48,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Weekly backup
+// ### Weekly backup
 //
 // ```go
 // package main
@@ -85,8 +83,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Regular backup
+// ### Regular backup
 //
 // ```go
 // package main

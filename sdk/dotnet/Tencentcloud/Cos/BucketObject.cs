@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// Provides a COS object resource to put an object(content or file) to the bucket.
     /// 
     /// ## Example Usage
-    /// 
-    /// Uploading a file to a bucket
+    /// ### Uploading a file to a bucket
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -35,8 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// }
     /// ```
-    /// 
-    /// Uploading a content to a bucket
+    /// ### Uploading a content to a bucket
     /// 
     /// ```csharp
     /// using Pulumi;

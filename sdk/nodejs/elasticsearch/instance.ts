@@ -9,34 +9,109 @@ import * as utilities from "../utilities";
  * Provides an elasticsearch instance resource.
  *
  * ## Example Usage
+ * ### Create a basic version of elasticsearch instance paid by the hour
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.elasticsearch.Instance("foo", {
- *     instanceName: "tf-test",
- *     availabilityZone: "ap-guangzhou-3",
- *     version: "7.5.1",
- *     vpcId: _var.vpc_id,
- *     subnetId: _var.subnet_id,
+ * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+ *     product: "es",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const example = new tencentcloud.elasticsearch.Instance("example", {
+ *     instanceName: "tf_example_es",
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     version: "7.10.1",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
  *     password: "Test12345",
  *     licenseType: "basic",
+ *     basicSecurityType: 2,
  *     webNodeTypeInfos: [{
  *         nodeNum: 1,
  *         nodeType: "ES.S1.MEDIUM4",
  *     }],
  *     nodeInfoLists: [{
  *         nodeNum: 2,
- *         nodeType: "ES.S1.MEDIUM4",
+ *         nodeType: "ES.S1.MEDIUM8",
  *         encrypt: false,
  *     }],
  *     esAcl: {
- *         blackLists: [
- *             "9.9.9.9",
- *             "8.8.8.8",
- *         ],
- *         whiteLists: ["0.0.0.0"],
+ *         whiteLists: ["127.0.0.1"],
+ *     },
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ * ### Create a basic version of elasticsearch instance for multi-availability zone deployment
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+ *     product: "es",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const subnetMultiZone = new tencentcloud.subnet.Instance("subnetMultiZone", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[1]?.name),
+ *     cidrBlock: "10.0.2.0/24",
+ * });
+ * const exampleMultiZone = new tencentcloud.elasticsearch.Instance("exampleMultiZone", {
+ *     instanceName: "tf_example_es",
+ *     availabilityZone: "-",
+ *     version: "7.10.1",
+ *     vpcId: vpc.id,
+ *     subnetId: "-",
+ *     password: "Test12345",
+ *     licenseType: "basic",
+ *     basicSecurityType: 2,
+ *     deployMode: 1,
+ *     multiZoneInfos: [
+ *         {
+ *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[0]?.name),
+ *             subnetId: subnet.id,
+ *         },
+ *         {
+ *             availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?[1]?.name),
+ *             subnetId: subnetMultiZone.id,
+ *         },
+ *     ],
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [
+ *         {
+ *             type: "dedicatedMaster",
+ *             nodeNum: 3,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *         {
+ *             type: "hotData",
+ *             nodeNum: 2,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *     ],
+ *     esAcl: {
+ *         whiteLists: ["127.0.0.1"],
  *     },
  *     tags: {
  *         test: "test",
@@ -81,7 +156,7 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * Availability zone. When create multi-az es, this parameter must be omitted.
+     * Availability zone. When create multi-az es, this parameter must be omitted or `-`.
      */
     public readonly availabilityZone!: pulumi.Output<string | undefined>;
     /**
@@ -141,7 +216,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly nodeInfoLists!: pulumi.Output<outputs.Elasticsearch.InstanceNodeInfoList[]>;
     /**
-     * Password to an instance.
+     * Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
      */
     public readonly password!: pulumi.Output<string>;
     /**
@@ -149,7 +224,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly renewFlag!: pulumi.Output<string | undefined>;
     /**
-     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -157,7 +232,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
      */
     public readonly version!: pulumi.Output<string>;
     /**
@@ -251,7 +326,7 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * Availability zone. When create multi-az es, this parameter must be omitted.
+     * Availability zone. When create multi-az es, this parameter must be omitted or `-`.
      */
     availabilityZone?: pulumi.Input<string>;
     /**
@@ -311,7 +386,7 @@ export interface InstanceState {
      */
     nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
     /**
-     * Password to an instance.
+     * Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
      */
     password?: pulumi.Input<string>;
     /**
@@ -319,7 +394,7 @@ export interface InstanceState {
      */
     renewFlag?: pulumi.Input<string>;
     /**
-     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -327,7 +402,7 @@ export interface InstanceState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
      */
     version?: pulumi.Input<string>;
     /**
@@ -345,7 +420,7 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * Availability zone. When create multi-az es, this parameter must be omitted.
+     * Availability zone. When create multi-az es, this parameter must be omitted or `-`.
      */
     availabilityZone?: pulumi.Input<string>;
     /**
@@ -385,7 +460,7 @@ export interface InstanceArgs {
      */
     nodeInfoLists: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
     /**
-     * Password to an instance.
+     * Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
      */
     password: pulumi.Input<string>;
     /**
@@ -393,7 +468,7 @@ export interface InstanceArgs {
      */
     renewFlag?: pulumi.Input<string>;
     /**
-     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+     * The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -401,7 +476,7 @@ export interface InstanceArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+     * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
      */
     version: pulumi.Input<string>;
     /**

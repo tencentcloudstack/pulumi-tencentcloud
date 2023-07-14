@@ -2386,7 +2386,9 @@ func (o GetIpStrategiesListAttachListArrayOutput) Index(i pulumi.IntInput) GetIp
 type GetServicesList struct {
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime string `pulumi:"createTime"`
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName string `pulumi:"exclusiveSetName"`
 	// Port number for http access over private network.
 	InnerHttpPort int `pulumi:"innerHttpPort"`
@@ -2428,7 +2430,9 @@ type GetServicesListInput interface {
 type GetServicesListArgs struct {
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName pulumi.StringInput `pulumi:"exclusiveSetName"`
 	// Port number for http access over private network.
 	InnerHttpPort pulumi.IntInput `pulumi:"innerHttpPort"`
@@ -2512,7 +2516,9 @@ func (o GetServicesListOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetServicesList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+// (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+//
+// Deprecated: It has been deprecated from version 1.81.9.
 func (o GetServicesListOutput) ExclusiveSetName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetServicesList) string { return v.ExclusiveSetName }).(pulumi.StringOutput)
 }

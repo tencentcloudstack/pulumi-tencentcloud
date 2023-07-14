@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public Input<bool>? EnablePilotHttp { get; set; }
 
         /// <summary>
-        /// Outbound traffic policy.
+        /// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
         /// </summary>
         [Input("outboundTrafficPolicy", required: true)]
         public Input<string> OutboundTrafficPolicy { get; set; } = null!;
@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         /// </summary>
         [Input("smartDns")]
         public Input<Inputs.MeshConfigIstioSmartDnsGetArgs>? SmartDns { get; set; }
+
+        /// <summary>
+        /// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+        /// </summary>
+        [Input("tracing")]
+        public Input<Inputs.MeshConfigIstioTracingGetArgs>? Tracing { get; set; }
 
         public MeshConfigIstioGetArgs()
         {

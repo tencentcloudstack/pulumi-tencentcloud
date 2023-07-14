@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// Provides a resource to create a CAM role.
     /// 
     /// ## Example Usage
-    /// 
-    /// Create normally
+    /// ### Create normally
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -52,8 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// }
     /// ```
-    /// 
-    /// Create with SAML provider
+    /// ### Create with SAML provider
     /// 
     /// ```csharp
     /// using Pulumi;

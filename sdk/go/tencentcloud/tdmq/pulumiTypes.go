@@ -116,6 +116,1838 @@ func (o RocketmqClusterVpcArrayOutput) Index(i pulumi.IntInput) RocketmqClusterV
 	}).(RocketmqClusterVpcOutput)
 }
 
+type GetProInstanceDetailClusterInfo struct {
+	// Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+	CanEditRoute bool `pulumi:"canEditRoute"`
+	// Cluster Id.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Maximum storage capacity, unit: MB.
+	MaxStorage int `pulumi:"maxStorage"`
+	// Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+	NodeDistributions []GetProInstanceDetailClusterInfoNodeDistribution `pulumi:"nodeDistributions"`
+	// Descriptive information.
+	Remark string `pulumi:"remark"`
+	// Cluster status, 0: creating, 1: normal, 2: isolated.
+	Status int `pulumi:"status"`
+	// cluster version.
+	Version string `pulumi:"version"`
+}
+
+// GetProInstanceDetailClusterInfoInput is an input type that accepts GetProInstanceDetailClusterInfoArgs and GetProInstanceDetailClusterInfoOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterInfoInput` via:
+//
+//          GetProInstanceDetailClusterInfoArgs{...}
+type GetProInstanceDetailClusterInfoInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterInfoOutput() GetProInstanceDetailClusterInfoOutput
+	ToGetProInstanceDetailClusterInfoOutputWithContext(context.Context) GetProInstanceDetailClusterInfoOutput
+}
+
+type GetProInstanceDetailClusterInfoArgs struct {
+	// Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+	CanEditRoute pulumi.BoolInput `pulumi:"canEditRoute"`
+	// Cluster Id.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Maximum storage capacity, unit: MB.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+	NodeDistributions GetProInstanceDetailClusterInfoNodeDistributionArrayInput `pulumi:"nodeDistributions"`
+	// Descriptive information.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Cluster status, 0: creating, 1: normal, 2: isolated.
+	Status pulumi.IntInput `pulumi:"status"`
+	// cluster version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetProInstanceDetailClusterInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterInfoArgs) ToGetProInstanceDetailClusterInfoOutput() GetProInstanceDetailClusterInfoOutput {
+	return i.ToGetProInstanceDetailClusterInfoOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterInfoArgs) ToGetProInstanceDetailClusterInfoOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterInfoOutput)
+}
+
+// GetProInstanceDetailClusterInfoArrayInput is an input type that accepts GetProInstanceDetailClusterInfoArray and GetProInstanceDetailClusterInfoArrayOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterInfoArrayInput` via:
+//
+//          GetProInstanceDetailClusterInfoArray{ GetProInstanceDetailClusterInfoArgs{...} }
+type GetProInstanceDetailClusterInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterInfoArrayOutput() GetProInstanceDetailClusterInfoArrayOutput
+	ToGetProInstanceDetailClusterInfoArrayOutputWithContext(context.Context) GetProInstanceDetailClusterInfoArrayOutput
+}
+
+type GetProInstanceDetailClusterInfoArray []GetProInstanceDetailClusterInfoInput
+
+func (GetProInstanceDetailClusterInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterInfoArray) ToGetProInstanceDetailClusterInfoArrayOutput() GetProInstanceDetailClusterInfoArrayOutput {
+	return i.ToGetProInstanceDetailClusterInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterInfoArray) ToGetProInstanceDetailClusterInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterInfoArrayOutput)
+}
+
+type GetProInstanceDetailClusterInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterInfoOutput) ToGetProInstanceDetailClusterInfoOutput() GetProInstanceDetailClusterInfoOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoOutput) ToGetProInstanceDetailClusterInfoOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoOutput {
+	return o
+}
+
+// Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstanceDetailClusterInfoOutput) CanEditRoute() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) bool { return v.CanEditRoute }).(pulumi.BoolOutput)
+}
+
+// Cluster Id.
+func (o GetProInstanceDetailClusterInfoOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o GetProInstanceDetailClusterInfoOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetProInstanceDetailClusterInfoOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Maximum storage capacity, unit: MB.
+func (o GetProInstanceDetailClusterInfoOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+// Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstanceDetailClusterInfoOutput) NodeDistributions() GetProInstanceDetailClusterInfoNodeDistributionArrayOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) []GetProInstanceDetailClusterInfoNodeDistribution {
+		return v.NodeDistributions
+	}).(GetProInstanceDetailClusterInfoNodeDistributionArrayOutput)
+}
+
+// Descriptive information.
+func (o GetProInstanceDetailClusterInfoOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Cluster status, 0: creating, 1: normal, 2: isolated.
+func (o GetProInstanceDetailClusterInfoOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// cluster version.
+func (o GetProInstanceDetailClusterInfoOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfo) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetProInstanceDetailClusterInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterInfoArrayOutput) ToGetProInstanceDetailClusterInfoArrayOutput() GetProInstanceDetailClusterInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoArrayOutput) ToGetProInstanceDetailClusterInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoArrayOutput) Index(i pulumi.IntInput) GetProInstanceDetailClusterInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstanceDetailClusterInfo {
+		return vs[0].([]GetProInstanceDetailClusterInfo)[vs[1].(int)]
+	}).(GetProInstanceDetailClusterInfoOutput)
+}
+
+type GetProInstanceDetailClusterInfoNodeDistribution struct {
+	// Number of nodes.
+	NodeCount int `pulumi:"nodeCount"`
+	// Availability zone ID.
+	ZoneId string `pulumi:"zoneId"`
+	// Availability zone.
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetProInstanceDetailClusterInfoNodeDistributionInput is an input type that accepts GetProInstanceDetailClusterInfoNodeDistributionArgs and GetProInstanceDetailClusterInfoNodeDistributionOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterInfoNodeDistributionInput` via:
+//
+//          GetProInstanceDetailClusterInfoNodeDistributionArgs{...}
+type GetProInstanceDetailClusterInfoNodeDistributionInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterInfoNodeDistributionOutput() GetProInstanceDetailClusterInfoNodeDistributionOutput
+	ToGetProInstanceDetailClusterInfoNodeDistributionOutputWithContext(context.Context) GetProInstanceDetailClusterInfoNodeDistributionOutput
+}
+
+type GetProInstanceDetailClusterInfoNodeDistributionArgs struct {
+	// Number of nodes.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// Availability zone ID.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	// Availability zone.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetProInstanceDetailClusterInfoNodeDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistribution)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterInfoNodeDistributionArgs) ToGetProInstanceDetailClusterInfoNodeDistributionOutput() GetProInstanceDetailClusterInfoNodeDistributionOutput {
+	return i.ToGetProInstanceDetailClusterInfoNodeDistributionOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterInfoNodeDistributionArgs) ToGetProInstanceDetailClusterInfoNodeDistributionOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoNodeDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterInfoNodeDistributionOutput)
+}
+
+// GetProInstanceDetailClusterInfoNodeDistributionArrayInput is an input type that accepts GetProInstanceDetailClusterInfoNodeDistributionArray and GetProInstanceDetailClusterInfoNodeDistributionArrayOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterInfoNodeDistributionArrayInput` via:
+//
+//          GetProInstanceDetailClusterInfoNodeDistributionArray{ GetProInstanceDetailClusterInfoNodeDistributionArgs{...} }
+type GetProInstanceDetailClusterInfoNodeDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutput() GetProInstanceDetailClusterInfoNodeDistributionArrayOutput
+	ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutputWithContext(context.Context) GetProInstanceDetailClusterInfoNodeDistributionArrayOutput
+}
+
+type GetProInstanceDetailClusterInfoNodeDistributionArray []GetProInstanceDetailClusterInfoNodeDistributionInput
+
+func (GetProInstanceDetailClusterInfoNodeDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterInfoNodeDistribution)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterInfoNodeDistributionArray) ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutput() GetProInstanceDetailClusterInfoNodeDistributionArrayOutput {
+	return i.ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterInfoNodeDistributionArray) ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoNodeDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterInfoNodeDistributionArrayOutput)
+}
+
+type GetProInstanceDetailClusterInfoNodeDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterInfoNodeDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistribution)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterInfoNodeDistributionOutput) ToGetProInstanceDetailClusterInfoNodeDistributionOutput() GetProInstanceDetailClusterInfoNodeDistributionOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoNodeDistributionOutput) ToGetProInstanceDetailClusterInfoNodeDistributionOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoNodeDistributionOutput {
+	return o
+}
+
+// Number of nodes.
+func (o GetProInstanceDetailClusterInfoNodeDistributionOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfoNodeDistribution) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+// Availability zone ID.
+func (o GetProInstanceDetailClusterInfoNodeDistributionOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfoNodeDistribution) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+// Availability zone.
+func (o GetProInstanceDetailClusterInfoNodeDistributionOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterInfoNodeDistribution) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetProInstanceDetailClusterInfoNodeDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterInfoNodeDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterInfoNodeDistribution)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterInfoNodeDistributionArrayOutput) ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutput() GetProInstanceDetailClusterInfoNodeDistributionArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoNodeDistributionArrayOutput) ToGetProInstanceDetailClusterInfoNodeDistributionArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterInfoNodeDistributionArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterInfoNodeDistributionArrayOutput) Index(i pulumi.IntInput) GetProInstanceDetailClusterInfoNodeDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstanceDetailClusterInfoNodeDistribution {
+		return vs[0].([]GetProInstanceDetailClusterInfoNodeDistribution)[vs[1].(int)]
+	}).(GetProInstanceDetailClusterInfoNodeDistributionOutput)
+}
+
+type GetProInstanceDetailClusterSpecInfo struct {
+	// peak bandwidth. Unit: mbps.
+	MaxBandWidth int `pulumi:"maxBandWidth"`
+	// Maximum number of namespaces.
+	MaxNamespaces int `pulumi:"maxNamespaces"`
+	// Maximum number of topic partitions.
+	MaxTopics int `pulumi:"maxTopics"`
+	// peak tps.
+	MaxTps int `pulumi:"maxTps"`
+	// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+	ScalableTps int `pulumi:"scalableTps"`
+	// Cluster specification name.
+	SpecName string `pulumi:"specName"`
+}
+
+// GetProInstanceDetailClusterSpecInfoInput is an input type that accepts GetProInstanceDetailClusterSpecInfoArgs and GetProInstanceDetailClusterSpecInfoOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterSpecInfoInput` via:
+//
+//          GetProInstanceDetailClusterSpecInfoArgs{...}
+type GetProInstanceDetailClusterSpecInfoInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterSpecInfoOutput() GetProInstanceDetailClusterSpecInfoOutput
+	ToGetProInstanceDetailClusterSpecInfoOutputWithContext(context.Context) GetProInstanceDetailClusterSpecInfoOutput
+}
+
+type GetProInstanceDetailClusterSpecInfoArgs struct {
+	// peak bandwidth. Unit: mbps.
+	MaxBandWidth pulumi.IntInput `pulumi:"maxBandWidth"`
+	// Maximum number of namespaces.
+	MaxNamespaces pulumi.IntInput `pulumi:"maxNamespaces"`
+	// Maximum number of topic partitions.
+	MaxTopics pulumi.IntInput `pulumi:"maxTopics"`
+	// peak tps.
+	MaxTps pulumi.IntInput `pulumi:"maxTps"`
+	// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+	ScalableTps pulumi.IntInput `pulumi:"scalableTps"`
+	// Cluster specification name.
+	SpecName pulumi.StringInput `pulumi:"specName"`
+}
+
+func (GetProInstanceDetailClusterSpecInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterSpecInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterSpecInfoArgs) ToGetProInstanceDetailClusterSpecInfoOutput() GetProInstanceDetailClusterSpecInfoOutput {
+	return i.ToGetProInstanceDetailClusterSpecInfoOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterSpecInfoArgs) ToGetProInstanceDetailClusterSpecInfoOutputWithContext(ctx context.Context) GetProInstanceDetailClusterSpecInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterSpecInfoOutput)
+}
+
+// GetProInstanceDetailClusterSpecInfoArrayInput is an input type that accepts GetProInstanceDetailClusterSpecInfoArray and GetProInstanceDetailClusterSpecInfoArrayOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailClusterSpecInfoArrayInput` via:
+//
+//          GetProInstanceDetailClusterSpecInfoArray{ GetProInstanceDetailClusterSpecInfoArgs{...} }
+type GetProInstanceDetailClusterSpecInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailClusterSpecInfoArrayOutput() GetProInstanceDetailClusterSpecInfoArrayOutput
+	ToGetProInstanceDetailClusterSpecInfoArrayOutputWithContext(context.Context) GetProInstanceDetailClusterSpecInfoArrayOutput
+}
+
+type GetProInstanceDetailClusterSpecInfoArray []GetProInstanceDetailClusterSpecInfoInput
+
+func (GetProInstanceDetailClusterSpecInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterSpecInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailClusterSpecInfoArray) ToGetProInstanceDetailClusterSpecInfoArrayOutput() GetProInstanceDetailClusterSpecInfoArrayOutput {
+	return i.ToGetProInstanceDetailClusterSpecInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailClusterSpecInfoArray) ToGetProInstanceDetailClusterSpecInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterSpecInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailClusterSpecInfoArrayOutput)
+}
+
+type GetProInstanceDetailClusterSpecInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterSpecInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailClusterSpecInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterSpecInfoOutput) ToGetProInstanceDetailClusterSpecInfoOutput() GetProInstanceDetailClusterSpecInfoOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterSpecInfoOutput) ToGetProInstanceDetailClusterSpecInfoOutputWithContext(ctx context.Context) GetProInstanceDetailClusterSpecInfoOutput {
+	return o
+}
+
+// peak bandwidth. Unit: mbps.
+func (o GetProInstanceDetailClusterSpecInfoOutput) MaxBandWidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) int { return v.MaxBandWidth }).(pulumi.IntOutput)
+}
+
+// Maximum number of namespaces.
+func (o GetProInstanceDetailClusterSpecInfoOutput) MaxNamespaces() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) int { return v.MaxNamespaces }).(pulumi.IntOutput)
+}
+
+// Maximum number of topic partitions.
+func (o GetProInstanceDetailClusterSpecInfoOutput) MaxTopics() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) int { return v.MaxTopics }).(pulumi.IntOutput)
+}
+
+// peak tps.
+func (o GetProInstanceDetailClusterSpecInfoOutput) MaxTps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) int { return v.MaxTps }).(pulumi.IntOutput)
+}
+
+// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstanceDetailClusterSpecInfoOutput) ScalableTps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) int { return v.ScalableTps }).(pulumi.IntOutput)
+}
+
+// Cluster specification name.
+func (o GetProInstanceDetailClusterSpecInfoOutput) SpecName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailClusterSpecInfo) string { return v.SpecName }).(pulumi.StringOutput)
+}
+
+type GetProInstanceDetailClusterSpecInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailClusterSpecInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailClusterSpecInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailClusterSpecInfoArrayOutput) ToGetProInstanceDetailClusterSpecInfoArrayOutput() GetProInstanceDetailClusterSpecInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterSpecInfoArrayOutput) ToGetProInstanceDetailClusterSpecInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailClusterSpecInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailClusterSpecInfoArrayOutput) Index(i pulumi.IntInput) GetProInstanceDetailClusterSpecInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstanceDetailClusterSpecInfo {
+		return vs[0].([]GetProInstanceDetailClusterSpecInfo)[vs[1].(int)]
+	}).(GetProInstanceDetailClusterSpecInfoOutput)
+}
+
+type GetProInstanceDetailNetworkAccessPointInfo struct {
+	// access address.
+	Endpoint string `pulumi:"endpoint"`
+	// instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+	RouteType int `pulumi:"routeType"`
+	// Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetProInstanceDetailNetworkAccessPointInfoInput is an input type that accepts GetProInstanceDetailNetworkAccessPointInfoArgs and GetProInstanceDetailNetworkAccessPointInfoOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailNetworkAccessPointInfoInput` via:
+//
+//          GetProInstanceDetailNetworkAccessPointInfoArgs{...}
+type GetProInstanceDetailNetworkAccessPointInfoInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailNetworkAccessPointInfoOutput() GetProInstanceDetailNetworkAccessPointInfoOutput
+	ToGetProInstanceDetailNetworkAccessPointInfoOutputWithContext(context.Context) GetProInstanceDetailNetworkAccessPointInfoOutput
+}
+
+type GetProInstanceDetailNetworkAccessPointInfoArgs struct {
+	// access address.
+	Endpoint pulumi.StringInput `pulumi:"endpoint"`
+	// instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+	RouteType pulumi.IntInput `pulumi:"routeType"`
+	// Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetProInstanceDetailNetworkAccessPointInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailNetworkAccessPointInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailNetworkAccessPointInfoArgs) ToGetProInstanceDetailNetworkAccessPointInfoOutput() GetProInstanceDetailNetworkAccessPointInfoOutput {
+	return i.ToGetProInstanceDetailNetworkAccessPointInfoOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailNetworkAccessPointInfoArgs) ToGetProInstanceDetailNetworkAccessPointInfoOutputWithContext(ctx context.Context) GetProInstanceDetailNetworkAccessPointInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailNetworkAccessPointInfoOutput)
+}
+
+// GetProInstanceDetailNetworkAccessPointInfoArrayInput is an input type that accepts GetProInstanceDetailNetworkAccessPointInfoArray and GetProInstanceDetailNetworkAccessPointInfoArrayOutput values.
+// You can construct a concrete instance of `GetProInstanceDetailNetworkAccessPointInfoArrayInput` via:
+//
+//          GetProInstanceDetailNetworkAccessPointInfoArray{ GetProInstanceDetailNetworkAccessPointInfoArgs{...} }
+type GetProInstanceDetailNetworkAccessPointInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstanceDetailNetworkAccessPointInfoArrayOutput() GetProInstanceDetailNetworkAccessPointInfoArrayOutput
+	ToGetProInstanceDetailNetworkAccessPointInfoArrayOutputWithContext(context.Context) GetProInstanceDetailNetworkAccessPointInfoArrayOutput
+}
+
+type GetProInstanceDetailNetworkAccessPointInfoArray []GetProInstanceDetailNetworkAccessPointInfoInput
+
+func (GetProInstanceDetailNetworkAccessPointInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailNetworkAccessPointInfo)(nil)).Elem()
+}
+
+func (i GetProInstanceDetailNetworkAccessPointInfoArray) ToGetProInstanceDetailNetworkAccessPointInfoArrayOutput() GetProInstanceDetailNetworkAccessPointInfoArrayOutput {
+	return i.ToGetProInstanceDetailNetworkAccessPointInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstanceDetailNetworkAccessPointInfoArray) ToGetProInstanceDetailNetworkAccessPointInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailNetworkAccessPointInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstanceDetailNetworkAccessPointInfoArrayOutput)
+}
+
+type GetProInstanceDetailNetworkAccessPointInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailNetworkAccessPointInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstanceDetailNetworkAccessPointInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) ToGetProInstanceDetailNetworkAccessPointInfoOutput() GetProInstanceDetailNetworkAccessPointInfoOutput {
+	return o
+}
+
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) ToGetProInstanceDetailNetworkAccessPointInfoOutputWithContext(ctx context.Context) GetProInstanceDetailNetworkAccessPointInfoOutput {
+	return o
+}
+
+// access address.
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailNetworkAccessPointInfo) string { return v.Endpoint }).(pulumi.StringOutput)
+}
+
+// instance id.
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailNetworkAccessPointInfo) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) RouteType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstanceDetailNetworkAccessPointInfo) int { return v.RouteType }).(pulumi.IntOutput)
+}
+
+// Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailNetworkAccessPointInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstanceDetailNetworkAccessPointInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstanceDetailNetworkAccessPointInfo) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetProInstanceDetailNetworkAccessPointInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstanceDetailNetworkAccessPointInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstanceDetailNetworkAccessPointInfo)(nil)).Elem()
+}
+
+func (o GetProInstanceDetailNetworkAccessPointInfoArrayOutput) ToGetProInstanceDetailNetworkAccessPointInfoArrayOutput() GetProInstanceDetailNetworkAccessPointInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailNetworkAccessPointInfoArrayOutput) ToGetProInstanceDetailNetworkAccessPointInfoArrayOutputWithContext(ctx context.Context) GetProInstanceDetailNetworkAccessPointInfoArrayOutput {
+	return o
+}
+
+func (o GetProInstanceDetailNetworkAccessPointInfoArrayOutput) Index(i pulumi.IntInput) GetProInstanceDetailNetworkAccessPointInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstanceDetailNetworkAccessPointInfo {
+		return vs[0].([]GetProInstanceDetailNetworkAccessPointInfo)[vs[1].(int)]
+	}).(GetProInstanceDetailNetworkAccessPointInfoOutput)
+}
+
+type GetProInstancesFilter struct {
+	// The name of the filter parameter.
+	Name *string `pulumi:"name"`
+	// value.
+	Values []string `pulumi:"values"`
+}
+
+// GetProInstancesFilterInput is an input type that accepts GetProInstancesFilterArgs and GetProInstancesFilterOutput values.
+// You can construct a concrete instance of `GetProInstancesFilterInput` via:
+//
+//          GetProInstancesFilterArgs{...}
+type GetProInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetProInstancesFilterOutput() GetProInstancesFilterOutput
+	ToGetProInstancesFilterOutputWithContext(context.Context) GetProInstancesFilterOutput
+}
+
+type GetProInstancesFilterArgs struct {
+	// The name of the filter parameter.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetProInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstancesFilter)(nil)).Elem()
+}
+
+func (i GetProInstancesFilterArgs) ToGetProInstancesFilterOutput() GetProInstancesFilterOutput {
+	return i.ToGetProInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetProInstancesFilterArgs) ToGetProInstancesFilterOutputWithContext(ctx context.Context) GetProInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstancesFilterOutput)
+}
+
+// GetProInstancesFilterArrayInput is an input type that accepts GetProInstancesFilterArray and GetProInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetProInstancesFilterArrayInput` via:
+//
+//          GetProInstancesFilterArray{ GetProInstancesFilterArgs{...} }
+type GetProInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstancesFilterArrayOutput() GetProInstancesFilterArrayOutput
+	ToGetProInstancesFilterArrayOutputWithContext(context.Context) GetProInstancesFilterArrayOutput
+}
+
+type GetProInstancesFilterArray []GetProInstancesFilterInput
+
+func (GetProInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstancesFilter)(nil)).Elem()
+}
+
+func (i GetProInstancesFilterArray) ToGetProInstancesFilterArrayOutput() GetProInstancesFilterArrayOutput {
+	return i.ToGetProInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstancesFilterArray) ToGetProInstancesFilterArrayOutputWithContext(ctx context.Context) GetProInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstancesFilterArrayOutput)
+}
+
+type GetProInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetProInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstancesFilter)(nil)).Elem()
+}
+
+func (o GetProInstancesFilterOutput) ToGetProInstancesFilterOutput() GetProInstancesFilterOutput {
+	return o
+}
+
+func (o GetProInstancesFilterOutput) ToGetProInstancesFilterOutputWithContext(ctx context.Context) GetProInstancesFilterOutput {
+	return o
+}
+
+// The name of the filter parameter.
+func (o GetProInstancesFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetProInstancesFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// value.
+func (o GetProInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetProInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstancesFilter)(nil)).Elem()
+}
+
+func (o GetProInstancesFilterArrayOutput) ToGetProInstancesFilterArrayOutput() GetProInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetProInstancesFilterArrayOutput) ToGetProInstancesFilterArrayOutputWithContext(ctx context.Context) GetProInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetProInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetProInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstancesFilter {
+		return vs[0].([]GetProInstancesFilter)[vs[1].(int)]
+	}).(GetProInstancesFilterOutput)
+}
+
+type GetProInstancesInstance struct {
+	// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// Instance configuration specification name.
+	ConfigDisplay string `pulumi:"configDisplay"`
+	// Instance expiration time, in milliseconds.
+	ExpireTime int `pulumi:"expireTime"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance version.
+	InstanceVersion string `pulumi:"instanceVersion"`
+	// Peak bandwidth. Unit: mbps.
+	MaxBandWidth int `pulumi:"maxBandWidth"`
+	// Storage capacity, in GB.
+	MaxStorage int `pulumi:"maxStorage"`
+	// Peak TPS.
+	MaxTps int `pulumi:"maxTps"`
+	// 0-postpaid, 1-prepaid.
+	PayMode int `pulumi:"payMode"`
+	// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+	Remark string `pulumi:"remark"`
+	// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+	ScalableTps int `pulumi:"scalableTps"`
+	// Instance Configuration ID.
+	SpecName string `pulumi:"specName"`
+	// Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+	Status int `pulumi:"status"`
+	// Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetProInstancesInstanceInput is an input type that accepts GetProInstancesInstanceArgs and GetProInstancesInstanceOutput values.
+// You can construct a concrete instance of `GetProInstancesInstanceInput` via:
+//
+//          GetProInstancesInstanceArgs{...}
+type GetProInstancesInstanceInput interface {
+	pulumi.Input
+
+	ToGetProInstancesInstanceOutput() GetProInstancesInstanceOutput
+	ToGetProInstancesInstanceOutputWithContext(context.Context) GetProInstancesInstanceOutput
+}
+
+type GetProInstancesInstanceArgs struct {
+	// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// Instance configuration specification name.
+	ConfigDisplay pulumi.StringInput `pulumi:"configDisplay"`
+	// Instance expiration time, in milliseconds.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance version.
+	InstanceVersion pulumi.StringInput `pulumi:"instanceVersion"`
+	// Peak bandwidth. Unit: mbps.
+	MaxBandWidth pulumi.IntInput `pulumi:"maxBandWidth"`
+	// Storage capacity, in GB.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// Peak TPS.
+	MaxTps pulumi.IntInput `pulumi:"maxTps"`
+	// 0-postpaid, 1-prepaid.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+	ScalableTps pulumi.IntInput `pulumi:"scalableTps"`
+	// Instance Configuration ID.
+	SpecName pulumi.StringInput `pulumi:"specName"`
+	// Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetProInstancesInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstancesInstance)(nil)).Elem()
+}
+
+func (i GetProInstancesInstanceArgs) ToGetProInstancesInstanceOutput() GetProInstancesInstanceOutput {
+	return i.ToGetProInstancesInstanceOutputWithContext(context.Background())
+}
+
+func (i GetProInstancesInstanceArgs) ToGetProInstancesInstanceOutputWithContext(ctx context.Context) GetProInstancesInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstancesInstanceOutput)
+}
+
+// GetProInstancesInstanceArrayInput is an input type that accepts GetProInstancesInstanceArray and GetProInstancesInstanceArrayOutput values.
+// You can construct a concrete instance of `GetProInstancesInstanceArrayInput` via:
+//
+//          GetProInstancesInstanceArray{ GetProInstancesInstanceArgs{...} }
+type GetProInstancesInstanceArrayInput interface {
+	pulumi.Input
+
+	ToGetProInstancesInstanceArrayOutput() GetProInstancesInstanceArrayOutput
+	ToGetProInstancesInstanceArrayOutputWithContext(context.Context) GetProInstancesInstanceArrayOutput
+}
+
+type GetProInstancesInstanceArray []GetProInstancesInstanceInput
+
+func (GetProInstancesInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstancesInstance)(nil)).Elem()
+}
+
+func (i GetProInstancesInstanceArray) ToGetProInstancesInstanceArrayOutput() GetProInstancesInstanceArrayOutput {
+	return i.ToGetProInstancesInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i GetProInstancesInstanceArray) ToGetProInstancesInstanceArrayOutputWithContext(ctx context.Context) GetProInstancesInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProInstancesInstanceArrayOutput)
+}
+
+type GetProInstancesInstanceOutput struct{ *pulumi.OutputState }
+
+func (GetProInstancesInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProInstancesInstance)(nil)).Elem()
+}
+
+func (o GetProInstancesInstanceOutput) ToGetProInstancesInstanceOutput() GetProInstancesInstanceOutput {
+	return o
+}
+
+func (o GetProInstancesInstanceOutput) ToGetProInstancesInstanceOutputWithContext(ctx context.Context) GetProInstancesInstanceOutput {
+	return o
+}
+
+// Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+func (o GetProInstancesInstanceOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+}
+
+// Instance configuration specification name.
+func (o GetProInstancesInstanceOutput) ConfigDisplay() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.ConfigDisplay }).(pulumi.StringOutput)
+}
+
+// Instance expiration time, in milliseconds.
+func (o GetProInstancesInstanceOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.ExpireTime }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetProInstancesInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetProInstancesInstanceOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance version.
+func (o GetProInstancesInstanceOutput) InstanceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.InstanceVersion }).(pulumi.StringOutput)
+}
+
+// Peak bandwidth. Unit: mbps.
+func (o GetProInstancesInstanceOutput) MaxBandWidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.MaxBandWidth }).(pulumi.IntOutput)
+}
+
+// Storage capacity, in GB.
+func (o GetProInstancesInstanceOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+// Peak TPS.
+func (o GetProInstancesInstanceOutput) MaxTps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.MaxTps }).(pulumi.IntOutput)
+}
+
+// 0-postpaid, 1-prepaid.
+func (o GetProInstancesInstanceOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+// RemarksNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstancesInstanceOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstancesInstanceOutput) ScalableTps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.ScalableTps }).(pulumi.IntOutput)
+}
+
+// Instance Configuration ID.
+func (o GetProInstancesInstanceOutput) SpecName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.SpecName }).(pulumi.StringOutput)
+}
+
+// Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+func (o GetProInstancesInstanceOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstancesInstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetProInstancesInstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProInstancesInstance) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetProInstancesInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProInstancesInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProInstancesInstance)(nil)).Elem()
+}
+
+func (o GetProInstancesInstanceArrayOutput) ToGetProInstancesInstanceArrayOutput() GetProInstancesInstanceArrayOutput {
+	return o
+}
+
+func (o GetProInstancesInstanceArrayOutput) ToGetProInstancesInstanceArrayOutputWithContext(ctx context.Context) GetProInstancesInstanceArrayOutput {
+	return o
+}
+
+func (o GetProInstancesInstanceArrayOutput) Index(i pulumi.IntInput) GetProInstancesInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProInstancesInstance {
+		return vs[0].([]GetProInstancesInstance)[vs[1].(int)]
+	}).(GetProInstancesInstanceOutput)
+}
+
+type GetPublishersFilter struct {
+	// The name of the filter parameter.
+	Name *string `pulumi:"name"`
+	// value.
+	Values []string `pulumi:"values"`
+}
+
+// GetPublishersFilterInput is an input type that accepts GetPublishersFilterArgs and GetPublishersFilterOutput values.
+// You can construct a concrete instance of `GetPublishersFilterInput` via:
+//
+//          GetPublishersFilterArgs{...}
+type GetPublishersFilterInput interface {
+	pulumi.Input
+
+	ToGetPublishersFilterOutput() GetPublishersFilterOutput
+	ToGetPublishersFilterOutputWithContext(context.Context) GetPublishersFilterOutput
+}
+
+type GetPublishersFilterArgs struct {
+	// The name of the filter parameter.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetPublishersFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersFilter)(nil)).Elem()
+}
+
+func (i GetPublishersFilterArgs) ToGetPublishersFilterOutput() GetPublishersFilterOutput {
+	return i.ToGetPublishersFilterOutputWithContext(context.Background())
+}
+
+func (i GetPublishersFilterArgs) ToGetPublishersFilterOutputWithContext(ctx context.Context) GetPublishersFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersFilterOutput)
+}
+
+// GetPublishersFilterArrayInput is an input type that accepts GetPublishersFilterArray and GetPublishersFilterArrayOutput values.
+// You can construct a concrete instance of `GetPublishersFilterArrayInput` via:
+//
+//          GetPublishersFilterArray{ GetPublishersFilterArgs{...} }
+type GetPublishersFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetPublishersFilterArrayOutput() GetPublishersFilterArrayOutput
+	ToGetPublishersFilterArrayOutputWithContext(context.Context) GetPublishersFilterArrayOutput
+}
+
+type GetPublishersFilterArray []GetPublishersFilterInput
+
+func (GetPublishersFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishersFilter)(nil)).Elem()
+}
+
+func (i GetPublishersFilterArray) ToGetPublishersFilterArrayOutput() GetPublishersFilterArrayOutput {
+	return i.ToGetPublishersFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublishersFilterArray) ToGetPublishersFilterArrayOutputWithContext(ctx context.Context) GetPublishersFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersFilterArrayOutput)
+}
+
+type GetPublishersFilterOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersFilter)(nil)).Elem()
+}
+
+func (o GetPublishersFilterOutput) ToGetPublishersFilterOutput() GetPublishersFilterOutput {
+	return o
+}
+
+func (o GetPublishersFilterOutput) ToGetPublishersFilterOutputWithContext(ctx context.Context) GetPublishersFilterOutput {
+	return o
+}
+
+// The name of the filter parameter.
+func (o GetPublishersFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetPublishersFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// value.
+func (o GetPublishersFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPublishersFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetPublishersFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishersFilter)(nil)).Elem()
+}
+
+func (o GetPublishersFilterArrayOutput) ToGetPublishersFilterArrayOutput() GetPublishersFilterArrayOutput {
+	return o
+}
+
+func (o GetPublishersFilterArrayOutput) ToGetPublishersFilterArrayOutputWithContext(ctx context.Context) GetPublishersFilterArrayOutput {
+	return o
+}
+
+func (o GetPublishersFilterArrayOutput) Index(i pulumi.IntInput) GetPublishersFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublishersFilter {
+		return vs[0].([]GetPublishersFilter)[vs[1].(int)]
+	}).(GetPublishersFilterOutput)
+}
+
+type GetPublishersPublisher struct {
+	// producer addressNote: This field may return null, indicating that no valid value can be obtained.
+	Address string `pulumi:"address"`
+	// Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+	AverageMsgSize float64 `pulumi:"averageMsgSize"`
+	// client versionNote: This field may return null, indicating that no valid value can be obtained.
+	ClientVersion string `pulumi:"clientVersion"`
+	// connection timeNote: This field may return null, indicating that no valid value can be obtained.
+	ConnectedSince string `pulumi:"connectedSince"`
+	// Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+	MsgRateIn float64 `pulumi:"msgRateIn"`
+	// Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+	MsgThroughputIn float64 `pulumi:"msgThroughputIn"`
+	// The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+	Partition int `pulumi:"partition"`
+	// producer idNote: This field may return null, indicating that no valid value can be obtained.
+	ProducerId int `pulumi:"producerId"`
+	// producer nameNote: This field may return null, indicating that no valid value can be obtained.
+	ProducerName string `pulumi:"producerName"`
+}
+
+// GetPublishersPublisherInput is an input type that accepts GetPublishersPublisherArgs and GetPublishersPublisherOutput values.
+// You can construct a concrete instance of `GetPublishersPublisherInput` via:
+//
+//          GetPublishersPublisherArgs{...}
+type GetPublishersPublisherInput interface {
+	pulumi.Input
+
+	ToGetPublishersPublisherOutput() GetPublishersPublisherOutput
+	ToGetPublishersPublisherOutputWithContext(context.Context) GetPublishersPublisherOutput
+}
+
+type GetPublishersPublisherArgs struct {
+	// producer addressNote: This field may return null, indicating that no valid value can be obtained.
+	Address pulumi.StringInput `pulumi:"address"`
+	// Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+	AverageMsgSize pulumi.Float64Input `pulumi:"averageMsgSize"`
+	// client versionNote: This field may return null, indicating that no valid value can be obtained.
+	ClientVersion pulumi.StringInput `pulumi:"clientVersion"`
+	// connection timeNote: This field may return null, indicating that no valid value can be obtained.
+	ConnectedSince pulumi.StringInput `pulumi:"connectedSince"`
+	// Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+	MsgRateIn pulumi.Float64Input `pulumi:"msgRateIn"`
+	// Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+	MsgThroughputIn pulumi.Float64Input `pulumi:"msgThroughputIn"`
+	// The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+	Partition pulumi.IntInput `pulumi:"partition"`
+	// producer idNote: This field may return null, indicating that no valid value can be obtained.
+	ProducerId pulumi.IntInput `pulumi:"producerId"`
+	// producer nameNote: This field may return null, indicating that no valid value can be obtained.
+	ProducerName pulumi.StringInput `pulumi:"producerName"`
+}
+
+func (GetPublishersPublisherArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersPublisher)(nil)).Elem()
+}
+
+func (i GetPublishersPublisherArgs) ToGetPublishersPublisherOutput() GetPublishersPublisherOutput {
+	return i.ToGetPublishersPublisherOutputWithContext(context.Background())
+}
+
+func (i GetPublishersPublisherArgs) ToGetPublishersPublisherOutputWithContext(ctx context.Context) GetPublishersPublisherOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersPublisherOutput)
+}
+
+// GetPublishersPublisherArrayInput is an input type that accepts GetPublishersPublisherArray and GetPublishersPublisherArrayOutput values.
+// You can construct a concrete instance of `GetPublishersPublisherArrayInput` via:
+//
+//          GetPublishersPublisherArray{ GetPublishersPublisherArgs{...} }
+type GetPublishersPublisherArrayInput interface {
+	pulumi.Input
+
+	ToGetPublishersPublisherArrayOutput() GetPublishersPublisherArrayOutput
+	ToGetPublishersPublisherArrayOutputWithContext(context.Context) GetPublishersPublisherArrayOutput
+}
+
+type GetPublishersPublisherArray []GetPublishersPublisherInput
+
+func (GetPublishersPublisherArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishersPublisher)(nil)).Elem()
+}
+
+func (i GetPublishersPublisherArray) ToGetPublishersPublisherArrayOutput() GetPublishersPublisherArrayOutput {
+	return i.ToGetPublishersPublisherArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublishersPublisherArray) ToGetPublishersPublisherArrayOutputWithContext(ctx context.Context) GetPublishersPublisherArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersPublisherArrayOutput)
+}
+
+type GetPublishersPublisherOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersPublisherOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersPublisher)(nil)).Elem()
+}
+
+func (o GetPublishersPublisherOutput) ToGetPublishersPublisherOutput() GetPublishersPublisherOutput {
+	return o
+}
+
+func (o GetPublishersPublisherOutput) ToGetPublishersPublisherOutputWithContext(ctx context.Context) GetPublishersPublisherOutput {
+	return o
+}
+
+// producer addressNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) AverageMsgSize() pulumi.Float64Output {
+	return o.ApplyT(func(v GetPublishersPublisher) float64 { return v.AverageMsgSize }).(pulumi.Float64Output)
+}
+
+// client versionNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) ClientVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) string { return v.ClientVersion }).(pulumi.StringOutput)
+}
+
+// connection timeNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) ConnectedSince() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) string { return v.ConnectedSince }).(pulumi.StringOutput)
+}
+
+// Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) MsgRateIn() pulumi.Float64Output {
+	return o.ApplyT(func(v GetPublishersPublisher) float64 { return v.MsgRateIn }).(pulumi.Float64Output)
+}
+
+// Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) MsgThroughputIn() pulumi.Float64Output {
+	return o.ApplyT(func(v GetPublishersPublisher) float64 { return v.MsgThroughputIn }).(pulumi.Float64Output)
+}
+
+// The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) Partition() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) int { return v.Partition }).(pulumi.IntOutput)
+}
+
+// producer idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) ProducerId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) int { return v.ProducerId }).(pulumi.IntOutput)
+}
+
+// producer nameNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetPublishersPublisherOutput) ProducerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersPublisher) string { return v.ProducerName }).(pulumi.StringOutput)
+}
+
+type GetPublishersPublisherArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersPublisherArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublishersPublisher)(nil)).Elem()
+}
+
+func (o GetPublishersPublisherArrayOutput) ToGetPublishersPublisherArrayOutput() GetPublishersPublisherArrayOutput {
+	return o
+}
+
+func (o GetPublishersPublisherArrayOutput) ToGetPublishersPublisherArrayOutputWithContext(ctx context.Context) GetPublishersPublisherArrayOutput {
+	return o
+}
+
+func (o GetPublishersPublisherArrayOutput) Index(i pulumi.IntInput) GetPublishersPublisherOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublishersPublisher {
+		return vs[0].([]GetPublishersPublisher)[vs[1].(int)]
+	}).(GetPublishersPublisherOutput)
+}
+
+type GetPublishersSort struct {
+	// sorter.
+	Name string `pulumi:"name"`
+	// Ascending ASC, descending DESC.
+	Order string `pulumi:"order"`
+}
+
+// GetPublishersSortInput is an input type that accepts GetPublishersSortArgs and GetPublishersSortOutput values.
+// You can construct a concrete instance of `GetPublishersSortInput` via:
+//
+//          GetPublishersSortArgs{...}
+type GetPublishersSortInput interface {
+	pulumi.Input
+
+	ToGetPublishersSortOutput() GetPublishersSortOutput
+	ToGetPublishersSortOutputWithContext(context.Context) GetPublishersSortOutput
+}
+
+type GetPublishersSortArgs struct {
+	// sorter.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Ascending ASC, descending DESC.
+	Order pulumi.StringInput `pulumi:"order"`
+}
+
+func (GetPublishersSortArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersSort)(nil)).Elem()
+}
+
+func (i GetPublishersSortArgs) ToGetPublishersSortOutput() GetPublishersSortOutput {
+	return i.ToGetPublishersSortOutputWithContext(context.Background())
+}
+
+func (i GetPublishersSortArgs) ToGetPublishersSortOutputWithContext(ctx context.Context) GetPublishersSortOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersSortOutput)
+}
+
+func (i GetPublishersSortArgs) ToGetPublishersSortPtrOutput() GetPublishersSortPtrOutput {
+	return i.ToGetPublishersSortPtrOutputWithContext(context.Background())
+}
+
+func (i GetPublishersSortArgs) ToGetPublishersSortPtrOutputWithContext(ctx context.Context) GetPublishersSortPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersSortOutput).ToGetPublishersSortPtrOutputWithContext(ctx)
+}
+
+// GetPublishersSortPtrInput is an input type that accepts GetPublishersSortArgs, GetPublishersSortPtr and GetPublishersSortPtrOutput values.
+// You can construct a concrete instance of `GetPublishersSortPtrInput` via:
+//
+//          GetPublishersSortArgs{...}
+//
+//  or:
+//
+//          nil
+type GetPublishersSortPtrInput interface {
+	pulumi.Input
+
+	ToGetPublishersSortPtrOutput() GetPublishersSortPtrOutput
+	ToGetPublishersSortPtrOutputWithContext(context.Context) GetPublishersSortPtrOutput
+}
+
+type getPublishersSortPtrType GetPublishersSortArgs
+
+func GetPublishersSortPtr(v *GetPublishersSortArgs) GetPublishersSortPtrInput {
+	return (*getPublishersSortPtrType)(v)
+}
+
+func (*getPublishersSortPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPublishersSort)(nil)).Elem()
+}
+
+func (i *getPublishersSortPtrType) ToGetPublishersSortPtrOutput() GetPublishersSortPtrOutput {
+	return i.ToGetPublishersSortPtrOutputWithContext(context.Background())
+}
+
+func (i *getPublishersSortPtrType) ToGetPublishersSortPtrOutputWithContext(ctx context.Context) GetPublishersSortPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublishersSortPtrOutput)
+}
+
+type GetPublishersSortOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersSortOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublishersSort)(nil)).Elem()
+}
+
+func (o GetPublishersSortOutput) ToGetPublishersSortOutput() GetPublishersSortOutput {
+	return o
+}
+
+func (o GetPublishersSortOutput) ToGetPublishersSortOutputWithContext(ctx context.Context) GetPublishersSortOutput {
+	return o
+}
+
+func (o GetPublishersSortOutput) ToGetPublishersSortPtrOutput() GetPublishersSortPtrOutput {
+	return o.ToGetPublishersSortPtrOutputWithContext(context.Background())
+}
+
+func (o GetPublishersSortOutput) ToGetPublishersSortPtrOutputWithContext(ctx context.Context) GetPublishersSortPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetPublishersSort) *GetPublishersSort {
+		return &v
+	}).(GetPublishersSortPtrOutput)
+}
+
+// sorter.
+func (o GetPublishersSortOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersSort) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Ascending ASC, descending DESC.
+func (o GetPublishersSortOutput) Order() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublishersSort) string { return v.Order }).(pulumi.StringOutput)
+}
+
+type GetPublishersSortPtrOutput struct{ *pulumi.OutputState }
+
+func (GetPublishersSortPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPublishersSort)(nil)).Elem()
+}
+
+func (o GetPublishersSortPtrOutput) ToGetPublishersSortPtrOutput() GetPublishersSortPtrOutput {
+	return o
+}
+
+func (o GetPublishersSortPtrOutput) ToGetPublishersSortPtrOutputWithContext(ctx context.Context) GetPublishersSortPtrOutput {
+	return o
+}
+
+func (o GetPublishersSortPtrOutput) Elem() GetPublishersSortOutput {
+	return o.ApplyT(func(v *GetPublishersSort) GetPublishersSort {
+		if v != nil {
+			return *v
+		}
+		var ret GetPublishersSort
+		return ret
+	}).(GetPublishersSortOutput)
+}
+
+// sorter.
+func (o GetPublishersSortPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetPublishersSort) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Ascending ASC, descending DESC.
+func (o GetPublishersSortPtrOutput) Order() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetPublishersSort) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Order
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetRabbitmqNodeListFilter struct {
+	Name   *string  `pulumi:"name"`
+	Values []string `pulumi:"values"`
+}
+
+// GetRabbitmqNodeListFilterInput is an input type that accepts GetRabbitmqNodeListFilterArgs and GetRabbitmqNodeListFilterOutput values.
+// You can construct a concrete instance of `GetRabbitmqNodeListFilterInput` via:
+//
+//          GetRabbitmqNodeListFilterArgs{...}
+type GetRabbitmqNodeListFilterInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqNodeListFilterOutput() GetRabbitmqNodeListFilterOutput
+	ToGetRabbitmqNodeListFilterOutputWithContext(context.Context) GetRabbitmqNodeListFilterOutput
+}
+
+type GetRabbitmqNodeListFilterArgs struct {
+	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetRabbitmqNodeListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqNodeListFilter)(nil)).Elem()
+}
+
+func (i GetRabbitmqNodeListFilterArgs) ToGetRabbitmqNodeListFilterOutput() GetRabbitmqNodeListFilterOutput {
+	return i.ToGetRabbitmqNodeListFilterOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqNodeListFilterArgs) ToGetRabbitmqNodeListFilterOutputWithContext(ctx context.Context) GetRabbitmqNodeListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqNodeListFilterOutput)
+}
+
+// GetRabbitmqNodeListFilterArrayInput is an input type that accepts GetRabbitmqNodeListFilterArray and GetRabbitmqNodeListFilterArrayOutput values.
+// You can construct a concrete instance of `GetRabbitmqNodeListFilterArrayInput` via:
+//
+//          GetRabbitmqNodeListFilterArray{ GetRabbitmqNodeListFilterArgs{...} }
+type GetRabbitmqNodeListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqNodeListFilterArrayOutput() GetRabbitmqNodeListFilterArrayOutput
+	ToGetRabbitmqNodeListFilterArrayOutputWithContext(context.Context) GetRabbitmqNodeListFilterArrayOutput
+}
+
+type GetRabbitmqNodeListFilterArray []GetRabbitmqNodeListFilterInput
+
+func (GetRabbitmqNodeListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqNodeListFilter)(nil)).Elem()
+}
+
+func (i GetRabbitmqNodeListFilterArray) ToGetRabbitmqNodeListFilterArrayOutput() GetRabbitmqNodeListFilterArrayOutput {
+	return i.ToGetRabbitmqNodeListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqNodeListFilterArray) ToGetRabbitmqNodeListFilterArrayOutputWithContext(ctx context.Context) GetRabbitmqNodeListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqNodeListFilterArrayOutput)
+}
+
+type GetRabbitmqNodeListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqNodeListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqNodeListFilter)(nil)).Elem()
+}
+
+func (o GetRabbitmqNodeListFilterOutput) ToGetRabbitmqNodeListFilterOutput() GetRabbitmqNodeListFilterOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListFilterOutput) ToGetRabbitmqNodeListFilterOutputWithContext(ctx context.Context) GetRabbitmqNodeListFilterOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o GetRabbitmqNodeListFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetRabbitmqNodeListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqNodeListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqNodeListFilter)(nil)).Elem()
+}
+
+func (o GetRabbitmqNodeListFilterArrayOutput) ToGetRabbitmqNodeListFilterArrayOutput() GetRabbitmqNodeListFilterArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListFilterArrayOutput) ToGetRabbitmqNodeListFilterArrayOutputWithContext(ctx context.Context) GetRabbitmqNodeListFilterArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListFilterArrayOutput) Index(i pulumi.IntInput) GetRabbitmqNodeListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRabbitmqNodeListFilter {
+		return vs[0].([]GetRabbitmqNodeListFilter)[vs[1].(int)]
+	}).(GetRabbitmqNodeListFilterOutput)
+}
+
+type GetRabbitmqNodeListNodeList struct {
+	CpuUsage      string `pulumi:"cpuUsage"`
+	DiskUsage     string `pulumi:"diskUsage"`
+	Memory        int    `pulumi:"memory"`
+	NodeName      string `pulumi:"nodeName"`
+	NodeStatus    string `pulumi:"nodeStatus"`
+	ProcessNumber int    `pulumi:"processNumber"`
+}
+
+// GetRabbitmqNodeListNodeListInput is an input type that accepts GetRabbitmqNodeListNodeListArgs and GetRabbitmqNodeListNodeListOutput values.
+// You can construct a concrete instance of `GetRabbitmqNodeListNodeListInput` via:
+//
+//          GetRabbitmqNodeListNodeListArgs{...}
+type GetRabbitmqNodeListNodeListInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqNodeListNodeListOutput() GetRabbitmqNodeListNodeListOutput
+	ToGetRabbitmqNodeListNodeListOutputWithContext(context.Context) GetRabbitmqNodeListNodeListOutput
+}
+
+type GetRabbitmqNodeListNodeListArgs struct {
+	CpuUsage      pulumi.StringInput `pulumi:"cpuUsage"`
+	DiskUsage     pulumi.StringInput `pulumi:"diskUsage"`
+	Memory        pulumi.IntInput    `pulumi:"memory"`
+	NodeName      pulumi.StringInput `pulumi:"nodeName"`
+	NodeStatus    pulumi.StringInput `pulumi:"nodeStatus"`
+	ProcessNumber pulumi.IntInput    `pulumi:"processNumber"`
+}
+
+func (GetRabbitmqNodeListNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqNodeListNodeList)(nil)).Elem()
+}
+
+func (i GetRabbitmqNodeListNodeListArgs) ToGetRabbitmqNodeListNodeListOutput() GetRabbitmqNodeListNodeListOutput {
+	return i.ToGetRabbitmqNodeListNodeListOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqNodeListNodeListArgs) ToGetRabbitmqNodeListNodeListOutputWithContext(ctx context.Context) GetRabbitmqNodeListNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqNodeListNodeListOutput)
+}
+
+// GetRabbitmqNodeListNodeListArrayInput is an input type that accepts GetRabbitmqNodeListNodeListArray and GetRabbitmqNodeListNodeListArrayOutput values.
+// You can construct a concrete instance of `GetRabbitmqNodeListNodeListArrayInput` via:
+//
+//          GetRabbitmqNodeListNodeListArray{ GetRabbitmqNodeListNodeListArgs{...} }
+type GetRabbitmqNodeListNodeListArrayInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqNodeListNodeListArrayOutput() GetRabbitmqNodeListNodeListArrayOutput
+	ToGetRabbitmqNodeListNodeListArrayOutputWithContext(context.Context) GetRabbitmqNodeListNodeListArrayOutput
+}
+
+type GetRabbitmqNodeListNodeListArray []GetRabbitmqNodeListNodeListInput
+
+func (GetRabbitmqNodeListNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqNodeListNodeList)(nil)).Elem()
+}
+
+func (i GetRabbitmqNodeListNodeListArray) ToGetRabbitmqNodeListNodeListArrayOutput() GetRabbitmqNodeListNodeListArrayOutput {
+	return i.ToGetRabbitmqNodeListNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqNodeListNodeListArray) ToGetRabbitmqNodeListNodeListArrayOutputWithContext(ctx context.Context) GetRabbitmqNodeListNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqNodeListNodeListArrayOutput)
+}
+
+type GetRabbitmqNodeListNodeListOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqNodeListNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqNodeListNodeList)(nil)).Elem()
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) ToGetRabbitmqNodeListNodeListOutput() GetRabbitmqNodeListNodeListOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) ToGetRabbitmqNodeListNodeListOutputWithContext(ctx context.Context) GetRabbitmqNodeListNodeListOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) CpuUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.CpuUsage }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) DiskUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.DiskUsage }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) NodeStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) string { return v.NodeStatus }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqNodeListNodeListOutput) ProcessNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqNodeListNodeList) int { return v.ProcessNumber }).(pulumi.IntOutput)
+}
+
+type GetRabbitmqNodeListNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqNodeListNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqNodeListNodeList)(nil)).Elem()
+}
+
+func (o GetRabbitmqNodeListNodeListArrayOutput) ToGetRabbitmqNodeListNodeListArrayOutput() GetRabbitmqNodeListNodeListArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListNodeListArrayOutput) ToGetRabbitmqNodeListNodeListArrayOutputWithContext(ctx context.Context) GetRabbitmqNodeListNodeListArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqNodeListNodeListArrayOutput) Index(i pulumi.IntInput) GetRabbitmqNodeListNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRabbitmqNodeListNodeList {
+		return vs[0].([]GetRabbitmqNodeListNodeList)[vs[1].(int)]
+	}).(GetRabbitmqNodeListNodeListOutput)
+}
+
+type GetRabbitmqVipInstanceFilter struct {
+	Name   *string  `pulumi:"name"`
+	Values []string `pulumi:"values"`
+}
+
+// GetRabbitmqVipInstanceFilterInput is an input type that accepts GetRabbitmqVipInstanceFilterArgs and GetRabbitmqVipInstanceFilterOutput values.
+// You can construct a concrete instance of `GetRabbitmqVipInstanceFilterInput` via:
+//
+//          GetRabbitmqVipInstanceFilterArgs{...}
+type GetRabbitmqVipInstanceFilterInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqVipInstanceFilterOutput() GetRabbitmqVipInstanceFilterOutput
+	ToGetRabbitmqVipInstanceFilterOutputWithContext(context.Context) GetRabbitmqVipInstanceFilterOutput
+}
+
+type GetRabbitmqVipInstanceFilterArgs struct {
+	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetRabbitmqVipInstanceFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqVipInstanceFilter)(nil)).Elem()
+}
+
+func (i GetRabbitmqVipInstanceFilterArgs) ToGetRabbitmqVipInstanceFilterOutput() GetRabbitmqVipInstanceFilterOutput {
+	return i.ToGetRabbitmqVipInstanceFilterOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqVipInstanceFilterArgs) ToGetRabbitmqVipInstanceFilterOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqVipInstanceFilterOutput)
+}
+
+// GetRabbitmqVipInstanceFilterArrayInput is an input type that accepts GetRabbitmqVipInstanceFilterArray and GetRabbitmqVipInstanceFilterArrayOutput values.
+// You can construct a concrete instance of `GetRabbitmqVipInstanceFilterArrayInput` via:
+//
+//          GetRabbitmqVipInstanceFilterArray{ GetRabbitmqVipInstanceFilterArgs{...} }
+type GetRabbitmqVipInstanceFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqVipInstanceFilterArrayOutput() GetRabbitmqVipInstanceFilterArrayOutput
+	ToGetRabbitmqVipInstanceFilterArrayOutputWithContext(context.Context) GetRabbitmqVipInstanceFilterArrayOutput
+}
+
+type GetRabbitmqVipInstanceFilterArray []GetRabbitmqVipInstanceFilterInput
+
+func (GetRabbitmqVipInstanceFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqVipInstanceFilter)(nil)).Elem()
+}
+
+func (i GetRabbitmqVipInstanceFilterArray) ToGetRabbitmqVipInstanceFilterArrayOutput() GetRabbitmqVipInstanceFilterArrayOutput {
+	return i.ToGetRabbitmqVipInstanceFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqVipInstanceFilterArray) ToGetRabbitmqVipInstanceFilterArrayOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqVipInstanceFilterArrayOutput)
+}
+
+type GetRabbitmqVipInstanceFilterOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqVipInstanceFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqVipInstanceFilter)(nil)).Elem()
+}
+
+func (o GetRabbitmqVipInstanceFilterOutput) ToGetRabbitmqVipInstanceFilterOutput() GetRabbitmqVipInstanceFilterOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceFilterOutput) ToGetRabbitmqVipInstanceFilterOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceFilterOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o GetRabbitmqVipInstanceFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetRabbitmqVipInstanceFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqVipInstanceFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqVipInstanceFilter)(nil)).Elem()
+}
+
+func (o GetRabbitmqVipInstanceFilterArrayOutput) ToGetRabbitmqVipInstanceFilterArrayOutput() GetRabbitmqVipInstanceFilterArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceFilterArrayOutput) ToGetRabbitmqVipInstanceFilterArrayOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceFilterArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceFilterArrayOutput) Index(i pulumi.IntInput) GetRabbitmqVipInstanceFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRabbitmqVipInstanceFilter {
+		return vs[0].([]GetRabbitmqVipInstanceFilter)[vs[1].(int)]
+	}).(GetRabbitmqVipInstanceFilterOutput)
+}
+
+type GetRabbitmqVipInstanceInstance struct {
+	AutoRenewFlag        int    `pulumi:"autoRenewFlag"`
+	ConfigDisplay        string `pulumi:"configDisplay"`
+	ExceptionInformation string `pulumi:"exceptionInformation"`
+	ExpireTime           int    `pulumi:"expireTime"`
+	InstanceId           string `pulumi:"instanceId"`
+	InstanceName         string `pulumi:"instanceName"`
+	InstanceVersion      string `pulumi:"instanceVersion"`
+	MaxBandWidth         int    `pulumi:"maxBandWidth"`
+	MaxStorage           int    `pulumi:"maxStorage"`
+	MaxTps               int    `pulumi:"maxTps"`
+	NodeCount            int    `pulumi:"nodeCount"`
+	PayMode              int    `pulumi:"payMode"`
+	Remark               string `pulumi:"remark"`
+	SpecName             string `pulumi:"specName"`
+	Status               int    `pulumi:"status"`
+}
+
+// GetRabbitmqVipInstanceInstanceInput is an input type that accepts GetRabbitmqVipInstanceInstanceArgs and GetRabbitmqVipInstanceInstanceOutput values.
+// You can construct a concrete instance of `GetRabbitmqVipInstanceInstanceInput` via:
+//
+//          GetRabbitmqVipInstanceInstanceArgs{...}
+type GetRabbitmqVipInstanceInstanceInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqVipInstanceInstanceOutput() GetRabbitmqVipInstanceInstanceOutput
+	ToGetRabbitmqVipInstanceInstanceOutputWithContext(context.Context) GetRabbitmqVipInstanceInstanceOutput
+}
+
+type GetRabbitmqVipInstanceInstanceArgs struct {
+	AutoRenewFlag        pulumi.IntInput    `pulumi:"autoRenewFlag"`
+	ConfigDisplay        pulumi.StringInput `pulumi:"configDisplay"`
+	ExceptionInformation pulumi.StringInput `pulumi:"exceptionInformation"`
+	ExpireTime           pulumi.IntInput    `pulumi:"expireTime"`
+	InstanceId           pulumi.StringInput `pulumi:"instanceId"`
+	InstanceName         pulumi.StringInput `pulumi:"instanceName"`
+	InstanceVersion      pulumi.StringInput `pulumi:"instanceVersion"`
+	MaxBandWidth         pulumi.IntInput    `pulumi:"maxBandWidth"`
+	MaxStorage           pulumi.IntInput    `pulumi:"maxStorage"`
+	MaxTps               pulumi.IntInput    `pulumi:"maxTps"`
+	NodeCount            pulumi.IntInput    `pulumi:"nodeCount"`
+	PayMode              pulumi.IntInput    `pulumi:"payMode"`
+	Remark               pulumi.StringInput `pulumi:"remark"`
+	SpecName             pulumi.StringInput `pulumi:"specName"`
+	Status               pulumi.IntInput    `pulumi:"status"`
+}
+
+func (GetRabbitmqVipInstanceInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqVipInstanceInstance)(nil)).Elem()
+}
+
+func (i GetRabbitmqVipInstanceInstanceArgs) ToGetRabbitmqVipInstanceInstanceOutput() GetRabbitmqVipInstanceInstanceOutput {
+	return i.ToGetRabbitmqVipInstanceInstanceOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqVipInstanceInstanceArgs) ToGetRabbitmqVipInstanceInstanceOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqVipInstanceInstanceOutput)
+}
+
+// GetRabbitmqVipInstanceInstanceArrayInput is an input type that accepts GetRabbitmqVipInstanceInstanceArray and GetRabbitmqVipInstanceInstanceArrayOutput values.
+// You can construct a concrete instance of `GetRabbitmqVipInstanceInstanceArrayInput` via:
+//
+//          GetRabbitmqVipInstanceInstanceArray{ GetRabbitmqVipInstanceInstanceArgs{...} }
+type GetRabbitmqVipInstanceInstanceArrayInput interface {
+	pulumi.Input
+
+	ToGetRabbitmqVipInstanceInstanceArrayOutput() GetRabbitmqVipInstanceInstanceArrayOutput
+	ToGetRabbitmqVipInstanceInstanceArrayOutputWithContext(context.Context) GetRabbitmqVipInstanceInstanceArrayOutput
+}
+
+type GetRabbitmqVipInstanceInstanceArray []GetRabbitmqVipInstanceInstanceInput
+
+func (GetRabbitmqVipInstanceInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqVipInstanceInstance)(nil)).Elem()
+}
+
+func (i GetRabbitmqVipInstanceInstanceArray) ToGetRabbitmqVipInstanceInstanceArrayOutput() GetRabbitmqVipInstanceInstanceArrayOutput {
+	return i.ToGetRabbitmqVipInstanceInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i GetRabbitmqVipInstanceInstanceArray) ToGetRabbitmqVipInstanceInstanceArrayOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRabbitmqVipInstanceInstanceArrayOutput)
+}
+
+type GetRabbitmqVipInstanceInstanceOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqVipInstanceInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRabbitmqVipInstanceInstance)(nil)).Elem()
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) ToGetRabbitmqVipInstanceInstanceOutput() GetRabbitmqVipInstanceInstanceOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) ToGetRabbitmqVipInstanceInstanceOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceInstanceOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) ConfigDisplay() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.ConfigDisplay }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) ExceptionInformation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.ExceptionInformation }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.ExpireTime }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) InstanceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.InstanceVersion }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) MaxBandWidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxBandWidth }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) MaxTps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.MaxTps }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) SpecName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) string { return v.SpecName }).(pulumi.StringOutput)
+}
+
+func (o GetRabbitmqVipInstanceInstanceOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRabbitmqVipInstanceInstance) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetRabbitmqVipInstanceInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRabbitmqVipInstanceInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRabbitmqVipInstanceInstance)(nil)).Elem()
+}
+
+func (o GetRabbitmqVipInstanceInstanceArrayOutput) ToGetRabbitmqVipInstanceInstanceArrayOutput() GetRabbitmqVipInstanceInstanceArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceInstanceArrayOutput) ToGetRabbitmqVipInstanceInstanceArrayOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceInstanceArrayOutput {
+	return o
+}
+
+func (o GetRabbitmqVipInstanceInstanceArrayOutput) Index(i pulumi.IntInput) GetRabbitmqVipInstanceInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRabbitmqVipInstanceInstance {
+		return vs[0].([]GetRabbitmqVipInstanceInstance)[vs[1].(int)]
+	}).(GetRabbitmqVipInstanceInstanceOutput)
+}
+
 type GetRocketmqClusterClusterList struct {
 	// Cluster configuration information.
 	Configs []GetRocketmqClusterClusterListConfig `pulumi:"configs"`
@@ -898,6 +2730,130 @@ func (o GetRocketmqGroupGroupArrayOutput) Index(i pulumi.IntInput) GetRocketmqGr
 	}).(GetRocketmqGroupGroupOutput)
 }
 
+type GetRocketmqMessagesMessageTrack struct {
+	// consumption status.
+	ConsumeStatus string `pulumi:"consumeStatus"`
+	// Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+	ExceptionDesc string `pulumi:"exceptionDesc"`
+	// consumer group.
+	Group string `pulumi:"group"`
+	// message track type.
+	TrackType string `pulumi:"trackType"`
+}
+
+// GetRocketmqMessagesMessageTrackInput is an input type that accepts GetRocketmqMessagesMessageTrackArgs and GetRocketmqMessagesMessageTrackOutput values.
+// You can construct a concrete instance of `GetRocketmqMessagesMessageTrackInput` via:
+//
+//          GetRocketmqMessagesMessageTrackArgs{...}
+type GetRocketmqMessagesMessageTrackInput interface {
+	pulumi.Input
+
+	ToGetRocketmqMessagesMessageTrackOutput() GetRocketmqMessagesMessageTrackOutput
+	ToGetRocketmqMessagesMessageTrackOutputWithContext(context.Context) GetRocketmqMessagesMessageTrackOutput
+}
+
+type GetRocketmqMessagesMessageTrackArgs struct {
+	// consumption status.
+	ConsumeStatus pulumi.StringInput `pulumi:"consumeStatus"`
+	// Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+	ExceptionDesc pulumi.StringInput `pulumi:"exceptionDesc"`
+	// consumer group.
+	Group pulumi.StringInput `pulumi:"group"`
+	// message track type.
+	TrackType pulumi.StringInput `pulumi:"trackType"`
+}
+
+func (GetRocketmqMessagesMessageTrackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRocketmqMessagesMessageTrack)(nil)).Elem()
+}
+
+func (i GetRocketmqMessagesMessageTrackArgs) ToGetRocketmqMessagesMessageTrackOutput() GetRocketmqMessagesMessageTrackOutput {
+	return i.ToGetRocketmqMessagesMessageTrackOutputWithContext(context.Background())
+}
+
+func (i GetRocketmqMessagesMessageTrackArgs) ToGetRocketmqMessagesMessageTrackOutputWithContext(ctx context.Context) GetRocketmqMessagesMessageTrackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRocketmqMessagesMessageTrackOutput)
+}
+
+// GetRocketmqMessagesMessageTrackArrayInput is an input type that accepts GetRocketmqMessagesMessageTrackArray and GetRocketmqMessagesMessageTrackArrayOutput values.
+// You can construct a concrete instance of `GetRocketmqMessagesMessageTrackArrayInput` via:
+//
+//          GetRocketmqMessagesMessageTrackArray{ GetRocketmqMessagesMessageTrackArgs{...} }
+type GetRocketmqMessagesMessageTrackArrayInput interface {
+	pulumi.Input
+
+	ToGetRocketmqMessagesMessageTrackArrayOutput() GetRocketmqMessagesMessageTrackArrayOutput
+	ToGetRocketmqMessagesMessageTrackArrayOutputWithContext(context.Context) GetRocketmqMessagesMessageTrackArrayOutput
+}
+
+type GetRocketmqMessagesMessageTrackArray []GetRocketmqMessagesMessageTrackInput
+
+func (GetRocketmqMessagesMessageTrackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRocketmqMessagesMessageTrack)(nil)).Elem()
+}
+
+func (i GetRocketmqMessagesMessageTrackArray) ToGetRocketmqMessagesMessageTrackArrayOutput() GetRocketmqMessagesMessageTrackArrayOutput {
+	return i.ToGetRocketmqMessagesMessageTrackArrayOutputWithContext(context.Background())
+}
+
+func (i GetRocketmqMessagesMessageTrackArray) ToGetRocketmqMessagesMessageTrackArrayOutputWithContext(ctx context.Context) GetRocketmqMessagesMessageTrackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRocketmqMessagesMessageTrackArrayOutput)
+}
+
+type GetRocketmqMessagesMessageTrackOutput struct{ *pulumi.OutputState }
+
+func (GetRocketmqMessagesMessageTrackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRocketmqMessagesMessageTrack)(nil)).Elem()
+}
+
+func (o GetRocketmqMessagesMessageTrackOutput) ToGetRocketmqMessagesMessageTrackOutput() GetRocketmqMessagesMessageTrackOutput {
+	return o
+}
+
+func (o GetRocketmqMessagesMessageTrackOutput) ToGetRocketmqMessagesMessageTrackOutputWithContext(ctx context.Context) GetRocketmqMessagesMessageTrackOutput {
+	return o
+}
+
+// consumption status.
+func (o GetRocketmqMessagesMessageTrackOutput) ConsumeStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRocketmqMessagesMessageTrack) string { return v.ConsumeStatus }).(pulumi.StringOutput)
+}
+
+// Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetRocketmqMessagesMessageTrackOutput) ExceptionDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRocketmqMessagesMessageTrack) string { return v.ExceptionDesc }).(pulumi.StringOutput)
+}
+
+// consumer group.
+func (o GetRocketmqMessagesMessageTrackOutput) Group() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRocketmqMessagesMessageTrack) string { return v.Group }).(pulumi.StringOutput)
+}
+
+// message track type.
+func (o GetRocketmqMessagesMessageTrackOutput) TrackType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRocketmqMessagesMessageTrack) string { return v.TrackType }).(pulumi.StringOutput)
+}
+
+type GetRocketmqMessagesMessageTrackArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRocketmqMessagesMessageTrackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRocketmqMessagesMessageTrack)(nil)).Elem()
+}
+
+func (o GetRocketmqMessagesMessageTrackArrayOutput) ToGetRocketmqMessagesMessageTrackArrayOutput() GetRocketmqMessagesMessageTrackArrayOutput {
+	return o
+}
+
+func (o GetRocketmqMessagesMessageTrackArrayOutput) ToGetRocketmqMessagesMessageTrackArrayOutputWithContext(ctx context.Context) GetRocketmqMessagesMessageTrackArrayOutput {
+	return o
+}
+
+func (o GetRocketmqMessagesMessageTrackArrayOutput) Index(i pulumi.IntInput) GetRocketmqMessagesMessageTrackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRocketmqMessagesMessageTrack {
+		return vs[0].([]GetRocketmqMessagesMessageTrack)[vs[1].(int)]
+	}).(GetRocketmqMessagesMessageTrackOutput)
+}
+
 type GetRocketmqNamespaceNamespace struct {
 	// Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
 	NamespaceId string `pulumi:"namespaceId"`
@@ -1306,9 +3262,683 @@ func (o GetRocketmqTopicTopicArrayOutput) Index(i pulumi.IntInput) GetRocketmqTo
 	}).(GetRocketmqTopicTopicOutput)
 }
 
+type GetVipInstanceClusterInfo struct {
+	ClusterId                string                         `pulumi:"clusterId"`
+	ClusterName              string                         `pulumi:"clusterName"`
+	CreateTime               int                            `pulumi:"createTime"`
+	HttpPublicEndpoint       string                         `pulumi:"httpPublicEndpoint"`
+	HttpVpcEndpoint          string                         `pulumi:"httpVpcEndpoint"`
+	IsVip                    bool                           `pulumi:"isVip"`
+	IsolateTime              int                            `pulumi:"isolateTime"`
+	PublicEndPoint           string                         `pulumi:"publicEndPoint"`
+	Region                   string                         `pulumi:"region"`
+	Remark                   string                         `pulumi:"remark"`
+	RocketMqFlag             bool                           `pulumi:"rocketMqFlag"`
+	Status                   int                            `pulumi:"status"`
+	SupportNamespaceEndpoint bool                           `pulumi:"supportNamespaceEndpoint"`
+	VpcEndPoint              string                         `pulumi:"vpcEndPoint"`
+	Vpcs                     []GetVipInstanceClusterInfoVpc `pulumi:"vpcs"`
+}
+
+// GetVipInstanceClusterInfoInput is an input type that accepts GetVipInstanceClusterInfoArgs and GetVipInstanceClusterInfoOutput values.
+// You can construct a concrete instance of `GetVipInstanceClusterInfoInput` via:
+//
+//          GetVipInstanceClusterInfoArgs{...}
+type GetVipInstanceClusterInfoInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceClusterInfoOutput() GetVipInstanceClusterInfoOutput
+	ToGetVipInstanceClusterInfoOutputWithContext(context.Context) GetVipInstanceClusterInfoOutput
+}
+
+type GetVipInstanceClusterInfoArgs struct {
+	ClusterId                pulumi.StringInput                     `pulumi:"clusterId"`
+	ClusterName              pulumi.StringInput                     `pulumi:"clusterName"`
+	CreateTime               pulumi.IntInput                        `pulumi:"createTime"`
+	HttpPublicEndpoint       pulumi.StringInput                     `pulumi:"httpPublicEndpoint"`
+	HttpVpcEndpoint          pulumi.StringInput                     `pulumi:"httpVpcEndpoint"`
+	IsVip                    pulumi.BoolInput                       `pulumi:"isVip"`
+	IsolateTime              pulumi.IntInput                        `pulumi:"isolateTime"`
+	PublicEndPoint           pulumi.StringInput                     `pulumi:"publicEndPoint"`
+	Region                   pulumi.StringInput                     `pulumi:"region"`
+	Remark                   pulumi.StringInput                     `pulumi:"remark"`
+	RocketMqFlag             pulumi.BoolInput                       `pulumi:"rocketMqFlag"`
+	Status                   pulumi.IntInput                        `pulumi:"status"`
+	SupportNamespaceEndpoint pulumi.BoolInput                       `pulumi:"supportNamespaceEndpoint"`
+	VpcEndPoint              pulumi.StringInput                     `pulumi:"vpcEndPoint"`
+	Vpcs                     GetVipInstanceClusterInfoVpcArrayInput `pulumi:"vpcs"`
+}
+
+func (GetVipInstanceClusterInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceClusterInfo)(nil)).Elem()
+}
+
+func (i GetVipInstanceClusterInfoArgs) ToGetVipInstanceClusterInfoOutput() GetVipInstanceClusterInfoOutput {
+	return i.ToGetVipInstanceClusterInfoOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceClusterInfoArgs) ToGetVipInstanceClusterInfoOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceClusterInfoOutput)
+}
+
+// GetVipInstanceClusterInfoArrayInput is an input type that accepts GetVipInstanceClusterInfoArray and GetVipInstanceClusterInfoArrayOutput values.
+// You can construct a concrete instance of `GetVipInstanceClusterInfoArrayInput` via:
+//
+//          GetVipInstanceClusterInfoArray{ GetVipInstanceClusterInfoArgs{...} }
+type GetVipInstanceClusterInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceClusterInfoArrayOutput() GetVipInstanceClusterInfoArrayOutput
+	ToGetVipInstanceClusterInfoArrayOutputWithContext(context.Context) GetVipInstanceClusterInfoArrayOutput
+}
+
+type GetVipInstanceClusterInfoArray []GetVipInstanceClusterInfoInput
+
+func (GetVipInstanceClusterInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceClusterInfo)(nil)).Elem()
+}
+
+func (i GetVipInstanceClusterInfoArray) ToGetVipInstanceClusterInfoArrayOutput() GetVipInstanceClusterInfoArrayOutput {
+	return i.ToGetVipInstanceClusterInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceClusterInfoArray) ToGetVipInstanceClusterInfoArrayOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceClusterInfoArrayOutput)
+}
+
+type GetVipInstanceClusterInfoOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceClusterInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceClusterInfo)(nil)).Elem()
+}
+
+func (o GetVipInstanceClusterInfoOutput) ToGetVipInstanceClusterInfoOutput() GetVipInstanceClusterInfoOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoOutput) ToGetVipInstanceClusterInfoOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) HttpPublicEndpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.HttpPublicEndpoint }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) HttpVpcEndpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.HttpVpcEndpoint }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) IsVip() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.IsVip }).(pulumi.BoolOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) IsolateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.IsolateTime }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) PublicEndPoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.PublicEndPoint }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) RocketMqFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.RocketMqFlag }).(pulumi.BoolOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) int { return v.Status }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) SupportNamespaceEndpoint() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) bool { return v.SupportNamespaceEndpoint }).(pulumi.BoolOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) VpcEndPoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) string { return v.VpcEndPoint }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoOutput) Vpcs() GetVipInstanceClusterInfoVpcArrayOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfo) []GetVipInstanceClusterInfoVpc { return v.Vpcs }).(GetVipInstanceClusterInfoVpcArrayOutput)
+}
+
+type GetVipInstanceClusterInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceClusterInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceClusterInfo)(nil)).Elem()
+}
+
+func (o GetVipInstanceClusterInfoArrayOutput) ToGetVipInstanceClusterInfoArrayOutput() GetVipInstanceClusterInfoArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoArrayOutput) ToGetVipInstanceClusterInfoArrayOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoArrayOutput) Index(i pulumi.IntInput) GetVipInstanceClusterInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipInstanceClusterInfo {
+		return vs[0].([]GetVipInstanceClusterInfo)[vs[1].(int)]
+	}).(GetVipInstanceClusterInfoOutput)
+}
+
+type GetVipInstanceClusterInfoVpc struct {
+	SubnetId string `pulumi:"subnetId"`
+	VpcId    string `pulumi:"vpcId"`
+}
+
+// GetVipInstanceClusterInfoVpcInput is an input type that accepts GetVipInstanceClusterInfoVpcArgs and GetVipInstanceClusterInfoVpcOutput values.
+// You can construct a concrete instance of `GetVipInstanceClusterInfoVpcInput` via:
+//
+//          GetVipInstanceClusterInfoVpcArgs{...}
+type GetVipInstanceClusterInfoVpcInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceClusterInfoVpcOutput() GetVipInstanceClusterInfoVpcOutput
+	ToGetVipInstanceClusterInfoVpcOutputWithContext(context.Context) GetVipInstanceClusterInfoVpcOutput
+}
+
+type GetVipInstanceClusterInfoVpcArgs struct {
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	VpcId    pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetVipInstanceClusterInfoVpcArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceClusterInfoVpc)(nil)).Elem()
+}
+
+func (i GetVipInstanceClusterInfoVpcArgs) ToGetVipInstanceClusterInfoVpcOutput() GetVipInstanceClusterInfoVpcOutput {
+	return i.ToGetVipInstanceClusterInfoVpcOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceClusterInfoVpcArgs) ToGetVipInstanceClusterInfoVpcOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoVpcOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceClusterInfoVpcOutput)
+}
+
+// GetVipInstanceClusterInfoVpcArrayInput is an input type that accepts GetVipInstanceClusterInfoVpcArray and GetVipInstanceClusterInfoVpcArrayOutput values.
+// You can construct a concrete instance of `GetVipInstanceClusterInfoVpcArrayInput` via:
+//
+//          GetVipInstanceClusterInfoVpcArray{ GetVipInstanceClusterInfoVpcArgs{...} }
+type GetVipInstanceClusterInfoVpcArrayInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceClusterInfoVpcArrayOutput() GetVipInstanceClusterInfoVpcArrayOutput
+	ToGetVipInstanceClusterInfoVpcArrayOutputWithContext(context.Context) GetVipInstanceClusterInfoVpcArrayOutput
+}
+
+type GetVipInstanceClusterInfoVpcArray []GetVipInstanceClusterInfoVpcInput
+
+func (GetVipInstanceClusterInfoVpcArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceClusterInfoVpc)(nil)).Elem()
+}
+
+func (i GetVipInstanceClusterInfoVpcArray) ToGetVipInstanceClusterInfoVpcArrayOutput() GetVipInstanceClusterInfoVpcArrayOutput {
+	return i.ToGetVipInstanceClusterInfoVpcArrayOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceClusterInfoVpcArray) ToGetVipInstanceClusterInfoVpcArrayOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoVpcArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceClusterInfoVpcArrayOutput)
+}
+
+type GetVipInstanceClusterInfoVpcOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceClusterInfoVpcOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceClusterInfoVpc)(nil)).Elem()
+}
+
+func (o GetVipInstanceClusterInfoVpcOutput) ToGetVipInstanceClusterInfoVpcOutput() GetVipInstanceClusterInfoVpcOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoVpcOutput) ToGetVipInstanceClusterInfoVpcOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoVpcOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoVpcOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfoVpc) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceClusterInfoVpcOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceClusterInfoVpc) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetVipInstanceClusterInfoVpcArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceClusterInfoVpcArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceClusterInfoVpc)(nil)).Elem()
+}
+
+func (o GetVipInstanceClusterInfoVpcArrayOutput) ToGetVipInstanceClusterInfoVpcArrayOutput() GetVipInstanceClusterInfoVpcArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoVpcArrayOutput) ToGetVipInstanceClusterInfoVpcArrayOutputWithContext(ctx context.Context) GetVipInstanceClusterInfoVpcArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceClusterInfoVpcArrayOutput) Index(i pulumi.IntInput) GetVipInstanceClusterInfoVpcOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipInstanceClusterInfoVpc {
+		return vs[0].([]GetVipInstanceClusterInfoVpc)[vs[1].(int)]
+	}).(GetVipInstanceClusterInfoVpcOutput)
+}
+
+type GetVipInstanceInstanceConfig struct {
+	ConfigDisplay      string                                          `pulumi:"configDisplay"`
+	MaxGroupNum        int                                             `pulumi:"maxGroupNum"`
+	MaxNamespaceNum    int                                             `pulumi:"maxNamespaceNum"`
+	MaxQueuesPerTopic  int                                             `pulumi:"maxQueuesPerTopic"`
+	MaxTopicNum        int                                             `pulumi:"maxTopicNum"`
+	MaxTpsPerNamespace int                                             `pulumi:"maxTpsPerNamespace"`
+	NodeCount          int                                             `pulumi:"nodeCount"`
+	NodeDistributions  []GetVipInstanceInstanceConfigNodeDistribution  `pulumi:"nodeDistributions"`
+	TopicDistributions []GetVipInstanceInstanceConfigTopicDistribution `pulumi:"topicDistributions"`
+	UsedGroupNum       int                                             `pulumi:"usedGroupNum"`
+	UsedNamespaceNum   int                                             `pulumi:"usedNamespaceNum"`
+	UsedTopicNum       int                                             `pulumi:"usedTopicNum"`
+}
+
+// GetVipInstanceInstanceConfigInput is an input type that accepts GetVipInstanceInstanceConfigArgs and GetVipInstanceInstanceConfigOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigInput` via:
+//
+//          GetVipInstanceInstanceConfigArgs{...}
+type GetVipInstanceInstanceConfigInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigOutput() GetVipInstanceInstanceConfigOutput
+	ToGetVipInstanceInstanceConfigOutputWithContext(context.Context) GetVipInstanceInstanceConfigOutput
+}
+
+type GetVipInstanceInstanceConfigArgs struct {
+	ConfigDisplay      pulumi.StringInput                                      `pulumi:"configDisplay"`
+	MaxGroupNum        pulumi.IntInput                                         `pulumi:"maxGroupNum"`
+	MaxNamespaceNum    pulumi.IntInput                                         `pulumi:"maxNamespaceNum"`
+	MaxQueuesPerTopic  pulumi.IntInput                                         `pulumi:"maxQueuesPerTopic"`
+	MaxTopicNum        pulumi.IntInput                                         `pulumi:"maxTopicNum"`
+	MaxTpsPerNamespace pulumi.IntInput                                         `pulumi:"maxTpsPerNamespace"`
+	NodeCount          pulumi.IntInput                                         `pulumi:"nodeCount"`
+	NodeDistributions  GetVipInstanceInstanceConfigNodeDistributionArrayInput  `pulumi:"nodeDistributions"`
+	TopicDistributions GetVipInstanceInstanceConfigTopicDistributionArrayInput `pulumi:"topicDistributions"`
+	UsedGroupNum       pulumi.IntInput                                         `pulumi:"usedGroupNum"`
+	UsedNamespaceNum   pulumi.IntInput                                         `pulumi:"usedNamespaceNum"`
+	UsedTopicNum       pulumi.IntInput                                         `pulumi:"usedTopicNum"`
+}
+
+func (GetVipInstanceInstanceConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfig)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigArgs) ToGetVipInstanceInstanceConfigOutput() GetVipInstanceInstanceConfigOutput {
+	return i.ToGetVipInstanceInstanceConfigOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigArgs) ToGetVipInstanceInstanceConfigOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigOutput)
+}
+
+// GetVipInstanceInstanceConfigArrayInput is an input type that accepts GetVipInstanceInstanceConfigArray and GetVipInstanceInstanceConfigArrayOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigArrayInput` via:
+//
+//          GetVipInstanceInstanceConfigArray{ GetVipInstanceInstanceConfigArgs{...} }
+type GetVipInstanceInstanceConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigArrayOutput() GetVipInstanceInstanceConfigArrayOutput
+	ToGetVipInstanceInstanceConfigArrayOutputWithContext(context.Context) GetVipInstanceInstanceConfigArrayOutput
+}
+
+type GetVipInstanceInstanceConfigArray []GetVipInstanceInstanceConfigInput
+
+func (GetVipInstanceInstanceConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfig)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigArray) ToGetVipInstanceInstanceConfigArrayOutput() GetVipInstanceInstanceConfigArrayOutput {
+	return i.ToGetVipInstanceInstanceConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigArray) ToGetVipInstanceInstanceConfigArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigArrayOutput)
+}
+
+type GetVipInstanceInstanceConfigOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfig)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigOutput) ToGetVipInstanceInstanceConfigOutput() GetVipInstanceInstanceConfigOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigOutput) ToGetVipInstanceInstanceConfigOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigOutput) ConfigDisplay() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) string { return v.ConfigDisplay }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) MaxGroupNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxGroupNum }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) MaxNamespaceNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxNamespaceNum }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) MaxQueuesPerTopic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxQueuesPerTopic }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) MaxTopicNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxTopicNum }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) MaxTpsPerNamespace() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.MaxTpsPerNamespace }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) NodeDistributions() GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) []GetVipInstanceInstanceConfigNodeDistribution {
+		return v.NodeDistributions
+	}).(GetVipInstanceInstanceConfigNodeDistributionArrayOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) TopicDistributions() GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) []GetVipInstanceInstanceConfigTopicDistribution {
+		return v.TopicDistributions
+	}).(GetVipInstanceInstanceConfigTopicDistributionArrayOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) UsedGroupNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedGroupNum }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) UsedNamespaceNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedNamespaceNum }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigOutput) UsedTopicNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfig) int { return v.UsedTopicNum }).(pulumi.IntOutput)
+}
+
+type GetVipInstanceInstanceConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfig)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigArrayOutput) ToGetVipInstanceInstanceConfigArrayOutput() GetVipInstanceInstanceConfigArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigArrayOutput) ToGetVipInstanceInstanceConfigArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigArrayOutput) Index(i pulumi.IntInput) GetVipInstanceInstanceConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipInstanceInstanceConfig {
+		return vs[0].([]GetVipInstanceInstanceConfig)[vs[1].(int)]
+	}).(GetVipInstanceInstanceConfigOutput)
+}
+
+type GetVipInstanceInstanceConfigNodeDistribution struct {
+	NodeCount int    `pulumi:"nodeCount"`
+	ZoneId    string `pulumi:"zoneId"`
+	ZoneName  string `pulumi:"zoneName"`
+}
+
+// GetVipInstanceInstanceConfigNodeDistributionInput is an input type that accepts GetVipInstanceInstanceConfigNodeDistributionArgs and GetVipInstanceInstanceConfigNodeDistributionOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigNodeDistributionInput` via:
+//
+//          GetVipInstanceInstanceConfigNodeDistributionArgs{...}
+type GetVipInstanceInstanceConfigNodeDistributionInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigNodeDistributionOutput() GetVipInstanceInstanceConfigNodeDistributionOutput
+	ToGetVipInstanceInstanceConfigNodeDistributionOutputWithContext(context.Context) GetVipInstanceInstanceConfigNodeDistributionOutput
+}
+
+type GetVipInstanceInstanceConfigNodeDistributionArgs struct {
+	NodeCount pulumi.IntInput    `pulumi:"nodeCount"`
+	ZoneId    pulumi.StringInput `pulumi:"zoneId"`
+	ZoneName  pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetVipInstanceInstanceConfigNodeDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfigNodeDistribution)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigNodeDistributionArgs) ToGetVipInstanceInstanceConfigNodeDistributionOutput() GetVipInstanceInstanceConfigNodeDistributionOutput {
+	return i.ToGetVipInstanceInstanceConfigNodeDistributionOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigNodeDistributionArgs) ToGetVipInstanceInstanceConfigNodeDistributionOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigNodeDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigNodeDistributionOutput)
+}
+
+// GetVipInstanceInstanceConfigNodeDistributionArrayInput is an input type that accepts GetVipInstanceInstanceConfigNodeDistributionArray and GetVipInstanceInstanceConfigNodeDistributionArrayOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigNodeDistributionArrayInput` via:
+//
+//          GetVipInstanceInstanceConfigNodeDistributionArray{ GetVipInstanceInstanceConfigNodeDistributionArgs{...} }
+type GetVipInstanceInstanceConfigNodeDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigNodeDistributionArrayOutput() GetVipInstanceInstanceConfigNodeDistributionArrayOutput
+	ToGetVipInstanceInstanceConfigNodeDistributionArrayOutputWithContext(context.Context) GetVipInstanceInstanceConfigNodeDistributionArrayOutput
+}
+
+type GetVipInstanceInstanceConfigNodeDistributionArray []GetVipInstanceInstanceConfigNodeDistributionInput
+
+func (GetVipInstanceInstanceConfigNodeDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfigNodeDistribution)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigNodeDistributionArray) ToGetVipInstanceInstanceConfigNodeDistributionArrayOutput() GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
+	return i.ToGetVipInstanceInstanceConfigNodeDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigNodeDistributionArray) ToGetVipInstanceInstanceConfigNodeDistributionArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigNodeDistributionArrayOutput)
+}
+
+type GetVipInstanceInstanceConfigNodeDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigNodeDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfigNodeDistribution)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ToGetVipInstanceInstanceConfigNodeDistributionOutput() GetVipInstanceInstanceConfigNodeDistributionOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ToGetVipInstanceInstanceConfigNodeDistributionOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigNodeDistributionOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfigNodeDistribution) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetVipInstanceInstanceConfigNodeDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigNodeDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfigNodeDistribution)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionArrayOutput) ToGetVipInstanceInstanceConfigNodeDistributionArrayOutput() GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionArrayOutput) ToGetVipInstanceInstanceConfigNodeDistributionArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigNodeDistributionArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigNodeDistributionArrayOutput) Index(i pulumi.IntInput) GetVipInstanceInstanceConfigNodeDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipInstanceInstanceConfigNodeDistribution {
+		return vs[0].([]GetVipInstanceInstanceConfigNodeDistribution)[vs[1].(int)]
+	}).(GetVipInstanceInstanceConfigNodeDistributionOutput)
+}
+
+type GetVipInstanceInstanceConfigTopicDistribution struct {
+	Count     int    `pulumi:"count"`
+	TopicType string `pulumi:"topicType"`
+}
+
+// GetVipInstanceInstanceConfigTopicDistributionInput is an input type that accepts GetVipInstanceInstanceConfigTopicDistributionArgs and GetVipInstanceInstanceConfigTopicDistributionOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigTopicDistributionInput` via:
+//
+//          GetVipInstanceInstanceConfigTopicDistributionArgs{...}
+type GetVipInstanceInstanceConfigTopicDistributionInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigTopicDistributionOutput() GetVipInstanceInstanceConfigTopicDistributionOutput
+	ToGetVipInstanceInstanceConfigTopicDistributionOutputWithContext(context.Context) GetVipInstanceInstanceConfigTopicDistributionOutput
+}
+
+type GetVipInstanceInstanceConfigTopicDistributionArgs struct {
+	Count     pulumi.IntInput    `pulumi:"count"`
+	TopicType pulumi.StringInput `pulumi:"topicType"`
+}
+
+func (GetVipInstanceInstanceConfigTopicDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistribution)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigTopicDistributionArgs) ToGetVipInstanceInstanceConfigTopicDistributionOutput() GetVipInstanceInstanceConfigTopicDistributionOutput {
+	return i.ToGetVipInstanceInstanceConfigTopicDistributionOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigTopicDistributionArgs) ToGetVipInstanceInstanceConfigTopicDistributionOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigTopicDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigTopicDistributionOutput)
+}
+
+// GetVipInstanceInstanceConfigTopicDistributionArrayInput is an input type that accepts GetVipInstanceInstanceConfigTopicDistributionArray and GetVipInstanceInstanceConfigTopicDistributionArrayOutput values.
+// You can construct a concrete instance of `GetVipInstanceInstanceConfigTopicDistributionArrayInput` via:
+//
+//          GetVipInstanceInstanceConfigTopicDistributionArray{ GetVipInstanceInstanceConfigTopicDistributionArgs{...} }
+type GetVipInstanceInstanceConfigTopicDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetVipInstanceInstanceConfigTopicDistributionArrayOutput() GetVipInstanceInstanceConfigTopicDistributionArrayOutput
+	ToGetVipInstanceInstanceConfigTopicDistributionArrayOutputWithContext(context.Context) GetVipInstanceInstanceConfigTopicDistributionArrayOutput
+}
+
+type GetVipInstanceInstanceConfigTopicDistributionArray []GetVipInstanceInstanceConfigTopicDistributionInput
+
+func (GetVipInstanceInstanceConfigTopicDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfigTopicDistribution)(nil)).Elem()
+}
+
+func (i GetVipInstanceInstanceConfigTopicDistributionArray) ToGetVipInstanceInstanceConfigTopicDistributionArrayOutput() GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
+	return i.ToGetVipInstanceInstanceConfigTopicDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetVipInstanceInstanceConfigTopicDistributionArray) ToGetVipInstanceInstanceConfigTopicDistributionArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVipInstanceInstanceConfigTopicDistributionArrayOutput)
+}
+
+type GetVipInstanceInstanceConfigTopicDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigTopicDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistribution)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionOutput) ToGetVipInstanceInstanceConfigTopicDistributionOutput() GetVipInstanceInstanceConfigTopicDistributionOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionOutput) ToGetVipInstanceInstanceConfigTopicDistributionOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigTopicDistributionOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfigTopicDistribution) int { return v.Count }).(pulumi.IntOutput)
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionOutput) TopicType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVipInstanceInstanceConfigTopicDistribution) string { return v.TopicType }).(pulumi.StringOutput)
+}
+
+type GetVipInstanceInstanceConfigTopicDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVipInstanceInstanceConfigTopicDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVipInstanceInstanceConfigTopicDistribution)(nil)).Elem()
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionArrayOutput) ToGetVipInstanceInstanceConfigTopicDistributionArrayOutput() GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionArrayOutput) ToGetVipInstanceInstanceConfigTopicDistributionArrayOutputWithContext(ctx context.Context) GetVipInstanceInstanceConfigTopicDistributionArrayOutput {
+	return o
+}
+
+func (o GetVipInstanceInstanceConfigTopicDistributionArrayOutput) Index(i pulumi.IntInput) GetVipInstanceInstanceConfigTopicDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVipInstanceInstanceConfigTopicDistribution {
+		return vs[0].([]GetVipInstanceInstanceConfigTopicDistribution)[vs[1].(int)]
+	}).(GetVipInstanceInstanceConfigTopicDistributionOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcInput)(nil)).Elem(), RocketmqClusterVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcArrayInput)(nil)).Elem(), RocketmqClusterVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoArrayInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistributionInput)(nil)).Elem(), GetProInstanceDetailClusterInfoNodeDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistributionArrayInput)(nil)).Elem(), GetProInstanceDetailClusterInfoNodeDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterSpecInfoInput)(nil)).Elem(), GetProInstanceDetailClusterSpecInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterSpecInfoArrayInput)(nil)).Elem(), GetProInstanceDetailClusterSpecInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailNetworkAccessPointInfoInput)(nil)).Elem(), GetProInstanceDetailNetworkAccessPointInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailNetworkAccessPointInfoArrayInput)(nil)).Elem(), GetProInstanceDetailNetworkAccessPointInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstancesFilterInput)(nil)).Elem(), GetProInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstancesFilterArrayInput)(nil)).Elem(), GetProInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstancesInstanceInput)(nil)).Elem(), GetProInstancesInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstancesInstanceArrayInput)(nil)).Elem(), GetProInstancesInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersFilterInput)(nil)).Elem(), GetPublishersFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersFilterArrayInput)(nil)).Elem(), GetPublishersFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersPublisherInput)(nil)).Elem(), GetPublishersPublisherArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersPublisherArrayInput)(nil)).Elem(), GetPublishersPublisherArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersSortInput)(nil)).Elem(), GetPublishersSortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublishersSortPtrInput)(nil)).Elem(), GetPublishersSortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqNodeListFilterInput)(nil)).Elem(), GetRabbitmqNodeListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqNodeListFilterArrayInput)(nil)).Elem(), GetRabbitmqNodeListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqNodeListNodeListInput)(nil)).Elem(), GetRabbitmqNodeListNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqNodeListNodeListArrayInput)(nil)).Elem(), GetRabbitmqNodeListNodeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqVipInstanceFilterInput)(nil)).Elem(), GetRabbitmqVipInstanceFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqVipInstanceFilterArrayInput)(nil)).Elem(), GetRabbitmqVipInstanceFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqVipInstanceInstanceInput)(nil)).Elem(), GetRabbitmqVipInstanceInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRabbitmqVipInstanceInstanceArrayInput)(nil)).Elem(), GetRabbitmqVipInstanceInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqClusterClusterListInput)(nil)).Elem(), GetRocketmqClusterClusterListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqClusterClusterListArrayInput)(nil)).Elem(), GetRocketmqClusterClusterListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqClusterClusterListConfigInput)(nil)).Elem(), GetRocketmqClusterClusterListConfigArgs{})
@@ -1319,14 +3949,52 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqClusterClusterListInfoVpcArrayInput)(nil)).Elem(), GetRocketmqClusterClusterListInfoVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqGroupGroupInput)(nil)).Elem(), GetRocketmqGroupGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqGroupGroupArrayInput)(nil)).Elem(), GetRocketmqGroupGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqMessagesMessageTrackInput)(nil)).Elem(), GetRocketmqMessagesMessageTrackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqMessagesMessageTrackArrayInput)(nil)).Elem(), GetRocketmqMessagesMessageTrackArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqNamespaceNamespaceInput)(nil)).Elem(), GetRocketmqNamespaceNamespaceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqNamespaceNamespaceArrayInput)(nil)).Elem(), GetRocketmqNamespaceNamespaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqRoleRoleSetInput)(nil)).Elem(), GetRocketmqRoleRoleSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqRoleRoleSetArrayInput)(nil)).Elem(), GetRocketmqRoleRoleSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqTopicTopicInput)(nil)).Elem(), GetRocketmqTopicTopicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRocketmqTopicTopicArrayInput)(nil)).Elem(), GetRocketmqTopicTopicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceClusterInfoInput)(nil)).Elem(), GetVipInstanceClusterInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceClusterInfoArrayInput)(nil)).Elem(), GetVipInstanceClusterInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceClusterInfoVpcInput)(nil)).Elem(), GetVipInstanceClusterInfoVpcArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceClusterInfoVpcArrayInput)(nil)).Elem(), GetVipInstanceClusterInfoVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigInput)(nil)).Elem(), GetVipInstanceInstanceConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigNodeDistributionInput)(nil)).Elem(), GetVipInstanceInstanceConfigNodeDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigNodeDistributionArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigNodeDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistributionInput)(nil)).Elem(), GetVipInstanceInstanceConfigTopicDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistributionArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigTopicDistributionArray{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoNodeDistributionOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoNodeDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterSpecInfoOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailClusterSpecInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailNetworkAccessPointInfoOutput{})
+	pulumi.RegisterOutputType(GetProInstanceDetailNetworkAccessPointInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetProInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetProInstancesInstanceOutput{})
+	pulumi.RegisterOutputType(GetProInstancesInstanceArrayOutput{})
+	pulumi.RegisterOutputType(GetPublishersFilterOutput{})
+	pulumi.RegisterOutputType(GetPublishersFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetPublishersPublisherOutput{})
+	pulumi.RegisterOutputType(GetPublishersPublisherArrayOutput{})
+	pulumi.RegisterOutputType(GetPublishersSortOutput{})
+	pulumi.RegisterOutputType(GetPublishersSortPtrOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqNodeListFilterOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqNodeListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqNodeListNodeListOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqNodeListNodeListArrayOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqVipInstanceFilterOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqVipInstanceFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqVipInstanceInstanceOutput{})
+	pulumi.RegisterOutputType(GetRabbitmqVipInstanceInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqClusterClusterListOutput{})
 	pulumi.RegisterOutputType(GetRocketmqClusterClusterListArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqClusterClusterListConfigOutput{})
@@ -1337,10 +4005,22 @@ func init() {
 	pulumi.RegisterOutputType(GetRocketmqClusterClusterListInfoVpcArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqGroupGroupOutput{})
 	pulumi.RegisterOutputType(GetRocketmqGroupGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetRocketmqMessagesMessageTrackOutput{})
+	pulumi.RegisterOutputType(GetRocketmqMessagesMessageTrackArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqNamespaceNamespaceOutput{})
 	pulumi.RegisterOutputType(GetRocketmqNamespaceNamespaceArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqRoleRoleSetOutput{})
 	pulumi.RegisterOutputType(GetRocketmqRoleRoleSetArrayOutput{})
 	pulumi.RegisterOutputType(GetRocketmqTopicTopicOutput{})
 	pulumi.RegisterOutputType(GetRocketmqTopicTopicArrayOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceClusterInfoOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceClusterInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceClusterInfoVpcOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceClusterInfoVpcArrayOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigNodeDistributionOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigNodeDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigTopicDistributionOutput{})
+	pulumi.RegisterOutputType(GetVipInstanceInstanceConfigTopicDistributionArrayOutput{})
 }

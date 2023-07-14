@@ -48,8 +48,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Use Kubelet
+ * ### Use Kubelet
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

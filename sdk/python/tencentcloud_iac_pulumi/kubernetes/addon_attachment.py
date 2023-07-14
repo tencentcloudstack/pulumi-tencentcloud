@@ -234,6 +234,7 @@ class AddonAttachment(pulumi.CustomResource):
         > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
 
         ## Example Usage
+        ### Install cbs addon by passing values
 
         ```python
         import pulumi
@@ -242,30 +243,68 @@ class AddonAttachment(pulumi.CustomResource):
         addon_cbs = tencentcloud.kubernetes.AddonAttachment("addonCbs",
             cluster_id="cls-xxxxxxxx",
             values=["rootdir=/var/lib/kubelet"])
+        ```
+        ### Install tcr addon by passing values
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        mytcr = tencentcloud.tcr.Instance("mytcr",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "test": "test",
+            })
+        tcr_id = mytcr.id
+        tcr_name = mytcr.name
+        my_ns = tencentcloud.tcr.Namespace("myNs",
+            instance_id=tcr_id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        ns_name = my_ns.name
+        my_token = tencentcloud.tcr.Token("myToken",
+            instance_id=tcr_id,
+            description="tcr token")
+        user_name = my_token.user_name
+        token = my_token.token
+        my_ins = tencentcloud.Tcr.get_instances_output(instance_id=tcr_id)
+        end_point = my_ins.instance_lists[0].internal_end_point
         addon_tcr = tencentcloud.kubernetes.AddonAttachment("addonTcr",
             cluster_id="cls-xxxxxxxx",
+            version="1.0.0",
             values=[
-                "global.imagePullSecretsCrs[0].name=unique-sample-vpc",
-                "global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system",
+                tcr_id.apply(lambda tcr_id: f"global.imagePullSecretsCrs[0].name={tcr_id}-vpc"),
+                ns_name.apply(lambda ns_name: f"global.imagePullSecretsCrs[0].namespaces={ns_name}"),
                 "global.imagePullSecretsCrs[0].serviceAccounts=*",
                 "global.imagePullSecretsCrs[0].type=docker",
-                "global.imagePullSecretsCrs[0].dockerUsername=100012345678",
-                "global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token",
-                "global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com",
-                "global.imagePullSecretsCrs[1].name=sample-public",
-                "global.imagePullSecretsCrs[1].namespaces=*",
+                user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[0].dockerUsername={user_name}"),
+                token.apply(lambda token: f"global.imagePullSecretsCrs[0].dockerPassword={token}"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[0].dockerServer={tcr_name}-vpc.tencentcloudcr.com"),
+                tcr_id.apply(lambda tcr_id: f"global.imagePullSecretsCrs[1].name={tcr_id}-public"),
+                ns_name.apply(lambda ns_name: f"global.imagePullSecretsCrs[1].namespaces={ns_name}"),
                 "global.imagePullSecretsCrs[1].serviceAccounts=*",
                 "global.imagePullSecretsCrs[1].type=docker",
-                "global.imagePullSecretsCrs[1].dockerUsername=100012345678",
-                "global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token",
-                "global.imagePullSecretsCrs[1].dockerServer=sample",
-                "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
-                "global.hosts[0].ip=10.16.0.49",
+                user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[1].dockerUsername={user_name}"),
+                token.apply(lambda token: f"global.imagePullSecretsCrs[1].dockerPassword={token}"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}-tencentcloudcr.com"),
+                "global.cluster.region=gz",
+                "global.cluster.longregion=ap-guangzhou",
+                tcr_name.apply(lambda tcr_name: f"global.hosts[0].domain={tcr_name}-vpc.tencentcloudcr.com"),
+                end_point.apply(lambda end_point: f"global.hosts[0].ip={end_point}"),
                 "global.hosts[0].disabled=false",
+                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}-tencentcloudcr.com"),
+                end_point.apply(lambda end_point: f"global.hosts[1].ip={end_point}"),
+                "global.hosts[1].disabled=false",
             ])
         ```
-
-        Install new addon by passing spec json to req_body directly
+        ### Install new addon by passing spec json to req_body directly
 
         ```python
         import pulumi
@@ -319,6 +358,7 @@ class AddonAttachment(pulumi.CustomResource):
         > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
 
         ## Example Usage
+        ### Install cbs addon by passing values
 
         ```python
         import pulumi
@@ -327,30 +367,68 @@ class AddonAttachment(pulumi.CustomResource):
         addon_cbs = tencentcloud.kubernetes.AddonAttachment("addonCbs",
             cluster_id="cls-xxxxxxxx",
             values=["rootdir=/var/lib/kubelet"])
+        ```
+        ### Install tcr addon by passing values
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        mytcr = tencentcloud.tcr.Instance("mytcr",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "test": "test",
+            })
+        tcr_id = mytcr.id
+        tcr_name = mytcr.name
+        my_ns = tencentcloud.tcr.Namespace("myNs",
+            instance_id=tcr_id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        ns_name = my_ns.name
+        my_token = tencentcloud.tcr.Token("myToken",
+            instance_id=tcr_id,
+            description="tcr token")
+        user_name = my_token.user_name
+        token = my_token.token
+        my_ins = tencentcloud.Tcr.get_instances_output(instance_id=tcr_id)
+        end_point = my_ins.instance_lists[0].internal_end_point
         addon_tcr = tencentcloud.kubernetes.AddonAttachment("addonTcr",
             cluster_id="cls-xxxxxxxx",
+            version="1.0.0",
             values=[
-                "global.imagePullSecretsCrs[0].name=unique-sample-vpc",
-                "global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system",
+                tcr_id.apply(lambda tcr_id: f"global.imagePullSecretsCrs[0].name={tcr_id}-vpc"),
+                ns_name.apply(lambda ns_name: f"global.imagePullSecretsCrs[0].namespaces={ns_name}"),
                 "global.imagePullSecretsCrs[0].serviceAccounts=*",
                 "global.imagePullSecretsCrs[0].type=docker",
-                "global.imagePullSecretsCrs[0].dockerUsername=100012345678",
-                "global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token",
-                "global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com",
-                "global.imagePullSecretsCrs[1].name=sample-public",
-                "global.imagePullSecretsCrs[1].namespaces=*",
+                user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[0].dockerUsername={user_name}"),
+                token.apply(lambda token: f"global.imagePullSecretsCrs[0].dockerPassword={token}"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[0].dockerServer={tcr_name}-vpc.tencentcloudcr.com"),
+                tcr_id.apply(lambda tcr_id: f"global.imagePullSecretsCrs[1].name={tcr_id}-public"),
+                ns_name.apply(lambda ns_name: f"global.imagePullSecretsCrs[1].namespaces={ns_name}"),
                 "global.imagePullSecretsCrs[1].serviceAccounts=*",
                 "global.imagePullSecretsCrs[1].type=docker",
-                "global.imagePullSecretsCrs[1].dockerUsername=100012345678",
-                "global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token",
-                "global.imagePullSecretsCrs[1].dockerServer=sample",
-                "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
-                "global.hosts[0].ip=10.16.0.49",
+                user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[1].dockerUsername={user_name}"),
+                token.apply(lambda token: f"global.imagePullSecretsCrs[1].dockerPassword={token}"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}-tencentcloudcr.com"),
+                "global.cluster.region=gz",
+                "global.cluster.longregion=ap-guangzhou",
+                tcr_name.apply(lambda tcr_name: f"global.hosts[0].domain={tcr_name}-vpc.tencentcloudcr.com"),
+                end_point.apply(lambda end_point: f"global.hosts[0].ip={end_point}"),
                 "global.hosts[0].disabled=false",
+                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}-tencentcloudcr.com"),
+                end_point.apply(lambda end_point: f"global.hosts[1].ip={end_point}"),
+                "global.hosts[1].disabled=false",
             ])
         ```
-
-        Install new addon by passing spec json to req_body directly
+        ### Install new addon by passing spec json to req_body directly
 
         ```python
         import pulumi

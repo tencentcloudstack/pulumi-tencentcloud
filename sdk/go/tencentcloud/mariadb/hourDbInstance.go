@@ -26,8 +26,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Mariadb.NewHourDbInstance(ctx, "basic", &Mariadb.HourDbInstanceArgs{
-// 			DbVersionId:  pulumi.String("8.0"),
-// 			InstanceName: pulumi.String("db-test-2"),
+// 			DbVersionId:  pulumi.String("10.0"),
+// 			InstanceName: pulumi.String("db-test-del"),
 // 			Memory:       pulumi.Int(2),
 // 			NodeCount:    pulumi.Int(2),
 // 			Storage:      pulumi.Int(10),
@@ -35,9 +35,10 @@ import (
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("terraform"),
 // 			},
+// 			Vip:   pulumi.String("10.0.0.197"),
 // 			VpcId: pulumi.String("vpc-k1t8ickr"),
 // 			Zones: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-7"),
+// 				pulumi.String("ap-guangzhou-6"),
 // 				pulumi.String("ap-guangzhou-7"),
 // 			},
 // 		})
@@ -67,12 +68,16 @@ type HourDbInstance struct {
 	Memory pulumi.IntOutput `pulumi:"memory"`
 	// number of node for instance.
 	NodeCount pulumi.IntOutput `pulumi:"nodeCount"`
+	// project id.
+	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// instance disk storage.
 	Storage pulumi.IntOutput `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
+	// vip.
+	Vip pulumi.StringOutput `pulumi:"vip"`
 	// vpc id.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 	// available zone of instance.
@@ -129,12 +134,16 @@ type hourDbInstanceState struct {
 	Memory *int `pulumi:"memory"`
 	// number of node for instance.
 	NodeCount *int `pulumi:"nodeCount"`
+	// project id.
+	ProjectId *int `pulumi:"projectId"`
 	// instance disk storage.
 	Storage *int `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// vip.
+	Vip *string `pulumi:"vip"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
 	// available zone of instance.
@@ -150,12 +159,16 @@ type HourDbInstanceState struct {
 	Memory pulumi.IntPtrInput
 	// number of node for instance.
 	NodeCount pulumi.IntPtrInput
+	// project id.
+	ProjectId pulumi.IntPtrInput
 	// instance disk storage.
 	Storage pulumi.IntPtrInput
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// vip.
+	Vip pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
 	// available zone of instance.
@@ -175,12 +188,16 @@ type hourDbInstanceArgs struct {
 	Memory int `pulumi:"memory"`
 	// number of node for instance.
 	NodeCount int `pulumi:"nodeCount"`
+	// project id.
+	ProjectId *int `pulumi:"projectId"`
 	// instance disk storage.
 	Storage int `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// vip.
+	Vip *string `pulumi:"vip"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
 	// available zone of instance.
@@ -197,12 +214,16 @@ type HourDbInstanceArgs struct {
 	Memory pulumi.IntInput
 	// number of node for instance.
 	NodeCount pulumi.IntInput
+	// project id.
+	ProjectId pulumi.IntPtrInput
 	// instance disk storage.
 	Storage pulumi.IntInput
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// vip.
+	Vip pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
 	// available zone of instance.
@@ -316,6 +337,11 @@ func (o HourDbInstanceOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *HourDbInstance) pulumi.IntOutput { return v.NodeCount }).(pulumi.IntOutput)
 }
 
+// project id.
+func (o HourDbInstanceOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *HourDbInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
 // instance disk storage.
 func (o HourDbInstanceOutput) Storage() pulumi.IntOutput {
 	return o.ApplyT(func(v *HourDbInstance) pulumi.IntOutput { return v.Storage }).(pulumi.IntOutput)
@@ -329,6 +355,11 @@ func (o HourDbInstanceOutput) SubnetId() pulumi.StringPtrOutput {
 // Tag description list.
 func (o HourDbInstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *HourDbInstance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
+}
+
+// vip.
+func (o HourDbInstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *HourDbInstance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
 }
 
 // vpc id.

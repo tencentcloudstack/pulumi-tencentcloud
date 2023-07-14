@@ -13,24 +13,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// <summary>
     /// Provides a resource to create a cls config attachment
     /// 
-    /// ## Example Usage
+    /// ## Import
     /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// cls config_attachment can be imported using the id, e.g.
     /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var attach = new Tencentcloud.Cls.ConfigAttachment("attach", new Tencentcloud.Cls.ConfigAttachmentArgs
-    ///         {
-    ///             ConfigId = tencentcloud_cls_config.Config.Id,
-    ///             GroupId = "27752a9b-9918-440a-8ee7-9c84a14a47ed",
-    ///         });
-    ///     }
-    /// 
-    /// }
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configAttachment:ConfigAttachment")]

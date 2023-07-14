@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a CLB instance.
 //
 // ## Example Usage
-//
-// INTERNAL CLB
+// ### INTERNAL CLB
 //
 // ```go
 // package main
@@ -44,8 +43,7 @@ import (
 // 	})
 // }
 // ```
-//
-// OPEN CLB
+// ### OPEN CLB
 //
 // ```go
 // package main
@@ -78,8 +76,54 @@ import (
 // 	})
 // }
 // ```
+// ### Dynamic Vip Instance
 //
-// Default enable
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		clbOpen, err := Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
+// 			NetworkType:            pulumi.String("OPEN"),
+// 			ClbName:                pulumi.String("clb-instance-open"),
+// 			ProjectId:              pulumi.Int(0),
+// 			VpcId:                  fooInstance.ID(),
+// 			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
+// 			TargetRegionInfoVpcId:  fooInstance.ID(),
+// 			SecurityGroups: pulumi.StringArray{
+// 				fooGroup.ID(),
+// 			},
+// 			DynamicVip: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ctx.Export("domain", clbOpen.Domain)
+// 		return nil
+// 	})
+// }
+// ```
+// ### Default enable
 //
 // ```go
 // package main
@@ -141,8 +185,7 @@ import (
 // 	})
 // }
 // ```
-//
-// CREATE multiple instance
+// ### CREATE multiple instance
 //
 // ```go
 // package main
@@ -166,8 +209,7 @@ import (
 // 	})
 // }
 // ```
-//
-// CREATE instance with log
+// ### CREATE instance with log
 //
 // ```go
 // package main
@@ -255,6 +297,10 @@ type Instance struct {
 	ClbName pulumi.StringOutput `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips pulumi.StringArrayOutput `pulumi:"clbVips"`
+	// Domain name of the CLB instance.
+	Domain pulumi.StringOutput `pulumi:"domain"`
+	// If create dynamic vip CLB instance, `true` or `false`.
+	DynamicVip pulumi.BoolPtrOutput `pulumi:"dynamicVip"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut pulumi.IntOutput `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -339,6 +385,10 @@ type instanceState struct {
 	ClbName *string `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips []string `pulumi:"clbVips"`
+	// Domain name of the CLB instance.
+	Domain *string `pulumi:"domain"`
+	// If create dynamic vip CLB instance, `true` or `false`.
+	DynamicVip *bool `pulumi:"dynamicVip"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut *int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -388,6 +438,10 @@ type InstanceState struct {
 	ClbName pulumi.StringPtrInput
 	// The virtual service address table of the CLB.
 	ClbVips pulumi.StringArrayInput
+	// Domain name of the CLB instance.
+	Domain pulumi.StringPtrInput
+	// If create dynamic vip CLB instance, `true` or `false`.
+	DynamicVip pulumi.BoolPtrInput
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut pulumi.IntPtrInput
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -439,6 +493,8 @@ type instanceArgs struct {
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ClbName string `pulumi:"clbName"`
+	// If create dynamic vip CLB instance, `true` or `false`.
+	DynamicVip *bool `pulumi:"dynamicVip"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut *int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -485,6 +541,8 @@ type InstanceArgs struct {
 	BandwidthPackageId pulumi.StringPtrInput
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ClbName pulumi.StringInput
+	// If create dynamic vip CLB instance, `true` or `false`.
+	DynamicVip pulumi.BoolPtrInput
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut pulumi.IntPtrInput
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -628,6 +686,16 @@ func (o InstanceOutput) ClbName() pulumi.StringOutput {
 // The virtual service address table of the CLB.
 func (o InstanceOutput) ClbVips() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.ClbVips }).(pulumi.StringArrayOutput)
+}
+
+// Domain name of the CLB instance.
+func (o InstanceOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
+}
+
+// If create dynamic vip CLB instance, `true` or `false`.
+func (o InstanceOutput) DynamicVip() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DynamicVip }).(pulumi.BoolPtrOutput)
 }
 
 // Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.

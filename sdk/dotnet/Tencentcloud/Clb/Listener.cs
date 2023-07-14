@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB listener.
     /// 
     /// ## Example Usage
-    /// 
-    /// HTTP Listener
+    /// ### HTTP Listener
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -36,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// TCP/UDP Listener
+    /// ### TCP/UDP Listener
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -70,8 +68,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// TCP/UDP Listener with tcp health check
+    /// ### TCP/UDP Listener with tcp health check
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -101,8 +98,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// TCP/UDP Listener with http health check
+    /// ### TCP/UDP Listener with http health check
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -136,8 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// TCP/UDP Listener with customer health check
+    /// ### TCP/UDP Listener with customer health check
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -170,8 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// HTTPS Listener
+    /// ### HTTPS Listener
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -196,8 +190,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// TCP SSL Listener
+    /// ### TCP SSL Listener
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -277,7 +270,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> HealthCheckHealthNum { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Output("healthCheckHttpCode")]
         public Output<int?> HealthCheckHttpCode { get; private set; } = null!;
@@ -307,7 +300,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string?> HealthCheckHttpVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Output("healthCheckIntervalTime")]
         public Output<int> HealthCheckIntervalTime { get; private set; } = null!;
@@ -486,7 +479,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckHealthNum { get; set; }
 
         /// <summary>
-        /// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Input("healthCheckHttpCode")]
         public Input<int>? HealthCheckHttpCode { get; set; }
@@ -516,7 +509,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? HealthCheckHttpVersion { get; set; }
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("healthCheckIntervalTime")]
         public Input<int>? HealthCheckIntervalTime { get; set; }
@@ -649,7 +642,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckHealthNum { get; set; }
 
         /// <summary>
-        /// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Input("healthCheckHttpCode")]
         public Input<int>? HealthCheckHttpCode { get; set; }
@@ -679,7 +672,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? HealthCheckHttpVersion { get; set; }
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("healthCheckIntervalTime")]
         public Input<int>? HealthCheckIntervalTime { get; set; }

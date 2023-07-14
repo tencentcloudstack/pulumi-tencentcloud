@@ -19,22 +19,41 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Nat.NewGateway(ctx, "foo", &Nat.GatewayArgs{
+// 		foo, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
+// 			Name: pulumi.StringRef("Default-VPC"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		eipDevDnat, err := Eip.NewInstance(ctx, "eipDevDnat", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		newEip, err := Eip.NewInstance(ctx, "newEip", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Nat.NewGateway(ctx, "myNat", &Nat.GatewayArgs{
+// 			VpcId:         pulumi.String(foo.InstanceLists[0].VpcId),
+// 			MaxConcurrent: pulumi.Int(10000000),
+// 			Bandwidth:     pulumi.Int(1000),
+// 			Zone:          pulumi.String("ap-guangzhou-3"),
 // 			AssignedEipSets: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
+// 				eipDevDnat.PublicIp,
+// 				newEip.PublicIp,
 // 			},
-// 			Bandwidth:     pulumi.Int(100),
-// 			MaxConcurrent: pulumi.Int(1000000),
 // 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
+// 				"tf": pulumi.Any("test"),
 // 			},
-// 			VpcId: pulumi.String("vpc-4xxr2cy7"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -68,6 +87,8 @@ type Gateway struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// ID of the vpc.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// The availability zone, such as `ap-guangzhou-3`.
+	Zone pulumi.StringOutput `pulumi:"zone"`
 }
 
 // NewGateway registers a new resource with the given unique name, arguments, and options.
@@ -120,6 +141,8 @@ type gatewayState struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the vpc.
 	VpcId *string `pulumi:"vpcId"`
+	// The availability zone, such as `ap-guangzhou-3`.
+	Zone *string `pulumi:"zone"`
 }
 
 type GatewayState struct {
@@ -137,6 +160,8 @@ type GatewayState struct {
 	Tags pulumi.MapInput
 	// ID of the vpc.
 	VpcId pulumi.StringPtrInput
+	// The availability zone, such as `ap-guangzhou-3`.
+	Zone pulumi.StringPtrInput
 }
 
 func (GatewayState) ElementType() reflect.Type {
@@ -156,6 +181,8 @@ type gatewayArgs struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the vpc.
 	VpcId string `pulumi:"vpcId"`
+	// The availability zone, such as `ap-guangzhou-3`.
+	Zone *string `pulumi:"zone"`
 }
 
 // The set of arguments for constructing a Gateway resource.
@@ -172,6 +199,8 @@ type GatewayArgs struct {
 	Tags pulumi.MapInput
 	// ID of the vpc.
 	VpcId pulumi.StringInput
+	// The availability zone, such as `ap-guangzhou-3`.
+	Zone pulumi.StringPtrInput
 }
 
 func (GatewayArgs) ElementType() reflect.Type {
@@ -294,6 +323,11 @@ func (o GatewayOutput) Tags() pulumi.MapOutput {
 // ID of the vpc.
 func (o GatewayOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// The availability zone, such as `ap-guangzhou-3`.
+func (o GatewayOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.Zone }).(pulumi.StringOutput)
 }
 
 type GatewayArrayOutput struct{ *pulumi.OutputState }

@@ -6,16 +6,27 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .chc_config import *
+from .export_images import *
 from .get_chc_denied_actions import *
 from .get_chc_hosts import *
 from .get_disaster_recover_group_quota import *
+from .get_image_quota import *
+from .get_image_share_permission import *
+from .get_import_image_os import *
 from .get_instance_vnc_url import *
 from .get_instances_modification import *
 from .hpc_cluster import *
+from .image_share_permission import *
+from .import_image import *
 from .launch_template import *
 from .launch_template_default_version import *
 from .launch_template_version import *
+from .modify_instance_disk_type import *
+from .program_fpga_image import *
 from .reboot_instance import *
+from .renew_host import *
+from .renew_instance import *
 from .security_group_attachment import *
+from .sync_image import *
 from ._inputs import *
 from . import outputs

@@ -66,10 +66,6 @@ import (
 // 				AdjDarMethod:          pulumi.String("scale"),
 // 				AudioBitrateAdjMethod: pulumi.String("0"),
 // 				DeleteMetadata:        pulumi.String("false"),
-// 				HlsEncrypt: &ci.MediaTranscodeTemplateTransConfigHlsEncryptArgs{
-// 					IsHlsEncrypt: pulumi.String("false"),
-// 					UriKey:       pulumi.String(""),
-// 				},
 // 				IsCheckAudioBitrate:   pulumi.String("false"),
 // 				IsCheckReso:           pulumi.String("false"),
 // 				IsCheckVideoBitrate:   pulumi.String("false"),

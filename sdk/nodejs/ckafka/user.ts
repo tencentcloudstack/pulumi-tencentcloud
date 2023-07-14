@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a Ckafka user.
  *
  * ## Example Usage
- *
- * Ckafka User
+ * ### Ckafka User
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

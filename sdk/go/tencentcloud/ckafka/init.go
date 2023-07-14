@@ -23,12 +23,22 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ckafka/acl:Acl":
 		r = &Acl{}
+	case "tencentcloud:Ckafka/aclRule:AclRule":
+		r = &AclRule{}
 	case "tencentcloud:Ckafka/connectResource:ConnectResource":
 		r = &ConnectResource{}
+	case "tencentcloud:Ckafka/consumerGroup:ConsumerGroup":
+		r = &ConsumerGroup{}
+	case "tencentcloud:Ckafka/consumerGroupModifyOffset:ConsumerGroupModifyOffset":
+		r = &ConsumerGroupModifyOffset{}
+	case "tencentcloud:Ckafka/datahubTask:DatahubTask":
+		r = &DatahubTask{}
 	case "tencentcloud:Ckafka/datahubTopic:DatahubTopic":
 		r = &DatahubTopic{}
 	case "tencentcloud:Ckafka/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Ckafka/renewInstance:RenewInstance":
+		r = &RenewInstance{}
 	case "tencentcloud:Ckafka/topic:Topic":
 		r = &Topic{}
 	case "tencentcloud:Ckafka/user:User":
@@ -53,7 +63,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Ckafka/aclRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Ckafka/connectResource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/consumerGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/consumerGroupModifyOffset",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/datahubTask",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -64,6 +94,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ckafka/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/renewInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

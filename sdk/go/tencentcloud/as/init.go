@@ -23,18 +23,30 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:As/attachment:Attachment":
 		r = &Attachment{}
+	case "tencentcloud:As/completeLifecycle:CompleteLifecycle":
+		r = &CompleteLifecycle{}
+	case "tencentcloud:As/executeScalingPolicy:ExecuteScalingPolicy":
+		r = &ExecuteScalingPolicy{}
 	case "tencentcloud:As/lifecycleHook:LifecycleHook":
 		r = &LifecycleHook{}
+	case "tencentcloud:As/loadBalancer:LoadBalancer":
+		r = &LoadBalancer{}
 	case "tencentcloud:As/notification:Notification":
 		r = &Notification{}
 	case "tencentcloud:As/protectInstances:ProtectInstances":
 		r = &ProtectInstances{}
 	case "tencentcloud:As/removeInstances:RemoveInstances":
 		r = &RemoveInstances{}
+	case "tencentcloud:As/scaleInInstances:ScaleInInstances":
+		r = &ScaleInInstances{}
+	case "tencentcloud:As/scaleOutInstances:ScaleOutInstances":
+		r = &ScaleOutInstances{}
 	case "tencentcloud:As/scalingConfig:ScalingConfig":
 		r = &ScalingConfig{}
 	case "tencentcloud:As/scalingGroup:ScalingGroup":
 		r = &ScalingGroup{}
+	case "tencentcloud:As/scalingGroupStatus:ScalingGroupStatus":
+		r = &ScalingGroupStatus{}
 	case "tencentcloud:As/scalingPolicy:ScalingPolicy":
 		r = &ScalingPolicy{}
 	case "tencentcloud:As/schedule:Schedule":
@@ -63,7 +75,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"As/completeLifecycle",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/executeScalingPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"As/lifecycleHook",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/loadBalancer",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -83,12 +110,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"As/scaleInInstances",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/scaleOutInstances",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"As/scalingConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"As/scalingGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/scalingGroupStatus",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

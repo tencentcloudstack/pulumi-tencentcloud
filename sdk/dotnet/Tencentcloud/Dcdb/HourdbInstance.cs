@@ -71,10 +71,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<string?> DbVersionId { get; private set; } = null!;
 
         /// <summary>
+        /// DCN source instance ID.
+        /// </summary>
+        [Output("dcnInstanceId")]
+        public Output<string?> DcnInstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// DCN source region.
+        /// </summary>
+        [Output("dcnRegion")]
+        public Output<string?> DcnRegion { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Output("extranetAccess")]
+        public Output<bool?> ExtranetAccess { get; private set; } = null!;
+
+        /// <summary>
         /// name of this instance.
         /// </summary>
         [Output("instanceName")]
         public Output<string?> InstanceName { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to support IPv6.
+        /// </summary>
+        [Output("ipv6Flag")]
+        public Output<int?> Ipv6Flag { get; private set; } = null!;
 
         /// <summary>
         /// project id.
@@ -119,16 +143,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<int> ShardStorage { get; private set; } = null!;
 
         /// <summary>
-        /// subnet id, it&amp;amp;#39;s required when vpcId is set.
+        /// subnet id, its required when vpcId is set.
         /// </summary>
         [Output("subnetId")]
         public Output<string?> SubnetId { get; private set; } = null!;
+
+        /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Output("vip")]
+        public Output<string> Vip { get; private set; } = null!;
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Output("vipv6")]
+        public Output<string> Vipv6 { get; private set; } = null!;
 
         /// <summary>
         /// vpc id.
         /// </summary>
         [Output("vpcId")]
         public Output<string?> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Intranet port.
+        /// </summary>
+        [Output("vport")]
+        public Output<int> Vport { get; private set; } = null!;
 
         /// <summary>
         /// available zone.
@@ -190,10 +232,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<string>? DbVersionId { get; set; }
 
         /// <summary>
+        /// DCN source instance ID.
+        /// </summary>
+        [Input("dcnInstanceId")]
+        public Input<string>? DcnInstanceId { get; set; }
+
+        /// <summary>
+        /// DCN source region.
+        /// </summary>
+        [Input("dcnRegion")]
+        public Input<string>? DcnRegion { get; set; }
+
+        /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Input("extranetAccess")]
+        public Input<bool>? ExtranetAccess { get; set; }
+
+        /// <summary>
         /// name of this instance.
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Whether to support IPv6.
+        /// </summary>
+        [Input("ipv6Flag")]
+        public Input<int>? Ipv6Flag { get; set; }
 
         /// <summary>
         /// project id.
@@ -244,10 +310,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<int> ShardStorage { get; set; } = null!;
 
         /// <summary>
-        /// subnet id, it&amp;amp;#39;s required when vpcId is set.
+        /// subnet id, its required when vpcId is set.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Input("vipv6")]
+        public Input<string>? Vipv6 { get; set; }
 
         /// <summary>
         /// vpc id.
@@ -281,10 +359,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<string>? DbVersionId { get; set; }
 
         /// <summary>
+        /// DCN source instance ID.
+        /// </summary>
+        [Input("dcnInstanceId")]
+        public Input<string>? DcnInstanceId { get; set; }
+
+        /// <summary>
+        /// DCN source region.
+        /// </summary>
+        [Input("dcnRegion")]
+        public Input<string>? DcnRegion { get; set; }
+
+        /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Input("extranetAccess")]
+        public Input<bool>? ExtranetAccess { get; set; }
+
+        /// <summary>
         /// name of this instance.
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Whether to support IPv6.
+        /// </summary>
+        [Input("ipv6Flag")]
+        public Input<int>? Ipv6Flag { get; set; }
 
         /// <summary>
         /// project id.
@@ -335,16 +437,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<int>? ShardStorage { get; set; }
 
         /// <summary>
-        /// subnet id, it&amp;amp;#39;s required when vpcId is set.
+        /// subnet id, its required when vpcId is set.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Input("vipv6")]
+        public Input<string>? Vipv6 { get; set; }
 
         /// <summary>
         /// vpc id.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Intranet port.
+        /// </summary>
+        [Input("vport")]
+        public Input<int>? Vport { get; set; }
 
         [Input("zones")]
         private InputList<string>? _zones;

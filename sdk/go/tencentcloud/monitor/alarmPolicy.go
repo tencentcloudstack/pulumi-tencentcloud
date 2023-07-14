@@ -14,8 +14,7 @@ import (
 // Provides a alarm policy resource for monitor.
 //
 // ## Example Usage
-//
-// cvmDevice alarm policy
+// ### cvmDevice alarm policy
 //
 // ```go
 // package main
@@ -73,8 +72,7 @@ import (
 // 	})
 // }
 // ```
-//
-// k8sCluster alarm policy
+// ### k8sCluster alarm policy
 //
 // ```go
 // package main
@@ -187,8 +185,7 @@ import (
 // 	})
 // }
 // ```
-//
-// cvmDevice alarm policy binding cvm by tag
+// ### cvmDevice alarm policy binding cvm by tag
 //
 // ```go
 // package main

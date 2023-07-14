@@ -463,8 +463,7 @@ class AlarmPolicy(pulumi.CustomResource):
         Provides a alarm policy resource for monitor.
 
         ## Example Usage
-
-        cvm_device alarm policy
+        ### cvm_device alarm policy
 
         ```python
         import pulumi
@@ -502,8 +501,7 @@ class AlarmPolicy(pulumi.CustomResource):
                 type="AS",
             )])
         ```
-
-        k8s_cluster alarm policy
+        ### k8s_cluster alarm policy
 
         ```python
         import pulumi
@@ -577,8 +575,7 @@ class AlarmPolicy(pulumi.CustomResource):
                 ],
             ))
         ```
-
-        cvm_device alarm policy binding cvm by tag
+        ### cvm_device alarm policy binding cvm by tag
 
         ```python
         import pulumi
@@ -691,8 +688,7 @@ class AlarmPolicy(pulumi.CustomResource):
         Provides a alarm policy resource for monitor.
 
         ## Example Usage
-
-        cvm_device alarm policy
+        ### cvm_device alarm policy
 
         ```python
         import pulumi
@@ -730,8 +726,7 @@ class AlarmPolicy(pulumi.CustomResource):
                 type="AS",
             )])
         ```
-
-        k8s_cluster alarm policy
+        ### k8s_cluster alarm policy
 
         ```python
         import pulumi
@@ -805,8 +800,7 @@ class AlarmPolicy(pulumi.CustomResource):
                 ],
             ))
         ```
-
-        cvm_device alarm policy binding cvm by tag
+        ### cvm_device alarm policy binding cvm by tag
 
         ```python
         import pulumi

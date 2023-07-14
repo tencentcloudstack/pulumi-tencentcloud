@@ -5,5 +5,11 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .address_transform import *
 from .association import *
+from .get_address_quota import *
+from .get_network_account_type import *
 from .instance import *
+from .normal_address_return import *
+from .public_address_adjust import *
+from . import outputs

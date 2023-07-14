@@ -23,20 +23,38 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Mariadb/account:Account":
 		r = &Account{}
+	case "tencentcloud:Mariadb/accountPrivileges:AccountPrivileges":
+		r = &AccountPrivileges{}
+	case "tencentcloud:Mariadb/backupTime:BackupTime":
+		r = &BackupTime{}
+	case "tencentcloud:Mariadb/cancelDcnJob:CancelDcnJob":
+		r = &CancelDcnJob{}
 	case "tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance":
 		r = &DedicatedclusterDbInstance{}
 	case "tencentcloud:Mariadb/encryptAttributes:EncryptAttributes":
 		r = &EncryptAttributes{}
+	case "tencentcloud:Mariadb/flushBinlog:FlushBinlog":
+		r = &FlushBinlog{}
 	case "tencentcloud:Mariadb/hourDbInstance:HourDbInstance":
 		r = &HourDbInstance{}
 	case "tencentcloud:Mariadb/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Mariadb/instanceConfig:InstanceConfig":
+		r = &InstanceConfig{}
 	case "tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod":
 		r = &LogFileRetentionPeriod{}
+	case "tencentcloud:Mariadb/operateHourDbInstance:OperateHourDbInstance":
+		r = &OperateHourDbInstance{}
 	case "tencentcloud:Mariadb/parameters:Parameters":
 		r = &Parameters{}
+	case "tencentcloud:Mariadb/renewInstance:RenewInstance":
+		r = &RenewInstance{}
+	case "tencentcloud:Mariadb/restartInstance:RestartInstance":
+		r = &RestartInstance{}
 	case "tencentcloud:Mariadb/securityGroups:SecurityGroups":
 		r = &SecurityGroups{}
+	case "tencentcloud:Mariadb/switchHa:SwitchHa":
+		r = &SwitchHa{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -57,12 +75,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mariadb/accountPrivileges",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/backupTime",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/cancelDcnJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mariadb/dedicatedclusterDbInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mariadb/encryptAttributes",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/flushBinlog",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -77,7 +115,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mariadb/instanceConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mariadb/logFileRetentionPeriod",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/operateHourDbInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -87,7 +135,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mariadb/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/restartInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mariadb/securityGroups",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mariadb/switchHa",
 		&module{version},
 	)
 }

@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver config_backup_strategy
     /// 
     /// ## Example Usage
-    /// 
-    /// Daily backup
+    /// ### Daily backup
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -46,8 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// }
     /// ```
-    /// 
-    /// Weekly backup
+    /// ### Weekly backup
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -79,8 +77,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// }
     /// ```
-    /// 
-    /// Regular backup
+    /// ### Regular backup
     /// 
     /// ```csharp
     /// using Pulumi;

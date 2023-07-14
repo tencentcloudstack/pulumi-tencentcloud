@@ -92,8 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// }
     /// ```
-    /// 
-    /// Use the TKE default issuer and jwks_uri
+    /// ### Use the TKE default issuer and jwks_uri
     /// 
     /// ```csharp
     /// using Pulumi;

@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a Ckafka user.
 //
 // ## Example Usage
-//
-// Ckafka User
+// ### Ckafka User
 //
 // ```go
 // package main

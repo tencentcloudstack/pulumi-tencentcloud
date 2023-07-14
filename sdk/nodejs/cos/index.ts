@@ -5,37 +5,85 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./batch";
 export * from "./bucket";
 export * from "./bucketDomainCertificateAttachment";
+export * from "./bucketGenerateInventoryImmediatelyOperation";
+export * from "./bucketInventory";
 export * from "./bucketObject";
 export * from "./bucketPolicy";
+export * from "./bucketReferer";
+export * from "./bucketVersion";
+export * from "./getBatchs";
+export * from "./getBucketInventorys";
+export * from "./getBucketMultipartUploads";
 export * from "./getBucketObject";
 export * from "./getBuckets";
+export * from "./objectAbortMultipartUploadOperation";
+export * from "./objectCopyOperation";
+export * from "./objectDownloadOperation";
+export * from "./objectRestoreOperation";
 
 // Import resources to register:
+import { Batch } from "./batch";
 import { Bucket } from "./bucket";
 import { BucketDomainCertificateAttachment } from "./bucketDomainCertificateAttachment";
+import { BucketGenerateInventoryImmediatelyOperation } from "./bucketGenerateInventoryImmediatelyOperation";
+import { BucketInventory } from "./bucketInventory";
 import { BucketObject } from "./bucketObject";
 import { BucketPolicy } from "./bucketPolicy";
+import { BucketReferer } from "./bucketReferer";
+import { BucketVersion } from "./bucketVersion";
+import { ObjectAbortMultipartUploadOperation } from "./objectAbortMultipartUploadOperation";
+import { ObjectCopyOperation } from "./objectCopyOperation";
+import { ObjectDownloadOperation } from "./objectDownloadOperation";
+import { ObjectRestoreOperation } from "./objectRestoreOperation";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cos/batch:Batch":
+                return new Batch(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucket:Bucket":
                 return new Bucket(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment":
                 return new BucketDomainCertificateAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/bucketGenerateInventoryImmediatelyOperation:BucketGenerateInventoryImmediatelyOperation":
+                return new BucketGenerateInventoryImmediatelyOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/bucketInventory:BucketInventory":
+                return new BucketInventory(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketObject:BucketObject":
                 return new BucketObject(name, <any>undefined, { urn })
             case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
                 return new BucketPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/bucketReferer:BucketReferer":
+                return new BucketReferer(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/bucketVersion:BucketVersion":
+                return new BucketVersion(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/objectAbortMultipartUploadOperation:ObjectAbortMultipartUploadOperation":
+                return new ObjectAbortMultipartUploadOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/objectCopyOperation:ObjectCopyOperation":
+                return new ObjectCopyOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/objectDownloadOperation:ObjectDownloadOperation":
+                return new ObjectDownloadOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cos/objectRestoreOperation:ObjectRestoreOperation":
+                return new ObjectRestoreOperation(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/batch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucket", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketDomainCertificateAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketGenerateInventoryImmediatelyOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketInventory", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketReferer", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/bucketVersion", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/objectAbortMultipartUploadOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/objectCopyOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/objectDownloadOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cos/objectRestoreOperation", _module)

@@ -13,6 +13,8 @@ import (
 
 // Use this resource to create postgresql instance.
 //
+// > **Note:** To update the charge type, please update the `chargeType` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+//
 // ## Example Usage
 //
 // ```go
@@ -73,8 +75,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Create a multi available zone bucket
+// ### Create a multi available zone bucket
 //
 // ```go
 // package main
@@ -148,8 +149,7 @@ import (
 // 	})
 // }
 // ```
-//
-// create pgsql with kms key
+// ### create pgsql with kms key
 //
 // ```go
 // package main
@@ -197,6 +197,56 @@ import (
 // 	})
 // }
 // ```
+// ### upgrade kernel version
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Postgresql.NewInstance(ctx, "test", &Postgresql.InstanceArgs{
+// 			AvailabilityZone:   pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name),
+// 			ChargeType:         pulumi.String("POSTPAID_BY_HOUR"),
+// 			VpcId:              pulumi.Any(local.Vpc_id),
+// 			SubnetId:           pulumi.Any(local.Subnet_id),
+// 			EngineVersion:      pulumi.String("13.3"),
+// 			RootPassword:       pulumi.String("*"),
+// 			Charset:            pulumi.String("LATIN1"),
+// 			ProjectId:          pulumi.Int(0),
+// 			PublicAccessSwitch: pulumi.Bool(false),
+// 			SecurityGroups: pulumi.StringArray{
+// 				pulumi.Any(local.Sg_id),
+// 			},
+// 			Memory:  pulumi.Int(4),
+// 			Storage: pulumi.Int(250),
+// 			BackupPlan: &postgresql.InstanceBackupPlanArgs{
+// 				MinBackupStartTime:        pulumi.String("01:10:11"),
+// 				MaxBackupStartTime:        pulumi.String("02:10:11"),
+// 				BaseBackupRetentionPeriod: pulumi.Int(5),
+// 				BackupPeriods: pulumi.StringArray{
+// 					pulumi.String("monday"),
+// 					pulumi.String("thursday"),
+// 					pulumi.String("sunday"),
+// 				},
+// 			},
+// 			DbKernelVersion: pulumi.String("v13.3_r1.4"),
+// 			Tags: pulumi.AnyMap{
+// 				"tf": pulumi.Any("teest"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
@@ -212,17 +262,17 @@ type Instance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
-	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrOutput `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrOutput `pulumi:"charset"`
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringOutput `pulumi:"dbKernelVersion"`
 	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringOutput `pulumi:"dbMajorVersion"`
@@ -248,7 +298,7 @@ type Instance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntOutput `pulumi:"needSupportTde"`
-	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// IP for private access.
 	PrivateAccessIp pulumi.StringOutput `pulumi:"privateAccessIp"`
@@ -271,7 +321,7 @@ type Instance struct {
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage pulumi.IntOutput `pulumi:"storage"`
 	// ID of subnet.
-	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// The available tags within this postgresql.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Uid of the postgresql instance.
@@ -279,7 +329,7 @@ type Instance struct {
 	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
 	VoucherIds pulumi.StringArrayOutput `pulumi:"voucherIds"`
 	// ID of VPC.
-	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -300,6 +350,12 @@ func NewInstance(ctx *pulumi.Context,
 	}
 	if args.Storage == nil {
 		return nil, errors.New("invalid value for required argument 'Storage'")
+	}
+	if args.SubnetId == nil {
+		return nil, errors.New("invalid value for required argument 'SubnetId'")
+	}
+	if args.VpcId == nil {
+		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
@@ -328,17 +384,17 @@ type instanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher *int `pulumi:"autoVoucher"`
-	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset *string `pulumi:"charset"`
 	// Create time of the postgresql instance.
 	CreateTime *string `pulumi:"createTime"`
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion *string `pulumi:"dbKernelVersion"`
 	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion *string `pulumi:"dbMajorVersion"`
@@ -364,7 +420,7 @@ type instanceState struct {
 	Name *string `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde *int `pulumi:"needSupportTde"`
-	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	Period *int `pulumi:"period"`
 	// IP for private access.
 	PrivateAccessIp *string `pulumi:"privateAccessIp"`
@@ -403,17 +459,17 @@ type InstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrInput
-	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringPtrInput
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
-	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrInput
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrInput
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringPtrInput
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringPtrInput
 	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringPtrInput
@@ -439,7 +495,7 @@ type InstanceState struct {
 	Name pulumi.StringPtrInput
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntPtrInput
-	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	Period pulumi.IntPtrInput
 	// IP for private access.
 	PrivateAccessIp pulumi.StringPtrInput
@@ -482,15 +538,15 @@ type instanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher *int `pulumi:"autoVoucher"`
-	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// Specify DB backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
-	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset *string `pulumi:"charset"`
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion *string `pulumi:"dbKernelVersion"`
 	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion *string `pulumi:"dbMajorVersion"`
@@ -516,7 +572,7 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde *int `pulumi:"needSupportTde"`
-	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	Period *int `pulumi:"period"`
 	// Project id, default value is `0`.
 	ProjectId *int `pulumi:"projectId"`
@@ -531,13 +587,13 @@ type instanceArgs struct {
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage int `pulumi:"storage"`
 	// ID of subnet.
-	SubnetId *string `pulumi:"subnetId"`
+	SubnetId string `pulumi:"subnetId"`
 	// The available tags within this postgresql.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
 	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
-	VpcId *string `pulumi:"vpcId"`
+	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -546,15 +602,15 @@ type InstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrInput
-	// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringInput
 	// Specify DB backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
-	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrInput
 	// Charset of the root account. Valid values are `UTF8`,`LATIN1`.
 	Charset pulumi.StringPtrInput
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringPtrInput
 	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringPtrInput
@@ -580,7 +636,7 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Whether to support data transparent encryption, 1: yes, 0: no (default).
 	NeedSupportTde pulumi.IntPtrInput
-	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	Period pulumi.IntPtrInput
 	// Project id, default value is `0`.
 	ProjectId pulumi.IntPtrInput
@@ -595,13 +651,13 @@ type InstanceArgs struct {
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage pulumi.IntInput
 	// ID of subnet.
-	SubnetId pulumi.StringPtrInput
+	SubnetId pulumi.StringInput
 	// The available tags within this postgresql.
 	Tags pulumi.MapInput
 	// Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
 	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
-	VpcId pulumi.StringPtrInput
+	VpcId pulumi.StringInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -701,7 +757,7 @@ func (o InstanceOutput) AutoVoucher() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoVoucher }).(pulumi.IntPtrOutput)
 }
 
-// Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 func (o InstanceOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
@@ -711,7 +767,7 @@ func (o InstanceOutput) BackupPlan() InstanceBackupPlanPtrOutput {
 	return o.ApplyT(func(v *Instance) InstanceBackupPlanPtrOutput { return v.BackupPlan }).(InstanceBackupPlanPtrOutput)
 }
 
-// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
@@ -726,7 +782,7 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 func (o InstanceOutput) DbKernelVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DbKernelVersion }).(pulumi.StringOutput)
 }
@@ -788,7 +844,7 @@ func (o InstanceOutput) NeedSupportTde() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.NeedSupportTde }).(pulumi.IntOutput)
 }
 
-// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
 func (o InstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
@@ -844,8 +900,8 @@ func (o InstanceOutput) Storage() pulumi.IntOutput {
 }
 
 // ID of subnet.
-func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
 // The available tags within this postgresql.
@@ -864,8 +920,8 @@ func (o InstanceOutput) VoucherIds() pulumi.StringArrayOutput {
 }
 
 // ID of VPC.
-func (o InstanceOutput) VpcId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

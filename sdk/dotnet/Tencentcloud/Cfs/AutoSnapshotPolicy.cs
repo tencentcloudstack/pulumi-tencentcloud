@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// Provides a resource to create a cfs auto_snapshot_policy
     /// 
     /// ## Example Usage
-    /// 
-    /// use day of week
+    /// ### use day of week
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -36,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// }
     /// ```
-    /// 
-    /// use day of month
+    /// ### use day of month
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -58,8 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// }
     /// ```
-    /// 
-    /// use interval days
+    /// ### use interval days
     /// 
     /// ```csharp
     /// using Pulumi;

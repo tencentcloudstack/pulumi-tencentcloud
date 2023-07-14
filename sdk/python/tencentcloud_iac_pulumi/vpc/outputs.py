@@ -11,14 +11,53 @@ from . import outputs
 
 __all__ = [
     'FlowLogFlowLogStorage',
+    'Ipv6EniAddressIpv6Address',
+    'Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks',
+    'NetworkAclQuintupleNetworkAclQuintupleSet',
+    'NetworkAclQuintupleNetworkAclQuintupleSetEgress',
+    'NetworkAclQuintupleNetworkAclQuintupleSetIngress',
+    'SnapshotPolicyAttachmentInstance',
+    'SnapshotPolicyBackupPolicy',
+    'GetAccountAttributesAccountAttributeSetResult',
     'GetAclsAclListResult',
     'GetAclsAclListEgressResult',
     'GetAclsAclListIngressResult',
     'GetAclsAclListSubnetResult',
+    'GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetResult',
+    'GetBandwidthPackageQuotaQuotaSetResult',
+    'GetClassicLinkInstancesClassicLinkInstanceSetResult',
+    'GetClassicLinkInstancesFilterResult',
+    'GetCvmInstancesFilterResult',
+    'GetCvmInstancesInstanceSetResult',
+    'GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetResult',
+    'GetGatewayFlowQosGatewayQosSetResult',
     'GetInstancesInstanceListResult',
+    'GetLimitsVpcLimitSetResult',
+    'GetNetDetectStateCheckNetDetectIpStateSetResult',
+    'GetNetDetectStatesFilterResult',
+    'GetNetDetectStatesNetDetectStateSetResult',
+    'GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetResult',
+    'GetPrivateIpAddressesVpcPrivateIpAddressSetResult',
+    'GetProductQuotaProductQuotaSetResult',
+    'GetResourceDashboardResourceDashboardSetResult',
+    'GetRouteConflictsRouteConflictSetResult',
+    'GetRouteConflictsRouteConflictSetConflictSetResult',
     'GetRouteTablesInstanceListResult',
     'GetRouteTablesInstanceListRouteEntryInfoResult',
+    'GetSecurityGroupLimitsSecurityGroupLimitSetResult',
+    'GetSecurityGroupReferencesReferredSecurityGroupSetResult',
+    'GetSgSnapshotFileContentBackupDataResult',
+    'GetSgSnapshotFileContentBackupDataAddressTemplateResult',
+    'GetSgSnapshotFileContentBackupDataServiceTemplateResult',
+    'GetSgSnapshotFileContentOriginalDataResult',
+    'GetSgSnapshotFileContentOriginalDataAddressTemplateResult',
+    'GetSgSnapshotFileContentOriginalDataServiceTemplateResult',
+    'GetSnapshotFilesSnapshotFileSetResult',
+    'GetSubnetResourceDashboardResourceStatisticsSetResult',
+    'GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetResult',
     'GetSubnetsInstanceListResult',
+    'GetTemplateLimitsTemplateLimitResult',
+    'GetUsedIpAddressIpAddressStateResult',
 ]
 
 @pulumi.output_type
@@ -69,6 +108,582 @@ class FlowLogFlowLogStorage(dict):
         Specify storage topic id, required while `storage_type` is `ckafka`.
         """
         return pulumi.get(self, "storage_topic")
+
+
+@pulumi.output_type
+class Ipv6EniAddressIpv6Address(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addressId":
+            suggest = "address_id"
+        elif key == "isWanIpBlocked":
+            suggest = "is_wan_ip_blocked"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in Ipv6EniAddressIpv6Address. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        Ipv6EniAddressIpv6Address.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        Ipv6EniAddressIpv6Address.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 address: str,
+                 address_id: Optional[str] = None,
+                 description: Optional[str] = None,
+                 is_wan_ip_blocked: Optional[bool] = None,
+                 primary: Optional[bool] = None,
+                 state: Optional[str] = None):
+        """
+        :param str address: `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+        :param str address_id: `EIP` instance `ID`, such as:`eip-hxlqja90`.
+        :param str description: Description.
+        :param bool is_wan_ip_blocked: Whether the public network IP is blocked.
+        :param bool primary: Whether to master `IP`.
+        :param str state: `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+        """
+        pulumi.set(__self__, "address", address)
+        if address_id is not None:
+            pulumi.set(__self__, "address_id", address_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if is_wan_ip_blocked is not None:
+            pulumi.set(__self__, "is_wan_ip_blocked", is_wan_ip_blocked)
+        if primary is not None:
+            pulumi.set(__self__, "primary", primary)
+        if state is not None:
+            pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="addressId")
+    def address_id(self) -> Optional[str]:
+        """
+        `EIP` instance `ID`, such as:`eip-hxlqja90`.
+        """
+        return pulumi.get(self, "address_id")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="isWanIpBlocked")
+    def is_wan_ip_blocked(self) -> Optional[bool]:
+        """
+        Whether the public network IP is blocked.
+        """
+        return pulumi.get(self, "is_wan_ip_blocked")
+
+    @property
+    @pulumi.getter
+    def primary(self) -> Optional[bool]:
+        """
+        Whether to master `IP`.
+        """
+        return pulumi.get(self, "primary")
+
+    @property
+    @pulumi.getter
+    def state(self) -> Optional[str]:
+        """
+        `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ipv6CidrBlock":
+            suggest = "ipv6_cidr_block"
+        elif key == "subnetId":
+            suggest = "subnet_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ipv6_cidr_block: str,
+                 subnet_id: str):
+        """
+        :param str ipv6_cidr_block: `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+        :param str subnet_id: Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+        """
+        pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter(name="ipv6CidrBlock")
+    def ipv6_cidr_block(self) -> str:
+        """
+        `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+        """
+        return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+        """
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class NetworkAclQuintupleNetworkAclQuintupleSet(dict):
+    def __init__(__self__, *,
+                 egresses: Optional[Sequence['outputs.NetworkAclQuintupleNetworkAclQuintupleSetEgress']] = None,
+                 ingresses: Optional[Sequence['outputs.NetworkAclQuintupleNetworkAclQuintupleSetIngress']] = None):
+        if egresses is not None:
+            pulumi.set(__self__, "egresses", egresses)
+        if ingresses is not None:
+            pulumi.set(__self__, "ingresses", ingresses)
+
+    @property
+    @pulumi.getter
+    def egresses(self) -> Optional[Sequence['outputs.NetworkAclQuintupleNetworkAclQuintupleSetEgress']]:
+        return pulumi.get(self, "egresses")
+
+    @property
+    @pulumi.getter
+    def ingresses(self) -> Optional[Sequence['outputs.NetworkAclQuintupleNetworkAclQuintupleSetIngress']]:
+        return pulumi.get(self, "ingresses")
+
+
+@pulumi.output_type
+class NetworkAclQuintupleNetworkAclQuintupleSetEgress(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "createTime":
+            suggest = "create_time"
+        elif key == "destinationCidr":
+            suggest = "destination_cidr"
+        elif key == "destinationPort":
+            suggest = "destination_port"
+        elif key == "networkAclDirection":
+            suggest = "network_acl_direction"
+        elif key == "networkAclQuintupleEntryId":
+            suggest = "network_acl_quintuple_entry_id"
+        elif key == "sourceCidr":
+            suggest = "source_cidr"
+        elif key == "sourcePort":
+            suggest = "source_port"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NetworkAclQuintupleNetworkAclQuintupleSetEgress. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NetworkAclQuintupleNetworkAclQuintupleSetEgress.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NetworkAclQuintupleNetworkAclQuintupleSetEgress.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: Optional[str] = None,
+                 create_time: Optional[str] = None,
+                 description: Optional[str] = None,
+                 destination_cidr: Optional[str] = None,
+                 destination_port: Optional[str] = None,
+                 network_acl_direction: Optional[str] = None,
+                 network_acl_quintuple_entry_id: Optional[str] = None,
+                 priority: Optional[int] = None,
+                 protocol: Optional[str] = None,
+                 source_cidr: Optional[str] = None,
+                 source_port: Optional[str] = None):
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if destination_cidr is not None:
+            pulumi.set(__self__, "destination_cidr", destination_cidr)
+        if destination_port is not None:
+            pulumi.set(__self__, "destination_port", destination_port)
+        if network_acl_direction is not None:
+            pulumi.set(__self__, "network_acl_direction", network_acl_direction)
+        if network_acl_quintuple_entry_id is not None:
+            pulumi.set(__self__, "network_acl_quintuple_entry_id", network_acl_quintuple_entry_id)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if source_cidr is not None:
+            pulumi.set(__self__, "source_cidr", source_cidr)
+        if source_port is not None:
+            pulumi.set(__self__, "source_port", source_port)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[str]:
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[str]:
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="destinationCidr")
+    def destination_cidr(self) -> Optional[str]:
+        return pulumi.get(self, "destination_cidr")
+
+    @property
+    @pulumi.getter(name="destinationPort")
+    def destination_port(self) -> Optional[str]:
+        return pulumi.get(self, "destination_port")
+
+    @property
+    @pulumi.getter(name="networkAclDirection")
+    def network_acl_direction(self) -> Optional[str]:
+        return pulumi.get(self, "network_acl_direction")
+
+    @property
+    @pulumi.getter(name="networkAclQuintupleEntryId")
+    def network_acl_quintuple_entry_id(self) -> Optional[str]:
+        return pulumi.get(self, "network_acl_quintuple_entry_id")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[int]:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="sourceCidr")
+    def source_cidr(self) -> Optional[str]:
+        return pulumi.get(self, "source_cidr")
+
+    @property
+    @pulumi.getter(name="sourcePort")
+    def source_port(self) -> Optional[str]:
+        return pulumi.get(self, "source_port")
+
+
+@pulumi.output_type
+class NetworkAclQuintupleNetworkAclQuintupleSetIngress(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "createTime":
+            suggest = "create_time"
+        elif key == "destinationCidr":
+            suggest = "destination_cidr"
+        elif key == "destinationPort":
+            suggest = "destination_port"
+        elif key == "networkAclDirection":
+            suggest = "network_acl_direction"
+        elif key == "networkAclQuintupleEntryId":
+            suggest = "network_acl_quintuple_entry_id"
+        elif key == "sourceCidr":
+            suggest = "source_cidr"
+        elif key == "sourcePort":
+            suggest = "source_port"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NetworkAclQuintupleNetworkAclQuintupleSetIngress. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NetworkAclQuintupleNetworkAclQuintupleSetIngress.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NetworkAclQuintupleNetworkAclQuintupleSetIngress.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: Optional[str] = None,
+                 create_time: Optional[str] = None,
+                 description: Optional[str] = None,
+                 destination_cidr: Optional[str] = None,
+                 destination_port: Optional[str] = None,
+                 network_acl_direction: Optional[str] = None,
+                 network_acl_quintuple_entry_id: Optional[str] = None,
+                 priority: Optional[int] = None,
+                 protocol: Optional[str] = None,
+                 source_cidr: Optional[str] = None,
+                 source_port: Optional[str] = None):
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if destination_cidr is not None:
+            pulumi.set(__self__, "destination_cidr", destination_cidr)
+        if destination_port is not None:
+            pulumi.set(__self__, "destination_port", destination_port)
+        if network_acl_direction is not None:
+            pulumi.set(__self__, "network_acl_direction", network_acl_direction)
+        if network_acl_quintuple_entry_id is not None:
+            pulumi.set(__self__, "network_acl_quintuple_entry_id", network_acl_quintuple_entry_id)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if source_cidr is not None:
+            pulumi.set(__self__, "source_cidr", source_cidr)
+        if source_port is not None:
+            pulumi.set(__self__, "source_port", source_port)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[str]:
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[str]:
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="destinationCidr")
+    def destination_cidr(self) -> Optional[str]:
+        return pulumi.get(self, "destination_cidr")
+
+    @property
+    @pulumi.getter(name="destinationPort")
+    def destination_port(self) -> Optional[str]:
+        return pulumi.get(self, "destination_port")
+
+    @property
+    @pulumi.getter(name="networkAclDirection")
+    def network_acl_direction(self) -> Optional[str]:
+        return pulumi.get(self, "network_acl_direction")
+
+    @property
+    @pulumi.getter(name="networkAclQuintupleEntryId")
+    def network_acl_quintuple_entry_id(self) -> Optional[str]:
+        return pulumi.get(self, "network_acl_quintuple_entry_id")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[int]:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="sourceCidr")
+    def source_cidr(self) -> Optional[str]:
+        return pulumi.get(self, "source_cidr")
+
+    @property
+    @pulumi.getter(name="sourcePort")
+    def source_port(self) -> Optional[str]:
+        return pulumi.get(self, "source_port")
+
+
+@pulumi.output_type
+class SnapshotPolicyAttachmentInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceRegion":
+            suggest = "instance_region"
+        elif key == "instanceType":
+            suggest = "instance_type"
+        elif key == "instanceName":
+            suggest = "instance_name"
+        elif key == "snapshotPolicyId":
+            suggest = "snapshot_policy_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SnapshotPolicyAttachmentInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SnapshotPolicyAttachmentInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SnapshotPolicyAttachmentInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_region: str,
+                 instance_type: str,
+                 instance_name: Optional[str] = None,
+                 snapshot_policy_id: Optional[str] = None):
+        """
+        :param str instance_id: InstanceId.
+        :param str instance_region: The region where the instance is located.
+        :param str instance_type: Instance type, currently supports set: `securitygroup`.
+        :param str instance_name: Instance name.
+        :param str snapshot_policy_id: Snapshot policy Id.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_region", instance_region)
+        pulumi.set(__self__, "instance_type", instance_type)
+        if instance_name is not None:
+            pulumi.set(__self__, "instance_name", instance_name)
+        if snapshot_policy_id is not None:
+            pulumi.set(__self__, "snapshot_policy_id", snapshot_policy_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        InstanceId.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        The region where the instance is located.
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type, currently supports set: `securitygroup`.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> Optional[str]:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="snapshotPolicyId")
+    def snapshot_policy_id(self) -> Optional[str]:
+        """
+        Snapshot policy Id.
+        """
+        return pulumi.get(self, "snapshot_policy_id")
+
+
+@pulumi.output_type
+class SnapshotPolicyBackupPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "backupDay":
+            suggest = "backup_day"
+        elif key == "backupTime":
+            suggest = "backup_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SnapshotPolicyBackupPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SnapshotPolicyBackupPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SnapshotPolicyBackupPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 backup_day: str,
+                 backup_time: str):
+        """
+        :param str backup_day: Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+        :param str backup_time: Backup time point, format:HH:mm:ss.
+        """
+        pulumi.set(__self__, "backup_day", backup_day)
+        pulumi.set(__self__, "backup_time", backup_time)
+
+    @property
+    @pulumi.getter(name="backupDay")
+    def backup_day(self) -> str:
+        """
+        Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+        """
+        return pulumi.get(self, "backup_day")
+
+    @property
+    @pulumi.getter(name="backupTime")
+    def backup_time(self) -> str:
+        """
+        Backup time point, format:HH:mm:ss.
+        """
+        return pulumi.get(self, "backup_time")
+
+
+@pulumi.output_type
+class GetAccountAttributesAccountAttributeSetResult(dict):
+    def __init__(__self__, *,
+                 attribute_name: str,
+                 attribute_values: Sequence[str]):
+        """
+        :param str attribute_name: Attribute name.
+        :param Sequence[str] attribute_values: Attribute values.
+        """
+        pulumi.set(__self__, "attribute_name", attribute_name)
+        pulumi.set(__self__, "attribute_values", attribute_values)
+
+    @property
+    @pulumi.getter(name="attributeName")
+    def attribute_name(self) -> str:
+        """
+        Attribute name.
+        """
+        return pulumi.get(self, "attribute_name")
+
+    @property
+    @pulumi.getter(name="attributeValues")
+    def attribute_values(self) -> Sequence[str]:
+        """
+        Attribute values.
+        """
+        return pulumi.get(self, "attribute_values")
 
 
 @pulumi.output_type
@@ -342,6 +957,403 @@ class GetAclsAclListSubnetResult(dict):
 
 
 @pulumi.output_type
+class GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_usage: float):
+        """
+        :param float bandwidth_usage: Current billing amount in Mbps.
+        """
+        pulumi.set(__self__, "bandwidth_usage", bandwidth_usage)
+
+    @property
+    @pulumi.getter(name="bandwidthUsage")
+    def bandwidth_usage(self) -> float:
+        """
+        Current billing amount in Mbps.
+        """
+        return pulumi.get(self, "bandwidth_usage")
+
+
+@pulumi.output_type
+class GetBandwidthPackageQuotaQuotaSetResult(dict):
+    def __init__(__self__, *,
+                 quota_current: int,
+                 quota_id: str,
+                 quota_limit: int):
+        """
+        :param int quota_current: current amount.
+        :param str quota_id: Quota type.
+        :param int quota_limit: quota amount.
+        """
+        pulumi.set(__self__, "quota_current", quota_current)
+        pulumi.set(__self__, "quota_id", quota_id)
+        pulumi.set(__self__, "quota_limit", quota_limit)
+
+    @property
+    @pulumi.getter(name="quotaCurrent")
+    def quota_current(self) -> int:
+        """
+        current amount.
+        """
+        return pulumi.get(self, "quota_current")
+
+    @property
+    @pulumi.getter(name="quotaId")
+    def quota_id(self) -> str:
+        """
+        Quota type.
+        """
+        return pulumi.get(self, "quota_id")
+
+    @property
+    @pulumi.getter(name="quotaLimit")
+    def quota_limit(self) -> int:
+        """
+        quota amount.
+        """
+        return pulumi.get(self, "quota_limit")
+
+
+@pulumi.output_type
+class GetClassicLinkInstancesClassicLinkInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 vpc_id: str):
+        """
+        :param str instance_id: The unique ID of the CVM instance.
+        :param str vpc_id: VPC instance ID.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        The unique ID of the CVM instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC instance ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetClassicLinkInstancesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        :param Sequence[str] values: The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetCvmInstancesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        :param Sequence[str] values: Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetCvmInstancesInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 cpu: int,
+                 created_time: str,
+                 eni_ip_limit: int,
+                 eni_limit: int,
+                 instance_eni_count: int,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_state: str,
+                 instance_type: str,
+                 memory: int,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param int cpu: Number of CPU cores in an instance (in core).
+        :param str created_time: The creation time.
+        :param int eni_ip_limit: Private IP quoata for instance ENIs (including primary ENIs).
+        :param int eni_limit: Instance ENI quota (including primary ENIs).
+        :param int instance_eni_count: The number of ENIs (including primary ENIs) bound to a instance.
+        :param str instance_id: CVM instance ID.
+        :param str instance_name: CVM Name.
+        :param str instance_state: CVM status.
+        :param str instance_type: Instance type.
+        :param int memory: Instance's memory capacity. Unit: GB.
+        :param str subnet_id: Subnet instance ID.
+        :param str vpc_id: VPC instance ID.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "eni_ip_limit", eni_ip_limit)
+        pulumi.set(__self__, "eni_limit", eni_limit)
+        pulumi.set(__self__, "instance_eni_count", instance_eni_count)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_state", instance_state)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of CPU cores in an instance (in core).
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        The creation time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="eniIpLimit")
+    def eni_ip_limit(self) -> int:
+        """
+        Private IP quoata for instance ENIs (including primary ENIs).
+        """
+        return pulumi.get(self, "eni_ip_limit")
+
+    @property
+    @pulumi.getter(name="eniLimit")
+    def eni_limit(self) -> int:
+        """
+        Instance ENI quota (including primary ENIs).
+        """
+        return pulumi.get(self, "eni_limit")
+
+    @property
+    @pulumi.getter(name="instanceEniCount")
+    def instance_eni_count(self) -> int:
+        """
+        The number of ENIs (including primary ENIs) bound to a instance.
+        """
+        return pulumi.get(self, "instance_eni_count")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        CVM instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        CVM Name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceState")
+    def instance_state(self) -> str:
+        """
+        CVM status.
+        """
+        return pulumi.get(self, "instance_state")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Instance's memory capacity. Unit: GB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet instance ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC instance ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetResult(dict):
+    def __init__(__self__, *,
+                 in_pkg: int,
+                 in_traffic: int,
+                 out_pkg: int,
+                 out_traffic: int,
+                 private_ip_address: str):
+        """
+        :param int in_pkg: Inbound packets.
+        :param int in_traffic: Inbound traffic, in Byte.
+        :param int out_pkg: Outbound packets.
+        :param int out_traffic: Outbound traffic, in Byte.
+        :param str private_ip_address: Origin `IP`.
+        """
+        pulumi.set(__self__, "in_pkg", in_pkg)
+        pulumi.set(__self__, "in_traffic", in_traffic)
+        pulumi.set(__self__, "out_pkg", out_pkg)
+        pulumi.set(__self__, "out_traffic", out_traffic)
+        pulumi.set(__self__, "private_ip_address", private_ip_address)
+
+    @property
+    @pulumi.getter(name="inPkg")
+    def in_pkg(self) -> int:
+        """
+        Inbound packets.
+        """
+        return pulumi.get(self, "in_pkg")
+
+    @property
+    @pulumi.getter(name="inTraffic")
+    def in_traffic(self) -> int:
+        """
+        Inbound traffic, in Byte.
+        """
+        return pulumi.get(self, "in_traffic")
+
+    @property
+    @pulumi.getter(name="outPkg")
+    def out_pkg(self) -> int:
+        """
+        Outbound packets.
+        """
+        return pulumi.get(self, "out_pkg")
+
+    @property
+    @pulumi.getter(name="outTraffic")
+    def out_traffic(self) -> int:
+        """
+        Outbound traffic, in Byte.
+        """
+        return pulumi.get(self, "out_traffic")
+
+    @property
+    @pulumi.getter(name="privateIpAddress")
+    def private_ip_address(self) -> str:
+        """
+        Origin `IP`.
+        """
+        return pulumi.get(self, "private_ip_address")
+
+
+@pulumi.output_type
+class GetGatewayFlowQosGatewayQosSetResult(dict):
+    def __init__(__self__, *,
+                 bandwidth: int,
+                 create_time: str,
+                 ip_address: str,
+                 vpc_id: str):
+        """
+        :param int bandwidth: bandwidth value.
+        :param str create_time: create time.
+        :param str ip_address: cvm ip address.
+        :param str vpc_id: vpc id.
+        """
+        pulumi.set(__self__, "bandwidth", bandwidth)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "ip_address", ip_address)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def bandwidth(self) -> int:
+        """
+        bandwidth value.
+        """
+        return pulumi.get(self, "bandwidth")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> str:
+        """
+        cvm ip address.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        vpc id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
 class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  cidr_block: str,
@@ -445,6 +1457,956 @@ class GetInstancesInstanceListResult(dict):
         ID of the VPC to be queried.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetLimitsVpcLimitSetResult(dict):
+    def __init__(__self__, *,
+                 limit_type: str,
+                 limit_value: int):
+        """
+        :param str limit_type: type of vpc limit.
+        :param int limit_value: value of vpc limit.
+        """
+        pulumi.set(__self__, "limit_type", limit_type)
+        pulumi.set(__self__, "limit_value", limit_value)
+
+    @property
+    @pulumi.getter(name="limitType")
+    def limit_type(self) -> str:
+        """
+        type of vpc limit.
+        """
+        return pulumi.get(self, "limit_type")
+
+    @property
+    @pulumi.getter(name="limitValue")
+    def limit_value(self) -> int:
+        """
+        value of vpc limit.
+        """
+        return pulumi.get(self, "limit_value")
+
+
+@pulumi.output_type
+class GetNetDetectStateCheckNetDetectIpStateSetResult(dict):
+    def __init__(__self__, *,
+                 delay: int,
+                 detect_destination_ip: str,
+                 packet_loss_rate: int,
+                 state: int):
+        """
+        :param int delay: The latency. Unit: ms.
+        :param str detect_destination_ip: The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+        :param int packet_loss_rate: The packet loss rate.
+        :param int state: The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+        """
+        pulumi.set(__self__, "delay", delay)
+        pulumi.set(__self__, "detect_destination_ip", detect_destination_ip)
+        pulumi.set(__self__, "packet_loss_rate", packet_loss_rate)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter
+    def delay(self) -> int:
+        """
+        The latency. Unit: ms.
+        """
+        return pulumi.get(self, "delay")
+
+    @property
+    @pulumi.getter(name="detectDestinationIp")
+    def detect_destination_ip(self) -> str:
+        """
+        The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+        """
+        return pulumi.get(self, "detect_destination_ip")
+
+    @property
+    @pulumi.getter(name="packetLossRate")
+    def packet_loss_rate(self) -> int:
+        """
+        The packet loss rate.
+        """
+        return pulumi.get(self, "packet_loss_rate")
+
+    @property
+    @pulumi.getter
+    def state(self) -> int:
+        """
+        The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetNetDetectStatesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        :param Sequence[str] values: Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetNetDetectStatesNetDetectStateSetResult(dict):
+    def __init__(__self__, *,
+                 net_detect_id: str,
+                 net_detect_ip_state_sets: Sequence['outputs.GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetResult']):
+        """
+        :param str net_detect_id: The ID of a network detection instance, such as netd-12345678.
+        :param Sequence['GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs'] net_detect_ip_state_sets: The array of network detection destination IP verification results.
+        """
+        pulumi.set(__self__, "net_detect_id", net_detect_id)
+        pulumi.set(__self__, "net_detect_ip_state_sets", net_detect_ip_state_sets)
+
+    @property
+    @pulumi.getter(name="netDetectId")
+    def net_detect_id(self) -> str:
+        """
+        The ID of a network detection instance, such as netd-12345678.
+        """
+        return pulumi.get(self, "net_detect_id")
+
+    @property
+    @pulumi.getter(name="netDetectIpStateSets")
+    def net_detect_ip_state_sets(self) -> Sequence['outputs.GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetResult']:
+        """
+        The array of network detection destination IP verification results.
+        """
+        return pulumi.get(self, "net_detect_ip_state_sets")
+
+
+@pulumi.output_type
+class GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetResult(dict):
+    def __init__(__self__, *,
+                 delay: int,
+                 detect_destination_ip: str,
+                 packet_loss_rate: int,
+                 state: int):
+        """
+        :param int delay: The latency. Unit: ms.
+        :param str detect_destination_ip: The destination IPv4 address of network detection.
+        :param int packet_loss_rate: The packet loss rate.
+        :param int state: The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+        """
+        pulumi.set(__self__, "delay", delay)
+        pulumi.set(__self__, "detect_destination_ip", detect_destination_ip)
+        pulumi.set(__self__, "packet_loss_rate", packet_loss_rate)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter
+    def delay(self) -> int:
+        """
+        The latency. Unit: ms.
+        """
+        return pulumi.get(self, "delay")
+
+    @property
+    @pulumi.getter(name="detectDestinationIp")
+    def detect_destination_ip(self) -> str:
+        """
+        The destination IPv4 address of network detection.
+        """
+        return pulumi.get(self, "detect_destination_ip")
+
+    @property
+    @pulumi.getter(name="packetLossRate")
+    def packet_loss_rate(self) -> int:
+        """
+        The packet loss rate.
+        """
+        return pulumi.get(self, "packet_loss_rate")
+
+    @property
+    @pulumi.getter
+    def state(self) -> int:
+        """
+        The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetPrivateIpAddressesVpcPrivateIpAddressSetResult(dict):
+    def __init__(__self__, *,
+                 cidr_block: str,
+                 created_time: str,
+                 private_ip_address: str,
+                 private_ip_address_type: str):
+        """
+        :param str cidr_block: The `CIDR` belonging to the subnet.
+        :param str created_time: `IP` application time.
+        :param str private_ip_address: `VPC` private `IP`.
+        :param str private_ip_address_type: Private `IP` type.
+        """
+        pulumi.set(__self__, "cidr_block", cidr_block)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "private_ip_address", private_ip_address)
+        pulumi.set(__self__, "private_ip_address_type", private_ip_address_type)
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> str:
+        """
+        The `CIDR` belonging to the subnet.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        `IP` application time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="privateIpAddress")
+    def private_ip_address(self) -> str:
+        """
+        `VPC` private `IP`.
+        """
+        return pulumi.get(self, "private_ip_address")
+
+    @property
+    @pulumi.getter(name="privateIpAddressType")
+    def private_ip_address_type(self) -> str:
+        """
+        Private `IP` type.
+        """
+        return pulumi.get(self, "private_ip_address_type")
+
+
+@pulumi.output_type
+class GetProductQuotaProductQuotaSetResult(dict):
+    def __init__(__self__, *,
+                 quota_current: int,
+                 quota_id: str,
+                 quota_limit: int,
+                 quota_name: str,
+                 quota_region: bool):
+        """
+        :param int quota_current: Current Quota.
+        :param str quota_id: Quota Id.
+        :param int quota_limit: Quota limit.
+        :param str quota_name: Quota name.
+        :param bool quota_region: Quota region.
+        """
+        pulumi.set(__self__, "quota_current", quota_current)
+        pulumi.set(__self__, "quota_id", quota_id)
+        pulumi.set(__self__, "quota_limit", quota_limit)
+        pulumi.set(__self__, "quota_name", quota_name)
+        pulumi.set(__self__, "quota_region", quota_region)
+
+    @property
+    @pulumi.getter(name="quotaCurrent")
+    def quota_current(self) -> int:
+        """
+        Current Quota.
+        """
+        return pulumi.get(self, "quota_current")
+
+    @property
+    @pulumi.getter(name="quotaId")
+    def quota_id(self) -> str:
+        """
+        Quota Id.
+        """
+        return pulumi.get(self, "quota_id")
+
+    @property
+    @pulumi.getter(name="quotaLimit")
+    def quota_limit(self) -> int:
+        """
+        Quota limit.
+        """
+        return pulumi.get(self, "quota_limit")
+
+    @property
+    @pulumi.getter(name="quotaName")
+    def quota_name(self) -> str:
+        """
+        Quota name.
+        """
+        return pulumi.get(self, "quota_name")
+
+    @property
+    @pulumi.getter(name="quotaRegion")
+    def quota_region(self) -> bool:
+        """
+        Quota region.
+        """
+        return pulumi.get(self, "quota_region")
+
+
+@pulumi.output_type
+class GetResourceDashboardResourceDashboardSetResult(dict):
+    def __init__(__self__, *,
+                 cdb: int,
+                 cfs: int,
+                 ckafka: int,
+                 classic_link: int,
+                 cmem: int,
+                 cnas: int,
+                 cts_db: int,
+                 cvm: int,
+                 cynos_db_mysql: int,
+                 cynos_db_postgres: int,
+                 db_audit: int,
+                 dcdb: int,
+                 dcg: int,
+                 elastic_search: int,
+                 emr: int,
+                 flow_log: int,
+                 greenplumn: int,
+                 grocery: int,
+                 hsm: int,
+                 ip: int,
+                 itop: int,
+                 lb: int,
+                 maria_db: int,
+                 mongo_db: int,
+                 nas: int,
+                 nat: int,
+                 network_acl: int,
+                 network_detect: int,
+                 oracle: int,
+                 pcx: int,
+                 postgres: int,
+                 redis: int,
+                 route_table: int,
+                 seal: int,
+                 sql_server: int,
+                 subnet: int,
+                 subnet_id: str,
+                 t_baas: int,
+                 tcaplus: int,
+                 ti_db: int,
+                 vpc_id: str,
+                 vpngw: int):
+        """
+        :param int cdb: Relational database.
+        :param int cfs: Cloud file storage - CFS.
+        :param int ckafka: Cloud Kafka (CKafka).
+        :param int classic_link: Classic link.
+        :param int cmem: TencentDB for Memcached.
+        :param int cnas: Cnas.
+        :param int cts_db: Cloud time series database.
+        :param int cvm: Cloud Virtual Machine.
+        :param int cynos_db_mysql: An enterprise-grade TencentDB - CynosDB for MySQL.
+        :param int cynos_db_postgres: Enterprise TencentDB - CynosDB for Postgres.
+        :param int db_audit: Cloud database audit.
+        :param int dcdb: A distributed cloud database - TencentDB for TDSQL.
+        :param int dcg: Direct Connect gateway.
+        :param int elastic_search: ElasticSearch Service.
+        :param int emr: EMR cluster.
+        :param int flow_log: Flow log.
+        :param int greenplumn: Snova data warehouse.
+        :param int grocery: Grocery.
+        :param int hsm: Data encryption service.
+        :param int ip: Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+        :param int itop: Itop.
+        :param int lb: Load balancer.
+        :param int maria_db: TencentDB for MariaDB (TDSQL).
+        :param int mongo_db: TencentDB for MongoDB.
+        :param int nas: Network attached storage.
+        :param int nat: NAT gateway.
+        :param int network_acl: Network ACL.
+        :param int network_detect: Network probing.
+        :param int oracle: Oracle.
+        :param int pcx: Peering connection.
+        :param int postgres: TencentDB for PostgreSQL.
+        :param int redis: TencentDB for Redis.
+        :param int route_table: Route table.
+        :param int seal: SEAL.
+        :param int sql_server: TencentDB for SQL Server.
+        :param int subnet: Subnets.
+        :param str subnet_id: Subnet instance ID, such as subnet-bthucmmy.
+        :param int t_baas: Blockchain service.
+        :param int tcaplus: Game storage - Tcaplus.
+        :param int ti_db: HTAP database - TiDB.
+        :param str vpc_id: VPC instance ID, such as `vpc-bq4bzxpj`.
+        :param int vpngw: VPN gateway.
+        """
+        pulumi.set(__self__, "cdb", cdb)
+        pulumi.set(__self__, "cfs", cfs)
+        pulumi.set(__self__, "ckafka", ckafka)
+        pulumi.set(__self__, "classic_link", classic_link)
+        pulumi.set(__self__, "cmem", cmem)
+        pulumi.set(__self__, "cnas", cnas)
+        pulumi.set(__self__, "cts_db", cts_db)
+        pulumi.set(__self__, "cvm", cvm)
+        pulumi.set(__self__, "cynos_db_mysql", cynos_db_mysql)
+        pulumi.set(__self__, "cynos_db_postgres", cynos_db_postgres)
+        pulumi.set(__self__, "db_audit", db_audit)
+        pulumi.set(__self__, "dcdb", dcdb)
+        pulumi.set(__self__, "dcg", dcg)
+        pulumi.set(__self__, "elastic_search", elastic_search)
+        pulumi.set(__self__, "emr", emr)
+        pulumi.set(__self__, "flow_log", flow_log)
+        pulumi.set(__self__, "greenplumn", greenplumn)
+        pulumi.set(__self__, "grocery", grocery)
+        pulumi.set(__self__, "hsm", hsm)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "itop", itop)
+        pulumi.set(__self__, "lb", lb)
+        pulumi.set(__self__, "maria_db", maria_db)
+        pulumi.set(__self__, "mongo_db", mongo_db)
+        pulumi.set(__self__, "nas", nas)
+        pulumi.set(__self__, "nat", nat)
+        pulumi.set(__self__, "network_acl", network_acl)
+        pulumi.set(__self__, "network_detect", network_detect)
+        pulumi.set(__self__, "oracle", oracle)
+        pulumi.set(__self__, "pcx", pcx)
+        pulumi.set(__self__, "postgres", postgres)
+        pulumi.set(__self__, "redis", redis)
+        pulumi.set(__self__, "route_table", route_table)
+        pulumi.set(__self__, "seal", seal)
+        pulumi.set(__self__, "sql_server", sql_server)
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "t_baas", t_baas)
+        pulumi.set(__self__, "tcaplus", tcaplus)
+        pulumi.set(__self__, "ti_db", ti_db)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vpngw", vpngw)
+
+    @property
+    @pulumi.getter
+    def cdb(self) -> int:
+        """
+        Relational database.
+        """
+        return pulumi.get(self, "cdb")
+
+    @property
+    @pulumi.getter
+    def cfs(self) -> int:
+        """
+        Cloud file storage - CFS.
+        """
+        return pulumi.get(self, "cfs")
+
+    @property
+    @pulumi.getter
+    def ckafka(self) -> int:
+        """
+        Cloud Kafka (CKafka).
+        """
+        return pulumi.get(self, "ckafka")
+
+    @property
+    @pulumi.getter(name="classicLink")
+    def classic_link(self) -> int:
+        """
+        Classic link.
+        """
+        return pulumi.get(self, "classic_link")
+
+    @property
+    @pulumi.getter
+    def cmem(self) -> int:
+        """
+        TencentDB for Memcached.
+        """
+        return pulumi.get(self, "cmem")
+
+    @property
+    @pulumi.getter
+    def cnas(self) -> int:
+        """
+        Cnas.
+        """
+        return pulumi.get(self, "cnas")
+
+    @property
+    @pulumi.getter(name="ctsDb")
+    def cts_db(self) -> int:
+        """
+        Cloud time series database.
+        """
+        return pulumi.get(self, "cts_db")
+
+    @property
+    @pulumi.getter
+    def cvm(self) -> int:
+        """
+        Cloud Virtual Machine.
+        """
+        return pulumi.get(self, "cvm")
+
+    @property
+    @pulumi.getter(name="cynosDbMysql")
+    def cynos_db_mysql(self) -> int:
+        """
+        An enterprise-grade TencentDB - CynosDB for MySQL.
+        """
+        return pulumi.get(self, "cynos_db_mysql")
+
+    @property
+    @pulumi.getter(name="cynosDbPostgres")
+    def cynos_db_postgres(self) -> int:
+        """
+        Enterprise TencentDB - CynosDB for Postgres.
+        """
+        return pulumi.get(self, "cynos_db_postgres")
+
+    @property
+    @pulumi.getter(name="dbAudit")
+    def db_audit(self) -> int:
+        """
+        Cloud database audit.
+        """
+        return pulumi.get(self, "db_audit")
+
+    @property
+    @pulumi.getter
+    def dcdb(self) -> int:
+        """
+        A distributed cloud database - TencentDB for TDSQL.
+        """
+        return pulumi.get(self, "dcdb")
+
+    @property
+    @pulumi.getter
+    def dcg(self) -> int:
+        """
+        Direct Connect gateway.
+        """
+        return pulumi.get(self, "dcg")
+
+    @property
+    @pulumi.getter(name="elasticSearch")
+    def elastic_search(self) -> int:
+        """
+        ElasticSearch Service.
+        """
+        return pulumi.get(self, "elastic_search")
+
+    @property
+    @pulumi.getter
+    def emr(self) -> int:
+        """
+        EMR cluster.
+        """
+        return pulumi.get(self, "emr")
+
+    @property
+    @pulumi.getter(name="flowLog")
+    def flow_log(self) -> int:
+        """
+        Flow log.
+        """
+        return pulumi.get(self, "flow_log")
+
+    @property
+    @pulumi.getter
+    def greenplumn(self) -> int:
+        """
+        Snova data warehouse.
+        """
+        return pulumi.get(self, "greenplumn")
+
+    @property
+    @pulumi.getter
+    def grocery(self) -> int:
+        """
+        Grocery.
+        """
+        return pulumi.get(self, "grocery")
+
+    @property
+    @pulumi.getter
+    def hsm(self) -> int:
+        """
+        Data encryption service.
+        """
+        return pulumi.get(self, "hsm")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> int:
+        """
+        Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def itop(self) -> int:
+        """
+        Itop.
+        """
+        return pulumi.get(self, "itop")
+
+    @property
+    @pulumi.getter
+    def lb(self) -> int:
+        """
+        Load balancer.
+        """
+        return pulumi.get(self, "lb")
+
+    @property
+    @pulumi.getter(name="mariaDb")
+    def maria_db(self) -> int:
+        """
+        TencentDB for MariaDB (TDSQL).
+        """
+        return pulumi.get(self, "maria_db")
+
+    @property
+    @pulumi.getter(name="mongoDb")
+    def mongo_db(self) -> int:
+        """
+        TencentDB for MongoDB.
+        """
+        return pulumi.get(self, "mongo_db")
+
+    @property
+    @pulumi.getter
+    def nas(self) -> int:
+        """
+        Network attached storage.
+        """
+        return pulumi.get(self, "nas")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> int:
+        """
+        NAT gateway.
+        """
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="networkAcl")
+    def network_acl(self) -> int:
+        """
+        Network ACL.
+        """
+        return pulumi.get(self, "network_acl")
+
+    @property
+    @pulumi.getter(name="networkDetect")
+    def network_detect(self) -> int:
+        """
+        Network probing.
+        """
+        return pulumi.get(self, "network_detect")
+
+    @property
+    @pulumi.getter
+    def oracle(self) -> int:
+        """
+        Oracle.
+        """
+        return pulumi.get(self, "oracle")
+
+    @property
+    @pulumi.getter
+    def pcx(self) -> int:
+        """
+        Peering connection.
+        """
+        return pulumi.get(self, "pcx")
+
+    @property
+    @pulumi.getter
+    def postgres(self) -> int:
+        """
+        TencentDB for PostgreSQL.
+        """
+        return pulumi.get(self, "postgres")
+
+    @property
+    @pulumi.getter
+    def redis(self) -> int:
+        """
+        TencentDB for Redis.
+        """
+        return pulumi.get(self, "redis")
+
+    @property
+    @pulumi.getter(name="routeTable")
+    def route_table(self) -> int:
+        """
+        Route table.
+        """
+        return pulumi.get(self, "route_table")
+
+    @property
+    @pulumi.getter
+    def seal(self) -> int:
+        """
+        SEAL.
+        """
+        return pulumi.get(self, "seal")
+
+    @property
+    @pulumi.getter(name="sqlServer")
+    def sql_server(self) -> int:
+        """
+        TencentDB for SQL Server.
+        """
+        return pulumi.get(self, "sql_server")
+
+    @property
+    @pulumi.getter
+    def subnet(self) -> int:
+        """
+        Subnets.
+        """
+        return pulumi.get(self, "subnet")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet instance ID, such as subnet-bthucmmy.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="tBaas")
+    def t_baas(self) -> int:
+        """
+        Blockchain service.
+        """
+        return pulumi.get(self, "t_baas")
+
+    @property
+    @pulumi.getter
+    def tcaplus(self) -> int:
+        """
+        Game storage - Tcaplus.
+        """
+        return pulumi.get(self, "tcaplus")
+
+    @property
+    @pulumi.getter(name="tiDb")
+    def ti_db(self) -> int:
+        """
+        HTAP database - TiDB.
+        """
+        return pulumi.get(self, "ti_db")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC instance ID, such as `vpc-bq4bzxpj`.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def vpngw(self) -> int:
+        """
+        VPN gateway.
+        """
+        return pulumi.get(self, "vpngw")
+
+
+@pulumi.output_type
+class GetRouteConflictsRouteConflictSetResult(dict):
+    def __init__(__self__, *,
+                 conflict_sets: Sequence['outputs.GetRouteConflictsRouteConflictSetConflictSetResult'],
+                 destination_cidr_block: str,
+                 route_table_id: str):
+        """
+        :param Sequence['GetRouteConflictsRouteConflictSetConflictSetArgs'] conflict_sets: route conflict list.
+        :param str destination_cidr_block: destination cidr block.
+        :param str route_table_id: Routing table instance ID, for example:rtb-azd4dt1c.
+        """
+        pulumi.set(__self__, "conflict_sets", conflict_sets)
+        pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
+        pulumi.set(__self__, "route_table_id", route_table_id)
+
+    @property
+    @pulumi.getter(name="conflictSets")
+    def conflict_sets(self) -> Sequence['outputs.GetRouteConflictsRouteConflictSetConflictSetResult']:
+        """
+        route conflict list.
+        """
+        return pulumi.get(self, "conflict_sets")
+
+    @property
+    @pulumi.getter(name="destinationCidrBlock")
+    def destination_cidr_block(self) -> str:
+        """
+        destination cidr block.
+        """
+        return pulumi.get(self, "destination_cidr_block")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> str:
+        """
+        Routing table instance ID, for example:rtb-azd4dt1c.
+        """
+        return pulumi.get(self, "route_table_id")
+
+
+@pulumi.output_type
+class GetRouteConflictsRouteConflictSetConflictSetResult(dict):
+    def __init__(__self__, *,
+                 created_time: str,
+                 destination_cidr_block: str,
+                 destination_ipv6_cidr_block: str,
+                 enabled: bool,
+                 gateway_id: str,
+                 gateway_type: str,
+                 published_to_vbc: bool,
+                 route_description: str,
+                 route_id: int,
+                 route_item_id: str,
+                 route_table_id: str,
+                 route_type: str):
+        """
+        :param str created_time: create time.
+        :param str destination_cidr_block: destination cidr block.
+        :param str destination_ipv6_cidr_block: Destination of Ipv6 Cidr Block.
+        :param bool enabled: if enabled.
+        :param str gateway_id: next hop id.
+        :param str gateway_type: next gateway type.
+        :param bool published_to_vbc: if published To ccn.
+        :param str route_description: route description.
+        :param int route_id: route id.
+        :param str route_item_id: unique policy id.
+        :param str route_table_id: Routing table instance ID, for example:rtb-azd4dt1c.
+        :param str route_type: routr type.
+        """
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
+        pulumi.set(__self__, "destination_ipv6_cidr_block", destination_ipv6_cidr_block)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "gateway_id", gateway_id)
+        pulumi.set(__self__, "gateway_type", gateway_type)
+        pulumi.set(__self__, "published_to_vbc", published_to_vbc)
+        pulumi.set(__self__, "route_description", route_description)
+        pulumi.set(__self__, "route_id", route_id)
+        pulumi.set(__self__, "route_item_id", route_item_id)
+        pulumi.set(__self__, "route_table_id", route_table_id)
+        pulumi.set(__self__, "route_type", route_type)
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="destinationCidrBlock")
+    def destination_cidr_block(self) -> str:
+        """
+        destination cidr block.
+        """
+        return pulumi.get(self, "destination_cidr_block")
+
+    @property
+    @pulumi.getter(name="destinationIpv6CidrBlock")
+    def destination_ipv6_cidr_block(self) -> str:
+        """
+        Destination of Ipv6 Cidr Block.
+        """
+        return pulumi.get(self, "destination_ipv6_cidr_block")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        if enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="gatewayId")
+    def gateway_id(self) -> str:
+        """
+        next hop id.
+        """
+        return pulumi.get(self, "gateway_id")
+
+    @property
+    @pulumi.getter(name="gatewayType")
+    def gateway_type(self) -> str:
+        """
+        next gateway type.
+        """
+        return pulumi.get(self, "gateway_type")
+
+    @property
+    @pulumi.getter(name="publishedToVbc")
+    def published_to_vbc(self) -> bool:
+        """
+        if published To ccn.
+        """
+        return pulumi.get(self, "published_to_vbc")
+
+    @property
+    @pulumi.getter(name="routeDescription")
+    def route_description(self) -> str:
+        """
+        route description.
+        """
+        return pulumi.get(self, "route_description")
+
+    @property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> int:
+        """
+        route id.
+        """
+        return pulumi.get(self, "route_id")
+
+    @property
+    @pulumi.getter(name="routeItemId")
+    def route_item_id(self) -> str:
+        """
+        unique policy id.
+        """
+        return pulumi.get(self, "route_item_id")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> str:
+        """
+        Routing table instance ID, for example:rtb-azd4dt1c.
+        """
+        return pulumi.get(self, "route_table_id")
+
+    @property
+    @pulumi.getter(name="routeType")
+    def route_type(self) -> str:
+        """
+        routr type.
+        """
+        return pulumi.get(self, "route_type")
 
 
 @pulumi.output_type
@@ -605,6 +2567,655 @@ class GetRouteTablesInstanceListRouteEntryInfoResult(dict):
 
 
 @pulumi.output_type
+class GetSecurityGroupLimitsSecurityGroupLimitSetResult(dict):
+    def __init__(__self__, *,
+                 instance_security_group_limit: int,
+                 referred_security_group_limit: int,
+                 security_group_extended_policy_limit: int,
+                 security_group_instance_limit: int,
+                 security_group_limit: int,
+                 security_group_policy_limit: int,
+                 security_group_referred_cvm_and_eni_limit: int,
+                 security_group_referred_svc_limit: int):
+        """
+        :param int instance_security_group_limit: number of instances associated sg.
+        :param int referred_security_group_limit: number of sg can be referred.
+        :param int security_group_extended_policy_limit: number of sg extended policy.
+        :param int security_group_instance_limit: number of sg associated instances.
+        :param int security_group_limit: number of sg can be created.
+        :param int security_group_policy_limit: number of sg polciy can be created.
+        :param int security_group_referred_cvm_and_eni_limit: number of eni and cvm can be referred.
+        :param int security_group_referred_svc_limit: number of svc can be referred.
+        """
+        pulumi.set(__self__, "instance_security_group_limit", instance_security_group_limit)
+        pulumi.set(__self__, "referred_security_group_limit", referred_security_group_limit)
+        pulumi.set(__self__, "security_group_extended_policy_limit", security_group_extended_policy_limit)
+        pulumi.set(__self__, "security_group_instance_limit", security_group_instance_limit)
+        pulumi.set(__self__, "security_group_limit", security_group_limit)
+        pulumi.set(__self__, "security_group_policy_limit", security_group_policy_limit)
+        pulumi.set(__self__, "security_group_referred_cvm_and_eni_limit", security_group_referred_cvm_and_eni_limit)
+        pulumi.set(__self__, "security_group_referred_svc_limit", security_group_referred_svc_limit)
+
+    @property
+    @pulumi.getter(name="instanceSecurityGroupLimit")
+    def instance_security_group_limit(self) -> int:
+        """
+        number of instances associated sg.
+        """
+        return pulumi.get(self, "instance_security_group_limit")
+
+    @property
+    @pulumi.getter(name="referredSecurityGroupLimit")
+    def referred_security_group_limit(self) -> int:
+        """
+        number of sg can be referred.
+        """
+        return pulumi.get(self, "referred_security_group_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupExtendedPolicyLimit")
+    def security_group_extended_policy_limit(self) -> int:
+        """
+        number of sg extended policy.
+        """
+        return pulumi.get(self, "security_group_extended_policy_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupInstanceLimit")
+    def security_group_instance_limit(self) -> int:
+        """
+        number of sg associated instances.
+        """
+        return pulumi.get(self, "security_group_instance_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupLimit")
+    def security_group_limit(self) -> int:
+        """
+        number of sg can be created.
+        """
+        return pulumi.get(self, "security_group_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupPolicyLimit")
+    def security_group_policy_limit(self) -> int:
+        """
+        number of sg polciy can be created.
+        """
+        return pulumi.get(self, "security_group_policy_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupReferredCvmAndEniLimit")
+    def security_group_referred_cvm_and_eni_limit(self) -> int:
+        """
+        number of eni and cvm can be referred.
+        """
+        return pulumi.get(self, "security_group_referred_cvm_and_eni_limit")
+
+    @property
+    @pulumi.getter(name="securityGroupReferredSvcLimit")
+    def security_group_referred_svc_limit(self) -> int:
+        """
+        number of svc can be referred.
+        """
+        return pulumi.get(self, "security_group_referred_svc_limit")
+
+
+@pulumi.output_type
+class GetSecurityGroupReferencesReferredSecurityGroupSetResult(dict):
+    def __init__(__self__, *,
+                 referred_security_group_ids: Sequence[str],
+                 security_group_id: str):
+        """
+        :param Sequence[str] referred_security_group_ids: IDs of all referred security group instances.
+        :param str security_group_id: Security group instance ID.
+        """
+        pulumi.set(__self__, "referred_security_group_ids", referred_security_group_ids)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+
+    @property
+    @pulumi.getter(name="referredSecurityGroupIds")
+    def referred_security_group_ids(self) -> Sequence[str]:
+        """
+        IDs of all referred security group instances.
+        """
+        return pulumi.get(self, "referred_security_group_ids")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group instance ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentBackupDataResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 address_templates: Sequence['outputs.GetSgSnapshotFileContentBackupDataAddressTemplateResult'],
+                 cidr_block: str,
+                 ipv6_cidr_block: str,
+                 modify_time: str,
+                 policy_description: str,
+                 policy_index: int,
+                 port: str,
+                 protocol: str,
+                 security_group_id: str,
+                 service_templates: Sequence['outputs.GetSgSnapshotFileContentBackupDataServiceTemplateResult']):
+        """
+        :param str action: ACCEPT or DROP.
+        :param Sequence['GetSgSnapshotFileContentBackupDataAddressTemplateArgs'] address_templates: IP address ID or IP address group ID.
+        :param str cidr_block: Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+        :param str ipv6_cidr_block: The CIDR block or IPv6 (mutually exclusive).
+        :param str modify_time: The last modification time of the security group.
+        :param str policy_description: Security group policy description.
+        :param int policy_index: The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+        :param str port: Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+        :param str protocol: Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+        :param str security_group_id: Security group ID.
+        :param Sequence['GetSgSnapshotFileContentBackupDataServiceTemplateArgs'] service_templates: Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "address_templates", address_templates)
+        pulumi.set(__self__, "cidr_block", cidr_block)
+        pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "policy_description", policy_description)
+        pulumi.set(__self__, "policy_index", policy_index)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "service_templates", service_templates)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressTemplates")
+    def address_templates(self) -> Sequence['outputs.GetSgSnapshotFileContentBackupDataAddressTemplateResult']:
+        """
+        IP address ID or IP address group ID.
+        """
+        return pulumi.get(self, "address_templates")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> str:
+        """
+        Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="ipv6CidrBlock")
+    def ipv6_cidr_block(self) -> str:
+        """
+        The CIDR block or IPv6 (mutually exclusive).
+        """
+        return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        The last modification time of the security group.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="policyDescription")
+    def policy_description(self) -> str:
+        """
+        Security group policy description.
+        """
+        return pulumi.get(self, "policy_description")
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> int:
+        """
+        The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+        """
+        return pulumi.get(self, "policy_index")
+
+    @property
+    @pulumi.getter
+    def port(self) -> str:
+        """
+        Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="serviceTemplates")
+    def service_templates(self) -> Sequence['outputs.GetSgSnapshotFileContentBackupDataServiceTemplateResult']:
+        """
+        Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+        """
+        return pulumi.get(self, "service_templates")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentBackupDataAddressTemplateResult(dict):
+    def __init__(__self__, *,
+                 address_group_id: str,
+                 address_id: str):
+        """
+        :param str address_group_id: The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+        :param str address_id: The ID of the IP address, such as `ipm-2uw6ujo6`.
+        """
+        pulumi.set(__self__, "address_group_id", address_group_id)
+        pulumi.set(__self__, "address_id", address_id)
+
+    @property
+    @pulumi.getter(name="addressGroupId")
+    def address_group_id(self) -> str:
+        """
+        The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+        """
+        return pulumi.get(self, "address_group_id")
+
+    @property
+    @pulumi.getter(name="addressId")
+    def address_id(self) -> str:
+        """
+        The ID of the IP address, such as `ipm-2uw6ujo6`.
+        """
+        return pulumi.get(self, "address_id")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentBackupDataServiceTemplateResult(dict):
+    def __init__(__self__, *,
+                 service_group_id: str,
+                 service_id: str):
+        """
+        :param str service_group_id: Protocol port group ID, such as `ppmg-f5n1f8da`.
+        :param str service_id: Protocol port ID, such as `ppm-f5n1f8da`.
+        """
+        pulumi.set(__self__, "service_group_id", service_group_id)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter(name="serviceGroupId")
+    def service_group_id(self) -> str:
+        """
+        Protocol port group ID, such as `ppmg-f5n1f8da`.
+        """
+        return pulumi.get(self, "service_group_id")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Protocol port ID, such as `ppm-f5n1f8da`.
+        """
+        return pulumi.get(self, "service_id")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentOriginalDataResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 address_templates: Sequence['outputs.GetSgSnapshotFileContentOriginalDataAddressTemplateResult'],
+                 cidr_block: str,
+                 ipv6_cidr_block: str,
+                 modify_time: str,
+                 policy_description: str,
+                 policy_index: int,
+                 port: str,
+                 protocol: str,
+                 security_group_id: str,
+                 service_templates: Sequence['outputs.GetSgSnapshotFileContentOriginalDataServiceTemplateResult']):
+        """
+        :param str action: ACCEPT or DROP.
+        :param Sequence['GetSgSnapshotFileContentOriginalDataAddressTemplateArgs'] address_templates: IP address ID or IP address group ID.
+        :param str cidr_block: Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+        :param str ipv6_cidr_block: The CIDR block or IPv6 (mutually exclusive).
+        :param str modify_time: The last modification time of the security group.
+        :param str policy_description: Security group policy description.
+        :param int policy_index: The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+        :param str port: Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+        :param str protocol: Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+        :param str security_group_id: Security group ID.
+        :param Sequence['GetSgSnapshotFileContentOriginalDataServiceTemplateArgs'] service_templates: Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "address_templates", address_templates)
+        pulumi.set(__self__, "cidr_block", cidr_block)
+        pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "policy_description", policy_description)
+        pulumi.set(__self__, "policy_index", policy_index)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "service_templates", service_templates)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressTemplates")
+    def address_templates(self) -> Sequence['outputs.GetSgSnapshotFileContentOriginalDataAddressTemplateResult']:
+        """
+        IP address ID or IP address group ID.
+        """
+        return pulumi.get(self, "address_templates")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> str:
+        """
+        Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="ipv6CidrBlock")
+    def ipv6_cidr_block(self) -> str:
+        """
+        The CIDR block or IPv6 (mutually exclusive).
+        """
+        return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        The last modification time of the security group.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="policyDescription")
+    def policy_description(self) -> str:
+        """
+        Security group policy description.
+        """
+        return pulumi.get(self, "policy_description")
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> int:
+        """
+        The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+        """
+        return pulumi.get(self, "policy_index")
+
+    @property
+    @pulumi.getter
+    def port(self) -> str:
+        """
+        Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="serviceTemplates")
+    def service_templates(self) -> Sequence['outputs.GetSgSnapshotFileContentOriginalDataServiceTemplateResult']:
+        """
+        Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+        """
+        return pulumi.get(self, "service_templates")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentOriginalDataAddressTemplateResult(dict):
+    def __init__(__self__, *,
+                 address_group_id: str,
+                 address_id: str):
+        """
+        :param str address_group_id: The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+        :param str address_id: The ID of the IP address, such as `ipm-2uw6ujo6`.
+        """
+        pulumi.set(__self__, "address_group_id", address_group_id)
+        pulumi.set(__self__, "address_id", address_id)
+
+    @property
+    @pulumi.getter(name="addressGroupId")
+    def address_group_id(self) -> str:
+        """
+        The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+        """
+        return pulumi.get(self, "address_group_id")
+
+    @property
+    @pulumi.getter(name="addressId")
+    def address_id(self) -> str:
+        """
+        The ID of the IP address, such as `ipm-2uw6ujo6`.
+        """
+        return pulumi.get(self, "address_id")
+
+
+@pulumi.output_type
+class GetSgSnapshotFileContentOriginalDataServiceTemplateResult(dict):
+    def __init__(__self__, *,
+                 service_group_id: str,
+                 service_id: str):
+        """
+        :param str service_group_id: Protocol port group ID, such as `ppmg-f5n1f8da`.
+        :param str service_id: Protocol port ID, such as `ppm-f5n1f8da`.
+        """
+        pulumi.set(__self__, "service_group_id", service_group_id)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter(name="serviceGroupId")
+    def service_group_id(self) -> str:
+        """
+        Protocol port group ID, such as `ppmg-f5n1f8da`.
+        """
+        return pulumi.get(self, "service_group_id")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Protocol port ID, such as `ppm-f5n1f8da`.
+        """
+        return pulumi.get(self, "service_id")
+
+
+@pulumi.output_type
+class GetSnapshotFilesSnapshotFileSetResult(dict):
+    def __init__(__self__, *,
+                 backup_time: str,
+                 instance_id: str,
+                 operator: str,
+                 snapshot_file_id: str,
+                 snapshot_policy_id: str):
+        """
+        :param str backup_time: backup time.
+        :param str instance_id: InstanceId.
+        :param str operator: Uin of operator.
+        :param str snapshot_file_id: snap shot file id.
+        :param str snapshot_policy_id: Snapshot Policy Id.
+        """
+        pulumi.set(__self__, "backup_time", backup_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "snapshot_file_id", snapshot_file_id)
+        pulumi.set(__self__, "snapshot_policy_id", snapshot_policy_id)
+
+    @property
+    @pulumi.getter(name="backupTime")
+    def backup_time(self) -> str:
+        """
+        backup time.
+        """
+        return pulumi.get(self, "backup_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        InstanceId.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Uin of operator.
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter(name="snapshotFileId")
+    def snapshot_file_id(self) -> str:
+        """
+        snap shot file id.
+        """
+        return pulumi.get(self, "snapshot_file_id")
+
+    @property
+    @pulumi.getter(name="snapshotPolicyId")
+    def snapshot_policy_id(self) -> str:
+        """
+        Snapshot Policy Id.
+        """
+        return pulumi.get(self, "snapshot_policy_id")
+
+
+@pulumi.output_type
+class GetSubnetResourceDashboardResourceStatisticsSetResult(dict):
+    def __init__(__self__, *,
+                 ip: int,
+                 resource_statistics_item_sets: Sequence['outputs.GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetResult'],
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param int ip: The total number of used IP addresses.
+        :param Sequence['GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs'] resource_statistics_item_sets: Information of associated resources.
+        :param str subnet_id: Subnet instance ID, such as `subnet-bthucmmy`.
+        :param str vpc_id: VPC instance ID, such as vpc-f1xjkw1b.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "resource_statistics_item_sets", resource_statistics_item_sets)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> int:
+        """
+        The total number of used IP addresses.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="resourceStatisticsItemSets")
+    def resource_statistics_item_sets(self) -> Sequence['outputs.GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetResult']:
+        """
+        Information of associated resources.
+        """
+        return pulumi.get(self, "resource_statistics_item_sets")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet instance ID, such as `subnet-bthucmmy`.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC instance ID, such as vpc-f1xjkw1b.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetResult(dict):
+    def __init__(__self__, *,
+                 resource_count: int,
+                 resource_name: str,
+                 resource_type: str):
+        """
+        :param int resource_count: Number of resources.
+        :param str resource_name: Resource name.
+        :param str resource_type: Resource type, such as CVM, ENI.
+        """
+        pulumi.set(__self__, "resource_count", resource_count)
+        pulumi.set(__self__, "resource_name", resource_name)
+        pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter(name="resourceCount")
+    def resource_count(self) -> int:
+        """
+        Number of resources.
+        """
+        return pulumi.get(self, "resource_count")
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> str:
+        """
+        Resource name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Resource type, such as CVM, ENI.
+        """
+        return pulumi.get(self, "resource_type")
+
+
+@pulumi.output_type
 class GetSubnetsInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
@@ -728,6 +3339,119 @@ class GetSubnetsInstanceListResult(dict):
     def vpc_id(self) -> str:
         """
         ID of the VPC to be queried.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetTemplateLimitsTemplateLimitResult(dict):
+    def __init__(__self__, *,
+                 address_template_group_member_limit: int,
+                 address_template_member_limit: int,
+                 service_template_group_member_limit: int,
+                 service_template_member_limit: int):
+        """
+        :param int address_template_group_member_limit: address template group member limit.
+        :param int address_template_member_limit: address template member limit.
+        :param int service_template_group_member_limit: service template group member limit.
+        :param int service_template_member_limit: service template member limit.
+        """
+        pulumi.set(__self__, "address_template_group_member_limit", address_template_group_member_limit)
+        pulumi.set(__self__, "address_template_member_limit", address_template_member_limit)
+        pulumi.set(__self__, "service_template_group_member_limit", service_template_group_member_limit)
+        pulumi.set(__self__, "service_template_member_limit", service_template_member_limit)
+
+    @property
+    @pulumi.getter(name="addressTemplateGroupMemberLimit")
+    def address_template_group_member_limit(self) -> int:
+        """
+        address template group member limit.
+        """
+        return pulumi.get(self, "address_template_group_member_limit")
+
+    @property
+    @pulumi.getter(name="addressTemplateMemberLimit")
+    def address_template_member_limit(self) -> int:
+        """
+        address template member limit.
+        """
+        return pulumi.get(self, "address_template_member_limit")
+
+    @property
+    @pulumi.getter(name="serviceTemplateGroupMemberLimit")
+    def service_template_group_member_limit(self) -> int:
+        """
+        service template group member limit.
+        """
+        return pulumi.get(self, "service_template_group_member_limit")
+
+    @property
+    @pulumi.getter(name="serviceTemplateMemberLimit")
+    def service_template_member_limit(self) -> int:
+        """
+        service template member limit.
+        """
+        return pulumi.get(self, "service_template_member_limit")
+
+
+@pulumi.output_type
+class GetUsedIpAddressIpAddressStateResult(dict):
+    def __init__(__self__, *,
+                 ip_address: str,
+                 resource_id: str,
+                 resource_type: str,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str ip_address: IP address.
+        :param str resource_id: Resource ID.
+        :param str resource_type: Resource type.
+        :param str subnet_id: Subnet instance ID.
+        :param str vpc_id: VPC instance ID.
+        """
+        pulumi.set(__self__, "ip_address", ip_address)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> str:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Resource ID.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet instance ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC instance ID.
         """
         return pulumi.get(self, "vpc_id")
 

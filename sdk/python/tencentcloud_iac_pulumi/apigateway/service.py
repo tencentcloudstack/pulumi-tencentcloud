@@ -19,28 +19,37 @@ class ServiceArgs:
                  protocol: pulumi.Input[str],
                  service_name: pulumi.Input[str],
                  exclusive_set_name: Optional[pulumi.Input[str]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None,
                  ip_version: Optional[pulumi.Input[str]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
                  service_desc: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Service resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[str] protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
         :param pulumi.Input[str] service_name: Custom service name.
-        :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] exclusive_set_name: It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] instance_id: Exclusive instance ID.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] service_desc: Custom service description.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         """
         pulumi.set(__self__, "net_types", net_types)
         pulumi.set(__self__, "protocol", protocol)
         pulumi.set(__self__, "service_name", service_name)
         if exclusive_set_name is not None:
+            warnings.warn("""It has been deprecated from version 1.81.9.""", DeprecationWarning)
+            pulumi.log.warn("""exclusive_set_name is deprecated: It has been deprecated from version 1.81.9.""")
+        if exclusive_set_name is not None:
             pulumi.set(__self__, "exclusive_set_name", exclusive_set_name)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if ip_version is not None:
             pulumi.set(__self__, "ip_version", ip_version)
         if pre_limit is not None:
@@ -49,6 +58,8 @@ class ServiceArgs:
             pulumi.set(__self__, "release_limit", release_limit)
         if service_desc is not None:
             pulumi.set(__self__, "service_desc", service_desc)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
 
@@ -92,13 +103,25 @@ class ServiceArgs:
     @pulumi.getter(name="exclusiveSetName")
     def exclusive_set_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         """
         return pulumi.get(self, "exclusive_set_name")
 
     @exclusive_set_name.setter
     def exclusive_set_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "exclusive_set_name", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
 
     @property
     @pulumi.getter(name="ipVersion")
@@ -149,6 +172,18 @@ class ServiceArgs:
         pulumi.set(self, "service_desc", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="testLimit")
     def test_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -169,6 +204,7 @@ class _ServiceState:
                  exclusive_set_name: Optional[pulumi.Input[str]] = None,
                  inner_http_port: Optional[pulumi.Input[int]] = None,
                  inner_https_port: Optional[pulumi.Input[int]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None,
                  internal_sub_domain: Optional[pulumi.Input[str]] = None,
                  ip_version: Optional[pulumi.Input[str]] = None,
                  modify_time: Optional[pulumi.Input[str]] = None,
@@ -179,15 +215,17 @@ class _ServiceState:
                  release_limit: Optional[pulumi.Input[int]] = None,
                  service_desc: Optional[pulumi.Input[str]] = None,
                  service_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
                  usage_plan_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ServiceUsagePlanListArgs']]]] = None):
         """
         Input properties used for looking up and filtering Service resources.
         :param pulumi.Input[Sequence[pulumi.Input['ServiceApiListArgs']]] api_lists: A list of APIs.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-        :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] exclusive_set_name: It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         :param pulumi.Input[int] inner_http_port: Port number for http access over private network.
         :param pulumi.Input[int] inner_https_port: Port number for https access over private network.
+        :param pulumi.Input[str] instance_id: Exclusive instance ID.
         :param pulumi.Input[str] internal_sub_domain: Private network access subdomain name.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -198,6 +236,7 @@ class _ServiceState:
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] service_desc: Custom service description.
         :param pulumi.Input[str] service_name: Custom service name.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[Sequence[pulumi.Input['ServiceUsagePlanListArgs']]] usage_plan_lists: A list of attach usage plans.
         """
@@ -206,11 +245,16 @@ class _ServiceState:
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if exclusive_set_name is not None:
+            warnings.warn("""It has been deprecated from version 1.81.9.""", DeprecationWarning)
+            pulumi.log.warn("""exclusive_set_name is deprecated: It has been deprecated from version 1.81.9.""")
+        if exclusive_set_name is not None:
             pulumi.set(__self__, "exclusive_set_name", exclusive_set_name)
         if inner_http_port is not None:
             pulumi.set(__self__, "inner_http_port", inner_http_port)
         if inner_https_port is not None:
             pulumi.set(__self__, "inner_https_port", inner_https_port)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if internal_sub_domain is not None:
             pulumi.set(__self__, "internal_sub_domain", internal_sub_domain)
         if ip_version is not None:
@@ -231,6 +275,8 @@ class _ServiceState:
             pulumi.set(__self__, "service_desc", service_desc)
         if service_name is not None:
             pulumi.set(__self__, "service_name", service_name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
         if usage_plan_lists is not None:
@@ -264,7 +310,7 @@ class _ServiceState:
     @pulumi.getter(name="exclusiveSetName")
     def exclusive_set_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         """
         return pulumi.get(self, "exclusive_set_name")
 
@@ -295,6 +341,18 @@ class _ServiceState:
     @inner_https_port.setter
     def inner_https_port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "inner_https_port", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
 
     @property
     @pulumi.getter(name="internalSubDomain")
@@ -417,6 +475,18 @@ class _ServiceState:
         pulumi.set(self, "service_name", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="testLimit")
     def test_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -447,6 +517,7 @@ class Service(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  exclusive_set_name: Optional[pulumi.Input[str]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None,
                  ip_version: Optional[pulumi.Input[str]] = None,
                  net_types: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
@@ -454,12 +525,14 @@ class Service(pulumi.CustomResource):
                  release_limit: Optional[pulumi.Input[int]] = None,
                  service_desc: Optional[pulumi.Input[str]] = None,
                  service_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Use this resource to create API gateway service.
 
         ## Example Usage
+        ### Shared Service
 
         ```python
         import pulumi
@@ -476,6 +549,33 @@ class Service(pulumi.CustomResource):
             release_limit=500,
             service_desc="your nice service",
             service_name="niceservice",
+            tags={
+                "test-key1": "test-value1",
+                "test-key2": "test-value2",
+            },
+            test_limit=500)
+        ```
+        ### Exclusive Service
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            instance_id="instance-rc6fcv4e",
+            ip_version="IPv4",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            pre_limit=500,
+            protocol="http&https",
+            release_limit=500,
+            service_desc="your nice service",
+            service_name="service",
+            tags={
+                "test-key1": "test-value1",
+            },
             test_limit=500)
         ```
 
@@ -489,7 +589,8 @@ class Service(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] exclusive_set_name: It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] instance_id: Exclusive instance ID.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -497,6 +598,7 @@ class Service(pulumi.CustomResource):
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] service_desc: Custom service description.
         :param pulumi.Input[str] service_name: Custom service name.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         """
         ...
@@ -509,6 +611,7 @@ class Service(pulumi.CustomResource):
         Use this resource to create API gateway service.
 
         ## Example Usage
+        ### Shared Service
 
         ```python
         import pulumi
@@ -525,6 +628,33 @@ class Service(pulumi.CustomResource):
             release_limit=500,
             service_desc="your nice service",
             service_name="niceservice",
+            tags={
+                "test-key1": "test-value1",
+                "test-key2": "test-value2",
+            },
+            test_limit=500)
+        ```
+        ### Exclusive Service
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            instance_id="instance-rc6fcv4e",
+            ip_version="IPv4",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            pre_limit=500,
+            protocol="http&https",
+            release_limit=500,
+            service_desc="your nice service",
+            service_name="service",
+            tags={
+                "test-key1": "test-value1",
+            },
             test_limit=500)
         ```
 
@@ -552,6 +682,7 @@ class Service(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  exclusive_set_name: Optional[pulumi.Input[str]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None,
                  ip_version: Optional[pulumi.Input[str]] = None,
                  net_types: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
@@ -559,6 +690,7 @@ class Service(pulumi.CustomResource):
                  release_limit: Optional[pulumi.Input[int]] = None,
                  service_desc: Optional[pulumi.Input[str]] = None,
                  service_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         if opts is None:
@@ -574,7 +706,11 @@ class Service(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ServiceArgs.__new__(ServiceArgs)
 
+            if exclusive_set_name is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.9.""", DeprecationWarning)
+                pulumi.log.warn("""exclusive_set_name is deprecated: It has been deprecated from version 1.81.9.""")
             __props__.__dict__["exclusive_set_name"] = exclusive_set_name
+            __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["ip_version"] = ip_version
             if net_types is None and not opts.urn:
                 raise TypeError("Missing required property 'net_types'")
@@ -588,6 +724,7 @@ class Service(pulumi.CustomResource):
             if service_name is None and not opts.urn:
                 raise TypeError("Missing required property 'service_name'")
             __props__.__dict__["service_name"] = service_name
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["test_limit"] = test_limit
             __props__.__dict__["api_lists"] = None
             __props__.__dict__["create_time"] = None
@@ -612,6 +749,7 @@ class Service(pulumi.CustomResource):
             exclusive_set_name: Optional[pulumi.Input[str]] = None,
             inner_http_port: Optional[pulumi.Input[int]] = None,
             inner_https_port: Optional[pulumi.Input[int]] = None,
+            instance_id: Optional[pulumi.Input[str]] = None,
             internal_sub_domain: Optional[pulumi.Input[str]] = None,
             ip_version: Optional[pulumi.Input[str]] = None,
             modify_time: Optional[pulumi.Input[str]] = None,
@@ -622,6 +760,7 @@ class Service(pulumi.CustomResource):
             release_limit: Optional[pulumi.Input[int]] = None,
             service_desc: Optional[pulumi.Input[str]] = None,
             service_name: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             test_limit: Optional[pulumi.Input[int]] = None,
             usage_plan_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServiceUsagePlanListArgs']]]]] = None) -> 'Service':
         """
@@ -633,9 +772,10 @@ class Service(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServiceApiListArgs']]]] api_lists: A list of APIs.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-        :param pulumi.Input[str] exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param pulumi.Input[str] exclusive_set_name: It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         :param pulumi.Input[int] inner_http_port: Port number for http access over private network.
         :param pulumi.Input[int] inner_https_port: Port number for https access over private network.
+        :param pulumi.Input[str] instance_id: Exclusive instance ID.
         :param pulumi.Input[str] internal_sub_domain: Private network access subdomain name.
         :param pulumi.Input[str] ip_version: IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -646,6 +786,7 @@ class Service(pulumi.CustomResource):
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] service_desc: Custom service description.
         :param pulumi.Input[str] service_name: Custom service name.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServiceUsagePlanListArgs']]]] usage_plan_lists: A list of attach usage plans.
         """
@@ -658,6 +799,7 @@ class Service(pulumi.CustomResource):
         __props__.__dict__["exclusive_set_name"] = exclusive_set_name
         __props__.__dict__["inner_http_port"] = inner_http_port
         __props__.__dict__["inner_https_port"] = inner_https_port
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["internal_sub_domain"] = internal_sub_domain
         __props__.__dict__["ip_version"] = ip_version
         __props__.__dict__["modify_time"] = modify_time
@@ -668,6 +810,7 @@ class Service(pulumi.CustomResource):
         __props__.__dict__["release_limit"] = release_limit
         __props__.__dict__["service_desc"] = service_desc
         __props__.__dict__["service_name"] = service_name
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["test_limit"] = test_limit
         __props__.__dict__["usage_plan_lists"] = usage_plan_lists
         return Service(resource_name, opts=opts, __props__=__props__)
@@ -692,7 +835,7 @@ class Service(pulumi.CustomResource):
     @pulumi.getter(name="exclusiveSetName")
     def exclusive_set_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         """
         return pulumi.get(self, "exclusive_set_name")
 
@@ -711,6 +854,14 @@ class Service(pulumi.CustomResource):
         Port number for https access over private network.
         """
         return pulumi.get(self, "inner_https_port")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Exclusive instance ID.
+        """
+        return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="internalSubDomain")
@@ -791,6 +942,14 @@ class Service(pulumi.CustomResource):
         Custom service name.
         """
         return pulumi.get(self, "service_name")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="testLimit")

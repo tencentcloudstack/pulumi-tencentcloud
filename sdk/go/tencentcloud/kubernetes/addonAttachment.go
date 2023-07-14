@@ -16,6 +16,7 @@ import (
 // > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
 //
 // ## Example Usage
+// ### Install cbs addon by passing values
 //
 // ```go
 // package main
@@ -36,26 +37,120 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Install tcr addon by passing values
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		mytcr, err := Tcr.NewInstance(ctx, "mytcr", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		tcrId := mytcr.ID()
+// 		tcrName := mytcr.Name
+// 		myNs, err := Tcr.NewNamespace(ctx, "myNs", &Tcr.NamespaceArgs{
+// 			InstanceId:   pulumi.String(tcrId),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		nsName := myNs.Name
+// 		myToken, err := Tcr.NewToken(ctx, "myToken", &Tcr.TokenArgs{
+// 			InstanceId:  pulumi.String(tcrId),
+// 			Description: pulumi.String("tcr token"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		userName := myToken.UserName
+// 		token := myToken.Token
+// 		myIns := Tcr.GetInstancesOutput(ctx, tcr.GetInstancesOutputArgs{
+// 			InstanceId: pulumi.String(tcrId),
+// 		}, nil)
 // 		_, err = Kubernetes.NewAddonAttachment(ctx, "addonTcr", &Kubernetes.AddonAttachmentArgs{
 // 			ClusterId: pulumi.String("cls-xxxxxxxx"),
+// 			Version:   pulumi.String("1.0.0"),
 // 			Values: pulumi.StringArray{
-// 				pulumi.String("global.imagePullSecretsCrs[0].name=unique-sample-vpc"),
-// 				pulumi.String("global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system"),
+// 				tcrId.ApplyT(func(tcrId string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[0].name=", tcrId, "-vpc"), nil
+// 				}).(pulumi.StringOutput),
+// 				nsName.ApplyT(func(nsName string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[0].namespaces=", nsName), nil
+// 				}).(pulumi.StringOutput),
 // 				pulumi.String("global.imagePullSecretsCrs[0].serviceAccounts=*"),
 // 				pulumi.String("global.imagePullSecretsCrs[0].type=docker"),
-// 				pulumi.String("global.imagePullSecretsCrs[0].dockerUsername=100012345678"),
-// 				pulumi.String("global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token"),
-// 				pulumi.String("global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com"),
-// 				pulumi.String("global.imagePullSecretsCrs[1].name=sample-public"),
-// 				pulumi.String("global.imagePullSecretsCrs[1].namespaces=*"),
+// 				userName.ApplyT(func(userName string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[0].dockerUsername=", userName), nil
+// 				}).(pulumi.StringOutput),
+// 				token.ApplyT(func(token string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[0].dockerPassword=", token), nil
+// 				}).(pulumi.StringOutput),
+// 				tcrName.ApplyT(func(tcrName string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[0].dockerServer=", tcrName, "-vpc.tencentcloudcr.com"), nil
+// 				}).(pulumi.StringOutput),
+// 				tcrId.ApplyT(func(tcrId string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[1].name=", tcrId, "-public"), nil
+// 				}).(pulumi.StringOutput),
+// 				nsName.ApplyT(func(nsName string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[1].namespaces=", nsName), nil
+// 				}).(pulumi.StringOutput),
 // 				pulumi.String("global.imagePullSecretsCrs[1].serviceAccounts=*"),
 // 				pulumi.String("global.imagePullSecretsCrs[1].type=docker"),
-// 				pulumi.String("global.imagePullSecretsCrs[1].dockerUsername=100012345678"),
-// 				pulumi.String("global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token"),
-// 				pulumi.String("global.imagePullSecretsCrs[1].dockerServer=sample"),
-// 				pulumi.String("global.hosts[0].domain=sample-vpc.tencentcloudcr.com"),
-// 				pulumi.String("global.hosts[0].ip=10.16.0.49"),
+// 				userName.ApplyT(func(userName string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[1].dockerUsername=", userName), nil
+// 				}).(pulumi.StringOutput),
+// 				token.ApplyT(func(token string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[1].dockerPassword=", token), nil
+// 				}).(pulumi.StringOutput),
+// 				tcrName.ApplyT(func(tcrName string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[1].dockerServer=", tcrName, "-tencentcloudcr.com"), nil
+// 				}).(pulumi.StringOutput),
+// 				pulumi.String("global.cluster.region=gz"),
+// 				pulumi.String("global.cluster.longregion=ap-guangzhou"),
+// 				tcrName.ApplyT(func(tcrName string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.hosts[0].domain=", tcrName, "-vpc.tencentcloudcr.com"), nil
+// 				}).(pulumi.StringOutput),
+// 				endPoint.ApplyT(func(endPoint string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.hosts[0].ip=", endPoint), nil
+// 				}).(pulumi.StringOutput),
 // 				pulumi.String("global.hosts[0].disabled=false"),
+// 				tcrName.ApplyT(func(tcrName string) (string, error) {
+// 					return fmt.Sprintf("%v%v%v", "global.hosts[1].domain=", tcrName, "-tencentcloudcr.com"), nil
+// 				}).(pulumi.StringOutput),
+// 				endPoint.ApplyT(func(endPoint string) (string, error) {
+// 					return fmt.Sprintf("%v%v", "global.hosts[1].ip=", endPoint), nil
+// 				}).(pulumi.StringOutput),
+// 				pulumi.String("global.hosts[1].disabled=false"),
 // 			},
 // 		})
 // 		if err != nil {
@@ -65,8 +160,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Install new addon by passing spec json to reqBody directly
+// ### Install new addon by passing spec json to reqBody directly
 //
 // ```go
 // package main

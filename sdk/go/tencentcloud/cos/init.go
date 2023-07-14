@@ -21,14 +21,32 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cos/batch:Batch":
+		r = &Batch{}
 	case "tencentcloud:Cos/bucket:Bucket":
 		r = &Bucket{}
 	case "tencentcloud:Cos/bucketDomainCertificateAttachment:BucketDomainCertificateAttachment":
 		r = &BucketDomainCertificateAttachment{}
+	case "tencentcloud:Cos/bucketGenerateInventoryImmediatelyOperation:BucketGenerateInventoryImmediatelyOperation":
+		r = &BucketGenerateInventoryImmediatelyOperation{}
+	case "tencentcloud:Cos/bucketInventory:BucketInventory":
+		r = &BucketInventory{}
 	case "tencentcloud:Cos/bucketObject:BucketObject":
 		r = &BucketObject{}
 	case "tencentcloud:Cos/bucketPolicy:BucketPolicy":
 		r = &BucketPolicy{}
+	case "tencentcloud:Cos/bucketReferer:BucketReferer":
+		r = &BucketReferer{}
+	case "tencentcloud:Cos/bucketVersion:BucketVersion":
+		r = &BucketVersion{}
+	case "tencentcloud:Cos/objectAbortMultipartUploadOperation:ObjectAbortMultipartUploadOperation":
+		r = &ObjectAbortMultipartUploadOperation{}
+	case "tencentcloud:Cos/objectCopyOperation:ObjectCopyOperation":
+		r = &ObjectCopyOperation{}
+	case "tencentcloud:Cos/objectDownloadOperation:ObjectDownloadOperation":
+		r = &ObjectDownloadOperation{}
+	case "tencentcloud:Cos/objectRestoreOperation:ObjectRestoreOperation":
+		r = &ObjectRestoreOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -44,6 +62,11 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cos/batch",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cos/bucket",
 		&module{version},
 	)
@@ -54,12 +77,52 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cos/bucketGenerateInventoryImmediatelyOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/bucketInventory",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cos/bucketObject",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cos/bucketPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/bucketReferer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/bucketVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/objectAbortMultipartUploadOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/objectCopyOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/objectDownloadOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cos/objectRestoreOperation",
 		&module{version},
 	)
 }

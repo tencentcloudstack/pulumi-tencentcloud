@@ -259,7 +259,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Intranet IP address.
      */
-    public /*out*/ readonly vip!: pulumi.Output<string>;
+    public readonly vip!: pulumi.Output<string>;
     /**
      * Intranet IPv6.
      */
@@ -406,6 +406,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
             resourceInputs["voucherIds"] = args ? args.voucherIds : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zones"] = args ? args.zones : undefined;
@@ -434,7 +435,6 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tdsqlVersion"] = undefined /*out*/;
             resourceInputs["uin"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
-            resourceInputs["vip"] = undefined /*out*/;
             resourceInputs["vipv6"] = undefined /*out*/;
             resourceInputs["vport"] = undefined /*out*/;
             resourceInputs["wanDomain"] = undefined /*out*/;
@@ -740,6 +740,10 @@ export interface InstanceArgs {
      * tag list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * Intranet IP address.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * A list of voucher IDs. Currently, only one voucher can be specified.
      */

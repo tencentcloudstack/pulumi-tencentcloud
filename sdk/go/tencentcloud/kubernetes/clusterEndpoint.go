@@ -47,6 +47,8 @@ type ClusterEndpoint struct {
 	ClusterIntranetSubnetId pulumi.StringPtrOutput `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
 	Domain pulumi.StringOutput `pulumi:"domain"`
+	// The LB parameter. Only used for public network access.
+	ExtensiveParameters pulumi.StringPtrOutput `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
 	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -114,6 +116,8 @@ type clusterEndpointState struct {
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
 	Domain *string `pulumi:"domain"`
+	// The LB parameter. Only used for public network access.
+	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
 	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -149,6 +153,8 @@ type ClusterEndpointState struct {
 	ClusterIntranetSubnetId pulumi.StringPtrInput
 	// Domain name for access.
 	Domain pulumi.StringPtrInput
+	// The LB parameter. Only used for public network access.
+	ExtensiveParameters pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
 	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -180,6 +186,8 @@ type clusterEndpointArgs struct {
 	ClusterIntranetDomain *string `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
+	// The LB parameter. Only used for public network access.
+	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
 	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -202,6 +210,8 @@ type ClusterEndpointArgs struct {
 	ClusterIntranetDomain pulumi.StringPtrInput
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrInput
+	// The LB parameter. Only used for public network access.
+	ExtensiveParameters pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
 	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -348,6 +358,11 @@ func (o ClusterEndpointOutput) ClusterIntranetSubnetId() pulumi.StringPtrOutput 
 // Domain name for access.
 func (o ClusterEndpointOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The LB parameter. Only used for public network access.
+func (o ClusterEndpointOutput) ExtensiveParameters() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ExtensiveParameters }).(pulumi.StringPtrOutput)
 }
 
 // this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.

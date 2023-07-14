@@ -164,8 +164,7 @@ class User(pulumi.CustomResource):
         Provides a resource to create a Ckafka user.
 
         ## Example Usage
-
-        Ckafka User
+        ### Ckafka User
 
         ```python
         import pulumi
@@ -201,8 +200,7 @@ class User(pulumi.CustomResource):
         Provides a resource to create a Ckafka user.
 
         ## Example Usage
-
-        Ckafka User
+        ### Ckafka User
 
         ```python
         import pulumi

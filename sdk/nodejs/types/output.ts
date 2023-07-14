@@ -476,7 +476,9 @@ export namespace ApiGateway {
          */
         createTime: string;
         /**
-         * Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+         * (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+         *
+         * @deprecated It has been deprecated from version 1.81.9.
          */
         exclusiveSetName: string;
         /**
@@ -781,6 +783,36 @@ export namespace ApiGateway {
 }
 
 export namespace As {
+    export interface GetAdvicesAutoScalingAdviceSet {
+        /**
+         * A collection of suggestions for scaling group configurations.
+         */
+        advices: outputs.As.GetAdvicesAutoScalingAdviceSetAdvice[];
+        /**
+         * Auto scaling group ID.
+         */
+        autoScalingGroupId: string;
+        /**
+         * Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+         */
+        level: string;
+    }
+
+    export interface GetAdvicesAutoScalingAdviceSetAdvice {
+        /**
+         * Problem Details.
+         */
+        detail: string;
+        /**
+         * Problem Description.
+         */
+        problem: string;
+        /**
+         * Recommended resolutions.
+         */
+        solution: string;
+    }
+
     export interface GetInstancesFilter {
         /**
          * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
@@ -845,6 +877,169 @@ export namespace As {
          * Available zone.
          */
         zone: string;
+    }
+
+    export interface GetLastActivityActivitySet {
+        /**
+         * Scaling activity ID.
+         */
+        activityId: string;
+        /**
+         * Information set of the instances related to the scaling activity.
+         */
+        activityRelatedInstanceSets: outputs.As.GetLastActivityActivitySetActivityRelatedInstanceSet[];
+        /**
+         * Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+         */
+        activityType: string;
+        /**
+         * Auto scaling group ID.
+         */
+        autoScalingGroupId: string;
+        /**
+         * Cause of the scaling activity.
+         */
+        cause: string;
+        /**
+         * Creation time of the scaling activity.
+         */
+        createdTime: string;
+        /**
+         * Description of the scaling activity.
+         */
+        description: string;
+        /**
+         * Detailed description of scaling activity status.
+         */
+        detailedStatusMessageSets: outputs.As.GetLastActivityActivitySetDetailedStatusMessageSet[];
+        /**
+         * End time of the scaling activity.
+         */
+        endTime: string;
+        /**
+         * Result of the command execution.
+         */
+        invocationResultSets: outputs.As.GetLastActivityActivitySetInvocationResultSet[];
+        /**
+         * Result of the lifecycle hook action in the scaling activity.
+         */
+        lifecycleActionResultSets: outputs.As.GetLastActivityActivitySetLifecycleActionResultSet[];
+        /**
+         * Start time of the scaling activity.
+         */
+        startTime: string;
+        /**
+         * Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+         */
+        statusCode: string;
+        /**
+         * Description of the scaling activity status.
+         */
+        statusMessage: string;
+        /**
+         * Brief description of the scaling activity status.
+         */
+        statusMessageSimplified: string;
+    }
+
+    export interface GetLastActivityActivitySetActivityRelatedInstanceSet {
+        /**
+         * ID of the instance.
+         */
+        instanceId: string;
+        /**
+         * Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+         */
+        instanceStatus: string;
+    }
+
+    export interface GetLastActivityActivitySetDetailedStatusMessageSet {
+        /**
+         * Error type.
+         */
+        code: string;
+        /**
+         * Instance billing mode.
+         */
+        instanceChargeType: string;
+        /**
+         * ID of the instance.
+         */
+        instanceId: string;
+        /**
+         * Instance type.
+         */
+        instanceType: string;
+        /**
+         * Error message.
+         */
+        message: string;
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * AZ information.
+         */
+        zone: string;
+    }
+
+    export interface GetLastActivityActivitySetInvocationResultSet {
+        /**
+         * Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commandId: string;
+        /**
+         * Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        errorMessage: string;
+        /**
+         * ID of the instance.
+         */
+        instanceId: string;
+        /**
+         * Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+         */
+        invocationId: string;
+        /**
+         * Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        invocationTaskId: string;
+        /**
+         * Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        taskStatus: string;
+    }
+
+    export interface GetLastActivityActivitySetLifecycleActionResultSet {
+        /**
+         * ID of the instance.
+         */
+        instanceId: string;
+        /**
+         * Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+         */
+        invocationId: string;
+        /**
+         * Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+         */
+        invokeCommandResult: string;
+        /**
+         * Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+         */
+        lifecycleActionResult: string;
+        /**
+         * ID of the lifecycle hook.
+         */
+        lifecycleHookId: string;
+        /**
+         * Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+         */
+        notificationResult: string;
+        /**
+         * Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+         */
+        resultReason: string;
     }
 
     export interface GetScalingConfigsConfigurationList {
@@ -1111,6 +1306,19 @@ export namespace As {
          * Alarm threshold.
          */
         threshold: number;
+    }
+
+    export interface LoadBalancerForwardLoadBalancer {
+        listenerId: string;
+        loadBalancerId: string;
+        locationId?: string;
+        region?: string;
+        targetAttributes: outputs.As.LoadBalancerForwardLoadBalancerTargetAttribute[];
+    }
+
+    export interface LoadBalancerForwardLoadBalancerTargetAttribute {
+        port: number;
+        weight: number;
     }
 
     export interface ScalingConfigDataDisk {
@@ -2027,6 +2235,29 @@ export namespace Ccn {
     }
 
     export interface InstancesAcceptAttachInstance {
+        /**
+         * Description.
+         */
+        description?: string;
+        /**
+         * Attachment Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Instance Region.
+         */
+        instanceRegion: string;
+        /**
+         * InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+         */
+        instanceType?: string;
+        /**
+         * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        routeTableId?: string;
+    }
+
+    export interface InstancesRejectAttachInstance {
         /**
          * Description.
          */
@@ -3617,6 +3848,61 @@ export namespace Chdfs {
         vpcType: number;
     }
 
+    export interface GetFileSystemsFileSystem {
+        /**
+         * appid of the user.
+         */
+        appId: number;
+        /**
+         * block size of the file system(byte).
+         */
+        blockSize: number;
+        /**
+         * capacity of the file system(byte).
+         */
+        capacityQuota: number;
+        /**
+         * create time.
+         */
+        createTime: string;
+        /**
+         * desc of the file system.
+         */
+        description: string;
+        /**
+         * check the ranger address or not.
+         */
+        enableRanger: boolean;
+        /**
+         * file system id.
+         */
+        fileSystemId: string;
+        /**
+         * file system name.
+         */
+        fileSystemName: string;
+        /**
+         * check POSIX ACL or not.
+         */
+        posixAcl: boolean;
+        /**
+         * ranger address list.
+         */
+        rangerServiceAddresses: string[];
+        /**
+         * region of the file system.
+         */
+        region: string;
+        /**
+         * status of the file system(1: creating create success 3: create failed).
+         */
+        status: number;
+        /**
+         * super users of the file system.
+         */
+        superUsers: string[];
+    }
+
     export interface GetMountPointsMountPoint {
         /**
          * associated group ids.
@@ -4276,7 +4562,7 @@ export namespace Ci {
         /**
          * hls encryption configuration.
          */
-        hlsEncrypt?: outputs.Ci.MediaTranscodeTemplateTransConfigHlsEncrypt;
+        hlsEncrypt: outputs.Ci.MediaTranscodeTemplateTransConfigHlsEncrypt;
         /**
          * Whether to check the audio code rate, true, false, When false, transcode according to configuration parameters.
          */
@@ -4307,11 +4593,11 @@ export namespace Ci {
         /**
          * Whether to enable HLS encryption, support encryption when Container.Format is hls.
          */
-        isHlsEncrypt?: string;
+        isHlsEncrypt: string;
         /**
          * HLS encrypted key, this parameter is only meaningful when IsHlsEncrypt is true.
          */
-        uriKey?: string;
+        uriKey: string;
     }
 
     export interface MediaTranscodeTemplateVideo {
@@ -4625,6 +4911,25 @@ export namespace Ci {
 }
 
 export namespace Ckafka {
+    export interface AclRuleRuleList {
+        /**
+         * The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
+         */
+        host: string;
+        /**
+         * Acl operation mode, enumeration value (all operations All, read Read, write Write).
+         */
+        operation: string;
+        /**
+         * permission type, (Deny|Allow).
+         */
+        permissionType: string;
+        /**
+         * User list, the default is User:, which means that any user can access, and the current user can only be the user included in the user list. The input format needs to be prefixed with [User:]. For example, user A is passed in as User:A.
+         */
+        principal: string;
+    }
+
     export interface ConnectResourceClickhouseConnectParam {
         /**
          * Whether to update to the associated Datahub task, default: false.
@@ -4963,6 +5268,3181 @@ export namespace Ckafka {
         userName: string;
     }
 
+    export interface DatahubTaskSourceResource {
+        /**
+         * ClickHouse config, Type CLICKHOUSE requierd.
+         */
+        clickHouseParam?: outputs.Ckafka.DatahubTaskSourceResourceClickHouseParam;
+        /**
+         * Cls configuration, Required when Type is CLS.
+         */
+        clsParam?: outputs.Ckafka.DatahubTaskSourceResourceClsParam;
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParam?: outputs.Ckafka.DatahubTaskSourceResourceCosParam;
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParam?: outputs.Ckafka.DatahubTaskSourceResourceCtsdbParam;
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParam?: outputs.Ckafka.DatahubTaskSourceResourceDtsParam;
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParam?: outputs.Ckafka.DatahubTaskSourceResourceEsParam;
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParam?: outputs.Ckafka.DatahubTaskSourceResourceEventBusParam;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskSourceResourceKafkaParam;
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParam?: outputs.Ckafka.DatahubTaskSourceResourceMariaDbParam;
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParam?: outputs.Ckafka.DatahubTaskSourceResourceMongoDbParam;
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParam?: outputs.Ckafka.DatahubTaskSourceResourceMySqlParam;
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParam?: outputs.Ckafka.DatahubTaskSourceResourcePostgreSqlParam;
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParam?: outputs.Ckafka.DatahubTaskSourceResourceScfParam;
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParam?: outputs.Ckafka.DatahubTaskSourceResourceSqlServerParam;
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParam?: outputs.Ckafka.DatahubTaskSourceResourceTdwParam;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskSourceResourceTopicParam;
+        /**
+         * resource type.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: string;
+        /**
+         * ClickHouse database name.
+         */
+        database: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskSourceResourceClickHouseParamDropCls;
+        /**
+         * Whether ClickHouse discards the message that fails to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * ClickHouse ip.
+         */
+        ip?: string;
+        /**
+         * ClickHouse passwd.
+         */
+        password?: string;
+        /**
+         * ClickHouse port.
+         */
+        port?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: outputs.Ckafka.DatahubTaskSourceResourceClickHouseParamSchema[];
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip?: string;
+        /**
+         * ClickHouse table.
+         */
+        table: string;
+        /**
+         * ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+         */
+        type?: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: string;
+        /**
+         * ClickHouse user name.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParamSchema {
+        /**
+         * Whether the column item is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * column name.
+         */
+        columnName: string;
+        /**
+         * The json Key name corresponding to this column.
+         */
+        jsonKey: string;
+        /**
+         * type of table column.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskSourceResourceClsParam {
+        /**
+         * Required when Decode Json is false.
+         */
+        contentKey?: string;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: boolean;
+        /**
+         * LogSet id.
+         */
+        logSet?: string;
+        /**
+         * cls id.
+         */
+        resource: string;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField?: string;
+    }
+
+    export interface DatahubTaskSourceResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize?: number;
+        /**
+         * time interval.
+         */
+        aggregateInterval?: number;
+        /**
+         * cos bucket name.
+         */
+        bucketName: string;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat?: string;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType?: string;
+        /**
+         * ObjectKey.
+         */
+        objectKey?: string;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix?: string;
+        /**
+         * region code.
+         */
+        region: string;
+    }
+
+    export interface DatahubTaskSourceResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric?: string;
+        /**
+         * resource id.
+         */
+        resource?: string;
+    }
+
+    export interface DatahubTaskSourceResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId?: string;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword?: string;
+        /**
+         * Dts account.
+         */
+        groupUser?: string;
+        /**
+         * Dts connection ip.
+         */
+        ip?: string;
+        /**
+         * Dts connection port.
+         */
+        port?: number;
+        /**
+         * Dts instance Id.
+         */
+        resource: string;
+        /**
+         * Dts topic.
+         */
+        topic?: string;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql?: boolean;
+    }
+
+    export interface DatahubTaskSourceResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey?: string;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey?: string;
+        /**
+         * Es date suffix.
+         */
+        dateFormat?: string;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField?: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskSourceResourceEsParamDropCls;
+        /**
+         * dead letter queue.
+         */
+        dropDlq?: outputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlq;
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage?: boolean;
+        /**
+         * Whether Es discards the message of parsing failure.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * Es index name.
+         */
+        index?: string;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType?: string;
+        /**
+         * Es Password.
+         */
+        password?: string;
+        /**
+         * Es connection port.
+         */
+        port?: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip?: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: string;
+        /**
+         * Es UserName.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: string;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqKafkaParam;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: number;
+        /**
+         * retry interval.
+         */
+        retryInterval?: number;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqTopicParam;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskSourceResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName?: string;
+        /**
+         * SCF namespace.
+         */
+        namespace?: string;
+        /**
+         * SCF version and alias.
+         */
+        qualifier?: string;
+        /**
+         * instance id.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * resource type. EB_COS/EB_ES/EB_CLS.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskSourceResourceKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskSourceResourceKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskSourceResourceKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskSourceResourceMariaDbParam {
+        /**
+         * MariaDB database name, * for all database.
+         */
+        database: string;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: boolean;
+        /**
+         * Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * MariaDB connection Id.
+         */
+        resource: string;
+        /**
+         * schema_only|initial, default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskSourceResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: string;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: boolean;
+        /**
+         * MongoDB database name.
+         */
+        database: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip?: string;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent?: string;
+        /**
+         * MongoDB database password.
+         */
+        password?: string;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline?: string;
+        /**
+         * MongoDB connection port.
+         */
+        port?: number;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference?: string;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * MongoDB database user name.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn?: string;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode?: string;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode?: string;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource?: string;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom?: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: outputs.Ckafka.DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping[];
+        /**
+         * MySQL database name, * is the whole database.
+         */
+        database: string;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic?: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskSourceResourceMySqlParamDropCls;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: boolean;
+        /**
+         * Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+         */
+        isTableRegular?: boolean;
+        /**
+         * Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * MySQL connection Id.
+         */
+        resource: string;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase?: string;
+        /**
+         * whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+         */
+        snapshotMode?: string;
+        /**
+         * The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+         */
+        table: string;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex?: string;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement?: string;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: boolean;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: string;
+        /**
+         * current column size.
+         */
+        columnSize?: string;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: string;
+        /**
+         * message type.
+         */
+        type?: string;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskSourceResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat?: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: outputs.Ckafka.DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping[];
+        /**
+         * PostgreSQL database name.
+         */
+        database: string;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular?: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * PostgreSQL connection Id.
+         */
+        resource: string;
+        /**
+         * never|initial, default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: boolean;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: string;
+        /**
+         * current column size.
+         */
+        columnSize?: string;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: string;
+        /**
+         * message type.
+         */
+        type?: string;
+    }
+
+    export interface DatahubTaskSourceResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize?: number;
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries?: number;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace?: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier?: string;
+    }
+
+    export interface DatahubTaskSourceResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer connection Id.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskSourceResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: string;
+        /**
+         * default true.
+         */
+        isDomestic?: boolean;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost?: string;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort?: number;
+        /**
+         * Tdw tid.
+         */
+        tid: string;
+    }
+
+    export interface DatahubTaskSourceResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskTargetResource {
+        /**
+         * ClickHouse config, Type CLICKHOUSE requierd.
+         */
+        clickHouseParam?: outputs.Ckafka.DatahubTaskTargetResourceClickHouseParam;
+        /**
+         * Cls configuration, Required when Type is CLS.
+         */
+        clsParam?: outputs.Ckafka.DatahubTaskTargetResourceClsParam;
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParam?: outputs.Ckafka.DatahubTaskTargetResourceCosParam;
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParam?: outputs.Ckafka.DatahubTaskTargetResourceCtsdbParam;
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParam?: outputs.Ckafka.DatahubTaskTargetResourceDtsParam;
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParam?: outputs.Ckafka.DatahubTaskTargetResourceEsParam;
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParam?: outputs.Ckafka.DatahubTaskTargetResourceEventBusParam;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskTargetResourceKafkaParam;
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParam?: outputs.Ckafka.DatahubTaskTargetResourceMariaDbParam;
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParam?: outputs.Ckafka.DatahubTaskTargetResourceMongoDbParam;
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParam?: outputs.Ckafka.DatahubTaskTargetResourceMySqlParam;
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParam?: outputs.Ckafka.DatahubTaskTargetResourcePostgreSqlParam;
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParam?: outputs.Ckafka.DatahubTaskTargetResourceScfParam;
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParam?: outputs.Ckafka.DatahubTaskTargetResourceSqlServerParam;
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParam?: outputs.Ckafka.DatahubTaskTargetResourceTdwParam;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskTargetResourceTopicParam;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: string;
+        /**
+         * ClickHouse database name.
+         */
+        database: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskTargetResourceClickHouseParamDropCls;
+        /**
+         * Whether ClickHouse discards the message that fails to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * ClickHouse ip.
+         */
+        ip?: string;
+        /**
+         * ClickHouse passwd.
+         */
+        password?: string;
+        /**
+         * ClickHouse port.
+         */
+        port?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: outputs.Ckafka.DatahubTaskTargetResourceClickHouseParamSchema[];
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip?: string;
+        /**
+         * ClickHouse table.
+         */
+        table: string;
+        /**
+         * ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+         */
+        type?: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: string;
+        /**
+         * ClickHouse user name.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParamSchema {
+        /**
+         * Whether the column item is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * column name.
+         */
+        columnName: string;
+        /**
+         * The json Key name corresponding to this column.
+         */
+        jsonKey: string;
+        /**
+         * type of table column.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTargetResourceClsParam {
+        /**
+         * Required when Decode Json is false.
+         */
+        contentKey?: string;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: boolean;
+        /**
+         * LogSet id.
+         */
+        logSet?: string;
+        /**
+         * cls id.
+         */
+        resource: string;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField?: string;
+    }
+
+    export interface DatahubTaskTargetResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize?: number;
+        /**
+         * time interval.
+         */
+        aggregateInterval?: number;
+        /**
+         * cos bucket name.
+         */
+        bucketName: string;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat?: string;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType?: string;
+        /**
+         * ObjectKey.
+         */
+        objectKey?: string;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix?: string;
+        /**
+         * region code.
+         */
+        region: string;
+    }
+
+    export interface DatahubTaskTargetResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric?: string;
+        /**
+         * resource id.
+         */
+        resource?: string;
+    }
+
+    export interface DatahubTaskTargetResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId?: string;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword?: string;
+        /**
+         * Dts account.
+         */
+        groupUser?: string;
+        /**
+         * Dts connection ip.
+         */
+        ip?: string;
+        /**
+         * Dts connection port.
+         */
+        port?: number;
+        /**
+         * Dts instance Id.
+         */
+        resource: string;
+        /**
+         * Dts topic.
+         */
+        topic?: string;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql?: boolean;
+    }
+
+    export interface DatahubTaskTargetResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey?: string;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey?: string;
+        /**
+         * Es date suffix.
+         */
+        dateFormat?: string;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField?: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskTargetResourceEsParamDropCls;
+        /**
+         * dead letter queue.
+         */
+        dropDlq?: outputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlq;
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage?: boolean;
+        /**
+         * Whether Es discards the message of parsing failure.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * Es index name.
+         */
+        index?: string;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType?: string;
+        /**
+         * Es Password.
+         */
+        password?: string;
+        /**
+         * Es connection port.
+         */
+        port?: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip?: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: string;
+        /**
+         * Es UserName.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: string;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqKafkaParam;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: number;
+        /**
+         * retry interval.
+         */
+        retryInterval?: number;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqTopicParam;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskTargetResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName?: string;
+        /**
+         * SCF namespace.
+         */
+        namespace?: string;
+        /**
+         * SCF version and alias.
+         */
+        qualifier?: string;
+        /**
+         * instance id.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * resource type. EB_COS/EB_ES/EB_CLS.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTargetResourceKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskTargetResourceKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskTargetResourceKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskTargetResourceMariaDbParam {
+        /**
+         * MariaDB database name, * for all database.
+         */
+        database: string;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: boolean;
+        /**
+         * Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * MariaDB connection Id.
+         */
+        resource: string;
+        /**
+         * schema_only|initial, default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskTargetResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: string;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: boolean;
+        /**
+         * MongoDB database name.
+         */
+        database: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip?: string;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent?: string;
+        /**
+         * MongoDB database password.
+         */
+        password?: string;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline?: string;
+        /**
+         * MongoDB connection port.
+         */
+        port?: number;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference?: string;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: boolean;
+        /**
+         * MongoDB database user name.
+         */
+        userName?: string;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn?: string;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode?: string;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode?: string;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource?: string;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom?: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: outputs.Ckafka.DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping[];
+        /**
+         * MySQL database name, * is the whole database.
+         */
+        database: string;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic?: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: outputs.Ckafka.DatahubTaskTargetResourceMySqlParamDropCls;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: boolean;
+        /**
+         * Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+         */
+        isTableRegular?: boolean;
+        /**
+         * Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * MySQL connection Id.
+         */
+        resource: string;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase?: string;
+        /**
+         * whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+         */
+        snapshotMode?: string;
+        /**
+         * The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+         */
+        table: string;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex?: string;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement?: string;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: boolean;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: string;
+        /**
+         * current column size.
+         */
+        columnSize?: string;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: string;
+        /**
+         * message type.
+         */
+        type?: string;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: string;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: string;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: boolean;
+    }
+
+    export interface DatahubTaskTargetResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat?: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: outputs.Ckafka.DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping[];
+        /**
+         * PostgreSQL database name.
+         */
+        database: string;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular?: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: string;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: boolean;
+        /**
+         * PostgreSQL connection Id.
+         */
+        resource: string;
+        /**
+         * never|initial, default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: boolean;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: string;
+        /**
+         * current column size.
+         */
+        columnSize?: string;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: string;
+        /**
+         * message type.
+         */
+        type?: string;
+    }
+
+    export interface DatahubTaskTargetResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize?: number;
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries?: number;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace?: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier?: string;
+    }
+
+    export interface DatahubTaskTargetResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer connection Id.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode?: string;
+        /**
+         * SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface DatahubTaskTargetResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: string;
+        /**
+         * default true.
+         */
+        isDomestic?: boolean;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost?: string;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort?: number;
+        /**
+         * Tdw tid.
+         */
+        tid: string;
+    }
+
+    export interface DatahubTaskTargetResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskTransformParam {
+        /**
+         * Analysis result.
+         */
+        analyseResults?: outputs.Ckafka.DatahubTaskTransformParamAnalyseResult[];
+        /**
+         * parsing format, JSON | DELIMITER| REGULAR.
+         */
+        analysisFormat: string;
+        /**
+         * Raw data.
+         */
+        content: string;
+        /**
+         * Whether to keep parsing failure data.
+         */
+        failureParam: outputs.Ckafka.DatahubTaskTransformParamFailureParam;
+        /**
+         * filter.
+         */
+        filterParams?: outputs.Ckafka.DatahubTaskTransformParamFilterParam[];
+        /**
+         * Map.
+         */
+        mapParams?: outputs.Ckafka.DatahubTaskTransformParamMapParam[];
+        /**
+         * output format.
+         */
+        outputFormat: string;
+        /**
+         * delimiter, regular expression.
+         */
+        regex?: string;
+        /**
+         * Test Results.
+         */
+        result?: string;
+        /**
+         * Data source, TOPIC pulls from the source topic, CUSTOMIZE custom.
+         */
+        sourceType: string;
+        /**
+         * Whether the underlying engine uses eb.
+         */
+        useEventBus?: boolean;
+    }
+
+    export interface DatahubTaskTransformParamAnalyseResult {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+         */
+        type?: string;
+        /**
+         * value.
+         */
+        value?: string;
+    }
+
+    export interface DatahubTaskTransformParamFailureParam {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: string;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskTransformParamFailureParamKafkaParam;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: number;
+        /**
+         * retry interval.
+         */
+        retryInterval?: number;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskTransformParamFailureParamTopicParam;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskTransformParamFailureParamKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskTransformParamFilterParam {
+        /**
+         * Key.
+         */
+        key: string;
+        /**
+         * Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+         */
+        matchMode: string;
+        /**
+         * REGULAR.
+         */
+        type?: string;
+        /**
+         * Value.
+         */
+        value: string;
+    }
+
+    export interface DatahubTaskTransformParamMapParam {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+         */
+        type?: string;
+        /**
+         * value.
+         */
+        value?: string;
+    }
+
+    export interface DatahubTaskTransformsParam {
+        /**
+         * data process.
+         */
+        batchAnalyse?: outputs.Ckafka.DatahubTaskTransformsParamBatchAnalyse;
+        /**
+         * Raw data.
+         */
+        content: string;
+        /**
+         * fail process.
+         */
+        failureParam?: outputs.Ckafka.DatahubTaskTransformsParamFailureParam;
+        /**
+         * processing chain.
+         */
+        fieldChains: outputs.Ckafka.DatahubTaskTransformsParamFieldChain[];
+        /**
+         * filter.
+         */
+        filterParams?: outputs.Ckafka.DatahubTaskTransformsParamFilterParam[];
+        /**
+         * Whether to keep the data source Topic metadata information (source Topic, Partition, Offset), the default is false.
+         */
+        keepMetadata?: boolean;
+        /**
+         * output format, JSON, ROW, default JSON.
+         */
+        outputFormat?: string;
+        /**
+         * result.
+         */
+        result?: string;
+        /**
+         * The output format is ROW Required.
+         */
+        rowParam?: outputs.Ckafka.DatahubTaskTransformsParamRowParam;
+        /**
+         * data source.
+         */
+        sourceType?: string;
+    }
+
+    export interface DatahubTaskTransformsParamBatchAnalyse {
+        /**
+         * ONE BY ONE single output, MERGE combined output.
+         */
+        format: string;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParam {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: string;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: outputs.Ckafka.DatahubTaskTransformsParamFailureParamKafkaParam;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: number;
+        /**
+         * retry interval.
+         */
+        retryInterval?: number;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: outputs.Ckafka.DatahubTaskTransformsParamFailureParamTopicParam;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: string;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: string;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * Partition num.
+         */
+        partitionNum?: number;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: number;
+        /**
+         * resource id.
+         */
+        resource: string;
+        /**
+         * resource id name.
+         */
+        resourceName?: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: outputs.Ckafka.DatahubTaskTransformsParamFailureParamKafkaParamTableMapping[];
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: string;
+        /**
+         * Topic Id.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: boolean;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId?: number;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * table name,use, to separate.
+         */
+        table: string;
+        /**
+         * Topic name.
+         */
+        topic: string;
+        /**
+         * Topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: string;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: number;
+        /**
+         * TopicId.
+         */
+        topicId?: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: boolean;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChain {
+        /**
+         * analyze.
+         */
+        analyse: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyse;
+        /**
+         * Parsing results in JSON format.
+         */
+        analyseJsonResult?: string;
+        /**
+         * Analysis result.
+         */
+        analyseResults?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResult[];
+        /**
+         * Test Results.
+         */
+        result?: string;
+        /**
+         * data processing.
+         */
+        sMTs?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMT[];
+        /**
+         * secondary analysis.
+         */
+        secondaryAnalyse?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyse;
+        /**
+         * Secondary parsing results in JSON format.
+         */
+        secondaryAnalyseJsonResult?: string;
+        /**
+         * Secondary Analysis Results.
+         */
+        secondaryAnalyseResults?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResult[];
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyse {
+        /**
+         * Parsing format, JSON, DELIMITER delimiter, REGULAR regular extraction, SOURCE processing all results of the upper layer.
+         */
+        format: string;
+        /**
+         * KEY to be processed again - KEY expression.
+         */
+        inputValue?: string;
+        /**
+         * KEY to be processed again - mode.
+         */
+        inputValueType?: string;
+        /**
+         * delimiter, regular expression.
+         */
+        regex?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResult {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: string;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: string;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: string;
+        /**
+         * value.
+         */
+        value?: string;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate[];
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDate;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplace;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKV;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplace;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplace;
+        /**
+         * result.
+         */
+        result?: string;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplit;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstr;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: string;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecode;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: string;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: string;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: string;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: string;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: string;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * Regular.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * been replaced value.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: number;
+        /**
+         * interception starting position.
+         */
+        start: number;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMT {
+        /**
+         * KEY.
+         */
+        key: string;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: string;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: string;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: string;
+        /**
+         * VALUE.
+         */
+        value?: string;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperate;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperate[];
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateDate;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplace;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateKV;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplace;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateReplace;
+        /**
+         * result.
+         */
+        result?: string;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateSplit;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateSubstr;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: string;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecode;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: string;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: string;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: string;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: string;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: string;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * Regular.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * been replaced value.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: number;
+        /**
+         * interception starting position.
+         */
+        start: number;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyse {
+        /**
+         * delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResult {
+        /**
+         * KEY.
+         */
+        key: string;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: string;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: string;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: string;
+        /**
+         * VALUE.
+         */
+        value?: string;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate[];
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDate;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplace;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplace;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplace;
+        /**
+         * result.
+         */
+        result?: string;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplit;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstr;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: string;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: outputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecode;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: string;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: string;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: string;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: string;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: string;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * Regular.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: string;
+        /**
+         * been replaced value.
+         */
+        oldValue: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: string;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: number;
+        /**
+         * interception starting position.
+         */
+        start: number;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: string;
+    }
+
+    export interface DatahubTaskTransformsParamFilterParam {
+        /**
+         * Key.
+         */
+        key: string;
+        /**
+         * Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+         */
+        matchMode: string;
+        /**
+         * REGULAR.
+         */
+        type?: string;
+        /**
+         * Value.
+         */
+        value: string;
+    }
+
+    export interface DatahubTaskTransformsParamRowParam {
+        /**
+         * delimiter.
+         */
+        entryDelimiter?: string;
+        /**
+         * key, value delimiter.
+         */
+        keyValueDelimiter?: string;
+        /**
+         * row content, KEY_VALUE, VALUE.
+         */
+        rowContent: string;
+    }
+
     export interface GetAclsAclList {
         /**
          * Host substr used for querying.
@@ -4988,6 +8468,2902 @@ export namespace Ckafka {
          * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
          */
         resourceType: string;
+    }
+
+    export interface GetConnectResourceResult {
+        /**
+         * Resource List.
+         */
+        connectResourceLists: outputs.Ckafka.GetConnectResourceResultConnectResourceList[];
+        /**
+         * Number of connection sources.
+         */
+        totalCount: number;
+    }
+
+    export interface GetConnectResourceResultConnectResourceList {
+        /**
+         * ClickHouse configuration, returned when Type is CLICKHOUSE.
+         */
+        clickhouseConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListClickhouseConnectParam[];
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Ctsdb configuration, returned when Type is CTSDB.
+         */
+        ctsdbConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListCtsdbConnectParam[];
+        /**
+         * The current step of the connection source.
+         */
+        currentStep: string;
+        /**
+         * The number of Datahub tasks associated with this connection source.
+         */
+        datahubTaskCount: number;
+        /**
+         * Description.
+         */
+        description: string;
+        /**
+         * Doris Configuration, returned when Type is DORIS.
+         */
+        dorisConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListDorisConnectParam[];
+        /**
+         * Dts configuration, returned when Type is DTS.
+         */
+        dtsConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListDtsConnectParam[];
+        /**
+         * Error Messages.
+         */
+        errorMessage: string;
+        /**
+         * Es configuration, return when Type is ES.
+         */
+        esConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListEsConnectParam[];
+        /**
+         * Kafka configuration, returned when Type is KAFKA.
+         */
+        kafkaConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListKafkaConnectParam[];
+        /**
+         * Mariadb configuration, returned when Type is MARIADB.
+         */
+        mariaDbConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListMariaDbConnectParam[];
+        /**
+         * Mongo DB configuration, returned when Type is MONGODB.
+         */
+        mongoDbConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListMongoDbConnectParam[];
+        /**
+         * Mysql configuration, returned when Type is MYSQL or TDSQL C MYSQL.
+         */
+        mysqlConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListMysqlConnectParam[];
+        /**
+         * Postgresql configuration, returned when Type is POSTGRESQL or TDSQL C POSTGRESQL.
+         */
+        postgreSqlConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListPostgreSqlConnectParam[];
+        /**
+         * Resource id.
+         */
+        resourceId: string;
+        /**
+         * Resource name.
+         */
+        resourceName: string;
+        /**
+         * SQL Server configuration, returned when Type is SQLSERVER.
+         */
+        sqlServerConnectParams: outputs.Ckafka.GetConnectResourceResultConnectResourceListSqlServerConnectParam[];
+        /**
+         * Resource status.
+         */
+        status: number;
+        /**
+         * Step List.
+         */
+        stepLists: string[];
+        /**
+         * Creation progress percentage.
+         */
+        taskProgress: number;
+        /**
+         * connection source type.
+         */
+        type: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListClickhouseConnectParam {
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListCtsdbConnectParam {
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListDorisConnectParam {
+        /**
+         * Doris's http load balancing connection port, usually mapped to be's 8040 port.
+         */
+        bePort: number;
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListDtsConnectParam {
+        /**
+         * The id of the Dts consumer group.
+         */
+        groupId: string;
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Topic subscribed by Dts.
+         */
+        topic: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListEsConnectParam {
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListKafkaConnectParam {
+        /**
+         * Broker address for Kafka connection, required for self-build.
+         */
+        brokerAddress: string;
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * Instance resource region of CKafka connection source, required when crossing regions.
+         */
+        region: string;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListMariaDbConnectParam {
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListMongoDbConnectParam {
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListMysqlConnectParam {
+        /**
+         * Required when type is TDSQL C_POSTGRESQL.
+         */
+        clusterId: string;
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListPostgreSqlConnectParam {
+        /**
+         * Required when type is TDSQL C_POSTGRESQL.
+         */
+        clusterId: string;
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Whether the connection source is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetConnectResourceResultConnectResourceListSqlServerConnectParam {
+        /**
+         * Whether to update to the associated Dip task.
+         */
+        isUpdate: boolean;
+        /**
+         * The password of the connection source.
+         */
+        password: string;
+        /**
+         * SQLServer port.
+         */
+        port: number;
+        /**
+         * Instance resource of connection source.
+         */
+        resource: string;
+        /**
+         * Instance VIP of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        serviceVip: string;
+        /**
+         * The vpc Id of the connection source, when it is a Tencent Cloud instance, it is required.
+         */
+        uniqVpcId: string;
+        /**
+         * The username of the connection source.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubGroupOffsetsTopicList {
+        /**
+         * The topic partition array, where each element is a json object.
+         */
+        partitions: outputs.Ckafka.GetDatahubGroupOffsetsTopicListPartition[];
+        /**
+         * topic name.
+         */
+        topic: string;
+    }
+
+    export interface GetDatahubGroupOffsetsTopicListPartition {
+        /**
+         * Error Code.
+         */
+        errorCode: number;
+        /**
+         * The number of unconsumed messages.
+         */
+        lag: number;
+        /**
+         * partition Log End Offset.
+         */
+        logEndOffset: number;
+        /**
+         * Usually an empty string.
+         */
+        metadata: string;
+        /**
+         * consumer offset.
+         */
+        offset: number;
+        /**
+         * topic partitionId.
+         */
+        partition: number;
+    }
+
+    export interface GetDatahubTaskTaskList {
+        /**
+         * CreateTime.
+         */
+        createTime: string;
+        /**
+         * Datahub Id.
+         */
+        datahubId: string;
+        /**
+         * ErrorMessage.
+         */
+        errorMessage: string;
+        /**
+         * data resource.
+         */
+        sourceResources: outputs.Ckafka.GetDatahubTaskTaskListSourceResource[];
+        /**
+         * Status, -1 failed to create, 0 to create, 1 to run, 2 to delete, 3 to deleted, 4 to delete failed, 5 to pause, 6 to pause, 7 to pause, 8 to resume, 9 to resume failed.
+         */
+        status: number;
+        /**
+         * StepList.
+         */
+        stepLists: string[];
+        /**
+         * Target Resource.
+         */
+        targetResources: outputs.Ckafka.GetDatahubTaskTaskListTargetResource[];
+        /**
+         * Task Current Step.
+         */
+        taskCurrentStep: string;
+        /**
+         * task ID.
+         */
+        taskId: string;
+        /**
+         * TaskName.
+         */
+        taskName: string;
+        /**
+         * Creation progress percentage.
+         */
+        taskProgress: number;
+        /**
+         * Task type, SOURCE|SINK.
+         */
+        taskType: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResource {
+        /**
+         * ClickHouse config, Type CLICKHOUSE requierd.
+         */
+        clickHouseParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceClickHouseParam[];
+        /**
+         * Cls configuration, Required when Type is CLS.
+         */
+        clsParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceClsParam[];
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceCosParam[];
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceCtsdbParam[];
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceDtsParam[];
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParam[];
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEventBusParam[];
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceKafkaParam[];
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceMariaDbParam[];
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceMongoDbParam[];
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceMySqlParam[];
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourcePostgreSqlParam[];
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceScfParam[];
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceSqlServerParam[];
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceTdwParam[];
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceTopicParam[];
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: string;
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceClickHouseParamDropCl[];
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceClickHouseParamSchema[];
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId: string;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceClickHouseParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceClickHouseParamSchema {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceClsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey: string;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: boolean;
+        /**
+         * LogSet id.
+         */
+        logSet: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize: number;
+        /**
+         * time interval.
+         */
+        aggregateInterval: number;
+        /**
+         * cos bucket name.
+         */
+        bucketName: string;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat: string;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType: string;
+        /**
+         * ObjectKey.
+         */
+        objectKey: string;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix: string;
+        /**
+         * region code.
+         */
+        region: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId: string;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword: string;
+        /**
+         * Dts account.
+         */
+        groupUser: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey: string;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey: string;
+        /**
+         * Es date suffix.
+         */
+        dateFormat: string;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParamDropCl[];
+        /**
+         * dead letter queue.
+         */
+        dropDlqs: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParamDropDlq[];
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage: boolean;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Es index name.
+         */
+        index: string;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId: string;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType: string;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParam[];
+        /**
+         * retry times.
+         */
+        maxRetryAttempts: number;
+        /**
+         * retry interval.
+         */
+        retryInterval: number;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParams: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParam[];
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * ConnectorSyncType.
+         */
+        connectorSyncType: string;
+        /**
+         * enable dead letter queue.
+         */
+        enableToleration: boolean;
+        /**
+         * KeepPartition.
+         */
+        keepPartition: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * the partition num of the topic.
+         */
+        partitionNum: number;
+        /**
+         * Qps(query per seconds) limit.
+         */
+        qpsLimit: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * instance name.
+         */
+        resourceName: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * maps of table to topic, required when multi topic is selected.
+         */
+        tableMappings: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMapping[];
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+        /**
+         * whether to use multi table.
+         */
+        useTableMapping: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceKafkaParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * ConnectorSyncType.
+         */
+        connectorSyncType: string;
+        /**
+         * enable dead letter queue.
+         */
+        enableToleration: boolean;
+        /**
+         * KeepPartition.
+         */
+        keepPartition: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * the partition num of the topic.
+         */
+        partitionNum: number;
+        /**
+         * Qps(query per seconds) limit.
+         */
+        qpsLimit: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * instance name.
+         */
+        resourceName: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * maps of table to topic, required when multi topic is selected.
+         */
+        tableMappings: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceKafkaParamTableMapping[];
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+        /**
+         * whether to use multi table.
+         */
+        useTableMapping: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceKafkaParamTableMapping {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceMariaDbParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: string;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: boolean;
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn: string;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode: string;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode: string;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource: string;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMapping[];
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListSourceResourceMySqlParamDropCl[];
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex: string;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * current ColumnSize.
+         */
+        columnSize: string;
+        /**
+         * current Column DecimalDigits.
+         */
+        decimalDigits: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceMySqlParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings: outputs.Ckafka.GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMapping[];
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * current ColumnSize.
+         */
+        columnSize: string;
+        /**
+         * current Column DecimalDigits.
+         */
+        decimalDigits: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize: number;
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries: number;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: string;
+        /**
+         * default true.
+         */
+        isDomestic: boolean;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost: string;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort: number;
+        /**
+         * Tdw tid.
+         */
+        tid: string;
+    }
+
+    export interface GetDatahubTaskTaskListSourceResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResource {
+        /**
+         * ClickHouse config, Type CLICKHOUSE requierd.
+         */
+        clickHouseParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceClickHouseParam[];
+        /**
+         * Cls configuration, Required when Type is CLS.
+         */
+        clsParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceClsParam[];
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceCosParam[];
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceCtsdbParam[];
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceDtsParam[];
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParam[];
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEventBusParam[];
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceKafkaParam[];
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceMariaDbParam[];
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceMongoDbParam[];
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceMySqlParam[];
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourcePostgreSqlParam[];
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceScfParam[];
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceSqlServerParam[];
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceTdwParam[];
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceTopicParam[];
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: string;
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceClickHouseParamDropCl[];
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceClickHouseParamSchema[];
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId: string;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceClickHouseParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceClickHouseParamSchema {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceClsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey: string;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: boolean;
+        /**
+         * LogSet id.
+         */
+        logSet: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize: number;
+        /**
+         * time interval.
+         */
+        aggregateInterval: number;
+        /**
+         * cos bucket name.
+         */
+        bucketName: string;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat: string;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType: string;
+        /**
+         * ObjectKey.
+         */
+        objectKey: string;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix: string;
+        /**
+         * region code.
+         */
+        region: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId: string;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword: string;
+        /**
+         * Dts account.
+         */
+        groupUser: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey: string;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey: string;
+        /**
+         * Es date suffix.
+         */
+        dateFormat: string;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParamDropCl[];
+        /**
+         * dead letter queue.
+         */
+        dropDlqs: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParamDropDlq[];
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage: boolean;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Es index name.
+         */
+        index: string;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * instance vip.
+         */
+        serviceVip: string;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId: string;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType: string;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParam[];
+        /**
+         * retry times.
+         */
+        maxRetryAttempts: number;
+        /**
+         * retry interval.
+         */
+        retryInterval: number;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParams: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParam[];
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * ConnectorSyncType.
+         */
+        connectorSyncType: string;
+        /**
+         * enable dead letter queue.
+         */
+        enableToleration: boolean;
+        /**
+         * KeepPartition.
+         */
+        keepPartition: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * the partition num of the topic.
+         */
+        partitionNum: number;
+        /**
+         * Qps(query per seconds) limit.
+         */
+        qpsLimit: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * instance name.
+         */
+        resourceName: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * maps of table to topic, required when multi topic is selected.
+         */
+        tableMappings: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMapping[];
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+        /**
+         * whether to use multi table.
+         */
+        useTableMapping: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceKafkaParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * ConnectorSyncType.
+         */
+        connectorSyncType: string;
+        /**
+         * enable dead letter queue.
+         */
+        enableToleration: boolean;
+        /**
+         * KeepPartition.
+         */
+        keepPartition: boolean;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * the partition num of the topic.
+         */
+        partitionNum: number;
+        /**
+         * Qps(query per seconds) limit.
+         */
+        qpsLimit: number;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * instance name.
+         */
+        resourceName: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * maps of table to topic, required when multi topic is selected.
+         */
+        tableMappings: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceKafkaParamTableMapping[];
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+        /**
+         * whether to use multi table.
+         */
+        useTableMapping: boolean;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceKafkaParamTableMapping {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Topic name, use `,` when more than 1 topic.
+         */
+        topic: string;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceMariaDbParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: string;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: boolean;
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip: string;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent: string;
+        /**
+         * MongoDB database password.
+         */
+        password: string;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline: string;
+        /**
+         * MongoDB connection port.
+         */
+        port: number;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: boolean;
+        /**
+         * MongoDB database user name.
+         */
+        userName: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn: string;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode: string;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode: string;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource: string;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMapping[];
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic: string;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls: outputs.Ckafka.GetDatahubTaskTaskListTargetResourceMySqlParamDropCl[];
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges: string;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery: boolean;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex: string;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * current ColumnSize.
+         */
+        columnSize: string;
+        /**
+         * current Column DecimalDigits.
+         */
+        decimalDigits: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceMySqlParamDropCl {
+        /**
+         * cls LogSet id.
+         */
+        dropClsLogSet: string;
+        /**
+         * account.
+         */
+        dropClsOwneruin: string;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion: string;
+        /**
+         * cls topic.
+         */
+        dropClsTopicId: string;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls: boolean;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat: string;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode: string;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField: string;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings: outputs.Ckafka.GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMapping[];
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage: boolean;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular: boolean;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns: string;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: string;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema: boolean;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull: boolean;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement: boolean;
+        /**
+         * Column Name.
+         */
+        columnName: string;
+        /**
+         * current ColumnSize.
+         */
+        columnSize: string;
+        /**
+         * current Column DecimalDigits.
+         */
+        decimalDigits: string;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue: string;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo: string;
+        /**
+         * The key name of the message.
+         */
+        jsonKey: string;
+        /**
+         * Resource Type.
+         */
+        type: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize: number;
+        /**
+         * SCF function name.
+         */
+        functionName: string;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries: number;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace: string;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode: string;
+        /**
+         * SQLServer table, is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: string;
+        /**
+         * default true.
+         */
+        isDomestic: boolean;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost: string;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort: number;
+        /**
+         * Tdw tid.
+         */
+        tid: string;
+    }
+
+    export interface GetDatahubTaskTaskListTargetResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType: string;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple: number;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime: number;
+        /**
+         * Topic TopicId.
+         */
+        topicId: string;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic: boolean;
+    }
+
+    export interface GetDatahubTopicTopicList {
+        /**
+         * name.
+         */
+        name: string;
+        /**
+         * Remark.
+         */
+        note: string;
+        /**
+         * number of partitions.
+         */
+        partitionNum: number;
+        /**
+         * Expiration.
+         */
+        retentionMs: number;
+        /**
+         * Status, 1 in use, 2 in deletion.
+         */
+        status: number;
+        /**
+         * Topic Id.
+         */
+        topicId: string;
+        /**
+         * Topic name.
+         */
+        topicName: string;
+    }
+
+    export interface GetGroupGroupList {
+        /**
+         * groupId.
+         */
+        group: string;
+        /**
+         * The protocol used by this group.
+         */
+        protocol: string;
+    }
+
+    export interface GetGroupInfoResult {
+        /**
+         * Error code, normally 0.
+         */
+        errorCode: string;
+        /**
+         * Kafka consumer group.
+         */
+        group: string;
+        /**
+         * This array contains information only if state is Stable and protocolType is consumer.
+         */
+        members: outputs.Ckafka.GetGroupInfoResultMember[];
+        /**
+         * Common consumer partition allocation algorithms are as follows (the default option for Kafka consumer SDK is range)  range|roundrobin|sticky.
+         */
+        protocol: string;
+        /**
+         * The protocol type selected by the consumption group is normally the consumer, but some systems use their own protocol, such as kafka-connect, which uses connect. Only the standard consumer protocol, this interface knows the format of the specific allocation method, and can analyze the specific partition allocation.
+         */
+        protocolType: string;
+        /**
+         * Group state description (commonly Empty, Stable, and Dead states): Dead: The consumption group does not exist Empty: The consumption group does not currently have any consumer subscriptions PreparingRebalance: The consumption group is in the rebalance state CompletingRebalance: The consumption group is in the rebalance state Stable: Each consumer in the consumption group has joined and is in a stable state.
+         */
+        state: string;
+    }
+
+    export interface GetGroupInfoResultMember {
+        /**
+         * Stores the partition information assigned to the consumer.
+         */
+        assignments: outputs.Ckafka.GetGroupInfoResultMemberAssignment[];
+        /**
+         * Generally store the customer&#39;s IP address.
+         */
+        clientHost: string;
+        /**
+         * The client.id information set by the client consumer SDK itself.
+         */
+        clientId: string;
+        /**
+         * ID that the coordinator generated for consumer.
+         */
+        memberId: string;
+    }
+
+    export interface GetGroupInfoResultMemberAssignment {
+        /**
+         * topic list.
+         */
+        topics: outputs.Ckafka.GetGroupInfoResultMemberAssignmentTopic[];
+        /**
+         * assignment version information.
+         */
+        version: number;
+    }
+
+    export interface GetGroupInfoResultMemberAssignmentTopic {
+        /**
+         * Allocated partition information.
+         */
+        partitions: number[];
+        /**
+         * Assigned topic name.
+         */
+        topic: string;
+    }
+
+    export interface GetGroupOffsetsTopicList {
+        /**
+         * he topic partition array, where each element is a json object.
+         */
+        partitions: outputs.Ckafka.GetGroupOffsetsTopicListPartition[];
+        /**
+         * topicName.
+         */
+        topic: string;
+    }
+
+    export interface GetGroupOffsetsTopicListPartition {
+        /**
+         * ErrorCode.
+         */
+        errorCode: number;
+        /**
+         * The number of unconsumed messages.
+         */
+        lag: number;
+        /**
+         * The latest offset of the current partition.
+         */
+        logEndOffset: number;
+        /**
+         * When consumers submit messages, they can pass in metadata for other purposes. Currently, it is usually an empty string.
+         */
+        metadata: string;
+        /**
+         * The offset of the position.
+         */
+        offset: number;
+        /**
+         * topic partitionId.
+         */
+        partition: number;
     }
 
     export interface GetInstancesFilter {
@@ -5146,6 +11522,250 @@ export namespace Ckafka {
         vport: string;
     }
 
+    export interface GetRegionResult {
+        /**
+         * area name.
+         */
+        areaName: string;
+        /**
+         * Whether to support ipv6, 0: means not supported, 1: means supported.
+         */
+        ipv6: number;
+        /**
+         * Whether to support cross-availability zones, 0: means not supported, 1: means supported.
+         */
+        multiZone: number;
+        /**
+         * Region Code.
+         */
+        regionCode: string;
+        /**
+         * Region Code(V3 version).
+         */
+        regionCodeV3: string;
+        /**
+         * region ID.
+         */
+        regionId: number;
+        /**
+         * geographical name.
+         */
+        regionName: string;
+        /**
+         * NONE: The default value does not support any special models CVM: Supports CVM types.
+         */
+        support: string;
+    }
+
+    export interface GetTaskStatusResult {
+        /**
+         * OutPut Info.
+         */
+        output: string;
+        /**
+         * Status.
+         */
+        status: number;
+    }
+
+    export interface GetTopicFlowRankingResult {
+        /**
+         * ConsumeSpeed.
+         */
+        consumeSpeeds: outputs.Ckafka.GetTopicFlowRankingResultConsumeSpeed[];
+        /**
+         * TopicFlow.
+         */
+        topicFlows: outputs.Ckafka.GetTopicFlowRankingResultTopicFlow[];
+        /**
+         * TopicMessageHeapRanking.
+         */
+        topicMessageHeaps: outputs.Ckafka.GetTopicFlowRankingResultTopicMessageHeap[];
+    }
+
+    export interface GetTopicFlowRankingResultConsumeSpeed {
+        /**
+         * ConsumerGroupName.
+         */
+        consumerGroupName: string;
+        /**
+         * Speed.
+         */
+        speed: number;
+    }
+
+    export interface GetTopicFlowRankingResultTopicFlow {
+        /**
+         * Topic MessageHeap.
+         */
+        messageHeap: number;
+        /**
+         * PartitionNum.
+         */
+        partitionNum: number;
+        /**
+         * ReplicaNum.
+         */
+        replicaNum: number;
+        /**
+         * topicId.
+         */
+        topicId: string;
+        /**
+         * topicName.
+         */
+        topicName: string;
+        /**
+         * TopicTraffic.
+         */
+        topicTraffic: string;
+    }
+
+    export interface GetTopicFlowRankingResultTopicMessageHeap {
+        /**
+         * Topic MessageHeap.
+         */
+        messageHeap: number;
+        /**
+         * PartitionNum.
+         */
+        partitionNum: number;
+        /**
+         * ReplicaNum.
+         */
+        replicaNum: number;
+        /**
+         * topicId.
+         */
+        topicId: string;
+        /**
+         * topicName.
+         */
+        topicName: string;
+        /**
+         * TopicTraffic.
+         */
+        topicTraffic: string;
+    }
+
+    export interface GetTopicProduceConnectionResult {
+        /**
+         * ip address.
+         */
+        ipAddr: string;
+        /**
+         * Is the supported version.
+         */
+        isUnSupportVersion: boolean;
+        /**
+         * connect time.
+         */
+        time: string;
+    }
+
+    export interface GetTopicSubscribeGroupGroupsInfo {
+        /**
+         * Error code, normally 0.
+         */
+        errorCode: string;
+        /**
+         * Kafka consumer group.
+         */
+        group: string;
+        /**
+         * This array contains information only if state is Stable and protocolType is consumer.
+         */
+        members: outputs.Ckafka.GetTopicSubscribeGroupGroupsInfoMember[];
+        /**
+         * Common consumer partition allocation algorithms are as follows (the default option for Kafka consumer SDK is range) range|roundrobin| sticky.
+         */
+        protocol: string;
+        /**
+         * The protocol type selected by the consumption group is normally the consumer, but some systems use their own protocol, such as kafka-connect, which uses connect. Only the standard consumer protocol, this interface knows the format of the specific allocation method, and can analyze the specific partition allocation.
+         */
+        protocolType: string;
+        /**
+         * Group state description (commonly Empty, Stable, and Dead states): Dead: The consumption group does not exist Empty: The consumption group does not currently have any consumer subscriptions PreparingRebalance: The consumption group is in the rebalance state CompletingRebalance: The consumption group is in the rebalance state Stable: Each consumer in the consumption group has joined and is in a stable state.
+         */
+        state: string;
+    }
+
+    export interface GetTopicSubscribeGroupGroupsInfoMember {
+        /**
+         * Stores the partition information assigned to the consumer.
+         */
+        assignments: outputs.Ckafka.GetTopicSubscribeGroupGroupsInfoMemberAssignment[];
+        /**
+         * Generally store the customer&#39;s IP address.
+         */
+        clientHost: string;
+        /**
+         * The client.id information set by the client consumer SDK itself.
+         */
+        clientId: string;
+        /**
+         * ID that the coordinator generated for consumer.
+         */
+        memberId: string;
+    }
+
+    export interface GetTopicSubscribeGroupGroupsInfoMemberAssignment {
+        /**
+         * topic list.
+         */
+        topics: outputs.Ckafka.GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopic[];
+        /**
+         * assignment version information.
+         */
+        version: number;
+    }
+
+    export interface GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopic {
+        /**
+         * partition list.
+         */
+        partitions: number[];
+        /**
+         * topic name.
+         */
+        topic: string;
+    }
+
+    export interface GetTopicSyncReplicaTopicInSyncReplicaList {
+        /**
+         * BeginOffset.
+         */
+        beginOffset: number;
+        /**
+         * EndOffset.
+         */
+        endOffset: number;
+        /**
+         * ISR.
+         */
+        inSyncReplica: string;
+        /**
+         * Leader Id.
+         */
+        leader: number;
+        /**
+         * Message Count.
+         */
+        messageCount: number;
+        /**
+         * Out Of Sync Replica.
+         */
+        outOfSyncReplica: string;
+        /**
+         * partition name.
+         */
+        partition: string;
+        /**
+         * replica set.
+         */
+        replica: string;
+    }
+
     export interface GetTopicsInstanceList {
         /**
          * Clear log policy, log clear mode. `delete`: logs are deleted according to the storage time, `compact`: logs are compressed according to the key, `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
@@ -5234,6 +11854,172 @@ export namespace Ckafka {
          * The last update time of the account.
          */
         updateTime: string;
+    }
+
+    export interface GetZoneResult {
+        /**
+         * User exclusive cluster information.
+         */
+        clusterInfos: outputs.Ckafka.GetZoneResultClusterInfo[];
+        /**
+         * Maximum purchased bandwidth in Mbs.
+         */
+        maxBandwidth: number;
+        /**
+         * The maximum number of purchased instances.
+         */
+        maxBuyInstanceNum: number;
+        /**
+         * Postpaid message unit price.
+         */
+        messagePrices: outputs.Ckafka.GetZoneResultMessagePrice[];
+        /**
+         * Physical Exclusive Edition Configuration.
+         */
+        physical: string;
+        /**
+         * Professional Edition configuration.
+         */
+        profession: string;
+        /**
+         * Public network bandwidth.
+         */
+        publicNetwork: string;
+        /**
+         * Public network bandwidth configuration.
+         */
+        publicNetworkLimit: string;
+        /**
+         * Purchase Standard Edition Configuration.
+         */
+        standard: string;
+        /**
+         * Standard Edition S2 configuration.
+         */
+        standardS2: string;
+        /**
+         * Postpaid unit price.
+         */
+        unitPrices: outputs.Ckafka.GetZoneResultUnitPrice[];
+        /**
+         * zone list.
+         */
+        zoneLists: outputs.Ckafka.GetZoneResultZoneList[];
+    }
+
+    export interface GetZoneResultClusterInfo {
+        /**
+         * The current available bandwidth of the cluster in MBs.
+         */
+        availableBandWidth: number;
+        /**
+         * The current available disk of the cluster, in GB.
+         */
+        availableDiskSize: number;
+        /**
+         * ClusterId.
+         */
+        clusterId: number;
+        /**
+         * ClusterName.
+         */
+        clusterName: string;
+        /**
+         * Maximum cluster bandwidth in MBs.
+         */
+        maxBandWidth: number;
+        /**
+         * The largest disk in the cluster, in GB.
+         */
+        maxDiskSize: number;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.
+         */
+        zoneIds: number[];
+    }
+
+    export interface GetZoneResultMessagePrice {
+        /**
+         * discount price.
+         */
+        realTotalCost: number;
+        /**
+         * original price.
+         */
+        totalCost: number;
+    }
+
+    export interface GetZoneResultUnitPrice {
+        /**
+         * discount price.
+         */
+        realTotalCost: number;
+        /**
+         * original price.
+         */
+        totalCost: number;
+    }
+
+    export interface GetZoneResultZoneList {
+        /**
+         * app id.
+         */
+        appId: number;
+        /**
+         * extra flag.
+         */
+        exflag: string;
+        /**
+         * Manually set flags.
+         */
+        flag: boolean;
+        /**
+         * internal APP.
+         */
+        isInternalApp: number;
+        /**
+         * Standard Edition Sold Out Information.
+         */
+        salesInfos: outputs.Ckafka.GetZoneResultZoneListSalesInfo[];
+        /**
+         * json object, key is model, value true is sold out, false is not sold out.
+         */
+        soldOut: string;
+        /**
+         * zone id.
+         */
+        zoneId: string;
+        /**
+         * zone name.
+         */
+        zoneName: string;
+        /**
+         * zone status.
+         */
+        zoneStatus: number;
+    }
+
+    export interface GetZoneResultZoneListSalesInfo {
+        /**
+         * Manually set flags.
+         */
+        flag: boolean;
+        /**
+         * Professional Edition, Standard Edition flag.
+         */
+        platform: string;
+        /**
+         * json object, key is model, value true is sold out, false is not sold out.
+         */
+        soldOut: boolean;
+        /**
+         * ckakfa version(1.1.1/2.4.2/0.10.2).
+         */
+        version: string;
     }
 
     export interface InstanceConfig {
@@ -5368,6 +12154,912 @@ export namespace Clb {
          * Forwarding weight of the backend service, the range of [0, 100], defaults to `10`.
          */
         weight: number;
+    }
+
+    export interface GetClusterResourcesClusterResourceSet {
+        /**
+         * Cluster ID.
+         */
+        clusterId: string;
+        /**
+         * cluster name.
+         */
+        clusterName: string;
+        /**
+         * clusters zone.
+         */
+        clustersZones: outputs.Clb.GetClusterResourcesClusterResourceSetClustersZone[];
+        /**
+         * Is it idle.
+         */
+        idle: string;
+        /**
+         * Isp.
+         */
+        isp: string;
+        /**
+         * Loadbalance Id.
+         */
+        loadBalancerId: string;
+        /**
+         * vip.
+         */
+        vip: string;
+    }
+
+    export interface GetClusterResourcesClusterResourceSetClustersZone {
+        /**
+         * Availability master zone where the cluster is located.
+         */
+        masterZones: string[];
+        /**
+         * Availability slave zone where the cluster is located.
+         */
+        slaveZones: string[];
+    }
+
+    export interface GetClusterResourcesFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetCrossTargetsCrossTargetSet {
+        /**
+         * ENI ID of the CVM instance.
+         */
+        eniId: string;
+        /**
+         * ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+         */
+        instanceId: string;
+        /**
+         * Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+         */
+        instanceName: string;
+        /**
+         * IP address of the CVM or ENI instance.
+         */
+        ip: string;
+        /**
+         * VPC ID of the CLB instance.
+         */
+        localVpcId: string;
+        /**
+         * Region of the CVM or ENI instance.
+         */
+        region: string;
+        /**
+         * VPC ID of the CVM or ENI instance.
+         */
+        vpcId: string;
+        /**
+         * VPC name of the CVM or ENI instance.
+         */
+        vpcName: string;
+    }
+
+    export interface GetCrossTargetsFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetExclusiveClustersClusterSet {
+        /**
+         * cluster ID.
+         */
+        clusterId: string;
+        /**
+         * cluster name.
+         */
+        clusterName: string;
+        /**
+         * Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        clusterTag: string;
+        /**
+         * cluster type: TGW, STGW, VPCGW.
+         */
+        clusterType: string;
+        /**
+         * clusters version.
+         */
+        clustersVersion: string;
+        /**
+         * Availability zone where the cluster is located.
+         */
+        clustersZones: outputs.Clb.GetExclusiveClustersClusterSetClustersZone[];
+        /**
+         * Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+         */
+        disasterRecoveryType: string;
+        /**
+         * Maximum number of new http connections.
+         */
+        httpMaxNewConn: number;
+        /**
+         * Http Qps.
+         */
+        httpQps: number;
+        /**
+         * Maximum number of new https connections.
+         */
+        httpsMaxNewConn: number;
+        /**
+         * Https Qps.
+         */
+        httpsQps: number;
+        /**
+         * The total number of free resources in the cluster.
+         */
+        idleResourceCount: number;
+        /**
+         * Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+         */
+        isp: string;
+        /**
+         * Total number of forwarders in the cluster.
+         */
+        loadBalanceDirectorCount: number;
+        /**
+         * Maximum number of connections.
+         */
+        maxConn: number;
+        /**
+         * Maximum incoming Bandwidth.
+         */
+        maxInFlow: number;
+        /**
+         * Maximum incoming packet.
+         */
+        maxInPkg: number;
+        /**
+         * Maximum number of new connections.
+         */
+        maxNewConn: number;
+        /**
+         * Maximum output bandwidth.
+         */
+        maxOutFlow: number;
+        /**
+         * Maximum output packet.
+         */
+        maxOutPkg: number;
+        /**
+         * cluster network type.
+         */
+        network: string;
+        /**
+         * The total number of resources in the cluster.
+         */
+        resourceCount: number;
+        /**
+         * .
+         */
+        zone: string;
+    }
+
+    export interface GetExclusiveClustersClusterSetClustersZone {
+        /**
+         * Availability master zone where the cluster is located.
+         */
+        masterZones: string[];
+        /**
+         * Availability slave zone where the cluster is located.
+         */
+        slaveZones: string[];
+    }
+
+    export interface GetExclusiveClustersFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetIdleInstancesIdleLoadBalancer {
+        /**
+         * The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * CLB type. Value range: 1 (CLB); 0 (classic CLB).
+         */
+        forward: number;
+        /**
+         * The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+         */
+        idleReason: string;
+        /**
+         * CLB instance ID.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name.
+         */
+        loadBalancerName: string;
+        /**
+         * CLB instance region.
+         */
+        region: string;
+        /**
+         * CLB instance status, including:0: Creating; 1: Running.
+         */
+        status: number;
+        /**
+         * CLB instance VIP.
+         */
+        vip: string;
+    }
+
+    export interface GetInstanceByCertIdCertSet {
+        /**
+         * Certificate ID.
+         */
+        certId: string;
+        /**
+         * List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancers: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancer[];
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancer {
+        /**
+         * IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        addressIPVersion: string;
+        /**
+         * IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        addressIPv6: string;
+        /**
+         * Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        anycastZone: string;
+        /**
+         * Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        attributeFlags: string[];
+        /**
+         * backup zone.
+         */
+        backupZoneSets: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet[];
+        /**
+         * Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        chargeType: string;
+        /**
+         * Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterIds: string[];
+        /**
+         * Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        clusterTag: string;
+        /**
+         * Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configId: string;
+        /**
+         * CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        exclusiveClusters: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster[];
+        /**
+         * CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        expireTime: string;
+        /**
+         * Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        extraInfos: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerExtraInfo[];
+        /**
+         * CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+         */
+        forward: number;
+        /**
+         * Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        healthLogSetId: string;
+        /**
+         * Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        healthLogTopicId: string;
+        /**
+         * This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        ipv6Mode: string;
+        /**
+         * Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        isBlock: boolean;
+        /**
+         * Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        isBlockTime: string;
+        /**
+         * Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isDdos: boolean;
+        /**
+         * CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isolatedTime: string;
+        /**
+         * 0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isolation: number;
+        /**
+         * Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerDomain: string;
+        /**
+         * CLB instance ID.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name.
+         */
+        loadBalancerName: string;
+        /**
+         * Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerPassToTarget: boolean;
+        /**
+         * CLB instance network type:OPEN: public network; INTERNAL: private network.
+         */
+        loadBalancerType: string;
+        /**
+         * List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerVips: string[];
+        /**
+         * Whether the IP type is the local BGP.
+         */
+        localBgp: boolean;
+        /**
+         * Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        log: string;
+        /**
+         * Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        logSetId: string;
+        /**
+         * Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        logTopicId: string;
+        /**
+         * Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        masterZones: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerMasterZone[];
+        /**
+         * If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        mixIpTarget: boolean;
+        /**
+         * CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        networkAttributes: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute[];
+        /**
+         * Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        nfvInfo: string;
+        /**
+         * VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        numericalVpcId: number;
+        /**
+         * Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        openBgp: number;
+        /**
+         * Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        prepaidAttributes: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute[];
+        /**
+         * ID of the project to which a CLB instance belongs. 0: default project.
+         */
+        projectId: number;
+        /**
+         * Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        secureGroups: string[];
+        /**
+         * Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        slaType: string;
+        /**
+         * SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        snat: boolean;
+        /**
+         * SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        snatIps: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerSnatIp[];
+        /**
+         * Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        snatPro: boolean;
+        /**
+         * CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        status: number;
+        /**
+         * Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        statusTime: string;
+        /**
+         * Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subnetId: string;
+        /**
+         * CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        tags: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerTag[];
+        /**
+         * Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        targetRegionInfos: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo[];
+        /**
+         * ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        vipIsp: string;
+        /**
+         * VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        vpcId: string;
+        /**
+         * Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        zones: string[];
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet {
+        /**
+         * Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        edgeZone: boolean;
+        /**
+         * Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        localZone: boolean;
+        /**
+         * Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+        /**
+         * .
+         */
+        zoneId: number;
+        /**
+         * AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zoneName: string;
+        /**
+         * AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zoneRegion: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster {
+        /**
+         * vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        classicalClusters: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster[];
+        /**
+         * Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        l4Clusters: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster[];
+        /**
+         * Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        l7Clusters: outputs.Clb.GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster[];
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster {
+        /**
+         * Unique cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        clusterName: string;
+        /**
+         * Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster {
+        /**
+         * Unique cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        clusterName: string;
+        /**
+         * Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster {
+        /**
+         * Unique cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        clusterName: string;
+        /**
+         * Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerExtraInfo {
+        /**
+         * TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        tgwGroupName: string;
+        /**
+         * Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zhiTong: boolean;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerMasterZone {
+        /**
+         * Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        edgeZone: boolean;
+        /**
+         * Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        localZone: boolean;
+        /**
+         * Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+        /**
+         * .
+         */
+        zoneId: number;
+        /**
+         * AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zoneName: string;
+        /**
+         * AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zoneRegion: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute {
+        /**
+         * Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        bandwidthpkgSubType: string;
+        /**
+         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+         */
+        internetChargeType: string;
+        /**
+         * Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+         */
+        internetMaxBandwidthOut: number;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute {
+        /**
+         * Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        period: number;
+        /**
+         * Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        renewFlag: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerSnatIp {
+        /**
+         * IP address, such as 192.168.0.1.
+         */
+        ip: string;
+        /**
+         * Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subnetId: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo {
+        /**
+         * Region of the target, such as ap-guangzhou.
+         */
+        region: string;
+        /**
+         * VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        vpcId: string;
+    }
+
+    export interface GetInstanceDetailFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetInstanceDetailLoadBalancerDetailSet {
+        /**
+         * CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        address: string;
+        /**
+         * IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        addressIpVersion: string;
+        /**
+         * IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        addressIpv6: string;
+        /**
+         * ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        addressIsp: string;
+        /**
+         * CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        chargeType: string;
+        /**
+         * Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configId: string;
+        /**
+         * CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+         */
+        domains: string;
+        /**
+         * Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        extraInfos: outputs.Clb.GetInstanceDetailLoadBalancerDetailSetExtraInfo[];
+        /**
+         * IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        ipv6Mode: string;
+        /**
+         * 0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        isolation: number;
+        /**
+         * CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        listenerId: string;
+        /**
+         * Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerDomain: string;
+        /**
+         * CLB instance ID.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name.
+         */
+        loadBalancerName: string;
+        /**
+         * Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        loadBalancerPassToTarget: number;
+        /**
+         * CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerType: string;
+        /**
+         * Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        locationId: string;
+        /**
+         * CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        networkAttributes: outputs.Clb.GetInstanceDetailLoadBalancerDetailSetNetworkAttribute[];
+        /**
+         * Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        port: number;
+        /**
+         * Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        prepaidAttributes: outputs.Clb.GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute[];
+        /**
+         * ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        projectId: number;
+        /**
+         * Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        protocol: string;
+        /**
+         * List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        securityGroups: string[];
+        /**
+         * The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+         */
+        slaveZones: string[];
+        /**
+         * Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+         */
+        sniSwitch: number;
+        /**
+         * CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        status: number;
+        /**
+         * CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        tags: outputs.Clb.GetInstanceDetailLoadBalancerDetailSetTag[];
+        /**
+         * Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targetAddress: string;
+        /**
+         * Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        targetHealth: string;
+        /**
+         * ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targetId: string;
+        /**
+         * Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targetPort: number;
+        /**
+         * Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targetWeight: number;
+        /**
+         * Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        url: string;
+        /**
+         * ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        vpcId: string;
+        /**
+         * Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+        /**
+         * The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+         */
+        zones: string[];
+    }
+
+    export interface GetInstanceDetailLoadBalancerDetailSetExtraInfo {
+        /**
+         * TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        tgwGroupName: string;
+        /**
+         * Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        zhiTong: boolean;
+    }
+
+    export interface GetInstanceDetailLoadBalancerDetailSetNetworkAttribute {
+        /**
+         * Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        bandwidthPkgSubType: string;
+        /**
+         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+         */
+        internetChargeType: string;
+        /**
+         * Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+         */
+        internetMaxBandwidthOut: number;
+    }
+
+    export interface GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute {
+        /**
+         * Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        period: number;
+        /**
+         * Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        renewFlag: string;
+    }
+
+    export interface GetInstanceDetailLoadBalancerDetailSetTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetInstanceTrafficLoadBalancerTraffic {
+        /**
+         * CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * CLB instance ID.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name.
+         */
+        loadBalancerName: string;
+        /**
+         * Maximum outbound bandwidth in Mbps.
+         */
+        outBandwidth: number;
+        /**
+         * CLB instance region.
+         */
+        region: string;
+        /**
+         * CLB instance VIP.
+         */
+        vip: string;
     }
 
     export interface GetInstancesClbList {
@@ -5507,7 +13199,7 @@ export namespace Clb {
          */
         healthCheckHttpPath: string;
         /**
-         * Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+         * Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
          */
         healthCheckIntervalTime: number;
         /**
@@ -5542,6 +13234,128 @@ export namespace Clb {
          * Url of the forwarding rule to be queried.
          */
         url?: string;
+    }
+
+    export interface GetListenersByTargetsBackend {
+        /**
+         * Private network IP to be queried, which can be of the CVM or ENI.
+         */
+        privateIp: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
+    }
+
+    export interface GetListenersByTargetsLoadBalancer {
+        /**
+         * Listener rule.
+         */
+        listeners: outputs.Clb.GetListenersByTargetsLoadBalancerListener[];
+        /**
+         * String ID of the CLB instance.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance region.
+         */
+        region: string;
+        /**
+         * VIP of the CLB instance.
+         */
+        vip: string;
+    }
+
+    export interface GetListenersByTargetsLoadBalancerListener {
+        /**
+         * End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        endPort: number;
+        /**
+         * Listener ID.
+         */
+        listenerId: string;
+        /**
+         * Port bound to the real server.
+         */
+        port: number;
+        /**
+         * Listener protocol.
+         */
+        protocol: string;
+        /**
+         * Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        rules: outputs.Clb.GetListenersByTargetsLoadBalancerListenerRule[];
+        /**
+         * Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targets: outputs.Clb.GetListenersByTargetsLoadBalancerListenerTarget[];
+    }
+
+    export interface GetListenersByTargetsLoadBalancerListenerRule {
+        /**
+         * Domain name.
+         */
+        domain: string;
+        /**
+         * Rule ID.
+         */
+        locationId: string;
+        /**
+         * Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targets: outputs.Clb.GetListenersByTargetsLoadBalancerListenerRuleTarget[];
+        /**
+         * url.
+         */
+        url: string;
+    }
+
+    export interface GetListenersByTargetsLoadBalancerListenerRuleTarget {
+        /**
+         * Port bound to the real server.
+         */
+        port: number;
+        /**
+         * Private network IP to be queried, which can be of the CVM or ENI.
+         */
+        privateIp: string;
+        /**
+         * Private network IP type, which can be cvm or eni.
+         */
+        type: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: number;
+        /**
+         * Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        weight: number;
+    }
+
+    export interface GetListenersByTargetsLoadBalancerListenerTarget {
+        /**
+         * Port bound to the real server.
+         */
+        port: number;
+        /**
+         * Private network IP to be queried, which can be of the CVM or ENI.
+         */
+        privateIp: string;
+        /**
+         * Private network IP type, which can be cvm or eni.
+         */
+        type: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: number;
+        /**
+         * Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        weight: number;
     }
 
     export interface GetListenersListenerList {
@@ -5590,7 +13404,7 @@ export namespace Clb {
          */
         healthCheckHttpVersion: string;
         /**
-         * Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+         * Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
          */
         healthCheckIntervalTime: number;
         /**
@@ -5672,6 +13486,159 @@ export namespace Clb {
          * Rule ID of target listener to be queried.
          */
         targetRuleId: string;
+    }
+
+    export interface GetResourcesFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetResourcesZoneResourceSet {
+        /**
+         * Whether the AZ is an edge zone. Values: true, false.
+         */
+        edgeZone: boolean;
+        /**
+         * IP version. Values: IPv4, IPv6, and IPv6_Nat.
+         */
+        ipVersion: string;
+        /**
+         * Whether the AZ is a LocalZone. Values: true, false.
+         */
+        localZone: boolean;
+        /**
+         * Primary AZ, such as ap-guangzhou-1.
+         */
+        masterZone: string;
+        /**
+         * List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        resourceSets: outputs.Clb.GetResourcesZoneResourceSetResourceSet[];
+        /**
+         * Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        slaveZone: string;
+        /**
+         * Region of the AZ, such as ap-guangzhou.
+         */
+        zoneRegion: string;
+        /**
+         * Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+         */
+        zoneResourceType: string;
+    }
+
+    export interface GetResourcesZoneResourceSetResourceSet {
+        /**
+         * Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+         */
+        availabilitySets: outputs.Clb.GetResourcesZoneResourceSetResourceSetAvailabilitySet[];
+        /**
+         * ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+         */
+        isp: string;
+        /**
+         * Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+         */
+        types: string[];
+    }
+
+    export interface GetResourcesZoneResourceSetResourceSetAvailabilitySet {
+        /**
+         * Whether the resource is available. Values: Available, Unavailable.
+         */
+        availability: string;
+        /**
+         * Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+         */
+        type: string;
+    }
+
+    export interface GetTargetGroupListFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetTargetGroupListTargetGroupSet {
+        /**
+         * Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        associatedRules: outputs.Clb.GetTargetGroupListTargetGroupSetAssociatedRule[];
+        /**
+         * Target group creation time.
+         */
+        createdTime: string;
+        /**
+         * Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        port: number;
+        /**
+         * Target group ID.
+         */
+        targetGroupId: string;
+        /**
+         * Target group name.
+         */
+        targetGroupName: string;
+        /**
+         * Target group modification time.
+         */
+        updatedTime: string;
+        /**
+         * vpcid of target group.
+         */
+        vpcId: string;
+    }
+
+    export interface GetTargetGroupListTargetGroupSetAssociatedRule {
+        /**
+         * Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * ID of associated listener.
+         */
+        listenerId: string;
+        /**
+         * Listener name.
+         */
+        listenerName: string;
+        /**
+         * ID of associated CLB instance.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name.
+         */
+        loadBalancerName: string;
+        /**
+         * ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        locationId: string;
+        /**
+         * Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        port: number;
+        /**
+         * Protocol type of associated listener, such as HTTP or TCP.
+         */
+        protocol: string;
+        /**
+         * URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        url: string;
     }
 
     export interface GetTargetGroupsList {
@@ -5787,6 +13754,86 @@ export namespace Clb {
         weight: number;
     }
 
+    export interface GetTargetHealthLoadBalancer {
+        /**
+         * List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        listeners: outputs.Clb.GetTargetHealthLoadBalancerListener[];
+        /**
+         * CLB instance ID.
+         */
+        loadBalancerId: string;
+        /**
+         * CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        loadBalancerName: string;
+    }
+
+    export interface GetTargetHealthLoadBalancerListener {
+        /**
+         * Listener ID.
+         */
+        listenerId: string;
+        /**
+         * Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        listenerName: string;
+        /**
+         * Port bound to the target.
+         */
+        port: number;
+        /**
+         * Listener protocol.
+         */
+        protocol: string;
+        /**
+         * List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        rules: outputs.Clb.GetTargetHealthLoadBalancerListenerRule[];
+    }
+
+    export interface GetTargetHealthLoadBalancerListenerRule {
+        /**
+         * Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        domain: string;
+        /**
+         * Forwarding rule ID.
+         */
+        locationId: string;
+        /**
+         * Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        targets: outputs.Clb.GetTargetHealthLoadBalancerListenerRuleTarget[];
+        /**
+         * Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        url: string;
+    }
+
+    export interface GetTargetHealthLoadBalancerListenerRuleTarget {
+        /**
+         * Current health status. true: healthy; false: unhealthy.
+         */
+        healthStatus: boolean;
+        /**
+         * Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         */
+        healthStatusDetail: string;
+        /**
+         * Private IP of the target.
+         */
+        ip: string;
+        /**
+         * Port bound to the target.
+         */
+        port: number;
+        /**
+         * Instance ID of the target, such as ins-12345678.
+         */
+        targetId: string;
+    }
+
     export interface InstanceSnatIp {
         /**
          * Snat IP address, If set to empty will auto allocated.
@@ -5796,6 +13843,41 @@ export namespace Clb {
          * Snat subnet ID.
          */
         subnetId: string;
+    }
+
+    export interface ReplaceCertForLbsCertificate {
+        /**
+         * Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         */
+        certCaContent?: string;
+        /**
+         * ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+         */
+        certCaId?: string;
+        /**
+         * Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         */
+        certCaName?: string;
+        /**
+         * Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certContent?: string;
+        /**
+         * ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+         */
+        certId?: string;
+        /**
+         * Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certKey?: string;
+        /**
+         * Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certName?: string;
+        /**
+         * Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+         */
+        sslMode?: string;
     }
 
     export interface SnatIpIp {
@@ -5830,6 +13912,185 @@ export namespace Clb {
 }
 
 export namespace Cls {
+    export interface AlarmAlarmTarget {
+        /**
+         * search end time of offset.
+         */
+        endTimeOffset: number;
+        /**
+         * logset id.
+         */
+        logsetId: string;
+        /**
+         * the number of alarm object.
+         */
+        number: number;
+        /**
+         * query rules.
+         */
+        query: string;
+        /**
+         * search start time of offset.
+         */
+        startTimeOffset: number;
+        /**
+         * topic id.
+         */
+        topicId: string;
+    }
+
+    export interface AlarmAnalysis {
+        /**
+         * configuration.
+         */
+        configInfos?: outputs.Cls.AlarmAnalysisConfigInfo[];
+        /**
+         * analysis content.
+         */
+        content: string;
+        /**
+         * analysis name.
+         */
+        name: string;
+        /**
+         * analysis type.
+         */
+        type: string;
+    }
+
+    export interface AlarmAnalysisConfigInfo {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * value.
+         */
+        value: string;
+    }
+
+    export interface AlarmCallBack {
+        /**
+         * callback body.
+         */
+        body: string;
+        /**
+         * callback headers.
+         */
+        headers?: string[];
+    }
+
+    export interface AlarmMonitorTime {
+        /**
+         * time period or point in time.
+         */
+        time: number;
+        /**
+         * Period for periodic execution, Fixed for regular execution.
+         */
+        type: string;
+    }
+
+    export interface AlarmNoticeNoticeReceiver {
+        /**
+         * end time allowed to receive messages.
+         */
+        endTime?: string;
+        /**
+         * index.
+         */
+        index?: number;
+        /**
+         * receiver channels, Email,Sms,WeChat or Phone.
+         */
+        receiverChannels: string[];
+        /**
+         * receiver id.
+         */
+        receiverIds: number[];
+        /**
+         * receiver type, Uin or Group.
+         */
+        receiverType: string;
+        /**
+         * start time allowed to receive messages.
+         */
+        startTime?: string;
+    }
+
+    export interface AlarmNoticeWebCallback {
+        /**
+         * abandoned.
+         */
+        body?: string;
+        /**
+         * callback type, WeCom or Http.
+         */
+        callbackType: string;
+        /**
+         * abandoned.
+         */
+        headers?: string[];
+        /**
+         * index.
+         */
+        index?: number;
+        /**
+         * Method, POST or PUT.
+         */
+        method?: string;
+        /**
+         * callback url.
+         */
+        url: string;
+    }
+
+    export interface CkafkaConsumerCkafka {
+        /**
+         * instance id.
+         */
+        instanceId: string;
+        /**
+         * instance name.
+         */
+        instanceName: string;
+        /**
+         * topic id of ckafka.
+         */
+        topicId: string;
+        /**
+         * topic name of ckafka.
+         */
+        topicName: string;
+        /**
+         * vip.
+         */
+        vip: string;
+        /**
+         * vport.
+         */
+        vport: string;
+    }
+
+    export interface CkafkaConsumerContent {
+        /**
+         * whether to deliver the TAG info.
+         */
+        enableTag: boolean;
+        /**
+         * metadata info list.
+         */
+        metaFields: string[];
+        /**
+         * whether to tiling tag json.
+         */
+        tagJsonNotTiled?: boolean;
+        /**
+         * delivery timestamp precision,1 for second, 2 for millisecond.
+         */
+        timestampAccuracy?: number;
+    }
+
     export interface ConfigExcludePath {
         /**
          * Type. Valid values: File, Path.
@@ -5956,7 +14217,7 @@ export namespace Cls {
         /**
          * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
          */
-        backtracking?: number;
+        backtracking: number;
         /**
          * First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
          */
@@ -5992,7 +14253,7 @@ export namespace Cls {
         /**
          * Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
          */
-        unMatchUpLoadSwitch?: boolean;
+        unMatchUpLoadSwitch: boolean;
     }
 
     export interface ConfigExtraExtractRuleFilterKeyRegex {
@@ -6023,6 +14284,10 @@ export namespace Cls {
 
     export interface ConfigExtractRule {
         /**
+         * syslog system log collection specifies the address and port that the collector listens to.
+         */
+        address?: string;
+        /**
          * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
          */
         backtracking?: number;
@@ -6039,6 +14304,14 @@ export namespace Cls {
          */
         filterKeyRegexes?: outputs.Cls.ConfigExtractRuleFilterKeyRegex[];
         /**
+         * GBK encoding. Default 0.
+         */
+        isGbk?: number;
+        /**
+         * standard json. Default 0.
+         */
+        jsonStandard?: number;
+        /**
          * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
          */
         keys?: string[];
@@ -6046,6 +14319,26 @@ export namespace Cls {
          * Full log matching rule, which is valid only if logType is fullregex_log.
          */
         logRegex?: string;
+        /**
+         * metadata tags.
+         */
+        metaTags?: outputs.Cls.ConfigExtractRuleMetaTag[];
+        /**
+         * metadata type.
+         */
+        metadataType?: number;
+        /**
+         * parse protocol.
+         */
+        parseProtocol?: string;
+        /**
+         * metadata path regex.
+         */
+        pathRegex?: string;
+        /**
+         * syslog protocol, tcp or udp.
+         */
+        protocol?: string;
         /**
          * Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
          */
@@ -6073,6 +14366,114 @@ export namespace Cls {
          * Filter rule regex corresponding to key.
          */
         regex?: string;
+    }
+
+    export interface ConfigExtractRuleMetaTag {
+        /**
+         * tag key.
+         */
+        key?: string;
+        /**
+         * tag value.
+         */
+        value?: string;
+    }
+
+    export interface CosRechargeExtractRuleInfo {
+        /**
+         * syslog address.
+         */
+        address?: string;
+        /**
+         * backtracking data volume in incremental acquisition mode.
+         */
+        backtracking?: number;
+        /**
+         * begin line regex.
+         */
+        beginRegex?: string;
+        /**
+         * log delimiter.
+         */
+        delimiter?: string;
+        /**
+         * rules that need to filter logs.
+         */
+        filterKeyRegexes?: outputs.Cls.CosRechargeExtractRuleInfoFilterKeyRegex[];
+        /**
+         * gbk encoding.
+         */
+        isGbk?: number;
+        /**
+         * is standard json.
+         */
+        jsonStandard?: number;
+        /**
+         * key list.
+         */
+        keys?: string[];
+        /**
+         * log regex.
+         */
+        logRegex?: string;
+        /**
+         * metadata tag list.
+         */
+        metaTags?: outputs.Cls.CosRechargeExtractRuleInfoMetaTag[];
+        /**
+         * metadata type.
+         */
+        metadataType?: number;
+        /**
+         * parse protocol.
+         */
+        parseProtocol?: string;
+        /**
+         * metadata path regex.
+         */
+        pathRegex?: string;
+        /**
+         * syslog protocol.
+         */
+        protocol?: string;
+        /**
+         * time format.
+         */
+        timeFormat?: string;
+        /**
+         * time key.
+         */
+        timeKey?: string;
+        /**
+         * parsing failure log key.
+         */
+        unMatchLogKey?: string;
+        /**
+         * whether to upload the parsing failure log.
+         */
+        unMatchUpLoadSwitch?: boolean;
+    }
+
+    export interface CosRechargeExtractRuleInfoFilterKeyRegex {
+        /**
+         * need filter log key.
+         */
+        key: string;
+        /**
+         * need filter log regex.
+         */
+        regex: string;
+    }
+
+    export interface CosRechargeExtractRuleInfoMetaTag {
+        /**
+         * metadata key.
+         */
+        key?: string;
+        /**
+         * metadata value.
+         */
+        value?: string;
     }
 
     export interface CosShipperCompress {
@@ -6145,6 +14546,235 @@ export namespace Cls {
          * Filter rule value.
          */
         value: string;
+    }
+
+    export interface GetMachineGroupConfigsConfig {
+        /**
+         * scrape config id.
+         */
+        configId: string;
+        /**
+         * create time.
+         */
+        createTime: string;
+        /**
+         * Collection path blocklist.
+         */
+        excludePaths: outputs.Cls.GetMachineGroupConfigsConfigExcludePath[];
+        /**
+         * Extraction rule. If ExtractRule is set, LogType must be set.
+         */
+        extractRules: outputs.Cls.GetMachineGroupConfigsConfigExtractRule[];
+        /**
+         * style of log format.
+         */
+        logFormat: string;
+        /**
+         * log type.
+         */
+        logType: string;
+        /**
+         * scrape config name.
+         */
+        name: string;
+        /**
+         * topicid.
+         */
+        output: string;
+        /**
+         * scrape log path.
+         */
+        path: string;
+        /**
+         * update time.
+         */
+        updateTime: string;
+        /**
+         * user define rule.
+         */
+        userDefineRule: string;
+    }
+
+    export interface GetMachineGroupConfigsConfigExcludePath {
+        /**
+         * Type. Valid values: File, Path.
+         */
+        type: string;
+        /**
+         * tag value.
+         */
+        value: string;
+    }
+
+    export interface GetMachineGroupConfigsConfigExtractRule {
+        /**
+         * syslog system log collection specifies the address and port that the collector listens to.
+         */
+        address: string;
+        /**
+         * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+         */
+        backtracking: number;
+        /**
+         * First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+         */
+        beginRegex: string;
+        /**
+         * Delimiter for delimited log, which is valid only if logType is delimiter_log.
+         */
+        delimiter: string;
+        /**
+         * Log keys to be filtered and the corresponding regex.
+         */
+        filterKeyRegexes: outputs.Cls.GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex[];
+        /**
+         * GBK encoding. Default 0.
+         */
+        isGbk: number;
+        /**
+         * standard json. Default 0.
+         */
+        jsonStandard: number;
+        /**
+         * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+         */
+        keys: string[];
+        /**
+         * Full log matching rule, which is valid only if logType is fullregex_log.
+         */
+        logRegex: string;
+        /**
+         * metadata tags.
+         */
+        metaTags: outputs.Cls.GetMachineGroupConfigsConfigExtractRuleMetaTag[];
+        /**
+         * metadata type.
+         */
+        metadataType: number;
+        /**
+         * parse protocol.
+         */
+        parseProtocol: string;
+        /**
+         * metadata path regex.
+         */
+        pathRegex: string;
+        /**
+         * syslog protocol, tcp or udp.
+         */
+        protocol: string;
+        /**
+         * Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+         */
+        timeFormat: string;
+        /**
+         * Time field key name. timeKey and timeFormat must appear in pair.
+         */
+        timeKey: string;
+        /**
+         * Unmatched log key.
+         */
+        unMatchLogKey: string;
+        /**
+         * Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+         */
+        unMatchUpLoadSwitch: boolean;
+    }
+
+    export interface GetMachineGroupConfigsConfigExtractRuleFilterKeyRegex {
+        /**
+         * tag key.
+         */
+        key: string;
+        /**
+         * Filter rule regex corresponding to key.
+         */
+        regex: string;
+    }
+
+    export interface GetMachineGroupConfigsConfigExtractRuleMetaTag {
+        /**
+         * tag key.
+         */
+        key: string;
+        /**
+         * tag value.
+         */
+        value: string;
+    }
+
+    export interface GetMachinesMachine {
+        /**
+         * if open auto update flag.
+         */
+        autoUpdate: number;
+        /**
+         * code of update operation.
+         */
+        errCode: number;
+        /**
+         * msg of update operation.
+         */
+        errMsg: string;
+        /**
+         * ip of machine.
+         */
+        ip: string;
+        /**
+         * offline time of machine.
+         */
+        offlineTime: string;
+        /**
+         * status of machine.
+         */
+        status: number;
+        /**
+         * machine update status.
+         */
+        updateStatus: number;
+        /**
+         * current machine version.
+         */
+        version: string;
+    }
+
+    export interface GetShipperTasksTask {
+        /**
+         * end time(ms).
+         */
+        endTime: number;
+        /**
+         * detail info.
+         */
+        message: string;
+        /**
+         * end time of current task (ms).
+         */
+        rangeEnd: number;
+        /**
+         * start time of current task (ms).
+         */
+        rangeStart: number;
+        /**
+         * shipper id.
+         */
+        shipperId: string;
+        /**
+         * start time(ms).
+         */
+        startTime: number;
+        /**
+         * status of current shipper task.
+         */
+        status: string;
+        /**
+         * task id.
+         */
+        taskId: string;
+        /**
+         * topic id.
+         */
+        topicId: string;
     }
 
     export interface IndexRule {
@@ -6273,6 +14903,222 @@ export namespace Cls {
 }
 
 export namespace Cos {
+    export interface BatchManifest {
+        /**
+         * The location information of the list of objects.
+         */
+        location: outputs.Cos.BatchManifestLocation;
+        /**
+         * Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+         */
+        spec: outputs.Cos.BatchManifestSpec;
+    }
+
+    export interface BatchManifestLocation {
+        /**
+         * Specifies the etag of the object list. Length 1-1024 bytes.
+         */
+        etag: string;
+        /**
+         * Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+         */
+        objectArn: string;
+        /**
+         * Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+         */
+        objectVersionId?: string;
+    }
+
+    export interface BatchManifestSpec {
+        /**
+         * Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+         */
+        fields?: string[];
+        /**
+         * Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+         */
+        format: string;
+    }
+
+    export interface BatchOperation {
+        /**
+         * Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+         */
+        cosInitiateRestoreObject?: outputs.Cos.BatchOperationCosInitiateRestoreObject;
+        /**
+         * Specifies the specific parameters for the batch copy operation on the objects in the list.
+         */
+        cosPutObjectCopy?: outputs.Cos.BatchOperationCosPutObjectCopy;
+    }
+
+    export interface BatchOperationCosInitiateRestoreObject {
+        /**
+         * Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+         */
+        expirationInDays: number;
+        /**
+         * Select archive recovery model. Available values: Bulk, Standard.
+         */
+        jobTier: string;
+    }
+
+    export interface BatchOperationCosPutObjectCopy {
+        /**
+         * This element specifies how ACL is copied. Valid values:
+         * - Copy: inherits the source object ACL
+         * - Replaced: replace source ACL
+         * - Add: add a new ACL based on the source ACL.
+         */
+        accessControlDirective?: string;
+        /**
+         * Controls the specific access to the object.
+         */
+        accessControlGrants?: outputs.Cos.BatchOperationCosPutObjectCopyAccessControlGrants;
+        /**
+         * Defines the ACL property of the object. Valid values: private, public-read.
+         */
+        cannedAccessControlList?: string;
+        /**
+         * This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+         */
+        metadataDirective?: string;
+        /**
+         * When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+         */
+        modifiedSinceConstraint?: number;
+        /**
+         * Configure the metadata for the object.
+         */
+        newObjectMetadata?: outputs.Cos.BatchOperationCosPutObjectCopyNewObjectMetadata;
+        /**
+         * The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+         */
+        newObjectTaggings?: outputs.Cos.BatchOperationCosPutObjectCopyNewObjectTagging[];
+        /**
+         * Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+         */
+        prefixReplace?: boolean;
+        /**
+         * This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+         */
+        resourcesPrefix?: string;
+        /**
+         * Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+         */
+        storageClass?: string;
+        /**
+         * This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+         */
+        taggingDirective?: string;
+        /**
+         * This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+         */
+        targetKeyPrefix?: string;
+        /**
+         * Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+         */
+        targetResource: string;
+        /**
+         * When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+         */
+        unmodifiedSinceConstraint?: number;
+    }
+
+    export interface BatchOperationCosPutObjectCopyAccessControlGrants {
+        /**
+         * User name.
+         */
+        displayName?: string;
+        /**
+         * User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+         */
+        identifier: string;
+        /**
+         * Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+         */
+        permission: string;
+        /**
+         * Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+         */
+        typeIdentifier: string;
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectMetadata {
+        /**
+         * The caching instructions defined in RFC 2616 are saved as object metadata.
+         */
+        cacheControl?: string;
+        /**
+         * The file name defined in RFC 2616 is saved as object metadata.
+         */
+        contentDisposition?: string;
+        /**
+         * The encoding format defined in RFC 2616 is saved as object metadata.
+         */
+        contentEncoding?: string;
+        /**
+         * The content types defined in RFC 2616 are saved as object metadata.
+         */
+        contentType?: string;
+        /**
+         * The cache expiration time defined in RFC 2616 is saved as object metadata.
+         */
+        httpExpiresDate?: string;
+        /**
+         * Server encryption algorithm. Currently, only AES256 is supported.
+         */
+        sseAlgorithm?: string;
+        /**
+         * Includes user-defined metadata.
+         */
+        userMetadatas?: outputs.Cos.BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata[];
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * value.
+         */
+        value: string;
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectTagging {
+        /**
+         * key.
+         */
+        key: string;
+        /**
+         * value.
+         */
+        value: string;
+    }
+
+    export interface BatchReport {
+        /**
+         * Delivery bucket for task completion reports.
+         */
+        bucket: string;
+        /**
+         * Whether to output the task completion report.
+         */
+        enabled: string;
+        /**
+         * Task completion report format information. Legal value: Report_CSV_V1.
+         */
+        format: string;
+        /**
+         * Prefix information for the task completion report. Length 0-256 bytes.
+         */
+        prefix?: string;
+        /**
+         * Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+         */
+        reportScope: string;
+    }
+
     export interface BucketCorsRule {
         /**
          * Specifies which headers are allowed.
@@ -6327,6 +15173,72 @@ export namespace Cos {
          * Private key of certificate.
          */
         privateKey: string;
+    }
+
+    export interface BucketInventoryDestination {
+        /**
+         * ID of the bucket owner.
+         */
+        accountId?: string;
+        /**
+         * Bucket name.
+         */
+        bucket: string;
+        /**
+         * Server-side encryption for the inventory result.
+         */
+        encryption?: outputs.Cos.BucketInventoryDestinationEncryption;
+        /**
+         * Format of the inventory result. Valid value: CSV.
+         */
+        format: string;
+        /**
+         * Prefix of the inventory result.
+         */
+        prefix?: string;
+    }
+
+    export interface BucketInventoryDestinationEncryption {
+        /**
+         * Encryption with COS-managed key. This field can be left empty.
+         */
+        sseCos?: string;
+    }
+
+    export interface BucketInventoryFilter {
+        /**
+         * Creation time range of the objects to analyze.
+         */
+        period?: outputs.Cos.BucketInventoryFilterPeriod;
+        /**
+         * Prefix of the objects to analyze.
+         */
+        prefix?: string;
+    }
+
+    export interface BucketInventoryFilterPeriod {
+        /**
+         * Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+         */
+        endTime?: string;
+        /**
+         * Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+         */
+        startTime?: string;
+    }
+
+    export interface BucketInventoryOptionalFields {
+        /**
+         * Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+         */
+        fields?: string[];
+    }
+
+    export interface BucketInventorySchedule {
+        /**
+         * Frequency of the inventory job. Enumerated values: Daily, Weekly.
+         */
+        frequency: string;
     }
 
     export interface BucketLifecycleRule {
@@ -6491,6 +15403,196 @@ export namespace Cos {
          * COS returns this index document when requests are made to the root domain or any of the subfolders.
          */
         indexDocument?: string;
+    }
+
+    export interface GetBatchsJob {
+        /**
+         * Job creation time.
+         */
+        creationTime: string;
+        /**
+         * Mission description. The length is limited to 0-256 bytes.
+         */
+        description: string;
+        /**
+         * Job ID. The length is limited to 1-64 bytes.
+         */
+        jobId: string;
+        /**
+         * Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+         */
+        operation: string;
+        /**
+         * Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+         */
+        priority: number;
+        /**
+         * Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+         */
+        progressSummaries: outputs.Cos.GetBatchsJobProgressSummary[];
+        /**
+         * Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+         */
+        status: string;
+        /**
+         * The end time of the batch processing job.
+         */
+        terminationDate: string;
+    }
+
+    export interface GetBatchsJobProgressSummary {
+        /**
+         * The current failed Operand.
+         */
+        numberOfTasksFailed: number;
+        /**
+         * The current successful Operand.
+         */
+        numberOfTasksSucceeded: number;
+        /**
+         * Total Operand.
+         */
+        totalNumberOfTasks: number;
+    }
+
+    export interface GetBucketInventorysInventory {
+        /**
+         * Information about the inventory result destination.
+         */
+        destinations: outputs.Cos.GetBucketInventorysInventoryDestination[];
+        /**
+         * Filters objects prefixed with the specified value to analyze.
+         */
+        filters: outputs.Cos.GetBucketInventorysInventoryFilter[];
+        /**
+         * Whether to enable the inventory. true or false.
+         */
+        id: string;
+        /**
+         * Whether to include object versions in the inventory. All or No.
+         */
+        includedObjectVersions: string;
+        /**
+         * Whether to enable the inventory. true or false.
+         */
+        isEnabled: string;
+        optionalFields?: outputs.Cos.GetBucketInventorysInventoryOptionalField[];
+        /**
+         * Inventory job cycle.
+         */
+        schedules: outputs.Cos.GetBucketInventorysInventorySchedule[];
+    }
+
+    export interface GetBucketInventorysInventoryDestination {
+        /**
+         * ID of the bucket owner.
+         */
+        accountId: string;
+        /**
+         * Bucket.
+         */
+        bucket: string;
+        /**
+         * Server-side encryption for the inventory result.
+         */
+        encryptions: outputs.Cos.GetBucketInventorysInventoryDestinationEncryption[];
+        /**
+         * Format of the inventory result. Valid value: CSV.
+         */
+        format: string;
+        /**
+         * Prefix of the objects to analyze.
+         */
+        prefix: string;
+    }
+
+    export interface GetBucketInventorysInventoryDestinationEncryption {
+        /**
+         * Encryption with COS-managed key. This field can be left empty.
+         */
+        sseCos: string;
+    }
+
+    export interface GetBucketInventorysInventoryFilter {
+        /**
+         * Creation time range of the objects to analyze.
+         */
+        periods: outputs.Cos.GetBucketInventorysInventoryFilterPeriod[];
+        /**
+         * Prefix of the objects to analyze.
+         */
+        prefix: string;
+    }
+
+    export interface GetBucketInventorysInventoryFilterPeriod {
+        /**
+         * Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+         */
+        endTime: string;
+        /**
+         * Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+         */
+        startTime: string;
+    }
+
+    export interface GetBucketInventorysInventoryOptionalField {
+        fields: string[];
+    }
+
+    export interface GetBucketInventorysInventorySchedule {
+        /**
+         * Frequency of the inventory job. Enumerated values: Daily, Weekly.
+         */
+        frequency: string;
+    }
+
+    export interface GetBucketMultipartUploadsUpload {
+        /**
+         * The starting time of multipart upload.
+         */
+        initiated: string;
+        /**
+         * Used to represent the information of the initiator of this upload.
+         */
+        initiators: outputs.Cos.GetBucketMultipartUploadsUploadInitiator[];
+        /**
+         * Name of the Object.
+         */
+        key: string;
+        /**
+         * Information used to represent the owner of these chunks.
+         */
+        owners: outputs.Cos.GetBucketMultipartUploadsUploadOwner[];
+        /**
+         * Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+         */
+        storageClass: string;
+        /**
+         * Mark the ID of this multipart upload.
+         */
+        uploadId: string;
+    }
+
+    export interface GetBucketMultipartUploadsUploadInitiator {
+        /**
+         * Abbreviation for user identity ID (UIN).
+         */
+        displayName: string;
+        /**
+         * The user's unique CAM identity ID.
+         */
+        id: string;
+    }
+
+    export interface GetBucketMultipartUploadsUploadOwner {
+        /**
+         * Abbreviation for user identity ID (UIN).
+         */
+        displayName: string;
+        /**
+         * The user's unique CAM identity ID.
+         */
+        id: string;
     }
 
     export interface GetBucketsBucketList {
@@ -6978,6 +16080,43 @@ export namespace Cvm {
         values: string[];
     }
 
+    export interface GetImageSharePermissionSharePermissionSet {
+        /**
+         * ID of the account with which the image is shared.
+         */
+        accountId: string;
+        /**
+         * Time when an image was shared.
+         */
+        createdTime: string;
+    }
+
+    export interface GetImportImageOsImportImageOsListSupported {
+        /**
+         * Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        linuxes: string[];
+        /**
+         * Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        windows: string[];
+    }
+
+    export interface GetImportImageOsImportImageOsVersionSet {
+        /**
+         * Supported operating system architecture.
+         */
+        architectures: string[];
+        /**
+         * Operating system type.
+         */
+        osName: string;
+        /**
+         * Supported operating system versions.
+         */
+        osVersions: string[];
+    }
+
     export interface GetInstancesModificationFilter {
         /**
          * Fields to be filtered.
@@ -7033,6 +16172,16 @@ export namespace Cvm {
          * Availability zone.
          */
         zone: string;
+    }
+
+    export interface ImportImageTagSpecification {
+        resourceType: string;
+        tags: outputs.Cvm.ImportImageTagSpecificationTag[];
+    }
+
+    export interface ImportImageTagSpecificationTag {
+        key: string;
+        value: string;
     }
 
     export interface LaunchTemplateActionTimer {
@@ -7574,9 +16723,74 @@ export namespace Cvm {
          */
         vpcId: string;
     }
+
+    export interface ModifyInstanceDiskTypeDataDisk {
+        cdcId?: string;
+        deleteWithInstance?: boolean;
+        diskId?: string;
+        diskSize: number;
+        diskType?: string;
+        encrypt?: boolean;
+        kmsKeyId?: string;
+        snapshotId?: string;
+        throughputPerformance?: number;
+    }
+
+    export interface ModifyInstanceDiskTypeSystemDisk {
+        cdcId?: string;
+        diskId?: string;
+        diskSize?: number;
+        diskType?: string;
+    }
+
+    export interface RenewHostHostChargePrepaid {
+        period: number;
+        renewFlag?: string;
+    }
+
+    export interface RenewInstanceInstanceChargePrepaid {
+        /**
+         * Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+         */
+        period: number;
+        /**
+         * Auto renewal flag. Valid values:
+         * - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+         * - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+         * - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+         * Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+         */
+        renewFlag?: string;
+    }
 }
 
 export namespace Cynosdb {
+    export interface AccountPrivilegesDatabasePrivilege {
+        /**
+         * Database.
+         */
+        db: string;
+        /**
+         * Database privileges.
+         */
+        privileges: string[];
+    }
+
+    export interface AccountPrivilegesTablePrivilege {
+        /**
+         * Database name.
+         */
+        db: string;
+        /**
+         * Table privileges.
+         */
+        privileges: string[];
+        /**
+         * Table name.
+         */
+        tableName: string;
+    }
+
     export interface AuditLogFileFilter {
         /**
          * Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
@@ -7630,6 +16844,21 @@ export namespace Cynosdb {
          * User name.
          */
         users?: string[];
+    }
+
+    export interface ClusterDatabasesUserHostPrivilege {
+        /**
+         * .
+         */
+        dbHost: string;
+        /**
+         * .
+         */
+        dbPrivilege: string;
+        /**
+         * Authorized Users.
+         */
+        dbUserName: string;
     }
 
     export interface ClusterParamItem {
@@ -7691,6 +16920,58 @@ export namespace Cynosdb {
         instanceName: string;
     }
 
+    export interface ExportInstanceErrorLogsErrorLogItemExport {
+        /**
+         * log content.
+         */
+        content: string;
+        /**
+         * Log level, optional values note, warning, error.
+         */
+        level: string;
+        /**
+         * time.
+         */
+        timestamp: string;
+    }
+
+    export interface GetAccountAllGrantPrivilegesAccount {
+        /**
+         * Account.
+         */
+        accountName: string;
+        /**
+         * Host, default `%`.
+         */
+        host?: string;
+    }
+
+    export interface GetAccountAllGrantPrivilegesDatabasePrivilege {
+        /**
+         * Database name.
+         */
+        db: string;
+        /**
+         * Permission List.
+         */
+        privileges: string[];
+    }
+
+    export interface GetAccountAllGrantPrivilegesTablePrivilege {
+        /**
+         * Database name.
+         */
+        db: string;
+        /**
+         * Permission List.
+         */
+        privileges: string[];
+        /**
+         * Table Name.
+         */
+        tableName: string;
+    }
+
     export interface GetAccountsAccountSet {
         /**
          * Account name of database.
@@ -7716,6 +16997,186 @@ export namespace Cynosdb {
          * Update time.
          */
         updateTime: string;
+    }
+
+    export interface GetAuditLogsFilter {
+        /**
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         */
+        affectRows?: number;
+        /**
+         * Database name.
+         */
+        dbNames?: string[];
+        /**
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+         */
+        execTime?: number;
+        /**
+         * Client address.
+         */
+        hosts?: string[];
+        /**
+         * Audit policy name.
+         */
+        policyNames?: string[];
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: number;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: string;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: string;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: string[];
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: string[];
+        /**
+         * Table name.
+         */
+        tableNames?: string[];
+        /**
+         * Thread ID.
+         */
+        threadIds?: string[];
+        /**
+         * User name.
+         */
+        users?: string[];
+    }
+
+    export interface GetAuditLogsItem {
+        /**
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         */
+        affectRows: number;
+        /**
+         * Database name.
+         */
+        dbName: string;
+        /**
+         * Error code.
+         */
+        errCode: number;
+        /**
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+         */
+        execTime: number;
+        /**
+         * Client address.
+         */
+        host: string;
+        /**
+         * Instance name.
+         */
+        instanceName: string;
+        /**
+         * Audit policy name.
+         */
+        policyName: string;
+        /**
+         * Returns the number of rows.
+         */
+        sentRows: number;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql: string;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType: string;
+        /**
+         * Table name.
+         */
+        tableName: string;
+        /**
+         * Thread ID.
+         */
+        threadId: number;
+        /**
+         * Timestamp.
+         */
+        timestamp: string;
+        /**
+         * User name.
+         */
+        user: string;
+    }
+
+    export interface GetClusterDetailDatabasesDbInfo {
+        /**
+         * User appid note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        appId: number;
+        /**
+         * Character Set Type.
+         */
+        characterSet: string;
+        /**
+         * Cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Capture Rules.
+         */
+        collateRule: string;
+        /**
+         * Creation time note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        createTime: string;
+        /**
+         * Database ID note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        dbId: number;
+        /**
+         * Database Name.
+         */
+        dbName: string;
+        /**
+         * Database note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        description: string;
+        /**
+         * Database Status.
+         */
+        status: string;
+        /**
+         * User Uin note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        uin: string;
+        /**
+         * Update time note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        updateTime: string;
+        /**
+         * User permission note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        userHostPrivileges: outputs.Cynosdb.GetClusterDetailDatabasesDbInfoUserHostPrivilege[];
+    }
+
+    export interface GetClusterDetailDatabasesDbInfoUserHostPrivilege {
+        /**
+         * Database host.
+         */
+        dbHost: string;
+        /**
+         * User permission note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        dbPrivilege: string;
+        /**
+         * DbUserName.
+         */
+        dbUserName: string;
     }
 
     export interface GetClusterInstanceGroupsInstanceGrpInfoList {
@@ -8006,6 +17467,41 @@ export namespace Cynosdb {
         taskType: string;
     }
 
+    export interface GetClusterParamLogsClusterParamLog {
+        /**
+         * Cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Current value.
+         */
+        currentValue: string;
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Parameter Name.
+         */
+        paramName: string;
+        /**
+         * modify state.
+         */
+        status: string;
+        /**
+         * Update time.
+         */
+        updateTime: string;
+        /**
+         * Modified value.
+         */
+        updateValue: string;
+    }
+
     export interface GetClusterParamsItem {
         /**
          * Current value.
@@ -8065,6 +17561,17 @@ export namespace Cynosdb {
         paramType: string;
     }
 
+    export interface GetClusterTable {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tables: string[];
+    }
+
     export interface GetClustersClusterList {
         /**
          * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Only works for PREPAID cluster.
@@ -8122,6 +17629,91 @@ export namespace Cynosdb {
          * ID of the VPC.
          */
         vpcId: string;
+    }
+
+    export interface GetDescribeInstanceErrorLogsErrorLog {
+        /**
+         * Note to log content: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        content: string;
+        /**
+         * Log level note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        level: string;
+        /**
+         * Log timestamp note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        timestamp: number;
+    }
+
+    export interface GetDescribeInstanceSlowQueriesBinlog {
+        /**
+         * Binlog file ID.
+         */
+        binlogId: number;
+        /**
+         * Binlog file name.
+         */
+        fileName: string;
+        /**
+         * File size in bytes.
+         */
+        fileSize: number;
+        /**
+         * Latest transaction time.
+         */
+        finishTime: string;
+        /**
+         * start time.
+         */
+        startTime: string;
+    }
+
+    export interface GetInstanceSlowQueriesSlowQuery {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Lock duration in seconds.
+         */
+        lockTime: number;
+        /**
+         * Execution time in seconds.
+         */
+        queryTime: number;
+        /**
+         * Scan Rows.
+         */
+        rowsExamined: number;
+        /**
+         * Return the number of rows.
+         */
+        rowsSent: number;
+        /**
+         * SQL statement md5.
+         */
+        sqlMd5: string;
+        /**
+         * SQL template.
+         */
+        sqlTemplate: string;
+        /**
+         * SQL statement.
+         */
+        sqlText: string;
+        /**
+         * Execution timestamp.
+         */
+        timestamp: number;
+        /**
+         * Client host.
+         */
+        userHost: string;
+        /**
+         * user name.
+         */
+        userName: string;
     }
 
     export interface GetInstancesInstanceList {
@@ -8223,6 +17815,277 @@ export namespace Cynosdb {
         paramType: string;
     }
 
+    export interface GetProjectSecurityGroupsGroup {
+        /**
+         * Creation time, time format: yyyy mm dd hh: mm: ss.
+         */
+        createTime: string;
+        /**
+         * Inbound Rules.
+         */
+        inbounds: outputs.Cynosdb.GetProjectSecurityGroupsGroupInbound[];
+        /**
+         * Outbound rules.
+         */
+        outbounds: outputs.Cynosdb.GetProjectSecurityGroupsGroupOutbound[];
+        /**
+         * Project ID.
+         */
+        projectId: number;
+        /**
+         * Security Group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Security Group Name.
+         */
+        securityGroupName: string;
+        /**
+         * Security Group Notes.
+         */
+        securityGroupRemark: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupInbound {
+        /**
+         * Action.
+         */
+        action: string;
+        /**
+         * Address module.
+         */
+        addressModule: string;
+        /**
+         * Cidr Ip.
+         */
+        cidrIp: string;
+        /**
+         * Description.
+         */
+        desc: string;
+        /**
+         * id.
+         */
+        id: string;
+        /**
+         * Ip protocol.
+         */
+        ipProtocol: string;
+        /**
+         * Port range.
+         */
+        portRange: string;
+        /**
+         * Service module.
+         */
+        serviceModule: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupOutbound {
+        /**
+         * Action.
+         */
+        action: string;
+        /**
+         * Address module.
+         */
+        addressModule: string;
+        /**
+         * Cidr Ip.
+         */
+        cidrIp: string;
+        /**
+         * Description.
+         */
+        desc: string;
+        /**
+         * id.
+         */
+        id: string;
+        /**
+         * Ip protocol.
+         */
+        ipProtocol: string;
+        /**
+         * Port range.
+         */
+        portRange: string;
+        /**
+         * Service module.
+         */
+        serviceModule: string;
+    }
+
+    export interface GetProxyNodeFilter {
+        /**
+         * Exact match or not.
+         */
+        exactMatch?: boolean;
+        /**
+         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         */
+        name?: string;
+        /**
+         * Search String.
+         */
+        names: string[];
+        /**
+         * Operator.
+         */
+        operator?: string;
+        /**
+         * Search String.
+         */
+        values: string[];
+    }
+
+    export interface GetProxyNodeProxyNodeInfo {
+        /**
+         * User AppID.
+         */
+        appId: number;
+        /**
+         * Cluster ID.
+         */
+        clusterId: string;
+        /**
+         * Database Agent Node CPU.
+         */
+        cpu: number;
+        /**
+         * Database Agent Node Memory.
+         */
+        mem: number;
+        /**
+         * Database Agent Group ID.
+         */
+        proxyGroupId: string;
+        /**
+         * The current number of connections of the node. The DescribeProxyNodes interface does not return a value for this field.
+         */
+        proxyNodeConnections: number;
+        /**
+         * Database Agent Node ID.
+         */
+        proxyNodeId: string;
+        /**
+         * region.
+         */
+        region: string;
+        /**
+         * Database Agent Node Status.
+         */
+        status: string;
+        /**
+         * Availability Zone.
+         */
+        zone: string;
+    }
+
+    export interface GetResourcePackageListResourcePackageList {
+        /**
+         * AppID note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        appId: number;
+        /**
+         * Note for binding instance information: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        bindInstanceInfos: outputs.Cynosdb.GetResourcePackageListResourcePackageListBindInstanceInfo[];
+        /**
+         * Expiration time: August 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        expireTime: string;
+        /**
+         * Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        hasQuota: boolean;
+        /**
+         * Resource Package Unique ID.
+         */
+        packageId: string;
+        /**
+         * Resource Package Name.
+         */
+        packageName: string;
+        /**
+         * Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+         */
+        packageRegion: string;
+        /**
+         * Attention to the total amount of resource packages: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        packageTotalSpec: number;
+        /**
+         * Resource package type CCU - Compute resource package, DISK - Storage resource package.
+         */
+        packageType: string;
+        /**
+         * Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        packageUsedSpec: number;
+        /**
+         * Effective time: July 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        startTime: string;
+        /**
+         * Resource package status creating - creating; Using - In use; Expired - has expired; Normal_ Finish - used up; Apply_ Refund - Applying for a refund; Refund - The fee has been refunded.
+         */
+        status: string;
+    }
+
+    export interface GetResourcePackageListResourcePackageListBindInstanceInfo {
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Region of instance.
+         */
+        instanceRegion: string;
+        /**
+         * Instance type.
+         */
+        instanceType: string;
+    }
+
+    export interface GetResourcePackageSaleSpecsDetail {
+        /**
+         * Resource package validity period, in days. Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        expireDay: number;
+        /**
+         * The maximum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        maxPackageSpec: number;
+        /**
+         * The minimum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        minPackageSpec: number;
+        /**
+         * Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+         */
+        packageRegion: string;
+        /**
+         * Resource package type CCU - Computing resource package DISK - Storage resource package.
+         */
+        packageType: string;
+        /**
+         * Resource package version base basic version, common general version, enterprise enterprise version Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        packageVersion: string;
+    }
+
+    export interface GetRollbackTimeRangeRollbackTimeRange {
+        /**
+         * Effective regression time range end time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        timeRangeEnd: string;
+        /**
+         * Effective regression time range start time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        timeRangeStart: string;
+    }
+
     export interface GetZoneConfigList {
         /**
          * Instance CPU, unit: core.
@@ -8263,6 +18126,156 @@ export namespace Cynosdb {
          * Availability zone.
          */
         zone: string;
+    }
+
+    export interface GetZoneRegionSet {
+        /**
+         * Database type.
+         */
+        dbType: string;
+        /**
+         * Regional module support.
+         */
+        modules: outputs.Cynosdb.GetZoneRegionSetModule[];
+        /**
+         * Region in English.
+         */
+        region: string;
+        /**
+         * Region ID.
+         */
+        regionId: number;
+        /**
+         * Region name in Chinese.
+         */
+        regionZh: string;
+        /**
+         * List of available zones for sale.
+         */
+        zoneSets: outputs.Cynosdb.GetZoneRegionSetZoneSet[];
+    }
+
+    export interface GetZoneRegionSetModule {
+        /**
+         * Is zone on sale, optional values: yes, no.
+         */
+        isDisable: string;
+        /**
+         * Module name.
+         */
+        moduleName: string;
+    }
+
+    export interface GetZoneRegionSetZoneSet {
+        /**
+         * Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        hasPermission: boolean;
+        /**
+         * Does it support normal clusters, 0:Not supported 1:Support.
+         */
+        isSupportNormal: number;
+        /**
+         * Does it support serverless clusters, 0:Not supported 1:Support.
+         */
+        isSupportServerless: number;
+        /**
+         * Is zone Rdma.
+         */
+        isWholeRdmaZone: string;
+        /**
+         * Physical zone.
+         */
+        physicalZone: string;
+        /**
+         * Zone name in English.
+         */
+        zone: string;
+        /**
+         * ZoneId.
+         */
+        zoneId: number;
+        /**
+         * Zone name in Chinesee.
+         */
+        zoneZh: string;
+    }
+
+    export interface InstanceParamInstanceParamList {
+        /**
+         * Current value of parameter.
+         */
+        currentValue: string;
+        /**
+         * Parameter Name.
+         */
+        paramName: string;
+    }
+
+    export interface ParamTemplateParamList {
+        /**
+         * Current value.
+         */
+        currentValue: string;
+        /**
+         * Parameter Name.
+         */
+        paramName: string;
+    }
+
+    export interface ProxyEndPointInstanceWeight {
+        /**
+         * Instance Id.
+         */
+        instanceId: string;
+        /**
+         * Instance Weight.
+         */
+        weight: number;
+    }
+
+    export interface ProxyProxyZone {
+        /**
+         * Number of proxy nodes.
+         */
+        proxyNodeCount?: number;
+        /**
+         * Proxy node availability zone.
+         */
+        proxyNodeZone?: string;
+    }
+
+    export interface RollBackClusterRollbackDatabase {
+        /**
+         * New database name.
+         */
+        newDatabase: string;
+        /**
+         * Old database name.
+         */
+        oldDatabase: string;
+    }
+
+    export interface RollBackClusterRollbackTable {
+        /**
+         * New database name.
+         */
+        database: string;
+        /**
+         * Tables.
+         */
+        tables: outputs.Cynosdb.RollBackClusterRollbackTableTable[];
+    }
+
+    export interface RollBackClusterRollbackTableTable {
+        /**
+         * New table name.
+         */
+        newTable: string;
+        /**
+         * Old table name.
+         */
+        oldTable: string;
     }
 
 }
@@ -9765,6 +19778,148 @@ export namespace Dayu {
 }
 
 export namespace Dbbrain {
+    export interface GetDiagDbInstancesItem {
+        /**
+         * Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+         */
+        auditPolicyStatus: string;
+        /**
+         * Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+         */
+        auditRunningStatus: string;
+        /**
+         * number of cores.
+         */
+        cpu: number;
+        /**
+         * create time.
+         */
+        createTime: string;
+        /**
+         * resource expiration time.
+         */
+        deadlineTime: string;
+        /**
+         * cdb type.
+         */
+        deployMode: string;
+        /**
+         * database version.
+         */
+        engineVersion: string;
+        /**
+         * the number of abnormal events.
+         */
+        eventCount: number;
+        /**
+         * group ID.
+         */
+        groupId: string;
+        /**
+         * group name.
+         */
+        groupName: string;
+        /**
+         * health score.
+         */
+        healthScore: number;
+        /**
+         * cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+         */
+        initFlag: number;
+        /**
+         * status of instance inspection/overview.
+         */
+        instanceConfs: outputs.Dbbrain.GetDiagDbInstancesItemInstanceConf[];
+        /**
+         * instance id.
+         */
+        instanceId: string;
+        /**
+         * instance name.
+         */
+        instanceName: string;
+        /**
+         * instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+         */
+        instanceType: number;
+        /**
+         * Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        internalVip: string;
+        /**
+         * Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        internalVport: number;
+        /**
+         * whether it is an instance supported by DBbrain, always pass `true`.
+         */
+        isSupported: boolean;
+        /**
+         * memory, in MB.
+         */
+        memory: number;
+        /**
+         * service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+         */
+        product: string;
+        /**
+         * region.
+         */
+        region: string;
+        /**
+         * enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+         */
+        secAuditStatus: string;
+        /**
+         * access source.
+         */
+        source: string;
+        /**
+         * Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+         */
+        status: number;
+        /**
+         * task status.
+         */
+        taskStatus: number;
+        /**
+         * subnet uniform ID.
+         */
+        uniqSubnetId: string;
+        /**
+         * the unified ID of the private network.
+         */
+        uniqVpcId: string;
+        /**
+         * intranet address.
+         */
+        vip: string;
+        /**
+         * hard disk storage, in GB.
+         */
+        volume: number;
+        /**
+         * intranet port.
+         */
+        vport: number;
+    }
+
+    export interface GetDiagDbInstancesItemInstanceConf {
+        /**
+         * database inspection switch, Yes/No.
+         */
+        dailyInspection: string;
+        /**
+         * Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        keyDelimiters: string[];
+        /**
+         * instance overview switch, Yes/No.
+         */
+        overviewDisplay: string;
+    }
+
     export interface GetDiagEventsList {
         /**
          * diag item.
@@ -9922,6 +20077,122 @@ export namespace Dbbrain {
          * Starting time.
          */
         startTime: string;
+    }
+
+    export interface GetMysqlProcessListProcessList {
+        /**
+         * The execution type of the thread, used to filter the thread list.
+         */
+        command: string;
+        /**
+         * The threads operations database, used to filter the thread list.
+         */
+        db: string;
+        /**
+         * The operating host address of the thread, used to filter the thread list.
+         */
+        host: string;
+        /**
+         * thread ID, used to filter the thread list.
+         */
+        id: string;
+        /**
+         * The threads operation statement is used to filter the thread list.
+         */
+        info: string;
+        /**
+         * The operational state of the thread, used to filter the thread list.
+         */
+        state: string;
+        /**
+         * The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+         */
+        time: string;
+        /**
+         * The operating account name of the thread, used to filter the thread list.
+         */
+        user: string;
+    }
+
+    export interface GetNoPrimaryKeyTablesNoPrimaryKeyTable {
+        /**
+         * Storage engine for database tables.
+         */
+        engine: string;
+        /**
+         * tableName.
+         */
+        tableName: string;
+        /**
+         * rows.
+         */
+        tableRows: number;
+        /**
+         * library name.
+         */
+        tableSchema: string;
+        /**
+         * Total space used (MB).
+         */
+        totalLength: number;
+    }
+
+    export interface GetRedisTopBigKeysTopKey {
+        /**
+         * key encoding method.
+         */
+        encoding: string;
+        /**
+         * Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+         */
+        expireTime: number;
+        /**
+         * number of elements.
+         */
+        itemCount: number;
+        /**
+         * key name.
+         */
+        key: string;
+        /**
+         * Key memory size, unit Byte.
+         */
+        length: number;
+        /**
+         * Maximum element length.
+         */
+        maxElementSize: number;
+        /**
+         * key type.
+         */
+        type: string;
+    }
+
+    export interface GetRedisTopKeyPrefixListItem {
+        /**
+         * Average element length.
+         */
+        aveElementSize: number;
+        /**
+         * The number of keys.
+         */
+        count: number;
+        /**
+         * number of elements.
+         */
+        itemCount: number;
+        /**
+         * key prefix.
+         */
+        keyPreIndex: string;
+        /**
+         * Total occupied memory (Byte).
+         */
+        length: number;
+        /**
+         * Maximum element length.
+         */
+        maxElementSize: number;
     }
 
     export interface GetSecurityAuditLogExportTasksList {
@@ -10129,6 +20400,45 @@ export namespace Dbbrain {
         userHost: string;
     }
 
+    export interface GetSlowLogsRow {
+        /**
+         * database.
+         */
+        database: string;
+        /**
+         * lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        lockTime: number;
+        /**
+         * Execution time, in seconds.
+         */
+        queryTime: number;
+        /**
+         * scan linesNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        rowsExamined: number;
+        /**
+         * Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        rowsSent: number;
+        /**
+         * sql statement.
+         */
+        sqlText: string;
+        /**
+         * Slow log start time.
+         */
+        timestamp: string;
+        /**
+         * Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        userHost: string;
+        /**
+         * User sourceNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        userName: string;
+    }
+
     export interface GetSqlFiltersList {
         /**
          * create time.
@@ -10174,6 +20484,166 @@ export namespace Dbbrain {
          * task status, optional value is RUNNING, FINISHED, TERMINATED.
          */
         status: string;
+    }
+
+    export interface GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries {
+        /**
+         * Spatial index data in unit time interval.
+         */
+        seriesDatas: outputs.Dbbrain.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData[];
+        /**
+         * databases name.
+         */
+        tableSchema: string;
+    }
+
+    export interface GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData {
+        /**
+         * Monitor metrics.
+         */
+        series: outputs.Dbbrain.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries[];
+        /**
+         * The timestamp corresponding to the monitoring indicator.
+         */
+        timestamps: number[];
+    }
+
+    export interface GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries {
+        /**
+         * Indicator name.
+         */
+        metric: string;
+        /**
+         * Indicator unit.
+         */
+        unit: string;
+        /**
+         * Index value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        values: number[];
+    }
+
+    export interface GetTopSpaceSchemasTopSpaceSchema {
+        /**
+         * Fragmentation space (MB).
+         */
+        dataFree: number;
+        /**
+         * data space (MB).
+         */
+        dataLength: number;
+        /**
+         * Fragmentation rate (%).
+         */
+        fragRatio: number;
+        /**
+         * Index space (MB).
+         */
+        indexLength: number;
+        /**
+         * The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        physicalFileSize: number;
+        /**
+         * Number of lines.
+         */
+        tableRows: number;
+        /**
+         * library name.
+         */
+        tableSchema: string;
+        /**
+         * Total space used (MB).
+         */
+        totalLength: number;
+    }
+
+    export interface GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries {
+        /**
+         * Storage engine for database tables.
+         */
+        engine: string;
+        /**
+         * Spatial index data in unit time interval.
+         */
+        seriesDatas: outputs.Dbbrain.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData[];
+        /**
+         * table name.
+         */
+        tableName: string;
+        /**
+         * databases name.
+         */
+        tableSchema: string;
+    }
+
+    export interface GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData {
+        /**
+         * Monitor metrics.
+         */
+        series: outputs.Dbbrain.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries[];
+        /**
+         * The timestamp corresponding to the monitoring indicator.
+         */
+        timestamps: number[];
+    }
+
+    export interface GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries {
+        /**
+         * Indicator name.
+         */
+        metric: string;
+        /**
+         * Indicator unit.
+         */
+        unit: string;
+        /**
+         * Index value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        values: number[];
+    }
+
+    export interface GetTopSpaceTablesTopSpaceTable {
+        /**
+         * Fragmentation space (MB).
+         */
+        dataFree: number;
+        /**
+         * data space (MB).
+         */
+        dataLength: number;
+        /**
+         * Storage engine for database tables.
+         */
+        engine: string;
+        /**
+         * Fragmentation rate (%).
+         */
+        fragRatio: number;
+        /**
+         * Index space (MB).
+         */
+        indexLength: number;
+        /**
+         * The independent physical file size (MB) corresponding to the table.
+         */
+        physicalFileSize: number;
+        /**
+         * table name.
+         */
+        tableName: string;
+        /**
+         * Number of lines.
+         */
+        tableRows: number;
+        /**
+         * database name.
+         */
+        tableSchema: string;
+        /**
+         * Total space used (MB).
+         */
+        totalLength: number;
     }
 
     export interface ModifyDiagDbInstanceOperationInstanceConfs {
@@ -10224,9 +20694,68 @@ export namespace Dbbrain {
          */
         users?: string[];
     }
+
 }
 
 export namespace Dc {
+    export interface GetAccessPointsAccessPointSet {
+        /**
+         * Unique access point ID.
+         */
+        accessPointId: string;
+        /**
+         * Access point name.
+         */
+        accessPointName: string;
+        /**
+         * Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        accessPointType: string;
+        /**
+         * Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        area: string;
+        /**
+         * Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+         */
+        availablePortTypes: string[];
+        /**
+         * City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        city: string;
+        /**
+         * Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        coordinates: outputs.Dc.GetAccessPointsAccessPointSetCoordinate[];
+        /**
+         * List of ISPs supported by access point.
+         */
+        lineOperators: string[];
+        /**
+         * Access point location.
+         */
+        location: string;
+        /**
+         * Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+         */
+        regionId: string;
+        /**
+         * Access point status. Valid values: available, unavailable.
+         */
+        state: string;
+    }
+
+    export interface GetAccessPointsAccessPointSetCoordinate {
+        /**
+         * Latitude.
+         */
+        lat: number;
+        /**
+         * Longitude.
+         */
+        lng: number;
+    }
+
     export interface GetGatewayCcnRoutesInstanceList {
         /**
          * As path list of the BGP.
@@ -10366,6 +20895,55 @@ export namespace Dc {
          * Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.
          */
         tencentAddress: string;
+    }
+
+    export interface GetInternetAddressStatisticsInternetAddressStatistic {
+        /**
+         * region.
+         */
+        region: string;
+        /**
+         * Number of Internet public network addresses.
+         */
+        subnetNum: number;
+    }
+
+    export interface GetPublicDirectConnectTunnelRoutesFilter {
+        /**
+         * Fields to be filtered.
+         */
+        name: string;
+        /**
+         * filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetPublicDirectConnectTunnelRoutesRoute {
+        /**
+         * ASPath info.
+         */
+        asPaths: string[];
+        /**
+         * Network CIDR.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Route next hop ip.
+         */
+        nextHop: string;
+        /**
+         * direct connect tunnel route id.
+         */
+        routeId: string;
+        /**
+         * Route type: BGP/STATIC route.
+         */
+        routeType: string;
+        /**
+         * ENABLE: routing is enabled, DISABLE: routing is disabled.
+         */
+        status: string;
     }
 
 }
@@ -10556,6 +21134,21 @@ export namespace Dcdb {
         dbName: string;
     }
 
+    export interface GetInstanceNodeInfoNodesInfo {
+        /**
+         * Node ID.
+         */
+        nodeId: string;
+        /**
+         * Node role. Valid values: `master`, `slave`.
+         */
+        role: string;
+        /**
+         * Instance shard ID.
+         */
+        shardId: string;
+    }
+
     export interface GetInstancesList {
         /**
          * app id.
@@ -10741,6 +21334,52 @@ export namespace Dcdb {
         storage: number;
     }
 
+    export interface GetLogFilesFile {
+        /**
+         * Filename.
+         */
+        fileName: string;
+        /**
+         * File length.
+         */
+        length: number;
+        /**
+         * Last modified time of log.
+         */
+        mtime: number;
+        /**
+         * Uniform resource identifier (URI) used during log download.
+         */
+        uri: string;
+    }
+
+    export interface GetOrdersDeal {
+        /**
+         * Number of items.
+         */
+        count: number;
+        /**
+         * Order number.
+         */
+        dealName: string;
+        /**
+         * ID of the associated process, which can be used to query the process execution status.
+         */
+        flowId: number;
+        /**
+         * The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        instanceIds: string[];
+        /**
+         * Account.
+         */
+        ownerUin: string;
+        /**
+         * Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+         */
+        payMode: number;
+    }
+
     export interface GetParametersList {
         /**
          * params constraint.
@@ -10796,6 +21435,213 @@ export namespace Dcdb {
          * min value.
          */
         min: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroup {
+        /**
+         * Creation time in the format of yyyy-mm-dd hh:mm:ss.
+         */
+        createTime: string;
+        /**
+         * Inbound rule.
+         */
+        inbounds: outputs.Dcdb.GetProjectSecurityGroupsGroupInbound[];
+        /**
+         * Outbound rule.
+         */
+        outbounds: outputs.Dcdb.GetProjectSecurityGroupsGroupOutbound[];
+        /**
+         * Project ID.
+         */
+        projectId: number;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Security group name.
+         */
+        securityGroupName: string;
+        /**
+         * Security group remarks.
+         */
+        securityGroupRemark: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupInbound {
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`.
+         */
+        action: string;
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16.
+         */
+        cidrIp: string;
+        /**
+         * Network protocol. UDP and TCP are supported.
+         */
+        ipProtocol: string;
+        /**
+         * Port.
+         */
+        portRange: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupOutbound {
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`.
+         */
+        action: string;
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16.
+         */
+        cidrIp: string;
+        /**
+         * Network protocol. UDP and TCP are supported.
+         */
+        ipProtocol: string;
+        /**
+         * Port.
+         */
+        portRange: string;
+    }
+
+    export interface GetProjectsProject {
+        /**
+         * Application ID.
+         */
+        appId: number;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Creator UIN.
+         */
+        creatorUin: number;
+        /**
+         * Description.
+         */
+        info: string;
+        /**
+         * Whether it is the default project. Valid values: `1` (yes), `0` (no).
+         */
+        isDefault: number;
+        /**
+         * Project name.
+         */
+        name: string;
+        /**
+         * The UIN of the resource owner (root account).
+         */
+        ownerUin: number;
+        /**
+         * Project ID.
+         */
+        projectId: number;
+        /**
+         * Source APPID.
+         */
+        srcAppId: number;
+        /**
+         * Source platform.
+         */
+        srcPlat: string;
+        /**
+         * Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+         */
+        status: number;
+    }
+
+    export interface GetSaleInfoRegionList {
+        /**
+         * available zone choice.
+         */
+        availableChoices: outputs.Dcdb.GetSaleInfoRegionListAvailableChoice[];
+        /**
+         * region name(en).
+         */
+        region: string;
+        /**
+         * region id.
+         */
+        regionId: number;
+        /**
+         * region name(zh).
+         */
+        regionName: string;
+        /**
+         * list of az zone.
+         */
+        zoneLists: outputs.Dcdb.GetSaleInfoRegionListZoneList[];
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoice {
+        /**
+         * master zone.
+         */
+        masterZones: outputs.Dcdb.GetSaleInfoRegionListAvailableChoiceMasterZone[];
+        /**
+         * slave zones.
+         */
+        slaveZones: outputs.Dcdb.GetSaleInfoRegionListAvailableChoiceSlaveZone[];
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoiceMasterZone {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoiceSlaveZone {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
+    }
+
+    export interface GetSaleInfoRegionListZoneList {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
     }
 
     export interface GetSecurityGroupsList {
@@ -10861,6 +21707,52 @@ export namespace Dcdb {
          * port range.
          */
         portRange: string;
+    }
+
+    export interface GetShardSpecSpecConfig {
+        /**
+         * machine type.
+         */
+        machine: string;
+        /**
+         * list of machine specifications.
+         */
+        specConfigInfos: outputs.Dcdb.GetShardSpecSpecConfigSpecConfigInfo[];
+    }
+
+    export interface GetShardSpecSpecConfigSpecConfigInfo {
+        /**
+         * CPU cores.
+         */
+        cpu: number;
+        /**
+         * maximum storage size, inGB.
+         */
+        maxStorage: number;
+        /**
+         * memory, in GB.
+         */
+        memory: number;
+        /**
+         * minimum storage size, in GB.
+         */
+        minStorage: number;
+        /**
+         * node count.
+         */
+        nodeCount: number;
+        /**
+         * product price id.
+         */
+        pid: number;
+        /**
+         * maximum QPS.
+         */
+        qps: number;
+        /**
+         * recommended usage scenarios.
+         */
+        suitInfo: string;
     }
 
     export interface GetShardsList {
@@ -10958,6 +21850,138 @@ export namespace Dcdb {
         zone: string;
     }
 
+    export interface GetSlowLogsData {
+        /**
+         * Statement checksum for querying details.
+         */
+        checkSum: string;
+        /**
+         * Specific name of the database to be queried.
+         */
+        db: string;
+        /**
+         * Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        exampleSql: string;
+        /**
+         * Abstracted SQL statement.
+         */
+        fingerPrint: string;
+        /**
+         * Host address of account.
+         */
+        host: string;
+        /**
+         * Average lock time.
+         */
+        lockTimeAvg: string;
+        /**
+         * Maximum lock time.
+         */
+        lockTimeMax: string;
+        /**
+         * Minimum lock time.
+         */
+        lockTimeMin: string;
+        /**
+         * Total statement lock time.
+         */
+        lockTimeSum: string;
+        /**
+         * Total number of statement queries.
+         */
+        queryCount: string;
+        /**
+         * Average query time.
+         */
+        queryTimeAvg: string;
+        /**
+         * Maximum query time.
+         */
+        queryTimeMax: string;
+        /**
+         * Minimum query time.
+         */
+        queryTimeMin: string;
+        /**
+         * Total statement query time.
+         */
+        queryTimeSum: string;
+        /**
+         * Number of scanned rows.
+         */
+        rowsExaminedSum: string;
+        /**
+         * Number of sent rows.
+         */
+        rowsSentSum: string;
+        /**
+         * Last execution time.
+         */
+        tsMax: string;
+        /**
+         * First execution time.
+         */
+        tsMin: string;
+        /**
+         * Account.
+         */
+        user: string;
+    }
+
+    export interface GetUpgradePriceAddShardConfig {
+        /**
+         * The number of new shards.
+         */
+        shardCount: number;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+    }
+
+    export interface GetUpgradePriceExpandShardConfig {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: string[];
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard node count.
+         */
+        shardNodeCount?: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+    }
+
+    export interface GetUpgradePriceSplitShardConfig {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: string[];
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+        /**
+         * Data split ratio, fixed at 50%.
+         */
+        splitRate: number;
+    }
+
     export interface HourdbInstanceResourceTag {
         /**
          * tag key.
@@ -10968,10 +21992,53 @@ export namespace Dcdb {
          */
         tagValue: string;
     }
-
 }
 
 export namespace Dcx {
+    export interface ExtraConfigBfdInfo {
+        /**
+         * detect interval.
+         */
+        interval?: number;
+        /**
+         * detect times.
+         */
+        probeFailedTimes?: number;
+    }
+
+    export interface ExtraConfigBgpPeer {
+        /**
+         * user idc BGP Asn.
+         */
+        asn?: number;
+        /**
+         * user bgp key.
+         */
+        authKey?: string;
+    }
+
+    export interface ExtraConfigNqaInfo {
+        /**
+         * detect ip.
+         */
+        destinationIp?: string;
+        /**
+         * detect interval.
+         */
+        interval?: number;
+        /**
+         * detect times.
+         */
+        probeFailedTimes?: number;
+    }
+
+    export interface ExtraConfigRouteFilterPrefixes {
+        /**
+         * user network prefixes.
+         */
+        cidr?: string;
+    }
+
     export interface GetInstancesInstanceList {
         /**
          * Bandwidth of the DC.
@@ -11456,6 +22523,33 @@ export namespace Dts {
 
     export interface GetCompareTasksListConfigObjectItemView {
         viewName?: string;
+    }
+
+    export interface GetMigrateDbInstancesInstance {
+        /**
+         * The reason of can&#39;t used in migration.
+         */
+        hint: string;
+        /**
+         * Database instance id.
+         */
+        instanceId: string;
+        /**
+         * Database instance name.
+         */
+        instanceName: string;
+        /**
+         * Can used in migration, 1-yes, 0-no.
+         */
+        usable: number;
+        /**
+         * Instance vip.
+         */
+        vip: string;
+        /**
+         * Instance port.
+         */
+        vport: number;
     }
 
     export interface GetMigrateJobsList {
@@ -12949,6 +24043,392 @@ export namespace Dts {
         tagValue?: string;
     }
 
+    export interface SyncConfigDstInfo {
+        /**
+         * The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        account?: string;
+        /**
+         * The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountMode?: string;
+        /**
+         * The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountRole?: string;
+        /**
+         * Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ccnId?: string;
+        /**
+         * CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cvmInstanceId?: string;
+        /**
+         * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbKernel?: string;
+        /**
+         * Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: string;
+        /**
+         * Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        encryptConn?: string;
+        /**
+         * Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        engineVersion?: string;
+        /**
+         * Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        instanceId?: string;
+        /**
+         * The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ip?: string;
+        /**
+         * Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        password: string;
+        /**
+         * Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        port?: number;
+        /**
+         * The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        region?: string;
+        /**
+         * The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        role?: string;
+        /**
+         * External role id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        roleExternalId?: string;
+        /**
+         * The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId?: string;
+        /**
+         * Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        supplier?: string;
+        /**
+         * Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretId?: string;
+        /**
+         * Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretKey?: string;
+        /**
+         * Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpToken?: string;
+        /**
+         * Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqDcgId?: string;
+        /**
+         * VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqVpnGwId?: string;
+        /**
+         * Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        user?: string;
+        /**
+         * Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId?: string;
+    }
+
+    export interface SyncConfigObjects {
+        /**
+         * For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        advancedObjects: string[];
+        /**
+         * Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databases: outputs.Dts.SyncConfigObjectsDatabase[];
+        /**
+         * Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        mode?: string;
+        /**
+         * OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        onlineDdl: outputs.Dts.SyncConfigObjectsOnlineDdl;
+    }
+
+    export interface SyncConfigObjectsDatabase {
+        /**
+         * DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbMode?: string;
+        /**
+         * The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: string;
+        /**
+         * Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        eventMode?: string;
+        /**
+         * When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        events: string[];
+        /**
+         * Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functionMode?: string;
+        /**
+         * Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functions: string[];
+        /**
+         * The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newDbName?: string;
+        /**
+         * Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newSchemaName?: string;
+        /**
+         * Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedureMode?: string;
+        /**
+         * Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedures: string[];
+        /**
+         * Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName?: string;
+        /**
+         * Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableMode?: string;
+        /**
+         * A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tables?: outputs.Dts.SyncConfigObjectsDatabaseTable[];
+        /**
+         * Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggerMode?: string;
+        /**
+         * When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggers: string[];
+        /**
+         * View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewMode?: string;
+        /**
+         * View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        views?: outputs.Dts.SyncConfigObjectsDatabaseView[];
+    }
+
+    export interface SyncConfigObjectsDatabaseTable {
+        /**
+         * Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        filterCondition?: string;
+        /**
+         * New table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newTableName?: string;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName?: string;
+    }
+
+    export interface SyncConfigObjectsDatabaseView {
+        /**
+         * New view name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newViewName?: string;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName?: string;
+    }
+
+    export interface SyncConfigObjectsOnlineDdl {
+        /**
+         * status.
+         */
+        status?: string;
+    }
+
+    export interface SyncConfigOptions {
+        /**
+         * Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        addAdditionalColumn: boolean;
+        /**
+         * Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleOption?: outputs.Dts.SyncConfigOptionsConflictHandleOption;
+        /**
+         * Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleType: string;
+        /**
+         * DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlOptions?: outputs.Dts.SyncConfigOptionsDdlOption[];
+        /**
+         * The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dealOfExistSameTable: string;
+        /**
+         * Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        initType: string;
+        /**
+         * DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        opTypes?: string[];
+    }
+
+    export interface SyncConfigOptionsConflictHandleOption {
+        /**
+         * Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionColumn?: string;
+        /**
+         * Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOperator?: string;
+        /**
+         * Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOrderInSrcAndDst?: string;
+    }
+
+    export interface SyncConfigOptionsDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: string;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: string[];
+    }
+
+    export interface SyncConfigSrcInfo {
+        /**
+         * The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        account?: string;
+        /**
+         * The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountMode?: string;
+        /**
+         * The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountRole?: string;
+        /**
+         * Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ccnId?: string;
+        /**
+         * CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cvmInstanceId?: string;
+        /**
+         * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbKernel?: string;
+        /**
+         * Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: string;
+        /**
+         * Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        encryptConn?: string;
+        /**
+         * Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        engineVersion?: string;
+        /**
+         * Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        instanceId?: string;
+        /**
+         * The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ip?: string;
+        /**
+         * Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        password: string;
+        /**
+         * Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        port?: number;
+        /**
+         * The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        region?: string;
+        /**
+         * The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        role?: string;
+        /**
+         * External role id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        roleExternalId?: string;
+        /**
+         * The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId?: string;
+        /**
+         * Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        supplier?: string;
+        /**
+         * Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretId?: string;
+        /**
+         * Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretKey?: string;
+        /**
+         * Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpToken?: string;
+        /**
+         * Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqDcgId?: string;
+        /**
+         * VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqVpnGwId?: string;
+        /**
+         * Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        user?: string;
+        /**
+         * Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId?: string;
+    }
+
     export interface SyncJobTag {
         /**
          * tag key.
@@ -12958,6 +24438,23 @@ export namespace Dts {
          * tag value.
          */
         tagValue?: string;
+    }
+}
+
+export namespace Eip {
+    export interface GetAddressQuotaQuotaSet {
+        /**
+         * Current count.
+         */
+        quotaCurrent: number;
+        /**
+         * Quota name: TOTAL_EIP_QUOTA,DAILY_EIP_APPLY,DAILY_PUBLIC_IP_ASSIGN.
+         */
+        quotaId: string;
+        /**
+         * quota count.
+         */
+        quotaLimit: number;
     }
 
 }
@@ -13146,7 +24643,7 @@ export namespace Elasticsearch {
          */
         diskSize?: number;
         /**
-         * Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+         * Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
          */
         diskType?: string;
         /**
@@ -15375,6 +26872,17 @@ export namespace Kubernetes {
         lanIp: string;
     }
 
+    export interface EncryptionProtectionKmsConfiguration {
+        /**
+         * kms id.
+         */
+        keyId?: string;
+        /**
+         * kms region.
+         */
+        kmsRegion?: string;
+    }
+
     export interface GetAvailableClusterVersionsCluster {
         /**
          * Cluster Id.
@@ -15399,6 +26907,40 @@ export namespace Kubernetes {
          * Name of chart.
          */
         name: string;
+    }
+
+    export interface GetClusterAuthenticationOptionsOidcConfig {
+        /**
+         * Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+         */
+        autoCreateClientIds: string[];
+        /**
+         * Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+         */
+        autoCreateOidcConfig: boolean;
+        /**
+         * Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+         */
+        autoInstallPodIdentityWebhookAddon: boolean;
+    }
+
+    export interface GetClusterAuthenticationOptionsServiceAccount {
+        /**
+         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        autoCreateDiscoveryAnonymousAuth: boolean;
+        /**
+         * service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        issuer: string;
+        /**
+         * service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        jwksUri: string;
+        /**
+         * Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+         */
+        useTkeDefault: boolean;
     }
 
     export interface GetClusterCommonNamesList {
@@ -16104,6 +27646,36 @@ export namespace Kubernetes {
 }
 
 export namespace Lighthouse {
+    export interface DiskAutoMountConfiguration {
+        /**
+         * The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+         */
+        fileSystemType?: string;
+        /**
+         * Instance ID to be mounted. The specified instance must be in the Running state.
+         */
+        instanceId: string;
+        /**
+         * The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+         */
+        mountPoint?: string;
+    }
+
+    export interface DiskDiskChargePrepaid {
+        /**
+         * new purchase cycle.
+         */
+        period: number;
+        /**
+         * Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+         */
+        renewFlag?: string;
+        /**
+         * newly purchased unit. Default: m.
+         */
+        timeUnit?: string;
+    }
+
     export interface FirewallRuleFirewallRule {
         /**
          * Valid values are ACCEPT, DROP. Default value is ACCEPT.
@@ -16125,6 +27697,21 @@ export namespace Lighthouse {
          * Protocol. Valid values are TCP, UDP, ICMP, ALL.
          */
         protocol: string;
+    }
+
+    export interface GetAllSceneSceneSet {
+        /**
+         * Use scene description.
+         */
+        description: string;
+        /**
+         * Use the scene presentation name.
+         */
+        displayName: string;
+        /**
+         * Use scene Id.
+         */
+        sceneId: string;
     }
 
     export interface GetBundleBundleSet {
@@ -16227,6 +27814,138 @@ export namespace Lighthouse {
         values: string[];
     }
 
+    export interface GetDiskConfigDiskConfigSet {
+        /**
+         * Cloud disk sale status.
+         */
+        diskSalesState: string;
+        /**
+         * Cloud disk increment.
+         */
+        diskStepSize: number;
+        /**
+         * Cloud disk type.
+         */
+        diskType: string;
+        /**
+         * Maximum cloud disk size.
+         */
+        maxDiskSize: number;
+        /**
+         * Minimum cloud disk size.
+         */
+        minDiskSize: number;
+        /**
+         * Availability zone.
+         */
+        zone: string;
+    }
+
+    export interface GetDiskConfigFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
+    export interface GetDisksDiskList {
+        /**
+         * Disk attach state.
+         */
+        attached: boolean;
+        /**
+         * Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+         */
+        createdTime: string;
+        /**
+         * Whether to release with the instance.
+         */
+        deleteWithInstance: boolean;
+        /**
+         * Number of existing backup points of cloud disk.
+         */
+        diskBackupCount: number;
+        /**
+         * Number of backup points quota for cloud disk.
+         */
+        diskBackupQuota: number;
+        /**
+         * Disk charge type.
+         */
+        diskChargeType: string;
+        /**
+         * Disk id.
+         */
+        diskId: string;
+        /**
+         * Disk name.
+         */
+        diskName: string;
+        /**
+         * Disk size.
+         */
+        diskSize: number;
+        /**
+         * Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+         */
+        diskState: string;
+        /**
+         * Disk type.
+         */
+        diskType: string;
+        /**
+         * Disk usage.
+         */
+        diskUsage: string;
+        /**
+         * Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+         */
+        expiredTime: string;
+        /**
+         * Instance id.
+         */
+        instanceId: string;
+        /**
+         * Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+         */
+        isolatedTime: string;
+        /**
+         * Latest operation.
+         */
+        latestOperation: string;
+        /**
+         * Latest operation request id.
+         */
+        latestOperationRequestId: string;
+        /**
+         * Latest operation state.
+         */
+        latestOperationState: string;
+        /**
+         * Renew flag.
+         */
+        renewFlag: string;
+        /**
+         * Availability zone.
+         */
+        zone: string;
+    }
+
+    export interface GetDisksFilter {
+        /**
+         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
+    }
+
     export interface GetFirewallRulesTemplateFirewallRuleSet {
         /**
          * Valid values are (ACCEPT, DROP). Default value is ACCEPT.
@@ -16252,6 +27971,521 @@ export namespace Lighthouse {
          * Protocol. Valid values are TCP, UDP, ICMP, ALL.
          */
         protocol: string;
+    }
+
+    export interface GetInstanceBlueprintBlueprintInstanceSet {
+        /**
+         * Blueprint instance information.
+         */
+        blueprints: outputs.Lighthouse.GetInstanceBlueprintBlueprintInstanceSetBlueprint[];
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Software list.
+         */
+        softwareSets: outputs.Lighthouse.GetInstanceBlueprintBlueprintInstanceSetSoftwareSet[];
+    }
+
+    export interface GetInstanceBlueprintBlueprintInstanceSetBlueprint {
+        /**
+         * Blueprint ID, which is the unique identifier of Blueprint.
+         */
+        blueprintId: string;
+        /**
+         * Blueprint name.
+         */
+        blueprintName: string;
+        /**
+         * Blueprint status.
+         */
+        blueprintState: string;
+        /**
+         * Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+         */
+        blueprintType: string;
+        /**
+         * URL of official website of the open-source project.
+         */
+        communityUrl: string;
+        /**
+         * Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+         */
+        createdTime: string;
+        /**
+         * Image description information.
+         */
+        description: string;
+        /**
+         * Blueprint title to be displayed.
+         */
+        displayTitle: string;
+        /**
+         * Blueprint version to be displayed.
+         */
+        displayVersion: string;
+        /**
+         * Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        dockerVersion: string;
+        /**
+         * Guide documentation URL.
+         */
+        guideUrl: string;
+        /**
+         * ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        imageId: string;
+        /**
+         * Software picture URL.
+         */
+        imageUrl: string;
+        /**
+         * OS name.
+         */
+        osName: string;
+        /**
+         * OS type.
+         */
+        platform: string;
+        /**
+         * OS type, such as LINUX_UNIX and WINDOWS.
+         */
+        platformType: string;
+        /**
+         * Memory size required by blueprint in GB.
+         */
+        requiredMemorySize: number;
+        /**
+         * System disk size required by blueprint in GB.
+         */
+        requiredSystemDiskSize: number;
+        /**
+         * Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        sceneIdSets: string[];
+        /**
+         * Whether the blueprint supports automation tools.
+         */
+        supportAutomationTools: boolean;
+    }
+
+    export interface GetInstanceBlueprintBlueprintInstanceSetSoftwareSet {
+        /**
+         * List of software details.
+         */
+        detailSets: outputs.Lighthouse.GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet[];
+        /**
+         * Software picture URL.
+         */
+        imageUrl: string;
+        /**
+         * Software installation directory.
+         */
+        installDir: string;
+        /**
+         * Software name.
+         */
+        name: string;
+        /**
+         * Software version.
+         */
+        version: string;
+    }
+
+    export interface GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet {
+        /**
+         * Unique detail key.
+         */
+        key: string;
+        /**
+         * Detail title.
+         */
+        title: string;
+        /**
+         * Detail value.
+         */
+        value: string;
+    }
+
+    export interface GetInstanceDiskNumAttachDetailSet {
+        /**
+         * Number of elastic cloud disks mounted to the instance.
+         */
+        attachedDiskCount: number;
+        /**
+         * Instance Id.
+         */
+        instanceId: string;
+        /**
+         * Number of elastic cloud disks that can be mounted.
+         */
+        maxAttachCount: number;
+    }
+
+    export interface GetInstanceTrafficPackageInstanceTrafficPackageSet {
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * List of traffic package details.
+         */
+        trafficPackageSets: outputs.Lighthouse.GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet[];
+    }
+
+    export interface GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet {
+        /**
+         * The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+         */
+        deadline: string;
+        /**
+         * The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+         */
+        endTime: string;
+        /**
+         * The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+         */
+        startTime: string;
+        /**
+         * Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+         */
+        status: string;
+        /**
+         * The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+         */
+        trafficOverflow: number;
+        /**
+         * Traffic packet ID.
+         */
+        trafficPackageId: string;
+        /**
+         * The remaining traffic during the effective period of the traffic packet, in bytes.
+         */
+        trafficPackageRemaining: number;
+        /**
+         * The total traffic in bytes during the effective period of the traffic packet.
+         */
+        trafficPackageTotal: number;
+        /**
+         * Traffic has been used during the effective period of the traffic packet, in bytes.
+         */
+        trafficUsed: number;
+    }
+
+    export interface GetModifyInstanceBundleFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSet {
+        /**
+         * Package information.
+         */
+        bundles: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSetBundle[];
+        /**
+         * Change the status of the package. Value:
+         * - SOLD_OUT: the package is sold out;
+         * - AVAILABLE: support package changes;
+         * - UNAVAILABLE: package changes are not supported for the time being.
+         */
+        modifyBundleState: string;
+        /**
+         * Change the price difference to be made up after the instance package.
+         */
+        modifyPrices: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSetModifyPrice[];
+        /**
+         * Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+         */
+        notSupportModifyMessage: string;
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSetBundle {
+        /**
+         * Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+         */
+        bundleDisplayLabel: string;
+        /**
+         * Package ID.
+         */
+        bundleId: string;
+        /**
+         * Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+         */
+        bundleSalesState: string;
+        /**
+         * Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+         */
+        bundleType: string;
+        /**
+         * Package type description information.
+         */
+        bundleTypeDescription: string;
+        /**
+         * CPU.
+         */
+        cpu: number;
+        /**
+         * Network billing mode.
+         */
+        internetChargeType: string;
+        /**
+         * Peak bandwidth in Mbps.
+         */
+        internetMaxBandwidthOut: number;
+        /**
+         * Memory size in GB.
+         */
+        memory: number;
+        /**
+         * Monthly network traffic in Gb.
+         */
+        monthlyTraffic: number;
+        /**
+         * Current package unit price information.
+         */
+        prices: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSetBundlePrice[];
+        /**
+         * Whether Linux/Unix is supported.
+         */
+        supportLinuxUnixPlatform: boolean;
+        /**
+         * Whether Windows is supported.
+         */
+        supportWindowsPlatform: boolean;
+        /**
+         * System disk size.
+         */
+        systemDiskSize: number;
+        /**
+         * System disk type.
+         */
+        systemDiskType: string;
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSetBundlePrice {
+        /**
+         * Instance price.
+         */
+        instancePrices: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice[];
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice {
+        /**
+         * A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+         */
+        currency: string;
+        /**
+         * Discount.
+         */
+        discount: number;
+        /**
+         * Discounted price.
+         */
+        discountPrice: number;
+        /**
+         * Original unit price of the package.
+         */
+        originalBundlePrice: number;
+        /**
+         * Original price.
+         */
+        originalPrice: number;
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSetModifyPrice {
+        /**
+         * Instance price.
+         */
+        instancePrices: outputs.Lighthouse.GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice[];
+    }
+
+    export interface GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice {
+        /**
+         * A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+         */
+        currency: string;
+        /**
+         * Discount.
+         */
+        discount: number;
+        /**
+         * Discounted price.
+         */
+        discountPrice: number;
+        /**
+         * Original unit price of the package.
+         */
+        originalBundlePrice: number;
+        /**
+         * Original price.
+         */
+        originalPrice: number;
+    }
+
+    export interface GetRegionRegionSet {
+        /**
+         * Whether the region is in the Chinese mainland.
+         */
+        isChinaMainland: boolean;
+        /**
+         * Region name.
+         */
+        region: string;
+        /**
+         * Region description.
+         */
+        regionName: string;
+        /**
+         * Region availability status.
+         */
+        regionState: string;
+    }
+
+    export interface GetResetInstanceBlueprintFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
+    export interface GetResetInstanceBlueprintResetInstanceBlueprintSet {
+        /**
+         * Mirror details.
+         */
+        blueprintInfos: outputs.Lighthouse.GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo[];
+        /**
+         * Whether the instance image can be reset to the target image.
+         */
+        isResettable: boolean;
+        /**
+         * The information cannot be reset. when the mirror can be reset ''.
+         */
+        nonResettableMessage: string;
+    }
+
+    export interface GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo {
+        /**
+         * Image ID, which is the unique identity of Blueprint.
+         */
+        blueprintId: string;
+        /**
+         * Mirror name.
+         */
+        blueprintName: string;
+        /**
+         * Mirror status.
+         */
+        blueprintState: string;
+        /**
+         * Image type, such as APP_OS, PURE_OS, PRIVATE.
+         */
+        blueprintType: string;
+        /**
+         * The official website Url.
+         */
+        communityUrl: string;
+        /**
+         * Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+         */
+        createdTime: string;
+        /**
+         * Mirror description information.
+         */
+        description: string;
+        /**
+         * The mirror image shows the title to the public.
+         */
+        displayTitle: string;
+        /**
+         * The image shows the version to the public.
+         */
+        displayVersion: string;
+        /**
+         * Docker version number.
+         */
+        dockerVersion: string;
+        /**
+         * Guide article Url.
+         */
+        guideUrl: string;
+        /**
+         * CVM image ID after sharing the CVM image to the lightweight application server.
+         */
+        imageId: string;
+        /**
+         * Mirror image URL.
+         */
+        imageUrl: string;
+        /**
+         * Operating system name.
+         */
+        osName: string;
+        /**
+         * Operating system platform.
+         */
+        platform: string;
+        /**
+         * Operating system platform type, such as LINUX_UNIX, WINDOWS.
+         */
+        platformType: string;
+        /**
+         * Memory required for mirroring (in GB).
+         */
+        requiredMemorySize: number;
+        /**
+         * The size of the system disk required for image (in GB).
+         */
+        requiredSystemDiskSize: number;
+        /**
+         * The mirror association uses the scene Id list.
+         */
+        sceneIdSets: string[];
+        /**
+         * Whether the image supports automation helper.
+         */
+        supportAutomationTools: boolean;
+    }
+
+    export interface GetSceneSceneSet {
+        /**
+         * Use scene description.
+         */
+        description: string;
+        /**
+         * Use the scene presentation name.
+         */
+        displayName: string;
+        /**
+         * Use scene Id.
+         */
+        sceneId: string;
+    }
+
+    export interface GetZoneZoneInfoSet {
+        /**
+         * Instance purchase page availability zone display label.
+         */
+        instanceDisplayLabel: string;
+        /**
+         * Availability zone.
+         */
+        zone: string;
+        /**
+         * Chinese name of availability zone.
+         */
+        zoneName: string;
     }
 
     export interface InstanceContainer {
@@ -16333,9 +28567,143 @@ export namespace Lighthouse {
         password?: string;
     }
 
+    export interface RenewDiskRenewDiskChargePrepaid {
+        /**
+         * Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+         */
+        curInstanceDeadline?: string;
+        /**
+         * Renewal period.
+         */
+        period?: number;
+        /**
+         * Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+         */
+        renewFlag?: string;
+        /**
+         * newly purchased unit. Default: m.
+         */
+        timeUnit?: string;
+    }
+
+    export interface RenewInstanceInstanceChargePrepaid {
+        /**
+         * The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+         */
+        period: number;
+        /**
+         * Automatic renewal logo. Values:
+         * - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+         * - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+         * - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+         * Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+         */
+        renewFlag?: string;
+    }
 }
 
 export namespace Mariadb {
+    export interface AccountPrivilegesAccounts {
+        /**
+         * user host.
+         */
+        host: string;
+        /**
+         * user name.
+         */
+        user: string;
+    }
+
+    export interface AccountPrivilegesColumnPrivilege {
+        /**
+         * Column name.
+         */
+        column: string;
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+        /**
+         * Table name.
+         */
+        table: string;
+    }
+
+    export interface AccountPrivilegesDatabasePrivilege {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+    }
+
+    export interface AccountPrivilegesFunctionPrivilege {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Function name.
+         */
+        functionName: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+    }
+
+    export interface AccountPrivilegesProcedurePrivilege {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+        /**
+         * Procedure name.
+         */
+        procedure: string;
+    }
+
+    export interface AccountPrivilegesTablePrivilege {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+        /**
+         * Table name.
+         */
+        table: string;
+    }
+
+    export interface AccountPrivilegesViewPrivilege {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Permission information.
+         */
+        privileges: string[];
+        /**
+         * View name.
+         */
+        view: string;
+    }
+
     export interface GetAccountsList {
         /**
          * creation time.
@@ -16475,6 +28843,384 @@ export namespace Mariadb {
         tagValue: string;
     }
 
+    export interface GetDcnDetailDcnDetail {
+        /**
+         * Number of CPU cores of the instance.
+         */
+        cpu: number;
+        /**
+         * Creation time of the instance in the format of 2006-01-02 15:04:05.
+         */
+        createTime: string;
+        /**
+         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery).
+         */
+        dcnFlag: number;
+        /**
+         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected).
+         */
+        dcnStatus: number;
+        /**
+         * Whether KMS is enabled.
+         */
+        encryptStatus: number;
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Instance name.
+         */
+        instanceName: string;
+        /**
+         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance).
+         */
+        instanceType: number;
+        /**
+         * Instance memory capacity in GB.
+         */
+        memory: number;
+        /**
+         * Billing mode.
+         */
+        payMode: number;
+        /**
+         * Expiration time of the instance in the format of 2006-01-02 15:04:05.
+         */
+        periodEndTime: string;
+        /**
+         * Region where the instance resides.
+         */
+        region: string;
+        /**
+         * Configuration information of DCN replication. This field is null for a primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        replicaConfigs: outputs.Mariadb.GetDcnDetailDcnDetailReplicaConfig[];
+        /**
+         * DCN replication status. This field is null for the primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        replicaStatuses: outputs.Mariadb.GetDcnDetailDcnDetailReplicaStatus[];
+        /**
+         * Instance status.
+         */
+        status: number;
+        /**
+         * Instance status description.
+         */
+        statusDesc: string;
+        /**
+         * Instance storage capacity in GB.
+         */
+        storage: number;
+        /**
+         * Instance IP address.
+         */
+        vip: string;
+        /**
+         * Instance IPv6 address.
+         */
+        vipv6: string;
+        /**
+         * Instance port.
+         */
+        vport: number;
+        /**
+         * Availability zone where the instance resides.
+         */
+        zone: string;
+    }
+
+    export interface GetDcnDetailDcnDetailReplicaConfig {
+        /**
+         * Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        delayReplicationType: string;
+        /**
+         * Specified time for delayed replicationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        dueTime: string;
+        /**
+         * The number of seconds to delay the replicationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        replicationDelay: number;
+        /**
+         * DCN running status. Valid values: `START` (running), `STOP` (pause)Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        roReplicationMode: string;
+    }
+
+    export interface GetDcnDetailDcnDetailReplicaStatus {
+        /**
+         * The current delay, which takes the delay value of the replica instance.
+         */
+        delay: number;
+        /**
+         * Instance status.
+         */
+        status: string;
+    }
+
+    export interface GetInstanceNodeInfoNodesInfo {
+        nodeId: string;
+        role: string;
+    }
+
+    export interface GetInstanceSpecsSpec {
+        /**
+         * machine type.
+         */
+        machine: string;
+        /**
+         * list of machine specifications.
+         */
+        specInfos: outputs.Mariadb.GetInstanceSpecsSpecSpecInfo[];
+    }
+
+    export interface GetInstanceSpecsSpecSpecInfo {
+        /**
+         * CPU cores.
+         */
+        cpu: number;
+        /**
+         * machine type.
+         */
+        machine: string;
+        /**
+         * maximum storage size, in GB.
+         */
+        maxStorage: number;
+        /**
+         * memory, in GB.
+         */
+        memory: number;
+        /**
+         * minimum storage size, in GB.
+         */
+        minStorage: number;
+        /**
+         * node count.
+         */
+        nodeCount: number;
+        /**
+         * product price id.
+         */
+        pid: number;
+        /**
+         * maximum QPS.
+         */
+        qps: number;
+        /**
+         * recommended usage scenarios.
+         */
+        suitInfo: string;
+    }
+
+    export interface GetLogFilesFile {
+        /**
+         * Filename.
+         */
+        fileName: string;
+        /**
+         * File length.
+         */
+        length: number;
+        /**
+         * Last modified time of log.
+         */
+        mtime: number;
+        /**
+         * Uniform resource identifier (URI) used during log download.
+         */
+        uri: string;
+    }
+
+    export interface GetOrdersDeal {
+        /**
+         * Number of items.
+         */
+        count: number;
+        /**
+         * List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
+         */
+        dealName: string;
+        /**
+         * ID of the associated process, which can be used to query the process execution status.
+         */
+        flowId: number;
+        /**
+         * The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        instanceIds: string[];
+        /**
+         * Account.
+         */
+        ownerUin: string;
+        /**
+         * Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+         */
+        payMode: number;
+    }
+
+    export interface GetProjectSecurityGroupsGroup {
+        /**
+         * Creation time in the format of yyyy-mm-dd hh:mm:ss.
+         */
+        createTime: string;
+        /**
+         * Inbound rule.
+         */
+        inbounds: outputs.Mariadb.GetProjectSecurityGroupsGroupInbound[];
+        /**
+         * Outbound rule.
+         */
+        outbounds: outputs.Mariadb.GetProjectSecurityGroupsGroupOutbound[];
+        /**
+         * Project ID.
+         */
+        projectId: number;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Security group name.
+         */
+        securityGroupName: string;
+        /**
+         * Security group remarks.
+         */
+        securityGroupRemark: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupInbound {
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`.
+         */
+        action: string;
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16.
+         */
+        cidrIp: string;
+        /**
+         * Network protocol. UDP and TCP are supported.
+         */
+        ipProtocol: string;
+        /**
+         * Port.
+         */
+        portRange: string;
+    }
+
+    export interface GetProjectSecurityGroupsGroupOutbound {
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`.
+         */
+        action: string;
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16.
+         */
+        cidrIp: string;
+        /**
+         * Network protocol. UDP and TCP are supported.
+         */
+        ipProtocol: string;
+        /**
+         * Port.
+         */
+        portRange: string;
+    }
+
+    export interface GetSaleInfoRegionList {
+        /**
+         * available zone choice.
+         */
+        availableChoices: outputs.Mariadb.GetSaleInfoRegionListAvailableChoice[];
+        /**
+         * region name(en).
+         */
+        region: string;
+        /**
+         * region id.
+         */
+        regionId: number;
+        /**
+         * region name(zh).
+         */
+        regionName: string;
+        /**
+         * list of az zone.
+         */
+        zoneLists: outputs.Mariadb.GetSaleInfoRegionListZoneList[];
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoice {
+        /**
+         * master zone.
+         */
+        masterZones: outputs.Mariadb.GetSaleInfoRegionListAvailableChoiceMasterZone[];
+        /**
+         * slave zones.
+         */
+        slaveZones: outputs.Mariadb.GetSaleInfoRegionListAvailableChoiceSlaveZone[];
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoiceMasterZone {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
+    }
+
+    export interface GetSaleInfoRegionListAvailableChoiceSlaveZone {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
+    }
+
+    export interface GetSaleInfoRegionListZoneList {
+        /**
+         * is zone on sale.
+         */
+        onSale: boolean;
+        /**
+         * zone name(en).
+         */
+        zone: string;
+        /**
+         * zone id.
+         */
+        zoneId: number;
+        /**
+         * zone name(zh).
+         */
+        zoneName: string;
+    }
+
     export interface GetSecurityGroupsList {
         /**
          * Creation time, time format: `yyyy-mm-dd hh:mm:ss`.
@@ -16542,6 +29288,85 @@ export namespace Mariadb {
          * port.
          */
         portRange: string;
+    }
+
+    export interface GetSlowLogsData {
+        /**
+         * Statement checksum for querying details.
+         */
+        checkSum: string;
+        /**
+         * Specific name of the database to be queried.
+         */
+        db: string;
+        /**
+         * Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        exampleSql: string;
+        /**
+         * Abstracted SQL statement.
+         */
+        fingerPrint: string;
+        /**
+         * Host address of account.
+         */
+        host: string;
+        /**
+         * Average lock time.
+         */
+        lockTimeAvg: string;
+        /**
+         * Maximum lock time.
+         */
+        lockTimeMax: string;
+        /**
+         * Minimum lock time.
+         */
+        lockTimeMin: string;
+        /**
+         * Total statement lock time.
+         */
+        lockTimeSum: string;
+        /**
+         * Total number of statement queries.
+         */
+        queryCount: string;
+        /**
+         * Average query time.
+         */
+        queryTimeAvg: string;
+        /**
+         * Maximum query time.
+         */
+        queryTimeMax: string;
+        /**
+         * Minimum query time.
+         */
+        queryTimeMin: string;
+        /**
+         * Total statement query time.
+         */
+        queryTimeSum: string;
+        /**
+         * Number of scanned rows.
+         */
+        rowsExaminedSum: string;
+        /**
+         * Number of sent rows.
+         */
+        rowsSentSum: string;
+        /**
+         * Last execution time.
+         */
+        tsMax: string;
+        /**
+         * First execution time.
+         */
+        tsMin: string;
+        /**
+         * Account.
+         */
+        user: string;
     }
 
     export interface InstanceInitParam {
@@ -20321,6 +33146,17 @@ export namespace Mysql {
         users?: string[];
     }
 
+    export interface BackupDownloadRestrictionLimitVpc {
+        /**
+         * Restrict downloads from regions. Currently only the current region is supported.
+         */
+        region: string;
+        /**
+         * List of vpcs to limit downloads.
+         */
+        vpcLists: string[];
+    }
+
     export interface GetBackupListList {
         /**
          * ID of Backup task.
@@ -20524,6 +33360,17 @@ export namespace Mysql {
         taskStatus: string;
     }
 
+    export interface GetDatabasesDatabaseList {
+        /**
+         * character set type.
+         */
+        characterSet: string;
+        /**
+         * The name of database.
+         */
+        databaseName: string;
+    }
+
     export interface GetDefaultParamsParamList {
         /**
          * Param current value.
@@ -20561,6 +33408,17 @@ export namespace Mysql {
          * Type of param.
          */
         paramType: string;
+    }
+
+    export interface GetErrorLogItem {
+        /**
+         * error details.
+         */
+        content: string;
+        /**
+         * The time the error occurred.
+         */
+        timestamp: number;
     }
 
     export interface GetInstanceInstanceList {
@@ -20678,6 +33536,44 @@ export namespace Mysql {
         zone: string;
     }
 
+    export interface GetInstanceParamRecordItem {
+        /**
+         * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+         */
+        instanceId: string;
+        /**
+         * Whether the parameter is modified successfully.
+         */
+        isSuccess: boolean;
+        /**
+         * Change the time.
+         */
+        modifyTime: string;
+        /**
+         * The modified value of the parameter.
+         */
+        newValue: string;
+        /**
+         * The value of the parameter before modification.
+         */
+        oldValue: string;
+        /**
+         * parameter name.
+         */
+        paramName: string;
+    }
+
+    export interface GetInstanceRebootTimeItem {
+        /**
+         * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
+         */
+        instanceId: string;
+        /**
+         * expected restart time.
+         */
+        timeInSeconds: number;
+    }
+
     export interface GetParameterListParameterList {
         /**
          * Current value.
@@ -20715,6 +33611,262 @@ export namespace Mysql {
          * Parameter type.
          */
         parameterType: string;
+    }
+
+    export interface GetProjectSecurityGroupGroup {
+        /**
+         * Creation time, time format: yyyy-mm-dd hh:mm:sss.
+         */
+        createTime: string;
+        /**
+         * inbound rules.
+         */
+        inbounds: outputs.Mysql.GetProjectSecurityGroupGroupInbound[];
+        /**
+         * outbound rules.
+         */
+        outbounds: outputs.Mysql.GetProjectSecurityGroupGroupOutbound[];
+        /**
+         * project id.
+         */
+        projectId: number;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Security group name.
+         */
+        securityGroupName: string;
+        /**
+         * Security group remark.
+         */
+        securityGroupRemark: string;
+    }
+
+    export interface GetProjectSecurityGroupGroupInbound {
+        /**
+         * Policy, ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * Destination IP or IP segment, such as 172.16.0.0/12.
+         */
+        cidrIp: string;
+        /**
+         * Rule description.
+         */
+        desc: string;
+        /**
+         * The direction defined by the rule, the inbound rule is OUTPUT.
+         */
+        dir: string;
+        /**
+         * Network protocol, support UDP, TCP, etc.
+         */
+        ipProtocol: string;
+        /**
+         * port or port range.
+         */
+        portRange: string;
+    }
+
+    export interface GetProjectSecurityGroupGroupOutbound {
+        /**
+         * Policy, ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * Destination IP or IP segment, such as 172.16.0.0/12.
+         */
+        cidrIp: string;
+        /**
+         * Rule description.
+         */
+        desc: string;
+        /**
+         * The direction defined by the rule, the inbound rule is OUTPUT.
+         */
+        dir: string;
+        /**
+         * Network protocol, support UDP, TCP, etc.
+         */
+        ipProtocol: string;
+        /**
+         * port or port range.
+         */
+        portRange: string;
+    }
+
+    export interface GetProxyCustomCustomConf {
+        cpu: number;
+        device: string;
+        deviceType: string;
+        memory: number;
+        type: string;
+    }
+
+    export interface GetProxyCustomWeightRule {
+        lessThan: number;
+        weight: number;
+    }
+
+    export interface GetRollbackRangeTimeItem {
+        /**
+         * Query database error code.
+         */
+        code: number;
+        /**
+         * A list of instance IDs. The format of a single instance ID is: cdb-c1nl9rpv. Same as the instance ID displayed in the cloud database console page.
+         */
+        instanceId: string;
+        /**
+         * Query database error information.
+         */
+        message: string;
+        /**
+         * Retrievable time range.
+         */
+        times: outputs.Mysql.GetRollbackRangeTimeItemTime[];
+    }
+
+    export interface GetRollbackRangeTimeItemTime {
+        /**
+         * Instance rollback start time, time format: 2016-10-29 01:06:04.
+         */
+        begin: string;
+        /**
+         * End time of instance rollback, time format: 2016-11-02 11:44:47.
+         */
+        end: string;
+    }
+
+    export interface GetSlowLogDataItem {
+        /**
+         * database name.
+         */
+        database: string;
+        /**
+         * Lock duration (seconds).
+         */
+        lockTime: number;
+        /**
+         * The md5 of the Sql statement.
+         */
+        md5: string;
+        /**
+         * Sql execution time (seconds).
+         */
+        queryTime: number;
+        /**
+         * The number of rows to scan.
+         */
+        rowsExamined: number;
+        /**
+         * The number of rows in the result set.
+         */
+        rowsSent: number;
+        /**
+         * Sql template.
+         */
+        sqlTemplate: string;
+        /**
+         * Sql statement.
+         */
+        sqlText: string;
+        /**
+         * Sql execution time.
+         */
+        timestamp: number;
+        /**
+         * client address.
+         */
+        userHost: string;
+        /**
+         * user name.
+         */
+        userName: string;
+    }
+
+    export interface GetSlowLogItem {
+        /**
+         * Backup snapshot time, time format: 2016-03-17 02:10:37.
+         */
+        date: string;
+        /**
+         * External network download address.
+         */
+        internetUrl: string;
+        /**
+         * Intranet download address.
+         */
+        intranetUrl: string;
+        /**
+         * backup file name.
+         */
+        name: string;
+        /**
+         * Backup file size, unit: Byte.
+         */
+        size: number;
+        /**
+         * Log specific type, possible values: slowlog - slow log.
+         */
+        type: string;
+    }
+
+    export interface GetSwitchRecordItem {
+        /**
+         * Switching time, the format is: 2017-09-03 01:34:31.
+         */
+        switchTime: string;
+        /**
+         * Switch type, possible return values: TRANSFER - data migration; MASTER2SLAVE - master-standby switch; RECOVERY - master-slave recovery.
+         */
+        switchType: string;
+    }
+
+    export interface GetUserTaskItem {
+        /**
+         * Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
+         */
+        asyncRequestId: string;
+        /**
+         * error code.
+         */
+        code: number;
+        /**
+         * Instance task end time.
+         */
+        endTime: string;
+        /**
+         * The instance ID associated with the task. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        instanceIds: string[];
+        /**
+         * Instance task ID.
+         */
+        jobId: number;
+        /**
+         * error message.
+         */
+        message: string;
+        /**
+         * Instance task progress.
+         */
+        progress: number;
+        /**
+         * Instance task start time.
+         */
+        startTime: string;
+        /**
+         * Task status. If no value is passed, all task statuses will be queried. Supported values include: `UNDEFINED` - undefined; `INITIAL` - initialization; `RUNNING` - running; `SUCCEED` - the execution was successful; `FAILED` - execution failed; `KILLED` - terminated; `REMOVED` - removed; `PAUSED` - Paused.
+         */
+        taskStatus: string;
+        /**
+         * Instance task type, possible values include:ROLLBACK - database rollback;SQL OPERATION - SQL operation;IMPORT DATA - data import;MODIFY PARAM - parameter setting;INITIAL - initialize the cloud database instance;REBOOT - restarts the cloud database instance;OPEN GTID - open the cloud database instance GTID;UPGRADE RO - read-only instance upgrade;BATCH ROLLBACK - database batch rollback;UPGRADE MASTER - master upgrade;DROP TABLES - delete cloud database tables;SWITCH DR TO MASTER - The disaster recovery instance.
+         */
+        taskType: string;
     }
 
     export interface GetZoneConfigList {
@@ -20800,9 +33952,20 @@ export namespace Mysql {
          */
         currentValue: string;
         /**
-         * The name of parameter template.
+         * The name of parameter.
          */
         name: string;
+    }
+
+    export interface PasswordComplexityParamList {
+        /**
+         * Parameter value.
+         */
+        currentValue?: string;
+        /**
+         * Parameter name.
+         */
+        name?: string;
     }
 
     export interface PrivilegeColumn {
@@ -20849,9 +34012,126 @@ export namespace Mysql {
          */
         tableName: string;
     }
+
+    export interface ProxyProxyNodeCustom {
+        /**
+         * Number of CPU cores.
+         */
+        cpu: number;
+        /**
+         * Memory size.
+         */
+        mem: number;
+        /**
+         * Number of nodes.
+         */
+        nodeCount: number;
+        /**
+         * Region.
+         */
+        region: string;
+        /**
+         * Zone.
+         */
+        zone: string;
+    }
+
+    export interface RoGroupRoGroupInfo {
+        /**
+         * The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+         */
+        minRoInGroup?: number;
+        /**
+         * Delayed replication time.
+         */
+        replicationDelayTime?: number;
+        /**
+         * RO group name.
+         */
+        roGroupName?: string;
+        /**
+         * RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+         */
+        roMaxDelayTime?: number;
+        /**
+         * Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+         */
+        roOfflineDelay?: number;
+        /**
+         * weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+         */
+        weightMode?: string;
+    }
+
+    export interface RoGroupRoWeightValue {
+        /**
+         * RO instance ID.
+         */
+        instanceId: string;
+        /**
+         * Weights. The value range is [0, 100].
+         */
+        weight: number;
+    }
+
+    export interface RollbackDatabase {
+        /**
+         * The original database name before rollback.
+         */
+        databaseName: string;
+        /**
+         * The new database name after rollback.
+         */
+        newDatabaseName: string;
+    }
+
+    export interface RollbackTable {
+        /**
+         * Database name.
+         */
+        database: string;
+        /**
+         * Database table details.
+         */
+        tables: outputs.Mysql.RollbackTableTable[];
+    }
+
+    export interface RollbackTableTable {
+        /**
+         * New database table name after rollback.
+         */
+        newTableName: string;
+        /**
+         * The original database table name before rollback.
+         */
+        tableName: string;
+    }
 }
 
 export namespace Nat {
+    export interface GetDcRouteNatDirectConnectGatewayRouteSet {
+        /**
+         * Create time of route.
+         */
+        createTime: string;
+        /**
+         * IPv4 CIDR of subnet.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Id of next-hop gateway.
+         */
+        gatewayId: string;
+        /**
+         * Type of next-hop gateway, valid values: DIRECTCONNECT.
+         */
+        gatewayType: string;
+        /**
+         * Update time of route.
+         */
+        updateTime: string;
+    }
+
     export interface GetGatewaySnatsSnatList {
         /**
          * Create time.
@@ -20976,6 +34256,286 @@ export namespace Placement {
 }
 
 export namespace Postgresql {
+    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        ipRestrictionEffect?: string;
+        /**
+         * Whether it is allowed to download IP list of the backup files.
+         */
+        ipSets?: string[];
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         */
+        restrictionType?: string;
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         */
+        vpcIdSets?: string[];
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        vpcRestrictionEffect?: string;
+    }
+
+    export interface GetBaseBackupsBaseBackupSet {
+        /**
+         * Backup method, including physical and logical.
+         */
+        backupMethod: string;
+        /**
+         * Backup mode, including automatic and manual.
+         */
+        backupMode: string;
+        /**
+         * Instance ID.
+         */
+        dbInstanceId: string;
+        /**
+         * Backup expiration time.
+         */
+        expireTime: string;
+        /**
+         * Backup end time.
+         */
+        finishTime: string;
+        /**
+         * Unique ID of a backup file.
+         */
+        id: string;
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Backup set size in bytes.
+         */
+        size: number;
+        /**
+         * Backup start time.
+         */
+        startTime: string;
+        /**
+         * Backup task status.
+         */
+        state: string;
+    }
+
+    export interface GetBaseBackupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
+    }
+
+    export interface GetDbInstanceClassesClassInfoSet {
+        /**
+         * Number of CPU cores.
+         */
+        cpu: number;
+        /**
+         * Maximum storage capacity in GB supported by this specification.
+         */
+        maxStorage: number;
+        /**
+         * Memory size in MB.
+         */
+        memory: number;
+        /**
+         * Minimum storage capacity in GB supported by this specification.
+         */
+        minStorage: number;
+        /**
+         * Estimated QPS for this specification.
+         */
+        qps: number;
+        /**
+         * Specification ID.
+         */
+        specCode: string;
+    }
+
+    export interface GetDbInstanceVersionsVersionSet {
+        /**
+         * List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+         */
+        availableUpgradeTargets: string[];
+        /**
+         * Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssqlCompatible` (MSSQL compatible-TencentDB for PostgreSQL).
+         */
+        dbEngine: string;
+        /**
+         * Database kernel version, such as v12.4_r1.3.
+         */
+        dbKernelVersion: string;
+        /**
+         * Database major version, such as 12.
+         */
+        dbMajorVersion: string;
+        /**
+         * Database version, such as 12.4.
+         */
+        dbVersion: string;
+        /**
+         * Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+         */
+        status: string;
+        /**
+         * List of features supported by the database kernel, such as:TDE: Supports data encryption.
+         */
+        supportedFeatureNames: string[];
+    }
+
+    export interface GetDefaultParametersParamInfoSet {
+        /**
+         * Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        advanced: boolean;
+        /**
+         * Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        classificationCn: string;
+        /**
+         * Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        classificationEn: string;
+        /**
+         * Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        currentValue: string;
+        /**
+         * Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        defaultValue: string;
+        /**
+         * Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        enumValues: string[];
+        /**
+         * Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        id: number;
+        /**
+         * The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        lastModifyTime: string;
+        /**
+         * The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        max: number;
+        /**
+         * The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        min: number;
+        /**
+         * Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        name: string;
+        /**
+         * Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        needReboot: boolean;
+        /**
+         * Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        paramDescriptionCh: string;
+        /**
+         * Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        paramDescriptionEn: string;
+        /**
+         * Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutilEnum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutilEnum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        paramValueType: string;
+        /**
+         * Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        specRelated: boolean;
+        /**
+         * Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        specRelationSets: outputs.Postgresql.GetDefaultParametersParamInfoSetSpecRelationSet[];
+        /**
+         * Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        standbyRelated: number;
+        /**
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        unit: string;
+        /**
+         * Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        versionRelationSets: outputs.Postgresql.GetDefaultParametersParamInfoSetVersionRelationSet[];
+    }
+
+    export interface GetDefaultParametersParamInfoSetSpecRelationSet {
+        /**
+         * Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        enumValues: string[];
+        /**
+         * The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        max: number;
+        /**
+         * The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        memory: string;
+        /**
+         * The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        min: number;
+        /**
+         * Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        name: string;
+        /**
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        unit: string;
+        /**
+         * Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        value: string;
+    }
+
+    export interface GetDefaultParametersParamInfoSetVersionRelationSet {
+        /**
+         * The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        dbKernelVersion: string;
+        /**
+         * Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        enumValues: string[];
+        /**
+         * The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        max: number;
+        /**
+         * The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        min: number;
+        /**
+         * Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        name: string;
+        /**
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        unit: string;
+        /**
+         * Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        value: string;
+    }
+
     export interface GetInstancesInstanceList {
         /**
          * Auto renew flag.
@@ -21059,6 +34619,60 @@ export namespace Postgresql {
         vpcId: string;
     }
 
+    export interface GetLogBackupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
+    }
+
+    export interface GetLogBackupsLogBackupSet {
+        /**
+         * Backup method, including physical and logical.
+         */
+        backupMethod: string;
+        /**
+         * Backup mode, including automatic and manual.
+         */
+        backupMode: string;
+        /**
+         * Instance ID.
+         */
+        dbInstanceId: string;
+        /**
+         * Backup expiration time.
+         */
+        expireTime: string;
+        /**
+         * Backup end time.
+         */
+        finishTime: string;
+        /**
+         * Unique ID of a backup file.
+         */
+        id: string;
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Backup set size in bytes.
+         */
+        size: number;
+        /**
+         * Backup start time.
+         */
+        startTime: string;
+        /**
+         * Backup task status.
+         */
+        state: string;
+    }
+
     export interface GetParameterTemplatesFilter {
         /**
          * Filter name.
@@ -21091,6 +34705,436 @@ export namespace Postgresql {
          * parameter template name.
          */
         templateName: string;
+    }
+
+    export interface GetReadonlyGroupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupList {
+        /**
+         * instance network connection information.
+         */
+        dbInstanceNetInfos: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo[];
+        /**
+         * Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        masterDbInstanceId: string;
+        /**
+         * delay time size threshold.
+         */
+        maxReplayLag: number;
+        /**
+         * delay space size threshold.
+         */
+        maxReplayLatency: number;
+        /**
+         * Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        minDelayEliminateReserve: number;
+        /**
+         * Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        networkAccessLists: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListNetworkAccessList[];
+        /**
+         * project ID.
+         */
+        projectId: number;
+        /**
+         * instance details.
+         */
+        readOnlyDbInstanceLists: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList[];
+        /**
+         * read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        readOnlyGroupId: string;
+        /**
+         * read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        readOnlyGroupName: string;
+        /**
+         * automatic load balancing switch.
+         */
+        rebalance: number;
+        /**
+         * region id.
+         */
+        region: string;
+        /**
+         * delay time switch.
+         */
+        replayLagEliminate: number;
+        /**
+         * delay size switch.
+         */
+        replayLatencyEliminate: number;
+        /**
+         * state.
+         */
+        status: string;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+        /**
+         * region id.
+         */
+        zone: string;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo {
+        /**
+         * DNS domain name.
+         */
+        address: string;
+        /**
+         * IP address.
+         */
+        ip: string;
+        /**
+         * network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+         */
+        netType: string;
+        /**
+         * connection port address.
+         */
+        port: number;
+        /**
+         * The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        protocolType: string;
+        /**
+         * state.
+         */
+        status: string;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListNetworkAccessList {
+        /**
+         * Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        resourceId: string;
+        /**
+         * Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        resourceType: number;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vip: string;
+        /**
+         * IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vip6: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+        /**
+         * Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcStatus: number;
+        /**
+         * access portNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vport: number;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList {
+        /**
+         * user&#39;s AppId.
+         */
+        appId: number;
+        /**
+         * auto-renew, 1: auto-renew, 0: no auto-renew.
+         */
+        autoRenew: number;
+        /**
+         * instance creation time.
+         */
+        createTime: string;
+        /**
+         * instance DB character set.
+         */
+        dbCharset: string;
+        /**
+         * Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssqlCompatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbEngine: string;
+        /**
+         * Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbEngineConfig: string;
+        /**
+         * sales specification ID.
+         */
+        dbInstanceClass: string;
+        /**
+         * the number of CPUs allocated by the instance.
+         */
+        dbInstanceCpu: number;
+        /**
+         * instance ID.
+         */
+        dbInstanceId: string;
+        /**
+         * the memory size allocated by the instance, unit: GB.
+         */
+        dbInstanceMemory: number;
+        /**
+         * instance name.
+         */
+        dbInstanceName: string;
+        /**
+         * instance network connection information.
+         */
+        dbInstanceNetInfos: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo[];
+        /**
+         * Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+         */
+        dbInstanceStatus: string;
+        /**
+         * the size of the storage space allocated by the instance, unit: GB.
+         */
+        dbInstanceStorage: number;
+        /**
+         * instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+         */
+        dbInstanceType: string;
+        /**
+         * instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+         */
+        dbInstanceVersion: string;
+        /**
+         * Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbKernelVersion: string;
+        /**
+         * PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbMajorVersion: string;
+        /**
+         * Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbNodeSets: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet[];
+        /**
+         * PostgreSQL version.
+         */
+        dbVersion: string;
+        /**
+         * instance expiration time.
+         */
+        expireTime: string;
+        /**
+         * Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        isSupportTDE: number;
+        /**
+         * instance isolation time.
+         */
+        isolatedTime: string;
+        /**
+         * Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        masterDbInstanceId: string;
+        /**
+         * Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        networkAccessLists: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList[];
+        /**
+         * offline timeNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        offlineTime: string;
+        /**
+         * billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+         */
+        payType: string;
+        /**
+         * project ID.
+         */
+        projectId: number;
+        /**
+         * Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        readOnlyInstanceNum: number;
+        /**
+         * region id.
+         */
+        region: string;
+        /**
+         * Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        statusInReadonlyGroup: string;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * Whether the instance supports Ipv6, 1: support, 0: not support.
+         */
+        supportIpv6: number;
+        /**
+         * Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        tagLists: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList[];
+        /**
+         * machine type.
+         */
+        type: string;
+        /**
+         * Uid of the instance.
+         */
+        uid: number;
+        /**
+         * The time when the instance performed the last update.
+         */
+        updateTime: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+        /**
+         * region id.
+         */
+        zone: string;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo {
+        /**
+         * DNS domain name.
+         */
+        address: string;
+        /**
+         * IP address.
+         */
+        ip: string;
+        /**
+         * network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+         */
+        netType: string;
+        /**
+         * connection port address.
+         */
+        port: number;
+        /**
+         * The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        protocolType: string;
+        /**
+         * state.
+         */
+        status: string;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet {
+        /**
+         * Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+         */
+        role: string;
+        /**
+         * region id.
+         */
+        zone: string;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList {
+        /**
+         * Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        resourceId: string;
+        /**
+         * Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        resourceType: number;
+        /**
+         * subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vip: string;
+        /**
+         * IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vip6: string;
+        /**
+         * virtual network id.
+         */
+        vpcId: string;
+        /**
+         * Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcStatus: number;
+        /**
+         * access portNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vport: number;
+    }
+
+    export interface GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList {
+        /**
+         * label key.
+         */
+        tagKey: string;
+        /**
+         * tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetRegionsRegionSet {
+        /**
+         * Region abbreviation.
+         */
+        region: string;
+        /**
+         * Region number.
+         */
+        regionId: number;
+        /**
+         * Region name.
+         */
+        regionName: string;
+        /**
+         * Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+         */
+        regionState: string;
+        /**
+         * Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        supportInternational: number;
     }
 
     export interface GetSpecinfosList {
@@ -21153,6 +35197,33 @@ export namespace Postgresql {
          * Xlog start time, format `yyyy-MM-dd hh:mm:ss`, start time cannot before 7 days ago.
          */
         startTime: string;
+    }
+
+    export interface GetZonesZoneSet {
+        /**
+         * AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        standbyZoneSets: string[];
+        /**
+         * AZ abbreviation.
+         */
+        zone: string;
+        /**
+         * AZ number.
+         */
+        zoneId: number;
+        /**
+         * AZ name.
+         */
+        zoneName: string;
+        /**
+         * Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+         */
+        zoneState: string;
+        /**
+         * Whether the AZ supports IPv6 address access.
+         */
+        zoneSupportIpv6: number;
     }
 
     export interface InstanceBackupPlan {
@@ -21237,6 +35308,32 @@ export namespace PrivateDns {
          * VPC ID.
          */
         uniqVpcId: string;
+    }
+
+}
+
+export namespace Projects {
+    export interface GetInstanceProject {
+        /**
+         * Create time.
+         */
+        createTime: string;
+        /**
+         * Uin of Creator.
+         */
+        creatorUin: number;
+        /**
+         * ID of Project.
+         */
+        projectId: number;
+        /**
+         * Description of project.
+         */
+        projectInfo: string;
+        /**
+         * Name of Project.
+         */
+        projectName: string;
     }
 
 }
@@ -21826,6 +35923,17 @@ export namespace Pts {
 }
 
 export namespace Redis {
+    export interface BackupDownloadRestrictionLimitVpc {
+        /**
+         * Customize the region of the VPC to which the backup file is downloaded.
+         */
+        region: string;
+        /**
+         * Customize the list of VPCs to download backup files.
+         */
+        vpcLists: string[];
+    }
+
     export interface GetBackupBackupSet {
         /**
          * Backup ID.
@@ -21917,6 +36025,36 @@ export namespace Redis {
          * Customize the list of VPCs to download backup files.
          */
         vpcLists: string[];
+    }
+
+    export interface GetInstanceNodeInfoProxy {
+        /**
+         * Node ID.
+         */
+        nodeId: string;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
+    }
+
+    export interface GetInstanceNodeInfoRedi {
+        /**
+         * Shard ID.
+         */
+        clusterId: number;
+        /**
+         * Node ID.
+         */
+        nodeId: string;
+        /**
+         * Node role.
+         */
+        nodeRole: string;
+        /**
+         * Zone ID.
+         */
+        zoneId: number;
     }
 
     export interface GetInstanceShardsInstanceShard {
@@ -22261,6 +36399,7 @@ export namespace Redis {
          */
         value: string;
     }
+
 }
 
 export namespace Reserved {
@@ -22571,6 +36710,24 @@ export namespace Scf {
         userId: string;
     }
 
+    export interface FunctionEventInvokeConfigAsyncTriggerConfig {
+        /**
+         * Message retention period.
+         */
+        msgTtl: number;
+        /**
+         * Async retry configuration of function upon user error.
+         */
+        retryConfigs: outputs.Scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig[];
+    }
+
+    export interface FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig {
+        /**
+         * Number of retry attempts.
+         */
+        retryNum: number;
+    }
+
     export interface FunctionImageConfig {
         /**
          * the parameters of command.
@@ -22657,6 +36814,294 @@ export namespace Scf {
          * Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
          */
         type: string;
+    }
+
+    export interface GetAccountInfoAccountLimit {
+        /**
+         * Namespace name.
+         */
+        namespaces: outputs.Scf.GetAccountInfoAccountLimitNamespace[];
+        /**
+         * Number of namespaces.
+         */
+        namespacesCount: number;
+    }
+
+    export interface GetAccountInfoAccountLimitNamespace {
+        /**
+         * Concurrency.
+         */
+        concurrentExecutions: number;
+        /**
+         * Number of functions in namespace.
+         */
+        functionsCount: number;
+        /**
+         * Initialization timeout limit.
+         */
+        initTimeoutLimit: number;
+        /**
+         * Upper limit of message retention time for async retry.
+         */
+        maxMsgTtl: number;
+        /**
+         * Lower limit of message retention time for async retry.
+         */
+        minMsgTtl: number;
+        /**
+         * Namespace name.
+         */
+        namespace: string;
+        /**
+         * Limit of async retry attempt quantity.
+         */
+        retryNumLimit: number;
+        /**
+         * Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        testModelLimit: number;
+        /**
+         * Timeout limit.
+         */
+        timeoutLimit: number;
+        /**
+         * Trigger information.
+         */
+        triggers: outputs.Scf.GetAccountInfoAccountLimitNamespaceTrigger[];
+    }
+
+    export interface GetAccountInfoAccountLimitNamespaceTrigger {
+        /**
+         * Number of API Gateway triggers.
+         */
+        apigw: number;
+        /**
+         * Number of CKafka triggers.
+         */
+        ckafka: number;
+        /**
+         * Number of CLB triggers.
+         */
+        clb: number;
+        /**
+         * Number of CLS triggers.
+         */
+        cls: number;
+        /**
+         * Number of CM triggers.
+         */
+        cm: number;
+        /**
+         * Number of CMQ triggers.
+         */
+        cmq: number;
+        /**
+         * Number of COS triggers.
+         */
+        cos: number;
+        /**
+         * Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        eb: number;
+        /**
+         * Number of MPS triggers.
+         */
+        mps: number;
+        /**
+         * Number of timer triggers.
+         */
+        timer: number;
+        /**
+         * Total number of triggers.
+         */
+        total: number;
+        /**
+         * Number of VOD triggers.
+         */
+        vod: number;
+    }
+
+    export interface GetAccountInfoAccountUsage {
+        /**
+         * Namespace name.
+         */
+        namespaces: outputs.Scf.GetAccountInfoAccountUsageNamespace[];
+        /**
+         * Number of namespaces.
+         */
+        namespacesCount: number;
+        /**
+         * Quota of configured user concurrency memory in the current region.
+         */
+        totalAllocatedConcurrencyMem: number;
+        /**
+         * Upper limit of user concurrency memory in the current region.
+         */
+        totalConcurrencyMem: number;
+        /**
+         * Quota of account concurrency actually configured by user.
+         */
+        userConcurrencyMemLimit: number;
+    }
+
+    export interface GetAccountInfoAccountUsageNamespace {
+        /**
+         * Function array.
+         */
+        functions: string[];
+        /**
+         * Number of functions in namespace.
+         */
+        functionsCount: number;
+        /**
+         * Namespace name.
+         */
+        namespace: string;
+        /**
+         * Quota of configured user concurrency memory in the current region.
+         */
+        totalAllocatedConcurrencyMem: number;
+        /**
+         * Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        totalAllocatedProvisionedMem: number;
+        /**
+         * Upper limit of user concurrency memory in the current region.
+         */
+        totalConcurrencyMem: number;
+    }
+
+    export interface GetAsyncEventManagementEventList {
+        /**
+         * Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+         */
+        endTime: string;
+        /**
+         * Filter (event invocation request ID).
+         */
+        invokeRequestId: string;
+        /**
+         * Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+         */
+        invokeType: string;
+        /**
+         * Filter (function version).
+         */
+        qualifier: string;
+        /**
+         * Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+         */
+        startTime: string;
+        /**
+         * Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+         */
+        status: string;
+    }
+
+    export interface GetAsyncEventStatusResult {
+        /**
+         * ID of the async execution request.
+         */
+        invokeRequestId: string;
+        /**
+         * Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+         */
+        status: string;
+        /**
+         * Request status code.
+         */
+        statusCode: number;
+    }
+
+    export interface GetFunctionAliasesAlias {
+        /**
+         * Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        addTime: string;
+        /**
+         * DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        description: string;
+        /**
+         * If this parameter is provided, only aliases associated with this function version will be returned.
+         */
+        functionVersion: string;
+        /**
+         * Update timeNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        modTime: string;
+        /**
+         * Alias name.
+         */
+        name: string;
+        /**
+         * Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        routingConfigs: outputs.Scf.GetFunctionAliasesAliasRoutingConfig[];
+    }
+
+    export interface GetFunctionAliasesAliasRoutingConfig {
+        /**
+         * Additional version with rule-based routing.
+         */
+        additionVersionMatchs: outputs.Scf.GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch[];
+        /**
+         * Additional version with random weight-based routing.
+         */
+        additionalVersionWeights: outputs.Scf.GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight[];
+    }
+
+    export interface GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch {
+        /**
+         * Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+         */
+        expression: string;
+        /**
+         * Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+         */
+        key: string;
+        /**
+         * Match method. Valid values:range: range matchexact: exact string match.
+         */
+        method: string;
+        /**
+         * Function version name.
+         */
+        version: string;
+    }
+
+    export interface GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight {
+        /**
+         * Function version name.
+         */
+        version: string;
+        /**
+         * Version weight.
+         */
+        weight: number;
+    }
+
+    export interface GetFunctionVersionsVersion {
+        /**
+         * The creation timeNote: This field may return null, indicating that no valid value was found.
+         */
+        addTime: string;
+        /**
+         * Version descriptionNote: This field may return null, indicating that no valid values is found.
+         */
+        description: string;
+        /**
+         * Update timeNote: This field may return null, indicating that no valid value was found.
+         */
+        modTime: string;
+        /**
+         * Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+         */
+        status: string;
+        /**
+         * Function version name.
+         */
+        version: string;
     }
 
     export interface GetFunctionsFunction {
@@ -22817,6 +37262,76 @@ export namespace Scf {
         type: string;
     }
 
+    export interface GetLayerVersionsLayerVersion {
+        /**
+         * Creation time.
+         */
+        addTime: string;
+        /**
+         * Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        compatibleRuntimes: string[];
+        /**
+         * Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        description: string;
+        /**
+         * Layer name.
+         */
+        layerName: string;
+        /**
+         * Version number.
+         */
+        layerVersion: number;
+        /**
+         * License informationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        licenseInfo: string;
+        /**
+         * StampNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        stamp: string;
+        /**
+         * Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+         */
+        status: string;
+    }
+
+    export interface GetLayersLayer {
+        /**
+         * Creation time.
+         */
+        addTime: string;
+        /**
+         * Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        compatibleRuntimes: string[];
+        /**
+         * Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        description: string;
+        /**
+         * Layer name.
+         */
+        layerName: string;
+        /**
+         * Version number.
+         */
+        layerVersion: number;
+        /**
+         * License informationNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        licenseInfo: string;
+        /**
+         * StampNote: This field may return null, indicating that no valid values can be obtained.
+         */
+        stamp: string;
+        /**
+         * Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+         */
+        status: string;
+    }
+
     export interface GetLogsLog {
         /**
          * Function billing time, according to duration up to the last 100ms, unit is ms.
@@ -22891,6 +37406,103 @@ export namespace Scf {
         type: string;
     }
 
+    export interface GetRequestStatusData {
+        /**
+         * Time consumed for the request in ms.
+         */
+        duration: number;
+        /**
+         * Function name.
+         */
+        functionName: string;
+        /**
+         * Time consumed by the request in MB.
+         */
+        memUsage: number;
+        /**
+         * Request ID.
+         */
+        requestId: string;
+        /**
+         * Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+         */
+        retCode: number;
+        /**
+         * Return value after the function is executed.
+         */
+        retMsg: string;
+        /**
+         * Retry Attempts.
+         */
+        retryNum: number;
+        /**
+         * Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+         */
+        startTime: string;
+    }
+
+    export interface GetTriggersFilter {
+        /**
+         * Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+         */
+        name: string;
+        /**
+         * Filter values of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetTriggersTrigger {
+        /**
+         * Trigger creation time.
+         */
+        addTime: string;
+        /**
+         * Whether the trigger is available.
+         */
+        availableStatus: string;
+        /**
+         * Trigger-Function binding status.
+         */
+        bindStatus: string;
+        /**
+         * Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+         */
+        customArgument: string;
+        /**
+         * Whether to enable.
+         */
+        enable: number;
+        /**
+         * Trigger last modified time.
+         */
+        modTime: string;
+        /**
+         * Function version or alias.
+         */
+        qualifier: string;
+        /**
+         * Minimum resource ID of trigger.
+         */
+        resourceId: string;
+        /**
+         * Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+         */
+        triggerAttribute: string;
+        /**
+         * Detailed configuration of trigger.
+         */
+        triggerDesc: string;
+        /**
+         * Trigger name.
+         */
+        triggerName: string;
+        /**
+         * Trigger type.
+         */
+        type: string;
+    }
+
     export interface LayerContent {
         /**
          * Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
@@ -22908,6 +37520,25 @@ export namespace Scf {
          * Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
          */
         zipFile?: string;
+    }
+
+    export interface ProvisionedConcurrencyConfigTriggerAction {
+        /**
+         * The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+         */
+        provisionedType?: string;
+        /**
+         * Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerCronConfig: string;
+        /**
+         * Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerName: string;
+        /**
+         * Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerProvisionedConcurrencyNum: number;
     }
 
 }
@@ -23002,11 +37633,11 @@ export namespace Security {
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
-        port: string;
+        port?: string;
         /**
          * Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
          */
-        protocol: string;
+        protocol?: string;
         /**
          * Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
          */
@@ -23049,11 +37680,11 @@ export namespace Security {
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
-        port: string;
+        port?: string;
         /**
          * Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
          */
-        protocol: string;
+        protocol?: string;
         /**
          * Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
          */
@@ -23085,6 +37716,50 @@ export namespace Ses {
 }
 
 export namespace Sqlserver {
+    export interface BusinessIntelligenceInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        tagKey?: string;
+        /**
+         * Tag value.
+         */
+        tagValue?: string;
+    }
+
+    export interface ConfigInstanceParamParamList {
+        /**
+         * Parameter value.
+         */
+        currentValue?: string;
+        /**
+         * Parameter name.
+         */
+        name?: string;
+    }
+
+    export interface ConfigInstanceRoGroupWeightPair {
+        /**
+         * Read-only instance ID, in the format: mssqlro-3l3fgqn7.
+         */
+        readOnlyInstanceId: string;
+        /**
+         * Read-only instance weight, the range is 0-100.
+         */
+        readOnlyWeight: number;
+    }
+
+    export interface GeneralCloudInstanceResourceTag {
+        /**
+         * tag key.
+         */
+        tagKey?: string;
+        /**
+         * tag value.
+         */
+        tagValue?: string;
+    }
+
     export interface GetAccountDbAttachmentsList {
         /**
          * Name of the SQL Server account to be queried.
@@ -23129,6 +37804,28 @@ export namespace Sqlserver {
          * Last updated time of the SQL Server account.
          */
         updateTime: string;
+    }
+
+    export interface GetBackupCommandsList {
+        /**
+         * Create backup command.
+         */
+        command: string;
+        /**
+         * Request ID.
+         */
+        requestId: string;
+    }
+
+    export interface GetBackupUploadSizeCosUploadBackupFileSet {
+        /**
+         * Backup name.
+         */
+        fileName: string;
+        /**
+         * Backup size.
+         */
+        size: number;
     }
 
     export interface GetBackupsList {
@@ -23280,6 +37977,49 @@ export namespace Sqlserver {
         status: string;
     }
 
+    export interface GetInsAttributeTdeConfig {
+        /**
+         * Certificate ownership. Self - indicates using the account's own certificate, others - indicates referencing certificates from other accounts, and none - indicates no certificate.
+         */
+        certificateAttribution: string;
+        /**
+         * TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+         */
+        encryption: string;
+        /**
+         * Other primary account IDs referenced when activating TDE encryption
+         * Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        quoteUin: string;
+    }
+
+    export interface GetInstanceParamRecordsItem {
+        /**
+         * Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
+         */
+        instanceId: string;
+        /**
+         * Modification time.
+         */
+        modifyTime: string;
+        /**
+         * Parameter value after modification.
+         */
+        newValue: string;
+        /**
+         * Parameter value before modification.
+         */
+        oldValue: string;
+        /**
+         * Parameter name.
+         */
+        paramName: string;
+        /**
+         * Parameter modification status. Valid values: 1 (initializing and waiting for modification), 2 (modification succeed), 3 (modification failed), 4 (modifying).
+         */
+        status: number;
+    }
+
     export interface GetInstancesInstanceList {
         /**
          * Availability zone.
@@ -23355,6 +38095,83 @@ export namespace Sqlserver {
         vport: number;
     }
 
+    export interface GetProjectSecurityGroupsSecurityGroupSet {
+        /**
+         * Creation time, time format: yyyy-mm-dd hh:mm:ss.
+         */
+        createTime: string;
+        /**
+         * inbound rules.
+         */
+        inboundSets: outputs.Sqlserver.GetProjectSecurityGroupsSecurityGroupSetInboundSet[];
+        /**
+         * outbound rules.
+         */
+        outboundSets: outputs.Sqlserver.GetProjectSecurityGroupsSecurityGroupSetOutboundSet[];
+        /**
+         * Project ID, which can be viewed through the console project management.
+         */
+        projectId: number;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * security group name.
+         */
+        securityGroupName: string;
+        /**
+         * Security Group Remarks.
+         */
+        securityGroupRemark: string;
+    }
+
+    export interface GetProjectSecurityGroupsSecurityGroupSetInboundSet {
+        /**
+         * Policy, ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * Destination IP or IP segment, such as 172.16.0.0/12.
+         */
+        cidrIp: string;
+        /**
+         * The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+         */
+        dir: string;
+        /**
+         * Network protocol, support UDP, TCP, etc.
+         */
+        ipProtocol: string;
+        /**
+         * port or port range.
+         */
+        portRange: string;
+    }
+
+    export interface GetProjectSecurityGroupsSecurityGroupSetOutboundSet {
+        /**
+         * Policy, ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * Destination IP or IP segment, such as 172.16.0.0/12.
+         */
+        cidrIp: string;
+        /**
+         * The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+         */
+        dir: string;
+        /**
+         * Network protocol, support UDP, TCP, etc.
+         */
+        ipProtocol: string;
+        /**
+         * port or port range.
+         */
+        portRange: string;
+    }
+
     export interface GetPublishSubscribesPublishSubscribeList {
         /**
          * Database Publish and Publish relationship list.
@@ -23413,6 +38230,45 @@ export namespace Sqlserver {
         subscribeDatabase: string;
     }
 
+    export interface GetQueryXeventEvent {
+        /**
+         * Generation end time of an extended file.
+         */
+        endTime: string;
+        /**
+         * Event type. Valid values: slow (Slow SQL event), blocked (blocking event), deadlock` (deadlock event).
+         */
+        eventType: string;
+        /**
+         * Download address on the public network.
+         */
+        externalAddr: string;
+        /**
+         * File name of an extended event.
+         */
+        fileName: string;
+        /**
+         * ID.
+         */
+        id: number;
+        /**
+         * Download address on the private network.
+         */
+        internalAddr: string;
+        /**
+         * File size of an extended event.
+         */
+        size: number;
+        /**
+         * Generation start time of an extended file.
+         */
+        startTime: string;
+        /**
+         * Event record status. Valid values: 1 (succeeded), 2 (failed).
+         */
+        status: number;
+    }
+
     export interface GetReadonlyGroupsList {
         /**
          * ID of the readonly group.
@@ -23454,6 +38310,75 @@ export namespace Sqlserver {
          * Virtual port of the readonly group.
          */
         vport: number;
+    }
+
+    export interface GetRegionsRegionSet {
+        /**
+         * Region ID in the format of ap-guangzhou.
+         */
+        region: string;
+        /**
+         * Numeric ID of region.
+         */
+        regionId: number;
+        /**
+         * Region name.
+         */
+        regionName: string;
+        /**
+         * Current purchasability of this region. UNAVAILABLE: not purchasable, AVAILABLE: purchasable.
+         */
+        regionState: string;
+    }
+
+    export interface GetRollbackTimeDetail {
+        /**
+         * Database name.
+         */
+        dbName: string;
+        /**
+         * End time of time range available for rollback.
+         */
+        endTime: string;
+        /**
+         * Start time of time range available for rollback.
+         */
+        startTime: string;
+    }
+
+    export interface GetSlowlogsSlowlog {
+        /**
+         * Number of logs in file.
+         */
+        count: number;
+        /**
+         * Query end time.
+         */
+        endTime: string;
+        /**
+         * Download address for public network.
+         */
+        externalAddr: string;
+        /**
+         * Unique ID of slow query log file.
+         */
+        id: number;
+        /**
+         * Download address for private network.
+         */
+        internalAddr: string;
+        /**
+         * File size in KB.
+         */
+        size: number;
+        /**
+         * Query start time.
+         */
+        startTime: string;
+        /**
+         * Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        status: number;
     }
 
     export interface GetZoneConfigZoneList {
@@ -23596,6 +38521,62 @@ export namespace Sqlserver {
          */
         publishDatabase: string;
     }
+
+    export interface RestoreInstanceEncryption {
+        /**
+         * Database name.
+         */
+        dbName: string;
+        /**
+         * encryption, `enable` encrypted, `disable` unencrypted.
+         */
+        status: string;
+    }
+
+    export interface RestoreInstanceRenameRestore {
+        /**
+         * New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
+         */
+        newName: string;
+        /**
+         * Database name. If the OldName database does not exist, a failure will be returned.It can be left empty in offline migration tasks.
+         */
+        oldName: string;
+    }
+
+    export interface RollbackInstanceEncryption {
+        /**
+         * Database name.
+         */
+        dbName: string;
+        /**
+         * encryption, `enable` encrypted, `disable` unencrypted.
+         */
+        status: string;
+    }
+
+    export interface RollbackInstanceRenameRestore {
+        /**
+         * New database name.
+         */
+        newName: string;
+        /**
+         * Database name. If the OldName database does not exist, a failure will be returned. It can be left empty in offline migration tasks.
+         */
+        oldName: string;
+    }
+
+    export interface StartXeventEventConfig {
+        /**
+         * Event type. Valid values: slow (set threshold for slow SQL ), blocked (set threshold for the blocking and deadlock).
+         */
+        eventType: string;
+        /**
+         * Threshold in milliseconds. Valid values: 0(disable), non-zero (enable).
+         */
+        threshold: number;
+    }
+
 }
 
 export namespace Ssl {
@@ -24528,6 +39509,10 @@ export namespace Tcm {
 
     export interface MeshConfig {
         /**
+         * Sidecar inject configuration.
+         */
+        inject?: outputs.Tcm.MeshConfigInject;
+        /**
          * Istio configuration.
          */
         istio?: outputs.Tcm.MeshConfigIstio;
@@ -24536,9 +39521,28 @@ export namespace Tcm {
          */
         prometheus: outputs.Tcm.MeshConfigPrometheus;
         /**
+         * Default sidecar requests and limits.
+         */
+        sidecarResources?: outputs.Tcm.MeshConfigSidecarResources;
+        /**
          * Tracing config.
          */
         tracing: outputs.Tcm.MeshConfigTracing;
+    }
+
+    export interface MeshConfigInject {
+        /**
+         * IP ranges that should not be proxied.
+         */
+        excludeIpRanges?: string[];
+        /**
+         * Let istio-proxy(sidecar) start first, before app container.
+         */
+        holdApplicationUntilProxyStarts?: boolean;
+        /**
+         * Let istio-proxy(sidecar) stop last, after app container.
+         */
+        holdProxyUntilApplicationEnds?: boolean;
     }
 
     export interface MeshConfigIstio {
@@ -24555,13 +39559,17 @@ export namespace Tcm {
          */
         enablePilotHttp?: boolean;
         /**
-         * Outbound traffic policy.
+         * Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
          */
         outboundTrafficPolicy: string;
         /**
          * SmartDNS configuration.
          */
         smartDns?: outputs.Tcm.MeshConfigIstioSmartDns;
+        /**
+         * Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+         */
+        tracing?: outputs.Tcm.MeshConfigIstioTracing;
     }
 
     export interface MeshConfigIstioSmartDns {
@@ -24573,6 +39581,47 @@ export namespace Tcm {
          * Enable dns proxy.
          */
         istioMetaDnsCapture?: boolean;
+    }
+
+    export interface MeshConfigIstioTracing {
+        /**
+         * APM config.
+         */
+        apm?: outputs.Tcm.MeshConfigIstioTracingApm;
+        /**
+         * Whether enable tracing.
+         */
+        enable?: boolean;
+        /**
+         * Tracing sampling, 0.0-1.0.
+         */
+        sampling: number;
+        /**
+         * Third party zipkin config.
+         */
+        zipkin?: outputs.Tcm.MeshConfigIstioTracingZipkin;
+    }
+
+    export interface MeshConfigIstioTracingApm {
+        /**
+         * Whether enable APM.
+         */
+        enable: boolean;
+        /**
+         * Instance id of the APM.
+         */
+        instanceId?: string;
+        /**
+         * Region.
+         */
+        region?: string;
+    }
+
+    export interface MeshConfigIstioTracingZipkin {
+        /**
+         * Zipkin address.
+         */
+        address: string;
     }
 
     export interface MeshConfigPrometheus {
@@ -24623,6 +39672,39 @@ export namespace Tcm {
          * Vpc id.
          */
         vpcId: string;
+    }
+
+    export interface MeshConfigSidecarResources {
+        /**
+         * Sidecar limits.
+         */
+        limits?: outputs.Tcm.MeshConfigSidecarResourcesLimit[];
+        /**
+         * Sidecar requests.
+         */
+        requests?: outputs.Tcm.MeshConfigSidecarResourcesRequest[];
+    }
+
+    export interface MeshConfigSidecarResourcesLimit {
+        /**
+         * Resource type name, `cpu/memory`.
+         */
+        name?: string;
+        /**
+         * Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+         */
+        quantity?: string;
+    }
+
+    export interface MeshConfigSidecarResourcesRequest {
+        /**
+         * Resource type name, `cpu/memory`.
+         */
+        name?: string;
+        /**
+         * Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+         */
+        quantity?: string;
     }
 
     export interface MeshConfigTracing {
@@ -25162,6 +40244,60 @@ export namespace Tcr {
         name: string;
     }
 
+    export interface GetReplicationInstanceCreateTasksTaskDetail {
+        /**
+         * task start name.
+         */
+        createdTime: string;
+        /**
+         * task end time. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        finishedTime: string;
+        /**
+         * Task status information. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        taskMessage: string;
+        /**
+         * task name.
+         */
+        taskName: string;
+        /**
+         * task status.
+         */
+        taskStatus: string;
+        /**
+         * task UUID.
+         */
+        taskUuid: string;
+    }
+
+    export interface GetReplicationInstanceSyncStatusReplicationLog {
+        /**
+         * destination resource. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        destination: string;
+        /**
+         * end time. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        endTime: string;
+        /**
+         * resource type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        resourceType: string;
+        /**
+         * Source image. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        source: string;
+        /**
+         * start time. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        startTime: string;
+        /**
+         * sync status. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        status: string;
+    }
+
     export interface GetRepositoriesRepositoryList {
         /**
          * Brief description of the repository.
@@ -25195,6 +40331,64 @@ export namespace Tcr {
          * URL of the repository.
          */
         url: string;
+    }
+
+    export interface GetTagRetentionExecutionTasksRetentionTaskList {
+        /**
+         * task end time.
+         */
+        endTime: string;
+        /**
+         * execution id.
+         */
+        executionId: number;
+        /**
+         * repository name.
+         */
+        repository: string;
+        /**
+         * Total number of retained tags.
+         */
+        retained: number;
+        /**
+         * task start time.
+         */
+        startTime: string;
+        /**
+         * the execution status of the task: Failed, Succeed, Stopped, InProgress.
+         */
+        status: string;
+        /**
+         * task id.
+         */
+        taskId: number;
+        /**
+         * Total number of tags.
+         */
+        total: number;
+    }
+
+    export interface GetTagRetentionExecutionsRetentionExecutionList {
+        /**
+         * execution end time.
+         */
+        endTime: string;
+        /**
+         * execution id.
+         */
+        executionId: number;
+        /**
+         * retention id.
+         */
+        retentionId: number;
+        /**
+         * execution start time.
+         */
+        startTime: string;
+        /**
+         * execution status: Failed, Succeed, Stopped, InProgress.
+         */
+        status: string;
     }
 
     export interface GetTokensTokenList {
@@ -25386,6 +40580,17 @@ export namespace Tcr {
         cveId?: string;
     }
 
+    export interface ServiceAccountPermission {
+        /**
+         * Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        actions: string[];
+        /**
+         * resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        resource: string;
+    }
+
     export interface TagRetentionRuleRetentionRule {
         /**
          * The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
@@ -25453,6 +40658,7 @@ export namespace Tcr {
          */
         values: string[];
     }
+
 }
 
 export namespace Tdcpg {
@@ -25660,6 +40866,286 @@ export namespace Tdcpg {
 }
 
 export namespace Tdmq {
+    export interface GetProInstanceDetailClusterInfo {
+        /**
+         * Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        canEditRoute: boolean;
+        /**
+         * Cluster Id.
+         */
+        clusterId: string;
+        /**
+         * Cluster name.
+         */
+        clusterName: string;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Maximum storage capacity, unit: MB.
+         */
+        maxStorage: number;
+        /**
+         * Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        nodeDistributions: outputs.Tdmq.GetProInstanceDetailClusterInfoNodeDistribution[];
+        /**
+         * Descriptive information.
+         */
+        remark: string;
+        /**
+         * Cluster status, 0: creating, 1: normal, 2: isolated.
+         */
+        status: number;
+        /**
+         * cluster version.
+         */
+        version: string;
+    }
+
+    export interface GetProInstanceDetailClusterInfoNodeDistribution {
+        /**
+         * Number of nodes.
+         */
+        nodeCount: number;
+        /**
+         * Availability zone ID.
+         */
+        zoneId: string;
+        /**
+         * Availability zone.
+         */
+        zoneName: string;
+    }
+
+    export interface GetProInstanceDetailClusterSpecInfo {
+        /**
+         * peak bandwidth. Unit: mbps.
+         */
+        maxBandWidth: number;
+        /**
+         * Maximum number of namespaces.
+         */
+        maxNamespaces: number;
+        /**
+         * Maximum number of topic partitions.
+         */
+        maxTopics: number;
+        /**
+         * peak tps.
+         */
+        maxTps: number;
+        /**
+         * Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        scalableTps: number;
+        /**
+         * Cluster specification name.
+         */
+        specName: string;
+    }
+
+    export interface GetProInstanceDetailNetworkAccessPointInfo {
+        /**
+         * access address.
+         */
+        endpoint: string;
+        /**
+         * instance id.
+         */
+        instanceId: string;
+        /**
+         * Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+         */
+        routeType: number;
+        /**
+         * Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId: string;
+    }
+
+    export interface GetProInstancesFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
+    }
+
+    export interface GetProInstancesInstance {
+        /**
+         * Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+         */
+        autoRenewFlag: number;
+        /**
+         * Instance configuration specification name.
+         */
+        configDisplay: string;
+        /**
+         * Instance expiration time, in milliseconds.
+         */
+        expireTime: number;
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Instance name.
+         */
+        instanceName: string;
+        /**
+         * Instance version.
+         */
+        instanceVersion: string;
+        /**
+         * Peak bandwidth. Unit: mbps.
+         */
+        maxBandWidth: number;
+        /**
+         * Storage capacity, in GB.
+         */
+        maxStorage: number;
+        /**
+         * Peak TPS.
+         */
+        maxTps: number;
+        /**
+         * 0-postpaid, 1-prepaid.
+         */
+        payMode: number;
+        /**
+         * RemarksNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        remark: string;
+        /**
+         * Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        scalableTps: number;
+        /**
+         * Instance Configuration ID.
+         */
+        specName: string;
+        /**
+         * Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+         */
+        status: number;
+        /**
+         * Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId: string;
+        /**
+         * Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId: string;
+    }
+
+    export interface GetPublishersFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
+    }
+
+    export interface GetPublishersPublisher {
+        /**
+         * producer addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        address: string;
+        /**
+         * Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        averageMsgSize: number;
+        /**
+         * client versionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        clientVersion: string;
+        /**
+         * connection timeNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        connectedSince: string;
+        /**
+         * Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        msgRateIn: number;
+        /**
+         * Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        msgThroughputIn: number;
+        /**
+         * The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        partition: number;
+        /**
+         * producer idNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        producerId: number;
+        /**
+         * producer nameNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        producerName: string;
+    }
+
+    export interface GetPublishersSort {
+        /**
+         * sorter.
+         */
+        name: string;
+        /**
+         * Ascending ASC, descending DESC.
+         */
+        order: string;
+    }
+
+    export interface GetRabbitmqNodeListFilter {
+        name?: string;
+        values?: string[];
+    }
+
+    export interface GetRabbitmqNodeListNodeList {
+        cpuUsage: string;
+        diskUsage: string;
+        memory: number;
+        nodeName: string;
+        nodeStatus: string;
+        processNumber: number;
+    }
+
+    export interface GetRabbitmqVipInstanceFilter {
+        name?: string;
+        values?: string[];
+    }
+
+    export interface GetRabbitmqVipInstanceInstance {
+        autoRenewFlag: number;
+        configDisplay: string;
+        exceptionInformation: string;
+        expireTime: number;
+        instanceId: string;
+        instanceName: string;
+        instanceVersion: string;
+        maxBandWidth: number;
+        maxStorage: number;
+        maxTps: number;
+        nodeCount: number;
+        payMode: number;
+        remark: string;
+        specName: string;
+        status: number;
+    }
+
     export interface GetRocketmqClusterClusterList {
         /**
          * Cluster configuration information.
@@ -25827,6 +41313,25 @@ export namespace Tdmq {
         updateTime: number;
     }
 
+    export interface GetRocketmqMessagesMessageTrack {
+        /**
+         * consumption status.
+         */
+        consumeStatus: string;
+        /**
+         * Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        exceptionDesc: string;
+        /**
+         * consumer group.
+         */
+        group: string;
+        /**
+         * message track type.
+         */
+        trackType: string;
+    }
+
     export interface GetRocketmqNamespaceNamespace {
         /**
          * Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
@@ -25900,6 +41405,55 @@ export namespace Tdmq {
         updateTime: number;
     }
 
+    export interface GetVipInstanceClusterInfo {
+        clusterId: string;
+        clusterName: string;
+        createTime: number;
+        httpPublicEndpoint: string;
+        httpVpcEndpoint: string;
+        isVip: boolean;
+        isolateTime: number;
+        publicEndPoint: string;
+        region: string;
+        remark: string;
+        rocketMqFlag: boolean;
+        status: number;
+        supportNamespaceEndpoint: boolean;
+        vpcEndPoint: string;
+        vpcs: outputs.Tdmq.GetVipInstanceClusterInfoVpc[];
+    }
+
+    export interface GetVipInstanceClusterInfoVpc {
+        subnetId: string;
+        vpcId: string;
+    }
+
+    export interface GetVipInstanceInstanceConfig {
+        configDisplay: string;
+        maxGroupNum: number;
+        maxNamespaceNum: number;
+        maxQueuesPerTopic: number;
+        maxTopicNum: number;
+        maxTpsPerNamespace: number;
+        nodeCount: number;
+        nodeDistributions: outputs.Tdmq.GetVipInstanceInstanceConfigNodeDistribution[];
+        topicDistributions: outputs.Tdmq.GetVipInstanceInstanceConfigTopicDistribution[];
+        usedGroupNum: number;
+        usedNamespaceNum: number;
+        usedTopicNum: number;
+    }
+
+    export interface GetVipInstanceInstanceConfigNodeDistribution {
+        nodeCount: number;
+        zoneId: string;
+        zoneName: string;
+    }
+
+    export interface GetVipInstanceInstanceConfigTopicDistribution {
+        count: number;
+        topicType: string;
+    }
+
     export interface RocketmqClusterVpc {
         /**
          * Subnet ID.
@@ -25910,6 +41464,7 @@ export namespace Tdmq {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tem {
@@ -28162,6 +43717,183 @@ export namespace Teo {
 
 }
 
+export namespace Tse {
+    export interface GetAccessAddressEnvAddressInfo {
+        /**
+         * config public network ip.
+         */
+        configInternetServiceIp: string;
+        /**
+         * config Intranet access addressNote: This field may return null, indicating that a valid value is not available.
+         */
+        configIntranetAddress: string;
+        /**
+         * Whether to enable the config public network.
+         */
+        enableConfigInternet: boolean;
+        /**
+         * Whether to enable the config Intranet clbNote: This field may return null, indicating that a valid value is not available.
+         */
+        enableConfigIntranet: boolean;
+        /**
+         * env name.
+         */
+        envName: string;
+        /**
+         * Client public network bandwidthNote: This field may return null, indicating that a valid value is not available.
+         */
+        internetBandWidth: number;
+    }
+
+    export interface GetAccessAddressLimiterAddressInfo {
+        /**
+         * VPC access IP address listNote: This field may return null, indicating that a valid value is not available.
+         */
+        intranetAddress: string;
+    }
+
+    export interface GetGatewayNodesNodeList {
+        /**
+         * gateway group ID.
+         */
+        groupId: string;
+        /**
+         * Group nameNote: This field may return null, indicating that a valid value is not available.
+         */
+        groupName: string;
+        /**
+         * gateway node id.
+         */
+        nodeId: string;
+        /**
+         * gateway node ip.
+         */
+        nodeIp: string;
+        /**
+         * statusNote: This field may return null, indicating that a valid value is not available.
+         */
+        status: string;
+        /**
+         * ZoneNote: This field may return null, indicating that a valid value is not available.
+         */
+        zone: string;
+        /**
+         * Zone idNote: This field may return null, indicating that a valid value is not available.
+         */
+        zoneId: string;
+    }
+
+    export interface GetNacosReplicasReplica {
+        /**
+         * name.
+         */
+        name: string;
+        /**
+         * role.
+         */
+        role: string;
+        /**
+         * status.
+         */
+        status: string;
+        /**
+         * Subnet IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        subnetId: string;
+        /**
+         * VPC IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        vpcId: string;
+        /**
+         * Available area NameNote: This field may return null, indicating that a valid value is not available.
+         */
+        zone: string;
+        /**
+         * Available area IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        zoneId: string;
+    }
+
+    export interface GetNacosServerInterfacesContent {
+        /**
+         * interface nameNote: This field may return null, indicating that a valid value is not available.
+         */
+        interface: string;
+    }
+
+    export interface GetZookeeperReplicasReplica {
+        /**
+         * aliasNote: This field may return null, indicating that a valid value is not available.
+         */
+        aliasName: string;
+        /**
+         * name.
+         */
+        name: string;
+        /**
+         * role.
+         */
+        role: string;
+        /**
+         * status.
+         */
+        status: string;
+        /**
+         * Subnet IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        subnetId: string;
+        /**
+         * VPC IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        vpcId: string;
+        /**
+         * Available area IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        zone: string;
+        /**
+         * Available area IDNote: This field may return null, indicating that a valid value is not available.
+         */
+        zoneId: string;
+    }
+
+    export interface GetZookeeperServerInterfacesContent {
+        /**
+         * interface nameNote: This field may return null, indicating that a valid value is not available.
+         */
+        interface: string;
+    }
+
+    export interface InstanceEngineRegionInfo {
+        /**
+         * Engine node region.
+         */
+        engineRegion: string;
+        /**
+         * The number of nodes allocated in this region.
+         */
+        replica: number;
+        /**
+         * Cluster network information.
+         */
+        vpcInfos: outputs.Tse.InstanceEngineRegionInfoVpcInfo[];
+    }
+
+    export interface InstanceEngineRegionInfoVpcInfo {
+        /**
+         * Intranet access addressNote: This field may return null, indicating that a valid value is not available..
+         */
+        intranetAddress?: string;
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * Vpc Id.
+         */
+        vpcId: string;
+    }
+}
+
 export namespace Tsf {
     export interface ApiGroupBindedGatewayDeployGroup {
         /**
@@ -28287,168 +44019,640 @@ export namespace Tsf {
         supported: boolean;
     }
 
-    export interface ContainGroupEnv {
+    export interface DeployContainerGroupAgentProfileList {
         /**
-         * environment variable name.
+         * Agent type.
+         */
+        agentType: string;
+        /**
+         * Agent version.
+         */
+        agentVersion: string;
+    }
+
+    export interface DeployContainerGroupEnv {
+        /**
+         * env param name.
          */
         name: string;
         /**
-         * environment variable value.
+         * value of env.
          */
         value: string;
         /**
-         * k8s ValueFrom.
+         * Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        valueFroms: outputs.Tsf.ContainGroupEnvValueFrom[];
+        valueFrom: outputs.Tsf.DeployContainerGroupEnvValueFrom;
     }
 
-    export interface ContainGroupEnvValueFrom {
+    export interface DeployContainerGroupEnvValueFrom {
         /**
-         * FieldRef for k8s env.
+         * The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        fieldReves: outputs.Tsf.ContainGroupEnvValueFromFieldRef[];
+        fieldRef: outputs.Tsf.DeployContainerGroupEnvValueFromFieldRef;
         /**
-         * ResourceFieldRef of k8s env.
+         * The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        resourceFieldReves: outputs.Tsf.ContainGroupEnvValueFromResourceFieldRef[];
+        resourceFieldRef: outputs.Tsf.DeployContainerGroupEnvValueFromResourceFieldRef;
     }
 
-    export interface ContainGroupEnvValueFromFieldRef {
+    export interface DeployContainerGroupEnvValueFromFieldRef {
         /**
-         * FieldPath of k8s.
+         * The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
          */
         fieldPath: string;
     }
 
-    export interface ContainGroupEnvValueFromResourceFieldRef {
+    export interface DeployContainerGroupEnvValueFromResourceFieldRef {
         /**
-         * Resource of k8s.
+         * The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
          */
         resource: string;
     }
 
-    export interface ContainGroupHealthCheckSetting {
+    export interface DeployContainerGroupHealthCheckSettings {
         /**
-         * live health check.
+         * Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        livenessProbes: outputs.Tsf.ContainGroupHealthCheckSettingLivenessProbe[];
+        livenessProbe?: outputs.Tsf.DeployContainerGroupHealthCheckSettingsLivenessProbe;
         /**
-         * readiness health check.
+         * Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        readinessProbes: outputs.Tsf.ContainGroupHealthCheckSettingReadinessProbe[];
+        readinessProbe?: outputs.Tsf.DeployContainerGroupHealthCheckSettingsReadinessProbe;
     }
 
-    export interface ContainGroupHealthCheckSettingLivenessProbe {
+    export interface DeployContainerGroupHealthCheckSettingsLivenessProbe {
         /**
-         * health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+         * The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
          */
         actionType: string;
         /**
-         * Execute command check mode, the command to execute.
+         * The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        commands: string[];
+        commands?: string[];
         /**
-         * Indicates the number of consecutive health check successes for the backend container from success to failure.
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        failureThreshold: number;
+        failureThreshold?: number;
         /**
-         * The time for the container to delay starting the health check.
+         * The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        initialDelaySeconds: number;
+        initialDelaySeconds?: number;
         /**
-         * The request path of the HTTP health check interface.
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        path: string;
+        path?: string;
         /**
-         * The interval at which health checks are performed.
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        periodSeconds: number;
+        periodSeconds?: number;
         /**
-         * service port.
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        port: number;
+        port?: number;
         /**
-         * The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        scheme: string;
+        scheme?: string;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from failure to success.
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        successThreshold: number;
+        successThreshold?: number;
         /**
-         * The maximum timeout for each health check response.
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        timeoutSeconds: number;
+        timeoutSeconds?: number;
         /**
-         * TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: string;
+    }
+
+    export interface DeployContainerGroupHealthCheckSettingsReadinessProbe {
+        /**
+         * The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        actionType: string;
+        /**
+         * The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commands?: string[];
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        failureThreshold?: number;
+        /**
+         * The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        initialDelaySeconds?: number;
+        /**
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path?: string;
+        /**
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        periodSeconds?: number;
+        /**
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        port?: number;
+        /**
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        scheme?: string;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        successThreshold?: number;
+        /**
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeoutSeconds?: number;
+        /**
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: string;
+    }
+
+    export interface DeployContainerGroupSchedulingStrategy {
+        /**
+         * NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
          */
         type: string;
     }
 
-    export interface ContainGroupHealthCheckSettingReadinessProbe {
+    export interface DeployContainerGroupServiceSetting {
         /**
-         * health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+         * 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        actionType: string;
+        accessType: number;
         /**
-         * Execute command check mode, the command to execute.
+         * When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        commands: string[];
+        allowDeleteService: boolean;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from success to failure.
+         * Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        failureThreshold: number;
+        disableService: boolean;
         /**
-         * The time for the container to delay starting the health check.
+         * Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        initialDelaySeconds: number;
+        headlessService: boolean;
         /**
-         * The request path of the HTTP health check interface.
+         * Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        path: string;
+        openSessionAffinity: boolean;
         /**
-         * The interval at which health checks are performed.
+         * Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        periodSeconds: number;
+        protocolPorts: outputs.Tsf.DeployContainerGroupServiceSettingProtocolPort[];
         /**
-         * service port.
+         * Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        port: number;
+        sessionAffinityTimeoutSeconds: number;
         /**
-         * The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+         * subnet Id.
          */
-        scheme: string;
-        /**
-         * Indicates the number of consecutive health check successes for the backend container from failure to success.
-         */
-        successThreshold: number;
-        /**
-         * The maximum timeout for each health check response.
-         */
-        timeoutSeconds: number;
-        /**
-         * TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
-         */
-        type: string;
+        subnetId: string;
     }
 
-    export interface ContainGroupProtocolPort {
+    export interface DeployContainerGroupServiceSettingProtocolPort {
         /**
-         * host port.
+         * node port.
          */
         nodePort: number;
         /**
-         * service port.
+         * port.
          */
         port: number;
         /**
-         * TCP UDP.
+         * TCP or UDP.
          */
         protocol: string;
         /**
          * container port.
          */
         targetPort: number;
+    }
+
+    export interface DeployContainerGroupVolumeInfoList {
+        /**
+         * volume config.
+         */
+        volumeConfig: string;
+        /**
+         * volume name.
+         */
+        volumeName: string;
+        /**
+         * volume type.
+         */
+        volumeType: string;
+    }
+
+    export interface DeployContainerGroupVolumeMountInfoList {
+        /**
+         * Read and write access mode. 1: Read-only. 2: Read-write.
+         */
+        readOrWrite: string;
+        /**
+         * mount volume name.
+         */
+        volumeMountName: string;
+        /**
+         * mount path.
+         */
+        volumeMountPath: string;
+        /**
+         * mount subPath.
+         */
+        volumeMountSubPath: string;
+    }
+
+    export interface DeployContainerGroupWarmupSetting {
+        /**
+         * Preheating curvature, with a value between 1 and 5.
+         */
+        curvature: number;
+        /**
+         * Whether to enable preheating.
+         */
+        enabled: boolean;
+        /**
+         * Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+         */
+        enabledProtection: boolean;
+        /**
+         * warmup time.
+         */
+        warmupTime: number;
+    }
+
+    export interface DeployVmGroupAgentProfileList {
+        /**
+         * Agent type.
+         */
+        agentType: string;
+        /**
+         * Agent version.
+         */
+        agentVersion: string;
+    }
+
+    export interface DeployVmGroupHealthCheckSettings {
+        /**
+         * Survival health check. Note: This field may return null, indicating that no valid value was found.
+         */
+        livenessProbe: outputs.Tsf.DeployVmGroupHealthCheckSettingsLivenessProbe;
+        /**
+         * Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        readinessProbe: outputs.Tsf.DeployVmGroupHealthCheckSettingsReadinessProbe;
+    }
+
+    export interface DeployVmGroupHealthCheckSettingsLivenessProbe {
+        /**
+         * Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+         */
+        actionType: string;
+        /**
+         * The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commands: string[];
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        failureThreshold: number;
+        /**
+         * The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        initialDelaySeconds: number;
+        /**
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path: string;
+        /**
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        periodSeconds: number;
+        /**
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        port: number;
+        /**
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        scheme: string;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        successThreshold: number;
+        /**
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeoutSeconds: number;
+        /**
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type: string;
+    }
+
+    export interface DeployVmGroupHealthCheckSettingsReadinessProbe {
+        /**
+         * The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        actionType: string;
+        /**
+         * The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commands: string[];
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        failureThreshold: number;
+        /**
+         * The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        initialDelaySeconds: number;
+        /**
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path: string;
+        /**
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        periodSeconds: number;
+        /**
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        port: number;
+        /**
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        scheme: string;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        successThreshold: number;
+        /**
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeoutSeconds: number;
+        /**
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type: string;
+    }
+
+    export interface DeployVmGroupWarmupSetting {
+        /**
+         * Preheating curvature, with a value between 1 and 5.
+         */
+        curvature: number;
+        /**
+         * Whether to enable preheating.
+         */
+        enabled: boolean;
+        /**
+         * Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+         */
+        enabledProtection: boolean;
+        /**
+         * warmup time.
+         */
+        warmupTime: number;
+    }
+
+    export interface GetApiDetailResult {
+        /**
+         * can debug or not.
+         */
+        canRun: boolean;
+        /**
+         * api data struct.
+         */
+        definitions: outputs.Tsf.GetApiDetailResultDefinition[];
+        /**
+         * param description.
+         */
+        description: string;
+        /**
+         * api content type.
+         */
+        requestContentType: string;
+        /**
+         * api request description.
+         */
+        requests: outputs.Tsf.GetApiDetailResultRequest[];
+        /**
+         * api response.
+         */
+        responses: outputs.Tsf.GetApiDetailResultResponse[];
+        /**
+         * API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+         */
+        status: number;
+    }
+
+    export interface GetApiDetailResultDefinition {
+        /**
+         * param description.
+         */
+        name: string;
+        /**
+         * object property list.
+         */
+        properties: outputs.Tsf.GetApiDetailResultDefinitionProperty[];
+    }
+
+    export interface GetApiDetailResultDefinitionProperty {
+        /**
+         * param description.
+         */
+        description: string;
+        /**
+         * param description.
+         */
+        name: string;
+        /**
+         * param type.
+         */
+        type: string;
+    }
+
+    export interface GetApiDetailResultRequest {
+        /**
+         * default value.
+         */
+        defaultValue: string;
+        /**
+         * param description.
+         */
+        description: string;
+        /**
+         * param position.
+         */
+        in: string;
+        /**
+         * param description.
+         */
+        name: string;
+        /**
+         * require or not.
+         */
+        required: boolean;
+        /**
+         * param type.
+         */
+        type: string;
+    }
+
+    export interface GetApiDetailResultResponse {
+        /**
+         * param description.
+         */
+        description: string;
+        /**
+         * param description.
+         */
+        name: string;
+        /**
+         * param type.
+         */
+        type: string;
+    }
+
+    export interface GetApiGroupResult {
+        /**
+         * Api group info.
+         */
+        contents: outputs.Tsf.GetApiGroupResultContent[];
+        /**
+         * record count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetApiGroupResultContent {
+        /**
+         * Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        aclMode: string;
+        /**
+         * api count.
+         */
+        apiCount: number;
+        /**
+         * Authentication type. secret: Secret key authentication; none: No authentication.
+         */
+        authType: string;
+        /**
+         * The gateway group bind with the api group list.
+         */
+        bindedGatewayDeployGroups: outputs.Tsf.GetApiGroupResultContentBindedGatewayDeployGroup[];
+        /**
+         * Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createdTime: string;
+        /**
+         * Description.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        description: string;
+        /**
+         * Gateway Instance Id.
+         */
+        gatewayInstanceId: string;
+        /**
+         * Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        gatewayInstanceType: string;
+        /**
+         * Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupContext: string;
+        /**
+         * Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupId: string;
+        /**
+         * Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupName: string;
+        /**
+         * Group type. ms: Microservice group; external: External API group.
+         */
+        groupType: string;
+        /**
+         * Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        namespaceNameKey: string;
+        /**
+         * Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        namespaceNameKeyPosition: string;
+        /**
+         * Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        serviceNameKey: string;
+        /**
+         * Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        serviceNameKeyPosition: string;
+        /**
+         * Publishing status. drafted: Not published. released: Published.
+         */
+        status: string;
+        /**
+         * Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        updatedTime: string;
+    }
+
+    export interface GetApiGroupResultContentBindedGatewayDeployGroup {
+        /**
+         * Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationId: string;
+        /**
+         * Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationName: string;
+        /**
+         * Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationType: string;
+        /**
+         * Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterType: string;
+        /**
+         * Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        deployGroupId: string;
+        /**
+         * Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        deployGroupName: string;
+        /**
+         * Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupStatus: string;
+    }
+
+    export interface GetApplicationAttributeResult {
+        /**
+         * Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupCount: number;
+        /**
+         * Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        instanceCount: number;
+        /**
+         * Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        runInstanceCount: number;
     }
 
     export interface GetApplicationConfigResult {
@@ -28756,6 +44960,134 @@ export namespace Tsf {
         targetPort: number;
     }
 
+    export interface GetBusinessLogConfigsResult {
+        /**
+         * Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        contents: outputs.Tsf.GetBusinessLogConfigsResultContent[];
+        /**
+         * Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        totalCount: number;
+    }
+
+    export interface GetBusinessLogConfigsResultContent {
+        /**
+         * the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configAssociatedGroups: outputs.Tsf.GetBusinessLogConfigsResultContentConfigAssociatedGroup[];
+        /**
+         * Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configCreateTime: string;
+        /**
+         * Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configDesc: string;
+        /**
+         * ConfigId.
+         */
+        configId: string;
+        /**
+         * ConfigName.
+         */
+        configName: string;
+        /**
+         * Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configPath: string;
+        /**
+         * Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configPipeline: string;
+        /**
+         * ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configSchemas: outputs.Tsf.GetBusinessLogConfigsResultContentConfigSchema[];
+        /**
+         * configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configTags: string;
+        /**
+         * Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configUpdateTime: string;
+    }
+
+    export interface GetBusinessLogConfigsResultContentConfigAssociatedGroup {
+        /**
+         * Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationId: string;
+        /**
+         * Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationName: string;
+        /**
+         * Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        applicationType: string;
+        /**
+         * Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        associatedTime: string;
+        /**
+         * Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterId: string;
+        /**
+         * Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterName: string;
+        /**
+         * Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterType: string;
+        /**
+         * Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupId: string;
+        /**
+         * Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groupName: string;
+        /**
+         * Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        namespaceId: string;
+        /**
+         * Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        namespaceName: string;
+    }
+
+    export interface GetBusinessLogConfigsResultContentConfigSchema {
+        /**
+         * content of schema.
+         */
+        schemaContent: string;
+        /**
+         * Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        schemaCreateTime: string;
+        /**
+         * Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        schemaDateFormat: string;
+        /**
+         * Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        schemaMultilinePattern: string;
+        /**
+         * User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        schemaPatternLayout: string;
+        /**
+         * Schema type.
+         */
+        schemaType: number;
+    }
+
     export interface GetClusterResult {
         /**
          * Cluster list. Note: This field may return null, indicating no valid values.
@@ -28942,6 +45274,942 @@ export namespace Tsf {
         supported: boolean;
     }
 
+    export interface GetConfigSummaryResult {
+        /**
+         * config list.
+         */
+        contents: outputs.Tsf.GetConfigSummaryResultContent[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetConfigSummaryResultContent {
+        /**
+         * Application ID. If not passed, the query will be for all.
+         */
+        applicationId: string;
+        /**
+         * Application Name. Note: This field may return null, indicating that no valid value was found.
+         */
+        applicationName: string;
+        /**
+         * Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+         */
+        configId: string;
+        /**
+         * Configuration name.Note: This field may return null, indicating that no valid value was found.
+         */
+        configName: string;
+        /**
+         * Config type. Note: This field may return null, indicating that no valid value was found.
+         */
+        configType: string;
+        /**
+         * Configuration value.Note: This field may return null, indicating that no valid value was found.
+         */
+        configValue: string;
+        /**
+         * Configuration version. Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersion: string;
+        /**
+         * Configure version count.Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersionCount: number;
+        /**
+         * Configuration version description.Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersionDesc: string;
+        /**
+         * Create time.Note: This field may return null, indicating that no valid value was found.
+         */
+        creationTime: string;
+        /**
+         * Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+         */
+        deleteFlag: boolean;
+        /**
+         * Last update time.Note: This field may return null, indicating that no valid value was found.
+         */
+        lastUpdateTime: string;
+    }
+
+    export interface GetContainerGroupResult {
+        /**
+         * List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+         */
+        contents: outputs.Tsf.GetContainerGroupResultContent[];
+        /**
+         * Total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetContainerGroupResultContent {
+        /**
+         * The Group description.Note: This field may return null, indicating that no valid value was found.
+         */
+        alias: string;
+        /**
+         * Cluster Id.
+         */
+        clusterId: string;
+        /**
+         * Cluster name.Note: This field may return null, indicating that no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+         */
+        cpuLimit: string;
+        /**
+         * The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+         */
+        cpuRequest: string;
+        /**
+         * Create time.Note: This field may return null, indicating that no valid value was found.
+         */
+        createTime: string;
+        /**
+         * Group Id.Note: This field may return null, indicating that no valid value was found.
+         */
+        groupId: string;
+        /**
+         * Group name.Note: This field may return null, indicating that no valid value was found.
+         */
+        groupName: string;
+        /**
+         * The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+         */
+        kubeInjectEnable: boolean;
+        /**
+         * The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+         */
+        memLimit: string;
+        /**
+         * The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+         */
+        memRequest: string;
+        /**
+         * Namespace Id.
+         */
+        namespaceId: string;
+        /**
+         * Namespace name.Note: This field may return null, indicating that no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Image name.Note: This field may return null, indicating that no valid value was found.
+         */
+        repoName: string;
+        /**
+         * Image server.Note: This field may return null, indicating that no valid value was found.
+         */
+        server: string;
+        /**
+         * Image version Name.Note: This field may return null, indicating that no valid value was found.
+         */
+        tagName: string;
+        /**
+         * Update type.Note: This field may return null, indicating that no valid value was found.
+         */
+        updatedTime: string;
+    }
+
+    export interface GetDeliveryConfigByGroupIdResult {
+        /**
+         * Config ID. Note: This field may return null, which means that no valid value was obtained.
+         */
+        configId: string;
+        /**
+         * Config Name. Note: This field may return null, which means that no valid value was obtained.
+         */
+        configName: string;
+    }
+
+    export interface GetDeliveryConfigsResult {
+        /**
+         * content. Note: This field may return null, which means that no valid value was obtained.
+         */
+        contents: outputs.Tsf.GetDeliveryConfigsResultContent[];
+        /**
+         * total count. Note: This field may return null, which means that no valid value was obtained.
+         */
+        totalCount: number;
+    }
+
+    export interface GetDeliveryConfigsResultContent {
+        /**
+         * harvest log path. Note: This field may return null, which means that no valid value was obtained.
+         */
+        collectPaths: string[];
+        /**
+         * config id.
+         */
+        configId: string;
+        /**
+         * config name.
+         */
+        configName: string;
+        /**
+         * Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Custom Line Rule.
+         */
+        customRule: string;
+        /**
+         * whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+         */
+        enableAuth: boolean;
+        /**
+         * Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+         */
+        enableGlobalLineRule: boolean;
+        /**
+         * Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        groups: outputs.Tsf.GetDeliveryConfigsResultContentGroup[];
+        /**
+         * KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+         */
+        kafkaAddress: string;
+        /**
+         * Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+         */
+        kafkaInfos: outputs.Tsf.GetDeliveryConfigsResultContentKafkaInfo[];
+        /**
+         * Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+         */
+        kafkaVIp: string;
+        /**
+         * Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+         */
+        kafkaVPort: string;
+        /**
+         * Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+         */
+        lineRule: string;
+        /**
+         * Password. Note: This field may return null, which means that no valid value was obtained.
+         */
+        password: string;
+        /**
+         * Topic. Note: This field may return null, which means that no valid value was obtained.
+         */
+        topic: string;
+        /**
+         * user Name. Note: This field may return null, which means that no valid value was obtained.
+         */
+        username: string;
+    }
+
+    export interface GetDeliveryConfigsResultContentGroup {
+        /**
+         * Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        associateTime: string;
+        /**
+         * Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterId: string;
+        /**
+         * Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clusterName: string;
+        /**
+         * Cluster type.
+         */
+        clusterType: string;
+        /**
+         * Group Id.
+         */
+        groupId: string;
+        /**
+         * Group Name.
+         */
+        groupName: string;
+        /**
+         * Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        namespaceName: string;
+    }
+
+    export interface GetDeliveryConfigsResultContentKafkaInfo {
+        /**
+         * Custom Line Rule.
+         */
+        customRule: string;
+        /**
+         * Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+         */
+        lineRule: string;
+        /**
+         * harvest log path. Note: This field may return null, which means that no valid value was obtained.
+         */
+        paths: string[];
+        /**
+         * Topic. Note: This field may return null, which means that no valid value was obtained.
+         */
+        topic: string;
+    }
+
+    export interface GetGatewayAllGroupApisResult {
+        /**
+         * gateway group Id.
+         */
+        gatewayDeployGroupId: string;
+        /**
+         * Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+         */
+        gatewayDeployGroupName: string;
+        /**
+         * Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+         */
+        groupNum: number;
+        /**
+         * Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+         */
+        groups: outputs.Tsf.GetGatewayAllGroupApisResultGroup[];
+    }
+
+    export interface GetGatewayAllGroupApisResultGroup {
+        /**
+         * gateway instance id.Note: This field may return null, which means no valid value was found.
+         */
+        gatewayInstanceId: string;
+        /**
+         * Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+         */
+        gatewayInstanceType: string;
+        /**
+         * Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+         */
+        groupApiCount: number;
+        /**
+         * List of APIs under the group.Note: This field may return null, which means no valid value was found.
+         */
+        groupApis: outputs.Tsf.GetGatewayAllGroupApisResultGroupGroupApi[];
+        /**
+         * api group id.Note: This field may return null, which means no valid value was found.
+         */
+        groupId: string;
+        /**
+         * api group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+    }
+
+    export interface GetGatewayAllGroupApisResultGroupGroupApi {
+        /**
+         * API ID.
+         */
+        apiId: string;
+        /**
+         * API method.
+         */
+        method: string;
+        /**
+         * API service name.
+         */
+        microserviceName: string;
+        /**
+         * namespace name.
+         */
+        namespaceName: string;
+        /**
+         * API path.
+         */
+        path: string;
+    }
+
+    export interface GetGroupConfigReleaseResult {
+        /**
+         * Configuration item release list.Note: This field may return null, which means no valid value was found.
+         */
+        configReleaseLists: outputs.Tsf.GetGroupConfigReleaseResultConfigReleaseList[];
+        /**
+         * File configuration item release list.Note: This field may return null, which means no valid value was found.
+         */
+        fileConfigReleaseLists: outputs.Tsf.GetGroupConfigReleaseResultFileConfigReleaseList[];
+        /**
+         * Package Id.Note: This field may return null, which means no valid value was found.
+         */
+        packageId: string;
+        /**
+         * Package name.Note: This field may return null, which means no valid value was found.
+         */
+        packageName: string;
+        /**
+         * Package version.Note: This field may return null, which means no valid value was found.
+         */
+        packageVersion: string;
+        /**
+         * Release public config list.
+         */
+        publicConfigReleaseLists: outputs.Tsf.GetGroupConfigReleaseResultPublicConfigReleaseList[];
+        /**
+         * image name.Note: This field may return null, which means no valid value was found.
+         */
+        repoName: string;
+        /**
+         * image tag name.Note: This field may return null, which means no valid value was found.
+         */
+        tagName: string;
+    }
+
+    export interface GetGroupConfigReleaseResultConfigReleaseList {
+        /**
+         * Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+         */
+        applicationId: string;
+        /**
+         * Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+         */
+        clusterId: string;
+        /**
+         * Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * Configuration item  ID.Note: This field may return null, which means no valid value was found.
+         */
+        configId: string;
+        /**
+         * Configuration item name.Note: This field may return null, which means no valid value was found.
+         */
+        configName: string;
+        /**
+         * Configuration item release ID.Note: This field may return null, which means no valid value was found.
+         */
+        configReleaseId: string;
+        /**
+         * Configuration version.Note: This field may return null, which means no valid value was found.
+         */
+        configVersion: string;
+        /**
+         * groupId.
+         */
+        groupId: string;
+        /**
+         * Configuration item release group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+        /**
+         * Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceId: string;
+        /**
+         * Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Configuration item release description.Note: This field may return null, which means no valid value was found.
+         */
+        releaseDesc: string;
+        /**
+         * Configuration item release time.Note: This field may return null, which means no valid value was found.
+         */
+        releaseTime: string;
+    }
+
+    export interface GetGroupConfigReleaseResultFileConfigReleaseList {
+        /**
+         * Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+         */
+        clusterId: string;
+        /**
+         * Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * Configuration item  ID.Note: This field may return null, which means no valid value was found.
+         */
+        configId: string;
+        /**
+         * Configuration item name.Note: This field may return null, which means no valid value was found.
+         */
+        configName: string;
+        /**
+         * Configuration item release ID.Note: This field may return null, which means no valid value was found.
+         */
+        configReleaseId: string;
+        /**
+         * Configuration version.Note: This field may return null, which means no valid value was found.
+         */
+        configVersion: string;
+        /**
+         * groupId.
+         */
+        groupId: string;
+        /**
+         * Configuration item release group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+        /**
+         * Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceId: string;
+        /**
+         * Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Configuration item release description.Note: This field may return null, which means no valid value was found.
+         */
+        releaseDesc: string;
+        /**
+         * Configuration item release time.Note: This field may return null, which means no valid value was found.
+         */
+        releaseTime: string;
+    }
+
+    export interface GetGroupConfigReleaseResultPublicConfigReleaseList {
+        /**
+         * Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+         */
+        applicationId: string;
+        /**
+         * Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+         */
+        clusterId: string;
+        /**
+         * Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * Configuration item  ID.Note: This field may return null, which means no valid value was found.
+         */
+        configId: string;
+        /**
+         * Configuration item name.Note: This field may return null, which means no valid value was found.
+         */
+        configName: string;
+        /**
+         * Configuration item release ID.Note: This field may return null, which means no valid value was found.
+         */
+        configReleaseId: string;
+        /**
+         * Configuration version.Note: This field may return null, which means no valid value was found.
+         */
+        configVersion: string;
+        /**
+         * groupId.
+         */
+        groupId: string;
+        /**
+         * Configuration item release group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+        /**
+         * Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceId: string;
+        /**
+         * Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Configuration item release description.Note: This field may return null, which means no valid value was found.
+         */
+        releaseDesc: string;
+        /**
+         * Configuration item release time.Note: This field may return null, which means no valid value was found.
+         */
+        releaseTime: string;
+    }
+
+    export interface GetGroupGatewaysResult {
+        /**
+         * api group Info.
+         */
+        contents: outputs.Tsf.GetGroupGatewaysResultContent[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetGroupGatewaysResultContent {
+        /**
+         * ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+         */
+        aclMode: string;
+        /**
+         * Number of APIs.Note: This field may return null, which means no valid value was found.
+         */
+        apiCount: number;
+        /**
+         * Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+         */
+        authType: string;
+        /**
+         * Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+         */
+        bindedGatewayDeployGroups: outputs.Tsf.GetGroupGatewaysResultContentBindedGatewayDeployGroup[];
+        /**
+         * Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+         */
+        createdTime: string;
+        /**
+         * Description.Note: This field may return null, which means no valid value was found.
+         */
+        description: string;
+        /**
+         * Gateway instance ID.Note: This field may return null, which means no valid value was found.
+         */
+        gatewayInstanceId: string;
+        /**
+         * Gateway instance type.Note: This field may return null, which means no valid value was found.
+         */
+        gatewayInstanceType: string;
+        /**
+         * api group context.Note: This field may return null, which means no valid value was found.
+         */
+        groupContext: string;
+        /**
+         * api group id.Note: This field may return null, which means no valid value was found.
+         */
+        groupId: string;
+        /**
+         * api group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+        /**
+         * Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+         */
+        groupType: string;
+        /**
+         * Namespace parameter key.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceNameKey: string;
+        /**
+         * Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceNameKeyPosition: string;
+        /**
+         * Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+         */
+        serviceNameKey: string;
+        /**
+         * Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+         */
+        serviceNameKeyPosition: string;
+        /**
+         * Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+         */
+        status: string;
+        /**
+         * Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+         */
+        updatedTime: string;
+    }
+
+    export interface GetGroupGatewaysResultContentBindedGatewayDeployGroup {
+        /**
+         * application ID.Note: This field may return null, which means no valid value was found.
+         */
+        applicationId: string;
+        /**
+         * application name.Note: This field may return null, which means no valid value was found.
+         */
+        applicationName: string;
+        /**
+         * Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+         */
+        applicationType: string;
+        /**
+         * Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+         */
+        clusterType: string;
+        /**
+         * Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+         */
+        deployGroupId: string;
+        /**
+         * Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+         */
+        deployGroupName: string;
+        /**
+         * Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+         */
+        groupStatus: string;
+    }
+
+    export interface GetGroupInstancesResult {
+        /**
+         * List of machine instances.Note: This field may return null, which means no valid value was found.
+         */
+        contents: outputs.Tsf.GetGroupInstancesResultContent[];
+        /**
+         * Total number of machine instances.Note: This field may return null, which means no valid value was found.
+         */
+        totalCount: number;
+    }
+
+    export interface GetGroupInstancesResultContent {
+        /**
+         * Agent version.Note: This field may return null, which means no valid value was found.
+         */
+        agentVersion: string;
+        /**
+         * Application id.Note: This field may return null, which means no valid value was found.
+         */
+        applicationId: string;
+        /**
+         * Application name. Note: This field may return null, which means no valid value was found.
+         */
+        applicationName: string;
+        /**
+         * application resource id.Note: This field may return null, which means no valid value was found.
+         */
+        applicationResourceType: string;
+        /**
+         * Application id.Note: This field may return null, which means no valid value was found.
+         */
+        applicationType: string;
+        /**
+         * Cluster id.Note: This field may return null, which means no valid value was found.
+         */
+        clusterId: string;
+        /**
+         * Cluster name. Note: This field may return null, which means no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * Cluster type.Note: This field may return null, which means no valid value was found.
+         */
+        clusterType: string;
+        /**
+         * Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+         */
+        countInTsf: number;
+        /**
+         * group id.
+         */
+        groupId: string;
+        /**
+         * Group name.Note: This field may return null, which means no valid value was found.
+         */
+        groupName: string;
+        /**
+         * VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+         */
+        instanceAvailableStatus: string;
+        /**
+         * machine instance charge type.Note: This field may return null, which means no valid value was found.
+         */
+        instanceChargeType: string;
+        /**
+         * Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+         */
+        instanceCreatedTime: string;
+        /**
+         * Description.Note: This field may return null, which means no valid value was found.
+         */
+        instanceDesc: string;
+        /**
+         * Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+         */
+        instanceExpiredTime: string;
+        /**
+         * Machine instance ID.Note: This field may return null, which means no valid value was found.
+         */
+        instanceId: string;
+        /**
+         * InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+         */
+        instanceImportMode: string;
+        /**
+         * Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceLimitCpu: number;
+        /**
+         * Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceLimitMem: number;
+        /**
+         * Machine name.Note: This field may return null, which means no valid value was found.
+         */
+        instanceName: string;
+        /**
+         * instance pkg version.Note: This field may return null, which means no valid value was found.
+         */
+        instancePkgVersion: string;
+        /**
+         * VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+         */
+        instanceStatus: string;
+        /**
+         * Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceTotalCpu: number;
+        /**
+         * Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceTotalMem: number;
+        /**
+         * CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceUsedCpu: number;
+        /**
+         * Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        instanceUsedMem: number;
+        /**
+         * Instance zone id.Note: This field may return null, which means no valid value was found.
+         */
+        instanceZoneId: string;
+        /**
+         * Private IP address.Note: This field may return null, which means no valid value was found.
+         */
+        lanIp: string;
+        /**
+         * Namespace id.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceId: string;
+        /**
+         * Namespace name.Note: This field may return null, which means no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Container host instance ID.Note: This field may return null, which means no valid value was found.
+         */
+        nodeInstanceId: string;
+        /**
+         * Execution status of the instance.Note: This field may return null, which means no valid value was found.
+         */
+        operationState: number;
+        /**
+         * Health checking reason.Note: This field may return null, which means no valid value was found.
+         */
+        reason: string;
+        /**
+         * Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+         */
+        restrictState: string;
+        /**
+         * Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+         */
+        serviceInstanceStatus: string;
+        /**
+         * Sidecar status.Note: This field may return null, which means no valid value was found.
+         */
+        serviceSidecarStatus: string;
+        /**
+         * Update time.Note: This field may return null, which means no valid value was found.
+         */
+        updateTime: string;
+        /**
+         * Public IP address.Note: This field may return null, which means no valid value was found.
+         */
+        wanIp: string;
+    }
+
+    export interface GetGroupsResult {
+        /**
+         * Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+         */
+        contents: outputs.Tsf.GetGroupsResultContent[];
+        /**
+         * Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+         */
+        totalCount: number;
+    }
+
+    export interface GetGroupsResultContent {
+        /**
+         * Group alias. Note: This field may return null, indicating that no valid value was found.
+         */
+        alias: string;
+        /**
+         * applicationId.
+         */
+        applicationId: string;
+        /**
+         * Application name. Note: This field may return null, indicating that no valid value was found.
+         */
+        applicationName: string;
+        /**
+         * Application type. Note: This field may return null, indicating that no valid value was found.
+         */
+        applicationType: string;
+        /**
+         * clusterId.
+         */
+        clusterId: string;
+        /**
+         * Cluster name. Note: This field may return null, indicating that no valid value was found.
+         */
+        clusterName: string;
+        /**
+         * Create Time. Note: This field may return null, indicating that no valid value was found.
+         */
+        createTime: string;
+        /**
+         * Group description. Note: This field may return null, indicating that no valid value was found.
+         */
+        deployDesc: string;
+        /**
+         * Group description. Note: This field may return null, indicating that no valid value was found.
+         */
+        groupDesc: string;
+        /**
+         * Group ID. Note: This field may return null, indicating that no valid value was found.
+         */
+        groupId: string;
+        /**
+         * Group ID. Note: This field may return null, indicating that no valid value was found.
+         */
+        groupName: string;
+        /**
+         * Group resource type. Note: This field may return null, indicating that no valid value was found.
+         */
+        groupResourceType: string;
+        /**
+         * Microservice type. Note: This field may return null, indicating that no valid value was found.
+         */
+        microserviceType: string;
+        /**
+         * namespace Id.
+         */
+        namespaceId: string;
+        /**
+         * Namespace name. Note: This field may return null, indicating that no valid value was found.
+         */
+        namespaceName: string;
+        /**
+         * Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+         */
+        startupParameters: string;
+        /**
+         * Group update time. Note: This field may return null, indicating that no valid value was found.
+         */
+        updateTime: string;
+        /**
+         * Update time. Note: This field may return null, indicating that no valid value was found.
+         */
+        updatedTime: number;
+    }
+
+    export interface GetMicroserviceApiVersionResult {
+        /**
+         * Application ID.
+         */
+        applicationId: string;
+        /**
+         * Application Name.
+         */
+        applicationName: string;
+        /**
+         * application pkg version.
+         */
+        pkgVersion: string;
+    }
+
     export interface GetMicroserviceResult {
         /**
          * Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.
@@ -28986,6 +46254,218 @@ export namespace Tsf {
          * last update time.  Note: This field may return null, indicating that no valid values can be obtained.
          */
         updateTime: number;
+    }
+
+    export interface GetMsApiListResult {
+        /**
+         * api list.
+         */
+        contents: outputs.Tsf.GetMsApiListResultContent[];
+        /**
+         * Quantity.
+         */
+        totalCount: number;
+    }
+
+    export interface GetMsApiListResultContent {
+        /**
+         * Method description. Note: This field may return null, indicating that no valid value was found.
+         */
+        description: string;
+        /**
+         * api method.
+         */
+        method: string;
+        /**
+         * api path.
+         */
+        path: string;
+        /**
+         * API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+         */
+        status: number;
+    }
+
+    export interface GetPodInstancesResult {
+        /**
+         * Content list.Note: This field may return null, which means no valid value was found.
+         */
+        contents: outputs.Tsf.GetPodInstancesResultContent[];
+        /**
+         * Total number of records.Note: This field may return null, which means no valid value was found.
+         */
+        totalCount: number;
+    }
+
+    export interface GetPodInstancesResultContent {
+        /**
+         * Instance start time.Note: This field may return null, which means no valid value was found.
+         */
+        createdAt: string;
+        /**
+         * Instance available status.Note: This field may return null, which means no valid value was found.
+         */
+        instanceAvailableStatus: string;
+        /**
+         * Instance status.Note: This field may return null, which means no valid value was found.
+         */
+        instanceStatus: string;
+        /**
+         * Instance ip.Note: This field may return null, which means no valid value was found.
+         */
+        ip: string;
+        /**
+         * Instance node id.Note: This field may return null, which means no valid value was found.
+         */
+        nodeInstanceId: string;
+        /**
+         * Instance node ip.Note: This field may return null, which means no valid value was found.
+         */
+        nodeIp: string;
+        /**
+         * Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+         */
+        podId: string;
+        /**
+         * Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+         */
+        podName: string;
+        /**
+         * Instance ready count.Note: This field may return null, which means no valid value was found.
+         */
+        readyCount: number;
+        /**
+         * Instance reason for current status.Note: This field may return null, which means no valid value was found.
+         */
+        reason: string;
+        /**
+         * Instance restart count.Note: This field may return null, which means no valid value was found.
+         */
+        restartCount: number;
+        /**
+         * Instance run time.Note: This field may return null, which means no valid value was found.
+         */
+        runtime: string;
+        /**
+         * Instance serve status.Note: This field may return null, which means no valid value was found.
+         */
+        serviceInstanceStatus: string;
+        /**
+         * Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+         */
+        status: string;
+    }
+
+    export interface GetPublicConfigSummaryResult {
+        /**
+         * config list.
+         */
+        contents: outputs.Tsf.GetPublicConfigSummaryResultContent[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetPublicConfigSummaryResultContent {
+        /**
+         * Application ID.Note: This field may return null, indicating that no valid value was found.
+         */
+        applicationId: string;
+        /**
+         * Application Name. Note: This field may return null, indicating that no valid value was found.
+         */
+        applicationName: string;
+        /**
+         * Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+         */
+        configId: string;
+        /**
+         * Configuration name.Note: This field may return null, indicating that no valid value was found.
+         */
+        configName: string;
+        /**
+         * Config type. Note: This field may return null, indicating that no valid value was found.
+         */
+        configType: string;
+        /**
+         * Configuration value.Note: This field may return null, indicating that no valid value was found.
+         */
+        configValue: string;
+        /**
+         * Configuration version. Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersion: string;
+        /**
+         * Configure version count.Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersionCount: number;
+        /**
+         * Configuration version description.Note: This field may return null, indicating that no valid value was found.
+         */
+        configVersionDesc: string;
+        /**
+         * Create time.Note: This field may return null, indicating that no valid value was found.
+         */
+        creationTime: string;
+        /**
+         * Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+         */
+        deleteFlag: boolean;
+        /**
+         * Last update time.Note: This field may return null, indicating that no valid value was found.
+         */
+        lastUpdateTime: string;
+    }
+
+    export interface GetRepositoryResult {
+        /**
+         * Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        contents: outputs.Tsf.GetRepositoryResultContent[];
+        /**
+         * Total Repository.
+         */
+        totalCount: number;
+    }
+
+    export interface GetRepositoryResultContent {
+        /**
+         * Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        bucketName: string;
+        /**
+         * Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        bucketRegion: string;
+        /**
+         * CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        directory: string;
+        /**
+         * Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        isUsed: boolean;
+        /**
+         * Repository description (default warehouse: default, private warehouse: private).
+         */
+        repositoryDesc: string;
+        /**
+         * repository Id.
+         */
+        repositoryId: string;
+        /**
+         * Repository Name.
+         */
+        repositoryName: string;
+        /**
+         * Repository type (default Repository: default, private Repository: private).
+         */
+        repositoryType: string;
     }
 
     export interface GetUnitRulesResult {
@@ -29098,6 +46578,44 @@ export namespace Tsf {
          * Unitization rule item ID.
          */
         unitRuleItemId: string;
+    }
+
+    export interface GetUsableUnitNamespacesResult {
+        /**
+         * namespace list.
+         */
+        contents: outputs.Tsf.GetUsableUnitNamespacesResultContent[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetUsableUnitNamespacesResultContent {
+        /**
+         * Create time. Note: This field may return null, indicating that no valid value was found.
+         */
+        createdTime: string;
+        /**
+         * Gateway instance id Note: This field may return null, indicating that no valid value was found.
+         */
+        gatewayInstanceId: string;
+        /**
+         * Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+         */
+        id: string;
+        /**
+         * namespace id.
+         */
+        namespaceId: string;
+        /**
+         * namespace name.
+         */
+        namespaceName: string;
+        /**
+         * Update time. Note: This field may return null, indicating that no valid value was found.
+         */
+        updatedTime: string;
     }
 
     export interface InstancesAttachmentInstanceAdvancedSettings {
@@ -29291,6 +46809,7 @@ export namespace Tsf {
          */
         unitRuleItemId: string;
     }
+
 }
 
 export namespace Vod {
@@ -30215,6 +47734,17 @@ export namespace Vpc {
         storageTopic: string;
     }
 
+    export interface GetAccountAttributesAccountAttributeSet {
+        /**
+         * Attribute name.
+         */
+        attributeName: string;
+        /**
+         * Attribute values.
+         */
+        attributeValues: string[];
+    }
+
     export interface GetAclsAclList {
         /**
          * Creation time.
@@ -30315,6 +47845,154 @@ export namespace Vpc {
         vpcId: string;
     }
 
+    export interface GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet {
+        /**
+         * Current billing amount in Mbps.
+         */
+        bandwidthUsage: number;
+    }
+
+    export interface GetBandwidthPackageQuotaQuotaSet {
+        /**
+         * current amount.
+         */
+        quotaCurrent: number;
+        /**
+         * Quota type.
+         */
+        quotaId: string;
+        /**
+         * quota amount.
+         */
+        quotaLimit: number;
+    }
+
+    export interface GetClassicLinkInstancesClassicLinkInstanceSet {
+        /**
+         * The unique ID of the CVM instance.
+         */
+        instanceId: string;
+        /**
+         * VPC instance ID.
+         */
+        vpcId: string;
+    }
+
+    export interface GetClassicLinkInstancesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+         */
+        values: string[];
+    }
+
+    export interface GetCvmInstancesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: string[];
+    }
+
+    export interface GetCvmInstancesInstanceSet {
+        /**
+         * Number of CPU cores in an instance (in core).
+         */
+        cpu: number;
+        /**
+         * The creation time.
+         */
+        createdTime: string;
+        /**
+         * Private IP quoata for instance ENIs (including primary ENIs).
+         */
+        eniIpLimit: number;
+        /**
+         * Instance ENI quota (including primary ENIs).
+         */
+        eniLimit: number;
+        /**
+         * The number of ENIs (including primary ENIs) bound to a instance.
+         */
+        instanceEniCount: number;
+        /**
+         * CVM instance ID.
+         */
+        instanceId: string;
+        /**
+         * CVM Name.
+         */
+        instanceName: string;
+        /**
+         * CVM status.
+         */
+        instanceState: string;
+        /**
+         * Instance type.
+         */
+        instanceType: string;
+        /**
+         * Instance's memory capacity. Unit: GB.
+         */
+        memory: number;
+        /**
+         * Subnet instance ID.
+         */
+        subnetId: string;
+        /**
+         * VPC instance ID.
+         */
+        vpcId: string;
+    }
+
+    export interface GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet {
+        /**
+         * Inbound packets.
+         */
+        inPkg: number;
+        /**
+         * Inbound traffic, in Byte.
+         */
+        inTraffic: number;
+        /**
+         * Outbound packets.
+         */
+        outPkg: number;
+        /**
+         * Outbound traffic, in Byte.
+         */
+        outTraffic: number;
+        /**
+         * Origin `IP`.
+         */
+        privateIpAddress: string;
+    }
+
+    export interface GetGatewayFlowQosGatewayQosSet {
+        /**
+         * bandwidth value.
+         */
+        bandwidth: number;
+        /**
+         * create time.
+         */
+        createTime: string;
+        /**
+         * cvm ip address.
+         */
+        ipAddress: string;
+        /**
+         * vpc id.
+         */
+        vpcId: string;
+    }
+
     export interface GetInstancesInstanceList {
         /**
          * Filter VPC with this CIDR.
@@ -30352,6 +48030,356 @@ export namespace Vpc {
          * ID of the VPC to be queried.
          */
         vpcId: string;
+    }
+
+    export interface GetLimitsVpcLimitSet {
+        /**
+         * type of vpc limit.
+         */
+        limitType: string;
+        /**
+         * value of vpc limit.
+         */
+        limitValue: number;
+    }
+
+    export interface GetNetDetectStateCheckNetDetectIpStateSet {
+        /**
+         * The latency. Unit: ms.
+         */
+        delay: number;
+        /**
+         * The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+         */
+        detectDestinationIp: string;
+        /**
+         * The packet loss rate.
+         */
+        packetLossRate: number;
+        /**
+         * The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+         */
+        state: number;
+    }
+
+    export interface GetNetDetectStatesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: string[];
+    }
+
+    export interface GetNetDetectStatesNetDetectStateSet {
+        /**
+         * The ID of a network detection instance, such as netd-12345678.
+         */
+        netDetectId: string;
+        /**
+         * The array of network detection destination IP verification results.
+         */
+        netDetectIpStateSets: outputs.Vpc.GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet[];
+    }
+
+    export interface GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet {
+        /**
+         * The latency. Unit: ms.
+         */
+        delay: number;
+        /**
+         * The destination IPv4 address of network detection.
+         */
+        detectDestinationIp: string;
+        /**
+         * The packet loss rate.
+         */
+        packetLossRate: number;
+        /**
+         * The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+         */
+        state: number;
+    }
+
+    export interface GetPrivateIpAddressesVpcPrivateIpAddressSet {
+        /**
+         * The `CIDR` belonging to the subnet.
+         */
+        cidrBlock: string;
+        /**
+         * `IP` application time.
+         */
+        createdTime: string;
+        /**
+         * `VPC` private `IP`.
+         */
+        privateIpAddress: string;
+        /**
+         * Private `IP` type.
+         */
+        privateIpAddressType: string;
+    }
+
+    export interface GetProductQuotaProductQuotaSet {
+        /**
+         * Current Quota.
+         */
+        quotaCurrent: number;
+        /**
+         * Quota Id.
+         */
+        quotaId: string;
+        /**
+         * Quota limit.
+         */
+        quotaLimit: number;
+        /**
+         * Quota name.
+         */
+        quotaName: string;
+        /**
+         * Quota region.
+         */
+        quotaRegion: boolean;
+    }
+
+    export interface GetResourceDashboardResourceDashboardSet {
+        /**
+         * Relational database.
+         */
+        cdb: number;
+        /**
+         * Cloud file storage - CFS.
+         */
+        cfs: number;
+        /**
+         * Cloud Kafka (CKafka).
+         */
+        ckafka: number;
+        /**
+         * Classic link.
+         */
+        classicLink: number;
+        /**
+         * TencentDB for Memcached.
+         */
+        cmem: number;
+        /**
+         * Cnas.
+         */
+        cnas: number;
+        /**
+         * Cloud time series database.
+         */
+        ctsDb: number;
+        /**
+         * Cloud Virtual Machine.
+         */
+        cvm: number;
+        /**
+         * An enterprise-grade TencentDB - CynosDB for MySQL.
+         */
+        cynosDbMysql: number;
+        /**
+         * Enterprise TencentDB - CynosDB for Postgres.
+         */
+        cynosDbPostgres: number;
+        /**
+         * Cloud database audit.
+         */
+        dbAudit: number;
+        /**
+         * A distributed cloud database - TencentDB for TDSQL.
+         */
+        dcdb: number;
+        /**
+         * Direct Connect gateway.
+         */
+        dcg: number;
+        /**
+         * ElasticSearch Service.
+         */
+        elasticSearch: number;
+        /**
+         * EMR cluster.
+         */
+        emr: number;
+        /**
+         * Flow log.
+         */
+        flowLog: number;
+        /**
+         * Snova data warehouse.
+         */
+        greenplumn: number;
+        /**
+         * Grocery.
+         */
+        grocery: number;
+        /**
+         * Data encryption service.
+         */
+        hsm: number;
+        /**
+         * Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+         */
+        ip: number;
+        /**
+         * Itop.
+         */
+        itop: number;
+        /**
+         * Load balancer.
+         */
+        lb: number;
+        /**
+         * TencentDB for MariaDB (TDSQL).
+         */
+        mariaDb: number;
+        /**
+         * TencentDB for MongoDB.
+         */
+        mongoDb: number;
+        /**
+         * Network attached storage.
+         */
+        nas: number;
+        /**
+         * NAT gateway.
+         */
+        nat: number;
+        /**
+         * Network ACL.
+         */
+        networkAcl: number;
+        /**
+         * Network probing.
+         */
+        networkDetect: number;
+        /**
+         * Oracle.
+         */
+        oracle: number;
+        /**
+         * Peering connection.
+         */
+        pcx: number;
+        /**
+         * TencentDB for PostgreSQL.
+         */
+        postgres: number;
+        /**
+         * TencentDB for Redis.
+         */
+        redis: number;
+        /**
+         * Route table.
+         */
+        routeTable: number;
+        /**
+         * SEAL.
+         */
+        seal: number;
+        /**
+         * TencentDB for SQL Server.
+         */
+        sqlServer: number;
+        /**
+         * Subnets.
+         */
+        subnet: number;
+        /**
+         * Subnet instance ID, such as subnet-bthucmmy.
+         */
+        subnetId: string;
+        /**
+         * Blockchain service.
+         */
+        tBaas: number;
+        /**
+         * Game storage - Tcaplus.
+         */
+        tcaplus: number;
+        /**
+         * HTAP database - TiDB.
+         */
+        tiDb: number;
+        /**
+         * VPC instance ID, such as `vpc-bq4bzxpj`.
+         */
+        vpcId: string;
+        /**
+         * VPN gateway.
+         */
+        vpngw: number;
+    }
+
+    export interface GetRouteConflictsRouteConflictSet {
+        /**
+         * route conflict list.
+         */
+        conflictSets: outputs.Vpc.GetRouteConflictsRouteConflictSetConflictSet[];
+        /**
+         * destination cidr block.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Routing table instance ID, for example:rtb-azd4dt1c.
+         */
+        routeTableId: string;
+    }
+
+    export interface GetRouteConflictsRouteConflictSetConflictSet {
+        /**
+         * create time.
+         */
+        createdTime: string;
+        /**
+         * destination cidr block.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Destination of Ipv6 Cidr Block.
+         */
+        destinationIpv6CidrBlock: string;
+        /**
+         * if enabled.
+         */
+        enabled: boolean;
+        /**
+         * next hop id.
+         */
+        gatewayId: string;
+        /**
+         * next gateway type.
+         */
+        gatewayType: string;
+        /**
+         * if published To ccn.
+         */
+        publishedToVbc: boolean;
+        /**
+         * route description.
+         */
+        routeDescription: string;
+        /**
+         * route id.
+         */
+        routeId: number;
+        /**
+         * unique policy id.
+         */
+        routeItemId: string;
+        /**
+         * Routing table instance ID, for example:rtb-azd4dt1c.
+         */
+        routeTableId: string;
+        /**
+         * routr type.
+         */
+        routeType: string;
     }
 
     export interface GetRouteTablesInstanceList {
@@ -30412,6 +48440,247 @@ export namespace Vpc {
         routeEntryId: string;
     }
 
+    export interface GetSecurityGroupLimitsSecurityGroupLimitSet {
+        /**
+         * number of instances associated sg.
+         */
+        instanceSecurityGroupLimit: number;
+        /**
+         * number of sg can be referred.
+         */
+        referredSecurityGroupLimit: number;
+        /**
+         * number of sg extended policy.
+         */
+        securityGroupExtendedPolicyLimit: number;
+        /**
+         * number of sg associated instances.
+         */
+        securityGroupInstanceLimit: number;
+        /**
+         * number of sg can be created.
+         */
+        securityGroupLimit: number;
+        /**
+         * number of sg polciy can be created.
+         */
+        securityGroupPolicyLimit: number;
+        /**
+         * number of eni and cvm can be referred.
+         */
+        securityGroupReferredCvmAndEniLimit: number;
+        /**
+         * number of svc can be referred.
+         */
+        securityGroupReferredSvcLimit: number;
+    }
+
+    export interface GetSecurityGroupReferencesReferredSecurityGroupSet {
+        /**
+         * IDs of all referred security group instances.
+         */
+        referredSecurityGroupIds: string[];
+        /**
+         * Security group instance ID.
+         */
+        securityGroupId: string;
+    }
+
+    export interface GetSgSnapshotFileContentBackupData {
+        /**
+         * ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * IP address ID or IP address group ID.
+         */
+        addressTemplates: outputs.Vpc.GetSgSnapshotFileContentBackupDataAddressTemplate[];
+        /**
+         * Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+         */
+        cidrBlock: string;
+        /**
+         * The CIDR block or IPv6 (mutually exclusive).
+         */
+        ipv6CidrBlock: string;
+        /**
+         * The last modification time of the security group.
+         */
+        modifyTime: string;
+        /**
+         * Security group policy description.
+         */
+        policyDescription: string;
+        /**
+         * The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+         */
+        policyIndex: number;
+        /**
+         * Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+         */
+        port: string;
+        /**
+         * Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+         */
+        protocol: string;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+         */
+        serviceTemplates: outputs.Vpc.GetSgSnapshotFileContentBackupDataServiceTemplate[];
+    }
+
+    export interface GetSgSnapshotFileContentBackupDataAddressTemplate {
+        /**
+         * The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+         */
+        addressGroupId: string;
+        /**
+         * The ID of the IP address, such as `ipm-2uw6ujo6`.
+         */
+        addressId: string;
+    }
+
+    export interface GetSgSnapshotFileContentBackupDataServiceTemplate {
+        /**
+         * Protocol port group ID, such as `ppmg-f5n1f8da`.
+         */
+        serviceGroupId: string;
+        /**
+         * Protocol port ID, such as `ppm-f5n1f8da`.
+         */
+        serviceId: string;
+    }
+
+    export interface GetSgSnapshotFileContentOriginalData {
+        /**
+         * ACCEPT or DROP.
+         */
+        action: string;
+        /**
+         * IP address ID or IP address group ID.
+         */
+        addressTemplates: outputs.Vpc.GetSgSnapshotFileContentOriginalDataAddressTemplate[];
+        /**
+         * Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+         */
+        cidrBlock: string;
+        /**
+         * The CIDR block or IPv6 (mutually exclusive).
+         */
+        ipv6CidrBlock: string;
+        /**
+         * The last modification time of the security group.
+         */
+        modifyTime: string;
+        /**
+         * Security group policy description.
+         */
+        policyDescription: string;
+        /**
+         * The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+         */
+        policyIndex: number;
+        /**
+         * Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+         */
+        port: string;
+        /**
+         * Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+         */
+        protocol: string;
+        /**
+         * Security group ID.
+         */
+        securityGroupId: string;
+        /**
+         * Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+         */
+        serviceTemplates: outputs.Vpc.GetSgSnapshotFileContentOriginalDataServiceTemplate[];
+    }
+
+    export interface GetSgSnapshotFileContentOriginalDataAddressTemplate {
+        /**
+         * The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+         */
+        addressGroupId: string;
+        /**
+         * The ID of the IP address, such as `ipm-2uw6ujo6`.
+         */
+        addressId: string;
+    }
+
+    export interface GetSgSnapshotFileContentOriginalDataServiceTemplate {
+        /**
+         * Protocol port group ID, such as `ppmg-f5n1f8da`.
+         */
+        serviceGroupId: string;
+        /**
+         * Protocol port ID, such as `ppm-f5n1f8da`.
+         */
+        serviceId: string;
+    }
+
+    export interface GetSnapshotFilesSnapshotFileSet {
+        /**
+         * backup time.
+         */
+        backupTime: string;
+        /**
+         * InstanceId.
+         */
+        instanceId: string;
+        /**
+         * Uin of operator.
+         */
+        operator: string;
+        /**
+         * snap shot file id.
+         */
+        snapshotFileId: string;
+        /**
+         * Snapshot Policy Id.
+         */
+        snapshotPolicyId: string;
+    }
+
+    export interface GetSubnetResourceDashboardResourceStatisticsSet {
+        /**
+         * The total number of used IP addresses.
+         */
+        ip: number;
+        /**
+         * Information of associated resources.
+         */
+        resourceStatisticsItemSets: outputs.Vpc.GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet[];
+        /**
+         * Subnet instance ID, such as `subnet-bthucmmy`.
+         */
+        subnetId: string;
+        /**
+         * VPC instance ID, such as vpc-f1xjkw1b.
+         */
+        vpcId: string;
+    }
+
+    export interface GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet {
+        /**
+         * Number of resources.
+         */
+        resourceCount: number;
+        /**
+         * Resource name.
+         */
+        resourceName: string;
+        /**
+         * Resource type, such as CVM, ENI.
+         */
+        resourceType: string;
+    }
+
     export interface GetSubnetsInstanceList {
         /**
          * Zone of the subnet to be queried.
@@ -30457,6 +48726,153 @@ export namespace Vpc {
          * ID of the VPC to be queried.
          */
         vpcId: string;
+    }
+
+    export interface GetTemplateLimitsTemplateLimit {
+        /**
+         * address template group member limit.
+         */
+        addressTemplateGroupMemberLimit: number;
+        /**
+         * address template member limit.
+         */
+        addressTemplateMemberLimit: number;
+        /**
+         * service template group member limit.
+         */
+        serviceTemplateGroupMemberLimit: number;
+        /**
+         * service template member limit.
+         */
+        serviceTemplateMemberLimit: number;
+    }
+
+    export interface GetUsedIpAddressIpAddressState {
+        /**
+         * IP address.
+         */
+        ipAddress: string;
+        /**
+         * Resource ID.
+         */
+        resourceId: string;
+        /**
+         * Resource type.
+         */
+        resourceType: string;
+        /**
+         * Subnet instance ID.
+         */
+        subnetId: string;
+        /**
+         * VPC instance ID.
+         */
+        vpcId: string;
+    }
+
+    export interface Ipv6EniAddressIpv6Address {
+        /**
+         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+         */
+        address: string;
+        /**
+         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
+         */
+        addressId?: string;
+        /**
+         * Description.
+         */
+        description?: string;
+        /**
+         * Whether the public network IP is blocked.
+         */
+        isWanIpBlocked?: boolean;
+        /**
+         * Whether to master `IP`.
+         */
+        primary?: boolean;
+        /**
+         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+         */
+        state?: string;
+    }
+
+    export interface Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
+        /**
+         * `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+         */
+        ipv6CidrBlock: string;
+        /**
+         * Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+         */
+        subnetId: string;
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSet {
+        egresses?: outputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetEgress[];
+        ingresses?: outputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetIngress[];
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+        action?: string;
+        createTime?: string;
+        description?: string;
+        destinationCidr?: string;
+        destinationPort?: string;
+        networkAclDirection?: string;
+        networkAclQuintupleEntryId?: string;
+        priority?: number;
+        protocol?: string;
+        sourceCidr?: string;
+        sourcePort?: string;
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+        action?: string;
+        createTime?: string;
+        description?: string;
+        destinationCidr?: string;
+        destinationPort?: string;
+        networkAclDirection?: string;
+        networkAclQuintupleEntryId?: string;
+        priority?: number;
+        protocol?: string;
+        sourceCidr?: string;
+        sourcePort?: string;
+    }
+
+    export interface SnapshotPolicyAttachmentInstance {
+        /**
+         * InstanceId.
+         */
+        instanceId: string;
+        /**
+         * Instance name.
+         */
+        instanceName: string;
+        /**
+         * The region where the instance is located.
+         */
+        instanceRegion: string;
+        /**
+         * Instance type, currently supports set: `securitygroup`.
+         */
+        instanceType: string;
+        /**
+         * Snapshot policy Id.
+         */
+        snapshotPolicyId: string;
+    }
+
+    export interface SnapshotPolicyBackupPolicy {
+        /**
+         * Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+         */
+        backupDay: string;
+        /**
+         * Backup time point, format:HH:mm:ss.
+         */
+        backupTime: string;
     }
 
 }

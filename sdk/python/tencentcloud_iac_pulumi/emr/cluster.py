@@ -37,7 +37,19 @@ class ClusterArgs:
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
-        :param pulumi.Input[int] product_id: The product id of EMR instance.
+        :param pulumi.Input[int] product_id: Product ID. Different products ID represents different EMR product versions. Value range:
+               - 16: represents EMR-V2.3.0
+               - 20: indicates EMR-V2.5.0
+               - 25: represents EMR-V3.1.0
+               - 27: represents KAFKA-V1.0.0
+               - 30: indicates EMR-V2.6.0
+               - 33: represents EMR-V3.2.1
+               - 34: stands for EMR-V3.3.0
+               - 36: represents STARROCKS-V1.0.0
+               - 37: indicates EMR-V3.4.0
+               - 38: represents EMR-V2.7.0
+               - 39: stands for STARROCKS-V1.1.0
+               - 41: represents DRUID-V1.1.0.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
         :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
@@ -136,7 +148,19 @@ class ClusterArgs:
     @pulumi.getter(name="productId")
     def product_id(self) -> pulumi.Input[int]:
         """
-        The product id of EMR instance.
+        Product ID. Different products ID represents different EMR product versions. Value range:
+        - 16: represents EMR-V2.3.0
+        - 20: indicates EMR-V2.5.0
+        - 25: represents EMR-V3.1.0
+        - 27: represents KAFKA-V1.0.0
+        - 30: indicates EMR-V2.6.0
+        - 33: represents EMR-V3.2.1
+        - 34: stands for EMR-V3.3.0
+        - 36: represents STARROCKS-V1.0.0
+        - 37: indicates EMR-V3.4.0
+        - 38: represents EMR-V2.7.0
+        - 39: stands for STARROCKS-V1.1.0
+        - 41: represents DRUID-V1.1.0.
         """
         return pulumi.get(self, "product_id")
 
@@ -289,7 +313,19 @@ class _ClusterState:
                By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
-        :param pulumi.Input[int] product_id: The product id of EMR instance.
+        :param pulumi.Input[int] product_id: Product ID. Different products ID represents different EMR product versions. Value range:
+               - 16: represents EMR-V2.3.0
+               - 20: indicates EMR-V2.5.0
+               - 25: represents EMR-V3.1.0
+               - 27: represents KAFKA-V1.0.0
+               - 30: indicates EMR-V2.6.0
+               - 33: represents EMR-V3.2.1
+               - 34: stands for EMR-V3.3.0
+               - 36: represents STARROCKS-V1.0.0
+               - 37: indicates EMR-V3.4.0
+               - 38: represents EMR-V2.7.0
+               - 39: stands for STARROCKS-V1.1.0
+               - 41: represents DRUID-V1.1.0.
         :param pulumi.Input['ClusterResourceSpecArgs'] resource_spec: Resource specification of EMR instance.
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
@@ -435,7 +471,19 @@ class _ClusterState:
     @pulumi.getter(name="productId")
     def product_id(self) -> Optional[pulumi.Input[int]]:
         """
-        The product id of EMR instance.
+        Product ID. Different products ID represents different EMR product versions. Value range:
+        - 16: represents EMR-V2.3.0
+        - 20: indicates EMR-V2.5.0
+        - 25: represents EMR-V3.1.0
+        - 27: represents KAFKA-V1.0.0
+        - 30: indicates EMR-V2.6.0
+        - 33: represents EMR-V3.2.1
+        - 34: stands for EMR-V3.3.0
+        - 36: represents STARROCKS-V1.0.0
+        - 37: indicates EMR-V3.4.0
+        - 38: represents EMR-V2.7.0
+        - 39: stands for STARROCKS-V1.1.0
+        - 41: represents DRUID-V1.1.0.
         """
         return pulumi.get(self, "product_id")
 
@@ -616,7 +664,19 @@ class Cluster(pulumi.CustomResource):
                By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
-        :param pulumi.Input[int] product_id: The product id of EMR instance.
+        :param pulumi.Input[int] product_id: Product ID. Different products ID represents different EMR product versions. Value range:
+               - 16: represents EMR-V2.3.0
+               - 20: indicates EMR-V2.5.0
+               - 25: represents EMR-V3.1.0
+               - 27: represents KAFKA-V1.0.0
+               - 30: indicates EMR-V2.6.0
+               - 33: represents EMR-V3.2.1
+               - 34: stands for EMR-V3.3.0
+               - 36: represents STARROCKS-V1.0.0
+               - 37: indicates EMR-V3.4.0
+               - 38: represents EMR-V2.7.0
+               - 39: stands for STARROCKS-V1.1.0
+               - 41: represents DRUID-V1.1.0.
         :param pulumi.Input[pulumi.InputType['ClusterResourceSpecArgs']] resource_spec: Resource specification of EMR instance.
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
@@ -812,7 +872,19 @@ class Cluster(pulumi.CustomResource):
                By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
-        :param pulumi.Input[int] product_id: The product id of EMR instance.
+        :param pulumi.Input[int] product_id: Product ID. Different products ID represents different EMR product versions. Value range:
+               - 16: represents EMR-V2.3.0
+               - 20: indicates EMR-V2.5.0
+               - 25: represents EMR-V3.1.0
+               - 27: represents KAFKA-V1.0.0
+               - 30: indicates EMR-V2.6.0
+               - 33: represents EMR-V3.2.1
+               - 34: stands for EMR-V3.3.0
+               - 36: represents STARROCKS-V1.0.0
+               - 37: indicates EMR-V3.4.0
+               - 38: represents EMR-V2.7.0
+               - 39: stands for STARROCKS-V1.1.0
+               - 41: represents DRUID-V1.1.0.
         :param pulumi.Input[pulumi.InputType['ClusterResourceSpecArgs']] resource_spec: Resource specification of EMR instance.
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
@@ -915,7 +987,19 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="productId")
     def product_id(self) -> pulumi.Output[int]:
         """
-        The product id of EMR instance.
+        Product ID. Different products ID represents different EMR product versions. Value range:
+        - 16: represents EMR-V2.3.0
+        - 20: indicates EMR-V2.5.0
+        - 25: represents EMR-V3.1.0
+        - 27: represents KAFKA-V1.0.0
+        - 30: indicates EMR-V2.6.0
+        - 33: represents EMR-V3.2.1
+        - 34: stands for EMR-V3.3.0
+        - 36: represents STARROCKS-V1.0.0
+        - 37: indicates EMR-V3.4.0
+        - 38: represents EMR-V2.7.0
+        - 39: stands for STARROCKS-V1.1.0
+        - 41: represents DRUID-V1.1.0.
         """
         return pulumi.get(self, "product_id")
 

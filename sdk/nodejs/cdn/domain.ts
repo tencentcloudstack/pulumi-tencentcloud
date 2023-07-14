@@ -43,8 +43,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Example Usage of cdn uses cache and request headers
+ * ### Example Usage of cdn uses cache and request headers
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -96,8 +95,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Example Usage of COS bucket url as origin
+ * ### Example Usage of COS bucket url as origin
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

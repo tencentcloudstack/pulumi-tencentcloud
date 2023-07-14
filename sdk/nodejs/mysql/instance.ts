@@ -98,9 +98,9 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
-    public readonly deviceType!: pulumi.Output<string | undefined>;
+    public readonly deviceType!: pulumi.Output<string>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
     public readonly engineVersion!: pulumi.Output<string | undefined>;
     /**
@@ -110,7 +110,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Zone information about first slave instance.
      */
-    public readonly firstSlaveZone!: pulumi.Output<string | undefined>;
+    public readonly firstSlaveZone!: pulumi.Output<string>;
     /**
      * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
@@ -147,6 +147,10 @@ export class Instance extends pulumi.CustomResource {
      * Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
      */
     public /*out*/ readonly locked!: pulumi.Output<number>;
+    /**
+     * Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    public readonly maxDeayTime!: pulumi.Output<number | undefined>;
     /**
      * Memory size (in MB).
      */
@@ -216,6 +220,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly taskStatus!: pulumi.Output<number>;
     /**
+     * Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    public readonly upgradeSubversion!: pulumi.Output<number | undefined>;
+    /**
      * Disk size (in GB).
      */
     public readonly volumeSize!: pulumi.Output<number>;
@@ -254,6 +262,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["intranetIp"] = state ? state.intranetIp : undefined;
             resourceInputs["intranetPort"] = state ? state.intranetPort : undefined;
             resourceInputs["locked"] = state ? state.locked : undefined;
+            resourceInputs["maxDeayTime"] = state ? state.maxDeayTime : undefined;
             resourceInputs["memSize"] = state ? state.memSize : undefined;
             resourceInputs["paramTemplateId"] = state ? state.paramTemplateId : undefined;
             resourceInputs["parameters"] = state ? state.parameters : undefined;
@@ -270,6 +279,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["taskStatus"] = state ? state.taskStatus : undefined;
+            resourceInputs["upgradeSubversion"] = state ? state.upgradeSubversion : undefined;
             resourceInputs["volumeSize"] = state ? state.volumeSize : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
@@ -295,6 +305,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["internetService"] = args ? args.internetService : undefined;
             resourceInputs["intranetPort"] = args ? args.intranetPort : undefined;
+            resourceInputs["maxDeayTime"] = args ? args.maxDeayTime : undefined;
             resourceInputs["memSize"] = args ? args.memSize : undefined;
             resourceInputs["paramTemplateId"] = args ? args.paramTemplateId : undefined;
             resourceInputs["parameters"] = args ? args.parameters : undefined;
@@ -309,6 +320,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["slaveSyncMode"] = args ? args.slaveSyncMode : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["upgradeSubversion"] = args ? args.upgradeSubversion : undefined;
             resourceInputs["volumeSize"] = args ? args.volumeSize : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["gtid"] = undefined /*out*/;
@@ -349,7 +361,7 @@ export interface InstanceState {
      */
     deviceType?: pulumi.Input<string>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
     engineVersion?: pulumi.Input<string>;
     /**
@@ -396,6 +408,10 @@ export interface InstanceState {
      * Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
      */
     locked?: pulumi.Input<number>;
+    /**
+     * Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    maxDeayTime?: pulumi.Input<number>;
     /**
      * Memory size (in MB).
      */
@@ -465,6 +481,10 @@ export interface InstanceState {
      */
     taskStatus?: pulumi.Input<number>;
     /**
+     * Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    upgradeSubversion?: pulumi.Input<number>;
+    /**
      * Disk size (in GB).
      */
     volumeSize?: pulumi.Input<number>;
@@ -499,7 +519,7 @@ export interface InstanceArgs {
      */
     deviceType?: pulumi.Input<string>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
     engineVersion?: pulumi.Input<string>;
     /**
@@ -526,6 +546,10 @@ export interface InstanceArgs {
      * Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
      */
     intranetPort?: pulumi.Input<number>;
+    /**
+     * Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    maxDeayTime?: pulumi.Input<number>;
     /**
      * Memory size (in MB).
      */
@@ -586,6 +610,10 @@ export interface InstanceArgs {
      * Instance tags.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+     */
+    upgradeSubversion?: pulumi.Input<number>;
     /**
      * Disk size (in GB).
      */

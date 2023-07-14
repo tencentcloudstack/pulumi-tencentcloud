@@ -10,6 +10,28 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
 {
+    /// <summary>
+    /// Provides a resource to create a dts sync_check_job_operation
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var syncCheckJobOperation = new Tencentcloud.Dts.SyncCheckJobOperation("syncCheckJobOperation", new Tencentcloud.Dts.SyncCheckJobOperationArgs
+    ///         {
+    ///             JobId = "",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncCheckJobOperation:SyncCheckJobOperation")]
     public partial class SyncCheckJobOperation : Pulumi.CustomResource
     {

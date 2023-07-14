@@ -11,16 +11,27 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Nat.Gateway("foo", {
- *     assignedEipSets: ["1.1.1.1"],
- *     bandwidth: 100,
- *     maxConcurrent: 1000000,
+ * const foo = tencentcloud.Vpc.getInstances({
+ *     name: "Default-VPC",
+ * });
+ * // Create EIP
+ * const eipDevDnat = new tencentcloud.eip.Instance("eipDevDnat", {});
+ * const newEip = new tencentcloud.eip.Instance("newEip", {});
+ * const myNat = new tencentcloud.nat.Gateway("myNat", {
+ *     vpcId: foo.then(foo => foo.instanceLists?[0]?.vpcId),
+ *     maxConcurrent: 10000000,
+ *     bandwidth: 1000,
+ *     zone: "ap-guangzhou-3",
+ *     assignedEipSets: [
+ *         eipDevDnat.publicIp,
+ *         newEip.publicIp,
+ *     ],
  *     tags: {
- *         test: "tf",
+ *         tf: "test",
  *     },
- *     vpcId: "vpc-4xxr2cy7",
  * });
  * ```
  *
@@ -88,6 +99,10 @@ export class Gateway extends pulumi.CustomResource {
      * ID of the vpc.
      */
     public readonly vpcId!: pulumi.Output<string>;
+    /**
+     * The availability zone, such as `ap-guangzhou-3`.
+     */
+    public readonly zone!: pulumi.Output<string>;
 
     /**
      * Create a Gateway resource with the given unique name, arguments, and options.
@@ -109,6 +124,7 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as GatewayArgs | undefined;
             if ((!args || args.assignedEipSets === undefined) && !opts.urn) {
@@ -123,6 +139,7 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["zone"] = args ? args.zone : undefined;
             resourceInputs["createdTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -162,6 +179,10 @@ export interface GatewayState {
      * ID of the vpc.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * The availability zone, such as `ap-guangzhou-3`.
+     */
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -192,4 +213,8 @@ export interface GatewayArgs {
      * ID of the vpc.
      */
     vpcId: pulumi.Input<string>;
+    /**
+     * The availability zone, such as `ap-guangzhou-3`.
+     */
+    zone?: pulumi.Input<string>;
 }

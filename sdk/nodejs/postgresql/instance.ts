@@ -8,6 +8,8 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to create postgresql instance.
  *
+ * > **Note:** To update the charge type, please update the `chargeType` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -43,8 +45,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Create a multi available zone bucket
+ * ### Create a multi available zone bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -89,8 +90,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * create pgsql with kms key
+ * ### create pgsql with kms key
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -124,6 +124,41 @@ import * as utilities from "../utilities";
  *         tf: "test",
  *     },
  *     vpcId: "vpc-86v957zb",
+ * });
+ * ```
+ * ### upgrade kernel version
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const test = new tencentcloud.postgresql.Instance("test", {
+ *     availabilityZone: data.tencentcloud_availability_zones_by_product.zone.zones[5].name,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: local.vpc_id,
+ *     subnetId: local.subnet_id,
+ *     engineVersion: "13.3",
+ *     rootPassword: "*",
+ *     charset: "LATIN1",
+ *     projectId: 0,
+ *     publicAccessSwitch: false,
+ *     securityGroups: [local.sg_id],
+ *     memory: 4,
+ *     storage: 250,
+ *     backupPlan: {
+ *         minBackupStartTime: "01:10:11",
+ *         maxBackupStartTime: "02:10:11",
+ *         baseBackupRetentionPeriod: 5,
+ *         backupPeriods: [
+ *             "monday",
+ *             "thursday",
+ *             "sunday",
+ *         ],
+ *     },
+ *     dbKernelVersion: "v13.3_r1.4",
+ *     tags: {
+ *         tf: "teest",
+ *     },
  * });
  * ```
  *
@@ -172,7 +207,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly autoVoucher!: pulumi.Output<number | undefined>;
     /**
-     * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+     * Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
      */
     public readonly availabilityZone!: pulumi.Output<string>;
     /**
@@ -180,7 +215,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly backupPlan!: pulumi.Output<outputs.Postgresql.InstanceBackupPlan | undefined>;
     /**
-     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -192,7 +227,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
     public readonly dbKernelVersion!: pulumi.Output<string>;
     /**
@@ -242,7 +277,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly needSupportTde!: pulumi.Output<number>;
     /**
-     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
@@ -288,7 +323,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * ID of subnet.
      */
-    public readonly subnetId!: pulumi.Output<string | undefined>;
+    public readonly subnetId!: pulumi.Output<string>;
     /**
      * The available tags within this postgresql.
      */
@@ -304,7 +339,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * ID of VPC.
      */
-    public readonly vpcId!: pulumi.Output<string | undefined>;
+    public readonly vpcId!: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -368,6 +403,12 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.storage === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'storage'");
             }
+            if ((!args || args.subnetId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'subnetId'");
+            }
+            if ((!args || args.vpcId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'vpcId'");
+            }
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
             resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
@@ -422,7 +463,7 @@ export interface InstanceState {
      */
     autoVoucher?: pulumi.Input<number>;
     /**
-     * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+     * Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
      */
     availabilityZone?: pulumi.Input<string>;
     /**
@@ -430,7 +471,7 @@ export interface InstanceState {
      */
     backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
     /**
-     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -442,7 +483,7 @@ export interface InstanceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
     dbKernelVersion?: pulumi.Input<string>;
     /**
@@ -492,7 +533,7 @@ export interface InstanceState {
      */
     needSupportTde?: pulumi.Input<number>;
     /**
-     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     period?: pulumi.Input<number>;
     /**
@@ -570,7 +611,7 @@ export interface InstanceArgs {
      */
     autoVoucher?: pulumi.Input<number>;
     /**
-     * Availability zone. NOTE: If value modified but included in `dbNodeSet`, the diff will be suppressed.
+     * Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
      */
     availabilityZone: pulumi.Input<string>;
     /**
@@ -578,7 +619,7 @@ export interface InstanceArgs {
      */
     backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
     /**
-     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+     * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -586,7 +627,7 @@ export interface InstanceArgs {
      */
     charset?: pulumi.Input<string>;
     /**
-     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+     * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
     dbKernelVersion?: pulumi.Input<string>;
     /**
@@ -636,7 +677,7 @@ export interface InstanceArgs {
      */
     needSupportTde?: pulumi.Input<number>;
     /**
-     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
     period?: pulumi.Input<number>;
     /**
@@ -666,7 +707,7 @@ export interface InstanceArgs {
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId: pulumi.Input<string>;
     /**
      * The available tags within this postgresql.
      */
@@ -678,5 +719,5 @@ export interface InstanceArgs {
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId: pulumi.Input<string>;
 }

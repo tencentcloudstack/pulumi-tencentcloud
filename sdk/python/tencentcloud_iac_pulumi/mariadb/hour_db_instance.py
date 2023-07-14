@@ -19,8 +19,10 @@ class HourDbInstanceArgs:
                  zones: pulumi.Input[Sequence[pulumi.Input[str]]],
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a HourDbInstance resource.
@@ -30,8 +32,10 @@ class HourDbInstanceArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone of instance.
         :param pulumi.Input[str] db_version_id: db engine version, default to 10.1.9.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         """
         pulumi.set(__self__, "memory", memory)
@@ -42,10 +46,14 @@ class HourDbInstanceArgs:
             pulumi.set(__self__, "db_version_id", db_version_id)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -122,6 +130,18 @@ class HourDbInstanceArgs:
         pulumi.set(self, "instance_name", value)
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "project_id", value)
+
+    @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -146,6 +166,18 @@ class HourDbInstanceArgs:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -165,9 +197,11 @@ class _HourDbInstanceState:
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_count: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -176,9 +210,11 @@ class _HourDbInstanceState:
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
         :param pulumi.Input[int] node_count: number of node for instance.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone of instance.
         """
@@ -190,12 +226,16 @@ class _HourDbInstanceState:
             pulumi.set(__self__, "memory", memory)
         if node_count is not None:
             pulumi.set(__self__, "node_count", node_count)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
         if storage is not None:
             pulumi.set(__self__, "storage", storage)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zones is not None:
@@ -250,6 +290,18 @@ class _HourDbInstanceState:
         pulumi.set(self, "node_count", value)
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "project_id", value)
+
+    @property
     @pulumi.getter
     def storage(self) -> Optional[pulumi.Input[int]]:
         """
@@ -286,6 +338,18 @@ class _HourDbInstanceState:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -319,9 +383,11 @@ class HourDbInstance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_count: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -335,8 +401,8 @@ class HourDbInstance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         basic = tencentcloud.mariadb.HourDbInstance("basic",
-            db_version_id="8.0",
-            instance_name="db-test-2",
+            db_version_id="10.0",
+            instance_name="db-test-del",
             memory=2,
             node_count=2,
             storage=10,
@@ -344,9 +410,10 @@ class HourDbInstance(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             },
+            vip="10.0.0.197",
             vpc_id="vpc-k1t8ickr",
             zones=[
-                "ap-guangzhou-7",
+                "ap-guangzhou-6",
                 "ap-guangzhou-7",
             ])
         ```
@@ -365,9 +432,11 @@ class HourDbInstance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
         :param pulumi.Input[int] node_count: number of node for instance.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone of instance.
         """
@@ -387,8 +456,8 @@ class HourDbInstance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         basic = tencentcloud.mariadb.HourDbInstance("basic",
-            db_version_id="8.0",
-            instance_name="db-test-2",
+            db_version_id="10.0",
+            instance_name="db-test-del",
             memory=2,
             node_count=2,
             storage=10,
@@ -396,9 +465,10 @@ class HourDbInstance(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             },
+            vip="10.0.0.197",
             vpc_id="vpc-k1t8ickr",
             zones=[
-                "ap-guangzhou-7",
+                "ap-guangzhou-6",
                 "ap-guangzhou-7",
             ])
         ```
@@ -430,9 +500,11 @@ class HourDbInstance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_count: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -457,11 +529,13 @@ class HourDbInstance(pulumi.CustomResource):
             if node_count is None and not opts.urn:
                 raise TypeError("Missing required property 'node_count'")
             __props__.__dict__["node_count"] = node_count
+            __props__.__dict__["project_id"] = project_id
             if storage is None and not opts.urn:
                 raise TypeError("Missing required property 'storage'")
             __props__.__dict__["storage"] = storage
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["vip"] = vip
             __props__.__dict__["vpc_id"] = vpc_id
             if zones is None and not opts.urn:
                 raise TypeError("Missing required property 'zones'")
@@ -480,9 +554,11 @@ class HourDbInstance(pulumi.CustomResource):
             instance_name: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
             node_count: Optional[pulumi.Input[int]] = None,
+            project_id: Optional[pulumi.Input[int]] = None,
             storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+            vip: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'HourDbInstance':
         """
@@ -496,9 +572,11 @@ class HourDbInstance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
         :param pulumi.Input[int] node_count: number of node for instance.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone of instance.
         """
@@ -510,9 +588,11 @@ class HourDbInstance(pulumi.CustomResource):
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["memory"] = memory
         __props__.__dict__["node_count"] = node_count
+        __props__.__dict__["project_id"] = project_id
         __props__.__dict__["storage"] = storage
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
+        __props__.__dict__["vip"] = vip
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zones"] = zones
         return HourDbInstance(resource_name, opts=opts, __props__=__props__)
@@ -550,6 +630,14 @@ class HourDbInstance(pulumi.CustomResource):
         return pulumi.get(self, "node_count")
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> pulumi.Output[Optional[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
     @pulumi.getter
     def storage(self) -> pulumi.Output[int]:
         """
@@ -572,6 +660,14 @@ class HourDbInstance(pulumi.CustomResource):
         Tag description list.
         """
         return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> pulumi.Output[str]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter(name="vpcId")

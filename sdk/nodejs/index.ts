@@ -24,6 +24,7 @@ import * as cdn from "./cdn";
 import * as cfs from "./cfs";
 import * as chdfs from "./chdfs";
 import * as ci from "./ci";
+import * as ciam from "./ciam";
 import * as ckafka from "./ckafka";
 import * as clb from "./clb";
 import * as cls from "./cls";
@@ -70,6 +71,8 @@ import * as organization from "./organization";
 import * as placement from "./placement";
 import * as postgresql from "./postgresql";
 import * as privatedns from "./privatedns";
+import * as project from "./project";
+import * as projects from "./projects";
 import * as protocol from "./protocol";
 import * as pts from "./pts";
 import * as redis from "./redis";
@@ -94,6 +97,7 @@ import * as tdcpg from "./tdcpg";
 import * as tdmq from "./tdmq";
 import * as tem from "./tem";
 import * as teo from "./teo";
+import * as tse from "./tse";
 import * as tsf from "./tsf";
 import * as types from "./types";
 import * as user from "./user";
@@ -118,6 +122,7 @@ export {
     cfs,
     chdfs,
     ci,
+    ciam,
     ckafka,
     clb,
     cls,
@@ -164,6 +169,8 @@ export {
     placement,
     postgresql,
     privatedns,
+    project,
+    projects,
     protocol,
     pts,
     redis,
@@ -188,6 +195,7 @@ export {
     tdmq,
     tem,
     teo,
+    tse,
     tsf,
     types,
     user,

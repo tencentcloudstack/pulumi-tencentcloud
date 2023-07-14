@@ -15,39 +15,57 @@ class FileSystemArgs:
     def __init__(__self__, *,
                  access_group_id: pulumi.Input[str],
                  availability_zone: pulumi.Input[str],
-                 subnet_id: pulumi.Input[str],
-                 vpc_id: pulumi.Input[str],
+                 capacity: Optional[pulumi.Input[int]] = None,
+                 ccn_id: Optional[pulumi.Input[str]] = None,
+                 cidr_block: Optional[pulumi.Input[str]] = None,
                  mount_ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 net_interface: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a FileSystem resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
-        :param pulumi.Input[str] subnet_id: ID of a subnet.
-        :param pulumi.Input[str] vpc_id: ID of a VPC network.
+        :param pulumi.Input[int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        :param pulumi.Input[str] ccn_id: CCN instance ID (required if the network type is CCN).
+        :param pulumi.Input[str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
-        :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
-        :param pulumi.Input[str] storage_type: File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        :param pulumi.Input[str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        :param pulumi.Input[str] protocol: File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
+        :param pulumi.Input[str] storage_type: Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
+        :param pulumi.Input[str] subnet_id: ID of a subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
+        :param pulumi.Input[str] vpc_id: ID of a VPC network.
         """
         pulumi.set(__self__, "access_group_id", access_group_id)
         pulumi.set(__self__, "availability_zone", availability_zone)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        pulumi.set(__self__, "vpc_id", vpc_id)
+        if capacity is not None:
+            pulumi.set(__self__, "capacity", capacity)
+        if ccn_id is not None:
+            pulumi.set(__self__, "ccn_id", ccn_id)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
         if mount_ip is not None:
             pulumi.set(__self__, "mount_ip", mount_ip)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if net_interface is not None:
+            pulumi.set(__self__, "net_interface", net_interface)
         if protocol is not None:
             pulumi.set(__self__, "protocol", protocol)
         if storage_type is not None:
             pulumi.set(__self__, "storage_type", storage_type)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="accessGroupId")
@@ -74,28 +92,40 @@ class FileSystemArgs:
         pulumi.set(self, "availability_zone", value)
 
     @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Input[str]:
+    @pulumi.getter
+    def capacity(self) -> Optional[pulumi.Input[int]]:
         """
-        ID of a subnet.
+        File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
         """
-        return pulumi.get(self, "subnet_id")
+        return pulumi.get(self, "capacity")
 
-    @subnet_id.setter
-    def subnet_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "subnet_id", value)
+    @capacity.setter
+    def capacity(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "capacity", value)
 
     @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of a VPC network.
+        CCN instance ID (required if the network type is CCN).
         """
-        return pulumi.get(self, "vpc_id")
+        return pulumi.get(self, "ccn_id")
 
-    @vpc_id.setter
-    def vpc_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "vpc_id", value)
+    @ccn_id.setter
+    def ccn_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ccn_id", value)
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[pulumi.Input[str]]:
+        """
+        CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @cidr_block.setter
+    def cidr_block(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cidr_block", value)
 
     @property
     @pulumi.getter(name="mountIp")
@@ -122,10 +152,22 @@ class FileSystemArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="netInterface")
+    def net_interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        """
+        return pulumi.get(self, "net_interface")
+
+    @net_interface.setter
+    def net_interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "net_interface", value)
+
+    @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         """
         return pulumi.get(self, "protocol")
 
@@ -137,13 +179,25 @@ class FileSystemArgs:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         """
         return pulumi.get(self, "storage_type")
 
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "storage_type", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of a subnet.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
 
     @property
     @pulumi.getter
@@ -157,16 +211,32 @@ class FileSystemArgs:
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
 
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of a VPC network.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
 
 @pulumi.input_type
 class _FileSystemState:
     def __init__(__self__, *,
                  access_group_id: Optional[pulumi.Input[str]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
+                 capacity: Optional[pulumi.Input[int]] = None,
+                 ccn_id: Optional[pulumi.Input[str]] = None,
+                 cidr_block: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  fs_id: Optional[pulumi.Input[str]] = None,
                  mount_ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 net_interface: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -176,12 +246,16 @@ class _FileSystemState:
         Input properties used for looking up and filtering FileSystem resources.
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
+        :param pulumi.Input[int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        :param pulumi.Input[str] ccn_id: CCN instance ID (required if the network type is CCN).
+        :param pulumi.Input[str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[str] create_time: Create time of the file system.
         :param pulumi.Input[str] fs_id: Mount root-directory.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
-        :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
-        :param pulumi.Input[str] storage_type: File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        :param pulumi.Input[str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        :param pulumi.Input[str] protocol: File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
+        :param pulumi.Input[str] storage_type: Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         :param pulumi.Input[str] subnet_id: ID of a subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] vpc_id: ID of a VPC network.
@@ -190,6 +264,12 @@ class _FileSystemState:
             pulumi.set(__self__, "access_group_id", access_group_id)
         if availability_zone is not None:
             pulumi.set(__self__, "availability_zone", availability_zone)
+        if capacity is not None:
+            pulumi.set(__self__, "capacity", capacity)
+        if ccn_id is not None:
+            pulumi.set(__self__, "ccn_id", ccn_id)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if fs_id is not None:
@@ -198,6 +278,8 @@ class _FileSystemState:
             pulumi.set(__self__, "mount_ip", mount_ip)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if net_interface is not None:
+            pulumi.set(__self__, "net_interface", net_interface)
         if protocol is not None:
             pulumi.set(__self__, "protocol", protocol)
         if storage_type is not None:
@@ -232,6 +314,42 @@ class _FileSystemState:
     @availability_zone.setter
     def availability_zone(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "availability_zone", value)
+
+    @property
+    @pulumi.getter
+    def capacity(self) -> Optional[pulumi.Input[int]]:
+        """
+        File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        """
+        return pulumi.get(self, "capacity")
+
+    @capacity.setter
+    def capacity(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "capacity", value)
+
+    @property
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CCN instance ID (required if the network type is CCN).
+        """
+        return pulumi.get(self, "ccn_id")
+
+    @ccn_id.setter
+    def ccn_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ccn_id", value)
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[pulumi.Input[str]]:
+        """
+        CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @cidr_block.setter
+    def cidr_block(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cidr_block", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -282,10 +400,22 @@ class _FileSystemState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="netInterface")
+    def net_interface(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        """
+        return pulumi.get(self, "net_interface")
+
+    @net_interface.setter
+    def net_interface(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "net_interface", value)
+
+    @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         """
         return pulumi.get(self, "protocol")
 
@@ -297,7 +427,7 @@ class _FileSystemState:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         """
         return pulumi.get(self, "storage_type")
 
@@ -349,8 +479,12 @@ class FileSystem(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_group_id: Optional[pulumi.Input[str]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
+                 capacity: Optional[pulumi.Input[int]] = None,
+                 ccn_id: Optional[pulumi.Input[str]] = None,
+                 cidr_block: Optional[pulumi.Input[str]] = None,
                  mount_ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 net_interface: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -361,6 +495,7 @@ class FileSystem(pulumi.CustomResource):
         Provides a resource to create a cloud file system(CFS).
 
         ## Example Usage
+        ### Standard Nfs CFS
 
         ```python
         import pulumi
@@ -372,6 +507,52 @@ class FileSystem(pulumi.CustomResource):
             protocol="NFS",
             subnet_id="subnet-9mu2t9iw",
             vpc_id="vpc-ah9fbkap")
+        ```
+        ### High-Performance Nfs CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            protocol="NFS",
+            storage_type="HP",
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb")
+        ```
+        ### Standard Turbo CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            capacity=20480,
+            ccn_id="ccn-39lqkygf",
+            cidr_block="11.0.0.0/24",
+            net_interface="CCN",
+            protocol="TURBO",
+            storage_type="TB")
+        ```
+        ### High-Performance Turbo CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            capacity=10240,
+            ccn_id="ccn-39lqkygf",
+            cidr_block="11.0.0.0/24",
+            net_interface="CCN",
+            protocol="TURBO",
+            storage_type="TP")
         ```
 
         ## Import
@@ -386,10 +567,14 @@ class FileSystem(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
+        :param pulumi.Input[int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        :param pulumi.Input[str] ccn_id: CCN instance ID (required if the network type is CCN).
+        :param pulumi.Input[str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
-        :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
-        :param pulumi.Input[str] storage_type: File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        :param pulumi.Input[str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        :param pulumi.Input[str] protocol: File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
+        :param pulumi.Input[str] storage_type: Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         :param pulumi.Input[str] subnet_id: ID of a subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] vpc_id: ID of a VPC network.
@@ -404,6 +589,7 @@ class FileSystem(pulumi.CustomResource):
         Provides a resource to create a cloud file system(CFS).
 
         ## Example Usage
+        ### Standard Nfs CFS
 
         ```python
         import pulumi
@@ -415,6 +601,52 @@ class FileSystem(pulumi.CustomResource):
             protocol="NFS",
             subnet_id="subnet-9mu2t9iw",
             vpc_id="vpc-ah9fbkap")
+        ```
+        ### High-Performance Nfs CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            protocol="NFS",
+            storage_type="HP",
+            subnet_id="subnet-enm92y0m",
+            vpc_id="vpc-86v957zb")
+        ```
+        ### Standard Turbo CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            capacity=20480,
+            ccn_id="ccn-39lqkygf",
+            cidr_block="11.0.0.0/24",
+            net_interface="CCN",
+            protocol="TURBO",
+            storage_type="TB")
+        ```
+        ### High-Performance Turbo CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            access_group_id="pgroup-drwt29od",
+            availability_zone="ap-guangzhou-6",
+            capacity=10240,
+            ccn_id="ccn-39lqkygf",
+            cidr_block="11.0.0.0/24",
+            net_interface="CCN",
+            protocol="TURBO",
+            storage_type="TP")
         ```
 
         ## Import
@@ -442,8 +674,12 @@ class FileSystem(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_group_id: Optional[pulumi.Input[str]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
+                 capacity: Optional[pulumi.Input[int]] = None,
+                 ccn_id: Optional[pulumi.Input[str]] = None,
+                 cidr_block: Optional[pulumi.Input[str]] = None,
                  mount_ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 net_interface: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -469,16 +705,16 @@ class FileSystem(pulumi.CustomResource):
             if availability_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'availability_zone'")
             __props__.__dict__["availability_zone"] = availability_zone
+            __props__.__dict__["capacity"] = capacity
+            __props__.__dict__["ccn_id"] = ccn_id
+            __props__.__dict__["cidr_block"] = cidr_block
             __props__.__dict__["mount_ip"] = mount_ip
             __props__.__dict__["name"] = name
+            __props__.__dict__["net_interface"] = net_interface
             __props__.__dict__["protocol"] = protocol
             __props__.__dict__["storage_type"] = storage_type
-            if subnet_id is None and not opts.urn:
-                raise TypeError("Missing required property 'subnet_id'")
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
-            if vpc_id is None and not opts.urn:
-                raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["fs_id"] = None
@@ -494,10 +730,14 @@ class FileSystem(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             access_group_id: Optional[pulumi.Input[str]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
+            capacity: Optional[pulumi.Input[int]] = None,
+            ccn_id: Optional[pulumi.Input[str]] = None,
+            cidr_block: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             fs_id: Optional[pulumi.Input[str]] = None,
             mount_ip: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            net_interface: Optional[pulumi.Input[str]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
             storage_type: Optional[pulumi.Input[str]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
@@ -512,12 +752,16 @@ class FileSystem(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
         :param pulumi.Input[str] availability_zone: The available zone that the file system locates at.
+        :param pulumi.Input[int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        :param pulumi.Input[str] ccn_id: CCN instance ID (required if the network type is CCN).
+        :param pulumi.Input[str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[str] create_time: Create time of the file system.
         :param pulumi.Input[str] fs_id: Mount root-directory.
         :param pulumi.Input[str] mount_ip: IP of mount point.
         :param pulumi.Input[str] name: Name of a file system.
-        :param pulumi.Input[str] protocol: File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
-        :param pulumi.Input[str] storage_type: File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        :param pulumi.Input[str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        :param pulumi.Input[str] protocol: File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
+        :param pulumi.Input[str] storage_type: Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         :param pulumi.Input[str] subnet_id: ID of a subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] vpc_id: ID of a VPC network.
@@ -528,10 +772,14 @@ class FileSystem(pulumi.CustomResource):
 
         __props__.__dict__["access_group_id"] = access_group_id
         __props__.__dict__["availability_zone"] = availability_zone
+        __props__.__dict__["capacity"] = capacity
+        __props__.__dict__["ccn_id"] = ccn_id
+        __props__.__dict__["cidr_block"] = cidr_block
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["fs_id"] = fs_id
         __props__.__dict__["mount_ip"] = mount_ip
         __props__.__dict__["name"] = name
+        __props__.__dict__["net_interface"] = net_interface
         __props__.__dict__["protocol"] = protocol
         __props__.__dict__["storage_type"] = storage_type
         __props__.__dict__["subnet_id"] = subnet_id
@@ -554,6 +802,30 @@ class FileSystem(pulumi.CustomResource):
         The available zone that the file system locates at.
         """
         return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter
+    def capacity(self) -> pulumi.Output[int]:
+        """
+        File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+        """
+        return pulumi.get(self, "capacity")
+
+    @property
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> pulumi.Output[str]:
+        """
+        CCN instance ID (required if the network type is CCN).
+        """
+        return pulumi.get(self, "ccn_id")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> pulumi.Output[str]:
+        """
+        CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        """
+        return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter(name="createTime")
@@ -588,10 +860,18 @@ class FileSystem(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="netInterface")
+    def net_interface(self) -> pulumi.Output[Optional[str]]:
+        """
+        Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+        """
+        return pulumi.get(self, "net_interface")
+
+    @property
     @pulumi.getter
     def protocol(self) -> pulumi.Output[Optional[str]]:
         """
-        File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+        File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
         """
         return pulumi.get(self, "protocol")
 
@@ -599,7 +879,7 @@ class FileSystem(pulumi.CustomResource):
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Output[Optional[str]]:
         """
-        File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+        Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
         """
         return pulumi.get(self, "storage_type")
 

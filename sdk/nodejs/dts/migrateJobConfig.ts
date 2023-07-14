@@ -74,20 +74,7 @@ import * as utilities from "../utilities";
  *     action: "pause",
  * });
  * ```
- *
- * Continue the a migration job
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- *
- * const config = new tencentcloud.dts.MigrateJobConfig("config", {
- *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
- *     action: "continue",
- * });
- * ```
- *
- * Complete a migration job when the status is readyComplete
+ * ### Continue the a migration job
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -98,8 +85,18 @@ import * as utilities from "../utilities";
  *     action: "continue",
  * });
  * ```
+ * ### Complete a migration job when the status is readyComplete
  *
- * Stop a running migration job
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new tencentcloud.dts.MigrateJobConfig("config", {
+ *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
+ *     action: "continue",
+ * });
+ * ```
+ * ### Stop a running migration job
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -110,8 +107,7 @@ import * as utilities from "../utilities";
  *     action: "stop",
  * });
  * ```
- *
- * Isolate a stopped/canceled migration job
+ * ### Isolate a stopped/canceled migration job
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -122,8 +118,7 @@ import * as utilities from "../utilities";
  *     action: "isolate",
  * });
  * ```
- *
- * Recover a isolated migration job
+ * ### Recover a isolated migration job
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a COS object resource to put an object(content or file) to the bucket.
  *
  * ## Example Usage
- *
- * Uploading a file to a bucket
+ * ### Uploading a file to a bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -21,8 +20,7 @@ import * as utilities from "../utilities";
  *     source: "path/to/file",
  * });
  * ```
- *
- * Uploading a content to a bucket
+ * ### Uploading a content to a bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

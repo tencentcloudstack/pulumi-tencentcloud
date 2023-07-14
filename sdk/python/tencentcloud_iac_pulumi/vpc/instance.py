@@ -296,6 +296,38 @@ class Instance(pulumi.CustomResource):
         """
         Provide a resource to create a VPC.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            cidr_block="10.0.0.0/16",
+            dns_servers=[
+                "119.29.29.29",
+                "8.8.8.8",
+            ],
+            is_multicast=False,
+            tags={
+                "test": "test",
+            })
+        ```
+        ### Using Assistant CIDR
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            assistant_cidrs=["172.16.0.0/24"],
+            cidr_block="10.0.0.0/16",
+            is_multicast=False,
+            tags={
+                "test": "test",
+            })
+        ```
+
         ## Import
 
         Vpc instance can be imported, e.g.
@@ -321,6 +353,38 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a VPC.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            cidr_block="10.0.0.0/16",
+            dns_servers=[
+                "119.29.29.29",
+                "8.8.8.8",
+            ],
+            is_multicast=False,
+            tags={
+                "test": "test",
+            })
+        ```
+        ### Using Assistant CIDR
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.vpc.Instance("foo",
+            assistant_cidrs=["172.16.0.0/24"],
+            cidr_block="10.0.0.0/16",
+            is_multicast=False,
+            tags={
+                "test": "test",
+            })
+        ```
 
         ## Import
 

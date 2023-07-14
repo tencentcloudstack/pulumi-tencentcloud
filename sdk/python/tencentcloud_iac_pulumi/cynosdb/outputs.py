@@ -10,25 +10,146 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'AccountPrivilegesDatabasePrivilege',
+    'AccountPrivilegesTablePrivilege',
     'AuditLogFileFilter',
+    'ClusterDatabasesUserHostPrivilege',
     'ClusterParamItem',
     'ClusterRoGroupAddr',
     'ClusterRoGroupInstance',
     'ClusterRwGroupAddr',
     'ClusterRwGroupInstance',
+    'ExportInstanceErrorLogsErrorLogItemExport',
+    'InstanceParamInstanceParamList',
+    'ParamTemplateParamList',
+    'ProxyEndPointInstanceWeight',
+    'ProxyProxyZone',
+    'RollBackClusterRollbackDatabase',
+    'RollBackClusterRollbackTable',
+    'RollBackClusterRollbackTableTable',
+    'GetAccountAllGrantPrivilegesAccountResult',
+    'GetAccountAllGrantPrivilegesDatabasePrivilegeResult',
+    'GetAccountAllGrantPrivilegesTablePrivilegeResult',
     'GetAccountsAccountSetResult',
+    'GetAuditLogsFilterResult',
+    'GetAuditLogsItemResult',
+    'GetClusterDetailDatabasesDbInfoResult',
+    'GetClusterDetailDatabasesDbInfoUserHostPrivilegeResult',
     'GetClusterInstanceGroupsInstanceGrpInfoListResult',
     'GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResult',
     'GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagResult',
     'GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskResult',
+    'GetClusterParamLogsClusterParamLogResult',
     'GetClusterParamsItemResult',
+    'GetClusterTableResult',
     'GetClustersClusterListResult',
+    'GetDescribeInstanceErrorLogsErrorLogResult',
+    'GetDescribeInstanceSlowQueriesBinlogResult',
+    'GetInstanceSlowQueriesSlowQueryResult',
     'GetInstancesInstanceListResult',
     'GetParamTemplatesItemResult',
     'GetParamTemplatesItemParamInfoSetResult',
+    'GetProjectSecurityGroupsGroupResult',
+    'GetProjectSecurityGroupsGroupInboundResult',
+    'GetProjectSecurityGroupsGroupOutboundResult',
+    'GetProxyNodeFilterResult',
+    'GetProxyNodeProxyNodeInfoResult',
+    'GetResourcePackageListResourcePackageListResult',
+    'GetResourcePackageListResourcePackageListBindInstanceInfoResult',
+    'GetResourcePackageSaleSpecsDetailResult',
+    'GetRollbackTimeRangeRollbackTimeRangeResult',
     'GetZoneConfigListResult',
     'GetZoneConfigListZoneStockInfoResult',
+    'GetZoneRegionSetResult',
+    'GetZoneRegionSetModuleResult',
+    'GetZoneRegionSetZoneSetResult',
 ]
+
+@pulumi.output_type
+class AccountPrivilegesDatabasePrivilege(dict):
+    def __init__(__self__, *,
+                 db: str,
+                 privileges: Sequence[str]):
+        """
+        :param str db: Database.
+        :param Sequence[str] privileges: Database privileges.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        Database.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Database privileges.
+        """
+        return pulumi.get(self, "privileges")
+
+
+@pulumi.output_type
+class AccountPrivilegesTablePrivilege(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tableName":
+            suggest = "table_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AccountPrivilegesTablePrivilege. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AccountPrivilegesTablePrivilege.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AccountPrivilegesTablePrivilege.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db: str,
+                 privileges: Sequence[str],
+                 table_name: str):
+        """
+        :param str db: Database name.
+        :param Sequence[str] privileges: Table privileges.
+        :param str table_name: Table name.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Table privileges.
+        """
+        return pulumi.get(self, "privileges")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
 
 @pulumi.output_type
 class AuditLogFileFilter(dict):
@@ -224,6 +345,67 @@ class AuditLogFileFilter(dict):
         User name.
         """
         return pulumi.get(self, "users")
+
+
+@pulumi.output_type
+class ClusterDatabasesUserHostPrivilege(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbHost":
+            suggest = "db_host"
+        elif key == "dbPrivilege":
+            suggest = "db_privilege"
+        elif key == "dbUserName":
+            suggest = "db_user_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterDatabasesUserHostPrivilege. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterDatabasesUserHostPrivilege.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterDatabasesUserHostPrivilege.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_host: str,
+                 db_privilege: str,
+                 db_user_name: str):
+        """
+        :param str db_host: .
+        :param str db_privilege: .
+        :param str db_user_name: Authorized Users.
+        """
+        pulumi.set(__self__, "db_host", db_host)
+        pulumi.set(__self__, "db_privilege", db_privilege)
+        pulumi.set(__self__, "db_user_name", db_user_name)
+
+    @property
+    @pulumi.getter(name="dbHost")
+    def db_host(self) -> str:
+        """
+        .
+        """
+        return pulumi.get(self, "db_host")
+
+    @property
+    @pulumi.getter(name="dbPrivilege")
+    def db_privilege(self) -> str:
+        """
+        .
+        """
+        return pulumi.get(self, "db_privilege")
+
+    @property
+    @pulumi.getter(name="dbUserName")
+    def db_user_name(self) -> str:
+        """
+        Authorized Users.
+        """
+        return pulumi.get(self, "db_user_name")
 
 
 @pulumi.output_type
@@ -449,6 +631,467 @@ class ClusterRwGroupInstance(dict):
 
 
 @pulumi.output_type
+class ExportInstanceErrorLogsErrorLogItemExport(dict):
+    def __init__(__self__, *,
+                 content: Optional[str] = None,
+                 level: Optional[str] = None,
+                 timestamp: Optional[str] = None):
+        """
+        :param str content: log content.
+        :param str level: Log level, optional values note, warning, error.
+        :param str timestamp: time.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if level is not None:
+            pulumi.set(__self__, "level", level)
+        if timestamp is not None:
+            pulumi.set(__self__, "timestamp", timestamp)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[str]:
+        """
+        log content.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def level(self) -> Optional[str]:
+        """
+        Log level, optional values note, warning, error.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> Optional[str]:
+        """
+        time.
+        """
+        return pulumi.get(self, "timestamp")
+
+
+@pulumi.output_type
+class InstanceParamInstanceParamList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+        elif key == "paramName":
+            suggest = "param_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceParamInstanceParamList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceParamInstanceParamList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceParamInstanceParamList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: str,
+                 param_name: str):
+        """
+        :param str current_value: Current value of parameter.
+        :param str param_name: Parameter Name.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "param_name", param_name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        Current value of parameter.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        Parameter Name.
+        """
+        return pulumi.get(self, "param_name")
+
+
+@pulumi.output_type
+class ParamTemplateParamList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+        elif key == "paramName":
+            suggest = "param_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ParamTemplateParamList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ParamTemplateParamList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ParamTemplateParamList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: Optional[str] = None,
+                 param_name: Optional[str] = None):
+        """
+        :param str current_value: Current value.
+        :param str param_name: Parameter Name.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if param_name is not None:
+            pulumi.set(__self__, "param_name", param_name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[str]:
+        """
+        Current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> Optional[str]:
+        """
+        Parameter Name.
+        """
+        return pulumi.get(self, "param_name")
+
+
+@pulumi.output_type
+class ProxyEndPointInstanceWeight(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProxyEndPointInstanceWeight. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProxyEndPointInstanceWeight.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProxyEndPointInstanceWeight.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 weight: int):
+        """
+        :param str instance_id: Instance Id.
+        :param int weight: Instance Weight.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance Id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Instance Weight.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class ProxyProxyZone(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "proxyNodeCount":
+            suggest = "proxy_node_count"
+        elif key == "proxyNodeZone":
+            suggest = "proxy_node_zone"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProxyProxyZone. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProxyProxyZone.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProxyProxyZone.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 proxy_node_count: Optional[int] = None,
+                 proxy_node_zone: Optional[str] = None):
+        """
+        :param int proxy_node_count: Number of proxy nodes.
+        :param str proxy_node_zone: Proxy node availability zone.
+        """
+        if proxy_node_count is not None:
+            pulumi.set(__self__, "proxy_node_count", proxy_node_count)
+        if proxy_node_zone is not None:
+            pulumi.set(__self__, "proxy_node_zone", proxy_node_zone)
+
+    @property
+    @pulumi.getter(name="proxyNodeCount")
+    def proxy_node_count(self) -> Optional[int]:
+        """
+        Number of proxy nodes.
+        """
+        return pulumi.get(self, "proxy_node_count")
+
+    @property
+    @pulumi.getter(name="proxyNodeZone")
+    def proxy_node_zone(self) -> Optional[str]:
+        """
+        Proxy node availability zone.
+        """
+        return pulumi.get(self, "proxy_node_zone")
+
+
+@pulumi.output_type
+class RollBackClusterRollbackDatabase(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newDatabase":
+            suggest = "new_database"
+        elif key == "oldDatabase":
+            suggest = "old_database"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollBackClusterRollbackDatabase. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollBackClusterRollbackDatabase.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollBackClusterRollbackDatabase.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_database: str,
+                 old_database: str):
+        """
+        :param str new_database: New database name.
+        :param str old_database: Old database name.
+        """
+        pulumi.set(__self__, "new_database", new_database)
+        pulumi.set(__self__, "old_database", old_database)
+
+    @property
+    @pulumi.getter(name="newDatabase")
+    def new_database(self) -> str:
+        """
+        New database name.
+        """
+        return pulumi.get(self, "new_database")
+
+    @property
+    @pulumi.getter(name="oldDatabase")
+    def old_database(self) -> str:
+        """
+        Old database name.
+        """
+        return pulumi.get(self, "old_database")
+
+
+@pulumi.output_type
+class RollBackClusterRollbackTable(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 tables: Sequence['outputs.RollBackClusterRollbackTableTable']):
+        """
+        :param str database: New database name.
+        :param Sequence['RollBackClusterRollbackTableTableArgs'] tables: Tables.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "tables", tables)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        New database name.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def tables(self) -> Sequence['outputs.RollBackClusterRollbackTableTable']:
+        """
+        Tables.
+        """
+        return pulumi.get(self, "tables")
+
+
+@pulumi.output_type
+class RollBackClusterRollbackTableTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newTable":
+            suggest = "new_table"
+        elif key == "oldTable":
+            suggest = "old_table"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollBackClusterRollbackTableTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollBackClusterRollbackTableTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollBackClusterRollbackTableTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_table: str,
+                 old_table: str):
+        """
+        :param str new_table: New table name.
+        :param str old_table: Old table name.
+        """
+        pulumi.set(__self__, "new_table", new_table)
+        pulumi.set(__self__, "old_table", old_table)
+
+    @property
+    @pulumi.getter(name="newTable")
+    def new_table(self) -> str:
+        """
+        New table name.
+        """
+        return pulumi.get(self, "new_table")
+
+    @property
+    @pulumi.getter(name="oldTable")
+    def old_table(self) -> str:
+        """
+        Old table name.
+        """
+        return pulumi.get(self, "old_table")
+
+
+@pulumi.output_type
+class GetAccountAllGrantPrivilegesAccountResult(dict):
+    def __init__(__self__, *,
+                 account_name: str,
+                 host: Optional[str] = None):
+        """
+        :param str account_name: Account.
+        :param str host: Host, default `%`.
+        """
+        pulumi.set(__self__, "account_name", account_name)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+
+    @property
+    @pulumi.getter(name="accountName")
+    def account_name(self) -> str:
+        """
+        Account.
+        """
+        return pulumi.get(self, "account_name")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[str]:
+        """
+        Host, default `%`.
+        """
+        return pulumi.get(self, "host")
+
+
+@pulumi.output_type
+class GetAccountAllGrantPrivilegesDatabasePrivilegeResult(dict):
+    def __init__(__self__, *,
+                 db: str,
+                 privileges: Sequence[str]):
+        """
+        :param str db: Database name.
+        :param Sequence[str] privileges: Permission List.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Permission List.
+        """
+        return pulumi.get(self, "privileges")
+
+
+@pulumi.output_type
+class GetAccountAllGrantPrivilegesTablePrivilegeResult(dict):
+    def __init__(__self__, *,
+                 db: str,
+                 privileges: Sequence[str],
+                 table_name: str):
+        """
+        :param str db: Database name.
+        :param Sequence[str] privileges: Permission List.
+        :param str table_name: Table Name.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> Sequence[str]:
+        """
+        Permission List.
+        """
+        return pulumi.get(self, "privileges")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table Name.
+        """
+        return pulumi.get(self, "table_name")
+
+
+@pulumi.output_type
 class GetAccountsAccountSetResult(dict):
     def __init__(__self__, *,
                  account_name: str,
@@ -519,6 +1162,509 @@ class GetAccountsAccountSetResult(dict):
         Update time.
         """
         return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetAuditLogsFilterResult(dict):
+    def __init__(__self__, *,
+                 affect_rows: Optional[int] = None,
+                 db_names: Optional[Sequence[str]] = None,
+                 exec_time: Optional[int] = None,
+                 hosts: Optional[Sequence[str]] = None,
+                 policy_names: Optional[Sequence[str]] = None,
+                 sent_rows: Optional[int] = None,
+                 sql: Optional[str] = None,
+                 sql_type: Optional[str] = None,
+                 sql_types: Optional[Sequence[str]] = None,
+                 sqls: Optional[Sequence[str]] = None,
+                 table_names: Optional[Sequence[str]] = None,
+                 thread_ids: Optional[Sequence[str]] = None,
+                 users: Optional[Sequence[str]] = None):
+        """
+        :param int affect_rows: Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        :param Sequence[str] db_names: Database name.
+        :param int exec_time: Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        :param Sequence[str] hosts: Client address.
+        :param Sequence[str] policy_names: Audit policy name.
+        :param int sent_rows: Returns the number of rows.
+        :param str sql: SQL statement. Supports fuzzy matching.
+        :param str sql_type: SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sql_types: SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sqls: SQL statement. Supports passing multiple SQL statements.
+        :param Sequence[str] table_names: Table name.
+        :param Sequence[str] thread_ids: Thread ID.
+        :param Sequence[str] users: User name.
+        """
+        if affect_rows is not None:
+            pulumi.set(__self__, "affect_rows", affect_rows)
+        if db_names is not None:
+            pulumi.set(__self__, "db_names", db_names)
+        if exec_time is not None:
+            pulumi.set(__self__, "exec_time", exec_time)
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if policy_names is not None:
+            pulumi.set(__self__, "policy_names", policy_names)
+        if sent_rows is not None:
+            pulumi.set(__self__, "sent_rows", sent_rows)
+        if sql is not None:
+            pulumi.set(__self__, "sql", sql)
+        if sql_type is not None:
+            pulumi.set(__self__, "sql_type", sql_type)
+        if sql_types is not None:
+            pulumi.set(__self__, "sql_types", sql_types)
+        if sqls is not None:
+            pulumi.set(__self__, "sqls", sqls)
+        if table_names is not None:
+            pulumi.set(__self__, "table_names", table_names)
+        if thread_ids is not None:
+            pulumi.set(__self__, "thread_ids", thread_ids)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+
+    @property
+    @pulumi.getter(name="affectRows")
+    def affect_rows(self) -> Optional[int]:
+        """
+        Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        """
+        return pulumi.get(self, "affect_rows")
+
+    @property
+    @pulumi.getter(name="dbNames")
+    def db_names(self) -> Optional[Sequence[str]]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_names")
+
+    @property
+    @pulumi.getter(name="execTime")
+    def exec_time(self) -> Optional[int]:
+        """
+        Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        """
+        return pulumi.get(self, "exec_time")
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[Sequence[str]]:
+        """
+        Client address.
+        """
+        return pulumi.get(self, "hosts")
+
+    @property
+    @pulumi.getter(name="policyNames")
+    def policy_names(self) -> Optional[Sequence[str]]:
+        """
+        Audit policy name.
+        """
+        return pulumi.get(self, "policy_names")
+
+    @property
+    @pulumi.getter(name="sentRows")
+    def sent_rows(self) -> Optional[int]:
+        """
+        Returns the number of rows.
+        """
+        return pulumi.get(self, "sent_rows")
+
+    @property
+    @pulumi.getter
+    def sql(self) -> Optional[str]:
+        """
+        SQL statement. Supports fuzzy matching.
+        """
+        return pulumi.get(self, "sql")
+
+    @property
+    @pulumi.getter(name="sqlType")
+    def sql_type(self) -> Optional[str]:
+        """
+        SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_type")
+
+    @property
+    @pulumi.getter(name="sqlTypes")
+    def sql_types(self) -> Optional[Sequence[str]]:
+        """
+        SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_types")
+
+    @property
+    @pulumi.getter
+    def sqls(self) -> Optional[Sequence[str]]:
+        """
+        SQL statement. Supports passing multiple SQL statements.
+        """
+        return pulumi.get(self, "sqls")
+
+    @property
+    @pulumi.getter(name="tableNames")
+    def table_names(self) -> Optional[Sequence[str]]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_names")
+
+    @property
+    @pulumi.getter(name="threadIds")
+    def thread_ids(self) -> Optional[Sequence[str]]:
+        """
+        Thread ID.
+        """
+        return pulumi.get(self, "thread_ids")
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[Sequence[str]]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "users")
+
+
+@pulumi.output_type
+class GetAuditLogsItemResult(dict):
+    def __init__(__self__, *,
+                 affect_rows: int,
+                 db_name: str,
+                 err_code: int,
+                 exec_time: int,
+                 host: str,
+                 instance_name: str,
+                 policy_name: str,
+                 sent_rows: int,
+                 sql: str,
+                 sql_type: str,
+                 table_name: str,
+                 thread_id: int,
+                 timestamp: str,
+                 user: str):
+        """
+        :param int affect_rows: Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        :param str db_name: Database name.
+        :param int err_code: Error code.
+        :param int exec_time: Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        :param str host: Client address.
+        :param str instance_name: Instance name.
+        :param str policy_name: Audit policy name.
+        :param int sent_rows: Returns the number of rows.
+        :param str sql: SQL statement. Supports fuzzy matching.
+        :param str sql_type: SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        :param str table_name: Table name.
+        :param int thread_id: Thread ID.
+        :param str timestamp: Timestamp.
+        :param str user: User name.
+        """
+        pulumi.set(__self__, "affect_rows", affect_rows)
+        pulumi.set(__self__, "db_name", db_name)
+        pulumi.set(__self__, "err_code", err_code)
+        pulumi.set(__self__, "exec_time", exec_time)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "policy_name", policy_name)
+        pulumi.set(__self__, "sent_rows", sent_rows)
+        pulumi.set(__self__, "sql", sql)
+        pulumi.set(__self__, "sql_type", sql_type)
+        pulumi.set(__self__, "table_name", table_name)
+        pulumi.set(__self__, "thread_id", thread_id)
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "user", user)
+
+    @property
+    @pulumi.getter(name="affectRows")
+    def affect_rows(self) -> int:
+        """
+        Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        """
+        return pulumi.get(self, "affect_rows")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="errCode")
+    def err_code(self) -> int:
+        """
+        Error code.
+        """
+        return pulumi.get(self, "err_code")
+
+    @property
+    @pulumi.getter(name="execTime")
+    def exec_time(self) -> int:
+        """
+        Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        """
+        return pulumi.get(self, "exec_time")
+
+    @property
+    @pulumi.getter
+    def host(self) -> str:
+        """
+        Client address.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> str:
+        """
+        Audit policy name.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="sentRows")
+    def sent_rows(self) -> int:
+        """
+        Returns the number of rows.
+        """
+        return pulumi.get(self, "sent_rows")
+
+    @property
+    @pulumi.getter
+    def sql(self) -> str:
+        """
+        SQL statement. Supports fuzzy matching.
+        """
+        return pulumi.get(self, "sql")
+
+    @property
+    @pulumi.getter(name="sqlType")
+    def sql_type(self) -> str:
+        """
+        SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_type")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @property
+    @pulumi.getter(name="threadId")
+    def thread_id(self) -> int:
+        """
+        Thread ID.
+        """
+        return pulumi.get(self, "thread_id")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> str:
+        """
+        Timestamp.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter
+    def user(self) -> str:
+        """
+        User name.
+        """
+        return pulumi.get(self, "user")
+
+
+@pulumi.output_type
+class GetClusterDetailDatabasesDbInfoResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 character_set: str,
+                 cluster_id: str,
+                 collate_rule: str,
+                 create_time: str,
+                 db_id: int,
+                 db_name: str,
+                 description: str,
+                 status: str,
+                 uin: str,
+                 update_time: str,
+                 user_host_privileges: Sequence['outputs.GetClusterDetailDatabasesDbInfoUserHostPrivilegeResult']):
+        """
+        :param int app_id: User appid note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str character_set: Character Set Type.
+        :param str cluster_id: Cluster ID.
+        :param str collate_rule: Capture Rules.
+        :param str create_time: Creation time note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int db_id: Database ID note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str db_name: Database Name.
+        :param str description: Database note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str status: Database Status.
+        :param str uin: User Uin note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str update_time: Update time note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs'] user_host_privileges: User permission note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "character_set", character_set)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "collate_rule", collate_rule)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "db_id", db_id)
+        pulumi.set(__self__, "db_name", db_name)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "user_host_privileges", user_host_privileges)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        User appid note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="characterSet")
+    def character_set(self) -> str:
+        """
+        Character Set Type.
+        """
+        return pulumi.get(self, "character_set")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="collateRule")
+    def collate_rule(self) -> str:
+        """
+        Capture Rules.
+        """
+        return pulumi.get(self, "collate_rule")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dbId")
+    def db_id(self) -> int:
+        """
+        Database ID note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "db_id")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> str:
+        """
+        Database Name.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Database note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Database Status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def uin(self) -> str:
+        """
+        User Uin note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "uin")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Update time note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="userHostPrivileges")
+    def user_host_privileges(self) -> Sequence['outputs.GetClusterDetailDatabasesDbInfoUserHostPrivilegeResult']:
+        """
+        User permission note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "user_host_privileges")
+
+
+@pulumi.output_type
+class GetClusterDetailDatabasesDbInfoUserHostPrivilegeResult(dict):
+    def __init__(__self__, *,
+                 db_host: str,
+                 db_privilege: str,
+                 db_user_name: str):
+        """
+        :param str db_host: Database host.
+        :param str db_privilege: User permission note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str db_user_name: DbUserName.
+        """
+        pulumi.set(__self__, "db_host", db_host)
+        pulumi.set(__self__, "db_privilege", db_privilege)
+        pulumi.set(__self__, "db_user_name", db_user_name)
+
+    @property
+    @pulumi.getter(name="dbHost")
+    def db_host(self) -> str:
+        """
+        Database host.
+        """
+        return pulumi.get(self, "db_host")
+
+    @property
+    @pulumi.getter(name="dbPrivilege")
+    def db_privilege(self) -> str:
+        """
+        User permission note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "db_privilege")
+
+    @property
+    @pulumi.getter(name="dbUserName")
+    def db_user_name(self) -> str:
+        """
+        DbUserName.
+        """
+        return pulumi.get(self, "db_user_name")
 
 
 @pulumi.output_type
@@ -1309,6 +2455,101 @@ class GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskResult(dict):
 
 
 @pulumi.output_type
+class GetClusterParamLogsClusterParamLogResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 create_time: str,
+                 current_value: str,
+                 instance_id: str,
+                 param_name: str,
+                 status: str,
+                 update_time: str,
+                 update_value: str):
+        """
+        :param str cluster_id: Cluster ID.
+        :param str create_time: Creation time.
+        :param str current_value: Current value.
+        :param str instance_id: Instance ID.
+        :param str param_name: Parameter Name.
+        :param str status: modify state.
+        :param str update_time: Update time.
+        :param str update_value: Modified value.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "update_value", update_value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        Current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        Parameter Name.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        modify state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="updateValue")
+    def update_value(self) -> str:
+        """
+        Modified value.
+        """
+        return pulumi.get(self, "update_value")
+
+
+@pulumi.output_type
 class GetClusterParamsItemResult(dict):
     def __init__(__self__, *,
                  current_value: str,
@@ -1470,6 +2711,35 @@ class GetClusterParamsItemResult(dict):
 
 
 @pulumi.output_type
+class GetClusterTableResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 tables: Sequence[str]):
+        """
+        :param str database: Database name.
+        :param Sequence[str] tables: Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "tables", tables)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def tables(self) -> Sequence[str]:
+        """
+        Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "tables")
+
+
+@pulumi.output_type
 class GetClustersClusterListResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
@@ -1628,6 +2898,236 @@ class GetClustersClusterListResult(dict):
         ID of the VPC.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetDescribeInstanceErrorLogsErrorLogResult(dict):
+    def __init__(__self__, *,
+                 content: str,
+                 level: str,
+                 timestamp: int):
+        """
+        :param str content: Note to log content: This field may return null, indicating that a valid value cannot be obtained.
+        :param str level: Log level note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int timestamp: Log timestamp note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "timestamp", timestamp)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Note to log content: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Log level note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        """
+        Log timestamp note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "timestamp")
+
+
+@pulumi.output_type
+class GetDescribeInstanceSlowQueriesBinlogResult(dict):
+    def __init__(__self__, *,
+                 binlog_id: int,
+                 file_name: str,
+                 file_size: int,
+                 finish_time: str,
+                 start_time: str):
+        """
+        :param int binlog_id: Binlog file ID.
+        :param str file_name: Binlog file name.
+        :param int file_size: File size in bytes.
+        :param str finish_time: Latest transaction time.
+        :param str start_time: start time.
+        """
+        pulumi.set(__self__, "binlog_id", binlog_id)
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "file_size", file_size)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="binlogId")
+    def binlog_id(self) -> int:
+        """
+        Binlog file ID.
+        """
+        return pulumi.get(self, "binlog_id")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Binlog file name.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter(name="fileSize")
+    def file_size(self) -> int:
+        """
+        File size in bytes.
+        """
+        return pulumi.get(self, "file_size")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Latest transaction time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        start time.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetInstanceSlowQueriesSlowQueryResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 lock_time: float,
+                 query_time: float,
+                 rows_examined: int,
+                 rows_sent: int,
+                 sql_md5: str,
+                 sql_template: str,
+                 sql_text: str,
+                 timestamp: int,
+                 user_host: str,
+                 user_name: str):
+        """
+        :param str database: Database name.
+        :param float lock_time: Lock duration in seconds.
+        :param float query_time: Execution time in seconds.
+        :param int rows_examined: Scan Rows.
+        :param int rows_sent: Return the number of rows.
+        :param str sql_md5: SQL statement md5.
+        :param str sql_template: SQL template.
+        :param str sql_text: SQL statement.
+        :param int timestamp: Execution timestamp.
+        :param str user_host: Client host.
+        :param str user_name: user name.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "lock_time", lock_time)
+        pulumi.set(__self__, "query_time", query_time)
+        pulumi.set(__self__, "rows_examined", rows_examined)
+        pulumi.set(__self__, "rows_sent", rows_sent)
+        pulumi.set(__self__, "sql_md5", sql_md5)
+        pulumi.set(__self__, "sql_template", sql_template)
+        pulumi.set(__self__, "sql_text", sql_text)
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "user_host", user_host)
+        pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter(name="lockTime")
+    def lock_time(self) -> float:
+        """
+        Lock duration in seconds.
+        """
+        return pulumi.get(self, "lock_time")
+
+    @property
+    @pulumi.getter(name="queryTime")
+    def query_time(self) -> float:
+        """
+        Execution time in seconds.
+        """
+        return pulumi.get(self, "query_time")
+
+    @property
+    @pulumi.getter(name="rowsExamined")
+    def rows_examined(self) -> int:
+        """
+        Scan Rows.
+        """
+        return pulumi.get(self, "rows_examined")
+
+    @property
+    @pulumi.getter(name="rowsSent")
+    def rows_sent(self) -> int:
+        """
+        Return the number of rows.
+        """
+        return pulumi.get(self, "rows_sent")
+
+    @property
+    @pulumi.getter(name="sqlMd5")
+    def sql_md5(self) -> str:
+        """
+        SQL statement md5.
+        """
+        return pulumi.get(self, "sql_md5")
+
+    @property
+    @pulumi.getter(name="sqlTemplate")
+    def sql_template(self) -> str:
+        """
+        SQL template.
+        """
+        return pulumi.get(self, "sql_template")
+
+    @property
+    @pulumi.getter(name="sqlText")
+    def sql_text(self) -> str:
+        """
+        SQL statement.
+        """
+        return pulumi.get(self, "sql_text")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        """
+        Execution timestamp.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter(name="userHost")
+    def user_host(self) -> str:
+        """
+        Client host.
+        """
+        return pulumi.get(self, "user_host")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        user name.
+        """
+        return pulumi.get(self, "user_name")
 
 
 @pulumi.output_type
@@ -1910,6 +3410,743 @@ class GetParamTemplatesItemParamInfoSetResult(dict):
 
 
 @pulumi.output_type
+class GetProjectSecurityGroupsGroupResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 inbounds: Sequence['outputs.GetProjectSecurityGroupsGroupInboundResult'],
+                 outbounds: Sequence['outputs.GetProjectSecurityGroupsGroupOutboundResult'],
+                 project_id: int,
+                 security_group_id: str,
+                 security_group_name: str,
+                 security_group_remark: str):
+        """
+        :param str create_time: Creation time, time format: yyyy mm dd hh: mm: ss.
+        :param Sequence['GetProjectSecurityGroupsGroupInboundArgs'] inbounds: Inbound Rules.
+        :param Sequence['GetProjectSecurityGroupsGroupOutboundArgs'] outbounds: Outbound rules.
+        :param int project_id: Project ID.
+        :param str security_group_id: Security Group ID.
+        :param str security_group_name: Security Group Name.
+        :param str security_group_remark: Security Group Notes.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "inbounds", inbounds)
+        pulumi.set(__self__, "outbounds", outbounds)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "security_group_name", security_group_name)
+        pulumi.set(__self__, "security_group_remark", security_group_remark)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time, time format: yyyy mm dd hh: mm: ss.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def inbounds(self) -> Sequence['outputs.GetProjectSecurityGroupsGroupInboundResult']:
+        """
+        Inbound Rules.
+        """
+        return pulumi.get(self, "inbounds")
+
+    @property
+    @pulumi.getter
+    def outbounds(self) -> Sequence['outputs.GetProjectSecurityGroupsGroupOutboundResult']:
+        """
+        Outbound rules.
+        """
+        return pulumi.get(self, "outbounds")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security Group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="securityGroupName")
+    def security_group_name(self) -> str:
+        """
+        Security Group Name.
+        """
+        return pulumi.get(self, "security_group_name")
+
+    @property
+    @pulumi.getter(name="securityGroupRemark")
+    def security_group_remark(self) -> str:
+        """
+        Security Group Notes.
+        """
+        return pulumi.get(self, "security_group_remark")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsGroupInboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 address_module: str,
+                 cidr_ip: str,
+                 desc: str,
+                 id: str,
+                 ip_protocol: str,
+                 port_range: str,
+                 service_module: str):
+        """
+        :param str action: Action.
+        :param str address_module: Address module.
+        :param str cidr_ip: Cidr Ip.
+        :param str desc: Description.
+        :param str id: id.
+        :param str ip_protocol: Ip protocol.
+        :param str port_range: Port range.
+        :param str service_module: Service module.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "address_module", address_module)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+        pulumi.set(__self__, "service_module", service_module)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressModule")
+    def address_module(self) -> str:
+        """
+        Address module.
+        """
+        return pulumi.get(self, "address_module")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Cidr Ip.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        id.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Ip protocol.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        Port range.
+        """
+        return pulumi.get(self, "port_range")
+
+    @property
+    @pulumi.getter(name="serviceModule")
+    def service_module(self) -> str:
+        """
+        Service module.
+        """
+        return pulumi.get(self, "service_module")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsGroupOutboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 address_module: str,
+                 cidr_ip: str,
+                 desc: str,
+                 id: str,
+                 ip_protocol: str,
+                 port_range: str,
+                 service_module: str):
+        """
+        :param str action: Action.
+        :param str address_module: Address module.
+        :param str cidr_ip: Cidr Ip.
+        :param str desc: Description.
+        :param str id: id.
+        :param str ip_protocol: Ip protocol.
+        :param str port_range: Port range.
+        :param str service_module: Service module.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "address_module", address_module)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+        pulumi.set(__self__, "service_module", service_module)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="addressModule")
+    def address_module(self) -> str:
+        """
+        Address module.
+        """
+        return pulumi.get(self, "address_module")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Cidr Ip.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        id.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Ip protocol.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        Port range.
+        """
+        return pulumi.get(self, "port_range")
+
+    @property
+    @pulumi.getter(name="serviceModule")
+    def service_module(self) -> str:
+        """
+        Service module.
+        """
+        return pulumi.get(self, "service_module")
+
+
+@pulumi.output_type
+class GetProxyNodeFilterResult(dict):
+    def __init__(__self__, *,
+                 names: Sequence[str],
+                 values: Sequence[str],
+                 exact_match: Optional[bool] = None,
+                 name: Optional[str] = None,
+                 operator: Optional[str] = None):
+        """
+        :param Sequence[str] names: Search String.
+        :param Sequence[str] values: Search String.
+        :param bool exact_match: Exact match or not.
+        :param str name: Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+        :param str operator: Operator.
+        """
+        pulumi.set(__self__, "names", names)
+        pulumi.set(__self__, "values", values)
+        if exact_match is not None:
+            pulumi.set(__self__, "exact_match", exact_match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if operator is not None:
+            pulumi.set(__self__, "operator", operator)
+
+    @property
+    @pulumi.getter
+    def names(self) -> Sequence[str]:
+        """
+        Search String.
+        """
+        return pulumi.get(self, "names")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Search String.
+        """
+        return pulumi.get(self, "values")
+
+    @property
+    @pulumi.getter(name="exactMatch")
+    def exact_match(self) -> Optional[bool]:
+        """
+        Exact match or not.
+        """
+        return pulumi.get(self, "exact_match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> Optional[str]:
+        """
+        Operator.
+        """
+        return pulumi.get(self, "operator")
+
+
+@pulumi.output_type
+class GetProxyNodeProxyNodeInfoResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 cluster_id: str,
+                 cpu: int,
+                 mem: int,
+                 proxy_group_id: str,
+                 proxy_node_connections: int,
+                 proxy_node_id: str,
+                 region: str,
+                 status: str,
+                 zone: str):
+        """
+        :param int app_id: User AppID.
+        :param str cluster_id: Cluster ID.
+        :param int cpu: Database Agent Node CPU.
+        :param int mem: Database Agent Node Memory.
+        :param str proxy_group_id: Database Agent Group ID.
+        :param int proxy_node_connections: The current number of connections of the node. The DescribeProxyNodes interface does not return a value for this field.
+        :param str proxy_node_id: Database Agent Node ID.
+        :param str region: region.
+        :param str status: Database Agent Node Status.
+        :param str zone: Availability Zone.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "mem", mem)
+        pulumi.set(__self__, "proxy_group_id", proxy_group_id)
+        pulumi.set(__self__, "proxy_node_connections", proxy_node_connections)
+        pulumi.set(__self__, "proxy_node_id", proxy_node_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        User AppID.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Database Agent Node CPU.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def mem(self) -> int:
+        """
+        Database Agent Node Memory.
+        """
+        return pulumi.get(self, "mem")
+
+    @property
+    @pulumi.getter(name="proxyGroupId")
+    def proxy_group_id(self) -> str:
+        """
+        Database Agent Group ID.
+        """
+        return pulumi.get(self, "proxy_group_id")
+
+    @property
+    @pulumi.getter(name="proxyNodeConnections")
+    def proxy_node_connections(self) -> int:
+        """
+        The current number of connections of the node. The DescribeProxyNodes interface does not return a value for this field.
+        """
+        return pulumi.get(self, "proxy_node_connections")
+
+    @property
+    @pulumi.getter(name="proxyNodeId")
+    def proxy_node_id(self) -> str:
+        """
+        Database Agent Node ID.
+        """
+        return pulumi.get(self, "proxy_node_id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Database Agent Node Status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Availability Zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetResourcePackageListResourcePackageListResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 bind_instance_infos: Sequence['outputs.GetResourcePackageListResourcePackageListBindInstanceInfoResult'],
+                 expire_time: str,
+                 has_quota: bool,
+                 package_id: str,
+                 package_name: str,
+                 package_region: str,
+                 package_total_spec: float,
+                 package_type: str,
+                 package_used_spec: float,
+                 start_time: str,
+                 status: str):
+        """
+        :param int app_id: AppID note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetResourcePackageListResourcePackageListBindInstanceInfoArgs'] bind_instance_infos: Note for binding instance information: This field may return null, indicating that a valid value cannot be obtained.
+        :param str expire_time: Expiration time: August 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+        :param bool has_quota: Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str package_id: Resource Package Unique ID.
+        :param str package_name: Resource Package Name.
+        :param str package_region: Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+        :param float package_total_spec: Attention to the total amount of resource packages: This field may return null, indicating that a valid value cannot be obtained.
+        :param str package_type: Resource package type CCU - Compute resource package, DISK - Storage resource package.
+        :param float package_used_spec: Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str start_time: Effective time: July 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+        :param str status: Resource package status creating - creating; Using - In use; Expired - has expired; Normal_ Finish - used up; Apply_ Refund - Applying for a refund; Refund - The fee has been refunded.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "bind_instance_infos", bind_instance_infos)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "has_quota", has_quota)
+        pulumi.set(__self__, "package_id", package_id)
+        pulumi.set(__self__, "package_name", package_name)
+        pulumi.set(__self__, "package_region", package_region)
+        pulumi.set(__self__, "package_total_spec", package_total_spec)
+        pulumi.set(__self__, "package_type", package_type)
+        pulumi.set(__self__, "package_used_spec", package_used_spec)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        AppID note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="bindInstanceInfos")
+    def bind_instance_infos(self) -> Sequence['outputs.GetResourcePackageListResourcePackageListBindInstanceInfoResult']:
+        """
+        Note for binding instance information: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bind_instance_infos")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Expiration time: August 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="hasQuota")
+    def has_quota(self) -> bool:
+        """
+        Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "has_quota")
+
+    @property
+    @pulumi.getter(name="packageId")
+    def package_id(self) -> str:
+        """
+        Resource Package Unique ID.
+        """
+        return pulumi.get(self, "package_id")
+
+    @property
+    @pulumi.getter(name="packageName")
+    def package_name(self) -> str:
+        """
+        Resource Package Name.
+        """
+        return pulumi.get(self, "package_name")
+
+    @property
+    @pulumi.getter(name="packageRegion")
+    def package_region(self) -> str:
+        """
+        Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+        """
+        return pulumi.get(self, "package_region")
+
+    @property
+    @pulumi.getter(name="packageTotalSpec")
+    def package_total_spec(self) -> float:
+        """
+        Attention to the total amount of resource packages: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_total_spec")
+
+    @property
+    @pulumi.getter(name="packageType")
+    def package_type(self) -> str:
+        """
+        Resource package type CCU - Compute resource package, DISK - Storage resource package.
+        """
+        return pulumi.get(self, "package_type")
+
+    @property
+    @pulumi.getter(name="packageUsedSpec")
+    def package_used_spec(self) -> float:
+        """
+        Resource package usage note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_used_spec")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Effective time: July 1st, 2022 00:00:00 Attention: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Resource package status creating - creating; Using - In use; Expired - has expired; Normal_ Finish - used up; Apply_ Refund - Applying for a refund; Refund - The fee has been refunded.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetResourcePackageListResourcePackageListBindInstanceInfoResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_region: str,
+                 instance_type: str):
+        """
+        :param str instance_id: Instance ID.
+        :param str instance_region: Region of instance.
+        :param str instance_type: Instance type.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_region", instance_region)
+        pulumi.set(__self__, "instance_type", instance_type)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        Region of instance.
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+
+@pulumi.output_type
+class GetResourcePackageSaleSpecsDetailResult(dict):
+    def __init__(__self__, *,
+                 expire_day: int,
+                 max_package_spec: float,
+                 min_package_spec: float,
+                 package_region: str,
+                 package_type: str,
+                 package_version: str):
+        """
+        :param int expire_day: Resource package validity period, in days. Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param float max_package_spec: The maximum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param float min_package_spec: The minimum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str package_region: Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+        :param str package_type: Resource package type CCU - Computing resource package DISK - Storage resource package.
+        :param str package_version: Resource package version base basic version, common general version, enterprise enterprise version Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "expire_day", expire_day)
+        pulumi.set(__self__, "max_package_spec", max_package_spec)
+        pulumi.set(__self__, "min_package_spec", min_package_spec)
+        pulumi.set(__self__, "package_region", package_region)
+        pulumi.set(__self__, "package_type", package_type)
+        pulumi.set(__self__, "package_version", package_version)
+
+    @property
+    @pulumi.getter(name="expireDay")
+    def expire_day(self) -> int:
+        """
+        Resource package validity period, in days. Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "expire_day")
+
+    @property
+    @pulumi.getter(name="maxPackageSpec")
+    def max_package_spec(self) -> float:
+        """
+        The maximum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "max_package_spec")
+
+    @property
+    @pulumi.getter(name="minPackageSpec")
+    def min_package_spec(self) -> float:
+        """
+        The minimum number of resources in the current version of the resource package, calculated in units of resources; Storage resource: GB Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "min_package_spec")
+
+    @property
+    @pulumi.getter(name="packageRegion")
+    def package_region(self) -> str:
+        """
+        Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
+        """
+        return pulumi.get(self, "package_region")
+
+    @property
+    @pulumi.getter(name="packageType")
+    def package_type(self) -> str:
+        """
+        Resource package type CCU - Computing resource package DISK - Storage resource package.
+        """
+        return pulumi.get(self, "package_type")
+
+    @property
+    @pulumi.getter(name="packageVersion")
+    def package_version(self) -> str:
+        """
+        Resource package version base basic version, common general version, enterprise enterprise version Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_version")
+
+
+@pulumi.output_type
+class GetRollbackTimeRangeRollbackTimeRangeResult(dict):
+    def __init__(__self__, *,
+                 time_range_end: str,
+                 time_range_start: str):
+        """
+        :param str time_range_end: Effective regression time range end time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str time_range_start: Effective regression time range start time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "time_range_end", time_range_end)
+        pulumi.set(__self__, "time_range_start", time_range_start)
+
+    @property
+    @pulumi.getter(name="timeRangeEnd")
+    def time_range_end(self) -> str:
+        """
+        Effective regression time range end time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "time_range_end")
+
+    @property
+    @pulumi.getter(name="timeRangeStart")
+    def time_range_start(self) -> str:
+        """
+        Effective regression time range start time point (obsolete) Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "time_range_start")
+
+
+@pulumi.output_type
 class GetZoneConfigListResult(dict):
     def __init__(__self__, *,
                  cpu: int,
@@ -2020,5 +4257,202 @@ class GetZoneConfigListZoneStockInfoResult(dict):
         Availability zone.
         """
         return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetZoneRegionSetResult(dict):
+    def __init__(__self__, *,
+                 db_type: str,
+                 modules: Sequence['outputs.GetZoneRegionSetModuleResult'],
+                 region: str,
+                 region_id: int,
+                 region_zh: str,
+                 zone_sets: Sequence['outputs.GetZoneRegionSetZoneSetResult']):
+        """
+        :param str db_type: Database type.
+        :param Sequence['GetZoneRegionSetModuleArgs'] modules: Regional module support.
+        :param str region: Region in English.
+        :param int region_id: Region ID.
+        :param str region_zh: Region name in Chinese.
+        :param Sequence['GetZoneRegionSetZoneSetArgs'] zone_sets: List of available zones for sale.
+        """
+        pulumi.set(__self__, "db_type", db_type)
+        pulumi.set(__self__, "modules", modules)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_zh", region_zh)
+        pulumi.set(__self__, "zone_sets", zone_sets)
+
+    @property
+    @pulumi.getter(name="dbType")
+    def db_type(self) -> str:
+        """
+        Database type.
+        """
+        return pulumi.get(self, "db_type")
+
+    @property
+    @pulumi.getter
+    def modules(self) -> Sequence['outputs.GetZoneRegionSetModuleResult']:
+        """
+        Regional module support.
+        """
+        return pulumi.get(self, "modules")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region in English.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionZh")
+    def region_zh(self) -> str:
+        """
+        Region name in Chinese.
+        """
+        return pulumi.get(self, "region_zh")
+
+    @property
+    @pulumi.getter(name="zoneSets")
+    def zone_sets(self) -> Sequence['outputs.GetZoneRegionSetZoneSetResult']:
+        """
+        List of available zones for sale.
+        """
+        return pulumi.get(self, "zone_sets")
+
+
+@pulumi.output_type
+class GetZoneRegionSetModuleResult(dict):
+    def __init__(__self__, *,
+                 is_disable: str,
+                 module_name: str):
+        """
+        :param str is_disable: Is zone on sale, optional values: yes, no.
+        :param str module_name: Module name.
+        """
+        pulumi.set(__self__, "is_disable", is_disable)
+        pulumi.set(__self__, "module_name", module_name)
+
+    @property
+    @pulumi.getter(name="isDisable")
+    def is_disable(self) -> str:
+        """
+        Is zone on sale, optional values: yes, no.
+        """
+        return pulumi.get(self, "is_disable")
+
+    @property
+    @pulumi.getter(name="moduleName")
+    def module_name(self) -> str:
+        """
+        Module name.
+        """
+        return pulumi.get(self, "module_name")
+
+
+@pulumi.output_type
+class GetZoneRegionSetZoneSetResult(dict):
+    def __init__(__self__, *,
+                 has_permission: bool,
+                 is_support_normal: int,
+                 is_support_serverless: int,
+                 is_whole_rdma_zone: str,
+                 physical_zone: str,
+                 zone: str,
+                 zone_id: int,
+                 zone_zh: str):
+        """
+        :param bool has_permission: Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.
+        :param int is_support_normal: Does it support normal clusters, 0:Not supported 1:Support.
+        :param int is_support_serverless: Does it support serverless clusters, 0:Not supported 1:Support.
+        :param str is_whole_rdma_zone: Is zone Rdma.
+        :param str physical_zone: Physical zone.
+        :param str zone: Zone name in English.
+        :param int zone_id: ZoneId.
+        :param str zone_zh: Zone name in Chinesee.
+        """
+        pulumi.set(__self__, "has_permission", has_permission)
+        pulumi.set(__self__, "is_support_normal", is_support_normal)
+        pulumi.set(__self__, "is_support_serverless", is_support_serverless)
+        pulumi.set(__self__, "is_whole_rdma_zone", is_whole_rdma_zone)
+        pulumi.set(__self__, "physical_zone", physical_zone)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_zh", zone_zh)
+
+    @property
+    @pulumi.getter(name="hasPermission")
+    def has_permission(self) -> bool:
+        """
+        Whether the user have zone permissionsNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "has_permission")
+
+    @property
+    @pulumi.getter(name="isSupportNormal")
+    def is_support_normal(self) -> int:
+        """
+        Does it support normal clusters, 0:Not supported 1:Support.
+        """
+        return pulumi.get(self, "is_support_normal")
+
+    @property
+    @pulumi.getter(name="isSupportServerless")
+    def is_support_serverless(self) -> int:
+        """
+        Does it support serverless clusters, 0:Not supported 1:Support.
+        """
+        return pulumi.get(self, "is_support_serverless")
+
+    @property
+    @pulumi.getter(name="isWholeRdmaZone")
+    def is_whole_rdma_zone(self) -> str:
+        """
+        Is zone Rdma.
+        """
+        return pulumi.get(self, "is_whole_rdma_zone")
+
+    @property
+    @pulumi.getter(name="physicalZone")
+    def physical_zone(self) -> str:
+        """
+        Physical zone.
+        """
+        return pulumi.get(self, "physical_zone")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone name in English.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        ZoneId.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneZh")
+    def zone_zh(self) -> str:
+        """
+        Zone name in Chinesee.
+        """
+        return pulumi.get(self, "zone_zh")
 
 

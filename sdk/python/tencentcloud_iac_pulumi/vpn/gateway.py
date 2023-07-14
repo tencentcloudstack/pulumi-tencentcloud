@@ -35,8 +35,8 @@ class GatewayArgs:
         :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
         :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
-        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        :param pulumi.Input[str] type: Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
+        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         """
         pulumi.set(__self__, "zone", zone)
         if bandwidth is not None:
@@ -172,7 +172,7 @@ class GatewayArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         """
         return pulumi.get(self, "type")
 
@@ -184,7 +184,7 @@ class GatewayArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -231,8 +231,8 @@ class _GatewayState:
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
-        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        :param pulumi.Input[str] type: Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
+        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         :param pulumi.Input[str] zone: Zone of the VPN gateway.
         """
         if bandwidth is not None:
@@ -456,7 +456,7 @@ class _GatewayState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         """
         return pulumi.get(self, "type")
 
@@ -468,7 +468,7 @@ class _GatewayState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -508,8 +508,50 @@ class Gateway(pulumi.CustomResource):
                  __props__=None):
         """
         ## Example Usage
+        ### VPC SSL VPN gateway
 
-        POSTPAID_BY_HOUR VPN gateway
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="SSL",
+            vpc_id="vpc-86v957zb",
+            zone="ap-guangzhou-3")
+        ```
+        ### CCN IPEC VPN gateway
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="CCN",
+            zone="ap-guangzhou-3")
+        ```
+        ### CCN SSL VPN gateway
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="SSL_CCN",
+            zone="ap-guangzhou-3")
+        ```
+        ### POSTPAID_BY_HOUR VPN gateway
 
         ```python
         import pulumi
@@ -523,8 +565,7 @@ class Gateway(pulumi.CustomResource):
             vpc_id="vpc-dk8zmwuf",
             zone="ap-guangzhou-3")
         ```
-
-        PREPAID VPN gateway
+        ### PREPAID VPN gateway
 
         ```python
         import pulumi
@@ -559,8 +600,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
         :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
-        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        :param pulumi.Input[str] type: Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
+        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         :param pulumi.Input[str] zone: Zone of the VPN gateway.
         """
         ...
@@ -571,8 +612,50 @@ class Gateway(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
+        ### VPC SSL VPN gateway
 
-        POSTPAID_BY_HOUR VPN gateway
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="SSL",
+            vpc_id="vpc-86v957zb",
+            zone="ap-guangzhou-3")
+        ```
+        ### CCN IPEC VPN gateway
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="CCN",
+            zone="ap-guangzhou-3")
+        ```
+        ### CCN SSL VPN gateway
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            type="SSL_CCN",
+            zone="ap-guangzhou-3")
+        ```
+        ### POSTPAID_BY_HOUR VPN gateway
 
         ```python
         import pulumi
@@ -586,8 +669,7 @@ class Gateway(pulumi.CustomResource):
             vpc_id="vpc-dk8zmwuf",
             zone="ap-guangzhou-3")
         ```
-
-        PREPAID VPN gateway
+        ### PREPAID VPN gateway
 
         ```python
         import pulumi
@@ -722,8 +804,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
-        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        :param pulumi.Input[str] type: Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
+        :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         :param pulumi.Input[str] zone: Zone of the VPN gateway.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -874,7 +956,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+        Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         """
         return pulumi.get(self, "type")
 
@@ -882,7 +964,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
-        ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+        ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
         """
         return pulumi.get(self, "vpc_id")
 

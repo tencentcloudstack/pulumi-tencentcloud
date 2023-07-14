@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Outputs
         /// </summary>
         public readonly string CreateTime;
         /// <summary>
-        /// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        /// (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         /// </summary>
         public readonly string ExclusiveSetName;
         /// <summary>

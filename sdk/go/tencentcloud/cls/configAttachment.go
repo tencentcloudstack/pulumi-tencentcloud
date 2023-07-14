@@ -13,28 +13,12 @@ import (
 
 // Provides a resource to create a cls config attachment
 //
-// ## Example Usage
+// ## Import
 //
-// ```go
-// package main
+// cls config_attachment can be imported using the id, e.g.
 //
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewConfigAttachment(ctx, "attach", &Cls.ConfigAttachmentArgs{
-// 			ConfigId: pulumi.Any(tencentcloud_cls_config.Config.Id),
-// 			GroupId:  pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+// ```sh
+//  $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
 // ```
 type ConfigAttachment struct {
 	pulumi.CustomResourceState

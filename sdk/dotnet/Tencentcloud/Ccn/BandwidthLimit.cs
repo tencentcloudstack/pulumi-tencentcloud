@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// Provides a resource to limit CCN bandwidth.
     /// 
     /// ## Example Usage
-    /// 
-    /// Set the upper limit of regional outbound bandwidth
+    /// ### Set the upper limit of regional outbound bandwidth
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -42,8 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// }
     /// ```
-    /// 
-    /// Set the upper limit between regions
+    /// ### Set the upper limit between regions
     /// 
     /// ```csharp
     /// using Pulumi;

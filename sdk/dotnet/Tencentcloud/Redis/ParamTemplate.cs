@@ -40,8 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// }
     /// ```
-    /// 
-    /// Copy from another template
+    /// ### Copy from another template
     /// 
     /// ```csharp
     /// using Pulumi;

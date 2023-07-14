@@ -954,8 +954,7 @@ class ScalingConfig(pulumi.CustomResource):
             system_disk_type="CLOUD_PREMIUM",
             user_data="dGVzdA==")
         ```
-
-        Using SPOT charge type
+        ### Using SPOT charge type
 
         ```python
         import pulumi
@@ -1046,8 +1045,7 @@ class ScalingConfig(pulumi.CustomResource):
             system_disk_type="CLOUD_PREMIUM",
             user_data="dGVzdA==")
         ```
-
-        Using SPOT charge type
+        ### Using SPOT charge type
 
         ```python
         import pulumi

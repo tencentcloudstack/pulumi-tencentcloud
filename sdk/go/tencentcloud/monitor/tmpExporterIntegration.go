@@ -16,8 +16,7 @@ import (
 // > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
 //
 // ## Example Usage
-//
-// Use blackbox-exporter
+// ### Use blackbox-exporter
 //
 // ```go
 // package main
@@ -43,8 +42,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Use es-exporter
+// ### Use es-exporter
 //
 // ```go
 // package main

@@ -275,7 +275,7 @@ func (o InstanceMultiZoneInfoArrayOutput) Index(i pulumi.IntInput) InstanceMulti
 type InstanceNodeInfoList struct {
 	// Node disk size. Unit is GB, and default value is `100`.
 	DiskSize *int `pulumi:"diskSize"`
-	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
 	// Decides to encrypt this disk or not.
 	Encrypt *bool `pulumi:"encrypt"`
@@ -301,7 +301,7 @@ type InstanceNodeInfoListInput interface {
 type InstanceNodeInfoListArgs struct {
 	// Node disk size. Unit is GB, and default value is `100`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
-	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
 	// Decides to encrypt this disk or not.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
@@ -369,7 +369,7 @@ func (o InstanceNodeInfoListOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
-// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
 func (o InstanceNodeInfoListOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }

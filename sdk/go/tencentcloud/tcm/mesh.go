@@ -26,8 +26,15 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewMesh(ctx, "basic", &Tcm.MeshArgs{
+// 		_, err := Tcm.NewMesh(ctx, "mesh", &Tcm.MeshArgs{
 // 			Config: &tcm.MeshConfigArgs{
+// 				Inject: &tcm.MeshConfigInjectArgs{
+// 					ExcludeIpRanges: pulumi.StringArray{
+// 						pulumi.String("172.16.0.0/16"),
+// 					},
+// 					HoldApplicationUntilProxyStarts: pulumi.Bool(true),
+// 					HoldProxyUntilApplicationEnds:   pulumi.Bool(true),
+// 				},
 // 				Istio: &tcm.MeshConfigIstioArgs{
 // 					DisableHttpRetry:      pulumi.Bool(true),
 // 					DisablePolicyChecks:   pulumi.Bool(true),
@@ -37,6 +44,46 @@ import (
 // 						IstioMetaDnsAutoAllocate: pulumi.Bool(true),
 // 						IstioMetaDnsCapture:      pulumi.Bool(true),
 // 					},
+// 					Tracing: &tcm.MeshConfigIstioTracingArgs{
+// 						Enable: pulumi.Bool(false),
+// 					},
+// 				},
+// 				Prometheus: &tcm.MeshConfigPrometheusArgs{
+// 					CustomProm: &tcm.MeshConfigPrometheusCustomPromArgs{
+// 						AuthType: pulumi.String("none"),
+// 						Url:      pulumi.String("https://10.0.0.1:1000"),
+// 						VpcId:    pulumi.String("vpc-j9yhbzpn"),
+// 					},
+// 				},
+// 				SidecarResources: &tcm.MeshConfigSidecarResourcesArgs{
+// 					Limits: tcm.MeshConfigSidecarResourcesLimitArray{
+// 						&tcm.MeshConfigSidecarResourcesLimitArgs{
+// 							Name:     pulumi.String("cpu"),
+// 							Quantity: pulumi.String("2"),
+// 						},
+// 						&tcm.MeshConfigSidecarResourcesLimitArgs{
+// 							Name:     pulumi.String("memory"),
+// 							Quantity: pulumi.String("1Gi"),
+// 						},
+// 					},
+// 					Requests: tcm.MeshConfigSidecarResourcesRequestArray{
+// 						&tcm.MeshConfigSidecarResourcesRequestArgs{
+// 							Name:     pulumi.String("cpu"),
+// 							Quantity: pulumi.String("100m"),
+// 						},
+// 						&tcm.MeshConfigSidecarResourcesRequestArgs{
+// 							Name:     pulumi.String("memory"),
+// 							Quantity: pulumi.String("128Mi"),
+// 						},
+// 					},
+// 				},
+// 				Tracing: &tcm.MeshConfigTracingArgs{
+// 					Apm: &tcm.MeshConfigTracingApmArgs{
+// 						Enable: pulumi.Bool(true),
+// 						Region: pulumi.String("ap-guangzhou"),
+// 					},
+// 					Enable:   pulumi.Bool(true),
+// 					Sampling: pulumi.Float64(1),
 // 				},
 // 			},
 // 			DisplayName: pulumi.String("test_mesh"),
@@ -44,7 +91,7 @@ import (
 // 			TagLists: tcm.MeshTagListArray{
 // 				&tcm.MeshTagListArgs{
 // 					Key:         pulumi.String("key"),
-// 					Passthrough: pulumi.Bool(true),
+// 					Passthrough: pulumi.Bool(false),
 // 					Value:       pulumi.String("value"),
 // 				},
 // 			},

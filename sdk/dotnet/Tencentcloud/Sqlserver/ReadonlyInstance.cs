@@ -177,6 +177,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         [Output("vport")]
         public Output<int> Vport { get; private set; } = null!;
 
+        /// <summary>
+        /// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        /// </summary>
+        [Output("waitSwitch")]
+        public Output<int?> WaitSwitch { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a ReadonlyInstance resource with the given unique name, arguments, and options.
@@ -338,6 +344,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
 
+        /// <summary>
+        /// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
+
         public ReadonlyInstanceArgs()
         {
         }
@@ -488,6 +500,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("vport")]
         public Input<int>? Vport { get; set; }
+
+        /// <summary>
+        /// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         public ReadonlyInstanceState()
         {

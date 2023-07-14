@@ -9,29 +9,56 @@ export * from "./apiGroup";
 export * from "./apiRateLimitRule";
 export * from "./application";
 export * from "./applicationConfig";
+export * from "./applicationFileConfig";
 export * from "./applicationFileConfigRelease";
 export * from "./applicationPublicConfig";
 export * from "./applicationPublicConfigRelease";
 export * from "./applicationReleaseConfig";
+export * from "./bindApiGroup";
 export * from "./cluster";
 export * from "./configTemplate";
-export * from "./containGroup";
+export * from "./deployContainerGroup";
+export * from "./deployVmGroup";
+export * from "./enableUnitRule";
+export * from "./getApiDetail";
+export * from "./getApiGroup";
 export * from "./getApplication";
+export * from "./getApplicationAttribute";
 export * from "./getApplicationConfig";
 export * from "./getApplicationFileConfig";
 export * from "./getApplicationPublicConfig";
+export * from "./getBusinessLogConfigs";
 export * from "./getCluster";
+export * from "./getConfigSummary";
+export * from "./getContainerGroup";
+export * from "./getDeliveryConfigByGroupId";
+export * from "./getDeliveryConfigs";
+export * from "./getGatewayAllGroupApis";
+export * from "./getGroupConfigRelease";
+export * from "./getGroupGateways";
+export * from "./getGroupInstances";
+export * from "./getGroups";
 export * from "./getMicroservice";
+export * from "./getMicroserviceApiVersion";
+export * from "./getMsApiList";
+export * from "./getPodInstances";
+export * from "./getPublicConfigSummary";
+export * from "./getRepository";
 export * from "./getUnitRules";
+export * from "./getUsableUnitNamespaces";
 export * from "./group";
 export * from "./instancesAttachment";
 export * from "./lane";
 export * from "./laneRule";
 export * from "./microservice";
 export * from "./namespace";
+export * from "./operateContainerGroup";
+export * from "./operateGroup";
 export * from "./pathRewrite";
+export * from "./releaseApiGroup";
 export * from "./repository";
 export * from "./task";
+export * from "./unitNamespace";
 export * from "./unitRule";
 
 // Import resources to register:
@@ -39,22 +66,30 @@ import { ApiGroup } from "./apiGroup";
 import { ApiRateLimitRule } from "./apiRateLimitRule";
 import { Application } from "./application";
 import { ApplicationConfig } from "./applicationConfig";
+import { ApplicationFileConfig } from "./applicationFileConfig";
 import { ApplicationFileConfigRelease } from "./applicationFileConfigRelease";
 import { ApplicationPublicConfig } from "./applicationPublicConfig";
 import { ApplicationPublicConfigRelease } from "./applicationPublicConfigRelease";
 import { ApplicationReleaseConfig } from "./applicationReleaseConfig";
+import { BindApiGroup } from "./bindApiGroup";
 import { Cluster } from "./cluster";
 import { ConfigTemplate } from "./configTemplate";
-import { ContainGroup } from "./containGroup";
+import { DeployContainerGroup } from "./deployContainerGroup";
+import { DeployVmGroup } from "./deployVmGroup";
+import { EnableUnitRule } from "./enableUnitRule";
 import { Group } from "./group";
 import { InstancesAttachment } from "./instancesAttachment";
 import { Lane } from "./lane";
 import { LaneRule } from "./laneRule";
 import { Microservice } from "./microservice";
 import { Namespace } from "./namespace";
+import { OperateContainerGroup } from "./operateContainerGroup";
+import { OperateGroup } from "./operateGroup";
 import { PathRewrite } from "./pathRewrite";
+import { ReleaseApiGroup } from "./releaseApiGroup";
 import { Repository } from "./repository";
 import { Task } from "./task";
+import { UnitNamespace } from "./unitNamespace";
 import { UnitRule } from "./unitRule";
 
 const _module = {
@@ -69,6 +104,8 @@ const _module = {
                 return new Application(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/applicationConfig:ApplicationConfig":
                 return new ApplicationConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/applicationFileConfig:ApplicationFileConfig":
+                return new ApplicationFileConfig(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease":
                 return new ApplicationFileConfigRelease(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/applicationPublicConfig:ApplicationPublicConfig":
@@ -77,12 +114,18 @@ const _module = {
                 return new ApplicationPublicConfigRelease(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig":
                 return new ApplicationReleaseConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/bindApiGroup:BindApiGroup":
+                return new BindApiGroup(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/configTemplate:ConfigTemplate":
                 return new ConfigTemplate(name, <any>undefined, { urn })
-            case "tencentcloud:Tsf/containGroup:ContainGroup":
-                return new ContainGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/deployContainerGroup:DeployContainerGroup":
+                return new DeployContainerGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/deployVmGroup:DeployVmGroup":
+                return new DeployVmGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/enableUnitRule:EnableUnitRule":
+                return new EnableUnitRule(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/group:Group":
                 return new Group(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/instancesAttachment:InstancesAttachment":
@@ -95,12 +138,20 @@ const _module = {
                 return new Microservice(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/namespace:Namespace":
                 return new Namespace(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/operateContainerGroup:OperateContainerGroup":
+                return new OperateContainerGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/operateGroup:OperateGroup":
+                return new OperateGroup(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/pathRewrite:PathRewrite":
                 return new PathRewrite(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/releaseApiGroup:ReleaseApiGroup":
+                return new ReleaseApiGroup(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/repository:Repository":
                 return new Repository(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/task:Task":
                 return new Task(name, <any>undefined, { urn })
+            case "tencentcloud:Tsf/unitNamespace:UnitNamespace":
+                return new UnitNamespace(name, <any>undefined, { urn })
             case "tencentcloud:Tsf/unitRule:UnitRule":
                 return new UnitRule(name, <any>undefined, { urn })
             default:
@@ -112,20 +163,28 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/apiGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/apiRateLimitRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/application", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationFileConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationFileConfigRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationPublicConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationPublicConfigRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/applicationReleaseConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/bindApiGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/configTemplate", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/containGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/deployContainerGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/deployVmGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/enableUnitRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/group", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/instancesAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/lane", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/laneRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/microservice", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/namespace", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/operateContainerGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/operateGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/pathRewrite", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/releaseApiGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/repository", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/task", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/unitNamespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tsf/unitRule", _module)

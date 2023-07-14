@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Elasticsearch/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Elasticsearch/securityGroup:SecurityGroup":
+		r = &SecurityGroup{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -39,6 +41,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Elasticsearch/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/securityGroup",
 		&module{version},
 	)
 }

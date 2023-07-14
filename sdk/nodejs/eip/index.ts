@@ -5,25 +5,42 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./addressTransform";
 export * from "./association";
+export * from "./getAddressQuota";
+export * from "./getNetworkAccountType";
 export * from "./instance";
+export * from "./normalAddressReturn";
+export * from "./publicAddressAdjust";
 
 // Import resources to register:
+import { AddressTransform } from "./addressTransform";
 import { Association } from "./association";
 import { Instance } from "./instance";
+import { NormalAddressReturn } from "./normalAddressReturn";
+import { PublicAddressAdjust } from "./publicAddressAdjust";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Eip/addressTransform:AddressTransform":
+                return new AddressTransform(name, <any>undefined, { urn })
             case "tencentcloud:Eip/association:Association":
                 return new Association(name, <any>undefined, { urn })
             case "tencentcloud:Eip/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Eip/normalAddressReturn:NormalAddressReturn":
+                return new NormalAddressReturn(name, <any>undefined, { urn })
+            case "tencentcloud:Eip/publicAddressAdjust:PublicAddressAdjust":
+                return new PublicAddressAdjust(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Eip/addressTransform", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eip/association", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eip/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eip/normalAddressReturn", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eip/publicAddressAdjust", _module)

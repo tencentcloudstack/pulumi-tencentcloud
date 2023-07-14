@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///         var auditLogFile = new Tencentcloud.Cynosdb.AuditLogFile("auditLogFile", new Tencentcloud.Cynosdb.AuditLogFileArgs
     ///         {
     ///             EndTime = "2022-08-12 10:29:20",
-    ///             InstanceId = "xxxxxxx",
+    ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
     ///             StartTime = "2022-07-12 10:29:20",
     ///         });
     ///     }

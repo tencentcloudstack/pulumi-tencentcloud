@@ -20,8 +20,7 @@ import * as utilities from "../utilities";
  * });
  * export const result = record.then(record => record.results);
  * ```
- *
- * Use verbose filter
+ * ### Use verbose filter
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

@@ -10,10 +10,27 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'BatchManifest',
+    'BatchManifestLocation',
+    'BatchManifestSpec',
+    'BatchOperation',
+    'BatchOperationCosInitiateRestoreObject',
+    'BatchOperationCosPutObjectCopy',
+    'BatchOperationCosPutObjectCopyAccessControlGrants',
+    'BatchOperationCosPutObjectCopyNewObjectMetadata',
+    'BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata',
+    'BatchOperationCosPutObjectCopyNewObjectTagging',
+    'BatchReport',
     'BucketCorsRule',
     'BucketDomainCertificateAttachmentDomainCertificate',
     'BucketDomainCertificateAttachmentDomainCertificateCertificate',
     'BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert',
+    'BucketInventoryDestination',
+    'BucketInventoryDestinationEncryption',
+    'BucketInventoryFilter',
+    'BucketInventoryFilterPeriod',
+    'BucketInventoryOptionalFields',
+    'BucketInventorySchedule',
     'BucketLifecycleRule',
     'BucketLifecycleRuleExpiration',
     'BucketLifecycleRuleNonCurrentExpiration',
@@ -23,6 +40,18 @@ __all__ = [
     'BucketOriginPullRule',
     'BucketReplicaRule',
     'BucketWebsite',
+    'GetBatchsJobResult',
+    'GetBatchsJobProgressSummaryResult',
+    'GetBucketInventorysInventoryResult',
+    'GetBucketInventorysInventoryDestinationResult',
+    'GetBucketInventorysInventoryDestinationEncryptionResult',
+    'GetBucketInventorysInventoryFilterResult',
+    'GetBucketInventorysInventoryFilterPeriodResult',
+    'GetBucketInventorysInventoryOptionalFieldResult',
+    'GetBucketInventorysInventoryScheduleResult',
+    'GetBucketMultipartUploadsUploadResult',
+    'GetBucketMultipartUploadsUploadInitiatorResult',
+    'GetBucketMultipartUploadsUploadOwnerResult',
     'GetBucketsBucketListResult',
     'GetBucketsBucketListCorsRuleResult',
     'GetBucketsBucketListLifecycleRuleResult',
@@ -34,6 +63,775 @@ __all__ = [
     'GetBucketsBucketListOriginPullRuleResult',
     'GetBucketsBucketListWebsiteResult',
 ]
+
+@pulumi.output_type
+class BatchManifest(dict):
+    def __init__(__self__, *,
+                 location: 'outputs.BatchManifestLocation',
+                 spec: 'outputs.BatchManifestSpec'):
+        """
+        :param 'BatchManifestLocationArgs' location: The location information of the list of objects.
+        :param 'BatchManifestSpecArgs' spec: Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+        """
+        pulumi.set(__self__, "location", location)
+        pulumi.set(__self__, "spec", spec)
+
+    @property
+    @pulumi.getter
+    def location(self) -> 'outputs.BatchManifestLocation':
+        """
+        The location information of the list of objects.
+        """
+        return pulumi.get(self, "location")
+
+    @property
+    @pulumi.getter
+    def spec(self) -> 'outputs.BatchManifestSpec':
+        """
+        Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+        """
+        return pulumi.get(self, "spec")
+
+
+@pulumi.output_type
+class BatchManifestLocation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "objectArn":
+            suggest = "object_arn"
+        elif key == "objectVersionId":
+            suggest = "object_version_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchManifestLocation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchManifestLocation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchManifestLocation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 etag: str,
+                 object_arn: str,
+                 object_version_id: Optional[str] = None):
+        """
+        :param str etag: Specifies the etag of the object list. Length 1-1024 bytes.
+        :param str object_arn: Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+        :param str object_version_id: Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+        """
+        pulumi.set(__self__, "etag", etag)
+        pulumi.set(__self__, "object_arn", object_arn)
+        if object_version_id is not None:
+            pulumi.set(__self__, "object_version_id", object_version_id)
+
+    @property
+    @pulumi.getter
+    def etag(self) -> str:
+        """
+        Specifies the etag of the object list. Length 1-1024 bytes.
+        """
+        return pulumi.get(self, "etag")
+
+    @property
+    @pulumi.getter(name="objectArn")
+    def object_arn(self) -> str:
+        """
+        Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+        """
+        return pulumi.get(self, "object_arn")
+
+    @property
+    @pulumi.getter(name="objectVersionId")
+    def object_version_id(self) -> Optional[str]:
+        """
+        Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+        """
+        return pulumi.get(self, "object_version_id")
+
+
+@pulumi.output_type
+class BatchManifestSpec(dict):
+    def __init__(__self__, *,
+                 format: str,
+                 fields: Optional[Sequence[str]] = None):
+        """
+        :param str format: Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+        :param Sequence[str] fields: Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+        """
+        pulumi.set(__self__, "format", format)
+        if fields is not None:
+            pulumi.set(__self__, "fields", fields)
+
+    @property
+    @pulumi.getter
+    def format(self) -> str:
+        """
+        Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+        """
+        return pulumi.get(self, "format")
+
+    @property
+    @pulumi.getter
+    def fields(self) -> Optional[Sequence[str]]:
+        """
+        Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+        """
+        return pulumi.get(self, "fields")
+
+
+@pulumi.output_type
+class BatchOperation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cosInitiateRestoreObject":
+            suggest = "cos_initiate_restore_object"
+        elif key == "cosPutObjectCopy":
+            suggest = "cos_put_object_copy"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchOperation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchOperation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchOperation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cos_initiate_restore_object: Optional['outputs.BatchOperationCosInitiateRestoreObject'] = None,
+                 cos_put_object_copy: Optional['outputs.BatchOperationCosPutObjectCopy'] = None):
+        """
+        :param 'BatchOperationCosInitiateRestoreObjectArgs' cos_initiate_restore_object: Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+        :param 'BatchOperationCosPutObjectCopyArgs' cos_put_object_copy: Specifies the specific parameters for the batch copy operation on the objects in the list.
+        """
+        if cos_initiate_restore_object is not None:
+            pulumi.set(__self__, "cos_initiate_restore_object", cos_initiate_restore_object)
+        if cos_put_object_copy is not None:
+            pulumi.set(__self__, "cos_put_object_copy", cos_put_object_copy)
+
+    @property
+    @pulumi.getter(name="cosInitiateRestoreObject")
+    def cos_initiate_restore_object(self) -> Optional['outputs.BatchOperationCosInitiateRestoreObject']:
+        """
+        Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+        """
+        return pulumi.get(self, "cos_initiate_restore_object")
+
+    @property
+    @pulumi.getter(name="cosPutObjectCopy")
+    def cos_put_object_copy(self) -> Optional['outputs.BatchOperationCosPutObjectCopy']:
+        """
+        Specifies the specific parameters for the batch copy operation on the objects in the list.
+        """
+        return pulumi.get(self, "cos_put_object_copy")
+
+
+@pulumi.output_type
+class BatchOperationCosInitiateRestoreObject(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "expirationInDays":
+            suggest = "expiration_in_days"
+        elif key == "jobTier":
+            suggest = "job_tier"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchOperationCosInitiateRestoreObject. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchOperationCosInitiateRestoreObject.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchOperationCosInitiateRestoreObject.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 expiration_in_days: int,
+                 job_tier: str):
+        """
+        :param int expiration_in_days: Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+        :param str job_tier: Select archive recovery model. Available values: Bulk, Standard.
+        """
+        pulumi.set(__self__, "expiration_in_days", expiration_in_days)
+        pulumi.set(__self__, "job_tier", job_tier)
+
+    @property
+    @pulumi.getter(name="expirationInDays")
+    def expiration_in_days(self) -> int:
+        """
+        Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+        """
+        return pulumi.get(self, "expiration_in_days")
+
+    @property
+    @pulumi.getter(name="jobTier")
+    def job_tier(self) -> str:
+        """
+        Select archive recovery model. Available values: Bulk, Standard.
+        """
+        return pulumi.get(self, "job_tier")
+
+
+@pulumi.output_type
+class BatchOperationCosPutObjectCopy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "targetResource":
+            suggest = "target_resource"
+        elif key == "accessControlDirective":
+            suggest = "access_control_directive"
+        elif key == "accessControlGrants":
+            suggest = "access_control_grants"
+        elif key == "cannedAccessControlList":
+            suggest = "canned_access_control_list"
+        elif key == "metadataDirective":
+            suggest = "metadata_directive"
+        elif key == "modifiedSinceConstraint":
+            suggest = "modified_since_constraint"
+        elif key == "newObjectMetadata":
+            suggest = "new_object_metadata"
+        elif key == "newObjectTaggings":
+            suggest = "new_object_taggings"
+        elif key == "prefixReplace":
+            suggest = "prefix_replace"
+        elif key == "resourcesPrefix":
+            suggest = "resources_prefix"
+        elif key == "storageClass":
+            suggest = "storage_class"
+        elif key == "taggingDirective":
+            suggest = "tagging_directive"
+        elif key == "targetKeyPrefix":
+            suggest = "target_key_prefix"
+        elif key == "unmodifiedSinceConstraint":
+            suggest = "unmodified_since_constraint"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchOperationCosPutObjectCopy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchOperationCosPutObjectCopy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchOperationCosPutObjectCopy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 target_resource: str,
+                 access_control_directive: Optional[str] = None,
+                 access_control_grants: Optional['outputs.BatchOperationCosPutObjectCopyAccessControlGrants'] = None,
+                 canned_access_control_list: Optional[str] = None,
+                 metadata_directive: Optional[str] = None,
+                 modified_since_constraint: Optional[int] = None,
+                 new_object_metadata: Optional['outputs.BatchOperationCosPutObjectCopyNewObjectMetadata'] = None,
+                 new_object_taggings: Optional[Sequence['outputs.BatchOperationCosPutObjectCopyNewObjectTagging']] = None,
+                 prefix_replace: Optional[bool] = None,
+                 resources_prefix: Optional[str] = None,
+                 storage_class: Optional[str] = None,
+                 tagging_directive: Optional[str] = None,
+                 target_key_prefix: Optional[str] = None,
+                 unmodified_since_constraint: Optional[int] = None):
+        """
+        :param str target_resource: Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+        :param str access_control_directive: This element specifies how ACL is copied. Valid values:
+               - Copy: inherits the source object ACL
+               - Replaced: replace source ACL
+               - Add: add a new ACL based on the source ACL.
+        :param 'BatchOperationCosPutObjectCopyAccessControlGrantsArgs' access_control_grants: Controls the specific access to the object.
+        :param str canned_access_control_list: Defines the ACL property of the object. Valid values: private, public-read.
+        :param str metadata_directive: This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+        :param int modified_since_constraint: When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+        :param 'BatchOperationCosPutObjectCopyNewObjectMetadataArgs' new_object_metadata: Configure the metadata for the object.
+        :param Sequence['BatchOperationCosPutObjectCopyNewObjectTaggingArgs'] new_object_taggings: The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+        :param bool prefix_replace: Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+        :param str resources_prefix: This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+        :param str storage_class: Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+        :param str tagging_directive: This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+        :param str target_key_prefix: This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+        :param int unmodified_since_constraint: When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        pulumi.set(__self__, "target_resource", target_resource)
+        if access_control_directive is not None:
+            pulumi.set(__self__, "access_control_directive", access_control_directive)
+        if access_control_grants is not None:
+            pulumi.set(__self__, "access_control_grants", access_control_grants)
+        if canned_access_control_list is not None:
+            pulumi.set(__self__, "canned_access_control_list", canned_access_control_list)
+        if metadata_directive is not None:
+            pulumi.set(__self__, "metadata_directive", metadata_directive)
+        if modified_since_constraint is not None:
+            pulumi.set(__self__, "modified_since_constraint", modified_since_constraint)
+        if new_object_metadata is not None:
+            pulumi.set(__self__, "new_object_metadata", new_object_metadata)
+        if new_object_taggings is not None:
+            pulumi.set(__self__, "new_object_taggings", new_object_taggings)
+        if prefix_replace is not None:
+            pulumi.set(__self__, "prefix_replace", prefix_replace)
+        if resources_prefix is not None:
+            pulumi.set(__self__, "resources_prefix", resources_prefix)
+        if storage_class is not None:
+            pulumi.set(__self__, "storage_class", storage_class)
+        if tagging_directive is not None:
+            pulumi.set(__self__, "tagging_directive", tagging_directive)
+        if target_key_prefix is not None:
+            pulumi.set(__self__, "target_key_prefix", target_key_prefix)
+        if unmodified_since_constraint is not None:
+            pulumi.set(__self__, "unmodified_since_constraint", unmodified_since_constraint)
+
+    @property
+    @pulumi.getter(name="targetResource")
+    def target_resource(self) -> str:
+        """
+        Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+        """
+        return pulumi.get(self, "target_resource")
+
+    @property
+    @pulumi.getter(name="accessControlDirective")
+    def access_control_directive(self) -> Optional[str]:
+        """
+        This element specifies how ACL is copied. Valid values:
+        - Copy: inherits the source object ACL
+        - Replaced: replace source ACL
+        - Add: add a new ACL based on the source ACL.
+        """
+        return pulumi.get(self, "access_control_directive")
+
+    @property
+    @pulumi.getter(name="accessControlGrants")
+    def access_control_grants(self) -> Optional['outputs.BatchOperationCosPutObjectCopyAccessControlGrants']:
+        """
+        Controls the specific access to the object.
+        """
+        return pulumi.get(self, "access_control_grants")
+
+    @property
+    @pulumi.getter(name="cannedAccessControlList")
+    def canned_access_control_list(self) -> Optional[str]:
+        """
+        Defines the ACL property of the object. Valid values: private, public-read.
+        """
+        return pulumi.get(self, "canned_access_control_list")
+
+    @property
+    @pulumi.getter(name="metadataDirective")
+    def metadata_directive(self) -> Optional[str]:
+        """
+        This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+        """
+        return pulumi.get(self, "metadata_directive")
+
+    @property
+    @pulumi.getter(name="modifiedSinceConstraint")
+    def modified_since_constraint(self) -> Optional[int]:
+        """
+        When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        return pulumi.get(self, "modified_since_constraint")
+
+    @property
+    @pulumi.getter(name="newObjectMetadata")
+    def new_object_metadata(self) -> Optional['outputs.BatchOperationCosPutObjectCopyNewObjectMetadata']:
+        """
+        Configure the metadata for the object.
+        """
+        return pulumi.get(self, "new_object_metadata")
+
+    @property
+    @pulumi.getter(name="newObjectTaggings")
+    def new_object_taggings(self) -> Optional[Sequence['outputs.BatchOperationCosPutObjectCopyNewObjectTagging']]:
+        """
+        The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+        """
+        return pulumi.get(self, "new_object_taggings")
+
+    @property
+    @pulumi.getter(name="prefixReplace")
+    def prefix_replace(self) -> Optional[bool]:
+        """
+        Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+        """
+        return pulumi.get(self, "prefix_replace")
+
+    @property
+    @pulumi.getter(name="resourcesPrefix")
+    def resources_prefix(self) -> Optional[str]:
+        """
+        This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+        """
+        return pulumi.get(self, "resources_prefix")
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> Optional[str]:
+        """
+        Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+        """
+        return pulumi.get(self, "storage_class")
+
+    @property
+    @pulumi.getter(name="taggingDirective")
+    def tagging_directive(self) -> Optional[str]:
+        """
+        This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+        """
+        return pulumi.get(self, "tagging_directive")
+
+    @property
+    @pulumi.getter(name="targetKeyPrefix")
+    def target_key_prefix(self) -> Optional[str]:
+        """
+        This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+        """
+        return pulumi.get(self, "target_key_prefix")
+
+    @property
+    @pulumi.getter(name="unmodifiedSinceConstraint")
+    def unmodified_since_constraint(self) -> Optional[int]:
+        """
+        When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        return pulumi.get(self, "unmodified_since_constraint")
+
+
+@pulumi.output_type
+class BatchOperationCosPutObjectCopyAccessControlGrants(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "typeIdentifier":
+            suggest = "type_identifier"
+        elif key == "displayName":
+            suggest = "display_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchOperationCosPutObjectCopyAccessControlGrants. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchOperationCosPutObjectCopyAccessControlGrants.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchOperationCosPutObjectCopyAccessControlGrants.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 identifier: str,
+                 permission: str,
+                 type_identifier: str,
+                 display_name: Optional[str] = None):
+        """
+        :param str identifier: User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+        :param str permission: Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+        :param str type_identifier: Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+        :param str display_name: User name.
+        """
+        pulumi.set(__self__, "identifier", identifier)
+        pulumi.set(__self__, "permission", permission)
+        pulumi.set(__self__, "type_identifier", type_identifier)
+        if display_name is not None:
+            pulumi.set(__self__, "display_name", display_name)
+
+    @property
+    @pulumi.getter
+    def identifier(self) -> str:
+        """
+        User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+        """
+        return pulumi.get(self, "identifier")
+
+    @property
+    @pulumi.getter
+    def permission(self) -> str:
+        """
+        Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+        """
+        return pulumi.get(self, "permission")
+
+    @property
+    @pulumi.getter(name="typeIdentifier")
+    def type_identifier(self) -> str:
+        """
+        Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+        """
+        return pulumi.get(self, "type_identifier")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> Optional[str]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "display_name")
+
+
+@pulumi.output_type
+class BatchOperationCosPutObjectCopyNewObjectMetadata(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cacheControl":
+            suggest = "cache_control"
+        elif key == "contentDisposition":
+            suggest = "content_disposition"
+        elif key == "contentEncoding":
+            suggest = "content_encoding"
+        elif key == "contentType":
+            suggest = "content_type"
+        elif key == "httpExpiresDate":
+            suggest = "http_expires_date"
+        elif key == "sseAlgorithm":
+            suggest = "sse_algorithm"
+        elif key == "userMetadatas":
+            suggest = "user_metadatas"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchOperationCosPutObjectCopyNewObjectMetadata. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchOperationCosPutObjectCopyNewObjectMetadata.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchOperationCosPutObjectCopyNewObjectMetadata.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cache_control: Optional[str] = None,
+                 content_disposition: Optional[str] = None,
+                 content_encoding: Optional[str] = None,
+                 content_type: Optional[str] = None,
+                 http_expires_date: Optional[str] = None,
+                 sse_algorithm: Optional[str] = None,
+                 user_metadatas: Optional[Sequence['outputs.BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata']] = None):
+        """
+        :param str cache_control: The caching instructions defined in RFC 2616 are saved as object metadata.
+        :param str content_disposition: The file name defined in RFC 2616 is saved as object metadata.
+        :param str content_encoding: The encoding format defined in RFC 2616 is saved as object metadata.
+        :param str content_type: The content types defined in RFC 2616 are saved as object metadata.
+        :param str http_expires_date: The cache expiration time defined in RFC 2616 is saved as object metadata.
+        :param str sse_algorithm: Server encryption algorithm. Currently, only AES256 is supported.
+        :param Sequence['BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs'] user_metadatas: Includes user-defined metadata.
+        """
+        if cache_control is not None:
+            pulumi.set(__self__, "cache_control", cache_control)
+        if content_disposition is not None:
+            pulumi.set(__self__, "content_disposition", content_disposition)
+        if content_encoding is not None:
+            pulumi.set(__self__, "content_encoding", content_encoding)
+        if content_type is not None:
+            pulumi.set(__self__, "content_type", content_type)
+        if http_expires_date is not None:
+            pulumi.set(__self__, "http_expires_date", http_expires_date)
+        if sse_algorithm is not None:
+            pulumi.set(__self__, "sse_algorithm", sse_algorithm)
+        if user_metadatas is not None:
+            pulumi.set(__self__, "user_metadatas", user_metadatas)
+
+    @property
+    @pulumi.getter(name="cacheControl")
+    def cache_control(self) -> Optional[str]:
+        """
+        The caching instructions defined in RFC 2616 are saved as object metadata.
+        """
+        return pulumi.get(self, "cache_control")
+
+    @property
+    @pulumi.getter(name="contentDisposition")
+    def content_disposition(self) -> Optional[str]:
+        """
+        The file name defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "content_disposition")
+
+    @property
+    @pulumi.getter(name="contentEncoding")
+    def content_encoding(self) -> Optional[str]:
+        """
+        The encoding format defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "content_encoding")
+
+    @property
+    @pulumi.getter(name="contentType")
+    def content_type(self) -> Optional[str]:
+        """
+        The content types defined in RFC 2616 are saved as object metadata.
+        """
+        return pulumi.get(self, "content_type")
+
+    @property
+    @pulumi.getter(name="httpExpiresDate")
+    def http_expires_date(self) -> Optional[str]:
+        """
+        The cache expiration time defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "http_expires_date")
+
+    @property
+    @pulumi.getter(name="sseAlgorithm")
+    def sse_algorithm(self) -> Optional[str]:
+        """
+        Server encryption algorithm. Currently, only AES256 is supported.
+        """
+        return pulumi.get(self, "sse_algorithm")
+
+    @property
+    @pulumi.getter(name="userMetadatas")
+    def user_metadatas(self) -> Optional[Sequence['outputs.BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata']]:
+        """
+        Includes user-defined metadata.
+        """
+        return pulumi.get(self, "user_metadatas")
+
+
+@pulumi.output_type
+class BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: key.
+        :param str value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class BatchOperationCosPutObjectCopyNewObjectTagging(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: key.
+        :param str value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class BatchReport(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "reportScope":
+            suggest = "report_scope"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchReport. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchReport.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchReport.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bucket: str,
+                 enabled: str,
+                 format: str,
+                 report_scope: str,
+                 prefix: Optional[str] = None):
+        """
+        :param str bucket: Delivery bucket for task completion reports.
+        :param str enabled: Whether to output the task completion report.
+        :param str format: Task completion report format information. Legal value: Report_CSV_V1.
+        :param str report_scope: Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+        :param str prefix: Prefix information for the task completion report. Length 0-256 bytes.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "format", format)
+        pulumi.set(__self__, "report_scope", report_scope)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        Delivery bucket for task completion reports.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> str:
+        """
+        Whether to output the task completion report.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def format(self) -> str:
+        """
+        Task completion report format information. Legal value: Report_CSV_V1.
+        """
+        return pulumi.get(self, "format")
+
+    @property
+    @pulumi.getter(name="reportScope")
+    def report_scope(self) -> str:
+        """
+        Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+        """
+        return pulumi.get(self, "report_scope")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        """
+        Prefix information for the task completion report. Length 0-256 bytes.
+        """
+        return pulumi.get(self, "prefix")
+
 
 @pulumi.output_type
 class BucketCorsRule(dict):
@@ -245,6 +1043,242 @@ class BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert(di
         Private key of certificate.
         """
         return pulumi.get(self, "private_key")
+
+
+@pulumi.output_type
+class BucketInventoryDestination(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accountId":
+            suggest = "account_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketInventoryDestination. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketInventoryDestination.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketInventoryDestination.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bucket: str,
+                 format: str,
+                 account_id: Optional[str] = None,
+                 encryption: Optional['outputs.BucketInventoryDestinationEncryption'] = None,
+                 prefix: Optional[str] = None):
+        """
+        :param str bucket: Bucket name.
+        :param str format: Format of the inventory result. Valid value: CSV.
+        :param str account_id: ID of the bucket owner.
+        :param 'BucketInventoryDestinationEncryptionArgs' encryption: Server-side encryption for the inventory result.
+        :param str prefix: Prefix of the inventory result.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "format", format)
+        if account_id is not None:
+            pulumi.set(__self__, "account_id", account_id)
+        if encryption is not None:
+            pulumi.set(__self__, "encryption", encryption)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        Bucket name.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter
+    def format(self) -> str:
+        """
+        Format of the inventory result. Valid value: CSV.
+        """
+        return pulumi.get(self, "format")
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> Optional[str]:
+        """
+        ID of the bucket owner.
+        """
+        return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter
+    def encryption(self) -> Optional['outputs.BucketInventoryDestinationEncryption']:
+        """
+        Server-side encryption for the inventory result.
+        """
+        return pulumi.get(self, "encryption")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        """
+        Prefix of the inventory result.
+        """
+        return pulumi.get(self, "prefix")
+
+
+@pulumi.output_type
+class BucketInventoryDestinationEncryption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "sseCos":
+            suggest = "sse_cos"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketInventoryDestinationEncryption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketInventoryDestinationEncryption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketInventoryDestinationEncryption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 sse_cos: Optional[str] = None):
+        """
+        :param str sse_cos: Encryption with COS-managed key. This field can be left empty.
+        """
+        if sse_cos is not None:
+            pulumi.set(__self__, "sse_cos", sse_cos)
+
+    @property
+    @pulumi.getter(name="sseCos")
+    def sse_cos(self) -> Optional[str]:
+        """
+        Encryption with COS-managed key. This field can be left empty.
+        """
+        return pulumi.get(self, "sse_cos")
+
+
+@pulumi.output_type
+class BucketInventoryFilter(dict):
+    def __init__(__self__, *,
+                 period: Optional['outputs.BucketInventoryFilterPeriod'] = None,
+                 prefix: Optional[str] = None):
+        """
+        :param 'BucketInventoryFilterPeriodArgs' period: Creation time range of the objects to analyze.
+        :param str prefix: Prefix of the objects to analyze.
+        """
+        if period is not None:
+            pulumi.set(__self__, "period", period)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def period(self) -> Optional['outputs.BucketInventoryFilterPeriod']:
+        """
+        Creation time range of the objects to analyze.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        """
+        Prefix of the objects to analyze.
+        """
+        return pulumi.get(self, "prefix")
+
+
+@pulumi.output_type
+class BucketInventoryFilterPeriod(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "endTime":
+            suggest = "end_time"
+        elif key == "startTime":
+            suggest = "start_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketInventoryFilterPeriod. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketInventoryFilterPeriod.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketInventoryFilterPeriod.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 end_time: Optional[str] = None,
+                 start_time: Optional[str] = None):
+        """
+        :param str end_time: Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        :param str start_time: Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        if end_time is not None:
+            pulumi.set(__self__, "end_time", end_time)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> Optional[str]:
+        """
+        Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[str]:
+        """
+        Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class BucketInventoryOptionalFields(dict):
+    def __init__(__self__, *,
+                 fields: Optional[Sequence[str]] = None):
+        """
+        :param Sequence[str] fields: Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+        """
+        if fields is not None:
+            pulumi.set(__self__, "fields", fields)
+
+    @property
+    @pulumi.getter
+    def fields(self) -> Optional[Sequence[str]]:
+        """
+        Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+        """
+        return pulumi.get(self, "fields")
+
+
+@pulumi.output_type
+class BucketInventorySchedule(dict):
+    def __init__(__self__, *,
+                 frequency: str):
+        """
+        :param str frequency: Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        pulumi.set(__self__, "frequency", frequency)
+
+    @property
+    @pulumi.getter
+    def frequency(self) -> str:
+        """
+        Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        return pulumi.get(self, "frequency")
 
 
 @pulumi.output_type
@@ -870,6 +1904,521 @@ class BucketWebsite(dict):
         COS returns this index document when requests are made to the root domain or any of the subfolders.
         """
         return pulumi.get(self, "index_document")
+
+
+@pulumi.output_type
+class GetBatchsJobResult(dict):
+    def __init__(__self__, *,
+                 creation_time: str,
+                 description: str,
+                 job_id: str,
+                 operation: str,
+                 priority: int,
+                 progress_summaries: Sequence['outputs.GetBatchsJobProgressSummaryResult'],
+                 status: str,
+                 termination_date: str):
+        """
+        :param str creation_time: Job creation time.
+        :param str description: Mission description. The length is limited to 0-256 bytes.
+        :param str job_id: Job ID. The length is limited to 1-64 bytes.
+        :param str operation: Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+        :param int priority: Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+        :param Sequence['GetBatchsJobProgressSummaryArgs'] progress_summaries: Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+        :param str status: Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+        :param str termination_date: The end time of the batch processing job.
+        """
+        pulumi.set(__self__, "creation_time", creation_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "job_id", job_id)
+        pulumi.set(__self__, "operation", operation)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "progress_summaries", progress_summaries)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "termination_date", termination_date)
+
+    @property
+    @pulumi.getter(name="creationTime")
+    def creation_time(self) -> str:
+        """
+        Job creation time.
+        """
+        return pulumi.get(self, "creation_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Mission description. The length is limited to 0-256 bytes.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> str:
+        """
+        Job ID. The length is limited to 1-64 bytes.
+        """
+        return pulumi.get(self, "job_id")
+
+    @property
+    @pulumi.getter
+    def operation(self) -> str:
+        """
+        Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+        """
+        return pulumi.get(self, "operation")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> int:
+        """
+        Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+        """
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="progressSummaries")
+    def progress_summaries(self) -> Sequence['outputs.GetBatchsJobProgressSummaryResult']:
+        """
+        Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+        """
+        return pulumi.get(self, "progress_summaries")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="terminationDate")
+    def termination_date(self) -> str:
+        """
+        The end time of the batch processing job.
+        """
+        return pulumi.get(self, "termination_date")
+
+
+@pulumi.output_type
+class GetBatchsJobProgressSummaryResult(dict):
+    def __init__(__self__, *,
+                 number_of_tasks_failed: int,
+                 number_of_tasks_succeeded: int,
+                 total_number_of_tasks: int):
+        """
+        :param int number_of_tasks_failed: The current failed Operand.
+        :param int number_of_tasks_succeeded: The current successful Operand.
+        :param int total_number_of_tasks: Total Operand.
+        """
+        pulumi.set(__self__, "number_of_tasks_failed", number_of_tasks_failed)
+        pulumi.set(__self__, "number_of_tasks_succeeded", number_of_tasks_succeeded)
+        pulumi.set(__self__, "total_number_of_tasks", total_number_of_tasks)
+
+    @property
+    @pulumi.getter(name="numberOfTasksFailed")
+    def number_of_tasks_failed(self) -> int:
+        """
+        The current failed Operand.
+        """
+        return pulumi.get(self, "number_of_tasks_failed")
+
+    @property
+    @pulumi.getter(name="numberOfTasksSucceeded")
+    def number_of_tasks_succeeded(self) -> int:
+        """
+        The current successful Operand.
+        """
+        return pulumi.get(self, "number_of_tasks_succeeded")
+
+    @property
+    @pulumi.getter(name="totalNumberOfTasks")
+    def total_number_of_tasks(self) -> int:
+        """
+        Total Operand.
+        """
+        return pulumi.get(self, "total_number_of_tasks")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryResult(dict):
+    def __init__(__self__, *,
+                 destinations: Sequence['outputs.GetBucketInventorysInventoryDestinationResult'],
+                 filters: Sequence['outputs.GetBucketInventorysInventoryFilterResult'],
+                 id: str,
+                 included_object_versions: str,
+                 is_enabled: str,
+                 schedules: Sequence['outputs.GetBucketInventorysInventoryScheduleResult'],
+                 optional_fields: Optional[Sequence['outputs.GetBucketInventorysInventoryOptionalFieldResult']] = None):
+        """
+        :param Sequence['GetBucketInventorysInventoryDestinationArgs'] destinations: Information about the inventory result destination.
+        :param Sequence['GetBucketInventorysInventoryFilterArgs'] filters: Filters objects prefixed with the specified value to analyze.
+        :param str id: Whether to enable the inventory. true or false.
+        :param str included_object_versions: Whether to include object versions in the inventory. All or No.
+        :param str is_enabled: Whether to enable the inventory. true or false.
+        :param Sequence['GetBucketInventorysInventoryScheduleArgs'] schedules: Inventory job cycle.
+        """
+        pulumi.set(__self__, "destinations", destinations)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "included_object_versions", included_object_versions)
+        pulumi.set(__self__, "is_enabled", is_enabled)
+        pulumi.set(__self__, "schedules", schedules)
+        if optional_fields is not None:
+            pulumi.set(__self__, "optional_fields", optional_fields)
+
+    @property
+    @pulumi.getter
+    def destinations(self) -> Sequence['outputs.GetBucketInventorysInventoryDestinationResult']:
+        """
+        Information about the inventory result destination.
+        """
+        return pulumi.get(self, "destinations")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.GetBucketInventorysInventoryFilterResult']:
+        """
+        Filters objects prefixed with the specified value to analyze.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Whether to enable the inventory. true or false.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="includedObjectVersions")
+    def included_object_versions(self) -> str:
+        """
+        Whether to include object versions in the inventory. All or No.
+        """
+        return pulumi.get(self, "included_object_versions")
+
+    @property
+    @pulumi.getter(name="isEnabled")
+    def is_enabled(self) -> str:
+        """
+        Whether to enable the inventory. true or false.
+        """
+        return pulumi.get(self, "is_enabled")
+
+    @property
+    @pulumi.getter
+    def schedules(self) -> Sequence['outputs.GetBucketInventorysInventoryScheduleResult']:
+        """
+        Inventory job cycle.
+        """
+        return pulumi.get(self, "schedules")
+
+    @property
+    @pulumi.getter(name="optionalFields")
+    def optional_fields(self) -> Optional[Sequence['outputs.GetBucketInventorysInventoryOptionalFieldResult']]:
+        return pulumi.get(self, "optional_fields")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryDestinationResult(dict):
+    def __init__(__self__, *,
+                 account_id: str,
+                 bucket: str,
+                 encryptions: Sequence['outputs.GetBucketInventorysInventoryDestinationEncryptionResult'],
+                 format: str,
+                 prefix: str):
+        """
+        :param str account_id: ID of the bucket owner.
+        :param str bucket: Bucket.
+        :param Sequence['GetBucketInventorysInventoryDestinationEncryptionArgs'] encryptions: Server-side encryption for the inventory result.
+        :param str format: Format of the inventory result. Valid value: CSV.
+        :param str prefix: Prefix of the objects to analyze.
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "encryptions", encryptions)
+        pulumi.set(__self__, "format", format)
+        pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> str:
+        """
+        ID of the bucket owner.
+        """
+        return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        Bucket.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter
+    def encryptions(self) -> Sequence['outputs.GetBucketInventorysInventoryDestinationEncryptionResult']:
+        """
+        Server-side encryption for the inventory result.
+        """
+        return pulumi.get(self, "encryptions")
+
+    @property
+    @pulumi.getter
+    def format(self) -> str:
+        """
+        Format of the inventory result. Valid value: CSV.
+        """
+        return pulumi.get(self, "format")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> str:
+        """
+        Prefix of the objects to analyze.
+        """
+        return pulumi.get(self, "prefix")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryDestinationEncryptionResult(dict):
+    def __init__(__self__, *,
+                 sse_cos: str):
+        """
+        :param str sse_cos: Encryption with COS-managed key. This field can be left empty.
+        """
+        pulumi.set(__self__, "sse_cos", sse_cos)
+
+    @property
+    @pulumi.getter(name="sseCos")
+    def sse_cos(self) -> str:
+        """
+        Encryption with COS-managed key. This field can be left empty.
+        """
+        return pulumi.get(self, "sse_cos")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryFilterResult(dict):
+    def __init__(__self__, *,
+                 periods: Sequence['outputs.GetBucketInventorysInventoryFilterPeriodResult'],
+                 prefix: str):
+        """
+        :param Sequence['GetBucketInventorysInventoryFilterPeriodArgs'] periods: Creation time range of the objects to analyze.
+        :param str prefix: Prefix of the objects to analyze.
+        """
+        pulumi.set(__self__, "periods", periods)
+        pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def periods(self) -> Sequence['outputs.GetBucketInventorysInventoryFilterPeriodResult']:
+        """
+        Creation time range of the objects to analyze.
+        """
+        return pulumi.get(self, "periods")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> str:
+        """
+        Prefix of the objects to analyze.
+        """
+        return pulumi.get(self, "prefix")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryFilterPeriodResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 start_time: str):
+        """
+        :param str end_time: Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        :param str start_time: Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryOptionalFieldResult(dict):
+    def __init__(__self__, *,
+                 fields: Sequence[str]):
+        pulumi.set(__self__, "fields", fields)
+
+    @property
+    @pulumi.getter
+    def fields(self) -> Sequence[str]:
+        return pulumi.get(self, "fields")
+
+
+@pulumi.output_type
+class GetBucketInventorysInventoryScheduleResult(dict):
+    def __init__(__self__, *,
+                 frequency: str):
+        """
+        :param str frequency: Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        pulumi.set(__self__, "frequency", frequency)
+
+    @property
+    @pulumi.getter
+    def frequency(self) -> str:
+        """
+        Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        return pulumi.get(self, "frequency")
+
+
+@pulumi.output_type
+class GetBucketMultipartUploadsUploadResult(dict):
+    def __init__(__self__, *,
+                 initiated: str,
+                 initiators: Sequence['outputs.GetBucketMultipartUploadsUploadInitiatorResult'],
+                 key: str,
+                 owners: Sequence['outputs.GetBucketMultipartUploadsUploadOwnerResult'],
+                 storage_class: str,
+                 upload_id: str):
+        """
+        :param str initiated: The starting time of multipart upload.
+        :param Sequence['GetBucketMultipartUploadsUploadInitiatorArgs'] initiators: Used to represent the information of the initiator of this upload.
+        :param str key: Name of the Object.
+        :param Sequence['GetBucketMultipartUploadsUploadOwnerArgs'] owners: Information used to represent the owner of these chunks.
+        :param str storage_class: Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+        :param str upload_id: Mark the ID of this multipart upload.
+        """
+        pulumi.set(__self__, "initiated", initiated)
+        pulumi.set(__self__, "initiators", initiators)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "owners", owners)
+        pulumi.set(__self__, "storage_class", storage_class)
+        pulumi.set(__self__, "upload_id", upload_id)
+
+    @property
+    @pulumi.getter
+    def initiated(self) -> str:
+        """
+        The starting time of multipart upload.
+        """
+        return pulumi.get(self, "initiated")
+
+    @property
+    @pulumi.getter
+    def initiators(self) -> Sequence['outputs.GetBucketMultipartUploadsUploadInitiatorResult']:
+        """
+        Used to represent the information of the initiator of this upload.
+        """
+        return pulumi.get(self, "initiators")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Name of the Object.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def owners(self) -> Sequence['outputs.GetBucketMultipartUploadsUploadOwnerResult']:
+        """
+        Information used to represent the owner of these chunks.
+        """
+        return pulumi.get(self, "owners")
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> str:
+        """
+        Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+        """
+        return pulumi.get(self, "storage_class")
+
+    @property
+    @pulumi.getter(name="uploadId")
+    def upload_id(self) -> str:
+        """
+        Mark the ID of this multipart upload.
+        """
+        return pulumi.get(self, "upload_id")
+
+
+@pulumi.output_type
+class GetBucketMultipartUploadsUploadInitiatorResult(dict):
+    def __init__(__self__, *,
+                 display_name: str,
+                 id: str):
+        """
+        :param str display_name: Abbreviation for user identity ID (UIN).
+        :param str id: The user's unique CAM identity ID.
+        """
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Abbreviation for user identity ID (UIN).
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        The user's unique CAM identity ID.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class GetBucketMultipartUploadsUploadOwnerResult(dict):
+    def __init__(__self__, *,
+                 display_name: str,
+                 id: str):
+        """
+        :param str display_name: Abbreviation for user identity ID (UIN).
+        :param str id: The user's unique CAM identity ID.
+        """
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Abbreviation for user identity ID (UIN).
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        The user's unique CAM identity ID.
+        """
+        return pulumi.get(self, "id")
 
 
 @pulumi.output_type

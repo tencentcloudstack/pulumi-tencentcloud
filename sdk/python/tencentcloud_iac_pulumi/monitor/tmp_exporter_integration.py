@@ -198,8 +198,7 @@ class TmpExporterIntegration(pulumi.CustomResource):
         > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
 
         ## Example Usage
-
-        Use blackbox-exporter
+        ### Use blackbox-exporter
 
         ```python
         import pulumi
@@ -212,8 +211,7 @@ class TmpExporterIntegration(pulumi.CustomResource):
             kind="blackbox-exporter",
             kube_type=1)
         ```
-
-        Use es-exporter
+        ### Use es-exporter
 
         ```python
         import pulumi
@@ -269,8 +267,7 @@ class TmpExporterIntegration(pulumi.CustomResource):
         > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
 
         ## Example Usage
-
-        Use blackbox-exporter
+        ### Use blackbox-exporter
 
         ```python
         import pulumi
@@ -283,8 +280,7 @@ class TmpExporterIntegration(pulumi.CustomResource):
             kind="blackbox-exporter",
             kube_type=1)
         ```
-
-        Use es-exporter
+        ### Use es-exporter
 
         ```python
         import pulumi

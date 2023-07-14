@@ -72,7 +72,7 @@ type MachineGroup struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Update end time. We recommend you update LogListener during off-peak hours.
 	UpdateEndTime pulumi.StringPtrOutput `pulumi:"updateEndTime"`
-	// pdate start time. We recommend you update LogListener during off-peak hours.
+	// Update start time. We recommend you update LogListener during off-peak hours.
 	UpdateStartTime pulumi.StringPtrOutput `pulumi:"updateStartTime"`
 }
 
@@ -124,7 +124,7 @@ type machineGroupState struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Update end time. We recommend you update LogListener during off-peak hours.
 	UpdateEndTime *string `pulumi:"updateEndTime"`
-	// pdate start time. We recommend you update LogListener during off-peak hours.
+	// Update start time. We recommend you update LogListener during off-peak hours.
 	UpdateStartTime *string `pulumi:"updateStartTime"`
 }
 
@@ -141,7 +141,7 @@ type MachineGroupState struct {
 	Tags pulumi.MapInput
 	// Update end time. We recommend you update LogListener during off-peak hours.
 	UpdateEndTime pulumi.StringPtrInput
-	// pdate start time. We recommend you update LogListener during off-peak hours.
+	// Update start time. We recommend you update LogListener during off-peak hours.
 	UpdateStartTime pulumi.StringPtrInput
 }
 
@@ -162,7 +162,7 @@ type machineGroupArgs struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Update end time. We recommend you update LogListener during off-peak hours.
 	UpdateEndTime *string `pulumi:"updateEndTime"`
-	// pdate start time. We recommend you update LogListener during off-peak hours.
+	// Update start time. We recommend you update LogListener during off-peak hours.
 	UpdateStartTime *string `pulumi:"updateStartTime"`
 }
 
@@ -180,7 +180,7 @@ type MachineGroupArgs struct {
 	Tags pulumi.MapInput
 	// Update end time. We recommend you update LogListener during off-peak hours.
 	UpdateEndTime pulumi.StringPtrInput
-	// pdate start time. We recommend you update LogListener during off-peak hours.
+	// Update start time. We recommend you update LogListener during off-peak hours.
 	UpdateStartTime pulumi.StringPtrInput
 }
 
@@ -301,7 +301,7 @@ func (o MachineGroupOutput) UpdateEndTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MachineGroup) pulumi.StringPtrOutput { return v.UpdateEndTime }).(pulumi.StringPtrOutput)
 }
 
-// pdate start time. We recommend you update LogListener during off-peak hours.
+// Update start time. We recommend you update LogListener during off-peak hours.
 func (o MachineGroupOutput) UpdateStartTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MachineGroup) pulumi.StringPtrOutput { return v.UpdateStartTime }).(pulumi.StringPtrOutput)
 }

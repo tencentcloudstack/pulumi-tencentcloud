@@ -13,11 +13,15 @@ __all__ = [
     'FunctionAliasRoutingConfigAdditionalVersionMatchArgs',
     'FunctionAliasRoutingConfigAdditionalVersionWeightArgs',
     'FunctionCfsConfigArgs',
+    'FunctionEventInvokeConfigAsyncTriggerConfigArgs',
+    'FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs',
     'FunctionImageConfigArgs',
     'FunctionLayerArgs',
     'FunctionTriggerArgs',
     'FunctionTriggerInfoArgs',
     'LayerContentArgs',
+    'ProvisionedConcurrencyConfigTriggerActionArgs',
+    'GetTriggersFilterArgs',
 ]
 
 @pulumi.input_type
@@ -294,6 +298,65 @@ class FunctionCfsConfigArgs:
     @mount_vpc_id.setter
     def mount_vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "mount_vpc_id", value)
+
+
+@pulumi.input_type
+class FunctionEventInvokeConfigAsyncTriggerConfigArgs:
+    def __init__(__self__, *,
+                 msg_ttl: pulumi.Input[int],
+                 retry_configs: pulumi.Input[Sequence[pulumi.Input['FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs']]]):
+        """
+        :param pulumi.Input[int] msg_ttl: Message retention period.
+        :param pulumi.Input[Sequence[pulumi.Input['FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs']]] retry_configs: Async retry configuration of function upon user error.
+        """
+        pulumi.set(__self__, "msg_ttl", msg_ttl)
+        pulumi.set(__self__, "retry_configs", retry_configs)
+
+    @property
+    @pulumi.getter(name="msgTtl")
+    def msg_ttl(self) -> pulumi.Input[int]:
+        """
+        Message retention period.
+        """
+        return pulumi.get(self, "msg_ttl")
+
+    @msg_ttl.setter
+    def msg_ttl(self, value: pulumi.Input[int]):
+        pulumi.set(self, "msg_ttl", value)
+
+    @property
+    @pulumi.getter(name="retryConfigs")
+    def retry_configs(self) -> pulumi.Input[Sequence[pulumi.Input['FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs']]]:
+        """
+        Async retry configuration of function upon user error.
+        """
+        return pulumi.get(self, "retry_configs")
+
+    @retry_configs.setter
+    def retry_configs(self, value: pulumi.Input[Sequence[pulumi.Input['FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs']]]):
+        pulumi.set(self, "retry_configs", value)
+
+
+@pulumi.input_type
+class FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs:
+    def __init__(__self__, *,
+                 retry_num: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] retry_num: Number of retry attempts.
+        """
+        pulumi.set(__self__, "retry_num", retry_num)
+
+    @property
+    @pulumi.getter(name="retryNum")
+    def retry_num(self) -> pulumi.Input[int]:
+        """
+        Number of retry attempts.
+        """
+        return pulumi.get(self, "retry_num")
+
+    @retry_num.setter
+    def retry_num(self, value: pulumi.Input[int]):
+        pulumi.set(self, "retry_num", value)
 
 
 @pulumi.input_type
@@ -690,5 +753,110 @@ class LayerContentArgs:
     @zip_file.setter
     def zip_file(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "zip_file", value)
+
+
+@pulumi.input_type
+class ProvisionedConcurrencyConfigTriggerActionArgs:
+    def __init__(__self__, *,
+                 trigger_cron_config: pulumi.Input[str],
+                 trigger_name: pulumi.Input[str],
+                 trigger_provisioned_concurrency_num: pulumi.Input[int],
+                 provisioned_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] trigger_cron_config: Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] trigger_name: Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] trigger_provisioned_concurrency_num: Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] provisioned_type: The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+        """
+        pulumi.set(__self__, "trigger_cron_config", trigger_cron_config)
+        pulumi.set(__self__, "trigger_name", trigger_name)
+        pulumi.set(__self__, "trigger_provisioned_concurrency_num", trigger_provisioned_concurrency_num)
+        if provisioned_type is not None:
+            pulumi.set(__self__, "provisioned_type", provisioned_type)
+
+    @property
+    @pulumi.getter(name="triggerCronConfig")
+    def trigger_cron_config(self) -> pulumi.Input[str]:
+        """
+        Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_cron_config")
+
+    @trigger_cron_config.setter
+    def trigger_cron_config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "trigger_cron_config", value)
+
+    @property
+    @pulumi.getter(name="triggerName")
+    def trigger_name(self) -> pulumi.Input[str]:
+        """
+        Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_name")
+
+    @trigger_name.setter
+    def trigger_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "trigger_name", value)
+
+    @property
+    @pulumi.getter(name="triggerProvisionedConcurrencyNum")
+    def trigger_provisioned_concurrency_num(self) -> pulumi.Input[int]:
+        """
+        Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_provisioned_concurrency_num")
+
+    @trigger_provisioned_concurrency_num.setter
+    def trigger_provisioned_concurrency_num(self, value: pulumi.Input[int]):
+        pulumi.set(self, "trigger_provisioned_concurrency_num", value)
+
+    @property
+    @pulumi.getter(name="provisionedType")
+    def provisioned_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "provisioned_type")
+
+    @provisioned_type.setter
+    def provisioned_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "provisioned_type", value)
+
+
+@pulumi.input_type
+class GetTriggersFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+        :param Sequence[str] values: Filter values of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

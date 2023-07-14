@@ -30,7 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         ///         var mysql = Output.Create(Tencentcloud.Mysql.GetParameterList.InvokeAsync(new Tencentcloud.Mysql.GetParameterListArgs
         ///         {
         ///             EngineVersion = "5.5",
-        ///             MysqlId = "my-test-database",
+        ///             MysqlId = "terraform-test-local-database",
         ///             ResultOutputFile = "mytestpath",
         ///         }));
         ///     }
@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         ///         var mysql = Output.Create(Tencentcloud.Mysql.GetParameterList.InvokeAsync(new Tencentcloud.Mysql.GetParameterListArgs
         ///         {
         ///             EngineVersion = "5.5",
-        ///             MysqlId = "my-test-database",
+        ///             MysqlId = "terraform-test-local-database",
         ///             ResultOutputFile = "mytestpath",
         ///         }));
         ///     }

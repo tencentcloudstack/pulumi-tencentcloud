@@ -30,6 +30,7 @@ __all__ = [
     'ClusterWorkerConfig',
     'ClusterWorkerConfigDataDisk',
     'ClusterWorkerInstancesList',
+    'EncryptionProtectionKmsConfiguration',
     'NodePoolAutoScalingConfig',
     'NodePoolAutoScalingConfigDataDisk',
     'NodePoolNodeConfig',
@@ -45,6 +46,8 @@ __all__ = [
     'ServerlessNodePoolTaint',
     'GetAvailableClusterVersionsClusterResult',
     'GetChartsChartListResult',
+    'GetClusterAuthenticationOptionsOidcConfigResult',
+    'GetClusterAuthenticationOptionsServiceAccountResult',
     'GetClusterCommonNamesListResult',
     'GetClusterLevelsListResult',
     'GetClustersListResult',
@@ -2484,6 +2487,56 @@ class ClusterWorkerInstancesList(dict):
 
 
 @pulumi.output_type
+class EncryptionProtectionKmsConfiguration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "keyId":
+            suggest = "key_id"
+        elif key == "kmsRegion":
+            suggest = "kms_region"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in EncryptionProtectionKmsConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        EncryptionProtectionKmsConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        EncryptionProtectionKmsConfiguration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 key_id: Optional[str] = None,
+                 kms_region: Optional[str] = None):
+        """
+        :param str key_id: kms id.
+        :param str kms_region: kms region.
+        """
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+        if kms_region is not None:
+            pulumi.set(__self__, "kms_region", kms_region)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> Optional[str]:
+        """
+        kms id.
+        """
+        return pulumi.get(self, "key_id")
+
+    @property
+    @pulumi.getter(name="kmsRegion")
+    def kms_region(self) -> Optional[str]:
+        """
+        kms region.
+        """
+        return pulumi.get(self, "kms_region")
+
+
+@pulumi.output_type
 class NodePoolAutoScalingConfig(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -4258,6 +4311,97 @@ class GetChartsChartListResult(dict):
         Name of chart.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetClusterAuthenticationOptionsOidcConfigResult(dict):
+    def __init__(__self__, *,
+                 auto_create_client_ids: Sequence[str],
+                 auto_create_oidc_config: bool,
+                 auto_install_pod_identity_webhook_addon: bool):
+        """
+        :param Sequence[str] auto_create_client_ids: Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+        :param bool auto_create_oidc_config: Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+        :param bool auto_install_pod_identity_webhook_addon: Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "auto_create_client_ids", auto_create_client_ids)
+        pulumi.set(__self__, "auto_create_oidc_config", auto_create_oidc_config)
+        pulumi.set(__self__, "auto_install_pod_identity_webhook_addon", auto_install_pod_identity_webhook_addon)
+
+    @property
+    @pulumi.getter(name="autoCreateClientIds")
+    def auto_create_client_ids(self) -> Sequence[str]:
+        """
+        Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "auto_create_client_ids")
+
+    @property
+    @pulumi.getter(name="autoCreateOidcConfig")
+    def auto_create_oidc_config(self) -> bool:
+        """
+        Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "auto_create_oidc_config")
+
+    @property
+    @pulumi.getter(name="autoInstallPodIdentityWebhookAddon")
+    def auto_install_pod_identity_webhook_addon(self) -> bool:
+        """
+        Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "auto_install_pod_identity_webhook_addon")
+
+
+@pulumi.output_type
+class GetClusterAuthenticationOptionsServiceAccountResult(dict):
+    def __init__(__self__, *,
+                 auto_create_discovery_anonymous_auth: bool,
+                 issuer: str,
+                 jwks_uri: str,
+                 use_tke_default: bool):
+        """
+        :param bool auto_create_discovery_anonymous_auth: If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str issuer: service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str jwks_uri: service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param bool use_tke_default: Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
+        pulumi.set(__self__, "issuer", issuer)
+        pulumi.set(__self__, "jwks_uri", jwks_uri)
+        pulumi.set(__self__, "use_tke_default", use_tke_default)
+
+    @property
+    @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
+    def auto_create_discovery_anonymous_auth(self) -> bool:
+        """
+        If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "auto_create_discovery_anonymous_auth")
+
+    @property
+    @pulumi.getter
+    def issuer(self) -> str:
+        """
+        service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "issuer")
+
+    @property
+    @pulumi.getter(name="jwksUri")
+    def jwks_uri(self) -> str:
+        """
+        service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "jwks_uri")
+
+    @property
+    @pulumi.getter(name="useTkeDefault")
+    def use_tke_default(self) -> bool:
+        """
+        Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "use_tke_default")
 
 
 @pulumi.output_type

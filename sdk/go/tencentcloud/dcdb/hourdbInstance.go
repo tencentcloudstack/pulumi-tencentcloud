@@ -67,8 +67,16 @@ type HourdbInstance struct {
 
 	// db engine version, default to Percona 5.7.17.
 	DbVersionId pulumi.StringPtrOutput `pulumi:"dbVersionId"`
+	// DCN source instance ID.
+	DcnInstanceId pulumi.StringPtrOutput `pulumi:"dcnInstanceId"`
+	// DCN source region.
+	DcnRegion pulumi.StringPtrOutput `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrOutput `pulumi:"extranetAccess"`
 	// name of this instance.
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
+	// Whether to support IPv6.
+	Ipv6Flag pulumi.IntPtrOutput `pulumi:"ipv6Flag"`
 	// project id.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// resource tags.
@@ -83,10 +91,16 @@ type HourdbInstance struct {
 	ShardNodeCount pulumi.IntOutput `pulumi:"shardNodeCount"`
 	// storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
 	ShardStorage pulumi.IntOutput `pulumi:"shardStorage"`
-	// subnet id, it&amp;#39;s required when vpcId is set.
+	// subnet id, its required when vpcId is set.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip pulumi.StringOutput `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringOutput `pulumi:"vipv6"`
 	// vpc id.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
+	// Intranet port.
+	Vport pulumi.IntOutput `pulumi:"vport"`
 	// available zone.
 	Zones pulumi.StringArrayOutput `pulumi:"zones"`
 }
@@ -135,8 +149,16 @@ func GetHourdbInstance(ctx *pulumi.Context,
 type hourdbInstanceState struct {
 	// db engine version, default to Percona 5.7.17.
 	DbVersionId *string `pulumi:"dbVersionId"`
+	// DCN source instance ID.
+	DcnInstanceId *string `pulumi:"dcnInstanceId"`
+	// DCN source region.
+	DcnRegion *string `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess *bool `pulumi:"extranetAccess"`
 	// name of this instance.
 	InstanceName *string `pulumi:"instanceName"`
+	// Whether to support IPv6.
+	Ipv6Flag *int `pulumi:"ipv6Flag"`
 	// project id.
 	ProjectId *int `pulumi:"projectId"`
 	// resource tags.
@@ -151,10 +173,16 @@ type hourdbInstanceState struct {
 	ShardNodeCount *int `pulumi:"shardNodeCount"`
 	// storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
 	ShardStorage *int `pulumi:"shardStorage"`
-	// subnet id, it&amp;#39;s required when vpcId is set.
+	// subnet id, its required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip *string `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 *string `pulumi:"vipv6"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
+	// Intranet port.
+	Vport *int `pulumi:"vport"`
 	// available zone.
 	Zones []string `pulumi:"zones"`
 }
@@ -162,8 +190,16 @@ type hourdbInstanceState struct {
 type HourdbInstanceState struct {
 	// db engine version, default to Percona 5.7.17.
 	DbVersionId pulumi.StringPtrInput
+	// DCN source instance ID.
+	DcnInstanceId pulumi.StringPtrInput
+	// DCN source region.
+	DcnRegion pulumi.StringPtrInput
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrInput
 	// name of this instance.
 	InstanceName pulumi.StringPtrInput
+	// Whether to support IPv6.
+	Ipv6Flag pulumi.IntPtrInput
 	// project id.
 	ProjectId pulumi.IntPtrInput
 	// resource tags.
@@ -178,10 +214,16 @@ type HourdbInstanceState struct {
 	ShardNodeCount pulumi.IntPtrInput
 	// storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
 	ShardStorage pulumi.IntPtrInput
-	// subnet id, it&amp;#39;s required when vpcId is set.
+	// subnet id, its required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
+	// The field is required to specify VIP.
+	Vip pulumi.StringPtrInput
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
+	// Intranet port.
+	Vport pulumi.IntPtrInput
 	// available zone.
 	Zones pulumi.StringArrayInput
 }
@@ -193,8 +235,16 @@ func (HourdbInstanceState) ElementType() reflect.Type {
 type hourdbInstanceArgs struct {
 	// db engine version, default to Percona 5.7.17.
 	DbVersionId *string `pulumi:"dbVersionId"`
+	// DCN source instance ID.
+	DcnInstanceId *string `pulumi:"dcnInstanceId"`
+	// DCN source region.
+	DcnRegion *string `pulumi:"dcnRegion"`
+	// Whether to open the extranet access.
+	ExtranetAccess *bool `pulumi:"extranetAccess"`
 	// name of this instance.
 	InstanceName *string `pulumi:"instanceName"`
+	// Whether to support IPv6.
+	Ipv6Flag *int `pulumi:"ipv6Flag"`
 	// project id.
 	ProjectId *int `pulumi:"projectId"`
 	// resource tags.
@@ -209,8 +259,12 @@ type hourdbInstanceArgs struct {
 	ShardNodeCount int `pulumi:"shardNodeCount"`
 	// storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
 	ShardStorage int `pulumi:"shardStorage"`
-	// subnet id, it&amp;#39;s required when vpcId is set.
+	// subnet id, its required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
+	// The field is required to specify VIP.
+	Vip *string `pulumi:"vip"`
+	// The field is required to specify VIPv6.
+	Vipv6 *string `pulumi:"vipv6"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
 	// available zone.
@@ -221,8 +275,16 @@ type hourdbInstanceArgs struct {
 type HourdbInstanceArgs struct {
 	// db engine version, default to Percona 5.7.17.
 	DbVersionId pulumi.StringPtrInput
+	// DCN source instance ID.
+	DcnInstanceId pulumi.StringPtrInput
+	// DCN source region.
+	DcnRegion pulumi.StringPtrInput
+	// Whether to open the extranet access.
+	ExtranetAccess pulumi.BoolPtrInput
 	// name of this instance.
 	InstanceName pulumi.StringPtrInput
+	// Whether to support IPv6.
+	Ipv6Flag pulumi.IntPtrInput
 	// project id.
 	ProjectId pulumi.IntPtrInput
 	// resource tags.
@@ -237,8 +299,12 @@ type HourdbInstanceArgs struct {
 	ShardNodeCount pulumi.IntInput
 	// storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
 	ShardStorage pulumi.IntInput
-	// subnet id, it&amp;#39;s required when vpcId is set.
+	// subnet id, its required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
+	// The field is required to specify VIP.
+	Vip pulumi.StringPtrInput
+	// The field is required to specify VIPv6.
+	Vipv6 pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
 	// available zone.
@@ -337,9 +403,29 @@ func (o HourdbInstanceOutput) DbVersionId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.DbVersionId }).(pulumi.StringPtrOutput)
 }
 
+// DCN source instance ID.
+func (o HourdbInstanceOutput) DcnInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.DcnInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// DCN source region.
+func (o HourdbInstanceOutput) DcnRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.DcnRegion }).(pulumi.StringPtrOutput)
+}
+
+// Whether to open the extranet access.
+func (o HourdbInstanceOutput) ExtranetAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.BoolPtrOutput { return v.ExtranetAccess }).(pulumi.BoolPtrOutput)
+}
+
 // name of this instance.
 func (o HourdbInstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// Whether to support IPv6.
+func (o HourdbInstanceOutput) Ipv6Flag() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.IntPtrOutput { return v.Ipv6Flag }).(pulumi.IntPtrOutput)
 }
 
 // project id.
@@ -377,14 +463,29 @@ func (o HourdbInstanceOutput) ShardStorage() pulumi.IntOutput {
 	return o.ApplyT(func(v *HourdbInstance) pulumi.IntOutput { return v.ShardStorage }).(pulumi.IntOutput)
 }
 
-// subnet id, it&amp;#39;s required when vpcId is set.
+// subnet id, its required when vpcId is set.
 func (o HourdbInstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// The field is required to specify VIP.
+func (o HourdbInstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
+}
+
+// The field is required to specify VIPv6.
+func (o HourdbInstanceOutput) Vipv6() pulumi.StringOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.StringOutput { return v.Vipv6 }).(pulumi.StringOutput)
 }
 
 // vpc id.
 func (o HourdbInstanceOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *HourdbInstance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+// Intranet port.
+func (o HourdbInstanceOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v *HourdbInstance) pulumi.IntOutput { return v.Vport }).(pulumi.IntOutput)
 }
 
 // available zone.

@@ -9,6 +9,7 @@ export * from "./accessGroup";
 export * from "./accessRule";
 export * from "./fileSystem";
 export * from "./getAccessGroups";
+export * from "./getFileSystems";
 export * from "./getMountPoints";
 export * from "./lifeCycleRule";
 export * from "./mountPoint";

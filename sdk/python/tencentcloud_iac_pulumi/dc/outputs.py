@@ -7,12 +7,175 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'GetAccessPointsAccessPointSetResult',
+    'GetAccessPointsAccessPointSetCoordinateResult',
     'GetGatewayCcnRoutesInstanceListResult',
     'GetGatewayInstancesInstanceListResult',
     'GetInstancesInstanceListResult',
+    'GetInternetAddressStatisticsInternetAddressStatisticResult',
+    'GetPublicDirectConnectTunnelRoutesFilterResult',
+    'GetPublicDirectConnectTunnelRoutesRouteResult',
 ]
+
+@pulumi.output_type
+class GetAccessPointsAccessPointSetResult(dict):
+    def __init__(__self__, *,
+                 access_point_id: str,
+                 access_point_name: str,
+                 access_point_type: str,
+                 area: str,
+                 available_port_types: Sequence[str],
+                 city: str,
+                 coordinates: Sequence['outputs.GetAccessPointsAccessPointSetCoordinateResult'],
+                 line_operators: Sequence[str],
+                 location: str,
+                 region_id: str,
+                 state: str):
+        """
+        :param str access_point_id: Unique access point ID.
+        :param str access_point_name: Access point name.
+        :param str access_point_type: Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str area: Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence[str] available_port_types: Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+        :param str city: City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence['GetAccessPointsAccessPointSetCoordinateArgs'] coordinates: Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence[str] line_operators: List of ISPs supported by access point.
+        :param str location: Access point location.
+        :param str region_id: Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+        :param str state: Access point status. Valid values: available, unavailable.
+        """
+        pulumi.set(__self__, "access_point_id", access_point_id)
+        pulumi.set(__self__, "access_point_name", access_point_name)
+        pulumi.set(__self__, "access_point_type", access_point_type)
+        pulumi.set(__self__, "area", area)
+        pulumi.set(__self__, "available_port_types", available_port_types)
+        pulumi.set(__self__, "city", city)
+        pulumi.set(__self__, "coordinates", coordinates)
+        pulumi.set(__self__, "line_operators", line_operators)
+        pulumi.set(__self__, "location", location)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter(name="accessPointId")
+    def access_point_id(self) -> str:
+        """
+        Unique access point ID.
+        """
+        return pulumi.get(self, "access_point_id")
+
+    @property
+    @pulumi.getter(name="accessPointName")
+    def access_point_name(self) -> str:
+        """
+        Access point name.
+        """
+        return pulumi.get(self, "access_point_name")
+
+    @property
+    @pulumi.getter(name="accessPointType")
+    def access_point_type(self) -> str:
+        """
+        Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "access_point_type")
+
+    @property
+    @pulumi.getter
+    def area(self) -> str:
+        """
+        Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "area")
+
+    @property
+    @pulumi.getter(name="availablePortTypes")
+    def available_port_types(self) -> Sequence[str]:
+        """
+        Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "available_port_types")
+
+    @property
+    @pulumi.getter
+    def city(self) -> str:
+        """
+        City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "city")
+
+    @property
+    @pulumi.getter
+    def coordinates(self) -> Sequence['outputs.GetAccessPointsAccessPointSetCoordinateResult']:
+        """
+        Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "coordinates")
+
+    @property
+    @pulumi.getter(name="lineOperators")
+    def line_operators(self) -> Sequence[str]:
+        """
+        List of ISPs supported by access point.
+        """
+        return pulumi.get(self, "line_operators")
+
+    @property
+    @pulumi.getter
+    def location(self) -> str:
+        """
+        Access point location.
+        """
+        return pulumi.get(self, "location")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        Access point status. Valid values: available, unavailable.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetAccessPointsAccessPointSetCoordinateResult(dict):
+    def __init__(__self__, *,
+                 lat: float,
+                 lng: float):
+        """
+        :param float lat: Latitude.
+        :param float lng: Longitude.
+        """
+        pulumi.set(__self__, "lat", lat)
+        pulumi.set(__self__, "lng", lng)
+
+    @property
+    @pulumi.getter
+    def lat(self) -> float:
+        """
+        Latitude.
+        """
+        return pulumi.get(self, "lat")
+
+    @property
+    @pulumi.getter
+    def lng(self) -> float:
+        """
+        Longitude.
+        """
+        return pulumi.get(self, "lng")
+
 
 @pulumi.output_type
 class GetGatewayCcnRoutesInstanceListResult(dict):
@@ -396,5 +559,136 @@ class GetInstancesInstanceListResult(dict):
         Interconnect IP of the DC within Tencent. Note: This field may return null, indicating that no valid values are taken.
         """
         return pulumi.get(self, "tencent_address")
+
+
+@pulumi.output_type
+class GetInternetAddressStatisticsInternetAddressStatisticResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 subnet_num: int):
+        """
+        :param str region: region.
+        :param int subnet_num: Number of Internet public network addresses.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "subnet_num", subnet_num)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="subnetNum")
+    def subnet_num(self) -> int:
+        """
+        Number of Internet public network addresses.
+        """
+        return pulumi.get(self, "subnet_num")
+
+
+@pulumi.output_type
+class GetPublicDirectConnectTunnelRoutesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered.
+        :param Sequence[str] values: filter value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filter value of the field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetPublicDirectConnectTunnelRoutesRouteResult(dict):
+    def __init__(__self__, *,
+                 as_paths: Sequence[str],
+                 destination_cidr_block: str,
+                 next_hop: str,
+                 route_id: str,
+                 route_type: str,
+                 status: str):
+        """
+        :param Sequence[str] as_paths: ASPath info.
+        :param str destination_cidr_block: Network CIDR.
+        :param str next_hop: Route next hop ip.
+        :param str route_id: direct connect tunnel route id.
+        :param str route_type: Route type: BGP/STATIC route.
+        :param str status: ENABLE: routing is enabled, DISABLE: routing is disabled.
+        """
+        pulumi.set(__self__, "as_paths", as_paths)
+        pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
+        pulumi.set(__self__, "next_hop", next_hop)
+        pulumi.set(__self__, "route_id", route_id)
+        pulumi.set(__self__, "route_type", route_type)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="asPaths")
+    def as_paths(self) -> Sequence[str]:
+        """
+        ASPath info.
+        """
+        return pulumi.get(self, "as_paths")
+
+    @property
+    @pulumi.getter(name="destinationCidrBlock")
+    def destination_cidr_block(self) -> str:
+        """
+        Network CIDR.
+        """
+        return pulumi.get(self, "destination_cidr_block")
+
+    @property
+    @pulumi.getter(name="nextHop")
+    def next_hop(self) -> str:
+        """
+        Route next hop ip.
+        """
+        return pulumi.get(self, "next_hop")
+
+    @property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> str:
+        """
+        direct connect tunnel route id.
+        """
+        return pulumi.get(self, "route_id")
+
+    @property
+    @pulumi.getter(name="routeType")
+    def route_type(self) -> str:
+        """
+        Route type: BGP/STATIC route.
+        """
+        return pulumi.get(self, "route_type")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        ENABLE: routing is enabled, DISABLE: routing is disabled.
+        """
+        return pulumi.get(self, "status")
 
 

@@ -103,6 +103,7 @@ class _TagRetentionRuleState:
                  disabled: Optional[pulumi.Input[bool]] = None,
                  namespace_name: Optional[pulumi.Input[str]] = None,
                  registry_id: Optional[pulumi.Input[str]] = None,
+                 retention_id: Optional[pulumi.Input[int]] = None,
                  retention_rule: Optional[pulumi.Input['TagRetentionRuleRetentionRuleArgs']] = None):
         """
         Input properties used for looking up and filtering TagRetentionRule resources.
@@ -110,6 +111,7 @@ class _TagRetentionRuleState:
         :param pulumi.Input[bool] disabled: Whether to disable the rule, with the default value of false.
         :param pulumi.Input[str] namespace_name: The Name of the namespace.
         :param pulumi.Input[str] registry_id: The main instance ID.
+        :param pulumi.Input[int] retention_id: The ID of the retention task.
         :param pulumi.Input['TagRetentionRuleRetentionRuleArgs'] retention_rule: Retention Policy.
         """
         if cron_setting is not None:
@@ -120,6 +122,8 @@ class _TagRetentionRuleState:
             pulumi.set(__self__, "namespace_name", namespace_name)
         if registry_id is not None:
             pulumi.set(__self__, "registry_id", registry_id)
+        if retention_id is not None:
+            pulumi.set(__self__, "retention_id", retention_id)
         if retention_rule is not None:
             pulumi.set(__self__, "retention_rule", retention_rule)
 
@@ -170,6 +174,18 @@ class _TagRetentionRuleState:
     @registry_id.setter
     def registry_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "registry_id", value)
+
+    @property
+    @pulumi.getter(name="retentionId")
+    def retention_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the retention task.
+        """
+        return pulumi.get(self, "retention_id")
+
+    @retention_id.setter
+    def retention_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retention_id", value)
 
     @property
     @pulumi.getter(name="retentionRule")
@@ -314,6 +330,7 @@ class TagRetentionRule(pulumi.CustomResource):
             if retention_rule is None and not opts.urn:
                 raise TypeError("Missing required property 'retention_rule'")
             __props__.__dict__["retention_rule"] = retention_rule
+            __props__.__dict__["retention_id"] = None
         super(TagRetentionRule, __self__).__init__(
             'tencentcloud:Tcr/tagRetentionRule:TagRetentionRule',
             resource_name,
@@ -328,6 +345,7 @@ class TagRetentionRule(pulumi.CustomResource):
             disabled: Optional[pulumi.Input[bool]] = None,
             namespace_name: Optional[pulumi.Input[str]] = None,
             registry_id: Optional[pulumi.Input[str]] = None,
+            retention_id: Optional[pulumi.Input[int]] = None,
             retention_rule: Optional[pulumi.Input[pulumi.InputType['TagRetentionRuleRetentionRuleArgs']]] = None) -> 'TagRetentionRule':
         """
         Get an existing TagRetentionRule resource's state with the given name, id, and optional extra
@@ -340,6 +358,7 @@ class TagRetentionRule(pulumi.CustomResource):
         :param pulumi.Input[bool] disabled: Whether to disable the rule, with the default value of false.
         :param pulumi.Input[str] namespace_name: The Name of the namespace.
         :param pulumi.Input[str] registry_id: The main instance ID.
+        :param pulumi.Input[int] retention_id: The ID of the retention task.
         :param pulumi.Input[pulumi.InputType['TagRetentionRuleRetentionRuleArgs']] retention_rule: Retention Policy.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -350,6 +369,7 @@ class TagRetentionRule(pulumi.CustomResource):
         __props__.__dict__["disabled"] = disabled
         __props__.__dict__["namespace_name"] = namespace_name
         __props__.__dict__["registry_id"] = registry_id
+        __props__.__dict__["retention_id"] = retention_id
         __props__.__dict__["retention_rule"] = retention_rule
         return TagRetentionRule(resource_name, opts=opts, __props__=__props__)
 
@@ -384,6 +404,14 @@ class TagRetentionRule(pulumi.CustomResource):
         The main instance ID.
         """
         return pulumi.get(self, "registry_id")
+
+    @property
+    @pulumi.getter(name="retentionId")
+    def retention_id(self) -> pulumi.Output[int]:
+        """
+        The ID of the retention task.
+        """
+        return pulumi.get(self, "retention_id")
 
     @property
     @pulumi.getter(name="retentionRule")

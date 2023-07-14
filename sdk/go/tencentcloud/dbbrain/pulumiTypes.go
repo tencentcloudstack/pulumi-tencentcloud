@@ -554,6 +554,488 @@ func (o TdsqlAuditLogFilterPtrOutput) Users() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+type GetDiagDbInstancesItem struct {
+	// Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+	AuditPolicyStatus string `pulumi:"auditPolicyStatus"`
+	// Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+	AuditRunningStatus string `pulumi:"auditRunningStatus"`
+	// number of cores.
+	Cpu int `pulumi:"cpu"`
+	// create time.
+	CreateTime string `pulumi:"createTime"`
+	// resource expiration time.
+	DeadlineTime string `pulumi:"deadlineTime"`
+	// cdb type.
+	DeployMode string `pulumi:"deployMode"`
+	// database version.
+	EngineVersion string `pulumi:"engineVersion"`
+	// the number of abnormal events.
+	EventCount int `pulumi:"eventCount"`
+	// group ID.
+	GroupId string `pulumi:"groupId"`
+	// group name.
+	GroupName string `pulumi:"groupName"`
+	// health score.
+	HealthScore int `pulumi:"healthScore"`
+	// cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+	InitFlag int `pulumi:"initFlag"`
+	// status of instance inspection/overview.
+	InstanceConfs []GetDiagDbInstancesItemInstanceConf `pulumi:"instanceConfs"`
+	// instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+	InstanceType int `pulumi:"instanceType"`
+	// Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+	InternalVip string `pulumi:"internalVip"`
+	// Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+	InternalVport int `pulumi:"internalVport"`
+	// whether it is an instance supported by DBbrain, always pass `true`.
+	IsSupported bool `pulumi:"isSupported"`
+	// memory, in MB.
+	Memory int `pulumi:"memory"`
+	// service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+	Product string `pulumi:"product"`
+	// region.
+	Region string `pulumi:"region"`
+	// enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+	SecAuditStatus string `pulumi:"secAuditStatus"`
+	// access source.
+	Source string `pulumi:"source"`
+	// Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+	Status int `pulumi:"status"`
+	// task status.
+	TaskStatus int `pulumi:"taskStatus"`
+	// subnet uniform ID.
+	UniqSubnetId string `pulumi:"uniqSubnetId"`
+	// the unified ID of the private network.
+	UniqVpcId string `pulumi:"uniqVpcId"`
+	// intranet address.
+	Vip string `pulumi:"vip"`
+	// hard disk storage, in GB.
+	Volume int `pulumi:"volume"`
+	// intranet port.
+	Vport int `pulumi:"vport"`
+}
+
+// GetDiagDbInstancesItemInput is an input type that accepts GetDiagDbInstancesItemArgs and GetDiagDbInstancesItemOutput values.
+// You can construct a concrete instance of `GetDiagDbInstancesItemInput` via:
+//
+//          GetDiagDbInstancesItemArgs{...}
+type GetDiagDbInstancesItemInput interface {
+	pulumi.Input
+
+	ToGetDiagDbInstancesItemOutput() GetDiagDbInstancesItemOutput
+	ToGetDiagDbInstancesItemOutputWithContext(context.Context) GetDiagDbInstancesItemOutput
+}
+
+type GetDiagDbInstancesItemArgs struct {
+	// Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+	AuditPolicyStatus pulumi.StringInput `pulumi:"auditPolicyStatus"`
+	// Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+	AuditRunningStatus pulumi.StringInput `pulumi:"auditRunningStatus"`
+	// number of cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// resource expiration time.
+	DeadlineTime pulumi.StringInput `pulumi:"deadlineTime"`
+	// cdb type.
+	DeployMode pulumi.StringInput `pulumi:"deployMode"`
+	// database version.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// the number of abnormal events.
+	EventCount pulumi.IntInput `pulumi:"eventCount"`
+	// group ID.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// group name.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// health score.
+	HealthScore pulumi.IntInput `pulumi:"healthScore"`
+	// cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+	InitFlag pulumi.IntInput `pulumi:"initFlag"`
+	// status of instance inspection/overview.
+	InstanceConfs GetDiagDbInstancesItemInstanceConfArrayInput `pulumi:"instanceConfs"`
+	// instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+	InstanceType pulumi.IntInput `pulumi:"instanceType"`
+	// Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+	InternalVip pulumi.StringInput `pulumi:"internalVip"`
+	// Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+	InternalVport pulumi.IntInput `pulumi:"internalVport"`
+	// whether it is an instance supported by DBbrain, always pass `true`.
+	IsSupported pulumi.BoolInput `pulumi:"isSupported"`
+	// memory, in MB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+	Product pulumi.StringInput `pulumi:"product"`
+	// region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+	SecAuditStatus pulumi.StringInput `pulumi:"secAuditStatus"`
+	// access source.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+	Status pulumi.IntInput `pulumi:"status"`
+	// task status.
+	TaskStatus pulumi.IntInput `pulumi:"taskStatus"`
+	// subnet uniform ID.
+	UniqSubnetId pulumi.StringInput `pulumi:"uniqSubnetId"`
+	// the unified ID of the private network.
+	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
+	// intranet address.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// hard disk storage, in GB.
+	Volume pulumi.IntInput `pulumi:"volume"`
+	// intranet port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetDiagDbInstancesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagDbInstancesItem)(nil)).Elem()
+}
+
+func (i GetDiagDbInstancesItemArgs) ToGetDiagDbInstancesItemOutput() GetDiagDbInstancesItemOutput {
+	return i.ToGetDiagDbInstancesItemOutputWithContext(context.Background())
+}
+
+func (i GetDiagDbInstancesItemArgs) ToGetDiagDbInstancesItemOutputWithContext(ctx context.Context) GetDiagDbInstancesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagDbInstancesItemOutput)
+}
+
+// GetDiagDbInstancesItemArrayInput is an input type that accepts GetDiagDbInstancesItemArray and GetDiagDbInstancesItemArrayOutput values.
+// You can construct a concrete instance of `GetDiagDbInstancesItemArrayInput` via:
+//
+//          GetDiagDbInstancesItemArray{ GetDiagDbInstancesItemArgs{...} }
+type GetDiagDbInstancesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagDbInstancesItemArrayOutput() GetDiagDbInstancesItemArrayOutput
+	ToGetDiagDbInstancesItemArrayOutputWithContext(context.Context) GetDiagDbInstancesItemArrayOutput
+}
+
+type GetDiagDbInstancesItemArray []GetDiagDbInstancesItemInput
+
+func (GetDiagDbInstancesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagDbInstancesItem)(nil)).Elem()
+}
+
+func (i GetDiagDbInstancesItemArray) ToGetDiagDbInstancesItemArrayOutput() GetDiagDbInstancesItemArrayOutput {
+	return i.ToGetDiagDbInstancesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagDbInstancesItemArray) ToGetDiagDbInstancesItemArrayOutputWithContext(ctx context.Context) GetDiagDbInstancesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagDbInstancesItemArrayOutput)
+}
+
+type GetDiagDbInstancesItemOutput struct{ *pulumi.OutputState }
+
+func (GetDiagDbInstancesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagDbInstancesItem)(nil)).Elem()
+}
+
+func (o GetDiagDbInstancesItemOutput) ToGetDiagDbInstancesItemOutput() GetDiagDbInstancesItemOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemOutput) ToGetDiagDbInstancesItemOutputWithContext(ctx context.Context) GetDiagDbInstancesItemOutput {
+	return o
+}
+
+// Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+func (o GetDiagDbInstancesItemOutput) AuditPolicyStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.AuditPolicyStatus }).(pulumi.StringOutput)
+}
+
+// Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+func (o GetDiagDbInstancesItemOutput) AuditRunningStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.AuditRunningStatus }).(pulumi.StringOutput)
+}
+
+// number of cores.
+func (o GetDiagDbInstancesItemOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// create time.
+func (o GetDiagDbInstancesItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// resource expiration time.
+func (o GetDiagDbInstancesItemOutput) DeadlineTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.DeadlineTime }).(pulumi.StringOutput)
+}
+
+// cdb type.
+func (o GetDiagDbInstancesItemOutput) DeployMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.DeployMode }).(pulumi.StringOutput)
+}
+
+// database version.
+func (o GetDiagDbInstancesItemOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.EngineVersion }).(pulumi.StringOutput)
+}
+
+// the number of abnormal events.
+func (o GetDiagDbInstancesItemOutput) EventCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.EventCount }).(pulumi.IntOutput)
+}
+
+// group ID.
+func (o GetDiagDbInstancesItemOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// group name.
+func (o GetDiagDbInstancesItemOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// health score.
+func (o GetDiagDbInstancesItemOutput) HealthScore() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.HealthScore }).(pulumi.IntOutput)
+}
+
+// cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+func (o GetDiagDbInstancesItemOutput) InitFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.InitFlag }).(pulumi.IntOutput)
+}
+
+// status of instance inspection/overview.
+func (o GetDiagDbInstancesItemOutput) InstanceConfs() GetDiagDbInstancesItemInstanceConfArrayOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) []GetDiagDbInstancesItemInstanceConf { return v.InstanceConfs }).(GetDiagDbInstancesItemInstanceConfArrayOutput)
+}
+
+// instance id.
+func (o GetDiagDbInstancesItemOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// instance name.
+func (o GetDiagDbInstancesItemOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+func (o GetDiagDbInstancesItemOutput) InstanceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.InstanceType }).(pulumi.IntOutput)
+}
+
+// Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetDiagDbInstancesItemOutput) InternalVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.InternalVip }).(pulumi.StringOutput)
+}
+
+// Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetDiagDbInstancesItemOutput) InternalVport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.InternalVport }).(pulumi.IntOutput)
+}
+
+// whether it is an instance supported by DBbrain, always pass `true`.
+func (o GetDiagDbInstancesItemOutput) IsSupported() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) bool { return v.IsSupported }).(pulumi.BoolOutput)
+}
+
+// memory, in MB.
+func (o GetDiagDbInstancesItemOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+func (o GetDiagDbInstancesItemOutput) Product() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.Product }).(pulumi.StringOutput)
+}
+
+// region.
+func (o GetDiagDbInstancesItemOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+func (o GetDiagDbInstancesItemOutput) SecAuditStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.SecAuditStatus }).(pulumi.StringOutput)
+}
+
+// access source.
+func (o GetDiagDbInstancesItemOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+func (o GetDiagDbInstancesItemOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// task status.
+func (o GetDiagDbInstancesItemOutput) TaskStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.TaskStatus }).(pulumi.IntOutput)
+}
+
+// subnet uniform ID.
+func (o GetDiagDbInstancesItemOutput) UniqSubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.UniqSubnetId }).(pulumi.StringOutput)
+}
+
+// the unified ID of the private network.
+func (o GetDiagDbInstancesItemOutput) UniqVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.UniqVpcId }).(pulumi.StringOutput)
+}
+
+// intranet address.
+func (o GetDiagDbInstancesItemOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// hard disk storage, in GB.
+func (o GetDiagDbInstancesItemOutput) Volume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.Volume }).(pulumi.IntOutput)
+}
+
+// intranet port.
+func (o GetDiagDbInstancesItemOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItem) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetDiagDbInstancesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagDbInstancesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagDbInstancesItem)(nil)).Elem()
+}
+
+func (o GetDiagDbInstancesItemArrayOutput) ToGetDiagDbInstancesItemArrayOutput() GetDiagDbInstancesItemArrayOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemArrayOutput) ToGetDiagDbInstancesItemArrayOutputWithContext(ctx context.Context) GetDiagDbInstancesItemArrayOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemArrayOutput) Index(i pulumi.IntInput) GetDiagDbInstancesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagDbInstancesItem {
+		return vs[0].([]GetDiagDbInstancesItem)[vs[1].(int)]
+	}).(GetDiagDbInstancesItemOutput)
+}
+
+type GetDiagDbInstancesItemInstanceConf struct {
+	// database inspection switch, Yes/No.
+	DailyInspection string `pulumi:"dailyInspection"`
+	// Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+	KeyDelimiters []string `pulumi:"keyDelimiters"`
+	// instance overview switch, Yes/No.
+	OverviewDisplay string `pulumi:"overviewDisplay"`
+}
+
+// GetDiagDbInstancesItemInstanceConfInput is an input type that accepts GetDiagDbInstancesItemInstanceConfArgs and GetDiagDbInstancesItemInstanceConfOutput values.
+// You can construct a concrete instance of `GetDiagDbInstancesItemInstanceConfInput` via:
+//
+//          GetDiagDbInstancesItemInstanceConfArgs{...}
+type GetDiagDbInstancesItemInstanceConfInput interface {
+	pulumi.Input
+
+	ToGetDiagDbInstancesItemInstanceConfOutput() GetDiagDbInstancesItemInstanceConfOutput
+	ToGetDiagDbInstancesItemInstanceConfOutputWithContext(context.Context) GetDiagDbInstancesItemInstanceConfOutput
+}
+
+type GetDiagDbInstancesItemInstanceConfArgs struct {
+	// database inspection switch, Yes/No.
+	DailyInspection pulumi.StringInput `pulumi:"dailyInspection"`
+	// Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+	KeyDelimiters pulumi.StringArrayInput `pulumi:"keyDelimiters"`
+	// instance overview switch, Yes/No.
+	OverviewDisplay pulumi.StringInput `pulumi:"overviewDisplay"`
+}
+
+func (GetDiagDbInstancesItemInstanceConfArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagDbInstancesItemInstanceConf)(nil)).Elem()
+}
+
+func (i GetDiagDbInstancesItemInstanceConfArgs) ToGetDiagDbInstancesItemInstanceConfOutput() GetDiagDbInstancesItemInstanceConfOutput {
+	return i.ToGetDiagDbInstancesItemInstanceConfOutputWithContext(context.Background())
+}
+
+func (i GetDiagDbInstancesItemInstanceConfArgs) ToGetDiagDbInstancesItemInstanceConfOutputWithContext(ctx context.Context) GetDiagDbInstancesItemInstanceConfOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagDbInstancesItemInstanceConfOutput)
+}
+
+// GetDiagDbInstancesItemInstanceConfArrayInput is an input type that accepts GetDiagDbInstancesItemInstanceConfArray and GetDiagDbInstancesItemInstanceConfArrayOutput values.
+// You can construct a concrete instance of `GetDiagDbInstancesItemInstanceConfArrayInput` via:
+//
+//          GetDiagDbInstancesItemInstanceConfArray{ GetDiagDbInstancesItemInstanceConfArgs{...} }
+type GetDiagDbInstancesItemInstanceConfArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagDbInstancesItemInstanceConfArrayOutput() GetDiagDbInstancesItemInstanceConfArrayOutput
+	ToGetDiagDbInstancesItemInstanceConfArrayOutputWithContext(context.Context) GetDiagDbInstancesItemInstanceConfArrayOutput
+}
+
+type GetDiagDbInstancesItemInstanceConfArray []GetDiagDbInstancesItemInstanceConfInput
+
+func (GetDiagDbInstancesItemInstanceConfArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagDbInstancesItemInstanceConf)(nil)).Elem()
+}
+
+func (i GetDiagDbInstancesItemInstanceConfArray) ToGetDiagDbInstancesItemInstanceConfArrayOutput() GetDiagDbInstancesItemInstanceConfArrayOutput {
+	return i.ToGetDiagDbInstancesItemInstanceConfArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagDbInstancesItemInstanceConfArray) ToGetDiagDbInstancesItemInstanceConfArrayOutputWithContext(ctx context.Context) GetDiagDbInstancesItemInstanceConfArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagDbInstancesItemInstanceConfArrayOutput)
+}
+
+type GetDiagDbInstancesItemInstanceConfOutput struct{ *pulumi.OutputState }
+
+func (GetDiagDbInstancesItemInstanceConfOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagDbInstancesItemInstanceConf)(nil)).Elem()
+}
+
+func (o GetDiagDbInstancesItemInstanceConfOutput) ToGetDiagDbInstancesItemInstanceConfOutput() GetDiagDbInstancesItemInstanceConfOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemInstanceConfOutput) ToGetDiagDbInstancesItemInstanceConfOutputWithContext(ctx context.Context) GetDiagDbInstancesItemInstanceConfOutput {
+	return o
+}
+
+// database inspection switch, Yes/No.
+func (o GetDiagDbInstancesItemInstanceConfOutput) DailyInspection() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItemInstanceConf) string { return v.DailyInspection }).(pulumi.StringOutput)
+}
+
+// Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetDiagDbInstancesItemInstanceConfOutput) KeyDelimiters() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItemInstanceConf) []string { return v.KeyDelimiters }).(pulumi.StringArrayOutput)
+}
+
+// instance overview switch, Yes/No.
+func (o GetDiagDbInstancesItemInstanceConfOutput) OverviewDisplay() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagDbInstancesItemInstanceConf) string { return v.OverviewDisplay }).(pulumi.StringOutput)
+}
+
+type GetDiagDbInstancesItemInstanceConfArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagDbInstancesItemInstanceConfArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagDbInstancesItemInstanceConf)(nil)).Elem()
+}
+
+func (o GetDiagDbInstancesItemInstanceConfArrayOutput) ToGetDiagDbInstancesItemInstanceConfArrayOutput() GetDiagDbInstancesItemInstanceConfArrayOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemInstanceConfArrayOutput) ToGetDiagDbInstancesItemInstanceConfArrayOutputWithContext(ctx context.Context) GetDiagDbInstancesItemInstanceConfArrayOutput {
+	return o
+}
+
+func (o GetDiagDbInstancesItemInstanceConfArrayOutput) Index(i pulumi.IntInput) GetDiagDbInstancesItemInstanceConfOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagDbInstancesItemInstanceConf {
+		return vs[0].([]GetDiagDbInstancesItemInstanceConf)[vs[1].(int)]
+	}).(GetDiagDbInstancesItemInstanceConfOutput)
+}
+
 type GetDiagEventsList struct {
 	// diag item.
 	DiagItem string `pulumi:"diagItem"`
@@ -1316,6 +1798,592 @@ func (o GetHealthScoresDataIssueTypeEventArrayOutput) Index(i pulumi.IntInput) G
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetHealthScoresDataIssueTypeEvent {
 		return vs[0].([]GetHealthScoresDataIssueTypeEvent)[vs[1].(int)]
 	}).(GetHealthScoresDataIssueTypeEventOutput)
+}
+
+type GetMysqlProcessListProcessList struct {
+	// The execution type of the thread, used to filter the thread list.
+	Command string `pulumi:"command"`
+	// The threads operations database, used to filter the thread list.
+	Db string `pulumi:"db"`
+	// The operating host address of the thread, used to filter the thread list.
+	Host string `pulumi:"host"`
+	// thread ID, used to filter the thread list.
+	Id string `pulumi:"id"`
+	// The threads operation statement is used to filter the thread list.
+	Info string `pulumi:"info"`
+	// The operational state of the thread, used to filter the thread list.
+	State string `pulumi:"state"`
+	// The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+	Time string `pulumi:"time"`
+	// The operating account name of the thread, used to filter the thread list.
+	User string `pulumi:"user"`
+}
+
+// GetMysqlProcessListProcessListInput is an input type that accepts GetMysqlProcessListProcessListArgs and GetMysqlProcessListProcessListOutput values.
+// You can construct a concrete instance of `GetMysqlProcessListProcessListInput` via:
+//
+//          GetMysqlProcessListProcessListArgs{...}
+type GetMysqlProcessListProcessListInput interface {
+	pulumi.Input
+
+	ToGetMysqlProcessListProcessListOutput() GetMysqlProcessListProcessListOutput
+	ToGetMysqlProcessListProcessListOutputWithContext(context.Context) GetMysqlProcessListProcessListOutput
+}
+
+type GetMysqlProcessListProcessListArgs struct {
+	// The execution type of the thread, used to filter the thread list.
+	Command pulumi.StringInput `pulumi:"command"`
+	// The threads operations database, used to filter the thread list.
+	Db pulumi.StringInput `pulumi:"db"`
+	// The operating host address of the thread, used to filter the thread list.
+	Host pulumi.StringInput `pulumi:"host"`
+	// thread ID, used to filter the thread list.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The threads operation statement is used to filter the thread list.
+	Info pulumi.StringInput `pulumi:"info"`
+	// The operational state of the thread, used to filter the thread list.
+	State pulumi.StringInput `pulumi:"state"`
+	// The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+	Time pulumi.StringInput `pulumi:"time"`
+	// The operating account name of the thread, used to filter the thread list.
+	User pulumi.StringInput `pulumi:"user"`
+}
+
+func (GetMysqlProcessListProcessListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMysqlProcessListProcessList)(nil)).Elem()
+}
+
+func (i GetMysqlProcessListProcessListArgs) ToGetMysqlProcessListProcessListOutput() GetMysqlProcessListProcessListOutput {
+	return i.ToGetMysqlProcessListProcessListOutputWithContext(context.Background())
+}
+
+func (i GetMysqlProcessListProcessListArgs) ToGetMysqlProcessListProcessListOutputWithContext(ctx context.Context) GetMysqlProcessListProcessListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMysqlProcessListProcessListOutput)
+}
+
+// GetMysqlProcessListProcessListArrayInput is an input type that accepts GetMysqlProcessListProcessListArray and GetMysqlProcessListProcessListArrayOutput values.
+// You can construct a concrete instance of `GetMysqlProcessListProcessListArrayInput` via:
+//
+//          GetMysqlProcessListProcessListArray{ GetMysqlProcessListProcessListArgs{...} }
+type GetMysqlProcessListProcessListArrayInput interface {
+	pulumi.Input
+
+	ToGetMysqlProcessListProcessListArrayOutput() GetMysqlProcessListProcessListArrayOutput
+	ToGetMysqlProcessListProcessListArrayOutputWithContext(context.Context) GetMysqlProcessListProcessListArrayOutput
+}
+
+type GetMysqlProcessListProcessListArray []GetMysqlProcessListProcessListInput
+
+func (GetMysqlProcessListProcessListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMysqlProcessListProcessList)(nil)).Elem()
+}
+
+func (i GetMysqlProcessListProcessListArray) ToGetMysqlProcessListProcessListArrayOutput() GetMysqlProcessListProcessListArrayOutput {
+	return i.ToGetMysqlProcessListProcessListArrayOutputWithContext(context.Background())
+}
+
+func (i GetMysqlProcessListProcessListArray) ToGetMysqlProcessListProcessListArrayOutputWithContext(ctx context.Context) GetMysqlProcessListProcessListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMysqlProcessListProcessListArrayOutput)
+}
+
+type GetMysqlProcessListProcessListOutput struct{ *pulumi.OutputState }
+
+func (GetMysqlProcessListProcessListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMysqlProcessListProcessList)(nil)).Elem()
+}
+
+func (o GetMysqlProcessListProcessListOutput) ToGetMysqlProcessListProcessListOutput() GetMysqlProcessListProcessListOutput {
+	return o
+}
+
+func (o GetMysqlProcessListProcessListOutput) ToGetMysqlProcessListProcessListOutputWithContext(ctx context.Context) GetMysqlProcessListProcessListOutput {
+	return o
+}
+
+// The execution type of the thread, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) Command() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Command }).(pulumi.StringOutput)
+}
+
+// The threads operations database, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) Db() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Db }).(pulumi.StringOutput)
+}
+
+// The operating host address of the thread, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// thread ID, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The threads operation statement is used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) Info() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Info }).(pulumi.StringOutput)
+}
+
+// The operational state of the thread, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.State }).(pulumi.StringOutput)
+}
+
+// The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+func (o GetMysqlProcessListProcessListOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.Time }).(pulumi.StringOutput)
+}
+
+// The operating account name of the thread, used to filter the thread list.
+func (o GetMysqlProcessListProcessListOutput) User() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMysqlProcessListProcessList) string { return v.User }).(pulumi.StringOutput)
+}
+
+type GetMysqlProcessListProcessListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMysqlProcessListProcessListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMysqlProcessListProcessList)(nil)).Elem()
+}
+
+func (o GetMysqlProcessListProcessListArrayOutput) ToGetMysqlProcessListProcessListArrayOutput() GetMysqlProcessListProcessListArrayOutput {
+	return o
+}
+
+func (o GetMysqlProcessListProcessListArrayOutput) ToGetMysqlProcessListProcessListArrayOutputWithContext(ctx context.Context) GetMysqlProcessListProcessListArrayOutput {
+	return o
+}
+
+func (o GetMysqlProcessListProcessListArrayOutput) Index(i pulumi.IntInput) GetMysqlProcessListProcessListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMysqlProcessListProcessList {
+		return vs[0].([]GetMysqlProcessListProcessList)[vs[1].(int)]
+	}).(GetMysqlProcessListProcessListOutput)
+}
+
+type GetNoPrimaryKeyTablesNoPrimaryKeyTable struct {
+	// Storage engine for database tables.
+	Engine string `pulumi:"engine"`
+	// tableName.
+	TableName string `pulumi:"tableName"`
+	// rows.
+	TableRows int `pulumi:"tableRows"`
+	// library name.
+	TableSchema string `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength float64 `pulumi:"totalLength"`
+}
+
+// GetNoPrimaryKeyTablesNoPrimaryKeyTableInput is an input type that accepts GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs and GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput values.
+// You can construct a concrete instance of `GetNoPrimaryKeyTablesNoPrimaryKeyTableInput` via:
+//
+//          GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...}
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableInput interface {
+	pulumi.Input
+
+	ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput
+	ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutputWithContext(context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput
+}
+
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs struct {
+	// Storage engine for database tables.
+	Engine pulumi.StringInput `pulumi:"engine"`
+	// tableName.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// rows.
+	TableRows pulumi.IntInput `pulumi:"tableRows"`
+	// library name.
+	TableSchema pulumi.StringInput `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength pulumi.Float64Input `pulumi:"totalLength"`
+}
+
+func (GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoPrimaryKeyTablesNoPrimaryKeyTable)(nil)).Elem()
+}
+
+func (i GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput {
+	return i.ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutputWithContext(context.Background())
+}
+
+func (i GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutputWithContext(ctx context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput)
+}
+
+// GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput is an input type that accepts GetNoPrimaryKeyTablesNoPrimaryKeyTableArray and GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput values.
+// You can construct a concrete instance of `GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput` via:
+//
+//          GetNoPrimaryKeyTablesNoPrimaryKeyTableArray{ GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{...} }
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput interface {
+	pulumi.Input
+
+	ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput
+	ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutputWithContext(context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput
+}
+
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableArray []GetNoPrimaryKeyTablesNoPrimaryKeyTableInput
+
+func (GetNoPrimaryKeyTablesNoPrimaryKeyTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoPrimaryKeyTablesNoPrimaryKeyTable)(nil)).Elem()
+}
+
+func (i GetNoPrimaryKeyTablesNoPrimaryKeyTableArray) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput {
+	return i.ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoPrimaryKeyTablesNoPrimaryKeyTableArray) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutputWithContext(ctx context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput)
+}
+
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput struct{ *pulumi.OutputState }
+
+func (GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoPrimaryKeyTablesNoPrimaryKeyTable)(nil)).Elem()
+}
+
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput {
+	return o
+}
+
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableOutputWithContext(ctx context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput {
+	return o
+}
+
+// Storage engine for database tables.
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) Engine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoPrimaryKeyTablesNoPrimaryKeyTable) string { return v.Engine }).(pulumi.StringOutput)
+}
+
+// tableName.
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoPrimaryKeyTablesNoPrimaryKeyTable) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// rows.
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) TableRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoPrimaryKeyTablesNoPrimaryKeyTable) int { return v.TableRows }).(pulumi.IntOutput)
+}
+
+// library name.
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) TableSchema() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoPrimaryKeyTablesNoPrimaryKeyTable) string { return v.TableSchema }).(pulumi.StringOutput)
+}
+
+// Total space used (MB).
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput) TotalLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetNoPrimaryKeyTablesNoPrimaryKeyTable) float64 { return v.TotalLength }).(pulumi.Float64Output)
+}
+
+type GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoPrimaryKeyTablesNoPrimaryKeyTable)(nil)).Elem()
+}
+
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput() GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput {
+	return o
+}
+
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput) ToGetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutputWithContext(ctx context.Context) GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput {
+	return o
+}
+
+func (o GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput) Index(i pulumi.IntInput) GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoPrimaryKeyTablesNoPrimaryKeyTable {
+		return vs[0].([]GetNoPrimaryKeyTablesNoPrimaryKeyTable)[vs[1].(int)]
+	}).(GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput)
+}
+
+type GetRedisTopBigKeysTopKey struct {
+	// key encoding method.
+	Encoding string `pulumi:"encoding"`
+	// Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+	ExpireTime int `pulumi:"expireTime"`
+	// number of elements.
+	ItemCount int `pulumi:"itemCount"`
+	// key name.
+	Key string `pulumi:"key"`
+	// Key memory size, unit Byte.
+	Length int `pulumi:"length"`
+	// Maximum element length.
+	MaxElementSize int `pulumi:"maxElementSize"`
+	// key type.
+	Type string `pulumi:"type"`
+}
+
+// GetRedisTopBigKeysTopKeyInput is an input type that accepts GetRedisTopBigKeysTopKeyArgs and GetRedisTopBigKeysTopKeyOutput values.
+// You can construct a concrete instance of `GetRedisTopBigKeysTopKeyInput` via:
+//
+//          GetRedisTopBigKeysTopKeyArgs{...}
+type GetRedisTopBigKeysTopKeyInput interface {
+	pulumi.Input
+
+	ToGetRedisTopBigKeysTopKeyOutput() GetRedisTopBigKeysTopKeyOutput
+	ToGetRedisTopBigKeysTopKeyOutputWithContext(context.Context) GetRedisTopBigKeysTopKeyOutput
+}
+
+type GetRedisTopBigKeysTopKeyArgs struct {
+	// key encoding method.
+	Encoding pulumi.StringInput `pulumi:"encoding"`
+	// Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+	ExpireTime pulumi.IntInput `pulumi:"expireTime"`
+	// number of elements.
+	ItemCount pulumi.IntInput `pulumi:"itemCount"`
+	// key name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Key memory size, unit Byte.
+	Length pulumi.IntInput `pulumi:"length"`
+	// Maximum element length.
+	MaxElementSize pulumi.IntInput `pulumi:"maxElementSize"`
+	// key type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetRedisTopBigKeysTopKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRedisTopBigKeysTopKey)(nil)).Elem()
+}
+
+func (i GetRedisTopBigKeysTopKeyArgs) ToGetRedisTopBigKeysTopKeyOutput() GetRedisTopBigKeysTopKeyOutput {
+	return i.ToGetRedisTopBigKeysTopKeyOutputWithContext(context.Background())
+}
+
+func (i GetRedisTopBigKeysTopKeyArgs) ToGetRedisTopBigKeysTopKeyOutputWithContext(ctx context.Context) GetRedisTopBigKeysTopKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRedisTopBigKeysTopKeyOutput)
+}
+
+// GetRedisTopBigKeysTopKeyArrayInput is an input type that accepts GetRedisTopBigKeysTopKeyArray and GetRedisTopBigKeysTopKeyArrayOutput values.
+// You can construct a concrete instance of `GetRedisTopBigKeysTopKeyArrayInput` via:
+//
+//          GetRedisTopBigKeysTopKeyArray{ GetRedisTopBigKeysTopKeyArgs{...} }
+type GetRedisTopBigKeysTopKeyArrayInput interface {
+	pulumi.Input
+
+	ToGetRedisTopBigKeysTopKeyArrayOutput() GetRedisTopBigKeysTopKeyArrayOutput
+	ToGetRedisTopBigKeysTopKeyArrayOutputWithContext(context.Context) GetRedisTopBigKeysTopKeyArrayOutput
+}
+
+type GetRedisTopBigKeysTopKeyArray []GetRedisTopBigKeysTopKeyInput
+
+func (GetRedisTopBigKeysTopKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRedisTopBigKeysTopKey)(nil)).Elem()
+}
+
+func (i GetRedisTopBigKeysTopKeyArray) ToGetRedisTopBigKeysTopKeyArrayOutput() GetRedisTopBigKeysTopKeyArrayOutput {
+	return i.ToGetRedisTopBigKeysTopKeyArrayOutputWithContext(context.Background())
+}
+
+func (i GetRedisTopBigKeysTopKeyArray) ToGetRedisTopBigKeysTopKeyArrayOutputWithContext(ctx context.Context) GetRedisTopBigKeysTopKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRedisTopBigKeysTopKeyArrayOutput)
+}
+
+type GetRedisTopBigKeysTopKeyOutput struct{ *pulumi.OutputState }
+
+func (GetRedisTopBigKeysTopKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRedisTopBigKeysTopKey)(nil)).Elem()
+}
+
+func (o GetRedisTopBigKeysTopKeyOutput) ToGetRedisTopBigKeysTopKeyOutput() GetRedisTopBigKeysTopKeyOutput {
+	return o
+}
+
+func (o GetRedisTopBigKeysTopKeyOutput) ToGetRedisTopBigKeysTopKeyOutputWithContext(ctx context.Context) GetRedisTopBigKeysTopKeyOutput {
+	return o
+}
+
+// key encoding method.
+func (o GetRedisTopBigKeysTopKeyOutput) Encoding() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) string { return v.Encoding }).(pulumi.StringOutput)
+}
+
+// Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+func (o GetRedisTopBigKeysTopKeyOutput) ExpireTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) int { return v.ExpireTime }).(pulumi.IntOutput)
+}
+
+// number of elements.
+func (o GetRedisTopBigKeysTopKeyOutput) ItemCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) int { return v.ItemCount }).(pulumi.IntOutput)
+}
+
+// key name.
+func (o GetRedisTopBigKeysTopKeyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Key memory size, unit Byte.
+func (o GetRedisTopBigKeysTopKeyOutput) Length() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) int { return v.Length }).(pulumi.IntOutput)
+}
+
+// Maximum element length.
+func (o GetRedisTopBigKeysTopKeyOutput) MaxElementSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) int { return v.MaxElementSize }).(pulumi.IntOutput)
+}
+
+// key type.
+func (o GetRedisTopBigKeysTopKeyOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRedisTopBigKeysTopKey) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetRedisTopBigKeysTopKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRedisTopBigKeysTopKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRedisTopBigKeysTopKey)(nil)).Elem()
+}
+
+func (o GetRedisTopBigKeysTopKeyArrayOutput) ToGetRedisTopBigKeysTopKeyArrayOutput() GetRedisTopBigKeysTopKeyArrayOutput {
+	return o
+}
+
+func (o GetRedisTopBigKeysTopKeyArrayOutput) ToGetRedisTopBigKeysTopKeyArrayOutputWithContext(ctx context.Context) GetRedisTopBigKeysTopKeyArrayOutput {
+	return o
+}
+
+func (o GetRedisTopBigKeysTopKeyArrayOutput) Index(i pulumi.IntInput) GetRedisTopBigKeysTopKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRedisTopBigKeysTopKey {
+		return vs[0].([]GetRedisTopBigKeysTopKey)[vs[1].(int)]
+	}).(GetRedisTopBigKeysTopKeyOutput)
+}
+
+type GetRedisTopKeyPrefixListItem struct {
+	// Average element length.
+	AveElementSize int `pulumi:"aveElementSize"`
+	// The number of keys.
+	Count int `pulumi:"count"`
+	// number of elements.
+	ItemCount int `pulumi:"itemCount"`
+	// key prefix.
+	KeyPreIndex string `pulumi:"keyPreIndex"`
+	// Total occupied memory (Byte).
+	Length int `pulumi:"length"`
+	// Maximum element length.
+	MaxElementSize int `pulumi:"maxElementSize"`
+}
+
+// GetRedisTopKeyPrefixListItemInput is an input type that accepts GetRedisTopKeyPrefixListItemArgs and GetRedisTopKeyPrefixListItemOutput values.
+// You can construct a concrete instance of `GetRedisTopKeyPrefixListItemInput` via:
+//
+//          GetRedisTopKeyPrefixListItemArgs{...}
+type GetRedisTopKeyPrefixListItemInput interface {
+	pulumi.Input
+
+	ToGetRedisTopKeyPrefixListItemOutput() GetRedisTopKeyPrefixListItemOutput
+	ToGetRedisTopKeyPrefixListItemOutputWithContext(context.Context) GetRedisTopKeyPrefixListItemOutput
+}
+
+type GetRedisTopKeyPrefixListItemArgs struct {
+	// Average element length.
+	AveElementSize pulumi.IntInput `pulumi:"aveElementSize"`
+	// The number of keys.
+	Count pulumi.IntInput `pulumi:"count"`
+	// number of elements.
+	ItemCount pulumi.IntInput `pulumi:"itemCount"`
+	// key prefix.
+	KeyPreIndex pulumi.StringInput `pulumi:"keyPreIndex"`
+	// Total occupied memory (Byte).
+	Length pulumi.IntInput `pulumi:"length"`
+	// Maximum element length.
+	MaxElementSize pulumi.IntInput `pulumi:"maxElementSize"`
+}
+
+func (GetRedisTopKeyPrefixListItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRedisTopKeyPrefixListItem)(nil)).Elem()
+}
+
+func (i GetRedisTopKeyPrefixListItemArgs) ToGetRedisTopKeyPrefixListItemOutput() GetRedisTopKeyPrefixListItemOutput {
+	return i.ToGetRedisTopKeyPrefixListItemOutputWithContext(context.Background())
+}
+
+func (i GetRedisTopKeyPrefixListItemArgs) ToGetRedisTopKeyPrefixListItemOutputWithContext(ctx context.Context) GetRedisTopKeyPrefixListItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRedisTopKeyPrefixListItemOutput)
+}
+
+// GetRedisTopKeyPrefixListItemArrayInput is an input type that accepts GetRedisTopKeyPrefixListItemArray and GetRedisTopKeyPrefixListItemArrayOutput values.
+// You can construct a concrete instance of `GetRedisTopKeyPrefixListItemArrayInput` via:
+//
+//          GetRedisTopKeyPrefixListItemArray{ GetRedisTopKeyPrefixListItemArgs{...} }
+type GetRedisTopKeyPrefixListItemArrayInput interface {
+	pulumi.Input
+
+	ToGetRedisTopKeyPrefixListItemArrayOutput() GetRedisTopKeyPrefixListItemArrayOutput
+	ToGetRedisTopKeyPrefixListItemArrayOutputWithContext(context.Context) GetRedisTopKeyPrefixListItemArrayOutput
+}
+
+type GetRedisTopKeyPrefixListItemArray []GetRedisTopKeyPrefixListItemInput
+
+func (GetRedisTopKeyPrefixListItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRedisTopKeyPrefixListItem)(nil)).Elem()
+}
+
+func (i GetRedisTopKeyPrefixListItemArray) ToGetRedisTopKeyPrefixListItemArrayOutput() GetRedisTopKeyPrefixListItemArrayOutput {
+	return i.ToGetRedisTopKeyPrefixListItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetRedisTopKeyPrefixListItemArray) ToGetRedisTopKeyPrefixListItemArrayOutputWithContext(ctx context.Context) GetRedisTopKeyPrefixListItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRedisTopKeyPrefixListItemArrayOutput)
+}
+
+type GetRedisTopKeyPrefixListItemOutput struct{ *pulumi.OutputState }
+
+func (GetRedisTopKeyPrefixListItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRedisTopKeyPrefixListItem)(nil)).Elem()
+}
+
+func (o GetRedisTopKeyPrefixListItemOutput) ToGetRedisTopKeyPrefixListItemOutput() GetRedisTopKeyPrefixListItemOutput {
+	return o
+}
+
+func (o GetRedisTopKeyPrefixListItemOutput) ToGetRedisTopKeyPrefixListItemOutputWithContext(ctx context.Context) GetRedisTopKeyPrefixListItemOutput {
+	return o
+}
+
+// Average element length.
+func (o GetRedisTopKeyPrefixListItemOutput) AveElementSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) int { return v.AveElementSize }).(pulumi.IntOutput)
+}
+
+// The number of keys.
+func (o GetRedisTopKeyPrefixListItemOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// number of elements.
+func (o GetRedisTopKeyPrefixListItemOutput) ItemCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) int { return v.ItemCount }).(pulumi.IntOutput)
+}
+
+// key prefix.
+func (o GetRedisTopKeyPrefixListItemOutput) KeyPreIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) string { return v.KeyPreIndex }).(pulumi.StringOutput)
+}
+
+// Total occupied memory (Byte).
+func (o GetRedisTopKeyPrefixListItemOutput) Length() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) int { return v.Length }).(pulumi.IntOutput)
+}
+
+// Maximum element length.
+func (o GetRedisTopKeyPrefixListItemOutput) MaxElementSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRedisTopKeyPrefixListItem) int { return v.MaxElementSize }).(pulumi.IntOutput)
+}
+
+type GetRedisTopKeyPrefixListItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRedisTopKeyPrefixListItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRedisTopKeyPrefixListItem)(nil)).Elem()
+}
+
+func (o GetRedisTopKeyPrefixListItemArrayOutput) ToGetRedisTopKeyPrefixListItemArrayOutput() GetRedisTopKeyPrefixListItemArrayOutput {
+	return o
+}
+
+func (o GetRedisTopKeyPrefixListItemArrayOutput) ToGetRedisTopKeyPrefixListItemArrayOutputWithContext(ctx context.Context) GetRedisTopKeyPrefixListItemArrayOutput {
+	return o
+}
+
+func (o GetRedisTopKeyPrefixListItemArrayOutput) Index(i pulumi.IntInput) GetRedisTopKeyPrefixListItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRedisTopKeyPrefixListItem {
+		return vs[0].([]GetRedisTopKeyPrefixListItem)[vs[1].(int)]
+	}).(GetRedisTopKeyPrefixListItemOutput)
 }
 
 type GetSecurityAuditLogExportTasksList struct {
@@ -2350,6 +3418,175 @@ func (o GetSlowLogUserHostStatsItemArrayOutput) Index(i pulumi.IntInput) GetSlow
 	}).(GetSlowLogUserHostStatsItemOutput)
 }
 
+type GetSlowLogsRow struct {
+	// database.
+	Database string `pulumi:"database"`
+	// lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+	LockTime int `pulumi:"lockTime"`
+	// Execution time, in seconds.
+	QueryTime int `pulumi:"queryTime"`
+	// scan linesNote: This field may return null, indicating that no valid value can be obtained.
+	RowsExamined int `pulumi:"rowsExamined"`
+	// Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+	RowsSent int `pulumi:"rowsSent"`
+	// sql statement.
+	SqlText string `pulumi:"sqlText"`
+	// Slow log start time.
+	Timestamp string `pulumi:"timestamp"`
+	// Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+	UserHost string `pulumi:"userHost"`
+	// User sourceNote: This field may return null, indicating that no valid value can be obtained.
+	UserName string `pulumi:"userName"`
+}
+
+// GetSlowLogsRowInput is an input type that accepts GetSlowLogsRowArgs and GetSlowLogsRowOutput values.
+// You can construct a concrete instance of `GetSlowLogsRowInput` via:
+//
+//          GetSlowLogsRowArgs{...}
+type GetSlowLogsRowInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsRowOutput() GetSlowLogsRowOutput
+	ToGetSlowLogsRowOutputWithContext(context.Context) GetSlowLogsRowOutput
+}
+
+type GetSlowLogsRowArgs struct {
+	// database.
+	Database pulumi.StringInput `pulumi:"database"`
+	// lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+	LockTime pulumi.IntInput `pulumi:"lockTime"`
+	// Execution time, in seconds.
+	QueryTime pulumi.IntInput `pulumi:"queryTime"`
+	// scan linesNote: This field may return null, indicating that no valid value can be obtained.
+	RowsExamined pulumi.IntInput `pulumi:"rowsExamined"`
+	// Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+	RowsSent pulumi.IntInput `pulumi:"rowsSent"`
+	// sql statement.
+	SqlText pulumi.StringInput `pulumi:"sqlText"`
+	// Slow log start time.
+	Timestamp pulumi.StringInput `pulumi:"timestamp"`
+	// Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+	UserHost pulumi.StringInput `pulumi:"userHost"`
+	// User sourceNote: This field may return null, indicating that no valid value can be obtained.
+	UserName pulumi.StringInput `pulumi:"userName"`
+}
+
+func (GetSlowLogsRowArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsRow)(nil)).Elem()
+}
+
+func (i GetSlowLogsRowArgs) ToGetSlowLogsRowOutput() GetSlowLogsRowOutput {
+	return i.ToGetSlowLogsRowOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsRowArgs) ToGetSlowLogsRowOutputWithContext(ctx context.Context) GetSlowLogsRowOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsRowOutput)
+}
+
+// GetSlowLogsRowArrayInput is an input type that accepts GetSlowLogsRowArray and GetSlowLogsRowArrayOutput values.
+// You can construct a concrete instance of `GetSlowLogsRowArrayInput` via:
+//
+//          GetSlowLogsRowArray{ GetSlowLogsRowArgs{...} }
+type GetSlowLogsRowArrayInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsRowArrayOutput() GetSlowLogsRowArrayOutput
+	ToGetSlowLogsRowArrayOutputWithContext(context.Context) GetSlowLogsRowArrayOutput
+}
+
+type GetSlowLogsRowArray []GetSlowLogsRowInput
+
+func (GetSlowLogsRowArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsRow)(nil)).Elem()
+}
+
+func (i GetSlowLogsRowArray) ToGetSlowLogsRowArrayOutput() GetSlowLogsRowArrayOutput {
+	return i.ToGetSlowLogsRowArrayOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsRowArray) ToGetSlowLogsRowArrayOutputWithContext(ctx context.Context) GetSlowLogsRowArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsRowArrayOutput)
+}
+
+type GetSlowLogsRowOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsRowOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsRow)(nil)).Elem()
+}
+
+func (o GetSlowLogsRowOutput) ToGetSlowLogsRowOutput() GetSlowLogsRowOutput {
+	return o
+}
+
+func (o GetSlowLogsRowOutput) ToGetSlowLogsRowOutputWithContext(ctx context.Context) GetSlowLogsRowOutput {
+	return o
+}
+
+// database.
+func (o GetSlowLogsRowOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetSlowLogsRowOutput) LockTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) int { return v.LockTime }).(pulumi.IntOutput)
+}
+
+// Execution time, in seconds.
+func (o GetSlowLogsRowOutput) QueryTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) int { return v.QueryTime }).(pulumi.IntOutput)
+}
+
+// scan linesNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetSlowLogsRowOutput) RowsExamined() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) int { return v.RowsExamined }).(pulumi.IntOutput)
+}
+
+// Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetSlowLogsRowOutput) RowsSent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) int { return v.RowsSent }).(pulumi.IntOutput)
+}
+
+// sql statement.
+func (o GetSlowLogsRowOutput) SqlText() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) string { return v.SqlText }).(pulumi.StringOutput)
+}
+
+// Slow log start time.
+func (o GetSlowLogsRowOutput) Timestamp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) string { return v.Timestamp }).(pulumi.StringOutput)
+}
+
+// Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetSlowLogsRowOutput) UserHost() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) string { return v.UserHost }).(pulumi.StringOutput)
+}
+
+// User sourceNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetSlowLogsRowOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsRow) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+type GetSlowLogsRowArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsRowArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsRow)(nil)).Elem()
+}
+
+func (o GetSlowLogsRowArrayOutput) ToGetSlowLogsRowArrayOutput() GetSlowLogsRowArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsRowArrayOutput) ToGetSlowLogsRowArrayOutputWithContext(ctx context.Context) GetSlowLogsRowArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsRowArrayOutput) Index(i pulumi.IntInput) GetSlowLogsRowOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSlowLogsRow {
+		return vs[0].([]GetSlowLogsRow)[vs[1].(int)]
+	}).(GetSlowLogsRowOutput)
+}
+
 type GetSqlFiltersList struct {
 	// create time.
 	CreateTime string `pulumi:"createTime"`
@@ -2537,6 +3774,1024 @@ func (o GetSqlFiltersListArrayOutput) Index(i pulumi.IntInput) GetSqlFiltersList
 	}).(GetSqlFiltersListOutput)
 }
 
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries struct {
+	// Spatial index data in unit time interval.
+	SeriesDatas []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData `pulumi:"seriesDatas"`
+	// databases name.
+	TableSchema string `pulumi:"tableSchema"`
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...}
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs struct {
+	// Spatial index data in unit time interval.
+	SeriesDatas GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput `pulumi:"seriesDatas"`
+	// databases name.
+	TableSchema pulumi.StringInput `pulumi:"tableSchema"`
+}
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput)
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{...} }
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput {
+	return o
+}
+
+// Spatial index data in unit time interval.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput) SeriesDatas() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries) []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData {
+		return v.SeriesDatas
+	}).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput)
+}
+
+// databases name.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput) TableSchema() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries) string { return v.TableSchema }).(pulumi.StringOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput) Index(i pulumi.IntInput) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries {
+		return vs[0].([]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeries)[vs[1].(int)]
+	}).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData struct {
+	// Monitor metrics.
+	Series []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries `pulumi:"series"`
+	// The timestamp corresponding to the monitoring indicator.
+	Timestamps []int `pulumi:"timestamps"`
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...}
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs struct {
+	// Monitor metrics.
+	Series GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput `pulumi:"series"`
+	// The timestamp corresponding to the monitoring indicator.
+	Timestamps pulumi.IntArrayInput `pulumi:"timestamps"`
+}
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput)
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{...} }
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput {
+	return o
+}
+
+// Monitor metrics.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput) Series() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData) []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries {
+		return v.Series
+	}).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput)
+}
+
+// The timestamp corresponding to the monitoring indicator.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput) Timestamps() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData) []int { return v.Timestamps }).(pulumi.IntArrayOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput) Index(i pulumi.IntInput) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData {
+		return vs[0].([]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesData)[vs[1].(int)]
+	}).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries struct {
+	// Indicator name.
+	Metric string `pulumi:"metric"`
+	// Indicator unit.
+	Unit string `pulumi:"unit"`
+	// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+	Values []float64 `pulumi:"values"`
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...}
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs struct {
+	// Indicator name.
+	Metric pulumi.StringInput `pulumi:"metric"`
+	// Indicator unit.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+	Values pulumi.Float64ArrayInput `pulumi:"values"`
+}
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput)
+}
+
+// GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput is an input type that accepts GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray and GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput` via:
+//
+//          GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray{ GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{...} }
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput
+	ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutputWithContext(context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray []GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput {
+	return i.ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput {
+	return o
+}
+
+// Indicator name.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) Metric() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries) string { return v.Metric }).(pulumi.StringOutput)
+}
+
+// Indicator unit.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput) Values() pulumi.Float64ArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries) []float64 { return v.Values }).(pulumi.Float64ArrayOutput)
+}
+
+type GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput) ToGetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput) Index(i pulumi.IntInput) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries {
+		return vs[0].([]GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeries)[vs[1].(int)]
+	}).(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput)
+}
+
+type GetTopSpaceSchemasTopSpaceSchema struct {
+	// Fragmentation space (MB).
+	DataFree float64 `pulumi:"dataFree"`
+	// data space (MB).
+	DataLength float64 `pulumi:"dataLength"`
+	// Fragmentation rate (%).
+	FragRatio float64 `pulumi:"fragRatio"`
+	// Index space (MB).
+	IndexLength float64 `pulumi:"indexLength"`
+	// The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+	PhysicalFileSize float64 `pulumi:"physicalFileSize"`
+	// Number of lines.
+	TableRows int `pulumi:"tableRows"`
+	// library name.
+	TableSchema string `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength float64 `pulumi:"totalLength"`
+}
+
+// GetTopSpaceSchemasTopSpaceSchemaInput is an input type that accepts GetTopSpaceSchemasTopSpaceSchemaArgs and GetTopSpaceSchemasTopSpaceSchemaOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemasTopSpaceSchemaInput` via:
+//
+//          GetTopSpaceSchemasTopSpaceSchemaArgs{...}
+type GetTopSpaceSchemasTopSpaceSchemaInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemasTopSpaceSchemaOutput() GetTopSpaceSchemasTopSpaceSchemaOutput
+	ToGetTopSpaceSchemasTopSpaceSchemaOutputWithContext(context.Context) GetTopSpaceSchemasTopSpaceSchemaOutput
+}
+
+type GetTopSpaceSchemasTopSpaceSchemaArgs struct {
+	// Fragmentation space (MB).
+	DataFree pulumi.Float64Input `pulumi:"dataFree"`
+	// data space (MB).
+	DataLength pulumi.Float64Input `pulumi:"dataLength"`
+	// Fragmentation rate (%).
+	FragRatio pulumi.Float64Input `pulumi:"fragRatio"`
+	// Index space (MB).
+	IndexLength pulumi.Float64Input `pulumi:"indexLength"`
+	// The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+	PhysicalFileSize pulumi.Float64Input `pulumi:"physicalFileSize"`
+	// Number of lines.
+	TableRows pulumi.IntInput `pulumi:"tableRows"`
+	// library name.
+	TableSchema pulumi.StringInput `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength pulumi.Float64Input `pulumi:"totalLength"`
+}
+
+func (GetTopSpaceSchemasTopSpaceSchemaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemasTopSpaceSchema)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemasTopSpaceSchemaArgs) ToGetTopSpaceSchemasTopSpaceSchemaOutput() GetTopSpaceSchemasTopSpaceSchemaOutput {
+	return i.ToGetTopSpaceSchemasTopSpaceSchemaOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemasTopSpaceSchemaArgs) ToGetTopSpaceSchemasTopSpaceSchemaOutputWithContext(ctx context.Context) GetTopSpaceSchemasTopSpaceSchemaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemasTopSpaceSchemaOutput)
+}
+
+// GetTopSpaceSchemasTopSpaceSchemaArrayInput is an input type that accepts GetTopSpaceSchemasTopSpaceSchemaArray and GetTopSpaceSchemasTopSpaceSchemaArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceSchemasTopSpaceSchemaArrayInput` via:
+//
+//          GetTopSpaceSchemasTopSpaceSchemaArray{ GetTopSpaceSchemasTopSpaceSchemaArgs{...} }
+type GetTopSpaceSchemasTopSpaceSchemaArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceSchemasTopSpaceSchemaArrayOutput() GetTopSpaceSchemasTopSpaceSchemaArrayOutput
+	ToGetTopSpaceSchemasTopSpaceSchemaArrayOutputWithContext(context.Context) GetTopSpaceSchemasTopSpaceSchemaArrayOutput
+}
+
+type GetTopSpaceSchemasTopSpaceSchemaArray []GetTopSpaceSchemasTopSpaceSchemaInput
+
+func (GetTopSpaceSchemasTopSpaceSchemaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemasTopSpaceSchema)(nil)).Elem()
+}
+
+func (i GetTopSpaceSchemasTopSpaceSchemaArray) ToGetTopSpaceSchemasTopSpaceSchemaArrayOutput() GetTopSpaceSchemasTopSpaceSchemaArrayOutput {
+	return i.ToGetTopSpaceSchemasTopSpaceSchemaArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceSchemasTopSpaceSchemaArray) ToGetTopSpaceSchemasTopSpaceSchemaArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemasTopSpaceSchemaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceSchemasTopSpaceSchemaArrayOutput)
+}
+
+type GetTopSpaceSchemasTopSpaceSchemaOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemasTopSpaceSchemaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceSchemasTopSpaceSchema)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) ToGetTopSpaceSchemasTopSpaceSchemaOutput() GetTopSpaceSchemasTopSpaceSchemaOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) ToGetTopSpaceSchemasTopSpaceSchemaOutputWithContext(ctx context.Context) GetTopSpaceSchemasTopSpaceSchemaOutput {
+	return o
+}
+
+// Fragmentation space (MB).
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) DataFree() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.DataFree }).(pulumi.Float64Output)
+}
+
+// data space (MB).
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) DataLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.DataLength }).(pulumi.Float64Output)
+}
+
+// Fragmentation rate (%).
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) FragRatio() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.FragRatio }).(pulumi.Float64Output)
+}
+
+// Index space (MB).
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) IndexLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.IndexLength }).(pulumi.Float64Output)
+}
+
+// The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) PhysicalFileSize() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.PhysicalFileSize }).(pulumi.Float64Output)
+}
+
+// Number of lines.
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) TableRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) int { return v.TableRows }).(pulumi.IntOutput)
+}
+
+// library name.
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) TableSchema() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) string { return v.TableSchema }).(pulumi.StringOutput)
+}
+
+// Total space used (MB).
+func (o GetTopSpaceSchemasTopSpaceSchemaOutput) TotalLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceSchemasTopSpaceSchema) float64 { return v.TotalLength }).(pulumi.Float64Output)
+}
+
+type GetTopSpaceSchemasTopSpaceSchemaArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceSchemasTopSpaceSchemaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceSchemasTopSpaceSchema)(nil)).Elem()
+}
+
+func (o GetTopSpaceSchemasTopSpaceSchemaArrayOutput) ToGetTopSpaceSchemasTopSpaceSchemaArrayOutput() GetTopSpaceSchemasTopSpaceSchemaArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemasTopSpaceSchemaArrayOutput) ToGetTopSpaceSchemasTopSpaceSchemaArrayOutputWithContext(ctx context.Context) GetTopSpaceSchemasTopSpaceSchemaArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceSchemasTopSpaceSchemaArrayOutput) Index(i pulumi.IntInput) GetTopSpaceSchemasTopSpaceSchemaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceSchemasTopSpaceSchema {
+		return vs[0].([]GetTopSpaceSchemasTopSpaceSchema)[vs[1].(int)]
+	}).(GetTopSpaceSchemasTopSpaceSchemaOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries struct {
+	// Storage engine for database tables.
+	Engine string `pulumi:"engine"`
+	// Spatial index data in unit time interval.
+	SeriesDatas []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData `pulumi:"seriesDatas"`
+	// table name.
+	TableName string `pulumi:"tableName"`
+	// databases name.
+	TableSchema string `pulumi:"tableSchema"`
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...}
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs struct {
+	// Storage engine for database tables.
+	Engine pulumi.StringInput `pulumi:"engine"`
+	// Spatial index data in unit time interval.
+	SeriesDatas GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput `pulumi:"seriesDatas"`
+	// table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// databases name.
+	TableSchema pulumi.StringInput `pulumi:"tableSchema"`
+}
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput)
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{...} }
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput {
+	return o
+}
+
+// Storage engine for database tables.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) Engine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries) string { return v.Engine }).(pulumi.StringOutput)
+}
+
+// Spatial index data in unit time interval.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) SeriesDatas() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries) []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData {
+		return v.SeriesDatas
+	}).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput)
+}
+
+// table name.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// databases name.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput) TableSchema() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries) string { return v.TableSchema }).(pulumi.StringOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput) Index(i pulumi.IntInput) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries {
+		return vs[0].([]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries)[vs[1].(int)]
+	}).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData struct {
+	// Monitor metrics.
+	Series []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries `pulumi:"series"`
+	// The timestamp corresponding to the monitoring indicator.
+	Timestamps []int `pulumi:"timestamps"`
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...}
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs struct {
+	// Monitor metrics.
+	Series GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput `pulumi:"series"`
+	// The timestamp corresponding to the monitoring indicator.
+	Timestamps pulumi.IntArrayInput `pulumi:"timestamps"`
+}
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput)
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{...} }
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput {
+	return o
+}
+
+// Monitor metrics.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput) Series() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData) []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries {
+		return v.Series
+	}).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput)
+}
+
+// The timestamp corresponding to the monitoring indicator.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput) Timestamps() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData) []int { return v.Timestamps }).(pulumi.IntArrayOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput) Index(i pulumi.IntInput) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData {
+		return vs[0].([]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesData)[vs[1].(int)]
+	}).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries struct {
+	// Indicator name.
+	Metric string `pulumi:"metric"`
+	// Indicator unit.
+	Unit string `pulumi:"unit"`
+	// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+	Values []float64 `pulumi:"values"`
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...}
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs struct {
+	// Indicator name.
+	Metric pulumi.StringInput `pulumi:"metric"`
+	// Indicator unit.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+	Values pulumi.Float64ArrayInput `pulumi:"values"`
+}
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput)
+}
+
+// GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput is an input type that accepts GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray and GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput` via:
+//
+//          GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray{ GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{...} }
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput
+	ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutputWithContext(context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray []GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput {
+	return i.ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput {
+	return o
+}
+
+// Indicator name.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) Metric() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries) string { return v.Metric }).(pulumi.StringOutput)
+}
+
+// Indicator unit.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Index value. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput) Values() pulumi.Float64ArrayOutput {
+	return o.ApplyT(func(v GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries) []float64 { return v.Values }).(pulumi.Float64ArrayOutput)
+}
+
+type GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries)(nil)).Elem()
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput() GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput) ToGetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutputWithContext(ctx context.Context) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput) Index(i pulumi.IntInput) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries {
+		return vs[0].([]GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeries)[vs[1].(int)]
+	}).(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput)
+}
+
+type GetTopSpaceTablesTopSpaceTable struct {
+	// Fragmentation space (MB).
+	DataFree float64 `pulumi:"dataFree"`
+	// data space (MB).
+	DataLength float64 `pulumi:"dataLength"`
+	// Storage engine for database tables.
+	Engine string `pulumi:"engine"`
+	// Fragmentation rate (%).
+	FragRatio float64 `pulumi:"fragRatio"`
+	// Index space (MB).
+	IndexLength float64 `pulumi:"indexLength"`
+	// The independent physical file size (MB) corresponding to the table.
+	PhysicalFileSize float64 `pulumi:"physicalFileSize"`
+	// table name.
+	TableName string `pulumi:"tableName"`
+	// Number of lines.
+	TableRows int `pulumi:"tableRows"`
+	// database name.
+	TableSchema string `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength float64 `pulumi:"totalLength"`
+}
+
+// GetTopSpaceTablesTopSpaceTableInput is an input type that accepts GetTopSpaceTablesTopSpaceTableArgs and GetTopSpaceTablesTopSpaceTableOutput values.
+// You can construct a concrete instance of `GetTopSpaceTablesTopSpaceTableInput` via:
+//
+//          GetTopSpaceTablesTopSpaceTableArgs{...}
+type GetTopSpaceTablesTopSpaceTableInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTablesTopSpaceTableOutput() GetTopSpaceTablesTopSpaceTableOutput
+	ToGetTopSpaceTablesTopSpaceTableOutputWithContext(context.Context) GetTopSpaceTablesTopSpaceTableOutput
+}
+
+type GetTopSpaceTablesTopSpaceTableArgs struct {
+	// Fragmentation space (MB).
+	DataFree pulumi.Float64Input `pulumi:"dataFree"`
+	// data space (MB).
+	DataLength pulumi.Float64Input `pulumi:"dataLength"`
+	// Storage engine for database tables.
+	Engine pulumi.StringInput `pulumi:"engine"`
+	// Fragmentation rate (%).
+	FragRatio pulumi.Float64Input `pulumi:"fragRatio"`
+	// Index space (MB).
+	IndexLength pulumi.Float64Input `pulumi:"indexLength"`
+	// The independent physical file size (MB) corresponding to the table.
+	PhysicalFileSize pulumi.Float64Input `pulumi:"physicalFileSize"`
+	// table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Number of lines.
+	TableRows pulumi.IntInput `pulumi:"tableRows"`
+	// database name.
+	TableSchema pulumi.StringInput `pulumi:"tableSchema"`
+	// Total space used (MB).
+	TotalLength pulumi.Float64Input `pulumi:"totalLength"`
+}
+
+func (GetTopSpaceTablesTopSpaceTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTablesTopSpaceTable)(nil)).Elem()
+}
+
+func (i GetTopSpaceTablesTopSpaceTableArgs) ToGetTopSpaceTablesTopSpaceTableOutput() GetTopSpaceTablesTopSpaceTableOutput {
+	return i.ToGetTopSpaceTablesTopSpaceTableOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTablesTopSpaceTableArgs) ToGetTopSpaceTablesTopSpaceTableOutputWithContext(ctx context.Context) GetTopSpaceTablesTopSpaceTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTablesTopSpaceTableOutput)
+}
+
+// GetTopSpaceTablesTopSpaceTableArrayInput is an input type that accepts GetTopSpaceTablesTopSpaceTableArray and GetTopSpaceTablesTopSpaceTableArrayOutput values.
+// You can construct a concrete instance of `GetTopSpaceTablesTopSpaceTableArrayInput` via:
+//
+//          GetTopSpaceTablesTopSpaceTableArray{ GetTopSpaceTablesTopSpaceTableArgs{...} }
+type GetTopSpaceTablesTopSpaceTableArrayInput interface {
+	pulumi.Input
+
+	ToGetTopSpaceTablesTopSpaceTableArrayOutput() GetTopSpaceTablesTopSpaceTableArrayOutput
+	ToGetTopSpaceTablesTopSpaceTableArrayOutputWithContext(context.Context) GetTopSpaceTablesTopSpaceTableArrayOutput
+}
+
+type GetTopSpaceTablesTopSpaceTableArray []GetTopSpaceTablesTopSpaceTableInput
+
+func (GetTopSpaceTablesTopSpaceTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTablesTopSpaceTable)(nil)).Elem()
+}
+
+func (i GetTopSpaceTablesTopSpaceTableArray) ToGetTopSpaceTablesTopSpaceTableArrayOutput() GetTopSpaceTablesTopSpaceTableArrayOutput {
+	return i.ToGetTopSpaceTablesTopSpaceTableArrayOutputWithContext(context.Background())
+}
+
+func (i GetTopSpaceTablesTopSpaceTableArray) ToGetTopSpaceTablesTopSpaceTableArrayOutputWithContext(ctx context.Context) GetTopSpaceTablesTopSpaceTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTopSpaceTablesTopSpaceTableArrayOutput)
+}
+
+type GetTopSpaceTablesTopSpaceTableOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTablesTopSpaceTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTopSpaceTablesTopSpaceTable)(nil)).Elem()
+}
+
+func (o GetTopSpaceTablesTopSpaceTableOutput) ToGetTopSpaceTablesTopSpaceTableOutput() GetTopSpaceTablesTopSpaceTableOutput {
+	return o
+}
+
+func (o GetTopSpaceTablesTopSpaceTableOutput) ToGetTopSpaceTablesTopSpaceTableOutputWithContext(ctx context.Context) GetTopSpaceTablesTopSpaceTableOutput {
+	return o
+}
+
+// Fragmentation space (MB).
+func (o GetTopSpaceTablesTopSpaceTableOutput) DataFree() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.DataFree }).(pulumi.Float64Output)
+}
+
+// data space (MB).
+func (o GetTopSpaceTablesTopSpaceTableOutput) DataLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.DataLength }).(pulumi.Float64Output)
+}
+
+// Storage engine for database tables.
+func (o GetTopSpaceTablesTopSpaceTableOutput) Engine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) string { return v.Engine }).(pulumi.StringOutput)
+}
+
+// Fragmentation rate (%).
+func (o GetTopSpaceTablesTopSpaceTableOutput) FragRatio() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.FragRatio }).(pulumi.Float64Output)
+}
+
+// Index space (MB).
+func (o GetTopSpaceTablesTopSpaceTableOutput) IndexLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.IndexLength }).(pulumi.Float64Output)
+}
+
+// The independent physical file size (MB) corresponding to the table.
+func (o GetTopSpaceTablesTopSpaceTableOutput) PhysicalFileSize() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.PhysicalFileSize }).(pulumi.Float64Output)
+}
+
+// table name.
+func (o GetTopSpaceTablesTopSpaceTableOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// Number of lines.
+func (o GetTopSpaceTablesTopSpaceTableOutput) TableRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) int { return v.TableRows }).(pulumi.IntOutput)
+}
+
+// database name.
+func (o GetTopSpaceTablesTopSpaceTableOutput) TableSchema() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) string { return v.TableSchema }).(pulumi.StringOutput)
+}
+
+// Total space used (MB).
+func (o GetTopSpaceTablesTopSpaceTableOutput) TotalLength() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTopSpaceTablesTopSpaceTable) float64 { return v.TotalLength }).(pulumi.Float64Output)
+}
+
+type GetTopSpaceTablesTopSpaceTableArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTopSpaceTablesTopSpaceTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTopSpaceTablesTopSpaceTable)(nil)).Elem()
+}
+
+func (o GetTopSpaceTablesTopSpaceTableArrayOutput) ToGetTopSpaceTablesTopSpaceTableArrayOutput() GetTopSpaceTablesTopSpaceTableArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTablesTopSpaceTableArrayOutput) ToGetTopSpaceTablesTopSpaceTableArrayOutputWithContext(ctx context.Context) GetTopSpaceTablesTopSpaceTableArrayOutput {
+	return o
+}
+
+func (o GetTopSpaceTablesTopSpaceTableArrayOutput) Index(i pulumi.IntInput) GetTopSpaceTablesTopSpaceTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTopSpaceTablesTopSpaceTable {
+		return vs[0].([]GetTopSpaceTablesTopSpaceTable)[vs[1].(int)]
+	}).(GetTopSpaceTablesTopSpaceTableOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ModifyDiagDbInstanceOperationInstanceConfsInput)(nil)).Elem(), ModifyDiagDbInstanceOperationInstanceConfsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ModifyDiagDbInstanceOperationInstanceConfsPtrInput)(nil)).Elem(), ModifyDiagDbInstanceOperationInstanceConfsArgs{})
@@ -2544,6 +4799,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SqlFilterSessionTokenPtrInput)(nil)).Elem(), SqlFilterSessionTokenArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TdsqlAuditLogFilterInput)(nil)).Elem(), TdsqlAuditLogFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TdsqlAuditLogFilterPtrInput)(nil)).Elem(), TdsqlAuditLogFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagDbInstancesItemInput)(nil)).Elem(), GetDiagDbInstancesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagDbInstancesItemArrayInput)(nil)).Elem(), GetDiagDbInstancesItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagDbInstancesItemInstanceConfInput)(nil)).Elem(), GetDiagDbInstancesItemInstanceConfArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagDbInstancesItemInstanceConfArrayInput)(nil)).Elem(), GetDiagDbInstancesItemInstanceConfArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagEventsListInput)(nil)).Elem(), GetDiagEventsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagEventsListArrayInput)(nil)).Elem(), GetDiagEventsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagHistoryEventInput)(nil)).Elem(), GetDiagHistoryEventArgs{})
@@ -2554,6 +4813,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthScoresDataIssueTypeArrayInput)(nil)).Elem(), GetHealthScoresDataIssueTypeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthScoresDataIssueTypeEventInput)(nil)).Elem(), GetHealthScoresDataIssueTypeEventArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHealthScoresDataIssueTypeEventArrayInput)(nil)).Elem(), GetHealthScoresDataIssueTypeEventArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMysqlProcessListProcessListInput)(nil)).Elem(), GetMysqlProcessListProcessListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMysqlProcessListProcessListArrayInput)(nil)).Elem(), GetMysqlProcessListProcessListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoPrimaryKeyTablesNoPrimaryKeyTableInput)(nil)).Elem(), GetNoPrimaryKeyTablesNoPrimaryKeyTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayInput)(nil)).Elem(), GetNoPrimaryKeyTablesNoPrimaryKeyTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRedisTopBigKeysTopKeyInput)(nil)).Elem(), GetRedisTopBigKeysTopKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRedisTopBigKeysTopKeyArrayInput)(nil)).Elem(), GetRedisTopBigKeysTopKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRedisTopKeyPrefixListItemInput)(nil)).Elem(), GetRedisTopKeyPrefixListItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRedisTopKeyPrefixListItemArrayInput)(nil)).Elem(), GetRedisTopKeyPrefixListItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityAuditLogExportTasksListInput)(nil)).Elem(), GetSecurityAuditLogExportTasksListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityAuditLogExportTasksListArrayInput)(nil)).Elem(), GetSecurityAuditLogExportTasksListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogTimeSeriesStatsSeriesDataInput)(nil)).Elem(), GetSlowLogTimeSeriesStatsSeriesDataArgs{})
@@ -2568,14 +4835,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogTopSqlsSchemaListArrayInput)(nil)).Elem(), GetSlowLogTopSqlsSchemaListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogUserHostStatsItemInput)(nil)).Elem(), GetSlowLogUserHostStatsItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogUserHostStatsItemArrayInput)(nil)).Elem(), GetSlowLogUserHostStatsItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsRowInput)(nil)).Elem(), GetSlowLogsRowArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsRowArrayInput)(nil)).Elem(), GetSlowLogsRowArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSqlFiltersListInput)(nil)).Elem(), GetSqlFiltersListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSqlFiltersListArrayInput)(nil)).Elem(), GetSqlFiltersListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayInput)(nil)).Elem(), GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemasTopSpaceSchemaInput)(nil)).Elem(), GetTopSpaceSchemasTopSpaceSchemaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceSchemasTopSpaceSchemaArrayInput)(nil)).Elem(), GetTopSpaceSchemasTopSpaceSchemaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayInput)(nil)).Elem(), GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTablesTopSpaceTableInput)(nil)).Elem(), GetTopSpaceTablesTopSpaceTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTopSpaceTablesTopSpaceTableArrayInput)(nil)).Elem(), GetTopSpaceTablesTopSpaceTableArray{})
 	pulumi.RegisterOutputType(ModifyDiagDbInstanceOperationInstanceConfsOutput{})
 	pulumi.RegisterOutputType(ModifyDiagDbInstanceOperationInstanceConfsPtrOutput{})
 	pulumi.RegisterOutputType(SqlFilterSessionTokenOutput{})
 	pulumi.RegisterOutputType(SqlFilterSessionTokenPtrOutput{})
 	pulumi.RegisterOutputType(TdsqlAuditLogFilterOutput{})
 	pulumi.RegisterOutputType(TdsqlAuditLogFilterPtrOutput{})
+	pulumi.RegisterOutputType(GetDiagDbInstancesItemOutput{})
+	pulumi.RegisterOutputType(GetDiagDbInstancesItemArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagDbInstancesItemInstanceConfOutput{})
+	pulumi.RegisterOutputType(GetDiagDbInstancesItemInstanceConfArrayOutput{})
 	pulumi.RegisterOutputType(GetDiagEventsListOutput{})
 	pulumi.RegisterOutputType(GetDiagEventsListArrayOutput{})
 	pulumi.RegisterOutputType(GetDiagHistoryEventOutput{})
@@ -2586,6 +4875,14 @@ func init() {
 	pulumi.RegisterOutputType(GetHealthScoresDataIssueTypeArrayOutput{})
 	pulumi.RegisterOutputType(GetHealthScoresDataIssueTypeEventOutput{})
 	pulumi.RegisterOutputType(GetHealthScoresDataIssueTypeEventArrayOutput{})
+	pulumi.RegisterOutputType(GetMysqlProcessListProcessListOutput{})
+	pulumi.RegisterOutputType(GetMysqlProcessListProcessListArrayOutput{})
+	pulumi.RegisterOutputType(GetNoPrimaryKeyTablesNoPrimaryKeyTableOutput{})
+	pulumi.RegisterOutputType(GetNoPrimaryKeyTablesNoPrimaryKeyTableArrayOutput{})
+	pulumi.RegisterOutputType(GetRedisTopBigKeysTopKeyOutput{})
+	pulumi.RegisterOutputType(GetRedisTopBigKeysTopKeyArrayOutput{})
+	pulumi.RegisterOutputType(GetRedisTopKeyPrefixListItemOutput{})
+	pulumi.RegisterOutputType(GetRedisTopKeyPrefixListItemArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityAuditLogExportTasksListOutput{})
 	pulumi.RegisterOutputType(GetSecurityAuditLogExportTasksListArrayOutput{})
 	pulumi.RegisterOutputType(GetSlowLogTimeSeriesStatsSeriesDataOutput{})
@@ -2600,6 +4897,24 @@ func init() {
 	pulumi.RegisterOutputType(GetSlowLogTopSqlsSchemaListArrayOutput{})
 	pulumi.RegisterOutputType(GetSlowLogUserHostStatsItemOutput{})
 	pulumi.RegisterOutputType(GetSlowLogUserHostStatsItemArrayOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsRowOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsRowArrayOutput{})
 	pulumi.RegisterOutputType(GetSqlFiltersListOutput{})
 	pulumi.RegisterOutputType(GetSqlFiltersListArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemasTopSpaceSchemaOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceSchemasTopSpaceSchemaArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArrayOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTablesTopSpaceTableOutput{})
+	pulumi.RegisterOutputType(GetTopSpaceTablesTopSpaceTableArrayOutput{})
 }

@@ -17,6 +17,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// &gt; **NOTE:** Both adding and removing replications in one change is supported but not recommend.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync());
+    ///         var redisInstanceTest2 = new Tencentcloud.Redis.Instance("redisInstanceTest2", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Redis instance can be imported, e.g.
@@ -59,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// IP address of an instance.
+        /// IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         /// </summary>
         [Output("ip")]
         public Output<string> Ip { get; private set; } = null!;
@@ -89,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<ImmutableArray<Outputs.InstanceNodeInfo>> NodeInfos { get; private set; } = null!;
 
         /// <summary>
+        /// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        /// </summary>
+        [Output("operationNetwork")]
+        public Output<string?> OperationNetwork { get; private set; } = null!;
+
+        /// <summary>
         /// Specify params template id. If not set, will use default template.
         /// </summary>
         [Output("paramsTemplateId")]
@@ -101,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string?> Password { get; private set; } = null!;
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
@@ -117,6 +150,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Output("projectId")]
         public Output<int?> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        /// </summary>
+        [Output("recycle")]
+        public Output<int?> Recycle { get; private set; } = null!;
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
@@ -155,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies which subnet the instance should belong to.
+        /// Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Output("subnetId")]
         public Output<string> SubnetId { get; private set; } = null!;
@@ -173,13 +212,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string?> Type { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         /// </summary>
         [Output("typeId")]
         public Output<int?> TypeId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the vpc with which the instance is to be associated.
+        /// ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -256,6 +295,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
+        /// IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
+        /// </summary>
+        [Input("ip")]
+        public Input<string>? Ip { get; set; }
+
+        /// <summary>
         /// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         /// </summary>
         [Input("memSize", required: true)]
@@ -274,6 +319,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<bool>? NoAuth { get; set; }
 
         /// <summary>
+        /// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        /// </summary>
+        [Input("operationNetwork")]
+        public Input<string>? OperationNetwork { get; set; }
+
+        /// <summary>
         /// Specify params template id. If not set, will use default template.
         /// </summary>
         [Input("paramsTemplateId")]
@@ -286,7 +337,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -302,6 +353,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
+        /// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        /// </summary>
+        [Input("recycle")]
+        public Input<int>? Recycle { get; set; }
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
@@ -346,7 +403,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
 
         /// <summary>
-        /// Specifies which subnet the instance should belong to.
+        /// Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -370,13 +427,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         /// </summary>
         [Input("typeId")]
         public Input<int>? TypeId { get; set; }
 
         /// <summary>
-        /// ID of the vpc with which the instance is to be associated.
+        /// ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
@@ -419,7 +476,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// IP address of an instance.
+        /// IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
@@ -455,6 +512,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
 
         /// <summary>
+        /// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        /// </summary>
+        [Input("operationNetwork")]
+        public Input<string>? OperationNetwork { get; set; }
+
+        /// <summary>
         /// Specify params template id. If not set, will use default template.
         /// </summary>
         [Input("paramsTemplateId")]
@@ -467,7 +530,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        /// The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -483,6 +546,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
+        /// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        /// </summary>
+        [Input("recycle")]
+        public Input<int>? Recycle { get; set; }
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
@@ -533,7 +602,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// Specifies which subnet the instance should belong to.
+        /// Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -557,13 +626,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        /// Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         /// </summary>
         [Input("typeId")]
         public Input<int>? TypeId { get; set; }
 
         /// <summary>
-        /// ID of the vpc with which the instance is to be associated.
+        /// ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

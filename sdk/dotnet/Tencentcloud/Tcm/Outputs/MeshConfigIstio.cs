@@ -27,13 +27,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Outputs
         /// </summary>
         public readonly bool? EnablePilotHttp;
         /// <summary>
-        /// Outbound traffic policy.
+        /// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
         /// </summary>
         public readonly string OutboundTrafficPolicy;
         /// <summary>
         /// SmartDNS configuration.
         /// </summary>
         public readonly Outputs.MeshConfigIstioSmartDns? SmartDns;
+        /// <summary>
+        /// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+        /// </summary>
+        public readonly Outputs.MeshConfigIstioTracing? Tracing;
 
         [OutputConstructor]
         private MeshConfigIstio(
@@ -45,13 +49,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Outputs
 
             string outboundTrafficPolicy,
 
-            Outputs.MeshConfigIstioSmartDns? smartDns)
+            Outputs.MeshConfigIstioSmartDns? smartDns,
+
+            Outputs.MeshConfigIstioTracing? tracing)
         {
             DisableHttpRetry = disableHttpRetry;
             DisablePolicyChecks = disablePolicyChecks;
             EnablePilotHttp = enablePilotHttp;
             OutboundTrafficPolicy = outboundTrafficPolicy;
             SmartDns = smartDns;
+            Tracing = tracing;
         }
     }
 }

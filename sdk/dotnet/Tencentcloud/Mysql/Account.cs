@@ -26,7 +26,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     ///         var @default = new Tencentcloud.Mysql.Account("default", new Tencentcloud.Mysql.AccountArgs
     ///         {
     ///             Description = "My test account",
-    ///             MysqlId = "my-test-database",
+    ///             MaxUserConnections = 10,
+    ///             MysqlId = "terraform-test-local-database",
     ///             Password = "********",
     ///         });
     ///     }
@@ -56,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("host")]
         public Output<string?> Host { get; private set; } = null!;
+
+        /// <summary>
+        /// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        /// </summary>
+        [Output("maxUserConnections")]
+        public Output<int> MaxUserConnections { get; private set; } = null!;
 
         /// <summary>
         /// Instance ID to which the account belongs.
@@ -135,6 +142,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? Host { get; set; }
 
         /// <summary>
+        /// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        /// </summary>
+        [Input("maxUserConnections")]
+        public Input<int>? MaxUserConnections { get; set; }
+
+        /// <summary>
         /// Instance ID to which the account belongs.
         /// </summary>
         [Input("mysqlId", required: true)]
@@ -170,6 +183,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
+
+        /// <summary>
+        /// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+        /// </summary>
+        [Input("maxUserConnections")]
+        public Input<int>? MaxUserConnections { get; set; }
 
         /// <summary>
         /// Instance ID to which the account belongs.

@@ -26,6 +26,7 @@ class DbInstanceArgs:
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  dcn_instance_id: Optional[pulumi.Input[str]] = None,
                  dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  init_params: Optional[pulumi.Input[Sequence[pulumi.Input['DbInstanceInitParamArgs']]]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  ipv6_flag: Optional[pulumi.Input[int]] = None,
@@ -33,6 +34,8 @@ class DbInstanceArgs:
                  resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input['DbInstanceResourceTagArgs']]]] = None,
                  security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
@@ -48,6 +51,7 @@ class DbInstanceArgs:
         :param pulumi.Input[str] db_version_id: &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
         :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
         :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[Sequence[pulumi.Input['DbInstanceInitParamArgs']]] init_params: &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
         :param pulumi.Input[str] instance_name: Instance name, you can set the name of the instance independently through this field.
         :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
@@ -55,6 +59,8 @@ class DbInstanceArgs:
         :param pulumi.Input[Sequence[pulumi.Input['DbInstanceResourceTagArgs']]] resource_tags: Array of tag key-value pairs.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security group ids, the security group can be passed in the form of an array, compatible with the previous SecurityGroupId parameter.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Voucher ID list, currently only supports specifying one voucher.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
         """
@@ -74,6 +80,8 @@ class DbInstanceArgs:
             pulumi.set(__self__, "dcn_instance_id", dcn_instance_id)
         if dcn_region is not None:
             pulumi.set(__self__, "dcn_region", dcn_region)
+        if extranet_access is not None:
+            pulumi.set(__self__, "extranet_access", extranet_access)
         if init_params is not None:
             pulumi.set(__self__, "init_params", init_params)
         if instance_name is not None:
@@ -88,6 +96,10 @@ class DbInstanceArgs:
             pulumi.set(__self__, "security_group_ids", security_group_ids)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vipv6 is not None:
+            pulumi.set(__self__, "vipv6", vipv6)
         if voucher_ids is not None:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
@@ -226,6 +238,18 @@ class DbInstanceArgs:
         pulumi.set(self, "dcn_region", value)
 
     @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
+
+    @extranet_access.setter
+    def extranet_access(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "extranet_access", value)
+
+    @property
     @pulumi.getter(name="initParams")
     def init_params(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DbInstanceInitParamArgs']]]]:
         """
@@ -310,6 +334,30 @@ class DbInstanceArgs:
         pulumi.set(self, "subnet_id", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
+
+    @vipv6.setter
+    def vipv6(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vipv6", value)
+
+    @property
     @pulumi.getter(name="voucherIds")
     def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -342,6 +390,7 @@ class _DbInstanceState:
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  dcn_instance_id: Optional[pulumi.Input[str]] = None,
                  dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  init_params: Optional[pulumi.Input[Sequence[pulumi.Input['DbInstanceInitParamArgs']]]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  ipv6_flag: Optional[pulumi.Input[int]] = None,
@@ -354,8 +403,11 @@ class _DbInstanceState:
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 vport: Optional[pulumi.Input[int]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering DbInstance resources.
@@ -364,6 +416,7 @@ class _DbInstanceState:
         :param pulumi.Input[str] db_version_id: &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
         :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
         :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[Sequence[pulumi.Input['DbInstanceInitParamArgs']]] init_params: &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
         :param pulumi.Input[str] instance_name: Instance name, you can set the name of the instance independently through this field.
         :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
@@ -376,8 +429,11 @@ class _DbInstanceState:
         :param pulumi.Input[int] shard_node_count: &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[int] shard_storage: &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Voucher ID list, currently only supports specifying one voucher.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
+        :param pulumi.Input[int] vport: Intranet port.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
         """
         if auto_renew_flag is not None:
@@ -390,6 +446,8 @@ class _DbInstanceState:
             pulumi.set(__self__, "dcn_instance_id", dcn_instance_id)
         if dcn_region is not None:
             pulumi.set(__self__, "dcn_region", dcn_region)
+        if extranet_access is not None:
+            pulumi.set(__self__, "extranet_access", extranet_access)
         if init_params is not None:
             pulumi.set(__self__, "init_params", init_params)
         if instance_name is not None:
@@ -414,10 +472,16 @@ class _DbInstanceState:
             pulumi.set(__self__, "shard_storage", shard_storage)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vipv6 is not None:
+            pulumi.set(__self__, "vipv6", vipv6)
         if voucher_ids is not None:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
         if zones is not None:
             pulumi.set(__self__, "zones", zones)
 
@@ -480,6 +544,18 @@ class _DbInstanceState:
     @dcn_region.setter
     def dcn_region(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "dcn_region", value)
+
+    @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
+
+    @extranet_access.setter
+    def extranet_access(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "extranet_access", value)
 
     @property
     @pulumi.getter(name="initParams")
@@ -626,6 +702,30 @@ class _DbInstanceState:
         pulumi.set(self, "subnet_id", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
+
+    @vipv6.setter
+    def vipv6(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vipv6", value)
+
+    @property
     @pulumi.getter(name="voucherIds")
     def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -651,6 +751,18 @@ class _DbInstanceState:
 
     @property
     @pulumi.getter
+    def vport(self) -> Optional[pulumi.Input[int]]:
+        """
+        Intranet port.
+        """
+        return pulumi.get(self, "vport")
+
+    @vport.setter
+    def vport(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vport", value)
+
+    @property
+    @pulumi.getter
     def zones(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
         &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
@@ -672,6 +784,7 @@ class DbInstance(pulumi.CustomResource):
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  dcn_instance_id: Optional[pulumi.Input[str]] = None,
                  dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  init_params: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DbInstanceInitParamArgs']]]]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  ipv6_flag: Optional[pulumi.Input[int]] = None,
@@ -684,6 +797,8 @@ class DbInstance(pulumi.CustomResource):
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -748,6 +863,7 @@ class DbInstance(pulumi.CustomResource):
         :param pulumi.Input[str] db_version_id: &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
         :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
         :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DbInstanceInitParamArgs']]]] init_params: &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
         :param pulumi.Input[str] instance_name: Instance name, you can set the name of the instance independently through this field.
         :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
@@ -760,6 +876,8 @@ class DbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] shard_node_count: &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[int] shard_storage: &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Voucher ID list, currently only supports specifying one voucher.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
@@ -843,6 +961,7 @@ class DbInstance(pulumi.CustomResource):
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  dcn_instance_id: Optional[pulumi.Input[str]] = None,
                  dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  init_params: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DbInstanceInitParamArgs']]]]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  ipv6_flag: Optional[pulumi.Input[int]] = None,
@@ -855,6 +974,8 @@ class DbInstance(pulumi.CustomResource):
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -877,6 +998,7 @@ class DbInstance(pulumi.CustomResource):
             __props__.__dict__["db_version_id"] = db_version_id
             __props__.__dict__["dcn_instance_id"] = dcn_instance_id
             __props__.__dict__["dcn_region"] = dcn_region
+            __props__.__dict__["extranet_access"] = extranet_access
             __props__.__dict__["init_params"] = init_params
             __props__.__dict__["instance_name"] = instance_name
             __props__.__dict__["ipv6_flag"] = ipv6_flag
@@ -899,11 +1021,14 @@ class DbInstance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'shard_storage'")
             __props__.__dict__["shard_storage"] = shard_storage
             __props__.__dict__["subnet_id"] = subnet_id
+            __props__.__dict__["vip"] = vip
+            __props__.__dict__["vipv6"] = vipv6
             __props__.__dict__["voucher_ids"] = voucher_ids
             __props__.__dict__["vpc_id"] = vpc_id
             if zones is None and not opts.urn:
                 raise TypeError("Missing required property 'zones'")
             __props__.__dict__["zones"] = zones
+            __props__.__dict__["vport"] = None
         super(DbInstance, __self__).__init__(
             'tencentcloud:Dcdb/dbInstance:DbInstance',
             resource_name,
@@ -919,6 +1044,7 @@ class DbInstance(pulumi.CustomResource):
             db_version_id: Optional[pulumi.Input[str]] = None,
             dcn_instance_id: Optional[pulumi.Input[str]] = None,
             dcn_region: Optional[pulumi.Input[str]] = None,
+            extranet_access: Optional[pulumi.Input[bool]] = None,
             init_params: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DbInstanceInitParamArgs']]]]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             ipv6_flag: Optional[pulumi.Input[int]] = None,
@@ -931,8 +1057,11 @@ class DbInstance(pulumi.CustomResource):
             shard_node_count: Optional[pulumi.Input[int]] = None,
             shard_storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
+            vip: Optional[pulumi.Input[str]] = None,
+            vipv6: Optional[pulumi.Input[str]] = None,
             voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
+            vport: Optional[pulumi.Input[int]] = None,
             zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'DbInstance':
         """
         Get an existing DbInstance resource's state with the given name, id, and optional extra
@@ -946,6 +1075,7 @@ class DbInstance(pulumi.CustomResource):
         :param pulumi.Input[str] db_version_id: &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
         :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
         :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DbInstanceInitParamArgs']]]] init_params: &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
         :param pulumi.Input[str] instance_name: Instance name, you can set the name of the instance independently through this field.
         :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
@@ -958,8 +1088,11 @@ class DbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] shard_node_count: &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[int] shard_storage: &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
         :param pulumi.Input[str] subnet_id: Virtual private network subnet ID, required when VpcId is not empty.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Voucher ID list, currently only supports specifying one voucher.
         :param pulumi.Input[str] vpc_id: Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
+        :param pulumi.Input[int] vport: Intranet port.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -971,6 +1104,7 @@ class DbInstance(pulumi.CustomResource):
         __props__.__dict__["db_version_id"] = db_version_id
         __props__.__dict__["dcn_instance_id"] = dcn_instance_id
         __props__.__dict__["dcn_region"] = dcn_region
+        __props__.__dict__["extranet_access"] = extranet_access
         __props__.__dict__["init_params"] = init_params
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["ipv6_flag"] = ipv6_flag
@@ -983,8 +1117,11 @@ class DbInstance(pulumi.CustomResource):
         __props__.__dict__["shard_node_count"] = shard_node_count
         __props__.__dict__["shard_storage"] = shard_storage
         __props__.__dict__["subnet_id"] = subnet_id
+        __props__.__dict__["vip"] = vip
+        __props__.__dict__["vipv6"] = vipv6
         __props__.__dict__["voucher_ids"] = voucher_ids
         __props__.__dict__["vpc_id"] = vpc_id
+        __props__.__dict__["vport"] = vport
         __props__.__dict__["zones"] = zones
         return DbInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -1027,6 +1164,14 @@ class DbInstance(pulumi.CustomResource):
         DCN source region.
         """
         return pulumi.get(self, "dcn_region")
+
+    @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
 
     @property
     @pulumi.getter(name="initParams")
@@ -1125,6 +1270,22 @@ class DbInstance(pulumi.CustomResource):
         return pulumi.get(self, "subnet_id")
 
     @property
+    @pulumi.getter
+    def vip(self) -> pulumi.Output[str]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> pulumi.Output[str]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
+
+    @property
     @pulumi.getter(name="voucherIds")
     def voucher_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
@@ -1139,6 +1300,14 @@ class DbInstance(pulumi.CustomResource):
         Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
         """
         return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> pulumi.Output[int]:
+        """
+        Intranet port.
+        """
+        return pulumi.get(self, "vport")
 
     @property
     @pulumi.getter

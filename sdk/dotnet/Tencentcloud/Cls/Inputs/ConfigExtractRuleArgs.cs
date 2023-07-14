@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
     public sealed class ConfigExtractRuleArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// syslog system log collection specifies the address and port that the collector listens to.
+        /// </summary>
+        [Input("address")]
+        public Input<string>? Address { get; set; }
+
+        /// <summary>
         /// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
         /// </summary>
         [Input("backtracking")]
@@ -43,6 +49,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
             set => _filterKeyRegexes = value;
         }
 
+        /// <summary>
+        /// GBK encoding. Default 0.
+        /// </summary>
+        [Input("isGbk")]
+        public Input<int>? IsGbk { get; set; }
+
+        /// <summary>
+        /// standard json. Default 0.
+        /// </summary>
+        [Input("jsonStandard")]
+        public Input<int>? JsonStandard { get; set; }
+
         [Input("keys")]
         private InputList<string>? _keys;
 
@@ -60,6 +78,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         /// </summary>
         [Input("logRegex")]
         public Input<string>? LogRegex { get; set; }
+
+        [Input("metaTags")]
+        private InputList<Inputs.ConfigExtractRuleMetaTagArgs>? _metaTags;
+
+        /// <summary>
+        /// metadata tags.
+        /// </summary>
+        public InputList<Inputs.ConfigExtractRuleMetaTagArgs> MetaTags
+        {
+            get => _metaTags ?? (_metaTags = new InputList<Inputs.ConfigExtractRuleMetaTagArgs>());
+            set => _metaTags = value;
+        }
+
+        /// <summary>
+        /// metadata type.
+        /// </summary>
+        [Input("metadataType")]
+        public Input<int>? MetadataType { get; set; }
+
+        /// <summary>
+        /// parse protocol.
+        /// </summary>
+        [Input("parseProtocol")]
+        public Input<string>? ParseProtocol { get; set; }
+
+        /// <summary>
+        /// metadata path regex.
+        /// </summary>
+        [Input("pathRegex")]
+        public Input<string>? PathRegex { get; set; }
+
+        /// <summary>
+        /// syslog protocol, tcp or udp.
+        /// </summary>
+        [Input("protocol")]
+        public Input<string>? Protocol { get; set; }
 
         /// <summary>
         /// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.

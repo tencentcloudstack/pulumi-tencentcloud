@@ -93,7 +93,7 @@ export class MachineGroup extends pulumi.CustomResource {
      */
     public readonly updateEndTime!: pulumi.Output<string | undefined>;
     /**
-     * pdate start time. We recommend you update LogListener during off-peak hours.
+     * Update start time. We recommend you update LogListener during off-peak hours.
      */
     public readonly updateStartTime!: pulumi.Output<string | undefined>;
 
@@ -167,7 +167,7 @@ export interface MachineGroupState {
      */
     updateEndTime?: pulumi.Input<string>;
     /**
-     * pdate start time. We recommend you update LogListener during off-peak hours.
+     * Update start time. We recommend you update LogListener during off-peak hours.
      */
     updateStartTime?: pulumi.Input<string>;
 }
@@ -201,7 +201,7 @@ export interface MachineGroupArgs {
      */
     updateEndTime?: pulumi.Input<string>;
     /**
-     * pdate start time. We recommend you update LogListener during off-peak hours.
+     * Update start time. We recommend you update LogListener during off-peak hours.
      */
     updateStartTime?: pulumi.Input<string>;
 }

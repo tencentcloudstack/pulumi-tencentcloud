@@ -28,6 +28,7 @@ class ReadonlyInstanceArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
+                 read_only_group_id: Optional[pulumi.Input[str]] = None,
                  voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
@@ -46,6 +47,7 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] read_only_group_id: RO group ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
         """
         pulumi.set(__self__, "db_version", db_version)
@@ -69,6 +71,8 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "need_support_ipv6", need_support_ipv6)
         if period is not None:
             pulumi.set(__self__, "period", period)
+        if read_only_group_id is not None:
+            pulumi.set(__self__, "read_only_group_id", read_only_group_id)
         if voucher_ids is not None:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
 
@@ -253,6 +257,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "period", value)
 
     @property
+    @pulumi.getter(name="readOnlyGroupId")
+    def read_only_group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        RO group ID.
+        """
+        return pulumi.get(self, "read_only_group_id")
+
+    @read_only_group_id.setter
+    def read_only_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "read_only_group_id", value)
+
+    @property
     @pulumi.getter(name="voucherIds")
     def voucher_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -273,12 +289,16 @@ class _ReadonlyInstanceState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
+                 instance_id: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
+                 private_access_ip: Optional[pulumi.Input[str]] = None,
+                 private_access_port: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 read_only_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -292,12 +312,16 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
+        :param pulumi.Input[str] instance_id: The instance ID of this readonly resource.
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] private_access_ip: IP for private access.
+        :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project ID.
+        :param pulumi.Input[str] read_only_group_id: RO group ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
@@ -315,6 +339,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "db_version", db_version)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if master_db_instance_id is not None:
             pulumi.set(__self__, "master_db_instance_id", master_db_instance_id)
         if memory is not None:
@@ -325,8 +351,14 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "need_support_ipv6", need_support_ipv6)
         if period is not None:
             pulumi.set(__self__, "period", period)
+        if private_access_ip is not None:
+            pulumi.set(__self__, "private_access_ip", private_access_ip)
+        if private_access_port is not None:
+            pulumi.set(__self__, "private_access_port", private_access_port)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if read_only_group_id is not None:
+            pulumi.set(__self__, "read_only_group_id", read_only_group_id)
         if security_groups_ids is not None:
             pulumi.set(__self__, "security_groups_ids", security_groups_ids)
         if storage is not None:
@@ -401,6 +433,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "instance_charge_type", value)
 
     @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The instance ID of this readonly resource.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
     @pulumi.getter(name="masterDbInstanceId")
     def master_db_instance_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -461,6 +505,30 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "period", value)
 
     @property
+    @pulumi.getter(name="privateAccessIp")
+    def private_access_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        IP for private access.
+        """
+        return pulumi.get(self, "private_access_ip")
+
+    @private_access_ip.setter
+    def private_access_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_access_ip", value)
+
+    @property
+    @pulumi.getter(name="privateAccessPort")
+    def private_access_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Port for private access.
+        """
+        return pulumi.get(self, "private_access_port")
+
+    @private_access_port.setter
+    def private_access_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "private_access_port", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -471,6 +539,18 @@ class _ReadonlyInstanceState:
     @project_id.setter
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter(name="readOnlyGroupId")
+    def read_only_group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        RO group ID.
+        """
+        return pulumi.get(self, "read_only_group_id")
+
+    @read_only_group_id.setter
+    def read_only_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "read_only_group_id", value)
 
     @property
     @pulumi.getter(name="securityGroupsIds")
@@ -560,6 +640,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 read_only_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -576,6 +657,16 @@ class ReadonlyInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        new_ro_group = tencentcloud.postgresql.ReadonlyGroup("newRoGroup",
+            master_db_instance_id=local["pgsql_id"],
+            project_id=0,
+            vpc_id=local["vpc_id"],
+            subnet_id=local["subnet_id"],
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
         foo = tencentcloud.postgresql.ReadonlyInstance("foo",
             auto_renew_flag=0,
             db_version="10.4",
@@ -588,7 +679,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             storage=250,
             subnet_id="subnet-enm92y0m",
             vpc_id="vpc-86v957zb",
-            zone="ap-guangzhou-6")
+            read_only_group_id=new_ro_group.id)
         ```
 
         ## Import
@@ -596,7 +687,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         postgresql readonly instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -611,6 +702,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Project ID.
+        :param pulumi.Input[str] read_only_group_id: RO group ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
@@ -633,6 +725,16 @@ class ReadonlyInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        new_ro_group = tencentcloud.postgresql.ReadonlyGroup("newRoGroup",
+            master_db_instance_id=local["pgsql_id"],
+            project_id=0,
+            vpc_id=local["vpc_id"],
+            subnet_id=local["subnet_id"],
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
         foo = tencentcloud.postgresql.ReadonlyInstance("foo",
             auto_renew_flag=0,
             db_version="10.4",
@@ -645,7 +747,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             storage=250,
             subnet_id="subnet-enm92y0m",
             vpc_id="vpc-86v957zb",
-            zone="ap-guangzhou-6")
+            read_only_group_id=new_ro_group.id)
         ```
 
         ## Import
@@ -653,7 +755,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         postgresql readonly instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+         $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -681,6 +783,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 read_only_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -719,6 +822,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
+            __props__.__dict__["read_only_group_id"] = read_only_group_id
             if security_groups_ids is None and not opts.urn:
                 raise TypeError("Missing required property 'security_groups_ids'")
             __props__.__dict__["security_groups_ids"] = security_groups_ids
@@ -736,6 +840,9 @@ class ReadonlyInstance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'zone'")
             __props__.__dict__["zone"] = zone
             __props__.__dict__["create_time"] = None
+            __props__.__dict__["instance_id"] = None
+            __props__.__dict__["private_access_ip"] = None
+            __props__.__dict__["private_access_port"] = None
         super(ReadonlyInstance, __self__).__init__(
             'tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance',
             resource_name,
@@ -751,12 +858,16 @@ class ReadonlyInstance(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             db_version: Optional[pulumi.Input[str]] = None,
             instance_charge_type: Optional[pulumi.Input[str]] = None,
+            instance_id: Optional[pulumi.Input[str]] = None,
             master_db_instance_id: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             need_support_ipv6: Optional[pulumi.Input[int]] = None,
             period: Optional[pulumi.Input[int]] = None,
+            private_access_ip: Optional[pulumi.Input[str]] = None,
+            private_access_port: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
+            read_only_group_id: Optional[pulumi.Input[str]] = None,
             security_groups_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
@@ -775,12 +886,16 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
+        :param pulumi.Input[str] instance_id: The instance ID of this readonly resource.
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
         :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] private_access_ip: IP for private access.
+        :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project ID.
+        :param pulumi.Input[str] read_only_group_id: RO group ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups_ids: ID of security group.
         :param pulumi.Input[int] storage: Instance storage capacity in GB.
         :param pulumi.Input[str] subnet_id: VPC subnet ID.
@@ -797,12 +912,16 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["db_version"] = db_version
         __props__.__dict__["instance_charge_type"] = instance_charge_type
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["master_db_instance_id"] = master_db_instance_id
         __props__.__dict__["memory"] = memory
         __props__.__dict__["name"] = name
         __props__.__dict__["need_support_ipv6"] = need_support_ipv6
         __props__.__dict__["period"] = period
+        __props__.__dict__["private_access_ip"] = private_access_ip
+        __props__.__dict__["private_access_port"] = private_access_port
         __props__.__dict__["project_id"] = project_id
+        __props__.__dict__["read_only_group_id"] = read_only_group_id
         __props__.__dict__["security_groups_ids"] = security_groups_ids
         __props__.__dict__["storage"] = storage
         __props__.__dict__["subnet_id"] = subnet_id
@@ -852,6 +971,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "instance_charge_type")
 
     @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[str]:
+        """
+        The instance ID of this readonly resource.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
     @pulumi.getter(name="masterDbInstanceId")
     def master_db_instance_id(self) -> pulumi.Output[str]:
         """
@@ -892,12 +1019,36 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "period")
 
     @property
+    @pulumi.getter(name="privateAccessIp")
+    def private_access_ip(self) -> pulumi.Output[str]:
+        """
+        IP for private access.
+        """
+        return pulumi.get(self, "private_access_ip")
+
+    @property
+    @pulumi.getter(name="privateAccessPort")
+    def private_access_port(self) -> pulumi.Output[int]:
+        """
+        Port for private access.
+        """
+        return pulumi.get(self, "private_access_port")
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Output[int]:
         """
         Project ID.
         """
         return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="readOnlyGroupId")
+    def read_only_group_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        RO group ID.
+        """
+        return pulumi.get(self, "read_only_group_id")
 
     @property
     @pulumi.getter(name="securityGroupsIds")

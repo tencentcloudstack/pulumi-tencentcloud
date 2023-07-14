@@ -27,7 +27,7 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Mysql.GetBackupList(ctx, &mysql.GetBackupListArgs{
 // 			MaxNumber:        pulumi.IntRef(10),
-// 			MysqlId:          "my-test-database",
+// 			MysqlId:          "terraform-test-local-database",
 // 			ResultOutputFile: pulumi.StringRef("mytestpath"),
 // 		}, nil)
 // 		if err != nil {

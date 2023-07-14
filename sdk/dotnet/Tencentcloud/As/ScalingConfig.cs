@@ -60,8 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// }
     /// ```
-    /// 
-    /// Using SPOT charge type
+    /// ### Using SPOT charge type
     /// 
     /// ```csharp
     /// using Pulumi;

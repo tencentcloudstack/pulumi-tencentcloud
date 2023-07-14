@@ -10,10 +10,18 @@ from .. import _utilities
 
 __all__ = [
     'AuditLogFileFilterArgs',
+    'BackupDownloadRestrictionLimitVpcArgs',
     'ParamTemplateParamListArgs',
+    'PasswordComplexityParamListArgs',
     'PrivilegeColumnArgs',
     'PrivilegeDatabaseArgs',
     'PrivilegeTableArgs',
+    'ProxyProxyNodeCustomArgs',
+    'RoGroupRoGroupInfoArgs',
+    'RoGroupRoWeightValueArgs',
+    'RollbackDatabaseArgs',
+    'RollbackTableArgs',
+    'RollbackTableTableArgs',
 ]
 
 @pulumi.input_type
@@ -200,13 +208,50 @@ class AuditLogFileFilterArgs:
 
 
 @pulumi.input_type
+class BackupDownloadRestrictionLimitVpcArgs:
+    def __init__(__self__, *,
+                 region: pulumi.Input[str],
+                 vpc_lists: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] region: Restrict downloads from regions. Currently only the current region is supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] vpc_lists: List of vpcs to limit downloads.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_lists", vpc_lists)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Restrict downloads from regions. Currently only the current region is supported.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="vpcLists")
+    def vpc_lists(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of vpcs to limit downloads.
+        """
+        return pulumi.get(self, "vpc_lists")
+
+    @vpc_lists.setter
+    def vpc_lists(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "vpc_lists", value)
+
+
+@pulumi.input_type
 class ParamTemplateParamListArgs:
     def __init__(__self__, *,
                  current_value: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] current_value: The value of parameter.
-        :param pulumi.Input[str] name: The name of parameter template.
+        :param pulumi.Input[str] name: The name of parameter.
         """
         if current_value is not None:
             pulumi.set(__self__, "current_value", current_value)
@@ -229,7 +274,46 @@ class ParamTemplateParamListArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of parameter template.
+        The name of parameter.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class PasswordComplexityParamListArgs:
+    def __init__(__self__, *,
+                 current_value: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] current_value: Parameter value.
+        :param pulumi.Input[str] name: Parameter name.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @current_value.setter
+    def current_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "current_value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter name.
         """
         return pulumi.get(self, "name")
 
@@ -386,6 +470,339 @@ class PrivilegeTableArgs:
     def table_name(self) -> pulumi.Input[str]:
         """
         Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @table_name.setter
+    def table_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table_name", value)
+
+
+@pulumi.input_type
+class ProxyProxyNodeCustomArgs:
+    def __init__(__self__, *,
+                 cpu: pulumi.Input[int],
+                 mem: pulumi.Input[int],
+                 node_count: pulumi.Input[int],
+                 region: pulumi.Input[str],
+                 zone: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] cpu: Number of CPU cores.
+        :param pulumi.Input[int] mem: Memory size.
+        :param pulumi.Input[int] node_count: Number of nodes.
+        :param pulumi.Input[str] region: Region.
+        :param pulumi.Input[str] zone: Zone.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "mem", mem)
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> pulumi.Input[int]:
+        """
+        Number of CPU cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @cpu.setter
+    def cpu(self, value: pulumi.Input[int]):
+        pulumi.set(self, "cpu", value)
+
+    @property
+    @pulumi.getter
+    def mem(self) -> pulumi.Input[int]:
+        """
+        Memory size.
+        """
+        return pulumi.get(self, "mem")
+
+    @mem.setter
+    def mem(self, value: pulumi.Input[int]):
+        pulumi.set(self, "mem", value)
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> pulumi.Input[int]:
+        """
+        Number of nodes.
+        """
+        return pulumi.get(self, "node_count")
+
+    @node_count.setter
+    def node_count(self, value: pulumi.Input[int]):
+        pulumi.set(self, "node_count", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> pulumi.Input[str]:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: pulumi.Input[str]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class RoGroupRoGroupInfoArgs:
+    def __init__(__self__, *,
+                 min_ro_in_group: Optional[pulumi.Input[int]] = None,
+                 replication_delay_time: Optional[pulumi.Input[int]] = None,
+                 ro_group_name: Optional[pulumi.Input[str]] = None,
+                 ro_max_delay_time: Optional[pulumi.Input[int]] = None,
+                 ro_offline_delay: Optional[pulumi.Input[int]] = None,
+                 weight_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] min_ro_in_group: The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+        :param pulumi.Input[int] replication_delay_time: Delayed replication time.
+        :param pulumi.Input[str] ro_group_name: RO group name.
+        :param pulumi.Input[int] ro_max_delay_time: RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+        :param pulumi.Input[int] ro_offline_delay: Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+        :param pulumi.Input[str] weight_mode: weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+        """
+        if min_ro_in_group is not None:
+            pulumi.set(__self__, "min_ro_in_group", min_ro_in_group)
+        if replication_delay_time is not None:
+            pulumi.set(__self__, "replication_delay_time", replication_delay_time)
+        if ro_group_name is not None:
+            pulumi.set(__self__, "ro_group_name", ro_group_name)
+        if ro_max_delay_time is not None:
+            pulumi.set(__self__, "ro_max_delay_time", ro_max_delay_time)
+        if ro_offline_delay is not None:
+            pulumi.set(__self__, "ro_offline_delay", ro_offline_delay)
+        if weight_mode is not None:
+            pulumi.set(__self__, "weight_mode", weight_mode)
+
+    @property
+    @pulumi.getter(name="minRoInGroup")
+    def min_ro_in_group(self) -> Optional[pulumi.Input[int]]:
+        """
+        The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+        """
+        return pulumi.get(self, "min_ro_in_group")
+
+    @min_ro_in_group.setter
+    def min_ro_in_group(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_ro_in_group", value)
+
+    @property
+    @pulumi.getter(name="replicationDelayTime")
+    def replication_delay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Delayed replication time.
+        """
+        return pulumi.get(self, "replication_delay_time")
+
+    @replication_delay_time.setter
+    def replication_delay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replication_delay_time", value)
+
+    @property
+    @pulumi.getter(name="roGroupName")
+    def ro_group_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        RO group name.
+        """
+        return pulumi.get(self, "ro_group_name")
+
+    @ro_group_name.setter
+    def ro_group_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ro_group_name", value)
+
+    @property
+    @pulumi.getter(name="roMaxDelayTime")
+    def ro_max_delay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+        """
+        return pulumi.get(self, "ro_max_delay_time")
+
+    @ro_max_delay_time.setter
+    def ro_max_delay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ro_max_delay_time", value)
+
+    @property
+    @pulumi.getter(name="roOfflineDelay")
+    def ro_offline_delay(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+        """
+        return pulumi.get(self, "ro_offline_delay")
+
+    @ro_offline_delay.setter
+    def ro_offline_delay(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ro_offline_delay", value)
+
+    @property
+    @pulumi.getter(name="weightMode")
+    def weight_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+        """
+        return pulumi.get(self, "weight_mode")
+
+    @weight_mode.setter
+    def weight_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "weight_mode", value)
+
+
+@pulumi.input_type
+class RoGroupRoWeightValueArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 weight: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] instance_id: RO instance ID.
+        :param pulumi.Input[int] weight: Weights. The value range is [0, 100].
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        RO instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        """
+        Weights. The value range is [0, 100].
+        """
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class RollbackDatabaseArgs:
+    def __init__(__self__, *,
+                 database_name: pulumi.Input[str],
+                 new_database_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database_name: The original database name before rollback.
+        :param pulumi.Input[str] new_database_name: The new database name after rollback.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "new_database_name", new_database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> pulumi.Input[str]:
+        """
+        The original database name before rollback.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database_name", value)
+
+    @property
+    @pulumi.getter(name="newDatabaseName")
+    def new_database_name(self) -> pulumi.Input[str]:
+        """
+        The new database name after rollback.
+        """
+        return pulumi.get(self, "new_database_name")
+
+    @new_database_name.setter
+    def new_database_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_database_name", value)
+
+
+@pulumi.input_type
+class RollbackTableArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 tables: pulumi.Input[Sequence[pulumi.Input['RollbackTableTableArgs']]]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input['RollbackTableTableArgs']]] tables: Database table details.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "tables", tables)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def tables(self) -> pulumi.Input[Sequence[pulumi.Input['RollbackTableTableArgs']]]:
+        """
+        Database table details.
+        """
+        return pulumi.get(self, "tables")
+
+    @tables.setter
+    def tables(self, value: pulumi.Input[Sequence[pulumi.Input['RollbackTableTableArgs']]]):
+        pulumi.set(self, "tables", value)
+
+
+@pulumi.input_type
+class RollbackTableTableArgs:
+    def __init__(__self__, *,
+                 new_table_name: pulumi.Input[str],
+                 table_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_table_name: New database table name after rollback.
+        :param pulumi.Input[str] table_name: The original database table name before rollback.
+        """
+        pulumi.set(__self__, "new_table_name", new_table_name)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="newTableName")
+    def new_table_name(self) -> pulumi.Input[str]:
+        """
+        New database table name after rollback.
+        """
+        return pulumi.get(self, "new_table_name")
+
+    @new_table_name.setter
+    def new_table_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_table_name", value)
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> pulumi.Input[str]:
+        """
+        The original database table name before rollback.
         """
         return pulumi.get(self, "table_name")
 

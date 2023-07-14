@@ -31,19 +31,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<Outputs.AccountPrivilegesAccount> Account { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Output("columnPrivileges")]
         public Output<Outputs.AccountPrivilegesColumnPrivileges?> ColumnPrivileges { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;amp;quot;&amp;amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Output("databasePrivileges")]
         public Output<Outputs.AccountPrivilegesDatabasePrivileges?> DatabasePrivileges { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;amp;quot;&amp;amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;amp;quot;.
+        /// Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         /// </summary>
         [Output("globalPrivileges")]
         public Output<ImmutableArray<string>> GlobalPrivileges { get; private set; } = null!;
@@ -55,13 +55,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Output("tablePrivileges")]
         public Output<Outputs.AccountPrivilegesTablePrivileges?> TablePrivileges { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Output("viewPrivileges")]
         public Output<Outputs.AccountPrivilegesViewPrivileges?> ViewPrivileges { get; private set; } = null!;
@@ -120,13 +120,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<Inputs.AccountPrivilegesAccountArgs> Account { get; set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("columnPrivileges")]
         public Input<Inputs.AccountPrivilegesColumnPrivilegesArgs>? ColumnPrivileges { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;amp;quot;&amp;amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("databasePrivileges")]
         public Input<Inputs.AccountPrivilegesDatabasePrivilegesArgs>? DatabasePrivileges { get; set; }
@@ -135,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<string>? _globalPrivileges;
 
         /// <summary>
-        /// &amp;amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;amp;quot;&amp;amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;amp;quot;.
+        /// Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         /// </summary>
         public InputList<string> GlobalPrivileges
         {
@@ -150,13 +150,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("tablePrivileges")]
         public Input<Inputs.AccountPrivilegesTablePrivilegesArgs>? TablePrivileges { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("viewPrivileges")]
         public Input<Inputs.AccountPrivilegesViewPrivilegesArgs>? ViewPrivileges { get; set; }
@@ -175,13 +175,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<Inputs.AccountPrivilegesAccountGetArgs>? Account { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("columnPrivileges")]
         public Input<Inputs.AccountPrivilegesColumnPrivilegesGetArgs>? ColumnPrivileges { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;amp;quot;&amp;amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("databasePrivileges")]
         public Input<Inputs.AccountPrivilegesDatabasePrivilegesGetArgs>? DatabasePrivileges { get; set; }
@@ -190,7 +190,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<string>? _globalPrivileges;
 
         /// <summary>
-        /// &amp;amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;amp;quot;&amp;amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;amp;quot;.
+        /// Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         /// </summary>
         public InputList<string> GlobalPrivileges
         {
@@ -205,13 +205,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("tablePrivileges")]
         public Input<Inputs.AccountPrivilegesTablePrivilegesGetArgs>? TablePrivileges { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;amp;quot;&amp;amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;amp;quot;&amp;amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;amp;quot;.
+        /// Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         /// </summary>
         [Input("viewPrivileges")]
         public Input<Inputs.AccountPrivilegesViewPrivilegesGetArgs>? ViewPrivileges { get; set; }

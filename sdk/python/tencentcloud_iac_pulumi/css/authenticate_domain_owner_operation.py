@@ -101,8 +101,7 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
         Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
 
         ## Example Usage
-
-        dnsCheck way:
+        ### dnsCheck way:
 
         ```python
         import pulumi
@@ -112,8 +111,7 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
             domain_name="your_domain_name",
             verify_type="dnsCheck")
         ```
-
-        fileCheck way:
+        ### fileCheck way:
 
         ```python
         import pulumi
@@ -139,8 +137,7 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
         Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
 
         ## Example Usage
-
-        dnsCheck way:
+        ### dnsCheck way:
 
         ```python
         import pulumi
@@ -150,8 +147,7 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
             domain_name="your_domain_name",
             verify_type="dnsCheck")
         ```
-
-        fileCheck way:
+        ### fileCheck way:
 
         ```python
         import pulumi

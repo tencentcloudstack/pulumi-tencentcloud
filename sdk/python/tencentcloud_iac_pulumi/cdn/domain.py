@@ -1474,8 +1474,7 @@ class Domain(pulumi.CustomResource):
                 "hello": "world",
             })
         ```
-
-        Example Usage of cdn uses cache and request headers
+        ### Example Usage of cdn uses cache and request headers
 
         ```python
         import pulumi
@@ -1525,8 +1524,7 @@ class Domain(pulumi.CustomResource):
                 "hello": "world",
             })
         ```
-
-        Example Usage of COS bucket url as origin
+        ### Example Usage of COS bucket url as origin
 
         ```python
         import pulumi
@@ -1653,8 +1651,7 @@ class Domain(pulumi.CustomResource):
                 "hello": "world",
             })
         ```
-
-        Example Usage of cdn uses cache and request headers
+        ### Example Usage of cdn uses cache and request headers
 
         ```python
         import pulumi
@@ -1704,8 +1701,7 @@ class Domain(pulumi.CustomResource):
                 "hello": "world",
             })
         ```
-
-        Example Usage of COS bucket url as origin
+        ### Example Usage of COS bucket url as origin
 
         ```python
         import pulumi

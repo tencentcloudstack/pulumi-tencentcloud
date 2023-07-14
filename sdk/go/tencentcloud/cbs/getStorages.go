@@ -36,8 +36,7 @@ import (
 // 	})
 // }
 // ```
-//
-// The following snippet shows the new supported query params
+// ### The following snippet shows the new supported query params
 //
 // ```go
 // package main

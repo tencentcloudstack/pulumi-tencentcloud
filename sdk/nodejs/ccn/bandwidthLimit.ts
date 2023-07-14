@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to limit CCN bandwidth.
  *
  * ## Example Usage
- *
- * Set the upper limit of regional outbound bandwidth
+ * ### Set the upper limit of regional outbound bandwidth
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -27,8 +26,7 @@ import * as utilities from "../utilities";
  *     bandwidthLimit: 500,
  * });
  * ```
- *
- * Set the upper limit between regions
+ * ### Set the upper limit between regions
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

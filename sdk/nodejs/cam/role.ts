@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CAM role.
  *
  * ## Example Usage
- *
- * Create normally
+ * ### Create normally
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -36,8 +35,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Create with SAML provider
+ * ### Create with SAML provider
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

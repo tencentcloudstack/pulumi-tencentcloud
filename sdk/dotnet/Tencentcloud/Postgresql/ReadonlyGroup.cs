@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///     {
     ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
     ///         {
-    ///             MasterDbInstanceId = "postgres-f44wlfdv",
+    ///             MasterDbInstanceId = "postgres-gzg9jb2n",
     ///             MaxReplayLag = 100,
     ///             MaxReplayLatency = 512,
     ///             MinDelayEliminateReserve = 1,

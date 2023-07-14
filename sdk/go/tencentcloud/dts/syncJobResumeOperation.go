@@ -11,6 +11,30 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a dts syncJobResumeOperation
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dts.NewSyncJobResumeOperation(ctx, "syncJobResumeOperation", &Dts.SyncJobResumeOperationArgs{
+// 			JobId: pulumi.String("sync-werwfs23"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type SyncJobResumeOperation struct {
 	pulumi.CustomResourceState
 

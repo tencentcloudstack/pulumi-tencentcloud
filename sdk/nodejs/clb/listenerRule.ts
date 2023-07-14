@@ -117,7 +117,7 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly healthCheckHttpPath!: pulumi.Output<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckIntervalTime!: pulumi.Output<number>;
     /**
@@ -293,7 +293,7 @@ export interface ListenerRuleState {
      */
     healthCheckHttpPath?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**
@@ -391,7 +391,7 @@ export interface ListenerRuleArgs {
      */
     healthCheckHttpPath?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**

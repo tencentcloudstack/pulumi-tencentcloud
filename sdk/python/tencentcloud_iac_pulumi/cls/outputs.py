@@ -10,6 +10,15 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'AlarmAlarmTarget',
+    'AlarmAnalysis',
+    'AlarmAnalysisConfigInfo',
+    'AlarmCallBack',
+    'AlarmMonitorTime',
+    'AlarmNoticeNoticeReceiver',
+    'AlarmNoticeWebCallback',
+    'CkafkaConsumerCkafka',
+    'CkafkaConsumerContent',
     'ConfigExcludePath',
     'ConfigExtraContainerFile',
     'ConfigExtraContainerFileWorkload',
@@ -21,6 +30,10 @@ __all__ = [
     'ConfigExtraHostFile',
     'ConfigExtractRule',
     'ConfigExtractRuleFilterKeyRegex',
+    'ConfigExtractRuleMetaTag',
+    'CosRechargeExtractRuleInfo',
+    'CosRechargeExtractRuleInfoFilterKeyRegex',
+    'CosRechargeExtractRuleInfoMetaTag',
     'CosShipperCompress',
     'CosShipperContent',
     'CosShipperContentCsv',
@@ -35,7 +48,634 @@ __all__ = [
     'IndexRuleTagKeyValue',
     'IndexRuleTagKeyValueValue',
     'MachineGroupMachineGroupType',
+    'GetMachineGroupConfigsConfigResult',
+    'GetMachineGroupConfigsConfigExcludePathResult',
+    'GetMachineGroupConfigsConfigExtractRuleResult',
+    'GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexResult',
+    'GetMachineGroupConfigsConfigExtractRuleMetaTagResult',
+    'GetMachinesMachineResult',
+    'GetShipperTasksTaskResult',
 ]
+
+@pulumi.output_type
+class AlarmAlarmTarget(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "endTimeOffset":
+            suggest = "end_time_offset"
+        elif key == "logsetId":
+            suggest = "logset_id"
+        elif key == "startTimeOffset":
+            suggest = "start_time_offset"
+        elif key == "topicId":
+            suggest = "topic_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AlarmAlarmTarget. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AlarmAlarmTarget.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AlarmAlarmTarget.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 end_time_offset: int,
+                 logset_id: str,
+                 number: int,
+                 query: str,
+                 start_time_offset: int,
+                 topic_id: str):
+        """
+        :param int end_time_offset: search end time of offset.
+        :param str logset_id: logset id.
+        :param int number: the number of alarm object.
+        :param str query: query rules.
+        :param int start_time_offset: search start time of offset.
+        :param str topic_id: topic id.
+        """
+        pulumi.set(__self__, "end_time_offset", end_time_offset)
+        pulumi.set(__self__, "logset_id", logset_id)
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "query", query)
+        pulumi.set(__self__, "start_time_offset", start_time_offset)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> int:
+        """
+        search end time of offset.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @property
+    @pulumi.getter(name="logsetId")
+    def logset_id(self) -> str:
+        """
+        logset id.
+        """
+        return pulumi.get(self, "logset_id")
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        the number of alarm object.
+        """
+        return pulumi.get(self, "number")
+
+    @property
+    @pulumi.getter
+    def query(self) -> str:
+        """
+        query rules.
+        """
+        return pulumi.get(self, "query")
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> int:
+        """
+        search start time of offset.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+
+@pulumi.output_type
+class AlarmAnalysis(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "configInfos":
+            suggest = "config_infos"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AlarmAnalysis. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AlarmAnalysis.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AlarmAnalysis.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 content: str,
+                 name: str,
+                 type: str,
+                 config_infos: Optional[Sequence['outputs.AlarmAnalysisConfigInfo']] = None):
+        """
+        :param str content: analysis content.
+        :param str name: analysis name.
+        :param str type: analysis type.
+        :param Sequence['AlarmAnalysisConfigInfoArgs'] config_infos: configuration.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if config_infos is not None:
+            pulumi.set(__self__, "config_infos", config_infos)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        analysis content.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        analysis name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        analysis type.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="configInfos")
+    def config_infos(self) -> Optional[Sequence['outputs.AlarmAnalysisConfigInfo']]:
+        """
+        configuration.
+        """
+        return pulumi.get(self, "config_infos")
+
+
+@pulumi.output_type
+class AlarmAnalysisConfigInfo(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: key.
+        :param str value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class AlarmCallBack(dict):
+    def __init__(__self__, *,
+                 body: str,
+                 headers: Optional[Sequence[str]] = None):
+        """
+        :param str body: callback body.
+        :param Sequence[str] headers: callback headers.
+        """
+        pulumi.set(__self__, "body", body)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+
+    @property
+    @pulumi.getter
+    def body(self) -> str:
+        """
+        callback body.
+        """
+        return pulumi.get(self, "body")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Sequence[str]]:
+        """
+        callback headers.
+        """
+        return pulumi.get(self, "headers")
+
+
+@pulumi.output_type
+class AlarmMonitorTime(dict):
+    def __init__(__self__, *,
+                 time: int,
+                 type: str):
+        """
+        :param int time: time period or point in time.
+        :param str type: Period for periodic execution, Fixed for regular execution.
+        """
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def time(self) -> int:
+        """
+        time period or point in time.
+        """
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Period for periodic execution, Fixed for regular execution.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class AlarmNoticeNoticeReceiver(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "receiverChannels":
+            suggest = "receiver_channels"
+        elif key == "receiverIds":
+            suggest = "receiver_ids"
+        elif key == "receiverType":
+            suggest = "receiver_type"
+        elif key == "endTime":
+            suggest = "end_time"
+        elif key == "startTime":
+            suggest = "start_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AlarmNoticeNoticeReceiver. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AlarmNoticeNoticeReceiver.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AlarmNoticeNoticeReceiver.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 receiver_channels: Sequence[str],
+                 receiver_ids: Sequence[int],
+                 receiver_type: str,
+                 end_time: Optional[str] = None,
+                 index: Optional[int] = None,
+                 start_time: Optional[str] = None):
+        """
+        :param Sequence[str] receiver_channels: receiver channels, Email,Sms,WeChat or Phone.
+        :param Sequence[int] receiver_ids: receiver id.
+        :param str receiver_type: receiver type, Uin or Group.
+        :param str end_time: end time allowed to receive messages.
+        :param int index: index.
+        :param str start_time: start time allowed to receive messages.
+        """
+        pulumi.set(__self__, "receiver_channels", receiver_channels)
+        pulumi.set(__self__, "receiver_ids", receiver_ids)
+        pulumi.set(__self__, "receiver_type", receiver_type)
+        if end_time is not None:
+            pulumi.set(__self__, "end_time", end_time)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="receiverChannels")
+    def receiver_channels(self) -> Sequence[str]:
+        """
+        receiver channels, Email,Sms,WeChat or Phone.
+        """
+        return pulumi.get(self, "receiver_channels")
+
+    @property
+    @pulumi.getter(name="receiverIds")
+    def receiver_ids(self) -> Sequence[int]:
+        """
+        receiver id.
+        """
+        return pulumi.get(self, "receiver_ids")
+
+    @property
+    @pulumi.getter(name="receiverType")
+    def receiver_type(self) -> str:
+        """
+        receiver type, Uin or Group.
+        """
+        return pulumi.get(self, "receiver_type")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> Optional[str]:
+        """
+        end time allowed to receive messages.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[int]:
+        """
+        index.
+        """
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[str]:
+        """
+        start time allowed to receive messages.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class AlarmNoticeWebCallback(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "callbackType":
+            suggest = "callback_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AlarmNoticeWebCallback. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AlarmNoticeWebCallback.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AlarmNoticeWebCallback.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 callback_type: str,
+                 url: str,
+                 body: Optional[str] = None,
+                 headers: Optional[Sequence[str]] = None,
+                 index: Optional[int] = None,
+                 method: Optional[str] = None):
+        """
+        :param str callback_type: callback type, WeCom or Http.
+        :param str url: callback url.
+        :param str body: abandoned.
+        :param Sequence[str] headers: abandoned.
+        :param int index: index.
+        :param str method: Method, POST or PUT.
+        """
+        pulumi.set(__self__, "callback_type", callback_type)
+        pulumi.set(__self__, "url", url)
+        if body is not None:
+            pulumi.set(__self__, "body", body)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if method is not None:
+            pulumi.set(__self__, "method", method)
+
+    @property
+    @pulumi.getter(name="callbackType")
+    def callback_type(self) -> str:
+        """
+        callback type, WeCom or Http.
+        """
+        return pulumi.get(self, "callback_type")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        callback url.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter
+    def body(self) -> Optional[str]:
+        """
+        abandoned.
+        """
+        return pulumi.get(self, "body")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Sequence[str]]:
+        """
+        abandoned.
+        """
+        return pulumi.get(self, "headers")
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[int]:
+        """
+        index.
+        """
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter
+    def method(self) -> Optional[str]:
+        """
+        Method, POST or PUT.
+        """
+        return pulumi.get(self, "method")
+
+
+@pulumi.output_type
+class CkafkaConsumerCkafka(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceName":
+            suggest = "instance_name"
+        elif key == "topicId":
+            suggest = "topic_id"
+        elif key == "topicName":
+            suggest = "topic_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CkafkaConsumerCkafka. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CkafkaConsumerCkafka.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CkafkaConsumerCkafka.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_name: str,
+                 topic_id: str,
+                 topic_name: str,
+                 vip: str,
+                 vport: str):
+        """
+        :param str instance_id: instance id.
+        :param str instance_name: instance name.
+        :param str topic_id: topic id of ckafka.
+        :param str topic_name: topic name of ckafka.
+        :param str vip: vip.
+        :param str vport: vport.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "topic_id", topic_id)
+        pulumi.set(__self__, "topic_name", topic_name)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        topic id of ckafka.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> str:
+        """
+        topic name of ckafka.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> str:
+        """
+        vport.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class CkafkaConsumerContent(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "enableTag":
+            suggest = "enable_tag"
+        elif key == "metaFields":
+            suggest = "meta_fields"
+        elif key == "tagJsonNotTiled":
+            suggest = "tag_json_not_tiled"
+        elif key == "timestampAccuracy":
+            suggest = "timestamp_accuracy"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CkafkaConsumerContent. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CkafkaConsumerContent.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CkafkaConsumerContent.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enable_tag: bool,
+                 meta_fields: Sequence[str],
+                 tag_json_not_tiled: Optional[bool] = None,
+                 timestamp_accuracy: Optional[int] = None):
+        """
+        :param bool enable_tag: whether to deliver the TAG info.
+        :param Sequence[str] meta_fields: metadata info list.
+        :param bool tag_json_not_tiled: whether to tiling tag json.
+        :param int timestamp_accuracy: delivery timestamp precision,1 for second, 2 for millisecond.
+        """
+        pulumi.set(__self__, "enable_tag", enable_tag)
+        pulumi.set(__self__, "meta_fields", meta_fields)
+        if tag_json_not_tiled is not None:
+            pulumi.set(__self__, "tag_json_not_tiled", tag_json_not_tiled)
+        if timestamp_accuracy is not None:
+            pulumi.set(__self__, "timestamp_accuracy", timestamp_accuracy)
+
+    @property
+    @pulumi.getter(name="enableTag")
+    def enable_tag(self) -> bool:
+        """
+        whether to deliver the TAG info.
+        """
+        return pulumi.get(self, "enable_tag")
+
+    @property
+    @pulumi.getter(name="metaFields")
+    def meta_fields(self) -> Sequence[str]:
+        """
+        metadata info list.
+        """
+        return pulumi.get(self, "meta_fields")
+
+    @property
+    @pulumi.getter(name="tagJsonNotTiled")
+    def tag_json_not_tiled(self) -> Optional[bool]:
+        """
+        whether to tiling tag json.
+        """
+        return pulumi.get(self, "tag_json_not_tiled")
+
+    @property
+    @pulumi.getter(name="timestampAccuracy")
+    def timestamp_accuracy(self) -> Optional[int]:
+        """
+        delivery timestamp precision,1 for second, 2 for millisecond.
+        """
+        return pulumi.get(self, "timestamp_accuracy")
+
 
 @pulumi.output_type
 class ConfigExcludePath(dict):
@@ -688,8 +1328,20 @@ class ConfigExtractRule(dict):
             suggest = "begin_regex"
         elif key == "filterKeyRegexes":
             suggest = "filter_key_regexes"
+        elif key == "isGbk":
+            suggest = "is_gbk"
+        elif key == "jsonStandard":
+            suggest = "json_standard"
         elif key == "logRegex":
             suggest = "log_regex"
+        elif key == "metaTags":
+            suggest = "meta_tags"
+        elif key == "metadataType":
+            suggest = "metadata_type"
+        elif key == "parseProtocol":
+            suggest = "parse_protocol"
+        elif key == "pathRegex":
+            suggest = "path_regex"
         elif key == "timeFormat":
             suggest = "time_format"
         elif key == "timeKey":
@@ -711,28 +1363,46 @@ class ConfigExtractRule(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 address: Optional[str] = None,
                  backtracking: Optional[int] = None,
                  begin_regex: Optional[str] = None,
                  delimiter: Optional[str] = None,
                  filter_key_regexes: Optional[Sequence['outputs.ConfigExtractRuleFilterKeyRegex']] = None,
+                 is_gbk: Optional[int] = None,
+                 json_standard: Optional[int] = None,
                  keys: Optional[Sequence[str]] = None,
                  log_regex: Optional[str] = None,
+                 meta_tags: Optional[Sequence['outputs.ConfigExtractRuleMetaTag']] = None,
+                 metadata_type: Optional[int] = None,
+                 parse_protocol: Optional[str] = None,
+                 path_regex: Optional[str] = None,
+                 protocol: Optional[str] = None,
                  time_format: Optional[str] = None,
                  time_key: Optional[str] = None,
                  un_match_log_key: Optional[str] = None,
                  un_match_up_load_switch: Optional[bool] = None):
         """
+        :param str address: syslog system log collection specifies the address and port that the collector listens to.
         :param int backtracking: Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
         :param str begin_regex: First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
         :param str delimiter: Delimiter for delimited log, which is valid only if log_type is delimiter_log.
         :param Sequence['ConfigExtractRuleFilterKeyRegexArgs'] filter_key_regexes: Log keys to be filtered and the corresponding regex.
+        :param int is_gbk: GBK encoding. Default 0.
+        :param int json_standard: standard json. Default 0.
         :param Sequence[str] keys: Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
         :param str log_regex: Full log matching rule, which is valid only if log_type is fullregex_log.
+        :param Sequence['ConfigExtractRuleMetaTagArgs'] meta_tags: metadata tags.
+        :param int metadata_type: metadata type.
+        :param str parse_protocol: parse protocol.
+        :param str path_regex: metadata path regex.
+        :param str protocol: syslog protocol, tcp or udp.
         :param str time_format: Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
         :param str time_key: Time field key name. time_key and time_format must appear in pair.
         :param str un_match_log_key: Unmatched log key.
         :param bool un_match_up_load_switch: Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
         """
+        if address is not None:
+            pulumi.set(__self__, "address", address)
         if backtracking is not None:
             pulumi.set(__self__, "backtracking", backtracking)
         if begin_regex is not None:
@@ -741,10 +1411,24 @@ class ConfigExtractRule(dict):
             pulumi.set(__self__, "delimiter", delimiter)
         if filter_key_regexes is not None:
             pulumi.set(__self__, "filter_key_regexes", filter_key_regexes)
+        if is_gbk is not None:
+            pulumi.set(__self__, "is_gbk", is_gbk)
+        if json_standard is not None:
+            pulumi.set(__self__, "json_standard", json_standard)
         if keys is not None:
             pulumi.set(__self__, "keys", keys)
         if log_regex is not None:
             pulumi.set(__self__, "log_regex", log_regex)
+        if meta_tags is not None:
+            pulumi.set(__self__, "meta_tags", meta_tags)
+        if metadata_type is not None:
+            pulumi.set(__self__, "metadata_type", metadata_type)
+        if parse_protocol is not None:
+            pulumi.set(__self__, "parse_protocol", parse_protocol)
+        if path_regex is not None:
+            pulumi.set(__self__, "path_regex", path_regex)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
         if time_format is not None:
             pulumi.set(__self__, "time_format", time_format)
         if time_key is not None:
@@ -753,6 +1437,14 @@ class ConfigExtractRule(dict):
             pulumi.set(__self__, "un_match_log_key", un_match_log_key)
         if un_match_up_load_switch is not None:
             pulumi.set(__self__, "un_match_up_load_switch", un_match_up_load_switch)
+
+    @property
+    @pulumi.getter
+    def address(self) -> Optional[str]:
+        """
+        syslog system log collection specifies the address and port that the collector listens to.
+        """
+        return pulumi.get(self, "address")
 
     @property
     @pulumi.getter
@@ -787,6 +1479,22 @@ class ConfigExtractRule(dict):
         return pulumi.get(self, "filter_key_regexes")
 
     @property
+    @pulumi.getter(name="isGbk")
+    def is_gbk(self) -> Optional[int]:
+        """
+        GBK encoding. Default 0.
+        """
+        return pulumi.get(self, "is_gbk")
+
+    @property
+    @pulumi.getter(name="jsonStandard")
+    def json_standard(self) -> Optional[int]:
+        """
+        standard json. Default 0.
+        """
+        return pulumi.get(self, "json_standard")
+
+    @property
     @pulumi.getter
     def keys(self) -> Optional[Sequence[str]]:
         """
@@ -801,6 +1509,46 @@ class ConfigExtractRule(dict):
         Full log matching rule, which is valid only if log_type is fullregex_log.
         """
         return pulumi.get(self, "log_regex")
+
+    @property
+    @pulumi.getter(name="metaTags")
+    def meta_tags(self) -> Optional[Sequence['outputs.ConfigExtractRuleMetaTag']]:
+        """
+        metadata tags.
+        """
+        return pulumi.get(self, "meta_tags")
+
+    @property
+    @pulumi.getter(name="metadataType")
+    def metadata_type(self) -> Optional[int]:
+        """
+        metadata type.
+        """
+        return pulumi.get(self, "metadata_type")
+
+    @property
+    @pulumi.getter(name="parseProtocol")
+    def parse_protocol(self) -> Optional[str]:
+        """
+        parse protocol.
+        """
+        return pulumi.get(self, "parse_protocol")
+
+    @property
+    @pulumi.getter(name="pathRegex")
+    def path_regex(self) -> Optional[str]:
+        """
+        metadata path regex.
+        """
+        return pulumi.get(self, "path_regex")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        syslog protocol, tcp or udp.
+        """
+        return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="timeFormat")
@@ -864,6 +1612,361 @@ class ConfigExtractRuleFilterKeyRegex(dict):
         Filter rule regex corresponding to key.
         """
         return pulumi.get(self, "regex")
+
+
+@pulumi.output_type
+class ConfigExtractRuleMetaTag(dict):
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: tag key.
+        :param str value: tag value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class CosRechargeExtractRuleInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "beginRegex":
+            suggest = "begin_regex"
+        elif key == "filterKeyRegexes":
+            suggest = "filter_key_regexes"
+        elif key == "isGbk":
+            suggest = "is_gbk"
+        elif key == "jsonStandard":
+            suggest = "json_standard"
+        elif key == "logRegex":
+            suggest = "log_regex"
+        elif key == "metaTags":
+            suggest = "meta_tags"
+        elif key == "metadataType":
+            suggest = "metadata_type"
+        elif key == "parseProtocol":
+            suggest = "parse_protocol"
+        elif key == "pathRegex":
+            suggest = "path_regex"
+        elif key == "timeFormat":
+            suggest = "time_format"
+        elif key == "timeKey":
+            suggest = "time_key"
+        elif key == "unMatchLogKey":
+            suggest = "un_match_log_key"
+        elif key == "unMatchUpLoadSwitch":
+            suggest = "un_match_up_load_switch"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CosRechargeExtractRuleInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CosRechargeExtractRuleInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CosRechargeExtractRuleInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 address: Optional[str] = None,
+                 backtracking: Optional[int] = None,
+                 begin_regex: Optional[str] = None,
+                 delimiter: Optional[str] = None,
+                 filter_key_regexes: Optional[Sequence['outputs.CosRechargeExtractRuleInfoFilterKeyRegex']] = None,
+                 is_gbk: Optional[int] = None,
+                 json_standard: Optional[int] = None,
+                 keys: Optional[Sequence[str]] = None,
+                 log_regex: Optional[str] = None,
+                 meta_tags: Optional[Sequence['outputs.CosRechargeExtractRuleInfoMetaTag']] = None,
+                 metadata_type: Optional[int] = None,
+                 parse_protocol: Optional[str] = None,
+                 path_regex: Optional[str] = None,
+                 protocol: Optional[str] = None,
+                 time_format: Optional[str] = None,
+                 time_key: Optional[str] = None,
+                 un_match_log_key: Optional[str] = None,
+                 un_match_up_load_switch: Optional[bool] = None):
+        """
+        :param str address: syslog address.
+        :param int backtracking: backtracking data volume in incremental acquisition mode.
+        :param str begin_regex: begin line regex.
+        :param str delimiter: log delimiter.
+        :param Sequence['CosRechargeExtractRuleInfoFilterKeyRegexArgs'] filter_key_regexes: rules that need to filter logs.
+        :param int is_gbk: gbk encoding.
+        :param int json_standard: is standard json.
+        :param Sequence[str] keys: key list.
+        :param str log_regex: log regex.
+        :param Sequence['CosRechargeExtractRuleInfoMetaTagArgs'] meta_tags: metadata tag list.
+        :param int metadata_type: metadata type.
+        :param str parse_protocol: parse protocol.
+        :param str path_regex: metadata path regex.
+        :param str protocol: syslog protocol.
+        :param str time_format: time format.
+        :param str time_key: time key.
+        :param str un_match_log_key: parsing failure log key.
+        :param bool un_match_up_load_switch: whether to upload the parsing failure log.
+        """
+        if address is not None:
+            pulumi.set(__self__, "address", address)
+        if backtracking is not None:
+            pulumi.set(__self__, "backtracking", backtracking)
+        if begin_regex is not None:
+            pulumi.set(__self__, "begin_regex", begin_regex)
+        if delimiter is not None:
+            pulumi.set(__self__, "delimiter", delimiter)
+        if filter_key_regexes is not None:
+            pulumi.set(__self__, "filter_key_regexes", filter_key_regexes)
+        if is_gbk is not None:
+            pulumi.set(__self__, "is_gbk", is_gbk)
+        if json_standard is not None:
+            pulumi.set(__self__, "json_standard", json_standard)
+        if keys is not None:
+            pulumi.set(__self__, "keys", keys)
+        if log_regex is not None:
+            pulumi.set(__self__, "log_regex", log_regex)
+        if meta_tags is not None:
+            pulumi.set(__self__, "meta_tags", meta_tags)
+        if metadata_type is not None:
+            pulumi.set(__self__, "metadata_type", metadata_type)
+        if parse_protocol is not None:
+            pulumi.set(__self__, "parse_protocol", parse_protocol)
+        if path_regex is not None:
+            pulumi.set(__self__, "path_regex", path_regex)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+        if time_key is not None:
+            pulumi.set(__self__, "time_key", time_key)
+        if un_match_log_key is not None:
+            pulumi.set(__self__, "un_match_log_key", un_match_log_key)
+        if un_match_up_load_switch is not None:
+            pulumi.set(__self__, "un_match_up_load_switch", un_match_up_load_switch)
+
+    @property
+    @pulumi.getter
+    def address(self) -> Optional[str]:
+        """
+        syslog address.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter
+    def backtracking(self) -> Optional[int]:
+        """
+        backtracking data volume in incremental acquisition mode.
+        """
+        return pulumi.get(self, "backtracking")
+
+    @property
+    @pulumi.getter(name="beginRegex")
+    def begin_regex(self) -> Optional[str]:
+        """
+        begin line regex.
+        """
+        return pulumi.get(self, "begin_regex")
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> Optional[str]:
+        """
+        log delimiter.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @property
+    @pulumi.getter(name="filterKeyRegexes")
+    def filter_key_regexes(self) -> Optional[Sequence['outputs.CosRechargeExtractRuleInfoFilterKeyRegex']]:
+        """
+        rules that need to filter logs.
+        """
+        return pulumi.get(self, "filter_key_regexes")
+
+    @property
+    @pulumi.getter(name="isGbk")
+    def is_gbk(self) -> Optional[int]:
+        """
+        gbk encoding.
+        """
+        return pulumi.get(self, "is_gbk")
+
+    @property
+    @pulumi.getter(name="jsonStandard")
+    def json_standard(self) -> Optional[int]:
+        """
+        is standard json.
+        """
+        return pulumi.get(self, "json_standard")
+
+    @property
+    @pulumi.getter
+    def keys(self) -> Optional[Sequence[str]]:
+        """
+        key list.
+        """
+        return pulumi.get(self, "keys")
+
+    @property
+    @pulumi.getter(name="logRegex")
+    def log_regex(self) -> Optional[str]:
+        """
+        log regex.
+        """
+        return pulumi.get(self, "log_regex")
+
+    @property
+    @pulumi.getter(name="metaTags")
+    def meta_tags(self) -> Optional[Sequence['outputs.CosRechargeExtractRuleInfoMetaTag']]:
+        """
+        metadata tag list.
+        """
+        return pulumi.get(self, "meta_tags")
+
+    @property
+    @pulumi.getter(name="metadataType")
+    def metadata_type(self) -> Optional[int]:
+        """
+        metadata type.
+        """
+        return pulumi.get(self, "metadata_type")
+
+    @property
+    @pulumi.getter(name="parseProtocol")
+    def parse_protocol(self) -> Optional[str]:
+        """
+        parse protocol.
+        """
+        return pulumi.get(self, "parse_protocol")
+
+    @property
+    @pulumi.getter(name="pathRegex")
+    def path_regex(self) -> Optional[str]:
+        """
+        metadata path regex.
+        """
+        return pulumi.get(self, "path_regex")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        syslog protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[str]:
+        """
+        time format.
+        """
+        return pulumi.get(self, "time_format")
+
+    @property
+    @pulumi.getter(name="timeKey")
+    def time_key(self) -> Optional[str]:
+        """
+        time key.
+        """
+        return pulumi.get(self, "time_key")
+
+    @property
+    @pulumi.getter(name="unMatchLogKey")
+    def un_match_log_key(self) -> Optional[str]:
+        """
+        parsing failure log key.
+        """
+        return pulumi.get(self, "un_match_log_key")
+
+    @property
+    @pulumi.getter(name="unMatchUpLoadSwitch")
+    def un_match_up_load_switch(self) -> Optional[bool]:
+        """
+        whether to upload the parsing failure log.
+        """
+        return pulumi.get(self, "un_match_up_load_switch")
+
+
+@pulumi.output_type
+class CosRechargeExtractRuleInfoFilterKeyRegex(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 regex: str):
+        """
+        :param str key: need filter log key.
+        :param str regex: need filter log regex.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        need filter log key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def regex(self) -> str:
+        """
+        need filter log regex.
+        """
+        return pulumi.get(self, "regex")
+
+
+@pulumi.output_type
+class CosRechargeExtractRuleInfoMetaTag(dict):
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: metadata key.
+        :param str value: metadata value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        metadata key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        metadata value.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -1551,5 +2654,626 @@ class MachineGroupMachineGroupType(dict):
         Machine description list.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetMachineGroupConfigsConfigResult(dict):
+    def __init__(__self__, *,
+                 config_id: str,
+                 create_time: str,
+                 exclude_paths: Sequence['outputs.GetMachineGroupConfigsConfigExcludePathResult'],
+                 extract_rules: Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleResult'],
+                 log_format: str,
+                 log_type: str,
+                 name: str,
+                 output: str,
+                 path: str,
+                 update_time: str,
+                 user_define_rule: str):
+        """
+        :param str config_id: scrape config id.
+        :param str create_time: create time.
+        :param Sequence['GetMachineGroupConfigsConfigExcludePathArgs'] exclude_paths: Collection path blocklist.
+        :param Sequence['GetMachineGroupConfigsConfigExtractRuleArgs'] extract_rules: Extraction rule. If ExtractRule is set, LogType must be set.
+        :param str log_format: style of log format.
+        :param str log_type: log type.
+        :param str name: scrape config name.
+        :param str output: topicid.
+        :param str path: scrape log path.
+        :param str update_time: update time.
+        :param str user_define_rule: user define rule.
+        """
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "exclude_paths", exclude_paths)
+        pulumi.set(__self__, "extract_rules", extract_rules)
+        pulumi.set(__self__, "log_format", log_format)
+        pulumi.set(__self__, "log_type", log_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "output", output)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "user_define_rule", user_define_rule)
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        scrape config id.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="excludePaths")
+    def exclude_paths(self) -> Sequence['outputs.GetMachineGroupConfigsConfigExcludePathResult']:
+        """
+        Collection path blocklist.
+        """
+        return pulumi.get(self, "exclude_paths")
+
+    @property
+    @pulumi.getter(name="extractRules")
+    def extract_rules(self) -> Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleResult']:
+        """
+        Extraction rule. If ExtractRule is set, LogType must be set.
+        """
+        return pulumi.get(self, "extract_rules")
+
+    @property
+    @pulumi.getter(name="logFormat")
+    def log_format(self) -> str:
+        """
+        style of log format.
+        """
+        return pulumi.get(self, "log_format")
+
+    @property
+    @pulumi.getter(name="logType")
+    def log_type(self) -> str:
+        """
+        log type.
+        """
+        return pulumi.get(self, "log_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        scrape config name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def output(self) -> str:
+        """
+        topicid.
+        """
+        return pulumi.get(self, "output")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        scrape log path.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="userDefineRule")
+    def user_define_rule(self) -> str:
+        """
+        user define rule.
+        """
+        return pulumi.get(self, "user_define_rule")
+
+
+@pulumi.output_type
+class GetMachineGroupConfigsConfigExcludePathResult(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 value: str):
+        """
+        :param str type: Type. Valid values: File, Path.
+        :param str value: tag value.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type. Valid values: File, Path.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetMachineGroupConfigsConfigExtractRuleResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 backtracking: int,
+                 begin_regex: str,
+                 delimiter: str,
+                 filter_key_regexes: Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexResult'],
+                 is_gbk: int,
+                 json_standard: int,
+                 keys: Sequence[str],
+                 log_regex: str,
+                 meta_tags: Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleMetaTagResult'],
+                 metadata_type: int,
+                 parse_protocol: str,
+                 path_regex: str,
+                 protocol: str,
+                 time_format: str,
+                 time_key: str,
+                 un_match_log_key: str,
+                 un_match_up_load_switch: bool):
+        """
+        :param str address: syslog system log collection specifies the address and port that the collector listens to.
+        :param int backtracking: Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        :param str begin_regex: First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        :param str delimiter: Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        :param Sequence['GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArgs'] filter_key_regexes: Log keys to be filtered and the corresponding regex.
+        :param int is_gbk: GBK encoding. Default 0.
+        :param int json_standard: standard json. Default 0.
+        :param Sequence[str] keys: Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        :param str log_regex: Full log matching rule, which is valid only if log_type is fullregex_log.
+        :param Sequence['GetMachineGroupConfigsConfigExtractRuleMetaTagArgs'] meta_tags: metadata tags.
+        :param int metadata_type: metadata type.
+        :param str parse_protocol: parse protocol.
+        :param str path_regex: metadata path regex.
+        :param str protocol: syslog protocol, tcp or udp.
+        :param str time_format: Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        :param str time_key: Time field key name. time_key and time_format must appear in pair.
+        :param str un_match_log_key: Unmatched log key.
+        :param bool un_match_up_load_switch: Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "backtracking", backtracking)
+        pulumi.set(__self__, "begin_regex", begin_regex)
+        pulumi.set(__self__, "delimiter", delimiter)
+        pulumi.set(__self__, "filter_key_regexes", filter_key_regexes)
+        pulumi.set(__self__, "is_gbk", is_gbk)
+        pulumi.set(__self__, "json_standard", json_standard)
+        pulumi.set(__self__, "keys", keys)
+        pulumi.set(__self__, "log_regex", log_regex)
+        pulumi.set(__self__, "meta_tags", meta_tags)
+        pulumi.set(__self__, "metadata_type", metadata_type)
+        pulumi.set(__self__, "parse_protocol", parse_protocol)
+        pulumi.set(__self__, "path_regex", path_regex)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "time_format", time_format)
+        pulumi.set(__self__, "time_key", time_key)
+        pulumi.set(__self__, "un_match_log_key", un_match_log_key)
+        pulumi.set(__self__, "un_match_up_load_switch", un_match_up_load_switch)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        syslog system log collection specifies the address and port that the collector listens to.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter
+    def backtracking(self) -> int:
+        """
+        Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        """
+        return pulumi.get(self, "backtracking")
+
+    @property
+    @pulumi.getter(name="beginRegex")
+    def begin_regex(self) -> str:
+        """
+        First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        """
+        return pulumi.get(self, "begin_regex")
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> str:
+        """
+        Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @property
+    @pulumi.getter(name="filterKeyRegexes")
+    def filter_key_regexes(self) -> Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexResult']:
+        """
+        Log keys to be filtered and the corresponding regex.
+        """
+        return pulumi.get(self, "filter_key_regexes")
+
+    @property
+    @pulumi.getter(name="isGbk")
+    def is_gbk(self) -> int:
+        """
+        GBK encoding. Default 0.
+        """
+        return pulumi.get(self, "is_gbk")
+
+    @property
+    @pulumi.getter(name="jsonStandard")
+    def json_standard(self) -> int:
+        """
+        standard json. Default 0.
+        """
+        return pulumi.get(self, "json_standard")
+
+    @property
+    @pulumi.getter
+    def keys(self) -> Sequence[str]:
+        """
+        Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        """
+        return pulumi.get(self, "keys")
+
+    @property
+    @pulumi.getter(name="logRegex")
+    def log_regex(self) -> str:
+        """
+        Full log matching rule, which is valid only if log_type is fullregex_log.
+        """
+        return pulumi.get(self, "log_regex")
+
+    @property
+    @pulumi.getter(name="metaTags")
+    def meta_tags(self) -> Sequence['outputs.GetMachineGroupConfigsConfigExtractRuleMetaTagResult']:
+        """
+        metadata tags.
+        """
+        return pulumi.get(self, "meta_tags")
+
+    @property
+    @pulumi.getter(name="metadataType")
+    def metadata_type(self) -> int:
+        """
+        metadata type.
+        """
+        return pulumi.get(self, "metadata_type")
+
+    @property
+    @pulumi.getter(name="parseProtocol")
+    def parse_protocol(self) -> str:
+        """
+        parse protocol.
+        """
+        return pulumi.get(self, "parse_protocol")
+
+    @property
+    @pulumi.getter(name="pathRegex")
+    def path_regex(self) -> str:
+        """
+        metadata path regex.
+        """
+        return pulumi.get(self, "path_regex")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        syslog protocol, tcp or udp.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> str:
+        """
+        Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        """
+        return pulumi.get(self, "time_format")
+
+    @property
+    @pulumi.getter(name="timeKey")
+    def time_key(self) -> str:
+        """
+        Time field key name. time_key and time_format must appear in pair.
+        """
+        return pulumi.get(self, "time_key")
+
+    @property
+    @pulumi.getter(name="unMatchLogKey")
+    def un_match_log_key(self) -> str:
+        """
+        Unmatched log key.
+        """
+        return pulumi.get(self, "un_match_log_key")
+
+    @property
+    @pulumi.getter(name="unMatchUpLoadSwitch")
+    def un_match_up_load_switch(self) -> bool:
+        """
+        Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
+        return pulumi.get(self, "un_match_up_load_switch")
+
+
+@pulumi.output_type
+class GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 regex: str):
+        """
+        :param str key: tag key.
+        :param str regex: Filter rule regex corresponding to key.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def regex(self) -> str:
+        """
+        Filter rule regex corresponding to key.
+        """
+        return pulumi.get(self, "regex")
+
+
+@pulumi.output_type
+class GetMachineGroupConfigsConfigExtractRuleMetaTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: tag key.
+        :param str value: tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetMachinesMachineResult(dict):
+    def __init__(__self__, *,
+                 auto_update: int,
+                 err_code: int,
+                 err_msg: str,
+                 ip: str,
+                 offline_time: str,
+                 status: int,
+                 update_status: int,
+                 version: str):
+        """
+        :param int auto_update: if open auto update flag.
+        :param int err_code: code of update operation.
+        :param str err_msg: msg of update operation.
+        :param str ip: ip of machine.
+        :param str offline_time: offline time of machine.
+        :param int status: status of machine.
+        :param int update_status: machine update status.
+        :param str version: current machine version.
+        """
+        pulumi.set(__self__, "auto_update", auto_update)
+        pulumi.set(__self__, "err_code", err_code)
+        pulumi.set(__self__, "err_msg", err_msg)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "offline_time", offline_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "update_status", update_status)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="autoUpdate")
+    def auto_update(self) -> int:
+        """
+        if open auto update flag.
+        """
+        return pulumi.get(self, "auto_update")
+
+    @property
+    @pulumi.getter(name="errCode")
+    def err_code(self) -> int:
+        """
+        code of update operation.
+        """
+        return pulumi.get(self, "err_code")
+
+    @property
+    @pulumi.getter(name="errMsg")
+    def err_msg(self) -> str:
+        """
+        msg of update operation.
+        """
+        return pulumi.get(self, "err_msg")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        ip of machine.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="offlineTime")
+    def offline_time(self) -> str:
+        """
+        offline time of machine.
+        """
+        return pulumi.get(self, "offline_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        status of machine.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updateStatus")
+    def update_status(self) -> int:
+        """
+        machine update status.
+        """
+        return pulumi.get(self, "update_status")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        current machine version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetShipperTasksTaskResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 message: str,
+                 range_end: int,
+                 range_start: int,
+                 shipper_id: str,
+                 start_time: int,
+                 status: str,
+                 task_id: str,
+                 topic_id: str):
+        """
+        :param int end_time: end time(ms).
+        :param str message: detail info.
+        :param int range_end: end time of current task (ms).
+        :param int range_start: start time of current task (ms).
+        :param str shipper_id: shipper id.
+        :param int start_time: start time(ms).
+        :param str status: status of current shipper task.
+        :param str task_id: task id.
+        :param str topic_id: topic id.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "range_end", range_end)
+        pulumi.set(__self__, "range_start", range_start)
+        pulumi.set(__self__, "shipper_id", shipper_id)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        end time(ms).
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        detail info.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter(name="rangeEnd")
+    def range_end(self) -> int:
+        """
+        end time of current task (ms).
+        """
+        return pulumi.get(self, "range_end")
+
+    @property
+    @pulumi.getter(name="rangeStart")
+    def range_start(self) -> int:
+        """
+        start time of current task (ms).
+        """
+        return pulumi.get(self, "range_start")
+
+    @property
+    @pulumi.getter(name="shipperId")
+    def shipper_id(self) -> str:
+        """
+        shipper id.
+        """
+        return pulumi.get(self, "shipper_id")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        start time(ms).
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        status of current shipper task.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> str:
+        """
+        task id.
+        """
+        return pulumi.get(self, "task_id")
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        topic id.
+        """
+        return pulumi.get(self, "topic_id")
 
 

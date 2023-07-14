@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// Provides a resource to create a CCN instance.
     /// 
     /// ## Example Usage
-    /// 
-    /// Create a prepaid CCN
+    /// ### Create a prepaid CCN
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -36,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// }
     /// ```
-    /// 
-    /// Create a post-paid regional export speed limit type CCN
+    /// ### Create a post-paid regional export speed limit type CCN
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -58,8 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// }
     /// ```
-    /// 
-    /// Create a post-paid inter-regional rate limit type CNN
+    /// ### Create a post-paid inter-regional rate limit type CNN
     /// 
     /// ```csharp
     /// using Pulumi;

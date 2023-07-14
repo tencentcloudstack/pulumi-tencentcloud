@@ -76,9 +76,25 @@ export class HourdbInstance extends pulumi.CustomResource {
      */
     public readonly dbVersionId!: pulumi.Output<string | undefined>;
     /**
+     * DCN source instance ID.
+     */
+    public readonly dcnInstanceId!: pulumi.Output<string | undefined>;
+    /**
+     * DCN source region.
+     */
+    public readonly dcnRegion!: pulumi.Output<string | undefined>;
+    /**
+     * Whether to open the extranet access.
+     */
+    public readonly extranetAccess!: pulumi.Output<boolean | undefined>;
+    /**
      * name of this instance.
      */
     public readonly instanceName!: pulumi.Output<string | undefined>;
+    /**
+     * Whether to support IPv6.
+     */
+    public readonly ipv6Flag!: pulumi.Output<number | undefined>;
     /**
      * project id.
      */
@@ -108,13 +124,25 @@ export class HourdbInstance extends pulumi.CustomResource {
      */
     public readonly shardStorage!: pulumi.Output<number>;
     /**
-     * subnet id, it&amp;#39;s required when vpcId is set.
+     * subnet id, its required when vpcId is set.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
+    /**
+     * The field is required to specify VIP.
+     */
+    public readonly vip!: pulumi.Output<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    public readonly vipv6!: pulumi.Output<string>;
     /**
      * vpc id.
      */
     public readonly vpcId!: pulumi.Output<string | undefined>;
+    /**
+     * Intranet port.
+     */
+    public /*out*/ readonly vport!: pulumi.Output<number>;
     /**
      * available zone.
      */
@@ -134,7 +162,11 @@ export class HourdbInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as HourdbInstanceState | undefined;
             resourceInputs["dbVersionId"] = state ? state.dbVersionId : undefined;
+            resourceInputs["dcnInstanceId"] = state ? state.dcnInstanceId : undefined;
+            resourceInputs["dcnRegion"] = state ? state.dcnRegion : undefined;
+            resourceInputs["extranetAccess"] = state ? state.extranetAccess : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
+            resourceInputs["ipv6Flag"] = state ? state.ipv6Flag : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["resourceTags"] = state ? state.resourceTags : undefined;
             resourceInputs["securityGroupId"] = state ? state.securityGroupId : undefined;
@@ -143,7 +175,10 @@ export class HourdbInstance extends pulumi.CustomResource {
             resourceInputs["shardNodeCount"] = state ? state.shardNodeCount : undefined;
             resourceInputs["shardStorage"] = state ? state.shardStorage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
+            resourceInputs["vip"] = state ? state.vip : undefined;
+            resourceInputs["vipv6"] = state ? state.vipv6 : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["vport"] = state ? state.vport : undefined;
             resourceInputs["zones"] = state ? state.zones : undefined;
         } else {
             const args = argsOrState as HourdbInstanceArgs | undefined;
@@ -160,7 +195,11 @@ export class HourdbInstance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'shardStorage'");
             }
             resourceInputs["dbVersionId"] = args ? args.dbVersionId : undefined;
+            resourceInputs["dcnInstanceId"] = args ? args.dcnInstanceId : undefined;
+            resourceInputs["dcnRegion"] = args ? args.dcnRegion : undefined;
+            resourceInputs["extranetAccess"] = args ? args.extranetAccess : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["ipv6Flag"] = args ? args.ipv6Flag : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["resourceTags"] = args ? args.resourceTags : undefined;
             resourceInputs["securityGroupId"] = args ? args.securityGroupId : undefined;
@@ -169,8 +208,11 @@ export class HourdbInstance extends pulumi.CustomResource {
             resourceInputs["shardNodeCount"] = args ? args.shardNodeCount : undefined;
             resourceInputs["shardStorage"] = args ? args.shardStorage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
+            resourceInputs["vipv6"] = args ? args.vipv6 : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zones"] = args ? args.zones : undefined;
+            resourceInputs["vport"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(HourdbInstance.__pulumiType, name, resourceInputs, opts);
@@ -186,9 +228,25 @@ export interface HourdbInstanceState {
      */
     dbVersionId?: pulumi.Input<string>;
     /**
+     * DCN source instance ID.
+     */
+    dcnInstanceId?: pulumi.Input<string>;
+    /**
+     * DCN source region.
+     */
+    dcnRegion?: pulumi.Input<string>;
+    /**
+     * Whether to open the extranet access.
+     */
+    extranetAccess?: pulumi.Input<boolean>;
+    /**
      * name of this instance.
      */
     instanceName?: pulumi.Input<string>;
+    /**
+     * Whether to support IPv6.
+     */
+    ipv6Flag?: pulumi.Input<number>;
     /**
      * project id.
      */
@@ -218,13 +276,25 @@ export interface HourdbInstanceState {
      */
     shardStorage?: pulumi.Input<number>;
     /**
-     * subnet id, it&amp;#39;s required when vpcId is set.
+     * subnet id, its required when vpcId is set.
      */
     subnetId?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIP.
+     */
+    vip?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    vipv6?: pulumi.Input<string>;
     /**
      * vpc id.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Intranet port.
+     */
+    vport?: pulumi.Input<number>;
     /**
      * available zone.
      */
@@ -240,9 +310,25 @@ export interface HourdbInstanceArgs {
      */
     dbVersionId?: pulumi.Input<string>;
     /**
+     * DCN source instance ID.
+     */
+    dcnInstanceId?: pulumi.Input<string>;
+    /**
+     * DCN source region.
+     */
+    dcnRegion?: pulumi.Input<string>;
+    /**
+     * Whether to open the extranet access.
+     */
+    extranetAccess?: pulumi.Input<boolean>;
+    /**
      * name of this instance.
      */
     instanceName?: pulumi.Input<string>;
+    /**
+     * Whether to support IPv6.
+     */
+    ipv6Flag?: pulumi.Input<number>;
     /**
      * project id.
      */
@@ -272,9 +358,17 @@ export interface HourdbInstanceArgs {
      */
     shardStorage: pulumi.Input<number>;
     /**
-     * subnet id, it&amp;#39;s required when vpcId is set.
+     * subnet id, its required when vpcId is set.
      */
     subnetId?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIP.
+     */
+    vip?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    vipv6?: pulumi.Input<string>;
     /**
      * vpc id.
      */

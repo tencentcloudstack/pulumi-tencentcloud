@@ -23,10 +23,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// {
     ///     public MyStack()
     ///     {
-    ///         var basic = new Tencentcloud.Tcm.Mesh("basic", new Tencentcloud.Tcm.MeshArgs
+    ///         var mesh = new Tencentcloud.Tcm.Mesh("mesh", new Tencentcloud.Tcm.MeshArgs
     ///         {
     ///             Config = new Tencentcloud.Tcm.Inputs.MeshConfigArgs
     ///             {
+    ///                 Inject = new Tencentcloud.Tcm.Inputs.MeshConfigInjectArgs
+    ///                 {
+    ///                     ExcludeIpRanges = 
+    ///                     {
+    ///                         "172.16.0.0/16",
+    ///                     },
+    ///                     HoldApplicationUntilProxyStarts = true,
+    ///                     HoldProxyUntilApplicationEnds = true,
+    ///                 },
     ///                 Istio = new Tencentcloud.Tcm.Inputs.MeshConfigIstioArgs
     ///                 {
     ///                     DisableHttpRetry = true,
@@ -38,6 +47,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     ///                         IstioMetaDnsAutoAllocate = true,
     ///                         IstioMetaDnsCapture = true,
     ///                     },
+    ///                     Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigIstioTracingArgs
+    ///                     {
+    ///                         Enable = false,
+    ///                     },
+    ///                 },
+    ///                 Prometheus = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusArgs
+    ///                 {
+    ///                     CustomProm = new Tencentcloud.Tcm.Inputs.MeshConfigPrometheusCustomPromArgs
+    ///                     {
+    ///                         AuthType = "none",
+    ///                         Url = "https://10.0.0.1:1000",
+    ///                         VpcId = "vpc-j9yhbzpn",
+    ///                     },
+    ///                 },
+    ///                 SidecarResources = new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesArgs
+    ///                 {
+    ///                     Limits = 
+    ///                     {
+    ///                         new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesLimitArgs
+    ///                         {
+    ///                             Name = "cpu",
+    ///                             Quantity = "2",
+    ///                         },
+    ///                         new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesLimitArgs
+    ///                         {
+    ///                             Name = "memory",
+    ///                             Quantity = "1Gi",
+    ///                         },
+    ///                     },
+    ///                     Requests = 
+    ///                     {
+    ///                         new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesRequestArgs
+    ///                         {
+    ///                             Name = "cpu",
+    ///                             Quantity = "100m",
+    ///                         },
+    ///                         new Tencentcloud.Tcm.Inputs.MeshConfigSidecarResourcesRequestArgs
+    ///                         {
+    ///                             Name = "memory",
+    ///                             Quantity = "128Mi",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///                 Tracing = new Tencentcloud.Tcm.Inputs.MeshConfigTracingArgs
+    ///                 {
+    ///                     Apm = new Tencentcloud.Tcm.Inputs.MeshConfigTracingApmArgs
+    ///                     {
+    ///                         Enable = true,
+    ///                         Region = "ap-guangzhou",
+    ///                     },
+    ///                     Enable = true,
+    ///                     Sampling = 1,
     ///                 },
     ///             },
     ///             DisplayName = "test_mesh",
@@ -47,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     ///                 new Tencentcloud.Tcm.Inputs.MeshTagListArgs
     ///                 {
     ///                     Key = "key",
-    ///                     Passthrough = true,
+    ///                     Passthrough = false,
     ///                     Value = "value",
     ///                 },
     ///             },

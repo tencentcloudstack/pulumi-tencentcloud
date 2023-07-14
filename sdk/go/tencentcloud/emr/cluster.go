@@ -99,7 +99,19 @@ type Cluster struct {
 	PayMode pulumi.IntOutput `pulumi:"payMode"`
 	// The location of the instance.
 	Placement pulumi.MapOutput `pulumi:"placement"`
-	// The product id of EMR instance.
+	// Product ID. Different products ID represents different EMR product versions. Value range:
+	// - 16: represents EMR-V2.3.0
+	// - 20: indicates EMR-V2.5.0
+	// - 25: represents EMR-V3.1.0
+	// - 27: represents KAFKA-V1.0.0
+	// - 30: indicates EMR-V2.6.0
+	// - 33: represents EMR-V3.2.1
+	// - 34: stands for EMR-V3.3.0
+	// - 36: represents STARROCKS-V1.0.0
+	// - 37: indicates EMR-V3.4.0
+	// - 38: represents EMR-V2.7.0
+	// - 39: stands for STARROCKS-V1.1.0
+	// - 41: represents DRUID-V1.1.0.
 	ProductId pulumi.IntOutput `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrOutput `pulumi:"resourceSpec"`
@@ -200,7 +212,19 @@ type clusterState struct {
 	PayMode *int `pulumi:"payMode"`
 	// The location of the instance.
 	Placement map[string]interface{} `pulumi:"placement"`
-	// The product id of EMR instance.
+	// Product ID. Different products ID represents different EMR product versions. Value range:
+	// - 16: represents EMR-V2.3.0
+	// - 20: indicates EMR-V2.5.0
+	// - 25: represents EMR-V3.1.0
+	// - 27: represents KAFKA-V1.0.0
+	// - 30: indicates EMR-V2.6.0
+	// - 33: represents EMR-V3.2.1
+	// - 34: stands for EMR-V3.3.0
+	// - 36: represents STARROCKS-V1.0.0
+	// - 37: indicates EMR-V3.4.0
+	// - 38: represents EMR-V2.7.0
+	// - 39: stands for STARROCKS-V1.1.0
+	// - 41: represents DRUID-V1.1.0.
 	ProductId *int `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec *ClusterResourceSpec `pulumi:"resourceSpec"`
@@ -239,7 +263,19 @@ type ClusterState struct {
 	PayMode pulumi.IntPtrInput
 	// The location of the instance.
 	Placement pulumi.MapInput
-	// The product id of EMR instance.
+	// Product ID. Different products ID represents different EMR product versions. Value range:
+	// - 16: represents EMR-V2.3.0
+	// - 20: indicates EMR-V2.5.0
+	// - 25: represents EMR-V3.1.0
+	// - 27: represents KAFKA-V1.0.0
+	// - 30: indicates EMR-V2.6.0
+	// - 33: represents EMR-V3.2.1
+	// - 34: stands for EMR-V3.3.0
+	// - 36: represents STARROCKS-V1.0.0
+	// - 37: indicates EMR-V3.4.0
+	// - 38: represents EMR-V2.7.0
+	// - 39: stands for STARROCKS-V1.1.0
+	// - 41: represents DRUID-V1.1.0.
 	ProductId pulumi.IntPtrInput
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrInput
@@ -280,7 +316,19 @@ type clusterArgs struct {
 	PayMode int `pulumi:"payMode"`
 	// The location of the instance.
 	Placement map[string]interface{} `pulumi:"placement"`
-	// The product id of EMR instance.
+	// Product ID. Different products ID represents different EMR product versions. Value range:
+	// - 16: represents EMR-V2.3.0
+	// - 20: indicates EMR-V2.5.0
+	// - 25: represents EMR-V3.1.0
+	// - 27: represents KAFKA-V1.0.0
+	// - 30: indicates EMR-V2.6.0
+	// - 33: represents EMR-V3.2.1
+	// - 34: stands for EMR-V3.3.0
+	// - 36: represents STARROCKS-V1.0.0
+	// - 37: indicates EMR-V3.4.0
+	// - 38: represents EMR-V2.7.0
+	// - 39: stands for STARROCKS-V1.1.0
+	// - 41: represents DRUID-V1.1.0.
 	ProductId int `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec *ClusterResourceSpec `pulumi:"resourceSpec"`
@@ -318,7 +366,19 @@ type ClusterArgs struct {
 	PayMode pulumi.IntInput
 	// The location of the instance.
 	Placement pulumi.MapInput
-	// The product id of EMR instance.
+	// Product ID. Different products ID represents different EMR product versions. Value range:
+	// - 16: represents EMR-V2.3.0
+	// - 20: indicates EMR-V2.5.0
+	// - 25: represents EMR-V3.1.0
+	// - 27: represents KAFKA-V1.0.0
+	// - 30: indicates EMR-V2.6.0
+	// - 33: represents EMR-V3.2.1
+	// - 34: stands for EMR-V3.3.0
+	// - 36: represents STARROCKS-V1.0.0
+	// - 37: indicates EMR-V3.4.0
+	// - 38: represents EMR-V2.7.0
+	// - 39: stands for STARROCKS-V1.1.0
+	// - 41: represents DRUID-V1.1.0.
 	ProductId pulumi.IntInput
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrInput
@@ -467,7 +527,19 @@ func (o ClusterOutput) Placement() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.Placement }).(pulumi.MapOutput)
 }
 
-// The product id of EMR instance.
+// Product ID. Different products ID represents different EMR product versions. Value range:
+// - 16: represents EMR-V2.3.0
+// - 20: indicates EMR-V2.5.0
+// - 25: represents EMR-V3.1.0
+// - 27: represents KAFKA-V1.0.0
+// - 30: indicates EMR-V2.6.0
+// - 33: represents EMR-V3.2.1
+// - 34: stands for EMR-V3.3.0
+// - 36: represents STARROCKS-V1.0.0
+// - 37: indicates EMR-V3.4.0
+// - 38: represents EMR-V2.7.0
+// - 39: stands for STARROCKS-V1.1.0
+// - 41: represents DRUID-V1.1.0.
 func (o ClusterOutput) ProductId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.ProductId }).(pulumi.IntOutput)
 }

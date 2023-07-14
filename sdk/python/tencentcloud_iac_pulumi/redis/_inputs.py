@@ -9,11 +9,49 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'BackupDownloadRestrictionLimitVpcArgs',
     'InstanceNodeInfoArgs',
     'ParamTemplateParamDetailArgs',
     'ParamTemplateParamsOverrideArgs',
     'GetBackupDownloadInfoLimitVpcArgs',
 ]
+
+@pulumi.input_type
+class BackupDownloadRestrictionLimitVpcArgs:
+    def __init__(__self__, *,
+                 region: pulumi.Input[str],
+                 vpc_lists: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] region: Customize the region of the VPC to which the backup file is downloaded.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] vpc_lists: Customize the list of VPCs to download backup files.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_lists", vpc_lists)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Customize the region of the VPC to which the backup file is downloaded.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="vpcLists")
+    def vpc_lists(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Customize the list of VPCs to download backup files.
+        """
+        return pulumi.get(self, "vpc_lists")
+
+    @vpc_lists.setter
+    def vpc_lists(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "vpc_lists", value)
+
 
 @pulumi.input_type
 class InstanceNodeInfoArgs:

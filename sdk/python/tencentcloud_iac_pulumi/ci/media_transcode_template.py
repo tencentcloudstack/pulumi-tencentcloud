@@ -341,10 +341,6 @@ class MediaTranscodeTemplate(pulumi.CustomResource):
                 adj_dar_method="scale",
                 audio_bitrate_adj_method="0",
                 delete_metadata="false",
-                hls_encrypt=tencentcloud.ci.MediaTranscodeTemplateTransConfigHlsEncryptArgs(
-                    is_hls_encrypt="false",
-                    uri_key="",
-                ),
                 is_check_audio_bitrate="false",
                 is_check_reso="false",
                 is_check_video_bitrate="false",
@@ -434,10 +430,6 @@ class MediaTranscodeTemplate(pulumi.CustomResource):
                 adj_dar_method="scale",
                 audio_bitrate_adj_method="0",
                 delete_metadata="false",
-                hls_encrypt=tencentcloud.ci.MediaTranscodeTemplateTransConfigHlsEncryptArgs(
-                    is_hls_encrypt="false",
-                    uri_key="",
-                ),
                 is_check_audio_bitrate="false",
                 is_check_reso="false",
                 is_check_video_bitrate="false",

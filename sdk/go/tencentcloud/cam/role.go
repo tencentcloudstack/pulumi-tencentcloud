@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a CAM role.
 //
 // ## Example Usage
-//
-// Create normally
+// ### Create normally
 //
 // ```go
 // package main
@@ -44,8 +43,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Create with SAML provider
+// ### Create with SAML provider
 //
 // ```go
 // package main

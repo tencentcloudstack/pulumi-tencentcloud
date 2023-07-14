@@ -10,18 +10,171 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'DiskAutoMountConfiguration',
+    'DiskDiskChargePrepaid',
     'FirewallRuleFirewallRule',
     'InstanceContainer',
     'InstanceContainerEnv',
     'InstanceContainerPublishPort',
     'InstanceContainerVolume',
     'InstanceLoginConfiguration',
+    'RenewDiskRenewDiskChargePrepaid',
+    'RenewInstanceInstanceChargePrepaid',
+    'GetAllSceneSceneSetResult',
     'GetBundleBundleSetResult',
     'GetBundleBundleSetPriceResult',
     'GetBundleBundleSetPriceInstancePriceResult',
     'GetBundleFilterResult',
+    'GetDiskConfigDiskConfigSetResult',
+    'GetDiskConfigFilterResult',
+    'GetDisksDiskListResult',
+    'GetDisksFilterResult',
     'GetFirewallRulesTemplateFirewallRuleSetResult',
+    'GetInstanceBlueprintBlueprintInstanceSetResult',
+    'GetInstanceBlueprintBlueprintInstanceSetBlueprintResult',
+    'GetInstanceBlueprintBlueprintInstanceSetSoftwareSetResult',
+    'GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetResult',
+    'GetInstanceDiskNumAttachDetailSetResult',
+    'GetInstanceTrafficPackageInstanceTrafficPackageSetResult',
+    'GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetResult',
+    'GetModifyInstanceBundleFilterResult',
+    'GetModifyInstanceBundleModifyBundleSetResult',
+    'GetModifyInstanceBundleModifyBundleSetBundleResult',
+    'GetModifyInstanceBundleModifyBundleSetBundlePriceResult',
+    'GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceResult',
+    'GetModifyInstanceBundleModifyBundleSetModifyPriceResult',
+    'GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceResult',
+    'GetRegionRegionSetResult',
+    'GetResetInstanceBlueprintFilterResult',
+    'GetResetInstanceBlueprintResetInstanceBlueprintSetResult',
+    'GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoResult',
+    'GetSceneSceneSetResult',
+    'GetZoneZoneInfoSetResult',
 ]
+
+@pulumi.output_type
+class DiskAutoMountConfiguration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "fileSystemType":
+            suggest = "file_system_type"
+        elif key == "mountPoint":
+            suggest = "mount_point"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DiskAutoMountConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DiskAutoMountConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DiskAutoMountConfiguration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 file_system_type: Optional[str] = None,
+                 mount_point: Optional[str] = None):
+        """
+        :param str instance_id: Instance ID to be mounted. The specified instance must be in the Running state.
+        :param str file_system_type: The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+        :param str mount_point: The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        if file_system_type is not None:
+            pulumi.set(__self__, "file_system_type", file_system_type)
+        if mount_point is not None:
+            pulumi.set(__self__, "mount_point", mount_point)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID to be mounted. The specified instance must be in the Running state.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="fileSystemType")
+    def file_system_type(self) -> Optional[str]:
+        """
+        The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+        """
+        return pulumi.get(self, "file_system_type")
+
+    @property
+    @pulumi.getter(name="mountPoint")
+    def mount_point(self) -> Optional[str]:
+        """
+        The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+        """
+        return pulumi.get(self, "mount_point")
+
+
+@pulumi.output_type
+class DiskDiskChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "renewFlag":
+            suggest = "renew_flag"
+        elif key == "timeUnit":
+            suggest = "time_unit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DiskDiskChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DiskDiskChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DiskDiskChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: Optional[str] = None,
+                 time_unit: Optional[str] = None):
+        """
+        :param int period: new purchase cycle.
+        :param str renew_flag: Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+        :param str time_unit: newly purchased unit. Default: m.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+        if time_unit is not None:
+            pulumi.set(__self__, "time_unit", time_unit)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        new purchase cycle.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        """
+        Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @property
+    @pulumi.getter(name="timeUnit")
+    def time_unit(self) -> Optional[str]:
+        """
+        newly purchased unit. Default: m.
+        """
+        return pulumi.get(self, "time_unit")
+
 
 @pulumi.output_type
 class FirewallRuleFirewallRule(dict):
@@ -405,6 +558,177 @@ class InstanceLoginConfiguration(dict):
 
 
 @pulumi.output_type
+class RenewDiskRenewDiskChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "curInstanceDeadline":
+            suggest = "cur_instance_deadline"
+        elif key == "renewFlag":
+            suggest = "renew_flag"
+        elif key == "timeUnit":
+            suggest = "time_unit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RenewDiskRenewDiskChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RenewDiskRenewDiskChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RenewDiskRenewDiskChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cur_instance_deadline: Optional[str] = None,
+                 period: Optional[int] = None,
+                 renew_flag: Optional[str] = None,
+                 time_unit: Optional[str] = None):
+        """
+        :param str cur_instance_deadline: Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+        :param int period: Renewal period.
+        :param str renew_flag: Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+        :param str time_unit: newly purchased unit. Default: m.
+        """
+        if cur_instance_deadline is not None:
+            pulumi.set(__self__, "cur_instance_deadline", cur_instance_deadline)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+        if time_unit is not None:
+            pulumi.set(__self__, "time_unit", time_unit)
+
+    @property
+    @pulumi.getter(name="curInstanceDeadline")
+    def cur_instance_deadline(self) -> Optional[str]:
+        """
+        Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+        """
+        return pulumi.get(self, "cur_instance_deadline")
+
+    @property
+    @pulumi.getter
+    def period(self) -> Optional[int]:
+        """
+        Renewal period.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        """
+        Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @property
+    @pulumi.getter(name="timeUnit")
+    def time_unit(self) -> Optional[str]:
+        """
+        newly purchased unit. Default: m.
+        """
+        return pulumi.get(self, "time_unit")
+
+
+@pulumi.output_type
+class RenewInstanceInstanceChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "renewFlag":
+            suggest = "renew_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RenewInstanceInstanceChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RenewInstanceInstanceChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RenewInstanceInstanceChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: Optional[str] = None):
+        """
+        :param int period: The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+        :param str renew_flag: Automatic renewal logo. Values:
+               - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+               - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+               - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+               Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        """
+        Automatic renewal logo. Values:
+        - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+        - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+        - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+        Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class GetAllSceneSceneSetResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 display_name: str,
+                 scene_id: str):
+        """
+        :param str description: Use scene description.
+        :param str display_name: Use the scene presentation name.
+        :param str scene_id: Use scene Id.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "scene_id", scene_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Use scene description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Use the scene presentation name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter(name="sceneId")
+    def scene_id(self) -> str:
+        """
+        Use scene Id.
+        """
+        return pulumi.get(self, "scene_id")
+
+
+@pulumi.output_type
 class GetBundleBundleSetResult(dict):
     def __init__(__self__, *,
                  bundle_display_label: str,
@@ -675,6 +999,364 @@ class GetBundleFilterResult(dict):
 
 
 @pulumi.output_type
+class GetDiskConfigDiskConfigSetResult(dict):
+    def __init__(__self__, *,
+                 disk_sales_state: str,
+                 disk_step_size: int,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int,
+                 zone: str):
+        """
+        :param str disk_sales_state: Cloud disk sale status.
+        :param int disk_step_size: Cloud disk increment.
+        :param str disk_type: Cloud disk type.
+        :param int max_disk_size: Maximum cloud disk size.
+        :param int min_disk_size: Minimum cloud disk size.
+        :param str zone: Availability zone.
+        """
+        pulumi.set(__self__, "disk_sales_state", disk_sales_state)
+        pulumi.set(__self__, "disk_step_size", disk_step_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="diskSalesState")
+    def disk_sales_state(self) -> str:
+        """
+        Cloud disk sale status.
+        """
+        return pulumi.get(self, "disk_sales_state")
+
+    @property
+    @pulumi.getter(name="diskStepSize")
+    def disk_step_size(self) -> int:
+        """
+        Cloud disk increment.
+        """
+        return pulumi.get(self, "disk_step_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum cloud disk size.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum cloud disk size.
+        """
+        return pulumi.get(self, "min_disk_size")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetDiskConfigFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetDisksDiskListResult(dict):
+    def __init__(__self__, *,
+                 attached: bool,
+                 created_time: str,
+                 delete_with_instance: bool,
+                 disk_backup_count: int,
+                 disk_backup_quota: int,
+                 disk_charge_type: str,
+                 disk_id: str,
+                 disk_name: str,
+                 disk_size: int,
+                 disk_state: str,
+                 disk_type: str,
+                 disk_usage: str,
+                 expired_time: str,
+                 instance_id: str,
+                 isolated_time: str,
+                 latest_operation: str,
+                 latest_operation_request_id: str,
+                 latest_operation_state: str,
+                 renew_flag: str,
+                 zone: str):
+        """
+        :param bool attached: Disk attach state.
+        :param str created_time: Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        :param bool delete_with_instance: Whether to release with the instance.
+        :param int disk_backup_count: Number of existing backup points of cloud disk.
+        :param int disk_backup_quota: Number of backup points quota for cloud disk.
+        :param str disk_charge_type: Disk charge type.
+        :param str disk_id: Disk id.
+        :param str disk_name: Disk name.
+        :param int disk_size: Disk size.
+        :param str disk_state: Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+        :param str disk_type: Disk type.
+        :param str disk_usage: Disk usage.
+        :param str expired_time: Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        :param str instance_id: Instance id.
+        :param str isolated_time: Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        :param str latest_operation: Latest operation.
+        :param str latest_operation_request_id: Latest operation request id.
+        :param str latest_operation_state: Latest operation state.
+        :param str renew_flag: Renew flag.
+        :param str zone: Availability zone.
+        """
+        pulumi.set(__self__, "attached", attached)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+        pulumi.set(__self__, "disk_backup_count", disk_backup_count)
+        pulumi.set(__self__, "disk_backup_quota", disk_backup_quota)
+        pulumi.set(__self__, "disk_charge_type", disk_charge_type)
+        pulumi.set(__self__, "disk_id", disk_id)
+        pulumi.set(__self__, "disk_name", disk_name)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_state", disk_state)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "disk_usage", disk_usage)
+        pulumi.set(__self__, "expired_time", expired_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "isolated_time", isolated_time)
+        pulumi.set(__self__, "latest_operation", latest_operation)
+        pulumi.set(__self__, "latest_operation_request_id", latest_operation_request_id)
+        pulumi.set(__self__, "latest_operation_state", latest_operation_state)
+        pulumi.set(__self__, "renew_flag", renew_flag)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def attached(self) -> bool:
+        """
+        Disk attach state.
+        """
+        return pulumi.get(self, "attached")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="deleteWithInstance")
+    def delete_with_instance(self) -> bool:
+        """
+        Whether to release with the instance.
+        """
+        return pulumi.get(self, "delete_with_instance")
+
+    @property
+    @pulumi.getter(name="diskBackupCount")
+    def disk_backup_count(self) -> int:
+        """
+        Number of existing backup points of cloud disk.
+        """
+        return pulumi.get(self, "disk_backup_count")
+
+    @property
+    @pulumi.getter(name="diskBackupQuota")
+    def disk_backup_quota(self) -> int:
+        """
+        Number of backup points quota for cloud disk.
+        """
+        return pulumi.get(self, "disk_backup_quota")
+
+    @property
+    @pulumi.getter(name="diskChargeType")
+    def disk_charge_type(self) -> str:
+        """
+        Disk charge type.
+        """
+        return pulumi.get(self, "disk_charge_type")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> str:
+        """
+        Disk id.
+        """
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="diskName")
+    def disk_name(self) -> str:
+        """
+        Disk name.
+        """
+        return pulumi.get(self, "disk_name")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Disk size.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskState")
+    def disk_state(self) -> str:
+        """
+        Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+        """
+        return pulumi.get(self, "disk_state")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="diskUsage")
+    def disk_usage(self) -> str:
+        """
+        Disk usage.
+        """
+        return pulumi.get(self, "disk_usage")
+
+    @property
+    @pulumi.getter(name="expiredTime")
+    def expired_time(self) -> str:
+        """
+        Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        """
+        return pulumi.get(self, "expired_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="isolatedTime")
+    def isolated_time(self) -> str:
+        """
+        Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+        """
+        return pulumi.get(self, "isolated_time")
+
+    @property
+    @pulumi.getter(name="latestOperation")
+    def latest_operation(self) -> str:
+        """
+        Latest operation.
+        """
+        return pulumi.get(self, "latest_operation")
+
+    @property
+    @pulumi.getter(name="latestOperationRequestId")
+    def latest_operation_request_id(self) -> str:
+        """
+        Latest operation request id.
+        """
+        return pulumi.get(self, "latest_operation_request_id")
+
+    @property
+    @pulumi.getter(name="latestOperationState")
+    def latest_operation_state(self) -> str:
+        """
+        Latest operation state.
+        """
+        return pulumi.get(self, "latest_operation_state")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> str:
+        """
+        Renew flag.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetDisksFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+        :param Sequence[str] values: Value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Value of the field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
 class GetFirewallRulesTemplateFirewallRuleSetResult(dict):
     def __init__(__self__, *,
                  action: str,
@@ -745,5 +1427,1394 @@ class GetFirewallRulesTemplateFirewallRuleSetResult(dict):
         Protocol. Valid values are TCP, UDP, ICMP, ALL.
         """
         return pulumi.get(self, "protocol")
+
+
+@pulumi.output_type
+class GetInstanceBlueprintBlueprintInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 blueprints: Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetBlueprintResult'],
+                 instance_id: str,
+                 software_sets: Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetSoftwareSetResult']):
+        """
+        :param Sequence['GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs'] blueprints: Blueprint instance information.
+        :param str instance_id: Instance ID.
+        :param Sequence['GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs'] software_sets: Software list.
+        """
+        pulumi.set(__self__, "blueprints", blueprints)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "software_sets", software_sets)
+
+    @property
+    @pulumi.getter
+    def blueprints(self) -> Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetBlueprintResult']:
+        """
+        Blueprint instance information.
+        """
+        return pulumi.get(self, "blueprints")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="softwareSets")
+    def software_sets(self) -> Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetSoftwareSetResult']:
+        """
+        Software list.
+        """
+        return pulumi.get(self, "software_sets")
+
+
+@pulumi.output_type
+class GetInstanceBlueprintBlueprintInstanceSetBlueprintResult(dict):
+    def __init__(__self__, *,
+                 blueprint_id: str,
+                 blueprint_name: str,
+                 blueprint_state: str,
+                 blueprint_type: str,
+                 community_url: str,
+                 created_time: str,
+                 description: str,
+                 display_title: str,
+                 display_version: str,
+                 docker_version: str,
+                 guide_url: str,
+                 image_id: str,
+                 image_url: str,
+                 os_name: str,
+                 platform: str,
+                 platform_type: str,
+                 required_memory_size: int,
+                 required_system_disk_size: int,
+                 scene_id_sets: Sequence[str],
+                 support_automation_tools: bool):
+        """
+        :param str blueprint_id: Blueprint ID, which is the unique identifier of Blueprint.
+        :param str blueprint_name: Blueprint name.
+        :param str blueprint_state: Blueprint status.
+        :param str blueprint_type: Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+        :param str community_url: URL of official website of the open-source project.
+        :param str created_time: Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+        :param str description: Image description information.
+        :param str display_title: Blueprint title to be displayed.
+        :param str display_version: Blueprint version to be displayed.
+        :param str docker_version: Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str guide_url: Guide documentation URL.
+        :param str image_id: ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+        :param str image_url: Software picture URL.
+        :param str os_name: OS name.
+        :param str platform: OS type.
+        :param str platform_type: OS type, such as LINUX_UNIX and WINDOWS.
+        :param int required_memory_size: Memory size required by blueprint in GB.
+        :param int required_system_disk_size: System disk size required by blueprint in GB.
+        :param Sequence[str] scene_id_sets: Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+        :param bool support_automation_tools: Whether the blueprint supports automation tools.
+        """
+        pulumi.set(__self__, "blueprint_id", blueprint_id)
+        pulumi.set(__self__, "blueprint_name", blueprint_name)
+        pulumi.set(__self__, "blueprint_state", blueprint_state)
+        pulumi.set(__self__, "blueprint_type", blueprint_type)
+        pulumi.set(__self__, "community_url", community_url)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_title", display_title)
+        pulumi.set(__self__, "display_version", display_version)
+        pulumi.set(__self__, "docker_version", docker_version)
+        pulumi.set(__self__, "guide_url", guide_url)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "image_url", image_url)
+        pulumi.set(__self__, "os_name", os_name)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "platform_type", platform_type)
+        pulumi.set(__self__, "required_memory_size", required_memory_size)
+        pulumi.set(__self__, "required_system_disk_size", required_system_disk_size)
+        pulumi.set(__self__, "scene_id_sets", scene_id_sets)
+        pulumi.set(__self__, "support_automation_tools", support_automation_tools)
+
+    @property
+    @pulumi.getter(name="blueprintId")
+    def blueprint_id(self) -> str:
+        """
+        Blueprint ID, which is the unique identifier of Blueprint.
+        """
+        return pulumi.get(self, "blueprint_id")
+
+    @property
+    @pulumi.getter(name="blueprintName")
+    def blueprint_name(self) -> str:
+        """
+        Blueprint name.
+        """
+        return pulumi.get(self, "blueprint_name")
+
+    @property
+    @pulumi.getter(name="blueprintState")
+    def blueprint_state(self) -> str:
+        """
+        Blueprint status.
+        """
+        return pulumi.get(self, "blueprint_state")
+
+    @property
+    @pulumi.getter(name="blueprintType")
+    def blueprint_type(self) -> str:
+        """
+        Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+        """
+        return pulumi.get(self, "blueprint_type")
+
+    @property
+    @pulumi.getter(name="communityUrl")
+    def community_url(self) -> str:
+        """
+        URL of official website of the open-source project.
+        """
+        return pulumi.get(self, "community_url")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Image description information.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="displayTitle")
+    def display_title(self) -> str:
+        """
+        Blueprint title to be displayed.
+        """
+        return pulumi.get(self, "display_title")
+
+    @property
+    @pulumi.getter(name="displayVersion")
+    def display_version(self) -> str:
+        """
+        Blueprint version to be displayed.
+        """
+        return pulumi.get(self, "display_version")
+
+    @property
+    @pulumi.getter(name="dockerVersion")
+    def docker_version(self) -> str:
+        """
+        Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "docker_version")
+
+    @property
+    @pulumi.getter(name="guideUrl")
+    def guide_url(self) -> str:
+        """
+        Guide documentation URL.
+        """
+        return pulumi.get(self, "guide_url")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter(name="imageUrl")
+    def image_url(self) -> str:
+        """
+        Software picture URL.
+        """
+        return pulumi.get(self, "image_url")
+
+    @property
+    @pulumi.getter(name="osName")
+    def os_name(self) -> str:
+        """
+        OS name.
+        """
+        return pulumi.get(self, "os_name")
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        OS type.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="platformType")
+    def platform_type(self) -> str:
+        """
+        OS type, such as LINUX_UNIX and WINDOWS.
+        """
+        return pulumi.get(self, "platform_type")
+
+    @property
+    @pulumi.getter(name="requiredMemorySize")
+    def required_memory_size(self) -> int:
+        """
+        Memory size required by blueprint in GB.
+        """
+        return pulumi.get(self, "required_memory_size")
+
+    @property
+    @pulumi.getter(name="requiredSystemDiskSize")
+    def required_system_disk_size(self) -> int:
+        """
+        System disk size required by blueprint in GB.
+        """
+        return pulumi.get(self, "required_system_disk_size")
+
+    @property
+    @pulumi.getter(name="sceneIdSets")
+    def scene_id_sets(self) -> Sequence[str]:
+        """
+        Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "scene_id_sets")
+
+    @property
+    @pulumi.getter(name="supportAutomationTools")
+    def support_automation_tools(self) -> bool:
+        """
+        Whether the blueprint supports automation tools.
+        """
+        return pulumi.get(self, "support_automation_tools")
+
+
+@pulumi.output_type
+class GetInstanceBlueprintBlueprintInstanceSetSoftwareSetResult(dict):
+    def __init__(__self__, *,
+                 detail_sets: Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetResult'],
+                 image_url: str,
+                 install_dir: str,
+                 name: str,
+                 version: str):
+        """
+        :param Sequence['GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs'] detail_sets: List of software details.
+        :param str image_url: Software picture URL.
+        :param str install_dir: Software installation directory.
+        :param str name: Software name.
+        :param str version: Software version.
+        """
+        pulumi.set(__self__, "detail_sets", detail_sets)
+        pulumi.set(__self__, "image_url", image_url)
+        pulumi.set(__self__, "install_dir", install_dir)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="detailSets")
+    def detail_sets(self) -> Sequence['outputs.GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetResult']:
+        """
+        List of software details.
+        """
+        return pulumi.get(self, "detail_sets")
+
+    @property
+    @pulumi.getter(name="imageUrl")
+    def image_url(self) -> str:
+        """
+        Software picture URL.
+        """
+        return pulumi.get(self, "image_url")
+
+    @property
+    @pulumi.getter(name="installDir")
+    def install_dir(self) -> str:
+        """
+        Software installation directory.
+        """
+        return pulumi.get(self, "install_dir")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Software name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Software version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 title: str,
+                 value: str):
+        """
+        :param str key: Unique detail key.
+        :param str title: Detail title.
+        :param str value: Detail value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "title", title)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Unique detail key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def title(self) -> str:
+        """
+        Detail title.
+        """
+        return pulumi.get(self, "title")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Detail value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetInstanceDiskNumAttachDetailSetResult(dict):
+    def __init__(__self__, *,
+                 attached_disk_count: int,
+                 instance_id: str,
+                 max_attach_count: int):
+        """
+        :param int attached_disk_count: Number of elastic cloud disks mounted to the instance.
+        :param str instance_id: Instance Id.
+        :param int max_attach_count: Number of elastic cloud disks that can be mounted.
+        """
+        pulumi.set(__self__, "attached_disk_count", attached_disk_count)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "max_attach_count", max_attach_count)
+
+    @property
+    @pulumi.getter(name="attachedDiskCount")
+    def attached_disk_count(self) -> int:
+        """
+        Number of elastic cloud disks mounted to the instance.
+        """
+        return pulumi.get(self, "attached_disk_count")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance Id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="maxAttachCount")
+    def max_attach_count(self) -> int:
+        """
+        Number of elastic cloud disks that can be mounted.
+        """
+        return pulumi.get(self, "max_attach_count")
+
+
+@pulumi.output_type
+class GetInstanceTrafficPackageInstanceTrafficPackageSetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 traffic_package_sets: Sequence['outputs.GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetResult']):
+        """
+        :param str instance_id: Instance ID.
+        :param Sequence['GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs'] traffic_package_sets: List of traffic package details.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "traffic_package_sets", traffic_package_sets)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="trafficPackageSets")
+    def traffic_package_sets(self) -> Sequence['outputs.GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetResult']:
+        """
+        List of traffic package details.
+        """
+        return pulumi.get(self, "traffic_package_sets")
+
+
+@pulumi.output_type
+class GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetResult(dict):
+    def __init__(__self__, *,
+                 deadline: str,
+                 end_time: str,
+                 start_time: str,
+                 status: str,
+                 traffic_overflow: int,
+                 traffic_package_id: str,
+                 traffic_package_remaining: int,
+                 traffic_package_total: int,
+                 traffic_used: int):
+        """
+        :param str deadline: The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+        :param str end_time: The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        :param str start_time: The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        :param str status: Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+        :param int traffic_overflow: The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+        :param str traffic_package_id: Traffic packet ID.
+        :param int traffic_package_remaining: The remaining traffic during the effective period of the traffic packet, in bytes.
+        :param int traffic_package_total: The total traffic in bytes during the effective period of the traffic packet.
+        :param int traffic_used: Traffic has been used during the effective period of the traffic packet, in bytes.
+        """
+        pulumi.set(__self__, "deadline", deadline)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "traffic_overflow", traffic_overflow)
+        pulumi.set(__self__, "traffic_package_id", traffic_package_id)
+        pulumi.set(__self__, "traffic_package_remaining", traffic_package_remaining)
+        pulumi.set(__self__, "traffic_package_total", traffic_package_total)
+        pulumi.set(__self__, "traffic_used", traffic_used)
+
+    @property
+    @pulumi.getter
+    def deadline(self) -> str:
+        """
+        The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+        """
+        return pulumi.get(self, "deadline")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="trafficOverflow")
+    def traffic_overflow(self) -> int:
+        """
+        The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+        """
+        return pulumi.get(self, "traffic_overflow")
+
+    @property
+    @pulumi.getter(name="trafficPackageId")
+    def traffic_package_id(self) -> str:
+        """
+        Traffic packet ID.
+        """
+        return pulumi.get(self, "traffic_package_id")
+
+    @property
+    @pulumi.getter(name="trafficPackageRemaining")
+    def traffic_package_remaining(self) -> int:
+        """
+        The remaining traffic during the effective period of the traffic packet, in bytes.
+        """
+        return pulumi.get(self, "traffic_package_remaining")
+
+    @property
+    @pulumi.getter(name="trafficPackageTotal")
+    def traffic_package_total(self) -> int:
+        """
+        The total traffic in bytes during the effective period of the traffic packet.
+        """
+        return pulumi.get(self, "traffic_package_total")
+
+    @property
+    @pulumi.getter(name="trafficUsed")
+    def traffic_used(self) -> int:
+        """
+        Traffic has been used during the effective period of the traffic packet, in bytes.
+        """
+        return pulumi.get(self, "traffic_used")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetResult(dict):
+    def __init__(__self__, *,
+                 bundles: Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundleResult'],
+                 modify_bundle_state: str,
+                 modify_prices: Sequence['outputs.GetModifyInstanceBundleModifyBundleSetModifyPriceResult'],
+                 not_support_modify_message: str):
+        """
+        :param Sequence['GetModifyInstanceBundleModifyBundleSetBundleArgs'] bundles: Package information.
+        :param str modify_bundle_state: Change the status of the package. Value:
+               - SOLD_OUT: the package is sold out;
+               - AVAILABLE: support package changes;
+               - UNAVAILABLE: package changes are not supported for the time being.
+        :param Sequence['GetModifyInstanceBundleModifyBundleSetModifyPriceArgs'] modify_prices: Change the price difference to be made up after the instance package.
+        :param str not_support_modify_message: Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+        """
+        pulumi.set(__self__, "bundles", bundles)
+        pulumi.set(__self__, "modify_bundle_state", modify_bundle_state)
+        pulumi.set(__self__, "modify_prices", modify_prices)
+        pulumi.set(__self__, "not_support_modify_message", not_support_modify_message)
+
+    @property
+    @pulumi.getter
+    def bundles(self) -> Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundleResult']:
+        """
+        Package information.
+        """
+        return pulumi.get(self, "bundles")
+
+    @property
+    @pulumi.getter(name="modifyBundleState")
+    def modify_bundle_state(self) -> str:
+        """
+        Change the status of the package. Value:
+        - SOLD_OUT: the package is sold out;
+        - AVAILABLE: support package changes;
+        - UNAVAILABLE: package changes are not supported for the time being.
+        """
+        return pulumi.get(self, "modify_bundle_state")
+
+    @property
+    @pulumi.getter(name="modifyPrices")
+    def modify_prices(self) -> Sequence['outputs.GetModifyInstanceBundleModifyBundleSetModifyPriceResult']:
+        """
+        Change the price difference to be made up after the instance package.
+        """
+        return pulumi.get(self, "modify_prices")
+
+    @property
+    @pulumi.getter(name="notSupportModifyMessage")
+    def not_support_modify_message(self) -> str:
+        """
+        Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+        """
+        return pulumi.get(self, "not_support_modify_message")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetBundleResult(dict):
+    def __init__(__self__, *,
+                 bundle_display_label: str,
+                 bundle_id: str,
+                 bundle_sales_state: str,
+                 bundle_type: str,
+                 bundle_type_description: str,
+                 cpu: int,
+                 internet_charge_type: str,
+                 internet_max_bandwidth_out: int,
+                 memory: int,
+                 monthly_traffic: int,
+                 prices: Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundlePriceResult'],
+                 support_linux_unix_platform: bool,
+                 support_windows_platform: bool,
+                 system_disk_size: int,
+                 system_disk_type: str):
+        """
+        :param str bundle_display_label: Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+        :param str bundle_id: Package ID.
+        :param str bundle_sales_state: Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+        :param str bundle_type: Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+        :param str bundle_type_description: Package type description information.
+        :param int cpu: CPU.
+        :param str internet_charge_type: Network billing mode.
+        :param int internet_max_bandwidth_out: Peak bandwidth in Mbps.
+        :param int memory: Memory size in GB.
+        :param int monthly_traffic: Monthly network traffic in Gb.
+        :param Sequence['GetModifyInstanceBundleModifyBundleSetBundlePriceArgs'] prices: Current package unit price information.
+        :param bool support_linux_unix_platform: Whether Linux/Unix is supported.
+        :param bool support_windows_platform: Whether Windows is supported.
+        :param int system_disk_size: System disk size.
+        :param str system_disk_type: System disk type.
+        """
+        pulumi.set(__self__, "bundle_display_label", bundle_display_label)
+        pulumi.set(__self__, "bundle_id", bundle_id)
+        pulumi.set(__self__, "bundle_sales_state", bundle_sales_state)
+        pulumi.set(__self__, "bundle_type", bundle_type)
+        pulumi.set(__self__, "bundle_type_description", bundle_type_description)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "monthly_traffic", monthly_traffic)
+        pulumi.set(__self__, "prices", prices)
+        pulumi.set(__self__, "support_linux_unix_platform", support_linux_unix_platform)
+        pulumi.set(__self__, "support_windows_platform", support_windows_platform)
+        pulumi.set(__self__, "system_disk_size", system_disk_size)
+        pulumi.set(__self__, "system_disk_type", system_disk_type)
+
+    @property
+    @pulumi.getter(name="bundleDisplayLabel")
+    def bundle_display_label(self) -> str:
+        """
+        Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+        """
+        return pulumi.get(self, "bundle_display_label")
+
+    @property
+    @pulumi.getter(name="bundleId")
+    def bundle_id(self) -> str:
+        """
+        Package ID.
+        """
+        return pulumi.get(self, "bundle_id")
+
+    @property
+    @pulumi.getter(name="bundleSalesState")
+    def bundle_sales_state(self) -> str:
+        """
+        Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+        """
+        return pulumi.get(self, "bundle_sales_state")
+
+    @property
+    @pulumi.getter(name="bundleType")
+    def bundle_type(self) -> str:
+        """
+        Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+        """
+        return pulumi.get(self, "bundle_type")
+
+    @property
+    @pulumi.getter(name="bundleTypeDescription")
+    def bundle_type_description(self) -> str:
+        """
+        Package type description information.
+        """
+        return pulumi.get(self, "bundle_type_description")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        CPU.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="internetChargeType")
+    def internet_charge_type(self) -> str:
+        """
+        Network billing mode.
+        """
+        return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        Peak bandwidth in Mbps.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size in GB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="monthlyTraffic")
+    def monthly_traffic(self) -> int:
+        """
+        Monthly network traffic in Gb.
+        """
+        return pulumi.get(self, "monthly_traffic")
+
+    @property
+    @pulumi.getter
+    def prices(self) -> Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundlePriceResult']:
+        """
+        Current package unit price information.
+        """
+        return pulumi.get(self, "prices")
+
+    @property
+    @pulumi.getter(name="supportLinuxUnixPlatform")
+    def support_linux_unix_platform(self) -> bool:
+        """
+        Whether Linux/Unix is supported.
+        """
+        return pulumi.get(self, "support_linux_unix_platform")
+
+    @property
+    @pulumi.getter(name="supportWindowsPlatform")
+    def support_windows_platform(self) -> bool:
+        """
+        Whether Windows is supported.
+        """
+        return pulumi.get(self, "support_windows_platform")
+
+    @property
+    @pulumi.getter(name="systemDiskSize")
+    def system_disk_size(self) -> int:
+        """
+        System disk size.
+        """
+        return pulumi.get(self, "system_disk_size")
+
+    @property
+    @pulumi.getter(name="systemDiskType")
+    def system_disk_type(self) -> str:
+        """
+        System disk type.
+        """
+        return pulumi.get(self, "system_disk_type")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetBundlePriceResult(dict):
+    def __init__(__self__, *,
+                 instance_prices: Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceResult']):
+        """
+        :param Sequence['GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs'] instance_prices: Instance price.
+        """
+        pulumi.set(__self__, "instance_prices", instance_prices)
+
+    @property
+    @pulumi.getter(name="instancePrices")
+    def instance_prices(self) -> Sequence['outputs.GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceResult']:
+        """
+        Instance price.
+        """
+        return pulumi.get(self, "instance_prices")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceResult(dict):
+    def __init__(__self__, *,
+                 currency: str,
+                 discount: float,
+                 discount_price: float,
+                 original_bundle_price: float,
+                 original_price: float):
+        """
+        :param str currency: A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+        :param float discount: Discount.
+        :param float discount_price: Discounted price.
+        :param float original_bundle_price: Original unit price of the package.
+        :param float original_price: Original price.
+        """
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "discount", discount)
+        pulumi.set(__self__, "discount_price", discount_price)
+        pulumi.set(__self__, "original_bundle_price", original_bundle_price)
+        pulumi.set(__self__, "original_price", original_price)
+
+    @property
+    @pulumi.getter
+    def currency(self) -> str:
+        """
+        A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+        """
+        return pulumi.get(self, "currency")
+
+    @property
+    @pulumi.getter
+    def discount(self) -> float:
+        """
+        Discount.
+        """
+        return pulumi.get(self, "discount")
+
+    @property
+    @pulumi.getter(name="discountPrice")
+    def discount_price(self) -> float:
+        """
+        Discounted price.
+        """
+        return pulumi.get(self, "discount_price")
+
+    @property
+    @pulumi.getter(name="originalBundlePrice")
+    def original_bundle_price(self) -> float:
+        """
+        Original unit price of the package.
+        """
+        return pulumi.get(self, "original_bundle_price")
+
+    @property
+    @pulumi.getter(name="originalPrice")
+    def original_price(self) -> float:
+        """
+        Original price.
+        """
+        return pulumi.get(self, "original_price")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetModifyPriceResult(dict):
+    def __init__(__self__, *,
+                 instance_prices: Sequence['outputs.GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceResult']):
+        """
+        :param Sequence['GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs'] instance_prices: Instance price.
+        """
+        pulumi.set(__self__, "instance_prices", instance_prices)
+
+    @property
+    @pulumi.getter(name="instancePrices")
+    def instance_prices(self) -> Sequence['outputs.GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceResult']:
+        """
+        Instance price.
+        """
+        return pulumi.get(self, "instance_prices")
+
+
+@pulumi.output_type
+class GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceResult(dict):
+    def __init__(__self__, *,
+                 currency: str,
+                 discount: float,
+                 discount_price: float,
+                 original_bundle_price: float,
+                 original_price: float):
+        """
+        :param str currency: A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+        :param float discount: Discount.
+        :param float discount_price: Discounted price.
+        :param float original_bundle_price: Original unit price of the package.
+        :param float original_price: Original price.
+        """
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "discount", discount)
+        pulumi.set(__self__, "discount_price", discount_price)
+        pulumi.set(__self__, "original_bundle_price", original_bundle_price)
+        pulumi.set(__self__, "original_price", original_price)
+
+    @property
+    @pulumi.getter
+    def currency(self) -> str:
+        """
+        A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+        """
+        return pulumi.get(self, "currency")
+
+    @property
+    @pulumi.getter
+    def discount(self) -> float:
+        """
+        Discount.
+        """
+        return pulumi.get(self, "discount")
+
+    @property
+    @pulumi.getter(name="discountPrice")
+    def discount_price(self) -> float:
+        """
+        Discounted price.
+        """
+        return pulumi.get(self, "discount_price")
+
+    @property
+    @pulumi.getter(name="originalBundlePrice")
+    def original_bundle_price(self) -> float:
+        """
+        Original unit price of the package.
+        """
+        return pulumi.get(self, "original_bundle_price")
+
+    @property
+    @pulumi.getter(name="originalPrice")
+    def original_price(self) -> float:
+        """
+        Original price.
+        """
+        return pulumi.get(self, "original_price")
+
+
+@pulumi.output_type
+class GetRegionRegionSetResult(dict):
+    def __init__(__self__, *,
+                 is_china_mainland: bool,
+                 region: str,
+                 region_name: str,
+                 region_state: str):
+        """
+        :param bool is_china_mainland: Whether the region is in the Chinese mainland.
+        :param str region: Region name.
+        :param str region_name: Region description.
+        :param str region_state: Region availability status.
+        """
+        pulumi.set(__self__, "is_china_mainland", is_china_mainland)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "region_state", region_state)
+
+    @property
+    @pulumi.getter(name="isChinaMainland")
+    def is_china_mainland(self) -> bool:
+        """
+        Whether the region is in the Chinese mainland.
+        """
+        return pulumi.get(self, "is_china_mainland")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region description.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="regionState")
+    def region_state(self) -> str:
+        """
+        Region availability status.
+        """
+        return pulumi.get(self, "region_state")
+
+
+@pulumi.output_type
+class GetResetInstanceBlueprintFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetResetInstanceBlueprintResetInstanceBlueprintSetResult(dict):
+    def __init__(__self__, *,
+                 blueprint_infos: Sequence['outputs.GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoResult'],
+                 is_resettable: bool,
+                 non_resettable_message: str):
+        """
+        :param Sequence['GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs'] blueprint_infos: Mirror details.
+        :param bool is_resettable: Whether the instance image can be reset to the target image.
+        :param str non_resettable_message: The information cannot be reset. when the mirror can be reset ''.
+        """
+        pulumi.set(__self__, "blueprint_infos", blueprint_infos)
+        pulumi.set(__self__, "is_resettable", is_resettable)
+        pulumi.set(__self__, "non_resettable_message", non_resettable_message)
+
+    @property
+    @pulumi.getter(name="blueprintInfos")
+    def blueprint_infos(self) -> Sequence['outputs.GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoResult']:
+        """
+        Mirror details.
+        """
+        return pulumi.get(self, "blueprint_infos")
+
+    @property
+    @pulumi.getter(name="isResettable")
+    def is_resettable(self) -> bool:
+        """
+        Whether the instance image can be reset to the target image.
+        """
+        return pulumi.get(self, "is_resettable")
+
+    @property
+    @pulumi.getter(name="nonResettableMessage")
+    def non_resettable_message(self) -> str:
+        """
+        The information cannot be reset. when the mirror can be reset ''.
+        """
+        return pulumi.get(self, "non_resettable_message")
+
+
+@pulumi.output_type
+class GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoResult(dict):
+    def __init__(__self__, *,
+                 blueprint_id: str,
+                 blueprint_name: str,
+                 blueprint_state: str,
+                 blueprint_type: str,
+                 community_url: str,
+                 created_time: str,
+                 description: str,
+                 display_title: str,
+                 display_version: str,
+                 docker_version: str,
+                 guide_url: str,
+                 image_id: str,
+                 image_url: str,
+                 os_name: str,
+                 platform: str,
+                 platform_type: str,
+                 required_memory_size: int,
+                 required_system_disk_size: int,
+                 scene_id_sets: Sequence[str],
+                 support_automation_tools: bool):
+        """
+        :param str blueprint_id: Image ID, which is the unique identity of Blueprint.
+        :param str blueprint_name: Mirror name.
+        :param str blueprint_state: Mirror status.
+        :param str blueprint_type: Image type, such as APP_OS, PURE_OS, PRIVATE.
+        :param str community_url: The official website Url.
+        :param str created_time: Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        :param str description: Mirror description information.
+        :param str display_title: The mirror image shows the title to the public.
+        :param str display_version: The image shows the version to the public.
+        :param str docker_version: Docker version number.
+        :param str guide_url: Guide article Url.
+        :param str image_id: CVM image ID after sharing the CVM image to the lightweight application server.
+        :param str image_url: Mirror image URL.
+        :param str os_name: Operating system name.
+        :param str platform: Operating system platform.
+        :param str platform_type: Operating system platform type, such as LINUX_UNIX, WINDOWS.
+        :param int required_memory_size: Memory required for mirroring (in GB).
+        :param int required_system_disk_size: The size of the system disk required for image (in GB).
+        :param Sequence[str] scene_id_sets: The mirror association uses the scene Id list.
+        :param bool support_automation_tools: Whether the image supports automation helper.
+        """
+        pulumi.set(__self__, "blueprint_id", blueprint_id)
+        pulumi.set(__self__, "blueprint_name", blueprint_name)
+        pulumi.set(__self__, "blueprint_state", blueprint_state)
+        pulumi.set(__self__, "blueprint_type", blueprint_type)
+        pulumi.set(__self__, "community_url", community_url)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_title", display_title)
+        pulumi.set(__self__, "display_version", display_version)
+        pulumi.set(__self__, "docker_version", docker_version)
+        pulumi.set(__self__, "guide_url", guide_url)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "image_url", image_url)
+        pulumi.set(__self__, "os_name", os_name)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "platform_type", platform_type)
+        pulumi.set(__self__, "required_memory_size", required_memory_size)
+        pulumi.set(__self__, "required_system_disk_size", required_system_disk_size)
+        pulumi.set(__self__, "scene_id_sets", scene_id_sets)
+        pulumi.set(__self__, "support_automation_tools", support_automation_tools)
+
+    @property
+    @pulumi.getter(name="blueprintId")
+    def blueprint_id(self) -> str:
+        """
+        Image ID, which is the unique identity of Blueprint.
+        """
+        return pulumi.get(self, "blueprint_id")
+
+    @property
+    @pulumi.getter(name="blueprintName")
+    def blueprint_name(self) -> str:
+        """
+        Mirror name.
+        """
+        return pulumi.get(self, "blueprint_name")
+
+    @property
+    @pulumi.getter(name="blueprintState")
+    def blueprint_state(self) -> str:
+        """
+        Mirror status.
+        """
+        return pulumi.get(self, "blueprint_state")
+
+    @property
+    @pulumi.getter(name="blueprintType")
+    def blueprint_type(self) -> str:
+        """
+        Image type, such as APP_OS, PURE_OS, PRIVATE.
+        """
+        return pulumi.get(self, "blueprint_type")
+
+    @property
+    @pulumi.getter(name="communityUrl")
+    def community_url(self) -> str:
+        """
+        The official website Url.
+        """
+        return pulumi.get(self, "community_url")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Mirror description information.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="displayTitle")
+    def display_title(self) -> str:
+        """
+        The mirror image shows the title to the public.
+        """
+        return pulumi.get(self, "display_title")
+
+    @property
+    @pulumi.getter(name="displayVersion")
+    def display_version(self) -> str:
+        """
+        The image shows the version to the public.
+        """
+        return pulumi.get(self, "display_version")
+
+    @property
+    @pulumi.getter(name="dockerVersion")
+    def docker_version(self) -> str:
+        """
+        Docker version number.
+        """
+        return pulumi.get(self, "docker_version")
+
+    @property
+    @pulumi.getter(name="guideUrl")
+    def guide_url(self) -> str:
+        """
+        Guide article Url.
+        """
+        return pulumi.get(self, "guide_url")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        CVM image ID after sharing the CVM image to the lightweight application server.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter(name="imageUrl")
+    def image_url(self) -> str:
+        """
+        Mirror image URL.
+        """
+        return pulumi.get(self, "image_url")
+
+    @property
+    @pulumi.getter(name="osName")
+    def os_name(self) -> str:
+        """
+        Operating system name.
+        """
+        return pulumi.get(self, "os_name")
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        Operating system platform.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="platformType")
+    def platform_type(self) -> str:
+        """
+        Operating system platform type, such as LINUX_UNIX, WINDOWS.
+        """
+        return pulumi.get(self, "platform_type")
+
+    @property
+    @pulumi.getter(name="requiredMemorySize")
+    def required_memory_size(self) -> int:
+        """
+        Memory required for mirroring (in GB).
+        """
+        return pulumi.get(self, "required_memory_size")
+
+    @property
+    @pulumi.getter(name="requiredSystemDiskSize")
+    def required_system_disk_size(self) -> int:
+        """
+        The size of the system disk required for image (in GB).
+        """
+        return pulumi.get(self, "required_system_disk_size")
+
+    @property
+    @pulumi.getter(name="sceneIdSets")
+    def scene_id_sets(self) -> Sequence[str]:
+        """
+        The mirror association uses the scene Id list.
+        """
+        return pulumi.get(self, "scene_id_sets")
+
+    @property
+    @pulumi.getter(name="supportAutomationTools")
+    def support_automation_tools(self) -> bool:
+        """
+        Whether the image supports automation helper.
+        """
+        return pulumi.get(self, "support_automation_tools")
+
+
+@pulumi.output_type
+class GetSceneSceneSetResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 display_name: str,
+                 scene_id: str):
+        """
+        :param str description: Use scene description.
+        :param str display_name: Use the scene presentation name.
+        :param str scene_id: Use scene Id.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "scene_id", scene_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Use scene description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Use the scene presentation name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter(name="sceneId")
+    def scene_id(self) -> str:
+        """
+        Use scene Id.
+        """
+        return pulumi.get(self, "scene_id")
+
+
+@pulumi.output_type
+class GetZoneZoneInfoSetResult(dict):
+    def __init__(__self__, *,
+                 instance_display_label: str,
+                 zone: str,
+                 zone_name: str):
+        """
+        :param str instance_display_label: Instance purchase page availability zone display label.
+        :param str zone: Availability zone.
+        :param str zone_name: Chinese name of availability zone.
+        """
+        pulumi.set(__self__, "instance_display_label", instance_display_label)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="instanceDisplayLabel")
+    def instance_display_label(self) -> str:
+        """
+        Instance purchase page availability zone display label.
+        """
+        return pulumi.get(self, "instance_display_label")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        Chinese name of availability zone.
+        """
+        return pulumi.get(self, "zone_name")
 
 
