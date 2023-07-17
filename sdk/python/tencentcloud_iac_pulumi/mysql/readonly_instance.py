@@ -823,6 +823,14 @@ class ReadonlyInstance(pulumi.CustomResource):
             vpc_id="vpc-12mt3l31")
         ```
 
+        ## Import
+
+        mysql read-only database instances can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. NOTES: Only supported prepaid instance.
@@ -877,6 +885,14 @@ class ReadonlyInstance(pulumi.CustomResource):
             },
             volume_size=255,
             vpc_id="vpc-12mt3l31")
+        ```
+
+        ## Import
+
+        mysql read-only database instances can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
         ```
 
         :param str resource_name: The name of the resource.
@@ -1093,7 +1109,7 @@ class ReadonlyInstance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="deviceType")
-    def device_type(self) -> pulumi.Output[Optional[str]]:
+    def device_type(self) -> pulumi.Output[str]:
         """
         Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
         """

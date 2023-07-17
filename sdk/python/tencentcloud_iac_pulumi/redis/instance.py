@@ -20,13 +20,16 @@ class InstanceArgs:
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 operation_network: Optional[pulumi.Input[str]] = None,
                  params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 recycle: Optional[pulumi.Input[int]] = None,
                  redis_replicas_num: Optional[pulumi.Input[int]] = None,
                  redis_shard_num: Optional[pulumi.Input[int]] = None,
                  replica_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -44,23 +47,26 @@ class InstanceArgs:
         :param pulumi.Input[int] auto_renew_flag: Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[str] ip: IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[str] operation_network: Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
         :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
+        :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
+        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
-        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
+        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "mem_size", mem_size)
@@ -70,10 +76,14 @@ class InstanceArgs:
             pulumi.set(__self__, "charge_type", charge_type)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if no_auth is not None:
             pulumi.set(__self__, "no_auth", no_auth)
+        if operation_network is not None:
+            pulumi.set(__self__, "operation_network", operation_network)
         if params_template_id is not None:
             pulumi.set(__self__, "params_template_id", params_template_id)
         if password is not None:
@@ -84,6 +94,8 @@ class InstanceArgs:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if recycle is not None:
+            pulumi.set(__self__, "recycle", recycle)
         if redis_replicas_num is not None:
             pulumi.set(__self__, "redis_replicas_num", redis_replicas_num)
         if redis_shard_num is not None:
@@ -170,6 +182,18 @@ class InstanceArgs:
 
     @property
     @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
         Instance name.
@@ -191,6 +215,18 @@ class InstanceArgs:
     @no_auth.setter
     def no_auth(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "no_auth", value)
+
+    @property
+    @pulumi.getter(name="operationNetwork")
+    def operation_network(self) -> Optional[pulumi.Input[str]]:
+        """
+        Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        """
+        return pulumi.get(self, "operation_network")
+
+    @operation_network.setter
+    def operation_network(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operation_network", value)
 
     @property
     @pulumi.getter(name="paramsTemplateId")
@@ -220,7 +256,7 @@ class InstanceArgs:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         """
         return pulumi.get(self, "port")
 
@@ -251,6 +287,18 @@ class InstanceArgs:
     @project_id.setter
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter
+    def recycle(self) -> Optional[pulumi.Input[int]]:
+        """
+        Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        """
+        return pulumi.get(self, "recycle")
+
+    @recycle.setter
+    def recycle(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "recycle", value)
 
     @property
     @pulumi.getter(name="redisReplicasNum")
@@ -316,7 +364,7 @@ class InstanceArgs:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies which subnet the instance should belong to.
+        Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -352,7 +400,7 @@ class InstanceArgs:
     @pulumi.getter(name="typeId")
     def type_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         """
         return pulumi.get(self, "type_id")
 
@@ -364,7 +412,7 @@ class InstanceArgs:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the vpc with which the instance is to be associated.
+        ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -386,11 +434,13 @@ class _InstanceState:
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
                  node_infos: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]]] = None,
+                 operation_network: Optional[pulumi.Input[str]] = None,
                  params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 recycle: Optional[pulumi.Input[int]] = None,
                  redis_replicas_num: Optional[pulumi.Input[int]] = None,
                  redis_shard_num: Optional[pulumi.Input[int]] = None,
                  replica_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -409,27 +459,29 @@ class _InstanceState:
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[str] create_time: The time when the instance was created.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
-        :param pulumi.Input[str] ip: IP address of an instance.
+        :param pulumi.Input[str] ip: IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoArgs']]] node_infos: Readonly Primary/Replica nodes.
+        :param pulumi.Input[str] operation_network: Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
         :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
+        :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
-        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
+        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
-        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
+        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
@@ -451,6 +503,8 @@ class _InstanceState:
             pulumi.set(__self__, "no_auth", no_auth)
         if node_infos is not None:
             pulumi.set(__self__, "node_infos", node_infos)
+        if operation_network is not None:
+            pulumi.set(__self__, "operation_network", operation_network)
         if params_template_id is not None:
             pulumi.set(__self__, "params_template_id", params_template_id)
         if password is not None:
@@ -461,6 +515,8 @@ class _InstanceState:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if recycle is not None:
+            pulumi.set(__self__, "recycle", recycle)
         if redis_replicas_num is not None:
             pulumi.set(__self__, "redis_replicas_num", redis_replicas_num)
         if redis_shard_num is not None:
@@ -551,7 +607,7 @@ class _InstanceState:
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
         """
-        IP address of an instance.
+        IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         """
         return pulumi.get(self, "ip")
 
@@ -608,6 +664,18 @@ class _InstanceState:
         pulumi.set(self, "node_infos", value)
 
     @property
+    @pulumi.getter(name="operationNetwork")
+    def operation_network(self) -> Optional[pulumi.Input[str]]:
+        """
+        Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        """
+        return pulumi.get(self, "operation_network")
+
+    @operation_network.setter
+    def operation_network(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operation_network", value)
+
+    @property
     @pulumi.getter(name="paramsTemplateId")
     def params_template_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -635,7 +703,7 @@ class _InstanceState:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         """
         return pulumi.get(self, "port")
 
@@ -666,6 +734,18 @@ class _InstanceState:
     @project_id.setter
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter
+    def recycle(self) -> Optional[pulumi.Input[int]]:
+        """
+        Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        """
+        return pulumi.get(self, "recycle")
+
+    @recycle.setter
+    def recycle(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "recycle", value)
 
     @property
     @pulumi.getter(name="redisReplicasNum")
@@ -743,7 +823,7 @@ class _InstanceState:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies which subnet the instance should belong to.
+        Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -779,7 +859,7 @@ class _InstanceState:
     @pulumi.getter(name="typeId")
     def type_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         """
         return pulumi.get(self, "type_id")
 
@@ -791,7 +871,7 @@ class _InstanceState:
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the vpc with which the instance is to be associated.
+        ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "vpc_id")
 
@@ -809,14 +889,17 @@ class Instance(pulumi.CustomResource):
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 operation_network: Optional[pulumi.Input[str]] = None,
                  params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 recycle: Optional[pulumi.Input[int]] = None,
                  redis_replicas_num: Optional[pulumi.Input[int]] = None,
                  redis_shard_num: Optional[pulumi.Input[int]] = None,
                  replica_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -835,6 +918,24 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config()
+        redis_instance_test2 = tencentcloud.redis.Instance("redisInstanceTest2",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379)
+        ```
+
         ## Import
 
         Redis instance can be imported, e.g.
@@ -849,24 +950,27 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] availability_zone: The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[str] ip: IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
+        :param pulumi.Input[str] operation_network: Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
         :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
+        :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
+        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
-        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
+        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         ...
     @overload
@@ -880,6 +984,24 @@ class Instance(pulumi.CustomResource):
         > **NOTE:** The argument vpc_id and subnet_id is now required because Basic Network Instance is no longer supported.
 
         > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config()
+        redis_instance_test2 = tencentcloud.redis.Instance("redisInstanceTest2",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379)
+        ```
 
         ## Import
 
@@ -908,14 +1030,17 @@ class Instance(pulumi.CustomResource):
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  no_auth: Optional[pulumi.Input[bool]] = None,
+                 operation_network: Optional[pulumi.Input[str]] = None,
                  params_template_id: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 recycle: Optional[pulumi.Input[int]] = None,
                  redis_replicas_num: Optional[pulumi.Input[int]] = None,
                  redis_shard_num: Optional[pulumi.Input[int]] = None,
                  replica_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -946,16 +1071,19 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["availability_zone"] = availability_zone
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["force_delete"] = force_delete
+            __props__.__dict__["ip"] = ip
             if mem_size is None and not opts.urn:
                 raise TypeError("Missing required property 'mem_size'")
             __props__.__dict__["mem_size"] = mem_size
             __props__.__dict__["name"] = name
             __props__.__dict__["no_auth"] = no_auth
+            __props__.__dict__["operation_network"] = operation_network
             __props__.__dict__["params_template_id"] = params_template_id
             __props__.__dict__["password"] = password
             __props__.__dict__["port"] = port
             __props__.__dict__["prepaid_period"] = prepaid_period
             __props__.__dict__["project_id"] = project_id
+            __props__.__dict__["recycle"] = recycle
             __props__.__dict__["redis_replicas_num"] = redis_replicas_num
             __props__.__dict__["redis_shard_num"] = redis_shard_num
             __props__.__dict__["replica_zone_ids"] = replica_zone_ids
@@ -970,7 +1098,6 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["type_id"] = type_id
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
-            __props__.__dict__["ip"] = None
             __props__.__dict__["node_infos"] = None
             __props__.__dict__["status"] = None
         super(Instance, __self__).__init__(
@@ -993,11 +1120,13 @@ class Instance(pulumi.CustomResource):
             name: Optional[pulumi.Input[str]] = None,
             no_auth: Optional[pulumi.Input[bool]] = None,
             node_infos: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoArgs']]]]] = None,
+            operation_network: Optional[pulumi.Input[str]] = None,
             params_template_id: Optional[pulumi.Input[str]] = None,
             password: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
+            recycle: Optional[pulumi.Input[int]] = None,
             redis_replicas_num: Optional[pulumi.Input[int]] = None,
             redis_shard_num: Optional[pulumi.Input[int]] = None,
             replica_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -1021,27 +1150,29 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[str] create_time: The time when the instance was created.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
-        :param pulumi.Input[str] ip: IP address of an instance.
+        :param pulumi.Input[str] ip: IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoArgs']]]] node_infos: Readonly Primary/Replica nodes.
+        :param pulumi.Input[str] operation_network: Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
         :param pulumi.Input[str] params_template_id: Specify params template id. If not set, will use default template.
         :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
+        :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
-        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
+        :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
-        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
+        :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -1057,11 +1188,13 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["no_auth"] = no_auth
         __props__.__dict__["node_infos"] = node_infos
+        __props__.__dict__["operation_network"] = operation_network
         __props__.__dict__["params_template_id"] = params_template_id
         __props__.__dict__["password"] = password
         __props__.__dict__["port"] = port
         __props__.__dict__["prepaid_period"] = prepaid_period
         __props__.__dict__["project_id"] = project_id
+        __props__.__dict__["recycle"] = recycle
         __props__.__dict__["redis_replicas_num"] = redis_replicas_num
         __props__.__dict__["redis_shard_num"] = redis_shard_num
         __props__.__dict__["replica_zone_ids"] = replica_zone_ids
@@ -1119,7 +1252,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def ip(self) -> pulumi.Output[str]:
         """
-        IP address of an instance.
+        IP address of an instance. When the `operation_network` is `changeVip`, this parameter needs to be configured.
         """
         return pulumi.get(self, "ip")
 
@@ -1156,6 +1289,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "node_infos")
 
     @property
+    @pulumi.getter(name="operationNetwork")
+    def operation_network(self) -> pulumi.Output[Optional[str]]:
+        """
+        Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+        """
+        return pulumi.get(self, "operation_network")
+
+    @property
     @pulumi.getter(name="paramsTemplateId")
     def params_template_id(self) -> pulumi.Output[Optional[str]]:
         """
@@ -1175,7 +1316,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def port(self) -> pulumi.Output[Optional[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         """
         return pulumi.get(self, "port")
 
@@ -1196,6 +1337,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "project_id")
 
     @property
+    @pulumi.getter
+    def recycle(self) -> pulumi.Output[Optional[int]]:
+        """
+        Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+        """
+        return pulumi.get(self, "recycle")
+
+    @property
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> pulumi.Output[Optional[int]]:
         """
@@ -1213,7 +1362,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="replicaZoneIds")
-    def replica_zone_ids(self) -> pulumi.Output[Optional[Sequence[int]]]:
+    def replica_zone_ids(self) -> pulumi.Output[Sequence[int]]:
         """
         ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         """
@@ -1247,7 +1396,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Output[str]:
         """
-        Specifies which subnet the instance should belong to.
+        Specifies which subnet the instance should belong to. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -1271,7 +1420,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="typeId")
     def type_id(self) -> pulumi.Output[Optional[int]]:
         """
-        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
         """
         return pulumi.get(self, "type_id")
 
@@ -1279,7 +1428,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Output[str]:
         """
-        ID of the vpc with which the instance is to be associated.
+        ID of the vpc with which the instance is to be associated. When the `operation_network` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
         """
         return pulumi.get(self, "vpc_id")
 

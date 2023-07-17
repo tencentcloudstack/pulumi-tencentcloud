@@ -29,6 +29,16 @@ __all__ = [
     'MigrateJobSrcInfoExtraAttr',
     'MigrateJobSrcInfoInfo',
     'MigrateServiceTag',
+    'SyncConfigDstInfo',
+    'SyncConfigObjects',
+    'SyncConfigObjectsDatabase',
+    'SyncConfigObjectsDatabaseTable',
+    'SyncConfigObjectsDatabaseView',
+    'SyncConfigObjectsOnlineDdl',
+    'SyncConfigOptions',
+    'SyncConfigOptionsConflictHandleOption',
+    'SyncConfigOptionsDdlOption',
+    'SyncConfigSrcInfo',
     'SyncJobTag',
     'GetCompareTasksListResult',
     'GetCompareTasksListCheckProcessResult',
@@ -43,6 +53,7 @@ __all__ = [
     'GetCompareTasksListConfigObjectItemResult',
     'GetCompareTasksListConfigObjectItemTableResult',
     'GetCompareTasksListConfigObjectItemViewResult',
+    'GetMigrateDbInstancesInstanceResult',
     'GetMigrateJobsListResult',
     'GetMigrateJobsListActionResult',
     'GetMigrateJobsListCompareTaskResult',
@@ -1918,6 +1929,1407 @@ class MigrateServiceTag(dict):
 
 
 @pulumi.output_type
+class SyncConfigDstInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accountMode":
+            suggest = "account_mode"
+        elif key == "accountRole":
+            suggest = "account_role"
+        elif key == "ccnId":
+            suggest = "ccn_id"
+        elif key == "cvmInstanceId":
+            suggest = "cvm_instance_id"
+        elif key == "dbKernel":
+            suggest = "db_kernel"
+        elif key == "dbName":
+            suggest = "db_name"
+        elif key == "encryptConn":
+            suggest = "encrypt_conn"
+        elif key == "engineVersion":
+            suggest = "engine_version"
+        elif key == "instanceId":
+            suggest = "instance_id"
+        elif key == "roleExternalId":
+            suggest = "role_external_id"
+        elif key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "tmpSecretId":
+            suggest = "tmp_secret_id"
+        elif key == "tmpSecretKey":
+            suggest = "tmp_secret_key"
+        elif key == "tmpToken":
+            suggest = "tmp_token"
+        elif key == "uniqDcgId":
+            suggest = "uniq_dcg_id"
+        elif key == "uniqVpnGwId":
+            suggest = "uniq_vpn_gw_id"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigDstInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigDstInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigDstInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 account: Optional[str] = None,
+                 account_mode: Optional[str] = None,
+                 account_role: Optional[str] = None,
+                 ccn_id: Optional[str] = None,
+                 cvm_instance_id: Optional[str] = None,
+                 db_kernel: Optional[str] = None,
+                 db_name: Optional[str] = None,
+                 encrypt_conn: Optional[str] = None,
+                 engine_version: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 ip: Optional[str] = None,
+                 password: Optional[str] = None,
+                 port: Optional[int] = None,
+                 region: Optional[str] = None,
+                 role: Optional[str] = None,
+                 role_external_id: Optional[str] = None,
+                 subnet_id: Optional[str] = None,
+                 supplier: Optional[str] = None,
+                 tmp_secret_id: Optional[str] = None,
+                 tmp_secret_key: Optional[str] = None,
+                 tmp_token: Optional[str] = None,
+                 uniq_dcg_id: Optional[str] = None,
+                 uniq_vpn_gw_id: Optional[str] = None,
+                 user: Optional[str] = None,
+                 vpc_id: Optional[str] = None):
+        """
+        :param str account: The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str account_mode: The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+        :param str account_role: The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str ccn_id: Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str cvm_instance_id: CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_kernel: Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_name: Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str encrypt_conn: Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str engine_version: Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str instance_id: Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str ip: The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str password: Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int port: Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str region: The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str role: The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str role_external_id: External role id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str subnet_id: The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str supplier: Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_secret_id: Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_secret_key: Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_token: Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str uniq_dcg_id: Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str uniq_vpn_gw_id: VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str user: Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if account is not None:
+            pulumi.set(__self__, "account", account)
+        if account_mode is not None:
+            pulumi.set(__self__, "account_mode", account_mode)
+        if account_role is not None:
+            pulumi.set(__self__, "account_role", account_role)
+        if ccn_id is not None:
+            pulumi.set(__self__, "ccn_id", ccn_id)
+        if cvm_instance_id is not None:
+            pulumi.set(__self__, "cvm_instance_id", cvm_instance_id)
+        if db_kernel is not None:
+            pulumi.set(__self__, "db_kernel", db_kernel)
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if encrypt_conn is not None:
+            pulumi.set(__self__, "encrypt_conn", encrypt_conn)
+        if engine_version is not None:
+            pulumi.set(__self__, "engine_version", engine_version)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+        if role is not None:
+            pulumi.set(__self__, "role", role)
+        if role_external_id is not None:
+            pulumi.set(__self__, "role_external_id", role_external_id)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if supplier is not None:
+            pulumi.set(__self__, "supplier", supplier)
+        if tmp_secret_id is not None:
+            pulumi.set(__self__, "tmp_secret_id", tmp_secret_id)
+        if tmp_secret_key is not None:
+            pulumi.set(__self__, "tmp_secret_key", tmp_secret_key)
+        if tmp_token is not None:
+            pulumi.set(__self__, "tmp_token", tmp_token)
+        if uniq_dcg_id is not None:
+            pulumi.set(__self__, "uniq_dcg_id", uniq_dcg_id)
+        if uniq_vpn_gw_id is not None:
+            pulumi.set(__self__, "uniq_vpn_gw_id", uniq_vpn_gw_id)
+        if user is not None:
+            pulumi.set(__self__, "user", user)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def account(self) -> Optional[str]:
+        """
+        The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter(name="accountMode")
+    def account_mode(self) -> Optional[str]:
+        """
+        The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account_mode")
+
+    @property
+    @pulumi.getter(name="accountRole")
+    def account_role(self) -> Optional[str]:
+        """
+        The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account_role")
+
+    @property
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> Optional[str]:
+        """
+        Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ccn_id")
+
+    @property
+    @pulumi.getter(name="cvmInstanceId")
+    def cvm_instance_id(self) -> Optional[str]:
+        """
+        CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cvm_instance_id")
+
+    @property
+    @pulumi.getter(name="dbKernel")
+    def db_kernel(self) -> Optional[str]:
+        """
+        Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_kernel")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="encryptConn")
+    def encrypt_conn(self) -> Optional[str]:
+        """
+        Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "encrypt_conn")
+
+    @property
+    @pulumi.getter(name="engineVersion")
+    def engine_version(self) -> Optional[str]:
+        """
+        Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "engine_version")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[str]:
+        """
+        The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        """
+        Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        """
+        The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def role(self) -> Optional[str]:
+        """
+        The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="roleExternalId")
+    def role_external_id(self) -> Optional[str]:
+        """
+        External role id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "role_external_id")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        """
+        The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def supplier(self) -> Optional[str]:
+        """
+        Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "supplier")
+
+    @property
+    @pulumi.getter(name="tmpSecretId")
+    def tmp_secret_id(self) -> Optional[str]:
+        """
+        Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_secret_id")
+
+    @property
+    @pulumi.getter(name="tmpSecretKey")
+    def tmp_secret_key(self) -> Optional[str]:
+        """
+        Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_secret_key")
+
+    @property
+    @pulumi.getter(name="tmpToken")
+    def tmp_token(self) -> Optional[str]:
+        """
+        Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_token")
+
+    @property
+    @pulumi.getter(name="uniqDcgId")
+    def uniq_dcg_id(self) -> Optional[str]:
+        """
+        Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "uniq_dcg_id")
+
+    @property
+    @pulumi.getter(name="uniqVpnGwId")
+    def uniq_vpn_gw_id(self) -> Optional[str]:
+        """
+        VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "uniq_vpn_gw_id")
+
+    @property
+    @pulumi.getter
+    def user(self) -> Optional[str]:
+        """
+        Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "user")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[str]:
+        """
+        Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class SyncConfigObjects(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "advancedObjects":
+            suggest = "advanced_objects"
+        elif key == "onlineDdl":
+            suggest = "online_ddl"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigObjects. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigObjects.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigObjects.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 advanced_objects: Optional[Sequence[str]] = None,
+                 databases: Optional[Sequence['outputs.SyncConfigObjectsDatabase']] = None,
+                 mode: Optional[str] = None,
+                 online_ddl: Optional['outputs.SyncConfigObjectsOnlineDdl'] = None):
+        """
+        :param Sequence[str] advanced_objects: For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncConfigObjectsDatabaseArgs'] databases: Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str mode: Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'SyncConfigObjectsOnlineDdlArgs' online_ddl: OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if advanced_objects is not None:
+            pulumi.set(__self__, "advanced_objects", advanced_objects)
+        if databases is not None:
+            pulumi.set(__self__, "databases", databases)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if online_ddl is not None:
+            pulumi.set(__self__, "online_ddl", online_ddl)
+
+    @property
+    @pulumi.getter(name="advancedObjects")
+    def advanced_objects(self) -> Optional[Sequence[str]]:
+        """
+        For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "advanced_objects")
+
+    @property
+    @pulumi.getter
+    def databases(self) -> Optional[Sequence['outputs.SyncConfigObjectsDatabase']]:
+        """
+        Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "databases")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        """
+        Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "mode")
+
+    @property
+    @pulumi.getter(name="onlineDdl")
+    def online_ddl(self) -> Optional['outputs.SyncConfigObjectsOnlineDdl']:
+        """
+        OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "online_ddl")
+
+
+@pulumi.output_type
+class SyncConfigObjectsDatabase(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbMode":
+            suggest = "db_mode"
+        elif key == "dbName":
+            suggest = "db_name"
+        elif key == "eventMode":
+            suggest = "event_mode"
+        elif key == "functionMode":
+            suggest = "function_mode"
+        elif key == "newDbName":
+            suggest = "new_db_name"
+        elif key == "newSchemaName":
+            suggest = "new_schema_name"
+        elif key == "procedureMode":
+            suggest = "procedure_mode"
+        elif key == "schemaName":
+            suggest = "schema_name"
+        elif key == "tableMode":
+            suggest = "table_mode"
+        elif key == "triggerMode":
+            suggest = "trigger_mode"
+        elif key == "viewMode":
+            suggest = "view_mode"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigObjectsDatabase. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigObjectsDatabase.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigObjectsDatabase.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_mode: Optional[str] = None,
+                 db_name: Optional[str] = None,
+                 event_mode: Optional[str] = None,
+                 events: Optional[Sequence[str]] = None,
+                 function_mode: Optional[str] = None,
+                 functions: Optional[Sequence[str]] = None,
+                 new_db_name: Optional[str] = None,
+                 new_schema_name: Optional[str] = None,
+                 procedure_mode: Optional[str] = None,
+                 procedures: Optional[Sequence[str]] = None,
+                 schema_name: Optional[str] = None,
+                 table_mode: Optional[str] = None,
+                 tables: Optional[Sequence['outputs.SyncConfigObjectsDatabaseTable']] = None,
+                 trigger_mode: Optional[str] = None,
+                 triggers: Optional[Sequence[str]] = None,
+                 view_mode: Optional[str] = None,
+                 views: Optional[Sequence['outputs.SyncConfigObjectsDatabaseView']] = None):
+        """
+        :param str db_mode: DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_name: The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str event_mode: Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] events: When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str function_mode: Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] functions: Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str new_db_name: The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str new_schema_name: Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str procedure_mode: Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] procedures: Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str schema_name: Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+        :param str table_mode: Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncConfigObjectsDatabaseTableArgs'] tables: A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str trigger_mode: Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] triggers: When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str view_mode: View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncConfigObjectsDatabaseViewArgs'] views: View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if db_mode is not None:
+            pulumi.set(__self__, "db_mode", db_mode)
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if event_mode is not None:
+            pulumi.set(__self__, "event_mode", event_mode)
+        if events is not None:
+            pulumi.set(__self__, "events", events)
+        if function_mode is not None:
+            pulumi.set(__self__, "function_mode", function_mode)
+        if functions is not None:
+            pulumi.set(__self__, "functions", functions)
+        if new_db_name is not None:
+            pulumi.set(__self__, "new_db_name", new_db_name)
+        if new_schema_name is not None:
+            pulumi.set(__self__, "new_schema_name", new_schema_name)
+        if procedure_mode is not None:
+            pulumi.set(__self__, "procedure_mode", procedure_mode)
+        if procedures is not None:
+            pulumi.set(__self__, "procedures", procedures)
+        if schema_name is not None:
+            pulumi.set(__self__, "schema_name", schema_name)
+        if table_mode is not None:
+            pulumi.set(__self__, "table_mode", table_mode)
+        if tables is not None:
+            pulumi.set(__self__, "tables", tables)
+        if trigger_mode is not None:
+            pulumi.set(__self__, "trigger_mode", trigger_mode)
+        if triggers is not None:
+            pulumi.set(__self__, "triggers", triggers)
+        if view_mode is not None:
+            pulumi.set(__self__, "view_mode", view_mode)
+        if views is not None:
+            pulumi.set(__self__, "views", views)
+
+    @property
+    @pulumi.getter(name="dbMode")
+    def db_mode(self) -> Optional[str]:
+        """
+        DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_mode")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="eventMode")
+    def event_mode(self) -> Optional[str]:
+        """
+        Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_mode")
+
+    @property
+    @pulumi.getter
+    def events(self) -> Optional[Sequence[str]]:
+        """
+        When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "events")
+
+    @property
+    @pulumi.getter(name="functionMode")
+    def function_mode(self) -> Optional[str]:
+        """
+        Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "function_mode")
+
+    @property
+    @pulumi.getter
+    def functions(self) -> Optional[Sequence[str]]:
+        """
+        Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "functions")
+
+    @property
+    @pulumi.getter(name="newDbName")
+    def new_db_name(self) -> Optional[str]:
+        """
+        The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_db_name")
+
+    @property
+    @pulumi.getter(name="newSchemaName")
+    def new_schema_name(self) -> Optional[str]:
+        """
+        Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_schema_name")
+
+    @property
+    @pulumi.getter(name="procedureMode")
+    def procedure_mode(self) -> Optional[str]:
+        """
+        Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "procedure_mode")
+
+    @property
+    @pulumi.getter
+    def procedures(self) -> Optional[Sequence[str]]:
+        """
+        Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "procedures")
+
+    @property
+    @pulumi.getter(name="schemaName")
+    def schema_name(self) -> Optional[str]:
+        """
+        Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "schema_name")
+
+    @property
+    @pulumi.getter(name="tableMode")
+    def table_mode(self) -> Optional[str]:
+        """
+        Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_mode")
+
+    @property
+    @pulumi.getter
+    def tables(self) -> Optional[Sequence['outputs.SyncConfigObjectsDatabaseTable']]:
+        """
+        A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tables")
+
+    @property
+    @pulumi.getter(name="triggerMode")
+    def trigger_mode(self) -> Optional[str]:
+        """
+        Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "trigger_mode")
+
+    @property
+    @pulumi.getter
+    def triggers(self) -> Optional[Sequence[str]]:
+        """
+        When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "triggers")
+
+    @property
+    @pulumi.getter(name="viewMode")
+    def view_mode(self) -> Optional[str]:
+        """
+        View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "view_mode")
+
+    @property
+    @pulumi.getter
+    def views(self) -> Optional[Sequence['outputs.SyncConfigObjectsDatabaseView']]:
+        """
+        View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "views")
+
+
+@pulumi.output_type
+class SyncConfigObjectsDatabaseTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "filterCondition":
+            suggest = "filter_condition"
+        elif key == "newTableName":
+            suggest = "new_table_name"
+        elif key == "tableName":
+            suggest = "table_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigObjectsDatabaseTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigObjectsDatabaseTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigObjectsDatabaseTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 filter_condition: Optional[str] = None,
+                 new_table_name: Optional[str] = None,
+                 table_name: Optional[str] = None):
+        """
+        :param str filter_condition: Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str new_table_name: New table name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str table_name: Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if filter_condition is not None:
+            pulumi.set(__self__, "filter_condition", filter_condition)
+        if new_table_name is not None:
+            pulumi.set(__self__, "new_table_name", new_table_name)
+        if table_name is not None:
+            pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="filterCondition")
+    def filter_condition(self) -> Optional[str]:
+        """
+        Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "filter_condition")
+
+    @property
+    @pulumi.getter(name="newTableName")
+    def new_table_name(self) -> Optional[str]:
+        """
+        New table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_table_name")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> Optional[str]:
+        """
+        Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_name")
+
+
+@pulumi.output_type
+class SyncConfigObjectsDatabaseView(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newViewName":
+            suggest = "new_view_name"
+        elif key == "viewName":
+            suggest = "view_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigObjectsDatabaseView. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigObjectsDatabaseView.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigObjectsDatabaseView.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_view_name: Optional[str] = None,
+                 view_name: Optional[str] = None):
+        """
+        :param str new_view_name: New view name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str view_name: View name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if new_view_name is not None:
+            pulumi.set(__self__, "new_view_name", new_view_name)
+        if view_name is not None:
+            pulumi.set(__self__, "view_name", view_name)
+
+    @property
+    @pulumi.getter(name="newViewName")
+    def new_view_name(self) -> Optional[str]:
+        """
+        New view name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_view_name")
+
+    @property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> Optional[str]:
+        """
+        View name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "view_name")
+
+
+@pulumi.output_type
+class SyncConfigObjectsOnlineDdl(dict):
+    def __init__(__self__, *,
+                 status: Optional[str] = None):
+        """
+        :param str status: status.
+        """
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[str]:
+        """
+        status.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class SyncConfigOptions(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addAdditionalColumn":
+            suggest = "add_additional_column"
+        elif key == "conflictHandleOption":
+            suggest = "conflict_handle_option"
+        elif key == "conflictHandleType":
+            suggest = "conflict_handle_type"
+        elif key == "ddlOptions":
+            suggest = "ddl_options"
+        elif key == "dealOfExistSameTable":
+            suggest = "deal_of_exist_same_table"
+        elif key == "initType":
+            suggest = "init_type"
+        elif key == "opTypes":
+            suggest = "op_types"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigOptions. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigOptions.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigOptions.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 add_additional_column: Optional[bool] = None,
+                 conflict_handle_option: Optional['outputs.SyncConfigOptionsConflictHandleOption'] = None,
+                 conflict_handle_type: Optional[str] = None,
+                 ddl_options: Optional[Sequence['outputs.SyncConfigOptionsDdlOption']] = None,
+                 deal_of_exist_same_table: Optional[str] = None,
+                 init_type: Optional[str] = None,
+                 op_types: Optional[Sequence[str]] = None):
+        """
+        :param bool add_additional_column: Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'SyncConfigOptionsConflictHandleOptionArgs' conflict_handle_option: Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str conflict_handle_type: Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncConfigOptionsDdlOptionArgs'] ddl_options: DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str deal_of_exist_same_table: The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+        :param str init_type: Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] op_types: DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if add_additional_column is not None:
+            pulumi.set(__self__, "add_additional_column", add_additional_column)
+        if conflict_handle_option is not None:
+            pulumi.set(__self__, "conflict_handle_option", conflict_handle_option)
+        if conflict_handle_type is not None:
+            pulumi.set(__self__, "conflict_handle_type", conflict_handle_type)
+        if ddl_options is not None:
+            pulumi.set(__self__, "ddl_options", ddl_options)
+        if deal_of_exist_same_table is not None:
+            pulumi.set(__self__, "deal_of_exist_same_table", deal_of_exist_same_table)
+        if init_type is not None:
+            pulumi.set(__self__, "init_type", init_type)
+        if op_types is not None:
+            pulumi.set(__self__, "op_types", op_types)
+
+    @property
+    @pulumi.getter(name="addAdditionalColumn")
+    def add_additional_column(self) -> Optional[bool]:
+        """
+        Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "add_additional_column")
+
+    @property
+    @pulumi.getter(name="conflictHandleOption")
+    def conflict_handle_option(self) -> Optional['outputs.SyncConfigOptionsConflictHandleOption']:
+        """
+        Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "conflict_handle_option")
+
+    @property
+    @pulumi.getter(name="conflictHandleType")
+    def conflict_handle_type(self) -> Optional[str]:
+        """
+        Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "conflict_handle_type")
+
+    @property
+    @pulumi.getter(name="ddlOptions")
+    def ddl_options(self) -> Optional[Sequence['outputs.SyncConfigOptionsDdlOption']]:
+        """
+        DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_options")
+
+    @property
+    @pulumi.getter(name="dealOfExistSameTable")
+    def deal_of_exist_same_table(self) -> Optional[str]:
+        """
+        The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "deal_of_exist_same_table")
+
+    @property
+    @pulumi.getter(name="initType")
+    def init_type(self) -> Optional[str]:
+        """
+        Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "init_type")
+
+    @property
+    @pulumi.getter(name="opTypes")
+    def op_types(self) -> Optional[Sequence[str]]:
+        """
+        DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "op_types")
+
+
+@pulumi.output_type
+class SyncConfigOptionsConflictHandleOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "conditionColumn":
+            suggest = "condition_column"
+        elif key == "conditionOperator":
+            suggest = "condition_operator"
+        elif key == "conditionOrderInSrcAndDst":
+            suggest = "condition_order_in_src_and_dst"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigOptionsConflictHandleOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigOptionsConflictHandleOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigOptionsConflictHandleOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 condition_column: Optional[str] = None,
+                 condition_operator: Optional[str] = None,
+                 condition_order_in_src_and_dst: Optional[str] = None):
+        """
+        :param str condition_column: Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str condition_operator: Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str condition_order_in_src_and_dst: Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if condition_column is not None:
+            pulumi.set(__self__, "condition_column", condition_column)
+        if condition_operator is not None:
+            pulumi.set(__self__, "condition_operator", condition_operator)
+        if condition_order_in_src_and_dst is not None:
+            pulumi.set(__self__, "condition_order_in_src_and_dst", condition_order_in_src_and_dst)
+
+    @property
+    @pulumi.getter(name="conditionColumn")
+    def condition_column(self) -> Optional[str]:
+        """
+        Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_column")
+
+    @property
+    @pulumi.getter(name="conditionOperator")
+    def condition_operator(self) -> Optional[str]:
+        """
+        Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_operator")
+
+    @property
+    @pulumi.getter(name="conditionOrderInSrcAndDst")
+    def condition_order_in_src_and_dst(self) -> Optional[str]:
+        """
+        Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_order_in_src_and_dst")
+
+
+@pulumi.output_type
+class SyncConfigOptionsDdlOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlObject":
+            suggest = "ddl_object"
+        elif key == "ddlValues":
+            suggest = "ddl_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigOptionsDdlOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigOptionsDdlOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigOptionsDdlOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_object: Optional[str] = None,
+                 ddl_values: Optional[Sequence[str]] = None):
+        """
+        :param str ddl_object: Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[str] ddl_values: The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if ddl_object is not None:
+            pulumi.set(__self__, "ddl_object", ddl_object)
+        if ddl_values is not None:
+            pulumi.set(__self__, "ddl_values", ddl_values)
+
+    @property
+    @pulumi.getter(name="ddlObject")
+    def ddl_object(self) -> Optional[str]:
+        """
+        Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_object")
+
+    @property
+    @pulumi.getter(name="ddlValues")
+    def ddl_values(self) -> Optional[Sequence[str]]:
+        """
+        The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_values")
+
+
+@pulumi.output_type
+class SyncConfigSrcInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accountMode":
+            suggest = "account_mode"
+        elif key == "accountRole":
+            suggest = "account_role"
+        elif key == "ccnId":
+            suggest = "ccn_id"
+        elif key == "cvmInstanceId":
+            suggest = "cvm_instance_id"
+        elif key == "dbKernel":
+            suggest = "db_kernel"
+        elif key == "dbName":
+            suggest = "db_name"
+        elif key == "encryptConn":
+            suggest = "encrypt_conn"
+        elif key == "engineVersion":
+            suggest = "engine_version"
+        elif key == "instanceId":
+            suggest = "instance_id"
+        elif key == "roleExternalId":
+            suggest = "role_external_id"
+        elif key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "tmpSecretId":
+            suggest = "tmp_secret_id"
+        elif key == "tmpSecretKey":
+            suggest = "tmp_secret_key"
+        elif key == "tmpToken":
+            suggest = "tmp_token"
+        elif key == "uniqDcgId":
+            suggest = "uniq_dcg_id"
+        elif key == "uniqVpnGwId":
+            suggest = "uniq_vpn_gw_id"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncConfigSrcInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncConfigSrcInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncConfigSrcInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 account: Optional[str] = None,
+                 account_mode: Optional[str] = None,
+                 account_role: Optional[str] = None,
+                 ccn_id: Optional[str] = None,
+                 cvm_instance_id: Optional[str] = None,
+                 db_kernel: Optional[str] = None,
+                 db_name: Optional[str] = None,
+                 encrypt_conn: Optional[str] = None,
+                 engine_version: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 ip: Optional[str] = None,
+                 password: Optional[str] = None,
+                 port: Optional[int] = None,
+                 region: Optional[str] = None,
+                 role: Optional[str] = None,
+                 role_external_id: Optional[str] = None,
+                 subnet_id: Optional[str] = None,
+                 supplier: Optional[str] = None,
+                 tmp_secret_id: Optional[str] = None,
+                 tmp_secret_key: Optional[str] = None,
+                 tmp_token: Optional[str] = None,
+                 uniq_dcg_id: Optional[str] = None,
+                 uniq_vpn_gw_id: Optional[str] = None,
+                 user: Optional[str] = None,
+                 vpc_id: Optional[str] = None):
+        """
+        :param str account: The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str account_mode: The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+        :param str account_role: The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str ccn_id: Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str cvm_instance_id: CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_kernel: Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_name: Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str encrypt_conn: Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str engine_version: Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str instance_id: Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str ip: The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str password: Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int port: Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str region: The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str role: The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str role_external_id: External role id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str subnet_id: The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str supplier: Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_secret_id: Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_secret_key: Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str tmp_token: Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str uniq_dcg_id: Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str uniq_vpn_gw_id: VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str user: Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if account is not None:
+            pulumi.set(__self__, "account", account)
+        if account_mode is not None:
+            pulumi.set(__self__, "account_mode", account_mode)
+        if account_role is not None:
+            pulumi.set(__self__, "account_role", account_role)
+        if ccn_id is not None:
+            pulumi.set(__self__, "ccn_id", ccn_id)
+        if cvm_instance_id is not None:
+            pulumi.set(__self__, "cvm_instance_id", cvm_instance_id)
+        if db_kernel is not None:
+            pulumi.set(__self__, "db_kernel", db_kernel)
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if encrypt_conn is not None:
+            pulumi.set(__self__, "encrypt_conn", encrypt_conn)
+        if engine_version is not None:
+            pulumi.set(__self__, "engine_version", engine_version)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+        if role is not None:
+            pulumi.set(__self__, "role", role)
+        if role_external_id is not None:
+            pulumi.set(__self__, "role_external_id", role_external_id)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if supplier is not None:
+            pulumi.set(__self__, "supplier", supplier)
+        if tmp_secret_id is not None:
+            pulumi.set(__self__, "tmp_secret_id", tmp_secret_id)
+        if tmp_secret_key is not None:
+            pulumi.set(__self__, "tmp_secret_key", tmp_secret_key)
+        if tmp_token is not None:
+            pulumi.set(__self__, "tmp_token", tmp_token)
+        if uniq_dcg_id is not None:
+            pulumi.set(__self__, "uniq_dcg_id", uniq_dcg_id)
+        if uniq_vpn_gw_id is not None:
+            pulumi.set(__self__, "uniq_vpn_gw_id", uniq_vpn_gw_id)
+        if user is not None:
+            pulumi.set(__self__, "user", user)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def account(self) -> Optional[str]:
+        """
+        The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter(name="accountMode")
+    def account_mode(self) -> Optional[str]:
+        """
+        The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account_mode")
+
+    @property
+    @pulumi.getter(name="accountRole")
+    def account_role(self) -> Optional[str]:
+        """
+        The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "account_role")
+
+    @property
+    @pulumi.getter(name="ccnId")
+    def ccn_id(self) -> Optional[str]:
+        """
+        Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ccn_id")
+
+    @property
+    @pulumi.getter(name="cvmInstanceId")
+    def cvm_instance_id(self) -> Optional[str]:
+        """
+        CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cvm_instance_id")
+
+    @property
+    @pulumi.getter(name="dbKernel")
+    def db_kernel(self) -> Optional[str]:
+        """
+        Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_kernel")
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="encryptConn")
+    def encrypt_conn(self) -> Optional[str]:
+        """
+        Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "encrypt_conn")
+
+    @property
+    @pulumi.getter(name="engineVersion")
+    def engine_version(self) -> Optional[str]:
+        """
+        Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "engine_version")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[str]:
+        """
+        The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        """
+        Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        """
+        The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def role(self) -> Optional[str]:
+        """
+        The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="roleExternalId")
+    def role_external_id(self) -> Optional[str]:
+        """
+        External role id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "role_external_id")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        """
+        The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def supplier(self) -> Optional[str]:
+        """
+        Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "supplier")
+
+    @property
+    @pulumi.getter(name="tmpSecretId")
+    def tmp_secret_id(self) -> Optional[str]:
+        """
+        Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_secret_id")
+
+    @property
+    @pulumi.getter(name="tmpSecretKey")
+    def tmp_secret_key(self) -> Optional[str]:
+        """
+        Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_secret_key")
+
+    @property
+    @pulumi.getter(name="tmpToken")
+    def tmp_token(self) -> Optional[str]:
+        """
+        Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_token")
+
+    @property
+    @pulumi.getter(name="uniqDcgId")
+    def uniq_dcg_id(self) -> Optional[str]:
+        """
+        Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "uniq_dcg_id")
+
+    @property
+    @pulumi.getter(name="uniqVpnGwId")
+    def uniq_vpn_gw_id(self) -> Optional[str]:
+        """
+        VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "uniq_vpn_gw_id")
+
+    @property
+    @pulumi.getter
+    def user(self) -> Optional[str]:
+        """
+        Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "user")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[str]:
+        """
+        Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
 class SyncJobTag(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -2669,6 +4081,79 @@ class GetCompareTasksListConfigObjectItemViewResult(dict):
     @pulumi.getter(name="viewName")
     def view_name(self) -> Optional[str]:
         return pulumi.get(self, "view_name")
+
+
+@pulumi.output_type
+class GetMigrateDbInstancesInstanceResult(dict):
+    def __init__(__self__, *,
+                 hint: str,
+                 instance_id: str,
+                 instance_name: str,
+                 usable: int,
+                 vip: str,
+                 vport: int):
+        """
+        :param str hint: The reason of can&#39;t used in migration.
+        :param str instance_id: Database instance id.
+        :param str instance_name: Database instance name.
+        :param int usable: Can used in migration, 1-yes, 0-no.
+        :param str vip: Instance vip.
+        :param int vport: Instance port.
+        """
+        pulumi.set(__self__, "hint", hint)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "usable", usable)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter
+    def hint(self) -> str:
+        """
+        The reason of can&#39;t used in migration.
+        """
+        return pulumi.get(self, "hint")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Database instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Database instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter
+    def usable(self) -> int:
+        """
+        Can used in migration, 1-yes, 0-no.
+        """
+        return pulumi.get(self, "usable")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        Instance vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        Instance port.
+        """
+        return pulumi.get(self, "vport")
 
 
 @pulumi.output_type

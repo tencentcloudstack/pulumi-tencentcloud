@@ -15,6 +15,7 @@ from .get_instances import *
 from .get_tenant_instances import *
 from .instance import *
 from .instances_accept_attach import *
+from .instances_reject_attach import *
 from .instances_reset_attach import *
 from .routes import *
 from ._inputs import *

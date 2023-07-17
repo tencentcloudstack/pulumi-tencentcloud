@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  *
  * const defaultBackupList = pulumi.output(tencentcloud.Mysql.getBackupList({
  *     maxNumber: 10,
- *     mysqlId: "my-test-database",
+ *     mysqlId: "terraform-test-local-database",
  *     resultOutputFile: "mytestpath",
  * }));
  * ```

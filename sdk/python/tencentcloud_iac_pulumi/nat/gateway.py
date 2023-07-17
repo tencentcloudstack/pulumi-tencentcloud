@@ -18,7 +18,8 @@ class GatewayArgs:
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Gateway resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
@@ -27,6 +28,7 @@ class GatewayArgs:
         :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
+        :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
         """
         pulumi.set(__self__, "assigned_eip_sets", assigned_eip_sets)
         pulumi.set(__self__, "vpc_id", vpc_id)
@@ -38,6 +40,8 @@ class GatewayArgs:
             pulumi.set(__self__, "name", name)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
 
     @property
     @pulumi.getter(name="assignedEipSets")
@@ -111,6 +115,18 @@ class GatewayArgs:
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
 
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The availability zone, such as `ap-guangzhou-3`.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
 
 @pulumi.input_type
 class _GatewayState:
@@ -121,7 +137,8 @@ class _GatewayState:
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
-                 vpc_id: Optional[pulumi.Input[str]] = None):
+                 vpc_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Gateway resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
@@ -131,6 +148,7 @@ class _GatewayState:
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
+        :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
         """
         if assigned_eip_sets is not None:
             pulumi.set(__self__, "assigned_eip_sets", assigned_eip_sets)
@@ -146,6 +164,8 @@ class _GatewayState:
             pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
 
     @property
     @pulumi.getter(name="assignedEipSets")
@@ -231,6 +251,18 @@ class _GatewayState:
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
 
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The availability zone, such as `ap-guangzhou-3`.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
 
 class Gateway(pulumi.CustomResource):
     @overload
@@ -243,6 +275,7 @@ class Gateway(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Provides a resource to create a NAT gateway.
@@ -251,16 +284,25 @@ class Gateway(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.nat.Gateway("foo",
-            assigned_eip_sets=["1.1.1.1"],
-            bandwidth=100,
-            max_concurrent=1000000,
+        foo = tencentcloud.Vpc.get_instances(name="Default-VPC")
+        # Create EIP
+        eip_dev_dnat = tencentcloud.eip.Instance("eipDevDnat")
+        new_eip = tencentcloud.eip.Instance("newEip")
+        my_nat = tencentcloud.nat.Gateway("myNat",
+            vpc_id=foo.instance_lists[0].vpc_id,
+            max_concurrent=10000000,
+            bandwidth=1000,
+            zone="ap-guangzhou-3",
+            assigned_eip_sets=[
+                eip_dev_dnat.public_ip,
+                new_eip.public_ip,
+            ],
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-4xxr2cy7")
+                "tf": "test",
+            })
         ```
 
         ## Import
@@ -279,6 +321,7 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
+        :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
         """
         ...
     @overload
@@ -293,16 +336,25 @@ class Gateway(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.nat.Gateway("foo",
-            assigned_eip_sets=["1.1.1.1"],
-            bandwidth=100,
-            max_concurrent=1000000,
+        foo = tencentcloud.Vpc.get_instances(name="Default-VPC")
+        # Create EIP
+        eip_dev_dnat = tencentcloud.eip.Instance("eipDevDnat")
+        new_eip = tencentcloud.eip.Instance("newEip")
+        my_nat = tencentcloud.nat.Gateway("myNat",
+            vpc_id=foo.instance_lists[0].vpc_id,
+            max_concurrent=10000000,
+            bandwidth=1000,
+            zone="ap-guangzhou-3",
+            assigned_eip_sets=[
+                eip_dev_dnat.public_ip,
+                new_eip.public_ip,
+            ],
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-4xxr2cy7")
+                "tf": "test",
+            })
         ```
 
         ## Import
@@ -334,6 +386,7 @@ class Gateway(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -358,6 +411,7 @@ class Gateway(pulumi.CustomResource):
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
+            __props__.__dict__["zone"] = zone
             __props__.__dict__["created_time"] = None
         super(Gateway, __self__).__init__(
             'tencentcloud:Nat/gateway:Gateway',
@@ -375,7 +429,8 @@ class Gateway(pulumi.CustomResource):
             max_concurrent: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
-            vpc_id: Optional[pulumi.Input[str]] = None) -> 'Gateway':
+            vpc_id: Optional[pulumi.Input[str]] = None,
+            zone: Optional[pulumi.Input[str]] = None) -> 'Gateway':
         """
         Get an existing Gateway resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -390,6 +445,7 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the NAT gateway.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
+        :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -402,6 +458,7 @@ class Gateway(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["tags"] = tags
         __props__.__dict__["vpc_id"] = vpc_id
+        __props__.__dict__["zone"] = zone
         return Gateway(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -459,4 +516,12 @@ class Gateway(pulumi.CustomResource):
         ID of the vpc.
         """
         return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> pulumi.Output[str]:
+        """
+        The availability zone, such as `ap-guangzhou-3`.
+        """
+        return pulumi.get(self, "zone")
 

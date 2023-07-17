@@ -131,8 +131,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using Spot CVM Instance
+// ### Using Spot CVM Instance
 //
 // ```go
 // package main
@@ -229,7 +228,7 @@ type NodePool struct {
 	NodeConfig NodePoolNodeConfigPtrOutput `pulumi:"nodeConfig"`
 	// The total node count.
 	NodeCount pulumi.IntOutput `pulumi:"nodeCount"`
-	// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+	// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOs pulumi.StringPtrOutput `pulumi:"nodeOs"`
 	// The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOsType pulumi.StringPtrOutput `pulumi:"nodeOsType"`
@@ -338,7 +337,7 @@ type nodePoolState struct {
 	NodeConfig *NodePoolNodeConfig `pulumi:"nodeConfig"`
 	// The total node count.
 	NodeCount *int `pulumi:"nodeCount"`
-	// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+	// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOs *string `pulumi:"nodeOs"`
 	// The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOsType *string `pulumi:"nodeOsType"`
@@ -403,7 +402,7 @@ type NodePoolState struct {
 	NodeConfig NodePoolNodeConfigPtrInput
 	// The total node count.
 	NodeCount pulumi.IntPtrInput
-	// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+	// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOs pulumi.StringPtrInput
 	// The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOsType pulumi.StringPtrInput
@@ -462,7 +461,7 @@ type nodePoolArgs struct {
 	Name *string `pulumi:"name"`
 	// Node config.
 	NodeConfig *NodePoolNodeConfig `pulumi:"nodeConfig"`
-	// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+	// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOs *string `pulumi:"nodeOs"`
 	// The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOsType *string `pulumi:"nodeOsType"`
@@ -516,7 +515,7 @@ type NodePoolArgs struct {
 	Name pulumi.StringPtrInput
 	// Node config.
 	NodeConfig NodePoolNodeConfigPtrInput
-	// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+	// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOs pulumi.StringPtrInput
 	// The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
 	NodeOsType pulumi.StringPtrInput
@@ -716,7 +715,7 @@ func (o NodePoolOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.IntOutput { return v.NodeCount }).(pulumi.IntOutput)
 }
 
-// Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+// Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
 func (o NodePoolOutput) NodeOs() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.StringPtrOutput { return v.NodeOs }).(pulumi.StringPtrOutput)
 }

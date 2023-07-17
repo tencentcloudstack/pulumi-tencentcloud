@@ -21,14 +21,56 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cynosdb/account:Account":
+		r = &Account{}
+	case "tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges":
+		r = &AccountPrivileges{}
 	case "tencentcloud:Cynosdb/auditLogFile:AuditLogFile":
 		r = &AuditLogFile{}
+	case "tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays":
+		r = &BinlogSaveDays{}
 	case "tencentcloud:Cynosdb/cluster:Cluster":
 		r = &Cluster{}
+	case "tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases":
+		r = &ClusterDatabases{}
+	case "tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity":
+		r = &ClusterPasswordComplexity{}
+	case "tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment":
+		r = &ClusterResourcePackagesAttachment{}
+	case "tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone":
+		r = &ClusterSlaveZone{}
+	case "tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs":
+		r = &ExportInstanceErrorLogs{}
+	case "tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries":
+		r = &ExportInstanceSlowQueries{}
+	case "tencentcloud:Cynosdb/instanceParam:InstanceParam":
+		r = &InstanceParam{}
+	case "tencentcloud:Cynosdb/isolateInstance:IsolateInstance":
+		r = &IsolateInstance{}
+	case "tencentcloud:Cynosdb/paramTemplate:ParamTemplate":
+		r = &ParamTemplate{}
+	case "tencentcloud:Cynosdb/proxy:Proxy":
+		r = &Proxy{}
+	case "tencentcloud:Cynosdb/proxyEndPoint:ProxyEndPoint":
+		r = &ProxyEndPoint{}
+	case "tencentcloud:Cynosdb/readOnlyInstanceExclusiveAccess:ReadOnlyInstanceExclusiveAccess":
+		r = &ReadOnlyInstanceExclusiveAccess{}
 	case "tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode":
+		r = &ReloadProxyNode{}
+	case "tencentcloud:Cynosdb/resourcePackage:ResourcePackage":
+		r = &ResourcePackage{}
+	case "tencentcloud:Cynosdb/restartInstance:RestartInstance":
+		r = &RestartInstance{}
+	case "tencentcloud:Cynosdb/rollBackCluster:RollBackCluster":
+		r = &RollBackCluster{}
 	case "tencentcloud:Cynosdb/securityGroup:SecurityGroup":
 		r = &SecurityGroup{}
+	case "tencentcloud:Cynosdb/upgradeProxyVersion:UpgradeProxyVersion":
+		r = &UpgradeProxyVersion{}
+	case "tencentcloud:Cynosdb/wan:Wan":
+		r = &Wan{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -44,7 +86,22 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/accountPrivileges",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/auditLogFile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/binlogSaveDays",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -54,12 +111,102 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/clusterDatabases",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/clusterPasswordComplexity",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/clusterResourcePackagesAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/clusterSlaveZone",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/exportInstanceErrorLogs",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/exportInstanceSlowQueries",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/instanceParam",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/isolateInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/paramTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/proxy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/proxyEndPoint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/readOnlyInstanceExclusiveAccess",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/readonlyInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/reloadProxyNode",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/resourcePackage",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/restartInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/rollBackCluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/securityGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/upgradeProxyVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/wan",
 		&module{version},
 	)
 }

@@ -6,13 +6,32 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .acl import *
+from .acl_rule import *
 from .connect_resource import *
+from .consumer_group import *
+from .consumer_group_modify_offset import *
+from .datahub_task import *
 from .datahub_topic import *
 from .get_acls import *
+from .get_connect_resource import *
+from .get_datahub_group_offsets import *
+from .get_datahub_task import *
+from .get_datahub_topic import *
+from .get_group import *
+from .get_group_info import *
+from .get_group_offsets import *
 from .get_instances import *
+from .get_region import *
+from .get_task_status import *
+from .get_topic_flow_ranking import *
+from .get_topic_produce_connection import *
+from .get_topic_subscribe_group import *
+from .get_topic_sync_replica import *
 from .get_topics import *
 from .get_users import *
+from .get_zone import *
 from .instance import *
+from .renew_instance import *
 from .topic import *
 from .user import *
 from ._inputs import *

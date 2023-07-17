@@ -7,6 +7,8 @@ import typing
 # Export this package's modules as members:
 from .gateway import *
 from .gateway_snat import *
+from .get_dc_route import *
 from .get_gateway_snats import *
 from .get_gateways import *
+from .refresh_nat_dc_route import *
 from . import outputs

@@ -65,7 +65,17 @@ class SyncCheckJobOperation(pulumi.CustomResource):
                  job_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SyncCheckJobOperation resource with the given unique name, props, and options.
+        Provides a resource to create a dts sync_check_job_operation
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        sync_check_job_operation = tencentcloud.dts.SyncCheckJobOperation("syncCheckJobOperation", job_id="")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] job_id: Sync job id.
@@ -77,7 +87,17 @@ class SyncCheckJobOperation(pulumi.CustomResource):
                  args: SyncCheckJobOperationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SyncCheckJobOperation resource with the given unique name, props, and options.
+        Provides a resource to create a dts sync_check_job_operation
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        sync_check_job_operation = tencentcloud.dts.SyncCheckJobOperation("syncCheckJobOperation", job_id="")
+        ```
+
         :param str resource_name: The name of the resource.
         :param SyncCheckJobOperationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

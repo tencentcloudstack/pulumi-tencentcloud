@@ -14,8 +14,7 @@ import (
 // Provides a resource to create a CLB listener.
 //
 // ## Example Usage
-//
-// HTTP Listener
+// ### HTTP Listener
 //
 // ```go
 // package main
@@ -40,8 +39,7 @@ import (
 // 	})
 // }
 // ```
-//
-// TCP/UDP Listener
+// ### TCP/UDP Listener
 //
 // ```go
 // package main
@@ -78,8 +76,7 @@ import (
 // 	})
 // }
 // ```
-//
-// TCP/UDP Listener with tcp health check
+// ### TCP/UDP Listener with tcp health check
 //
 // ```go
 // package main
@@ -113,8 +110,7 @@ import (
 // 	})
 // }
 // ```
-//
-// TCP/UDP Listener with http health check
+// ### TCP/UDP Listener with http health check
 //
 // ```go
 // package main
@@ -152,8 +148,7 @@ import (
 // 	})
 // }
 // ```
-//
-// TCP/UDP Listener with customer health check
+// ### TCP/UDP Listener with customer health check
 //
 // ```go
 // package main
@@ -190,8 +185,7 @@ import (
 // 	})
 // }
 // ```
-//
-// HTTPS Listener
+// ### HTTPS Listener
 //
 // ```go
 // package main
@@ -220,8 +214,7 @@ import (
 // 	})
 // }
 // ```
-//
-// TCP SSL Listener
+// ### TCP SSL Listener
 //
 // ```go
 // package main
@@ -279,7 +272,7 @@ type Listener struct {
 	HealthCheckContextType pulumi.StringPtrOutput `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckHttpCode pulumi.IntPtrOutput `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrOutput `pulumi:"healthCheckHttpDomain"`
@@ -289,7 +282,7 @@ type Listener struct {
 	HealthCheckHttpPath pulumi.StringPtrOutput `pulumi:"healthCheckHttpPath"`
 	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrOutput `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntOutput `pulumi:"healthCheckIntervalTime"`
 	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrOutput `pulumi:"healthCheckPort"`
@@ -374,7 +367,7 @@ type listenerState struct {
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckHttpCode *int `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain *string `pulumi:"healthCheckHttpDomain"`
@@ -384,7 +377,7 @@ type listenerState struct {
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
 	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion *string `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort *int `pulumi:"healthCheckPort"`
@@ -431,7 +424,7 @@ type ListenerState struct {
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntPtrInput
-	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckHttpCode pulumi.IntPtrInput
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrInput
@@ -441,7 +434,7 @@ type ListenerState struct {
 	HealthCheckHttpPath pulumi.StringPtrInput
 	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrInput
@@ -492,7 +485,7 @@ type listenerArgs struct {
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckHttpCode *int `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain *string `pulumi:"healthCheckHttpDomain"`
@@ -502,7 +495,7 @@ type listenerArgs struct {
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
 	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion *string `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort *int `pulumi:"healthCheckPort"`
@@ -548,7 +541,7 @@ type ListenerArgs struct {
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntPtrInput
-	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 	HealthCheckHttpCode pulumi.IntPtrInput
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrInput
@@ -558,7 +551,7 @@ type ListenerArgs struct {
 	HealthCheckHttpPath pulumi.StringPtrInput
 	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrInput
@@ -707,7 +700,7 @@ func (o ListenerOutput) HealthCheckHealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
 }
 
-// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
 func (o ListenerOutput) HealthCheckHttpCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.HealthCheckHttpCode }).(pulumi.IntPtrOutput)
 }
@@ -732,7 +725,7 @@ func (o ListenerOutput) HealthCheckHttpVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckHttpVersion }).(pulumi.StringPtrOutput)
 }
 
-// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckIntervalTime }).(pulumi.IntOutput)
 }

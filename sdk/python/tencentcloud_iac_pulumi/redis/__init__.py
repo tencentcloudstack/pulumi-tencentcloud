@@ -7,9 +7,13 @@ import typing
 # Export this package's modules as members:
 from .account import *
 from .backup_config import *
+from .backup_download_restriction import *
+from .backup_operation import *
+from .clear_instance_operation import *
 from .connection_config import *
 from .get_backup import *
 from .get_backup_download_info import *
+from .get_instance_node_info import *
 from .get_instance_shards import *
 from .get_instance_task_list import *
 from .get_instance_zone_info import *
@@ -21,7 +25,15 @@ from .maintenance_window import *
 from .param import *
 from .param_template import *
 from .read_only import *
+from .renew_instance_operation import *
 from .replica_readonly import *
+from .replicate_attachment import *
+from .security_group_attachment import *
 from .ssl import *
+from .startup_instance_operation import *
+from .switch_master import *
+from .upgrade_cache_version_operation import *
+from .upgrade_multi_zone_operation import *
+from .upgrade_proxy_version_operation import *
 from ._inputs import *
 from . import outputs

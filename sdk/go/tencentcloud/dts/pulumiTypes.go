@@ -3148,6 +3148,2517 @@ func (o MigrateServiceTagArrayOutput) Index(i pulumi.IntInput) MigrateServiceTag
 	}).(MigrateServiceTagOutput)
 }
 
+type SyncConfigDstInfo struct {
+	// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	Account *string `pulumi:"account"`
+	// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+	AccountMode *string `pulumi:"accountMode"`
+	// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+	AccountRole *string `pulumi:"accountRole"`
+	// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+	CcnId *string `pulumi:"ccnId"`
+	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+	CvmInstanceId *string `pulumi:"cvmInstanceId"`
+	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+	DbKernel *string `pulumi:"dbKernel"`
+	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName *string `pulumi:"dbName"`
+	// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+	EncryptConn *string `pulumi:"encryptConn"`
+	// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+	EngineVersion *string `pulumi:"engineVersion"`
+	// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceId *string `pulumi:"instanceId"`
+	// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Ip *string `pulumi:"ip"`
+	// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	Password *string `pulumi:"password"`
+	// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Port *int `pulumi:"port"`
+	// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+	Region *string `pulumi:"region"`
+	// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+	Role *string `pulumi:"role"`
+	// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+	RoleExternalId *string `pulumi:"roleExternalId"`
+	// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+	SubnetId *string `pulumi:"subnetId"`
+	// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+	Supplier *string `pulumi:"supplier"`
+	// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretId *string `pulumi:"tmpSecretId"`
+	// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretKey *string `pulumi:"tmpSecretKey"`
+	// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpToken *string `pulumi:"tmpToken"`
+	// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqDcgId *string `pulumi:"uniqDcgId"`
+	// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqVpnGwId *string `pulumi:"uniqVpnGwId"`
+	// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	User *string `pulumi:"user"`
+	// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// SyncConfigDstInfoInput is an input type that accepts SyncConfigDstInfoArgs and SyncConfigDstInfoOutput values.
+// You can construct a concrete instance of `SyncConfigDstInfoInput` via:
+//
+//          SyncConfigDstInfoArgs{...}
+type SyncConfigDstInfoInput interface {
+	pulumi.Input
+
+	ToSyncConfigDstInfoOutput() SyncConfigDstInfoOutput
+	ToSyncConfigDstInfoOutputWithContext(context.Context) SyncConfigDstInfoOutput
+}
+
+type SyncConfigDstInfoArgs struct {
+	// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	Account pulumi.StringPtrInput `pulumi:"account"`
+	// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+	AccountMode pulumi.StringPtrInput `pulumi:"accountMode"`
+	// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+	AccountRole pulumi.StringPtrInput `pulumi:"accountRole"`
+	// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+	CcnId pulumi.StringPtrInput `pulumi:"ccnId"`
+	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+	CvmInstanceId pulumi.StringPtrInput `pulumi:"cvmInstanceId"`
+	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+	DbKernel pulumi.StringPtrInput `pulumi:"dbKernel"`
+	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+	EncryptConn pulumi.StringPtrInput `pulumi:"encryptConn"`
+	// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+	EngineVersion pulumi.StringPtrInput `pulumi:"engineVersion"`
+	// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+	Role pulumi.StringPtrInput `pulumi:"role"`
+	// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+	RoleExternalId pulumi.StringPtrInput `pulumi:"roleExternalId"`
+	// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
+	// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+	Supplier pulumi.StringPtrInput `pulumi:"supplier"`
+	// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretId pulumi.StringPtrInput `pulumi:"tmpSecretId"`
+	// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretKey pulumi.StringPtrInput `pulumi:"tmpSecretKey"`
+	// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpToken pulumi.StringPtrInput `pulumi:"tmpToken"`
+	// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqDcgId pulumi.StringPtrInput `pulumi:"uniqDcgId"`
+	// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqVpnGwId pulumi.StringPtrInput `pulumi:"uniqVpnGwId"`
+	// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	User pulumi.StringPtrInput `pulumi:"user"`
+	// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (SyncConfigDstInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigDstInfo)(nil)).Elem()
+}
+
+func (i SyncConfigDstInfoArgs) ToSyncConfigDstInfoOutput() SyncConfigDstInfoOutput {
+	return i.ToSyncConfigDstInfoOutputWithContext(context.Background())
+}
+
+func (i SyncConfigDstInfoArgs) ToSyncConfigDstInfoOutputWithContext(ctx context.Context) SyncConfigDstInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigDstInfoOutput)
+}
+
+func (i SyncConfigDstInfoArgs) ToSyncConfigDstInfoPtrOutput() SyncConfigDstInfoPtrOutput {
+	return i.ToSyncConfigDstInfoPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigDstInfoArgs) ToSyncConfigDstInfoPtrOutputWithContext(ctx context.Context) SyncConfigDstInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigDstInfoOutput).ToSyncConfigDstInfoPtrOutputWithContext(ctx)
+}
+
+// SyncConfigDstInfoPtrInput is an input type that accepts SyncConfigDstInfoArgs, SyncConfigDstInfoPtr and SyncConfigDstInfoPtrOutput values.
+// You can construct a concrete instance of `SyncConfigDstInfoPtrInput` via:
+//
+//          SyncConfigDstInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigDstInfoPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigDstInfoPtrOutput() SyncConfigDstInfoPtrOutput
+	ToSyncConfigDstInfoPtrOutputWithContext(context.Context) SyncConfigDstInfoPtrOutput
+}
+
+type syncConfigDstInfoPtrType SyncConfigDstInfoArgs
+
+func SyncConfigDstInfoPtr(v *SyncConfigDstInfoArgs) SyncConfigDstInfoPtrInput {
+	return (*syncConfigDstInfoPtrType)(v)
+}
+
+func (*syncConfigDstInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigDstInfo)(nil)).Elem()
+}
+
+func (i *syncConfigDstInfoPtrType) ToSyncConfigDstInfoPtrOutput() SyncConfigDstInfoPtrOutput {
+	return i.ToSyncConfigDstInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigDstInfoPtrType) ToSyncConfigDstInfoPtrOutputWithContext(ctx context.Context) SyncConfigDstInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigDstInfoPtrOutput)
+}
+
+type SyncConfigDstInfoOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigDstInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigDstInfo)(nil)).Elem()
+}
+
+func (o SyncConfigDstInfoOutput) ToSyncConfigDstInfoOutput() SyncConfigDstInfoOutput {
+	return o
+}
+
+func (o SyncConfigDstInfoOutput) ToSyncConfigDstInfoOutputWithContext(ctx context.Context) SyncConfigDstInfoOutput {
+	return o
+}
+
+func (o SyncConfigDstInfoOutput) ToSyncConfigDstInfoPtrOutput() SyncConfigDstInfoPtrOutput {
+	return o.ToSyncConfigDstInfoPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigDstInfoOutput) ToSyncConfigDstInfoPtrOutputWithContext(ctx context.Context) SyncConfigDstInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigDstInfo) *SyncConfigDstInfo {
+		return &v
+	}).(SyncConfigDstInfoPtrOutput)
+}
+
+// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Account }).(pulumi.StringPtrOutput)
+}
+
+// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) AccountMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.AccountMode }).(pulumi.StringPtrOutput)
+}
+
+// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) AccountRole() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.AccountRole }).(pulumi.StringPtrOutput)
+}
+
+// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) CcnId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.CcnId }).(pulumi.StringPtrOutput)
+}
+
+// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) CvmInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.CvmInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) DbKernel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.DbKernel }).(pulumi.StringPtrOutput)
+}
+
+// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) EncryptConn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.EncryptConn }).(pulumi.StringPtrOutput)
+}
+
+// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) EngineVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.EngineVersion }).(pulumi.StringPtrOutput)
+}
+
+// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Role() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Role }).(pulumi.StringPtrOutput)
+}
+
+// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) RoleExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.RoleExternalId }).(pulumi.StringPtrOutput)
+}
+
+// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) Supplier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.Supplier }).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) TmpSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.TmpSecretId }).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) TmpSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.TmpSecretKey }).(pulumi.StringPtrOutput)
+}
+
+// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) TmpToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.TmpToken }).(pulumi.StringPtrOutput)
+}
+
+// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) UniqDcgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.UniqDcgId }).(pulumi.StringPtrOutput)
+}
+
+// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) UniqVpnGwId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.UniqVpnGwId }).(pulumi.StringPtrOutput)
+}
+
+// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.User }).(pulumi.StringPtrOutput)
+}
+
+// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigDstInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigDstInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigDstInfo)(nil)).Elem()
+}
+
+func (o SyncConfigDstInfoPtrOutput) ToSyncConfigDstInfoPtrOutput() SyncConfigDstInfoPtrOutput {
+	return o
+}
+
+func (o SyncConfigDstInfoPtrOutput) ToSyncConfigDstInfoPtrOutputWithContext(ctx context.Context) SyncConfigDstInfoPtrOutput {
+	return o
+}
+
+func (o SyncConfigDstInfoPtrOutput) Elem() SyncConfigDstInfoOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) SyncConfigDstInfo {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigDstInfo
+		return ret
+	}).(SyncConfigDstInfoOutput)
+}
+
+// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Account
+	}).(pulumi.StringPtrOutput)
+}
+
+// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) AccountMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccountMode
+	}).(pulumi.StringPtrOutput)
+}
+
+// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) AccountRole() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccountRole
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) CcnId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CcnId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) CvmInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CvmInstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) DbKernel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DbKernel
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DbName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) EncryptConn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EncryptConn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) EngineVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EngineVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Ip
+	}).(pulumi.StringPtrOutput)
+}
+
+// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Role() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Role
+	}).(pulumi.StringPtrOutput)
+}
+
+// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) RoleExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RoleExternalId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) Supplier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Supplier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) TmpSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpSecretId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) TmpSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpSecretKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) TmpToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) UniqDcgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqDcgId
+	}).(pulumi.StringPtrOutput)
+}
+
+// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) UniqVpnGwId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpnGwId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.User
+	}).(pulumi.StringPtrOutput)
+}
+
+// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigObjects struct {
+	// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+	AdvancedObjects []string `pulumi:"advancedObjects"`
+	// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Databases []SyncConfigObjectsDatabase `pulumi:"databases"`
+	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+	Mode *string `pulumi:"mode"`
+	// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	OnlineDdl *SyncConfigObjectsOnlineDdl `pulumi:"onlineDdl"`
+}
+
+// SyncConfigObjectsInput is an input type that accepts SyncConfigObjectsArgs and SyncConfigObjectsOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsInput` via:
+//
+//          SyncConfigObjectsArgs{...}
+type SyncConfigObjectsInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsOutput() SyncConfigObjectsOutput
+	ToSyncConfigObjectsOutputWithContext(context.Context) SyncConfigObjectsOutput
+}
+
+type SyncConfigObjectsArgs struct {
+	// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+	AdvancedObjects pulumi.StringArrayInput `pulumi:"advancedObjects"`
+	// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Databases SyncConfigObjectsDatabaseArrayInput `pulumi:"databases"`
+	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	OnlineDdl SyncConfigObjectsOnlineDdlPtrInput `pulumi:"onlineDdl"`
+}
+
+func (SyncConfigObjectsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjects)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsArgs) ToSyncConfigObjectsOutput() SyncConfigObjectsOutput {
+	return i.ToSyncConfigObjectsOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsArgs) ToSyncConfigObjectsOutputWithContext(ctx context.Context) SyncConfigObjectsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsOutput)
+}
+
+func (i SyncConfigObjectsArgs) ToSyncConfigObjectsPtrOutput() SyncConfigObjectsPtrOutput {
+	return i.ToSyncConfigObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsArgs) ToSyncConfigObjectsPtrOutputWithContext(ctx context.Context) SyncConfigObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsOutput).ToSyncConfigObjectsPtrOutputWithContext(ctx)
+}
+
+// SyncConfigObjectsPtrInput is an input type that accepts SyncConfigObjectsArgs, SyncConfigObjectsPtr and SyncConfigObjectsPtrOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsPtrInput` via:
+//
+//          SyncConfigObjectsArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigObjectsPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsPtrOutput() SyncConfigObjectsPtrOutput
+	ToSyncConfigObjectsPtrOutputWithContext(context.Context) SyncConfigObjectsPtrOutput
+}
+
+type syncConfigObjectsPtrType SyncConfigObjectsArgs
+
+func SyncConfigObjectsPtr(v *SyncConfigObjectsArgs) SyncConfigObjectsPtrInput {
+	return (*syncConfigObjectsPtrType)(v)
+}
+
+func (*syncConfigObjectsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigObjects)(nil)).Elem()
+}
+
+func (i *syncConfigObjectsPtrType) ToSyncConfigObjectsPtrOutput() SyncConfigObjectsPtrOutput {
+	return i.ToSyncConfigObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigObjectsPtrType) ToSyncConfigObjectsPtrOutputWithContext(ctx context.Context) SyncConfigObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsPtrOutput)
+}
+
+type SyncConfigObjectsOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjects)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsOutput) ToSyncConfigObjectsOutput() SyncConfigObjectsOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOutput) ToSyncConfigObjectsOutputWithContext(ctx context.Context) SyncConfigObjectsOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOutput) ToSyncConfigObjectsPtrOutput() SyncConfigObjectsPtrOutput {
+	return o.ToSyncConfigObjectsPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigObjectsOutput) ToSyncConfigObjectsPtrOutputWithContext(ctx context.Context) SyncConfigObjectsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigObjects) *SyncConfigObjects {
+		return &v
+	}).(SyncConfigObjectsPtrOutput)
+}
+
+// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsOutput) AdvancedObjects() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjects) []string { return v.AdvancedObjects }).(pulumi.StringArrayOutput)
+}
+
+// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsOutput) Databases() SyncConfigObjectsDatabaseArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjects) []SyncConfigObjectsDatabase { return v.Databases }).(SyncConfigObjectsDatabaseArrayOutput)
+}
+
+// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjects) *string { return v.Mode }).(pulumi.StringPtrOutput)
+}
+
+// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsOutput) OnlineDdl() SyncConfigObjectsOnlineDdlPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjects) *SyncConfigObjectsOnlineDdl { return v.OnlineDdl }).(SyncConfigObjectsOnlineDdlPtrOutput)
+}
+
+type SyncConfigObjectsPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigObjects)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsPtrOutput) ToSyncConfigObjectsPtrOutput() SyncConfigObjectsPtrOutput {
+	return o
+}
+
+func (o SyncConfigObjectsPtrOutput) ToSyncConfigObjectsPtrOutputWithContext(ctx context.Context) SyncConfigObjectsPtrOutput {
+	return o
+}
+
+func (o SyncConfigObjectsPtrOutput) Elem() SyncConfigObjectsOutput {
+	return o.ApplyT(func(v *SyncConfigObjects) SyncConfigObjects {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigObjects
+		return ret
+	}).(SyncConfigObjectsOutput)
+}
+
+// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsPtrOutput) AdvancedObjects() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncConfigObjects) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AdvancedObjects
+	}).(pulumi.StringArrayOutput)
+}
+
+// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsPtrOutput) Databases() SyncConfigObjectsDatabaseArrayOutput {
+	return o.ApplyT(func(v *SyncConfigObjects) []SyncConfigObjectsDatabase {
+		if v == nil {
+			return nil
+		}
+		return v.Databases
+	}).(SyncConfigObjectsDatabaseArrayOutput)
+}
+
+// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsPtrOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigObjects) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mode
+	}).(pulumi.StringPtrOutput)
+}
+
+// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsPtrOutput) OnlineDdl() SyncConfigObjectsOnlineDdlPtrOutput {
+	return o.ApplyT(func(v *SyncConfigObjects) *SyncConfigObjectsOnlineDdl {
+		if v == nil {
+			return nil
+		}
+		return v.OnlineDdl
+	}).(SyncConfigObjectsOnlineDdlPtrOutput)
+}
+
+type SyncConfigObjectsDatabase struct {
+	// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+	DbMode *string `pulumi:"dbMode"`
+	// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName *string `pulumi:"dbName"`
+	// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	EventMode *string `pulumi:"eventMode"`
+	// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Events []string `pulumi:"events"`
+	// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionMode *string `pulumi:"functionMode"`
+	// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Functions []string `pulumi:"functions"`
+	// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+	NewDbName *string `pulumi:"newDbName"`
+	// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+	NewSchemaName *string `pulumi:"newSchemaName"`
+	// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+	ProcedureMode *string `pulumi:"procedureMode"`
+	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedures []string `pulumi:"procedures"`
+	// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+	SchemaName *string `pulumi:"schemaName"`
+	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	TableMode *string `pulumi:"tableMode"`
+	// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Tables []SyncConfigObjectsDatabaseTable `pulumi:"tables"`
+	// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	TriggerMode *string `pulumi:"triggerMode"`
+	// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Triggers []string `pulumi:"triggers"`
+	// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewMode *string `pulumi:"viewMode"`
+	// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Views []SyncConfigObjectsDatabaseView `pulumi:"views"`
+}
+
+// SyncConfigObjectsDatabaseInput is an input type that accepts SyncConfigObjectsDatabaseArgs and SyncConfigObjectsDatabaseOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseInput` via:
+//
+//          SyncConfigObjectsDatabaseArgs{...}
+type SyncConfigObjectsDatabaseInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseOutput() SyncConfigObjectsDatabaseOutput
+	ToSyncConfigObjectsDatabaseOutputWithContext(context.Context) SyncConfigObjectsDatabaseOutput
+}
+
+type SyncConfigObjectsDatabaseArgs struct {
+	// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+	DbMode pulumi.StringPtrInput `pulumi:"dbMode"`
+	// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	EventMode pulumi.StringPtrInput `pulumi:"eventMode"`
+	// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Events pulumi.StringArrayInput `pulumi:"events"`
+	// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionMode pulumi.StringPtrInput `pulumi:"functionMode"`
+	// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Functions pulumi.StringArrayInput `pulumi:"functions"`
+	// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+	NewDbName pulumi.StringPtrInput `pulumi:"newDbName"`
+	// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+	NewSchemaName pulumi.StringPtrInput `pulumi:"newSchemaName"`
+	// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+	ProcedureMode pulumi.StringPtrInput `pulumi:"procedureMode"`
+	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedures pulumi.StringArrayInput `pulumi:"procedures"`
+	// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	TableMode pulumi.StringPtrInput `pulumi:"tableMode"`
+	// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Tables SyncConfigObjectsDatabaseTableArrayInput `pulumi:"tables"`
+	// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	TriggerMode pulumi.StringPtrInput `pulumi:"triggerMode"`
+	// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Triggers pulumi.StringArrayInput `pulumi:"triggers"`
+	// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewMode pulumi.StringPtrInput `pulumi:"viewMode"`
+	// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Views SyncConfigObjectsDatabaseViewArrayInput `pulumi:"views"`
+}
+
+func (SyncConfigObjectsDatabaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabase)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseArgs) ToSyncConfigObjectsDatabaseOutput() SyncConfigObjectsDatabaseOutput {
+	return i.ToSyncConfigObjectsDatabaseOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseArgs) ToSyncConfigObjectsDatabaseOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseOutput)
+}
+
+// SyncConfigObjectsDatabaseArrayInput is an input type that accepts SyncConfigObjectsDatabaseArray and SyncConfigObjectsDatabaseArrayOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseArrayInput` via:
+//
+//          SyncConfigObjectsDatabaseArray{ SyncConfigObjectsDatabaseArgs{...} }
+type SyncConfigObjectsDatabaseArrayInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseArrayOutput() SyncConfigObjectsDatabaseArrayOutput
+	ToSyncConfigObjectsDatabaseArrayOutputWithContext(context.Context) SyncConfigObjectsDatabaseArrayOutput
+}
+
+type SyncConfigObjectsDatabaseArray []SyncConfigObjectsDatabaseInput
+
+func (SyncConfigObjectsDatabaseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabase)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseArray) ToSyncConfigObjectsDatabaseArrayOutput() SyncConfigObjectsDatabaseArrayOutput {
+	return i.ToSyncConfigObjectsDatabaseArrayOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseArray) ToSyncConfigObjectsDatabaseArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseArrayOutput)
+}
+
+type SyncConfigObjectsDatabaseOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabase)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseOutput) ToSyncConfigObjectsDatabaseOutput() SyncConfigObjectsDatabaseOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseOutput) ToSyncConfigObjectsDatabaseOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseOutput {
+	return o
+}
+
+// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) DbMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.DbMode }).(pulumi.StringPtrOutput)
+}
+
+// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) EventMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.EventMode }).(pulumi.StringPtrOutput)
+}
+
+// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Events() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []string { return v.Events }).(pulumi.StringArrayOutput)
+}
+
+// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) FunctionMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.FunctionMode }).(pulumi.StringPtrOutput)
+}
+
+// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Functions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []string { return v.Functions }).(pulumi.StringArrayOutput)
+}
+
+// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) NewDbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.NewDbName }).(pulumi.StringPtrOutput)
+}
+
+// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) NewSchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.NewSchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) ProcedureMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.ProcedureMode }).(pulumi.StringPtrOutput)
+}
+
+// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Procedures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []string { return v.Procedures }).(pulumi.StringArrayOutput)
+}
+
+// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) TableMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.TableMode }).(pulumi.StringPtrOutput)
+}
+
+// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Tables() SyncConfigObjectsDatabaseTableArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []SyncConfigObjectsDatabaseTable { return v.Tables }).(SyncConfigObjectsDatabaseTableArrayOutput)
+}
+
+// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) TriggerMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.TriggerMode }).(pulumi.StringPtrOutput)
+}
+
+// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Triggers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []string { return v.Triggers }).(pulumi.StringArrayOutput)
+}
+
+// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) ViewMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.ViewMode }).(pulumi.StringPtrOutput)
+}
+
+// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) Views() SyncConfigObjectsDatabaseViewArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) []SyncConfigObjectsDatabaseView { return v.Views }).(SyncConfigObjectsDatabaseViewArrayOutput)
+}
+
+type SyncConfigObjectsDatabaseArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabase)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseArrayOutput) ToSyncConfigObjectsDatabaseArrayOutput() SyncConfigObjectsDatabaseArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseArrayOutput) ToSyncConfigObjectsDatabaseArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseArrayOutput) Index(i pulumi.IntInput) SyncConfigObjectsDatabaseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigObjectsDatabase {
+		return vs[0].([]SyncConfigObjectsDatabase)[vs[1].(int)]
+	}).(SyncConfigObjectsDatabaseOutput)
+}
+
+type SyncConfigObjectsDatabaseTable struct {
+	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+	FilterCondition *string `pulumi:"filterCondition"`
+	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewTableName *string `pulumi:"newTableName"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName *string `pulumi:"tableName"`
+}
+
+// SyncConfigObjectsDatabaseTableInput is an input type that accepts SyncConfigObjectsDatabaseTableArgs and SyncConfigObjectsDatabaseTableOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseTableInput` via:
+//
+//          SyncConfigObjectsDatabaseTableArgs{...}
+type SyncConfigObjectsDatabaseTableInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseTableOutput() SyncConfigObjectsDatabaseTableOutput
+	ToSyncConfigObjectsDatabaseTableOutputWithContext(context.Context) SyncConfigObjectsDatabaseTableOutput
+}
+
+type SyncConfigObjectsDatabaseTableArgs struct {
+	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+	FilterCondition pulumi.StringPtrInput `pulumi:"filterCondition"`
+	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewTableName pulumi.StringPtrInput `pulumi:"newTableName"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (SyncConfigObjectsDatabaseTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseTableArgs) ToSyncConfigObjectsDatabaseTableOutput() SyncConfigObjectsDatabaseTableOutput {
+	return i.ToSyncConfigObjectsDatabaseTableOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseTableArgs) ToSyncConfigObjectsDatabaseTableOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseTableOutput)
+}
+
+// SyncConfigObjectsDatabaseTableArrayInput is an input type that accepts SyncConfigObjectsDatabaseTableArray and SyncConfigObjectsDatabaseTableArrayOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseTableArrayInput` via:
+//
+//          SyncConfigObjectsDatabaseTableArray{ SyncConfigObjectsDatabaseTableArgs{...} }
+type SyncConfigObjectsDatabaseTableArrayInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseTableArrayOutput() SyncConfigObjectsDatabaseTableArrayOutput
+	ToSyncConfigObjectsDatabaseTableArrayOutputWithContext(context.Context) SyncConfigObjectsDatabaseTableArrayOutput
+}
+
+type SyncConfigObjectsDatabaseTableArray []SyncConfigObjectsDatabaseTableInput
+
+func (SyncConfigObjectsDatabaseTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseTableArray) ToSyncConfigObjectsDatabaseTableArrayOutput() SyncConfigObjectsDatabaseTableArrayOutput {
+	return i.ToSyncConfigObjectsDatabaseTableArrayOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseTableArray) ToSyncConfigObjectsDatabaseTableArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseTableArrayOutput)
+}
+
+type SyncConfigObjectsDatabaseTableOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseTableOutput) ToSyncConfigObjectsDatabaseTableOutput() SyncConfigObjectsDatabaseTableOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableOutput) ToSyncConfigObjectsDatabaseTableOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableOutput {
+	return o
+}
+
+// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) FilterCondition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.FilterCondition }).(pulumi.StringPtrOutput)
+}
+
+// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) NewTableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.NewTableName }).(pulumi.StringPtrOutput)
+}
+
+// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigObjectsDatabaseTableArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseTableArrayOutput) ToSyncConfigObjectsDatabaseTableArrayOutput() SyncConfigObjectsDatabaseTableArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableArrayOutput) ToSyncConfigObjectsDatabaseTableArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableArrayOutput) Index(i pulumi.IntInput) SyncConfigObjectsDatabaseTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigObjectsDatabaseTable {
+		return vs[0].([]SyncConfigObjectsDatabaseTable)[vs[1].(int)]
+	}).(SyncConfigObjectsDatabaseTableOutput)
+}
+
+type SyncConfigObjectsDatabaseView struct {
+	// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewViewName *string `pulumi:"newViewName"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName *string `pulumi:"viewName"`
+}
+
+// SyncConfigObjectsDatabaseViewInput is an input type that accepts SyncConfigObjectsDatabaseViewArgs and SyncConfigObjectsDatabaseViewOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseViewInput` via:
+//
+//          SyncConfigObjectsDatabaseViewArgs{...}
+type SyncConfigObjectsDatabaseViewInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseViewOutput() SyncConfigObjectsDatabaseViewOutput
+	ToSyncConfigObjectsDatabaseViewOutputWithContext(context.Context) SyncConfigObjectsDatabaseViewOutput
+}
+
+type SyncConfigObjectsDatabaseViewArgs struct {
+	// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewViewName pulumi.StringPtrInput `pulumi:"newViewName"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName pulumi.StringPtrInput `pulumi:"viewName"`
+}
+
+func (SyncConfigObjectsDatabaseViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseView)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseViewArgs) ToSyncConfigObjectsDatabaseViewOutput() SyncConfigObjectsDatabaseViewOutput {
+	return i.ToSyncConfigObjectsDatabaseViewOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseViewArgs) ToSyncConfigObjectsDatabaseViewOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseViewOutput)
+}
+
+// SyncConfigObjectsDatabaseViewArrayInput is an input type that accepts SyncConfigObjectsDatabaseViewArray and SyncConfigObjectsDatabaseViewArrayOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseViewArrayInput` via:
+//
+//          SyncConfigObjectsDatabaseViewArray{ SyncConfigObjectsDatabaseViewArgs{...} }
+type SyncConfigObjectsDatabaseViewArrayInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseViewArrayOutput() SyncConfigObjectsDatabaseViewArrayOutput
+	ToSyncConfigObjectsDatabaseViewArrayOutputWithContext(context.Context) SyncConfigObjectsDatabaseViewArrayOutput
+}
+
+type SyncConfigObjectsDatabaseViewArray []SyncConfigObjectsDatabaseViewInput
+
+func (SyncConfigObjectsDatabaseViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseView)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseViewArray) ToSyncConfigObjectsDatabaseViewArrayOutput() SyncConfigObjectsDatabaseViewArrayOutput {
+	return i.ToSyncConfigObjectsDatabaseViewArrayOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseViewArray) ToSyncConfigObjectsDatabaseViewArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseViewArrayOutput)
+}
+
+type SyncConfigObjectsDatabaseViewOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseView)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseViewOutput) ToSyncConfigObjectsDatabaseViewOutput() SyncConfigObjectsDatabaseViewOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseViewOutput) ToSyncConfigObjectsDatabaseViewOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseViewOutput {
+	return o
+}
+
+// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseViewOutput) NewViewName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseView) *string { return v.NewViewName }).(pulumi.StringPtrOutput)
+}
+
+// View name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseViewOutput) ViewName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseView) *string { return v.ViewName }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigObjectsDatabaseViewArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseView)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseViewArrayOutput) ToSyncConfigObjectsDatabaseViewArrayOutput() SyncConfigObjectsDatabaseViewArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseViewArrayOutput) ToSyncConfigObjectsDatabaseViewArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseViewArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseViewArrayOutput) Index(i pulumi.IntInput) SyncConfigObjectsDatabaseViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigObjectsDatabaseView {
+		return vs[0].([]SyncConfigObjectsDatabaseView)[vs[1].(int)]
+	}).(SyncConfigObjectsDatabaseViewOutput)
+}
+
+type SyncConfigObjectsOnlineDdl struct {
+	// status.
+	Status *string `pulumi:"status"`
+}
+
+// SyncConfigObjectsOnlineDdlInput is an input type that accepts SyncConfigObjectsOnlineDdlArgs and SyncConfigObjectsOnlineDdlOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsOnlineDdlInput` via:
+//
+//          SyncConfigObjectsOnlineDdlArgs{...}
+type SyncConfigObjectsOnlineDdlInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsOnlineDdlOutput() SyncConfigObjectsOnlineDdlOutput
+	ToSyncConfigObjectsOnlineDdlOutputWithContext(context.Context) SyncConfigObjectsOnlineDdlOutput
+}
+
+type SyncConfigObjectsOnlineDdlArgs struct {
+	// status.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (SyncConfigObjectsOnlineDdlArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsOnlineDdlArgs) ToSyncConfigObjectsOnlineDdlOutput() SyncConfigObjectsOnlineDdlOutput {
+	return i.ToSyncConfigObjectsOnlineDdlOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsOnlineDdlArgs) ToSyncConfigObjectsOnlineDdlOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsOnlineDdlOutput)
+}
+
+func (i SyncConfigObjectsOnlineDdlArgs) ToSyncConfigObjectsOnlineDdlPtrOutput() SyncConfigObjectsOnlineDdlPtrOutput {
+	return i.ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsOnlineDdlArgs) ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsOnlineDdlOutput).ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(ctx)
+}
+
+// SyncConfigObjectsOnlineDdlPtrInput is an input type that accepts SyncConfigObjectsOnlineDdlArgs, SyncConfigObjectsOnlineDdlPtr and SyncConfigObjectsOnlineDdlPtrOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsOnlineDdlPtrInput` via:
+//
+//          SyncConfigObjectsOnlineDdlArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigObjectsOnlineDdlPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsOnlineDdlPtrOutput() SyncConfigObjectsOnlineDdlPtrOutput
+	ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(context.Context) SyncConfigObjectsOnlineDdlPtrOutput
+}
+
+type syncConfigObjectsOnlineDdlPtrType SyncConfigObjectsOnlineDdlArgs
+
+func SyncConfigObjectsOnlineDdlPtr(v *SyncConfigObjectsOnlineDdlArgs) SyncConfigObjectsOnlineDdlPtrInput {
+	return (*syncConfigObjectsOnlineDdlPtrType)(v)
+}
+
+func (*syncConfigObjectsOnlineDdlPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (i *syncConfigObjectsOnlineDdlPtrType) ToSyncConfigObjectsOnlineDdlPtrOutput() SyncConfigObjectsOnlineDdlPtrOutput {
+	return i.ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigObjectsOnlineDdlPtrType) ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsOnlineDdlPtrOutput)
+}
+
+type SyncConfigObjectsOnlineDdlOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsOnlineDdlOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsOnlineDdlOutput) ToSyncConfigObjectsOnlineDdlOutput() SyncConfigObjectsOnlineDdlOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOnlineDdlOutput) ToSyncConfigObjectsOnlineDdlOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOnlineDdlOutput) ToSyncConfigObjectsOnlineDdlPtrOutput() SyncConfigObjectsOnlineDdlPtrOutput {
+	return o.ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigObjectsOnlineDdlOutput) ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigObjectsOnlineDdl) *SyncConfigObjectsOnlineDdl {
+		return &v
+	}).(SyncConfigObjectsOnlineDdlPtrOutput)
+}
+
+// status.
+func (o SyncConfigObjectsOnlineDdlOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsOnlineDdl) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigObjectsOnlineDdlPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsOnlineDdlPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsOnlineDdlPtrOutput) ToSyncConfigObjectsOnlineDdlPtrOutput() SyncConfigObjectsOnlineDdlPtrOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOnlineDdlPtrOutput) ToSyncConfigObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncConfigObjectsOnlineDdlPtrOutput {
+	return o
+}
+
+func (o SyncConfigObjectsOnlineDdlPtrOutput) Elem() SyncConfigObjectsOnlineDdlOutput {
+	return o.ApplyT(func(v *SyncConfigObjectsOnlineDdl) SyncConfigObjectsOnlineDdl {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigObjectsOnlineDdl
+		return ret
+	}).(SyncConfigObjectsOnlineDdlOutput)
+}
+
+// status.
+func (o SyncConfigObjectsOnlineDdlPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigObjectsOnlineDdl) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Status
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigOptions struct {
+	// Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+	AddAdditionalColumn *bool `pulumi:"addAdditionalColumn"`
+	// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleOption *SyncConfigOptionsConflictHandleOption `pulumi:"conflictHandleOption"`
+	// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleType *string `pulumi:"conflictHandleType"`
+	// DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlOptions []SyncConfigOptionsDdlOption `pulumi:"ddlOptions"`
+	// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+	DealOfExistSameTable *string `pulumi:"dealOfExistSameTable"`
+	// Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+	InitType *string `pulumi:"initType"`
+	// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+	OpTypes []string `pulumi:"opTypes"`
+}
+
+// SyncConfigOptionsInput is an input type that accepts SyncConfigOptionsArgs and SyncConfigOptionsOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsInput` via:
+//
+//          SyncConfigOptionsArgs{...}
+type SyncConfigOptionsInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsOutput() SyncConfigOptionsOutput
+	ToSyncConfigOptionsOutputWithContext(context.Context) SyncConfigOptionsOutput
+}
+
+type SyncConfigOptionsArgs struct {
+	// Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+	AddAdditionalColumn pulumi.BoolPtrInput `pulumi:"addAdditionalColumn"`
+	// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleOption SyncConfigOptionsConflictHandleOptionPtrInput `pulumi:"conflictHandleOption"`
+	// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleType pulumi.StringPtrInput `pulumi:"conflictHandleType"`
+	// DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlOptions SyncConfigOptionsDdlOptionArrayInput `pulumi:"ddlOptions"`
+	// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+	DealOfExistSameTable pulumi.StringPtrInput `pulumi:"dealOfExistSameTable"`
+	// Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+	InitType pulumi.StringPtrInput `pulumi:"initType"`
+	// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+	OpTypes pulumi.StringArrayInput `pulumi:"opTypes"`
+}
+
+func (SyncConfigOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptions)(nil)).Elem()
+}
+
+func (i SyncConfigOptionsArgs) ToSyncConfigOptionsOutput() SyncConfigOptionsOutput {
+	return i.ToSyncConfigOptionsOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsArgs) ToSyncConfigOptionsOutputWithContext(ctx context.Context) SyncConfigOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsOutput)
+}
+
+func (i SyncConfigOptionsArgs) ToSyncConfigOptionsPtrOutput() SyncConfigOptionsPtrOutput {
+	return i.ToSyncConfigOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsArgs) ToSyncConfigOptionsPtrOutputWithContext(ctx context.Context) SyncConfigOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsOutput).ToSyncConfigOptionsPtrOutputWithContext(ctx)
+}
+
+// SyncConfigOptionsPtrInput is an input type that accepts SyncConfigOptionsArgs, SyncConfigOptionsPtr and SyncConfigOptionsPtrOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsPtrInput` via:
+//
+//          SyncConfigOptionsArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigOptionsPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsPtrOutput() SyncConfigOptionsPtrOutput
+	ToSyncConfigOptionsPtrOutputWithContext(context.Context) SyncConfigOptionsPtrOutput
+}
+
+type syncConfigOptionsPtrType SyncConfigOptionsArgs
+
+func SyncConfigOptionsPtr(v *SyncConfigOptionsArgs) SyncConfigOptionsPtrInput {
+	return (*syncConfigOptionsPtrType)(v)
+}
+
+func (*syncConfigOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigOptions)(nil)).Elem()
+}
+
+func (i *syncConfigOptionsPtrType) ToSyncConfigOptionsPtrOutput() SyncConfigOptionsPtrOutput {
+	return i.ToSyncConfigOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigOptionsPtrType) ToSyncConfigOptionsPtrOutputWithContext(ctx context.Context) SyncConfigOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsPtrOutput)
+}
+
+type SyncConfigOptionsOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptions)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsOutput) ToSyncConfigOptionsOutput() SyncConfigOptionsOutput {
+	return o
+}
+
+func (o SyncConfigOptionsOutput) ToSyncConfigOptionsOutputWithContext(ctx context.Context) SyncConfigOptionsOutput {
+	return o
+}
+
+func (o SyncConfigOptionsOutput) ToSyncConfigOptionsPtrOutput() SyncConfigOptionsPtrOutput {
+	return o.ToSyncConfigOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigOptionsOutput) ToSyncConfigOptionsPtrOutputWithContext(ctx context.Context) SyncConfigOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigOptions) *SyncConfigOptions {
+		return &v
+	}).(SyncConfigOptionsPtrOutput)
+}
+
+// Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) AddAdditionalColumn() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptions) *bool { return v.AddAdditionalColumn }).(pulumi.BoolPtrOutput)
+}
+
+// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) ConflictHandleOption() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptions) *SyncConfigOptionsConflictHandleOption { return v.ConflictHandleOption }).(SyncConfigOptionsConflictHandleOptionPtrOutput)
+}
+
+// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) ConflictHandleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptions) *string { return v.ConflictHandleType }).(pulumi.StringPtrOutput)
+}
+
+// DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) DdlOptions() SyncConfigOptionsDdlOptionArrayOutput {
+	return o.ApplyT(func(v SyncConfigOptions) []SyncConfigOptionsDdlOption { return v.DdlOptions }).(SyncConfigOptionsDdlOptionArrayOutput)
+}
+
+// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) DealOfExistSameTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptions) *string { return v.DealOfExistSameTable }).(pulumi.StringPtrOutput)
+}
+
+// Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) InitType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptions) *string { return v.InitType }).(pulumi.StringPtrOutput)
+}
+
+// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigOptions) []string { return v.OpTypes }).(pulumi.StringArrayOutput)
+}
+
+type SyncConfigOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigOptions)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsPtrOutput) ToSyncConfigOptionsPtrOutput() SyncConfigOptionsPtrOutput {
+	return o
+}
+
+func (o SyncConfigOptionsPtrOutput) ToSyncConfigOptionsPtrOutputWithContext(ctx context.Context) SyncConfigOptionsPtrOutput {
+	return o
+}
+
+func (o SyncConfigOptionsPtrOutput) Elem() SyncConfigOptionsOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) SyncConfigOptions {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigOptions
+		return ret
+	}).(SyncConfigOptionsOutput)
+}
+
+// Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) AddAdditionalColumn() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AddAdditionalColumn
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) ConflictHandleOption() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) *SyncConfigOptionsConflictHandleOption {
+		if v == nil {
+			return nil
+		}
+		return v.ConflictHandleOption
+	}).(SyncConfigOptionsConflictHandleOptionPtrOutput)
+}
+
+// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) ConflictHandleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConflictHandleType
+	}).(pulumi.StringPtrOutput)
+}
+
+// DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) DdlOptions() SyncConfigOptionsDdlOptionArrayOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) []SyncConfigOptionsDdlOption {
+		if v == nil {
+			return nil
+		}
+		return v.DdlOptions
+	}).(SyncConfigOptionsDdlOptionArrayOutput)
+}
+
+// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) DealOfExistSameTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DealOfExistSameTable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) InitType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InitType
+	}).(pulumi.StringPtrOutput)
+}
+
+// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsPtrOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncConfigOptions) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OpTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+type SyncConfigOptionsConflictHandleOption struct {
+	// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionColumn *string `pulumi:"conditionColumn"`
+	// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOperator *string `pulumi:"conditionOperator"`
+	// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOrderInSrcAndDst *string `pulumi:"conditionOrderInSrcAndDst"`
+}
+
+// SyncConfigOptionsConflictHandleOptionInput is an input type that accepts SyncConfigOptionsConflictHandleOptionArgs and SyncConfigOptionsConflictHandleOptionOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsConflictHandleOptionInput` via:
+//
+//          SyncConfigOptionsConflictHandleOptionArgs{...}
+type SyncConfigOptionsConflictHandleOptionInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsConflictHandleOptionOutput() SyncConfigOptionsConflictHandleOptionOutput
+	ToSyncConfigOptionsConflictHandleOptionOutputWithContext(context.Context) SyncConfigOptionsConflictHandleOptionOutput
+}
+
+type SyncConfigOptionsConflictHandleOptionArgs struct {
+	// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionColumn pulumi.StringPtrInput `pulumi:"conditionColumn"`
+	// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOperator pulumi.StringPtrInput `pulumi:"conditionOperator"`
+	// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOrderInSrcAndDst pulumi.StringPtrInput `pulumi:"conditionOrderInSrcAndDst"`
+}
+
+func (SyncConfigOptionsConflictHandleOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (i SyncConfigOptionsConflictHandleOptionArgs) ToSyncConfigOptionsConflictHandleOptionOutput() SyncConfigOptionsConflictHandleOptionOutput {
+	return i.ToSyncConfigOptionsConflictHandleOptionOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsConflictHandleOptionArgs) ToSyncConfigOptionsConflictHandleOptionOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsConflictHandleOptionOutput)
+}
+
+func (i SyncConfigOptionsConflictHandleOptionArgs) ToSyncConfigOptionsConflictHandleOptionPtrOutput() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return i.ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsConflictHandleOptionArgs) ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsConflictHandleOptionOutput).ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(ctx)
+}
+
+// SyncConfigOptionsConflictHandleOptionPtrInput is an input type that accepts SyncConfigOptionsConflictHandleOptionArgs, SyncConfigOptionsConflictHandleOptionPtr and SyncConfigOptionsConflictHandleOptionPtrOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsConflictHandleOptionPtrInput` via:
+//
+//          SyncConfigOptionsConflictHandleOptionArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigOptionsConflictHandleOptionPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsConflictHandleOptionPtrOutput() SyncConfigOptionsConflictHandleOptionPtrOutput
+	ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(context.Context) SyncConfigOptionsConflictHandleOptionPtrOutput
+}
+
+type syncConfigOptionsConflictHandleOptionPtrType SyncConfigOptionsConflictHandleOptionArgs
+
+func SyncConfigOptionsConflictHandleOptionPtr(v *SyncConfigOptionsConflictHandleOptionArgs) SyncConfigOptionsConflictHandleOptionPtrInput {
+	return (*syncConfigOptionsConflictHandleOptionPtrType)(v)
+}
+
+func (*syncConfigOptionsConflictHandleOptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (i *syncConfigOptionsConflictHandleOptionPtrType) ToSyncConfigOptionsConflictHandleOptionPtrOutput() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return i.ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigOptionsConflictHandleOptionPtrType) ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsConflictHandleOptionPtrOutput)
+}
+
+type SyncConfigOptionsConflictHandleOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsConflictHandleOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsConflictHandleOptionOutput) ToSyncConfigOptionsConflictHandleOptionOutput() SyncConfigOptionsConflictHandleOptionOutput {
+	return o
+}
+
+func (o SyncConfigOptionsConflictHandleOptionOutput) ToSyncConfigOptionsConflictHandleOptionOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionOutput {
+	return o
+}
+
+func (o SyncConfigOptionsConflictHandleOptionOutput) ToSyncConfigOptionsConflictHandleOptionPtrOutput() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o.ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigOptionsConflictHandleOptionOutput) ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigOptionsConflictHandleOption) *SyncConfigOptionsConflictHandleOption {
+		return &v
+	}).(SyncConfigOptionsConflictHandleOptionPtrOutput)
+}
+
+// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionOutput) ConditionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptionsConflictHandleOption) *string { return v.ConditionColumn }).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionOutput) ConditionOperator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptionsConflictHandleOption) *string { return v.ConditionOperator }).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionOutput) ConditionOrderInSrcAndDst() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptionsConflictHandleOption) *string { return v.ConditionOrderInSrcAndDst }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigOptionsConflictHandleOptionPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsConflictHandleOptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) ToSyncConfigOptionsConflictHandleOptionPtrOutput() SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o
+}
+
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) ToSyncConfigOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncConfigOptionsConflictHandleOptionPtrOutput {
+	return o
+}
+
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) Elem() SyncConfigOptionsConflictHandleOptionOutput {
+	return o.ApplyT(func(v *SyncConfigOptionsConflictHandleOption) SyncConfigOptionsConflictHandleOption {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigOptionsConflictHandleOption
+		return ret
+	}).(SyncConfigOptionsConflictHandleOptionOutput)
+}
+
+// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) ConditionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) ConditionOperator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionOperator
+	}).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsConflictHandleOptionPtrOutput) ConditionOrderInSrcAndDst() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionOrderInSrcAndDst
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigOptionsDdlOption struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject *string `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues []string `pulumi:"ddlValues"`
+}
+
+// SyncConfigOptionsDdlOptionInput is an input type that accepts SyncConfigOptionsDdlOptionArgs and SyncConfigOptionsDdlOptionOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsDdlOptionInput` via:
+//
+//          SyncConfigOptionsDdlOptionArgs{...}
+type SyncConfigOptionsDdlOptionInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsDdlOptionOutput() SyncConfigOptionsDdlOptionOutput
+	ToSyncConfigOptionsDdlOptionOutputWithContext(context.Context) SyncConfigOptionsDdlOptionOutput
+}
+
+type SyncConfigOptionsDdlOptionArgs struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject pulumi.StringPtrInput `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues pulumi.StringArrayInput `pulumi:"ddlValues"`
+}
+
+func (SyncConfigOptionsDdlOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptionsDdlOption)(nil)).Elem()
+}
+
+func (i SyncConfigOptionsDdlOptionArgs) ToSyncConfigOptionsDdlOptionOutput() SyncConfigOptionsDdlOptionOutput {
+	return i.ToSyncConfigOptionsDdlOptionOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsDdlOptionArgs) ToSyncConfigOptionsDdlOptionOutputWithContext(ctx context.Context) SyncConfigOptionsDdlOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsDdlOptionOutput)
+}
+
+// SyncConfigOptionsDdlOptionArrayInput is an input type that accepts SyncConfigOptionsDdlOptionArray and SyncConfigOptionsDdlOptionArrayOutput values.
+// You can construct a concrete instance of `SyncConfigOptionsDdlOptionArrayInput` via:
+//
+//          SyncConfigOptionsDdlOptionArray{ SyncConfigOptionsDdlOptionArgs{...} }
+type SyncConfigOptionsDdlOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncConfigOptionsDdlOptionArrayOutput() SyncConfigOptionsDdlOptionArrayOutput
+	ToSyncConfigOptionsDdlOptionArrayOutputWithContext(context.Context) SyncConfigOptionsDdlOptionArrayOutput
+}
+
+type SyncConfigOptionsDdlOptionArray []SyncConfigOptionsDdlOptionInput
+
+func (SyncConfigOptionsDdlOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigOptionsDdlOption)(nil)).Elem()
+}
+
+func (i SyncConfigOptionsDdlOptionArray) ToSyncConfigOptionsDdlOptionArrayOutput() SyncConfigOptionsDdlOptionArrayOutput {
+	return i.ToSyncConfigOptionsDdlOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncConfigOptionsDdlOptionArray) ToSyncConfigOptionsDdlOptionArrayOutputWithContext(ctx context.Context) SyncConfigOptionsDdlOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigOptionsDdlOptionArrayOutput)
+}
+
+type SyncConfigOptionsDdlOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsDdlOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigOptionsDdlOption)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsDdlOptionOutput) ToSyncConfigOptionsDdlOptionOutput() SyncConfigOptionsDdlOptionOutput {
+	return o
+}
+
+func (o SyncConfigOptionsDdlOptionOutput) ToSyncConfigOptionsDdlOptionOutputWithContext(ctx context.Context) SyncConfigOptionsDdlOptionOutput {
+	return o
+}
+
+// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsDdlOptionOutput) DdlObject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigOptionsDdlOption) *string { return v.DdlObject }).(pulumi.StringPtrOutput)
+}
+
+// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigOptionsDdlOptionOutput) DdlValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigOptionsDdlOption) []string { return v.DdlValues }).(pulumi.StringArrayOutput)
+}
+
+type SyncConfigOptionsDdlOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigOptionsDdlOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigOptionsDdlOption)(nil)).Elem()
+}
+
+func (o SyncConfigOptionsDdlOptionArrayOutput) ToSyncConfigOptionsDdlOptionArrayOutput() SyncConfigOptionsDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncConfigOptionsDdlOptionArrayOutput) ToSyncConfigOptionsDdlOptionArrayOutputWithContext(ctx context.Context) SyncConfigOptionsDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncConfigOptionsDdlOptionArrayOutput) Index(i pulumi.IntInput) SyncConfigOptionsDdlOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigOptionsDdlOption {
+		return vs[0].([]SyncConfigOptionsDdlOption)[vs[1].(int)]
+	}).(SyncConfigOptionsDdlOptionOutput)
+}
+
+type SyncConfigSrcInfo struct {
+	// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	Account *string `pulumi:"account"`
+	// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+	AccountMode *string `pulumi:"accountMode"`
+	// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+	AccountRole *string `pulumi:"accountRole"`
+	// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+	CcnId *string `pulumi:"ccnId"`
+	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+	CvmInstanceId *string `pulumi:"cvmInstanceId"`
+	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+	DbKernel *string `pulumi:"dbKernel"`
+	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName *string `pulumi:"dbName"`
+	// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+	EncryptConn *string `pulumi:"encryptConn"`
+	// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+	EngineVersion *string `pulumi:"engineVersion"`
+	// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceId *string `pulumi:"instanceId"`
+	// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Ip *string `pulumi:"ip"`
+	// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	Password *string `pulumi:"password"`
+	// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Port *int `pulumi:"port"`
+	// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+	Region *string `pulumi:"region"`
+	// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+	Role *string `pulumi:"role"`
+	// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+	RoleExternalId *string `pulumi:"roleExternalId"`
+	// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+	SubnetId *string `pulumi:"subnetId"`
+	// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+	Supplier *string `pulumi:"supplier"`
+	// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretId *string `pulumi:"tmpSecretId"`
+	// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretKey *string `pulumi:"tmpSecretKey"`
+	// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpToken *string `pulumi:"tmpToken"`
+	// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqDcgId *string `pulumi:"uniqDcgId"`
+	// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqVpnGwId *string `pulumi:"uniqVpnGwId"`
+	// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	User *string `pulumi:"user"`
+	// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// SyncConfigSrcInfoInput is an input type that accepts SyncConfigSrcInfoArgs and SyncConfigSrcInfoOutput values.
+// You can construct a concrete instance of `SyncConfigSrcInfoInput` via:
+//
+//          SyncConfigSrcInfoArgs{...}
+type SyncConfigSrcInfoInput interface {
+	pulumi.Input
+
+	ToSyncConfigSrcInfoOutput() SyncConfigSrcInfoOutput
+	ToSyncConfigSrcInfoOutputWithContext(context.Context) SyncConfigSrcInfoOutput
+}
+
+type SyncConfigSrcInfoArgs struct {
+	// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	Account pulumi.StringPtrInput `pulumi:"account"`
+	// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+	AccountMode pulumi.StringPtrInput `pulumi:"accountMode"`
+	// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+	AccountRole pulumi.StringPtrInput `pulumi:"accountRole"`
+	// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+	CcnId pulumi.StringPtrInput `pulumi:"ccnId"`
+	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+	CvmInstanceId pulumi.StringPtrInput `pulumi:"cvmInstanceId"`
+	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+	DbKernel pulumi.StringPtrInput `pulumi:"dbKernel"`
+	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+	EncryptConn pulumi.StringPtrInput `pulumi:"encryptConn"`
+	// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+	EngineVersion pulumi.StringPtrInput `pulumi:"engineVersion"`
+	// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+	Role pulumi.StringPtrInput `pulumi:"role"`
+	// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+	RoleExternalId pulumi.StringPtrInput `pulumi:"roleExternalId"`
+	// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
+	// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+	Supplier pulumi.StringPtrInput `pulumi:"supplier"`
+	// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretId pulumi.StringPtrInput `pulumi:"tmpSecretId"`
+	// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpSecretKey pulumi.StringPtrInput `pulumi:"tmpSecretKey"`
+	// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpToken pulumi.StringPtrInput `pulumi:"tmpToken"`
+	// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqDcgId pulumi.StringPtrInput `pulumi:"uniqDcgId"`
+	// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+	UniqVpnGwId pulumi.StringPtrInput `pulumi:"uniqVpnGwId"`
+	// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+	User pulumi.StringPtrInput `pulumi:"user"`
+	// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (SyncConfigSrcInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigSrcInfo)(nil)).Elem()
+}
+
+func (i SyncConfigSrcInfoArgs) ToSyncConfigSrcInfoOutput() SyncConfigSrcInfoOutput {
+	return i.ToSyncConfigSrcInfoOutputWithContext(context.Background())
+}
+
+func (i SyncConfigSrcInfoArgs) ToSyncConfigSrcInfoOutputWithContext(ctx context.Context) SyncConfigSrcInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigSrcInfoOutput)
+}
+
+func (i SyncConfigSrcInfoArgs) ToSyncConfigSrcInfoPtrOutput() SyncConfigSrcInfoPtrOutput {
+	return i.ToSyncConfigSrcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i SyncConfigSrcInfoArgs) ToSyncConfigSrcInfoPtrOutputWithContext(ctx context.Context) SyncConfigSrcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigSrcInfoOutput).ToSyncConfigSrcInfoPtrOutputWithContext(ctx)
+}
+
+// SyncConfigSrcInfoPtrInput is an input type that accepts SyncConfigSrcInfoArgs, SyncConfigSrcInfoPtr and SyncConfigSrcInfoPtrOutput values.
+// You can construct a concrete instance of `SyncConfigSrcInfoPtrInput` via:
+//
+//          SyncConfigSrcInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type SyncConfigSrcInfoPtrInput interface {
+	pulumi.Input
+
+	ToSyncConfigSrcInfoPtrOutput() SyncConfigSrcInfoPtrOutput
+	ToSyncConfigSrcInfoPtrOutputWithContext(context.Context) SyncConfigSrcInfoPtrOutput
+}
+
+type syncConfigSrcInfoPtrType SyncConfigSrcInfoArgs
+
+func SyncConfigSrcInfoPtr(v *SyncConfigSrcInfoArgs) SyncConfigSrcInfoPtrInput {
+	return (*syncConfigSrcInfoPtrType)(v)
+}
+
+func (*syncConfigSrcInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigSrcInfo)(nil)).Elem()
+}
+
+func (i *syncConfigSrcInfoPtrType) ToSyncConfigSrcInfoPtrOutput() SyncConfigSrcInfoPtrOutput {
+	return i.ToSyncConfigSrcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *syncConfigSrcInfoPtrType) ToSyncConfigSrcInfoPtrOutputWithContext(ctx context.Context) SyncConfigSrcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigSrcInfoPtrOutput)
+}
+
+type SyncConfigSrcInfoOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigSrcInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigSrcInfo)(nil)).Elem()
+}
+
+func (o SyncConfigSrcInfoOutput) ToSyncConfigSrcInfoOutput() SyncConfigSrcInfoOutput {
+	return o
+}
+
+func (o SyncConfigSrcInfoOutput) ToSyncConfigSrcInfoOutputWithContext(ctx context.Context) SyncConfigSrcInfoOutput {
+	return o
+}
+
+func (o SyncConfigSrcInfoOutput) ToSyncConfigSrcInfoPtrOutput() SyncConfigSrcInfoPtrOutput {
+	return o.ToSyncConfigSrcInfoPtrOutputWithContext(context.Background())
+}
+
+func (o SyncConfigSrcInfoOutput) ToSyncConfigSrcInfoPtrOutputWithContext(ctx context.Context) SyncConfigSrcInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncConfigSrcInfo) *SyncConfigSrcInfo {
+		return &v
+	}).(SyncConfigSrcInfoPtrOutput)
+}
+
+// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Account }).(pulumi.StringPtrOutput)
+}
+
+// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) AccountMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.AccountMode }).(pulumi.StringPtrOutput)
+}
+
+// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) AccountRole() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.AccountRole }).(pulumi.StringPtrOutput)
+}
+
+// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) CcnId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.CcnId }).(pulumi.StringPtrOutput)
+}
+
+// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) CvmInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.CvmInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) DbKernel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.DbKernel }).(pulumi.StringPtrOutput)
+}
+
+// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) EncryptConn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.EncryptConn }).(pulumi.StringPtrOutput)
+}
+
+// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) EngineVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.EngineVersion }).(pulumi.StringPtrOutput)
+}
+
+// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Role() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Role }).(pulumi.StringPtrOutput)
+}
+
+// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) RoleExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.RoleExternalId }).(pulumi.StringPtrOutput)
+}
+
+// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) Supplier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.Supplier }).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) TmpSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.TmpSecretId }).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) TmpSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.TmpSecretKey }).(pulumi.StringPtrOutput)
+}
+
+// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) TmpToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.TmpToken }).(pulumi.StringPtrOutput)
+}
+
+// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) UniqDcgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.UniqDcgId }).(pulumi.StringPtrOutput)
+}
+
+// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) UniqVpnGwId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.UniqVpnGwId }).(pulumi.StringPtrOutput)
+}
+
+// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.User }).(pulumi.StringPtrOutput)
+}
+
+// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigSrcInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigSrcInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncConfigSrcInfo)(nil)).Elem()
+}
+
+func (o SyncConfigSrcInfoPtrOutput) ToSyncConfigSrcInfoPtrOutput() SyncConfigSrcInfoPtrOutput {
+	return o
+}
+
+func (o SyncConfigSrcInfoPtrOutput) ToSyncConfigSrcInfoPtrOutputWithContext(ctx context.Context) SyncConfigSrcInfoPtrOutput {
+	return o
+}
+
+func (o SyncConfigSrcInfoPtrOutput) Elem() SyncConfigSrcInfoOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) SyncConfigSrcInfo {
+		if v != nil {
+			return *v
+		}
+		var ret SyncConfigSrcInfo
+		return ret
+	}).(SyncConfigSrcInfoOutput)
+}
+
+// The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Account
+	}).(pulumi.StringPtrOutput)
+}
+
+// The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) AccountMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccountMode
+	}).(pulumi.StringPtrOutput)
+}
+
+// The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) AccountRole() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccountRole
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) CcnId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CcnId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) CvmInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CvmInstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) DbKernel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DbKernel
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DbName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) EncryptConn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EncryptConn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) EngineVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EngineVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Ip
+	}).(pulumi.StringPtrOutput)
+}
+
+// Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Role() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Role
+	}).(pulumi.StringPtrOutput)
+}
+
+// External role id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) RoleExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RoleExternalId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) Supplier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Supplier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) TmpSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpSecretId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) TmpSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpSecretKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) TmpToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TmpToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) UniqDcgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqDcgId
+	}).(pulumi.StringPtrOutput)
+}
+
+// VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) UniqVpnGwId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UniqVpnGwId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.User
+	}).(pulumi.StringPtrOutput)
+}
+
+// Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
+	}).(pulumi.StringPtrOutput)
+}
+
 type SyncJobTag struct {
 	// tag key.
 	TagKey *string `pulumi:"tagKey"`
@@ -4889,6 +7400,148 @@ func (o GetCompareTasksListConfigObjectItemViewArrayOutput) Index(i pulumi.IntIn
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCompareTasksListConfigObjectItemView {
 		return vs[0].([]GetCompareTasksListConfigObjectItemView)[vs[1].(int)]
 	}).(GetCompareTasksListConfigObjectItemViewOutput)
+}
+
+type GetMigrateDbInstancesInstance struct {
+	// The reason of can&#39;t used in migration.
+	Hint string `pulumi:"hint"`
+	// Database instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Database instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Can used in migration, 1-yes, 0-no.
+	Usable int `pulumi:"usable"`
+	// Instance vip.
+	Vip string `pulumi:"vip"`
+	// Instance port.
+	Vport int `pulumi:"vport"`
+}
+
+// GetMigrateDbInstancesInstanceInput is an input type that accepts GetMigrateDbInstancesInstanceArgs and GetMigrateDbInstancesInstanceOutput values.
+// You can construct a concrete instance of `GetMigrateDbInstancesInstanceInput` via:
+//
+//          GetMigrateDbInstancesInstanceArgs{...}
+type GetMigrateDbInstancesInstanceInput interface {
+	pulumi.Input
+
+	ToGetMigrateDbInstancesInstanceOutput() GetMigrateDbInstancesInstanceOutput
+	ToGetMigrateDbInstancesInstanceOutputWithContext(context.Context) GetMigrateDbInstancesInstanceOutput
+}
+
+type GetMigrateDbInstancesInstanceArgs struct {
+	// The reason of can&#39;t used in migration.
+	Hint pulumi.StringInput `pulumi:"hint"`
+	// Database instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Database instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Can used in migration, 1-yes, 0-no.
+	Usable pulumi.IntInput `pulumi:"usable"`
+	// Instance vip.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Instance port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetMigrateDbInstancesInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMigrateDbInstancesInstance)(nil)).Elem()
+}
+
+func (i GetMigrateDbInstancesInstanceArgs) ToGetMigrateDbInstancesInstanceOutput() GetMigrateDbInstancesInstanceOutput {
+	return i.ToGetMigrateDbInstancesInstanceOutputWithContext(context.Background())
+}
+
+func (i GetMigrateDbInstancesInstanceArgs) ToGetMigrateDbInstancesInstanceOutputWithContext(ctx context.Context) GetMigrateDbInstancesInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMigrateDbInstancesInstanceOutput)
+}
+
+// GetMigrateDbInstancesInstanceArrayInput is an input type that accepts GetMigrateDbInstancesInstanceArray and GetMigrateDbInstancesInstanceArrayOutput values.
+// You can construct a concrete instance of `GetMigrateDbInstancesInstanceArrayInput` via:
+//
+//          GetMigrateDbInstancesInstanceArray{ GetMigrateDbInstancesInstanceArgs{...} }
+type GetMigrateDbInstancesInstanceArrayInput interface {
+	pulumi.Input
+
+	ToGetMigrateDbInstancesInstanceArrayOutput() GetMigrateDbInstancesInstanceArrayOutput
+	ToGetMigrateDbInstancesInstanceArrayOutputWithContext(context.Context) GetMigrateDbInstancesInstanceArrayOutput
+}
+
+type GetMigrateDbInstancesInstanceArray []GetMigrateDbInstancesInstanceInput
+
+func (GetMigrateDbInstancesInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMigrateDbInstancesInstance)(nil)).Elem()
+}
+
+func (i GetMigrateDbInstancesInstanceArray) ToGetMigrateDbInstancesInstanceArrayOutput() GetMigrateDbInstancesInstanceArrayOutput {
+	return i.ToGetMigrateDbInstancesInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i GetMigrateDbInstancesInstanceArray) ToGetMigrateDbInstancesInstanceArrayOutputWithContext(ctx context.Context) GetMigrateDbInstancesInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMigrateDbInstancesInstanceArrayOutput)
+}
+
+type GetMigrateDbInstancesInstanceOutput struct{ *pulumi.OutputState }
+
+func (GetMigrateDbInstancesInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMigrateDbInstancesInstance)(nil)).Elem()
+}
+
+func (o GetMigrateDbInstancesInstanceOutput) ToGetMigrateDbInstancesInstanceOutput() GetMigrateDbInstancesInstanceOutput {
+	return o
+}
+
+func (o GetMigrateDbInstancesInstanceOutput) ToGetMigrateDbInstancesInstanceOutputWithContext(ctx context.Context) GetMigrateDbInstancesInstanceOutput {
+	return o
+}
+
+// The reason of can&#39;t used in migration.
+func (o GetMigrateDbInstancesInstanceOutput) Hint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) string { return v.Hint }).(pulumi.StringOutput)
+}
+
+// Database instance id.
+func (o GetMigrateDbInstancesInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Database instance name.
+func (o GetMigrateDbInstancesInstanceOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Can used in migration, 1-yes, 0-no.
+func (o GetMigrateDbInstancesInstanceOutput) Usable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) int { return v.Usable }).(pulumi.IntOutput)
+}
+
+// Instance vip.
+func (o GetMigrateDbInstancesInstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Instance port.
+func (o GetMigrateDbInstancesInstanceOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMigrateDbInstancesInstance) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetMigrateDbInstancesInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMigrateDbInstancesInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMigrateDbInstancesInstance)(nil)).Elem()
+}
+
+func (o GetMigrateDbInstancesInstanceArrayOutput) ToGetMigrateDbInstancesInstanceArrayOutput() GetMigrateDbInstancesInstanceArrayOutput {
+	return o
+}
+
+func (o GetMigrateDbInstancesInstanceArrayOutput) ToGetMigrateDbInstancesInstanceArrayOutputWithContext(ctx context.Context) GetMigrateDbInstancesInstanceArrayOutput {
+	return o
+}
+
+func (o GetMigrateDbInstancesInstanceArrayOutput) Index(i pulumi.IntInput) GetMigrateDbInstancesInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMigrateDbInstancesInstance {
+		return vs[0].([]GetMigrateDbInstancesInstance)[vs[1].(int)]
+	}).(GetMigrateDbInstancesInstanceOutput)
 }
 
 type GetMigrateJobsList struct {
@@ -9801,6 +12454,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*MigrateJobSrcInfoInfoArrayInput)(nil)).Elem(), MigrateJobSrcInfoInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MigrateServiceTagInput)(nil)).Elem(), MigrateServiceTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MigrateServiceTagArrayInput)(nil)).Elem(), MigrateServiceTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigDstInfoInput)(nil)).Elem(), SyncConfigDstInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigDstInfoPtrInput)(nil)).Elem(), SyncConfigDstInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsInput)(nil)).Elem(), SyncConfigObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsPtrInput)(nil)).Elem(), SyncConfigObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseInput)(nil)).Elem(), SyncConfigObjectsDatabaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseViewInput)(nil)).Elem(), SyncConfigObjectsDatabaseViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseViewArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsOnlineDdlInput)(nil)).Elem(), SyncConfigObjectsOnlineDdlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsOnlineDdlPtrInput)(nil)).Elem(), SyncConfigObjectsOnlineDdlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsInput)(nil)).Elem(), SyncConfigOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsPtrInput)(nil)).Elem(), SyncConfigOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsConflictHandleOptionInput)(nil)).Elem(), SyncConfigOptionsConflictHandleOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsConflictHandleOptionPtrInput)(nil)).Elem(), SyncConfigOptionsConflictHandleOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsDdlOptionInput)(nil)).Elem(), SyncConfigOptionsDdlOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsDdlOptionArrayInput)(nil)).Elem(), SyncConfigOptionsDdlOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigSrcInfoInput)(nil)).Elem(), SyncConfigSrcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigSrcInfoPtrInput)(nil)).Elem(), SyncConfigSrcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobTagInput)(nil)).Elem(), SyncJobTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobTagArrayInput)(nil)).Elem(), SyncJobTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCompareTasksListInput)(nil)).Elem(), GetCompareTasksListArgs{})
@@ -9829,6 +12502,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCompareTasksListConfigObjectItemTableArrayInput)(nil)).Elem(), GetCompareTasksListConfigObjectItemTableArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCompareTasksListConfigObjectItemViewInput)(nil)).Elem(), GetCompareTasksListConfigObjectItemViewArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCompareTasksListConfigObjectItemViewArrayInput)(nil)).Elem(), GetCompareTasksListConfigObjectItemViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMigrateDbInstancesInstanceInput)(nil)).Elem(), GetMigrateDbInstancesInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMigrateDbInstancesInstanceArrayInput)(nil)).Elem(), GetMigrateDbInstancesInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMigrateJobsListInput)(nil)).Elem(), GetMigrateJobsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMigrateJobsListArrayInput)(nil)).Elem(), GetMigrateJobsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMigrateJobsListActionInput)(nil)).Elem(), GetMigrateJobsListActionArgs{})
@@ -9929,6 +12604,26 @@ func init() {
 	pulumi.RegisterOutputType(MigrateJobSrcInfoInfoArrayOutput{})
 	pulumi.RegisterOutputType(MigrateServiceTagOutput{})
 	pulumi.RegisterOutputType(MigrateServiceTagArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigDstInfoOutput{})
+	pulumi.RegisterOutputType(SyncConfigDstInfoPtrOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsPtrOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseViewOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseViewArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsOnlineDdlOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsOnlineDdlPtrOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsPtrOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsConflictHandleOptionOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsConflictHandleOptionPtrOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsDdlOptionOutput{})
+	pulumi.RegisterOutputType(SyncConfigOptionsDdlOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigSrcInfoOutput{})
+	pulumi.RegisterOutputType(SyncConfigSrcInfoPtrOutput{})
 	pulumi.RegisterOutputType(SyncJobTagOutput{})
 	pulumi.RegisterOutputType(SyncJobTagArrayOutput{})
 	pulumi.RegisterOutputType(GetCompareTasksListOutput{})
@@ -9957,6 +12652,8 @@ func init() {
 	pulumi.RegisterOutputType(GetCompareTasksListConfigObjectItemTableArrayOutput{})
 	pulumi.RegisterOutputType(GetCompareTasksListConfigObjectItemViewOutput{})
 	pulumi.RegisterOutputType(GetCompareTasksListConfigObjectItemViewArrayOutput{})
+	pulumi.RegisterOutputType(GetMigrateDbInstancesInstanceOutput{})
+	pulumi.RegisterOutputType(GetMigrateDbInstancesInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetMigrateJobsListOutput{})
 	pulumi.RegisterOutputType(GetMigrateJobsListArrayOutput{})
 	pulumi.RegisterOutputType(GetMigrateJobsListActionOutput{})

@@ -67,8 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// }
     /// ```
-    /// 
-    /// Use Kubelet
+    /// ### Use Kubelet
     /// 
     /// ```csharp
     /// using Pulumi;

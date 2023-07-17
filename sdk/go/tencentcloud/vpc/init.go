@@ -29,6 +29,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BandwidthPackage{}
 	case "tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment":
 		r = &BandwidthPackageAttachment{}
+	case "tencentcloud:Vpc/classicLinkAttachment:ClassicLinkAttachment":
+		r = &ClassicLinkAttachment{}
+	case "tencentcloud:Vpc/dhcpAssociateAddress:DhcpAssociateAddress":
+		r = &DhcpAssociateAddress{}
+	case "tencentcloud:Vpc/dhcpIp:DhcpIp":
+		r = &DhcpIp{}
+	case "tencentcloud:Vpc/enableEndPointConnect:EnableEndPointConnect":
+		r = &EnableEndPointConnect{}
 	case "tencentcloud:Vpc/endPoint:EndPoint":
 		r = &EndPoint{}
 	case "tencentcloud:Vpc/endPointService:EndPointService":
@@ -37,8 +45,34 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &EndPointServiceWhiteList{}
 	case "tencentcloud:Vpc/flowLog:FlowLog":
 		r = &FlowLog{}
+	case "tencentcloud:Vpc/flowLogConfig:FlowLogConfig":
+		r = &FlowLogConfig{}
 	case "tencentcloud:Vpc/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock":
+		r = &Ipv6CidrBlock{}
+	case "tencentcloud:Vpc/ipv6EniAddress:Ipv6EniAddress":
+		r = &Ipv6EniAddress{}
+	case "tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock":
+		r = &Ipv6SubnetCidrBlock{}
+	case "tencentcloud:Vpc/localGateway:LocalGateway":
+		r = &LocalGateway{}
+	case "tencentcloud:Vpc/netDetect:NetDetect":
+		r = &NetDetect{}
+	case "tencentcloud:Vpc/networkAclQuintuple:NetworkAclQuintuple":
+		r = &NetworkAclQuintuple{}
+	case "tencentcloud:Vpc/notifyRoutes:NotifyRoutes":
+		r = &NotifyRoutes{}
+	case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
+		r = &ResumeSnapshotInstance{}
+	case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
+		r = &SnapshotPolicy{}
+	case "tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment":
+		r = &SnapshotPolicyAttachment{}
+	case "tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig":
+		r = &SnapshotPolicyConfig{}
+	case "tencentcloud:Vpc/trafficPackage:TrafficPackage":
+		r = &TrafficPackage{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -74,6 +108,26 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpc/classicLinkAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/dhcpAssociateAddress",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/dhcpIp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/enableEndPointConnect",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpc/endPoint",
 		&module{version},
 	)
@@ -94,7 +148,72 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpc/flowLogConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpc/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/ipv6CidrBlock",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/ipv6EniAddress",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/ipv6SubnetCidrBlock",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/localGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/netDetect",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/networkAclQuintuple",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/notifyRoutes",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/resumeSnapshotInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/snapshotPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/snapshotPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/snapshotPolicyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/trafficPackage",
 		&module{version},
 	)
 }

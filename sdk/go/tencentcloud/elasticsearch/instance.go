@@ -14,26 +14,52 @@ import (
 // Provides an elasticsearch instance resource.
 //
 // ## Example Usage
+// ### Create a basic version of elasticsearch instance paid by the hour
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewInstance(ctx, "foo", &Elasticsearch.InstanceArgs{
-// 			InstanceName:     pulumi.String("tf-test"),
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Version:          pulumi.String("7.5.1"),
-// 			VpcId:            pulumi.Any(_var.Vpc_id),
-// 			SubnetId:         pulumi.Any(_var.Subnet_id),
-// 			Password:         pulumi.String("Test12345"),
-// 			LicenseType:      pulumi.String("basic"),
+// 		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "es",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Elasticsearch.NewInstance(ctx, "example", &Elasticsearch.InstanceArgs{
+// 			InstanceName:      pulumi.String("tf_example_es"),
+// 			AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
+// 			Version:           pulumi.String("7.10.1"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          subnet.ID(),
+// 			Password:          pulumi.String("Test12345"),
+// 			LicenseType:       pulumi.String("basic"),
+// 			BasicSecurityType: pulumi.Int(2),
 // 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
 // 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
 // 					NodeNum:  pulumi.Int(1),
@@ -43,17 +69,114 @@ import (
 // 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
 // 				&elasticsearch.InstanceNodeInfoListArgs{
 // 					NodeNum:  pulumi.Int(2),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
 // 					Encrypt:  pulumi.Bool(false),
 // 				},
 // 			},
 // 			EsAcl: &elasticsearch.InstanceEsAclArgs{
-// 				BlackLists: pulumi.StringArray{
-// 					pulumi.String("9.9.9.9"),
-// 					pulumi.String("8.8.8.8"),
-// 				},
 // 				WhiteLists: pulumi.StringArray{
-// 					pulumi.String("0.0.0.0"),
+// 					pulumi.String("127.0.0.1"),
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Create a basic version of elasticsearch instance for multi-availability zone deployment
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "es",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnetMultiZone, err := Subnet.NewInstance(ctx, "subnetMultiZone", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+// 			CidrBlock:        pulumi.String("10.0.2.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Elasticsearch.NewInstance(ctx, "exampleMultiZone", &Elasticsearch.InstanceArgs{
+// 			InstanceName:      pulumi.String("tf_example_es"),
+// 			AvailabilityZone:  pulumi.String("-"),
+// 			Version:           pulumi.String("7.10.1"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          pulumi.String("-"),
+// 			Password:          pulumi.String("Test12345"),
+// 			LicenseType:       pulumi.String("basic"),
+// 			BasicSecurityType: pulumi.Int(2),
+// 			DeployMode:        pulumi.Int(1),
+// 			MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
+// 				&elasticsearch.InstanceMultiZoneInfoArgs{
+// 					AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+// 					SubnetId:         subnet.ID(),
+// 				},
+// 				&elasticsearch.InstanceMultiZoneInfoArgs{
+// 					AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+// 					SubnetId:         subnetMultiZone.ID(),
+// 				},
+// 			},
+// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
+// 					NodeNum:  pulumi.Int(1),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
+// 				},
+// 			},
+// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+// 				&elasticsearch.InstanceNodeInfoListArgs{
+// 					Type:     pulumi.String("dedicatedMaster"),
+// 					NodeNum:  pulumi.Int(3),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+// 					Encrypt:  pulumi.Bool(false),
+// 				},
+// 				&elasticsearch.InstanceNodeInfoListArgs{
+// 					Type:     pulumi.String("hotData"),
+// 					NodeNum:  pulumi.Int(2),
+// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
+// 					Encrypt:  pulumi.Bool(false),
+// 				},
+// 			},
+// 			EsAcl: &elasticsearch.InstanceEsAclArgs{
+// 				WhiteLists: pulumi.StringArray{
+// 					pulumi.String("127.0.0.1"),
 // 				},
 // 			},
 // 			Tags: pulumi.AnyMap{
@@ -78,7 +201,7 @@ import (
 type Instance struct {
 	pulumi.CustomResourceState
 
-	// Availability zone. When create multi-az es, this parameter must be omitted.
+	// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 	AvailabilityZone pulumi.StringPtrOutput `pulumi:"availabilityZone"`
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrOutput `pulumi:"basicSecurityType"`
@@ -108,15 +231,15 @@ type Instance struct {
 	MultiZoneInfos InstanceMultiZoneInfoArrayOutput `pulumi:"multiZoneInfos"`
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayOutput `pulumi:"nodeInfoLists"`
-	// Password to an instance.
+	// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 	Password pulumi.StringOutput `pulumi:"password"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrOutput `pulumi:"renewFlag"`
-	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 	Version pulumi.StringOutput `pulumi:"version"`
 	// The ID of a VPC network.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
@@ -166,7 +289,7 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
-	// Availability zone. When create multi-az es, this parameter must be omitted.
+	// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
@@ -196,15 +319,15 @@ type instanceState struct {
 	MultiZoneInfos []InstanceMultiZoneInfo `pulumi:"multiZoneInfos"`
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists []InstanceNodeInfoList `pulumi:"nodeInfoLists"`
-	// Password to an instance.
+	// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 	Password *string `pulumi:"password"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
-	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 	SubnetId *string `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 	Version *string `pulumi:"version"`
 	// The ID of a VPC network.
 	VpcId *string `pulumi:"vpcId"`
@@ -213,7 +336,7 @@ type instanceState struct {
 }
 
 type InstanceState struct {
-	// Availability zone. When create multi-az es, this parameter must be omitted.
+	// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 	AvailabilityZone pulumi.StringPtrInput
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrInput
@@ -243,15 +366,15 @@ type InstanceState struct {
 	MultiZoneInfos InstanceMultiZoneInfoArrayInput
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayInput
-	// Password to an instance.
+	// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 	Password pulumi.StringPtrInput
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
-	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 	SubnetId pulumi.StringPtrInput
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
-	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 	Version pulumi.StringPtrInput
 	// The ID of a VPC network.
 	VpcId pulumi.StringPtrInput
@@ -264,7 +387,7 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
-	// Availability zone. When create multi-az es, this parameter must be omitted.
+	// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType *int `pulumi:"basicSecurityType"`
@@ -284,15 +407,15 @@ type instanceArgs struct {
 	MultiZoneInfos []InstanceMultiZoneInfo `pulumi:"multiZoneInfos"`
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists []InstanceNodeInfoList `pulumi:"nodeInfoLists"`
-	// Password to an instance.
+	// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 	Password string `pulumi:"password"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
-	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 	SubnetId *string `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 	Version string `pulumi:"version"`
 	// The ID of a VPC network.
 	VpcId string `pulumi:"vpcId"`
@@ -302,7 +425,7 @@ type instanceArgs struct {
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
-	// Availability zone. When create multi-az es, this parameter must be omitted.
+	// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 	AvailabilityZone pulumi.StringPtrInput
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
 	BasicSecurityType pulumi.IntPtrInput
@@ -322,15 +445,15 @@ type InstanceArgs struct {
 	MultiZoneInfos InstanceMultiZoneInfoArrayInput
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
 	NodeInfoLists InstanceNodeInfoListArrayInput
-	// Password to an instance.
+	// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 	Password pulumi.StringInput
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
-	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 	SubnetId pulumi.StringPtrInput
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
 	Tags pulumi.MapInput
-	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+	// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 	Version pulumi.StringInput
 	// The ID of a VPC network.
 	VpcId pulumi.StringInput
@@ -425,7 +548,7 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
-// Availability zone. When create multi-az es, this parameter must be omitted.
+// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
 func (o InstanceOutput) AvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AvailabilityZone }).(pulumi.StringPtrOutput)
 }
@@ -500,7 +623,7 @@ func (o InstanceOutput) NodeInfoLists() InstanceNodeInfoListArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceNodeInfoListArrayOutput { return v.NodeInfoLists }).(InstanceNodeInfoListArrayOutput)
 }
 
-// Password to an instance.
+// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
 func (o InstanceOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
@@ -510,7 +633,7 @@ func (o InstanceOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.RenewFlag }).(pulumi.StringPtrOutput)
 }
 
-// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
 func (o InstanceOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
@@ -520,7 +643,7 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
 func (o InstanceOutput) Version() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Version }).(pulumi.StringOutput)
 }

@@ -29,6 +29,7 @@ __all__ = [
     'ClusterWorkerConfigArgs',
     'ClusterWorkerConfigDataDiskArgs',
     'ClusterWorkerInstancesListArgs',
+    'EncryptionProtectionKmsConfigurationArgs',
     'NodePoolAutoScalingConfigArgs',
     'NodePoolAutoScalingConfigDataDiskArgs',
     'NodePoolNodeConfigArgs',
@@ -2524,6 +2525,45 @@ class ClusterWorkerInstancesListArgs:
     @lan_ip.setter
     def lan_ip(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "lan_ip", value)
+
+
+@pulumi.input_type
+class EncryptionProtectionKmsConfigurationArgs:
+    def __init__(__self__, *,
+                 key_id: Optional[pulumi.Input[str]] = None,
+                 kms_region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key_id: kms id.
+        :param pulumi.Input[str] kms_region: kms region.
+        """
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+        if kms_region is not None:
+            pulumi.set(__self__, "kms_region", kms_region)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        kms id.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_id", value)
+
+    @property
+    @pulumi.getter(name="kmsRegion")
+    def kms_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        kms region.
+        """
+        return pulumi.get(self, "kms_region")
+
+    @kms_region.setter
+    def kms_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "kms_region", value)
 
 
 @pulumi.input_type

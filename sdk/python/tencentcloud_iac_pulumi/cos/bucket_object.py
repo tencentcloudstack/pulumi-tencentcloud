@@ -430,8 +430,7 @@ class BucketObject(pulumi.CustomResource):
         Provides a COS object resource to put an object(content or file) to the bucket.
 
         ## Example Usage
-
-        Uploading a file to a bucket
+        ### Uploading a file to a bucket
 
         ```python
         import pulumi
@@ -442,8 +441,7 @@ class BucketObject(pulumi.CustomResource):
             key="new_object_key",
             source="path/to/file")
         ```
-
-        Uploading a content to a bucket
+        ### Uploading a content to a bucket
 
         ```python
         import pulumi
@@ -483,8 +481,7 @@ class BucketObject(pulumi.CustomResource):
         Provides a COS object resource to put an object(content or file) to the bucket.
 
         ## Example Usage
-
-        Uploading a file to a bucket
+        ### Uploading a file to a bucket
 
         ```python
         import pulumi
@@ -495,8 +492,7 @@ class BucketObject(pulumi.CustomResource):
             key="new_object_key",
             source="path/to/file")
         ```
-
-        Uploading a content to a bucket
+        ### Uploading a content to a bucket
 
         ```python
         import pulumi

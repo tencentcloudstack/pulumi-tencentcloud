@@ -570,6 +570,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
             set => _tags = value;
         }
 
+        /// <summary>
+        /// Intranet IP address.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
         [Input("voucherIds")]
         private InputList<string>? _voucherIds;
 

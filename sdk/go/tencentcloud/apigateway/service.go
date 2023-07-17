@@ -14,6 +14,7 @@ import (
 // Use this resource to create API gateway service.
 //
 // ## Example Usage
+// ### Shared Service
 //
 // ```go
 // package main
@@ -36,7 +37,47 @@ import (
 // 			ReleaseLimit: pulumi.Int(500),
 // 			ServiceDesc:  pulumi.String("your nice service"),
 // 			ServiceName:  pulumi.String("niceservice"),
-// 			TestLimit:    pulumi.Int(500),
+// 			Tags: pulumi.AnyMap{
+// 				"test-key1": pulumi.Any("test-value1"),
+// 				"test-key2": pulumi.Any("test-value2"),
+// 			},
+// 			TestLimit: pulumi.Int(500),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Exclusive Service
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+// 			InstanceId: pulumi.String("instance-rc6fcv4e"),
+// 			IpVersion:  pulumi.String("IPv4"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			PreLimit:     pulumi.Int(500),
+// 			Protocol:     pulumi.String("http&https"),
+// 			ReleaseLimit: pulumi.Int(500),
+// 			ServiceDesc:  pulumi.String("your nice service"),
+// 			ServiceName:  pulumi.String("service"),
+// 			Tags: pulumi.AnyMap{
+// 				"test-key1": pulumi.Any("test-value1"),
+// 			},
+// 			TestLimit: pulumi.Int(500),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -60,12 +101,16 @@ type Service struct {
 	ApiLists ServiceApiListArrayOutput `pulumi:"apiLists"`
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName pulumi.StringPtrOutput `pulumi:"exclusiveSetName"`
 	// Port number for http access over private network.
 	InnerHttpPort pulumi.IntOutput `pulumi:"innerHttpPort"`
 	// Port number for https access over private network.
 	InnerHttpsPort pulumi.IntOutput `pulumi:"innerHttpsPort"`
+	// Exclusive instance ID.
+	InstanceId pulumi.StringPtrOutput `pulumi:"instanceId"`
 	// Private network access subdomain name.
 	InternalSubDomain pulumi.StringOutput `pulumi:"internalSubDomain"`
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
@@ -86,6 +131,8 @@ type Service struct {
 	ServiceDesc pulumi.StringPtrOutput `pulumi:"serviceDesc"`
 	// Custom service name.
 	ServiceName pulumi.StringOutput `pulumi:"serviceName"`
+	// Tag description list.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntOutput `pulumi:"testLimit"`
 	// A list of attach usage plans.
@@ -135,12 +182,16 @@ type serviceState struct {
 	ApiLists []ServiceApiList `pulumi:"apiLists"`
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime *string `pulumi:"createTime"`
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName *string `pulumi:"exclusiveSetName"`
 	// Port number for http access over private network.
 	InnerHttpPort *int `pulumi:"innerHttpPort"`
 	// Port number for https access over private network.
 	InnerHttpsPort *int `pulumi:"innerHttpsPort"`
+	// Exclusive instance ID.
+	InstanceId *string `pulumi:"instanceId"`
 	// Private network access subdomain name.
 	InternalSubDomain *string `pulumi:"internalSubDomain"`
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
@@ -161,6 +212,8 @@ type serviceState struct {
 	ServiceDesc *string `pulumi:"serviceDesc"`
 	// Custom service name.
 	ServiceName *string `pulumi:"serviceName"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit *int `pulumi:"testLimit"`
 	// A list of attach usage plans.
@@ -172,12 +225,16 @@ type ServiceState struct {
 	ApiLists ServiceApiListArrayInput
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringPtrInput
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName pulumi.StringPtrInput
 	// Port number for http access over private network.
 	InnerHttpPort pulumi.IntPtrInput
 	// Port number for https access over private network.
 	InnerHttpsPort pulumi.IntPtrInput
+	// Exclusive instance ID.
+	InstanceId pulumi.StringPtrInput
 	// Private network access subdomain name.
 	InternalSubDomain pulumi.StringPtrInput
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
@@ -198,6 +255,8 @@ type ServiceState struct {
 	ServiceDesc pulumi.StringPtrInput
 	// Custom service name.
 	ServiceName pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntPtrInput
 	// A list of attach usage plans.
@@ -209,8 +268,12 @@ func (ServiceState) ElementType() reflect.Type {
 }
 
 type serviceArgs struct {
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName *string `pulumi:"exclusiveSetName"`
+	// Exclusive instance ID.
+	InstanceId *string `pulumi:"instanceId"`
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
 	IpVersion *string `pulumi:"ipVersion"`
 	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
@@ -225,14 +288,20 @@ type serviceArgs struct {
 	ServiceDesc *string `pulumi:"serviceDesc"`
 	// Custom service name.
 	ServiceName string `pulumi:"serviceName"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit *int `pulumi:"testLimit"`
 }
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	//
+	// Deprecated: It has been deprecated from version 1.81.9.
 	ExclusiveSetName pulumi.StringPtrInput
+	// Exclusive instance ID.
+	InstanceId pulumi.StringPtrInput
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
 	IpVersion pulumi.StringPtrInput
 	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
@@ -247,6 +316,8 @@ type ServiceArgs struct {
 	ServiceDesc pulumi.StringPtrInput
 	// Custom service name.
 	ServiceName pulumi.StringInput
+	// Tag description list.
+	Tags pulumi.MapInput
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntPtrInput
 }
@@ -348,7 +419,9 @@ func (o ServiceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+//
+// Deprecated: It has been deprecated from version 1.81.9.
 func (o ServiceOutput) ExclusiveSetName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.ExclusiveSetName }).(pulumi.StringPtrOutput)
 }
@@ -361,6 +434,11 @@ func (o ServiceOutput) InnerHttpPort() pulumi.IntOutput {
 // Port number for https access over private network.
 func (o ServiceOutput) InnerHttpsPort() pulumi.IntOutput {
 	return o.ApplyT(func(v *Service) pulumi.IntOutput { return v.InnerHttpsPort }).(pulumi.IntOutput)
+}
+
+// Exclusive instance ID.
+func (o ServiceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
 // Private network access subdomain name.
@@ -411,6 +489,11 @@ func (o ServiceOutput) ServiceDesc() pulumi.StringPtrOutput {
 // Custom service name.
 func (o ServiceOutput) ServiceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+// Tag description list.
+func (o ServiceOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Service) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // API QPS value. Enter a positive number to limit the API query rate per second `QPS`.

@@ -102,6 +102,10 @@ type Instance struct {
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Port for private access.
 	Vport pulumi.IntOutput `pulumi:"vport"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -190,6 +194,10 @@ type instanceState struct {
 	VpcId *string `pulumi:"vpcId"`
 	// Port for private access.
 	Vport *int `pulumi:"vport"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 type InstanceState struct {
@@ -243,6 +251,10 @@ type InstanceState struct {
 	VpcId pulumi.StringPtrInput
 	// Port for private access.
 	Vport pulumi.IntPtrInput
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -290,6 +302,10 @@ type instanceArgs struct {
 	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
 	VpcId *string `pulumi:"vpcId"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -334,6 +350,10 @@ type InstanceArgs struct {
 	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
 	VpcId pulumi.StringPtrInput
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -546,6 +566,13 @@ func (o InstanceOutput) VpcId() pulumi.StringPtrOutput {
 // Port for private access.
 func (o InstanceOutput) Vport() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Vport }).(pulumi.IntOutput)
+}
+
+// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+//
+// Deprecated: It has been deprecated from version 1.81.2.
+func (o InstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

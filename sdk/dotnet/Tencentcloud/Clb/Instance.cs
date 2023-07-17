@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB instance.
     /// 
     /// ## Example Usage
-    /// 
-    /// INTERNAL CLB
+    /// ### INTERNAL CLB
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -41,8 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// OPEN CLB
+    /// ### OPEN CLB
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -73,8 +71,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
+    /// ### Dynamic Vip Instance
     /// 
-    /// Default enable
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "clb-instance-open",
+    ///             ProjectId = 0,
+    ///             VpcId = fooInstance.Id,
+    ///             TargetRegionInfoRegion = "ap-guangzhou",
+    ///             TargetRegionInfoVpcId = fooInstance.Id,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 fooGroup.Id,
+    ///             },
+    ///             DynamicVip = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///         this.Domain = clbOpen.Domain;
+    ///     }
+    /// 
+    ///     [Output("domain")]
+    ///     public Output&lt;string&gt; Domain { get; set; }
+    /// }
+    /// ```
+    /// ### Default enable
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -126,8 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// CREATE multiple instance
+    /// ### CREATE multiple instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -147,8 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// CREATE instance with log
+    /// ### CREATE instance with log
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -236,6 +273,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("clbVips")]
         public Output<ImmutableArray<string>> ClbVips { get; private set; } = null!;
+
+        /// <summary>
+        /// Domain name of the CLB instance.
+        /// </summary>
+        [Output("domain")]
+        public Output<string> Domain { get; private set; } = null!;
+
+        /// <summary>
+        /// If create dynamic vip CLB instance, `true` or `false`.
+        /// </summary>
+        [Output("dynamicVip")]
+        public Output<bool?> DynamicVip { get; private set; } = null!;
 
         /// <summary>
         /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -417,6 +466,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ClbName { get; set; } = null!;
 
         /// <summary>
+        /// If create dynamic vip CLB instance, `true` or `false`.
+        /// </summary>
+        [Input("dynamicVip")]
+        public Input<bool>? DynamicVip { get; set; }
+
+        /// <summary>
         /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         /// </summary>
         [Input("internetBandwidthMaxOut")]
@@ -578,6 +633,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             get => _clbVips ?? (_clbVips = new InputList<string>());
             set => _clbVips = value;
         }
+
+        /// <summary>
+        /// Domain name of the CLB instance.
+        /// </summary>
+        [Input("domain")]
+        public Input<string>? Domain { get; set; }
+
+        /// <summary>
+        /// If create dynamic vip CLB instance, `true` or `false`.
+        /// </summary>
+        [Input("dynamicVip")]
+        public Input<bool>? DynamicVip { get; set; }
 
         /// <summary>
         /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.

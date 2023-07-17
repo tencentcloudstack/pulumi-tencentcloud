@@ -196,19 +196,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=start.id,
             action="pause")
         ```
-
-        Continue the a migration job
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = tencentcloud.dts.MigrateJobConfig("config",
-            job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
-            action="continue")
-        ```
-
-        Complete a migration job when the status is readyComplete
+        ### Continue the a migration job
 
         ```python
         import pulumi
@@ -218,8 +206,17 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="continue")
         ```
+        ### Complete a migration job when the status is readyComplete
 
-        Stop a running migration job
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = tencentcloud.dts.MigrateJobConfig("config",
+            job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
+            action="continue")
+        ```
+        ### Stop a running migration job
 
         ```python
         import pulumi
@@ -229,8 +226,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="stop")
         ```
-
-        Isolate a stopped/canceled migration job
+        ### Isolate a stopped/canceled migration job
 
         ```python
         import pulumi
@@ -240,8 +236,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="isolate")
         ```
-
-        Recover a isolated migration job
+        ### Recover a isolated migration job
 
         ```python
         import pulumi
@@ -331,19 +326,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=start.id,
             action="pause")
         ```
-
-        Continue the a migration job
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = tencentcloud.dts.MigrateJobConfig("config",
-            job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
-            action="continue")
-        ```
-
-        Complete a migration job when the status is readyComplete
+        ### Continue the a migration job
 
         ```python
         import pulumi
@@ -353,8 +336,17 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="continue")
         ```
+        ### Complete a migration job when the status is readyComplete
 
-        Stop a running migration job
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = tencentcloud.dts.MigrateJobConfig("config",
+            job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
+            action="continue")
+        ```
+        ### Stop a running migration job
 
         ```python
         import pulumi
@@ -364,8 +356,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="stop")
         ```
-
-        Isolate a stopped/canceled migration job
+        ### Isolate a stopped/canceled migration job
 
         ```python
         import pulumi
@@ -375,8 +366,7 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=tencentcloud_dts_migrate_job_start_operation["start"]["id"],
             action="isolate")
         ```
-
-        Recover a isolated migration job
+        ### Recover a isolated migration job
 
         ```python
         import pulumi

@@ -12,7 +12,11 @@ __all__ = [
     'InstanceBackupPlanArgs',
     'InstanceDbNodeSetArgs',
     'ParameterTemplateModifyParamEntrySetArgs',
+    'GetBackupDownloadUrlsBackupDownloadRestrictionArgs',
+    'GetBaseBackupsFilterArgs',
+    'GetLogBackupsFilterArgs',
     'GetParameterTemplatesFilterArgs',
+    'GetReadonlyGroupsFilterArgs',
 ]
 
 @pulumi.input_type
@@ -162,7 +166,211 @@ class ParameterTemplateModifyParamEntrySetArgs:
 
 
 @pulumi.input_type
+class GetBackupDownloadUrlsBackupDownloadRestrictionArgs:
+    def __init__(__self__, *,
+                 ip_restriction_effect: Optional[str] = None,
+                 ip_sets: Optional[Sequence[str]] = None,
+                 restriction_type: Optional[str] = None,
+                 vpc_id_sets: Optional[Sequence[str]] = None,
+                 vpc_restriction_effect: Optional[str] = None):
+        """
+        :param str ip_restriction_effect: Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        :param Sequence[str] ip_sets: Whether it is allowed to download IP list of the backup files.
+        :param str restriction_type: Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+        :param Sequence[str] vpc_id_sets: Whether it is allowed to download the VPC ID list of the backup files.
+        :param str vpc_restriction_effect: Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        if ip_restriction_effect is not None:
+            pulumi.set(__self__, "ip_restriction_effect", ip_restriction_effect)
+        if ip_sets is not None:
+            pulumi.set(__self__, "ip_sets", ip_sets)
+        if restriction_type is not None:
+            pulumi.set(__self__, "restriction_type", restriction_type)
+        if vpc_id_sets is not None:
+            pulumi.set(__self__, "vpc_id_sets", vpc_id_sets)
+        if vpc_restriction_effect is not None:
+            pulumi.set(__self__, "vpc_restriction_effect", vpc_restriction_effect)
+
+    @property
+    @pulumi.getter(name="ipRestrictionEffect")
+    def ip_restriction_effect(self) -> Optional[str]:
+        """
+        Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        return pulumi.get(self, "ip_restriction_effect")
+
+    @ip_restriction_effect.setter
+    def ip_restriction_effect(self, value: Optional[str]):
+        pulumi.set(self, "ip_restriction_effect", value)
+
+    @property
+    @pulumi.getter(name="ipSets")
+    def ip_sets(self) -> Optional[Sequence[str]]:
+        """
+        Whether it is allowed to download IP list of the backup files.
+        """
+        return pulumi.get(self, "ip_sets")
+
+    @ip_sets.setter
+    def ip_sets(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "ip_sets", value)
+
+    @property
+    @pulumi.getter(name="restrictionType")
+    def restriction_type(self) -> Optional[str]:
+        """
+        Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+        """
+        return pulumi.get(self, "restriction_type")
+
+    @restriction_type.setter
+    def restriction_type(self, value: Optional[str]):
+        pulumi.set(self, "restriction_type", value)
+
+    @property
+    @pulumi.getter(name="vpcIdSets")
+    def vpc_id_sets(self) -> Optional[Sequence[str]]:
+        """
+        Whether it is allowed to download the VPC ID list of the backup files.
+        """
+        return pulumi.get(self, "vpc_id_sets")
+
+    @vpc_id_sets.setter
+    def vpc_id_sets(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "vpc_id_sets", value)
+
+    @property
+    @pulumi.getter(name="vpcRestrictionEffect")
+    def vpc_restriction_effect(self) -> Optional[str]:
+        """
+        Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        return pulumi.get(self, "vpc_restriction_effect")
+
+    @vpc_restriction_effect.setter
+    def vpc_restriction_effect(self, value: Optional[str]):
+        pulumi.set(self, "vpc_restriction_effect", value)
+
+
+@pulumi.input_type
+class GetBaseBackupsFilterArgs:
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetLogBackupsFilterArgs:
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
 class GetParameterTemplatesFilterArgs:
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetReadonlyGroupsFilterArgs:
     def __init__(__self__, *,
                  name: Optional[str] = None,
                  values: Optional[Sequence[str]] = None):

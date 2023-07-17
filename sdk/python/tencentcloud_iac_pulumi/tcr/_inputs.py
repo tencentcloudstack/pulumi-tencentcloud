@@ -16,6 +16,7 @@ __all__ = [
     'ManageReplicationOperationRuleArgs',
     'ManageReplicationOperationRuleFilterArgs',
     'NamespaceCveWhitelistItemArgs',
+    'ServiceAccountPermissionArgs',
     'TagRetentionRuleRetentionRuleArgs',
     'WebhookTriggerTriggerArgs',
     'WebhookTriggerTriggerTargetArgs',
@@ -429,6 +430,43 @@ class NamespaceCveWhitelistItemArgs:
     @cve_id.setter
     def cve_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cve_id", value)
+
+
+@pulumi.input_type
+class ServiceAccountPermissionArgs:
+    def __init__(__self__, *,
+                 actions: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 resource: pulumi.Input[str]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] actions: Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] resource: resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "actions", actions)
+        pulumi.set(__self__, "resource", resource)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "actions")
+
+    @actions.setter
+    def actions(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "actions", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
 
 
 @pulumi.input_type

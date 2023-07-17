@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  *
  * const auditLogFile = new tencentcloud.Cynosdb.AuditLogFile("audit_log_file", {
  *     endTime: "2022-08-12 10:29:20",
- *     instanceId: "xxxxxxx",
+ *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2022-07-12 10:29:20",
  * });
  * ```

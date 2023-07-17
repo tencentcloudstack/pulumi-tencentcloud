@@ -23,18 +23,34 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Cvm/chcConfig:ChcConfig":
 		r = &ChcConfig{}
+	case "tencentcloud:Cvm/exportImages:ExportImages":
+		r = &ExportImages{}
 	case "tencentcloud:Cvm/hpcCluster:HpcCluster":
 		r = &HpcCluster{}
+	case "tencentcloud:Cvm/imageSharePermission:ImageSharePermission":
+		r = &ImageSharePermission{}
+	case "tencentcloud:Cvm/importImage:ImportImage":
+		r = &ImportImage{}
 	case "tencentcloud:Cvm/launchTemplate:LaunchTemplate":
 		r = &LaunchTemplate{}
 	case "tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion":
 		r = &LaunchTemplateDefaultVersion{}
 	case "tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion":
 		r = &LaunchTemplateVersion{}
+	case "tencentcloud:Cvm/modifyInstanceDiskType:ModifyInstanceDiskType":
+		r = &ModifyInstanceDiskType{}
+	case "tencentcloud:Cvm/programFpgaImage:ProgramFpgaImage":
+		r = &ProgramFpgaImage{}
 	case "tencentcloud:Cvm/rebootInstance:RebootInstance":
 		r = &RebootInstance{}
+	case "tencentcloud:Cvm/renewHost:RenewHost":
+		r = &RenewHost{}
+	case "tencentcloud:Cvm/renewInstance:RenewInstance":
+		r = &RenewInstance{}
 	case "tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment":
 		r = &SecurityGroupAttachment{}
+	case "tencentcloud:Cvm/syncImage:SyncImage":
+		r = &SyncImage{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -55,7 +71,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cvm/exportImages",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cvm/hpcCluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/imageSharePermission",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/importImage",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -75,12 +106,37 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cvm/modifyInstanceDiskType",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/programFpgaImage",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cvm/rebootInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cvm/renewHost",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cvm/securityGroupAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/syncImage",
 		&module{version},
 	)
 }

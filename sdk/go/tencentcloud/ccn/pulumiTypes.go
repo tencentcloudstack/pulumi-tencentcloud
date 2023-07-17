@@ -143,6 +143,139 @@ func (o InstancesAcceptAttachInstanceArrayOutput) Index(i pulumi.IntInput) Insta
 	}).(InstancesAcceptAttachInstanceOutput)
 }
 
+type InstancesRejectAttachInstance struct {
+	// Description.
+	Description *string `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType *string `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId *string `pulumi:"routeTableId"`
+}
+
+// InstancesRejectAttachInstanceInput is an input type that accepts InstancesRejectAttachInstanceArgs and InstancesRejectAttachInstanceOutput values.
+// You can construct a concrete instance of `InstancesRejectAttachInstanceInput` via:
+//
+//          InstancesRejectAttachInstanceArgs{...}
+type InstancesRejectAttachInstanceInput interface {
+	pulumi.Input
+
+	ToInstancesRejectAttachInstanceOutput() InstancesRejectAttachInstanceOutput
+	ToInstancesRejectAttachInstanceOutputWithContext(context.Context) InstancesRejectAttachInstanceOutput
+}
+
+type InstancesRejectAttachInstanceArgs struct {
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Attachment Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance Region.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+	RouteTableId pulumi.StringPtrInput `pulumi:"routeTableId"`
+}
+
+func (InstancesRejectAttachInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesRejectAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesRejectAttachInstanceArgs) ToInstancesRejectAttachInstanceOutput() InstancesRejectAttachInstanceOutput {
+	return i.ToInstancesRejectAttachInstanceOutputWithContext(context.Background())
+}
+
+func (i InstancesRejectAttachInstanceArgs) ToInstancesRejectAttachInstanceOutputWithContext(ctx context.Context) InstancesRejectAttachInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesRejectAttachInstanceOutput)
+}
+
+// InstancesRejectAttachInstanceArrayInput is an input type that accepts InstancesRejectAttachInstanceArray and InstancesRejectAttachInstanceArrayOutput values.
+// You can construct a concrete instance of `InstancesRejectAttachInstanceArrayInput` via:
+//
+//          InstancesRejectAttachInstanceArray{ InstancesRejectAttachInstanceArgs{...} }
+type InstancesRejectAttachInstanceArrayInput interface {
+	pulumi.Input
+
+	ToInstancesRejectAttachInstanceArrayOutput() InstancesRejectAttachInstanceArrayOutput
+	ToInstancesRejectAttachInstanceArrayOutputWithContext(context.Context) InstancesRejectAttachInstanceArrayOutput
+}
+
+type InstancesRejectAttachInstanceArray []InstancesRejectAttachInstanceInput
+
+func (InstancesRejectAttachInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesRejectAttachInstance)(nil)).Elem()
+}
+
+func (i InstancesRejectAttachInstanceArray) ToInstancesRejectAttachInstanceArrayOutput() InstancesRejectAttachInstanceArrayOutput {
+	return i.ToInstancesRejectAttachInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i InstancesRejectAttachInstanceArray) ToInstancesRejectAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesRejectAttachInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstancesRejectAttachInstanceArrayOutput)
+}
+
+type InstancesRejectAttachInstanceOutput struct{ *pulumi.OutputState }
+
+func (InstancesRejectAttachInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstancesRejectAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesRejectAttachInstanceOutput) ToInstancesRejectAttachInstanceOutput() InstancesRejectAttachInstanceOutput {
+	return o
+}
+
+func (o InstancesRejectAttachInstanceOutput) ToInstancesRejectAttachInstanceOutputWithContext(ctx context.Context) InstancesRejectAttachInstanceOutput {
+	return o
+}
+
+// Description.
+func (o InstancesRejectAttachInstanceOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesRejectAttachInstance) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Attachment Instance ID.
+func (o InstancesRejectAttachInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesRejectAttachInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance Region.
+func (o InstancesRejectAttachInstanceOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v InstancesRejectAttachInstance) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+func (o InstancesRejectAttachInstanceOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesRejectAttachInstance) *string { return v.InstanceType }).(pulumi.StringPtrOutput)
+}
+
+// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+func (o InstancesRejectAttachInstanceOutput) RouteTableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesRejectAttachInstance) *string { return v.RouteTableId }).(pulumi.StringPtrOutput)
+}
+
+type InstancesRejectAttachInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (InstancesRejectAttachInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstancesRejectAttachInstance)(nil)).Elem()
+}
+
+func (o InstancesRejectAttachInstanceArrayOutput) ToInstancesRejectAttachInstanceArrayOutput() InstancesRejectAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesRejectAttachInstanceArrayOutput) ToInstancesRejectAttachInstanceArrayOutputWithContext(ctx context.Context) InstancesRejectAttachInstanceArrayOutput {
+	return o
+}
+
+func (o InstancesRejectAttachInstanceArrayOutput) Index(i pulumi.IntInput) InstancesRejectAttachInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesRejectAttachInstance {
+		return vs[0].([]InstancesRejectAttachInstance)[vs[1].(int)]
+	}).(InstancesRejectAttachInstanceOutput)
+}
+
 type InstancesResetAttachInstance struct {
 	// Description.
 	Description *string `pulumi:"description"`
@@ -1254,6 +1387,8 @@ func (o GetInstancesInstanceListAttachmentListArrayOutput) Index(i pulumi.IntInp
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceInput)(nil)).Elem(), InstancesAcceptAttachInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceArrayInput)(nil)).Elem(), InstancesAcceptAttachInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesRejectAttachInstanceInput)(nil)).Elem(), InstancesRejectAttachInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstancesRejectAttachInstanceArrayInput)(nil)).Elem(), InstancesRejectAttachInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceInput)(nil)).Elem(), InstancesResetAttachInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceArrayInput)(nil)).Elem(), InstancesResetAttachInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitInput)(nil)).Elem(), GetBandwidthLimitsLimitArgs{})
@@ -1272,6 +1407,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListArrayInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArray{})
 	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceOutput{})
 	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceArrayOutput{})
+	pulumi.RegisterOutputType(InstancesRejectAttachInstanceOutput{})
+	pulumi.RegisterOutputType(InstancesRejectAttachInstanceArrayOutput{})
 	pulumi.RegisterOutputType(InstancesResetAttachInstanceOutput{})
 	pulumi.RegisterOutputType(InstancesResetAttachInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetBandwidthLimitsLimitOutput{})

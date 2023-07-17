@@ -592,6 +592,276 @@ func (o InstanceSnatIpArrayOutput) Index(i pulumi.IntInput) InstanceSnatIpOutput
 	}).(InstanceSnatIpOutput)
 }
 
+type ReplaceCertForLbsCertificate struct {
+	// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+	CertCaContent *string `pulumi:"certCaContent"`
+	// ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+	CertCaId *string `pulumi:"certCaId"`
+	// Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+	CertCaName *string `pulumi:"certCaName"`
+	// Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertContent *string `pulumi:"certContent"`
+	// ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+	CertId *string `pulumi:"certId"`
+	// Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertKey *string `pulumi:"certKey"`
+	// Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertName *string `pulumi:"certName"`
+	// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+	SslMode *string `pulumi:"sslMode"`
+}
+
+// ReplaceCertForLbsCertificateInput is an input type that accepts ReplaceCertForLbsCertificateArgs and ReplaceCertForLbsCertificateOutput values.
+// You can construct a concrete instance of `ReplaceCertForLbsCertificateInput` via:
+//
+//          ReplaceCertForLbsCertificateArgs{...}
+type ReplaceCertForLbsCertificateInput interface {
+	pulumi.Input
+
+	ToReplaceCertForLbsCertificateOutput() ReplaceCertForLbsCertificateOutput
+	ToReplaceCertForLbsCertificateOutputWithContext(context.Context) ReplaceCertForLbsCertificateOutput
+}
+
+type ReplaceCertForLbsCertificateArgs struct {
+	// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+	CertCaContent pulumi.StringPtrInput `pulumi:"certCaContent"`
+	// ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+	CertCaId pulumi.StringPtrInput `pulumi:"certCaId"`
+	// Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+	CertCaName pulumi.StringPtrInput `pulumi:"certCaName"`
+	// Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertContent pulumi.StringPtrInput `pulumi:"certContent"`
+	// ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+	CertId pulumi.StringPtrInput `pulumi:"certId"`
+	// Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertKey pulumi.StringPtrInput `pulumi:"certKey"`
+	// Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+	CertName pulumi.StringPtrInput `pulumi:"certName"`
+	// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+	SslMode pulumi.StringPtrInput `pulumi:"sslMode"`
+}
+
+func (ReplaceCertForLbsCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplaceCertForLbsCertificate)(nil)).Elem()
+}
+
+func (i ReplaceCertForLbsCertificateArgs) ToReplaceCertForLbsCertificateOutput() ReplaceCertForLbsCertificateOutput {
+	return i.ToReplaceCertForLbsCertificateOutputWithContext(context.Background())
+}
+
+func (i ReplaceCertForLbsCertificateArgs) ToReplaceCertForLbsCertificateOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplaceCertForLbsCertificateOutput)
+}
+
+func (i ReplaceCertForLbsCertificateArgs) ToReplaceCertForLbsCertificatePtrOutput() ReplaceCertForLbsCertificatePtrOutput {
+	return i.ToReplaceCertForLbsCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i ReplaceCertForLbsCertificateArgs) ToReplaceCertForLbsCertificatePtrOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplaceCertForLbsCertificateOutput).ToReplaceCertForLbsCertificatePtrOutputWithContext(ctx)
+}
+
+// ReplaceCertForLbsCertificatePtrInput is an input type that accepts ReplaceCertForLbsCertificateArgs, ReplaceCertForLbsCertificatePtr and ReplaceCertForLbsCertificatePtrOutput values.
+// You can construct a concrete instance of `ReplaceCertForLbsCertificatePtrInput` via:
+//
+//          ReplaceCertForLbsCertificateArgs{...}
+//
+//  or:
+//
+//          nil
+type ReplaceCertForLbsCertificatePtrInput interface {
+	pulumi.Input
+
+	ToReplaceCertForLbsCertificatePtrOutput() ReplaceCertForLbsCertificatePtrOutput
+	ToReplaceCertForLbsCertificatePtrOutputWithContext(context.Context) ReplaceCertForLbsCertificatePtrOutput
+}
+
+type replaceCertForLbsCertificatePtrType ReplaceCertForLbsCertificateArgs
+
+func ReplaceCertForLbsCertificatePtr(v *ReplaceCertForLbsCertificateArgs) ReplaceCertForLbsCertificatePtrInput {
+	return (*replaceCertForLbsCertificatePtrType)(v)
+}
+
+func (*replaceCertForLbsCertificatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplaceCertForLbsCertificate)(nil)).Elem()
+}
+
+func (i *replaceCertForLbsCertificatePtrType) ToReplaceCertForLbsCertificatePtrOutput() ReplaceCertForLbsCertificatePtrOutput {
+	return i.ToReplaceCertForLbsCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i *replaceCertForLbsCertificatePtrType) ToReplaceCertForLbsCertificatePtrOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplaceCertForLbsCertificatePtrOutput)
+}
+
+type ReplaceCertForLbsCertificateOutput struct{ *pulumi.OutputState }
+
+func (ReplaceCertForLbsCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplaceCertForLbsCertificate)(nil)).Elem()
+}
+
+func (o ReplaceCertForLbsCertificateOutput) ToReplaceCertForLbsCertificateOutput() ReplaceCertForLbsCertificateOutput {
+	return o
+}
+
+func (o ReplaceCertForLbsCertificateOutput) ToReplaceCertForLbsCertificateOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificateOutput {
+	return o
+}
+
+func (o ReplaceCertForLbsCertificateOutput) ToReplaceCertForLbsCertificatePtrOutput() ReplaceCertForLbsCertificatePtrOutput {
+	return o.ToReplaceCertForLbsCertificatePtrOutputWithContext(context.Background())
+}
+
+func (o ReplaceCertForLbsCertificateOutput) ToReplaceCertForLbsCertificatePtrOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ReplaceCertForLbsCertificate) *ReplaceCertForLbsCertificate {
+		return &v
+	}).(ReplaceCertForLbsCertificatePtrOutput)
+}
+
+// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+func (o ReplaceCertForLbsCertificateOutput) CertCaContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertCaContent }).(pulumi.StringPtrOutput)
+}
+
+// ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+func (o ReplaceCertForLbsCertificateOutput) CertCaId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertCaId }).(pulumi.StringPtrOutput)
+}
+
+// Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+func (o ReplaceCertForLbsCertificateOutput) CertCaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertCaName }).(pulumi.StringPtrOutput)
+}
+
+// Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificateOutput) CertContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertContent }).(pulumi.StringPtrOutput)
+}
+
+// ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+func (o ReplaceCertForLbsCertificateOutput) CertId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertId }).(pulumi.StringPtrOutput)
+}
+
+// Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificateOutput) CertKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertKey }).(pulumi.StringPtrOutput)
+}
+
+// Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificateOutput) CertName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.CertName }).(pulumi.StringPtrOutput)
+}
+
+// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+func (o ReplaceCertForLbsCertificateOutput) SslMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceCertForLbsCertificate) *string { return v.SslMode }).(pulumi.StringPtrOutput)
+}
+
+type ReplaceCertForLbsCertificatePtrOutput struct{ *pulumi.OutputState }
+
+func (ReplaceCertForLbsCertificatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplaceCertForLbsCertificate)(nil)).Elem()
+}
+
+func (o ReplaceCertForLbsCertificatePtrOutput) ToReplaceCertForLbsCertificatePtrOutput() ReplaceCertForLbsCertificatePtrOutput {
+	return o
+}
+
+func (o ReplaceCertForLbsCertificatePtrOutput) ToReplaceCertForLbsCertificatePtrOutputWithContext(ctx context.Context) ReplaceCertForLbsCertificatePtrOutput {
+	return o
+}
+
+func (o ReplaceCertForLbsCertificatePtrOutput) Elem() ReplaceCertForLbsCertificateOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) ReplaceCertForLbsCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret ReplaceCertForLbsCertificate
+		return ret
+	}).(ReplaceCertForLbsCertificateOutput)
+}
+
+// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertCaContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertCaContent
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertCaId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertCaId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertCaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertCaName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertContent
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+func (o ReplaceCertForLbsCertificatePtrOutput) CertName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CertName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+func (o ReplaceCertForLbsCertificatePtrOutput) SslMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplaceCertForLbsCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SslMode
+	}).(pulumi.StringPtrOutput)
+}
+
 type SnatIpIp struct {
 	// Snat IP.
 	Ip string `pulumi:"ip"`
@@ -1070,6 +1340,4522 @@ func (o GetAttachmentsAttachmentListTargetArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetAttachmentsAttachmentListTargetOutput)
 }
 
+type GetClusterResourcesClusterResourceSet struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// clusters zone.
+	ClustersZones []GetClusterResourcesClusterResourceSetClustersZone `pulumi:"clustersZones"`
+	// Is it idle.
+	Idle string `pulumi:"idle"`
+	// Isp.
+	Isp string `pulumi:"isp"`
+	// Loadbalance Id.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// vip.
+	Vip string `pulumi:"vip"`
+}
+
+// GetClusterResourcesClusterResourceSetInput is an input type that accepts GetClusterResourcesClusterResourceSetArgs and GetClusterResourcesClusterResourceSetOutput values.
+// You can construct a concrete instance of `GetClusterResourcesClusterResourceSetInput` via:
+//
+//          GetClusterResourcesClusterResourceSetArgs{...}
+type GetClusterResourcesClusterResourceSetInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesClusterResourceSetOutput() GetClusterResourcesClusterResourceSetOutput
+	ToGetClusterResourcesClusterResourceSetOutputWithContext(context.Context) GetClusterResourcesClusterResourceSetOutput
+}
+
+type GetClusterResourcesClusterResourceSetArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// clusters zone.
+	ClustersZones GetClusterResourcesClusterResourceSetClustersZoneArrayInput `pulumi:"clustersZones"`
+	// Is it idle.
+	Idle pulumi.StringInput `pulumi:"idle"`
+	// Isp.
+	Isp pulumi.StringInput `pulumi:"isp"`
+	// Loadbalance Id.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// vip.
+	Vip pulumi.StringInput `pulumi:"vip"`
+}
+
+func (GetClusterResourcesClusterResourceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesClusterResourceSet)(nil)).Elem()
+}
+
+func (i GetClusterResourcesClusterResourceSetArgs) ToGetClusterResourcesClusterResourceSetOutput() GetClusterResourcesClusterResourceSetOutput {
+	return i.ToGetClusterResourcesClusterResourceSetOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesClusterResourceSetArgs) ToGetClusterResourcesClusterResourceSetOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesClusterResourceSetOutput)
+}
+
+// GetClusterResourcesClusterResourceSetArrayInput is an input type that accepts GetClusterResourcesClusterResourceSetArray and GetClusterResourcesClusterResourceSetArrayOutput values.
+// You can construct a concrete instance of `GetClusterResourcesClusterResourceSetArrayInput` via:
+//
+//          GetClusterResourcesClusterResourceSetArray{ GetClusterResourcesClusterResourceSetArgs{...} }
+type GetClusterResourcesClusterResourceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesClusterResourceSetArrayOutput() GetClusterResourcesClusterResourceSetArrayOutput
+	ToGetClusterResourcesClusterResourceSetArrayOutputWithContext(context.Context) GetClusterResourcesClusterResourceSetArrayOutput
+}
+
+type GetClusterResourcesClusterResourceSetArray []GetClusterResourcesClusterResourceSetInput
+
+func (GetClusterResourcesClusterResourceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesClusterResourceSet)(nil)).Elem()
+}
+
+func (i GetClusterResourcesClusterResourceSetArray) ToGetClusterResourcesClusterResourceSetArrayOutput() GetClusterResourcesClusterResourceSetArrayOutput {
+	return i.ToGetClusterResourcesClusterResourceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesClusterResourceSetArray) ToGetClusterResourcesClusterResourceSetArrayOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesClusterResourceSetArrayOutput)
+}
+
+type GetClusterResourcesClusterResourceSetOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesClusterResourceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesClusterResourceSet)(nil)).Elem()
+}
+
+func (o GetClusterResourcesClusterResourceSetOutput) ToGetClusterResourcesClusterResourceSetOutput() GetClusterResourcesClusterResourceSetOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetOutput) ToGetClusterResourcesClusterResourceSetOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetOutput {
+	return o
+}
+
+// Cluster ID.
+func (o GetClusterResourcesClusterResourceSetOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// cluster name.
+func (o GetClusterResourcesClusterResourceSetOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// clusters zone.
+func (o GetClusterResourcesClusterResourceSetOutput) ClustersZones() GetClusterResourcesClusterResourceSetClustersZoneArrayOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) []GetClusterResourcesClusterResourceSetClustersZone {
+		return v.ClustersZones
+	}).(GetClusterResourcesClusterResourceSetClustersZoneArrayOutput)
+}
+
+// Is it idle.
+func (o GetClusterResourcesClusterResourceSetOutput) Idle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.Idle }).(pulumi.StringOutput)
+}
+
+// Isp.
+func (o GetClusterResourcesClusterResourceSetOutput) Isp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.Isp }).(pulumi.StringOutput)
+}
+
+// Loadbalance Id.
+func (o GetClusterResourcesClusterResourceSetOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// vip.
+func (o GetClusterResourcesClusterResourceSetOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSet) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+type GetClusterResourcesClusterResourceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesClusterResourceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesClusterResourceSet)(nil)).Elem()
+}
+
+func (o GetClusterResourcesClusterResourceSetArrayOutput) ToGetClusterResourcesClusterResourceSetArrayOutput() GetClusterResourcesClusterResourceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetArrayOutput) ToGetClusterResourcesClusterResourceSetArrayOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetArrayOutput) Index(i pulumi.IntInput) GetClusterResourcesClusterResourceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterResourcesClusterResourceSet {
+		return vs[0].([]GetClusterResourcesClusterResourceSet)[vs[1].(int)]
+	}).(GetClusterResourcesClusterResourceSetOutput)
+}
+
+type GetClusterResourcesClusterResourceSetClustersZone struct {
+	// Availability master zone where the cluster is located.
+	MasterZones []string `pulumi:"masterZones"`
+	// Availability slave zone where the cluster is located.
+	SlaveZones []string `pulumi:"slaveZones"`
+}
+
+// GetClusterResourcesClusterResourceSetClustersZoneInput is an input type that accepts GetClusterResourcesClusterResourceSetClustersZoneArgs and GetClusterResourcesClusterResourceSetClustersZoneOutput values.
+// You can construct a concrete instance of `GetClusterResourcesClusterResourceSetClustersZoneInput` via:
+//
+//          GetClusterResourcesClusterResourceSetClustersZoneArgs{...}
+type GetClusterResourcesClusterResourceSetClustersZoneInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesClusterResourceSetClustersZoneOutput() GetClusterResourcesClusterResourceSetClustersZoneOutput
+	ToGetClusterResourcesClusterResourceSetClustersZoneOutputWithContext(context.Context) GetClusterResourcesClusterResourceSetClustersZoneOutput
+}
+
+type GetClusterResourcesClusterResourceSetClustersZoneArgs struct {
+	// Availability master zone where the cluster is located.
+	MasterZones pulumi.StringArrayInput `pulumi:"masterZones"`
+	// Availability slave zone where the cluster is located.
+	SlaveZones pulumi.StringArrayInput `pulumi:"slaveZones"`
+}
+
+func (GetClusterResourcesClusterResourceSetClustersZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesClusterResourceSetClustersZone)(nil)).Elem()
+}
+
+func (i GetClusterResourcesClusterResourceSetClustersZoneArgs) ToGetClusterResourcesClusterResourceSetClustersZoneOutput() GetClusterResourcesClusterResourceSetClustersZoneOutput {
+	return i.ToGetClusterResourcesClusterResourceSetClustersZoneOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesClusterResourceSetClustersZoneArgs) ToGetClusterResourcesClusterResourceSetClustersZoneOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetClustersZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesClusterResourceSetClustersZoneOutput)
+}
+
+// GetClusterResourcesClusterResourceSetClustersZoneArrayInput is an input type that accepts GetClusterResourcesClusterResourceSetClustersZoneArray and GetClusterResourcesClusterResourceSetClustersZoneArrayOutput values.
+// You can construct a concrete instance of `GetClusterResourcesClusterResourceSetClustersZoneArrayInput` via:
+//
+//          GetClusterResourcesClusterResourceSetClustersZoneArray{ GetClusterResourcesClusterResourceSetClustersZoneArgs{...} }
+type GetClusterResourcesClusterResourceSetClustersZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutput() GetClusterResourcesClusterResourceSetClustersZoneArrayOutput
+	ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutputWithContext(context.Context) GetClusterResourcesClusterResourceSetClustersZoneArrayOutput
+}
+
+type GetClusterResourcesClusterResourceSetClustersZoneArray []GetClusterResourcesClusterResourceSetClustersZoneInput
+
+func (GetClusterResourcesClusterResourceSetClustersZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesClusterResourceSetClustersZone)(nil)).Elem()
+}
+
+func (i GetClusterResourcesClusterResourceSetClustersZoneArray) ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutput() GetClusterResourcesClusterResourceSetClustersZoneArrayOutput {
+	return i.ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesClusterResourceSetClustersZoneArray) ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetClustersZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesClusterResourceSetClustersZoneArrayOutput)
+}
+
+type GetClusterResourcesClusterResourceSetClustersZoneOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesClusterResourceSetClustersZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesClusterResourceSetClustersZone)(nil)).Elem()
+}
+
+func (o GetClusterResourcesClusterResourceSetClustersZoneOutput) ToGetClusterResourcesClusterResourceSetClustersZoneOutput() GetClusterResourcesClusterResourceSetClustersZoneOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetClustersZoneOutput) ToGetClusterResourcesClusterResourceSetClustersZoneOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetClustersZoneOutput {
+	return o
+}
+
+// Availability master zone where the cluster is located.
+func (o GetClusterResourcesClusterResourceSetClustersZoneOutput) MasterZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSetClustersZone) []string { return v.MasterZones }).(pulumi.StringArrayOutput)
+}
+
+// Availability slave zone where the cluster is located.
+func (o GetClusterResourcesClusterResourceSetClustersZoneOutput) SlaveZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterResourcesClusterResourceSetClustersZone) []string { return v.SlaveZones }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterResourcesClusterResourceSetClustersZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesClusterResourceSetClustersZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesClusterResourceSetClustersZone)(nil)).Elem()
+}
+
+func (o GetClusterResourcesClusterResourceSetClustersZoneArrayOutput) ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutput() GetClusterResourcesClusterResourceSetClustersZoneArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetClustersZoneArrayOutput) ToGetClusterResourcesClusterResourceSetClustersZoneArrayOutputWithContext(ctx context.Context) GetClusterResourcesClusterResourceSetClustersZoneArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesClusterResourceSetClustersZoneArrayOutput) Index(i pulumi.IntInput) GetClusterResourcesClusterResourceSetClustersZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterResourcesClusterResourceSetClustersZone {
+		return vs[0].([]GetClusterResourcesClusterResourceSetClustersZone)[vs[1].(int)]
+	}).(GetClusterResourcesClusterResourceSetClustersZoneOutput)
+}
+
+type GetClusterResourcesFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetClusterResourcesFilterInput is an input type that accepts GetClusterResourcesFilterArgs and GetClusterResourcesFilterOutput values.
+// You can construct a concrete instance of `GetClusterResourcesFilterInput` via:
+//
+//          GetClusterResourcesFilterArgs{...}
+type GetClusterResourcesFilterInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesFilterOutput() GetClusterResourcesFilterOutput
+	ToGetClusterResourcesFilterOutputWithContext(context.Context) GetClusterResourcesFilterOutput
+}
+
+type GetClusterResourcesFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetClusterResourcesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesFilter)(nil)).Elem()
+}
+
+func (i GetClusterResourcesFilterArgs) ToGetClusterResourcesFilterOutput() GetClusterResourcesFilterOutput {
+	return i.ToGetClusterResourcesFilterOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesFilterArgs) ToGetClusterResourcesFilterOutputWithContext(ctx context.Context) GetClusterResourcesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesFilterOutput)
+}
+
+// GetClusterResourcesFilterArrayInput is an input type that accepts GetClusterResourcesFilterArray and GetClusterResourcesFilterArrayOutput values.
+// You can construct a concrete instance of `GetClusterResourcesFilterArrayInput` via:
+//
+//          GetClusterResourcesFilterArray{ GetClusterResourcesFilterArgs{...} }
+type GetClusterResourcesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterResourcesFilterArrayOutput() GetClusterResourcesFilterArrayOutput
+	ToGetClusterResourcesFilterArrayOutputWithContext(context.Context) GetClusterResourcesFilterArrayOutput
+}
+
+type GetClusterResourcesFilterArray []GetClusterResourcesFilterInput
+
+func (GetClusterResourcesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesFilter)(nil)).Elem()
+}
+
+func (i GetClusterResourcesFilterArray) ToGetClusterResourcesFilterArrayOutput() GetClusterResourcesFilterArrayOutput {
+	return i.ToGetClusterResourcesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterResourcesFilterArray) ToGetClusterResourcesFilterArrayOutputWithContext(ctx context.Context) GetClusterResourcesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterResourcesFilterArrayOutput)
+}
+
+type GetClusterResourcesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterResourcesFilter)(nil)).Elem()
+}
+
+func (o GetClusterResourcesFilterOutput) ToGetClusterResourcesFilterOutput() GetClusterResourcesFilterOutput {
+	return o
+}
+
+func (o GetClusterResourcesFilterOutput) ToGetClusterResourcesFilterOutputWithContext(ctx context.Context) GetClusterResourcesFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetClusterResourcesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterResourcesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter values.
+func (o GetClusterResourcesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterResourcesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterResourcesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterResourcesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterResourcesFilter)(nil)).Elem()
+}
+
+func (o GetClusterResourcesFilterArrayOutput) ToGetClusterResourcesFilterArrayOutput() GetClusterResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesFilterArrayOutput) ToGetClusterResourcesFilterArrayOutputWithContext(ctx context.Context) GetClusterResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterResourcesFilterArrayOutput) Index(i pulumi.IntInput) GetClusterResourcesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterResourcesFilter {
+		return vs[0].([]GetClusterResourcesFilter)[vs[1].(int)]
+	}).(GetClusterResourcesFilterOutput)
+}
+
+type GetCrossTargetsCrossTargetSet struct {
+	// ENI ID of the CVM instance.
+	EniId string `pulumi:"eniId"`
+	// ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+	InstanceName string `pulumi:"instanceName"`
+	// IP address of the CVM or ENI instance.
+	Ip string `pulumi:"ip"`
+	// VPC ID of the CLB instance.
+	LocalVpcId string `pulumi:"localVpcId"`
+	// Region of the CVM or ENI instance.
+	Region string `pulumi:"region"`
+	// VPC ID of the CVM or ENI instance.
+	VpcId string `pulumi:"vpcId"`
+	// VPC name of the CVM or ENI instance.
+	VpcName string `pulumi:"vpcName"`
+}
+
+// GetCrossTargetsCrossTargetSetInput is an input type that accepts GetCrossTargetsCrossTargetSetArgs and GetCrossTargetsCrossTargetSetOutput values.
+// You can construct a concrete instance of `GetCrossTargetsCrossTargetSetInput` via:
+//
+//          GetCrossTargetsCrossTargetSetArgs{...}
+type GetCrossTargetsCrossTargetSetInput interface {
+	pulumi.Input
+
+	ToGetCrossTargetsCrossTargetSetOutput() GetCrossTargetsCrossTargetSetOutput
+	ToGetCrossTargetsCrossTargetSetOutputWithContext(context.Context) GetCrossTargetsCrossTargetSetOutput
+}
+
+type GetCrossTargetsCrossTargetSetArgs struct {
+	// ENI ID of the CVM instance.
+	EniId pulumi.StringInput `pulumi:"eniId"`
+	// ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// IP address of the CVM or ENI instance.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// VPC ID of the CLB instance.
+	LocalVpcId pulumi.StringInput `pulumi:"localVpcId"`
+	// Region of the CVM or ENI instance.
+	Region pulumi.StringInput `pulumi:"region"`
+	// VPC ID of the CVM or ENI instance.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// VPC name of the CVM or ENI instance.
+	VpcName pulumi.StringInput `pulumi:"vpcName"`
+}
+
+func (GetCrossTargetsCrossTargetSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossTargetsCrossTargetSet)(nil)).Elem()
+}
+
+func (i GetCrossTargetsCrossTargetSetArgs) ToGetCrossTargetsCrossTargetSetOutput() GetCrossTargetsCrossTargetSetOutput {
+	return i.ToGetCrossTargetsCrossTargetSetOutputWithContext(context.Background())
+}
+
+func (i GetCrossTargetsCrossTargetSetArgs) ToGetCrossTargetsCrossTargetSetOutputWithContext(ctx context.Context) GetCrossTargetsCrossTargetSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossTargetsCrossTargetSetOutput)
+}
+
+// GetCrossTargetsCrossTargetSetArrayInput is an input type that accepts GetCrossTargetsCrossTargetSetArray and GetCrossTargetsCrossTargetSetArrayOutput values.
+// You can construct a concrete instance of `GetCrossTargetsCrossTargetSetArrayInput` via:
+//
+//          GetCrossTargetsCrossTargetSetArray{ GetCrossTargetsCrossTargetSetArgs{...} }
+type GetCrossTargetsCrossTargetSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossTargetsCrossTargetSetArrayOutput() GetCrossTargetsCrossTargetSetArrayOutput
+	ToGetCrossTargetsCrossTargetSetArrayOutputWithContext(context.Context) GetCrossTargetsCrossTargetSetArrayOutput
+}
+
+type GetCrossTargetsCrossTargetSetArray []GetCrossTargetsCrossTargetSetInput
+
+func (GetCrossTargetsCrossTargetSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossTargetsCrossTargetSet)(nil)).Elem()
+}
+
+func (i GetCrossTargetsCrossTargetSetArray) ToGetCrossTargetsCrossTargetSetArrayOutput() GetCrossTargetsCrossTargetSetArrayOutput {
+	return i.ToGetCrossTargetsCrossTargetSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossTargetsCrossTargetSetArray) ToGetCrossTargetsCrossTargetSetArrayOutputWithContext(ctx context.Context) GetCrossTargetsCrossTargetSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossTargetsCrossTargetSetArrayOutput)
+}
+
+type GetCrossTargetsCrossTargetSetOutput struct{ *pulumi.OutputState }
+
+func (GetCrossTargetsCrossTargetSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossTargetsCrossTargetSet)(nil)).Elem()
+}
+
+func (o GetCrossTargetsCrossTargetSetOutput) ToGetCrossTargetsCrossTargetSetOutput() GetCrossTargetsCrossTargetSetOutput {
+	return o
+}
+
+func (o GetCrossTargetsCrossTargetSetOutput) ToGetCrossTargetsCrossTargetSetOutputWithContext(ctx context.Context) GetCrossTargetsCrossTargetSetOutput {
+	return o
+}
+
+// ENI ID of the CVM instance.
+func (o GetCrossTargetsCrossTargetSetOutput) EniId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.EniId }).(pulumi.StringOutput)
+}
+
+// ID of the CVM instance.Note: This field may return null, indicating that no valid value was found.
+func (o GetCrossTargetsCrossTargetSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Name of the CVM instance. Note: This field may return null, indicating that no valid value was found.
+func (o GetCrossTargetsCrossTargetSetOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// IP address of the CVM or ENI instance.
+func (o GetCrossTargetsCrossTargetSetOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// VPC ID of the CLB instance.
+func (o GetCrossTargetsCrossTargetSetOutput) LocalVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.LocalVpcId }).(pulumi.StringOutput)
+}
+
+// Region of the CVM or ENI instance.
+func (o GetCrossTargetsCrossTargetSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// VPC ID of the CVM or ENI instance.
+func (o GetCrossTargetsCrossTargetSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// VPC name of the CVM or ENI instance.
+func (o GetCrossTargetsCrossTargetSetOutput) VpcName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsCrossTargetSet) string { return v.VpcName }).(pulumi.StringOutput)
+}
+
+type GetCrossTargetsCrossTargetSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossTargetsCrossTargetSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossTargetsCrossTargetSet)(nil)).Elem()
+}
+
+func (o GetCrossTargetsCrossTargetSetArrayOutput) ToGetCrossTargetsCrossTargetSetArrayOutput() GetCrossTargetsCrossTargetSetArrayOutput {
+	return o
+}
+
+func (o GetCrossTargetsCrossTargetSetArrayOutput) ToGetCrossTargetsCrossTargetSetArrayOutputWithContext(ctx context.Context) GetCrossTargetsCrossTargetSetArrayOutput {
+	return o
+}
+
+func (o GetCrossTargetsCrossTargetSetArrayOutput) Index(i pulumi.IntInput) GetCrossTargetsCrossTargetSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossTargetsCrossTargetSet {
+		return vs[0].([]GetCrossTargetsCrossTargetSet)[vs[1].(int)]
+	}).(GetCrossTargetsCrossTargetSetOutput)
+}
+
+type GetCrossTargetsFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetCrossTargetsFilterInput is an input type that accepts GetCrossTargetsFilterArgs and GetCrossTargetsFilterOutput values.
+// You can construct a concrete instance of `GetCrossTargetsFilterInput` via:
+//
+//          GetCrossTargetsFilterArgs{...}
+type GetCrossTargetsFilterInput interface {
+	pulumi.Input
+
+	ToGetCrossTargetsFilterOutput() GetCrossTargetsFilterOutput
+	ToGetCrossTargetsFilterOutputWithContext(context.Context) GetCrossTargetsFilterOutput
+}
+
+type GetCrossTargetsFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetCrossTargetsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossTargetsFilter)(nil)).Elem()
+}
+
+func (i GetCrossTargetsFilterArgs) ToGetCrossTargetsFilterOutput() GetCrossTargetsFilterOutput {
+	return i.ToGetCrossTargetsFilterOutputWithContext(context.Background())
+}
+
+func (i GetCrossTargetsFilterArgs) ToGetCrossTargetsFilterOutputWithContext(ctx context.Context) GetCrossTargetsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossTargetsFilterOutput)
+}
+
+// GetCrossTargetsFilterArrayInput is an input type that accepts GetCrossTargetsFilterArray and GetCrossTargetsFilterArrayOutput values.
+// You can construct a concrete instance of `GetCrossTargetsFilterArrayInput` via:
+//
+//          GetCrossTargetsFilterArray{ GetCrossTargetsFilterArgs{...} }
+type GetCrossTargetsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetCrossTargetsFilterArrayOutput() GetCrossTargetsFilterArrayOutput
+	ToGetCrossTargetsFilterArrayOutputWithContext(context.Context) GetCrossTargetsFilterArrayOutput
+}
+
+type GetCrossTargetsFilterArray []GetCrossTargetsFilterInput
+
+func (GetCrossTargetsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossTargetsFilter)(nil)).Elem()
+}
+
+func (i GetCrossTargetsFilterArray) ToGetCrossTargetsFilterArrayOutput() GetCrossTargetsFilterArrayOutput {
+	return i.ToGetCrossTargetsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetCrossTargetsFilterArray) ToGetCrossTargetsFilterArrayOutputWithContext(ctx context.Context) GetCrossTargetsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCrossTargetsFilterArrayOutput)
+}
+
+type GetCrossTargetsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetCrossTargetsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCrossTargetsFilter)(nil)).Elem()
+}
+
+func (o GetCrossTargetsFilterOutput) ToGetCrossTargetsFilterOutput() GetCrossTargetsFilterOutput {
+	return o
+}
+
+func (o GetCrossTargetsFilterOutput) ToGetCrossTargetsFilterOutputWithContext(ctx context.Context) GetCrossTargetsFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetCrossTargetsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCrossTargetsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter values.
+func (o GetCrossTargetsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCrossTargetsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetCrossTargetsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCrossTargetsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCrossTargetsFilter)(nil)).Elem()
+}
+
+func (o GetCrossTargetsFilterArrayOutput) ToGetCrossTargetsFilterArrayOutput() GetCrossTargetsFilterArrayOutput {
+	return o
+}
+
+func (o GetCrossTargetsFilterArrayOutput) ToGetCrossTargetsFilterArrayOutputWithContext(ctx context.Context) GetCrossTargetsFilterArrayOutput {
+	return o
+}
+
+func (o GetCrossTargetsFilterArrayOutput) Index(i pulumi.IntInput) GetCrossTargetsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCrossTargetsFilter {
+		return vs[0].([]GetCrossTargetsFilter)[vs[1].(int)]
+	}).(GetCrossTargetsFilterOutput)
+}
+
+type GetExclusiveClustersClusterSet struct {
+	// cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterTag string `pulumi:"clusterTag"`
+	// cluster type: TGW, STGW, VPCGW.
+	ClusterType string `pulumi:"clusterType"`
+	// clusters version.
+	ClustersVersion string `pulumi:"clustersVersion"`
+	// Availability zone where the cluster is located.
+	ClustersZones []GetExclusiveClustersClusterSetClustersZone `pulumi:"clustersZones"`
+	// Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+	DisasterRecoveryType string `pulumi:"disasterRecoveryType"`
+	// Maximum number of new http connections.
+	HttpMaxNewConn int `pulumi:"httpMaxNewConn"`
+	// Http Qps.
+	HttpQps int `pulumi:"httpQps"`
+	// Maximum number of new https connections.
+	HttpsMaxNewConn int `pulumi:"httpsMaxNewConn"`
+	// Https Qps.
+	HttpsQps int `pulumi:"httpsQps"`
+	// The total number of free resources in the cluster.
+	IdleResourceCount int `pulumi:"idleResourceCount"`
+	// Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+	Isp string `pulumi:"isp"`
+	// Total number of forwarders in the cluster.
+	LoadBalanceDirectorCount int `pulumi:"loadBalanceDirectorCount"`
+	// Maximum number of connections.
+	MaxConn int `pulumi:"maxConn"`
+	// Maximum incoming Bandwidth.
+	MaxInFlow int `pulumi:"maxInFlow"`
+	// Maximum incoming packet.
+	MaxInPkg int `pulumi:"maxInPkg"`
+	// Maximum number of new connections.
+	MaxNewConn int `pulumi:"maxNewConn"`
+	// Maximum output bandwidth.
+	MaxOutFlow int `pulumi:"maxOutFlow"`
+	// Maximum output packet.
+	MaxOutPkg int `pulumi:"maxOutPkg"`
+	// cluster network type.
+	Network string `pulumi:"network"`
+	// The total number of resources in the cluster.
+	ResourceCount int `pulumi:"resourceCount"`
+	// .
+	Zone string `pulumi:"zone"`
+}
+
+// GetExclusiveClustersClusterSetInput is an input type that accepts GetExclusiveClustersClusterSetArgs and GetExclusiveClustersClusterSetOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersClusterSetInput` via:
+//
+//          GetExclusiveClustersClusterSetArgs{...}
+type GetExclusiveClustersClusterSetInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersClusterSetOutput() GetExclusiveClustersClusterSetOutput
+	ToGetExclusiveClustersClusterSetOutputWithContext(context.Context) GetExclusiveClustersClusterSetOutput
+}
+
+type GetExclusiveClustersClusterSetArgs struct {
+	// cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterTag pulumi.StringInput `pulumi:"clusterTag"`
+	// cluster type: TGW, STGW, VPCGW.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// clusters version.
+	ClustersVersion pulumi.StringInput `pulumi:"clustersVersion"`
+	// Availability zone where the cluster is located.
+	ClustersZones GetExclusiveClustersClusterSetClustersZoneArrayInput `pulumi:"clustersZones"`
+	// Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+	DisasterRecoveryType pulumi.StringInput `pulumi:"disasterRecoveryType"`
+	// Maximum number of new http connections.
+	HttpMaxNewConn pulumi.IntInput `pulumi:"httpMaxNewConn"`
+	// Http Qps.
+	HttpQps pulumi.IntInput `pulumi:"httpQps"`
+	// Maximum number of new https connections.
+	HttpsMaxNewConn pulumi.IntInput `pulumi:"httpsMaxNewConn"`
+	// Https Qps.
+	HttpsQps pulumi.IntInput `pulumi:"httpsQps"`
+	// The total number of free resources in the cluster.
+	IdleResourceCount pulumi.IntInput `pulumi:"idleResourceCount"`
+	// Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+	Isp pulumi.StringInput `pulumi:"isp"`
+	// Total number of forwarders in the cluster.
+	LoadBalanceDirectorCount pulumi.IntInput `pulumi:"loadBalanceDirectorCount"`
+	// Maximum number of connections.
+	MaxConn pulumi.IntInput `pulumi:"maxConn"`
+	// Maximum incoming Bandwidth.
+	MaxInFlow pulumi.IntInput `pulumi:"maxInFlow"`
+	// Maximum incoming packet.
+	MaxInPkg pulumi.IntInput `pulumi:"maxInPkg"`
+	// Maximum number of new connections.
+	MaxNewConn pulumi.IntInput `pulumi:"maxNewConn"`
+	// Maximum output bandwidth.
+	MaxOutFlow pulumi.IntInput `pulumi:"maxOutFlow"`
+	// Maximum output packet.
+	MaxOutPkg pulumi.IntInput `pulumi:"maxOutPkg"`
+	// cluster network type.
+	Network pulumi.StringInput `pulumi:"network"`
+	// The total number of resources in the cluster.
+	ResourceCount pulumi.IntInput `pulumi:"resourceCount"`
+	// .
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetExclusiveClustersClusterSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersClusterSet)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersClusterSetArgs) ToGetExclusiveClustersClusterSetOutput() GetExclusiveClustersClusterSetOutput {
+	return i.ToGetExclusiveClustersClusterSetOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersClusterSetArgs) ToGetExclusiveClustersClusterSetOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersClusterSetOutput)
+}
+
+// GetExclusiveClustersClusterSetArrayInput is an input type that accepts GetExclusiveClustersClusterSetArray and GetExclusiveClustersClusterSetArrayOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersClusterSetArrayInput` via:
+//
+//          GetExclusiveClustersClusterSetArray{ GetExclusiveClustersClusterSetArgs{...} }
+type GetExclusiveClustersClusterSetArrayInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersClusterSetArrayOutput() GetExclusiveClustersClusterSetArrayOutput
+	ToGetExclusiveClustersClusterSetArrayOutputWithContext(context.Context) GetExclusiveClustersClusterSetArrayOutput
+}
+
+type GetExclusiveClustersClusterSetArray []GetExclusiveClustersClusterSetInput
+
+func (GetExclusiveClustersClusterSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersClusterSet)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersClusterSetArray) ToGetExclusiveClustersClusterSetArrayOutput() GetExclusiveClustersClusterSetArrayOutput {
+	return i.ToGetExclusiveClustersClusterSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersClusterSetArray) ToGetExclusiveClustersClusterSetArrayOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersClusterSetArrayOutput)
+}
+
+type GetExclusiveClustersClusterSetOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersClusterSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersClusterSet)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersClusterSetOutput) ToGetExclusiveClustersClusterSetOutput() GetExclusiveClustersClusterSetOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetOutput) ToGetExclusiveClustersClusterSetOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetOutput {
+	return o
+}
+
+// cluster ID.
+func (o GetExclusiveClustersClusterSetOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// cluster name.
+func (o GetExclusiveClustersClusterSetOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetExclusiveClustersClusterSetOutput) ClusterTag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.ClusterTag }).(pulumi.StringOutput)
+}
+
+// cluster type: TGW, STGW, VPCGW.
+func (o GetExclusiveClustersClusterSetOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// clusters version.
+func (o GetExclusiveClustersClusterSetOutput) ClustersVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.ClustersVersion }).(pulumi.StringOutput)
+}
+
+// Availability zone where the cluster is located.
+func (o GetExclusiveClustersClusterSetOutput) ClustersZones() GetExclusiveClustersClusterSetClustersZoneArrayOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) []GetExclusiveClustersClusterSetClustersZone {
+		return v.ClustersZones
+	}).(GetExclusiveClustersClusterSetClustersZoneArrayOutput)
+}
+
+// Cluster disaster recovery type:SINGLE-ZONE, DISASTER-RECOVERY, MUTUAL-DISASTER-RECOVERY.
+func (o GetExclusiveClustersClusterSetOutput) DisasterRecoveryType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.DisasterRecoveryType }).(pulumi.StringOutput)
+}
+
+// Maximum number of new http connections.
+func (o GetExclusiveClustersClusterSetOutput) HttpMaxNewConn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.HttpMaxNewConn }).(pulumi.IntOutput)
+}
+
+// Http Qps.
+func (o GetExclusiveClustersClusterSetOutput) HttpQps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.HttpQps }).(pulumi.IntOutput)
+}
+
+// Maximum number of new https connections.
+func (o GetExclusiveClustersClusterSetOutput) HttpsMaxNewConn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.HttpsMaxNewConn }).(pulumi.IntOutput)
+}
+
+// Https Qps.
+func (o GetExclusiveClustersClusterSetOutput) HttpsQps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.HttpsQps }).(pulumi.IntOutput)
+}
+
+// The total number of free resources in the cluster.
+func (o GetExclusiveClustersClusterSetOutput) IdleResourceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.IdleResourceCount }).(pulumi.IntOutput)
+}
+
+// Isp: BGP, CMCC,CUCC,CTCC,INTERNAL.
+func (o GetExclusiveClustersClusterSetOutput) Isp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.Isp }).(pulumi.StringOutput)
+}
+
+// Total number of forwarders in the cluster.
+func (o GetExclusiveClustersClusterSetOutput) LoadBalanceDirectorCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.LoadBalanceDirectorCount }).(pulumi.IntOutput)
+}
+
+// Maximum number of connections.
+func (o GetExclusiveClustersClusterSetOutput) MaxConn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxConn }).(pulumi.IntOutput)
+}
+
+// Maximum incoming Bandwidth.
+func (o GetExclusiveClustersClusterSetOutput) MaxInFlow() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxInFlow }).(pulumi.IntOutput)
+}
+
+// Maximum incoming packet.
+func (o GetExclusiveClustersClusterSetOutput) MaxInPkg() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxInPkg }).(pulumi.IntOutput)
+}
+
+// Maximum number of new connections.
+func (o GetExclusiveClustersClusterSetOutput) MaxNewConn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxNewConn }).(pulumi.IntOutput)
+}
+
+// Maximum output bandwidth.
+func (o GetExclusiveClustersClusterSetOutput) MaxOutFlow() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxOutFlow }).(pulumi.IntOutput)
+}
+
+// Maximum output packet.
+func (o GetExclusiveClustersClusterSetOutput) MaxOutPkg() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.MaxOutPkg }).(pulumi.IntOutput)
+}
+
+// cluster network type.
+func (o GetExclusiveClustersClusterSetOutput) Network() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.Network }).(pulumi.StringOutput)
+}
+
+// The total number of resources in the cluster.
+func (o GetExclusiveClustersClusterSetOutput) ResourceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) int { return v.ResourceCount }).(pulumi.IntOutput)
+}
+
+// .
+func (o GetExclusiveClustersClusterSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetExclusiveClustersClusterSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersClusterSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersClusterSet)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersClusterSetArrayOutput) ToGetExclusiveClustersClusterSetArrayOutput() GetExclusiveClustersClusterSetArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetArrayOutput) ToGetExclusiveClustersClusterSetArrayOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetArrayOutput) Index(i pulumi.IntInput) GetExclusiveClustersClusterSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetExclusiveClustersClusterSet {
+		return vs[0].([]GetExclusiveClustersClusterSet)[vs[1].(int)]
+	}).(GetExclusiveClustersClusterSetOutput)
+}
+
+type GetExclusiveClustersClusterSetClustersZone struct {
+	// Availability master zone where the cluster is located.
+	MasterZones []string `pulumi:"masterZones"`
+	// Availability slave zone where the cluster is located.
+	SlaveZones []string `pulumi:"slaveZones"`
+}
+
+// GetExclusiveClustersClusterSetClustersZoneInput is an input type that accepts GetExclusiveClustersClusterSetClustersZoneArgs and GetExclusiveClustersClusterSetClustersZoneOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersClusterSetClustersZoneInput` via:
+//
+//          GetExclusiveClustersClusterSetClustersZoneArgs{...}
+type GetExclusiveClustersClusterSetClustersZoneInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersClusterSetClustersZoneOutput() GetExclusiveClustersClusterSetClustersZoneOutput
+	ToGetExclusiveClustersClusterSetClustersZoneOutputWithContext(context.Context) GetExclusiveClustersClusterSetClustersZoneOutput
+}
+
+type GetExclusiveClustersClusterSetClustersZoneArgs struct {
+	// Availability master zone where the cluster is located.
+	MasterZones pulumi.StringArrayInput `pulumi:"masterZones"`
+	// Availability slave zone where the cluster is located.
+	SlaveZones pulumi.StringArrayInput `pulumi:"slaveZones"`
+}
+
+func (GetExclusiveClustersClusterSetClustersZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersClusterSetClustersZone)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersClusterSetClustersZoneArgs) ToGetExclusiveClustersClusterSetClustersZoneOutput() GetExclusiveClustersClusterSetClustersZoneOutput {
+	return i.ToGetExclusiveClustersClusterSetClustersZoneOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersClusterSetClustersZoneArgs) ToGetExclusiveClustersClusterSetClustersZoneOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetClustersZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersClusterSetClustersZoneOutput)
+}
+
+// GetExclusiveClustersClusterSetClustersZoneArrayInput is an input type that accepts GetExclusiveClustersClusterSetClustersZoneArray and GetExclusiveClustersClusterSetClustersZoneArrayOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersClusterSetClustersZoneArrayInput` via:
+//
+//          GetExclusiveClustersClusterSetClustersZoneArray{ GetExclusiveClustersClusterSetClustersZoneArgs{...} }
+type GetExclusiveClustersClusterSetClustersZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersClusterSetClustersZoneArrayOutput() GetExclusiveClustersClusterSetClustersZoneArrayOutput
+	ToGetExclusiveClustersClusterSetClustersZoneArrayOutputWithContext(context.Context) GetExclusiveClustersClusterSetClustersZoneArrayOutput
+}
+
+type GetExclusiveClustersClusterSetClustersZoneArray []GetExclusiveClustersClusterSetClustersZoneInput
+
+func (GetExclusiveClustersClusterSetClustersZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersClusterSetClustersZone)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersClusterSetClustersZoneArray) ToGetExclusiveClustersClusterSetClustersZoneArrayOutput() GetExclusiveClustersClusterSetClustersZoneArrayOutput {
+	return i.ToGetExclusiveClustersClusterSetClustersZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersClusterSetClustersZoneArray) ToGetExclusiveClustersClusterSetClustersZoneArrayOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetClustersZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersClusterSetClustersZoneArrayOutput)
+}
+
+type GetExclusiveClustersClusterSetClustersZoneOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersClusterSetClustersZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersClusterSetClustersZone)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersClusterSetClustersZoneOutput) ToGetExclusiveClustersClusterSetClustersZoneOutput() GetExclusiveClustersClusterSetClustersZoneOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetClustersZoneOutput) ToGetExclusiveClustersClusterSetClustersZoneOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetClustersZoneOutput {
+	return o
+}
+
+// Availability master zone where the cluster is located.
+func (o GetExclusiveClustersClusterSetClustersZoneOutput) MasterZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSetClustersZone) []string { return v.MasterZones }).(pulumi.StringArrayOutput)
+}
+
+// Availability slave zone where the cluster is located.
+func (o GetExclusiveClustersClusterSetClustersZoneOutput) SlaveZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetExclusiveClustersClusterSetClustersZone) []string { return v.SlaveZones }).(pulumi.StringArrayOutput)
+}
+
+type GetExclusiveClustersClusterSetClustersZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersClusterSetClustersZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersClusterSetClustersZone)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersClusterSetClustersZoneArrayOutput) ToGetExclusiveClustersClusterSetClustersZoneArrayOutput() GetExclusiveClustersClusterSetClustersZoneArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetClustersZoneArrayOutput) ToGetExclusiveClustersClusterSetClustersZoneArrayOutputWithContext(ctx context.Context) GetExclusiveClustersClusterSetClustersZoneArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersClusterSetClustersZoneArrayOutput) Index(i pulumi.IntInput) GetExclusiveClustersClusterSetClustersZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetExclusiveClustersClusterSetClustersZone {
+		return vs[0].([]GetExclusiveClustersClusterSetClustersZone)[vs[1].(int)]
+	}).(GetExclusiveClustersClusterSetClustersZoneOutput)
+}
+
+type GetExclusiveClustersFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter value array.
+	Values []string `pulumi:"values"`
+}
+
+// GetExclusiveClustersFilterInput is an input type that accepts GetExclusiveClustersFilterArgs and GetExclusiveClustersFilterOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersFilterInput` via:
+//
+//          GetExclusiveClustersFilterArgs{...}
+type GetExclusiveClustersFilterInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersFilterOutput() GetExclusiveClustersFilterOutput
+	ToGetExclusiveClustersFilterOutputWithContext(context.Context) GetExclusiveClustersFilterOutput
+}
+
+type GetExclusiveClustersFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value array.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetExclusiveClustersFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersFilter)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersFilterArgs) ToGetExclusiveClustersFilterOutput() GetExclusiveClustersFilterOutput {
+	return i.ToGetExclusiveClustersFilterOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersFilterArgs) ToGetExclusiveClustersFilterOutputWithContext(ctx context.Context) GetExclusiveClustersFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersFilterOutput)
+}
+
+// GetExclusiveClustersFilterArrayInput is an input type that accepts GetExclusiveClustersFilterArray and GetExclusiveClustersFilterArrayOutput values.
+// You can construct a concrete instance of `GetExclusiveClustersFilterArrayInput` via:
+//
+//          GetExclusiveClustersFilterArray{ GetExclusiveClustersFilterArgs{...} }
+type GetExclusiveClustersFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetExclusiveClustersFilterArrayOutput() GetExclusiveClustersFilterArrayOutput
+	ToGetExclusiveClustersFilterArrayOutputWithContext(context.Context) GetExclusiveClustersFilterArrayOutput
+}
+
+type GetExclusiveClustersFilterArray []GetExclusiveClustersFilterInput
+
+func (GetExclusiveClustersFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersFilter)(nil)).Elem()
+}
+
+func (i GetExclusiveClustersFilterArray) ToGetExclusiveClustersFilterArrayOutput() GetExclusiveClustersFilterArrayOutput {
+	return i.ToGetExclusiveClustersFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetExclusiveClustersFilterArray) ToGetExclusiveClustersFilterArrayOutputWithContext(ctx context.Context) GetExclusiveClustersFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetExclusiveClustersFilterArrayOutput)
+}
+
+type GetExclusiveClustersFilterOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetExclusiveClustersFilter)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersFilterOutput) ToGetExclusiveClustersFilterOutput() GetExclusiveClustersFilterOutput {
+	return o
+}
+
+func (o GetExclusiveClustersFilterOutput) ToGetExclusiveClustersFilterOutputWithContext(ctx context.Context) GetExclusiveClustersFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetExclusiveClustersFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetExclusiveClustersFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value array.
+func (o GetExclusiveClustersFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetExclusiveClustersFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetExclusiveClustersFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetExclusiveClustersFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetExclusiveClustersFilter)(nil)).Elem()
+}
+
+func (o GetExclusiveClustersFilterArrayOutput) ToGetExclusiveClustersFilterArrayOutput() GetExclusiveClustersFilterArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersFilterArrayOutput) ToGetExclusiveClustersFilterArrayOutputWithContext(ctx context.Context) GetExclusiveClustersFilterArrayOutput {
+	return o
+}
+
+func (o GetExclusiveClustersFilterArrayOutput) Index(i pulumi.IntInput) GetExclusiveClustersFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetExclusiveClustersFilter {
+		return vs[0].([]GetExclusiveClustersFilter)[vs[1].(int)]
+	}).(GetExclusiveClustersFilterOutput)
+}
+
+type GetIdleInstancesIdleLoadBalancer struct {
+	// The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// CLB type. Value range: 1 (CLB); 0 (classic CLB).
+	Forward int `pulumi:"forward"`
+	// The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+	IdleReason string `pulumi:"idleReason"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// CLB instance region.
+	Region string `pulumi:"region"`
+	// CLB instance status, including:0: Creating; 1: Running.
+	Status int `pulumi:"status"`
+	// CLB instance VIP.
+	Vip string `pulumi:"vip"`
+}
+
+// GetIdleInstancesIdleLoadBalancerInput is an input type that accepts GetIdleInstancesIdleLoadBalancerArgs and GetIdleInstancesIdleLoadBalancerOutput values.
+// You can construct a concrete instance of `GetIdleInstancesIdleLoadBalancerInput` via:
+//
+//          GetIdleInstancesIdleLoadBalancerArgs{...}
+type GetIdleInstancesIdleLoadBalancerInput interface {
+	pulumi.Input
+
+	ToGetIdleInstancesIdleLoadBalancerOutput() GetIdleInstancesIdleLoadBalancerOutput
+	ToGetIdleInstancesIdleLoadBalancerOutputWithContext(context.Context) GetIdleInstancesIdleLoadBalancerOutput
+}
+
+type GetIdleInstancesIdleLoadBalancerArgs struct {
+	// The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// CLB type. Value range: 1 (CLB); 0 (classic CLB).
+	Forward pulumi.IntInput `pulumi:"forward"`
+	// The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+	IdleReason pulumi.StringInput `pulumi:"idleReason"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// CLB instance region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// CLB instance status, including:0: Creating; 1: Running.
+	Status pulumi.IntInput `pulumi:"status"`
+	// CLB instance VIP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+}
+
+func (GetIdleInstancesIdleLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIdleInstancesIdleLoadBalancer)(nil)).Elem()
+}
+
+func (i GetIdleInstancesIdleLoadBalancerArgs) ToGetIdleInstancesIdleLoadBalancerOutput() GetIdleInstancesIdleLoadBalancerOutput {
+	return i.ToGetIdleInstancesIdleLoadBalancerOutputWithContext(context.Background())
+}
+
+func (i GetIdleInstancesIdleLoadBalancerArgs) ToGetIdleInstancesIdleLoadBalancerOutputWithContext(ctx context.Context) GetIdleInstancesIdleLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIdleInstancesIdleLoadBalancerOutput)
+}
+
+// GetIdleInstancesIdleLoadBalancerArrayInput is an input type that accepts GetIdleInstancesIdleLoadBalancerArray and GetIdleInstancesIdleLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `GetIdleInstancesIdleLoadBalancerArrayInput` via:
+//
+//          GetIdleInstancesIdleLoadBalancerArray{ GetIdleInstancesIdleLoadBalancerArgs{...} }
+type GetIdleInstancesIdleLoadBalancerArrayInput interface {
+	pulumi.Input
+
+	ToGetIdleInstancesIdleLoadBalancerArrayOutput() GetIdleInstancesIdleLoadBalancerArrayOutput
+	ToGetIdleInstancesIdleLoadBalancerArrayOutputWithContext(context.Context) GetIdleInstancesIdleLoadBalancerArrayOutput
+}
+
+type GetIdleInstancesIdleLoadBalancerArray []GetIdleInstancesIdleLoadBalancerInput
+
+func (GetIdleInstancesIdleLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIdleInstancesIdleLoadBalancer)(nil)).Elem()
+}
+
+func (i GetIdleInstancesIdleLoadBalancerArray) ToGetIdleInstancesIdleLoadBalancerArrayOutput() GetIdleInstancesIdleLoadBalancerArrayOutput {
+	return i.ToGetIdleInstancesIdleLoadBalancerArrayOutputWithContext(context.Background())
+}
+
+func (i GetIdleInstancesIdleLoadBalancerArray) ToGetIdleInstancesIdleLoadBalancerArrayOutputWithContext(ctx context.Context) GetIdleInstancesIdleLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIdleInstancesIdleLoadBalancerArrayOutput)
+}
+
+type GetIdleInstancesIdleLoadBalancerOutput struct{ *pulumi.OutputState }
+
+func (GetIdleInstancesIdleLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIdleInstancesIdleLoadBalancer)(nil)).Elem()
+}
+
+func (o GetIdleInstancesIdleLoadBalancerOutput) ToGetIdleInstancesIdleLoadBalancerOutput() GetIdleInstancesIdleLoadBalancerOutput {
+	return o
+}
+
+func (o GetIdleInstancesIdleLoadBalancerOutput) ToGetIdleInstancesIdleLoadBalancerOutputWithContext(ctx context.Context) GetIdleInstancesIdleLoadBalancerOutput {
+	return o
+}
+
+// The load balancing hostname.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetIdleInstancesIdleLoadBalancerOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// CLB type. Value range: 1 (CLB); 0 (classic CLB).
+func (o GetIdleInstancesIdleLoadBalancerOutput) Forward() pulumi.IntOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) int { return v.Forward }).(pulumi.IntOutput)
+}
+
+// The reason why the load balancer is considered idle. NO_RULES: No rules configured. NO_RS: The rules are not associated with servers.
+func (o GetIdleInstancesIdleLoadBalancerOutput) IdleReason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.IdleReason }).(pulumi.StringOutput)
+}
+
+// CLB instance ID.
+func (o GetIdleInstancesIdleLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetIdleInstancesIdleLoadBalancerOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+// CLB instance region.
+func (o GetIdleInstancesIdleLoadBalancerOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// CLB instance status, including:0: Creating; 1: Running.
+func (o GetIdleInstancesIdleLoadBalancerOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// CLB instance VIP.
+func (o GetIdleInstancesIdleLoadBalancerOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIdleInstancesIdleLoadBalancer) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+type GetIdleInstancesIdleLoadBalancerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetIdleInstancesIdleLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIdleInstancesIdleLoadBalancer)(nil)).Elem()
+}
+
+func (o GetIdleInstancesIdleLoadBalancerArrayOutput) ToGetIdleInstancesIdleLoadBalancerArrayOutput() GetIdleInstancesIdleLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetIdleInstancesIdleLoadBalancerArrayOutput) ToGetIdleInstancesIdleLoadBalancerArrayOutputWithContext(ctx context.Context) GetIdleInstancesIdleLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetIdleInstancesIdleLoadBalancerArrayOutput) Index(i pulumi.IntInput) GetIdleInstancesIdleLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIdleInstancesIdleLoadBalancer {
+		return vs[0].([]GetIdleInstancesIdleLoadBalancer)[vs[1].(int)]
+	}).(GetIdleInstancesIdleLoadBalancerOutput)
+}
+
+type GetInstanceByCertIdCertSet struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancers []GetInstanceByCertIdCertSetLoadBalancer `pulumi:"loadBalancers"`
+}
+
+// GetInstanceByCertIdCertSetInput is an input type that accepts GetInstanceByCertIdCertSetArgs and GetInstanceByCertIdCertSetOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetInput` via:
+//
+//          GetInstanceByCertIdCertSetArgs{...}
+type GetInstanceByCertIdCertSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetOutput() GetInstanceByCertIdCertSetOutput
+	ToGetInstanceByCertIdCertSetOutputWithContext(context.Context) GetInstanceByCertIdCertSetOutput
+}
+
+type GetInstanceByCertIdCertSetArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancers GetInstanceByCertIdCertSetLoadBalancerArrayInput `pulumi:"loadBalancers"`
+}
+
+func (GetInstanceByCertIdCertSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSet)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetArgs) ToGetInstanceByCertIdCertSetOutput() GetInstanceByCertIdCertSetOutput {
+	return i.ToGetInstanceByCertIdCertSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetArgs) ToGetInstanceByCertIdCertSetOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetOutput)
+}
+
+// GetInstanceByCertIdCertSetArrayInput is an input type that accepts GetInstanceByCertIdCertSetArray and GetInstanceByCertIdCertSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetArray{ GetInstanceByCertIdCertSetArgs{...} }
+type GetInstanceByCertIdCertSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetArrayOutput() GetInstanceByCertIdCertSetArrayOutput
+	ToGetInstanceByCertIdCertSetArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetArrayOutput
+}
+
+type GetInstanceByCertIdCertSetArray []GetInstanceByCertIdCertSetInput
+
+func (GetInstanceByCertIdCertSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSet)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetArray) ToGetInstanceByCertIdCertSetArrayOutput() GetInstanceByCertIdCertSetArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetArray) ToGetInstanceByCertIdCertSetArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSet)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetOutput) ToGetInstanceByCertIdCertSetOutput() GetInstanceByCertIdCertSetOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetOutput) ToGetInstanceByCertIdCertSetOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetInstanceByCertIdCertSetOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSet) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// List of CLB instances associated with certificate. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetOutput) LoadBalancers() GetInstanceByCertIdCertSetLoadBalancerArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSet) []GetInstanceByCertIdCertSetLoadBalancer { return v.LoadBalancers }).(GetInstanceByCertIdCertSetLoadBalancerArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSet)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetArrayOutput) ToGetInstanceByCertIdCertSetArrayOutput() GetInstanceByCertIdCertSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetArrayOutput) ToGetInstanceByCertIdCertSetArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSet {
+		return vs[0].([]GetInstanceByCertIdCertSet)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancer struct {
+	// IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIPVersion string `pulumi:"addressIPVersion"`
+	// IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	AddressIPv6 string `pulumi:"addressIPv6"`
+	// Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+	AnycastZone string `pulumi:"anycastZone"`
+	// Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+	AttributeFlags []string `pulumi:"attributeFlags"`
+	// backup zone.
+	BackupZoneSets []GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet `pulumi:"backupZoneSets"`
+	// Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType string `pulumi:"chargeType"`
+	// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterIds []string `pulumi:"clusterIds"`
+	// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterTag string `pulumi:"clusterTag"`
+	// Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigId string `pulumi:"configId"`
+	// CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+	ExclusiveClusters []GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster `pulumi:"exclusiveClusters"`
+	// CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime string `pulumi:"expireTime"`
+	// Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraInfos []GetInstanceByCertIdCertSetLoadBalancerExtraInfo `pulumi:"extraInfos"`
+	// CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+	Forward int `pulumi:"forward"`
+	// Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+	HealthLogSetId string `pulumi:"healthLogSetId"`
+	// Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+	HealthLogTopicId string `pulumi:"healthLogTopicId"`
+	// This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+	Ipv6Mode string `pulumi:"ipv6Mode"`
+	// Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+	IsBlock bool `pulumi:"isBlock"`
+	// Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+	IsBlockTime string `pulumi:"isBlockTime"`
+	// Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+	IsDdos bool `pulumi:"isDdos"`
+	// CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+	IsolatedTime string `pulumi:"isolatedTime"`
+	// 0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+	Isolation int `pulumi:"isolation"`
+	// Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerDomain string `pulumi:"loadBalancerDomain"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancerPassToTarget bool `pulumi:"loadBalancerPassToTarget"`
+	// CLB instance network type:OPEN: public network; INTERNAL: private network.
+	LoadBalancerType string `pulumi:"loadBalancerType"`
+	// List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerVips []string `pulumi:"loadBalancerVips"`
+	// Whether the IP type is the local BGP.
+	LocalBgp bool `pulumi:"localBgp"`
+	// Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+	Log string `pulumi:"log"`
+	// Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+	LogSetId string `pulumi:"logSetId"`
+	// Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+	LogTopicId string `pulumi:"logTopicId"`
+	// Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+	MasterZones []GetInstanceByCertIdCertSetLoadBalancerMasterZone `pulumi:"masterZones"`
+	// If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+	MixIpTarget bool `pulumi:"mixIpTarget"`
+	// CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkAttributes []GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute `pulumi:"networkAttributes"`
+	// Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+	NfvInfo string `pulumi:"nfvInfo"`
+	// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+	NumericalVpcId int `pulumi:"numericalVpcId"`
+	// Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+	OpenBgp int `pulumi:"openBgp"`
+	// Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	PrepaidAttributes []GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute `pulumi:"prepaidAttributes"`
+	// ID of the project to which a CLB instance belongs. 0: default project.
+	ProjectId int `pulumi:"projectId"`
+	// Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	SecureGroups []string `pulumi:"secureGroups"`
+	// Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+	SlaType string `pulumi:"slaType"`
+	// SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+	Snat bool `pulumi:"snat"`
+	// SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+	SnatIps []GetInstanceByCertIdCertSetLoadBalancerSnatIp `pulumi:"snatIps"`
+	// Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+	SnatPro bool `pulumi:"snatPro"`
+	// CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+	Status int `pulumi:"status"`
+	// Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	StatusTime string `pulumi:"statusTime"`
+	// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []GetInstanceByCertIdCertSetLoadBalancerTag `pulumi:"tags"`
+	// Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	TargetRegionInfos []GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo `pulumi:"targetRegionInfos"`
+	// ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+	VipIsp string `pulumi:"vipIsp"`
+	// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId string `pulumi:"vpcId"`
+	// Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+	Zones []string `pulumi:"zones"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerArgs and GetInstanceByCertIdCertSetLoadBalancerOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerOutput() GetInstanceByCertIdCertSetLoadBalancerOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerArgs struct {
+	// IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIPVersion pulumi.StringInput `pulumi:"addressIPVersion"`
+	// IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	AddressIPv6 pulumi.StringInput `pulumi:"addressIPv6"`
+	// Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+	AnycastZone pulumi.StringInput `pulumi:"anycastZone"`
+	// Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+	AttributeFlags pulumi.StringArrayInput `pulumi:"attributeFlags"`
+	// backup zone.
+	BackupZoneSets GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayInput `pulumi:"backupZoneSets"`
+	// Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterIds pulumi.StringArrayInput `pulumi:"clusterIds"`
+	// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterTag pulumi.StringInput `pulumi:"clusterTag"`
+	// Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+	ExclusiveClusters GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayInput `pulumi:"exclusiveClusters"`
+	// CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraInfos GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayInput `pulumi:"extraInfos"`
+	// CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+	Forward pulumi.IntInput `pulumi:"forward"`
+	// Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+	HealthLogSetId pulumi.StringInput `pulumi:"healthLogSetId"`
+	// Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+	HealthLogTopicId pulumi.StringInput `pulumi:"healthLogTopicId"`
+	// This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+	Ipv6Mode pulumi.StringInput `pulumi:"ipv6Mode"`
+	// Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+	IsBlock pulumi.BoolInput `pulumi:"isBlock"`
+	// Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+	IsBlockTime pulumi.StringInput `pulumi:"isBlockTime"`
+	// Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+	IsDdos pulumi.BoolInput `pulumi:"isDdos"`
+	// CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+	IsolatedTime pulumi.StringInput `pulumi:"isolatedTime"`
+	// 0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+	Isolation pulumi.IntInput `pulumi:"isolation"`
+	// Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerDomain pulumi.StringInput `pulumi:"loadBalancerDomain"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancerPassToTarget pulumi.BoolInput `pulumi:"loadBalancerPassToTarget"`
+	// CLB instance network type:OPEN: public network; INTERNAL: private network.
+	LoadBalancerType pulumi.StringInput `pulumi:"loadBalancerType"`
+	// List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerVips pulumi.StringArrayInput `pulumi:"loadBalancerVips"`
+	// Whether the IP type is the local BGP.
+	LocalBgp pulumi.BoolInput `pulumi:"localBgp"`
+	// Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+	Log pulumi.StringInput `pulumi:"log"`
+	// Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+	LogSetId pulumi.StringInput `pulumi:"logSetId"`
+	// Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+	LogTopicId pulumi.StringInput `pulumi:"logTopicId"`
+	// Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+	MasterZones GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayInput `pulumi:"masterZones"`
+	// If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+	MixIpTarget pulumi.BoolInput `pulumi:"mixIpTarget"`
+	// CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkAttributes GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayInput `pulumi:"networkAttributes"`
+	// Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+	NfvInfo pulumi.StringInput `pulumi:"nfvInfo"`
+	// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+	NumericalVpcId pulumi.IntInput `pulumi:"numericalVpcId"`
+	// Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+	OpenBgp pulumi.IntInput `pulumi:"openBgp"`
+	// Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	PrepaidAttributes GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayInput `pulumi:"prepaidAttributes"`
+	// ID of the project to which a CLB instance belongs. 0: default project.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	SecureGroups pulumi.StringArrayInput `pulumi:"secureGroups"`
+	// Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+	SlaType pulumi.StringInput `pulumi:"slaType"`
+	// SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+	Snat pulumi.BoolInput `pulumi:"snat"`
+	// SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+	SnatIps GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayInput `pulumi:"snatIps"`
+	// Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+	SnatPro pulumi.BoolInput `pulumi:"snatPro"`
+	// CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	StatusTime pulumi.StringInput `pulumi:"statusTime"`
+	// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+	Tags GetInstanceByCertIdCertSetLoadBalancerTagArrayInput `pulumi:"tags"`
+	// Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+	TargetRegionInfos GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayInput `pulumi:"targetRegionInfos"`
+	// ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+	VipIsp pulumi.StringInput `pulumi:"vipIsp"`
+	// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+	Zones pulumi.StringArrayInput `pulumi:"zones"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancer)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerArgs) ToGetInstanceByCertIdCertSetLoadBalancerOutput() GetInstanceByCertIdCertSetLoadBalancerOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerArgs) ToGetInstanceByCertIdCertSetLoadBalancerOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerArray and GetInstanceByCertIdCertSetLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerArray{ GetInstanceByCertIdCertSetLoadBalancerArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerArrayOutput() GetInstanceByCertIdCertSetLoadBalancerArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerArray []GetInstanceByCertIdCertSetLoadBalancerInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancer)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerArray) ToGetInstanceByCertIdCertSetLoadBalancerArrayOutput() GetInstanceByCertIdCertSetLoadBalancerArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerArray) ToGetInstanceByCertIdCertSetLoadBalancerArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancer)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ToGetInstanceByCertIdCertSetLoadBalancerOutput() GetInstanceByCertIdCertSetLoadBalancerOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ToGetInstanceByCertIdCertSetLoadBalancerOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerOutput {
+	return o
+}
+
+// IP version. Valid values: ipv4, ipv6. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) AddressIPVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.AddressIPVersion }).(pulumi.StringOutput)
+}
+
+// IPv6 address of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) AddressIPv6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.AddressIPv6 }).(pulumi.StringOutput)
+}
+
+// Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) AnycastZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.AnycastZone }).(pulumi.StringOutput)
+}
+
+// Cluster ID.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) AttributeFlags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []string { return v.AttributeFlags }).(pulumi.StringArrayOutput)
+}
+
+// backup zone.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) BackupZoneSets() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet {
+		return v.BackupZoneSets
+	}).(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput)
+}
+
+// Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go). Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ClusterIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []string { return v.ClusterIds }).(pulumi.StringArrayOutput)
+}
+
+// Dedicated layer-7 tag. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ClusterTag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.ClusterTag }).(pulumi.StringOutput)
+}
+
+// Custom configuration ID at the CLB instance level. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// CLB instance creation time. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use LoadBalancerDomain instead. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Private network dedicated cluster. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ExclusiveClusters() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster {
+		return v.ExclusiveClusters
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput)
+}
+
+// CLB instance expiration time, which takes effect only for prepaid instances. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Reserved field which can be ignored generally.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ExtraInfos() GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerExtraInfo {
+		return v.ExtraInfos
+	}).(GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput)
+}
+
+// CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Forward() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.Forward }).(pulumi.IntOutput)
+}
+
+// Health check logset ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) HealthLogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.HealthLogSetId }).(pulumi.StringOutput)
+}
+
+// Health check log topic ID of CLB CLS. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) HealthLogTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.HealthLogTopicId }).(pulumi.StringOutput)
+}
+
+// This field is meaningful only when the IP address version is ipv6. Valid values: IPv6Nat64, IPv6FullChain. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Ipv6Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.Ipv6Mode }).(pulumi.StringOutput)
+}
+
+// Whether VIP is blocked. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) IsBlock() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.IsBlock }).(pulumi.BoolOutput)
+}
+
+// Time blocked or unblocked. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) IsBlockTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.IsBlockTime }).(pulumi.StringOutput)
+}
+
+// Whether an Anti-DDoS Pro instance can be bound. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) IsDdos() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.IsDdos }).(pulumi.BoolOutput)
+}
+
+// CLB instance isolation time. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) IsolatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.IsolatedTime }).(pulumi.StringOutput)
+}
+
+// 0: not isolated; 1: isolated. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Isolation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.Isolation }).(pulumi.IntOutput)
+}
+
+// Domain name of the CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LoadBalancerDomain }).(pulumi.StringOutput)
+}
+
+// CLB instance ID.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+// Whether a real server opens the traffic from a CLB instance to the internet. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerPassToTarget() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.LoadBalancerPassToTarget }).(pulumi.BoolOutput)
+}
+
+// CLB instance network type:OPEN: public network; INTERNAL: private network.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LoadBalancerType }).(pulumi.StringOutput)
+}
+
+// List of VIPs of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LoadBalancerVips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []string { return v.LoadBalancerVips }).(pulumi.StringArrayOutput)
+}
+
+// Whether the IP type is the local BGP.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LocalBgp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.LocalBgp }).(pulumi.BoolOutput)
+}
+
+// Log information. Only the public network CLB that have HTTP or HTTPS listeners can generate logs. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Log() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.Log }).(pulumi.StringOutput)
+}
+
+// Logset ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LogSetId }).(pulumi.StringOutput)
+}
+
+// Log topic ID of CLB Log Service (CLS). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) LogTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.LogTopicId }).(pulumi.StringOutput)
+}
+
+// Primary AZ. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) MasterZones() GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerMasterZone {
+		return v.MasterZones
+	}).(GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput)
+}
+
+// If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) MixIpTarget() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.MixIpTarget }).(pulumi.BoolOutput)
+}
+
+// CLB instance network attributes. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) NetworkAttributes() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute {
+		return v.NetworkAttributes
+	}).(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput)
+}
+
+// Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) NfvInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.NfvInfo }).(pulumi.StringOutput)
+}
+
+// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) NumericalVpcId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.NumericalVpcId }).(pulumi.IntOutput)
+}
+
+// Protective CLB identifier. Value range: 1 (protective), 0 (non-protective). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) OpenBgp() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.OpenBgp }).(pulumi.IntOutput)
+}
+
+// Prepaid billing attributes of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) PrepaidAttributes() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute {
+		return v.PrepaidAttributes
+	}).(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput)
+}
+
+// ID of the project to which a CLB instance belongs. 0: default project.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Security group of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) SecureGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []string { return v.SecureGroups }).(pulumi.StringArrayOutput)
+}
+
+// Specification of the LCU-supported instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) SlaType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.SlaType }).(pulumi.StringOutput)
+}
+
+// SNAT is enabled for all private network classic CLB created before December 2016. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Snat() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.Snat }).(pulumi.BoolOutput)
+}
+
+// SnatIp list after SnatPro load balancing is enabled. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) SnatIps() GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerSnatIp {
+		return v.SnatIps
+	}).(GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput)
+}
+
+// Whether to enable SnatPro. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) SnatPro() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) bool { return v.SnatPro }).(pulumi.BoolOutput)
+}
+
+// CLB instance status, including:0: creating; 1: running. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Last status change time of a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) StatusTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.StatusTime }).(pulumi.StringOutput)
+}
+
+// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// CLB instance tag information. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Tags() GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerTag {
+		return v.Tags
+	}).(GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput)
+}
+
+// Basic information of a backend server bound to a CLB instance. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) TargetRegionInfos() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo {
+		return v.TargetRegionInfos
+	}).(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput)
+}
+
+// ISP to which a CLB IP address belongs. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) VipIsp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.VipIsp }).(pulumi.StringOutput)
+}
+
+// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Availability zone of a VPC-based private network CLB instance. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerOutput) Zones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancer) []string { return v.Zones }).(pulumi.StringArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancer)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerArrayOutput() GetInstanceByCertIdCertSetLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancer {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancer)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet struct {
+	// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+	EdgeZone bool `pulumi:"edgeZone"`
+	// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+	LocalZone bool `pulumi:"localZone"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+	// .
+	ZoneId int `pulumi:"zoneId"`
+	// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneName string `pulumi:"zoneName"`
+	// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneRegion string `pulumi:"zoneRegion"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs and GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs struct {
+	// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+	EdgeZone pulumi.BoolInput `pulumi:"edgeZone"`
+	// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+	LocalZone pulumi.BoolInput `pulumi:"localZone"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// .
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+	// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneRegion pulumi.StringInput `pulumi:"zoneRegion"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray and GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray{ GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray []GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput {
+	return o
+}
+
+// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) EdgeZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) bool { return v.EdgeZone }).(pulumi.BoolOutput)
+}
+
+// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) LocalZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) bool { return v.LocalZone }).(pulumi.BoolOutput)
+}
+
+// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput) ZoneRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet) string { return v.ZoneRegion }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput() GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerBackupZoneSet)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster struct {
+	// vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+	ClassicalClusters []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster `pulumi:"classicalClusters"`
+	// Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+	L4Clusters []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster `pulumi:"l4Clusters"`
+	// Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+	L7Clusters []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster `pulumi:"l7Clusters"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs struct {
+	// vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+	ClassicalClusters GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayInput `pulumi:"classicalClusters"`
+	// Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+	L4Clusters GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayInput `pulumi:"l4Clusters"`
+	// Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+	L7Clusters GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayInput `pulumi:"l7Clusters"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray{ GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput {
+	return o
+}
+
+// vpcgw cluster. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) ClassicalClusters() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster) []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster {
+		return v.ClassicalClusters
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput)
+}
+
+// Layer-4 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) L4Clusters() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster) []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster {
+		return v.L4Clusters
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput)
+}
+
+// Layer-7 dedicated cluster list. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput) L7Clusters() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster) []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster {
+		return v.L7Clusters
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerExclusiveCluster)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName string `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray{ GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput {
+	return o
+}
+
+// Unique cluster ID.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster) string {
+		return v.ClusterId
+	}).(pulumi.StringOutput)
+}
+
+// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster) string {
+		return v.ClusterName
+	}).(pulumi.StringOutput)
+}
+
+// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalCluster)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName string `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray{ GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput {
+	return o
+}
+
+// Unique cluster ID.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4Cluster)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName string `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray and GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray{ GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray []GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput {
+	return o
+}
+
+// Unique cluster ID.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7Cluster)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfo struct {
+	// TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+	TgwGroupName string `pulumi:"tgwGroupName"`
+	// Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ZhiTong bool `pulumi:"zhiTong"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExtraInfoInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs and GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExtraInfoInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs struct {
+	// TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+	TgwGroupName pulumi.StringInput `pulumi:"tgwGroupName"`
+	// Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ZhiTong pulumi.BoolInput `pulumi:"zhiTong"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExtraInfo)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray and GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray{ GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray []GetInstanceByCertIdCertSetLoadBalancerExtraInfoInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExtraInfo)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExtraInfo)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput {
+	return o
+}
+
+// TgwGroup name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput) TgwGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExtraInfo) string { return v.TgwGroupName }).(pulumi.StringOutput)
+}
+
+// Whether to enable VIP direct connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput) ZhiTong() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerExtraInfo) bool { return v.ZhiTong }).(pulumi.BoolOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerExtraInfo)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerExtraInfo {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerExtraInfo)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerMasterZone struct {
+	// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+	EdgeZone bool `pulumi:"edgeZone"`
+	// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+	LocalZone bool `pulumi:"localZone"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+	// .
+	ZoneId int `pulumi:"zoneId"`
+	// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneName string `pulumi:"zoneName"`
+	// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneRegion string `pulumi:"zoneRegion"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerMasterZoneInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs and GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerMasterZoneInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs struct {
+	// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+	EdgeZone pulumi.BoolInput `pulumi:"edgeZone"`
+	// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+	LocalZone pulumi.BoolInput `pulumi:"localZone"`
+	// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// .
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+	// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneRegion pulumi.StringInput `pulumi:"zoneRegion"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerMasterZone)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray and GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray{ GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray []GetInstanceByCertIdCertSetLoadBalancerMasterZoneInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerMasterZone)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerMasterZone)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput {
+	return o
+}
+
+// Whether the AZ is an edge zone. Values: true, false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) EdgeZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) bool { return v.EdgeZone }).(pulumi.BoolOutput)
+}
+
+// Whether the AZ is the LocalZone, e.g., false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) LocalZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) bool { return v.LocalZone }).(pulumi.BoolOutput)
+}
+
+// Unique AZ ID in a numeric form, such as 100001. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// AZ name, such as Guangzhou Zone 1. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+// AZ region, e.g., ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput) ZoneRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerMasterZone) string { return v.ZoneRegion }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerMasterZone)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput() GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerMasterZone {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerMasterZone)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute struct {
+	// Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+	BandwidthpkgSubType string `pulumi:"bandwidthpkgSubType"`
+	// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+	InternetChargeType string `pulumi:"internetChargeType"`
+	// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs and GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs struct {
+	// Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+	BandwidthpkgSubType pulumi.StringInput `pulumi:"bandwidthpkgSubType"`
+	// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+	InternetChargeType pulumi.StringInput `pulumi:"internetChargeType"`
+	// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray and GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray{ GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray []GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput {
+	return o
+}
+
+// Bandwidth package type, such as SINGLEISP. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) BandwidthpkgSubType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute) string { return v.BandwidthpkgSubType }).(pulumi.StringOutput)
+}
+
+// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth; BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) InternetChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute) string { return v.InternetChargeType }).(pulumi.StringOutput)
+}
+
+// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerNetworkAttribute)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute struct {
+	// Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+	Period int `pulumi:"period"`
+	// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag string `pulumi:"renewFlag"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs and GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs struct {
+	// Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray and GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray{ GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray []GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput {
+	return o
+}
+
+// Cycle, indicating the number of months (reserved field). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput() GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerPrepaidAttribute)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerSnatIp struct {
+	// IP address, such as 192.168.0.1.
+	Ip string `pulumi:"ip"`
+	// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerSnatIpInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs and GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerSnatIpInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs struct {
+	// IP address, such as 192.168.0.1.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerSnatIp)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerSnatIpArray and GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerSnatIpArray{ GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpArray []GetInstanceByCertIdCertSetLoadBalancerSnatIpInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerSnatIpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerSnatIp)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerSnatIpArray) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerSnatIpArray) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerSnatIp)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput {
+	return o
+}
+
+// IP address, such as 192.168.0.1.
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerSnatIp) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Subnet where a CLB instance resides (meaningful only for private network VPC CLB). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerSnatIp) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerSnatIp)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput() GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerSnatIp {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerSnatIp)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerTagInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerTagArgs and GetInstanceByCertIdCertSetLoadBalancerTagOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerTagInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerTagArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerTagInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerTagOutput() GetInstanceByCertIdCertSetLoadBalancerTagOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerTagOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerTagOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTag)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTagArgs) ToGetInstanceByCertIdCertSetLoadBalancerTagOutput() GetInstanceByCertIdCertSetLoadBalancerTagOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerTagOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTagArgs) ToGetInstanceByCertIdCertSetLoadBalancerTagOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerTagOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerTagArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerTagArray and GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerTagArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerTagArray{ GetInstanceByCertIdCertSetLoadBalancerTagArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerTagArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTagArray []GetInstanceByCertIdCertSetLoadBalancerTagInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerTag)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTagArray) ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTagArray) ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTagOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTag)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTagOutput) ToGetInstanceByCertIdCertSetLoadBalancerTagOutput() GetInstanceByCertIdCertSetLoadBalancerTagOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTagOutput) ToGetInstanceByCertIdCertSetLoadBalancerTagOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetInstanceByCertIdCertSetLoadBalancerTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetInstanceByCertIdCertSetLoadBalancerTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerTag)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerTagArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerTag {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerTag)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerTagOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo struct {
+	// Region of the target, such as ap-guangzhou.
+	Region string `pulumi:"region"`
+	// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs and GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs{...}
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs struct {
+	// Region of the target, such as ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput)
+}
+
+// GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayInput is an input type that accepts GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray and GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayInput` via:
+//
+//          GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray{ GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs{...} }
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput
+	ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutputWithContext(context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray []GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoInput
+
+func (GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo)(nil)).Elem()
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput {
+	return i.ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput {
+	return o
+}
+
+// Region of the target, such as ap-guangzhou.
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// VPC ID Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo)(nil)).Elem()
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput() GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput) ToGetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutputWithContext(ctx context.Context) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo {
+		return vs[0].([]GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfo)[vs[1].(int)]
+	}).(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput)
+}
+
+type GetInstanceDetailFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter value array.
+	Values []string `pulumi:"values"`
+}
+
+// GetInstanceDetailFilterInput is an input type that accepts GetInstanceDetailFilterArgs and GetInstanceDetailFilterOutput values.
+// You can construct a concrete instance of `GetInstanceDetailFilterInput` via:
+//
+//          GetInstanceDetailFilterArgs{...}
+type GetInstanceDetailFilterInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailFilterOutput() GetInstanceDetailFilterOutput
+	ToGetInstanceDetailFilterOutputWithContext(context.Context) GetInstanceDetailFilterOutput
+}
+
+type GetInstanceDetailFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value array.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetInstanceDetailFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailFilter)(nil)).Elem()
+}
+
+func (i GetInstanceDetailFilterArgs) ToGetInstanceDetailFilterOutput() GetInstanceDetailFilterOutput {
+	return i.ToGetInstanceDetailFilterOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailFilterArgs) ToGetInstanceDetailFilterOutputWithContext(ctx context.Context) GetInstanceDetailFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailFilterOutput)
+}
+
+// GetInstanceDetailFilterArrayInput is an input type that accepts GetInstanceDetailFilterArray and GetInstanceDetailFilterArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailFilterArrayInput` via:
+//
+//          GetInstanceDetailFilterArray{ GetInstanceDetailFilterArgs{...} }
+type GetInstanceDetailFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailFilterArrayOutput() GetInstanceDetailFilterArrayOutput
+	ToGetInstanceDetailFilterArrayOutputWithContext(context.Context) GetInstanceDetailFilterArrayOutput
+}
+
+type GetInstanceDetailFilterArray []GetInstanceDetailFilterInput
+
+func (GetInstanceDetailFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailFilter)(nil)).Elem()
+}
+
+func (i GetInstanceDetailFilterArray) ToGetInstanceDetailFilterArrayOutput() GetInstanceDetailFilterArrayOutput {
+	return i.ToGetInstanceDetailFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailFilterArray) ToGetInstanceDetailFilterArrayOutputWithContext(ctx context.Context) GetInstanceDetailFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailFilterArrayOutput)
+}
+
+type GetInstanceDetailFilterOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailFilter)(nil)).Elem()
+}
+
+func (o GetInstanceDetailFilterOutput) ToGetInstanceDetailFilterOutput() GetInstanceDetailFilterOutput {
+	return o
+}
+
+func (o GetInstanceDetailFilterOutput) ToGetInstanceDetailFilterOutputWithContext(ctx context.Context) GetInstanceDetailFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetInstanceDetailFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value array.
+func (o GetInstanceDetailFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetInstanceDetailFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailFilter)(nil)).Elem()
+}
+
+func (o GetInstanceDetailFilterArrayOutput) ToGetInstanceDetailFilterArrayOutput() GetInstanceDetailFilterArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailFilterArrayOutput) ToGetInstanceDetailFilterArrayOutputWithContext(ctx context.Context) GetInstanceDetailFilterArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailFilterArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailFilter {
+		return vs[0].([]GetInstanceDetailFilter)[vs[1].(int)]
+	}).(GetInstanceDetailFilterOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSet struct {
+	// CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+	Address string `pulumi:"address"`
+	// IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIpVersion string `pulumi:"addressIpVersion"`
+	// IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIpv6 string `pulumi:"addressIpv6"`
+	// ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIsp string `pulumi:"addressIsp"`
+	// CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType string `pulumi:"chargeType"`
+	// Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigId string `pulumi:"configId"`
+	// CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+	Domains string `pulumi:"domains"`
+	// Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+	ExtraInfos []GetInstanceDetailLoadBalancerDetailSetExtraInfo `pulumi:"extraInfos"`
+	// IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+	Ipv6Mode string `pulumi:"ipv6Mode"`
+	// 0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+	Isolation int `pulumi:"isolation"`
+	// CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+	ListenerId string `pulumi:"listenerId"`
+	// Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerDomain string `pulumi:"loadBalancerDomain"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+	LoadBalancerPassToTarget int `pulumi:"loadBalancerPassToTarget"`
+	// CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancerType string `pulumi:"loadBalancerType"`
+	// Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId string `pulumi:"locationId"`
+	// CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+	NetworkAttributes []GetInstanceDetailLoadBalancerDetailSetNetworkAttribute `pulumi:"networkAttributes"`
+	// Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+	Port int `pulumi:"port"`
+	// Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+	PrepaidAttributes []GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute `pulumi:"prepaidAttributes"`
+	// ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+	ProjectId int `pulumi:"projectId"`
+	// Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+	Protocol string `pulumi:"protocol"`
+	// List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroups []string `pulumi:"securityGroups"`
+	// The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+	SlaveZones []string `pulumi:"slaveZones"`
+	// Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+	SniSwitch int `pulumi:"sniSwitch"`
+	// CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+	Status int `pulumi:"status"`
+	// CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+	Tags []GetInstanceDetailLoadBalancerDetailSetTag `pulumi:"tags"`
+	// Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetAddress string `pulumi:"targetAddress"`
+	// Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetHealth string `pulumi:"targetHealth"`
+	// ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetId string `pulumi:"targetId"`
+	// Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetPort int `pulumi:"targetPort"`
+	// Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetWeight int `pulumi:"targetWeight"`
+	// Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+	Url string `pulumi:"url"`
+	// ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+	VpcId string `pulumi:"vpcId"`
+	// Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+	// The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+	Zones []string `pulumi:"zones"`
+}
+
+// GetInstanceDetailLoadBalancerDetailSetInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetArgs and GetInstanceDetailLoadBalancerDetailSetOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetArgs{...}
+type GetInstanceDetailLoadBalancerDetailSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetOutput() GetInstanceDetailLoadBalancerDetailSetOutput
+	ToGetInstanceDetailLoadBalancerDetailSetOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetArgs struct {
+	// CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+	Address pulumi.StringInput `pulumi:"address"`
+	// IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIpVersion pulumi.StringInput `pulumi:"addressIpVersion"`
+	// IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIpv6 pulumi.StringInput `pulumi:"addressIpv6"`
+	// ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIsp pulumi.StringInput `pulumi:"addressIsp"`
+	// CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+	Domains pulumi.StringInput `pulumi:"domains"`
+	// Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+	ExtraInfos GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayInput `pulumi:"extraInfos"`
+	// IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+	Ipv6Mode pulumi.StringInput `pulumi:"ipv6Mode"`
+	// 0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+	Isolation pulumi.IntInput `pulumi:"isolation"`
+	// CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerDomain pulumi.StringInput `pulumi:"loadBalancerDomain"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+	LoadBalancerPassToTarget pulumi.IntInput `pulumi:"loadBalancerPassToTarget"`
+	// CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancerType pulumi.StringInput `pulumi:"loadBalancerType"`
+	// Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+	NetworkAttributes GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayInput `pulumi:"networkAttributes"`
+	// Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+	PrepaidAttributes GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayInput `pulumi:"prepaidAttributes"`
+	// ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroups pulumi.StringArrayInput `pulumi:"securityGroups"`
+	// The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+	SlaveZones pulumi.StringArrayInput `pulumi:"slaveZones"`
+	// Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+	SniSwitch pulumi.IntInput `pulumi:"sniSwitch"`
+	// CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+	// CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+	Tags GetInstanceDetailLoadBalancerDetailSetTagArrayInput `pulumi:"tags"`
+	// Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetAddress pulumi.StringInput `pulumi:"targetAddress"`
+	// Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetHealth pulumi.StringInput `pulumi:"targetHealth"`
+	// ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetId pulumi.StringInput `pulumi:"targetId"`
+	// Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetPort pulumi.IntInput `pulumi:"targetPort"`
+	// Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+	TargetWeight pulumi.IntInput `pulumi:"targetWeight"`
+	// Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+	Url pulumi.StringInput `pulumi:"url"`
+	// ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+	Zones pulumi.StringArrayInput `pulumi:"zones"`
+}
+
+func (GetInstanceDetailLoadBalancerDetailSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetArgs) ToGetInstanceDetailLoadBalancerDetailSetOutput() GetInstanceDetailLoadBalancerDetailSetOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetArgs) ToGetInstanceDetailLoadBalancerDetailSetOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetOutput)
+}
+
+// GetInstanceDetailLoadBalancerDetailSetArrayInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetArray and GetInstanceDetailLoadBalancerDetailSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetArrayInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetArray{ GetInstanceDetailLoadBalancerDetailSetArgs{...} }
+type GetInstanceDetailLoadBalancerDetailSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetArrayOutput() GetInstanceDetailLoadBalancerDetailSetArrayOutput
+	ToGetInstanceDetailLoadBalancerDetailSetArrayOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetArrayOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetArray []GetInstanceDetailLoadBalancerDetailSetInput
+
+func (GetInstanceDetailLoadBalancerDetailSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetArray) ToGetInstanceDetailLoadBalancerDetailSetArrayOutput() GetInstanceDetailLoadBalancerDetailSetArrayOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetArray) ToGetInstanceDetailLoadBalancerDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ToGetInstanceDetailLoadBalancerDetailSetOutput() GetInstanceDetailLoadBalancerDetailSetOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ToGetInstanceDetailLoadBalancerDetailSetOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetOutput {
+	return o
+}
+
+// CLB instance VIP.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// IP version of the CLB instance. Valid values: IPv4, IPv6.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) AddressIpVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.AddressIpVersion }).(pulumi.StringOutput)
+}
+
+// IPv6 VIP address of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) AddressIpv6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.AddressIpv6 }).(pulumi.StringOutput)
+}
+
+// ISP to which the CLB IP address belongs.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) AddressIsp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.AddressIsp }).(pulumi.StringOutput)
+}
+
+// CLB instance billing mode.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// CLB instance creation time.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Domain name of the forwarding rule.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// List o domain names associated with the forwarding ruleNote: This field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Domains() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Domains }).(pulumi.StringOutput)
+}
+
+// Reserved field, which can be ignored generally.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ExtraInfos() GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []GetInstanceDetailLoadBalancerDetailSetExtraInfo {
+		return v.ExtraInfos
+	}).(GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput)
+}
+
+// IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Ipv6Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Ipv6Mode }).(pulumi.StringOutput)
+}
+
+// 0: not isolated; 1: isolated.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Isolation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.Isolation }).(pulumi.IntOutput)
+}
+
+// CLB listener ID.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Domain name of the CLB instance.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LoadBalancerDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.LoadBalancerDomain }).(pulumi.StringOutput)
+}
+
+// CLB instance ID.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+// Whether the CLB instance is billed by IP.Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LoadBalancerPassToTarget() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.LoadBalancerPassToTarget }).(pulumi.IntOutput)
+}
+
+// CLB instance network type:Public: public network; Private: private network.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LoadBalancerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.LoadBalancerType }).(pulumi.StringOutput)
+}
+
+// Forwarding rule ID.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// CLB instance network attribute.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) NetworkAttributes() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []GetInstanceDetailLoadBalancerDetailSetNetworkAttribute {
+		return v.NetworkAttributes
+	}).(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput)
+}
+
+// Listener port.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Pay-as-you-go attribute of the CLB instance.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) PrepaidAttributes() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute {
+		return v.PrepaidAttributes
+	}).(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput)
+}
+
+// ID of the project to which the CLB instance belongs. 0: default project.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Listener protocol.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// List of the security groups bound to the CLB instance.Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) SecurityGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []string { return v.SecurityGroups }).(pulumi.StringArrayOutput)
+}
+
+// The secondary zone of multi-AZ CLB instanceNote: This field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) SlaveZones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []string { return v.SlaveZones }).(pulumi.StringArrayOutput)
+}
+
+// Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.Note: This field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) SniSwitch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.SniSwitch }).(pulumi.IntOutput)
+}
+
+// CLB instance status, including:0: creating; 1: running.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// CLB instance tag information.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Tags() GetInstanceDetailLoadBalancerDetailSetTagArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []GetInstanceDetailLoadBalancerDetailSetTag {
+		return v.Tags
+	}).(GetInstanceDetailLoadBalancerDetailSetTagArrayOutput)
+}
+
+// Address of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) TargetAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.TargetAddress }).(pulumi.StringOutput)
+}
+
+// Health status of the target real server.Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) TargetHealth() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.TargetHealth }).(pulumi.StringOutput)
+}
+
+// ID of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) TargetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.TargetId }).(pulumi.StringOutput)
+}
+
+// Listening port of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) TargetPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.TargetPort }).(pulumi.IntOutput)
+}
+
+// Forwarding weight of target real servers.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) TargetWeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) int { return v.TargetWeight }).(pulumi.IntOutput)
+}
+
+// Forwarding rule path.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// ID of the VPC instance to which the CLB instance belongs.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Availability zone where the CLB instance resides.Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// The AZ of private CLB instance. This is only available for beta users.Note: This field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetOutput) Zones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSet) []string { return v.Zones }).(pulumi.StringArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetArrayOutput() GetInstanceDetailLoadBalancerDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailLoadBalancerDetailSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailLoadBalancerDetailSet {
+		return vs[0].([]GetInstanceDetailLoadBalancerDetailSet)[vs[1].(int)]
+	}).(GetInstanceDetailLoadBalancerDetailSetOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetExtraInfo struct {
+	// TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+	TgwGroupName string `pulumi:"tgwGroupName"`
+	// Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+	ZhiTong bool `pulumi:"zhiTong"`
+}
+
+// GetInstanceDetailLoadBalancerDetailSetExtraInfoInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs and GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetExtraInfoInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs{...}
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput
+	ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs struct {
+	// TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+	TgwGroupName pulumi.StringInput `pulumi:"tgwGroupName"`
+	// Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+	ZhiTong pulumi.BoolInput `pulumi:"zhiTong"`
+}
+
+func (GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetExtraInfo)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput)
+}
+
+// GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetExtraInfoArray and GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetExtraInfoArray{ GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs{...} }
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput
+	ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoArray []GetInstanceDetailLoadBalancerDetailSetExtraInfoInput
+
+func (GetInstanceDetailLoadBalancerDetailSetExtraInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetExtraInfo)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetExtraInfoArray) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetExtraInfoArray) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetExtraInfo)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput {
+	return o
+}
+
+// TgwGroup nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput) TgwGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetExtraInfo) string { return v.TgwGroupName }).(pulumi.StringOutput)
+}
+
+// Whether to enable VIP direct connectionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput) ZhiTong() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetExtraInfo) bool { return v.ZhiTong }).(pulumi.BoolOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetExtraInfo)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput() GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailLoadBalancerDetailSetExtraInfo {
+		return vs[0].([]GetInstanceDetailLoadBalancerDetailSetExtraInfo)[vs[1].(int)]
+	}).(GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttribute struct {
+	// Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+	BandwidthPkgSubType string `pulumi:"bandwidthPkgSubType"`
+	// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+	InternetChargeType string `pulumi:"internetChargeType"`
+	// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+}
+
+// GetInstanceDetailLoadBalancerDetailSetNetworkAttributeInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs and GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetNetworkAttributeInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs{...}
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput
+	ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs struct {
+	// Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+	BandwidthPkgSubType pulumi.StringInput `pulumi:"bandwidthPkgSubType"`
+	// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+	InternetChargeType pulumi.StringInput `pulumi:"internetChargeType"`
+	// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+}
+
+func (GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetNetworkAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput)
+}
+
+// GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray and GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray{ GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs{...} }
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput
+	ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray []GetInstanceDetailLoadBalancerDetailSetNetworkAttributeInput
+
+func (GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetNetworkAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetNetworkAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput {
+	return o
+}
+
+// Bandwidth package type, such as SINGLEISPNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) BandwidthPkgSubType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetNetworkAttribute) string { return v.BandwidthPkgSubType }).(pulumi.StringOutput)
+}
+
+// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified).
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) InternetChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetNetworkAttribute) string { return v.InternetChargeType }).(pulumi.StringOutput)
+}
+
+// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetNetworkAttribute) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetNetworkAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailLoadBalancerDetailSetNetworkAttribute {
+		return vs[0].([]GetInstanceDetailLoadBalancerDetailSetNetworkAttribute)[vs[1].(int)]
+	}).(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute struct {
+	// Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+	Period int `pulumi:"period"`
+	// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag string `pulumi:"renewFlag"`
+}
+
+// GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs and GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs{...}
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput
+	ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs struct {
+	// Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+}
+
+func (GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput)
+}
+
+// GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray and GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray{ GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs{...} }
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput
+	ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray []GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeInput
+
+func (GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput {
+	return o
+}
+
+// Cycle, indicating the number of months (reserved field)Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewalNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput() GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute {
+		return vs[0].([]GetInstanceDetailLoadBalancerDetailSetPrepaidAttribute)[vs[1].(int)]
+	}).(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetInstanceDetailLoadBalancerDetailSetTagInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetTagArgs and GetInstanceDetailLoadBalancerDetailSetTagOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetTagInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetTagArgs{...}
+type GetInstanceDetailLoadBalancerDetailSetTagInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetTagOutput() GetInstanceDetailLoadBalancerDetailSetTagOutput
+	ToGetInstanceDetailLoadBalancerDetailSetTagOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetTagOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetInstanceDetailLoadBalancerDetailSetTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetTag)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetTagArgs) ToGetInstanceDetailLoadBalancerDetailSetTagOutput() GetInstanceDetailLoadBalancerDetailSetTagOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetTagOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetTagArgs) ToGetInstanceDetailLoadBalancerDetailSetTagOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetTagOutput)
+}
+
+// GetInstanceDetailLoadBalancerDetailSetTagArrayInput is an input type that accepts GetInstanceDetailLoadBalancerDetailSetTagArray and GetInstanceDetailLoadBalancerDetailSetTagArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDetailLoadBalancerDetailSetTagArrayInput` via:
+//
+//          GetInstanceDetailLoadBalancerDetailSetTagArray{ GetInstanceDetailLoadBalancerDetailSetTagArgs{...} }
+type GetInstanceDetailLoadBalancerDetailSetTagArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutput() GetInstanceDetailLoadBalancerDetailSetTagArrayOutput
+	ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutputWithContext(context.Context) GetInstanceDetailLoadBalancerDetailSetTagArrayOutput
+}
+
+type GetInstanceDetailLoadBalancerDetailSetTagArray []GetInstanceDetailLoadBalancerDetailSetTagInput
+
+func (GetInstanceDetailLoadBalancerDetailSetTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetTag)(nil)).Elem()
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetTagArray) ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutput() GetInstanceDetailLoadBalancerDetailSetTagArrayOutput {
+	return i.ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDetailLoadBalancerDetailSetTagArray) ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDetailLoadBalancerDetailSetTagArrayOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetTagOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetTag)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetTagOutput) ToGetInstanceDetailLoadBalancerDetailSetTagOutput() GetInstanceDetailLoadBalancerDetailSetTagOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetTagOutput) ToGetInstanceDetailLoadBalancerDetailSetTagOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetInstanceDetailLoadBalancerDetailSetTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetInstanceDetailLoadBalancerDetailSetTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDetailLoadBalancerDetailSetTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetInstanceDetailLoadBalancerDetailSetTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDetailLoadBalancerDetailSetTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDetailLoadBalancerDetailSetTag)(nil)).Elem()
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetTagArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutput() GetInstanceDetailLoadBalancerDetailSetTagArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetTagArrayOutput) ToGetInstanceDetailLoadBalancerDetailSetTagArrayOutputWithContext(ctx context.Context) GetInstanceDetailLoadBalancerDetailSetTagArrayOutput {
+	return o
+}
+
+func (o GetInstanceDetailLoadBalancerDetailSetTagArrayOutput) Index(i pulumi.IntInput) GetInstanceDetailLoadBalancerDetailSetTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDetailLoadBalancerDetailSetTag {
+		return vs[0].([]GetInstanceDetailLoadBalancerDetailSetTag)[vs[1].(int)]
+	}).(GetInstanceDetailLoadBalancerDetailSetTagOutput)
+}
+
+type GetInstanceTrafficLoadBalancerTraffic struct {
+	// CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// Maximum outbound bandwidth in Mbps.
+	OutBandwidth float64 `pulumi:"outBandwidth"`
+	// CLB instance region.
+	Region string `pulumi:"region"`
+	// CLB instance VIP.
+	Vip string `pulumi:"vip"`
+}
+
+// GetInstanceTrafficLoadBalancerTrafficInput is an input type that accepts GetInstanceTrafficLoadBalancerTrafficArgs and GetInstanceTrafficLoadBalancerTrafficOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficLoadBalancerTrafficInput` via:
+//
+//          GetInstanceTrafficLoadBalancerTrafficArgs{...}
+type GetInstanceTrafficLoadBalancerTrafficInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficLoadBalancerTrafficOutput() GetInstanceTrafficLoadBalancerTrafficOutput
+	ToGetInstanceTrafficLoadBalancerTrafficOutputWithContext(context.Context) GetInstanceTrafficLoadBalancerTrafficOutput
+}
+
+type GetInstanceTrafficLoadBalancerTrafficArgs struct {
+	// CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// Maximum outbound bandwidth in Mbps.
+	OutBandwidth pulumi.Float64Input `pulumi:"outBandwidth"`
+	// CLB instance region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// CLB instance VIP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+}
+
+func (GetInstanceTrafficLoadBalancerTrafficArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficLoadBalancerTraffic)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficLoadBalancerTrafficArgs) ToGetInstanceTrafficLoadBalancerTrafficOutput() GetInstanceTrafficLoadBalancerTrafficOutput {
+	return i.ToGetInstanceTrafficLoadBalancerTrafficOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficLoadBalancerTrafficArgs) ToGetInstanceTrafficLoadBalancerTrafficOutputWithContext(ctx context.Context) GetInstanceTrafficLoadBalancerTrafficOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficLoadBalancerTrafficOutput)
+}
+
+// GetInstanceTrafficLoadBalancerTrafficArrayInput is an input type that accepts GetInstanceTrafficLoadBalancerTrafficArray and GetInstanceTrafficLoadBalancerTrafficArrayOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficLoadBalancerTrafficArrayInput` via:
+//
+//          GetInstanceTrafficLoadBalancerTrafficArray{ GetInstanceTrafficLoadBalancerTrafficArgs{...} }
+type GetInstanceTrafficLoadBalancerTrafficArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficLoadBalancerTrafficArrayOutput() GetInstanceTrafficLoadBalancerTrafficArrayOutput
+	ToGetInstanceTrafficLoadBalancerTrafficArrayOutputWithContext(context.Context) GetInstanceTrafficLoadBalancerTrafficArrayOutput
+}
+
+type GetInstanceTrafficLoadBalancerTrafficArray []GetInstanceTrafficLoadBalancerTrafficInput
+
+func (GetInstanceTrafficLoadBalancerTrafficArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficLoadBalancerTraffic)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficLoadBalancerTrafficArray) ToGetInstanceTrafficLoadBalancerTrafficArrayOutput() GetInstanceTrafficLoadBalancerTrafficArrayOutput {
+	return i.ToGetInstanceTrafficLoadBalancerTrafficArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficLoadBalancerTrafficArray) ToGetInstanceTrafficLoadBalancerTrafficArrayOutputWithContext(ctx context.Context) GetInstanceTrafficLoadBalancerTrafficArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficLoadBalancerTrafficArrayOutput)
+}
+
+type GetInstanceTrafficLoadBalancerTrafficOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficLoadBalancerTrafficOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficLoadBalancerTraffic)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) ToGetInstanceTrafficLoadBalancerTrafficOutput() GetInstanceTrafficLoadBalancerTrafficOutput {
+	return o
+}
+
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) ToGetInstanceTrafficLoadBalancerTrafficOutputWithContext(ctx context.Context) GetInstanceTrafficLoadBalancerTrafficOutput {
+	return o
+}
+
+// CLB domain name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// CLB instance ID.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+// Maximum outbound bandwidth in Mbps.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) OutBandwidth() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) float64 { return v.OutBandwidth }).(pulumi.Float64Output)
+}
+
+// CLB instance region.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// CLB instance VIP.
+func (o GetInstanceTrafficLoadBalancerTrafficOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficLoadBalancerTraffic) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+type GetInstanceTrafficLoadBalancerTrafficArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficLoadBalancerTrafficArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficLoadBalancerTraffic)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficLoadBalancerTrafficArrayOutput) ToGetInstanceTrafficLoadBalancerTrafficArrayOutput() GetInstanceTrafficLoadBalancerTrafficArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficLoadBalancerTrafficArrayOutput) ToGetInstanceTrafficLoadBalancerTrafficArrayOutputWithContext(ctx context.Context) GetInstanceTrafficLoadBalancerTrafficArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficLoadBalancerTrafficArrayOutput) Index(i pulumi.IntInput) GetInstanceTrafficLoadBalancerTrafficOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceTrafficLoadBalancerTraffic {
+		return vs[0].([]GetInstanceTrafficLoadBalancerTraffic)[vs[1].(int)]
+	}).(GetInstanceTrafficLoadBalancerTrafficOutput)
+}
+
 type GetInstancesClbList struct {
 	// IP version, only applicable to open CLB. Valid values are `IPV4`, `IPV6` and `IPv6FullChain`.
 	AddressIpVersion string `pulumi:"addressIpVersion"`
@@ -1386,7 +6172,7 @@ type GetListenerRulesRuleList struct {
 	HealthCheckHttpMethod string `pulumi:"healthCheckHttpMethod"`
 	// Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
 	HealthCheckHttpPath string `pulumi:"healthCheckHttpPath"`
-	// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckIntervalTime int `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch bool `pulumi:"healthCheckSwitch"`
@@ -1438,7 +6224,7 @@ type GetListenerRulesRuleListArgs struct {
 	HealthCheckHttpMethod pulumi.StringInput `pulumi:"healthCheckHttpMethod"`
 	// Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
 	HealthCheckHttpPath pulumi.StringInput `pulumi:"healthCheckHttpPath"`
-	// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckIntervalTime pulumi.IntInput `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolInput `pulumi:"healthCheckSwitch"`
@@ -1559,7 +6345,7 @@ func (o GetListenerRulesRuleListOutput) HealthCheckHttpPath() pulumi.StringOutpu
 	return o.ApplyT(func(v GetListenerRulesRuleList) string { return v.HealthCheckHttpPath }).(pulumi.StringOutput)
 }
 
-// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 func (o GetListenerRulesRuleListOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetListenerRulesRuleList) int { return v.HealthCheckIntervalTime }).(pulumi.IntOutput)
 }
@@ -1624,6 +6410,776 @@ func (o GetListenerRulesRuleListArrayOutput) Index(i pulumi.IntInput) GetListene
 	}).(GetListenerRulesRuleListOutput)
 }
 
+type GetListenersByTargetsBackend struct {
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp string `pulumi:"privateIp"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetListenersByTargetsBackendInput is an input type that accepts GetListenersByTargetsBackendArgs and GetListenersByTargetsBackendOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsBackendInput` via:
+//
+//          GetListenersByTargetsBackendArgs{...}
+type GetListenersByTargetsBackendInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsBackendOutput() GetListenersByTargetsBackendOutput
+	ToGetListenersByTargetsBackendOutputWithContext(context.Context) GetListenersByTargetsBackendOutput
+}
+
+type GetListenersByTargetsBackendArgs struct {
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetListenersByTargetsBackendArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsBackend)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsBackendArgs) ToGetListenersByTargetsBackendOutput() GetListenersByTargetsBackendOutput {
+	return i.ToGetListenersByTargetsBackendOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsBackendArgs) ToGetListenersByTargetsBackendOutputWithContext(ctx context.Context) GetListenersByTargetsBackendOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsBackendOutput)
+}
+
+// GetListenersByTargetsBackendArrayInput is an input type that accepts GetListenersByTargetsBackendArray and GetListenersByTargetsBackendArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsBackendArrayInput` via:
+//
+//          GetListenersByTargetsBackendArray{ GetListenersByTargetsBackendArgs{...} }
+type GetListenersByTargetsBackendArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsBackendArrayOutput() GetListenersByTargetsBackendArrayOutput
+	ToGetListenersByTargetsBackendArrayOutputWithContext(context.Context) GetListenersByTargetsBackendArrayOutput
+}
+
+type GetListenersByTargetsBackendArray []GetListenersByTargetsBackendInput
+
+func (GetListenersByTargetsBackendArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsBackend)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsBackendArray) ToGetListenersByTargetsBackendArrayOutput() GetListenersByTargetsBackendArrayOutput {
+	return i.ToGetListenersByTargetsBackendArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsBackendArray) ToGetListenersByTargetsBackendArrayOutputWithContext(ctx context.Context) GetListenersByTargetsBackendArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsBackendArrayOutput)
+}
+
+type GetListenersByTargetsBackendOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsBackendOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsBackend)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsBackendOutput) ToGetListenersByTargetsBackendOutput() GetListenersByTargetsBackendOutput {
+	return o
+}
+
+func (o GetListenersByTargetsBackendOutput) ToGetListenersByTargetsBackendOutputWithContext(ctx context.Context) GetListenersByTargetsBackendOutput {
+	return o
+}
+
+// Private network IP to be queried, which can be of the CVM or ENI.
+func (o GetListenersByTargetsBackendOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsBackend) string { return v.PrivateIp }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetListenersByTargetsBackendOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsBackend) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetListenersByTargetsBackendArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsBackendArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsBackend)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsBackendArrayOutput) ToGetListenersByTargetsBackendArrayOutput() GetListenersByTargetsBackendArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsBackendArrayOutput) ToGetListenersByTargetsBackendArrayOutputWithContext(ctx context.Context) GetListenersByTargetsBackendArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsBackendArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsBackendOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsBackend {
+		return vs[0].([]GetListenersByTargetsBackend)[vs[1].(int)]
+	}).(GetListenersByTargetsBackendOutput)
+}
+
+type GetListenersByTargetsLoadBalancer struct {
+	// Listener rule.
+	Listeners []GetListenersByTargetsLoadBalancerListener `pulumi:"listeners"`
+	// String ID of the CLB instance.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance region.
+	Region string `pulumi:"region"`
+	// VIP of the CLB instance.
+	Vip string `pulumi:"vip"`
+}
+
+// GetListenersByTargetsLoadBalancerInput is an input type that accepts GetListenersByTargetsLoadBalancerArgs and GetListenersByTargetsLoadBalancerOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerInput` via:
+//
+//          GetListenersByTargetsLoadBalancerArgs{...}
+type GetListenersByTargetsLoadBalancerInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerOutput() GetListenersByTargetsLoadBalancerOutput
+	ToGetListenersByTargetsLoadBalancerOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerOutput
+}
+
+type GetListenersByTargetsLoadBalancerArgs struct {
+	// Listener rule.
+	Listeners GetListenersByTargetsLoadBalancerListenerArrayInput `pulumi:"listeners"`
+	// String ID of the CLB instance.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// VIP of the CLB instance.
+	Vip pulumi.StringInput `pulumi:"vip"`
+}
+
+func (GetListenersByTargetsLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancer)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerArgs) ToGetListenersByTargetsLoadBalancerOutput() GetListenersByTargetsLoadBalancerOutput {
+	return i.ToGetListenersByTargetsLoadBalancerOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerArgs) ToGetListenersByTargetsLoadBalancerOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerOutput)
+}
+
+// GetListenersByTargetsLoadBalancerArrayInput is an input type that accepts GetListenersByTargetsLoadBalancerArray and GetListenersByTargetsLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerArrayInput` via:
+//
+//          GetListenersByTargetsLoadBalancerArray{ GetListenersByTargetsLoadBalancerArgs{...} }
+type GetListenersByTargetsLoadBalancerArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerArrayOutput() GetListenersByTargetsLoadBalancerArrayOutput
+	ToGetListenersByTargetsLoadBalancerArrayOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerArrayOutput
+}
+
+type GetListenersByTargetsLoadBalancerArray []GetListenersByTargetsLoadBalancerInput
+
+func (GetListenersByTargetsLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancer)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerArray) ToGetListenersByTargetsLoadBalancerArrayOutput() GetListenersByTargetsLoadBalancerArrayOutput {
+	return i.ToGetListenersByTargetsLoadBalancerArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerArray) ToGetListenersByTargetsLoadBalancerArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancer)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerOutput) ToGetListenersByTargetsLoadBalancerOutput() GetListenersByTargetsLoadBalancerOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerOutput) ToGetListenersByTargetsLoadBalancerOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerOutput {
+	return o
+}
+
+// Listener rule.
+func (o GetListenersByTargetsLoadBalancerOutput) Listeners() GetListenersByTargetsLoadBalancerListenerArrayOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancer) []GetListenersByTargetsLoadBalancerListener {
+		return v.Listeners
+	}).(GetListenersByTargetsLoadBalancerListenerArrayOutput)
+}
+
+// String ID of the CLB instance.
+func (o GetListenersByTargetsLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance region.
+func (o GetListenersByTargetsLoadBalancerOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancer) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// VIP of the CLB instance.
+func (o GetListenersByTargetsLoadBalancerOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancer) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+type GetListenersByTargetsLoadBalancerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancer)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerArrayOutput) ToGetListenersByTargetsLoadBalancerArrayOutput() GetListenersByTargetsLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerArrayOutput) ToGetListenersByTargetsLoadBalancerArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsLoadBalancer {
+		return vs[0].([]GetListenersByTargetsLoadBalancer)[vs[1].(int)]
+	}).(GetListenersByTargetsLoadBalancerOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListener struct {
+	// End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+	EndPort int `pulumi:"endPort"`
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// Port bound to the real server.
+	Port int `pulumi:"port"`
+	// Listener protocol.
+	Protocol string `pulumi:"protocol"`
+	// Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Rules []GetListenersByTargetsLoadBalancerListenerRule `pulumi:"rules"`
+	// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets []GetListenersByTargetsLoadBalancerListenerTarget `pulumi:"targets"`
+}
+
+// GetListenersByTargetsLoadBalancerListenerInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerArgs and GetListenersByTargetsLoadBalancerListenerOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerArgs{...}
+type GetListenersByTargetsLoadBalancerListenerInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerOutput() GetListenersByTargetsLoadBalancerListenerOutput
+	ToGetListenersByTargetsLoadBalancerListenerOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerArgs struct {
+	// End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+	EndPort pulumi.IntInput `pulumi:"endPort"`
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Port bound to the real server.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Listener protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Rules GetListenersByTargetsLoadBalancerListenerRuleArrayInput `pulumi:"rules"`
+	// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets GetListenersByTargetsLoadBalancerListenerTargetArrayInput `pulumi:"targets"`
+}
+
+func (GetListenersByTargetsLoadBalancerListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListener)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerArgs) ToGetListenersByTargetsLoadBalancerListenerOutput() GetListenersByTargetsLoadBalancerListenerOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerArgs) ToGetListenersByTargetsLoadBalancerListenerOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerOutput)
+}
+
+// GetListenersByTargetsLoadBalancerListenerArrayInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerArray and GetListenersByTargetsLoadBalancerListenerArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerArrayInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerArray{ GetListenersByTargetsLoadBalancerListenerArgs{...} }
+type GetListenersByTargetsLoadBalancerListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerArrayOutput() GetListenersByTargetsLoadBalancerListenerArrayOutput
+	ToGetListenersByTargetsLoadBalancerListenerArrayOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerArrayOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerArray []GetListenersByTargetsLoadBalancerListenerInput
+
+func (GetListenersByTargetsLoadBalancerListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListener)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerArray) ToGetListenersByTargetsLoadBalancerListenerArrayOutput() GetListenersByTargetsLoadBalancerListenerArrayOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerArray) ToGetListenersByTargetsLoadBalancerListenerArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListener)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerOutput) ToGetListenersByTargetsLoadBalancerListenerOutput() GetListenersByTargetsLoadBalancerListenerOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerOutput) ToGetListenersByTargetsLoadBalancerListenerOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerOutput {
+	return o
+}
+
+// End port of the listener. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) EndPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) int { return v.EndPort }).(pulumi.IntOutput)
+}
+
+// Listener ID.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Port bound to the real server.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Listener protocol.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Bound rule. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) Rules() GetListenersByTargetsLoadBalancerListenerRuleArrayOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) []GetListenersByTargetsLoadBalancerListenerRule {
+		return v.Rules
+	}).(GetListenersByTargetsLoadBalancerListenerRuleArrayOutput)
+}
+
+// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerOutput) Targets() GetListenersByTargetsLoadBalancerListenerTargetArrayOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListener) []GetListenersByTargetsLoadBalancerListenerTarget {
+		return v.Targets
+	}).(GetListenersByTargetsLoadBalancerListenerTargetArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListener)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerArrayOutput) ToGetListenersByTargetsLoadBalancerListenerArrayOutput() GetListenersByTargetsLoadBalancerListenerArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerArrayOutput) ToGetListenersByTargetsLoadBalancerListenerArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsLoadBalancerListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsLoadBalancerListener {
+		return vs[0].([]GetListenersByTargetsLoadBalancerListener)[vs[1].(int)]
+	}).(GetListenersByTargetsLoadBalancerListenerOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRule struct {
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Rule ID.
+	LocationId string `pulumi:"locationId"`
+	// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets []GetListenersByTargetsLoadBalancerListenerRuleTarget `pulumi:"targets"`
+	// url.
+	Url string `pulumi:"url"`
+}
+
+// GetListenersByTargetsLoadBalancerListenerRuleInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerRuleArgs and GetListenersByTargetsLoadBalancerListenerRuleOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerRuleInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerRuleArgs{...}
+type GetListenersByTargetsLoadBalancerListenerRuleInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerRuleOutput() GetListenersByTargetsLoadBalancerListenerRuleOutput
+	ToGetListenersByTargetsLoadBalancerListenerRuleOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerRuleOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleArgs struct {
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Rule ID.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets GetListenersByTargetsLoadBalancerListenerRuleTargetArrayInput `pulumi:"targets"`
+	// url.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetListenersByTargetsLoadBalancerListenerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleArgs) ToGetListenersByTargetsLoadBalancerListenerRuleOutput() GetListenersByTargetsLoadBalancerListenerRuleOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerRuleOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleArgs) ToGetListenersByTargetsLoadBalancerListenerRuleOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerRuleOutput)
+}
+
+// GetListenersByTargetsLoadBalancerListenerRuleArrayInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerRuleArray and GetListenersByTargetsLoadBalancerListenerRuleArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerRuleArrayInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerRuleArray{ GetListenersByTargetsLoadBalancerListenerRuleArgs{...} }
+type GetListenersByTargetsLoadBalancerListenerRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleArrayOutput
+	ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerRuleArrayOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleArray []GetListenersByTargetsLoadBalancerListenerRuleInput
+
+func (GetListenersByTargetsLoadBalancerListenerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleArray) ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleArrayOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleArray) ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerRuleArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) ToGetListenersByTargetsLoadBalancerListenerRuleOutput() GetListenersByTargetsLoadBalancerListenerRuleOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) ToGetListenersByTargetsLoadBalancerListenerRuleOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleOutput {
+	return o
+}
+
+// Domain name.
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Rule ID.
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRule) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// Object bound to the layer-4 listener. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) Targets() GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRule) []GetListenersByTargetsLoadBalancerListenerRuleTarget {
+		return v.Targets
+	}).(GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput)
+}
+
+// url.
+func (o GetListenersByTargetsLoadBalancerListenerRuleOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRule) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleArrayOutput) ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleArrayOutput) ToGetListenersByTargetsLoadBalancerListenerRuleArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsLoadBalancerListenerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsLoadBalancerListenerRule {
+		return vs[0].([]GetListenersByTargetsLoadBalancerListenerRule)[vs[1].(int)]
+	}).(GetListenersByTargetsLoadBalancerListenerRuleOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleTarget struct {
+	// Port bound to the real server.
+	Port int `pulumi:"port"`
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp string `pulumi:"privateIp"`
+	// Private network IP type, which can be cvm or eni.
+	Type string `pulumi:"type"`
+	// VPC ID.
+	VpcId int `pulumi:"vpcId"`
+	// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+	Weight int `pulumi:"weight"`
+}
+
+// GetListenersByTargetsLoadBalancerListenerRuleTargetInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerRuleTargetArgs and GetListenersByTargetsLoadBalancerListenerRuleTargetOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerRuleTargetInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerRuleTargetArgs{...}
+type GetListenersByTargetsLoadBalancerListenerRuleTargetInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetOutput
+	ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleTargetArgs struct {
+	// Port bound to the real server.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// Private network IP type, which can be cvm or eni.
+	Type pulumi.StringInput `pulumi:"type"`
+	// VPC ID.
+	VpcId pulumi.IntInput `pulumi:"vpcId"`
+	// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetListenersByTargetsLoadBalancerListenerRuleTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleTargetArgs) ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleTargetArgs) ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerRuleTargetOutput)
+}
+
+// GetListenersByTargetsLoadBalancerListenerRuleTargetArrayInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerRuleTargetArray and GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerRuleTargetArrayInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerRuleTargetArray{ GetListenersByTargetsLoadBalancerListenerRuleTargetArgs{...} }
+type GetListenersByTargetsLoadBalancerListenerRuleTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput
+	ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleTargetArray []GetListenersByTargetsLoadBalancerListenerRuleTargetInput
+
+func (GetListenersByTargetsLoadBalancerListenerRuleTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleTargetArray) ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerRuleTargetArray) ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleTargetOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) ToGetListenersByTargetsLoadBalancerListenerRuleTargetOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetOutput {
+	return o
+}
+
+// Port bound to the real server.
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRuleTarget) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Private network IP to be queried, which can be of the CVM or ENI.
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRuleTarget) string { return v.PrivateIp }).(pulumi.StringOutput)
+}
+
+// Private network IP type, which can be cvm or eni.
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRuleTarget) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) VpcId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRuleTarget) int { return v.VpcId }).(pulumi.IntOutput)
+}
+
+// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerRuleTarget) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput) ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput) ToGetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsLoadBalancerListenerRuleTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsLoadBalancerListenerRuleTarget {
+		return vs[0].([]GetListenersByTargetsLoadBalancerListenerRuleTarget)[vs[1].(int)]
+	}).(GetListenersByTargetsLoadBalancerListenerRuleTargetOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerTarget struct {
+	// Port bound to the real server.
+	Port int `pulumi:"port"`
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp string `pulumi:"privateIp"`
+	// Private network IP type, which can be cvm or eni.
+	Type string `pulumi:"type"`
+	// VPC ID.
+	VpcId int `pulumi:"vpcId"`
+	// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+	Weight int `pulumi:"weight"`
+}
+
+// GetListenersByTargetsLoadBalancerListenerTargetInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerTargetArgs and GetListenersByTargetsLoadBalancerListenerTargetOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerTargetInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerTargetArgs{...}
+type GetListenersByTargetsLoadBalancerListenerTargetInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerTargetOutput() GetListenersByTargetsLoadBalancerListenerTargetOutput
+	ToGetListenersByTargetsLoadBalancerListenerTargetOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerTargetOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerTargetArgs struct {
+	// Port bound to the real server.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// Private network IP type, which can be cvm or eni.
+	Type pulumi.StringInput `pulumi:"type"`
+	// VPC ID.
+	VpcId pulumi.IntInput `pulumi:"vpcId"`
+	// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetListenersByTargetsLoadBalancerListenerTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerTarget)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerTargetArgs) ToGetListenersByTargetsLoadBalancerListenerTargetOutput() GetListenersByTargetsLoadBalancerListenerTargetOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerTargetOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerTargetArgs) ToGetListenersByTargetsLoadBalancerListenerTargetOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerTargetOutput)
+}
+
+// GetListenersByTargetsLoadBalancerListenerTargetArrayInput is an input type that accepts GetListenersByTargetsLoadBalancerListenerTargetArray and GetListenersByTargetsLoadBalancerListenerTargetArrayOutput values.
+// You can construct a concrete instance of `GetListenersByTargetsLoadBalancerListenerTargetArrayInput` via:
+//
+//          GetListenersByTargetsLoadBalancerListenerTargetArray{ GetListenersByTargetsLoadBalancerListenerTargetArgs{...} }
+type GetListenersByTargetsLoadBalancerListenerTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerTargetArrayOutput
+	ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutputWithContext(context.Context) GetListenersByTargetsLoadBalancerListenerTargetArrayOutput
+}
+
+type GetListenersByTargetsLoadBalancerListenerTargetArray []GetListenersByTargetsLoadBalancerListenerTargetInput
+
+func (GetListenersByTargetsLoadBalancerListenerTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerTarget)(nil)).Elem()
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerTargetArray) ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerTargetArrayOutput {
+	return i.ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenersByTargetsLoadBalancerListenerTargetArray) ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenersByTargetsLoadBalancerListenerTargetArrayOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerTargetOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerTarget)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) ToGetListenersByTargetsLoadBalancerListenerTargetOutput() GetListenersByTargetsLoadBalancerListenerTargetOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) ToGetListenersByTargetsLoadBalancerListenerTargetOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerTargetOutput {
+	return o
+}
+
+// Port bound to the real server.
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerTarget) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Private network IP to be queried, which can be of the CVM or ENI.
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerTarget) string { return v.PrivateIp }).(pulumi.StringOutput)
+}
+
+// Private network IP type, which can be cvm or eni.
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerTarget) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) VpcId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerTarget) int { return v.VpcId }).(pulumi.IntOutput)
+}
+
+// Weight of the real server. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetListenersByTargetsLoadBalancerListenerTargetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenersByTargetsLoadBalancerListenerTarget) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetListenersByTargetsLoadBalancerListenerTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenersByTargetsLoadBalancerListenerTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenersByTargetsLoadBalancerListenerTarget)(nil)).Elem()
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerTargetArrayOutput) ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutput() GetListenersByTargetsLoadBalancerListenerTargetArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerTargetArrayOutput) ToGetListenersByTargetsLoadBalancerListenerTargetArrayOutputWithContext(ctx context.Context) GetListenersByTargetsLoadBalancerListenerTargetArrayOutput {
+	return o
+}
+
+func (o GetListenersByTargetsLoadBalancerListenerTargetArrayOutput) Index(i pulumi.IntInput) GetListenersByTargetsLoadBalancerListenerTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenersByTargetsLoadBalancerListenerTarget {
+		return vs[0].([]GetListenersByTargetsLoadBalancerListenerTarget)[vs[1].(int)]
+	}).(GetListenersByTargetsLoadBalancerListenerTargetOutput)
+}
+
 type GetListenersListenerList struct {
 	// Id of the client certificate. It must be set when SSLMode is `mutual`. NOTES: only supported by listeners of `HTTPS` and `TCP_SSL` protocol.
 	CertificateCaId string `pulumi:"certificateCaId"`
@@ -1647,7 +7203,7 @@ type GetListenersListenerList struct {
 	HealthCheckHttpPath string `pulumi:"healthCheckHttpPath"`
 	// The HTTP version of the backend service.
 	HealthCheckHttpVersion string `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckIntervalTime int `pulumi:"healthCheckIntervalTime"`
 	// The health check port is the port of the backend service.
 	HealthCheckPort int `pulumi:"healthCheckPort"`
@@ -1713,7 +7269,7 @@ type GetListenersListenerListArgs struct {
 	HealthCheckHttpPath pulumi.StringInput `pulumi:"healthCheckHttpPath"`
 	// The HTTP version of the backend service.
 	HealthCheckHttpVersion pulumi.StringInput `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckIntervalTime pulumi.IntInput `pulumi:"healthCheckIntervalTime"`
 	// The health check port is the port of the backend service.
 	HealthCheckPort pulumi.IntInput `pulumi:"healthCheckPort"`
@@ -1851,7 +7407,7 @@ func (o GetListenersListenerListOutput) HealthCheckHttpVersion() pulumi.StringOu
 	return o.ApplyT(func(v GetListenersListenerList) string { return v.HealthCheckHttpVersion }).(pulumi.StringOutput)
 }
 
-// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 func (o GetListenersListenerListOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetListenersListenerList) int { return v.HealthCheckIntervalTime }).(pulumi.IntOutput)
 }
@@ -2077,6 +7633,923 @@ func (o GetRedirectionsRedirectionListArrayOutput) Index(i pulumi.IntInput) GetR
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRedirectionsRedirectionList {
 		return vs[0].([]GetRedirectionsRedirectionList)[vs[1].(int)]
 	}).(GetRedirectionsRedirectionListOutput)
+}
+
+type GetResourcesFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter value array.
+	Values []string `pulumi:"values"`
+}
+
+// GetResourcesFilterInput is an input type that accepts GetResourcesFilterArgs and GetResourcesFilterOutput values.
+// You can construct a concrete instance of `GetResourcesFilterInput` via:
+//
+//          GetResourcesFilterArgs{...}
+type GetResourcesFilterInput interface {
+	pulumi.Input
+
+	ToGetResourcesFilterOutput() GetResourcesFilterOutput
+	ToGetResourcesFilterOutputWithContext(context.Context) GetResourcesFilterOutput
+}
+
+type GetResourcesFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value array.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetResourcesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesFilter)(nil)).Elem()
+}
+
+func (i GetResourcesFilterArgs) ToGetResourcesFilterOutput() GetResourcesFilterOutput {
+	return i.ToGetResourcesFilterOutputWithContext(context.Background())
+}
+
+func (i GetResourcesFilterArgs) ToGetResourcesFilterOutputWithContext(ctx context.Context) GetResourcesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesFilterOutput)
+}
+
+// GetResourcesFilterArrayInput is an input type that accepts GetResourcesFilterArray and GetResourcesFilterArrayOutput values.
+// You can construct a concrete instance of `GetResourcesFilterArrayInput` via:
+//
+//          GetResourcesFilterArray{ GetResourcesFilterArgs{...} }
+type GetResourcesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetResourcesFilterArrayOutput() GetResourcesFilterArrayOutput
+	ToGetResourcesFilterArrayOutputWithContext(context.Context) GetResourcesFilterArrayOutput
+}
+
+type GetResourcesFilterArray []GetResourcesFilterInput
+
+func (GetResourcesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesFilter)(nil)).Elem()
+}
+
+func (i GetResourcesFilterArray) ToGetResourcesFilterArrayOutput() GetResourcesFilterArrayOutput {
+	return i.ToGetResourcesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourcesFilterArray) ToGetResourcesFilterArrayOutputWithContext(ctx context.Context) GetResourcesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesFilterArrayOutput)
+}
+
+type GetResourcesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesFilter)(nil)).Elem()
+}
+
+func (o GetResourcesFilterOutput) ToGetResourcesFilterOutput() GetResourcesFilterOutput {
+	return o
+}
+
+func (o GetResourcesFilterOutput) ToGetResourcesFilterOutputWithContext(ctx context.Context) GetResourcesFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetResourcesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value array.
+func (o GetResourcesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetResourcesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetResourcesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesFilter)(nil)).Elem()
+}
+
+func (o GetResourcesFilterArrayOutput) ToGetResourcesFilterArrayOutput() GetResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetResourcesFilterArrayOutput) ToGetResourcesFilterArrayOutputWithContext(ctx context.Context) GetResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetResourcesFilterArrayOutput) Index(i pulumi.IntInput) GetResourcesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourcesFilter {
+		return vs[0].([]GetResourcesFilter)[vs[1].(int)]
+	}).(GetResourcesFilterOutput)
+}
+
+type GetResourcesZoneResourceSet struct {
+	// Whether the AZ is an edge zone. Values: true, false.
+	EdgeZone bool `pulumi:"edgeZone"`
+	// IP version. Values: IPv4, IPv6, and IPv6_Nat.
+	IpVersion string `pulumi:"ipVersion"`
+	// Whether the AZ is a LocalZone. Values: true, false.
+	LocalZone bool `pulumi:"localZone"`
+	// Primary AZ, such as ap-guangzhou-1.
+	MasterZone string `pulumi:"masterZone"`
+	// List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceSets []GetResourcesZoneResourceSetResourceSet `pulumi:"resourceSets"`
+	// Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZone string `pulumi:"slaveZone"`
+	// Region of the AZ, such as ap-guangzhou.
+	ZoneRegion string `pulumi:"zoneRegion"`
+	// Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+	ZoneResourceType string `pulumi:"zoneResourceType"`
+}
+
+// GetResourcesZoneResourceSetInput is an input type that accepts GetResourcesZoneResourceSetArgs and GetResourcesZoneResourceSetOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetInput` via:
+//
+//          GetResourcesZoneResourceSetArgs{...}
+type GetResourcesZoneResourceSetInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetOutput() GetResourcesZoneResourceSetOutput
+	ToGetResourcesZoneResourceSetOutputWithContext(context.Context) GetResourcesZoneResourceSetOutput
+}
+
+type GetResourcesZoneResourceSetArgs struct {
+	// Whether the AZ is an edge zone. Values: true, false.
+	EdgeZone pulumi.BoolInput `pulumi:"edgeZone"`
+	// IP version. Values: IPv4, IPv6, and IPv6_Nat.
+	IpVersion pulumi.StringInput `pulumi:"ipVersion"`
+	// Whether the AZ is a LocalZone. Values: true, false.
+	LocalZone pulumi.BoolInput `pulumi:"localZone"`
+	// Primary AZ, such as ap-guangzhou-1.
+	MasterZone pulumi.StringInput `pulumi:"masterZone"`
+	// List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceSets GetResourcesZoneResourceSetResourceSetArrayInput `pulumi:"resourceSets"`
+	// Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZone pulumi.StringInput `pulumi:"slaveZone"`
+	// Region of the AZ, such as ap-guangzhou.
+	ZoneRegion pulumi.StringInput `pulumi:"zoneRegion"`
+	// Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+	ZoneResourceType pulumi.StringInput `pulumi:"zoneResourceType"`
+}
+
+func (GetResourcesZoneResourceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetArgs) ToGetResourcesZoneResourceSetOutput() GetResourcesZoneResourceSetOutput {
+	return i.ToGetResourcesZoneResourceSetOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetArgs) ToGetResourcesZoneResourceSetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetOutput)
+}
+
+// GetResourcesZoneResourceSetArrayInput is an input type that accepts GetResourcesZoneResourceSetArray and GetResourcesZoneResourceSetArrayOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetArrayInput` via:
+//
+//          GetResourcesZoneResourceSetArray{ GetResourcesZoneResourceSetArgs{...} }
+type GetResourcesZoneResourceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetArrayOutput() GetResourcesZoneResourceSetArrayOutput
+	ToGetResourcesZoneResourceSetArrayOutputWithContext(context.Context) GetResourcesZoneResourceSetArrayOutput
+}
+
+type GetResourcesZoneResourceSetArray []GetResourcesZoneResourceSetInput
+
+func (GetResourcesZoneResourceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetArray) ToGetResourcesZoneResourceSetArrayOutput() GetResourcesZoneResourceSetArrayOutput {
+	return i.ToGetResourcesZoneResourceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetArray) ToGetResourcesZoneResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetArrayOutput)
+}
+
+type GetResourcesZoneResourceSetOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetOutput) ToGetResourcesZoneResourceSetOutput() GetResourcesZoneResourceSetOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetOutput) ToGetResourcesZoneResourceSetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetOutput {
+	return o
+}
+
+// Whether the AZ is an edge zone. Values: true, false.
+func (o GetResourcesZoneResourceSetOutput) EdgeZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) bool { return v.EdgeZone }).(pulumi.BoolOutput)
+}
+
+// IP version. Values: IPv4, IPv6, and IPv6_Nat.
+func (o GetResourcesZoneResourceSetOutput) IpVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) string { return v.IpVersion }).(pulumi.StringOutput)
+}
+
+// Whether the AZ is a LocalZone. Values: true, false.
+func (o GetResourcesZoneResourceSetOutput) LocalZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) bool { return v.LocalZone }).(pulumi.BoolOutput)
+}
+
+// Primary AZ, such as ap-guangzhou-1.
+func (o GetResourcesZoneResourceSetOutput) MasterZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) string { return v.MasterZone }).(pulumi.StringOutput)
+}
+
+// List of resources. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetResourcesZoneResourceSetOutput) ResourceSets() GetResourcesZoneResourceSetResourceSetArrayOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) []GetResourcesZoneResourceSetResourceSet { return v.ResourceSets }).(GetResourcesZoneResourceSetResourceSetArrayOutput)
+}
+
+// Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetResourcesZoneResourceSetOutput) SlaveZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) string { return v.SlaveZone }).(pulumi.StringOutput)
+}
+
+// Region of the AZ, such as ap-guangzhou.
+func (o GetResourcesZoneResourceSetOutput) ZoneRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) string { return v.ZoneRegion }).(pulumi.StringOutput)
+}
+
+// Type of resources in the zone. Values: SHARED, EXCLUSIVE.
+func (o GetResourcesZoneResourceSetOutput) ZoneResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSet) string { return v.ZoneResourceType }).(pulumi.StringOutput)
+}
+
+type GetResourcesZoneResourceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetArrayOutput) ToGetResourcesZoneResourceSetArrayOutput() GetResourcesZoneResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetArrayOutput) ToGetResourcesZoneResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetArrayOutput) Index(i pulumi.IntInput) GetResourcesZoneResourceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourcesZoneResourceSet {
+		return vs[0].([]GetResourcesZoneResourceSet)[vs[1].(int)]
+	}).(GetResourcesZoneResourceSetOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSet struct {
+	// Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+	AvailabilitySets []GetResourcesZoneResourceSetResourceSetAvailabilitySet `pulumi:"availabilitySets"`
+	// ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Isp string `pulumi:"isp"`
+	// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Types []string `pulumi:"types"`
+}
+
+// GetResourcesZoneResourceSetResourceSetInput is an input type that accepts GetResourcesZoneResourceSetResourceSetArgs and GetResourcesZoneResourceSetResourceSetOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetResourceSetInput` via:
+//
+//          GetResourcesZoneResourceSetResourceSetArgs{...}
+type GetResourcesZoneResourceSetResourceSetInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetResourceSetOutput() GetResourcesZoneResourceSetResourceSetOutput
+	ToGetResourcesZoneResourceSetResourceSetOutputWithContext(context.Context) GetResourcesZoneResourceSetResourceSetOutput
+}
+
+type GetResourcesZoneResourceSetResourceSetArgs struct {
+	// Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+	AvailabilitySets GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayInput `pulumi:"availabilitySets"`
+	// ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Isp pulumi.StringInput `pulumi:"isp"`
+	// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Types pulumi.StringArrayInput `pulumi:"types"`
+}
+
+func (GetResourcesZoneResourceSetResourceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSetResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetResourceSetArgs) ToGetResourcesZoneResourceSetResourceSetOutput() GetResourcesZoneResourceSetResourceSetOutput {
+	return i.ToGetResourcesZoneResourceSetResourceSetOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetResourceSetArgs) ToGetResourcesZoneResourceSetResourceSetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetResourceSetOutput)
+}
+
+// GetResourcesZoneResourceSetResourceSetArrayInput is an input type that accepts GetResourcesZoneResourceSetResourceSetArray and GetResourcesZoneResourceSetResourceSetArrayOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetResourceSetArrayInput` via:
+//
+//          GetResourcesZoneResourceSetResourceSetArray{ GetResourcesZoneResourceSetResourceSetArgs{...} }
+type GetResourcesZoneResourceSetResourceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetResourceSetArrayOutput() GetResourcesZoneResourceSetResourceSetArrayOutput
+	ToGetResourcesZoneResourceSetResourceSetArrayOutputWithContext(context.Context) GetResourcesZoneResourceSetResourceSetArrayOutput
+}
+
+type GetResourcesZoneResourceSetResourceSetArray []GetResourcesZoneResourceSetResourceSetInput
+
+func (GetResourcesZoneResourceSetResourceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSetResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetResourceSetArray) ToGetResourcesZoneResourceSetResourceSetArrayOutput() GetResourcesZoneResourceSetResourceSetArrayOutput {
+	return i.ToGetResourcesZoneResourceSetResourceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetResourceSetArray) ToGetResourcesZoneResourceSetResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetResourceSetArrayOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSetOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetResourceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSetResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetResourceSetOutput) ToGetResourcesZoneResourceSetResourceSetOutput() GetResourcesZoneResourceSetResourceSetOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetOutput) ToGetResourcesZoneResourceSetResourceSetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetOutput {
+	return o
+}
+
+// Available resources. Note: This field may return null, indicating that no valid values can be obtaine.
+func (o GetResourcesZoneResourceSetResourceSetOutput) AvailabilitySets() GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSetResourceSet) []GetResourcesZoneResourceSetResourceSetAvailabilitySet {
+		return v.AvailabilitySets
+	}).(GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput)
+}
+
+// ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.
+func (o GetResourcesZoneResourceSetResourceSetOutput) Isp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSetResourceSet) string { return v.Isp }).(pulumi.StringOutput)
+}
+
+// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+func (o GetResourcesZoneResourceSetResourceSetOutput) Types() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSetResourceSet) []string { return v.Types }).(pulumi.StringArrayOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetResourceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSetResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetResourceSetArrayOutput) ToGetResourcesZoneResourceSetResourceSetArrayOutput() GetResourcesZoneResourceSetResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetArrayOutput) ToGetResourcesZoneResourceSetResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetArrayOutput) Index(i pulumi.IntInput) GetResourcesZoneResourceSetResourceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourcesZoneResourceSetResourceSet {
+		return vs[0].([]GetResourcesZoneResourceSetResourceSet)[vs[1].(int)]
+	}).(GetResourcesZoneResourceSetResourceSetOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSetAvailabilitySet struct {
+	// Whether the resource is available. Values: Available, Unavailable.
+	Availability string `pulumi:"availability"`
+	// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Type string `pulumi:"type"`
+}
+
+// GetResourcesZoneResourceSetResourceSetAvailabilitySetInput is an input type that accepts GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs and GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetResourceSetAvailabilitySetInput` via:
+//
+//          GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs{...}
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput
+	ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutputWithContext(context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput
+}
+
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs struct {
+	// Whether the resource is available. Values: Available, Unavailable.
+	Availability pulumi.StringInput `pulumi:"availability"`
+	// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetAvailabilitySet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput {
+	return i.ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput)
+}
+
+// GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayInput is an input type that accepts GetResourcesZoneResourceSetResourceSetAvailabilitySetArray and GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput values.
+// You can construct a concrete instance of `GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayInput` via:
+//
+//          GetResourcesZoneResourceSetResourceSetAvailabilitySetArray{ GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs{...} }
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayInput interface {
+	pulumi.Input
+
+	ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput
+	ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutputWithContext(context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput
+}
+
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetArray []GetResourcesZoneResourceSetResourceSetAvailabilitySetInput
+
+func (GetResourcesZoneResourceSetResourceSetAvailabilitySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSetResourceSetAvailabilitySet)(nil)).Elem()
+}
+
+func (i GetResourcesZoneResourceSetResourceSetAvailabilitySetArray) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput {
+	return i.ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourcesZoneResourceSetResourceSetAvailabilitySetArray) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetAvailabilitySet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput {
+	return o
+}
+
+// Whether the resource is available. Values: Available, Unavailable.
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput) Availability() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSetResourceSetAvailabilitySet) string { return v.Availability }).(pulumi.StringOutput)
+}
+
+// Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesZoneResourceSetResourceSetAvailabilitySet) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesZoneResourceSetResourceSetAvailabilitySet)(nil)).Elem()
+}
+
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput() GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput) ToGetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutputWithContext(ctx context.Context) GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput {
+	return o
+}
+
+func (o GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput) Index(i pulumi.IntInput) GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourcesZoneResourceSetResourceSetAvailabilitySet {
+		return vs[0].([]GetResourcesZoneResourceSetResourceSetAvailabilitySet)[vs[1].(int)]
+	}).(GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput)
+}
+
+type GetTargetGroupListFilter struct {
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Filter value array.
+	Values []string `pulumi:"values"`
+}
+
+// GetTargetGroupListFilterInput is an input type that accepts GetTargetGroupListFilterArgs and GetTargetGroupListFilterOutput values.
+// You can construct a concrete instance of `GetTargetGroupListFilterInput` via:
+//
+//          GetTargetGroupListFilterArgs{...}
+type GetTargetGroupListFilterInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListFilterOutput() GetTargetGroupListFilterOutput
+	ToGetTargetGroupListFilterOutputWithContext(context.Context) GetTargetGroupListFilterOutput
+}
+
+type GetTargetGroupListFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value array.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetTargetGroupListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListFilter)(nil)).Elem()
+}
+
+func (i GetTargetGroupListFilterArgs) ToGetTargetGroupListFilterOutput() GetTargetGroupListFilterOutput {
+	return i.ToGetTargetGroupListFilterOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListFilterArgs) ToGetTargetGroupListFilterOutputWithContext(ctx context.Context) GetTargetGroupListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListFilterOutput)
+}
+
+// GetTargetGroupListFilterArrayInput is an input type that accepts GetTargetGroupListFilterArray and GetTargetGroupListFilterArrayOutput values.
+// You can construct a concrete instance of `GetTargetGroupListFilterArrayInput` via:
+//
+//          GetTargetGroupListFilterArray{ GetTargetGroupListFilterArgs{...} }
+type GetTargetGroupListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListFilterArrayOutput() GetTargetGroupListFilterArrayOutput
+	ToGetTargetGroupListFilterArrayOutputWithContext(context.Context) GetTargetGroupListFilterArrayOutput
+}
+
+type GetTargetGroupListFilterArray []GetTargetGroupListFilterInput
+
+func (GetTargetGroupListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListFilter)(nil)).Elem()
+}
+
+func (i GetTargetGroupListFilterArray) ToGetTargetGroupListFilterArrayOutput() GetTargetGroupListFilterArrayOutput {
+	return i.ToGetTargetGroupListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListFilterArray) ToGetTargetGroupListFilterArrayOutputWithContext(ctx context.Context) GetTargetGroupListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListFilterArrayOutput)
+}
+
+type GetTargetGroupListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListFilter)(nil)).Elem()
+}
+
+func (o GetTargetGroupListFilterOutput) ToGetTargetGroupListFilterOutput() GetTargetGroupListFilterOutput {
+	return o
+}
+
+func (o GetTargetGroupListFilterOutput) ToGetTargetGroupListFilterOutputWithContext(ctx context.Context) GetTargetGroupListFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetTargetGroupListFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value array.
+func (o GetTargetGroupListFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTargetGroupListFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetTargetGroupListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListFilter)(nil)).Elem()
+}
+
+func (o GetTargetGroupListFilterArrayOutput) ToGetTargetGroupListFilterArrayOutput() GetTargetGroupListFilterArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListFilterArrayOutput) ToGetTargetGroupListFilterArrayOutputWithContext(ctx context.Context) GetTargetGroupListFilterArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListFilterArrayOutput) Index(i pulumi.IntInput) GetTargetGroupListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetGroupListFilter {
+		return vs[0].([]GetTargetGroupListFilter)[vs[1].(int)]
+	}).(GetTargetGroupListFilterOutput)
+}
+
+type GetTargetGroupListTargetGroupSet struct {
+	// Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+	AssociatedRules []GetTargetGroupListTargetGroupSetAssociatedRule `pulumi:"associatedRules"`
+	// Target group creation time.
+	CreatedTime string `pulumi:"createdTime"`
+	// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+	Port int `pulumi:"port"`
+	// Target group ID.
+	TargetGroupId string `pulumi:"targetGroupId"`
+	// Target group name.
+	TargetGroupName string `pulumi:"targetGroupName"`
+	// Target group modification time.
+	UpdatedTime string `pulumi:"updatedTime"`
+	// vpcid of target group.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetTargetGroupListTargetGroupSetInput is an input type that accepts GetTargetGroupListTargetGroupSetArgs and GetTargetGroupListTargetGroupSetOutput values.
+// You can construct a concrete instance of `GetTargetGroupListTargetGroupSetInput` via:
+//
+//          GetTargetGroupListTargetGroupSetArgs{...}
+type GetTargetGroupListTargetGroupSetInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListTargetGroupSetOutput() GetTargetGroupListTargetGroupSetOutput
+	ToGetTargetGroupListTargetGroupSetOutputWithContext(context.Context) GetTargetGroupListTargetGroupSetOutput
+}
+
+type GetTargetGroupListTargetGroupSetArgs struct {
+	// Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+	AssociatedRules GetTargetGroupListTargetGroupSetAssociatedRuleArrayInput `pulumi:"associatedRules"`
+	// Target group creation time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Target group ID.
+	TargetGroupId pulumi.StringInput `pulumi:"targetGroupId"`
+	// Target group name.
+	TargetGroupName pulumi.StringInput `pulumi:"targetGroupName"`
+	// Target group modification time.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+	// vpcid of target group.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetTargetGroupListTargetGroupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListTargetGroupSet)(nil)).Elem()
+}
+
+func (i GetTargetGroupListTargetGroupSetArgs) ToGetTargetGroupListTargetGroupSetOutput() GetTargetGroupListTargetGroupSetOutput {
+	return i.ToGetTargetGroupListTargetGroupSetOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListTargetGroupSetArgs) ToGetTargetGroupListTargetGroupSetOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListTargetGroupSetOutput)
+}
+
+// GetTargetGroupListTargetGroupSetArrayInput is an input type that accepts GetTargetGroupListTargetGroupSetArray and GetTargetGroupListTargetGroupSetArrayOutput values.
+// You can construct a concrete instance of `GetTargetGroupListTargetGroupSetArrayInput` via:
+//
+//          GetTargetGroupListTargetGroupSetArray{ GetTargetGroupListTargetGroupSetArgs{...} }
+type GetTargetGroupListTargetGroupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListTargetGroupSetArrayOutput() GetTargetGroupListTargetGroupSetArrayOutput
+	ToGetTargetGroupListTargetGroupSetArrayOutputWithContext(context.Context) GetTargetGroupListTargetGroupSetArrayOutput
+}
+
+type GetTargetGroupListTargetGroupSetArray []GetTargetGroupListTargetGroupSetInput
+
+func (GetTargetGroupListTargetGroupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListTargetGroupSet)(nil)).Elem()
+}
+
+func (i GetTargetGroupListTargetGroupSetArray) ToGetTargetGroupListTargetGroupSetArrayOutput() GetTargetGroupListTargetGroupSetArrayOutput {
+	return i.ToGetTargetGroupListTargetGroupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListTargetGroupSetArray) ToGetTargetGroupListTargetGroupSetArrayOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListTargetGroupSetArrayOutput)
+}
+
+type GetTargetGroupListTargetGroupSetOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListTargetGroupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListTargetGroupSet)(nil)).Elem()
+}
+
+func (o GetTargetGroupListTargetGroupSetOutput) ToGetTargetGroupListTargetGroupSetOutput() GetTargetGroupListTargetGroupSetOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetOutput) ToGetTargetGroupListTargetGroupSetOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetOutput {
+	return o
+}
+
+// Array of associated rules. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetOutput) AssociatedRules() GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) []GetTargetGroupListTargetGroupSetAssociatedRule {
+		return v.AssociatedRules
+	}).(GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput)
+}
+
+// Target group creation time.
+func (o GetTargetGroupListTargetGroupSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Target group ID.
+func (o GetTargetGroupListTargetGroupSetOutput) TargetGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) string { return v.TargetGroupId }).(pulumi.StringOutput)
+}
+
+// Target group name.
+func (o GetTargetGroupListTargetGroupSetOutput) TargetGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) string { return v.TargetGroupName }).(pulumi.StringOutput)
+}
+
+// Target group modification time.
+func (o GetTargetGroupListTargetGroupSetOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+// vpcid of target group.
+func (o GetTargetGroupListTargetGroupSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetTargetGroupListTargetGroupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListTargetGroupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListTargetGroupSet)(nil)).Elem()
+}
+
+func (o GetTargetGroupListTargetGroupSetArrayOutput) ToGetTargetGroupListTargetGroupSetArrayOutput() GetTargetGroupListTargetGroupSetArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetArrayOutput) ToGetTargetGroupListTargetGroupSetArrayOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetArrayOutput) Index(i pulumi.IntInput) GetTargetGroupListTargetGroupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetGroupListTargetGroupSet {
+		return vs[0].([]GetTargetGroupListTargetGroupSet)[vs[1].(int)]
+	}).(GetTargetGroupListTargetGroupSetOutput)
+}
+
+type GetTargetGroupListTargetGroupSetAssociatedRule struct {
+	// Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// ID of associated listener.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName string `pulumi:"listenerName"`
+	// ID of associated CLB instance.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+	// ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId string `pulumi:"locationId"`
+	// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+	Port int `pulumi:"port"`
+	// Protocol type of associated listener, such as HTTP or TCP.
+	Protocol string `pulumi:"protocol"`
+	// URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Url string `pulumi:"url"`
+}
+
+// GetTargetGroupListTargetGroupSetAssociatedRuleInput is an input type that accepts GetTargetGroupListTargetGroupSetAssociatedRuleArgs and GetTargetGroupListTargetGroupSetAssociatedRuleOutput values.
+// You can construct a concrete instance of `GetTargetGroupListTargetGroupSetAssociatedRuleInput` via:
+//
+//          GetTargetGroupListTargetGroupSetAssociatedRuleArgs{...}
+type GetTargetGroupListTargetGroupSetAssociatedRuleInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListTargetGroupSetAssociatedRuleOutput() GetTargetGroupListTargetGroupSetAssociatedRuleOutput
+	ToGetTargetGroupListTargetGroupSetAssociatedRuleOutputWithContext(context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleOutput
+}
+
+type GetTargetGroupListTargetGroupSetAssociatedRuleArgs struct {
+	// Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// ID of associated listener.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// ID of associated CLB instance.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+	// ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Protocol type of associated listener, such as HTTP or TCP.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetTargetGroupListTargetGroupSetAssociatedRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListTargetGroupSetAssociatedRule)(nil)).Elem()
+}
+
+func (i GetTargetGroupListTargetGroupSetAssociatedRuleArgs) ToGetTargetGroupListTargetGroupSetAssociatedRuleOutput() GetTargetGroupListTargetGroupSetAssociatedRuleOutput {
+	return i.ToGetTargetGroupListTargetGroupSetAssociatedRuleOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListTargetGroupSetAssociatedRuleArgs) ToGetTargetGroupListTargetGroupSetAssociatedRuleOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListTargetGroupSetAssociatedRuleOutput)
+}
+
+// GetTargetGroupListTargetGroupSetAssociatedRuleArrayInput is an input type that accepts GetTargetGroupListTargetGroupSetAssociatedRuleArray and GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput values.
+// You can construct a concrete instance of `GetTargetGroupListTargetGroupSetAssociatedRuleArrayInput` via:
+//
+//          GetTargetGroupListTargetGroupSetAssociatedRuleArray{ GetTargetGroupListTargetGroupSetAssociatedRuleArgs{...} }
+type GetTargetGroupListTargetGroupSetAssociatedRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput() GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput
+	ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutputWithContext(context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput
+}
+
+type GetTargetGroupListTargetGroupSetAssociatedRuleArray []GetTargetGroupListTargetGroupSetAssociatedRuleInput
+
+func (GetTargetGroupListTargetGroupSetAssociatedRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListTargetGroupSetAssociatedRule)(nil)).Elem()
+}
+
+func (i GetTargetGroupListTargetGroupSetAssociatedRuleArray) ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput() GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput {
+	return i.ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetGroupListTargetGroupSetAssociatedRuleArray) ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput)
+}
+
+type GetTargetGroupListTargetGroupSetAssociatedRuleOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListTargetGroupSetAssociatedRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetGroupListTargetGroupSetAssociatedRule)(nil)).Elem()
+}
+
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) ToGetTargetGroupListTargetGroupSetAssociatedRuleOutput() GetTargetGroupListTargetGroupSetAssociatedRuleOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) ToGetTargetGroupListTargetGroupSetAssociatedRuleOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleOutput {
+	return o
+}
+
+// Domain name of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// ID of associated listener.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Listener name.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// ID of associated CLB instance.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+// ID of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// Default port of target group. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Protocol type of associated listener, such as HTTP or TCP.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// URL of associated forwarding rule. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetGroupListTargetGroupSetAssociatedRule) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetGroupListTargetGroupSetAssociatedRule)(nil)).Elem()
+}
+
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput) ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput() GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput) ToGetTargetGroupListTargetGroupSetAssociatedRuleArrayOutputWithContext(ctx context.Context) GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput {
+	return o
+}
+
+func (o GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput) Index(i pulumi.IntInput) GetTargetGroupListTargetGroupSetAssociatedRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetGroupListTargetGroupSetAssociatedRule {
+		return vs[0].([]GetTargetGroupListTargetGroupSetAssociatedRule)[vs[1].(int)]
+	}).(GetTargetGroupListTargetGroupSetAssociatedRuleOutput)
 }
 
 type GetTargetGroupsList struct {
@@ -2579,6 +9052,513 @@ func (o GetTargetGroupsListTargetGroupInstanceListArrayOutput) Index(i pulumi.In
 	}).(GetTargetGroupsListTargetGroupInstanceListOutput)
 }
 
+type GetTargetHealthLoadBalancer struct {
+	// List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+	Listeners []GetTargetHealthLoadBalancerListener `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+}
+
+// GetTargetHealthLoadBalancerInput is an input type that accepts GetTargetHealthLoadBalancerArgs and GetTargetHealthLoadBalancerOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerInput` via:
+//
+//          GetTargetHealthLoadBalancerArgs{...}
+type GetTargetHealthLoadBalancerInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerOutput() GetTargetHealthLoadBalancerOutput
+	ToGetTargetHealthLoadBalancerOutputWithContext(context.Context) GetTargetHealthLoadBalancerOutput
+}
+
+type GetTargetHealthLoadBalancerArgs struct {
+	// List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+	Listeners GetTargetHealthLoadBalancerListenerArrayInput `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+}
+
+func (GetTargetHealthLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancer)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerArgs) ToGetTargetHealthLoadBalancerOutput() GetTargetHealthLoadBalancerOutput {
+	return i.ToGetTargetHealthLoadBalancerOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerArgs) ToGetTargetHealthLoadBalancerOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerOutput)
+}
+
+// GetTargetHealthLoadBalancerArrayInput is an input type that accepts GetTargetHealthLoadBalancerArray and GetTargetHealthLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerArrayInput` via:
+//
+//          GetTargetHealthLoadBalancerArray{ GetTargetHealthLoadBalancerArgs{...} }
+type GetTargetHealthLoadBalancerArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerArrayOutput() GetTargetHealthLoadBalancerArrayOutput
+	ToGetTargetHealthLoadBalancerArrayOutputWithContext(context.Context) GetTargetHealthLoadBalancerArrayOutput
+}
+
+type GetTargetHealthLoadBalancerArray []GetTargetHealthLoadBalancerInput
+
+func (GetTargetHealthLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancer)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerArray) ToGetTargetHealthLoadBalancerArrayOutput() GetTargetHealthLoadBalancerArrayOutput {
+	return i.ToGetTargetHealthLoadBalancerArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerArray) ToGetTargetHealthLoadBalancerArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerArrayOutput)
+}
+
+type GetTargetHealthLoadBalancerOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancer)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerOutput) ToGetTargetHealthLoadBalancerOutput() GetTargetHealthLoadBalancerOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerOutput) ToGetTargetHealthLoadBalancerOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerOutput {
+	return o
+}
+
+// List of listeners. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerOutput) Listeners() GetTargetHealthLoadBalancerListenerArrayOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancer) []GetTargetHealthLoadBalancerListener { return v.Listeners }).(GetTargetHealthLoadBalancerListenerArrayOutput)
+}
+
+// CLB instance ID.
+func (o GetTargetHealthLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancer) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+type GetTargetHealthLoadBalancerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancer)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerArrayOutput) ToGetTargetHealthLoadBalancerArrayOutput() GetTargetHealthLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerArrayOutput) ToGetTargetHealthLoadBalancerArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerArrayOutput) Index(i pulumi.IntInput) GetTargetHealthLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetHealthLoadBalancer {
+		return vs[0].([]GetTargetHealthLoadBalancer)[vs[1].(int)]
+	}).(GetTargetHealthLoadBalancerOutput)
+}
+
+type GetTargetHealthLoadBalancerListener struct {
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+	ListenerName string `pulumi:"listenerName"`
+	// Port bound to the target.
+	Port int `pulumi:"port"`
+	// Listener protocol.
+	Protocol string `pulumi:"protocol"`
+	// List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+	Rules []GetTargetHealthLoadBalancerListenerRule `pulumi:"rules"`
+}
+
+// GetTargetHealthLoadBalancerListenerInput is an input type that accepts GetTargetHealthLoadBalancerListenerArgs and GetTargetHealthLoadBalancerListenerOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerArgs{...}
+type GetTargetHealthLoadBalancerListenerInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerOutput() GetTargetHealthLoadBalancerListenerOutput
+	ToGetTargetHealthLoadBalancerListenerOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerOutput
+}
+
+type GetTargetHealthLoadBalancerListenerArgs struct {
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// Port bound to the target.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Listener protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+	Rules GetTargetHealthLoadBalancerListenerRuleArrayInput `pulumi:"rules"`
+}
+
+func (GetTargetHealthLoadBalancerListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListener)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerArgs) ToGetTargetHealthLoadBalancerListenerOutput() GetTargetHealthLoadBalancerListenerOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerArgs) ToGetTargetHealthLoadBalancerListenerOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerOutput)
+}
+
+// GetTargetHealthLoadBalancerListenerArrayInput is an input type that accepts GetTargetHealthLoadBalancerListenerArray and GetTargetHealthLoadBalancerListenerArrayOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerArrayInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerArray{ GetTargetHealthLoadBalancerListenerArgs{...} }
+type GetTargetHealthLoadBalancerListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerArrayOutput() GetTargetHealthLoadBalancerListenerArrayOutput
+	ToGetTargetHealthLoadBalancerListenerArrayOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerArrayOutput
+}
+
+type GetTargetHealthLoadBalancerListenerArray []GetTargetHealthLoadBalancerListenerInput
+
+func (GetTargetHealthLoadBalancerListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListener)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerArray) ToGetTargetHealthLoadBalancerListenerArrayOutput() GetTargetHealthLoadBalancerListenerArrayOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerArray) ToGetTargetHealthLoadBalancerListenerArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerArrayOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListener)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerOutput) ToGetTargetHealthLoadBalancerListenerOutput() GetTargetHealthLoadBalancerListenerOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerOutput) ToGetTargetHealthLoadBalancerListenerOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerOutput {
+	return o
+}
+
+// Listener ID.
+func (o GetTargetHealthLoadBalancerListenerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListener) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Listener name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerListenerOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListener) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// Port bound to the target.
+func (o GetTargetHealthLoadBalancerListenerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListener) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Listener protocol.
+func (o GetTargetHealthLoadBalancerListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// List of forwarding rules of the listener. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerListenerOutput) Rules() GetTargetHealthLoadBalancerListenerRuleArrayOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListener) []GetTargetHealthLoadBalancerListenerRule { return v.Rules }).(GetTargetHealthLoadBalancerListenerRuleArrayOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListener)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerArrayOutput) ToGetTargetHealthLoadBalancerListenerArrayOutput() GetTargetHealthLoadBalancerListenerArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerArrayOutput) ToGetTargetHealthLoadBalancerListenerArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerArrayOutput) Index(i pulumi.IntInput) GetTargetHealthLoadBalancerListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetHealthLoadBalancerListener {
+		return vs[0].([]GetTargetHealthLoadBalancerListener)[vs[1].(int)]
+	}).(GetTargetHealthLoadBalancerListenerOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRule struct {
+	// Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain string `pulumi:"domain"`
+	// Forwarding rule ID.
+	LocationId string `pulumi:"locationId"`
+	// Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets []GetTargetHealthLoadBalancerListenerRuleTarget `pulumi:"targets"`
+	// Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+	Url string `pulumi:"url"`
+}
+
+// GetTargetHealthLoadBalancerListenerRuleInput is an input type that accepts GetTargetHealthLoadBalancerListenerRuleArgs and GetTargetHealthLoadBalancerListenerRuleOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerRuleInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerRuleArgs{...}
+type GetTargetHealthLoadBalancerListenerRuleInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerRuleOutput() GetTargetHealthLoadBalancerListenerRuleOutput
+	ToGetTargetHealthLoadBalancerListenerRuleOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerRuleOutput
+}
+
+type GetTargetHealthLoadBalancerListenerRuleArgs struct {
+	// Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Forwarding rule ID.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+	Targets GetTargetHealthLoadBalancerListenerRuleTargetArrayInput `pulumi:"targets"`
+	// Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetTargetHealthLoadBalancerListenerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleArgs) ToGetTargetHealthLoadBalancerListenerRuleOutput() GetTargetHealthLoadBalancerListenerRuleOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerRuleOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleArgs) ToGetTargetHealthLoadBalancerListenerRuleOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerRuleOutput)
+}
+
+// GetTargetHealthLoadBalancerListenerRuleArrayInput is an input type that accepts GetTargetHealthLoadBalancerListenerRuleArray and GetTargetHealthLoadBalancerListenerRuleArrayOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerRuleArrayInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerRuleArray{ GetTargetHealthLoadBalancerListenerRuleArgs{...} }
+type GetTargetHealthLoadBalancerListenerRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerRuleArrayOutput() GetTargetHealthLoadBalancerListenerRuleArrayOutput
+	ToGetTargetHealthLoadBalancerListenerRuleArrayOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerRuleArrayOutput
+}
+
+type GetTargetHealthLoadBalancerListenerRuleArray []GetTargetHealthLoadBalancerListenerRuleInput
+
+func (GetTargetHealthLoadBalancerListenerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleArray) ToGetTargetHealthLoadBalancerListenerRuleArrayOutput() GetTargetHealthLoadBalancerListenerRuleArrayOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleArray) ToGetTargetHealthLoadBalancerListenerRuleArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerRuleArrayOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRuleOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) ToGetTargetHealthLoadBalancerListenerRuleOutput() GetTargetHealthLoadBalancerListenerRuleOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) ToGetTargetHealthLoadBalancerListenerRuleOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleOutput {
+	return o
+}
+
+// Domain name of the forwarding rule. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Forwarding rule ID.
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRule) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// Health status of the real server bound to this rule. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) Targets() GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRule) []GetTargetHealthLoadBalancerListenerRuleTarget {
+		return v.Targets
+	}).(GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput)
+}
+
+// Forwarding rule Url. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTargetHealthLoadBalancerListenerRuleOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRule) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListenerRule)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleArrayOutput) ToGetTargetHealthLoadBalancerListenerRuleArrayOutput() GetTargetHealthLoadBalancerListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleArrayOutput) ToGetTargetHealthLoadBalancerListenerRuleArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleArrayOutput) Index(i pulumi.IntInput) GetTargetHealthLoadBalancerListenerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetHealthLoadBalancerListenerRule {
+		return vs[0].([]GetTargetHealthLoadBalancerListenerRule)[vs[1].(int)]
+	}).(GetTargetHealthLoadBalancerListenerRuleOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRuleTarget struct {
+	// Current health status. true: healthy; false: unhealthy.
+	HealthStatus bool `pulumi:"healthStatus"`
+	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+	HealthStatusDetail string `pulumi:"healthStatusDetail"`
+	// Private IP of the target.
+	Ip string `pulumi:"ip"`
+	// Port bound to the target.
+	Port int `pulumi:"port"`
+	// Instance ID of the target, such as ins-12345678.
+	TargetId string `pulumi:"targetId"`
+}
+
+// GetTargetHealthLoadBalancerListenerRuleTargetInput is an input type that accepts GetTargetHealthLoadBalancerListenerRuleTargetArgs and GetTargetHealthLoadBalancerListenerRuleTargetOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerRuleTargetInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerRuleTargetArgs{...}
+type GetTargetHealthLoadBalancerListenerRuleTargetInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerRuleTargetOutput() GetTargetHealthLoadBalancerListenerRuleTargetOutput
+	ToGetTargetHealthLoadBalancerListenerRuleTargetOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerRuleTargetOutput
+}
+
+type GetTargetHealthLoadBalancerListenerRuleTargetArgs struct {
+	// Current health status. true: healthy; false: unhealthy.
+	HealthStatus pulumi.BoolInput `pulumi:"healthStatus"`
+	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+	HealthStatusDetail pulumi.StringInput `pulumi:"healthStatusDetail"`
+	// Private IP of the target.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Port bound to the target.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Instance ID of the target, such as ins-12345678.
+	TargetId pulumi.StringInput `pulumi:"targetId"`
+}
+
+func (GetTargetHealthLoadBalancerListenerRuleTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleTargetArgs) ToGetTargetHealthLoadBalancerListenerRuleTargetOutput() GetTargetHealthLoadBalancerListenerRuleTargetOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerRuleTargetOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleTargetArgs) ToGetTargetHealthLoadBalancerListenerRuleTargetOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerRuleTargetOutput)
+}
+
+// GetTargetHealthLoadBalancerListenerRuleTargetArrayInput is an input type that accepts GetTargetHealthLoadBalancerListenerRuleTargetArray and GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput values.
+// You can construct a concrete instance of `GetTargetHealthLoadBalancerListenerRuleTargetArrayInput` via:
+//
+//          GetTargetHealthLoadBalancerListenerRuleTargetArray{ GetTargetHealthLoadBalancerListenerRuleTargetArgs{...} }
+type GetTargetHealthLoadBalancerListenerRuleTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutput() GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput
+	ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutputWithContext(context.Context) GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput
+}
+
+type GetTargetHealthLoadBalancerListenerRuleTargetArray []GetTargetHealthLoadBalancerListenerRuleTargetInput
+
+func (GetTargetHealthLoadBalancerListenerRuleTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleTargetArray) ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutput() GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput {
+	return i.ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetTargetHealthLoadBalancerListenerRuleTargetArray) ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRuleTargetOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerRuleTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) ToGetTargetHealthLoadBalancerListenerRuleTargetOutput() GetTargetHealthLoadBalancerListenerRuleTargetOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) ToGetTargetHealthLoadBalancerListenerRuleTargetOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleTargetOutput {
+	return o
+}
+
+// Current health status. true: healthy; false: unhealthy.
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) HealthStatus() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRuleTarget) bool { return v.HealthStatus }).(pulumi.BoolOutput)
+}
+
+// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) HealthStatusDetail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRuleTarget) string { return v.HealthStatusDetail }).(pulumi.StringOutput)
+}
+
+// Private IP of the target.
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRuleTarget) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Port bound to the target.
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRuleTarget) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Instance ID of the target, such as ins-12345678.
+func (o GetTargetHealthLoadBalancerListenerRuleTargetOutput) TargetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTargetHealthLoadBalancerListenerRuleTarget) string { return v.TargetId }).(pulumi.StringOutput)
+}
+
+type GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTargetHealthLoadBalancerListenerRuleTarget)(nil)).Elem()
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput) ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutput() GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput) ToGetTargetHealthLoadBalancerListenerRuleTargetArrayOutputWithContext(ctx context.Context) GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput) Index(i pulumi.IntInput) GetTargetHealthLoadBalancerListenerRuleTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTargetHealthLoadBalancerListenerRuleTarget {
+		return vs[0].([]GetTargetHealthLoadBalancerListenerRuleTarget)[vs[1].(int)]
+	}).(GetTargetHealthLoadBalancerListenerRuleTargetOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachmentTargetInput)(nil)).Elem(), AttachmentTargetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachmentTargetArrayInput)(nil)).Elem(), AttachmentTargetArray{})
@@ -2588,6 +9568,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpInput)(nil)).Elem(), InstanceSnatIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpArrayInput)(nil)).Elem(), InstanceSnatIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceCertForLbsCertificateInput)(nil)).Elem(), ReplaceCertForLbsCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceCertForLbsCertificatePtrInput)(nil)).Elem(), ReplaceCertForLbsCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpInput)(nil)).Elem(), SnatIpIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpArrayInput)(nil)).Elem(), SnatIpIpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupTargetGroupInstanceInput)(nil)).Elem(), TargetGroupTargetGroupInstanceArgs{})
@@ -2596,20 +9578,114 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttachmentsAttachmentListArrayInput)(nil)).Elem(), GetAttachmentsAttachmentListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttachmentsAttachmentListTargetInput)(nil)).Elem(), GetAttachmentsAttachmentListTargetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttachmentsAttachmentListTargetArrayInput)(nil)).Elem(), GetAttachmentsAttachmentListTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesClusterResourceSetInput)(nil)).Elem(), GetClusterResourcesClusterResourceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesClusterResourceSetArrayInput)(nil)).Elem(), GetClusterResourcesClusterResourceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesClusterResourceSetClustersZoneInput)(nil)).Elem(), GetClusterResourcesClusterResourceSetClustersZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesClusterResourceSetClustersZoneArrayInput)(nil)).Elem(), GetClusterResourcesClusterResourceSetClustersZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesFilterInput)(nil)).Elem(), GetClusterResourcesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResourcesFilterArrayInput)(nil)).Elem(), GetClusterResourcesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossTargetsCrossTargetSetInput)(nil)).Elem(), GetCrossTargetsCrossTargetSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossTargetsCrossTargetSetArrayInput)(nil)).Elem(), GetCrossTargetsCrossTargetSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossTargetsFilterInput)(nil)).Elem(), GetCrossTargetsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossTargetsFilterArrayInput)(nil)).Elem(), GetCrossTargetsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersClusterSetInput)(nil)).Elem(), GetExclusiveClustersClusterSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersClusterSetArrayInput)(nil)).Elem(), GetExclusiveClustersClusterSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersClusterSetClustersZoneInput)(nil)).Elem(), GetExclusiveClustersClusterSetClustersZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersClusterSetClustersZoneArrayInput)(nil)).Elem(), GetExclusiveClustersClusterSetClustersZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersFilterInput)(nil)).Elem(), GetExclusiveClustersFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetExclusiveClustersFilterArrayInput)(nil)).Elem(), GetExclusiveClustersFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIdleInstancesIdleLoadBalancerInput)(nil)).Elem(), GetIdleInstancesIdleLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIdleInstancesIdleLoadBalancerArrayInput)(nil)).Elem(), GetIdleInstancesIdleLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetInput)(nil)).Elem(), GetInstanceByCertIdCertSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExtraInfoInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExtraInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerExtraInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerMasterZoneInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerMasterZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerMasterZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerSnatIpInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerSnatIpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerSnatIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTagInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTagArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayInput)(nil)).Elem(), GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailFilterInput)(nil)).Elem(), GetInstanceDetailFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailFilterArrayInput)(nil)).Elem(), GetInstanceDetailFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetArrayInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetExtraInfoInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetExtraInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetExtraInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetNetworkAttributeInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetTagInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDetailLoadBalancerDetailSetTagArrayInput)(nil)).Elem(), GetInstanceDetailLoadBalancerDetailSetTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficLoadBalancerTrafficInput)(nil)).Elem(), GetInstanceTrafficLoadBalancerTrafficArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficLoadBalancerTrafficArrayInput)(nil)).Elem(), GetInstanceTrafficLoadBalancerTrafficArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListInput)(nil)).Elem(), GetInstancesClbListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListArrayInput)(nil)).Elem(), GetInstancesClbListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRulesRuleListInput)(nil)).Elem(), GetListenerRulesRuleListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRulesRuleListArrayInput)(nil)).Elem(), GetListenerRulesRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsBackendInput)(nil)).Elem(), GetListenersByTargetsBackendArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsBackendArrayInput)(nil)).Elem(), GetListenersByTargetsBackendArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerArrayInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerArrayInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleArrayInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleTargetInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerRuleTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerRuleTargetArrayInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerRuleTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerTargetInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsLoadBalancerListenerTargetArrayInput)(nil)).Elem(), GetListenersByTargetsLoadBalancerListenerTargetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersListenerListInput)(nil)).Elem(), GetListenersListenerListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersListenerListArrayInput)(nil)).Elem(), GetListenersListenerListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRedirectionsRedirectionListInput)(nil)).Elem(), GetRedirectionsRedirectionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRedirectionsRedirectionListArrayInput)(nil)).Elem(), GetRedirectionsRedirectionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesFilterInput)(nil)).Elem(), GetResourcesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesFilterArrayInput)(nil)).Elem(), GetResourcesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetInput)(nil)).Elem(), GetResourcesZoneResourceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetArrayInput)(nil)).Elem(), GetResourcesZoneResourceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetInput)(nil)).Elem(), GetResourcesZoneResourceSetResourceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetArrayInput)(nil)).Elem(), GetResourcesZoneResourceSetResourceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetAvailabilitySetInput)(nil)).Elem(), GetResourcesZoneResourceSetResourceSetAvailabilitySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayInput)(nil)).Elem(), GetResourcesZoneResourceSetResourceSetAvailabilitySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListFilterInput)(nil)).Elem(), GetTargetGroupListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListFilterArrayInput)(nil)).Elem(), GetTargetGroupListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListTargetGroupSetInput)(nil)).Elem(), GetTargetGroupListTargetGroupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListTargetGroupSetArrayInput)(nil)).Elem(), GetTargetGroupListTargetGroupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListTargetGroupSetAssociatedRuleInput)(nil)).Elem(), GetTargetGroupListTargetGroupSetAssociatedRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupListTargetGroupSetAssociatedRuleArrayInput)(nil)).Elem(), GetTargetGroupListTargetGroupSetAssociatedRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListInput)(nil)).Elem(), GetTargetGroupsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListArrayInput)(nil)).Elem(), GetTargetGroupsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListAssociatedRuleListInput)(nil)).Elem(), GetTargetGroupsListAssociatedRuleListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListAssociatedRuleListArrayInput)(nil)).Elem(), GetTargetGroupsListAssociatedRuleListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListTargetGroupInstanceListInput)(nil)).Elem(), GetTargetGroupsListTargetGroupInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetGroupsListTargetGroupInstanceListArrayInput)(nil)).Elem(), GetTargetGroupsListTargetGroupInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerInput)(nil)).Elem(), GetTargetHealthLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerArrayInput)(nil)).Elem(), GetTargetHealthLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerArrayInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleArrayInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleTargetInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerRuleTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTargetHealthLoadBalancerListenerRuleTargetArrayInput)(nil)).Elem(), GetTargetHealthLoadBalancerListenerRuleTargetArray{})
 	pulumi.RegisterOutputType(AttachmentTargetOutput{})
 	pulumi.RegisterOutputType(AttachmentTargetArrayOutput{})
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsOutput{})
@@ -2618,6 +9694,8 @@ func init() {
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpArrayOutput{})
+	pulumi.RegisterOutputType(ReplaceCertForLbsCertificateOutput{})
+	pulumi.RegisterOutputType(ReplaceCertForLbsCertificatePtrOutput{})
 	pulumi.RegisterOutputType(SnatIpIpOutput{})
 	pulumi.RegisterOutputType(SnatIpIpArrayOutput{})
 	pulumi.RegisterOutputType(TargetGroupTargetGroupInstanceOutput{})
@@ -2626,18 +9704,112 @@ func init() {
 	pulumi.RegisterOutputType(GetAttachmentsAttachmentListArrayOutput{})
 	pulumi.RegisterOutputType(GetAttachmentsAttachmentListTargetOutput{})
 	pulumi.RegisterOutputType(GetAttachmentsAttachmentListTargetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesClusterResourceSetOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesClusterResourceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesClusterResourceSetClustersZoneOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesClusterResourceSetClustersZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesFilterOutput{})
+	pulumi.RegisterOutputType(GetClusterResourcesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossTargetsCrossTargetSetOutput{})
+	pulumi.RegisterOutputType(GetCrossTargetsCrossTargetSetArrayOutput{})
+	pulumi.RegisterOutputType(GetCrossTargetsFilterOutput{})
+	pulumi.RegisterOutputType(GetCrossTargetsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersClusterSetOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersClusterSetArrayOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersClusterSetClustersZoneOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersClusterSetClustersZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersFilterOutput{})
+	pulumi.RegisterOutputType(GetExclusiveClustersFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetIdleInstancesIdleLoadBalancerOutput{})
+	pulumi.RegisterOutputType(GetIdleInstancesIdleLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerBackupZoneSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterClassicalClusterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL4ClusterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExclusiveClusterL7ClusterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExtraInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerExtraInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerMasterZoneOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerMasterZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerNetworkAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerPrepaidAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerSnatIpOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerSnatIpArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerTagOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerTagArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceByCertIdCertSetLoadBalancerTargetRegionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailFilterOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetExtraInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetExtraInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetNetworkAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetPrepaidAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetTagOutput{})
+	pulumi.RegisterOutputType(GetInstanceDetailLoadBalancerDetailSetTagArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficLoadBalancerTrafficOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficLoadBalancerTrafficArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesClbListOutput{})
 	pulumi.RegisterOutputType(GetInstancesClbListArrayOutput{})
 	pulumi.RegisterOutputType(GetListenerRulesRuleListOutput{})
 	pulumi.RegisterOutputType(GetListenerRulesRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsBackendOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsBackendArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerRuleOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerRuleTargetOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerRuleTargetArrayOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerTargetOutput{})
+	pulumi.RegisterOutputType(GetListenersByTargetsLoadBalancerListenerTargetArrayOutput{})
 	pulumi.RegisterOutputType(GetListenersListenerListOutput{})
 	pulumi.RegisterOutputType(GetListenersListenerListArrayOutput{})
 	pulumi.RegisterOutputType(GetRedirectionsRedirectionListOutput{})
 	pulumi.RegisterOutputType(GetRedirectionsRedirectionListArrayOutput{})
+	pulumi.RegisterOutputType(GetResourcesFilterOutput{})
+	pulumi.RegisterOutputType(GetResourcesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetResourceSetOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetResourceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetResourceSetAvailabilitySetOutput{})
+	pulumi.RegisterOutputType(GetResourcesZoneResourceSetResourceSetAvailabilitySetArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListFilterOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListTargetGroupSetOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListTargetGroupSetArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListTargetGroupSetAssociatedRuleOutput{})
+	pulumi.RegisterOutputType(GetTargetGroupListTargetGroupSetAssociatedRuleArrayOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListArrayOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListAssociatedRuleListOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListAssociatedRuleListArrayOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListTargetGroupInstanceListOutput{})
 	pulumi.RegisterOutputType(GetTargetGroupsListTargetGroupInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerRuleOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerRuleTargetOutput{})
+	pulumi.RegisterOutputType(GetTargetHealthLoadBalancerListenerRuleTargetArrayOutput{})
 }

@@ -18,6 +18,9 @@ __all__ = [
     'DbInstanceResourceTagArgs',
     'DbParametersParamsArgs',
     'HourdbInstanceResourceTagArgs',
+    'GetUpgradePriceAddShardConfigArgs',
+    'GetUpgradePriceExpandShardConfigArgs',
+    'GetUpgradePriceSplitShardConfigArgs',
 ]
 
 @pulumi.input_type
@@ -411,5 +414,192 @@ class HourdbInstanceResourceTagArgs:
     @tag_value.setter
     def tag_value(self, value: pulumi.Input[str]):
         pulumi.set(self, "tag_value", value)
+
+
+@pulumi.input_type
+class GetUpgradePriceAddShardConfigArgs:
+    def __init__(__self__, *,
+                 shard_count: int,
+                 shard_memory: int,
+                 shard_storage: int):
+        """
+        :param int shard_count: The number of new shards.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        """
+        pulumi.set(__self__, "shard_count", shard_count)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+
+    @property
+    @pulumi.getter(name="shardCount")
+    def shard_count(self) -> int:
+        """
+        The number of new shards.
+        """
+        return pulumi.get(self, "shard_count")
+
+    @shard_count.setter
+    def shard_count(self, value: int):
+        pulumi.set(self, "shard_count", value)
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @shard_memory.setter
+    def shard_memory(self, value: int):
+        pulumi.set(self, "shard_memory", value)
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+    @shard_storage.setter
+    def shard_storage(self, value: int):
+        pulumi.set(self, "shard_storage", value)
+
+
+@pulumi.input_type
+class GetUpgradePriceExpandShardConfigArgs:
+    def __init__(__self__, *,
+                 shard_instance_ids: Sequence[str],
+                 shard_memory: int,
+                 shard_storage: int,
+                 shard_node_count: Optional[int] = None):
+        """
+        :param Sequence[str] shard_instance_ids: List of shard ID.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        :param int shard_node_count: Shard node count.
+        """
+        pulumi.set(__self__, "shard_instance_ids", shard_instance_ids)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+        if shard_node_count is not None:
+            pulumi.set(__self__, "shard_node_count", shard_node_count)
+
+    @property
+    @pulumi.getter(name="shardInstanceIds")
+    def shard_instance_ids(self) -> Sequence[str]:
+        """
+        List of shard ID.
+        """
+        return pulumi.get(self, "shard_instance_ids")
+
+    @shard_instance_ids.setter
+    def shard_instance_ids(self, value: Sequence[str]):
+        pulumi.set(self, "shard_instance_ids", value)
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @shard_memory.setter
+    def shard_memory(self, value: int):
+        pulumi.set(self, "shard_memory", value)
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+    @shard_storage.setter
+    def shard_storage(self, value: int):
+        pulumi.set(self, "shard_storage", value)
+
+    @property
+    @pulumi.getter(name="shardNodeCount")
+    def shard_node_count(self) -> Optional[int]:
+        """
+        Shard node count.
+        """
+        return pulumi.get(self, "shard_node_count")
+
+    @shard_node_count.setter
+    def shard_node_count(self, value: Optional[int]):
+        pulumi.set(self, "shard_node_count", value)
+
+
+@pulumi.input_type
+class GetUpgradePriceSplitShardConfigArgs:
+    def __init__(__self__, *,
+                 shard_instance_ids: Sequence[str],
+                 shard_memory: int,
+                 shard_storage: int,
+                 split_rate: int):
+        """
+        :param Sequence[str] shard_instance_ids: List of shard ID.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        :param int split_rate: Data split ratio, fixed at 50%.
+        """
+        pulumi.set(__self__, "shard_instance_ids", shard_instance_ids)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+        pulumi.set(__self__, "split_rate", split_rate)
+
+    @property
+    @pulumi.getter(name="shardInstanceIds")
+    def shard_instance_ids(self) -> Sequence[str]:
+        """
+        List of shard ID.
+        """
+        return pulumi.get(self, "shard_instance_ids")
+
+    @shard_instance_ids.setter
+    def shard_instance_ids(self, value: Sequence[str]):
+        pulumi.set(self, "shard_instance_ids", value)
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @shard_memory.setter
+    def shard_memory(self, value: int):
+        pulumi.set(self, "shard_memory", value)
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+    @shard_storage.setter
+    def shard_storage(self, value: int):
+        pulumi.set(self, "shard_storage", value)
+
+    @property
+    @pulumi.getter(name="splitRate")
+    def split_rate(self) -> int:
+        """
+        Data split ratio, fixed at 50%.
+        """
+        return pulumi.get(self, "split_rate")
+
+    @split_rate.setter
+    def split_rate(self, value: int):
+        pulumi.set(self, "split_rate", value)
 
 

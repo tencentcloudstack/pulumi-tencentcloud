@@ -10,6 +10,226 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type LoadBalancerForwardLoadBalancer struct {
+	ListenerId       string                                           `pulumi:"listenerId"`
+	LoadBalancerId   string                                           `pulumi:"loadBalancerId"`
+	LocationId       *string                                          `pulumi:"locationId"`
+	Region           *string                                          `pulumi:"region"`
+	TargetAttributes []LoadBalancerForwardLoadBalancerTargetAttribute `pulumi:"targetAttributes"`
+}
+
+// LoadBalancerForwardLoadBalancerInput is an input type that accepts LoadBalancerForwardLoadBalancerArgs and LoadBalancerForwardLoadBalancerOutput values.
+// You can construct a concrete instance of `LoadBalancerForwardLoadBalancerInput` via:
+//
+//          LoadBalancerForwardLoadBalancerArgs{...}
+type LoadBalancerForwardLoadBalancerInput interface {
+	pulumi.Input
+
+	ToLoadBalancerForwardLoadBalancerOutput() LoadBalancerForwardLoadBalancerOutput
+	ToLoadBalancerForwardLoadBalancerOutputWithContext(context.Context) LoadBalancerForwardLoadBalancerOutput
+}
+
+type LoadBalancerForwardLoadBalancerArgs struct {
+	ListenerId       pulumi.StringInput                                       `pulumi:"listenerId"`
+	LoadBalancerId   pulumi.StringInput                                       `pulumi:"loadBalancerId"`
+	LocationId       pulumi.StringPtrInput                                    `pulumi:"locationId"`
+	Region           pulumi.StringPtrInput                                    `pulumi:"region"`
+	TargetAttributes LoadBalancerForwardLoadBalancerTargetAttributeArrayInput `pulumi:"targetAttributes"`
+}
+
+func (LoadBalancerForwardLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LoadBalancerForwardLoadBalancer)(nil)).Elem()
+}
+
+func (i LoadBalancerForwardLoadBalancerArgs) ToLoadBalancerForwardLoadBalancerOutput() LoadBalancerForwardLoadBalancerOutput {
+	return i.ToLoadBalancerForwardLoadBalancerOutputWithContext(context.Background())
+}
+
+func (i LoadBalancerForwardLoadBalancerArgs) ToLoadBalancerForwardLoadBalancerOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerForwardLoadBalancerOutput)
+}
+
+// LoadBalancerForwardLoadBalancerArrayInput is an input type that accepts LoadBalancerForwardLoadBalancerArray and LoadBalancerForwardLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `LoadBalancerForwardLoadBalancerArrayInput` via:
+//
+//          LoadBalancerForwardLoadBalancerArray{ LoadBalancerForwardLoadBalancerArgs{...} }
+type LoadBalancerForwardLoadBalancerArrayInput interface {
+	pulumi.Input
+
+	ToLoadBalancerForwardLoadBalancerArrayOutput() LoadBalancerForwardLoadBalancerArrayOutput
+	ToLoadBalancerForwardLoadBalancerArrayOutputWithContext(context.Context) LoadBalancerForwardLoadBalancerArrayOutput
+}
+
+type LoadBalancerForwardLoadBalancerArray []LoadBalancerForwardLoadBalancerInput
+
+func (LoadBalancerForwardLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LoadBalancerForwardLoadBalancer)(nil)).Elem()
+}
+
+func (i LoadBalancerForwardLoadBalancerArray) ToLoadBalancerForwardLoadBalancerArrayOutput() LoadBalancerForwardLoadBalancerArrayOutput {
+	return i.ToLoadBalancerForwardLoadBalancerArrayOutputWithContext(context.Background())
+}
+
+func (i LoadBalancerForwardLoadBalancerArray) ToLoadBalancerForwardLoadBalancerArrayOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerForwardLoadBalancerArrayOutput)
+}
+
+type LoadBalancerForwardLoadBalancerOutput struct{ *pulumi.OutputState }
+
+func (LoadBalancerForwardLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LoadBalancerForwardLoadBalancer)(nil)).Elem()
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) ToLoadBalancerForwardLoadBalancerOutput() LoadBalancerForwardLoadBalancerOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) ToLoadBalancerForwardLoadBalancerOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancer) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) LocationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancer) *string { return v.LocationId }).(pulumi.StringPtrOutput)
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancer) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+func (o LoadBalancerForwardLoadBalancerOutput) TargetAttributes() LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancer) []LoadBalancerForwardLoadBalancerTargetAttribute {
+		return v.TargetAttributes
+	}).(LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput)
+}
+
+type LoadBalancerForwardLoadBalancerArrayOutput struct{ *pulumi.OutputState }
+
+func (LoadBalancerForwardLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LoadBalancerForwardLoadBalancer)(nil)).Elem()
+}
+
+func (o LoadBalancerForwardLoadBalancerArrayOutput) ToLoadBalancerForwardLoadBalancerArrayOutput() LoadBalancerForwardLoadBalancerArrayOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerArrayOutput) ToLoadBalancerForwardLoadBalancerArrayOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerArrayOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerArrayOutput) Index(i pulumi.IntInput) LoadBalancerForwardLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LoadBalancerForwardLoadBalancer {
+		return vs[0].([]LoadBalancerForwardLoadBalancer)[vs[1].(int)]
+	}).(LoadBalancerForwardLoadBalancerOutput)
+}
+
+type LoadBalancerForwardLoadBalancerTargetAttribute struct {
+	Port   int `pulumi:"port"`
+	Weight int `pulumi:"weight"`
+}
+
+// LoadBalancerForwardLoadBalancerTargetAttributeInput is an input type that accepts LoadBalancerForwardLoadBalancerTargetAttributeArgs and LoadBalancerForwardLoadBalancerTargetAttributeOutput values.
+// You can construct a concrete instance of `LoadBalancerForwardLoadBalancerTargetAttributeInput` via:
+//
+//          LoadBalancerForwardLoadBalancerTargetAttributeArgs{...}
+type LoadBalancerForwardLoadBalancerTargetAttributeInput interface {
+	pulumi.Input
+
+	ToLoadBalancerForwardLoadBalancerTargetAttributeOutput() LoadBalancerForwardLoadBalancerTargetAttributeOutput
+	ToLoadBalancerForwardLoadBalancerTargetAttributeOutputWithContext(context.Context) LoadBalancerForwardLoadBalancerTargetAttributeOutput
+}
+
+type LoadBalancerForwardLoadBalancerTargetAttributeArgs struct {
+	Port   pulumi.IntInput `pulumi:"port"`
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (LoadBalancerForwardLoadBalancerTargetAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LoadBalancerForwardLoadBalancerTargetAttribute)(nil)).Elem()
+}
+
+func (i LoadBalancerForwardLoadBalancerTargetAttributeArgs) ToLoadBalancerForwardLoadBalancerTargetAttributeOutput() LoadBalancerForwardLoadBalancerTargetAttributeOutput {
+	return i.ToLoadBalancerForwardLoadBalancerTargetAttributeOutputWithContext(context.Background())
+}
+
+func (i LoadBalancerForwardLoadBalancerTargetAttributeArgs) ToLoadBalancerForwardLoadBalancerTargetAttributeOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerTargetAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerForwardLoadBalancerTargetAttributeOutput)
+}
+
+// LoadBalancerForwardLoadBalancerTargetAttributeArrayInput is an input type that accepts LoadBalancerForwardLoadBalancerTargetAttributeArray and LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput values.
+// You can construct a concrete instance of `LoadBalancerForwardLoadBalancerTargetAttributeArrayInput` via:
+//
+//          LoadBalancerForwardLoadBalancerTargetAttributeArray{ LoadBalancerForwardLoadBalancerTargetAttributeArgs{...} }
+type LoadBalancerForwardLoadBalancerTargetAttributeArrayInput interface {
+	pulumi.Input
+
+	ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutput() LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput
+	ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutputWithContext(context.Context) LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput
+}
+
+type LoadBalancerForwardLoadBalancerTargetAttributeArray []LoadBalancerForwardLoadBalancerTargetAttributeInput
+
+func (LoadBalancerForwardLoadBalancerTargetAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LoadBalancerForwardLoadBalancerTargetAttribute)(nil)).Elem()
+}
+
+func (i LoadBalancerForwardLoadBalancerTargetAttributeArray) ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutput() LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput {
+	return i.ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i LoadBalancerForwardLoadBalancerTargetAttributeArray) ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput)
+}
+
+type LoadBalancerForwardLoadBalancerTargetAttributeOutput struct{ *pulumi.OutputState }
+
+func (LoadBalancerForwardLoadBalancerTargetAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LoadBalancerForwardLoadBalancerTargetAttribute)(nil)).Elem()
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeOutput) ToLoadBalancerForwardLoadBalancerTargetAttributeOutput() LoadBalancerForwardLoadBalancerTargetAttributeOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeOutput) ToLoadBalancerForwardLoadBalancerTargetAttributeOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerTargetAttributeOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancerTargetAttribute) int { return v.Port }).(pulumi.IntOutput)
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v LoadBalancerForwardLoadBalancerTargetAttribute) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LoadBalancerForwardLoadBalancerTargetAttribute)(nil)).Elem()
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput) ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutput() LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput) ToLoadBalancerForwardLoadBalancerTargetAttributeArrayOutputWithContext(ctx context.Context) LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput {
+	return o
+}
+
+func (o LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput) Index(i pulumi.IntInput) LoadBalancerForwardLoadBalancerTargetAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LoadBalancerForwardLoadBalancerTargetAttribute {
+		return vs[0].([]LoadBalancerForwardLoadBalancerTargetAttribute)[vs[1].(int)]
+	}).(LoadBalancerForwardLoadBalancerTargetAttributeOutput)
+}
+
 type ScalingConfigDataDisk struct {
 	// Indicates whether the disk remove after instance terminated. Default is `false`.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
@@ -522,6 +742,236 @@ func (o ScalingGroupForwardBalancerIdTargetAttributeArrayOutput) Index(i pulumi.
 	}).(ScalingGroupForwardBalancerIdTargetAttributeOutput)
 }
 
+type GetAdvicesAutoScalingAdviceSet struct {
+	// A collection of suggestions for scaling group configurations.
+	Advices []GetAdvicesAutoScalingAdviceSetAdvice `pulumi:"advices"`
+	// Auto scaling group ID.
+	AutoScalingGroupId string `pulumi:"autoScalingGroupId"`
+	// Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+	Level string `pulumi:"level"`
+}
+
+// GetAdvicesAutoScalingAdviceSetInput is an input type that accepts GetAdvicesAutoScalingAdviceSetArgs and GetAdvicesAutoScalingAdviceSetOutput values.
+// You can construct a concrete instance of `GetAdvicesAutoScalingAdviceSetInput` via:
+//
+//          GetAdvicesAutoScalingAdviceSetArgs{...}
+type GetAdvicesAutoScalingAdviceSetInput interface {
+	pulumi.Input
+
+	ToGetAdvicesAutoScalingAdviceSetOutput() GetAdvicesAutoScalingAdviceSetOutput
+	ToGetAdvicesAutoScalingAdviceSetOutputWithContext(context.Context) GetAdvicesAutoScalingAdviceSetOutput
+}
+
+type GetAdvicesAutoScalingAdviceSetArgs struct {
+	// A collection of suggestions for scaling group configurations.
+	Advices GetAdvicesAutoScalingAdviceSetAdviceArrayInput `pulumi:"advices"`
+	// Auto scaling group ID.
+	AutoScalingGroupId pulumi.StringInput `pulumi:"autoScalingGroupId"`
+	// Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+	Level pulumi.StringInput `pulumi:"level"`
+}
+
+func (GetAdvicesAutoScalingAdviceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAdvicesAutoScalingAdviceSet)(nil)).Elem()
+}
+
+func (i GetAdvicesAutoScalingAdviceSetArgs) ToGetAdvicesAutoScalingAdviceSetOutput() GetAdvicesAutoScalingAdviceSetOutput {
+	return i.ToGetAdvicesAutoScalingAdviceSetOutputWithContext(context.Background())
+}
+
+func (i GetAdvicesAutoScalingAdviceSetArgs) ToGetAdvicesAutoScalingAdviceSetOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAdvicesAutoScalingAdviceSetOutput)
+}
+
+// GetAdvicesAutoScalingAdviceSetArrayInput is an input type that accepts GetAdvicesAutoScalingAdviceSetArray and GetAdvicesAutoScalingAdviceSetArrayOutput values.
+// You can construct a concrete instance of `GetAdvicesAutoScalingAdviceSetArrayInput` via:
+//
+//          GetAdvicesAutoScalingAdviceSetArray{ GetAdvicesAutoScalingAdviceSetArgs{...} }
+type GetAdvicesAutoScalingAdviceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAdvicesAutoScalingAdviceSetArrayOutput() GetAdvicesAutoScalingAdviceSetArrayOutput
+	ToGetAdvicesAutoScalingAdviceSetArrayOutputWithContext(context.Context) GetAdvicesAutoScalingAdviceSetArrayOutput
+}
+
+type GetAdvicesAutoScalingAdviceSetArray []GetAdvicesAutoScalingAdviceSetInput
+
+func (GetAdvicesAutoScalingAdviceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAdvicesAutoScalingAdviceSet)(nil)).Elem()
+}
+
+func (i GetAdvicesAutoScalingAdviceSetArray) ToGetAdvicesAutoScalingAdviceSetArrayOutput() GetAdvicesAutoScalingAdviceSetArrayOutput {
+	return i.ToGetAdvicesAutoScalingAdviceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAdvicesAutoScalingAdviceSetArray) ToGetAdvicesAutoScalingAdviceSetArrayOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAdvicesAutoScalingAdviceSetArrayOutput)
+}
+
+type GetAdvicesAutoScalingAdviceSetOutput struct{ *pulumi.OutputState }
+
+func (GetAdvicesAutoScalingAdviceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAdvicesAutoScalingAdviceSet)(nil)).Elem()
+}
+
+func (o GetAdvicesAutoScalingAdviceSetOutput) ToGetAdvicesAutoScalingAdviceSetOutput() GetAdvicesAutoScalingAdviceSetOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetOutput) ToGetAdvicesAutoScalingAdviceSetOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetOutput {
+	return o
+}
+
+// A collection of suggestions for scaling group configurations.
+func (o GetAdvicesAutoScalingAdviceSetOutput) Advices() GetAdvicesAutoScalingAdviceSetAdviceArrayOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSet) []GetAdvicesAutoScalingAdviceSetAdvice { return v.Advices }).(GetAdvicesAutoScalingAdviceSetAdviceArrayOutput)
+}
+
+// Auto scaling group ID.
+func (o GetAdvicesAutoScalingAdviceSetOutput) AutoScalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSet) string { return v.AutoScalingGroupId }).(pulumi.StringOutput)
+}
+
+// Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+func (o GetAdvicesAutoScalingAdviceSetOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSet) string { return v.Level }).(pulumi.StringOutput)
+}
+
+type GetAdvicesAutoScalingAdviceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAdvicesAutoScalingAdviceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAdvicesAutoScalingAdviceSet)(nil)).Elem()
+}
+
+func (o GetAdvicesAutoScalingAdviceSetArrayOutput) ToGetAdvicesAutoScalingAdviceSetArrayOutput() GetAdvicesAutoScalingAdviceSetArrayOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetArrayOutput) ToGetAdvicesAutoScalingAdviceSetArrayOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetArrayOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetArrayOutput) Index(i pulumi.IntInput) GetAdvicesAutoScalingAdviceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAdvicesAutoScalingAdviceSet {
+		return vs[0].([]GetAdvicesAutoScalingAdviceSet)[vs[1].(int)]
+	}).(GetAdvicesAutoScalingAdviceSetOutput)
+}
+
+type GetAdvicesAutoScalingAdviceSetAdvice struct {
+	// Problem Details.
+	Detail string `pulumi:"detail"`
+	// Problem Description.
+	Problem string `pulumi:"problem"`
+	// Recommended resolutions.
+	Solution string `pulumi:"solution"`
+}
+
+// GetAdvicesAutoScalingAdviceSetAdviceInput is an input type that accepts GetAdvicesAutoScalingAdviceSetAdviceArgs and GetAdvicesAutoScalingAdviceSetAdviceOutput values.
+// You can construct a concrete instance of `GetAdvicesAutoScalingAdviceSetAdviceInput` via:
+//
+//          GetAdvicesAutoScalingAdviceSetAdviceArgs{...}
+type GetAdvicesAutoScalingAdviceSetAdviceInput interface {
+	pulumi.Input
+
+	ToGetAdvicesAutoScalingAdviceSetAdviceOutput() GetAdvicesAutoScalingAdviceSetAdviceOutput
+	ToGetAdvicesAutoScalingAdviceSetAdviceOutputWithContext(context.Context) GetAdvicesAutoScalingAdviceSetAdviceOutput
+}
+
+type GetAdvicesAutoScalingAdviceSetAdviceArgs struct {
+	// Problem Details.
+	Detail pulumi.StringInput `pulumi:"detail"`
+	// Problem Description.
+	Problem pulumi.StringInput `pulumi:"problem"`
+	// Recommended resolutions.
+	Solution pulumi.StringInput `pulumi:"solution"`
+}
+
+func (GetAdvicesAutoScalingAdviceSetAdviceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetAdvice)(nil)).Elem()
+}
+
+func (i GetAdvicesAutoScalingAdviceSetAdviceArgs) ToGetAdvicesAutoScalingAdviceSetAdviceOutput() GetAdvicesAutoScalingAdviceSetAdviceOutput {
+	return i.ToGetAdvicesAutoScalingAdviceSetAdviceOutputWithContext(context.Background())
+}
+
+func (i GetAdvicesAutoScalingAdviceSetAdviceArgs) ToGetAdvicesAutoScalingAdviceSetAdviceOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetAdviceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAdvicesAutoScalingAdviceSetAdviceOutput)
+}
+
+// GetAdvicesAutoScalingAdviceSetAdviceArrayInput is an input type that accepts GetAdvicesAutoScalingAdviceSetAdviceArray and GetAdvicesAutoScalingAdviceSetAdviceArrayOutput values.
+// You can construct a concrete instance of `GetAdvicesAutoScalingAdviceSetAdviceArrayInput` via:
+//
+//          GetAdvicesAutoScalingAdviceSetAdviceArray{ GetAdvicesAutoScalingAdviceSetAdviceArgs{...} }
+type GetAdvicesAutoScalingAdviceSetAdviceArrayInput interface {
+	pulumi.Input
+
+	ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutput() GetAdvicesAutoScalingAdviceSetAdviceArrayOutput
+	ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutputWithContext(context.Context) GetAdvicesAutoScalingAdviceSetAdviceArrayOutput
+}
+
+type GetAdvicesAutoScalingAdviceSetAdviceArray []GetAdvicesAutoScalingAdviceSetAdviceInput
+
+func (GetAdvicesAutoScalingAdviceSetAdviceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAdvicesAutoScalingAdviceSetAdvice)(nil)).Elem()
+}
+
+func (i GetAdvicesAutoScalingAdviceSetAdviceArray) ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutput() GetAdvicesAutoScalingAdviceSetAdviceArrayOutput {
+	return i.ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutputWithContext(context.Background())
+}
+
+func (i GetAdvicesAutoScalingAdviceSetAdviceArray) ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetAdviceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAdvicesAutoScalingAdviceSetAdviceArrayOutput)
+}
+
+type GetAdvicesAutoScalingAdviceSetAdviceOutput struct{ *pulumi.OutputState }
+
+func (GetAdvicesAutoScalingAdviceSetAdviceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetAdvice)(nil)).Elem()
+}
+
+func (o GetAdvicesAutoScalingAdviceSetAdviceOutput) ToGetAdvicesAutoScalingAdviceSetAdviceOutput() GetAdvicesAutoScalingAdviceSetAdviceOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetAdviceOutput) ToGetAdvicesAutoScalingAdviceSetAdviceOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetAdviceOutput {
+	return o
+}
+
+// Problem Details.
+func (o GetAdvicesAutoScalingAdviceSetAdviceOutput) Detail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSetAdvice) string { return v.Detail }).(pulumi.StringOutput)
+}
+
+// Problem Description.
+func (o GetAdvicesAutoScalingAdviceSetAdviceOutput) Problem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSetAdvice) string { return v.Problem }).(pulumi.StringOutput)
+}
+
+// Recommended resolutions.
+func (o GetAdvicesAutoScalingAdviceSetAdviceOutput) Solution() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAdvicesAutoScalingAdviceSetAdvice) string { return v.Solution }).(pulumi.StringOutput)
+}
+
+type GetAdvicesAutoScalingAdviceSetAdviceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAdvicesAutoScalingAdviceSetAdviceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAdvicesAutoScalingAdviceSetAdvice)(nil)).Elem()
+}
+
+func (o GetAdvicesAutoScalingAdviceSetAdviceArrayOutput) ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutput() GetAdvicesAutoScalingAdviceSetAdviceArrayOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetAdviceArrayOutput) ToGetAdvicesAutoScalingAdviceSetAdviceArrayOutputWithContext(ctx context.Context) GetAdvicesAutoScalingAdviceSetAdviceArrayOutput {
+	return o
+}
+
+func (o GetAdvicesAutoScalingAdviceSetAdviceArrayOutput) Index(i pulumi.IntInput) GetAdvicesAutoScalingAdviceSetAdviceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAdvicesAutoScalingAdviceSetAdvice {
+		return vs[0].([]GetAdvicesAutoScalingAdviceSetAdvice)[vs[1].(int)]
+	}).(GetAdvicesAutoScalingAdviceSetAdviceOutput)
+}
+
 type GetInstancesFilter struct {
 	// Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
 	Name string `pulumi:"name"`
@@ -831,6 +1281,787 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
 		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
 	}).(GetInstancesInstanceListOutput)
+}
+
+type GetLastActivityActivitySet struct {
+	// Scaling activity ID.
+	ActivityId string `pulumi:"activityId"`
+	// Information set of the instances related to the scaling activity.
+	ActivityRelatedInstanceSets []GetLastActivityActivitySetActivityRelatedInstanceSet `pulumi:"activityRelatedInstanceSets"`
+	// Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+	ActivityType string `pulumi:"activityType"`
+	// Auto scaling group ID.
+	AutoScalingGroupId string `pulumi:"autoScalingGroupId"`
+	// Cause of the scaling activity.
+	Cause string `pulumi:"cause"`
+	// Creation time of the scaling activity.
+	CreatedTime string `pulumi:"createdTime"`
+	// Description of the scaling activity.
+	Description string `pulumi:"description"`
+	// Detailed description of scaling activity status.
+	DetailedStatusMessageSets []GetLastActivityActivitySetDetailedStatusMessageSet `pulumi:"detailedStatusMessageSets"`
+	// End time of the scaling activity.
+	EndTime string `pulumi:"endTime"`
+	// Result of the command execution.
+	InvocationResultSets []GetLastActivityActivitySetInvocationResultSet `pulumi:"invocationResultSets"`
+	// Result of the lifecycle hook action in the scaling activity.
+	LifecycleActionResultSets []GetLastActivityActivitySetLifecycleActionResultSet `pulumi:"lifecycleActionResultSets"`
+	// Start time of the scaling activity.
+	StartTime string `pulumi:"startTime"`
+	// Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+	StatusCode string `pulumi:"statusCode"`
+	// Description of the scaling activity status.
+	StatusMessage string `pulumi:"statusMessage"`
+	// Brief description of the scaling activity status.
+	StatusMessageSimplified string `pulumi:"statusMessageSimplified"`
+}
+
+// GetLastActivityActivitySetInput is an input type that accepts GetLastActivityActivitySetArgs and GetLastActivityActivitySetOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetInput` via:
+//
+//          GetLastActivityActivitySetArgs{...}
+type GetLastActivityActivitySetInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetOutput() GetLastActivityActivitySetOutput
+	ToGetLastActivityActivitySetOutputWithContext(context.Context) GetLastActivityActivitySetOutput
+}
+
+type GetLastActivityActivitySetArgs struct {
+	// Scaling activity ID.
+	ActivityId pulumi.StringInput `pulumi:"activityId"`
+	// Information set of the instances related to the scaling activity.
+	ActivityRelatedInstanceSets GetLastActivityActivitySetActivityRelatedInstanceSetArrayInput `pulumi:"activityRelatedInstanceSets"`
+	// Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+	ActivityType pulumi.StringInput `pulumi:"activityType"`
+	// Auto scaling group ID.
+	AutoScalingGroupId pulumi.StringInput `pulumi:"autoScalingGroupId"`
+	// Cause of the scaling activity.
+	Cause pulumi.StringInput `pulumi:"cause"`
+	// Creation time of the scaling activity.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Description of the scaling activity.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Detailed description of scaling activity status.
+	DetailedStatusMessageSets GetLastActivityActivitySetDetailedStatusMessageSetArrayInput `pulumi:"detailedStatusMessageSets"`
+	// End time of the scaling activity.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Result of the command execution.
+	InvocationResultSets GetLastActivityActivitySetInvocationResultSetArrayInput `pulumi:"invocationResultSets"`
+	// Result of the lifecycle hook action in the scaling activity.
+	LifecycleActionResultSets GetLastActivityActivitySetLifecycleActionResultSetArrayInput `pulumi:"lifecycleActionResultSets"`
+	// Start time of the scaling activity.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+	StatusCode pulumi.StringInput `pulumi:"statusCode"`
+	// Description of the scaling activity status.
+	StatusMessage pulumi.StringInput `pulumi:"statusMessage"`
+	// Brief description of the scaling activity status.
+	StatusMessageSimplified pulumi.StringInput `pulumi:"statusMessageSimplified"`
+}
+
+func (GetLastActivityActivitySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetArgs) ToGetLastActivityActivitySetOutput() GetLastActivityActivitySetOutput {
+	return i.ToGetLastActivityActivitySetOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetArgs) ToGetLastActivityActivitySetOutputWithContext(ctx context.Context) GetLastActivityActivitySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetOutput)
+}
+
+// GetLastActivityActivitySetArrayInput is an input type that accepts GetLastActivityActivitySetArray and GetLastActivityActivitySetArrayOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetArrayInput` via:
+//
+//          GetLastActivityActivitySetArray{ GetLastActivityActivitySetArgs{...} }
+type GetLastActivityActivitySetArrayInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetArrayOutput() GetLastActivityActivitySetArrayOutput
+	ToGetLastActivityActivitySetArrayOutputWithContext(context.Context) GetLastActivityActivitySetArrayOutput
+}
+
+type GetLastActivityActivitySetArray []GetLastActivityActivitySetInput
+
+func (GetLastActivityActivitySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetArray) ToGetLastActivityActivitySetArrayOutput() GetLastActivityActivitySetArrayOutput {
+	return i.ToGetLastActivityActivitySetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetArray) ToGetLastActivityActivitySetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetArrayOutput)
+}
+
+type GetLastActivityActivitySetOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetOutput) ToGetLastActivityActivitySetOutput() GetLastActivityActivitySetOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetOutput) ToGetLastActivityActivitySetOutputWithContext(ctx context.Context) GetLastActivityActivitySetOutput {
+	return o
+}
+
+// Scaling activity ID.
+func (o GetLastActivityActivitySetOutput) ActivityId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.ActivityId }).(pulumi.StringOutput)
+}
+
+// Information set of the instances related to the scaling activity.
+func (o GetLastActivityActivitySetOutput) ActivityRelatedInstanceSets() GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) []GetLastActivityActivitySetActivityRelatedInstanceSet {
+		return v.ActivityRelatedInstanceSets
+	}).(GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput)
+}
+
+// Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+func (o GetLastActivityActivitySetOutput) ActivityType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.ActivityType }).(pulumi.StringOutput)
+}
+
+// Auto scaling group ID.
+func (o GetLastActivityActivitySetOutput) AutoScalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.AutoScalingGroupId }).(pulumi.StringOutput)
+}
+
+// Cause of the scaling activity.
+func (o GetLastActivityActivitySetOutput) Cause() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.Cause }).(pulumi.StringOutput)
+}
+
+// Creation time of the scaling activity.
+func (o GetLastActivityActivitySetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Description of the scaling activity.
+func (o GetLastActivityActivitySetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Detailed description of scaling activity status.
+func (o GetLastActivityActivitySetOutput) DetailedStatusMessageSets() GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) []GetLastActivityActivitySetDetailedStatusMessageSet {
+		return v.DetailedStatusMessageSets
+	}).(GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput)
+}
+
+// End time of the scaling activity.
+func (o GetLastActivityActivitySetOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Result of the command execution.
+func (o GetLastActivityActivitySetOutput) InvocationResultSets() GetLastActivityActivitySetInvocationResultSetArrayOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) []GetLastActivityActivitySetInvocationResultSet {
+		return v.InvocationResultSets
+	}).(GetLastActivityActivitySetInvocationResultSetArrayOutput)
+}
+
+// Result of the lifecycle hook action in the scaling activity.
+func (o GetLastActivityActivitySetOutput) LifecycleActionResultSets() GetLastActivityActivitySetLifecycleActionResultSetArrayOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) []GetLastActivityActivitySetLifecycleActionResultSet {
+		return v.LifecycleActionResultSets
+	}).(GetLastActivityActivitySetLifecycleActionResultSetArrayOutput)
+}
+
+// Start time of the scaling activity.
+func (o GetLastActivityActivitySetOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+func (o GetLastActivityActivitySetOutput) StatusCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.StatusCode }).(pulumi.StringOutput)
+}
+
+// Description of the scaling activity status.
+func (o GetLastActivityActivitySetOutput) StatusMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.StatusMessage }).(pulumi.StringOutput)
+}
+
+// Brief description of the scaling activity status.
+func (o GetLastActivityActivitySetOutput) StatusMessageSimplified() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySet) string { return v.StatusMessageSimplified }).(pulumi.StringOutput)
+}
+
+type GetLastActivityActivitySetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetArrayOutput) ToGetLastActivityActivitySetArrayOutput() GetLastActivityActivitySetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetArrayOutput) ToGetLastActivityActivitySetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetArrayOutput) Index(i pulumi.IntInput) GetLastActivityActivitySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLastActivityActivitySet {
+		return vs[0].([]GetLastActivityActivitySet)[vs[1].(int)]
+	}).(GetLastActivityActivitySetOutput)
+}
+
+type GetLastActivityActivitySetActivityRelatedInstanceSet struct {
+	// ID of the instance.
+	InstanceId string `pulumi:"instanceId"`
+	// Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+	InstanceStatus string `pulumi:"instanceStatus"`
+}
+
+// GetLastActivityActivitySetActivityRelatedInstanceSetInput is an input type that accepts GetLastActivityActivitySetActivityRelatedInstanceSetArgs and GetLastActivityActivitySetActivityRelatedInstanceSetOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetActivityRelatedInstanceSetInput` via:
+//
+//          GetLastActivityActivitySetActivityRelatedInstanceSetArgs{...}
+type GetLastActivityActivitySetActivityRelatedInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetActivityRelatedInstanceSetOutput() GetLastActivityActivitySetActivityRelatedInstanceSetOutput
+	ToGetLastActivityActivitySetActivityRelatedInstanceSetOutputWithContext(context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetOutput
+}
+
+type GetLastActivityActivitySetActivityRelatedInstanceSetArgs struct {
+	// ID of the instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+}
+
+func (GetLastActivityActivitySetActivityRelatedInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetActivityRelatedInstanceSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetActivityRelatedInstanceSetArgs) ToGetLastActivityActivitySetActivityRelatedInstanceSetOutput() GetLastActivityActivitySetActivityRelatedInstanceSetOutput {
+	return i.ToGetLastActivityActivitySetActivityRelatedInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetActivityRelatedInstanceSetArgs) ToGetLastActivityActivitySetActivityRelatedInstanceSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetActivityRelatedInstanceSetOutput)
+}
+
+// GetLastActivityActivitySetActivityRelatedInstanceSetArrayInput is an input type that accepts GetLastActivityActivitySetActivityRelatedInstanceSetArray and GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetActivityRelatedInstanceSetArrayInput` via:
+//
+//          GetLastActivityActivitySetActivityRelatedInstanceSetArray{ GetLastActivityActivitySetActivityRelatedInstanceSetArgs{...} }
+type GetLastActivityActivitySetActivityRelatedInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput() GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput
+	ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutputWithContext(context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput
+}
+
+type GetLastActivityActivitySetActivityRelatedInstanceSetArray []GetLastActivityActivitySetActivityRelatedInstanceSetInput
+
+func (GetLastActivityActivitySetActivityRelatedInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetActivityRelatedInstanceSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetActivityRelatedInstanceSetArray) ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput() GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput {
+	return i.ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetActivityRelatedInstanceSetArray) ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput)
+}
+
+type GetLastActivityActivitySetActivityRelatedInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetActivityRelatedInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetActivityRelatedInstanceSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetOutput) ToGetLastActivityActivitySetActivityRelatedInstanceSetOutput() GetLastActivityActivitySetActivityRelatedInstanceSetOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetOutput) ToGetLastActivityActivitySetActivityRelatedInstanceSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetOutput {
+	return o
+}
+
+// ID of the instance.
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetActivityRelatedInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetActivityRelatedInstanceSet) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+type GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetActivityRelatedInstanceSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput) ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput() GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput) ToGetLastActivityActivitySetActivityRelatedInstanceSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput) Index(i pulumi.IntInput) GetLastActivityActivitySetActivityRelatedInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLastActivityActivitySetActivityRelatedInstanceSet {
+		return vs[0].([]GetLastActivityActivitySetActivityRelatedInstanceSet)[vs[1].(int)]
+	}).(GetLastActivityActivitySetActivityRelatedInstanceSetOutput)
+}
+
+type GetLastActivityActivitySetDetailedStatusMessageSet struct {
+	// Error type.
+	Code string `pulumi:"code"`
+	// Instance billing mode.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// ID of the instance.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Error message.
+	Message string `pulumi:"message"`
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// AZ information.
+	Zone string `pulumi:"zone"`
+}
+
+// GetLastActivityActivitySetDetailedStatusMessageSetInput is an input type that accepts GetLastActivityActivitySetDetailedStatusMessageSetArgs and GetLastActivityActivitySetDetailedStatusMessageSetOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetDetailedStatusMessageSetInput` via:
+//
+//          GetLastActivityActivitySetDetailedStatusMessageSetArgs{...}
+type GetLastActivityActivitySetDetailedStatusMessageSetInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetDetailedStatusMessageSetOutput() GetLastActivityActivitySetDetailedStatusMessageSetOutput
+	ToGetLastActivityActivitySetDetailedStatusMessageSetOutputWithContext(context.Context) GetLastActivityActivitySetDetailedStatusMessageSetOutput
+}
+
+type GetLastActivityActivitySetDetailedStatusMessageSetArgs struct {
+	// Error type.
+	Code pulumi.StringInput `pulumi:"code"`
+	// Instance billing mode.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// ID of the instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Error message.
+	Message pulumi.StringInput `pulumi:"message"`
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// AZ information.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetLastActivityActivitySetDetailedStatusMessageSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetDetailedStatusMessageSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetDetailedStatusMessageSetArgs) ToGetLastActivityActivitySetDetailedStatusMessageSetOutput() GetLastActivityActivitySetDetailedStatusMessageSetOutput {
+	return i.ToGetLastActivityActivitySetDetailedStatusMessageSetOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetDetailedStatusMessageSetArgs) ToGetLastActivityActivitySetDetailedStatusMessageSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetDetailedStatusMessageSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetDetailedStatusMessageSetOutput)
+}
+
+// GetLastActivityActivitySetDetailedStatusMessageSetArrayInput is an input type that accepts GetLastActivityActivitySetDetailedStatusMessageSetArray and GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetDetailedStatusMessageSetArrayInput` via:
+//
+//          GetLastActivityActivitySetDetailedStatusMessageSetArray{ GetLastActivityActivitySetDetailedStatusMessageSetArgs{...} }
+type GetLastActivityActivitySetDetailedStatusMessageSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutput() GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput
+	ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutputWithContext(context.Context) GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput
+}
+
+type GetLastActivityActivitySetDetailedStatusMessageSetArray []GetLastActivityActivitySetDetailedStatusMessageSetInput
+
+func (GetLastActivityActivitySetDetailedStatusMessageSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetDetailedStatusMessageSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetDetailedStatusMessageSetArray) ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutput() GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput {
+	return i.ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetDetailedStatusMessageSetArray) ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput)
+}
+
+type GetLastActivityActivitySetDetailedStatusMessageSetOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetDetailedStatusMessageSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetDetailedStatusMessageSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) ToGetLastActivityActivitySetDetailedStatusMessageSetOutput() GetLastActivityActivitySetDetailedStatusMessageSetOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) ToGetLastActivityActivitySetDetailedStatusMessageSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetDetailedStatusMessageSetOutput {
+	return o
+}
+
+// Error type.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) Code() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.Code }).(pulumi.StringOutput)
+}
+
+// Instance billing mode.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// ID of the instance.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Error message.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// Subnet ID.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// AZ information.
+func (o GetLastActivityActivitySetDetailedStatusMessageSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetDetailedStatusMessageSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetDetailedStatusMessageSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput) ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutput() GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput) ToGetLastActivityActivitySetDetailedStatusMessageSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput) Index(i pulumi.IntInput) GetLastActivityActivitySetDetailedStatusMessageSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLastActivityActivitySetDetailedStatusMessageSet {
+		return vs[0].([]GetLastActivityActivitySetDetailedStatusMessageSet)[vs[1].(int)]
+	}).(GetLastActivityActivitySetDetailedStatusMessageSetOutput)
+}
+
+type GetLastActivityActivitySetInvocationResultSet struct {
+	// Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+	CommandId string `pulumi:"commandId"`
+	// Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorMessage string `pulumi:"errorMessage"`
+	// ID of the instance.
+	InstanceId string `pulumi:"instanceId"`
+	// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+	InvocationId string `pulumi:"invocationId"`
+	// Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+	InvocationTaskId string `pulumi:"invocationTaskId"`
+	// Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+	TaskStatus string `pulumi:"taskStatus"`
+}
+
+// GetLastActivityActivitySetInvocationResultSetInput is an input type that accepts GetLastActivityActivitySetInvocationResultSetArgs and GetLastActivityActivitySetInvocationResultSetOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetInvocationResultSetInput` via:
+//
+//          GetLastActivityActivitySetInvocationResultSetArgs{...}
+type GetLastActivityActivitySetInvocationResultSetInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetInvocationResultSetOutput() GetLastActivityActivitySetInvocationResultSetOutput
+	ToGetLastActivityActivitySetInvocationResultSetOutputWithContext(context.Context) GetLastActivityActivitySetInvocationResultSetOutput
+}
+
+type GetLastActivityActivitySetInvocationResultSetArgs struct {
+	// Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+	CommandId pulumi.StringInput `pulumi:"commandId"`
+	// Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorMessage pulumi.StringInput `pulumi:"errorMessage"`
+	// ID of the instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+	InvocationId pulumi.StringInput `pulumi:"invocationId"`
+	// Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+	InvocationTaskId pulumi.StringInput `pulumi:"invocationTaskId"`
+	// Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+	TaskStatus pulumi.StringInput `pulumi:"taskStatus"`
+}
+
+func (GetLastActivityActivitySetInvocationResultSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetInvocationResultSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetInvocationResultSetArgs) ToGetLastActivityActivitySetInvocationResultSetOutput() GetLastActivityActivitySetInvocationResultSetOutput {
+	return i.ToGetLastActivityActivitySetInvocationResultSetOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetInvocationResultSetArgs) ToGetLastActivityActivitySetInvocationResultSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetInvocationResultSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetInvocationResultSetOutput)
+}
+
+// GetLastActivityActivitySetInvocationResultSetArrayInput is an input type that accepts GetLastActivityActivitySetInvocationResultSetArray and GetLastActivityActivitySetInvocationResultSetArrayOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetInvocationResultSetArrayInput` via:
+//
+//          GetLastActivityActivitySetInvocationResultSetArray{ GetLastActivityActivitySetInvocationResultSetArgs{...} }
+type GetLastActivityActivitySetInvocationResultSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetInvocationResultSetArrayOutput() GetLastActivityActivitySetInvocationResultSetArrayOutput
+	ToGetLastActivityActivitySetInvocationResultSetArrayOutputWithContext(context.Context) GetLastActivityActivitySetInvocationResultSetArrayOutput
+}
+
+type GetLastActivityActivitySetInvocationResultSetArray []GetLastActivityActivitySetInvocationResultSetInput
+
+func (GetLastActivityActivitySetInvocationResultSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetInvocationResultSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetInvocationResultSetArray) ToGetLastActivityActivitySetInvocationResultSetArrayOutput() GetLastActivityActivitySetInvocationResultSetArrayOutput {
+	return i.ToGetLastActivityActivitySetInvocationResultSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetInvocationResultSetArray) ToGetLastActivityActivitySetInvocationResultSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetInvocationResultSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetInvocationResultSetArrayOutput)
+}
+
+type GetLastActivityActivitySetInvocationResultSetOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetInvocationResultSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetInvocationResultSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetInvocationResultSetOutput) ToGetLastActivityActivitySetInvocationResultSetOutput() GetLastActivityActivitySetInvocationResultSetOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetInvocationResultSetOutput) ToGetLastActivityActivitySetInvocationResultSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetInvocationResultSetOutput {
+	return o
+}
+
+// Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) CommandId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.CommandId }).(pulumi.StringOutput)
+}
+
+// Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) ErrorMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.ErrorMessage }).(pulumi.StringOutput)
+}
+
+// ID of the instance.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) InvocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.InvocationId }).(pulumi.StringOutput)
+}
+
+// Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) InvocationTaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.InvocationTaskId }).(pulumi.StringOutput)
+}
+
+// Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetLastActivityActivitySetInvocationResultSetOutput) TaskStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetInvocationResultSet) string { return v.TaskStatus }).(pulumi.StringOutput)
+}
+
+type GetLastActivityActivitySetInvocationResultSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetInvocationResultSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetInvocationResultSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetInvocationResultSetArrayOutput) ToGetLastActivityActivitySetInvocationResultSetArrayOutput() GetLastActivityActivitySetInvocationResultSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetInvocationResultSetArrayOutput) ToGetLastActivityActivitySetInvocationResultSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetInvocationResultSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetInvocationResultSetArrayOutput) Index(i pulumi.IntInput) GetLastActivityActivitySetInvocationResultSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLastActivityActivitySetInvocationResultSet {
+		return vs[0].([]GetLastActivityActivitySetInvocationResultSet)[vs[1].(int)]
+	}).(GetLastActivityActivitySetInvocationResultSetOutput)
+}
+
+type GetLastActivityActivitySetLifecycleActionResultSet struct {
+	// ID of the instance.
+	InstanceId string `pulumi:"instanceId"`
+	// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+	InvocationId string `pulumi:"invocationId"`
+	// Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+	InvokeCommandResult string `pulumi:"invokeCommandResult"`
+	// Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+	LifecycleActionResult string `pulumi:"lifecycleActionResult"`
+	// ID of the lifecycle hook.
+	LifecycleHookId string `pulumi:"lifecycleHookId"`
+	// Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+	NotificationResult string `pulumi:"notificationResult"`
+	// Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+	ResultReason string `pulumi:"resultReason"`
+}
+
+// GetLastActivityActivitySetLifecycleActionResultSetInput is an input type that accepts GetLastActivityActivitySetLifecycleActionResultSetArgs and GetLastActivityActivitySetLifecycleActionResultSetOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetLifecycleActionResultSetInput` via:
+//
+//          GetLastActivityActivitySetLifecycleActionResultSetArgs{...}
+type GetLastActivityActivitySetLifecycleActionResultSetInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetLifecycleActionResultSetOutput() GetLastActivityActivitySetLifecycleActionResultSetOutput
+	ToGetLastActivityActivitySetLifecycleActionResultSetOutputWithContext(context.Context) GetLastActivityActivitySetLifecycleActionResultSetOutput
+}
+
+type GetLastActivityActivitySetLifecycleActionResultSetArgs struct {
+	// ID of the instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+	InvocationId pulumi.StringInput `pulumi:"invocationId"`
+	// Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+	InvokeCommandResult pulumi.StringInput `pulumi:"invokeCommandResult"`
+	// Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+	LifecycleActionResult pulumi.StringInput `pulumi:"lifecycleActionResult"`
+	// ID of the lifecycle hook.
+	LifecycleHookId pulumi.StringInput `pulumi:"lifecycleHookId"`
+	// Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+	NotificationResult pulumi.StringInput `pulumi:"notificationResult"`
+	// Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+	ResultReason pulumi.StringInput `pulumi:"resultReason"`
+}
+
+func (GetLastActivityActivitySetLifecycleActionResultSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetLifecycleActionResultSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetLifecycleActionResultSetArgs) ToGetLastActivityActivitySetLifecycleActionResultSetOutput() GetLastActivityActivitySetLifecycleActionResultSetOutput {
+	return i.ToGetLastActivityActivitySetLifecycleActionResultSetOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetLifecycleActionResultSetArgs) ToGetLastActivityActivitySetLifecycleActionResultSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetLifecycleActionResultSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetLifecycleActionResultSetOutput)
+}
+
+// GetLastActivityActivitySetLifecycleActionResultSetArrayInput is an input type that accepts GetLastActivityActivitySetLifecycleActionResultSetArray and GetLastActivityActivitySetLifecycleActionResultSetArrayOutput values.
+// You can construct a concrete instance of `GetLastActivityActivitySetLifecycleActionResultSetArrayInput` via:
+//
+//          GetLastActivityActivitySetLifecycleActionResultSetArray{ GetLastActivityActivitySetLifecycleActionResultSetArgs{...} }
+type GetLastActivityActivitySetLifecycleActionResultSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutput() GetLastActivityActivitySetLifecycleActionResultSetArrayOutput
+	ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutputWithContext(context.Context) GetLastActivityActivitySetLifecycleActionResultSetArrayOutput
+}
+
+type GetLastActivityActivitySetLifecycleActionResultSetArray []GetLastActivityActivitySetLifecycleActionResultSetInput
+
+func (GetLastActivityActivitySetLifecycleActionResultSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetLifecycleActionResultSet)(nil)).Elem()
+}
+
+func (i GetLastActivityActivitySetLifecycleActionResultSetArray) ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutput() GetLastActivityActivitySetLifecycleActionResultSetArrayOutput {
+	return i.ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLastActivityActivitySetLifecycleActionResultSetArray) ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetLifecycleActionResultSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLastActivityActivitySetLifecycleActionResultSetArrayOutput)
+}
+
+type GetLastActivityActivitySetLifecycleActionResultSetOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetLifecycleActionResultSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLastActivityActivitySetLifecycleActionResultSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) ToGetLastActivityActivitySetLifecycleActionResultSetOutput() GetLastActivityActivitySetLifecycleActionResultSetOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) ToGetLastActivityActivitySetLifecycleActionResultSetOutputWithContext(ctx context.Context) GetLastActivityActivitySetLifecycleActionResultSetOutput {
+	return o
+}
+
+// ID of the instance.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) InvocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.InvocationId }).(pulumi.StringOutput)
+}
+
+// Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) InvokeCommandResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.InvokeCommandResult }).(pulumi.StringOutput)
+}
+
+// Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) LifecycleActionResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.LifecycleActionResult }).(pulumi.StringOutput)
+}
+
+// ID of the lifecycle hook.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) LifecycleHookId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.LifecycleHookId }).(pulumi.StringOutput)
+}
+
+// Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) NotificationResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.NotificationResult }).(pulumi.StringOutput)
+}
+
+// Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+func (o GetLastActivityActivitySetLifecycleActionResultSetOutput) ResultReason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLastActivityActivitySetLifecycleActionResultSet) string { return v.ResultReason }).(pulumi.StringOutput)
+}
+
+type GetLastActivityActivitySetLifecycleActionResultSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLastActivityActivitySetLifecycleActionResultSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLastActivityActivitySetLifecycleActionResultSet)(nil)).Elem()
+}
+
+func (o GetLastActivityActivitySetLifecycleActionResultSetArrayOutput) ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutput() GetLastActivityActivitySetLifecycleActionResultSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetLifecycleActionResultSetArrayOutput) ToGetLastActivityActivitySetLifecycleActionResultSetArrayOutputWithContext(ctx context.Context) GetLastActivityActivitySetLifecycleActionResultSetArrayOutput {
+	return o
+}
+
+func (o GetLastActivityActivitySetLifecycleActionResultSetArrayOutput) Index(i pulumi.IntInput) GetLastActivityActivitySetLifecycleActionResultSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLastActivityActivitySetLifecycleActionResultSet {
+		return vs[0].([]GetLastActivityActivitySetLifecycleActionResultSet)[vs[1].(int)]
+	}).(GetLastActivityActivitySetLifecycleActionResultSetOutput)
 }
 
 type GetScalingConfigsConfigurationList struct {
@@ -1926,6 +3157,10 @@ func (o GetScalingPoliciesScalingPolicyListArrayOutput) Index(i pulumi.IntInput)
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerForwardLoadBalancerInput)(nil)).Elem(), LoadBalancerForwardLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerForwardLoadBalancerArrayInput)(nil)).Elem(), LoadBalancerForwardLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerForwardLoadBalancerTargetAttributeInput)(nil)).Elem(), LoadBalancerForwardLoadBalancerTargetAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerForwardLoadBalancerTargetAttributeArrayInput)(nil)).Elem(), LoadBalancerForwardLoadBalancerTargetAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigDataDiskInput)(nil)).Elem(), ScalingConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigDataDiskArrayInput)(nil)).Elem(), ScalingConfigDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigInstanceNameSettingsInput)(nil)).Elem(), ScalingConfigInstanceNameSettingsArgs{})
@@ -1934,10 +3169,24 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdArrayInput)(nil)).Elem(), ScalingGroupForwardBalancerIdArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdTargetAttributeInput)(nil)).Elem(), ScalingGroupForwardBalancerIdTargetAttributeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdTargetAttributeArrayInput)(nil)).Elem(), ScalingGroupForwardBalancerIdTargetAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetInput)(nil)).Elem(), GetAdvicesAutoScalingAdviceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetArrayInput)(nil)).Elem(), GetAdvicesAutoScalingAdviceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetAdviceInput)(nil)).Elem(), GetAdvicesAutoScalingAdviceSetAdviceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAdvicesAutoScalingAdviceSetAdviceArrayInput)(nil)).Elem(), GetAdvicesAutoScalingAdviceSetAdviceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterInput)(nil)).Elem(), GetInstancesFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterArrayInput)(nil)).Elem(), GetInstancesFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetInput)(nil)).Elem(), GetLastActivityActivitySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetArrayInput)(nil)).Elem(), GetLastActivityActivitySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetActivityRelatedInstanceSetInput)(nil)).Elem(), GetLastActivityActivitySetActivityRelatedInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetActivityRelatedInstanceSetArrayInput)(nil)).Elem(), GetLastActivityActivitySetActivityRelatedInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetDetailedStatusMessageSetInput)(nil)).Elem(), GetLastActivityActivitySetDetailedStatusMessageSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetDetailedStatusMessageSetArrayInput)(nil)).Elem(), GetLastActivityActivitySetDetailedStatusMessageSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetInvocationResultSetInput)(nil)).Elem(), GetLastActivityActivitySetInvocationResultSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetInvocationResultSetArrayInput)(nil)).Elem(), GetLastActivityActivitySetInvocationResultSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetLifecycleActionResultSetInput)(nil)).Elem(), GetLastActivityActivitySetLifecycleActionResultSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLastActivityActivitySetLifecycleActionResultSetArrayInput)(nil)).Elem(), GetLastActivityActivitySetLifecycleActionResultSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListInput)(nil)).Elem(), GetScalingConfigsConfigurationListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListArrayInput)(nil)).Elem(), GetScalingConfigsConfigurationListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListDataDiskInput)(nil)).Elem(), GetScalingConfigsConfigurationListDataDiskArgs{})
@@ -1950,6 +3199,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingPoliciesScalingPolicyListInput)(nil)).Elem(), GetScalingPoliciesScalingPolicyListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingPoliciesScalingPolicyListArrayInput)(nil)).Elem(), GetScalingPoliciesScalingPolicyListArray{})
+	pulumi.RegisterOutputType(LoadBalancerForwardLoadBalancerOutput{})
+	pulumi.RegisterOutputType(LoadBalancerForwardLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(LoadBalancerForwardLoadBalancerTargetAttributeOutput{})
+	pulumi.RegisterOutputType(LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput{})
 	pulumi.RegisterOutputType(ScalingConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ScalingConfigDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ScalingConfigInstanceNameSettingsOutput{})
@@ -1958,10 +3211,24 @@ func init() {
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdArrayOutput{})
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdTargetAttributeOutput{})
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdTargetAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetAdvicesAutoScalingAdviceSetOutput{})
+	pulumi.RegisterOutputType(GetAdvicesAutoScalingAdviceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAdvicesAutoScalingAdviceSetAdviceOutput{})
+	pulumi.RegisterOutputType(GetAdvicesAutoScalingAdviceSetAdviceArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesFilterOutput{})
 	pulumi.RegisterOutputType(GetInstancesFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetArrayOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetActivityRelatedInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetActivityRelatedInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetDetailedStatusMessageSetOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetDetailedStatusMessageSetArrayOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetInvocationResultSetOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetInvocationResultSetArrayOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetLifecycleActionResultSetOutput{})
+	pulumi.RegisterOutputType(GetLastActivityActivitySetLifecycleActionResultSetArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListDataDiskOutput{})

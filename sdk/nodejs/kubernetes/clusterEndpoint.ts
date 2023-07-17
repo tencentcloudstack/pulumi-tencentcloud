@@ -90,6 +90,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      */
     public /*out*/ readonly domain!: pulumi.Output<string>;
     /**
+     * The LB parameter. Only used for public network access.
+     */
+    public readonly extensiveParameters!: pulumi.Output<string | undefined>;
+    /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -132,6 +136,7 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["clusterIntranetDomain"] = state ? state.clusterIntranetDomain : undefined;
             resourceInputs["clusterIntranetSubnetId"] = state ? state.clusterIntranetSubnetId : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
+            resourceInputs["extensiveParameters"] = state ? state.extensiveParameters : undefined;
             resourceInputs["managedClusterInternetSecurityPolicies"] = state ? state.managedClusterInternetSecurityPolicies : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["pgwEndpoint"] = state ? state.pgwEndpoint : undefined;
@@ -148,6 +153,7 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["clusterIntranet"] = args ? args.clusterIntranet : undefined;
             resourceInputs["clusterIntranetDomain"] = args ? args.clusterIntranetDomain : undefined;
             resourceInputs["clusterIntranetSubnetId"] = args ? args.clusterIntranetSubnetId : undefined;
+            resourceInputs["extensiveParameters"] = args ? args.extensiveParameters : undefined;
             resourceInputs["managedClusterInternetSecurityPolicies"] = args ? args.managedClusterInternetSecurityPolicies : undefined;
             resourceInputs["certificationAuthority"] = undefined /*out*/;
             resourceInputs["clusterDeployType"] = undefined /*out*/;
@@ -211,6 +217,10 @@ export interface ClusterEndpointState {
      */
     domain?: pulumi.Input<string>;
     /**
+     * The LB parameter. Only used for public network access.
+     */
+    extensiveParameters?: pulumi.Input<string>;
+    /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
@@ -262,6 +272,10 @@ export interface ClusterEndpointArgs {
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
     clusterIntranetSubnetId?: pulumi.Input<string>;
+    /**
+     * The LB parameter. Only used for public network access.
+     */
+    extensiveParameters?: pulumi.Input<string>;
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *

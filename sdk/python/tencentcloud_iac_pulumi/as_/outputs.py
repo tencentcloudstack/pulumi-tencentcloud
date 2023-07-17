@@ -10,12 +10,21 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'LoadBalancerForwardLoadBalancer',
+    'LoadBalancerForwardLoadBalancerTargetAttribute',
     'ScalingConfigDataDisk',
     'ScalingConfigInstanceNameSettings',
     'ScalingGroupForwardBalancerId',
     'ScalingGroupForwardBalancerIdTargetAttribute',
+    'GetAdvicesAutoScalingAdviceSetResult',
+    'GetAdvicesAutoScalingAdviceSetAdviceResult',
     'GetInstancesFilterResult',
     'GetInstancesInstanceListResult',
+    'GetLastActivityActivitySetResult',
+    'GetLastActivityActivitySetActivityRelatedInstanceSetResult',
+    'GetLastActivityActivitySetDetailedStatusMessageSetResult',
+    'GetLastActivityActivitySetInvocationResultSetResult',
+    'GetLastActivityActivitySetLifecycleActionResultSetResult',
     'GetScalingConfigsConfigurationListResult',
     'GetScalingConfigsConfigurationListDataDiskResult',
     'GetScalingGroupsScalingGroupListResult',
@@ -23,6 +32,90 @@ __all__ = [
     'GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult',
     'GetScalingPoliciesScalingPolicyListResult',
 ]
+
+@pulumi.output_type
+class LoadBalancerForwardLoadBalancer(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "listenerId":
+            suggest = "listener_id"
+        elif key == "loadBalancerId":
+            suggest = "load_balancer_id"
+        elif key == "targetAttributes":
+            suggest = "target_attributes"
+        elif key == "locationId":
+            suggest = "location_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LoadBalancerForwardLoadBalancer. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LoadBalancerForwardLoadBalancer.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LoadBalancerForwardLoadBalancer.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 listener_id: str,
+                 load_balancer_id: str,
+                 target_attributes: Sequence['outputs.LoadBalancerForwardLoadBalancerTargetAttribute'],
+                 location_id: Optional[str] = None,
+                 region: Optional[str] = None):
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "target_attributes", target_attributes)
+        if location_id is not None:
+            pulumi.set(__self__, "location_id", location_id)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="targetAttributes")
+    def target_attributes(self) -> Sequence['outputs.LoadBalancerForwardLoadBalancerTargetAttribute']:
+        return pulumi.get(self, "target_attributes")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> Optional[str]:
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class LoadBalancerForwardLoadBalancerTargetAttribute(dict):
+    def __init__(__self__, *,
+                 port: int,
+                 weight: int):
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        return pulumi.get(self, "weight")
+
 
 @pulumi.output_type
 class ScalingConfigDataDisk(dict):
@@ -256,6 +349,86 @@ class ScalingGroupForwardBalancerIdTargetAttribute(dict):
 
 
 @pulumi.output_type
+class GetAdvicesAutoScalingAdviceSetResult(dict):
+    def __init__(__self__, *,
+                 advices: Sequence['outputs.GetAdvicesAutoScalingAdviceSetAdviceResult'],
+                 auto_scaling_group_id: str,
+                 level: str):
+        """
+        :param Sequence['GetAdvicesAutoScalingAdviceSetAdviceArgs'] advices: A collection of suggestions for scaling group configurations.
+        :param str auto_scaling_group_id: Auto scaling group ID.
+        :param str level: Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+        """
+        pulumi.set(__self__, "advices", advices)
+        pulumi.set(__self__, "auto_scaling_group_id", auto_scaling_group_id)
+        pulumi.set(__self__, "level", level)
+
+    @property
+    @pulumi.getter
+    def advices(self) -> Sequence['outputs.GetAdvicesAutoScalingAdviceSetAdviceResult']:
+        """
+        A collection of suggestions for scaling group configurations.
+        """
+        return pulumi.get(self, "advices")
+
+    @property
+    @pulumi.getter(name="autoScalingGroupId")
+    def auto_scaling_group_id(self) -> str:
+        """
+        Auto scaling group ID.
+        """
+        return pulumi.get(self, "auto_scaling_group_id")
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.
+        """
+        return pulumi.get(self, "level")
+
+
+@pulumi.output_type
+class GetAdvicesAutoScalingAdviceSetAdviceResult(dict):
+    def __init__(__self__, *,
+                 detail: str,
+                 problem: str,
+                 solution: str):
+        """
+        :param str detail: Problem Details.
+        :param str problem: Problem Description.
+        :param str solution: Recommended resolutions.
+        """
+        pulumi.set(__self__, "detail", detail)
+        pulumi.set(__self__, "problem", problem)
+        pulumi.set(__self__, "solution", solution)
+
+    @property
+    @pulumi.getter
+    def detail(self) -> str:
+        """
+        Problem Details.
+        """
+        return pulumi.get(self, "detail")
+
+    @property
+    @pulumi.getter
+    def problem(self) -> str:
+        """
+        Problem Description.
+        """
+        return pulumi.get(self, "problem")
+
+    @property
+    @pulumi.getter
+    def solution(self) -> str:
+        """
+        Recommended resolutions.
+        """
+        return pulumi.get(self, "solution")
+
+
+@pulumi.output_type
 class GetInstancesFilterResult(dict):
     def __init__(__self__, *,
                  name: str,
@@ -432,6 +605,448 @@ class GetInstancesInstanceListResult(dict):
         Available zone.
         """
         return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetLastActivityActivitySetResult(dict):
+    def __init__(__self__, *,
+                 activity_id: str,
+                 activity_related_instance_sets: Sequence['outputs.GetLastActivityActivitySetActivityRelatedInstanceSetResult'],
+                 activity_type: str,
+                 auto_scaling_group_id: str,
+                 cause: str,
+                 created_time: str,
+                 description: str,
+                 detailed_status_message_sets: Sequence['outputs.GetLastActivityActivitySetDetailedStatusMessageSetResult'],
+                 end_time: str,
+                 invocation_result_sets: Sequence['outputs.GetLastActivityActivitySetInvocationResultSetResult'],
+                 lifecycle_action_result_sets: Sequence['outputs.GetLastActivityActivitySetLifecycleActionResultSetResult'],
+                 start_time: str,
+                 status_code: str,
+                 status_message: str,
+                 status_message_simplified: str):
+        """
+        :param str activity_id: Scaling activity ID.
+        :param Sequence['GetLastActivityActivitySetActivityRelatedInstanceSetArgs'] activity_related_instance_sets: Information set of the instances related to the scaling activity.
+        :param str activity_type: Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+        :param str auto_scaling_group_id: Auto scaling group ID.
+        :param str cause: Cause of the scaling activity.
+        :param str created_time: Creation time of the scaling activity.
+        :param str description: Description of the scaling activity.
+        :param Sequence['GetLastActivityActivitySetDetailedStatusMessageSetArgs'] detailed_status_message_sets: Detailed description of scaling activity status.
+        :param str end_time: End time of the scaling activity.
+        :param Sequence['GetLastActivityActivitySetInvocationResultSetArgs'] invocation_result_sets: Result of the command execution.
+        :param Sequence['GetLastActivityActivitySetLifecycleActionResultSetArgs'] lifecycle_action_result_sets: Result of the lifecycle hook action in the scaling activity.
+        :param str start_time: Start time of the scaling activity.
+        :param str status_code: Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+        :param str status_message: Description of the scaling activity status.
+        :param str status_message_simplified: Brief description of the scaling activity status.
+        """
+        pulumi.set(__self__, "activity_id", activity_id)
+        pulumi.set(__self__, "activity_related_instance_sets", activity_related_instance_sets)
+        pulumi.set(__self__, "activity_type", activity_type)
+        pulumi.set(__self__, "auto_scaling_group_id", auto_scaling_group_id)
+        pulumi.set(__self__, "cause", cause)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "detailed_status_message_sets", detailed_status_message_sets)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "invocation_result_sets", invocation_result_sets)
+        pulumi.set(__self__, "lifecycle_action_result_sets", lifecycle_action_result_sets)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status_code", status_code)
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "status_message_simplified", status_message_simplified)
+
+    @property
+    @pulumi.getter(name="activityId")
+    def activity_id(self) -> str:
+        """
+        Scaling activity ID.
+        """
+        return pulumi.get(self, "activity_id")
+
+    @property
+    @pulumi.getter(name="activityRelatedInstanceSets")
+    def activity_related_instance_sets(self) -> Sequence['outputs.GetLastActivityActivitySetActivityRelatedInstanceSetResult']:
+        """
+        Information set of the instances related to the scaling activity.
+        """
+        return pulumi.get(self, "activity_related_instance_sets")
+
+    @property
+    @pulumi.getter(name="activityType")
+    def activity_type(self) -> str:
+        """
+        Type of the scaling activity. Value range: SCALE_OUT, SCALE_IN, ATTACH_INSTANCES, REMOVE_INSTANCES, DETACH_INSTANCES, TERMINATE_INSTANCES_UNEXPECTEDLY, REPLACE_UNHEALTHY_INSTANCE, START_INSTANCES, STOP_INSTANCES, INVOKE_COMMAND.
+        """
+        return pulumi.get(self, "activity_type")
+
+    @property
+    @pulumi.getter(name="autoScalingGroupId")
+    def auto_scaling_group_id(self) -> str:
+        """
+        Auto scaling group ID.
+        """
+        return pulumi.get(self, "auto_scaling_group_id")
+
+    @property
+    @pulumi.getter
+    def cause(self) -> str:
+        """
+        Cause of the scaling activity.
+        """
+        return pulumi.get(self, "cause")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Creation time of the scaling activity.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of the scaling activity.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="detailedStatusMessageSets")
+    def detailed_status_message_sets(self) -> Sequence['outputs.GetLastActivityActivitySetDetailedStatusMessageSetResult']:
+        """
+        Detailed description of scaling activity status.
+        """
+        return pulumi.get(self, "detailed_status_message_sets")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        End time of the scaling activity.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="invocationResultSets")
+    def invocation_result_sets(self) -> Sequence['outputs.GetLastActivityActivitySetInvocationResultSetResult']:
+        """
+        Result of the command execution.
+        """
+        return pulumi.get(self, "invocation_result_sets")
+
+    @property
+    @pulumi.getter(name="lifecycleActionResultSets")
+    def lifecycle_action_result_sets(self) -> Sequence['outputs.GetLastActivityActivitySetLifecycleActionResultSetResult']:
+        """
+        Result of the lifecycle hook action in the scaling activity.
+        """
+        return pulumi.get(self, "lifecycle_action_result_sets")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time of the scaling activity.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="statusCode")
+    def status_code(self) -> str:
+        """
+        Scaling activity status. Value range: INIT, RUNNING, SUCCESSFUL, PARTIALLY_SUCCESSFUL, FAILED, CANCELLED.
+        """
+        return pulumi.get(self, "status_code")
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> str:
+        """
+        Description of the scaling activity status.
+        """
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="statusMessageSimplified")
+    def status_message_simplified(self) -> str:
+        """
+        Brief description of the scaling activity status.
+        """
+        return pulumi.get(self, "status_message_simplified")
+
+
+@pulumi.output_type
+class GetLastActivityActivitySetActivityRelatedInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_status: str):
+        """
+        :param str instance_id: ID of the instance.
+        :param str instance_status: Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_status", instance_status)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceStatus")
+    def instance_status(self) -> str:
+        """
+        Status of the instance in the scaling activity. Value range: INIT, RUNNING, SUCCESSFUL, FAILED.
+        """
+        return pulumi.get(self, "instance_status")
+
+
+@pulumi.output_type
+class GetLastActivityActivitySetDetailedStatusMessageSetResult(dict):
+    def __init__(__self__, *,
+                 code: str,
+                 instance_charge_type: str,
+                 instance_id: str,
+                 instance_type: str,
+                 message: str,
+                 subnet_id: str,
+                 zone: str):
+        """
+        :param str code: Error type.
+        :param str instance_charge_type: Instance billing mode.
+        :param str instance_id: ID of the instance.
+        :param str instance_type: Instance type.
+        :param str message: Error message.
+        :param str subnet_id: Subnet ID.
+        :param str zone: AZ information.
+        """
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def code(self) -> str:
+        """
+        Error type.
+        """
+        return pulumi.get(self, "code")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        Instance billing mode.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        Error message.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        AZ information.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetLastActivityActivitySetInvocationResultSetResult(dict):
+    def __init__(__self__, *,
+                 command_id: str,
+                 error_message: str,
+                 instance_id: str,
+                 invocation_id: str,
+                 invocation_task_id: str,
+                 task_status: str):
+        """
+        :param str command_id: Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str error_message: Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str instance_id: ID of the instance.
+        :param str invocation_id: Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+        :param str invocation_task_id: Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str task_status: Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "command_id", command_id)
+        pulumi.set(__self__, "error_message", error_message)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "invocation_id", invocation_id)
+        pulumi.set(__self__, "invocation_task_id", invocation_task_id)
+        pulumi.set(__self__, "task_status", task_status)
+
+    @property
+    @pulumi.getter(name="commandId")
+    def command_id(self) -> str:
+        """
+        Command ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "command_id")
+
+    @property
+    @pulumi.getter(name="errorMessage")
+    def error_message(self) -> str:
+        """
+        Execution exception information. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "error_message")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="invocationId")
+    def invocation_id(self) -> str:
+        """
+        Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+        """
+        return pulumi.get(self, "invocation_id")
+
+    @property
+    @pulumi.getter(name="invocationTaskId")
+    def invocation_task_id(self) -> str:
+        """
+        Execution task ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "invocation_task_id")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> str:
+        """
+        Execution Status. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "task_status")
+
+
+@pulumi.output_type
+class GetLastActivityActivitySetLifecycleActionResultSetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 invocation_id: str,
+                 invoke_command_result: str,
+                 lifecycle_action_result: str,
+                 lifecycle_hook_id: str,
+                 notification_result: str,
+                 result_reason: str):
+        """
+        :param str instance_id: ID of the instance.
+        :param str invocation_id: Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+        :param str invoke_command_result: Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+        :param str lifecycle_action_result: Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+        :param str lifecycle_hook_id: ID of the lifecycle hook.
+        :param str notification_result: Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+        :param str result_reason: Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "invocation_id", invocation_id)
+        pulumi.set(__self__, "invoke_command_result", invoke_command_result)
+        pulumi.set(__self__, "lifecycle_action_result", lifecycle_action_result)
+        pulumi.set(__self__, "lifecycle_hook_id", lifecycle_hook_id)
+        pulumi.set(__self__, "notification_result", notification_result)
+        pulumi.set(__self__, "result_reason", result_reason)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        ID of the instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="invocationId")
+    def invocation_id(self) -> str:
+        """
+        Execution task ID. You can query the result by using the DescribeInvocations API of TAT.
+        """
+        return pulumi.get(self, "invocation_id")
+
+    @property
+    @pulumi.getter(name="invokeCommandResult")
+    def invoke_command_result(self) -> str:
+        """
+        Result of command invocation, value range: SUCCESSFUL, FAILED, NONE.
+        """
+        return pulumi.get(self, "invoke_command_result")
+
+    @property
+    @pulumi.getter(name="lifecycleActionResult")
+    def lifecycle_action_result(self) -> str:
+        """
+        Result of the lifecycle hook action, value range: CONTINUE, ABANDON.
+        """
+        return pulumi.get(self, "lifecycle_action_result")
+
+    @property
+    @pulumi.getter(name="lifecycleHookId")
+    def lifecycle_hook_id(self) -> str:
+        """
+        ID of the lifecycle hook.
+        """
+        return pulumi.get(self, "lifecycle_hook_id")
+
+    @property
+    @pulumi.getter(name="notificationResult")
+    def notification_result(self) -> str:
+        """
+        Notification result, which indicates whether it is successful to notify CMQ/TDMQ, value range: SUCCESSFUL, FAILED, NONE.
+        """
+        return pulumi.get(self, "notification_result")
+
+    @property
+    @pulumi.getter(name="resultReason")
+    def result_reason(self) -> str:
+        """
+        Reason of the result, value range: HEARTBEAT_TIMEOUT: Heartbeat timed out. The setting of DefaultResult is used. NOTIFICATION_FAILURE: Failed to send the notification. The setting of DefaultResult is used. CALL_INTERFACE: Calls the CompleteLifecycleAction to set the result ANOTHER_ACTION_ABANDON: It has been set to ABANDON by another operation. COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied. COMMAND_EXEC_FINISH: Command completed COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied. COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.
+        """
+        return pulumi.get(self, "result_reason")
 
 
 @pulumi.output_type

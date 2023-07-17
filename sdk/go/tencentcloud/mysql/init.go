@@ -25,24 +25,72 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Account{}
 	case "tencentcloud:Mysql/auditLogFile:AuditLogFile":
 		r = &AuditLogFile{}
+	case "tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction":
+		r = &BackupDownloadRestriction{}
+	case "tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus":
+		r = &BackupEncryptionStatus{}
 	case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
 		r = &BackupPolicy{}
+	case "tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation":
+		r = &DbImportJobOperation{}
 	case "tencentcloud:Mysql/deployGroup:DeployGroup":
 		r = &DeployGroup{}
+	case "tencentcloud:Mysql/drInstanceToMater:DrInstanceToMater":
+		r = &DrInstanceToMater{}
 	case "tencentcloud:Mysql/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Mysql/instanceEncryptionOperation:InstanceEncryptionOperation":
+		r = &InstanceEncryptionOperation{}
+	case "tencentcloud:Mysql/isolateInstance:IsolateInstance":
+		r = &IsolateInstance{}
 	case "tencentcloud:Mysql/localBinlogConfig:LocalBinlogConfig":
 		r = &LocalBinlogConfig{}
 	case "tencentcloud:Mysql/paramTemplate:ParamTemplate":
 		r = &ParamTemplate{}
+	case "tencentcloud:Mysql/passwordComplexity:PasswordComplexity":
+		r = &PasswordComplexity{}
 	case "tencentcloud:Mysql/privilege:Privilege":
 		r = &Privilege{}
+	case "tencentcloud:Mysql/proxy:Proxy":
+		r = &Proxy{}
 	case "tencentcloud:Mysql/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Mysql/reloadBalanceProxyNode:ReloadBalanceProxyNode":
+		r = &ReloadBalanceProxyNode{}
+	case "tencentcloud:Mysql/remoteBackupConfig:RemoteBackupConfig":
+		r = &RemoteBackupConfig{}
+	case "tencentcloud:Mysql/renewDbInstanceOperation:RenewDbInstanceOperation":
+		r = &RenewDbInstanceOperation{}
+	case "tencentcloud:Mysql/resetRootAccount:ResetRootAccount":
+		r = &ResetRootAccount{}
+	case "tencentcloud:Mysql/restartDbInstancesOperation:RestartDbInstancesOperation":
+		r = &RestartDbInstancesOperation{}
+	case "tencentcloud:Mysql/roGroup:RoGroup":
+		r = &RoGroup{}
+	case "tencentcloud:Mysql/roGroupLoadOperation:RoGroupLoadOperation":
+		r = &RoGroupLoadOperation{}
+	case "tencentcloud:Mysql/roInstanceIp:RoInstanceIp":
+		r = &RoInstanceIp{}
+	case "tencentcloud:Mysql/roStartReplication:RoStartReplication":
+		r = &RoStartReplication{}
+	case "tencentcloud:Mysql/roStopReplication:RoStopReplication":
+		r = &RoStopReplication{}
+	case "tencentcloud:Mysql/rollback:Rollback":
+		r = &Rollback{}
+	case "tencentcloud:Mysql/rollbackStop:RollbackStop":
+		r = &RollbackStop{}
 	case "tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment":
 		r = &SecurityGroupsAttachment{}
+	case "tencentcloud:Mysql/switchForUpgrade:SwitchForUpgrade":
+		r = &SwitchForUpgrade{}
+	case "tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation":
+		r = &SwitchMasterSlaveOperation{}
+	case "tencentcloud:Mysql/switchProxy:SwitchProxy":
+		r = &SwitchProxy{}
 	case "tencentcloud:Mysql/timeWindow:TimeWindow":
 		r = &TimeWindow{}
+	case "tencentcloud:Mysql/verifyRootAccount:VerifyRootAccount":
+		r = &VerifyRootAccount{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -68,7 +116,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/backupDownloadRestriction",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/backupEncryptionStatus",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/backupPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/dbImportJobOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -78,7 +141,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/drInstanceToMater",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/instanceEncryptionOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/isolateInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -93,7 +171,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/passwordComplexity",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/privilege",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/proxy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -103,12 +191,92 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/reloadBalanceProxyNode",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/remoteBackupConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/renewDbInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/resetRootAccount",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/restartDbInstancesOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/roGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/roGroupLoadOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/roInstanceIp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/roStartReplication",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/roStopReplication",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/rollback",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/rollbackStop",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/securityGroupsAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mysql/switchForUpgrade",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/switchMasterSlaveOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/switchProxy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mysql/timeWindow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/verifyRootAccount",
 		&module{version},
 	)
 }

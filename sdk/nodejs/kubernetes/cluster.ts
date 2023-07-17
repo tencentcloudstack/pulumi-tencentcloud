@@ -9,7 +9,289 @@ import * as utilities from "../utilities";
  * Provide a resource to create a kubernetes cluster.
  *
  * > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extraArgs`), you need to submit a ticket for application.
- * **NOTE:**  We recommend the usage of one cluster without worker config + node pool to manage cluster and nodes. It's a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, tencentcloud.Kubernetes.ScaleWorker or exist node management of `tencentcloudKubernetesAttachment`. Cause some unchangeable parameters of `workerConfig` may cause the whole cluster resource `force new`.
+ *
+ * > **NOTE:** We recommend this usage that uses the `tencentcloud.Kubernetes.Cluster` resource to create a cluster without any `workerConfig`, then adds nodes by the `tencentcloud.Kubernetes.NodePool` resource.
+ * It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+ * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+ * const clusterCidr = config.get("clusterCidr") || "10.31.0.0/16";
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
+ * const vpcFirst = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneFirst,
+ * });
+ * const vpcSecond = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneSecond,
+ * });
+ * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+ *     vpcId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.vpcId),
+ *     clusterCidr: clusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "test",
+ *     clusterDesc: "test cluster desc",
+ *     clusterMaxServiceNum: 32,
+ *     clusterInternet: true,
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ *     workerConfigs: [
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneFirst,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.subnetId),
+ *             imgId: "img-rkiynh11",
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             keyIds: "skey-11112222",
+ *         },
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneSecond,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: vpcSecond.then(vpcSecond => vpcSecond.instanceLists?[0]?.subnetId),
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             keyIds: "skey-11112222",
+ *             camRoleName: "CVM_QcsRole",
+ *         },
+ *     ],
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ * });
+ * ```
+ * ### Use Kubelet
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+ * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+ * const clusterCidr = config.get("clusterCidr") || "10.31.0.0/16";
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
+ * const vpcFirst = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneFirst,
+ * });
+ * const vpcSecond = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneSecond,
+ * });
+ * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+ *     vpcId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.vpcId),
+ *     clusterCidr: clusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "test",
+ *     clusterDesc: "test cluster desc",
+ *     clusterMaxServiceNum: 32,
+ *     clusterInternet: true,
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ *     workerConfigs: [
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneFirst,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.subnetId),
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             keyIds: "skey-11112222",
+ *         },
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneSecond,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: vpcSecond.then(vpcSecond => vpcSecond.instanceLists?[0]?.subnetId),
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             camRoleName: "CVM_QcsRole",
+ *             keyIds: "skey-11112222",
+ *         },
+ *     ],
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ *     extraArgs: ["root-dir=/var/lib/kubelet"],
+ * });
+ * ```
+ * ### Use node pool global config
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const vpc = config.get("vpc") || "vpc-dk8zmwuf";
+ * const subnet = config.get("subnet") || "subnet-pqfek0t8";
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA1.LARGE8";
+ * const testNodePoolGlobalConfig = new tencentcloud.kubernetes.Cluster("testNodePoolGlobalConfig", {
+ *     vpcId: vpc,
+ *     clusterCidr: "10.1.0.0/16",
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "test",
+ *     clusterDesc: "test cluster desc",
+ *     clusterMaxServiceNum: 32,
+ *     clusterInternet: true,
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ *     workerConfigs: [{
+ *         count: 1,
+ *         availabilityZone: availabilityZone,
+ *         instanceType: defaultInstanceType,
+ *         systemDiskType: "CLOUD_SSD",
+ *         systemDiskSize: 60,
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 100,
+ *         publicIpAssigned: true,
+ *         subnetId: subnet,
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *         }],
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         userData: "dGVzdA==",
+ *         keyIds: "skey-11112222",
+ *     }],
+ *     nodePoolGlobalConfigs: [{
+ *         isScaleInEnabled: true,
+ *         expander: "random",
+ *         ignoreDaemonSetsUtilization: true,
+ *         maxConcurrentScaleIn: 5,
+ *         scaleInDelay: 15,
+ *         scaleInUnneededTime: 15,
+ *         scaleInUtilizationThreshold: 30,
+ *         skipNodesWithLocalStorage: false,
+ *         skipNodesWithSystemPods: true,
+ *     }],
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ * });
+ * ```
+ * ### Using VPC-CNI network type
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-1";
+ * const vpc = config.get("vpc") || "vpc-r1m1fyx5";
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.SMALL2";
+ * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+ *     vpcId: vpc,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "test",
+ *     clusterDesc: "test cluster desc",
+ *     clusterMaxServiceNum: 256,
+ *     clusterInternet: true,
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ *     networkType: "VPC-CNI",
+ *     eniSubnetIds: ["subnet-bk1etlyu"],
+ *     serviceCidr: "10.1.0.0/24",
+ *     workerConfigs: [{
+ *         count: 1,
+ *         availabilityZone: availabilityZone,
+ *         instanceType: defaultInstanceType,
+ *         systemDiskType: "CLOUD_PREMIUM",
+ *         systemDiskSize: 60,
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 100,
+ *         publicIpAssigned: true,
+ *         subnetId: "subnet-t5dv27rs",
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *         }],
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         userData: "dGVzdA==",
+ *         keyIds: "skey-11112222",
+ *     }],
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ * });
+ * ```
+ * ### Using ops options
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const managedCluster = new tencentcloud.Kubernetes.Cluster("managed_cluster", {
+ *     clusterAudit: {
+ *         enabled: true,
+ *         logSetId: "", // optional
+ *         logSetTopic: "", // optional
+ *     },
+ *     eventPersistence: {
+ *         enabled: true,
+ *         logSetId: "", // optional
+ *         logSetTopic: "", // optional
+ *     },
+ *     logAgent: {
+ *         enabled: true,
+ *         kubeletRootDir: "", // optional
+ *     },
+ * });
+ * ```
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -150,9 +432,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly clusterOsType!: pulumi.Output<string | undefined>;
     /**
-     * Version of the cluster, Default is '1.10.5'. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the available versions.
+     * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
-    public readonly clusterVersion!: pulumi.Output<string | undefined>;
+    public readonly clusterVersion!: pulumi.Output<string>;
     /**
      * Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
      */
@@ -573,7 +855,7 @@ export interface ClusterState {
      */
     clusterOsType?: pulumi.Input<string>;
     /**
-     * Version of the cluster, Default is '1.10.5'. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the available versions.
+     * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
     clusterVersion?: pulumi.Input<string>;
     /**
@@ -831,7 +1113,7 @@ export interface ClusterArgs {
      */
     clusterOsType?: pulumi.Input<string>;
     /**
-     * Version of the cluster, Default is '1.10.5'. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the available versions.
+     * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
     clusterVersion?: pulumi.Input<string>;
     /**

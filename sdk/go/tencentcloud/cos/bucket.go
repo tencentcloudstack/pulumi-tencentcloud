@@ -14,8 +14,7 @@ import (
 // Provides a COS resource to create a COS bucket and set its attributes.
 //
 // ## Example Usage
-//
-// Private Bucket
+// ### Private Bucket
 //
 // ```go
 // package main
@@ -38,8 +37,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Creation of multiple available zone bucket
+// ### Creation of multiple available zone bucket
 //
 // ```go
 // package main
@@ -65,8 +63,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using verbose acl
+// ### Using verbose acl
 //
 // ```go
 // package main
@@ -81,8 +78,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cos.NewBucket(ctx, "withAclBody", &Cos.BucketArgs{
-// 			AclBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "<AccessControlPolicy>\n", "    <Owner>\n", "        <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>\n", "    </Owner>\n", "    <AccessControlList>\n", "        <Grant>\n", "            <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "                <URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "            </Grantee>\n", "            <Permission>READ</Permission>\n", "        </Grant>\n", "        <Grant>\n", "            <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "                <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>\n", "                <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>\n", "            </Grantee>\n", "            <Permission>WRITE</Permission>\n", "        </Grant>\n", "        <Grant>\n", "            <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "                <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>\n", "                <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>\n", "            </Grantee>\n", "            <Permission>READ_ACP</Permission>\n", "        </Grant>\n", "    </AccessControlList>\n", "</AccessControlPolicy>\n", "\n")),
-// 			Bucket:  pulumi.String("mycos-1258798060"),
+// 			AclBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "<AccessControlPolicy>\n", "	<Owner>\n", "		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "	</Owner>\n", "	<AccessControlList>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "	</AccessControlList>\n", "</AccessControlPolicy>\n", "\n")),
+// 			Bucket: pulumi.String("mycos-1258798060"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -91,8 +88,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Static Website
+// ### Static Website
 //
 // ```go
 // package main
@@ -122,8 +118,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using CORS
+// ### Using CORS
 //
 // ```go
 // package main
@@ -165,8 +160,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using object lifecycle
+// ### Using object lifecycle
 //
 // ```go
 // package main
@@ -204,8 +198,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using custom origin domain settings
+// ### Using custom origin domain settings
 //
 // ```go
 // package main
@@ -236,8 +229,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using origin-pull settings
+// ### Using origin-pull settings
 //
 // ```go
 // package main
@@ -279,8 +271,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using replication
+// ### Using replication
 //
 // ```go
 // package main
@@ -326,8 +317,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Setting log status
+// ### Setting log status
 //
 // ```go
 // package main
@@ -407,10 +397,16 @@ type Bucket struct {
 	CorsRules BucketCorsRuleArrayOutput `pulumi:"corsRules"`
 	// The URL of this cos bucket.
 	CosBucketUrl pulumi.StringOutput `pulumi:"cosBucketUrl"`
+	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+	EnableIntelligentTiering pulumi.BoolOutput `pulumi:"enableIntelligentTiering"`
 	// The server-side encryption algorithm to use. Valid value is `AES256`.
 	EncryptionAlgorithm pulumi.StringPtrOutput `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrOutput `pulumi:"forceClean"`
+	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+	IntelligentTieringDays pulumi.IntOutput `pulumi:"intelligentTieringDays"`
+	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+	IntelligentTieringRequestFrequent pulumi.IntOutput `pulumi:"intelligentTieringRequestFrequent"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayOutput `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -419,7 +415,7 @@ type Bucket struct {
 	LogPrefix pulumi.StringOutput `pulumi:"logPrefix"`
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
 	LogTargetBucket pulumi.StringOutput `pulumi:"logTargetBucket"`
-	// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrOutput `pulumi:"multiAz"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayOutput `pulumi:"originDomainRules"`
@@ -431,7 +427,7 @@ type Bucket struct {
 	ReplicaRules BucketReplicaRuleArrayOutput `pulumi:"replicaRules"`
 	// The tags of a bucket.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// Enable bucket versioning.
+	// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 	VersioningEnable pulumi.BoolPtrOutput `pulumi:"versioningEnable"`
 	// A website object(documented below).
 	Website BucketWebsitePtrOutput `pulumi:"website"`
@@ -482,10 +478,16 @@ type bucketState struct {
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
 	// The URL of this cos bucket.
 	CosBucketUrl *string `pulumi:"cosBucketUrl"`
+	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+	EnableIntelligentTiering *bool `pulumi:"enableIntelligentTiering"`
 	// The server-side encryption algorithm to use. Valid value is `AES256`.
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
+	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
+	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+	IntelligentTieringRequestFrequent *int `pulumi:"intelligentTieringRequestFrequent"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules []BucketLifecycleRule `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -494,7 +496,7 @@ type bucketState struct {
 	LogPrefix *string `pulumi:"logPrefix"`
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
 	LogTargetBucket *string `pulumi:"logTargetBucket"`
-	// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+	// Indicates whether to create a bucket of multi available zone.
 	MultiAz *bool `pulumi:"multiAz"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules []BucketOriginDomainRule `pulumi:"originDomainRules"`
@@ -506,7 +508,7 @@ type bucketState struct {
 	ReplicaRules []BucketReplicaRule `pulumi:"replicaRules"`
 	// The tags of a bucket.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Enable bucket versioning.
+	// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 	VersioningEnable *bool `pulumi:"versioningEnable"`
 	// A website object(documented below).
 	Website *BucketWebsite `pulumi:"website"`
@@ -525,10 +527,16 @@ type BucketState struct {
 	CorsRules BucketCorsRuleArrayInput
 	// The URL of this cos bucket.
 	CosBucketUrl pulumi.StringPtrInput
+	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+	EnableIntelligentTiering pulumi.BoolPtrInput
 	// The server-side encryption algorithm to use. Valid value is `AES256`.
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
+	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+	IntelligentTieringDays pulumi.IntPtrInput
+	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+	IntelligentTieringRequestFrequent pulumi.IntPtrInput
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayInput
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -537,7 +545,7 @@ type BucketState struct {
 	LogPrefix pulumi.StringPtrInput
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
 	LogTargetBucket pulumi.StringPtrInput
-	// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrInput
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayInput
@@ -549,7 +557,7 @@ type BucketState struct {
 	ReplicaRules BucketReplicaRuleArrayInput
 	// The tags of a bucket.
 	Tags pulumi.MapInput
-	// Enable bucket versioning.
+	// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 	VersioningEnable pulumi.BoolPtrInput
 	// A website object(documented below).
 	Website BucketWebsitePtrInput
@@ -570,10 +578,16 @@ type bucketArgs struct {
 	Bucket string `pulumi:"bucket"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
+	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+	EnableIntelligentTiering *bool `pulumi:"enableIntelligentTiering"`
 	// The server-side encryption algorithm to use. Valid value is `AES256`.
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
+	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
+	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+	IntelligentTieringRequestFrequent *int `pulumi:"intelligentTieringRequestFrequent"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules []BucketLifecycleRule `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -582,7 +596,7 @@ type bucketArgs struct {
 	LogPrefix *string `pulumi:"logPrefix"`
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
 	LogTargetBucket *string `pulumi:"logTargetBucket"`
-	// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+	// Indicates whether to create a bucket of multi available zone.
 	MultiAz *bool `pulumi:"multiAz"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules []BucketOriginDomainRule `pulumi:"originDomainRules"`
@@ -594,7 +608,7 @@ type bucketArgs struct {
 	ReplicaRules []BucketReplicaRule `pulumi:"replicaRules"`
 	// The tags of a bucket.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Enable bucket versioning.
+	// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 	VersioningEnable *bool `pulumi:"versioningEnable"`
 	// A website object(documented below).
 	Website *BucketWebsite `pulumi:"website"`
@@ -612,10 +626,16 @@ type BucketArgs struct {
 	Bucket pulumi.StringInput
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayInput
+	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+	EnableIntelligentTiering pulumi.BoolPtrInput
 	// The server-side encryption algorithm to use. Valid value is `AES256`.
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
+	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+	IntelligentTieringDays pulumi.IntPtrInput
+	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+	IntelligentTieringRequestFrequent pulumi.IntPtrInput
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayInput
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -624,7 +644,7 @@ type BucketArgs struct {
 	LogPrefix pulumi.StringPtrInput
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
 	LogTargetBucket pulumi.StringPtrInput
-	// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrInput
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayInput
@@ -636,7 +656,7 @@ type BucketArgs struct {
 	ReplicaRules BucketReplicaRuleArrayInput
 	// The tags of a bucket.
 	Tags pulumi.MapInput
-	// Enable bucket versioning.
+	// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 	VersioningEnable pulumi.BoolPtrInput
 	// A website object(documented below).
 	Website BucketWebsitePtrInput
@@ -759,6 +779,11 @@ func (o BucketOutput) CosBucketUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.CosBucketUrl }).(pulumi.StringOutput)
 }
 
+// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+func (o BucketOutput) EnableIntelligentTiering() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.BoolOutput { return v.EnableIntelligentTiering }).(pulumi.BoolOutput)
+}
+
 // The server-side encryption algorithm to use. Valid value is `AES256`.
 func (o BucketOutput) EncryptionAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.EncryptionAlgorithm }).(pulumi.StringPtrOutput)
@@ -767,6 +792,16 @@ func (o BucketOutput) EncryptionAlgorithm() pulumi.StringPtrOutput {
 // Force cleanup all objects before delete bucket.
 func (o BucketOutput) ForceClean() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolPtrOutput { return v.ForceClean }).(pulumi.BoolPtrOutput)
+}
+
+// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+func (o BucketOutput) IntelligentTieringDays() pulumi.IntOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.IntOutput { return v.IntelligentTieringDays }).(pulumi.IntOutput)
+}
+
+// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+func (o BucketOutput) IntelligentTieringRequestFrequent() pulumi.IntOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.IntOutput { return v.IntelligentTieringRequestFrequent }).(pulumi.IntOutput)
 }
 
 // A configuration of object lifecycle management (documented below).
@@ -789,7 +824,7 @@ func (o BucketOutput) LogTargetBucket() pulumi.StringOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.LogTargetBucket }).(pulumi.StringOutput)
 }
 
-// Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+// Indicates whether to create a bucket of multi available zone.
 func (o BucketOutput) MultiAz() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolPtrOutput { return v.MultiAz }).(pulumi.BoolPtrOutput)
 }
@@ -819,7 +854,7 @@ func (o BucketOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// Enable bucket versioning.
+// Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
 func (o BucketOutput) VersioningEnable() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolPtrOutput { return v.VersioningEnable }).(pulumi.BoolPtrOutput)
 }

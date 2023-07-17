@@ -10,6 +10,852 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AccountPrivilegesAccounts struct {
+	// user host.
+	Host string `pulumi:"host"`
+	// user name.
+	User string `pulumi:"user"`
+}
+
+// AccountPrivilegesAccountsInput is an input type that accepts AccountPrivilegesAccountsArgs and AccountPrivilegesAccountsOutput values.
+// You can construct a concrete instance of `AccountPrivilegesAccountsInput` via:
+//
+//          AccountPrivilegesAccountsArgs{...}
+type AccountPrivilegesAccountsInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesAccountsOutput() AccountPrivilegesAccountsOutput
+	ToAccountPrivilegesAccountsOutputWithContext(context.Context) AccountPrivilegesAccountsOutput
+}
+
+type AccountPrivilegesAccountsArgs struct {
+	// user host.
+	Host pulumi.StringInput `pulumi:"host"`
+	// user name.
+	User pulumi.StringInput `pulumi:"user"`
+}
+
+func (AccountPrivilegesAccountsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesAccounts)(nil)).Elem()
+}
+
+func (i AccountPrivilegesAccountsArgs) ToAccountPrivilegesAccountsOutput() AccountPrivilegesAccountsOutput {
+	return i.ToAccountPrivilegesAccountsOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesAccountsArgs) ToAccountPrivilegesAccountsOutputWithContext(ctx context.Context) AccountPrivilegesAccountsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesAccountsOutput)
+}
+
+func (i AccountPrivilegesAccountsArgs) ToAccountPrivilegesAccountsPtrOutput() AccountPrivilegesAccountsPtrOutput {
+	return i.ToAccountPrivilegesAccountsPtrOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesAccountsArgs) ToAccountPrivilegesAccountsPtrOutputWithContext(ctx context.Context) AccountPrivilegesAccountsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesAccountsOutput).ToAccountPrivilegesAccountsPtrOutputWithContext(ctx)
+}
+
+// AccountPrivilegesAccountsPtrInput is an input type that accepts AccountPrivilegesAccountsArgs, AccountPrivilegesAccountsPtr and AccountPrivilegesAccountsPtrOutput values.
+// You can construct a concrete instance of `AccountPrivilegesAccountsPtrInput` via:
+//
+//          AccountPrivilegesAccountsArgs{...}
+//
+//  or:
+//
+//          nil
+type AccountPrivilegesAccountsPtrInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesAccountsPtrOutput() AccountPrivilegesAccountsPtrOutput
+	ToAccountPrivilegesAccountsPtrOutputWithContext(context.Context) AccountPrivilegesAccountsPtrOutput
+}
+
+type accountPrivilegesAccountsPtrType AccountPrivilegesAccountsArgs
+
+func AccountPrivilegesAccountsPtr(v *AccountPrivilegesAccountsArgs) AccountPrivilegesAccountsPtrInput {
+	return (*accountPrivilegesAccountsPtrType)(v)
+}
+
+func (*accountPrivilegesAccountsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesAccounts)(nil)).Elem()
+}
+
+func (i *accountPrivilegesAccountsPtrType) ToAccountPrivilegesAccountsPtrOutput() AccountPrivilegesAccountsPtrOutput {
+	return i.ToAccountPrivilegesAccountsPtrOutputWithContext(context.Background())
+}
+
+func (i *accountPrivilegesAccountsPtrType) ToAccountPrivilegesAccountsPtrOutputWithContext(ctx context.Context) AccountPrivilegesAccountsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesAccountsPtrOutput)
+}
+
+type AccountPrivilegesAccountsOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesAccountsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesAccounts)(nil)).Elem()
+}
+
+func (o AccountPrivilegesAccountsOutput) ToAccountPrivilegesAccountsOutput() AccountPrivilegesAccountsOutput {
+	return o
+}
+
+func (o AccountPrivilegesAccountsOutput) ToAccountPrivilegesAccountsOutputWithContext(ctx context.Context) AccountPrivilegesAccountsOutput {
+	return o
+}
+
+func (o AccountPrivilegesAccountsOutput) ToAccountPrivilegesAccountsPtrOutput() AccountPrivilegesAccountsPtrOutput {
+	return o.ToAccountPrivilegesAccountsPtrOutputWithContext(context.Background())
+}
+
+func (o AccountPrivilegesAccountsOutput) ToAccountPrivilegesAccountsPtrOutputWithContext(ctx context.Context) AccountPrivilegesAccountsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AccountPrivilegesAccounts) *AccountPrivilegesAccounts {
+		return &v
+	}).(AccountPrivilegesAccountsPtrOutput)
+}
+
+// user host.
+func (o AccountPrivilegesAccountsOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesAccounts) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// user name.
+func (o AccountPrivilegesAccountsOutput) User() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesAccounts) string { return v.User }).(pulumi.StringOutput)
+}
+
+type AccountPrivilegesAccountsPtrOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesAccountsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesAccounts)(nil)).Elem()
+}
+
+func (o AccountPrivilegesAccountsPtrOutput) ToAccountPrivilegesAccountsPtrOutput() AccountPrivilegesAccountsPtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesAccountsPtrOutput) ToAccountPrivilegesAccountsPtrOutputWithContext(ctx context.Context) AccountPrivilegesAccountsPtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesAccountsPtrOutput) Elem() AccountPrivilegesAccountsOutput {
+	return o.ApplyT(func(v *AccountPrivilegesAccounts) AccountPrivilegesAccounts {
+		if v != nil {
+			return *v
+		}
+		var ret AccountPrivilegesAccounts
+		return ret
+	}).(AccountPrivilegesAccountsOutput)
+}
+
+// user host.
+func (o AccountPrivilegesAccountsPtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesAccounts) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// user name.
+func (o AccountPrivilegesAccountsPtrOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesAccounts) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.User
+	}).(pulumi.StringPtrOutput)
+}
+
+type AccountPrivilegesColumnPrivilege struct {
+	// Column name.
+	Column string `pulumi:"column"`
+	// Database name.
+	Database string `pulumi:"database"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+	// Table name.
+	Table string `pulumi:"table"`
+}
+
+// AccountPrivilegesColumnPrivilegeInput is an input type that accepts AccountPrivilegesColumnPrivilegeArgs and AccountPrivilegesColumnPrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesColumnPrivilegeInput` via:
+//
+//          AccountPrivilegesColumnPrivilegeArgs{...}
+type AccountPrivilegesColumnPrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesColumnPrivilegeOutput() AccountPrivilegesColumnPrivilegeOutput
+	ToAccountPrivilegesColumnPrivilegeOutputWithContext(context.Context) AccountPrivilegesColumnPrivilegeOutput
+}
+
+type AccountPrivilegesColumnPrivilegeArgs struct {
+	// Column name.
+	Column pulumi.StringInput `pulumi:"column"`
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Table name.
+	Table pulumi.StringInput `pulumi:"table"`
+}
+
+func (AccountPrivilegesColumnPrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesColumnPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesColumnPrivilegeArgs) ToAccountPrivilegesColumnPrivilegeOutput() AccountPrivilegesColumnPrivilegeOutput {
+	return i.ToAccountPrivilegesColumnPrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesColumnPrivilegeArgs) ToAccountPrivilegesColumnPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesColumnPrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesColumnPrivilegeOutput)
+}
+
+// AccountPrivilegesColumnPrivilegeArrayInput is an input type that accepts AccountPrivilegesColumnPrivilegeArray and AccountPrivilegesColumnPrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesColumnPrivilegeArrayInput` via:
+//
+//          AccountPrivilegesColumnPrivilegeArray{ AccountPrivilegesColumnPrivilegeArgs{...} }
+type AccountPrivilegesColumnPrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesColumnPrivilegeArrayOutput() AccountPrivilegesColumnPrivilegeArrayOutput
+	ToAccountPrivilegesColumnPrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesColumnPrivilegeArrayOutput
+}
+
+type AccountPrivilegesColumnPrivilegeArray []AccountPrivilegesColumnPrivilegeInput
+
+func (AccountPrivilegesColumnPrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesColumnPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesColumnPrivilegeArray) ToAccountPrivilegesColumnPrivilegeArrayOutput() AccountPrivilegesColumnPrivilegeArrayOutput {
+	return i.ToAccountPrivilegesColumnPrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesColumnPrivilegeArray) ToAccountPrivilegesColumnPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesColumnPrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesColumnPrivilegeArrayOutput)
+}
+
+type AccountPrivilegesColumnPrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesColumnPrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesColumnPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesColumnPrivilegeOutput) ToAccountPrivilegesColumnPrivilegeOutput() AccountPrivilegesColumnPrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesColumnPrivilegeOutput) ToAccountPrivilegesColumnPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesColumnPrivilegeOutput {
+	return o
+}
+
+// Column name.
+func (o AccountPrivilegesColumnPrivilegeOutput) Column() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesColumnPrivilege) string { return v.Column }).(pulumi.StringOutput)
+}
+
+// Database name.
+func (o AccountPrivilegesColumnPrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesColumnPrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesColumnPrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesColumnPrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// Table name.
+func (o AccountPrivilegesColumnPrivilegeOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesColumnPrivilege) string { return v.Table }).(pulumi.StringOutput)
+}
+
+type AccountPrivilegesColumnPrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesColumnPrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesColumnPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesColumnPrivilegeArrayOutput) ToAccountPrivilegesColumnPrivilegeArrayOutput() AccountPrivilegesColumnPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesColumnPrivilegeArrayOutput) ToAccountPrivilegesColumnPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesColumnPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesColumnPrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesColumnPrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesColumnPrivilege {
+		return vs[0].([]AccountPrivilegesColumnPrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesColumnPrivilegeOutput)
+}
+
+type AccountPrivilegesDatabasePrivilege struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+}
+
+// AccountPrivilegesDatabasePrivilegeInput is an input type that accepts AccountPrivilegesDatabasePrivilegeArgs and AccountPrivilegesDatabasePrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesDatabasePrivilegeInput` via:
+//
+//          AccountPrivilegesDatabasePrivilegeArgs{...}
+type AccountPrivilegesDatabasePrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesDatabasePrivilegeOutput() AccountPrivilegesDatabasePrivilegeOutput
+	ToAccountPrivilegesDatabasePrivilegeOutputWithContext(context.Context) AccountPrivilegesDatabasePrivilegeOutput
+}
+
+type AccountPrivilegesDatabasePrivilegeArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+}
+
+func (AccountPrivilegesDatabasePrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesDatabasePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesDatabasePrivilegeArgs) ToAccountPrivilegesDatabasePrivilegeOutput() AccountPrivilegesDatabasePrivilegeOutput {
+	return i.ToAccountPrivilegesDatabasePrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesDatabasePrivilegeArgs) ToAccountPrivilegesDatabasePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesDatabasePrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesDatabasePrivilegeOutput)
+}
+
+// AccountPrivilegesDatabasePrivilegeArrayInput is an input type that accepts AccountPrivilegesDatabasePrivilegeArray and AccountPrivilegesDatabasePrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesDatabasePrivilegeArrayInput` via:
+//
+//          AccountPrivilegesDatabasePrivilegeArray{ AccountPrivilegesDatabasePrivilegeArgs{...} }
+type AccountPrivilegesDatabasePrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesDatabasePrivilegeArrayOutput() AccountPrivilegesDatabasePrivilegeArrayOutput
+	ToAccountPrivilegesDatabasePrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesDatabasePrivilegeArrayOutput
+}
+
+type AccountPrivilegesDatabasePrivilegeArray []AccountPrivilegesDatabasePrivilegeInput
+
+func (AccountPrivilegesDatabasePrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesDatabasePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesDatabasePrivilegeArray) ToAccountPrivilegesDatabasePrivilegeArrayOutput() AccountPrivilegesDatabasePrivilegeArrayOutput {
+	return i.ToAccountPrivilegesDatabasePrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesDatabasePrivilegeArray) ToAccountPrivilegesDatabasePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesDatabasePrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesDatabasePrivilegeArrayOutput)
+}
+
+type AccountPrivilegesDatabasePrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesDatabasePrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesDatabasePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesDatabasePrivilegeOutput) ToAccountPrivilegesDatabasePrivilegeOutput() AccountPrivilegesDatabasePrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesDatabasePrivilegeOutput) ToAccountPrivilegesDatabasePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesDatabasePrivilegeOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPrivilegesDatabasePrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesDatabasePrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesDatabasePrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesDatabasePrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+type AccountPrivilegesDatabasePrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesDatabasePrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesDatabasePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesDatabasePrivilegeArrayOutput) ToAccountPrivilegesDatabasePrivilegeArrayOutput() AccountPrivilegesDatabasePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesDatabasePrivilegeArrayOutput) ToAccountPrivilegesDatabasePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesDatabasePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesDatabasePrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesDatabasePrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesDatabasePrivilege {
+		return vs[0].([]AccountPrivilegesDatabasePrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesDatabasePrivilegeOutput)
+}
+
+type AccountPrivilegesFunctionPrivilege struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Function name.
+	FunctionName string `pulumi:"functionName"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+}
+
+// AccountPrivilegesFunctionPrivilegeInput is an input type that accepts AccountPrivilegesFunctionPrivilegeArgs and AccountPrivilegesFunctionPrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesFunctionPrivilegeInput` via:
+//
+//          AccountPrivilegesFunctionPrivilegeArgs{...}
+type AccountPrivilegesFunctionPrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesFunctionPrivilegeOutput() AccountPrivilegesFunctionPrivilegeOutput
+	ToAccountPrivilegesFunctionPrivilegeOutputWithContext(context.Context) AccountPrivilegesFunctionPrivilegeOutput
+}
+
+type AccountPrivilegesFunctionPrivilegeArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Function name.
+	FunctionName pulumi.StringInput `pulumi:"functionName"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+}
+
+func (AccountPrivilegesFunctionPrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesFunctionPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesFunctionPrivilegeArgs) ToAccountPrivilegesFunctionPrivilegeOutput() AccountPrivilegesFunctionPrivilegeOutput {
+	return i.ToAccountPrivilegesFunctionPrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesFunctionPrivilegeArgs) ToAccountPrivilegesFunctionPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesFunctionPrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesFunctionPrivilegeOutput)
+}
+
+// AccountPrivilegesFunctionPrivilegeArrayInput is an input type that accepts AccountPrivilegesFunctionPrivilegeArray and AccountPrivilegesFunctionPrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesFunctionPrivilegeArrayInput` via:
+//
+//          AccountPrivilegesFunctionPrivilegeArray{ AccountPrivilegesFunctionPrivilegeArgs{...} }
+type AccountPrivilegesFunctionPrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesFunctionPrivilegeArrayOutput() AccountPrivilegesFunctionPrivilegeArrayOutput
+	ToAccountPrivilegesFunctionPrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesFunctionPrivilegeArrayOutput
+}
+
+type AccountPrivilegesFunctionPrivilegeArray []AccountPrivilegesFunctionPrivilegeInput
+
+func (AccountPrivilegesFunctionPrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesFunctionPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesFunctionPrivilegeArray) ToAccountPrivilegesFunctionPrivilegeArrayOutput() AccountPrivilegesFunctionPrivilegeArrayOutput {
+	return i.ToAccountPrivilegesFunctionPrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesFunctionPrivilegeArray) ToAccountPrivilegesFunctionPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesFunctionPrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesFunctionPrivilegeArrayOutput)
+}
+
+type AccountPrivilegesFunctionPrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesFunctionPrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesFunctionPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesFunctionPrivilegeOutput) ToAccountPrivilegesFunctionPrivilegeOutput() AccountPrivilegesFunctionPrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesFunctionPrivilegeOutput) ToAccountPrivilegesFunctionPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesFunctionPrivilegeOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPrivilegesFunctionPrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesFunctionPrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Function name.
+func (o AccountPrivilegesFunctionPrivilegeOutput) FunctionName() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesFunctionPrivilege) string { return v.FunctionName }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesFunctionPrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesFunctionPrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+type AccountPrivilegesFunctionPrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesFunctionPrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesFunctionPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesFunctionPrivilegeArrayOutput) ToAccountPrivilegesFunctionPrivilegeArrayOutput() AccountPrivilegesFunctionPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesFunctionPrivilegeArrayOutput) ToAccountPrivilegesFunctionPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesFunctionPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesFunctionPrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesFunctionPrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesFunctionPrivilege {
+		return vs[0].([]AccountPrivilegesFunctionPrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesFunctionPrivilegeOutput)
+}
+
+type AccountPrivilegesProcedurePrivilege struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+	// Procedure name.
+	Procedure string `pulumi:"procedure"`
+}
+
+// AccountPrivilegesProcedurePrivilegeInput is an input type that accepts AccountPrivilegesProcedurePrivilegeArgs and AccountPrivilegesProcedurePrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesProcedurePrivilegeInput` via:
+//
+//          AccountPrivilegesProcedurePrivilegeArgs{...}
+type AccountPrivilegesProcedurePrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesProcedurePrivilegeOutput() AccountPrivilegesProcedurePrivilegeOutput
+	ToAccountPrivilegesProcedurePrivilegeOutputWithContext(context.Context) AccountPrivilegesProcedurePrivilegeOutput
+}
+
+type AccountPrivilegesProcedurePrivilegeArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Procedure name.
+	Procedure pulumi.StringInput `pulumi:"procedure"`
+}
+
+func (AccountPrivilegesProcedurePrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesProcedurePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesProcedurePrivilegeArgs) ToAccountPrivilegesProcedurePrivilegeOutput() AccountPrivilegesProcedurePrivilegeOutput {
+	return i.ToAccountPrivilegesProcedurePrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesProcedurePrivilegeArgs) ToAccountPrivilegesProcedurePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesProcedurePrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesProcedurePrivilegeOutput)
+}
+
+// AccountPrivilegesProcedurePrivilegeArrayInput is an input type that accepts AccountPrivilegesProcedurePrivilegeArray and AccountPrivilegesProcedurePrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesProcedurePrivilegeArrayInput` via:
+//
+//          AccountPrivilegesProcedurePrivilegeArray{ AccountPrivilegesProcedurePrivilegeArgs{...} }
+type AccountPrivilegesProcedurePrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesProcedurePrivilegeArrayOutput() AccountPrivilegesProcedurePrivilegeArrayOutput
+	ToAccountPrivilegesProcedurePrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesProcedurePrivilegeArrayOutput
+}
+
+type AccountPrivilegesProcedurePrivilegeArray []AccountPrivilegesProcedurePrivilegeInput
+
+func (AccountPrivilegesProcedurePrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesProcedurePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesProcedurePrivilegeArray) ToAccountPrivilegesProcedurePrivilegeArrayOutput() AccountPrivilegesProcedurePrivilegeArrayOutput {
+	return i.ToAccountPrivilegesProcedurePrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesProcedurePrivilegeArray) ToAccountPrivilegesProcedurePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesProcedurePrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesProcedurePrivilegeArrayOutput)
+}
+
+type AccountPrivilegesProcedurePrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesProcedurePrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesProcedurePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesProcedurePrivilegeOutput) ToAccountPrivilegesProcedurePrivilegeOutput() AccountPrivilegesProcedurePrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesProcedurePrivilegeOutput) ToAccountPrivilegesProcedurePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesProcedurePrivilegeOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPrivilegesProcedurePrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesProcedurePrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesProcedurePrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesProcedurePrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// Procedure name.
+func (o AccountPrivilegesProcedurePrivilegeOutput) Procedure() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesProcedurePrivilege) string { return v.Procedure }).(pulumi.StringOutput)
+}
+
+type AccountPrivilegesProcedurePrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesProcedurePrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesProcedurePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesProcedurePrivilegeArrayOutput) ToAccountPrivilegesProcedurePrivilegeArrayOutput() AccountPrivilegesProcedurePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesProcedurePrivilegeArrayOutput) ToAccountPrivilegesProcedurePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesProcedurePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesProcedurePrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesProcedurePrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesProcedurePrivilege {
+		return vs[0].([]AccountPrivilegesProcedurePrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesProcedurePrivilegeOutput)
+}
+
+type AccountPrivilegesTablePrivilege struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+	// Table name.
+	Table string `pulumi:"table"`
+}
+
+// AccountPrivilegesTablePrivilegeInput is an input type that accepts AccountPrivilegesTablePrivilegeArgs and AccountPrivilegesTablePrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesTablePrivilegeInput` via:
+//
+//          AccountPrivilegesTablePrivilegeArgs{...}
+type AccountPrivilegesTablePrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesTablePrivilegeOutput() AccountPrivilegesTablePrivilegeOutput
+	ToAccountPrivilegesTablePrivilegeOutputWithContext(context.Context) AccountPrivilegesTablePrivilegeOutput
+}
+
+type AccountPrivilegesTablePrivilegeArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Table name.
+	Table pulumi.StringInput `pulumi:"table"`
+}
+
+func (AccountPrivilegesTablePrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesTablePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesTablePrivilegeArgs) ToAccountPrivilegesTablePrivilegeOutput() AccountPrivilegesTablePrivilegeOutput {
+	return i.ToAccountPrivilegesTablePrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesTablePrivilegeArgs) ToAccountPrivilegesTablePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesTablePrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesTablePrivilegeOutput)
+}
+
+// AccountPrivilegesTablePrivilegeArrayInput is an input type that accepts AccountPrivilegesTablePrivilegeArray and AccountPrivilegesTablePrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesTablePrivilegeArrayInput` via:
+//
+//          AccountPrivilegesTablePrivilegeArray{ AccountPrivilegesTablePrivilegeArgs{...} }
+type AccountPrivilegesTablePrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesTablePrivilegeArrayOutput() AccountPrivilegesTablePrivilegeArrayOutput
+	ToAccountPrivilegesTablePrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesTablePrivilegeArrayOutput
+}
+
+type AccountPrivilegesTablePrivilegeArray []AccountPrivilegesTablePrivilegeInput
+
+func (AccountPrivilegesTablePrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesTablePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesTablePrivilegeArray) ToAccountPrivilegesTablePrivilegeArrayOutput() AccountPrivilegesTablePrivilegeArrayOutput {
+	return i.ToAccountPrivilegesTablePrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesTablePrivilegeArray) ToAccountPrivilegesTablePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesTablePrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesTablePrivilegeArrayOutput)
+}
+
+type AccountPrivilegesTablePrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesTablePrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesTablePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesTablePrivilegeOutput) ToAccountPrivilegesTablePrivilegeOutput() AccountPrivilegesTablePrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesTablePrivilegeOutput) ToAccountPrivilegesTablePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesTablePrivilegeOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPrivilegesTablePrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesTablePrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesTablePrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesTablePrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// Table name.
+func (o AccountPrivilegesTablePrivilegeOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesTablePrivilege) string { return v.Table }).(pulumi.StringOutput)
+}
+
+type AccountPrivilegesTablePrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesTablePrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesTablePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesTablePrivilegeArrayOutput) ToAccountPrivilegesTablePrivilegeArrayOutput() AccountPrivilegesTablePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesTablePrivilegeArrayOutput) ToAccountPrivilegesTablePrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesTablePrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesTablePrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesTablePrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesTablePrivilege {
+		return vs[0].([]AccountPrivilegesTablePrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesTablePrivilegeOutput)
+}
+
+type AccountPrivilegesViewPrivilege struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Permission information.
+	Privileges []string `pulumi:"privileges"`
+	// View name.
+	View string `pulumi:"view"`
+}
+
+// AccountPrivilegesViewPrivilegeInput is an input type that accepts AccountPrivilegesViewPrivilegeArgs and AccountPrivilegesViewPrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesViewPrivilegeInput` via:
+//
+//          AccountPrivilegesViewPrivilegeArgs{...}
+type AccountPrivilegesViewPrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesViewPrivilegeOutput() AccountPrivilegesViewPrivilegeOutput
+	ToAccountPrivilegesViewPrivilegeOutputWithContext(context.Context) AccountPrivilegesViewPrivilegeOutput
+}
+
+type AccountPrivilegesViewPrivilegeArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Permission information.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// View name.
+	View pulumi.StringInput `pulumi:"view"`
+}
+
+func (AccountPrivilegesViewPrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesViewPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesViewPrivilegeArgs) ToAccountPrivilegesViewPrivilegeOutput() AccountPrivilegesViewPrivilegeOutput {
+	return i.ToAccountPrivilegesViewPrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesViewPrivilegeArgs) ToAccountPrivilegesViewPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesViewPrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesViewPrivilegeOutput)
+}
+
+// AccountPrivilegesViewPrivilegeArrayInput is an input type that accepts AccountPrivilegesViewPrivilegeArray and AccountPrivilegesViewPrivilegeArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesViewPrivilegeArrayInput` via:
+//
+//          AccountPrivilegesViewPrivilegeArray{ AccountPrivilegesViewPrivilegeArgs{...} }
+type AccountPrivilegesViewPrivilegeArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesViewPrivilegeArrayOutput() AccountPrivilegesViewPrivilegeArrayOutput
+	ToAccountPrivilegesViewPrivilegeArrayOutputWithContext(context.Context) AccountPrivilegesViewPrivilegeArrayOutput
+}
+
+type AccountPrivilegesViewPrivilegeArray []AccountPrivilegesViewPrivilegeInput
+
+func (AccountPrivilegesViewPrivilegeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesViewPrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesViewPrivilegeArray) ToAccountPrivilegesViewPrivilegeArrayOutput() AccountPrivilegesViewPrivilegeArrayOutput {
+	return i.ToAccountPrivilegesViewPrivilegeArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesViewPrivilegeArray) ToAccountPrivilegesViewPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesViewPrivilegeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesViewPrivilegeArrayOutput)
+}
+
+type AccountPrivilegesViewPrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesViewPrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesViewPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesViewPrivilegeOutput) ToAccountPrivilegesViewPrivilegeOutput() AccountPrivilegesViewPrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesViewPrivilegeOutput) ToAccountPrivilegesViewPrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesViewPrivilegeOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPrivilegesViewPrivilegeOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesViewPrivilege) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Permission information.
+func (o AccountPrivilegesViewPrivilegeOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesViewPrivilege) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// View name.
+func (o AccountPrivilegesViewPrivilegeOutput) View() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesViewPrivilege) string { return v.View }).(pulumi.StringOutput)
+}
+
+type AccountPrivilegesViewPrivilegeArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesViewPrivilegeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesViewPrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesViewPrivilegeArrayOutput) ToAccountPrivilegesViewPrivilegeArrayOutput() AccountPrivilegesViewPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesViewPrivilegeArrayOutput) ToAccountPrivilegesViewPrivilegeArrayOutputWithContext(ctx context.Context) AccountPrivilegesViewPrivilegeArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesViewPrivilegeArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesViewPrivilegeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesViewPrivilege {
+		return vs[0].([]AccountPrivilegesViewPrivilege)[vs[1].(int)]
+	}).(AccountPrivilegesViewPrivilegeOutput)
+}
+
 type InstanceInitParam struct {
 	// parameter name.
 	Param string `pulumi:"param"`
@@ -1266,6 +2112,2168 @@ func (o GetDbInstancesInstanceResourceTagArrayOutput) Index(i pulumi.IntInput) G
 	}).(GetDbInstancesInstanceResourceTagOutput)
 }
 
+type GetDcnDetailDcnDetail struct {
+	// Number of CPU cores of the instance.
+	Cpu int `pulumi:"cpu"`
+	// Creation time of the instance in the format of 2006-01-02 15:04:05.
+	CreateTime string `pulumi:"createTime"`
+	// DCN flag. Valid values: `1` (primary), `2` (disaster recovery).
+	DcnFlag int `pulumi:"dcnFlag"`
+	// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected).
+	DcnStatus int `pulumi:"dcnStatus"`
+	// Whether KMS is enabled.
+	EncryptStatus int `pulumi:"encryptStatus"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance).
+	InstanceType int `pulumi:"instanceType"`
+	// Instance memory capacity in GB.
+	Memory int `pulumi:"memory"`
+	// Billing mode.
+	PayMode int `pulumi:"payMode"`
+	// Expiration time of the instance in the format of 2006-01-02 15:04:05.
+	PeriodEndTime string `pulumi:"periodEndTime"`
+	// Region where the instance resides.
+	Region string `pulumi:"region"`
+	// Configuration information of DCN replication. This field is null for a primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaConfigs []GetDcnDetailDcnDetailReplicaConfig `pulumi:"replicaConfigs"`
+	// DCN replication status. This field is null for the primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaStatuses []GetDcnDetailDcnDetailReplicaStatus `pulumi:"replicaStatuses"`
+	// Instance status.
+	Status int `pulumi:"status"`
+	// Instance status description.
+	StatusDesc string `pulumi:"statusDesc"`
+	// Instance storage capacity in GB.
+	Storage int `pulumi:"storage"`
+	// Instance IP address.
+	Vip string `pulumi:"vip"`
+	// Instance IPv6 address.
+	Vipv6 string `pulumi:"vipv6"`
+	// Instance port.
+	Vport int `pulumi:"vport"`
+	// Availability zone where the instance resides.
+	Zone string `pulumi:"zone"`
+}
+
+// GetDcnDetailDcnDetailInput is an input type that accepts GetDcnDetailDcnDetailArgs and GetDcnDetailDcnDetailOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailInput` via:
+//
+//          GetDcnDetailDcnDetailArgs{...}
+type GetDcnDetailDcnDetailInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailOutput() GetDcnDetailDcnDetailOutput
+	ToGetDcnDetailDcnDetailOutputWithContext(context.Context) GetDcnDetailDcnDetailOutput
+}
+
+type GetDcnDetailDcnDetailArgs struct {
+	// Number of CPU cores of the instance.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Creation time of the instance in the format of 2006-01-02 15:04:05.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// DCN flag. Valid values: `1` (primary), `2` (disaster recovery).
+	DcnFlag pulumi.IntInput `pulumi:"dcnFlag"`
+	// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected).
+	DcnStatus pulumi.IntInput `pulumi:"dcnStatus"`
+	// Whether KMS is enabled.
+	EncryptStatus pulumi.IntInput `pulumi:"encryptStatus"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance).
+	InstanceType pulumi.IntInput `pulumi:"instanceType"`
+	// Instance memory capacity in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Billing mode.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// Expiration time of the instance in the format of 2006-01-02 15:04:05.
+	PeriodEndTime pulumi.StringInput `pulumi:"periodEndTime"`
+	// Region where the instance resides.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Configuration information of DCN replication. This field is null for a primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaConfigs GetDcnDetailDcnDetailReplicaConfigArrayInput `pulumi:"replicaConfigs"`
+	// DCN replication status. This field is null for the primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaStatuses GetDcnDetailDcnDetailReplicaStatusArrayInput `pulumi:"replicaStatuses"`
+	// Instance status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Instance status description.
+	StatusDesc pulumi.StringInput `pulumi:"statusDesc"`
+	// Instance storage capacity in GB.
+	Storage pulumi.IntInput `pulumi:"storage"`
+	// Instance IP address.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Instance IPv6 address.
+	Vipv6 pulumi.StringInput `pulumi:"vipv6"`
+	// Instance port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+	// Availability zone where the instance resides.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetDcnDetailDcnDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetail)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailArgs) ToGetDcnDetailDcnDetailOutput() GetDcnDetailDcnDetailOutput {
+	return i.ToGetDcnDetailDcnDetailOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailArgs) ToGetDcnDetailDcnDetailOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailOutput)
+}
+
+// GetDcnDetailDcnDetailArrayInput is an input type that accepts GetDcnDetailDcnDetailArray and GetDcnDetailDcnDetailArrayOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailArrayInput` via:
+//
+//          GetDcnDetailDcnDetailArray{ GetDcnDetailDcnDetailArgs{...} }
+type GetDcnDetailDcnDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailArrayOutput() GetDcnDetailDcnDetailArrayOutput
+	ToGetDcnDetailDcnDetailArrayOutputWithContext(context.Context) GetDcnDetailDcnDetailArrayOutput
+}
+
+type GetDcnDetailDcnDetailArray []GetDcnDetailDcnDetailInput
+
+func (GetDcnDetailDcnDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetail)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailArray) ToGetDcnDetailDcnDetailArrayOutput() GetDcnDetailDcnDetailArrayOutput {
+	return i.ToGetDcnDetailDcnDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailArray) ToGetDcnDetailDcnDetailArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailArrayOutput)
+}
+
+type GetDcnDetailDcnDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetail)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailOutput) ToGetDcnDetailDcnDetailOutput() GetDcnDetailDcnDetailOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailOutput) ToGetDcnDetailDcnDetailOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailOutput {
+	return o
+}
+
+// Number of CPU cores of the instance.
+func (o GetDcnDetailDcnDetailOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Creation time of the instance in the format of 2006-01-02 15:04:05.
+func (o GetDcnDetailDcnDetailOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// DCN flag. Valid values: `1` (primary), `2` (disaster recovery).
+func (o GetDcnDetailDcnDetailOutput) DcnFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.DcnFlag }).(pulumi.IntOutput)
+}
+
+// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected).
+func (o GetDcnDetailDcnDetailOutput) DcnStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.DcnStatus }).(pulumi.IntOutput)
+}
+
+// Whether KMS is enabled.
+func (o GetDcnDetailDcnDetailOutput) EncryptStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.EncryptStatus }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetDcnDetailDcnDetailOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetDcnDetailDcnDetailOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance).
+func (o GetDcnDetailDcnDetailOutput) InstanceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.InstanceType }).(pulumi.IntOutput)
+}
+
+// Instance memory capacity in GB.
+func (o GetDcnDetailDcnDetailOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Billing mode.
+func (o GetDcnDetailDcnDetailOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+// Expiration time of the instance in the format of 2006-01-02 15:04:05.
+func (o GetDcnDetailDcnDetailOutput) PeriodEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.PeriodEndTime }).(pulumi.StringOutput)
+}
+
+// Region where the instance resides.
+func (o GetDcnDetailDcnDetailOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Configuration information of DCN replication. This field is null for a primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailOutput) ReplicaConfigs() GetDcnDetailDcnDetailReplicaConfigArrayOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) []GetDcnDetailDcnDetailReplicaConfig { return v.ReplicaConfigs }).(GetDcnDetailDcnDetailReplicaConfigArrayOutput)
+}
+
+// DCN replication status. This field is null for the primary instance.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailOutput) ReplicaStatuses() GetDcnDetailDcnDetailReplicaStatusArrayOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) []GetDcnDetailDcnDetailReplicaStatus { return v.ReplicaStatuses }).(GetDcnDetailDcnDetailReplicaStatusArrayOutput)
+}
+
+// Instance status.
+func (o GetDcnDetailDcnDetailOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Instance status description.
+func (o GetDcnDetailDcnDetailOutput) StatusDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.StatusDesc }).(pulumi.StringOutput)
+}
+
+// Instance storage capacity in GB.
+func (o GetDcnDetailDcnDetailOutput) Storage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Instance IP address.
+func (o GetDcnDetailDcnDetailOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Instance IPv6 address.
+func (o GetDcnDetailDcnDetailOutput) Vipv6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.Vipv6 }).(pulumi.StringOutput)
+}
+
+// Instance port.
+func (o GetDcnDetailDcnDetailOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+// Availability zone where the instance resides.
+func (o GetDcnDetailDcnDetailOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetail) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetDcnDetailDcnDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetail)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailArrayOutput) ToGetDcnDetailDcnDetailArrayOutput() GetDcnDetailDcnDetailArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailArrayOutput) ToGetDcnDetailDcnDetailArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailArrayOutput) Index(i pulumi.IntInput) GetDcnDetailDcnDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDcnDetailDcnDetail {
+		return vs[0].([]GetDcnDetailDcnDetail)[vs[1].(int)]
+	}).(GetDcnDetailDcnDetailOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaConfig struct {
+	// Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)Note: This field may return null, indicating that no valid values can be obtained.
+	DelayReplicationType string `pulumi:"delayReplicationType"`
+	// Specified time for delayed replicationNote: This field may return null, indicating that no valid values can be obtained.
+	DueTime string `pulumi:"dueTime"`
+	// The number of seconds to delay the replicationNote: This field may return null, indicating that no valid values can be obtained.
+	ReplicationDelay int `pulumi:"replicationDelay"`
+	// DCN running status. Valid values: `START` (running), `STOP` (pause)Note: This field may return null, indicating that no valid values can be obtained.
+	RoReplicationMode string `pulumi:"roReplicationMode"`
+}
+
+// GetDcnDetailDcnDetailReplicaConfigInput is an input type that accepts GetDcnDetailDcnDetailReplicaConfigArgs and GetDcnDetailDcnDetailReplicaConfigOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailReplicaConfigInput` via:
+//
+//          GetDcnDetailDcnDetailReplicaConfigArgs{...}
+type GetDcnDetailDcnDetailReplicaConfigInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailReplicaConfigOutput() GetDcnDetailDcnDetailReplicaConfigOutput
+	ToGetDcnDetailDcnDetailReplicaConfigOutputWithContext(context.Context) GetDcnDetailDcnDetailReplicaConfigOutput
+}
+
+type GetDcnDetailDcnDetailReplicaConfigArgs struct {
+	// Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)Note: This field may return null, indicating that no valid values can be obtained.
+	DelayReplicationType pulumi.StringInput `pulumi:"delayReplicationType"`
+	// Specified time for delayed replicationNote: This field may return null, indicating that no valid values can be obtained.
+	DueTime pulumi.StringInput `pulumi:"dueTime"`
+	// The number of seconds to delay the replicationNote: This field may return null, indicating that no valid values can be obtained.
+	ReplicationDelay pulumi.IntInput `pulumi:"replicationDelay"`
+	// DCN running status. Valid values: `START` (running), `STOP` (pause)Note: This field may return null, indicating that no valid values can be obtained.
+	RoReplicationMode pulumi.StringInput `pulumi:"roReplicationMode"`
+}
+
+func (GetDcnDetailDcnDetailReplicaConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetailReplicaConfig)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailReplicaConfigArgs) ToGetDcnDetailDcnDetailReplicaConfigOutput() GetDcnDetailDcnDetailReplicaConfigOutput {
+	return i.ToGetDcnDetailDcnDetailReplicaConfigOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailReplicaConfigArgs) ToGetDcnDetailDcnDetailReplicaConfigOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailReplicaConfigOutput)
+}
+
+// GetDcnDetailDcnDetailReplicaConfigArrayInput is an input type that accepts GetDcnDetailDcnDetailReplicaConfigArray and GetDcnDetailDcnDetailReplicaConfigArrayOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailReplicaConfigArrayInput` via:
+//
+//          GetDcnDetailDcnDetailReplicaConfigArray{ GetDcnDetailDcnDetailReplicaConfigArgs{...} }
+type GetDcnDetailDcnDetailReplicaConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailReplicaConfigArrayOutput() GetDcnDetailDcnDetailReplicaConfigArrayOutput
+	ToGetDcnDetailDcnDetailReplicaConfigArrayOutputWithContext(context.Context) GetDcnDetailDcnDetailReplicaConfigArrayOutput
+}
+
+type GetDcnDetailDcnDetailReplicaConfigArray []GetDcnDetailDcnDetailReplicaConfigInput
+
+func (GetDcnDetailDcnDetailReplicaConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetailReplicaConfig)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailReplicaConfigArray) ToGetDcnDetailDcnDetailReplicaConfigArrayOutput() GetDcnDetailDcnDetailReplicaConfigArrayOutput {
+	return i.ToGetDcnDetailDcnDetailReplicaConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailReplicaConfigArray) ToGetDcnDetailDcnDetailReplicaConfigArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailReplicaConfigArrayOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaConfigOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailReplicaConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetailReplicaConfig)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) ToGetDcnDetailDcnDetailReplicaConfigOutput() GetDcnDetailDcnDetailReplicaConfigOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) ToGetDcnDetailDcnDetailReplicaConfigOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaConfigOutput {
+	return o
+}
+
+// Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) DelayReplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaConfig) string { return v.DelayReplicationType }).(pulumi.StringOutput)
+}
+
+// Specified time for delayed replicationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) DueTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaConfig) string { return v.DueTime }).(pulumi.StringOutput)
+}
+
+// The number of seconds to delay the replicationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) ReplicationDelay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaConfig) int { return v.ReplicationDelay }).(pulumi.IntOutput)
+}
+
+// DCN running status. Valid values: `START` (running), `STOP` (pause)Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDcnDetailDcnDetailReplicaConfigOutput) RoReplicationMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaConfig) string { return v.RoReplicationMode }).(pulumi.StringOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailReplicaConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetailReplicaConfig)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailReplicaConfigArrayOutput) ToGetDcnDetailDcnDetailReplicaConfigArrayOutput() GetDcnDetailDcnDetailReplicaConfigArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaConfigArrayOutput) ToGetDcnDetailDcnDetailReplicaConfigArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaConfigArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaConfigArrayOutput) Index(i pulumi.IntInput) GetDcnDetailDcnDetailReplicaConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDcnDetailDcnDetailReplicaConfig {
+		return vs[0].([]GetDcnDetailDcnDetailReplicaConfig)[vs[1].(int)]
+	}).(GetDcnDetailDcnDetailReplicaConfigOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaStatus struct {
+	// The current delay, which takes the delay value of the replica instance.
+	Delay int `pulumi:"delay"`
+	// Instance status.
+	Status string `pulumi:"status"`
+}
+
+// GetDcnDetailDcnDetailReplicaStatusInput is an input type that accepts GetDcnDetailDcnDetailReplicaStatusArgs and GetDcnDetailDcnDetailReplicaStatusOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailReplicaStatusInput` via:
+//
+//          GetDcnDetailDcnDetailReplicaStatusArgs{...}
+type GetDcnDetailDcnDetailReplicaStatusInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailReplicaStatusOutput() GetDcnDetailDcnDetailReplicaStatusOutput
+	ToGetDcnDetailDcnDetailReplicaStatusOutputWithContext(context.Context) GetDcnDetailDcnDetailReplicaStatusOutput
+}
+
+type GetDcnDetailDcnDetailReplicaStatusArgs struct {
+	// The current delay, which takes the delay value of the replica instance.
+	Delay pulumi.IntInput `pulumi:"delay"`
+	// Instance status.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetDcnDetailDcnDetailReplicaStatusArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetailReplicaStatus)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailReplicaStatusArgs) ToGetDcnDetailDcnDetailReplicaStatusOutput() GetDcnDetailDcnDetailReplicaStatusOutput {
+	return i.ToGetDcnDetailDcnDetailReplicaStatusOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailReplicaStatusArgs) ToGetDcnDetailDcnDetailReplicaStatusOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaStatusOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailReplicaStatusOutput)
+}
+
+// GetDcnDetailDcnDetailReplicaStatusArrayInput is an input type that accepts GetDcnDetailDcnDetailReplicaStatusArray and GetDcnDetailDcnDetailReplicaStatusArrayOutput values.
+// You can construct a concrete instance of `GetDcnDetailDcnDetailReplicaStatusArrayInput` via:
+//
+//          GetDcnDetailDcnDetailReplicaStatusArray{ GetDcnDetailDcnDetailReplicaStatusArgs{...} }
+type GetDcnDetailDcnDetailReplicaStatusArrayInput interface {
+	pulumi.Input
+
+	ToGetDcnDetailDcnDetailReplicaStatusArrayOutput() GetDcnDetailDcnDetailReplicaStatusArrayOutput
+	ToGetDcnDetailDcnDetailReplicaStatusArrayOutputWithContext(context.Context) GetDcnDetailDcnDetailReplicaStatusArrayOutput
+}
+
+type GetDcnDetailDcnDetailReplicaStatusArray []GetDcnDetailDcnDetailReplicaStatusInput
+
+func (GetDcnDetailDcnDetailReplicaStatusArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetailReplicaStatus)(nil)).Elem()
+}
+
+func (i GetDcnDetailDcnDetailReplicaStatusArray) ToGetDcnDetailDcnDetailReplicaStatusArrayOutput() GetDcnDetailDcnDetailReplicaStatusArrayOutput {
+	return i.ToGetDcnDetailDcnDetailReplicaStatusArrayOutputWithContext(context.Background())
+}
+
+func (i GetDcnDetailDcnDetailReplicaStatusArray) ToGetDcnDetailDcnDetailReplicaStatusArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaStatusArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcnDetailDcnDetailReplicaStatusArrayOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaStatusOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailReplicaStatusOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcnDetailDcnDetailReplicaStatus)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailReplicaStatusOutput) ToGetDcnDetailDcnDetailReplicaStatusOutput() GetDcnDetailDcnDetailReplicaStatusOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaStatusOutput) ToGetDcnDetailDcnDetailReplicaStatusOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaStatusOutput {
+	return o
+}
+
+// The current delay, which takes the delay value of the replica instance.
+func (o GetDcnDetailDcnDetailReplicaStatusOutput) Delay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaStatus) int { return v.Delay }).(pulumi.IntOutput)
+}
+
+// Instance status.
+func (o GetDcnDetailDcnDetailReplicaStatusOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcnDetailDcnDetailReplicaStatus) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetDcnDetailDcnDetailReplicaStatusArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDcnDetailDcnDetailReplicaStatusArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcnDetailDcnDetailReplicaStatus)(nil)).Elem()
+}
+
+func (o GetDcnDetailDcnDetailReplicaStatusArrayOutput) ToGetDcnDetailDcnDetailReplicaStatusArrayOutput() GetDcnDetailDcnDetailReplicaStatusArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaStatusArrayOutput) ToGetDcnDetailDcnDetailReplicaStatusArrayOutputWithContext(ctx context.Context) GetDcnDetailDcnDetailReplicaStatusArrayOutput {
+	return o
+}
+
+func (o GetDcnDetailDcnDetailReplicaStatusArrayOutput) Index(i pulumi.IntInput) GetDcnDetailDcnDetailReplicaStatusOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDcnDetailDcnDetailReplicaStatus {
+		return vs[0].([]GetDcnDetailDcnDetailReplicaStatus)[vs[1].(int)]
+	}).(GetDcnDetailDcnDetailReplicaStatusOutput)
+}
+
+type GetInstanceNodeInfoNodesInfo struct {
+	NodeId string `pulumi:"nodeId"`
+	Role   string `pulumi:"role"`
+}
+
+// GetInstanceNodeInfoNodesInfoInput is an input type that accepts GetInstanceNodeInfoNodesInfoArgs and GetInstanceNodeInfoNodesInfoOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoNodesInfoInput` via:
+//
+//          GetInstanceNodeInfoNodesInfoArgs{...}
+type GetInstanceNodeInfoNodesInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput
+	ToGetInstanceNodeInfoNodesInfoOutputWithContext(context.Context) GetInstanceNodeInfoNodesInfoOutput
+}
+
+type GetInstanceNodeInfoNodesInfoArgs struct {
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	Role   pulumi.StringInput `pulumi:"role"`
+}
+
+func (GetInstanceNodeInfoNodesInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoNodesInfoArgs) ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput {
+	return i.ToGetInstanceNodeInfoNodesInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoNodesInfoArgs) ToGetInstanceNodeInfoNodesInfoOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoNodesInfoOutput)
+}
+
+// GetInstanceNodeInfoNodesInfoArrayInput is an input type that accepts GetInstanceNodeInfoNodesInfoArray and GetInstanceNodeInfoNodesInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoNodesInfoArrayInput` via:
+//
+//          GetInstanceNodeInfoNodesInfoArray{ GetInstanceNodeInfoNodesInfoArgs{...} }
+type GetInstanceNodeInfoNodesInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput
+	ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(context.Context) GetInstanceNodeInfoNodesInfoArrayOutput
+}
+
+type GetInstanceNodeInfoNodesInfoArray []GetInstanceNodeInfoNodesInfoInput
+
+func (GetInstanceNodeInfoNodesInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoNodesInfoArray) ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput {
+	return i.ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoNodesInfoArray) ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoNodesInfoArrayOutput)
+}
+
+type GetInstanceNodeInfoNodesInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoNodesInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) ToGetInstanceNodeInfoNodesInfoOutput() GetInstanceNodeInfoNodesInfoOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) ToGetInstanceNodeInfoNodesInfoOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoNodesInfo) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+func (o GetInstanceNodeInfoNodesInfoOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoNodesInfo) string { return v.Role }).(pulumi.StringOutput)
+}
+
+type GetInstanceNodeInfoNodesInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoNodesInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoNodesInfo)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) ToGetInstanceNodeInfoNodesInfoArrayOutput() GetInstanceNodeInfoNodesInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) ToGetInstanceNodeInfoNodesInfoArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoNodesInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoNodesInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceNodeInfoNodesInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceNodeInfoNodesInfo {
+		return vs[0].([]GetInstanceNodeInfoNodesInfo)[vs[1].(int)]
+	}).(GetInstanceNodeInfoNodesInfoOutput)
+}
+
+type GetInstanceSpecsSpec struct {
+	// machine type.
+	Machine string `pulumi:"machine"`
+	// list of machine specifications.
+	SpecInfos []GetInstanceSpecsSpecSpecInfo `pulumi:"specInfos"`
+}
+
+// GetInstanceSpecsSpecInput is an input type that accepts GetInstanceSpecsSpecArgs and GetInstanceSpecsSpecOutput values.
+// You can construct a concrete instance of `GetInstanceSpecsSpecInput` via:
+//
+//          GetInstanceSpecsSpecArgs{...}
+type GetInstanceSpecsSpecInput interface {
+	pulumi.Input
+
+	ToGetInstanceSpecsSpecOutput() GetInstanceSpecsSpecOutput
+	ToGetInstanceSpecsSpecOutputWithContext(context.Context) GetInstanceSpecsSpecOutput
+}
+
+type GetInstanceSpecsSpecArgs struct {
+	// machine type.
+	Machine pulumi.StringInput `pulumi:"machine"`
+	// list of machine specifications.
+	SpecInfos GetInstanceSpecsSpecSpecInfoArrayInput `pulumi:"specInfos"`
+}
+
+func (GetInstanceSpecsSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceSpecsSpec)(nil)).Elem()
+}
+
+func (i GetInstanceSpecsSpecArgs) ToGetInstanceSpecsSpecOutput() GetInstanceSpecsSpecOutput {
+	return i.ToGetInstanceSpecsSpecOutputWithContext(context.Background())
+}
+
+func (i GetInstanceSpecsSpecArgs) ToGetInstanceSpecsSpecOutputWithContext(ctx context.Context) GetInstanceSpecsSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceSpecsSpecOutput)
+}
+
+// GetInstanceSpecsSpecArrayInput is an input type that accepts GetInstanceSpecsSpecArray and GetInstanceSpecsSpecArrayOutput values.
+// You can construct a concrete instance of `GetInstanceSpecsSpecArrayInput` via:
+//
+//          GetInstanceSpecsSpecArray{ GetInstanceSpecsSpecArgs{...} }
+type GetInstanceSpecsSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceSpecsSpecArrayOutput() GetInstanceSpecsSpecArrayOutput
+	ToGetInstanceSpecsSpecArrayOutputWithContext(context.Context) GetInstanceSpecsSpecArrayOutput
+}
+
+type GetInstanceSpecsSpecArray []GetInstanceSpecsSpecInput
+
+func (GetInstanceSpecsSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceSpecsSpec)(nil)).Elem()
+}
+
+func (i GetInstanceSpecsSpecArray) ToGetInstanceSpecsSpecArrayOutput() GetInstanceSpecsSpecArrayOutput {
+	return i.ToGetInstanceSpecsSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceSpecsSpecArray) ToGetInstanceSpecsSpecArrayOutputWithContext(ctx context.Context) GetInstanceSpecsSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceSpecsSpecArrayOutput)
+}
+
+type GetInstanceSpecsSpecOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceSpecsSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceSpecsSpec)(nil)).Elem()
+}
+
+func (o GetInstanceSpecsSpecOutput) ToGetInstanceSpecsSpecOutput() GetInstanceSpecsSpecOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecOutput) ToGetInstanceSpecsSpecOutputWithContext(ctx context.Context) GetInstanceSpecsSpecOutput {
+	return o
+}
+
+// machine type.
+func (o GetInstanceSpecsSpecOutput) Machine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpec) string { return v.Machine }).(pulumi.StringOutput)
+}
+
+// list of machine specifications.
+func (o GetInstanceSpecsSpecOutput) SpecInfos() GetInstanceSpecsSpecSpecInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpec) []GetInstanceSpecsSpecSpecInfo { return v.SpecInfos }).(GetInstanceSpecsSpecSpecInfoArrayOutput)
+}
+
+type GetInstanceSpecsSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceSpecsSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceSpecsSpec)(nil)).Elem()
+}
+
+func (o GetInstanceSpecsSpecArrayOutput) ToGetInstanceSpecsSpecArrayOutput() GetInstanceSpecsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecArrayOutput) ToGetInstanceSpecsSpecArrayOutputWithContext(ctx context.Context) GetInstanceSpecsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecArrayOutput) Index(i pulumi.IntInput) GetInstanceSpecsSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceSpecsSpec {
+		return vs[0].([]GetInstanceSpecsSpec)[vs[1].(int)]
+	}).(GetInstanceSpecsSpecOutput)
+}
+
+type GetInstanceSpecsSpecSpecInfo struct {
+	// CPU cores.
+	Cpu int `pulumi:"cpu"`
+	// machine type.
+	Machine string `pulumi:"machine"`
+	// maximum storage size, in GB.
+	MaxStorage int `pulumi:"maxStorage"`
+	// memory, in GB.
+	Memory int `pulumi:"memory"`
+	// minimum storage size, in GB.
+	MinStorage int `pulumi:"minStorage"`
+	// node count.
+	NodeCount int `pulumi:"nodeCount"`
+	// product price id.
+	Pid int `pulumi:"pid"`
+	// maximum QPS.
+	Qps int `pulumi:"qps"`
+	// recommended usage scenarios.
+	SuitInfo string `pulumi:"suitInfo"`
+}
+
+// GetInstanceSpecsSpecSpecInfoInput is an input type that accepts GetInstanceSpecsSpecSpecInfoArgs and GetInstanceSpecsSpecSpecInfoOutput values.
+// You can construct a concrete instance of `GetInstanceSpecsSpecSpecInfoInput` via:
+//
+//          GetInstanceSpecsSpecSpecInfoArgs{...}
+type GetInstanceSpecsSpecSpecInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceSpecsSpecSpecInfoOutput() GetInstanceSpecsSpecSpecInfoOutput
+	ToGetInstanceSpecsSpecSpecInfoOutputWithContext(context.Context) GetInstanceSpecsSpecSpecInfoOutput
+}
+
+type GetInstanceSpecsSpecSpecInfoArgs struct {
+	// CPU cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// machine type.
+	Machine pulumi.StringInput `pulumi:"machine"`
+	// maximum storage size, in GB.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// memory, in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// minimum storage size, in GB.
+	MinStorage pulumi.IntInput `pulumi:"minStorage"`
+	// node count.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// product price id.
+	Pid pulumi.IntInput `pulumi:"pid"`
+	// maximum QPS.
+	Qps pulumi.IntInput `pulumi:"qps"`
+	// recommended usage scenarios.
+	SuitInfo pulumi.StringInput `pulumi:"suitInfo"`
+}
+
+func (GetInstanceSpecsSpecSpecInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceSpecsSpecSpecInfo)(nil)).Elem()
+}
+
+func (i GetInstanceSpecsSpecSpecInfoArgs) ToGetInstanceSpecsSpecSpecInfoOutput() GetInstanceSpecsSpecSpecInfoOutput {
+	return i.ToGetInstanceSpecsSpecSpecInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceSpecsSpecSpecInfoArgs) ToGetInstanceSpecsSpecSpecInfoOutputWithContext(ctx context.Context) GetInstanceSpecsSpecSpecInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceSpecsSpecSpecInfoOutput)
+}
+
+// GetInstanceSpecsSpecSpecInfoArrayInput is an input type that accepts GetInstanceSpecsSpecSpecInfoArray and GetInstanceSpecsSpecSpecInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceSpecsSpecSpecInfoArrayInput` via:
+//
+//          GetInstanceSpecsSpecSpecInfoArray{ GetInstanceSpecsSpecSpecInfoArgs{...} }
+type GetInstanceSpecsSpecSpecInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceSpecsSpecSpecInfoArrayOutput() GetInstanceSpecsSpecSpecInfoArrayOutput
+	ToGetInstanceSpecsSpecSpecInfoArrayOutputWithContext(context.Context) GetInstanceSpecsSpecSpecInfoArrayOutput
+}
+
+type GetInstanceSpecsSpecSpecInfoArray []GetInstanceSpecsSpecSpecInfoInput
+
+func (GetInstanceSpecsSpecSpecInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceSpecsSpecSpecInfo)(nil)).Elem()
+}
+
+func (i GetInstanceSpecsSpecSpecInfoArray) ToGetInstanceSpecsSpecSpecInfoArrayOutput() GetInstanceSpecsSpecSpecInfoArrayOutput {
+	return i.ToGetInstanceSpecsSpecSpecInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceSpecsSpecSpecInfoArray) ToGetInstanceSpecsSpecSpecInfoArrayOutputWithContext(ctx context.Context) GetInstanceSpecsSpecSpecInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceSpecsSpecSpecInfoArrayOutput)
+}
+
+type GetInstanceSpecsSpecSpecInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceSpecsSpecSpecInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceSpecsSpecSpecInfo)(nil)).Elem()
+}
+
+func (o GetInstanceSpecsSpecSpecInfoOutput) ToGetInstanceSpecsSpecSpecInfoOutput() GetInstanceSpecsSpecSpecInfoOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecSpecInfoOutput) ToGetInstanceSpecsSpecSpecInfoOutputWithContext(ctx context.Context) GetInstanceSpecsSpecSpecInfoOutput {
+	return o
+}
+
+// CPU cores.
+func (o GetInstanceSpecsSpecSpecInfoOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// machine type.
+func (o GetInstanceSpecsSpecSpecInfoOutput) Machine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) string { return v.Machine }).(pulumi.StringOutput)
+}
+
+// maximum storage size, in GB.
+func (o GetInstanceSpecsSpecSpecInfoOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+// memory, in GB.
+func (o GetInstanceSpecsSpecSpecInfoOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// minimum storage size, in GB.
+func (o GetInstanceSpecsSpecSpecInfoOutput) MinStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.MinStorage }).(pulumi.IntOutput)
+}
+
+// node count.
+func (o GetInstanceSpecsSpecSpecInfoOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+// product price id.
+func (o GetInstanceSpecsSpecSpecInfoOutput) Pid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.Pid }).(pulumi.IntOutput)
+}
+
+// maximum QPS.
+func (o GetInstanceSpecsSpecSpecInfoOutput) Qps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) int { return v.Qps }).(pulumi.IntOutput)
+}
+
+// recommended usage scenarios.
+func (o GetInstanceSpecsSpecSpecInfoOutput) SuitInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceSpecsSpecSpecInfo) string { return v.SuitInfo }).(pulumi.StringOutput)
+}
+
+type GetInstanceSpecsSpecSpecInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceSpecsSpecSpecInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceSpecsSpecSpecInfo)(nil)).Elem()
+}
+
+func (o GetInstanceSpecsSpecSpecInfoArrayOutput) ToGetInstanceSpecsSpecSpecInfoArrayOutput() GetInstanceSpecsSpecSpecInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecSpecInfoArrayOutput) ToGetInstanceSpecsSpecSpecInfoArrayOutputWithContext(ctx context.Context) GetInstanceSpecsSpecSpecInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceSpecsSpecSpecInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceSpecsSpecSpecInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceSpecsSpecSpecInfo {
+		return vs[0].([]GetInstanceSpecsSpecSpecInfo)[vs[1].(int)]
+	}).(GetInstanceSpecsSpecSpecInfoOutput)
+}
+
+type GetLogFilesFile struct {
+	// Filename.
+	FileName string `pulumi:"fileName"`
+	// File length.
+	Length int `pulumi:"length"`
+	// Last modified time of log.
+	Mtime int `pulumi:"mtime"`
+	// Uniform resource identifier (URI) used during log download.
+	Uri string `pulumi:"uri"`
+}
+
+// GetLogFilesFileInput is an input type that accepts GetLogFilesFileArgs and GetLogFilesFileOutput values.
+// You can construct a concrete instance of `GetLogFilesFileInput` via:
+//
+//          GetLogFilesFileArgs{...}
+type GetLogFilesFileInput interface {
+	pulumi.Input
+
+	ToGetLogFilesFileOutput() GetLogFilesFileOutput
+	ToGetLogFilesFileOutputWithContext(context.Context) GetLogFilesFileOutput
+}
+
+type GetLogFilesFileArgs struct {
+	// Filename.
+	FileName pulumi.StringInput `pulumi:"fileName"`
+	// File length.
+	Length pulumi.IntInput `pulumi:"length"`
+	// Last modified time of log.
+	Mtime pulumi.IntInput `pulumi:"mtime"`
+	// Uniform resource identifier (URI) used during log download.
+	Uri pulumi.StringInput `pulumi:"uri"`
+}
+
+func (GetLogFilesFileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogFilesFile)(nil)).Elem()
+}
+
+func (i GetLogFilesFileArgs) ToGetLogFilesFileOutput() GetLogFilesFileOutput {
+	return i.ToGetLogFilesFileOutputWithContext(context.Background())
+}
+
+func (i GetLogFilesFileArgs) ToGetLogFilesFileOutputWithContext(ctx context.Context) GetLogFilesFileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogFilesFileOutput)
+}
+
+// GetLogFilesFileArrayInput is an input type that accepts GetLogFilesFileArray and GetLogFilesFileArrayOutput values.
+// You can construct a concrete instance of `GetLogFilesFileArrayInput` via:
+//
+//          GetLogFilesFileArray{ GetLogFilesFileArgs{...} }
+type GetLogFilesFileArrayInput interface {
+	pulumi.Input
+
+	ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput
+	ToGetLogFilesFileArrayOutputWithContext(context.Context) GetLogFilesFileArrayOutput
+}
+
+type GetLogFilesFileArray []GetLogFilesFileInput
+
+func (GetLogFilesFileArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogFilesFile)(nil)).Elem()
+}
+
+func (i GetLogFilesFileArray) ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput {
+	return i.ToGetLogFilesFileArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogFilesFileArray) ToGetLogFilesFileArrayOutputWithContext(ctx context.Context) GetLogFilesFileArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogFilesFileArrayOutput)
+}
+
+type GetLogFilesFileOutput struct{ *pulumi.OutputState }
+
+func (GetLogFilesFileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogFilesFile)(nil)).Elem()
+}
+
+func (o GetLogFilesFileOutput) ToGetLogFilesFileOutput() GetLogFilesFileOutput {
+	return o
+}
+
+func (o GetLogFilesFileOutput) ToGetLogFilesFileOutputWithContext(ctx context.Context) GetLogFilesFileOutput {
+	return o
+}
+
+// Filename.
+func (o GetLogFilesFileOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogFilesFile) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+// File length.
+func (o GetLogFilesFileOutput) Length() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogFilesFile) int { return v.Length }).(pulumi.IntOutput)
+}
+
+// Last modified time of log.
+func (o GetLogFilesFileOutput) Mtime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogFilesFile) int { return v.Mtime }).(pulumi.IntOutput)
+}
+
+// Uniform resource identifier (URI) used during log download.
+func (o GetLogFilesFileOutput) Uri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogFilesFile) string { return v.Uri }).(pulumi.StringOutput)
+}
+
+type GetLogFilesFileArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogFilesFileArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogFilesFile)(nil)).Elem()
+}
+
+func (o GetLogFilesFileArrayOutput) ToGetLogFilesFileArrayOutput() GetLogFilesFileArrayOutput {
+	return o
+}
+
+func (o GetLogFilesFileArrayOutput) ToGetLogFilesFileArrayOutputWithContext(ctx context.Context) GetLogFilesFileArrayOutput {
+	return o
+}
+
+func (o GetLogFilesFileArrayOutput) Index(i pulumi.IntInput) GetLogFilesFileOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogFilesFile {
+		return vs[0].([]GetLogFilesFile)[vs[1].(int)]
+	}).(GetLogFilesFileOutput)
+}
+
+type GetOrdersDeal struct {
+	// Number of items.
+	Count int `pulumi:"count"`
+	// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
+	DealName string `pulumi:"dealName"`
+	// ID of the associated process, which can be used to query the process execution status.
+	FlowId int `pulumi:"flowId"`
+	// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIds []string `pulumi:"instanceIds"`
+	// Account.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+	PayMode int `pulumi:"payMode"`
+}
+
+// GetOrdersDealInput is an input type that accepts GetOrdersDealArgs and GetOrdersDealOutput values.
+// You can construct a concrete instance of `GetOrdersDealInput` via:
+//
+//          GetOrdersDealArgs{...}
+type GetOrdersDealInput interface {
+	pulumi.Input
+
+	ToGetOrdersDealOutput() GetOrdersDealOutput
+	ToGetOrdersDealOutputWithContext(context.Context) GetOrdersDealOutput
+}
+
+type GetOrdersDealArgs struct {
+	// Number of items.
+	Count pulumi.IntInput `pulumi:"count"`
+	// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
+	DealName pulumi.StringInput `pulumi:"dealName"`
+	// ID of the associated process, which can be used to query the process execution status.
+	FlowId pulumi.IntInput `pulumi:"flowId"`
+	// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+	// Account.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+}
+
+func (GetOrdersDealArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrdersDeal)(nil)).Elem()
+}
+
+func (i GetOrdersDealArgs) ToGetOrdersDealOutput() GetOrdersDealOutput {
+	return i.ToGetOrdersDealOutputWithContext(context.Background())
+}
+
+func (i GetOrdersDealArgs) ToGetOrdersDealOutputWithContext(ctx context.Context) GetOrdersDealOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrdersDealOutput)
+}
+
+// GetOrdersDealArrayInput is an input type that accepts GetOrdersDealArray and GetOrdersDealArrayOutput values.
+// You can construct a concrete instance of `GetOrdersDealArrayInput` via:
+//
+//          GetOrdersDealArray{ GetOrdersDealArgs{...} }
+type GetOrdersDealArrayInput interface {
+	pulumi.Input
+
+	ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput
+	ToGetOrdersDealArrayOutputWithContext(context.Context) GetOrdersDealArrayOutput
+}
+
+type GetOrdersDealArray []GetOrdersDealInput
+
+func (GetOrdersDealArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrdersDeal)(nil)).Elem()
+}
+
+func (i GetOrdersDealArray) ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput {
+	return i.ToGetOrdersDealArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrdersDealArray) ToGetOrdersDealArrayOutputWithContext(ctx context.Context) GetOrdersDealArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrdersDealArrayOutput)
+}
+
+type GetOrdersDealOutput struct{ *pulumi.OutputState }
+
+func (GetOrdersDealOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrdersDeal)(nil)).Elem()
+}
+
+func (o GetOrdersDealOutput) ToGetOrdersDealOutput() GetOrdersDealOutput {
+	return o
+}
+
+func (o GetOrdersDealOutput) ToGetOrdersDealOutputWithContext(ctx context.Context) GetOrdersDealOutput {
+	return o
+}
+
+// Number of items.
+func (o GetOrdersDealOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
+func (o GetOrdersDealOutput) DealName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrdersDeal) string { return v.DealName }).(pulumi.StringOutput)
+}
+
+// ID of the associated process, which can be used to query the process execution status.
+func (o GetOrdersDealOutput) FlowId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.FlowId }).(pulumi.IntOutput)
+}
+
+// The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetOrdersDealOutput) InstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetOrdersDeal) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Account.
+func (o GetOrdersDealOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrdersDeal) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+func (o GetOrdersDealOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrdersDeal) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+type GetOrdersDealArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrdersDealArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrdersDeal)(nil)).Elem()
+}
+
+func (o GetOrdersDealArrayOutput) ToGetOrdersDealArrayOutput() GetOrdersDealArrayOutput {
+	return o
+}
+
+func (o GetOrdersDealArrayOutput) ToGetOrdersDealArrayOutputWithContext(ctx context.Context) GetOrdersDealArrayOutput {
+	return o
+}
+
+func (o GetOrdersDealArrayOutput) Index(i pulumi.IntInput) GetOrdersDealOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrdersDeal {
+		return vs[0].([]GetOrdersDeal)[vs[1].(int)]
+	}).(GetOrdersDealOutput)
+}
+
+type GetProjectSecurityGroupsGroup struct {
+	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+	CreateTime string `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds []GetProjectSecurityGroupsGroupInbound `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds []GetProjectSecurityGroupsGroupOutbound `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Security group ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName string `pulumi:"securityGroupName"`
+	// Security group remarks.
+	SecurityGroupRemark string `pulumi:"securityGroupRemark"`
+}
+
+// GetProjectSecurityGroupsGroupInput is an input type that accepts GetProjectSecurityGroupsGroupArgs and GetProjectSecurityGroupsGroupOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInput` via:
+//
+//          GetProjectSecurityGroupsGroupArgs{...}
+type GetProjectSecurityGroupsGroupInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput
+	ToGetProjectSecurityGroupsGroupOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutput
+}
+
+type GetProjectSecurityGroupsGroupArgs struct {
+	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds GetProjectSecurityGroupsGroupInboundArrayInput `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds GetProjectSecurityGroupsGroupOutboundArrayInput `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Security group ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName pulumi.StringInput `pulumi:"securityGroupName"`
+	// Security group remarks.
+	SecurityGroupRemark pulumi.StringInput `pulumi:"securityGroupRemark"`
+}
+
+func (GetProjectSecurityGroupsGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupArgs) ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupArgs) ToGetProjectSecurityGroupsGroupOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutput)
+}
+
+// GetProjectSecurityGroupsGroupArrayInput is an input type that accepts GetProjectSecurityGroupsGroupArray and GetProjectSecurityGroupsGroupArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupArray{ GetProjectSecurityGroupsGroupArgs{...} }
+type GetProjectSecurityGroupsGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput
+	ToGetProjectSecurityGroupsGroupArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupArray []GetProjectSecurityGroupsGroupInput
+
+func (GetProjectSecurityGroupsGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupArray) ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupArray) ToGetProjectSecurityGroupsGroupArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutput) ToGetProjectSecurityGroupsGroupOutput() GetProjectSecurityGroupsGroupOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutput) ToGetProjectSecurityGroupsGroupOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutput {
+	return o
+}
+
+// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+func (o GetProjectSecurityGroupsGroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Inbound rule.
+func (o GetProjectSecurityGroupsGroupOutput) Inbounds() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) []GetProjectSecurityGroupsGroupInbound { return v.Inbounds }).(GetProjectSecurityGroupsGroupInboundArrayOutput)
+}
+
+// Outbound rule.
+func (o GetProjectSecurityGroupsGroupOutput) Outbounds() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) []GetProjectSecurityGroupsGroupOutbound { return v.Outbounds }).(GetProjectSecurityGroupsGroupOutboundArrayOutput)
+}
+
+// Project ID.
+func (o GetProjectSecurityGroupsGroupOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Security group ID.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+// Security group name.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupName }).(pulumi.StringOutput)
+}
+
+// Security group remarks.
+func (o GetProjectSecurityGroupsGroupOutput) SecurityGroupRemark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroup) string { return v.SecurityGroupRemark }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroup)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) ToGetProjectSecurityGroupsGroupArrayOutput() GetProjectSecurityGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) ToGetProjectSecurityGroupsGroupArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroup {
+		return vs[0].([]GetProjectSecurityGroupsGroup)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupOutput)
+}
+
+type GetProjectSecurityGroupsGroupInbound struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action string `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp string `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetProjectSecurityGroupsGroupInboundInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArgs and GetProjectSecurityGroupsGroupInboundOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundInput` via:
+//
+//          GetProjectSecurityGroupsGroupInboundArgs{...}
+type GetProjectSecurityGroupsGroupInboundInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput
+	ToGetProjectSecurityGroupsGroupInboundOutputWithContext(context.Context) GetProjectSecurityGroupsGroupInboundOutput
+}
+
+type GetProjectSecurityGroupsGroupInboundArgs struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetProjectSecurityGroupsGroupInboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArgs) ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput {
+	return i.ToGetProjectSecurityGroupsGroupInboundOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArgs) ToGetProjectSecurityGroupsGroupInboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupInboundOutput)
+}
+
+// GetProjectSecurityGroupsGroupInboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArray and GetProjectSecurityGroupsGroupInboundArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupInboundArray{ GetProjectSecurityGroupsGroupInboundArgs{...} }
+type GetProjectSecurityGroupsGroupInboundArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput
+	ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupInboundArray []GetProjectSecurityGroupsGroupInboundInput
+
+func (GetProjectSecurityGroupsGroupInboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArray) ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupInboundArray) ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupInboundArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupInboundOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupInboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupInboundOutput) ToGetProjectSecurityGroupsGroupInboundOutput() GetProjectSecurityGroupsGroupInboundOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundOutput) ToGetProjectSecurityGroupsGroupInboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundOutput {
+	return o
+}
+
+// Policy, which can be `ACCEPT` or `DROP`.
+func (o GetProjectSecurityGroupsGroupInboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source IP or source IP range, such as 192.168.0.0/16.
+func (o GetProjectSecurityGroupsGroupInboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Network protocol. UDP and TCP are supported.
+func (o GetProjectSecurityGroupsGroupInboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetProjectSecurityGroupsGroupInboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupInbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupInboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupInboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupInbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) ToGetProjectSecurityGroupsGroupInboundArrayOutput() GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) ToGetProjectSecurityGroupsGroupInboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupInboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupInboundArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupInboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroupInbound {
+		return vs[0].([]GetProjectSecurityGroupsGroupInbound)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupInboundOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutbound struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action string `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp string `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetProjectSecurityGroupsGroupOutboundInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArgs and GetProjectSecurityGroupsGroupOutboundOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundInput` via:
+//
+//          GetProjectSecurityGroupsGroupOutboundArgs{...}
+type GetProjectSecurityGroupsGroupOutboundInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput
+	ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutboundOutput
+}
+
+type GetProjectSecurityGroupsGroupOutboundArgs struct {
+	// Policy, which can be `ACCEPT` or `DROP`.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source IP or source IP range, such as 192.168.0.0/16.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetProjectSecurityGroupsGroupOutboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArgs) ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArgs) ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutboundOutput)
+}
+
+// GetProjectSecurityGroupsGroupOutboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArray and GetProjectSecurityGroupsGroupOutboundArrayOutput values.
+// You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundArrayInput` via:
+//
+//          GetProjectSecurityGroupsGroupOutboundArray{ GetProjectSecurityGroupsGroupOutboundArgs{...} }
+type GetProjectSecurityGroupsGroupOutboundArrayInput interface {
+	pulumi.Input
+
+	ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput
+	ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput
+}
+
+type GetProjectSecurityGroupsGroupOutboundArray []GetProjectSecurityGroupsGroupOutboundInput
+
+func (GetProjectSecurityGroupsGroupOutboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArray) ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return i.ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetProjectSecurityGroupsGroupOutboundArray) ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProjectSecurityGroupsGroupOutboundArrayOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutboundOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundOutput) ToGetProjectSecurityGroupsGroupOutboundOutput() GetProjectSecurityGroupsGroupOutboundOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundOutput) ToGetProjectSecurityGroupsGroupOutboundOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundOutput {
+	return o
+}
+
+// Policy, which can be `ACCEPT` or `DROP`.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source IP or source IP range, such as 192.168.0.0/16.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Network protocol. UDP and TCP are supported.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetProjectSecurityGroupsGroupOutboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProjectSecurityGroupsGroupOutbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetProjectSecurityGroupsGroupOutboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProjectSecurityGroupsGroupOutboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProjectSecurityGroupsGroupOutbound)(nil)).Elem()
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) ToGetProjectSecurityGroupsGroupOutboundArrayOutput() GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) ToGetProjectSecurityGroupsGroupOutboundArrayOutputWithContext(ctx context.Context) GetProjectSecurityGroupsGroupOutboundArrayOutput {
+	return o
+}
+
+func (o GetProjectSecurityGroupsGroupOutboundArrayOutput) Index(i pulumi.IntInput) GetProjectSecurityGroupsGroupOutboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectSecurityGroupsGroupOutbound {
+		return vs[0].([]GetProjectSecurityGroupsGroupOutbound)[vs[1].(int)]
+	}).(GetProjectSecurityGroupsGroupOutboundOutput)
+}
+
+type GetSaleInfoRegionList struct {
+	// available zone choice.
+	AvailableChoices []GetSaleInfoRegionListAvailableChoice `pulumi:"availableChoices"`
+	// region name(en).
+	Region string `pulumi:"region"`
+	// region id.
+	RegionId int `pulumi:"regionId"`
+	// region name(zh).
+	RegionName string `pulumi:"regionName"`
+	// list of az zone.
+	ZoneLists []GetSaleInfoRegionListZoneList `pulumi:"zoneLists"`
+}
+
+// GetSaleInfoRegionListInput is an input type that accepts GetSaleInfoRegionListArgs and GetSaleInfoRegionListOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListInput` via:
+//
+//          GetSaleInfoRegionListArgs{...}
+type GetSaleInfoRegionListInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput
+	ToGetSaleInfoRegionListOutputWithContext(context.Context) GetSaleInfoRegionListOutput
+}
+
+type GetSaleInfoRegionListArgs struct {
+	// available zone choice.
+	AvailableChoices GetSaleInfoRegionListAvailableChoiceArrayInput `pulumi:"availableChoices"`
+	// region name(en).
+	Region pulumi.StringInput `pulumi:"region"`
+	// region id.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// region name(zh).
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// list of az zone.
+	ZoneLists GetSaleInfoRegionListZoneListArrayInput `pulumi:"zoneLists"`
+}
+
+func (GetSaleInfoRegionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListArgs) ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput {
+	return i.ToGetSaleInfoRegionListOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListArgs) ToGetSaleInfoRegionListOutputWithContext(ctx context.Context) GetSaleInfoRegionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListOutput)
+}
+
+// GetSaleInfoRegionListArrayInput is an input type that accepts GetSaleInfoRegionListArray and GetSaleInfoRegionListArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListArrayInput` via:
+//
+//          GetSaleInfoRegionListArray{ GetSaleInfoRegionListArgs{...} }
+type GetSaleInfoRegionListArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput
+	ToGetSaleInfoRegionListArrayOutputWithContext(context.Context) GetSaleInfoRegionListArrayOutput
+}
+
+type GetSaleInfoRegionListArray []GetSaleInfoRegionListInput
+
+func (GetSaleInfoRegionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListArray) ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput {
+	return i.ToGetSaleInfoRegionListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListArray) ToGetSaleInfoRegionListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListArrayOutput)
+}
+
+type GetSaleInfoRegionListOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListOutput) ToGetSaleInfoRegionListOutput() GetSaleInfoRegionListOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListOutput) ToGetSaleInfoRegionListOutputWithContext(ctx context.Context) GetSaleInfoRegionListOutput {
+	return o
+}
+
+// available zone choice.
+func (o GetSaleInfoRegionListOutput) AvailableChoices() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) []GetSaleInfoRegionListAvailableChoice { return v.AvailableChoices }).(GetSaleInfoRegionListAvailableChoiceArrayOutput)
+}
+
+// region name(en).
+func (o GetSaleInfoRegionListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// region id.
+func (o GetSaleInfoRegionListOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// region name(zh).
+func (o GetSaleInfoRegionListOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// list of az zone.
+func (o GetSaleInfoRegionListOutput) ZoneLists() GetSaleInfoRegionListZoneListArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionList) []GetSaleInfoRegionListZoneList { return v.ZoneLists }).(GetSaleInfoRegionListZoneListArrayOutput)
+}
+
+type GetSaleInfoRegionListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListArrayOutput) ToGetSaleInfoRegionListArrayOutput() GetSaleInfoRegionListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListArrayOutput) ToGetSaleInfoRegionListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionList {
+		return vs[0].([]GetSaleInfoRegionList)[vs[1].(int)]
+	}).(GetSaleInfoRegionListOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoice struct {
+	// master zone.
+	MasterZones []GetSaleInfoRegionListAvailableChoiceMasterZone `pulumi:"masterZones"`
+	// slave zones.
+	SlaveZones []GetSaleInfoRegionListAvailableChoiceSlaveZone `pulumi:"slaveZones"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceArgs and GetSaleInfoRegionListAvailableChoiceOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceArgs{...}
+type GetSaleInfoRegionListAvailableChoiceInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput
+	ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceArgs struct {
+	// master zone.
+	MasterZones GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput `pulumi:"masterZones"`
+	// slave zones.
+	SlaveZones GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput `pulumi:"slaveZones"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArgs) ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArgs) ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceArray and GetSaleInfoRegionListAvailableChoiceArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceArray{ GetSaleInfoRegionListAvailableChoiceArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceArray []GetSaleInfoRegionListAvailableChoiceInput
+
+func (GetSaleInfoRegionListAvailableChoiceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArray) ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceArray) ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceOutput) ToGetSaleInfoRegionListAvailableChoiceOutput() GetSaleInfoRegionListAvailableChoiceOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceOutput) ToGetSaleInfoRegionListAvailableChoiceOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceOutput {
+	return o
+}
+
+// master zone.
+func (o GetSaleInfoRegionListAvailableChoiceOutput) MasterZones() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoice) []GetSaleInfoRegionListAvailableChoiceMasterZone {
+		return v.MasterZones
+	}).(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput)
+}
+
+// slave zones.
+func (o GetSaleInfoRegionListAvailableChoiceOutput) SlaveZones() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoice) []GetSaleInfoRegionListAvailableChoiceSlaveZone {
+		return v.SlaveZones
+	}).(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoice)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) ToGetSaleInfoRegionListAvailableChoiceArrayOutput() GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) ToGetSaleInfoRegionListAvailableChoiceArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoice {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoice)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZone struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceMasterZoneInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceMasterZoneArgs and GetSaleInfoRegionListAvailableChoiceMasterZoneOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceMasterZoneInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{...}
+type GetSaleInfoRegionListAvailableChoiceMasterZoneInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArgs) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceMasterZoneArray and GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceMasterZoneArray{ GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArray []GetSaleInfoRegionListAvailableChoiceMasterZoneInput
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceMasterZoneArray) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceMasterZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceMasterZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceMasterZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoiceMasterZone {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoiceMasterZone)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZone struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListAvailableChoiceSlaveZoneInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs and GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceSlaveZoneInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{...}
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput)
+}
+
+// GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput is an input type that accepts GetSaleInfoRegionListAvailableChoiceSlaveZoneArray and GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput` via:
+//
+//          GetSaleInfoRegionListAvailableChoiceSlaveZoneArray{ GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{...} }
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput
+	ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArray []GetSaleInfoRegionListAvailableChoiceSlaveZoneInput
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return i.ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListAvailableChoiceSlaveZoneArray) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListAvailableChoiceSlaveZone) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListAvailableChoiceSlaveZone)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput() GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) ToGetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListAvailableChoiceSlaveZone {
+		return vs[0].([]GetSaleInfoRegionListAvailableChoiceSlaveZone)[vs[1].(int)]
+	}).(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput)
+}
+
+type GetSaleInfoRegionListZoneList struct {
+	// is zone on sale.
+	OnSale bool `pulumi:"onSale"`
+	// zone name(en).
+	Zone string `pulumi:"zone"`
+	// zone id.
+	ZoneId int `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetSaleInfoRegionListZoneListInput is an input type that accepts GetSaleInfoRegionListZoneListArgs and GetSaleInfoRegionListZoneListOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListZoneListInput` via:
+//
+//          GetSaleInfoRegionListZoneListArgs{...}
+type GetSaleInfoRegionListZoneListInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput
+	ToGetSaleInfoRegionListZoneListOutputWithContext(context.Context) GetSaleInfoRegionListZoneListOutput
+}
+
+type GetSaleInfoRegionListZoneListArgs struct {
+	// is zone on sale.
+	OnSale pulumi.BoolInput `pulumi:"onSale"`
+	// zone name(en).
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// zone id.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// zone name(zh).
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetSaleInfoRegionListZoneListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListZoneListArgs) ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput {
+	return i.ToGetSaleInfoRegionListZoneListOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListZoneListArgs) ToGetSaleInfoRegionListZoneListOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListZoneListOutput)
+}
+
+// GetSaleInfoRegionListZoneListArrayInput is an input type that accepts GetSaleInfoRegionListZoneListArray and GetSaleInfoRegionListZoneListArrayOutput values.
+// You can construct a concrete instance of `GetSaleInfoRegionListZoneListArrayInput` via:
+//
+//          GetSaleInfoRegionListZoneListArray{ GetSaleInfoRegionListZoneListArgs{...} }
+type GetSaleInfoRegionListZoneListArrayInput interface {
+	pulumi.Input
+
+	ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput
+	ToGetSaleInfoRegionListZoneListArrayOutputWithContext(context.Context) GetSaleInfoRegionListZoneListArrayOutput
+}
+
+type GetSaleInfoRegionListZoneListArray []GetSaleInfoRegionListZoneListInput
+
+func (GetSaleInfoRegionListZoneListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (i GetSaleInfoRegionListZoneListArray) ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput {
+	return i.ToGetSaleInfoRegionListZoneListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSaleInfoRegionListZoneListArray) ToGetSaleInfoRegionListZoneListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSaleInfoRegionListZoneListArrayOutput)
+}
+
+type GetSaleInfoRegionListZoneListOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListZoneListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListZoneListOutput) ToGetSaleInfoRegionListZoneListOutput() GetSaleInfoRegionListZoneListOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListOutput) ToGetSaleInfoRegionListZoneListOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListOutput {
+	return o
+}
+
+// is zone on sale.
+func (o GetSaleInfoRegionListZoneListOutput) OnSale() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) bool { return v.OnSale }).(pulumi.BoolOutput)
+}
+
+// zone name(en).
+func (o GetSaleInfoRegionListZoneListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// zone id.
+func (o GetSaleInfoRegionListZoneListOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// zone name(zh).
+func (o GetSaleInfoRegionListZoneListOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSaleInfoRegionListZoneList) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetSaleInfoRegionListZoneListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSaleInfoRegionListZoneListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSaleInfoRegionListZoneList)(nil)).Elem()
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) ToGetSaleInfoRegionListZoneListArrayOutput() GetSaleInfoRegionListZoneListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) ToGetSaleInfoRegionListZoneListArrayOutputWithContext(ctx context.Context) GetSaleInfoRegionListZoneListArrayOutput {
+	return o
+}
+
+func (o GetSaleInfoRegionListZoneListArrayOutput) Index(i pulumi.IntInput) GetSaleInfoRegionListZoneListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSaleInfoRegionListZoneList {
+		return vs[0].([]GetSaleInfoRegionListZoneList)[vs[1].(int)]
+	}).(GetSaleInfoRegionListZoneListOutput)
+}
+
 type GetSecurityGroupsList struct {
 	// Creation time, time format: `yyyy-mm-dd hh:mm:ss`.
 	CreateTime string `pulumi:"createTime"`
@@ -1665,7 +4673,280 @@ func (o GetSecurityGroupsListOutboundArrayOutput) Index(i pulumi.IntInput) GetSe
 	}).(GetSecurityGroupsListOutboundOutput)
 }
 
+type GetSlowLogsData struct {
+	// Statement checksum for querying details.
+	CheckSum string `pulumi:"checkSum"`
+	// Specific name of the database to be queried.
+	Db string `pulumi:"db"`
+	// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+	ExampleSql string `pulumi:"exampleSql"`
+	// Abstracted SQL statement.
+	FingerPrint string `pulumi:"fingerPrint"`
+	// Host address of account.
+	Host string `pulumi:"host"`
+	// Average lock time.
+	LockTimeAvg string `pulumi:"lockTimeAvg"`
+	// Maximum lock time.
+	LockTimeMax string `pulumi:"lockTimeMax"`
+	// Minimum lock time.
+	LockTimeMin string `pulumi:"lockTimeMin"`
+	// Total statement lock time.
+	LockTimeSum string `pulumi:"lockTimeSum"`
+	// Total number of statement queries.
+	QueryCount string `pulumi:"queryCount"`
+	// Average query time.
+	QueryTimeAvg string `pulumi:"queryTimeAvg"`
+	// Maximum query time.
+	QueryTimeMax string `pulumi:"queryTimeMax"`
+	// Minimum query time.
+	QueryTimeMin string `pulumi:"queryTimeMin"`
+	// Total statement query time.
+	QueryTimeSum string `pulumi:"queryTimeSum"`
+	// Number of scanned rows.
+	RowsExaminedSum string `pulumi:"rowsExaminedSum"`
+	// Number of sent rows.
+	RowsSentSum string `pulumi:"rowsSentSum"`
+	// Last execution time.
+	TsMax string `pulumi:"tsMax"`
+	// First execution time.
+	TsMin string `pulumi:"tsMin"`
+	// Account.
+	User string `pulumi:"user"`
+}
+
+// GetSlowLogsDataInput is an input type that accepts GetSlowLogsDataArgs and GetSlowLogsDataOutput values.
+// You can construct a concrete instance of `GetSlowLogsDataInput` via:
+//
+//          GetSlowLogsDataArgs{...}
+type GetSlowLogsDataInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsDataOutput() GetSlowLogsDataOutput
+	ToGetSlowLogsDataOutputWithContext(context.Context) GetSlowLogsDataOutput
+}
+
+type GetSlowLogsDataArgs struct {
+	// Statement checksum for querying details.
+	CheckSum pulumi.StringInput `pulumi:"checkSum"`
+	// Specific name of the database to be queried.
+	Db pulumi.StringInput `pulumi:"db"`
+	// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+	ExampleSql pulumi.StringInput `pulumi:"exampleSql"`
+	// Abstracted SQL statement.
+	FingerPrint pulumi.StringInput `pulumi:"fingerPrint"`
+	// Host address of account.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Average lock time.
+	LockTimeAvg pulumi.StringInput `pulumi:"lockTimeAvg"`
+	// Maximum lock time.
+	LockTimeMax pulumi.StringInput `pulumi:"lockTimeMax"`
+	// Minimum lock time.
+	LockTimeMin pulumi.StringInput `pulumi:"lockTimeMin"`
+	// Total statement lock time.
+	LockTimeSum pulumi.StringInput `pulumi:"lockTimeSum"`
+	// Total number of statement queries.
+	QueryCount pulumi.StringInput `pulumi:"queryCount"`
+	// Average query time.
+	QueryTimeAvg pulumi.StringInput `pulumi:"queryTimeAvg"`
+	// Maximum query time.
+	QueryTimeMax pulumi.StringInput `pulumi:"queryTimeMax"`
+	// Minimum query time.
+	QueryTimeMin pulumi.StringInput `pulumi:"queryTimeMin"`
+	// Total statement query time.
+	QueryTimeSum pulumi.StringInput `pulumi:"queryTimeSum"`
+	// Number of scanned rows.
+	RowsExaminedSum pulumi.StringInput `pulumi:"rowsExaminedSum"`
+	// Number of sent rows.
+	RowsSentSum pulumi.StringInput `pulumi:"rowsSentSum"`
+	// Last execution time.
+	TsMax pulumi.StringInput `pulumi:"tsMax"`
+	// First execution time.
+	TsMin pulumi.StringInput `pulumi:"tsMin"`
+	// Account.
+	User pulumi.StringInput `pulumi:"user"`
+}
+
+func (GetSlowLogsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsData)(nil)).Elem()
+}
+
+func (i GetSlowLogsDataArgs) ToGetSlowLogsDataOutput() GetSlowLogsDataOutput {
+	return i.ToGetSlowLogsDataOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsDataArgs) ToGetSlowLogsDataOutputWithContext(ctx context.Context) GetSlowLogsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsDataOutput)
+}
+
+// GetSlowLogsDataArrayInput is an input type that accepts GetSlowLogsDataArray and GetSlowLogsDataArrayOutput values.
+// You can construct a concrete instance of `GetSlowLogsDataArrayInput` via:
+//
+//          GetSlowLogsDataArray{ GetSlowLogsDataArgs{...} }
+type GetSlowLogsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput
+	ToGetSlowLogsDataArrayOutputWithContext(context.Context) GetSlowLogsDataArrayOutput
+}
+
+type GetSlowLogsDataArray []GetSlowLogsDataInput
+
+func (GetSlowLogsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsData)(nil)).Elem()
+}
+
+func (i GetSlowLogsDataArray) ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput {
+	return i.ToGetSlowLogsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetSlowLogsDataArray) ToGetSlowLogsDataArrayOutputWithContext(ctx context.Context) GetSlowLogsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSlowLogsDataArrayOutput)
+}
+
+type GetSlowLogsDataOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSlowLogsData)(nil)).Elem()
+}
+
+func (o GetSlowLogsDataOutput) ToGetSlowLogsDataOutput() GetSlowLogsDataOutput {
+	return o
+}
+
+func (o GetSlowLogsDataOutput) ToGetSlowLogsDataOutputWithContext(ctx context.Context) GetSlowLogsDataOutput {
+	return o
+}
+
+// Statement checksum for querying details.
+func (o GetSlowLogsDataOutput) CheckSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.CheckSum }).(pulumi.StringOutput)
+}
+
+// Specific name of the database to be queried.
+func (o GetSlowLogsDataOutput) Db() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.Db }).(pulumi.StringOutput)
+}
+
+// Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetSlowLogsDataOutput) ExampleSql() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.ExampleSql }).(pulumi.StringOutput)
+}
+
+// Abstracted SQL statement.
+func (o GetSlowLogsDataOutput) FingerPrint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.FingerPrint }).(pulumi.StringOutput)
+}
+
+// Host address of account.
+func (o GetSlowLogsDataOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Average lock time.
+func (o GetSlowLogsDataOutput) LockTimeAvg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeAvg }).(pulumi.StringOutput)
+}
+
+// Maximum lock time.
+func (o GetSlowLogsDataOutput) LockTimeMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeMax }).(pulumi.StringOutput)
+}
+
+// Minimum lock time.
+func (o GetSlowLogsDataOutput) LockTimeMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeMin }).(pulumi.StringOutput)
+}
+
+// Total statement lock time.
+func (o GetSlowLogsDataOutput) LockTimeSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.LockTimeSum }).(pulumi.StringOutput)
+}
+
+// Total number of statement queries.
+func (o GetSlowLogsDataOutput) QueryCount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryCount }).(pulumi.StringOutput)
+}
+
+// Average query time.
+func (o GetSlowLogsDataOutput) QueryTimeAvg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeAvg }).(pulumi.StringOutput)
+}
+
+// Maximum query time.
+func (o GetSlowLogsDataOutput) QueryTimeMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeMax }).(pulumi.StringOutput)
+}
+
+// Minimum query time.
+func (o GetSlowLogsDataOutput) QueryTimeMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeMin }).(pulumi.StringOutput)
+}
+
+// Total statement query time.
+func (o GetSlowLogsDataOutput) QueryTimeSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.QueryTimeSum }).(pulumi.StringOutput)
+}
+
+// Number of scanned rows.
+func (o GetSlowLogsDataOutput) RowsExaminedSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.RowsExaminedSum }).(pulumi.StringOutput)
+}
+
+// Number of sent rows.
+func (o GetSlowLogsDataOutput) RowsSentSum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.RowsSentSum }).(pulumi.StringOutput)
+}
+
+// Last execution time.
+func (o GetSlowLogsDataOutput) TsMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.TsMax }).(pulumi.StringOutput)
+}
+
+// First execution time.
+func (o GetSlowLogsDataOutput) TsMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.TsMin }).(pulumi.StringOutput)
+}
+
+// Account.
+func (o GetSlowLogsDataOutput) User() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSlowLogsData) string { return v.User }).(pulumi.StringOutput)
+}
+
+type GetSlowLogsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSlowLogsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSlowLogsData)(nil)).Elem()
+}
+
+func (o GetSlowLogsDataArrayOutput) ToGetSlowLogsDataArrayOutput() GetSlowLogsDataArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsDataArrayOutput) ToGetSlowLogsDataArrayOutputWithContext(ctx context.Context) GetSlowLogsDataArrayOutput {
+	return o
+}
+
+func (o GetSlowLogsDataArrayOutput) Index(i pulumi.IntInput) GetSlowLogsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSlowLogsData {
+		return vs[0].([]GetSlowLogsData)[vs[1].(int)]
+	}).(GetSlowLogsDataOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesAccountsInput)(nil)).Elem(), AccountPrivilegesAccountsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesAccountsPtrInput)(nil)).Elem(), AccountPrivilegesAccountsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesColumnPrivilegeInput)(nil)).Elem(), AccountPrivilegesColumnPrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesColumnPrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesColumnPrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesDatabasePrivilegeInput)(nil)).Elem(), AccountPrivilegesDatabasePrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesDatabasePrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesDatabasePrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesFunctionPrivilegeInput)(nil)).Elem(), AccountPrivilegesFunctionPrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesFunctionPrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesFunctionPrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesProcedurePrivilegeInput)(nil)).Elem(), AccountPrivilegesProcedurePrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesProcedurePrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesProcedurePrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesTablePrivilegeInput)(nil)).Elem(), AccountPrivilegesTablePrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesTablePrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesTablePrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesViewPrivilegeInput)(nil)).Elem(), AccountPrivilegesViewPrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesViewPrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesViewPrivilegeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInitParamInput)(nil)).Elem(), InstanceInitParamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInitParamArrayInput)(nil)).Elem(), InstanceInitParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParametersParamInput)(nil)).Elem(), ParametersParamArgs{})
@@ -1688,12 +4969,60 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstancesInstanceArrayInput)(nil)).Elem(), GetDbInstancesInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstancesInstanceResourceTagInput)(nil)).Elem(), GetDbInstancesInstanceResourceTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstancesInstanceResourceTagArrayInput)(nil)).Elem(), GetDbInstancesInstanceResourceTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailInput)(nil)).Elem(), GetDcnDetailDcnDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailArrayInput)(nil)).Elem(), GetDcnDetailDcnDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailReplicaConfigInput)(nil)).Elem(), GetDcnDetailDcnDetailReplicaConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailReplicaConfigArrayInput)(nil)).Elem(), GetDcnDetailDcnDetailReplicaConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailReplicaStatusInput)(nil)).Elem(), GetDcnDetailDcnDetailReplicaStatusArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcnDetailDcnDetailReplicaStatusArrayInput)(nil)).Elem(), GetDcnDetailDcnDetailReplicaStatusArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoNodesInfoInput)(nil)).Elem(), GetInstanceNodeInfoNodesInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoNodesInfoArrayInput)(nil)).Elem(), GetInstanceNodeInfoNodesInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceSpecsSpecInput)(nil)).Elem(), GetInstanceSpecsSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceSpecsSpecArrayInput)(nil)).Elem(), GetInstanceSpecsSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceSpecsSpecSpecInfoInput)(nil)).Elem(), GetInstanceSpecsSpecSpecInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceSpecsSpecSpecInfoArrayInput)(nil)).Elem(), GetInstanceSpecsSpecSpecInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogFilesFileInput)(nil)).Elem(), GetLogFilesFileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogFilesFileArrayInput)(nil)).Elem(), GetLogFilesFileArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrdersDealInput)(nil)).Elem(), GetOrdersDealArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrdersDealArrayInput)(nil)).Elem(), GetOrdersDealArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInput)(nil)).Elem(), GetProjectSecurityGroupsGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInboundInput)(nil)).Elem(), GetProjectSecurityGroupsGroupInboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupInboundArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupInboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupOutboundInput)(nil)).Elem(), GetProjectSecurityGroupsGroupOutboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectSecurityGroupsGroupOutboundArrayInput)(nil)).Elem(), GetProjectSecurityGroupsGroupOutboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListInput)(nil)).Elem(), GetSaleInfoRegionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListArrayInput)(nil)).Elem(), GetSaleInfoRegionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZoneInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceMasterZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceMasterZoneArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceMasterZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZoneInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayInput)(nil)).Elem(), GetSaleInfoRegionListAvailableChoiceSlaveZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListZoneListInput)(nil)).Elem(), GetSaleInfoRegionListZoneListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSaleInfoRegionListZoneListArrayInput)(nil)).Elem(), GetSaleInfoRegionListZoneListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInput)(nil)).Elem(), GetSecurityGroupsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListArrayInput)(nil)).Elem(), GetSecurityGroupsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInboundInput)(nil)).Elem(), GetSecurityGroupsListInboundArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListInboundArrayInput)(nil)).Elem(), GetSecurityGroupsListInboundArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListOutboundInput)(nil)).Elem(), GetSecurityGroupsListOutboundArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupsListOutboundArrayInput)(nil)).Elem(), GetSecurityGroupsListOutboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsDataInput)(nil)).Elem(), GetSlowLogsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSlowLogsDataArrayInput)(nil)).Elem(), GetSlowLogsDataArray{})
+	pulumi.RegisterOutputType(AccountPrivilegesAccountsOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesAccountsPtrOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesColumnPrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesColumnPrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesDatabasePrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesDatabasePrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesFunctionPrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesFunctionPrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesProcedurePrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesProcedurePrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesTablePrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesTablePrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesViewPrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesViewPrivilegeArrayOutput{})
 	pulumi.RegisterOutputType(InstanceInitParamOutput{})
 	pulumi.RegisterOutputType(InstanceInitParamArrayOutput{})
 	pulumi.RegisterOutputType(ParametersParamOutput{})
@@ -1716,10 +5045,44 @@ func init() {
 	pulumi.RegisterOutputType(GetDbInstancesInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetDbInstancesInstanceResourceTagOutput{})
 	pulumi.RegisterOutputType(GetDbInstancesInstanceResourceTagArrayOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailReplicaConfigOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailReplicaConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailReplicaStatusOutput{})
+	pulumi.RegisterOutputType(GetDcnDetailDcnDetailReplicaStatusArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoNodesInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoNodesInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceSpecsSpecOutput{})
+	pulumi.RegisterOutputType(GetInstanceSpecsSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceSpecsSpecSpecInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceSpecsSpecSpecInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLogFilesFileOutput{})
+	pulumi.RegisterOutputType(GetLogFilesFileArrayOutput{})
+	pulumi.RegisterOutputType(GetOrdersDealOutput{})
+	pulumi.RegisterOutputType(GetOrdersDealArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupInboundOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupInboundArrayOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutboundOutput{})
+	pulumi.RegisterOutputType(GetProjectSecurityGroupsGroupOutboundArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceMasterZoneOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceMasterZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceSlaveZoneOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListAvailableChoiceSlaveZoneArrayOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListZoneListOutput{})
+	pulumi.RegisterOutputType(GetSaleInfoRegionListZoneListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListInboundOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListInboundArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutboundOutput{})
 	pulumi.RegisterOutputType(GetSecurityGroupsListOutboundArrayOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsDataOutput{})
+	pulumi.RegisterOutputType(GetSlowLogsDataArrayOutput{})
 }

@@ -492,6 +492,8 @@ type instanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// tag list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Intranet IP address.
+	Vip *string `pulumi:"vip"`
 	// A list of voucher IDs. Currently, only one voucher can be specified.
 	VoucherIds []string `pulumi:"voucherIds"`
 	// Virtual private network ID, if not passed, it means that it is created as a basic network.
@@ -534,6 +536,8 @@ type InstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// tag list.
 	Tags pulumi.MapInput
+	// Intranet IP address.
+	Vip pulumi.StringPtrInput
 	// A list of voucher IDs. Currently, only one voucher can be specified.
 	VoucherIds pulumi.StringArrayInput
 	// Virtual private network ID, if not passed, it means that it is created as a basic network.

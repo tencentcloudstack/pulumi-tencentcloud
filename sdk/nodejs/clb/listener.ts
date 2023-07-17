@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CLB listener.
  *
  * ## Example Usage
- *
- * HTTP Listener
+ * ### HTTP Listener
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -22,8 +21,7 @@ import * as utilities from "../utilities";
  *     protocol: "HTTP",
  * });
  * ```
- *
- * TCP/UDP Listener
+ * ### TCP/UDP Listener
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -48,8 +46,7 @@ import * as utilities from "../utilities";
  *     sessionExpireTime: 30,
  * });
  * ```
- *
- * TCP/UDP Listener with tcp health check
+ * ### TCP/UDP Listener with tcp health check
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -71,8 +68,7 @@ import * as utilities from "../utilities";
  *     healthCheckPort: 200,
  * });
  * ```
- *
- * TCP/UDP Listener with http health check
+ * ### TCP/UDP Listener with http health check
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -98,8 +94,7 @@ import * as utilities from "../utilities";
  *     healthCheckHttpPath: "/",
  * });
  * ```
- *
- * TCP/UDP Listener with customer health check
+ * ### TCP/UDP Listener with customer health check
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -124,8 +119,7 @@ import * as utilities from "../utilities";
  *     targetType: "TARGETGROUP",
  * });
  * ```
- *
- * HTTPS Listener
+ * ### HTTPS Listener
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -142,8 +136,7 @@ import * as utilities from "../utilities";
  *     sniSwitch: true,
  * });
  * ```
- *
- * TCP SSL Listener
+ * ### TCP SSL Listener
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -228,7 +221,7 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly healthCheckHealthNum!: pulumi.Output<number>;
     /**
-     * HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+     * HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
      */
     public readonly healthCheckHttpCode!: pulumi.Output<number | undefined>;
     /**
@@ -248,7 +241,7 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly healthCheckHttpVersion!: pulumi.Output<string | undefined>;
     /**
-     * Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly healthCheckIntervalTime!: pulumi.Output<number>;
     /**
@@ -425,7 +418,7 @@ export interface ListenerState {
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
-     * HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+     * HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
      */
     healthCheckHttpCode?: pulumi.Input<number>;
     /**
@@ -445,7 +438,7 @@ export interface ListenerState {
      */
     healthCheckHttpVersion?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**
@@ -539,7 +532,7 @@ export interface ListenerArgs {
      */
     healthCheckHealthNum?: pulumi.Input<number>;
     /**
-     * HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
+     * HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
      */
     healthCheckHttpCode?: pulumi.Input<number>;
     /**
@@ -559,7 +552,7 @@ export interface ListenerArgs {
      */
     healthCheckHttpVersion?: pulumi.Input<string>;
     /**
-     * Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+     * Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     healthCheckIntervalTime?: pulumi.Input<number>;
     /**

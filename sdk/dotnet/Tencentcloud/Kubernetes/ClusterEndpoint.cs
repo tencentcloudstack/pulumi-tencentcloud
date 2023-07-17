@@ -93,6 +93,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
+        /// The LB parameter. Only used for public network access.
+        /// </summary>
+        [Output("extensiveParameters")]
+        public Output<string?> ExtensiveParameters { get; private set; } = null!;
+
+        /// <summary>
         /// this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         /// </summary>
         [Output("managedClusterInternetSecurityPolicies")]
@@ -205,6 +211,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         [Input("clusterIntranetSubnetId")]
         public Input<string>? ClusterIntranetSubnetId { get; set; }
 
+        /// <summary>
+        /// The LB parameter. Only used for public network access.
+        /// </summary>
+        [Input("extensiveParameters")]
+        public Input<string>? ExtensiveParameters { get; set; }
+
         [Input("managedClusterInternetSecurityPolicies")]
         private InputList<string>? _managedClusterInternetSecurityPolicies;
 
@@ -290,6 +302,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
+
+        /// <summary>
+        /// The LB parameter. Only used for public network access.
+        /// </summary>
+        [Input("extensiveParameters")]
+        public Input<string>? ExtensiveParameters { get; set; }
 
         [Input("managedClusterInternetSecurityPolicies")]
         private InputList<string>? _managedClusterInternetSecurityPolicies;

@@ -178,8 +178,7 @@ class Association(pulumi.CustomResource):
             eip_id="eip-xxxxxx",
             instance_id="ins-xxxxxx")
         ```
-
-        or
+        ### or
 
         ```python
         import pulumi
@@ -227,8 +226,7 @@ class Association(pulumi.CustomResource):
             eip_id="eip-xxxxxx",
             instance_id="ins-xxxxxx")
         ```
-
-        or
+        ### or
 
         ```python
         import pulumi

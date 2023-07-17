@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB redirection.
     /// 
     /// ## Example Usage
-    /// 
-    /// Manual Rewrite
+    /// ### Manual Rewrite
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -37,8 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
-    /// 
-    /// Auto Rewrite
+    /// ### Auto Rewrite
     /// 
     /// ```csharp
     /// using Pulumi;

@@ -37,10 +37,26 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &MigrateService{}
 	case "tencentcloud:Dts/syncCheckJobOperation:SyncCheckJobOperation":
 		r = &SyncCheckJobOperation{}
+	case "tencentcloud:Dts/syncConfig:SyncConfig":
+		r = &SyncConfig{}
 	case "tencentcloud:Dts/syncJob:SyncJob":
 		r = &SyncJob{}
+	case "tencentcloud:Dts/syncJobContinueOperation:SyncJobContinueOperation":
+		r = &SyncJobContinueOperation{}
+	case "tencentcloud:Dts/syncJobIsolateOperation:SyncJobIsolateOperation":
+		r = &SyncJobIsolateOperation{}
+	case "tencentcloud:Dts/syncJobPauseOperation:SyncJobPauseOperation":
+		r = &SyncJobPauseOperation{}
+	case "tencentcloud:Dts/syncJobRecoverOperation:SyncJobRecoverOperation":
+		r = &SyncJobRecoverOperation{}
+	case "tencentcloud:Dts/syncJobResizeOperation:SyncJobResizeOperation":
+		r = &SyncJobResizeOperation{}
 	case "tencentcloud:Dts/syncJobResumeOperation:SyncJobResumeOperation":
 		r = &SyncJobResumeOperation{}
+	case "tencentcloud:Dts/syncJobStartOperation:SyncJobStartOperation":
+		r = &SyncJobStartOperation{}
+	case "tencentcloud:Dts/syncJobStopOperation:SyncJobStopOperation":
+		r = &SyncJobStopOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -96,12 +112,52 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dts/syncConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dts/syncJob",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dts/syncJobContinueOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobIsolateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobPauseOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobRecoverOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobResizeOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dts/syncJobResumeOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobStartOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobStopOperation",
 		&module{version},
 	)
 }

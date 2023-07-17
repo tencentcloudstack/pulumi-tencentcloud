@@ -10,6 +10,139 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type GetDcRouteNatDirectConnectGatewayRouteSet struct {
+	// Create time of route.
+	CreateTime string `pulumi:"createTime"`
+	// IPv4 CIDR of subnet.
+	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
+	// Id of next-hop gateway.
+	GatewayId string `pulumi:"gatewayId"`
+	// Type of next-hop gateway, valid values: DIRECTCONNECT.
+	GatewayType string `pulumi:"gatewayType"`
+	// Update time of route.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDcRouteNatDirectConnectGatewayRouteSetInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArgs and GetDcRouteNatDirectConnectGatewayRouteSetOutput values.
+// You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetInput` via:
+//
+//          GetDcRouteNatDirectConnectGatewayRouteSetArgs{...}
+type GetDcRouteNatDirectConnectGatewayRouteSetInput interface {
+	pulumi.Input
+
+	ToGetDcRouteNatDirectConnectGatewayRouteSetOutput() GetDcRouteNatDirectConnectGatewayRouteSetOutput
+	ToGetDcRouteNatDirectConnectGatewayRouteSetOutputWithContext(context.Context) GetDcRouteNatDirectConnectGatewayRouteSetOutput
+}
+
+type GetDcRouteNatDirectConnectGatewayRouteSetArgs struct {
+	// Create time of route.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// IPv4 CIDR of subnet.
+	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
+	// Id of next-hop gateway.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// Type of next-hop gateway, valid values: DIRECTCONNECT.
+	GatewayType pulumi.StringInput `pulumi:"gatewayType"`
+	// Update time of route.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDcRouteNatDirectConnectGatewayRouteSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcRouteNatDirectConnectGatewayRouteSet)(nil)).Elem()
+}
+
+func (i GetDcRouteNatDirectConnectGatewayRouteSetArgs) ToGetDcRouteNatDirectConnectGatewayRouteSetOutput() GetDcRouteNatDirectConnectGatewayRouteSetOutput {
+	return i.ToGetDcRouteNatDirectConnectGatewayRouteSetOutputWithContext(context.Background())
+}
+
+func (i GetDcRouteNatDirectConnectGatewayRouteSetArgs) ToGetDcRouteNatDirectConnectGatewayRouteSetOutputWithContext(ctx context.Context) GetDcRouteNatDirectConnectGatewayRouteSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcRouteNatDirectConnectGatewayRouteSetOutput)
+}
+
+// GetDcRouteNatDirectConnectGatewayRouteSetArrayInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArray and GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput values.
+// You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetArrayInput` via:
+//
+//          GetDcRouteNatDirectConnectGatewayRouteSetArray{ GetDcRouteNatDirectConnectGatewayRouteSetArgs{...} }
+type GetDcRouteNatDirectConnectGatewayRouteSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutput() GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput
+	ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutputWithContext(context.Context) GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput
+}
+
+type GetDcRouteNatDirectConnectGatewayRouteSetArray []GetDcRouteNatDirectConnectGatewayRouteSetInput
+
+func (GetDcRouteNatDirectConnectGatewayRouteSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcRouteNatDirectConnectGatewayRouteSet)(nil)).Elem()
+}
+
+func (i GetDcRouteNatDirectConnectGatewayRouteSetArray) ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutput() GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput {
+	return i.ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDcRouteNatDirectConnectGatewayRouteSetArray) ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutputWithContext(ctx context.Context) GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput)
+}
+
+type GetDcRouteNatDirectConnectGatewayRouteSetOutput struct{ *pulumi.OutputState }
+
+func (GetDcRouteNatDirectConnectGatewayRouteSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDcRouteNatDirectConnectGatewayRouteSet)(nil)).Elem()
+}
+
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) ToGetDcRouteNatDirectConnectGatewayRouteSetOutput() GetDcRouteNatDirectConnectGatewayRouteSetOutput {
+	return o
+}
+
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) ToGetDcRouteNatDirectConnectGatewayRouteSetOutputWithContext(ctx context.Context) GetDcRouteNatDirectConnectGatewayRouteSetOutput {
+	return o
+}
+
+// Create time of route.
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcRouteNatDirectConnectGatewayRouteSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// IPv4 CIDR of subnet.
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcRouteNatDirectConnectGatewayRouteSet) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+}
+
+// Id of next-hop gateway.
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcRouteNatDirectConnectGatewayRouteSet) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// Type of next-hop gateway, valid values: DIRECTCONNECT.
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) GatewayType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcRouteNatDirectConnectGatewayRouteSet) string { return v.GatewayType }).(pulumi.StringOutput)
+}
+
+// Update time of route.
+func (o GetDcRouteNatDirectConnectGatewayRouteSetOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDcRouteNatDirectConnectGatewayRouteSet) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDcRouteNatDirectConnectGatewayRouteSet)(nil)).Elem()
+}
+
+func (o GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput) ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutput() GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput {
+	return o
+}
+
+func (o GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput) ToGetDcRouteNatDirectConnectGatewayRouteSetArrayOutputWithContext(ctx context.Context) GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput {
+	return o
+}
+
+func (o GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput) Index(i pulumi.IntInput) GetDcRouteNatDirectConnectGatewayRouteSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDcRouteNatDirectConnectGatewayRouteSet {
+		return vs[0].([]GetDcRouteNatDirectConnectGatewayRouteSet)[vs[1].(int)]
+	}).(GetDcRouteNatDirectConnectGatewayRouteSetOutput)
+}
+
 type GetGatewaySnatsSnatList struct {
 	// Create time.
 	CreateTime string `pulumi:"createTime"`
@@ -349,10 +482,14 @@ func (o GetGatewaysNatArrayOutput) Index(i pulumi.IntInput) GetGatewaysNatOutput
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcRouteNatDirectConnectGatewayRouteSetInput)(nil)).Elem(), GetDcRouteNatDirectConnectGatewayRouteSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDcRouteNatDirectConnectGatewayRouteSetArrayInput)(nil)).Elem(), GetDcRouteNatDirectConnectGatewayRouteSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaySnatsSnatListInput)(nil)).Elem(), GetGatewaySnatsSnatListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaySnatsSnatListArrayInput)(nil)).Elem(), GetGatewaySnatsSnatListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysNatInput)(nil)).Elem(), GetGatewaysNatArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysNatArrayInput)(nil)).Elem(), GetGatewaysNatArray{})
+	pulumi.RegisterOutputType(GetDcRouteNatDirectConnectGatewayRouteSetOutput{})
+	pulumi.RegisterOutputType(GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewaySnatsSnatListOutput{})
 	pulumi.RegisterOutputType(GetGatewaySnatsSnatListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewaysNatOutput{})

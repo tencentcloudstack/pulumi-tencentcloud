@@ -146,6 +146,12 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * Port for private access.
      */
     public /*out*/ readonly vport!: pulumi.Output<number>;
+    /**
+     * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+     *
+     * @deprecated It has been deprecated from version 1.81.2.
+     */
+    public readonly waitSwitch!: pulumi.Output<number | undefined>;
 
     /**
      * Create a ReadonlyInstance resource with the given unique name, arguments, and options.
@@ -181,6 +187,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["voucherIds"] = state ? state.voucherIds : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["vport"] = state ? state.vport : undefined;
+            resourceInputs["waitSwitch"] = state ? state.waitSwitch : undefined;
         } else {
             const args = argsOrState as ReadonlyInstanceArgs | undefined;
             if ((!args || args.masterInstanceId === undefined) && !opts.urn) {
@@ -211,6 +218,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["voucherIds"] = args ? args.voucherIds : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["waitSwitch"] = args ? args.waitSwitch : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["roFlag"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
@@ -310,6 +318,12 @@ export interface ReadonlyInstanceState {
      * Port for private access.
      */
     vport?: pulumi.Input<number>;
+    /**
+     * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+     *
+     * @deprecated It has been deprecated from version 1.81.2.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }
 
 /**
@@ -380,4 +394,10 @@ export interface ReadonlyInstanceArgs {
      * ID of VPC.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+     *
+     * @deprecated It has been deprecated from version 1.81.2.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }

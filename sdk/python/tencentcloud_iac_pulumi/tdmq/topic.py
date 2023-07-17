@@ -17,24 +17,32 @@ class TopicArgs:
                  environ_id: pulumi.Input[str],
                  partitions: pulumi.Input[int],
                  topic_name: pulumi.Input[str],
-                 topic_type: pulumi.Input[int],
-                 remark: Optional[pulumi.Input[str]] = None):
+                 pulsar_topic_type: Optional[pulumi.Input[int]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
+                 topic_type: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Topic resource.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] environ_id: The name of tdmq namespace.
         :param pulumi.Input[int] partitions: The partitions of topic.
         :param pulumi.Input[str] topic_name: The name of topic to be created.
-        :param pulumi.Input[int] topic_type: The type of topic.
+        :param pulumi.Input[int] pulsar_topic_type: Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
         :param pulumi.Input[str] remark: Description of the namespace.
+        :param pulumi.Input[int] topic_type: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "environ_id", environ_id)
         pulumi.set(__self__, "partitions", partitions)
         pulumi.set(__self__, "topic_name", topic_name)
-        pulumi.set(__self__, "topic_type", topic_type)
+        if pulsar_topic_type is not None:
+            pulumi.set(__self__, "pulsar_topic_type", pulsar_topic_type)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if topic_type is not None:
+            warnings.warn("""This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""", DeprecationWarning)
+            pulumi.log.warn("""topic_type is deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""")
+        if topic_type is not None:
+            pulumi.set(__self__, "topic_type", topic_type)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -85,16 +93,16 @@ class TopicArgs:
         pulumi.set(self, "topic_name", value)
 
     @property
-    @pulumi.getter(name="topicType")
-    def topic_type(self) -> pulumi.Input[int]:
+    @pulumi.getter(name="pulsarTopicType")
+    def pulsar_topic_type(self) -> Optional[pulumi.Input[int]]:
         """
-        The type of topic.
+        Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
         """
-        return pulumi.get(self, "topic_type")
+        return pulumi.get(self, "pulsar_topic_type")
 
-    @topic_type.setter
-    def topic_type(self, value: pulumi.Input[int]):
-        pulumi.set(self, "topic_type", value)
+    @pulsar_topic_type.setter
+    def pulsar_topic_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pulsar_topic_type", value)
 
     @property
     @pulumi.getter
@@ -108,6 +116,18 @@ class TopicArgs:
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
 
+    @property
+    @pulumi.getter(name="topicType")
+    def topic_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+        """
+        return pulumi.get(self, "topic_type")
+
+    @topic_type.setter
+    def topic_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "topic_type", value)
+
 
 @pulumi.input_type
 class _TopicState:
@@ -116,6 +136,7 @@ class _TopicState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  environ_id: Optional[pulumi.Input[str]] = None,
                  partitions: Optional[pulumi.Input[int]] = None,
+                 pulsar_topic_type: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
                  topic_name: Optional[pulumi.Input[str]] = None,
                  topic_type: Optional[pulumi.Input[int]] = None):
@@ -125,9 +146,10 @@ class _TopicState:
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] environ_id: The name of tdmq namespace.
         :param pulumi.Input[int] partitions: The partitions of topic.
+        :param pulumi.Input[int] pulsar_topic_type: Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
         :param pulumi.Input[str] remark: Description of the namespace.
         :param pulumi.Input[str] topic_name: The name of topic to be created.
-        :param pulumi.Input[int] topic_type: The type of topic.
+        :param pulumi.Input[int] topic_type: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -137,10 +159,15 @@ class _TopicState:
             pulumi.set(__self__, "environ_id", environ_id)
         if partitions is not None:
             pulumi.set(__self__, "partitions", partitions)
+        if pulsar_topic_type is not None:
+            pulumi.set(__self__, "pulsar_topic_type", pulsar_topic_type)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
         if topic_name is not None:
             pulumi.set(__self__, "topic_name", topic_name)
+        if topic_type is not None:
+            warnings.warn("""This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""", DeprecationWarning)
+            pulumi.log.warn("""topic_type is deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""")
         if topic_type is not None:
             pulumi.set(__self__, "topic_type", topic_type)
 
@@ -193,6 +220,18 @@ class _TopicState:
         pulumi.set(self, "partitions", value)
 
     @property
+    @pulumi.getter(name="pulsarTopicType")
+    def pulsar_topic_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+        """
+        return pulumi.get(self, "pulsar_topic_type")
+
+    @pulsar_topic_type.setter
+    def pulsar_topic_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pulsar_topic_type", value)
+
+    @property
     @pulumi.getter
     def remark(self) -> Optional[pulumi.Input[str]]:
         """
@@ -220,7 +259,7 @@ class _TopicState:
     @pulumi.getter(name="topicType")
     def topic_type(self) -> Optional[pulumi.Input[int]]:
         """
-        The type of topic.
+        This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         return pulumi.get(self, "topic_type")
 
@@ -237,6 +276,7 @@ class Topic(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  environ_id: Optional[pulumi.Input[str]] = None,
                  partitions: Optional[pulumi.Input[int]] = None,
+                 pulsar_topic_type: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
                  topic_name: Optional[pulumi.Input[str]] = None,
                  topic_type: Optional[pulumi.Input[int]] = None,
@@ -280,9 +320,10 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] environ_id: The name of tdmq namespace.
         :param pulumi.Input[int] partitions: The partitions of topic.
+        :param pulumi.Input[int] pulsar_topic_type: Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
         :param pulumi.Input[str] remark: Description of the namespace.
         :param pulumi.Input[str] topic_name: The name of topic to be created.
-        :param pulumi.Input[int] topic_type: The type of topic.
+        :param pulumi.Input[int] topic_type: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         ...
     @overload
@@ -342,6 +383,7 @@ class Topic(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  environ_id: Optional[pulumi.Input[str]] = None,
                  partitions: Optional[pulumi.Input[int]] = None,
+                 pulsar_topic_type: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
                  topic_name: Optional[pulumi.Input[str]] = None,
                  topic_type: Optional[pulumi.Input[int]] = None,
@@ -368,12 +410,14 @@ class Topic(pulumi.CustomResource):
             if partitions is None and not opts.urn:
                 raise TypeError("Missing required property 'partitions'")
             __props__.__dict__["partitions"] = partitions
+            __props__.__dict__["pulsar_topic_type"] = pulsar_topic_type
             __props__.__dict__["remark"] = remark
             if topic_name is None and not opts.urn:
                 raise TypeError("Missing required property 'topic_name'")
             __props__.__dict__["topic_name"] = topic_name
-            if topic_type is None and not opts.urn:
-                raise TypeError("Missing required property 'topic_type'")
+            if topic_type is not None and not opts.urn:
+                warnings.warn("""This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""", DeprecationWarning)
+                pulumi.log.warn("""topic_type is deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.""")
             __props__.__dict__["topic_type"] = topic_type
             __props__.__dict__["create_time"] = None
         super(Topic, __self__).__init__(
@@ -390,6 +434,7 @@ class Topic(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             environ_id: Optional[pulumi.Input[str]] = None,
             partitions: Optional[pulumi.Input[int]] = None,
+            pulsar_topic_type: Optional[pulumi.Input[int]] = None,
             remark: Optional[pulumi.Input[str]] = None,
             topic_name: Optional[pulumi.Input[str]] = None,
             topic_type: Optional[pulumi.Input[int]] = None) -> 'Topic':
@@ -404,9 +449,10 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] environ_id: The name of tdmq namespace.
         :param pulumi.Input[int] partitions: The partitions of topic.
+        :param pulumi.Input[int] pulsar_topic_type: Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
         :param pulumi.Input[str] remark: Description of the namespace.
         :param pulumi.Input[str] topic_name: The name of topic to be created.
-        :param pulumi.Input[int] topic_type: The type of topic.
+        :param pulumi.Input[int] topic_type: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -416,6 +462,7 @@ class Topic(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["environ_id"] = environ_id
         __props__.__dict__["partitions"] = partitions
+        __props__.__dict__["pulsar_topic_type"] = pulsar_topic_type
         __props__.__dict__["remark"] = remark
         __props__.__dict__["topic_name"] = topic_name
         __props__.__dict__["topic_type"] = topic_type
@@ -454,6 +501,14 @@ class Topic(pulumi.CustomResource):
         return pulumi.get(self, "partitions")
 
     @property
+    @pulumi.getter(name="pulsarTopicType")
+    def pulsar_topic_type(self) -> pulumi.Output[int]:
+        """
+        Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+        """
+        return pulumi.get(self, "pulsar_topic_type")
+
+    @property
     @pulumi.getter
     def remark(self) -> pulumi.Output[Optional[str]]:
         """
@@ -473,7 +528,7 @@ class Topic(pulumi.CustomResource):
     @pulumi.getter(name="topicType")
     def topic_type(self) -> pulumi.Output[int]:
         """
-        The type of topic.
+        This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
         """
         return pulumi.get(self, "topic_type")
 

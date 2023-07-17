@@ -274,8 +274,7 @@ class UrlPush(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.UrlPush("foo", urls=["https://www.example.com/b"])
         ```
-
-        argument to request new push task with same urls
+        ### argument to request new push task with same urls
 
         ```python
         import pulumi
@@ -312,8 +311,7 @@ class UrlPush(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.UrlPush("foo", urls=["https://www.example.com/b"])
         ```
-
-        argument to request new push task with same urls
+        ### argument to request new push task with same urls
 
         ```python
         import pulumi

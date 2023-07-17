@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// Provides a alarm policy resource for monitor.
     /// 
     /// ## Example Usage
-    /// 
-    /// cvm_device alarm policy
+    /// ### cvm_device alarm policy
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -77,8 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// }
     /// ```
-    /// 
-    /// k8s_cluster alarm policy
+    /// ### k8s_cluster alarm policy
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -203,8 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// }
     /// ```
-    /// 
-    /// cvm_device alarm policy binding cvm by tag
+    /// ### cvm_device alarm policy binding cvm by tag
     /// 
     /// ```csharp
     /// using Pulumi;

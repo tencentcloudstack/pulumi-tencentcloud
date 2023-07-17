@@ -48,6 +48,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// mysql read-only database instances can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/readonlyInstance:ReadonlyInstance")]
     public partial class ReadonlyInstance : Pulumi.CustomResource
@@ -74,7 +82,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
         /// </summary>
         [Output("deviceType")]
-        public Output<string?> DeviceType { get; private set; } = null!;
+        public Output<string> DeviceType { get; private set; } = null!;
 
         /// <summary>
         /// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.

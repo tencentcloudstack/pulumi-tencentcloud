@@ -16,6 +16,7 @@ from .gateway_ssl_client_cert import *
 from .get_connections import *
 from .get_customer_gateway_vendors import *
 from .get_customer_gateways import *
+from .get_default_health_check_ip import *
 from .get_gateway_routes import *
 from .get_gateways import *
 from .ssl_client import *

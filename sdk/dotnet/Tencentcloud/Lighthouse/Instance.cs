@@ -161,6 +161,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
+        /// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+        /// </summary>
+        [Output("isUpdateBundleIdAutoVoucher")]
+        public Output<bool?> IsUpdateBundleIdAutoVoucher { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+        /// </summary>
+        [Output("isolateDataDisk")]
+        public Output<bool?> IsolateDataDisk { get; private set; } = null!;
+
+        /// <summary>
         /// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
         /// </summary>
         [Output("loginConfiguration")]
@@ -171,6 +183,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Output("period")]
         public Output<int> Period { get; private set; } = null!;
+
+        /// <summary>
+        /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+        /// </summary>
+        [Output("permitDefaultKeyPairLogin")]
+        public Output<string> PermitDefaultKeyPairLogin { get; private set; } = null!;
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
@@ -274,6 +292,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public Input<string> InstanceName { get; set; } = null!;
 
         /// <summary>
+        /// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+        /// </summary>
+        [Input("isUpdateBundleIdAutoVoucher")]
+        public Input<bool>? IsUpdateBundleIdAutoVoucher { get; set; }
+
+        /// <summary>
+        /// Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+        /// </summary>
+        [Input("isolateDataDisk")]
+        public Input<bool>? IsolateDataDisk { get; set; }
+
+        /// <summary>
         /// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
         /// </summary>
         [Input("loginConfiguration")]
@@ -284,6 +314,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Input("period", required: true)]
         public Input<int> Period { get; set; } = null!;
+
+        /// <summary>
+        /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+        /// </summary>
+        [Input("permitDefaultKeyPairLogin")]
+        public Input<string>? PermitDefaultKeyPairLogin { get; set; }
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
@@ -347,6 +383,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public Input<string>? InstanceName { get; set; }
 
         /// <summary>
+        /// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+        /// </summary>
+        [Input("isUpdateBundleIdAutoVoucher")]
+        public Input<bool>? IsUpdateBundleIdAutoVoucher { get; set; }
+
+        /// <summary>
+        /// Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+        /// </summary>
+        [Input("isolateDataDisk")]
+        public Input<bool>? IsolateDataDisk { get; set; }
+
+        /// <summary>
         /// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
         /// </summary>
         [Input("loginConfiguration")]
@@ -357,6 +405,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
+
+        /// <summary>
+        /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+        /// </summary>
+        [Input("permitDefaultKeyPairLogin")]
+        public Input<string>? PermitDefaultKeyPairLogin { get; set; }
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.

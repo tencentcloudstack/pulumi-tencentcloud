@@ -81,6 +81,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public Output<int> Memory { get; private set; } = null!;
 
         /// <summary>
+        /// project id.
+        /// </summary>
+        [Output("projectId")]
+        public Output<int?> ProjectId { get; private set; } = null!;
+
+        /// <summary>
         /// instance disk storage.
         /// </summary>
         [Output("storage")]
@@ -97,6 +103,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// vip.
+        /// </summary>
+        [Output("vip")]
+        public Output<string> Vip { get; private set; } = null!;
 
         /// <summary>
         /// vpc id.
@@ -182,6 +194,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public Input<int> Memory { get; set; } = null!;
 
         /// <summary>
+        /// project id.
+        /// </summary>
+        [Input("projectId")]
+        public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
         /// instance disk storage.
         /// </summary>
         [Input("storage", required: true)]
@@ -204,6 +222,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
             get => _tags ?? (_tags = new InputMap<object>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// vip.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
 
         /// <summary>
         /// vpc id.
@@ -249,6 +273,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public Input<int>? Memory { get; set; }
 
         /// <summary>
+        /// project id.
+        /// </summary>
+        [Input("projectId")]
+        public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
         /// instance disk storage.
         /// </summary>
         [Input("storage")]
@@ -271,6 +301,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
             get => _tags ?? (_tags = new InputMap<object>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// vip.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
 
         /// <summary>
         /// vpc id.

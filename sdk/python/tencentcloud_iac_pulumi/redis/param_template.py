@@ -232,8 +232,7 @@ class ParamTemplate(pulumi.CustomResource):
             )],
             product_type=6)
         ```
-
-        Copy from another template
+        ### Copy from another template
 
         ```python
         import pulumi
@@ -287,8 +286,7 @@ class ParamTemplate(pulumi.CustomResource):
             )],
             product_type=6)
         ```
-
-        Copy from another template
+        ### Copy from another template
 
         ```python
         import pulumi

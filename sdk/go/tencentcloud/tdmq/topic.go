@@ -75,11 +75,15 @@ type Topic struct {
 	EnvironId pulumi.StringOutput `pulumi:"environId"`
 	// The partitions of topic.
 	Partitions pulumi.IntOutput `pulumi:"partitions"`
+	// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+	PulsarTopicType pulumi.IntOutput `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// The name of topic to be created.
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
-	// The type of topic.
+	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+	//
+	// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
 	TopicType pulumi.IntOutput `pulumi:"topicType"`
 }
 
@@ -101,9 +105,6 @@ func NewTopic(ctx *pulumi.Context,
 	}
 	if args.TopicName == nil {
 		return nil, errors.New("invalid value for required argument 'TopicName'")
-	}
-	if args.TopicType == nil {
-		return nil, errors.New("invalid value for required argument 'TopicType'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Topic
@@ -136,11 +137,15 @@ type topicState struct {
 	EnvironId *string `pulumi:"environId"`
 	// The partitions of topic.
 	Partitions *int `pulumi:"partitions"`
+	// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+	PulsarTopicType *int `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
 	// The name of topic to be created.
 	TopicName *string `pulumi:"topicName"`
-	// The type of topic.
+	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+	//
+	// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
 	TopicType *int `pulumi:"topicType"`
 }
 
@@ -153,11 +158,15 @@ type TopicState struct {
 	EnvironId pulumi.StringPtrInput
 	// The partitions of topic.
 	Partitions pulumi.IntPtrInput
+	// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+	PulsarTopicType pulumi.IntPtrInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
 	// The name of topic to be created.
 	TopicName pulumi.StringPtrInput
-	// The type of topic.
+	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+	//
+	// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
 	TopicType pulumi.IntPtrInput
 }
 
@@ -172,12 +181,16 @@ type topicArgs struct {
 	EnvironId string `pulumi:"environId"`
 	// The partitions of topic.
 	Partitions int `pulumi:"partitions"`
+	// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+	PulsarTopicType *int `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
 	// The name of topic to be created.
 	TopicName string `pulumi:"topicName"`
-	// The type of topic.
-	TopicType int `pulumi:"topicType"`
+	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+	//
+	// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
+	TopicType *int `pulumi:"topicType"`
 }
 
 // The set of arguments for constructing a Topic resource.
@@ -188,12 +201,16 @@ type TopicArgs struct {
 	EnvironId pulumi.StringInput
 	// The partitions of topic.
 	Partitions pulumi.IntInput
+	// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+	PulsarTopicType pulumi.IntPtrInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
 	// The name of topic to be created.
 	TopicName pulumi.StringInput
-	// The type of topic.
-	TopicType pulumi.IntInput
+	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+	//
+	// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
+	TopicType pulumi.IntPtrInput
 }
 
 func (TopicArgs) ElementType() reflect.Type {
@@ -303,6 +320,11 @@ func (o TopicOutput) Partitions() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.Partitions }).(pulumi.IntOutput)
 }
 
+// Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
+func (o TopicOutput) PulsarTopicType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.PulsarTopicType }).(pulumi.IntOutput)
+}
+
 // Description of the namespace.
 func (o TopicOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
@@ -313,7 +335,9 @@ func (o TopicOutput) TopicName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.TopicName }).(pulumi.StringOutput)
 }
 
-// The type of topic.
+// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
+//
+// Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
 func (o TopicOutput) TopicType() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.TopicType }).(pulumi.IntOutput)
 }

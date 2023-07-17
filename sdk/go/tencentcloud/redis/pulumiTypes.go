@@ -10,6 +10,112 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type BackupDownloadRestrictionLimitVpc struct {
+	// Customize the region of the VPC to which the backup file is downloaded.
+	Region string `pulumi:"region"`
+	// Customize the list of VPCs to download backup files.
+	VpcLists []string `pulumi:"vpcLists"`
+}
+
+// BackupDownloadRestrictionLimitVpcInput is an input type that accepts BackupDownloadRestrictionLimitVpcArgs and BackupDownloadRestrictionLimitVpcOutput values.
+// You can construct a concrete instance of `BackupDownloadRestrictionLimitVpcInput` via:
+//
+//          BackupDownloadRestrictionLimitVpcArgs{...}
+type BackupDownloadRestrictionLimitVpcInput interface {
+	pulumi.Input
+
+	ToBackupDownloadRestrictionLimitVpcOutput() BackupDownloadRestrictionLimitVpcOutput
+	ToBackupDownloadRestrictionLimitVpcOutputWithContext(context.Context) BackupDownloadRestrictionLimitVpcOutput
+}
+
+type BackupDownloadRestrictionLimitVpcArgs struct {
+	// Customize the region of the VPC to which the backup file is downloaded.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Customize the list of VPCs to download backup files.
+	VpcLists pulumi.StringArrayInput `pulumi:"vpcLists"`
+}
+
+func (BackupDownloadRestrictionLimitVpcArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupDownloadRestrictionLimitVpc)(nil)).Elem()
+}
+
+func (i BackupDownloadRestrictionLimitVpcArgs) ToBackupDownloadRestrictionLimitVpcOutput() BackupDownloadRestrictionLimitVpcOutput {
+	return i.ToBackupDownloadRestrictionLimitVpcOutputWithContext(context.Background())
+}
+
+func (i BackupDownloadRestrictionLimitVpcArgs) ToBackupDownloadRestrictionLimitVpcOutputWithContext(ctx context.Context) BackupDownloadRestrictionLimitVpcOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupDownloadRestrictionLimitVpcOutput)
+}
+
+// BackupDownloadRestrictionLimitVpcArrayInput is an input type that accepts BackupDownloadRestrictionLimitVpcArray and BackupDownloadRestrictionLimitVpcArrayOutput values.
+// You can construct a concrete instance of `BackupDownloadRestrictionLimitVpcArrayInput` via:
+//
+//          BackupDownloadRestrictionLimitVpcArray{ BackupDownloadRestrictionLimitVpcArgs{...} }
+type BackupDownloadRestrictionLimitVpcArrayInput interface {
+	pulumi.Input
+
+	ToBackupDownloadRestrictionLimitVpcArrayOutput() BackupDownloadRestrictionLimitVpcArrayOutput
+	ToBackupDownloadRestrictionLimitVpcArrayOutputWithContext(context.Context) BackupDownloadRestrictionLimitVpcArrayOutput
+}
+
+type BackupDownloadRestrictionLimitVpcArray []BackupDownloadRestrictionLimitVpcInput
+
+func (BackupDownloadRestrictionLimitVpcArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupDownloadRestrictionLimitVpc)(nil)).Elem()
+}
+
+func (i BackupDownloadRestrictionLimitVpcArray) ToBackupDownloadRestrictionLimitVpcArrayOutput() BackupDownloadRestrictionLimitVpcArrayOutput {
+	return i.ToBackupDownloadRestrictionLimitVpcArrayOutputWithContext(context.Background())
+}
+
+func (i BackupDownloadRestrictionLimitVpcArray) ToBackupDownloadRestrictionLimitVpcArrayOutputWithContext(ctx context.Context) BackupDownloadRestrictionLimitVpcArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupDownloadRestrictionLimitVpcArrayOutput)
+}
+
+type BackupDownloadRestrictionLimitVpcOutput struct{ *pulumi.OutputState }
+
+func (BackupDownloadRestrictionLimitVpcOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupDownloadRestrictionLimitVpc)(nil)).Elem()
+}
+
+func (o BackupDownloadRestrictionLimitVpcOutput) ToBackupDownloadRestrictionLimitVpcOutput() BackupDownloadRestrictionLimitVpcOutput {
+	return o
+}
+
+func (o BackupDownloadRestrictionLimitVpcOutput) ToBackupDownloadRestrictionLimitVpcOutputWithContext(ctx context.Context) BackupDownloadRestrictionLimitVpcOutput {
+	return o
+}
+
+// Customize the region of the VPC to which the backup file is downloaded.
+func (o BackupDownloadRestrictionLimitVpcOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v BackupDownloadRestrictionLimitVpc) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Customize the list of VPCs to download backup files.
+func (o BackupDownloadRestrictionLimitVpcOutput) VpcLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BackupDownloadRestrictionLimitVpc) []string { return v.VpcLists }).(pulumi.StringArrayOutput)
+}
+
+type BackupDownloadRestrictionLimitVpcArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupDownloadRestrictionLimitVpcArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupDownloadRestrictionLimitVpc)(nil)).Elem()
+}
+
+func (o BackupDownloadRestrictionLimitVpcArrayOutput) ToBackupDownloadRestrictionLimitVpcArrayOutput() BackupDownloadRestrictionLimitVpcArrayOutput {
+	return o
+}
+
+func (o BackupDownloadRestrictionLimitVpcArrayOutput) ToBackupDownloadRestrictionLimitVpcArrayOutputWithContext(ctx context.Context) BackupDownloadRestrictionLimitVpcArrayOutput {
+	return o
+}
+
+func (o BackupDownloadRestrictionLimitVpcArrayOutput) Index(i pulumi.IntInput) BackupDownloadRestrictionLimitVpcOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupDownloadRestrictionLimitVpc {
+		return vs[0].([]BackupDownloadRestrictionLimitVpc)[vs[1].(int)]
+	}).(BackupDownloadRestrictionLimitVpcOutput)
+}
+
 type InstanceNodeInfo struct {
 	// ID of the master or replica node.
 	Id *int `pulumi:"id"`
@@ -851,6 +957,236 @@ func (o GetBackupDownloadInfoLimitVpcArrayOutput) Index(i pulumi.IntInput) GetBa
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupDownloadInfoLimitVpc {
 		return vs[0].([]GetBackupDownloadInfoLimitVpc)[vs[1].(int)]
 	}).(GetBackupDownloadInfoLimitVpcOutput)
+}
+
+type GetInstanceNodeInfoProxy struct {
+	// Node ID.
+	NodeId string `pulumi:"nodeId"`
+	// Zone ID.
+	ZoneId int `pulumi:"zoneId"`
+}
+
+// GetInstanceNodeInfoProxyInput is an input type that accepts GetInstanceNodeInfoProxyArgs and GetInstanceNodeInfoProxyOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoProxyInput` via:
+//
+//          GetInstanceNodeInfoProxyArgs{...}
+type GetInstanceNodeInfoProxyInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoProxyOutput() GetInstanceNodeInfoProxyOutput
+	ToGetInstanceNodeInfoProxyOutputWithContext(context.Context) GetInstanceNodeInfoProxyOutput
+}
+
+type GetInstanceNodeInfoProxyArgs struct {
+	// Node ID.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Zone ID.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+}
+
+func (GetInstanceNodeInfoProxyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoProxy)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoProxyArgs) ToGetInstanceNodeInfoProxyOutput() GetInstanceNodeInfoProxyOutput {
+	return i.ToGetInstanceNodeInfoProxyOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoProxyArgs) ToGetInstanceNodeInfoProxyOutputWithContext(ctx context.Context) GetInstanceNodeInfoProxyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoProxyOutput)
+}
+
+// GetInstanceNodeInfoProxyArrayInput is an input type that accepts GetInstanceNodeInfoProxyArray and GetInstanceNodeInfoProxyArrayOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoProxyArrayInput` via:
+//
+//          GetInstanceNodeInfoProxyArray{ GetInstanceNodeInfoProxyArgs{...} }
+type GetInstanceNodeInfoProxyArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoProxyArrayOutput() GetInstanceNodeInfoProxyArrayOutput
+	ToGetInstanceNodeInfoProxyArrayOutputWithContext(context.Context) GetInstanceNodeInfoProxyArrayOutput
+}
+
+type GetInstanceNodeInfoProxyArray []GetInstanceNodeInfoProxyInput
+
+func (GetInstanceNodeInfoProxyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoProxy)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoProxyArray) ToGetInstanceNodeInfoProxyArrayOutput() GetInstanceNodeInfoProxyArrayOutput {
+	return i.ToGetInstanceNodeInfoProxyArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoProxyArray) ToGetInstanceNodeInfoProxyArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoProxyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoProxyArrayOutput)
+}
+
+type GetInstanceNodeInfoProxyOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoProxyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoProxy)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoProxyOutput) ToGetInstanceNodeInfoProxyOutput() GetInstanceNodeInfoProxyOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoProxyOutput) ToGetInstanceNodeInfoProxyOutputWithContext(ctx context.Context) GetInstanceNodeInfoProxyOutput {
+	return o
+}
+
+// Node ID.
+func (o GetInstanceNodeInfoProxyOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoProxy) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Zone ID.
+func (o GetInstanceNodeInfoProxyOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoProxy) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+type GetInstanceNodeInfoProxyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoProxyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoProxy)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoProxyArrayOutput) ToGetInstanceNodeInfoProxyArrayOutput() GetInstanceNodeInfoProxyArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoProxyArrayOutput) ToGetInstanceNodeInfoProxyArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoProxyArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoProxyArrayOutput) Index(i pulumi.IntInput) GetInstanceNodeInfoProxyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceNodeInfoProxy {
+		return vs[0].([]GetInstanceNodeInfoProxy)[vs[1].(int)]
+	}).(GetInstanceNodeInfoProxyOutput)
+}
+
+type GetInstanceNodeInfoRedi struct {
+	// Shard ID.
+	ClusterId int `pulumi:"clusterId"`
+	// Node ID.
+	NodeId string `pulumi:"nodeId"`
+	// Node role.
+	NodeRole string `pulumi:"nodeRole"`
+	// Zone ID.
+	ZoneId int `pulumi:"zoneId"`
+}
+
+// GetInstanceNodeInfoRediInput is an input type that accepts GetInstanceNodeInfoRediArgs and GetInstanceNodeInfoRediOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoRediInput` via:
+//
+//          GetInstanceNodeInfoRediArgs{...}
+type GetInstanceNodeInfoRediInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoRediOutput() GetInstanceNodeInfoRediOutput
+	ToGetInstanceNodeInfoRediOutputWithContext(context.Context) GetInstanceNodeInfoRediOutput
+}
+
+type GetInstanceNodeInfoRediArgs struct {
+	// Shard ID.
+	ClusterId pulumi.IntInput `pulumi:"clusterId"`
+	// Node ID.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Node role.
+	NodeRole pulumi.StringInput `pulumi:"nodeRole"`
+	// Zone ID.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+}
+
+func (GetInstanceNodeInfoRediArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoRedi)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoRediArgs) ToGetInstanceNodeInfoRediOutput() GetInstanceNodeInfoRediOutput {
+	return i.ToGetInstanceNodeInfoRediOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoRediArgs) ToGetInstanceNodeInfoRediOutputWithContext(ctx context.Context) GetInstanceNodeInfoRediOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoRediOutput)
+}
+
+// GetInstanceNodeInfoRediArrayInput is an input type that accepts GetInstanceNodeInfoRediArray and GetInstanceNodeInfoRediArrayOutput values.
+// You can construct a concrete instance of `GetInstanceNodeInfoRediArrayInput` via:
+//
+//          GetInstanceNodeInfoRediArray{ GetInstanceNodeInfoRediArgs{...} }
+type GetInstanceNodeInfoRediArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodeInfoRediArrayOutput() GetInstanceNodeInfoRediArrayOutput
+	ToGetInstanceNodeInfoRediArrayOutputWithContext(context.Context) GetInstanceNodeInfoRediArrayOutput
+}
+
+type GetInstanceNodeInfoRediArray []GetInstanceNodeInfoRediInput
+
+func (GetInstanceNodeInfoRediArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoRedi)(nil)).Elem()
+}
+
+func (i GetInstanceNodeInfoRediArray) ToGetInstanceNodeInfoRediArrayOutput() GetInstanceNodeInfoRediArrayOutput {
+	return i.ToGetInstanceNodeInfoRediArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodeInfoRediArray) ToGetInstanceNodeInfoRediArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoRediArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodeInfoRediArrayOutput)
+}
+
+type GetInstanceNodeInfoRediOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoRediOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodeInfoRedi)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoRediOutput) ToGetInstanceNodeInfoRediOutput() GetInstanceNodeInfoRediOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoRediOutput) ToGetInstanceNodeInfoRediOutputWithContext(ctx context.Context) GetInstanceNodeInfoRediOutput {
+	return o
+}
+
+// Shard ID.
+func (o GetInstanceNodeInfoRediOutput) ClusterId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoRedi) int { return v.ClusterId }).(pulumi.IntOutput)
+}
+
+// Node ID.
+func (o GetInstanceNodeInfoRediOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoRedi) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Node role.
+func (o GetInstanceNodeInfoRediOutput) NodeRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoRedi) string { return v.NodeRole }).(pulumi.StringOutput)
+}
+
+// Zone ID.
+func (o GetInstanceNodeInfoRediOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodeInfoRedi) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+type GetInstanceNodeInfoRediArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodeInfoRediArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodeInfoRedi)(nil)).Elem()
+}
+
+func (o GetInstanceNodeInfoRediArrayOutput) ToGetInstanceNodeInfoRediArrayOutput() GetInstanceNodeInfoRediArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoRediArrayOutput) ToGetInstanceNodeInfoRediArrayOutputWithContext(ctx context.Context) GetInstanceNodeInfoRediArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodeInfoRediArrayOutput) Index(i pulumi.IntInput) GetInstanceNodeInfoRediOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceNodeInfoRedi {
+		return vs[0].([]GetInstanceNodeInfoRedi)[vs[1].(int)]
+	}).(GetInstanceNodeInfoRediOutput)
 }
 
 type GetInstanceShardsInstanceShard struct {
@@ -2136,6 +2472,8 @@ func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigList
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcArrayInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceNodeInfoInput)(nil)).Elem(), InstanceNodeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceNodeInfoArrayInput)(nil)).Elem(), InstanceNodeInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParamTemplateParamDetailInput)(nil)).Elem(), ParamTemplateParamDetailArgs{})
@@ -2148,6 +2486,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadInfoBackupInfoArrayInput)(nil)).Elem(), GetBackupDownloadInfoBackupInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadInfoLimitVpcInput)(nil)).Elem(), GetBackupDownloadInfoLimitVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadInfoLimitVpcArrayInput)(nil)).Elem(), GetBackupDownloadInfoLimitVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoProxyInput)(nil)).Elem(), GetInstanceNodeInfoProxyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoProxyArrayInput)(nil)).Elem(), GetInstanceNodeInfoProxyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoRediInput)(nil)).Elem(), GetInstanceNodeInfoRediArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodeInfoRediArrayInput)(nil)).Elem(), GetInstanceNodeInfoRediArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceShardsInstanceShardInput)(nil)).Elem(), GetInstanceShardsInstanceShardArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceShardsInstanceShardArrayInput)(nil)).Elem(), GetInstanceShardsInstanceShardArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTaskListTaskInput)(nil)).Elem(), GetInstanceTaskListTaskArgs{})
@@ -2164,6 +2506,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParamRecordsInstanceParamHistoryArrayInput)(nil)).Elem(), GetParamRecordsInstanceParamHistoryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcOutput{})
+	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcArrayOutput{})
 	pulumi.RegisterOutputType(InstanceNodeInfoOutput{})
 	pulumi.RegisterOutputType(InstanceNodeInfoArrayOutput{})
 	pulumi.RegisterOutputType(ParamTemplateParamDetailOutput{})
@@ -2176,6 +2520,10 @@ func init() {
 	pulumi.RegisterOutputType(GetBackupDownloadInfoBackupInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadInfoLimitVpcOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadInfoLimitVpcArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoProxyOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoProxyArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoRediOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodeInfoRediArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceShardsInstanceShardOutput{})
 	pulumi.RegisterOutputType(GetInstanceShardsInstanceShardArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceTaskListTaskOutput{})

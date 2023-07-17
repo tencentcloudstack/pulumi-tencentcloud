@@ -426,8 +426,7 @@ class ScaleWorker(pulumi.CustomResource):
                 password="AABBccdd1122",
             ))
         ```
-
-        Use Kubelet
+        ### Use Kubelet
 
         ```python
         import pulumi
@@ -538,8 +537,7 @@ class ScaleWorker(pulumi.CustomResource):
                 password="AABBccdd1122",
             ))
         ```
-
-        Use Kubelet
+        ### Use Kubelet
 
         ```python
         import pulumi

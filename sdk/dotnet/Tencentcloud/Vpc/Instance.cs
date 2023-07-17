@@ -13,6 +13,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// <summary>
     /// Provide a resource to create a VPC.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             DnsServers = 
+    ///             {
+    ///                 "119.29.29.29",
+    ///                 "8.8.8.8",
+    ///             },
+    ///             IsMulticast = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Using Assistant CIDR
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             AssistantCidrs = 
+    ///             {
+    ///                 "172.16.0.0/24",
+    ///             },
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Vpc instance can be imported, e.g.

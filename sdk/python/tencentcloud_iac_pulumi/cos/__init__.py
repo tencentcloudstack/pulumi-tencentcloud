@@ -5,11 +5,23 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .batch import *
 from .bucket import *
 from .bucket_domain_certificate_attachment import *
+from .bucket_generate_inventory_immediately_operation import *
+from .bucket_inventory import *
 from .bucket_object import *
 from .bucket_policy import *
+from .bucket_referer import *
+from .bucket_version import *
+from .get_batchs import *
+from .get_bucket_inventorys import *
+from .get_bucket_multipart_uploads import *
 from .get_bucket_object import *
 from .get_buckets import *
+from .object_abort_multipart_upload_operation import *
+from .object_copy_operation import *
+from .object_download_operation import *
+from .object_restore_operation import *
 from ._inputs import *
 from . import outputs

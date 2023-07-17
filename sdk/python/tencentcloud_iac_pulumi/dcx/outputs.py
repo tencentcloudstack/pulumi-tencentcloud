@@ -9,8 +9,189 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ExtraConfigBfdInfo',
+    'ExtraConfigBgpPeer',
+    'ExtraConfigNqaInfo',
+    'ExtraConfigRouteFilterPrefixes',
     'GetInstancesInstanceListResult',
 ]
+
+@pulumi.output_type
+class ExtraConfigBfdInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "probeFailedTimes":
+            suggest = "probe_failed_times"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ExtraConfigBfdInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ExtraConfigBfdInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ExtraConfigBfdInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 interval: Optional[int] = None,
+                 probe_failed_times: Optional[int] = None):
+        """
+        :param int interval: detect interval.
+        :param int probe_failed_times: detect times.
+        """
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if probe_failed_times is not None:
+            pulumi.set(__self__, "probe_failed_times", probe_failed_times)
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[int]:
+        """
+        detect interval.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter(name="probeFailedTimes")
+    def probe_failed_times(self) -> Optional[int]:
+        """
+        detect times.
+        """
+        return pulumi.get(self, "probe_failed_times")
+
+
+@pulumi.output_type
+class ExtraConfigBgpPeer(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authKey":
+            suggest = "auth_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ExtraConfigBgpPeer. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ExtraConfigBgpPeer.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ExtraConfigBgpPeer.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 asn: Optional[int] = None,
+                 auth_key: Optional[str] = None):
+        """
+        :param int asn: user idc BGP Asn.
+        :param str auth_key: user bgp key.
+        """
+        if asn is not None:
+            pulumi.set(__self__, "asn", asn)
+        if auth_key is not None:
+            pulumi.set(__self__, "auth_key", auth_key)
+
+    @property
+    @pulumi.getter
+    def asn(self) -> Optional[int]:
+        """
+        user idc BGP Asn.
+        """
+        return pulumi.get(self, "asn")
+
+    @property
+    @pulumi.getter(name="authKey")
+    def auth_key(self) -> Optional[str]:
+        """
+        user bgp key.
+        """
+        return pulumi.get(self, "auth_key")
+
+
+@pulumi.output_type
+class ExtraConfigNqaInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "destinationIp":
+            suggest = "destination_ip"
+        elif key == "probeFailedTimes":
+            suggest = "probe_failed_times"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ExtraConfigNqaInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ExtraConfigNqaInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ExtraConfigNqaInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 destination_ip: Optional[str] = None,
+                 interval: Optional[int] = None,
+                 probe_failed_times: Optional[int] = None):
+        """
+        :param str destination_ip: detect ip.
+        :param int interval: detect interval.
+        :param int probe_failed_times: detect times.
+        """
+        if destination_ip is not None:
+            pulumi.set(__self__, "destination_ip", destination_ip)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if probe_failed_times is not None:
+            pulumi.set(__self__, "probe_failed_times", probe_failed_times)
+
+    @property
+    @pulumi.getter(name="destinationIp")
+    def destination_ip(self) -> Optional[str]:
+        """
+        detect ip.
+        """
+        return pulumi.get(self, "destination_ip")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[int]:
+        """
+        detect interval.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter(name="probeFailedTimes")
+    def probe_failed_times(self) -> Optional[int]:
+        """
+        detect times.
+        """
+        return pulumi.get(self, "probe_failed_times")
+
+
+@pulumi.output_type
+class ExtraConfigRouteFilterPrefixes(dict):
+    def __init__(__self__, *,
+                 cidr: Optional[str] = None):
+        """
+        :param str cidr: user network prefixes.
+        """
+        if cidr is not None:
+            pulumi.set(__self__, "cidr", cidr)
+
+    @property
+    @pulumi.getter
+    def cidr(self) -> Optional[str]:
+        """
+        user network prefixes.
+        """
+        return pulumi.get(self, "cidr")
+
 
 @pulumi.output_type
 class GetInstancesInstanceListResult(dict):

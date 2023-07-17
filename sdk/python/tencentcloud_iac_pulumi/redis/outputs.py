@@ -10,12 +10,15 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'BackupDownloadRestrictionLimitVpc',
     'InstanceNodeInfo',
     'ParamTemplateParamDetail',
     'ParamTemplateParamsOverride',
     'GetBackupBackupSetResult',
     'GetBackupDownloadInfoBackupInfoResult',
     'GetBackupDownloadInfoLimitVpcResult',
+    'GetInstanceNodeInfoProxyResult',
+    'GetInstanceNodeInfoRediResult',
     'GetInstanceShardsInstanceShardResult',
     'GetInstanceTaskListTaskResult',
     'GetInstanceZoneInfoReplicaGroupResult',
@@ -25,6 +28,52 @@ __all__ = [
     'GetParamRecordsInstanceParamHistoryResult',
     'GetZoneConfigListResult',
 ]
+
+@pulumi.output_type
+class BackupDownloadRestrictionLimitVpc(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "vpcLists":
+            suggest = "vpc_lists"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BackupDownloadRestrictionLimitVpc. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BackupDownloadRestrictionLimitVpc.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BackupDownloadRestrictionLimitVpc.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 region: str,
+                 vpc_lists: Sequence[str]):
+        """
+        :param str region: Customize the region of the VPC to which the backup file is downloaded.
+        :param Sequence[str] vpc_lists: Customize the list of VPCs to download backup files.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc_lists", vpc_lists)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Customize the region of the VPC to which the backup file is downloaded.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="vpcLists")
+    def vpc_lists(self) -> Sequence[str]:
+        """
+        Customize the list of VPCs to download backup files.
+        """
+        return pulumi.get(self, "vpc_lists")
+
 
 @pulumi.output_type
 class InstanceNodeInfo(dict):
@@ -503,6 +552,86 @@ class GetBackupDownloadInfoLimitVpcResult(dict):
         Customize the list of VPCs to download backup files.
         """
         return pulumi.get(self, "vpc_lists")
+
+
+@pulumi.output_type
+class GetInstanceNodeInfoProxyResult(dict):
+    def __init__(__self__, *,
+                 node_id: str,
+                 zone_id: int):
+        """
+        :param str node_id: Node ID.
+        :param int zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetInstanceNodeInfoRediResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: int,
+                 node_id: str,
+                 node_role: str,
+                 zone_id: int):
+        """
+        :param int cluster_id: Shard ID.
+        :param str node_id: Node ID.
+        :param str node_role: Node role.
+        :param int zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "node_role", node_role)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> int:
+        """
+        Shard ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter(name="nodeRole")
+    def node_role(self) -> str:
+        """
+        Node role.
+        """
+        return pulumi.get(self, "node_role")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
 
 
 @pulumi.output_type

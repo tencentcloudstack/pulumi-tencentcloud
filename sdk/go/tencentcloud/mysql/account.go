@@ -26,9 +26,10 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Mysql.NewAccount(ctx, "default", &Mysql.AccountArgs{
-// 			Description: pulumi.String("My test account"),
-// 			MysqlId:     pulumi.String("my-test-database"),
-// 			Password:    pulumi.String("********"),
+// 			Description:        pulumi.String("My test account"),
+// 			MaxUserConnections: pulumi.Int(10),
+// 			MysqlId:            pulumi.String("terraform-test-local-database"),
+// 			Password:           pulumi.String("********"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -52,6 +53,8 @@ type Account struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Account host, default is `%`.
 	Host pulumi.StringPtrOutput `pulumi:"host"`
+	// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+	MaxUserConnections pulumi.IntOutput `pulumi:"maxUserConnections"`
 	// Instance ID to which the account belongs.
 	MysqlId pulumi.StringOutput `pulumi:"mysqlId"`
 	// Account name.
@@ -100,6 +103,8 @@ type accountState struct {
 	Description *string `pulumi:"description"`
 	// Account host, default is `%`.
 	Host *string `pulumi:"host"`
+	// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+	MaxUserConnections *int `pulumi:"maxUserConnections"`
 	// Instance ID to which the account belongs.
 	MysqlId *string `pulumi:"mysqlId"`
 	// Account name.
@@ -113,6 +118,8 @@ type AccountState struct {
 	Description pulumi.StringPtrInput
 	// Account host, default is `%`.
 	Host pulumi.StringPtrInput
+	// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+	MaxUserConnections pulumi.IntPtrInput
 	// Instance ID to which the account belongs.
 	MysqlId pulumi.StringPtrInput
 	// Account name.
@@ -130,6 +137,8 @@ type accountArgs struct {
 	Description *string `pulumi:"description"`
 	// Account host, default is `%`.
 	Host *string `pulumi:"host"`
+	// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+	MaxUserConnections *int `pulumi:"maxUserConnections"`
 	// Instance ID to which the account belongs.
 	MysqlId string `pulumi:"mysqlId"`
 	// Account name.
@@ -144,6 +153,8 @@ type AccountArgs struct {
 	Description pulumi.StringPtrInput
 	// Account host, default is `%`.
 	Host pulumi.StringPtrInput
+	// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+	MaxUserConnections pulumi.IntPtrInput
 	// Instance ID to which the account belongs.
 	MysqlId pulumi.StringInput
 	// Account name.
@@ -247,6 +258,11 @@ func (o AccountOutput) Description() pulumi.StringPtrOutput {
 // Account host, default is `%`.
 func (o AccountOutput) Host() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Account) pulumi.StringPtrOutput { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+func (o AccountOutput) MaxUserConnections() pulumi.IntOutput {
+	return o.ApplyT(func(v *Account) pulumi.IntOutput { return v.MaxUserConnections }).(pulumi.IntOutput)
 }
 
 // Instance ID to which the account belongs.

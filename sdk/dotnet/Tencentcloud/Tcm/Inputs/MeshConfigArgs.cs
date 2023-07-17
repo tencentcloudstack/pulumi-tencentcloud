@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
     public sealed class MeshConfigArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Sidecar inject configuration.
+        /// </summary>
+        [Input("inject")]
+        public Input<Inputs.MeshConfigInjectArgs>? Inject { get; set; }
+
+        /// <summary>
         /// Istio configuration.
         /// </summary>
         [Input("istio")]
@@ -24,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         /// </summary>
         [Input("prometheus")]
         public Input<Inputs.MeshConfigPrometheusArgs>? Prometheus { get; set; }
+
+        /// <summary>
+        /// Default sidecar requests and limits.
+        /// </summary>
+        [Input("sidecarResources")]
+        public Input<Inputs.MeshConfigSidecarResourcesArgs>? SidecarResources { get; set; }
 
         /// <summary>
         /// Tracing config.

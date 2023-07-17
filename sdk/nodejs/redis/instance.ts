@@ -12,6 +12,25 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
  *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zone = tencentcloud.Redis.getZoneConfig({});
+ * const redisInstanceTest2 = new tencentcloud.redis.Instance("redisInstanceTest2", {
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ * });
+ * ```
+ *
  * ## Import
  *
  * Redis instance can be imported, e.g.
@@ -69,9 +88,9 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * IP address of an instance.
+     * IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
      */
-    public /*out*/ readonly ip!: pulumi.Output<string>;
+    public readonly ip!: pulumi.Output<string>;
     /**
      * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
      */
@@ -89,6 +108,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly nodeInfos!: pulumi.Output<outputs.Redis.InstanceNodeInfo[]>;
     /**
+     * Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+     */
+    public readonly operationNetwork!: pulumi.Output<string | undefined>;
+    /**
      * Specify params template id. If not set, will use default template.
      */
     public readonly paramsTemplateId!: pulumi.Output<string | undefined>;
@@ -97,7 +120,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string | undefined>;
     /**
-     * The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+     * The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
@@ -109,6 +132,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
+     * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+     */
+    public readonly recycle!: pulumi.Output<number | undefined>;
+    /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
     public readonly redisReplicasNum!: pulumi.Output<number | undefined>;
@@ -119,7 +146,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
-    public readonly replicaZoneIds!: pulumi.Output<number[] | undefined>;
+    public readonly replicaZoneIds!: pulumi.Output<number[]>;
     /**
      * Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
      */
@@ -133,7 +160,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * Specifies which subnet the instance should belong to.
+     * Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     public readonly subnetId!: pulumi.Output<string>;
     /**
@@ -147,11 +174,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly type!: pulumi.Output<string | undefined>;
     /**
-     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
      */
     public readonly typeId!: pulumi.Output<number | undefined>;
     /**
-     * ID of the vpc with which the instance is to be associated.
+     * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     public readonly vpcId!: pulumi.Output<string>;
 
@@ -178,11 +205,13 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["noAuth"] = state ? state.noAuth : undefined;
             resourceInputs["nodeInfos"] = state ? state.nodeInfos : undefined;
+            resourceInputs["operationNetwork"] = state ? state.operationNetwork : undefined;
             resourceInputs["paramsTemplateId"] = state ? state.paramsTemplateId : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["recycle"] = state ? state.recycle : undefined;
             resourceInputs["redisReplicasNum"] = state ? state.redisReplicasNum : undefined;
             resourceInputs["redisShardNum"] = state ? state.redisShardNum : undefined;
             resourceInputs["replicaZoneIds"] = state ? state.replicaZoneIds : undefined;
@@ -206,14 +235,17 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["forceDelete"] = args ? args.forceDelete : undefined;
+            resourceInputs["ip"] = args ? args.ip : undefined;
             resourceInputs["memSize"] = args ? args.memSize : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["noAuth"] = args ? args.noAuth : undefined;
+            resourceInputs["operationNetwork"] = args ? args.operationNetwork : undefined;
             resourceInputs["paramsTemplateId"] = args ? args.paramsTemplateId : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["recycle"] = args ? args.recycle : undefined;
             resourceInputs["redisReplicasNum"] = args ? args.redisReplicasNum : undefined;
             resourceInputs["redisShardNum"] = args ? args.redisShardNum : undefined;
             resourceInputs["replicaZoneIds"] = args ? args.replicaZoneIds : undefined;
@@ -225,7 +257,6 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["typeId"] = args ? args.typeId : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
-            resourceInputs["ip"] = undefined /*out*/;
             resourceInputs["nodeInfos"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -259,7 +290,7 @@ export interface InstanceState {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * IP address of an instance.
+     * IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
      */
     ip?: pulumi.Input<string>;
     /**
@@ -279,6 +310,10 @@ export interface InstanceState {
      */
     nodeInfos?: pulumi.Input<pulumi.Input<inputs.Redis.InstanceNodeInfo>[]>;
     /**
+     * Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+     */
+    operationNetwork?: pulumi.Input<string>;
+    /**
      * Specify params template id. If not set, will use default template.
      */
     paramsTemplateId?: pulumi.Input<string>;
@@ -287,7 +322,7 @@ export interface InstanceState {
      */
     password?: pulumi.Input<string>;
     /**
-     * The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+     * The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
      */
     port?: pulumi.Input<number>;
     /**
@@ -298,6 +333,10 @@ export interface InstanceState {
      * Specifies which project the instance should belong to.
      */
     projectId?: pulumi.Input<number>;
+    /**
+     * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+     */
+    recycle?: pulumi.Input<number>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
@@ -323,7 +362,7 @@ export interface InstanceState {
      */
     status?: pulumi.Input<string>;
     /**
-     * Specifies which subnet the instance should belong to.
+     * Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -337,11 +376,11 @@ export interface InstanceState {
      */
     type?: pulumi.Input<string>;
     /**
-     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
      */
     typeId?: pulumi.Input<number>;
     /**
-     * ID of the vpc with which the instance is to be associated.
+     * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     vpcId?: pulumi.Input<string>;
 }
@@ -367,6 +406,10 @@ export interface InstanceArgs {
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
+     * IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
+     */
+    ip?: pulumi.Input<string>;
+    /**
      * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
      */
     memSize: pulumi.Input<number>;
@@ -379,6 +422,10 @@ export interface InstanceArgs {
      */
     noAuth?: pulumi.Input<boolean>;
     /**
+     * Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+     */
+    operationNetwork?: pulumi.Input<string>;
+    /**
      * Specify params template id. If not set, will use default template.
      */
     paramsTemplateId?: pulumi.Input<string>;
@@ -387,7 +434,7 @@ export interface InstanceArgs {
      */
     password?: pulumi.Input<string>;
     /**
-     * The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+     * The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
      */
     port?: pulumi.Input<number>;
     /**
@@ -398,6 +445,10 @@ export interface InstanceArgs {
      * Specifies which project the instance should belong to.
      */
     projectId?: pulumi.Input<number>;
+    /**
+     * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+     */
+    recycle?: pulumi.Input<number>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
      */
@@ -419,7 +470,7 @@ export interface InstanceArgs {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Specifies which subnet the instance should belong to.
+     * Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -433,11 +484,11 @@ export interface InstanceArgs {
      */
     type?: pulumi.Input<string>;
     /**
-     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+     * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
      */
     typeId?: pulumi.Input<number>;
     /**
-     * ID of the vpc with which the instance is to be associated.
+     * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     vpcId?: pulumi.Input<string>;
 }

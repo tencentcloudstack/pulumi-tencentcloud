@@ -35,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// }
     /// ```
-    /// 
-    /// Using CFS config
+    /// ### Using CFS config
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -174,6 +173,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Output("errNo")]
         public Output<int> ErrNo { get; private set; } = null!;
+
+        /// <summary>
+        /// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        /// </summary>
+        [Output("funcType")]
+        public Output<string> FuncType { get; private set; } = null!;
 
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
@@ -427,6 +432,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
 
         /// <summary>
+        /// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        /// </summary>
+        [Input("funcType")]
+        public Input<string>? FuncType { get; set; }
+
+        /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Input("handler", required: true)]
@@ -660,6 +671,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Input("errNo")]
         public Input<int>? ErrNo { get; set; }
+
+        /// <summary>
+        /// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+        /// </summary>
+        [Input("funcType")]
+        public Input<string>? FuncType { get; set; }
 
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.

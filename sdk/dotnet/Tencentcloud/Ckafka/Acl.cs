@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// Provides a resource to create a Ckafka Acl.
     /// 
     /// ## Example Usage
-    /// 
-    /// Ckafka Acl
+    /// ### Ckafka Acl
     /// 
     /// ```csharp
     /// using Pulumi;

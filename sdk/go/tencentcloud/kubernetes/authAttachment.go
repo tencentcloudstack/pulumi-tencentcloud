@@ -117,8 +117,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Use the TKE default issuer and jwksUri
+// ### Use the TKE default issuer and jwksUri
 //
 // ```go
 // package main

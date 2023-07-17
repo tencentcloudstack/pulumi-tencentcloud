@@ -9,8 +9,7 @@ import * as utilities from "../utilities";
  * Provides a COS resource to create a COS bucket and set its attributes.
  *
  * ## Example Usage
- *
- * Private Bucket
+ * ### Private Bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -21,8 +20,7 @@ import * as utilities from "../utilities";
  *     bucket: "mycos-1258798060",
  * });
  * ```
- *
- * Creation of multiple available zone bucket
+ * ### Creation of multiple available zone bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -36,48 +34,79 @@ import * as utilities from "../utilities";
  *     versioningEnable: true,
  * });
  * ```
- *
- * Using verbose acl
+ * ### Using verbose acl
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const withAclBody = new tencentcloud.Cos.Bucket("with_acl_body", {
- *     // NOTE: Granting http://cam.qcloud.com/groups/global/AllUsers `READ` Permission is equivalent to "public-read" acl
+ *     // NOTE: Specify the acl_body by the priority sequence of permission and user type with the following sequence: `CanonicalUser with READ`, `CanonicalUser with WRITE`, `CanonicalUser with FULL_CONTROL`, `CanonicalUser with WRITE_ACP`, `CanonicalUser with READ_ACP`, then specify the `Group` of permissions same as `CanonicalUser`.
  *     aclBody: `<AccessControlPolicy>
- *     <Owner>
- *         <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
- *     </Owner>
- *     <AccessControlList>
- *         <Grant>
- *             <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
- *                 <URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
- *             </Grantee>
- *             <Permission>READ</Permission>
- *         </Grant>
- *         <Grant>
- *             <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
- *                 <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
- *                 <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
- *             </Grantee>
- *             <Permission>WRITE</Permission>
- *         </Grant>
- *         <Grant>
- *             <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
- *                 <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
- *                 <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
- *             </Grantee>
- *             <Permission>READ_ACP</Permission>
- *         </Grant>
- *     </AccessControlList>
+ * 	<Owner>
+ * 		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+ * 		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+ * 	</Owner>
+ * 	<AccessControlList>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+ * 				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+ * 			</Grantee>
+ * 			<Permission>READ</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+ * 				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+ * 				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+ * 			</Grantee>
+ * 			<Permission>FULL_CONTROL</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+ * 				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+ * 				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+ * 			</Grantee>
+ * 			<Permission>WRITE_ACP</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+ * 				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+ * 			</Grantee>
+ * 			<Permission>READ_ACP</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+ * 				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+ * 			</Grantee>
+ * 			<Permission>WRITE_ACP</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+ * 				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+ * 				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+ * 			</Grantee>
+ * 			<Permission>READ</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+ * 				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+ * 				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+ * 			</Grantee>
+ * 			<Permission>WRITE</Permission>
+ * 		</Grant>
+ * 		<Grant>
+ * 			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+ * 				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+ * 			</Grantee>
+ * 			<Permission>FULL_CONTROL</Permission>
+ * 		</Grant>
+ * 	</AccessControlList>
  * </AccessControlPolicy>
  * `,
  *     bucket: "mycos-1258798060",
  * });
  * ```
- *
- * Static Website
+ * ### Static Website
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -92,8 +121,7 @@ import * as utilities from "../utilities";
  * });
  * export const endpointTest = mycos.website.apply(website => website?.endpoint);
  * ```
- *
- * Using CORS
+ * ### Using CORS
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -114,8 +142,7 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
- *
- * Using object lifecycle
+ * ### Using object lifecycle
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -136,8 +163,7 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
- *
- * Using custom origin domain settings
+ * ### Using custom origin domain settings
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -153,8 +179,7 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
- *
- * Using origin-pull settings
+ * ### Using origin-pull settings
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -181,8 +206,7 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
- *
- * Using replication
+ * ### Using replication
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -206,8 +230,7 @@ import * as utilities from "../utilities";
  *     versioningEnable: true,
  * });
  * ```
- *
- * Setting log status
+ * ### Setting log status
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -315,6 +338,10 @@ export class Bucket extends pulumi.CustomResource {
      */
     public /*out*/ readonly cosBucketUrl!: pulumi.Output<string>;
     /**
+     * Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+     */
+    public readonly enableIntelligentTiering!: pulumi.Output<boolean>;
+    /**
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     public readonly encryptionAlgorithm!: pulumi.Output<string | undefined>;
@@ -322,6 +349,14 @@ export class Bucket extends pulumi.CustomResource {
      * Force cleanup all objects before delete bucket.
      */
     public readonly forceClean!: pulumi.Output<boolean | undefined>;
+    /**
+     * Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+     */
+    public readonly intelligentTieringDays!: pulumi.Output<number>;
+    /**
+     * Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+     */
+    public readonly intelligentTieringRequestFrequent!: pulumi.Output<number>;
     /**
      * A configuration of object lifecycle management (documented below).
      */
@@ -339,7 +374,7 @@ export class Bucket extends pulumi.CustomResource {
      */
     public readonly logTargetBucket!: pulumi.Output<string>;
     /**
-     * Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+     * Indicates whether to create a bucket of multi available zone.
      */
     public readonly multiAz!: pulumi.Output<boolean | undefined>;
     /**
@@ -363,7 +398,7 @@ export class Bucket extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Enable bucket versioning.
+     * Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
      */
     public readonly versioningEnable!: pulumi.Output<boolean | undefined>;
     /**
@@ -390,8 +425,11 @@ export class Bucket extends pulumi.CustomResource {
             resourceInputs["bucket"] = state ? state.bucket : undefined;
             resourceInputs["corsRules"] = state ? state.corsRules : undefined;
             resourceInputs["cosBucketUrl"] = state ? state.cosBucketUrl : undefined;
+            resourceInputs["enableIntelligentTiering"] = state ? state.enableIntelligentTiering : undefined;
             resourceInputs["encryptionAlgorithm"] = state ? state.encryptionAlgorithm : undefined;
             resourceInputs["forceClean"] = state ? state.forceClean : undefined;
+            resourceInputs["intelligentTieringDays"] = state ? state.intelligentTieringDays : undefined;
+            resourceInputs["intelligentTieringRequestFrequent"] = state ? state.intelligentTieringRequestFrequent : undefined;
             resourceInputs["lifecycleRules"] = state ? state.lifecycleRules : undefined;
             resourceInputs["logEnable"] = state ? state.logEnable : undefined;
             resourceInputs["logPrefix"] = state ? state.logPrefix : undefined;
@@ -414,8 +452,11 @@ export class Bucket extends pulumi.CustomResource {
             resourceInputs["aclBody"] = args ? args.aclBody : undefined;
             resourceInputs["bucket"] = args ? args.bucket : undefined;
             resourceInputs["corsRules"] = args ? args.corsRules : undefined;
+            resourceInputs["enableIntelligentTiering"] = args ? args.enableIntelligentTiering : undefined;
             resourceInputs["encryptionAlgorithm"] = args ? args.encryptionAlgorithm : undefined;
             resourceInputs["forceClean"] = args ? args.forceClean : undefined;
+            resourceInputs["intelligentTieringDays"] = args ? args.intelligentTieringDays : undefined;
+            resourceInputs["intelligentTieringRequestFrequent"] = args ? args.intelligentTieringRequestFrequent : undefined;
             resourceInputs["lifecycleRules"] = args ? args.lifecycleRules : undefined;
             resourceInputs["logEnable"] = args ? args.logEnable : undefined;
             resourceInputs["logPrefix"] = args ? args.logPrefix : undefined;
@@ -464,6 +505,10 @@ export interface BucketState {
      */
     cosBucketUrl?: pulumi.Input<string>;
     /**
+     * Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+     */
+    enableIntelligentTiering?: pulumi.Input<boolean>;
+    /**
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     encryptionAlgorithm?: pulumi.Input<string>;
@@ -471,6 +516,14 @@ export interface BucketState {
      * Force cleanup all objects before delete bucket.
      */
     forceClean?: pulumi.Input<boolean>;
+    /**
+     * Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+     */
+    intelligentTieringDays?: pulumi.Input<number>;
+    /**
+     * Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+     */
+    intelligentTieringRequestFrequent?: pulumi.Input<number>;
     /**
      * A configuration of object lifecycle management (documented below).
      */
@@ -488,7 +541,7 @@ export interface BucketState {
      */
     logTargetBucket?: pulumi.Input<string>;
     /**
-     * Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+     * Indicates whether to create a bucket of multi available zone.
      */
     multiAz?: pulumi.Input<boolean>;
     /**
@@ -512,7 +565,7 @@ export interface BucketState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Enable bucket versioning.
+     * Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
      */
     versioningEnable?: pulumi.Input<boolean>;
     /**
@@ -546,6 +599,10 @@ export interface BucketArgs {
      */
     corsRules?: pulumi.Input<pulumi.Input<inputs.Cos.BucketCorsRule>[]>;
     /**
+     * Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+     */
+    enableIntelligentTiering?: pulumi.Input<boolean>;
+    /**
      * The server-side encryption algorithm to use. Valid value is `AES256`.
      */
     encryptionAlgorithm?: pulumi.Input<string>;
@@ -553,6 +610,14 @@ export interface BucketArgs {
      * Force cleanup all objects before delete bucket.
      */
     forceClean?: pulumi.Input<boolean>;
+    /**
+     * Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+     */
+    intelligentTieringDays?: pulumi.Input<number>;
+    /**
+     * Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+     */
+    intelligentTieringRequestFrequent?: pulumi.Input<number>;
     /**
      * A configuration of object lifecycle management (documented below).
      */
@@ -570,7 +635,7 @@ export interface BucketArgs {
      */
     logTargetBucket?: pulumi.Input<string>;
     /**
-     * Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+     * Indicates whether to create a bucket of multi available zone.
      */
     multiAz?: pulumi.Input<boolean>;
     /**
@@ -594,7 +659,7 @@ export interface BucketArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Enable bucket versioning.
+     * Enable bucket versioning. NOTE: The `multiAz` feature is true for the current bucket, cannot disable version control.
      */
     versioningEnable?: pulumi.Input<boolean>;
     /**

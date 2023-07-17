@@ -19,8 +19,10 @@ class DedicatedclusterDbInstanceArgs:
                  storage: pulumi.Input[int],
                  db_version_id: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a DedicatedclusterDbInstance resource.
@@ -30,8 +32,10 @@ class DedicatedclusterDbInstanceArgs:
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] db_version_id: db engine version, default to 0.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
@@ -42,10 +46,14 @@ class DedicatedclusterDbInstanceArgs:
             pulumi.set(__self__, "db_version_id", db_version_id)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -122,6 +130,18 @@ class DedicatedclusterDbInstanceArgs:
         pulumi.set(self, "instance_name", value)
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "project_id", value)
+
+    @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -146,6 +166,18 @@ class DedicatedclusterDbInstanceArgs:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -166,9 +198,11 @@ class _DedicatedclusterDbInstanceState:
                  goods_num: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering DedicatedclusterDbInstance resources.
@@ -177,9 +211,11 @@ class _DedicatedclusterDbInstanceState:
         :param pulumi.Input[int] goods_num: number of instance.
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         """
         if cluster_id is not None:
@@ -192,12 +228,16 @@ class _DedicatedclusterDbInstanceState:
             pulumi.set(__self__, "instance_name", instance_name)
         if memory is not None:
             pulumi.set(__self__, "memory", memory)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
         if storage is not None:
             pulumi.set(__self__, "storage", storage)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -262,6 +302,18 @@ class _DedicatedclusterDbInstanceState:
         pulumi.set(self, "memory", value)
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "project_id", value)
+
+    @property
     @pulumi.getter
     def storage(self) -> Optional[pulumi.Input[int]]:
         """
@@ -298,6 +350,18 @@ class _DedicatedclusterDbInstanceState:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -320,9 +384,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
                  goods_num: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -360,9 +426,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] goods_num: number of instance.
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         """
         ...
@@ -419,9 +487,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
                  goods_num: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[int]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -448,11 +518,13 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
             if memory is None and not opts.urn:
                 raise TypeError("Missing required property 'memory'")
             __props__.__dict__["memory"] = memory
+            __props__.__dict__["project_id"] = project_id
             if storage is None and not opts.urn:
                 raise TypeError("Missing required property 'storage'")
             __props__.__dict__["storage"] = storage
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["vip"] = vip
             __props__.__dict__["vpc_id"] = vpc_id
         super(DedicatedclusterDbInstance, __self__).__init__(
             'tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance',
@@ -469,9 +541,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
             goods_num: Optional[pulumi.Input[int]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
+            project_id: Optional[pulumi.Input[int]] = None,
             storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+            vip: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None) -> 'DedicatedclusterDbInstance':
         """
         Get an existing DedicatedclusterDbInstance resource's state with the given name, id, and optional extra
@@ -485,9 +559,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] goods_num: number of instance.
         :param pulumi.Input[str] instance_name: name of this instance.
         :param pulumi.Input[int] memory: instance memory.
+        :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[int] storage: instance disk storage.
         :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[str] vip: vip.
         :param pulumi.Input[str] vpc_id: vpc id.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -499,9 +575,11 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
         __props__.__dict__["goods_num"] = goods_num
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["memory"] = memory
+        __props__.__dict__["project_id"] = project_id
         __props__.__dict__["storage"] = storage
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
+        __props__.__dict__["vip"] = vip
         __props__.__dict__["vpc_id"] = vpc_id
         return DedicatedclusterDbInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -546,6 +624,14 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
         return pulumi.get(self, "memory")
 
     @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> pulumi.Output[Optional[int]]:
+        """
+        project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
     @pulumi.getter
     def storage(self) -> pulumi.Output[int]:
         """
@@ -568,6 +654,14 @@ class DedicatedclusterDbInstance(pulumi.CustomResource):
         Tag description list.
         """
         return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> pulumi.Output[str]:
+        """
+        vip.
+        """
+        return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter(name="vpcId")

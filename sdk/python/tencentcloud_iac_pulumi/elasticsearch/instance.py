@@ -35,10 +35,10 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
-        :param pulumi.Input[str] password: Password to an instance.
-        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        :param pulumi.Input[str] password: Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
+        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
-        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
@@ -48,7 +48,7 @@ class InstanceArgs:
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
         :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
-        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]] web_node_type_infos: Visual node configuration.
         """
@@ -99,7 +99,7 @@ class InstanceArgs:
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
         """
-        Password to an instance.
+        Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         """
         return pulumi.get(self, "password")
 
@@ -111,7 +111,7 @@ class InstanceArgs:
     @pulumi.getter
     def version(self) -> pulumi.Input[str]:
         """
-        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         """
         return pulumi.get(self, "version")
 
@@ -135,7 +135,7 @@ class InstanceArgs:
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> Optional[pulumi.Input[str]]:
         """
-        Availability zone. When create multi-az es, this parameter must be omitted.
+        Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -255,7 +255,7 @@ class InstanceArgs:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -315,7 +315,7 @@ class _InstanceState:
                  web_node_type_infos: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
@@ -330,11 +330,11 @@ class _InstanceState:
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceMultiZoneInfoArgs']]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
         :param pulumi.Input[Sequence[pulumi.Input['InstanceNodeInfoListArgs']]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
-        :param pulumi.Input[str] password: Password to an instance.
+        :param pulumi.Input[str] password: Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
-        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
-        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]] web_node_type_infos: Visual node configuration.
         """
@@ -387,7 +387,7 @@ class _InstanceState:
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> Optional[pulumi.Input[str]]:
         """
-        Availability zone. When create multi-az es, this parameter must be omitted.
+        Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -567,7 +567,7 @@ class _InstanceState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password to an instance.
+        Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         """
         return pulumi.get(self, "password")
 
@@ -591,7 +591,7 @@ class _InstanceState:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -615,7 +615,7 @@ class _InstanceState:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         """
         return pulumi.get(self, "version")
 
@@ -675,34 +675,101 @@ class Instance(pulumi.CustomResource):
         Provides an elasticsearch instance resource.
 
         ## Example Usage
+        ### Create a basic version of elasticsearch instance paid by the hour
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.elasticsearch.Instance("foo",
-            instance_name="tf-test",
-            availability_zone="ap-guangzhou-3",
-            version="7.5.1",
-            vpc_id=var["vpc_id"],
-            subnet_id=var["subnet_id"],
+        availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            cidr_block="10.0.1.0/24")
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example_es",
+            availability_zone=availability_zone.zones[0].name,
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             password="Test12345",
             license_type="basic",
+            basic_security_type=2,
             web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
                 node_num=1,
                 node_type="ES.S1.MEDIUM4",
             )],
             node_info_lists=[tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
                 node_num=2,
-                node_type="ES.S1.MEDIUM4",
+                node_type="ES.S1.MEDIUM8",
                 encrypt=False,
             )],
             es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
-                black_lists=[
-                    "9.9.9.9",
-                    "8.8.8.8",
-                ],
-                white_lists=["0.0.0.0"],
+                white_lists=["127.0.0.1"],
+            ),
+            tags={
+                "test": "test",
+            })
+        ```
+        ### Create a basic version of elasticsearch instance for multi-availability zone deployment
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            cidr_block="10.0.1.0/24")
+        subnet_multi_zone = tencentcloud.subnet.Instance("subnetMultiZone",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[1].name,
+            cidr_block="10.0.2.0/24")
+        example_multi_zone = tencentcloud.elasticsearch.Instance("exampleMultiZone",
+            instance_name="tf_example_es",
+            availability_zone="-",
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id="-",
+            password="Test12345",
+            license_type="basic",
+            basic_security_type=2,
+            deploy_mode=1,
+            multi_zone_infos=[
+                tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
+                    availability_zone=availability_zone.zones[0].name,
+                    subnet_id=subnet.id,
+                ),
+                tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
+                    availability_zone=availability_zone.zones[1].name,
+                    subnet_id=subnet_multi_zone.id,
+                ),
+            ],
+            web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
+                node_num=1,
+                node_type="ES.S1.MEDIUM4",
+            )],
+            node_info_lists=[
+                tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                    type="dedicatedMaster",
+                    node_num=3,
+                    node_type="ES.S1.MEDIUM8",
+                    encrypt=False,
+                ),
+                tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                    type="hotData",
+                    node_num=2,
+                    node_type="ES.S1.MEDIUM8",
+                    encrypt=False,
+                ),
+            ],
+            es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
+                white_lists=["127.0.0.1"],
             ),
             tags={
                 "test": "test",
@@ -719,7 +786,7 @@ class Instance(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
@@ -729,11 +796,11 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
-        :param pulumi.Input[str] password: Password to an instance.
+        :param pulumi.Input[str] password: Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
-        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
-        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceWebNodeTypeInfoArgs']]]] web_node_type_infos: Visual node configuration.
         """
@@ -747,34 +814,101 @@ class Instance(pulumi.CustomResource):
         Provides an elasticsearch instance resource.
 
         ## Example Usage
+        ### Create a basic version of elasticsearch instance paid by the hour
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.elasticsearch.Instance("foo",
-            instance_name="tf-test",
-            availability_zone="ap-guangzhou-3",
-            version="7.5.1",
-            vpc_id=var["vpc_id"],
-            subnet_id=var["subnet_id"],
+        availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            cidr_block="10.0.1.0/24")
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example_es",
+            availability_zone=availability_zone.zones[0].name,
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             password="Test12345",
             license_type="basic",
+            basic_security_type=2,
             web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
                 node_num=1,
                 node_type="ES.S1.MEDIUM4",
             )],
             node_info_lists=[tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
                 node_num=2,
-                node_type="ES.S1.MEDIUM4",
+                node_type="ES.S1.MEDIUM8",
                 encrypt=False,
             )],
             es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
-                black_lists=[
-                    "9.9.9.9",
-                    "8.8.8.8",
-                ],
-                white_lists=["0.0.0.0"],
+                white_lists=["127.0.0.1"],
+            ),
+            tags={
+                "test": "test",
+            })
+        ```
+        ### Create a basic version of elasticsearch instance for multi-availability zone deployment
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        availability_zone = tencentcloud.Availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            cidr_block="10.0.1.0/24")
+        subnet_multi_zone = tencentcloud.subnet.Instance("subnetMultiZone",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[1].name,
+            cidr_block="10.0.2.0/24")
+        example_multi_zone = tencentcloud.elasticsearch.Instance("exampleMultiZone",
+            instance_name="tf_example_es",
+            availability_zone="-",
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id="-",
+            password="Test12345",
+            license_type="basic",
+            basic_security_type=2,
+            deploy_mode=1,
+            multi_zone_infos=[
+                tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
+                    availability_zone=availability_zone.zones[0].name,
+                    subnet_id=subnet.id,
+                ),
+                tencentcloud.elasticsearch.InstanceMultiZoneInfoArgs(
+                    availability_zone=availability_zone.zones[1].name,
+                    subnet_id=subnet_multi_zone.id,
+                ),
+            ],
+            web_node_type_infos=[tencentcloud.elasticsearch.InstanceWebNodeTypeInfoArgs(
+                node_num=1,
+                node_type="ES.S1.MEDIUM4",
+            )],
+            node_info_lists=[
+                tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                    type="dedicatedMaster",
+                    node_num=3,
+                    node_type="ES.S1.MEDIUM8",
+                    encrypt=False,
+                ),
+                tencentcloud.elasticsearch.InstanceNodeInfoListArgs(
+                    type="hotData",
+                    node_num=2,
+                    node_type="ES.S1.MEDIUM8",
+                    encrypt=False,
+                ),
+            ],
+            es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
+                white_lists=["127.0.0.1"],
             ),
             tags={
                 "test": "test",
@@ -904,7 +1038,7 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] availability_zone: Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
@@ -919,11 +1053,11 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] license_type: License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceMultiZoneInfoArgs']]]] multi_zone_infos: Details of AZs in multi-AZ deployment mode (which is required when deploy_mode is `1`).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceNodeInfoListArgs']]]] node_info_lists: Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
-        :param pulumi.Input[str] password: Password to an instance.
+        :param pulumi.Input[str] password: Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         :param pulumi.Input[str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
-        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        :param pulumi.Input[str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
-        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        :param pulumi.Input[str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         :param pulumi.Input[str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceWebNodeTypeInfoArgs']]]] web_node_type_infos: Visual node configuration.
         """
@@ -959,7 +1093,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> pulumi.Output[Optional[str]]:
         """
-        Availability zone. When create multi-az es, this parameter must be omitted.
+        Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -1079,7 +1213,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
         """
-        Password to an instance.
+        Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
         """
         return pulumi.get(self, "password")
 
@@ -1095,7 +1229,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Output[Optional[str]]:
         """
-        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         """
         return pulumi.get(self, "subnet_id")
 
@@ -1111,7 +1245,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def version(self) -> pulumi.Output[str]:
         """
-        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         """
         return pulumi.get(self, "version")
 

@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
         /// </summary>
         public readonly string? CurrentValue;
         /// <summary>
-        /// The name of parameter template.
+        /// The name of parameter.
         /// </summary>
         public readonly string? Name;
 

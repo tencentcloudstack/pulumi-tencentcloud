@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a cloud file system(CFS).
 //
 // ## Example Usage
+// ### Standard Nfs CFS
 //
 // ```go
 // package main
@@ -39,6 +40,91 @@ import (
 // 	})
 // }
 // ```
+// ### High-Performance Nfs CFS
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+// 			Protocol:         pulumi.String("NFS"),
+// 			StorageType:      pulumi.String("HP"),
+// 			SubnetId:         pulumi.String("subnet-enm92y0m"),
+// 			VpcId:            pulumi.String("vpc-86v957zb"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Standard Turbo CFS
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+// 			Capacity:         pulumi.Int(20480),
+// 			CcnId:            pulumi.String("ccn-39lqkygf"),
+// 			CidrBlock:        pulumi.String("11.0.0.0/24"),
+// 			NetInterface:     pulumi.String("CCN"),
+// 			Protocol:         pulumi.String("TURBO"),
+// 			StorageType:      pulumi.String("TB"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### High-Performance Turbo CFS
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+// 			AccessGroupId:    pulumi.String("pgroup-drwt29od"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+// 			Capacity:         pulumi.Int(10240),
+// 			CcnId:            pulumi.String("ccn-39lqkygf"),
+// 			CidrBlock:        pulumi.String("11.0.0.0/24"),
+// 			NetInterface:     pulumi.String("CCN"),
+// 			Protocol:         pulumi.String("TURBO"),
+// 			StorageType:      pulumi.String("TP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
@@ -54,6 +140,12 @@ type FileSystem struct {
 	AccessGroupId pulumi.StringOutput `pulumi:"accessGroupId"`
 	// The available zone that the file system locates at.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity pulumi.IntOutput `pulumi:"capacity"`
+	// CCN instance ID (required if the network type is CCN).
+	CcnId pulumi.StringOutput `pulumi:"ccnId"`
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+	CidrBlock pulumi.StringOutput `pulumi:"cidrBlock"`
 	// Create time of the file system.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Mount root-directory.
@@ -62,9 +154,11 @@ type FileSystem struct {
 	MountIp pulumi.StringOutput `pulumi:"mountIp"`
 	// Name of a file system.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+	// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+	NetInterface pulumi.StringPtrOutput `pulumi:"netInterface"`
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol pulumi.StringPtrOutput `pulumi:"protocol"`
-	// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType pulumi.StringPtrOutput `pulumi:"storageType"`
 	// ID of a subnet.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
@@ -86,12 +180,6 @@ func NewFileSystem(ctx *pulumi.Context,
 	}
 	if args.AvailabilityZone == nil {
 		return nil, errors.New("invalid value for required argument 'AvailabilityZone'")
-	}
-	if args.SubnetId == nil {
-		return nil, errors.New("invalid value for required argument 'SubnetId'")
-	}
-	if args.VpcId == nil {
-		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource FileSystem
@@ -120,6 +208,12 @@ type fileSystemState struct {
 	AccessGroupId *string `pulumi:"accessGroupId"`
 	// The available zone that the file system locates at.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity *int `pulumi:"capacity"`
+	// CCN instance ID (required if the network type is CCN).
+	CcnId *string `pulumi:"ccnId"`
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+	CidrBlock *string `pulumi:"cidrBlock"`
 	// Create time of the file system.
 	CreateTime *string `pulumi:"createTime"`
 	// Mount root-directory.
@@ -128,9 +222,11 @@ type fileSystemState struct {
 	MountIp *string `pulumi:"mountIp"`
 	// Name of a file system.
 	Name *string `pulumi:"name"`
-	// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+	// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+	NetInterface *string `pulumi:"netInterface"`
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol *string `pulumi:"protocol"`
-	// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType *string `pulumi:"storageType"`
 	// ID of a subnet.
 	SubnetId *string `pulumi:"subnetId"`
@@ -145,6 +241,12 @@ type FileSystemState struct {
 	AccessGroupId pulumi.StringPtrInput
 	// The available zone that the file system locates at.
 	AvailabilityZone pulumi.StringPtrInput
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity pulumi.IntPtrInput
+	// CCN instance ID (required if the network type is CCN).
+	CcnId pulumi.StringPtrInput
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+	CidrBlock pulumi.StringPtrInput
 	// Create time of the file system.
 	CreateTime pulumi.StringPtrInput
 	// Mount root-directory.
@@ -153,9 +255,11 @@ type FileSystemState struct {
 	MountIp pulumi.StringPtrInput
 	// Name of a file system.
 	Name pulumi.StringPtrInput
-	// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+	// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+	NetInterface pulumi.StringPtrInput
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol pulumi.StringPtrInput
-	// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType pulumi.StringPtrInput
 	// ID of a subnet.
 	SubnetId pulumi.StringPtrInput
@@ -174,20 +278,28 @@ type fileSystemArgs struct {
 	AccessGroupId string `pulumi:"accessGroupId"`
 	// The available zone that the file system locates at.
 	AvailabilityZone string `pulumi:"availabilityZone"`
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity *int `pulumi:"capacity"`
+	// CCN instance ID (required if the network type is CCN).
+	CcnId *string `pulumi:"ccnId"`
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+	CidrBlock *string `pulumi:"cidrBlock"`
 	// IP of mount point.
 	MountIp *string `pulumi:"mountIp"`
 	// Name of a file system.
 	Name *string `pulumi:"name"`
-	// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+	// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+	NetInterface *string `pulumi:"netInterface"`
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol *string `pulumi:"protocol"`
-	// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType *string `pulumi:"storageType"`
 	// ID of a subnet.
-	SubnetId string `pulumi:"subnetId"`
+	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of a VPC network.
-	VpcId string `pulumi:"vpcId"`
+	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a FileSystem resource.
@@ -196,20 +308,28 @@ type FileSystemArgs struct {
 	AccessGroupId pulumi.StringInput
 	// The available zone that the file system locates at.
 	AvailabilityZone pulumi.StringInput
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity pulumi.IntPtrInput
+	// CCN instance ID (required if the network type is CCN).
+	CcnId pulumi.StringPtrInput
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+	CidrBlock pulumi.StringPtrInput
 	// IP of mount point.
 	MountIp pulumi.StringPtrInput
 	// Name of a file system.
 	Name pulumi.StringPtrInput
-	// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+	// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+	NetInterface pulumi.StringPtrInput
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol pulumi.StringPtrInput
-	// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType pulumi.StringPtrInput
 	// ID of a subnet.
-	SubnetId pulumi.StringInput
+	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
 	// ID of a VPC network.
-	VpcId pulumi.StringInput
+	VpcId pulumi.StringPtrInput
 }
 
 func (FileSystemArgs) ElementType() reflect.Type {
@@ -309,6 +429,21 @@ func (o FileSystemOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
+// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+func (o FileSystemOutput) Capacity() pulumi.IntOutput {
+	return o.ApplyT(func(v *FileSystem) pulumi.IntOutput { return v.Capacity }).(pulumi.IntOutput)
+}
+
+// CCN instance ID (required if the network type is CCN).
+func (o FileSystemOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+func (o FileSystemOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
 // Create time of the file system.
 func (o FileSystemOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
@@ -329,12 +464,17 @@ func (o FileSystemOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+// Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+func (o FileSystemOutput) NetInterface() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FileSystem) pulumi.StringPtrOutput { return v.NetInterface }).(pulumi.StringPtrOutput)
+}
+
+// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 func (o FileSystemOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringPtrOutput { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-// File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 func (o FileSystemOutput) StorageType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringPtrOutput { return v.StorageType }).(pulumi.StringPtrOutput)
 }

@@ -55,7 +55,7 @@ class NodePoolArgs:
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
         :param pulumi.Input[str] name: Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
         :param pulumi.Input['NodePoolNodeConfigArgs'] node_config: Node config.
-        :param pulumi.Input[str] node_os: Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
@@ -274,7 +274,7 @@ class NodePoolArgs:
     @pulumi.getter(name="nodeOs")
     def node_os(self) -> Optional[pulumi.Input[str]]:
         """
-        Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         """
         return pulumi.get(self, "node_os")
 
@@ -468,7 +468,7 @@ class _NodePoolState:
         :param pulumi.Input[str] name: Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
         :param pulumi.Input['NodePoolNodeConfigArgs'] node_config: Node config.
         :param pulumi.Input[int] node_count: The total node count.
-        :param pulumi.Input[str] node_os: Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
@@ -754,7 +754,7 @@ class _NodePoolState:
     @pulumi.getter(name="nodeOs")
     def node_os(self) -> Optional[pulumi.Input[str]]:
         """
-        Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         """
         return pulumi.get(self, "node_os")
 
@@ -1037,8 +1037,7 @@ class NodePool(pulumi.CustomResource):
                 extra_args=["root-dir=/var/lib/kubelet"],
             ))
         ```
-
-        Using Spot CVM Instance
+        ### Using Spot CVM Instance
 
         ```python
         import pulumi
@@ -1093,7 +1092,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
         :param pulumi.Input[str] name: Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
         :param pulumi.Input[pulumi.InputType['NodePoolNodeConfigArgs']] node_config: Node config.
-        :param pulumi.Input[str] node_os: Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
@@ -1200,8 +1199,7 @@ class NodePool(pulumi.CustomResource):
                 extra_args=["root-dir=/var/lib/kubelet"],
             ))
         ```
-
-        Using Spot CVM Instance
+        ### Using Spot CVM Instance
 
         ```python
         import pulumi
@@ -1402,7 +1400,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
         :param pulumi.Input[pulumi.InputType['NodePoolNodeConfigArgs']] node_config: Node config.
         :param pulumi.Input[int] node_count: The total node count.
-        :param pulumi.Input[str] node_os: Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
@@ -1594,7 +1592,7 @@ class NodePool(pulumi.CustomResource):
     @pulumi.getter(name="nodeOs")
     def node_os(self) -> pulumi.Output[Optional[str]]:
         """
-        Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+        Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         """
         return pulumi.get(self, "node_os")
 

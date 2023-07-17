@@ -14,6 +14,7 @@ __all__ = [
     'LifeCycleRuleLifeCycleRule',
     'LifeCycleRuleLifeCycleRuleTransition',
     'GetAccessGroupsAccessGroupResult',
+    'GetFileSystemsFileSystemResult',
     'GetMountPointsMountPointResult',
 ]
 
@@ -289,6 +290,156 @@ class GetAccessGroupsAccessGroupResult(dict):
         vpc network type(1:CVM, 2:BM 1.0).
         """
         return pulumi.get(self, "vpc_type")
+
+
+@pulumi.output_type
+class GetFileSystemsFileSystemResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 block_size: int,
+                 capacity_quota: int,
+                 create_time: str,
+                 description: str,
+                 enable_ranger: bool,
+                 file_system_id: str,
+                 file_system_name: str,
+                 posix_acl: bool,
+                 ranger_service_addresses: Sequence[str],
+                 region: str,
+                 status: int,
+                 super_users: Sequence[str]):
+        """
+        :param int app_id: appid of the user.
+        :param int block_size: block size of the file system(byte).
+        :param int capacity_quota: capacity of the file system(byte).
+        :param str create_time: create time.
+        :param str description: desc of the file system.
+        :param bool enable_ranger: check the ranger address or not.
+        :param str file_system_id: file system id.
+        :param str file_system_name: file system name.
+        :param bool posix_acl: check POSIX ACL or not.
+        :param Sequence[str] ranger_service_addresses: ranger address list.
+        :param str region: region of the file system.
+        :param int status: status of the file system(1: creating create success 3: create failed).
+        :param Sequence[str] super_users: super users of the file system.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "block_size", block_size)
+        pulumi.set(__self__, "capacity_quota", capacity_quota)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "enable_ranger", enable_ranger)
+        pulumi.set(__self__, "file_system_id", file_system_id)
+        pulumi.set(__self__, "file_system_name", file_system_name)
+        pulumi.set(__self__, "posix_acl", posix_acl)
+        pulumi.set(__self__, "ranger_service_addresses", ranger_service_addresses)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "super_users", super_users)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        appid of the user.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="blockSize")
+    def block_size(self) -> int:
+        """
+        block size of the file system(byte).
+        """
+        return pulumi.get(self, "block_size")
+
+    @property
+    @pulumi.getter(name="capacityQuota")
+    def capacity_quota(self) -> int:
+        """
+        capacity of the file system(byte).
+        """
+        return pulumi.get(self, "capacity_quota")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        desc of the file system.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="enableRanger")
+    def enable_ranger(self) -> bool:
+        """
+        check the ranger address or not.
+        """
+        return pulumi.get(self, "enable_ranger")
+
+    @property
+    @pulumi.getter(name="fileSystemId")
+    def file_system_id(self) -> str:
+        """
+        file system id.
+        """
+        return pulumi.get(self, "file_system_id")
+
+    @property
+    @pulumi.getter(name="fileSystemName")
+    def file_system_name(self) -> str:
+        """
+        file system name.
+        """
+        return pulumi.get(self, "file_system_name")
+
+    @property
+    @pulumi.getter(name="posixAcl")
+    def posix_acl(self) -> bool:
+        """
+        check POSIX ACL or not.
+        """
+        return pulumi.get(self, "posix_acl")
+
+    @property
+    @pulumi.getter(name="rangerServiceAddresses")
+    def ranger_service_addresses(self) -> Sequence[str]:
+        """
+        ranger address list.
+        """
+        return pulumi.get(self, "ranger_service_addresses")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region of the file system.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        status of the file system(1: creating create success 3: create failed).
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="superUsers")
+    def super_users(self) -> Sequence[str]:
+        """
+        super users of the file system.
+        """
+        return pulumi.get(self, "super_users")
 
 
 @pulumi.output_type

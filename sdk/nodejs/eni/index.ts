@@ -7,10 +7,12 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./attachment";
 export * from "./instance";
+export * from "./sgAttachment";
 
 // Import resources to register:
 import { Attachment } from "./attachment";
 import { Instance } from "./instance";
+import { SgAttachment } from "./sgAttachment";
 
 const _module = {
     version: utilities.getVersion(),
@@ -20,6 +22,8 @@ const _module = {
                 return new Attachment(name, <any>undefined, { urn })
             case "tencentcloud:Eni/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Eni/sgAttachment:SgAttachment":
+                return new SgAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -27,3 +31,4 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Eni/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eni/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eni/sgAttachment", _module)

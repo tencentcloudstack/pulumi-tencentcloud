@@ -431,8 +431,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
         Provides a resource to create a sqlserver config_backup_strategy
 
         ## Example Usage
-
-        Daily backup
+        ### Daily backup
 
         ```python
         import pulumi
@@ -451,8 +450,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_strategy="months",
             regular_backup_counts=1)
         ```
-
-        Weekly backup
+        ### Weekly backup
 
         ```python
         import pulumi
@@ -474,8 +472,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_strategy="months",
             regular_backup_counts=1)
         ```
-
-        Regular backup
+        ### Regular backup
 
         ```python
         import pulumi
@@ -530,8 +527,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
         Provides a resource to create a sqlserver config_backup_strategy
 
         ## Example Usage
-
-        Daily backup
+        ### Daily backup
 
         ```python
         import pulumi
@@ -550,8 +546,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_strategy="months",
             regular_backup_counts=1)
         ```
-
-        Weekly backup
+        ### Weekly backup
 
         ```python
         import pulumi
@@ -573,8 +568,7 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_strategy="months",
             regular_backup_counts=1)
         ```
-
-        Regular backup
+        ### Regular backup
 
         ```python
         import pulumi

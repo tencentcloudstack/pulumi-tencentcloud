@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Ccn/instancesAcceptAttach:InstancesAcceptAttach":
 		r = &InstancesAcceptAttach{}
+	case "tencentcloud:Ccn/instancesRejectAttach:InstancesRejectAttach":
+		r = &InstancesRejectAttach{}
 	case "tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach":
 		r = &InstancesResetAttach{}
 	case "tencentcloud:Ccn/routes:Routes":
@@ -64,6 +66,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ccn/instancesAcceptAttach",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/instancesRejectAttach",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -65,6 +65,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// cls config can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/config:Config config config_id
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/config:Config")]
     public partial class Config : Pulumi.CustomResource

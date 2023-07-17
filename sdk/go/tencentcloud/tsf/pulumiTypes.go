@@ -979,1029 +979,3551 @@ func (o ClusterOperationInfoInitArrayOutput) Index(i pulumi.IntInput) ClusterOpe
 	}).(ClusterOperationInfoInitOutput)
 }
 
-type ContainGroupEnv struct {
-	// environment variable name.
-	Name *string `pulumi:"name"`
-	// environment variable value.
+type DeployContainerGroupAgentProfileList struct {
+	// Agent type.
+	AgentType *string `pulumi:"agentType"`
+	// Agent version.
+	AgentVersion *string `pulumi:"agentVersion"`
+}
+
+// DeployContainerGroupAgentProfileListInput is an input type that accepts DeployContainerGroupAgentProfileListArgs and DeployContainerGroupAgentProfileListOutput values.
+// You can construct a concrete instance of `DeployContainerGroupAgentProfileListInput` via:
+//
+//          DeployContainerGroupAgentProfileListArgs{...}
+type DeployContainerGroupAgentProfileListInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupAgentProfileListOutput() DeployContainerGroupAgentProfileListOutput
+	ToDeployContainerGroupAgentProfileListOutputWithContext(context.Context) DeployContainerGroupAgentProfileListOutput
+}
+
+type DeployContainerGroupAgentProfileListArgs struct {
+	// Agent type.
+	AgentType pulumi.StringPtrInput `pulumi:"agentType"`
+	// Agent version.
+	AgentVersion pulumi.StringPtrInput `pulumi:"agentVersion"`
+}
+
+func (DeployContainerGroupAgentProfileListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupAgentProfileList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupAgentProfileListArgs) ToDeployContainerGroupAgentProfileListOutput() DeployContainerGroupAgentProfileListOutput {
+	return i.ToDeployContainerGroupAgentProfileListOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupAgentProfileListArgs) ToDeployContainerGroupAgentProfileListOutputWithContext(ctx context.Context) DeployContainerGroupAgentProfileListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupAgentProfileListOutput)
+}
+
+// DeployContainerGroupAgentProfileListArrayInput is an input type that accepts DeployContainerGroupAgentProfileListArray and DeployContainerGroupAgentProfileListArrayOutput values.
+// You can construct a concrete instance of `DeployContainerGroupAgentProfileListArrayInput` via:
+//
+//          DeployContainerGroupAgentProfileListArray{ DeployContainerGroupAgentProfileListArgs{...} }
+type DeployContainerGroupAgentProfileListArrayInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupAgentProfileListArrayOutput() DeployContainerGroupAgentProfileListArrayOutput
+	ToDeployContainerGroupAgentProfileListArrayOutputWithContext(context.Context) DeployContainerGroupAgentProfileListArrayOutput
+}
+
+type DeployContainerGroupAgentProfileListArray []DeployContainerGroupAgentProfileListInput
+
+func (DeployContainerGroupAgentProfileListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupAgentProfileList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupAgentProfileListArray) ToDeployContainerGroupAgentProfileListArrayOutput() DeployContainerGroupAgentProfileListArrayOutput {
+	return i.ToDeployContainerGroupAgentProfileListArrayOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupAgentProfileListArray) ToDeployContainerGroupAgentProfileListArrayOutputWithContext(ctx context.Context) DeployContainerGroupAgentProfileListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupAgentProfileListArrayOutput)
+}
+
+type DeployContainerGroupAgentProfileListOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupAgentProfileListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupAgentProfileList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupAgentProfileListOutput) ToDeployContainerGroupAgentProfileListOutput() DeployContainerGroupAgentProfileListOutput {
+	return o
+}
+
+func (o DeployContainerGroupAgentProfileListOutput) ToDeployContainerGroupAgentProfileListOutputWithContext(ctx context.Context) DeployContainerGroupAgentProfileListOutput {
+	return o
+}
+
+// Agent type.
+func (o DeployContainerGroupAgentProfileListOutput) AgentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupAgentProfileList) *string { return v.AgentType }).(pulumi.StringPtrOutput)
+}
+
+// Agent version.
+func (o DeployContainerGroupAgentProfileListOutput) AgentVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupAgentProfileList) *string { return v.AgentVersion }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupAgentProfileListArrayOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupAgentProfileListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupAgentProfileList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupAgentProfileListArrayOutput) ToDeployContainerGroupAgentProfileListArrayOutput() DeployContainerGroupAgentProfileListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupAgentProfileListArrayOutput) ToDeployContainerGroupAgentProfileListArrayOutputWithContext(ctx context.Context) DeployContainerGroupAgentProfileListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupAgentProfileListArrayOutput) Index(i pulumi.IntInput) DeployContainerGroupAgentProfileListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployContainerGroupAgentProfileList {
+		return vs[0].([]DeployContainerGroupAgentProfileList)[vs[1].(int)]
+	}).(DeployContainerGroupAgentProfileListOutput)
+}
+
+type DeployContainerGroupEnv struct {
+	// env param name.
+	Name string `pulumi:"name"`
+	// value of env.
 	Value *string `pulumi:"value"`
-	// k8s ValueFrom.
-	ValueFroms []ContainGroupEnvValueFrom `pulumi:"valueFroms"`
+	// Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
+	ValueFrom *DeployContainerGroupEnvValueFrom `pulumi:"valueFrom"`
 }
 
-// ContainGroupEnvInput is an input type that accepts ContainGroupEnvArgs and ContainGroupEnvOutput values.
-// You can construct a concrete instance of `ContainGroupEnvInput` via:
+// DeployContainerGroupEnvInput is an input type that accepts DeployContainerGroupEnvArgs and DeployContainerGroupEnvOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvInput` via:
 //
-//          ContainGroupEnvArgs{...}
-type ContainGroupEnvInput interface {
+//          DeployContainerGroupEnvArgs{...}
+type DeployContainerGroupEnvInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvOutput() ContainGroupEnvOutput
-	ToContainGroupEnvOutputWithContext(context.Context) ContainGroupEnvOutput
+	ToDeployContainerGroupEnvOutput() DeployContainerGroupEnvOutput
+	ToDeployContainerGroupEnvOutputWithContext(context.Context) DeployContainerGroupEnvOutput
 }
 
-type ContainGroupEnvArgs struct {
-	// environment variable name.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// environment variable value.
+type DeployContainerGroupEnvArgs struct {
+	// env param name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// value of env.
 	Value pulumi.StringPtrInput `pulumi:"value"`
-	// k8s ValueFrom.
-	ValueFroms ContainGroupEnvValueFromArrayInput `pulumi:"valueFroms"`
+	// Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
+	ValueFrom DeployContainerGroupEnvValueFromPtrInput `pulumi:"valueFrom"`
 }
 
-func (ContainGroupEnvArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnv)(nil)).Elem()
+func (DeployContainerGroupEnvArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnv)(nil)).Elem()
 }
 
-func (i ContainGroupEnvArgs) ToContainGroupEnvOutput() ContainGroupEnvOutput {
-	return i.ToContainGroupEnvOutputWithContext(context.Background())
+func (i DeployContainerGroupEnvArgs) ToDeployContainerGroupEnvOutput() DeployContainerGroupEnvOutput {
+	return i.ToDeployContainerGroupEnvOutputWithContext(context.Background())
 }
 
-func (i ContainGroupEnvArgs) ToContainGroupEnvOutputWithContext(ctx context.Context) ContainGroupEnvOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvOutput)
+func (i DeployContainerGroupEnvArgs) ToDeployContainerGroupEnvOutputWithContext(ctx context.Context) DeployContainerGroupEnvOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvOutput)
 }
 
-// ContainGroupEnvArrayInput is an input type that accepts ContainGroupEnvArray and ContainGroupEnvArrayOutput values.
-// You can construct a concrete instance of `ContainGroupEnvArrayInput` via:
+// DeployContainerGroupEnvArrayInput is an input type that accepts DeployContainerGroupEnvArray and DeployContainerGroupEnvArrayOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvArrayInput` via:
 //
-//          ContainGroupEnvArray{ ContainGroupEnvArgs{...} }
-type ContainGroupEnvArrayInput interface {
+//          DeployContainerGroupEnvArray{ DeployContainerGroupEnvArgs{...} }
+type DeployContainerGroupEnvArrayInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvArrayOutput() ContainGroupEnvArrayOutput
-	ToContainGroupEnvArrayOutputWithContext(context.Context) ContainGroupEnvArrayOutput
+	ToDeployContainerGroupEnvArrayOutput() DeployContainerGroupEnvArrayOutput
+	ToDeployContainerGroupEnvArrayOutputWithContext(context.Context) DeployContainerGroupEnvArrayOutput
 }
 
-type ContainGroupEnvArray []ContainGroupEnvInput
+type DeployContainerGroupEnvArray []DeployContainerGroupEnvInput
 
-func (ContainGroupEnvArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnv)(nil)).Elem()
+func (DeployContainerGroupEnvArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupEnv)(nil)).Elem()
 }
 
-func (i ContainGroupEnvArray) ToContainGroupEnvArrayOutput() ContainGroupEnvArrayOutput {
-	return i.ToContainGroupEnvArrayOutputWithContext(context.Background())
+func (i DeployContainerGroupEnvArray) ToDeployContainerGroupEnvArrayOutput() DeployContainerGroupEnvArrayOutput {
+	return i.ToDeployContainerGroupEnvArrayOutputWithContext(context.Background())
 }
 
-func (i ContainGroupEnvArray) ToContainGroupEnvArrayOutputWithContext(ctx context.Context) ContainGroupEnvArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvArrayOutput)
+func (i DeployContainerGroupEnvArray) ToDeployContainerGroupEnvArrayOutputWithContext(ctx context.Context) DeployContainerGroupEnvArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvArrayOutput)
 }
 
-type ContainGroupEnvOutput struct{ *pulumi.OutputState }
+type DeployContainerGroupEnvOutput struct{ *pulumi.OutputState }
 
-func (ContainGroupEnvOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnv)(nil)).Elem()
+func (DeployContainerGroupEnvOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnv)(nil)).Elem()
 }
 
-func (o ContainGroupEnvOutput) ToContainGroupEnvOutput() ContainGroupEnvOutput {
+func (o DeployContainerGroupEnvOutput) ToDeployContainerGroupEnvOutput() DeployContainerGroupEnvOutput {
 	return o
 }
 
-func (o ContainGroupEnvOutput) ToContainGroupEnvOutputWithContext(ctx context.Context) ContainGroupEnvOutput {
+func (o DeployContainerGroupEnvOutput) ToDeployContainerGroupEnvOutputWithContext(ctx context.Context) DeployContainerGroupEnvOutput {
 	return o
 }
 
-// environment variable name.
-func (o ContainGroupEnvOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupEnv) *string { return v.Name }).(pulumi.StringPtrOutput)
+// env param name.
+func (o DeployContainerGroupEnvOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnv) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// environment variable value.
-func (o ContainGroupEnvOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupEnv) *string { return v.Value }).(pulumi.StringPtrOutput)
+// value of env.
+func (o DeployContainerGroupEnvOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnv) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
 
-// k8s ValueFrom.
-func (o ContainGroupEnvOutput) ValueFroms() ContainGroupEnvValueFromArrayOutput {
-	return o.ApplyT(func(v ContainGroupEnv) []ContainGroupEnvValueFrom { return v.ValueFroms }).(ContainGroupEnvValueFromArrayOutput)
+// Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvOutput) ValueFrom() DeployContainerGroupEnvValueFromPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnv) *DeployContainerGroupEnvValueFrom { return v.ValueFrom }).(DeployContainerGroupEnvValueFromPtrOutput)
 }
 
-type ContainGroupEnvArrayOutput struct{ *pulumi.OutputState }
+type DeployContainerGroupEnvArrayOutput struct{ *pulumi.OutputState }
 
-func (ContainGroupEnvArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnv)(nil)).Elem()
+func (DeployContainerGroupEnvArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupEnv)(nil)).Elem()
 }
 
-func (o ContainGroupEnvArrayOutput) ToContainGroupEnvArrayOutput() ContainGroupEnvArrayOutput {
+func (o DeployContainerGroupEnvArrayOutput) ToDeployContainerGroupEnvArrayOutput() DeployContainerGroupEnvArrayOutput {
 	return o
 }
 
-func (o ContainGroupEnvArrayOutput) ToContainGroupEnvArrayOutputWithContext(ctx context.Context) ContainGroupEnvArrayOutput {
+func (o DeployContainerGroupEnvArrayOutput) ToDeployContainerGroupEnvArrayOutputWithContext(ctx context.Context) DeployContainerGroupEnvArrayOutput {
 	return o
 }
 
-func (o ContainGroupEnvArrayOutput) Index(i pulumi.IntInput) ContainGroupEnvOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupEnv {
-		return vs[0].([]ContainGroupEnv)[vs[1].(int)]
-	}).(ContainGroupEnvOutput)
+func (o DeployContainerGroupEnvArrayOutput) Index(i pulumi.IntInput) DeployContainerGroupEnvOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployContainerGroupEnv {
+		return vs[0].([]DeployContainerGroupEnv)[vs[1].(int)]
+	}).(DeployContainerGroupEnvOutput)
 }
 
-type ContainGroupEnvValueFrom struct {
-	// FieldRef for k8s env.
-	FieldReves []ContainGroupEnvValueFromFieldRef `pulumi:"fieldReves"`
-	// ResourceFieldRef of k8s env.
-	ResourceFieldReves []ContainGroupEnvValueFromResourceFieldRef `pulumi:"resourceFieldReves"`
+type DeployContainerGroupEnvValueFrom struct {
+	// The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+	FieldRef *DeployContainerGroupEnvValueFromFieldRef `pulumi:"fieldRef"`
+	// The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceFieldRef *DeployContainerGroupEnvValueFromResourceFieldRef `pulumi:"resourceFieldRef"`
 }
 
-// ContainGroupEnvValueFromInput is an input type that accepts ContainGroupEnvValueFromArgs and ContainGroupEnvValueFromOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromInput` via:
+// DeployContainerGroupEnvValueFromInput is an input type that accepts DeployContainerGroupEnvValueFromArgs and DeployContainerGroupEnvValueFromOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromInput` via:
 //
-//          ContainGroupEnvValueFromArgs{...}
-type ContainGroupEnvValueFromInput interface {
+//          DeployContainerGroupEnvValueFromArgs{...}
+type DeployContainerGroupEnvValueFromInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromOutput() ContainGroupEnvValueFromOutput
-	ToContainGroupEnvValueFromOutputWithContext(context.Context) ContainGroupEnvValueFromOutput
+	ToDeployContainerGroupEnvValueFromOutput() DeployContainerGroupEnvValueFromOutput
+	ToDeployContainerGroupEnvValueFromOutputWithContext(context.Context) DeployContainerGroupEnvValueFromOutput
 }
 
-type ContainGroupEnvValueFromArgs struct {
-	// FieldRef for k8s env.
-	FieldReves ContainGroupEnvValueFromFieldRefArrayInput `pulumi:"fieldReves"`
-	// ResourceFieldRef of k8s env.
-	ResourceFieldReves ContainGroupEnvValueFromResourceFieldRefArrayInput `pulumi:"resourceFieldReves"`
+type DeployContainerGroupEnvValueFromArgs struct {
+	// The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+	FieldRef DeployContainerGroupEnvValueFromFieldRefPtrInput `pulumi:"fieldRef"`
+	// The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceFieldRef DeployContainerGroupEnvValueFromResourceFieldRefPtrInput `pulumi:"resourceFieldRef"`
 }
 
-func (ContainGroupEnvValueFromArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFrom)(nil)).Elem()
+func (DeployContainerGroupEnvValueFromArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFrom)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromArgs) ToContainGroupEnvValueFromOutput() ContainGroupEnvValueFromOutput {
-	return i.ToContainGroupEnvValueFromOutputWithContext(context.Background())
+func (i DeployContainerGroupEnvValueFromArgs) ToDeployContainerGroupEnvValueFromOutput() DeployContainerGroupEnvValueFromOutput {
+	return i.ToDeployContainerGroupEnvValueFromOutputWithContext(context.Background())
 }
 
-func (i ContainGroupEnvValueFromArgs) ToContainGroupEnvValueFromOutputWithContext(ctx context.Context) ContainGroupEnvValueFromOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromOutput)
+func (i DeployContainerGroupEnvValueFromArgs) ToDeployContainerGroupEnvValueFromOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromOutput)
 }
 
-// ContainGroupEnvValueFromArrayInput is an input type that accepts ContainGroupEnvValueFromArray and ContainGroupEnvValueFromArrayOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromArrayInput` via:
+func (i DeployContainerGroupEnvValueFromArgs) ToDeployContainerGroupEnvValueFromPtrOutput() DeployContainerGroupEnvValueFromPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupEnvValueFromArgs) ToDeployContainerGroupEnvValueFromPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromOutput).ToDeployContainerGroupEnvValueFromPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupEnvValueFromPtrInput is an input type that accepts DeployContainerGroupEnvValueFromArgs, DeployContainerGroupEnvValueFromPtr and DeployContainerGroupEnvValueFromPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromPtrInput` via:
 //
-//          ContainGroupEnvValueFromArray{ ContainGroupEnvValueFromArgs{...} }
-type ContainGroupEnvValueFromArrayInput interface {
+//          DeployContainerGroupEnvValueFromArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupEnvValueFromPtrInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromArrayOutput() ContainGroupEnvValueFromArrayOutput
-	ToContainGroupEnvValueFromArrayOutputWithContext(context.Context) ContainGroupEnvValueFromArrayOutput
+	ToDeployContainerGroupEnvValueFromPtrOutput() DeployContainerGroupEnvValueFromPtrOutput
+	ToDeployContainerGroupEnvValueFromPtrOutputWithContext(context.Context) DeployContainerGroupEnvValueFromPtrOutput
 }
 
-type ContainGroupEnvValueFromArray []ContainGroupEnvValueFromInput
+type deployContainerGroupEnvValueFromPtrType DeployContainerGroupEnvValueFromArgs
 
-func (ContainGroupEnvValueFromArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFrom)(nil)).Elem()
+func DeployContainerGroupEnvValueFromPtr(v *DeployContainerGroupEnvValueFromArgs) DeployContainerGroupEnvValueFromPtrInput {
+	return (*deployContainerGroupEnvValueFromPtrType)(v)
 }
 
-func (i ContainGroupEnvValueFromArray) ToContainGroupEnvValueFromArrayOutput() ContainGroupEnvValueFromArrayOutput {
-	return i.ToContainGroupEnvValueFromArrayOutputWithContext(context.Background())
+func (*deployContainerGroupEnvValueFromPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFrom)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromArray) ToContainGroupEnvValueFromArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromArrayOutput)
+func (i *deployContainerGroupEnvValueFromPtrType) ToDeployContainerGroupEnvValueFromPtrOutput() DeployContainerGroupEnvValueFromPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupEnvValueFromOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFrom)(nil)).Elem()
+func (i *deployContainerGroupEnvValueFromPtrType) ToDeployContainerGroupEnvValueFromPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromOutput) ToContainGroupEnvValueFromOutput() ContainGroupEnvValueFromOutput {
+type DeployContainerGroupEnvValueFromOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFrom)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromOutput) ToDeployContainerGroupEnvValueFromOutput() DeployContainerGroupEnvValueFromOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromOutput) ToContainGroupEnvValueFromOutputWithContext(ctx context.Context) ContainGroupEnvValueFromOutput {
+func (o DeployContainerGroupEnvValueFromOutput) ToDeployContainerGroupEnvValueFromOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromOutput {
 	return o
 }
 
-// FieldRef for k8s env.
-func (o ContainGroupEnvValueFromOutput) FieldReves() ContainGroupEnvValueFromFieldRefArrayOutput {
-	return o.ApplyT(func(v ContainGroupEnvValueFrom) []ContainGroupEnvValueFromFieldRef { return v.FieldReves }).(ContainGroupEnvValueFromFieldRefArrayOutput)
+func (o DeployContainerGroupEnvValueFromOutput) ToDeployContainerGroupEnvValueFromPtrOutput() DeployContainerGroupEnvValueFromPtrOutput {
+	return o.ToDeployContainerGroupEnvValueFromPtrOutputWithContext(context.Background())
 }
 
-// ResourceFieldRef of k8s env.
-func (o ContainGroupEnvValueFromOutput) ResourceFieldReves() ContainGroupEnvValueFromResourceFieldRefArrayOutput {
-	return o.ApplyT(func(v ContainGroupEnvValueFrom) []ContainGroupEnvValueFromResourceFieldRef {
-		return v.ResourceFieldReves
-	}).(ContainGroupEnvValueFromResourceFieldRefArrayOutput)
+func (o DeployContainerGroupEnvValueFromOutput) ToDeployContainerGroupEnvValueFromPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupEnvValueFrom) *DeployContainerGroupEnvValueFrom {
+		return &v
+	}).(DeployContainerGroupEnvValueFromPtrOutput)
 }
 
-type ContainGroupEnvValueFromArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFrom)(nil)).Elem()
+// The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromOutput) FieldRef() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnvValueFrom) *DeployContainerGroupEnvValueFromFieldRef { return v.FieldRef }).(DeployContainerGroupEnvValueFromFieldRefPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromArrayOutput) ToContainGroupEnvValueFromArrayOutput() ContainGroupEnvValueFromArrayOutput {
+// The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromOutput) ResourceFieldRef() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnvValueFrom) *DeployContainerGroupEnvValueFromResourceFieldRef {
+		return v.ResourceFieldRef
+	}).(DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput)
+}
+
+type DeployContainerGroupEnvValueFromPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFrom)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromPtrOutput) ToDeployContainerGroupEnvValueFromPtrOutput() DeployContainerGroupEnvValueFromPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromArrayOutput) ToContainGroupEnvValueFromArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromArrayOutput {
+func (o DeployContainerGroupEnvValueFromPtrOutput) ToDeployContainerGroupEnvValueFromPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromArrayOutput) Index(i pulumi.IntInput) ContainGroupEnvValueFromOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupEnvValueFrom {
-		return vs[0].([]ContainGroupEnvValueFrom)[vs[1].(int)]
-	}).(ContainGroupEnvValueFromOutput)
+func (o DeployContainerGroupEnvValueFromPtrOutput) Elem() DeployContainerGroupEnvValueFromOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFrom) DeployContainerGroupEnvValueFrom {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupEnvValueFrom
+		return ret
+	}).(DeployContainerGroupEnvValueFromOutput)
 }
 
-type ContainGroupEnvValueFromFieldRef struct {
-	// FieldPath of k8s.
+// The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromPtrOutput) FieldRef() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFrom) *DeployContainerGroupEnvValueFromFieldRef {
+		if v == nil {
+			return nil
+		}
+		return v.FieldRef
+	}).(DeployContainerGroupEnvValueFromFieldRefPtrOutput)
+}
+
+// The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromPtrOutput) ResourceFieldRef() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFrom) *DeployContainerGroupEnvValueFromResourceFieldRef {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceFieldRef
+	}).(DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput)
+}
+
+type DeployContainerGroupEnvValueFromFieldRef struct {
+	// The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
 	FieldPath *string `pulumi:"fieldPath"`
 }
 
-// ContainGroupEnvValueFromFieldRefInput is an input type that accepts ContainGroupEnvValueFromFieldRefArgs and ContainGroupEnvValueFromFieldRefOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromFieldRefInput` via:
+// DeployContainerGroupEnvValueFromFieldRefInput is an input type that accepts DeployContainerGroupEnvValueFromFieldRefArgs and DeployContainerGroupEnvValueFromFieldRefOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromFieldRefInput` via:
 //
-//          ContainGroupEnvValueFromFieldRefArgs{...}
-type ContainGroupEnvValueFromFieldRefInput interface {
+//          DeployContainerGroupEnvValueFromFieldRefArgs{...}
+type DeployContainerGroupEnvValueFromFieldRefInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromFieldRefOutput() ContainGroupEnvValueFromFieldRefOutput
-	ToContainGroupEnvValueFromFieldRefOutputWithContext(context.Context) ContainGroupEnvValueFromFieldRefOutput
+	ToDeployContainerGroupEnvValueFromFieldRefOutput() DeployContainerGroupEnvValueFromFieldRefOutput
+	ToDeployContainerGroupEnvValueFromFieldRefOutputWithContext(context.Context) DeployContainerGroupEnvValueFromFieldRefOutput
 }
 
-type ContainGroupEnvValueFromFieldRefArgs struct {
-	// FieldPath of k8s.
+type DeployContainerGroupEnvValueFromFieldRefArgs struct {
+	// The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
 	FieldPath pulumi.StringPtrInput `pulumi:"fieldPath"`
 }
 
-func (ContainGroupEnvValueFromFieldRefArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFromFieldRef)(nil)).Elem()
+func (DeployContainerGroupEnvValueFromFieldRefArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFromFieldRef)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromFieldRefArgs) ToContainGroupEnvValueFromFieldRefOutput() ContainGroupEnvValueFromFieldRefOutput {
-	return i.ToContainGroupEnvValueFromFieldRefOutputWithContext(context.Background())
+func (i DeployContainerGroupEnvValueFromFieldRefArgs) ToDeployContainerGroupEnvValueFromFieldRefOutput() DeployContainerGroupEnvValueFromFieldRefOutput {
+	return i.ToDeployContainerGroupEnvValueFromFieldRefOutputWithContext(context.Background())
 }
 
-func (i ContainGroupEnvValueFromFieldRefArgs) ToContainGroupEnvValueFromFieldRefOutputWithContext(ctx context.Context) ContainGroupEnvValueFromFieldRefOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromFieldRefOutput)
+func (i DeployContainerGroupEnvValueFromFieldRefArgs) ToDeployContainerGroupEnvValueFromFieldRefOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromFieldRefOutput)
 }
 
-// ContainGroupEnvValueFromFieldRefArrayInput is an input type that accepts ContainGroupEnvValueFromFieldRefArray and ContainGroupEnvValueFromFieldRefArrayOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromFieldRefArrayInput` via:
+func (i DeployContainerGroupEnvValueFromFieldRefArgs) ToDeployContainerGroupEnvValueFromFieldRefPtrOutput() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupEnvValueFromFieldRefArgs) ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromFieldRefOutput).ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupEnvValueFromFieldRefPtrInput is an input type that accepts DeployContainerGroupEnvValueFromFieldRefArgs, DeployContainerGroupEnvValueFromFieldRefPtr and DeployContainerGroupEnvValueFromFieldRefPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromFieldRefPtrInput` via:
 //
-//          ContainGroupEnvValueFromFieldRefArray{ ContainGroupEnvValueFromFieldRefArgs{...} }
-type ContainGroupEnvValueFromFieldRefArrayInput interface {
+//          DeployContainerGroupEnvValueFromFieldRefArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupEnvValueFromFieldRefPtrInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromFieldRefArrayOutput() ContainGroupEnvValueFromFieldRefArrayOutput
-	ToContainGroupEnvValueFromFieldRefArrayOutputWithContext(context.Context) ContainGroupEnvValueFromFieldRefArrayOutput
+	ToDeployContainerGroupEnvValueFromFieldRefPtrOutput() DeployContainerGroupEnvValueFromFieldRefPtrOutput
+	ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(context.Context) DeployContainerGroupEnvValueFromFieldRefPtrOutput
 }
 
-type ContainGroupEnvValueFromFieldRefArray []ContainGroupEnvValueFromFieldRefInput
+type deployContainerGroupEnvValueFromFieldRefPtrType DeployContainerGroupEnvValueFromFieldRefArgs
 
-func (ContainGroupEnvValueFromFieldRefArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFromFieldRef)(nil)).Elem()
+func DeployContainerGroupEnvValueFromFieldRefPtr(v *DeployContainerGroupEnvValueFromFieldRefArgs) DeployContainerGroupEnvValueFromFieldRefPtrInput {
+	return (*deployContainerGroupEnvValueFromFieldRefPtrType)(v)
 }
 
-func (i ContainGroupEnvValueFromFieldRefArray) ToContainGroupEnvValueFromFieldRefArrayOutput() ContainGroupEnvValueFromFieldRefArrayOutput {
-	return i.ToContainGroupEnvValueFromFieldRefArrayOutputWithContext(context.Background())
+func (*deployContainerGroupEnvValueFromFieldRefPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFromFieldRef)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromFieldRefArray) ToContainGroupEnvValueFromFieldRefArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromFieldRefArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromFieldRefArrayOutput)
+func (i *deployContainerGroupEnvValueFromFieldRefPtrType) ToDeployContainerGroupEnvValueFromFieldRefPtrOutput() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupEnvValueFromFieldRefOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromFieldRefOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFromFieldRef)(nil)).Elem()
+func (i *deployContainerGroupEnvValueFromFieldRefPtrType) ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromFieldRefPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromFieldRefOutput) ToContainGroupEnvValueFromFieldRefOutput() ContainGroupEnvValueFromFieldRefOutput {
+type DeployContainerGroupEnvValueFromFieldRefOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromFieldRefOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFromFieldRef)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromFieldRefOutput) ToDeployContainerGroupEnvValueFromFieldRefOutput() DeployContainerGroupEnvValueFromFieldRefOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromFieldRefOutput) ToContainGroupEnvValueFromFieldRefOutputWithContext(ctx context.Context) ContainGroupEnvValueFromFieldRefOutput {
+func (o DeployContainerGroupEnvValueFromFieldRefOutput) ToDeployContainerGroupEnvValueFromFieldRefOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefOutput {
 	return o
 }
 
-// FieldPath of k8s.
-func (o ContainGroupEnvValueFromFieldRefOutput) FieldPath() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupEnvValueFromFieldRef) *string { return v.FieldPath }).(pulumi.StringPtrOutput)
+func (o DeployContainerGroupEnvValueFromFieldRefOutput) ToDeployContainerGroupEnvValueFromFieldRefPtrOutput() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return o.ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupEnvValueFromFieldRefArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromFieldRefArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFromFieldRef)(nil)).Elem()
+func (o DeployContainerGroupEnvValueFromFieldRefOutput) ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupEnvValueFromFieldRef) *DeployContainerGroupEnvValueFromFieldRef {
+		return &v
+	}).(DeployContainerGroupEnvValueFromFieldRefPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromFieldRefArrayOutput) ToContainGroupEnvValueFromFieldRefArrayOutput() ContainGroupEnvValueFromFieldRefArrayOutput {
+// The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromFieldRefOutput) FieldPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnvValueFromFieldRef) *string { return v.FieldPath }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupEnvValueFromFieldRefPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromFieldRefPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFromFieldRef)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromFieldRefPtrOutput) ToDeployContainerGroupEnvValueFromFieldRefPtrOutput() DeployContainerGroupEnvValueFromFieldRefPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromFieldRefArrayOutput) ToContainGroupEnvValueFromFieldRefArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromFieldRefArrayOutput {
+func (o DeployContainerGroupEnvValueFromFieldRefPtrOutput) ToDeployContainerGroupEnvValueFromFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromFieldRefPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromFieldRefArrayOutput) Index(i pulumi.IntInput) ContainGroupEnvValueFromFieldRefOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupEnvValueFromFieldRef {
-		return vs[0].([]ContainGroupEnvValueFromFieldRef)[vs[1].(int)]
-	}).(ContainGroupEnvValueFromFieldRefOutput)
+func (o DeployContainerGroupEnvValueFromFieldRefPtrOutput) Elem() DeployContainerGroupEnvValueFromFieldRefOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFromFieldRef) DeployContainerGroupEnvValueFromFieldRef {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupEnvValueFromFieldRef
+		return ret
+	}).(DeployContainerGroupEnvValueFromFieldRefOutput)
 }
 
-type ContainGroupEnvValueFromResourceFieldRef struct {
-	// Resource of k8s.
+// The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromFieldRefPtrOutput) FieldPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFromFieldRef) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldPath
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupEnvValueFromResourceFieldRef struct {
+	// The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
 	Resource *string `pulumi:"resource"`
 }
 
-// ContainGroupEnvValueFromResourceFieldRefInput is an input type that accepts ContainGroupEnvValueFromResourceFieldRefArgs and ContainGroupEnvValueFromResourceFieldRefOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromResourceFieldRefInput` via:
+// DeployContainerGroupEnvValueFromResourceFieldRefInput is an input type that accepts DeployContainerGroupEnvValueFromResourceFieldRefArgs and DeployContainerGroupEnvValueFromResourceFieldRefOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromResourceFieldRefInput` via:
 //
-//          ContainGroupEnvValueFromResourceFieldRefArgs{...}
-type ContainGroupEnvValueFromResourceFieldRefInput interface {
+//          DeployContainerGroupEnvValueFromResourceFieldRefArgs{...}
+type DeployContainerGroupEnvValueFromResourceFieldRefInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromResourceFieldRefOutput() ContainGroupEnvValueFromResourceFieldRefOutput
-	ToContainGroupEnvValueFromResourceFieldRefOutputWithContext(context.Context) ContainGroupEnvValueFromResourceFieldRefOutput
+	ToDeployContainerGroupEnvValueFromResourceFieldRefOutput() DeployContainerGroupEnvValueFromResourceFieldRefOutput
+	ToDeployContainerGroupEnvValueFromResourceFieldRefOutputWithContext(context.Context) DeployContainerGroupEnvValueFromResourceFieldRefOutput
 }
 
-type ContainGroupEnvValueFromResourceFieldRefArgs struct {
-	// Resource of k8s.
+type DeployContainerGroupEnvValueFromResourceFieldRefArgs struct {
+	// The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
 	Resource pulumi.StringPtrInput `pulumi:"resource"`
 }
 
-func (ContainGroupEnvValueFromResourceFieldRefArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+func (DeployContainerGroupEnvValueFromResourceFieldRefArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFromResourceFieldRef)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromResourceFieldRefArgs) ToContainGroupEnvValueFromResourceFieldRefOutput() ContainGroupEnvValueFromResourceFieldRefOutput {
-	return i.ToContainGroupEnvValueFromResourceFieldRefOutputWithContext(context.Background())
+func (i DeployContainerGroupEnvValueFromResourceFieldRefArgs) ToDeployContainerGroupEnvValueFromResourceFieldRefOutput() DeployContainerGroupEnvValueFromResourceFieldRefOutput {
+	return i.ToDeployContainerGroupEnvValueFromResourceFieldRefOutputWithContext(context.Background())
 }
 
-func (i ContainGroupEnvValueFromResourceFieldRefArgs) ToContainGroupEnvValueFromResourceFieldRefOutputWithContext(ctx context.Context) ContainGroupEnvValueFromResourceFieldRefOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromResourceFieldRefOutput)
+func (i DeployContainerGroupEnvValueFromResourceFieldRefArgs) ToDeployContainerGroupEnvValueFromResourceFieldRefOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromResourceFieldRefOutput)
 }
 
-// ContainGroupEnvValueFromResourceFieldRefArrayInput is an input type that accepts ContainGroupEnvValueFromResourceFieldRefArray and ContainGroupEnvValueFromResourceFieldRefArrayOutput values.
-// You can construct a concrete instance of `ContainGroupEnvValueFromResourceFieldRefArrayInput` via:
+func (i DeployContainerGroupEnvValueFromResourceFieldRefArgs) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutput() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupEnvValueFromResourceFieldRefArgs) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromResourceFieldRefOutput).ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupEnvValueFromResourceFieldRefPtrInput is an input type that accepts DeployContainerGroupEnvValueFromResourceFieldRefArgs, DeployContainerGroupEnvValueFromResourceFieldRefPtr and DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupEnvValueFromResourceFieldRefPtrInput` via:
 //
-//          ContainGroupEnvValueFromResourceFieldRefArray{ ContainGroupEnvValueFromResourceFieldRefArgs{...} }
-type ContainGroupEnvValueFromResourceFieldRefArrayInput interface {
+//          DeployContainerGroupEnvValueFromResourceFieldRefArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupEnvValueFromResourceFieldRefPtrInput interface {
 	pulumi.Input
 
-	ToContainGroupEnvValueFromResourceFieldRefArrayOutput() ContainGroupEnvValueFromResourceFieldRefArrayOutput
-	ToContainGroupEnvValueFromResourceFieldRefArrayOutputWithContext(context.Context) ContainGroupEnvValueFromResourceFieldRefArrayOutput
+	ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutput() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput
+	ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(context.Context) DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput
 }
 
-type ContainGroupEnvValueFromResourceFieldRefArray []ContainGroupEnvValueFromResourceFieldRefInput
+type deployContainerGroupEnvValueFromResourceFieldRefPtrType DeployContainerGroupEnvValueFromResourceFieldRefArgs
 
-func (ContainGroupEnvValueFromResourceFieldRefArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+func DeployContainerGroupEnvValueFromResourceFieldRefPtr(v *DeployContainerGroupEnvValueFromResourceFieldRefArgs) DeployContainerGroupEnvValueFromResourceFieldRefPtrInput {
+	return (*deployContainerGroupEnvValueFromResourceFieldRefPtrType)(v)
 }
 
-func (i ContainGroupEnvValueFromResourceFieldRefArray) ToContainGroupEnvValueFromResourceFieldRefArrayOutput() ContainGroupEnvValueFromResourceFieldRefArrayOutput {
-	return i.ToContainGroupEnvValueFromResourceFieldRefArrayOutputWithContext(context.Background())
+func (*deployContainerGroupEnvValueFromResourceFieldRefPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFromResourceFieldRef)(nil)).Elem()
 }
 
-func (i ContainGroupEnvValueFromResourceFieldRefArray) ToContainGroupEnvValueFromResourceFieldRefArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromResourceFieldRefArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupEnvValueFromResourceFieldRefArrayOutput)
+func (i *deployContainerGroupEnvValueFromResourceFieldRefPtrType) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutput() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return i.ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupEnvValueFromResourceFieldRefOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromResourceFieldRefOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+func (i *deployContainerGroupEnvValueFromResourceFieldRefPtrType) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromResourceFieldRefOutput) ToContainGroupEnvValueFromResourceFieldRefOutput() ContainGroupEnvValueFromResourceFieldRefOutput {
+type DeployContainerGroupEnvValueFromResourceFieldRefOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromResourceFieldRefOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromResourceFieldRefOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefOutput() DeployContainerGroupEnvValueFromResourceFieldRefOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromResourceFieldRefOutput) ToContainGroupEnvValueFromResourceFieldRefOutputWithContext(ctx context.Context) ContainGroupEnvValueFromResourceFieldRefOutput {
+func (o DeployContainerGroupEnvValueFromResourceFieldRefOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefOutput {
 	return o
 }
 
-// Resource of k8s.
-func (o ContainGroupEnvValueFromResourceFieldRefOutput) Resource() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupEnvValueFromResourceFieldRef) *string { return v.Resource }).(pulumi.StringPtrOutput)
+func (o DeployContainerGroupEnvValueFromResourceFieldRefOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutput() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return o.ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupEnvValueFromResourceFieldRefArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupEnvValueFromResourceFieldRefArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+func (o DeployContainerGroupEnvValueFromResourceFieldRefOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupEnvValueFromResourceFieldRef) *DeployContainerGroupEnvValueFromResourceFieldRef {
+		return &v
+	}).(DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput)
 }
 
-func (o ContainGroupEnvValueFromResourceFieldRefArrayOutput) ToContainGroupEnvValueFromResourceFieldRefArrayOutput() ContainGroupEnvValueFromResourceFieldRefArrayOutput {
+// The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromResourceFieldRefOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupEnvValueFromResourceFieldRef) *string { return v.Resource }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupEnvValueFromResourceFieldRef)(nil)).Elem()
+}
+
+func (o DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutput() DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromResourceFieldRefArrayOutput) ToContainGroupEnvValueFromResourceFieldRefArrayOutputWithContext(ctx context.Context) ContainGroupEnvValueFromResourceFieldRefArrayOutput {
+func (o DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput) ToDeployContainerGroupEnvValueFromResourceFieldRefPtrOutputWithContext(ctx context.Context) DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput {
 	return o
 }
 
-func (o ContainGroupEnvValueFromResourceFieldRefArrayOutput) Index(i pulumi.IntInput) ContainGroupEnvValueFromResourceFieldRefOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupEnvValueFromResourceFieldRef {
-		return vs[0].([]ContainGroupEnvValueFromResourceFieldRef)[vs[1].(int)]
-	}).(ContainGroupEnvValueFromResourceFieldRefOutput)
+func (o DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput) Elem() DeployContainerGroupEnvValueFromResourceFieldRefOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFromResourceFieldRef) DeployContainerGroupEnvValueFromResourceFieldRef {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupEnvValueFromResourceFieldRef
+		return ret
+	}).(DeployContainerGroupEnvValueFromResourceFieldRefOutput)
 }
 
-type ContainGroupHealthCheckSetting struct {
-	// live health check.
-	LivenessProbes []ContainGroupHealthCheckSettingLivenessProbe `pulumi:"livenessProbes"`
-	// readiness health check.
-	ReadinessProbes []ContainGroupHealthCheckSettingReadinessProbe `pulumi:"readinessProbes"`
+// The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput) Resource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupEnvValueFromResourceFieldRef) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Resource
+	}).(pulumi.StringPtrOutput)
 }
 
-// ContainGroupHealthCheckSettingInput is an input type that accepts ContainGroupHealthCheckSettingArgs and ContainGroupHealthCheckSettingOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingInput` via:
+type DeployContainerGroupHealthCheckSettings struct {
+	// Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+	LivenessProbe *DeployContainerGroupHealthCheckSettingsLivenessProbe `pulumi:"livenessProbe"`
+	// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+	ReadinessProbe *DeployContainerGroupHealthCheckSettingsReadinessProbe `pulumi:"readinessProbe"`
+}
+
+// DeployContainerGroupHealthCheckSettingsInput is an input type that accepts DeployContainerGroupHealthCheckSettingsArgs and DeployContainerGroupHealthCheckSettingsOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsInput` via:
 //
-//          ContainGroupHealthCheckSettingArgs{...}
-type ContainGroupHealthCheckSettingInput interface {
+//          DeployContainerGroupHealthCheckSettingsArgs{...}
+type DeployContainerGroupHealthCheckSettingsInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingOutput() ContainGroupHealthCheckSettingOutput
-	ToContainGroupHealthCheckSettingOutputWithContext(context.Context) ContainGroupHealthCheckSettingOutput
+	ToDeployContainerGroupHealthCheckSettingsOutput() DeployContainerGroupHealthCheckSettingsOutput
+	ToDeployContainerGroupHealthCheckSettingsOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsOutput
 }
 
-type ContainGroupHealthCheckSettingArgs struct {
-	// live health check.
-	LivenessProbes ContainGroupHealthCheckSettingLivenessProbeArrayInput `pulumi:"livenessProbes"`
-	// readiness health check.
-	ReadinessProbes ContainGroupHealthCheckSettingReadinessProbeArrayInput `pulumi:"readinessProbes"`
+type DeployContainerGroupHealthCheckSettingsArgs struct {
+	// Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+	LivenessProbe DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput `pulumi:"livenessProbe"`
+	// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+	ReadinessProbe DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput `pulumi:"readinessProbe"`
 }
 
-func (ContainGroupHealthCheckSettingArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSetting)(nil)).Elem()
+func (DeployContainerGroupHealthCheckSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettings)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingArgs) ToContainGroupHealthCheckSettingOutput() ContainGroupHealthCheckSettingOutput {
-	return i.ToContainGroupHealthCheckSettingOutputWithContext(context.Background())
+func (i DeployContainerGroupHealthCheckSettingsArgs) ToDeployContainerGroupHealthCheckSettingsOutput() DeployContainerGroupHealthCheckSettingsOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsOutputWithContext(context.Background())
 }
 
-func (i ContainGroupHealthCheckSettingArgs) ToContainGroupHealthCheckSettingOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingOutput)
+func (i DeployContainerGroupHealthCheckSettingsArgs) ToDeployContainerGroupHealthCheckSettingsOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsOutput)
 }
 
-// ContainGroupHealthCheckSettingArrayInput is an input type that accepts ContainGroupHealthCheckSettingArray and ContainGroupHealthCheckSettingArrayOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingArrayInput` via:
+func (i DeployContainerGroupHealthCheckSettingsArgs) ToDeployContainerGroupHealthCheckSettingsPtrOutput() DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupHealthCheckSettingsArgs) ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsOutput).ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupHealthCheckSettingsPtrInput is an input type that accepts DeployContainerGroupHealthCheckSettingsArgs, DeployContainerGroupHealthCheckSettingsPtr and DeployContainerGroupHealthCheckSettingsPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsPtrInput` via:
 //
-//          ContainGroupHealthCheckSettingArray{ ContainGroupHealthCheckSettingArgs{...} }
-type ContainGroupHealthCheckSettingArrayInput interface {
+//          DeployContainerGroupHealthCheckSettingsArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupHealthCheckSettingsPtrInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingArrayOutput() ContainGroupHealthCheckSettingArrayOutput
-	ToContainGroupHealthCheckSettingArrayOutputWithContext(context.Context) ContainGroupHealthCheckSettingArrayOutput
+	ToDeployContainerGroupHealthCheckSettingsPtrOutput() DeployContainerGroupHealthCheckSettingsPtrOutput
+	ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsPtrOutput
 }
 
-type ContainGroupHealthCheckSettingArray []ContainGroupHealthCheckSettingInput
+type deployContainerGroupHealthCheckSettingsPtrType DeployContainerGroupHealthCheckSettingsArgs
 
-func (ContainGroupHealthCheckSettingArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSetting)(nil)).Elem()
+func DeployContainerGroupHealthCheckSettingsPtr(v *DeployContainerGroupHealthCheckSettingsArgs) DeployContainerGroupHealthCheckSettingsPtrInput {
+	return (*deployContainerGroupHealthCheckSettingsPtrType)(v)
 }
 
-func (i ContainGroupHealthCheckSettingArray) ToContainGroupHealthCheckSettingArrayOutput() ContainGroupHealthCheckSettingArrayOutput {
-	return i.ToContainGroupHealthCheckSettingArrayOutputWithContext(context.Background())
+func (*deployContainerGroupHealthCheckSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettings)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingArray) ToContainGroupHealthCheckSettingArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingArrayOutput)
+func (i *deployContainerGroupHealthCheckSettingsPtrType) ToDeployContainerGroupHealthCheckSettingsPtrOutput() DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
 }
 
-type ContainGroupHealthCheckSettingOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSetting)(nil)).Elem()
+func (i *deployContainerGroupHealthCheckSettingsPtrType) ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsPtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingOutput) ToContainGroupHealthCheckSettingOutput() ContainGroupHealthCheckSettingOutput {
+type DeployContainerGroupHealthCheckSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsOutput) ToDeployContainerGroupHealthCheckSettingsOutput() DeployContainerGroupHealthCheckSettingsOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingOutput) ToContainGroupHealthCheckSettingOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingOutput {
+func (o DeployContainerGroupHealthCheckSettingsOutput) ToDeployContainerGroupHealthCheckSettingsOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsOutput {
 	return o
 }
 
-// live health check.
-func (o ContainGroupHealthCheckSettingOutput) LivenessProbes() ContainGroupHealthCheckSettingLivenessProbeArrayOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSetting) []ContainGroupHealthCheckSettingLivenessProbe {
-		return v.LivenessProbes
-	}).(ContainGroupHealthCheckSettingLivenessProbeArrayOutput)
+func (o DeployContainerGroupHealthCheckSettingsOutput) ToDeployContainerGroupHealthCheckSettingsPtrOutput() DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return o.ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
 }
 
-// readiness health check.
-func (o ContainGroupHealthCheckSettingOutput) ReadinessProbes() ContainGroupHealthCheckSettingReadinessProbeArrayOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSetting) []ContainGroupHealthCheckSettingReadinessProbe {
-		return v.ReadinessProbes
-	}).(ContainGroupHealthCheckSettingReadinessProbeArrayOutput)
+func (o DeployContainerGroupHealthCheckSettingsOutput) ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupHealthCheckSettings) *DeployContainerGroupHealthCheckSettings {
+		return &v
+	}).(DeployContainerGroupHealthCheckSettingsPtrOutput)
 }
 
-type ContainGroupHealthCheckSettingArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSetting)(nil)).Elem()
+// Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsOutput) LivenessProbe() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettings) *DeployContainerGroupHealthCheckSettingsLivenessProbe {
+		return v.LivenessProbe
+	}).(DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingArrayOutput) ToContainGroupHealthCheckSettingArrayOutput() ContainGroupHealthCheckSettingArrayOutput {
+// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsOutput) ReadinessProbe() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettings) *DeployContainerGroupHealthCheckSettingsReadinessProbe {
+		return v.ReadinessProbe
+	}).(DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+type DeployContainerGroupHealthCheckSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsPtrOutput) ToDeployContainerGroupHealthCheckSettingsPtrOutput() DeployContainerGroupHealthCheckSettingsPtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingArrayOutput) ToContainGroupHealthCheckSettingArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingArrayOutput {
+func (o DeployContainerGroupHealthCheckSettingsPtrOutput) ToDeployContainerGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsPtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingArrayOutput) Index(i pulumi.IntInput) ContainGroupHealthCheckSettingOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupHealthCheckSetting {
-		return vs[0].([]ContainGroupHealthCheckSetting)[vs[1].(int)]
-	}).(ContainGroupHealthCheckSettingOutput)
+func (o DeployContainerGroupHealthCheckSettingsPtrOutput) Elem() DeployContainerGroupHealthCheckSettingsOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettings) DeployContainerGroupHealthCheckSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupHealthCheckSettings
+		return ret
+	}).(DeployContainerGroupHealthCheckSettingsOutput)
 }
 
-type ContainGroupHealthCheckSettingLivenessProbe struct {
-	// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-	ActionType *string `pulumi:"actionType"`
-	// Execute command check mode, the command to execute.
+// Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsPtrOutput) LivenessProbe() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettings) *DeployContainerGroupHealthCheckSettingsLivenessProbe {
+		if v == nil {
+			return nil
+		}
+		return v.LivenessProbe
+	}).(DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput)
+}
+
+// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsPtrOutput) ReadinessProbe() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettings) *DeployContainerGroupHealthCheckSettingsReadinessProbe {
+		if v == nil {
+			return nil
+		}
+		return v.ReadinessProbe
+	}).(DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+type DeployContainerGroupHealthCheckSettingsLivenessProbe struct {
+	// The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType string `pulumi:"actionType"`
+	// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Commands []string `pulumi:"commands"`
-	// Indicates the number of consecutive health check successes for the backend container from success to failure.
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
 	FailureThreshold *int `pulumi:"failureThreshold"`
-	// The time for the container to delay starting the health check.
+	// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
 	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
-	// The request path of the HTTP health check interface.
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `pulumi:"path"`
-	// The interval at which health checks are performed.
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	PeriodSeconds *int `pulumi:"periodSeconds"`
-	// service port.
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
 	Port *int `pulumi:"port"`
-	// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
 	Scheme *string `pulumi:"scheme"`
-	// Indicates the number of consecutive health check successes for the backend container from failure to success.
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
 	SuccessThreshold *int `pulumi:"successThreshold"`
-	// The maximum timeout for each health check response.
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
 	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
-	// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `pulumi:"type"`
 }
 
-// ContainGroupHealthCheckSettingLivenessProbeInput is an input type that accepts ContainGroupHealthCheckSettingLivenessProbeArgs and ContainGroupHealthCheckSettingLivenessProbeOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingLivenessProbeInput` via:
+// DeployContainerGroupHealthCheckSettingsLivenessProbeInput is an input type that accepts DeployContainerGroupHealthCheckSettingsLivenessProbeArgs and DeployContainerGroupHealthCheckSettingsLivenessProbeOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsLivenessProbeInput` via:
 //
-//          ContainGroupHealthCheckSettingLivenessProbeArgs{...}
-type ContainGroupHealthCheckSettingLivenessProbeInput interface {
+//          DeployContainerGroupHealthCheckSettingsLivenessProbeArgs{...}
+type DeployContainerGroupHealthCheckSettingsLivenessProbeInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingLivenessProbeOutput() ContainGroupHealthCheckSettingLivenessProbeOutput
-	ToContainGroupHealthCheckSettingLivenessProbeOutputWithContext(context.Context) ContainGroupHealthCheckSettingLivenessProbeOutput
+	ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutput() DeployContainerGroupHealthCheckSettingsLivenessProbeOutput
+	ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbeOutput
 }
 
-type ContainGroupHealthCheckSettingLivenessProbeArgs struct {
-	// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-	ActionType pulumi.StringPtrInput `pulumi:"actionType"`
-	// Execute command check mode, the command to execute.
+type DeployContainerGroupHealthCheckSettingsLivenessProbeArgs struct {
+	// The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType pulumi.StringInput `pulumi:"actionType"`
+	// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Commands pulumi.StringArrayInput `pulumi:"commands"`
-	// Indicates the number of consecutive health check successes for the backend container from success to failure.
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
 	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
-	// The time for the container to delay starting the health check.
+	// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
 	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
-	// The request path of the HTTP health check interface.
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Path pulumi.StringPtrInput `pulumi:"path"`
-	// The interval at which health checks are performed.
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
-	// service port.
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
 	Port pulumi.IntPtrInput `pulumi:"port"`
-	// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
 	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
-	// Indicates the number of consecutive health check successes for the backend container from failure to success.
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
 	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
-	// The maximum timeout for each health check response.
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
 	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
-	// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
-func (ContainGroupHealthCheckSettingLivenessProbeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSettingLivenessProbe)(nil)).Elem()
+func (DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingLivenessProbeArgs) ToContainGroupHealthCheckSettingLivenessProbeOutput() ContainGroupHealthCheckSettingLivenessProbeOutput {
-	return i.ToContainGroupHealthCheckSettingLivenessProbeOutputWithContext(context.Background())
+func (i DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutput() DeployContainerGroupHealthCheckSettingsLivenessProbeOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutputWithContext(context.Background())
 }
 
-func (i ContainGroupHealthCheckSettingLivenessProbeArgs) ToContainGroupHealthCheckSettingLivenessProbeOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingLivenessProbeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingLivenessProbeOutput)
+func (i DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsLivenessProbeOutput)
 }
 
-// ContainGroupHealthCheckSettingLivenessProbeArrayInput is an input type that accepts ContainGroupHealthCheckSettingLivenessProbeArray and ContainGroupHealthCheckSettingLivenessProbeArrayOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingLivenessProbeArrayInput` via:
+func (i DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsLivenessProbeOutput).ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput is an input type that accepts DeployContainerGroupHealthCheckSettingsLivenessProbeArgs, DeployContainerGroupHealthCheckSettingsLivenessProbePtr and DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput` via:
 //
-//          ContainGroupHealthCheckSettingLivenessProbeArray{ ContainGroupHealthCheckSettingLivenessProbeArgs{...} }
-type ContainGroupHealthCheckSettingLivenessProbeArrayInput interface {
+//          DeployContainerGroupHealthCheckSettingsLivenessProbeArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingLivenessProbeArrayOutput() ContainGroupHealthCheckSettingLivenessProbeArrayOutput
-	ToContainGroupHealthCheckSettingLivenessProbeArrayOutputWithContext(context.Context) ContainGroupHealthCheckSettingLivenessProbeArrayOutput
+	ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput
+	ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput
 }
 
-type ContainGroupHealthCheckSettingLivenessProbeArray []ContainGroupHealthCheckSettingLivenessProbeInput
+type deployContainerGroupHealthCheckSettingsLivenessProbePtrType DeployContainerGroupHealthCheckSettingsLivenessProbeArgs
 
-func (ContainGroupHealthCheckSettingLivenessProbeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSettingLivenessProbe)(nil)).Elem()
+func DeployContainerGroupHealthCheckSettingsLivenessProbePtr(v *DeployContainerGroupHealthCheckSettingsLivenessProbeArgs) DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput {
+	return (*deployContainerGroupHealthCheckSettingsLivenessProbePtrType)(v)
 }
 
-func (i ContainGroupHealthCheckSettingLivenessProbeArray) ToContainGroupHealthCheckSettingLivenessProbeArrayOutput() ContainGroupHealthCheckSettingLivenessProbeArrayOutput {
-	return i.ToContainGroupHealthCheckSettingLivenessProbeArrayOutputWithContext(context.Background())
+func (*deployContainerGroupHealthCheckSettingsLivenessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingLivenessProbeArray) ToContainGroupHealthCheckSettingLivenessProbeArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingLivenessProbeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingLivenessProbeArrayOutput)
+func (i *deployContainerGroupHealthCheckSettingsLivenessProbePtrType) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
 }
 
-type ContainGroupHealthCheckSettingLivenessProbeOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingLivenessProbeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSettingLivenessProbe)(nil)).Elem()
+func (i *deployContainerGroupHealthCheckSettingsLivenessProbePtrType) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) ToContainGroupHealthCheckSettingLivenessProbeOutput() ContainGroupHealthCheckSettingLivenessProbeOutput {
+type DeployContainerGroupHealthCheckSettingsLivenessProbeOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutput() DeployContainerGroupHealthCheckSettingsLivenessProbeOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) ToContainGroupHealthCheckSettingLivenessProbeOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingLivenessProbeOutput {
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbeOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbeOutput {
 	return o
 }
 
-// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) ActionType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *string { return v.ActionType }).(pulumi.StringPtrOutput)
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
 }
 
-// Execute command check mode, the command to execute.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) Commands() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupHealthCheckSettingsLivenessProbe) *DeployContainerGroupHealthCheckSettingsLivenessProbe {
+		return &v
+	}).(DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput)
 }
 
-// Indicates the number of consecutive health check successes for the backend container from success to failure.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+// The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) ActionType() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) string { return v.ActionType }).(pulumi.StringOutput)
 }
 
-// The time for the container to delay starting the health check.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
 }
 
-// The request path of the HTTP health check interface.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
 }
 
-// The interval at which health checks are performed.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
 }
 
-// service port.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
-// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) Scheme() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
 }
 
-// Indicates the number of consecutive health check successes for the backend container from failure to success.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// The maximum timeout for each health check response.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
 }
 
-// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
-func (o ContainGroupHealthCheckSettingLivenessProbeOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingLivenessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
 }
 
-type ContainGroupHealthCheckSettingLivenessProbeArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingLivenessProbeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSettingLivenessProbe)(nil)).Elem()
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingLivenessProbeArrayOutput) ToContainGroupHealthCheckSettingLivenessProbeArrayOutput() ContainGroupHealthCheckSettingLivenessProbeArrayOutput {
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbeOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsLivenessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput() DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingLivenessProbeArrayOutput) ToContainGroupHealthCheckSettingLivenessProbeArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingLivenessProbeArrayOutput {
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) ToDeployContainerGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingLivenessProbeArrayOutput) Index(i pulumi.IntInput) ContainGroupHealthCheckSettingLivenessProbeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupHealthCheckSettingLivenessProbe {
-		return vs[0].([]ContainGroupHealthCheckSettingLivenessProbe)[vs[1].(int)]
-	}).(ContainGroupHealthCheckSettingLivenessProbeOutput)
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Elem() DeployContainerGroupHealthCheckSettingsLivenessProbeOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) DeployContainerGroupHealthCheckSettingsLivenessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupHealthCheckSettingsLivenessProbe
+		return ret
+	}).(DeployContainerGroupHealthCheckSettingsLivenessProbeOutput)
 }
 
-type ContainGroupHealthCheckSettingReadinessProbe struct {
-	// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-	ActionType *string `pulumi:"actionType"`
-	// Execute command check mode, the command to execute.
+// The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) ActionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ActionType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Commands
+	}).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupHealthCheckSettingsReadinessProbe struct {
+	// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType string `pulumi:"actionType"`
+	// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
 	Commands []string `pulumi:"commands"`
-	// Indicates the number of consecutive health check successes for the backend container from success to failure.
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
 	FailureThreshold *int `pulumi:"failureThreshold"`
-	// The time for the container to delay starting the health check.
+	// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
 	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
-	// The request path of the HTTP health check interface.
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `pulumi:"path"`
-	// The interval at which health checks are performed.
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	PeriodSeconds *int `pulumi:"periodSeconds"`
-	// service port.
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
 	Port *int `pulumi:"port"`
-	// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
 	Scheme *string `pulumi:"scheme"`
-	// Indicates the number of consecutive health check successes for the backend container from failure to success.
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
 	SuccessThreshold *int `pulumi:"successThreshold"`
-	// The maximum timeout for each health check response.
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
 	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
-	// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `pulumi:"type"`
 }
 
-// ContainGroupHealthCheckSettingReadinessProbeInput is an input type that accepts ContainGroupHealthCheckSettingReadinessProbeArgs and ContainGroupHealthCheckSettingReadinessProbeOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingReadinessProbeInput` via:
+// DeployContainerGroupHealthCheckSettingsReadinessProbeInput is an input type that accepts DeployContainerGroupHealthCheckSettingsReadinessProbeArgs and DeployContainerGroupHealthCheckSettingsReadinessProbeOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsReadinessProbeInput` via:
 //
-//          ContainGroupHealthCheckSettingReadinessProbeArgs{...}
-type ContainGroupHealthCheckSettingReadinessProbeInput interface {
+//          DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{...}
+type DeployContainerGroupHealthCheckSettingsReadinessProbeInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingReadinessProbeOutput() ContainGroupHealthCheckSettingReadinessProbeOutput
-	ToContainGroupHealthCheckSettingReadinessProbeOutputWithContext(context.Context) ContainGroupHealthCheckSettingReadinessProbeOutput
+	ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutput() DeployContainerGroupHealthCheckSettingsReadinessProbeOutput
+	ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbeOutput
 }
 
-type ContainGroupHealthCheckSettingReadinessProbeArgs struct {
-	// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-	ActionType pulumi.StringPtrInput `pulumi:"actionType"`
-	// Execute command check mode, the command to execute.
+type DeployContainerGroupHealthCheckSettingsReadinessProbeArgs struct {
+	// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType pulumi.StringInput `pulumi:"actionType"`
+	// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
 	Commands pulumi.StringArrayInput `pulumi:"commands"`
-	// Indicates the number of consecutive health check successes for the backend container from success to failure.
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
 	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
-	// The time for the container to delay starting the health check.
+	// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
 	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
-	// The request path of the HTTP health check interface.
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	Path pulumi.StringPtrInput `pulumi:"path"`
-	// The interval at which health checks are performed.
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
 	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
-	// service port.
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
 	Port pulumi.IntPtrInput `pulumi:"port"`
-	// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
 	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
-	// Indicates the number of consecutive health check successes for the backend container from failure to success.
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
 	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
-	// The maximum timeout for each health check response.
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
 	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
-	// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
-func (ContainGroupHealthCheckSettingReadinessProbeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSettingReadinessProbe)(nil)).Elem()
+func (DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingReadinessProbeArgs) ToContainGroupHealthCheckSettingReadinessProbeOutput() ContainGroupHealthCheckSettingReadinessProbeOutput {
-	return i.ToContainGroupHealthCheckSettingReadinessProbeOutputWithContext(context.Background())
+func (i DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutput() DeployContainerGroupHealthCheckSettingsReadinessProbeOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutputWithContext(context.Background())
 }
 
-func (i ContainGroupHealthCheckSettingReadinessProbeArgs) ToContainGroupHealthCheckSettingReadinessProbeOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingReadinessProbeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingReadinessProbeOutput)
+func (i DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsReadinessProbeOutput)
 }
 
-// ContainGroupHealthCheckSettingReadinessProbeArrayInput is an input type that accepts ContainGroupHealthCheckSettingReadinessProbeArray and ContainGroupHealthCheckSettingReadinessProbeArrayOutput values.
-// You can construct a concrete instance of `ContainGroupHealthCheckSettingReadinessProbeArrayInput` via:
+func (i DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsReadinessProbeOutput).ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput is an input type that accepts DeployContainerGroupHealthCheckSettingsReadinessProbeArgs, DeployContainerGroupHealthCheckSettingsReadinessProbePtr and DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput` via:
 //
-//          ContainGroupHealthCheckSettingReadinessProbeArray{ ContainGroupHealthCheckSettingReadinessProbeArgs{...} }
-type ContainGroupHealthCheckSettingReadinessProbeArrayInput interface {
+//          DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput interface {
 	pulumi.Input
 
-	ToContainGroupHealthCheckSettingReadinessProbeArrayOutput() ContainGroupHealthCheckSettingReadinessProbeArrayOutput
-	ToContainGroupHealthCheckSettingReadinessProbeArrayOutputWithContext(context.Context) ContainGroupHealthCheckSettingReadinessProbeArrayOutput
+	ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput
+	ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput
 }
 
-type ContainGroupHealthCheckSettingReadinessProbeArray []ContainGroupHealthCheckSettingReadinessProbeInput
+type deployContainerGroupHealthCheckSettingsReadinessProbePtrType DeployContainerGroupHealthCheckSettingsReadinessProbeArgs
 
-func (ContainGroupHealthCheckSettingReadinessProbeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSettingReadinessProbe)(nil)).Elem()
+func DeployContainerGroupHealthCheckSettingsReadinessProbePtr(v *DeployContainerGroupHealthCheckSettingsReadinessProbeArgs) DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput {
+	return (*deployContainerGroupHealthCheckSettingsReadinessProbePtrType)(v)
 }
 
-func (i ContainGroupHealthCheckSettingReadinessProbeArray) ToContainGroupHealthCheckSettingReadinessProbeArrayOutput() ContainGroupHealthCheckSettingReadinessProbeArrayOutput {
-	return i.ToContainGroupHealthCheckSettingReadinessProbeArrayOutputWithContext(context.Background())
+func (*deployContainerGroupHealthCheckSettingsReadinessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
 }
 
-func (i ContainGroupHealthCheckSettingReadinessProbeArray) ToContainGroupHealthCheckSettingReadinessProbeArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingReadinessProbeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupHealthCheckSettingReadinessProbeArrayOutput)
+func (i *deployContainerGroupHealthCheckSettingsReadinessProbePtrType) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return i.ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
 }
 
-type ContainGroupHealthCheckSettingReadinessProbeOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingReadinessProbeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupHealthCheckSettingReadinessProbe)(nil)).Elem()
+func (i *deployContainerGroupHealthCheckSettingsReadinessProbePtrType) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) ToContainGroupHealthCheckSettingReadinessProbeOutput() ContainGroupHealthCheckSettingReadinessProbeOutput {
+type DeployContainerGroupHealthCheckSettingsReadinessProbeOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutput() DeployContainerGroupHealthCheckSettingsReadinessProbeOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) ToContainGroupHealthCheckSettingReadinessProbeOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingReadinessProbeOutput {
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbeOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbeOutput {
 	return o
 }
 
-// health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) ActionType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *string { return v.ActionType }).(pulumi.StringPtrOutput)
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
 }
 
-// Execute command check mode, the command to execute.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) Commands() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupHealthCheckSettingsReadinessProbe) *DeployContainerGroupHealthCheckSettingsReadinessProbe {
+		return &v
+	}).(DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput)
 }
 
-// Indicates the number of consecutive health check successes for the backend container from success to failure.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) ActionType() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) string { return v.ActionType }).(pulumi.StringOutput)
 }
 
-// The time for the container to delay starting the health check.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
 }
 
-// The request path of the HTTP health check interface.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
 }
 
-// The interval at which health checks are performed.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
 }
 
-// service port.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
-// The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) Scheme() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
 }
 
-// Indicates the number of consecutive health check successes for the backend container from failure to success.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// The maximum timeout for each health check response.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
 }
 
-// TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
-func (o ContainGroupHealthCheckSettingReadinessProbeOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ContainGroupHealthCheckSettingReadinessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
 }
 
-type ContainGroupHealthCheckSettingReadinessProbeArrayOutput struct{ *pulumi.OutputState }
-
-func (ContainGroupHealthCheckSettingReadinessProbeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupHealthCheckSettingReadinessProbe)(nil)).Elem()
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
 }
 
-func (o ContainGroupHealthCheckSettingReadinessProbeArrayOutput) ToContainGroupHealthCheckSettingReadinessProbeArrayOutput() ContainGroupHealthCheckSettingReadinessProbeArrayOutput {
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbeOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupHealthCheckSettingsReadinessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput() DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingReadinessProbeArrayOutput) ToContainGroupHealthCheckSettingReadinessProbeArrayOutputWithContext(ctx context.Context) ContainGroupHealthCheckSettingReadinessProbeArrayOutput {
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) ToDeployContainerGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput {
 	return o
 }
 
-func (o ContainGroupHealthCheckSettingReadinessProbeArrayOutput) Index(i pulumi.IntInput) ContainGroupHealthCheckSettingReadinessProbeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupHealthCheckSettingReadinessProbe {
-		return vs[0].([]ContainGroupHealthCheckSettingReadinessProbe)[vs[1].(int)]
-	}).(ContainGroupHealthCheckSettingReadinessProbeOutput)
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Elem() DeployContainerGroupHealthCheckSettingsReadinessProbeOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) DeployContainerGroupHealthCheckSettingsReadinessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupHealthCheckSettingsReadinessProbe
+		return ret
+	}).(DeployContainerGroupHealthCheckSettingsReadinessProbeOutput)
 }
 
-type ContainGroupProtocolPort struct {
-	// host port.
+// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) ActionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ActionType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Commands
+	}).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupSchedulingStrategy struct {
+	// NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+	Type string `pulumi:"type"`
+}
+
+// DeployContainerGroupSchedulingStrategyInput is an input type that accepts DeployContainerGroupSchedulingStrategyArgs and DeployContainerGroupSchedulingStrategyOutput values.
+// You can construct a concrete instance of `DeployContainerGroupSchedulingStrategyInput` via:
+//
+//          DeployContainerGroupSchedulingStrategyArgs{...}
+type DeployContainerGroupSchedulingStrategyInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupSchedulingStrategyOutput() DeployContainerGroupSchedulingStrategyOutput
+	ToDeployContainerGroupSchedulingStrategyOutputWithContext(context.Context) DeployContainerGroupSchedulingStrategyOutput
+}
+
+type DeployContainerGroupSchedulingStrategyArgs struct {
+	// NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (DeployContainerGroupSchedulingStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupSchedulingStrategy)(nil)).Elem()
+}
+
+func (i DeployContainerGroupSchedulingStrategyArgs) ToDeployContainerGroupSchedulingStrategyOutput() DeployContainerGroupSchedulingStrategyOutput {
+	return i.ToDeployContainerGroupSchedulingStrategyOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupSchedulingStrategyArgs) ToDeployContainerGroupSchedulingStrategyOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupSchedulingStrategyOutput)
+}
+
+func (i DeployContainerGroupSchedulingStrategyArgs) ToDeployContainerGroupSchedulingStrategyPtrOutput() DeployContainerGroupSchedulingStrategyPtrOutput {
+	return i.ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupSchedulingStrategyArgs) ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupSchedulingStrategyOutput).ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupSchedulingStrategyPtrInput is an input type that accepts DeployContainerGroupSchedulingStrategyArgs, DeployContainerGroupSchedulingStrategyPtr and DeployContainerGroupSchedulingStrategyPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupSchedulingStrategyPtrInput` via:
+//
+//          DeployContainerGroupSchedulingStrategyArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupSchedulingStrategyPtrInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupSchedulingStrategyPtrOutput() DeployContainerGroupSchedulingStrategyPtrOutput
+	ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(context.Context) DeployContainerGroupSchedulingStrategyPtrOutput
+}
+
+type deployContainerGroupSchedulingStrategyPtrType DeployContainerGroupSchedulingStrategyArgs
+
+func DeployContainerGroupSchedulingStrategyPtr(v *DeployContainerGroupSchedulingStrategyArgs) DeployContainerGroupSchedulingStrategyPtrInput {
+	return (*deployContainerGroupSchedulingStrategyPtrType)(v)
+}
+
+func (*deployContainerGroupSchedulingStrategyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupSchedulingStrategy)(nil)).Elem()
+}
+
+func (i *deployContainerGroupSchedulingStrategyPtrType) ToDeployContainerGroupSchedulingStrategyPtrOutput() DeployContainerGroupSchedulingStrategyPtrOutput {
+	return i.ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(context.Background())
+}
+
+func (i *deployContainerGroupSchedulingStrategyPtrType) ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupSchedulingStrategyPtrOutput)
+}
+
+type DeployContainerGroupSchedulingStrategyOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupSchedulingStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupSchedulingStrategy)(nil)).Elem()
+}
+
+func (o DeployContainerGroupSchedulingStrategyOutput) ToDeployContainerGroupSchedulingStrategyOutput() DeployContainerGroupSchedulingStrategyOutput {
+	return o
+}
+
+func (o DeployContainerGroupSchedulingStrategyOutput) ToDeployContainerGroupSchedulingStrategyOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyOutput {
+	return o
+}
+
+func (o DeployContainerGroupSchedulingStrategyOutput) ToDeployContainerGroupSchedulingStrategyPtrOutput() DeployContainerGroupSchedulingStrategyPtrOutput {
+	return o.ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(context.Background())
+}
+
+func (o DeployContainerGroupSchedulingStrategyOutput) ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupSchedulingStrategy) *DeployContainerGroupSchedulingStrategy {
+		return &v
+	}).(DeployContainerGroupSchedulingStrategyPtrOutput)
+}
+
+// NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupSchedulingStrategyOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupSchedulingStrategy) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type DeployContainerGroupSchedulingStrategyPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupSchedulingStrategyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupSchedulingStrategy)(nil)).Elem()
+}
+
+func (o DeployContainerGroupSchedulingStrategyPtrOutput) ToDeployContainerGroupSchedulingStrategyPtrOutput() DeployContainerGroupSchedulingStrategyPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupSchedulingStrategyPtrOutput) ToDeployContainerGroupSchedulingStrategyPtrOutputWithContext(ctx context.Context) DeployContainerGroupSchedulingStrategyPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupSchedulingStrategyPtrOutput) Elem() DeployContainerGroupSchedulingStrategyOutput {
+	return o.ApplyT(func(v *DeployContainerGroupSchedulingStrategy) DeployContainerGroupSchedulingStrategy {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupSchedulingStrategy
+		return ret
+	}).(DeployContainerGroupSchedulingStrategyOutput)
+}
+
+// NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupSchedulingStrategyPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupSchedulingStrategy) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupServiceSetting struct {
+	// 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+	AccessType int `pulumi:"accessType"`
+	// When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+	AllowDeleteService *bool `pulumi:"allowDeleteService"`
+	// Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+	DisableService *bool `pulumi:"disableService"`
+	// Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+	HeadlessService *bool `pulumi:"headlessService"`
+	// Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+	OpenSessionAffinity *bool `pulumi:"openSessionAffinity"`
+	// Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+	ProtocolPorts []DeployContainerGroupServiceSettingProtocolPort `pulumi:"protocolPorts"`
+	// Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+	SessionAffinityTimeoutSeconds *int `pulumi:"sessionAffinityTimeoutSeconds"`
+	// subnet Id.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// DeployContainerGroupServiceSettingInput is an input type that accepts DeployContainerGroupServiceSettingArgs and DeployContainerGroupServiceSettingOutput values.
+// You can construct a concrete instance of `DeployContainerGroupServiceSettingInput` via:
+//
+//          DeployContainerGroupServiceSettingArgs{...}
+type DeployContainerGroupServiceSettingInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupServiceSettingOutput() DeployContainerGroupServiceSettingOutput
+	ToDeployContainerGroupServiceSettingOutputWithContext(context.Context) DeployContainerGroupServiceSettingOutput
+}
+
+type DeployContainerGroupServiceSettingArgs struct {
+	// 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+	AccessType pulumi.IntInput `pulumi:"accessType"`
+	// When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+	AllowDeleteService pulumi.BoolPtrInput `pulumi:"allowDeleteService"`
+	// Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+	DisableService pulumi.BoolPtrInput `pulumi:"disableService"`
+	// Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+	HeadlessService pulumi.BoolPtrInput `pulumi:"headlessService"`
+	// Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+	OpenSessionAffinity pulumi.BoolPtrInput `pulumi:"openSessionAffinity"`
+	// Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+	ProtocolPorts DeployContainerGroupServiceSettingProtocolPortArrayInput `pulumi:"protocolPorts"`
+	// Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+	SessionAffinityTimeoutSeconds pulumi.IntPtrInput `pulumi:"sessionAffinityTimeoutSeconds"`
+	// subnet Id.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (DeployContainerGroupServiceSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupServiceSetting)(nil)).Elem()
+}
+
+func (i DeployContainerGroupServiceSettingArgs) ToDeployContainerGroupServiceSettingOutput() DeployContainerGroupServiceSettingOutput {
+	return i.ToDeployContainerGroupServiceSettingOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupServiceSettingArgs) ToDeployContainerGroupServiceSettingOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupServiceSettingOutput)
+}
+
+func (i DeployContainerGroupServiceSettingArgs) ToDeployContainerGroupServiceSettingPtrOutput() DeployContainerGroupServiceSettingPtrOutput {
+	return i.ToDeployContainerGroupServiceSettingPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupServiceSettingArgs) ToDeployContainerGroupServiceSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupServiceSettingOutput).ToDeployContainerGroupServiceSettingPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupServiceSettingPtrInput is an input type that accepts DeployContainerGroupServiceSettingArgs, DeployContainerGroupServiceSettingPtr and DeployContainerGroupServiceSettingPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupServiceSettingPtrInput` via:
+//
+//          DeployContainerGroupServiceSettingArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupServiceSettingPtrInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupServiceSettingPtrOutput() DeployContainerGroupServiceSettingPtrOutput
+	ToDeployContainerGroupServiceSettingPtrOutputWithContext(context.Context) DeployContainerGroupServiceSettingPtrOutput
+}
+
+type deployContainerGroupServiceSettingPtrType DeployContainerGroupServiceSettingArgs
+
+func DeployContainerGroupServiceSettingPtr(v *DeployContainerGroupServiceSettingArgs) DeployContainerGroupServiceSettingPtrInput {
+	return (*deployContainerGroupServiceSettingPtrType)(v)
+}
+
+func (*deployContainerGroupServiceSettingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupServiceSetting)(nil)).Elem()
+}
+
+func (i *deployContainerGroupServiceSettingPtrType) ToDeployContainerGroupServiceSettingPtrOutput() DeployContainerGroupServiceSettingPtrOutput {
+	return i.ToDeployContainerGroupServiceSettingPtrOutputWithContext(context.Background())
+}
+
+func (i *deployContainerGroupServiceSettingPtrType) ToDeployContainerGroupServiceSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupServiceSettingPtrOutput)
+}
+
+type DeployContainerGroupServiceSettingOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupServiceSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupServiceSetting)(nil)).Elem()
+}
+
+func (o DeployContainerGroupServiceSettingOutput) ToDeployContainerGroupServiceSettingOutput() DeployContainerGroupServiceSettingOutput {
+	return o
+}
+
+func (o DeployContainerGroupServiceSettingOutput) ToDeployContainerGroupServiceSettingOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingOutput {
+	return o
+}
+
+func (o DeployContainerGroupServiceSettingOutput) ToDeployContainerGroupServiceSettingPtrOutput() DeployContainerGroupServiceSettingPtrOutput {
+	return o.ToDeployContainerGroupServiceSettingPtrOutputWithContext(context.Background())
+}
+
+func (o DeployContainerGroupServiceSettingOutput) ToDeployContainerGroupServiceSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupServiceSetting) *DeployContainerGroupServiceSetting {
+		return &v
+	}).(DeployContainerGroupServiceSettingPtrOutput)
+}
+
+// 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) AccessType() pulumi.IntOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) int { return v.AccessType }).(pulumi.IntOutput)
+}
+
+// When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) AllowDeleteService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) *bool { return v.AllowDeleteService }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) DisableService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) *bool { return v.DisableService }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) HeadlessService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) *bool { return v.HeadlessService }).(pulumi.BoolPtrOutput)
+}
+
+// Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) OpenSessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) *bool { return v.OpenSessionAffinity }).(pulumi.BoolPtrOutput)
+}
+
+// Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) ProtocolPorts() DeployContainerGroupServiceSettingProtocolPortArrayOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) []DeployContainerGroupServiceSettingProtocolPort {
+		return v.ProtocolPorts
+	}).(DeployContainerGroupServiceSettingProtocolPortArrayOutput)
+}
+
+// Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingOutput) SessionAffinityTimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) *int { return v.SessionAffinityTimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+// subnet Id.
+func (o DeployContainerGroupServiceSettingOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSetting) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type DeployContainerGroupServiceSettingPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupServiceSettingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupServiceSetting)(nil)).Elem()
+}
+
+func (o DeployContainerGroupServiceSettingPtrOutput) ToDeployContainerGroupServiceSettingPtrOutput() DeployContainerGroupServiceSettingPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupServiceSettingPtrOutput) ToDeployContainerGroupServiceSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupServiceSettingPtrOutput) Elem() DeployContainerGroupServiceSettingOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) DeployContainerGroupServiceSetting {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupServiceSetting
+		return ret
+	}).(DeployContainerGroupServiceSettingOutput)
+}
+
+// 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) AccessType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.AccessType
+	}).(pulumi.IntPtrOutput)
+}
+
+// When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) AllowDeleteService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowDeleteService
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) DisableService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableService
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) HeadlessService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HeadlessService
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) OpenSessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenSessionAffinity
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) ProtocolPorts() DeployContainerGroupServiceSettingProtocolPortArrayOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) []DeployContainerGroupServiceSettingProtocolPort {
+		if v == nil {
+			return nil
+		}
+		return v.ProtocolPorts
+	}).(DeployContainerGroupServiceSettingProtocolPortArrayOutput)
+}
+
+// Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployContainerGroupServiceSettingPtrOutput) SessionAffinityTimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SessionAffinityTimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// subnet Id.
+func (o DeployContainerGroupServiceSettingPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupServiceSetting) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupServiceSettingProtocolPort struct {
+	// node port.
 	NodePort *int `pulumi:"nodePort"`
-	// service port.
+	// port.
 	Port int `pulumi:"port"`
-	// TCP UDP.
+	// TCP or UDP.
 	Protocol string `pulumi:"protocol"`
 	// container port.
 	TargetPort int `pulumi:"targetPort"`
 }
 
-// ContainGroupProtocolPortInput is an input type that accepts ContainGroupProtocolPortArgs and ContainGroupProtocolPortOutput values.
-// You can construct a concrete instance of `ContainGroupProtocolPortInput` via:
+// DeployContainerGroupServiceSettingProtocolPortInput is an input type that accepts DeployContainerGroupServiceSettingProtocolPortArgs and DeployContainerGroupServiceSettingProtocolPortOutput values.
+// You can construct a concrete instance of `DeployContainerGroupServiceSettingProtocolPortInput` via:
 //
-//          ContainGroupProtocolPortArgs{...}
-type ContainGroupProtocolPortInput interface {
+//          DeployContainerGroupServiceSettingProtocolPortArgs{...}
+type DeployContainerGroupServiceSettingProtocolPortInput interface {
 	pulumi.Input
 
-	ToContainGroupProtocolPortOutput() ContainGroupProtocolPortOutput
-	ToContainGroupProtocolPortOutputWithContext(context.Context) ContainGroupProtocolPortOutput
+	ToDeployContainerGroupServiceSettingProtocolPortOutput() DeployContainerGroupServiceSettingProtocolPortOutput
+	ToDeployContainerGroupServiceSettingProtocolPortOutputWithContext(context.Context) DeployContainerGroupServiceSettingProtocolPortOutput
 }
 
-type ContainGroupProtocolPortArgs struct {
-	// host port.
+type DeployContainerGroupServiceSettingProtocolPortArgs struct {
+	// node port.
 	NodePort pulumi.IntPtrInput `pulumi:"nodePort"`
-	// service port.
+	// port.
 	Port pulumi.IntInput `pulumi:"port"`
-	// TCP UDP.
+	// TCP or UDP.
 	Protocol pulumi.StringInput `pulumi:"protocol"`
 	// container port.
 	TargetPort pulumi.IntInput `pulumi:"targetPort"`
 }
 
-func (ContainGroupProtocolPortArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupProtocolPort)(nil)).Elem()
+func (DeployContainerGroupServiceSettingProtocolPortArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupServiceSettingProtocolPort)(nil)).Elem()
 }
 
-func (i ContainGroupProtocolPortArgs) ToContainGroupProtocolPortOutput() ContainGroupProtocolPortOutput {
-	return i.ToContainGroupProtocolPortOutputWithContext(context.Background())
+func (i DeployContainerGroupServiceSettingProtocolPortArgs) ToDeployContainerGroupServiceSettingProtocolPortOutput() DeployContainerGroupServiceSettingProtocolPortOutput {
+	return i.ToDeployContainerGroupServiceSettingProtocolPortOutputWithContext(context.Background())
 }
 
-func (i ContainGroupProtocolPortArgs) ToContainGroupProtocolPortOutputWithContext(ctx context.Context) ContainGroupProtocolPortOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupProtocolPortOutput)
+func (i DeployContainerGroupServiceSettingProtocolPortArgs) ToDeployContainerGroupServiceSettingProtocolPortOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingProtocolPortOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupServiceSettingProtocolPortOutput)
 }
 
-// ContainGroupProtocolPortArrayInput is an input type that accepts ContainGroupProtocolPortArray and ContainGroupProtocolPortArrayOutput values.
-// You can construct a concrete instance of `ContainGroupProtocolPortArrayInput` via:
+// DeployContainerGroupServiceSettingProtocolPortArrayInput is an input type that accepts DeployContainerGroupServiceSettingProtocolPortArray and DeployContainerGroupServiceSettingProtocolPortArrayOutput values.
+// You can construct a concrete instance of `DeployContainerGroupServiceSettingProtocolPortArrayInput` via:
 //
-//          ContainGroupProtocolPortArray{ ContainGroupProtocolPortArgs{...} }
-type ContainGroupProtocolPortArrayInput interface {
+//          DeployContainerGroupServiceSettingProtocolPortArray{ DeployContainerGroupServiceSettingProtocolPortArgs{...} }
+type DeployContainerGroupServiceSettingProtocolPortArrayInput interface {
 	pulumi.Input
 
-	ToContainGroupProtocolPortArrayOutput() ContainGroupProtocolPortArrayOutput
-	ToContainGroupProtocolPortArrayOutputWithContext(context.Context) ContainGroupProtocolPortArrayOutput
+	ToDeployContainerGroupServiceSettingProtocolPortArrayOutput() DeployContainerGroupServiceSettingProtocolPortArrayOutput
+	ToDeployContainerGroupServiceSettingProtocolPortArrayOutputWithContext(context.Context) DeployContainerGroupServiceSettingProtocolPortArrayOutput
 }
 
-type ContainGroupProtocolPortArray []ContainGroupProtocolPortInput
+type DeployContainerGroupServiceSettingProtocolPortArray []DeployContainerGroupServiceSettingProtocolPortInput
 
-func (ContainGroupProtocolPortArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupProtocolPort)(nil)).Elem()
+func (DeployContainerGroupServiceSettingProtocolPortArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupServiceSettingProtocolPort)(nil)).Elem()
 }
 
-func (i ContainGroupProtocolPortArray) ToContainGroupProtocolPortArrayOutput() ContainGroupProtocolPortArrayOutput {
-	return i.ToContainGroupProtocolPortArrayOutputWithContext(context.Background())
+func (i DeployContainerGroupServiceSettingProtocolPortArray) ToDeployContainerGroupServiceSettingProtocolPortArrayOutput() DeployContainerGroupServiceSettingProtocolPortArrayOutput {
+	return i.ToDeployContainerGroupServiceSettingProtocolPortArrayOutputWithContext(context.Background())
 }
 
-func (i ContainGroupProtocolPortArray) ToContainGroupProtocolPortArrayOutputWithContext(ctx context.Context) ContainGroupProtocolPortArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainGroupProtocolPortArrayOutput)
+func (i DeployContainerGroupServiceSettingProtocolPortArray) ToDeployContainerGroupServiceSettingProtocolPortArrayOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingProtocolPortArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupServiceSettingProtocolPortArrayOutput)
 }
 
-type ContainGroupProtocolPortOutput struct{ *pulumi.OutputState }
+type DeployContainerGroupServiceSettingProtocolPortOutput struct{ *pulumi.OutputState }
 
-func (ContainGroupProtocolPortOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ContainGroupProtocolPort)(nil)).Elem()
+func (DeployContainerGroupServiceSettingProtocolPortOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupServiceSettingProtocolPort)(nil)).Elem()
 }
 
-func (o ContainGroupProtocolPortOutput) ToContainGroupProtocolPortOutput() ContainGroupProtocolPortOutput {
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) ToDeployContainerGroupServiceSettingProtocolPortOutput() DeployContainerGroupServiceSettingProtocolPortOutput {
 	return o
 }
 
-func (o ContainGroupProtocolPortOutput) ToContainGroupProtocolPortOutputWithContext(ctx context.Context) ContainGroupProtocolPortOutput {
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) ToDeployContainerGroupServiceSettingProtocolPortOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingProtocolPortOutput {
 	return o
 }
 
-// host port.
-func (o ContainGroupProtocolPortOutput) NodePort() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ContainGroupProtocolPort) *int { return v.NodePort }).(pulumi.IntPtrOutput)
+// node port.
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) NodePort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSettingProtocolPort) *int { return v.NodePort }).(pulumi.IntPtrOutput)
 }
 
-// service port.
-func (o ContainGroupProtocolPortOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v ContainGroupProtocolPort) int { return v.Port }).(pulumi.IntOutput)
+// port.
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSettingProtocolPort) int { return v.Port }).(pulumi.IntOutput)
 }
 
-// TCP UDP.
-func (o ContainGroupProtocolPortOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v ContainGroupProtocolPort) string { return v.Protocol }).(pulumi.StringOutput)
+// TCP or UDP.
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSettingProtocolPort) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 // container port.
-func (o ContainGroupProtocolPortOutput) TargetPort() pulumi.IntOutput {
-	return o.ApplyT(func(v ContainGroupProtocolPort) int { return v.TargetPort }).(pulumi.IntOutput)
+func (o DeployContainerGroupServiceSettingProtocolPortOutput) TargetPort() pulumi.IntOutput {
+	return o.ApplyT(func(v DeployContainerGroupServiceSettingProtocolPort) int { return v.TargetPort }).(pulumi.IntOutput)
 }
 
-type ContainGroupProtocolPortArrayOutput struct{ *pulumi.OutputState }
+type DeployContainerGroupServiceSettingProtocolPortArrayOutput struct{ *pulumi.OutputState }
 
-func (ContainGroupProtocolPortArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ContainGroupProtocolPort)(nil)).Elem()
+func (DeployContainerGroupServiceSettingProtocolPortArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupServiceSettingProtocolPort)(nil)).Elem()
 }
 
-func (o ContainGroupProtocolPortArrayOutput) ToContainGroupProtocolPortArrayOutput() ContainGroupProtocolPortArrayOutput {
+func (o DeployContainerGroupServiceSettingProtocolPortArrayOutput) ToDeployContainerGroupServiceSettingProtocolPortArrayOutput() DeployContainerGroupServiceSettingProtocolPortArrayOutput {
 	return o
 }
 
-func (o ContainGroupProtocolPortArrayOutput) ToContainGroupProtocolPortArrayOutputWithContext(ctx context.Context) ContainGroupProtocolPortArrayOutput {
+func (o DeployContainerGroupServiceSettingProtocolPortArrayOutput) ToDeployContainerGroupServiceSettingProtocolPortArrayOutputWithContext(ctx context.Context) DeployContainerGroupServiceSettingProtocolPortArrayOutput {
 	return o
 }
 
-func (o ContainGroupProtocolPortArrayOutput) Index(i pulumi.IntInput) ContainGroupProtocolPortOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainGroupProtocolPort {
-		return vs[0].([]ContainGroupProtocolPort)[vs[1].(int)]
-	}).(ContainGroupProtocolPortOutput)
+func (o DeployContainerGroupServiceSettingProtocolPortArrayOutput) Index(i pulumi.IntInput) DeployContainerGroupServiceSettingProtocolPortOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployContainerGroupServiceSettingProtocolPort {
+		return vs[0].([]DeployContainerGroupServiceSettingProtocolPort)[vs[1].(int)]
+	}).(DeployContainerGroupServiceSettingProtocolPortOutput)
+}
+
+type DeployContainerGroupVolumeInfoList struct {
+	// volume config.
+	VolumeConfig *string `pulumi:"volumeConfig"`
+	// volume name.
+	VolumeName string `pulumi:"volumeName"`
+	// volume type.
+	VolumeType string `pulumi:"volumeType"`
+}
+
+// DeployContainerGroupVolumeInfoListInput is an input type that accepts DeployContainerGroupVolumeInfoListArgs and DeployContainerGroupVolumeInfoListOutput values.
+// You can construct a concrete instance of `DeployContainerGroupVolumeInfoListInput` via:
+//
+//          DeployContainerGroupVolumeInfoListArgs{...}
+type DeployContainerGroupVolumeInfoListInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupVolumeInfoListOutput() DeployContainerGroupVolumeInfoListOutput
+	ToDeployContainerGroupVolumeInfoListOutputWithContext(context.Context) DeployContainerGroupVolumeInfoListOutput
+}
+
+type DeployContainerGroupVolumeInfoListArgs struct {
+	// volume config.
+	VolumeConfig pulumi.StringPtrInput `pulumi:"volumeConfig"`
+	// volume name.
+	VolumeName pulumi.StringInput `pulumi:"volumeName"`
+	// volume type.
+	VolumeType pulumi.StringInput `pulumi:"volumeType"`
+}
+
+func (DeployContainerGroupVolumeInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupVolumeInfoList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupVolumeInfoListArgs) ToDeployContainerGroupVolumeInfoListOutput() DeployContainerGroupVolumeInfoListOutput {
+	return i.ToDeployContainerGroupVolumeInfoListOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupVolumeInfoListArgs) ToDeployContainerGroupVolumeInfoListOutputWithContext(ctx context.Context) DeployContainerGroupVolumeInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupVolumeInfoListOutput)
+}
+
+// DeployContainerGroupVolumeInfoListArrayInput is an input type that accepts DeployContainerGroupVolumeInfoListArray and DeployContainerGroupVolumeInfoListArrayOutput values.
+// You can construct a concrete instance of `DeployContainerGroupVolumeInfoListArrayInput` via:
+//
+//          DeployContainerGroupVolumeInfoListArray{ DeployContainerGroupVolumeInfoListArgs{...} }
+type DeployContainerGroupVolumeInfoListArrayInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupVolumeInfoListArrayOutput() DeployContainerGroupVolumeInfoListArrayOutput
+	ToDeployContainerGroupVolumeInfoListArrayOutputWithContext(context.Context) DeployContainerGroupVolumeInfoListArrayOutput
+}
+
+type DeployContainerGroupVolumeInfoListArray []DeployContainerGroupVolumeInfoListInput
+
+func (DeployContainerGroupVolumeInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupVolumeInfoList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupVolumeInfoListArray) ToDeployContainerGroupVolumeInfoListArrayOutput() DeployContainerGroupVolumeInfoListArrayOutput {
+	return i.ToDeployContainerGroupVolumeInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupVolumeInfoListArray) ToDeployContainerGroupVolumeInfoListArrayOutputWithContext(ctx context.Context) DeployContainerGroupVolumeInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupVolumeInfoListArrayOutput)
+}
+
+type DeployContainerGroupVolumeInfoListOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupVolumeInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupVolumeInfoList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupVolumeInfoListOutput) ToDeployContainerGroupVolumeInfoListOutput() DeployContainerGroupVolumeInfoListOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeInfoListOutput) ToDeployContainerGroupVolumeInfoListOutputWithContext(ctx context.Context) DeployContainerGroupVolumeInfoListOutput {
+	return o
+}
+
+// volume config.
+func (o DeployContainerGroupVolumeInfoListOutput) VolumeConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeInfoList) *string { return v.VolumeConfig }).(pulumi.StringPtrOutput)
+}
+
+// volume name.
+func (o DeployContainerGroupVolumeInfoListOutput) VolumeName() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeInfoList) string { return v.VolumeName }).(pulumi.StringOutput)
+}
+
+// volume type.
+func (o DeployContainerGroupVolumeInfoListOutput) VolumeType() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeInfoList) string { return v.VolumeType }).(pulumi.StringOutput)
+}
+
+type DeployContainerGroupVolumeInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupVolumeInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupVolumeInfoList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupVolumeInfoListArrayOutput) ToDeployContainerGroupVolumeInfoListArrayOutput() DeployContainerGroupVolumeInfoListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeInfoListArrayOutput) ToDeployContainerGroupVolumeInfoListArrayOutputWithContext(ctx context.Context) DeployContainerGroupVolumeInfoListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeInfoListArrayOutput) Index(i pulumi.IntInput) DeployContainerGroupVolumeInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployContainerGroupVolumeInfoList {
+		return vs[0].([]DeployContainerGroupVolumeInfoList)[vs[1].(int)]
+	}).(DeployContainerGroupVolumeInfoListOutput)
+}
+
+type DeployContainerGroupVolumeMountInfoList struct {
+	// Read and write access mode. 1: Read-only. 2: Read-write.
+	ReadOrWrite *string `pulumi:"readOrWrite"`
+	// mount volume name.
+	VolumeMountName string `pulumi:"volumeMountName"`
+	// mount path.
+	VolumeMountPath string `pulumi:"volumeMountPath"`
+	// mount subPath.
+	VolumeMountSubPath *string `pulumi:"volumeMountSubPath"`
+}
+
+// DeployContainerGroupVolumeMountInfoListInput is an input type that accepts DeployContainerGroupVolumeMountInfoListArgs and DeployContainerGroupVolumeMountInfoListOutput values.
+// You can construct a concrete instance of `DeployContainerGroupVolumeMountInfoListInput` via:
+//
+//          DeployContainerGroupVolumeMountInfoListArgs{...}
+type DeployContainerGroupVolumeMountInfoListInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupVolumeMountInfoListOutput() DeployContainerGroupVolumeMountInfoListOutput
+	ToDeployContainerGroupVolumeMountInfoListOutputWithContext(context.Context) DeployContainerGroupVolumeMountInfoListOutput
+}
+
+type DeployContainerGroupVolumeMountInfoListArgs struct {
+	// Read and write access mode. 1: Read-only. 2: Read-write.
+	ReadOrWrite pulumi.StringPtrInput `pulumi:"readOrWrite"`
+	// mount volume name.
+	VolumeMountName pulumi.StringInput `pulumi:"volumeMountName"`
+	// mount path.
+	VolumeMountPath pulumi.StringInput `pulumi:"volumeMountPath"`
+	// mount subPath.
+	VolumeMountSubPath pulumi.StringPtrInput `pulumi:"volumeMountSubPath"`
+}
+
+func (DeployContainerGroupVolumeMountInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupVolumeMountInfoList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupVolumeMountInfoListArgs) ToDeployContainerGroupVolumeMountInfoListOutput() DeployContainerGroupVolumeMountInfoListOutput {
+	return i.ToDeployContainerGroupVolumeMountInfoListOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupVolumeMountInfoListArgs) ToDeployContainerGroupVolumeMountInfoListOutputWithContext(ctx context.Context) DeployContainerGroupVolumeMountInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupVolumeMountInfoListOutput)
+}
+
+// DeployContainerGroupVolumeMountInfoListArrayInput is an input type that accepts DeployContainerGroupVolumeMountInfoListArray and DeployContainerGroupVolumeMountInfoListArrayOutput values.
+// You can construct a concrete instance of `DeployContainerGroupVolumeMountInfoListArrayInput` via:
+//
+//          DeployContainerGroupVolumeMountInfoListArray{ DeployContainerGroupVolumeMountInfoListArgs{...} }
+type DeployContainerGroupVolumeMountInfoListArrayInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupVolumeMountInfoListArrayOutput() DeployContainerGroupVolumeMountInfoListArrayOutput
+	ToDeployContainerGroupVolumeMountInfoListArrayOutputWithContext(context.Context) DeployContainerGroupVolumeMountInfoListArrayOutput
+}
+
+type DeployContainerGroupVolumeMountInfoListArray []DeployContainerGroupVolumeMountInfoListInput
+
+func (DeployContainerGroupVolumeMountInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupVolumeMountInfoList)(nil)).Elem()
+}
+
+func (i DeployContainerGroupVolumeMountInfoListArray) ToDeployContainerGroupVolumeMountInfoListArrayOutput() DeployContainerGroupVolumeMountInfoListArrayOutput {
+	return i.ToDeployContainerGroupVolumeMountInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupVolumeMountInfoListArray) ToDeployContainerGroupVolumeMountInfoListArrayOutputWithContext(ctx context.Context) DeployContainerGroupVolumeMountInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupVolumeMountInfoListArrayOutput)
+}
+
+type DeployContainerGroupVolumeMountInfoListOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupVolumeMountInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupVolumeMountInfoList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupVolumeMountInfoListOutput) ToDeployContainerGroupVolumeMountInfoListOutput() DeployContainerGroupVolumeMountInfoListOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeMountInfoListOutput) ToDeployContainerGroupVolumeMountInfoListOutputWithContext(ctx context.Context) DeployContainerGroupVolumeMountInfoListOutput {
+	return o
+}
+
+// Read and write access mode. 1: Read-only. 2: Read-write.
+func (o DeployContainerGroupVolumeMountInfoListOutput) ReadOrWrite() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeMountInfoList) *string { return v.ReadOrWrite }).(pulumi.StringPtrOutput)
+}
+
+// mount volume name.
+func (o DeployContainerGroupVolumeMountInfoListOutput) VolumeMountName() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeMountInfoList) string { return v.VolumeMountName }).(pulumi.StringOutput)
+}
+
+// mount path.
+func (o DeployContainerGroupVolumeMountInfoListOutput) VolumeMountPath() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeMountInfoList) string { return v.VolumeMountPath }).(pulumi.StringOutput)
+}
+
+// mount subPath.
+func (o DeployContainerGroupVolumeMountInfoListOutput) VolumeMountSubPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupVolumeMountInfoList) *string { return v.VolumeMountSubPath }).(pulumi.StringPtrOutput)
+}
+
+type DeployContainerGroupVolumeMountInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupVolumeMountInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployContainerGroupVolumeMountInfoList)(nil)).Elem()
+}
+
+func (o DeployContainerGroupVolumeMountInfoListArrayOutput) ToDeployContainerGroupVolumeMountInfoListArrayOutput() DeployContainerGroupVolumeMountInfoListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeMountInfoListArrayOutput) ToDeployContainerGroupVolumeMountInfoListArrayOutputWithContext(ctx context.Context) DeployContainerGroupVolumeMountInfoListArrayOutput {
+	return o
+}
+
+func (o DeployContainerGroupVolumeMountInfoListArrayOutput) Index(i pulumi.IntInput) DeployContainerGroupVolumeMountInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployContainerGroupVolumeMountInfoList {
+		return vs[0].([]DeployContainerGroupVolumeMountInfoList)[vs[1].(int)]
+	}).(DeployContainerGroupVolumeMountInfoListOutput)
+}
+
+type DeployContainerGroupWarmupSetting struct {
+	// Preheating curvature, with a value between 1 and 5.
+	Curvature *int `pulumi:"curvature"`
+	// Whether to enable preheating.
+	Enabled *bool `pulumi:"enabled"`
+	// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+	EnabledProtection *bool `pulumi:"enabledProtection"`
+	// warmup time.
+	WarmupTime *int `pulumi:"warmupTime"`
+}
+
+// DeployContainerGroupWarmupSettingInput is an input type that accepts DeployContainerGroupWarmupSettingArgs and DeployContainerGroupWarmupSettingOutput values.
+// You can construct a concrete instance of `DeployContainerGroupWarmupSettingInput` via:
+//
+//          DeployContainerGroupWarmupSettingArgs{...}
+type DeployContainerGroupWarmupSettingInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupWarmupSettingOutput() DeployContainerGroupWarmupSettingOutput
+	ToDeployContainerGroupWarmupSettingOutputWithContext(context.Context) DeployContainerGroupWarmupSettingOutput
+}
+
+type DeployContainerGroupWarmupSettingArgs struct {
+	// Preheating curvature, with a value between 1 and 5.
+	Curvature pulumi.IntPtrInput `pulumi:"curvature"`
+	// Whether to enable preheating.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+	EnabledProtection pulumi.BoolPtrInput `pulumi:"enabledProtection"`
+	// warmup time.
+	WarmupTime pulumi.IntPtrInput `pulumi:"warmupTime"`
+}
+
+func (DeployContainerGroupWarmupSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupWarmupSetting)(nil)).Elem()
+}
+
+func (i DeployContainerGroupWarmupSettingArgs) ToDeployContainerGroupWarmupSettingOutput() DeployContainerGroupWarmupSettingOutput {
+	return i.ToDeployContainerGroupWarmupSettingOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupWarmupSettingArgs) ToDeployContainerGroupWarmupSettingOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupWarmupSettingOutput)
+}
+
+func (i DeployContainerGroupWarmupSettingArgs) ToDeployContainerGroupWarmupSettingPtrOutput() DeployContainerGroupWarmupSettingPtrOutput {
+	return i.ToDeployContainerGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (i DeployContainerGroupWarmupSettingArgs) ToDeployContainerGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupWarmupSettingOutput).ToDeployContainerGroupWarmupSettingPtrOutputWithContext(ctx)
+}
+
+// DeployContainerGroupWarmupSettingPtrInput is an input type that accepts DeployContainerGroupWarmupSettingArgs, DeployContainerGroupWarmupSettingPtr and DeployContainerGroupWarmupSettingPtrOutput values.
+// You can construct a concrete instance of `DeployContainerGroupWarmupSettingPtrInput` via:
+//
+//          DeployContainerGroupWarmupSettingArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployContainerGroupWarmupSettingPtrInput interface {
+	pulumi.Input
+
+	ToDeployContainerGroupWarmupSettingPtrOutput() DeployContainerGroupWarmupSettingPtrOutput
+	ToDeployContainerGroupWarmupSettingPtrOutputWithContext(context.Context) DeployContainerGroupWarmupSettingPtrOutput
+}
+
+type deployContainerGroupWarmupSettingPtrType DeployContainerGroupWarmupSettingArgs
+
+func DeployContainerGroupWarmupSettingPtr(v *DeployContainerGroupWarmupSettingArgs) DeployContainerGroupWarmupSettingPtrInput {
+	return (*deployContainerGroupWarmupSettingPtrType)(v)
+}
+
+func (*deployContainerGroupWarmupSettingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupWarmupSetting)(nil)).Elem()
+}
+
+func (i *deployContainerGroupWarmupSettingPtrType) ToDeployContainerGroupWarmupSettingPtrOutput() DeployContainerGroupWarmupSettingPtrOutput {
+	return i.ToDeployContainerGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (i *deployContainerGroupWarmupSettingPtrType) ToDeployContainerGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployContainerGroupWarmupSettingPtrOutput)
+}
+
+type DeployContainerGroupWarmupSettingOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupWarmupSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployContainerGroupWarmupSetting)(nil)).Elem()
+}
+
+func (o DeployContainerGroupWarmupSettingOutput) ToDeployContainerGroupWarmupSettingOutput() DeployContainerGroupWarmupSettingOutput {
+	return o
+}
+
+func (o DeployContainerGroupWarmupSettingOutput) ToDeployContainerGroupWarmupSettingOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingOutput {
+	return o
+}
+
+func (o DeployContainerGroupWarmupSettingOutput) ToDeployContainerGroupWarmupSettingPtrOutput() DeployContainerGroupWarmupSettingPtrOutput {
+	return o.ToDeployContainerGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (o DeployContainerGroupWarmupSettingOutput) ToDeployContainerGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployContainerGroupWarmupSetting) *DeployContainerGroupWarmupSetting {
+		return &v
+	}).(DeployContainerGroupWarmupSettingPtrOutput)
+}
+
+// Preheating curvature, with a value between 1 and 5.
+func (o DeployContainerGroupWarmupSettingOutput) Curvature() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupWarmupSetting) *int { return v.Curvature }).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable preheating.
+func (o DeployContainerGroupWarmupSettingOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupWarmupSetting) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+func (o DeployContainerGroupWarmupSettingOutput) EnabledProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupWarmupSetting) *bool { return v.EnabledProtection }).(pulumi.BoolPtrOutput)
+}
+
+// warmup time.
+func (o DeployContainerGroupWarmupSettingOutput) WarmupTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployContainerGroupWarmupSetting) *int { return v.WarmupTime }).(pulumi.IntPtrOutput)
+}
+
+type DeployContainerGroupWarmupSettingPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployContainerGroupWarmupSettingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployContainerGroupWarmupSetting)(nil)).Elem()
+}
+
+func (o DeployContainerGroupWarmupSettingPtrOutput) ToDeployContainerGroupWarmupSettingPtrOutput() DeployContainerGroupWarmupSettingPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupWarmupSettingPtrOutput) ToDeployContainerGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployContainerGroupWarmupSettingPtrOutput {
+	return o
+}
+
+func (o DeployContainerGroupWarmupSettingPtrOutput) Elem() DeployContainerGroupWarmupSettingOutput {
+	return o.ApplyT(func(v *DeployContainerGroupWarmupSetting) DeployContainerGroupWarmupSetting {
+		if v != nil {
+			return *v
+		}
+		var ret DeployContainerGroupWarmupSetting
+		return ret
+	}).(DeployContainerGroupWarmupSettingOutput)
+}
+
+// Preheating curvature, with a value between 1 and 5.
+func (o DeployContainerGroupWarmupSettingPtrOutput) Curvature() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupWarmupSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Curvature
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable preheating.
+func (o DeployContainerGroupWarmupSettingPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupWarmupSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+func (o DeployContainerGroupWarmupSettingPtrOutput) EnabledProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupWarmupSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnabledProtection
+	}).(pulumi.BoolPtrOutput)
+}
+
+// warmup time.
+func (o DeployContainerGroupWarmupSettingPtrOutput) WarmupTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployContainerGroupWarmupSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return v.WarmupTime
+	}).(pulumi.IntPtrOutput)
+}
+
+type DeployVmGroupAgentProfileList struct {
+	// Agent type.
+	AgentType *string `pulumi:"agentType"`
+	// Agent version.
+	AgentVersion *string `pulumi:"agentVersion"`
+}
+
+// DeployVmGroupAgentProfileListInput is an input type that accepts DeployVmGroupAgentProfileListArgs and DeployVmGroupAgentProfileListOutput values.
+// You can construct a concrete instance of `DeployVmGroupAgentProfileListInput` via:
+//
+//          DeployVmGroupAgentProfileListArgs{...}
+type DeployVmGroupAgentProfileListInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupAgentProfileListOutput() DeployVmGroupAgentProfileListOutput
+	ToDeployVmGroupAgentProfileListOutputWithContext(context.Context) DeployVmGroupAgentProfileListOutput
+}
+
+type DeployVmGroupAgentProfileListArgs struct {
+	// Agent type.
+	AgentType pulumi.StringPtrInput `pulumi:"agentType"`
+	// Agent version.
+	AgentVersion pulumi.StringPtrInput `pulumi:"agentVersion"`
+}
+
+func (DeployVmGroupAgentProfileListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupAgentProfileList)(nil)).Elem()
+}
+
+func (i DeployVmGroupAgentProfileListArgs) ToDeployVmGroupAgentProfileListOutput() DeployVmGroupAgentProfileListOutput {
+	return i.ToDeployVmGroupAgentProfileListOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupAgentProfileListArgs) ToDeployVmGroupAgentProfileListOutputWithContext(ctx context.Context) DeployVmGroupAgentProfileListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupAgentProfileListOutput)
+}
+
+// DeployVmGroupAgentProfileListArrayInput is an input type that accepts DeployVmGroupAgentProfileListArray and DeployVmGroupAgentProfileListArrayOutput values.
+// You can construct a concrete instance of `DeployVmGroupAgentProfileListArrayInput` via:
+//
+//          DeployVmGroupAgentProfileListArray{ DeployVmGroupAgentProfileListArgs{...} }
+type DeployVmGroupAgentProfileListArrayInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupAgentProfileListArrayOutput() DeployVmGroupAgentProfileListArrayOutput
+	ToDeployVmGroupAgentProfileListArrayOutputWithContext(context.Context) DeployVmGroupAgentProfileListArrayOutput
+}
+
+type DeployVmGroupAgentProfileListArray []DeployVmGroupAgentProfileListInput
+
+func (DeployVmGroupAgentProfileListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployVmGroupAgentProfileList)(nil)).Elem()
+}
+
+func (i DeployVmGroupAgentProfileListArray) ToDeployVmGroupAgentProfileListArrayOutput() DeployVmGroupAgentProfileListArrayOutput {
+	return i.ToDeployVmGroupAgentProfileListArrayOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupAgentProfileListArray) ToDeployVmGroupAgentProfileListArrayOutputWithContext(ctx context.Context) DeployVmGroupAgentProfileListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupAgentProfileListArrayOutput)
+}
+
+type DeployVmGroupAgentProfileListOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupAgentProfileListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupAgentProfileList)(nil)).Elem()
+}
+
+func (o DeployVmGroupAgentProfileListOutput) ToDeployVmGroupAgentProfileListOutput() DeployVmGroupAgentProfileListOutput {
+	return o
+}
+
+func (o DeployVmGroupAgentProfileListOutput) ToDeployVmGroupAgentProfileListOutputWithContext(ctx context.Context) DeployVmGroupAgentProfileListOutput {
+	return o
+}
+
+// Agent type.
+func (o DeployVmGroupAgentProfileListOutput) AgentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupAgentProfileList) *string { return v.AgentType }).(pulumi.StringPtrOutput)
+}
+
+// Agent version.
+func (o DeployVmGroupAgentProfileListOutput) AgentVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupAgentProfileList) *string { return v.AgentVersion }).(pulumi.StringPtrOutput)
+}
+
+type DeployVmGroupAgentProfileListArrayOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupAgentProfileListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeployVmGroupAgentProfileList)(nil)).Elem()
+}
+
+func (o DeployVmGroupAgentProfileListArrayOutput) ToDeployVmGroupAgentProfileListArrayOutput() DeployVmGroupAgentProfileListArrayOutput {
+	return o
+}
+
+func (o DeployVmGroupAgentProfileListArrayOutput) ToDeployVmGroupAgentProfileListArrayOutputWithContext(ctx context.Context) DeployVmGroupAgentProfileListArrayOutput {
+	return o
+}
+
+func (o DeployVmGroupAgentProfileListArrayOutput) Index(i pulumi.IntInput) DeployVmGroupAgentProfileListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeployVmGroupAgentProfileList {
+		return vs[0].([]DeployVmGroupAgentProfileList)[vs[1].(int)]
+	}).(DeployVmGroupAgentProfileListOutput)
+}
+
+type DeployVmGroupHealthCheckSettings struct {
+	// Survival health check. Note: This field may return null, indicating that no valid value was found.
+	LivenessProbe *DeployVmGroupHealthCheckSettingsLivenessProbe `pulumi:"livenessProbe"`
+	// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+	ReadinessProbe *DeployVmGroupHealthCheckSettingsReadinessProbe `pulumi:"readinessProbe"`
+}
+
+// DeployVmGroupHealthCheckSettingsInput is an input type that accepts DeployVmGroupHealthCheckSettingsArgs and DeployVmGroupHealthCheckSettingsOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsArgs{...}
+type DeployVmGroupHealthCheckSettingsInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsOutput() DeployVmGroupHealthCheckSettingsOutput
+	ToDeployVmGroupHealthCheckSettingsOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsOutput
+}
+
+type DeployVmGroupHealthCheckSettingsArgs struct {
+	// Survival health check. Note: This field may return null, indicating that no valid value was found.
+	LivenessProbe DeployVmGroupHealthCheckSettingsLivenessProbePtrInput `pulumi:"livenessProbe"`
+	// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+	ReadinessProbe DeployVmGroupHealthCheckSettingsReadinessProbePtrInput `pulumi:"readinessProbe"`
+}
+
+func (DeployVmGroupHealthCheckSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (i DeployVmGroupHealthCheckSettingsArgs) ToDeployVmGroupHealthCheckSettingsOutput() DeployVmGroupHealthCheckSettingsOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsArgs) ToDeployVmGroupHealthCheckSettingsOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsOutput)
+}
+
+func (i DeployVmGroupHealthCheckSettingsArgs) ToDeployVmGroupHealthCheckSettingsPtrOutput() DeployVmGroupHealthCheckSettingsPtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsArgs) ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsOutput).ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(ctx)
+}
+
+// DeployVmGroupHealthCheckSettingsPtrInput is an input type that accepts DeployVmGroupHealthCheckSettingsArgs, DeployVmGroupHealthCheckSettingsPtr and DeployVmGroupHealthCheckSettingsPtrOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsPtrInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployVmGroupHealthCheckSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsPtrOutput() DeployVmGroupHealthCheckSettingsPtrOutput
+	ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsPtrOutput
+}
+
+type deployVmGroupHealthCheckSettingsPtrType DeployVmGroupHealthCheckSettingsArgs
+
+func DeployVmGroupHealthCheckSettingsPtr(v *DeployVmGroupHealthCheckSettingsArgs) DeployVmGroupHealthCheckSettingsPtrInput {
+	return (*deployVmGroupHealthCheckSettingsPtrType)(v)
+}
+
+func (*deployVmGroupHealthCheckSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (i *deployVmGroupHealthCheckSettingsPtrType) ToDeployVmGroupHealthCheckSettingsPtrOutput() DeployVmGroupHealthCheckSettingsPtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deployVmGroupHealthCheckSettingsPtrType) ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsPtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsOutput) ToDeployVmGroupHealthCheckSettingsOutput() DeployVmGroupHealthCheckSettingsOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsOutput) ToDeployVmGroupHealthCheckSettingsOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsOutput) ToDeployVmGroupHealthCheckSettingsPtrOutput() DeployVmGroupHealthCheckSettingsPtrOutput {
+	return o.ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeployVmGroupHealthCheckSettingsOutput) ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployVmGroupHealthCheckSettings) *DeployVmGroupHealthCheckSettings {
+		return &v
+	}).(DeployVmGroupHealthCheckSettingsPtrOutput)
+}
+
+// Survival health check. Note: This field may return null, indicating that no valid value was found.
+func (o DeployVmGroupHealthCheckSettingsOutput) LivenessProbe() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettings) *DeployVmGroupHealthCheckSettingsLivenessProbe {
+		return v.LivenessProbe
+	}).(DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput)
+}
+
+// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsOutput) ReadinessProbe() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettings) *DeployVmGroupHealthCheckSettingsReadinessProbe {
+		return v.ReadinessProbe
+	}).(DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettings)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsPtrOutput) ToDeployVmGroupHealthCheckSettingsPtrOutput() DeployVmGroupHealthCheckSettingsPtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsPtrOutput) ToDeployVmGroupHealthCheckSettingsPtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsPtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsPtrOutput) Elem() DeployVmGroupHealthCheckSettingsOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettings) DeployVmGroupHealthCheckSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeployVmGroupHealthCheckSettings
+		return ret
+	}).(DeployVmGroupHealthCheckSettingsOutput)
+}
+
+// Survival health check. Note: This field may return null, indicating that no valid value was found.
+func (o DeployVmGroupHealthCheckSettingsPtrOutput) LivenessProbe() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettings) *DeployVmGroupHealthCheckSettingsLivenessProbe {
+		if v == nil {
+			return nil
+		}
+		return v.LivenessProbe
+	}).(DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput)
+}
+
+// Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsPtrOutput) ReadinessProbe() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettings) *DeployVmGroupHealthCheckSettingsReadinessProbe {
+		if v == nil {
+			return nil
+		}
+		return v.ReadinessProbe
+	}).(DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsLivenessProbe struct {
+	// Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+	ActionType string `pulumi:"actionType"`
+	// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Commands []string `pulumi:"commands"`
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `pulumi:"path"`
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+	Port *int `pulumi:"port"`
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+	Scheme *string `pulumi:"scheme"`
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+	SuccessThreshold *int `pulumi:"successThreshold"`
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `pulumi:"type"`
+}
+
+// DeployVmGroupHealthCheckSettingsLivenessProbeInput is an input type that accepts DeployVmGroupHealthCheckSettingsLivenessProbeArgs and DeployVmGroupHealthCheckSettingsLivenessProbeOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsLivenessProbeInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsLivenessProbeArgs{...}
+type DeployVmGroupHealthCheckSettingsLivenessProbeInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsLivenessProbeOutput() DeployVmGroupHealthCheckSettingsLivenessProbeOutput
+	ToDeployVmGroupHealthCheckSettingsLivenessProbeOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsLivenessProbeOutput
+}
+
+type DeployVmGroupHealthCheckSettingsLivenessProbeArgs struct {
+	// Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+	ActionType pulumi.StringInput `pulumi:"actionType"`
+	// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Commands pulumi.StringArrayInput `pulumi:"commands"`
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (DeployVmGroupHealthCheckSettingsLivenessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (i DeployVmGroupHealthCheckSettingsLivenessProbeArgs) ToDeployVmGroupHealthCheckSettingsLivenessProbeOutput() DeployVmGroupHealthCheckSettingsLivenessProbeOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsLivenessProbeOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsLivenessProbeArgs) ToDeployVmGroupHealthCheckSettingsLivenessProbeOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsLivenessProbeOutput)
+}
+
+func (i DeployVmGroupHealthCheckSettingsLivenessProbeArgs) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutput() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsLivenessProbeArgs) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsLivenessProbeOutput).ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx)
+}
+
+// DeployVmGroupHealthCheckSettingsLivenessProbePtrInput is an input type that accepts DeployVmGroupHealthCheckSettingsLivenessProbeArgs, DeployVmGroupHealthCheckSettingsLivenessProbePtr and DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsLivenessProbePtrInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsLivenessProbeArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployVmGroupHealthCheckSettingsLivenessProbePtrInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutput() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput
+	ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput
+}
+
+type deployVmGroupHealthCheckSettingsLivenessProbePtrType DeployVmGroupHealthCheckSettingsLivenessProbeArgs
+
+func DeployVmGroupHealthCheckSettingsLivenessProbePtr(v *DeployVmGroupHealthCheckSettingsLivenessProbeArgs) DeployVmGroupHealthCheckSettingsLivenessProbePtrInput {
+	return (*deployVmGroupHealthCheckSettingsLivenessProbePtrType)(v)
+}
+
+func (*deployVmGroupHealthCheckSettingsLivenessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (i *deployVmGroupHealthCheckSettingsLivenessProbePtrType) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutput() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (i *deployVmGroupHealthCheckSettingsLivenessProbePtrType) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsLivenessProbeOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbeOutput() DeployVmGroupHealthCheckSettingsLivenessProbeOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbeOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbeOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutput() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployVmGroupHealthCheckSettingsLivenessProbe) *DeployVmGroupHealthCheckSettingsLivenessProbe {
+		return &v
+	}).(DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput)
+}
+
+// Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) ActionType() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) string { return v.ActionType }).(pulumi.StringOutput)
+}
+
+// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+}
+
+// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbeOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsLivenessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettingsLivenessProbe)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutput() DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) ToDeployVmGroupHealthCheckSettingsLivenessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Elem() DeployVmGroupHealthCheckSettingsLivenessProbeOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) DeployVmGroupHealthCheckSettingsLivenessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret DeployVmGroupHealthCheckSettingsLivenessProbe
+		return ret
+	}).(DeployVmGroupHealthCheckSettingsLivenessProbeOutput)
+}
+
+// Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) ActionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ActionType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Commands
+	}).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsReadinessProbe struct {
+	// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType string `pulumi:"actionType"`
+	// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+	Commands []string `pulumi:"commands"`
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `pulumi:"path"`
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+	Port *int `pulumi:"port"`
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+	Scheme *string `pulumi:"scheme"`
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+	SuccessThreshold *int `pulumi:"successThreshold"`
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `pulumi:"type"`
+}
+
+// DeployVmGroupHealthCheckSettingsReadinessProbeInput is an input type that accepts DeployVmGroupHealthCheckSettingsReadinessProbeArgs and DeployVmGroupHealthCheckSettingsReadinessProbeOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsReadinessProbeInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsReadinessProbeArgs{...}
+type DeployVmGroupHealthCheckSettingsReadinessProbeInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsReadinessProbeOutput() DeployVmGroupHealthCheckSettingsReadinessProbeOutput
+	ToDeployVmGroupHealthCheckSettingsReadinessProbeOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsReadinessProbeOutput
+}
+
+type DeployVmGroupHealthCheckSettingsReadinessProbeArgs struct {
+	// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType pulumi.StringInput `pulumi:"actionType"`
+	// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+	Commands pulumi.StringArrayInput `pulumi:"commands"`
+	// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
+	// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
+	// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
+	// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (DeployVmGroupHealthCheckSettingsReadinessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (i DeployVmGroupHealthCheckSettingsReadinessProbeArgs) ToDeployVmGroupHealthCheckSettingsReadinessProbeOutput() DeployVmGroupHealthCheckSettingsReadinessProbeOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsReadinessProbeOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsReadinessProbeArgs) ToDeployVmGroupHealthCheckSettingsReadinessProbeOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsReadinessProbeOutput)
+}
+
+func (i DeployVmGroupHealthCheckSettingsReadinessProbeArgs) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutput() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupHealthCheckSettingsReadinessProbeArgs) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsReadinessProbeOutput).ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx)
+}
+
+// DeployVmGroupHealthCheckSettingsReadinessProbePtrInput is an input type that accepts DeployVmGroupHealthCheckSettingsReadinessProbeArgs, DeployVmGroupHealthCheckSettingsReadinessProbePtr and DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput values.
+// You can construct a concrete instance of `DeployVmGroupHealthCheckSettingsReadinessProbePtrInput` via:
+//
+//          DeployVmGroupHealthCheckSettingsReadinessProbeArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployVmGroupHealthCheckSettingsReadinessProbePtrInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutput() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput
+	ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Context) DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput
+}
+
+type deployVmGroupHealthCheckSettingsReadinessProbePtrType DeployVmGroupHealthCheckSettingsReadinessProbeArgs
+
+func DeployVmGroupHealthCheckSettingsReadinessProbePtr(v *DeployVmGroupHealthCheckSettingsReadinessProbeArgs) DeployVmGroupHealthCheckSettingsReadinessProbePtrInput {
+	return (*deployVmGroupHealthCheckSettingsReadinessProbePtrType)(v)
+}
+
+func (*deployVmGroupHealthCheckSettingsReadinessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (i *deployVmGroupHealthCheckSettingsReadinessProbePtrType) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutput() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return i.ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (i *deployVmGroupHealthCheckSettingsReadinessProbePtrType) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsReadinessProbeOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbeOutput() DeployVmGroupHealthCheckSettingsReadinessProbeOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbeOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbeOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutput() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployVmGroupHealthCheckSettingsReadinessProbe) *DeployVmGroupHealthCheckSettingsReadinessProbe {
+		return &v
+	}).(DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput)
+}
+
+// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) ActionType() pulumi.StringOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) string { return v.ActionType }).(pulumi.StringOutput)
+}
+
+// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) []string { return v.Commands }).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+}
+
+// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbeOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupHealthCheckSettingsReadinessProbe) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupHealthCheckSettingsReadinessProbe)(nil)).Elem()
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutput() DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) ToDeployVmGroupHealthCheckSettingsReadinessProbePtrOutputWithContext(ctx context.Context) DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput {
+	return o
+}
+
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Elem() DeployVmGroupHealthCheckSettingsReadinessProbeOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) DeployVmGroupHealthCheckSettingsReadinessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret DeployVmGroupHealthCheckSettingsReadinessProbe
+		return ret
+	}).(DeployVmGroupHealthCheckSettingsReadinessProbeOutput)
+}
+
+// The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) ActionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ActionType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Commands() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Commands
+	}).(pulumi.StringArrayOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+func (o DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupHealthCheckSettingsReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeployVmGroupWarmupSetting struct {
+	// Preheating curvature, with a value between 1 and 5.
+	Curvature *int `pulumi:"curvature"`
+	// Whether to enable preheating.
+	Enabled *bool `pulumi:"enabled"`
+	// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+	EnabledProtection *bool `pulumi:"enabledProtection"`
+	// warmup time.
+	WarmupTime *int `pulumi:"warmupTime"`
+}
+
+// DeployVmGroupWarmupSettingInput is an input type that accepts DeployVmGroupWarmupSettingArgs and DeployVmGroupWarmupSettingOutput values.
+// You can construct a concrete instance of `DeployVmGroupWarmupSettingInput` via:
+//
+//          DeployVmGroupWarmupSettingArgs{...}
+type DeployVmGroupWarmupSettingInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupWarmupSettingOutput() DeployVmGroupWarmupSettingOutput
+	ToDeployVmGroupWarmupSettingOutputWithContext(context.Context) DeployVmGroupWarmupSettingOutput
+}
+
+type DeployVmGroupWarmupSettingArgs struct {
+	// Preheating curvature, with a value between 1 and 5.
+	Curvature pulumi.IntPtrInput `pulumi:"curvature"`
+	// Whether to enable preheating.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+	EnabledProtection pulumi.BoolPtrInput `pulumi:"enabledProtection"`
+	// warmup time.
+	WarmupTime pulumi.IntPtrInput `pulumi:"warmupTime"`
+}
+
+func (DeployVmGroupWarmupSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupWarmupSetting)(nil)).Elem()
+}
+
+func (i DeployVmGroupWarmupSettingArgs) ToDeployVmGroupWarmupSettingOutput() DeployVmGroupWarmupSettingOutput {
+	return i.ToDeployVmGroupWarmupSettingOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupWarmupSettingArgs) ToDeployVmGroupWarmupSettingOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupWarmupSettingOutput)
+}
+
+func (i DeployVmGroupWarmupSettingArgs) ToDeployVmGroupWarmupSettingPtrOutput() DeployVmGroupWarmupSettingPtrOutput {
+	return i.ToDeployVmGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (i DeployVmGroupWarmupSettingArgs) ToDeployVmGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupWarmupSettingOutput).ToDeployVmGroupWarmupSettingPtrOutputWithContext(ctx)
+}
+
+// DeployVmGroupWarmupSettingPtrInput is an input type that accepts DeployVmGroupWarmupSettingArgs, DeployVmGroupWarmupSettingPtr and DeployVmGroupWarmupSettingPtrOutput values.
+// You can construct a concrete instance of `DeployVmGroupWarmupSettingPtrInput` via:
+//
+//          DeployVmGroupWarmupSettingArgs{...}
+//
+//  or:
+//
+//          nil
+type DeployVmGroupWarmupSettingPtrInput interface {
+	pulumi.Input
+
+	ToDeployVmGroupWarmupSettingPtrOutput() DeployVmGroupWarmupSettingPtrOutput
+	ToDeployVmGroupWarmupSettingPtrOutputWithContext(context.Context) DeployVmGroupWarmupSettingPtrOutput
+}
+
+type deployVmGroupWarmupSettingPtrType DeployVmGroupWarmupSettingArgs
+
+func DeployVmGroupWarmupSettingPtr(v *DeployVmGroupWarmupSettingArgs) DeployVmGroupWarmupSettingPtrInput {
+	return (*deployVmGroupWarmupSettingPtrType)(v)
+}
+
+func (*deployVmGroupWarmupSettingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupWarmupSetting)(nil)).Elem()
+}
+
+func (i *deployVmGroupWarmupSettingPtrType) ToDeployVmGroupWarmupSettingPtrOutput() DeployVmGroupWarmupSettingPtrOutput {
+	return i.ToDeployVmGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (i *deployVmGroupWarmupSettingPtrType) ToDeployVmGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeployVmGroupWarmupSettingPtrOutput)
+}
+
+type DeployVmGroupWarmupSettingOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupWarmupSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeployVmGroupWarmupSetting)(nil)).Elem()
+}
+
+func (o DeployVmGroupWarmupSettingOutput) ToDeployVmGroupWarmupSettingOutput() DeployVmGroupWarmupSettingOutput {
+	return o
+}
+
+func (o DeployVmGroupWarmupSettingOutput) ToDeployVmGroupWarmupSettingOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingOutput {
+	return o
+}
+
+func (o DeployVmGroupWarmupSettingOutput) ToDeployVmGroupWarmupSettingPtrOutput() DeployVmGroupWarmupSettingPtrOutput {
+	return o.ToDeployVmGroupWarmupSettingPtrOutputWithContext(context.Background())
+}
+
+func (o DeployVmGroupWarmupSettingOutput) ToDeployVmGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeployVmGroupWarmupSetting) *DeployVmGroupWarmupSetting {
+		return &v
+	}).(DeployVmGroupWarmupSettingPtrOutput)
+}
+
+// Preheating curvature, with a value between 1 and 5.
+func (o DeployVmGroupWarmupSettingOutput) Curvature() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupWarmupSetting) *int { return v.Curvature }).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable preheating.
+func (o DeployVmGroupWarmupSettingOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupWarmupSetting) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+func (o DeployVmGroupWarmupSettingOutput) EnabledProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupWarmupSetting) *bool { return v.EnabledProtection }).(pulumi.BoolPtrOutput)
+}
+
+// warmup time.
+func (o DeployVmGroupWarmupSettingOutput) WarmupTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeployVmGroupWarmupSetting) *int { return v.WarmupTime }).(pulumi.IntPtrOutput)
+}
+
+type DeployVmGroupWarmupSettingPtrOutput struct{ *pulumi.OutputState }
+
+func (DeployVmGroupWarmupSettingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeployVmGroupWarmupSetting)(nil)).Elem()
+}
+
+func (o DeployVmGroupWarmupSettingPtrOutput) ToDeployVmGroupWarmupSettingPtrOutput() DeployVmGroupWarmupSettingPtrOutput {
+	return o
+}
+
+func (o DeployVmGroupWarmupSettingPtrOutput) ToDeployVmGroupWarmupSettingPtrOutputWithContext(ctx context.Context) DeployVmGroupWarmupSettingPtrOutput {
+	return o
+}
+
+func (o DeployVmGroupWarmupSettingPtrOutput) Elem() DeployVmGroupWarmupSettingOutput {
+	return o.ApplyT(func(v *DeployVmGroupWarmupSetting) DeployVmGroupWarmupSetting {
+		if v != nil {
+			return *v
+		}
+		var ret DeployVmGroupWarmupSetting
+		return ret
+	}).(DeployVmGroupWarmupSettingOutput)
+}
+
+// Preheating curvature, with a value between 1 and 5.
+func (o DeployVmGroupWarmupSettingPtrOutput) Curvature() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupWarmupSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Curvature
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable preheating.
+func (o DeployVmGroupWarmupSettingPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupWarmupSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+func (o DeployVmGroupWarmupSettingPtrOutput) EnabledProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupWarmupSetting) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnabledProtection
+	}).(pulumi.BoolPtrOutput)
+}
+
+// warmup time.
+func (o DeployVmGroupWarmupSettingPtrOutput) WarmupTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeployVmGroupWarmupSetting) *int {
+		if v == nil {
+			return nil
+		}
+		return v.WarmupTime
+	}).(pulumi.IntPtrOutput)
 }
 
 type InstancesAttachmentInstanceAdvancedSettings struct {
@@ -3234,6 +5756,1259 @@ func (o UnitRuleUnitRuleItemListUnitRuleTagListArrayOutput) Index(i pulumi.IntIn
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UnitRuleUnitRuleItemListUnitRuleTagList {
 		return vs[0].([]UnitRuleUnitRuleItemListUnitRuleTagList)[vs[1].(int)]
 	}).(UnitRuleUnitRuleItemListUnitRuleTagListOutput)
+}
+
+type GetApiDetailResult struct {
+	// can debug or not.
+	CanRun bool `pulumi:"canRun"`
+	// api data struct.
+	Definitions []GetApiDetailResultDefinition `pulumi:"definitions"`
+	// param description.
+	Description string `pulumi:"description"`
+	// api content type.
+	RequestContentType string `pulumi:"requestContentType"`
+	// api request description.
+	Requests []GetApiDetailResultRequest `pulumi:"requests"`
+	// api response.
+	Responses []GetApiDetailResultResponse `pulumi:"responses"`
+	// API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+	Status int `pulumi:"status"`
+}
+
+// GetApiDetailResultInput is an input type that accepts GetApiDetailResultArgs and GetApiDetailResultOutput values.
+// You can construct a concrete instance of `GetApiDetailResultInput` via:
+//
+//          GetApiDetailResultArgs{...}
+type GetApiDetailResultInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultOutput() GetApiDetailResultOutput
+	ToGetApiDetailResultOutputWithContext(context.Context) GetApiDetailResultOutput
+}
+
+type GetApiDetailResultArgs struct {
+	// can debug or not.
+	CanRun pulumi.BoolInput `pulumi:"canRun"`
+	// api data struct.
+	Definitions GetApiDetailResultDefinitionArrayInput `pulumi:"definitions"`
+	// param description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// api content type.
+	RequestContentType pulumi.StringInput `pulumi:"requestContentType"`
+	// api request description.
+	Requests GetApiDetailResultRequestArrayInput `pulumi:"requests"`
+	// api response.
+	Responses GetApiDetailResultResponseArrayInput `pulumi:"responses"`
+	// API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetApiDetailResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResult)(nil)).Elem()
+}
+
+func (i GetApiDetailResultArgs) ToGetApiDetailResultOutput() GetApiDetailResultOutput {
+	return i.ToGetApiDetailResultOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultArgs) ToGetApiDetailResultOutputWithContext(ctx context.Context) GetApiDetailResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultOutput)
+}
+
+// GetApiDetailResultArrayInput is an input type that accepts GetApiDetailResultArray and GetApiDetailResultArrayOutput values.
+// You can construct a concrete instance of `GetApiDetailResultArrayInput` via:
+//
+//          GetApiDetailResultArray{ GetApiDetailResultArgs{...} }
+type GetApiDetailResultArrayInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultArrayOutput() GetApiDetailResultArrayOutput
+	ToGetApiDetailResultArrayOutputWithContext(context.Context) GetApiDetailResultArrayOutput
+}
+
+type GetApiDetailResultArray []GetApiDetailResultInput
+
+func (GetApiDetailResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResult)(nil)).Elem()
+}
+
+func (i GetApiDetailResultArray) ToGetApiDetailResultArrayOutput() GetApiDetailResultArrayOutput {
+	return i.ToGetApiDetailResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultArray) ToGetApiDetailResultArrayOutputWithContext(ctx context.Context) GetApiDetailResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultArrayOutput)
+}
+
+type GetApiDetailResultOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResult)(nil)).Elem()
+}
+
+func (o GetApiDetailResultOutput) ToGetApiDetailResultOutput() GetApiDetailResultOutput {
+	return o
+}
+
+func (o GetApiDetailResultOutput) ToGetApiDetailResultOutputWithContext(ctx context.Context) GetApiDetailResultOutput {
+	return o
+}
+
+// can debug or not.
+func (o GetApiDetailResultOutput) CanRun() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetApiDetailResult) bool { return v.CanRun }).(pulumi.BoolOutput)
+}
+
+// api data struct.
+func (o GetApiDetailResultOutput) Definitions() GetApiDetailResultDefinitionArrayOutput {
+	return o.ApplyT(func(v GetApiDetailResult) []GetApiDetailResultDefinition { return v.Definitions }).(GetApiDetailResultDefinitionArrayOutput)
+}
+
+// param description.
+func (o GetApiDetailResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// api content type.
+func (o GetApiDetailResultOutput) RequestContentType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResult) string { return v.RequestContentType }).(pulumi.StringOutput)
+}
+
+// api request description.
+func (o GetApiDetailResultOutput) Requests() GetApiDetailResultRequestArrayOutput {
+	return o.ApplyT(func(v GetApiDetailResult) []GetApiDetailResultRequest { return v.Requests }).(GetApiDetailResultRequestArrayOutput)
+}
+
+// api response.
+func (o GetApiDetailResultOutput) Responses() GetApiDetailResultResponseArrayOutput {
+	return o.ApplyT(func(v GetApiDetailResult) []GetApiDetailResultResponse { return v.Responses }).(GetApiDetailResultResponseArrayOutput)
+}
+
+// API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+func (o GetApiDetailResultOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApiDetailResult) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetApiDetailResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResult)(nil)).Elem()
+}
+
+func (o GetApiDetailResultArrayOutput) ToGetApiDetailResultArrayOutput() GetApiDetailResultArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultArrayOutput) ToGetApiDetailResultArrayOutputWithContext(ctx context.Context) GetApiDetailResultArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultArrayOutput) Index(i pulumi.IntInput) GetApiDetailResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiDetailResult {
+		return vs[0].([]GetApiDetailResult)[vs[1].(int)]
+	}).(GetApiDetailResultOutput)
+}
+
+type GetApiDetailResultDefinition struct {
+	// param description.
+	Name string `pulumi:"name"`
+	// object property list.
+	Properties []GetApiDetailResultDefinitionProperty `pulumi:"properties"`
+}
+
+// GetApiDetailResultDefinitionInput is an input type that accepts GetApiDetailResultDefinitionArgs and GetApiDetailResultDefinitionOutput values.
+// You can construct a concrete instance of `GetApiDetailResultDefinitionInput` via:
+//
+//          GetApiDetailResultDefinitionArgs{...}
+type GetApiDetailResultDefinitionInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultDefinitionOutput() GetApiDetailResultDefinitionOutput
+	ToGetApiDetailResultDefinitionOutputWithContext(context.Context) GetApiDetailResultDefinitionOutput
+}
+
+type GetApiDetailResultDefinitionArgs struct {
+	// param description.
+	Name pulumi.StringInput `pulumi:"name"`
+	// object property list.
+	Properties GetApiDetailResultDefinitionPropertyArrayInput `pulumi:"properties"`
+}
+
+func (GetApiDetailResultDefinitionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultDefinition)(nil)).Elem()
+}
+
+func (i GetApiDetailResultDefinitionArgs) ToGetApiDetailResultDefinitionOutput() GetApiDetailResultDefinitionOutput {
+	return i.ToGetApiDetailResultDefinitionOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultDefinitionArgs) ToGetApiDetailResultDefinitionOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultDefinitionOutput)
+}
+
+// GetApiDetailResultDefinitionArrayInput is an input type that accepts GetApiDetailResultDefinitionArray and GetApiDetailResultDefinitionArrayOutput values.
+// You can construct a concrete instance of `GetApiDetailResultDefinitionArrayInput` via:
+//
+//          GetApiDetailResultDefinitionArray{ GetApiDetailResultDefinitionArgs{...} }
+type GetApiDetailResultDefinitionArrayInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultDefinitionArrayOutput() GetApiDetailResultDefinitionArrayOutput
+	ToGetApiDetailResultDefinitionArrayOutputWithContext(context.Context) GetApiDetailResultDefinitionArrayOutput
+}
+
+type GetApiDetailResultDefinitionArray []GetApiDetailResultDefinitionInput
+
+func (GetApiDetailResultDefinitionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultDefinition)(nil)).Elem()
+}
+
+func (i GetApiDetailResultDefinitionArray) ToGetApiDetailResultDefinitionArrayOutput() GetApiDetailResultDefinitionArrayOutput {
+	return i.ToGetApiDetailResultDefinitionArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultDefinitionArray) ToGetApiDetailResultDefinitionArrayOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultDefinitionArrayOutput)
+}
+
+type GetApiDetailResultDefinitionOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultDefinitionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultDefinition)(nil)).Elem()
+}
+
+func (o GetApiDetailResultDefinitionOutput) ToGetApiDetailResultDefinitionOutput() GetApiDetailResultDefinitionOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionOutput) ToGetApiDetailResultDefinitionOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionOutput {
+	return o
+}
+
+// param description.
+func (o GetApiDetailResultDefinitionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultDefinition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// object property list.
+func (o GetApiDetailResultDefinitionOutput) Properties() GetApiDetailResultDefinitionPropertyArrayOutput {
+	return o.ApplyT(func(v GetApiDetailResultDefinition) []GetApiDetailResultDefinitionProperty { return v.Properties }).(GetApiDetailResultDefinitionPropertyArrayOutput)
+}
+
+type GetApiDetailResultDefinitionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultDefinitionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultDefinition)(nil)).Elem()
+}
+
+func (o GetApiDetailResultDefinitionArrayOutput) ToGetApiDetailResultDefinitionArrayOutput() GetApiDetailResultDefinitionArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionArrayOutput) ToGetApiDetailResultDefinitionArrayOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionArrayOutput) Index(i pulumi.IntInput) GetApiDetailResultDefinitionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiDetailResultDefinition {
+		return vs[0].([]GetApiDetailResultDefinition)[vs[1].(int)]
+	}).(GetApiDetailResultDefinitionOutput)
+}
+
+type GetApiDetailResultDefinitionProperty struct {
+	// param description.
+	Description string `pulumi:"description"`
+	// param description.
+	Name string `pulumi:"name"`
+	// param type.
+	Type string `pulumi:"type"`
+}
+
+// GetApiDetailResultDefinitionPropertyInput is an input type that accepts GetApiDetailResultDefinitionPropertyArgs and GetApiDetailResultDefinitionPropertyOutput values.
+// You can construct a concrete instance of `GetApiDetailResultDefinitionPropertyInput` via:
+//
+//          GetApiDetailResultDefinitionPropertyArgs{...}
+type GetApiDetailResultDefinitionPropertyInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultDefinitionPropertyOutput() GetApiDetailResultDefinitionPropertyOutput
+	ToGetApiDetailResultDefinitionPropertyOutputWithContext(context.Context) GetApiDetailResultDefinitionPropertyOutput
+}
+
+type GetApiDetailResultDefinitionPropertyArgs struct {
+	// param description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// param description.
+	Name pulumi.StringInput `pulumi:"name"`
+	// param type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetApiDetailResultDefinitionPropertyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultDefinitionProperty)(nil)).Elem()
+}
+
+func (i GetApiDetailResultDefinitionPropertyArgs) ToGetApiDetailResultDefinitionPropertyOutput() GetApiDetailResultDefinitionPropertyOutput {
+	return i.ToGetApiDetailResultDefinitionPropertyOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultDefinitionPropertyArgs) ToGetApiDetailResultDefinitionPropertyOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionPropertyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultDefinitionPropertyOutput)
+}
+
+// GetApiDetailResultDefinitionPropertyArrayInput is an input type that accepts GetApiDetailResultDefinitionPropertyArray and GetApiDetailResultDefinitionPropertyArrayOutput values.
+// You can construct a concrete instance of `GetApiDetailResultDefinitionPropertyArrayInput` via:
+//
+//          GetApiDetailResultDefinitionPropertyArray{ GetApiDetailResultDefinitionPropertyArgs{...} }
+type GetApiDetailResultDefinitionPropertyArrayInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultDefinitionPropertyArrayOutput() GetApiDetailResultDefinitionPropertyArrayOutput
+	ToGetApiDetailResultDefinitionPropertyArrayOutputWithContext(context.Context) GetApiDetailResultDefinitionPropertyArrayOutput
+}
+
+type GetApiDetailResultDefinitionPropertyArray []GetApiDetailResultDefinitionPropertyInput
+
+func (GetApiDetailResultDefinitionPropertyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultDefinitionProperty)(nil)).Elem()
+}
+
+func (i GetApiDetailResultDefinitionPropertyArray) ToGetApiDetailResultDefinitionPropertyArrayOutput() GetApiDetailResultDefinitionPropertyArrayOutput {
+	return i.ToGetApiDetailResultDefinitionPropertyArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultDefinitionPropertyArray) ToGetApiDetailResultDefinitionPropertyArrayOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionPropertyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultDefinitionPropertyArrayOutput)
+}
+
+type GetApiDetailResultDefinitionPropertyOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultDefinitionPropertyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultDefinitionProperty)(nil)).Elem()
+}
+
+func (o GetApiDetailResultDefinitionPropertyOutput) ToGetApiDetailResultDefinitionPropertyOutput() GetApiDetailResultDefinitionPropertyOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionPropertyOutput) ToGetApiDetailResultDefinitionPropertyOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionPropertyOutput {
+	return o
+}
+
+// param description.
+func (o GetApiDetailResultDefinitionPropertyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultDefinitionProperty) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// param description.
+func (o GetApiDetailResultDefinitionPropertyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultDefinitionProperty) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// param type.
+func (o GetApiDetailResultDefinitionPropertyOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultDefinitionProperty) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetApiDetailResultDefinitionPropertyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultDefinitionPropertyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultDefinitionProperty)(nil)).Elem()
+}
+
+func (o GetApiDetailResultDefinitionPropertyArrayOutput) ToGetApiDetailResultDefinitionPropertyArrayOutput() GetApiDetailResultDefinitionPropertyArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionPropertyArrayOutput) ToGetApiDetailResultDefinitionPropertyArrayOutputWithContext(ctx context.Context) GetApiDetailResultDefinitionPropertyArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultDefinitionPropertyArrayOutput) Index(i pulumi.IntInput) GetApiDetailResultDefinitionPropertyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiDetailResultDefinitionProperty {
+		return vs[0].([]GetApiDetailResultDefinitionProperty)[vs[1].(int)]
+	}).(GetApiDetailResultDefinitionPropertyOutput)
+}
+
+type GetApiDetailResultRequest struct {
+	// default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// param description.
+	Description string `pulumi:"description"`
+	// param position.
+	In string `pulumi:"in"`
+	// param description.
+	Name string `pulumi:"name"`
+	// require or not.
+	Required bool `pulumi:"required"`
+	// param type.
+	Type string `pulumi:"type"`
+}
+
+// GetApiDetailResultRequestInput is an input type that accepts GetApiDetailResultRequestArgs and GetApiDetailResultRequestOutput values.
+// You can construct a concrete instance of `GetApiDetailResultRequestInput` via:
+//
+//          GetApiDetailResultRequestArgs{...}
+type GetApiDetailResultRequestInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultRequestOutput() GetApiDetailResultRequestOutput
+	ToGetApiDetailResultRequestOutputWithContext(context.Context) GetApiDetailResultRequestOutput
+}
+
+type GetApiDetailResultRequestArgs struct {
+	// default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// param description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// param position.
+	In pulumi.StringInput `pulumi:"in"`
+	// param description.
+	Name pulumi.StringInput `pulumi:"name"`
+	// require or not.
+	Required pulumi.BoolInput `pulumi:"required"`
+	// param type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetApiDetailResultRequestArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultRequest)(nil)).Elem()
+}
+
+func (i GetApiDetailResultRequestArgs) ToGetApiDetailResultRequestOutput() GetApiDetailResultRequestOutput {
+	return i.ToGetApiDetailResultRequestOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultRequestArgs) ToGetApiDetailResultRequestOutputWithContext(ctx context.Context) GetApiDetailResultRequestOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultRequestOutput)
+}
+
+// GetApiDetailResultRequestArrayInput is an input type that accepts GetApiDetailResultRequestArray and GetApiDetailResultRequestArrayOutput values.
+// You can construct a concrete instance of `GetApiDetailResultRequestArrayInput` via:
+//
+//          GetApiDetailResultRequestArray{ GetApiDetailResultRequestArgs{...} }
+type GetApiDetailResultRequestArrayInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultRequestArrayOutput() GetApiDetailResultRequestArrayOutput
+	ToGetApiDetailResultRequestArrayOutputWithContext(context.Context) GetApiDetailResultRequestArrayOutput
+}
+
+type GetApiDetailResultRequestArray []GetApiDetailResultRequestInput
+
+func (GetApiDetailResultRequestArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultRequest)(nil)).Elem()
+}
+
+func (i GetApiDetailResultRequestArray) ToGetApiDetailResultRequestArrayOutput() GetApiDetailResultRequestArrayOutput {
+	return i.ToGetApiDetailResultRequestArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultRequestArray) ToGetApiDetailResultRequestArrayOutputWithContext(ctx context.Context) GetApiDetailResultRequestArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultRequestArrayOutput)
+}
+
+type GetApiDetailResultRequestOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultRequestOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultRequest)(nil)).Elem()
+}
+
+func (o GetApiDetailResultRequestOutput) ToGetApiDetailResultRequestOutput() GetApiDetailResultRequestOutput {
+	return o
+}
+
+func (o GetApiDetailResultRequestOutput) ToGetApiDetailResultRequestOutputWithContext(ctx context.Context) GetApiDetailResultRequestOutput {
+	return o
+}
+
+// default value.
+func (o GetApiDetailResultRequestOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// param description.
+func (o GetApiDetailResultRequestOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// param position.
+func (o GetApiDetailResultRequestOutput) In() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) string { return v.In }).(pulumi.StringOutput)
+}
+
+// param description.
+func (o GetApiDetailResultRequestOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// require or not.
+func (o GetApiDetailResultRequestOutput) Required() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) bool { return v.Required }).(pulumi.BoolOutput)
+}
+
+// param type.
+func (o GetApiDetailResultRequestOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultRequest) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetApiDetailResultRequestArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultRequestArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultRequest)(nil)).Elem()
+}
+
+func (o GetApiDetailResultRequestArrayOutput) ToGetApiDetailResultRequestArrayOutput() GetApiDetailResultRequestArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultRequestArrayOutput) ToGetApiDetailResultRequestArrayOutputWithContext(ctx context.Context) GetApiDetailResultRequestArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultRequestArrayOutput) Index(i pulumi.IntInput) GetApiDetailResultRequestOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiDetailResultRequest {
+		return vs[0].([]GetApiDetailResultRequest)[vs[1].(int)]
+	}).(GetApiDetailResultRequestOutput)
+}
+
+type GetApiDetailResultResponse struct {
+	// param description.
+	Description string `pulumi:"description"`
+	// param description.
+	Name string `pulumi:"name"`
+	// param type.
+	Type string `pulumi:"type"`
+}
+
+// GetApiDetailResultResponseInput is an input type that accepts GetApiDetailResultResponseArgs and GetApiDetailResultResponseOutput values.
+// You can construct a concrete instance of `GetApiDetailResultResponseInput` via:
+//
+//          GetApiDetailResultResponseArgs{...}
+type GetApiDetailResultResponseInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultResponseOutput() GetApiDetailResultResponseOutput
+	ToGetApiDetailResultResponseOutputWithContext(context.Context) GetApiDetailResultResponseOutput
+}
+
+type GetApiDetailResultResponseArgs struct {
+	// param description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// param description.
+	Name pulumi.StringInput `pulumi:"name"`
+	// param type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetApiDetailResultResponseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultResponse)(nil)).Elem()
+}
+
+func (i GetApiDetailResultResponseArgs) ToGetApiDetailResultResponseOutput() GetApiDetailResultResponseOutput {
+	return i.ToGetApiDetailResultResponseOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultResponseArgs) ToGetApiDetailResultResponseOutputWithContext(ctx context.Context) GetApiDetailResultResponseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultResponseOutput)
+}
+
+// GetApiDetailResultResponseArrayInput is an input type that accepts GetApiDetailResultResponseArray and GetApiDetailResultResponseArrayOutput values.
+// You can construct a concrete instance of `GetApiDetailResultResponseArrayInput` via:
+//
+//          GetApiDetailResultResponseArray{ GetApiDetailResultResponseArgs{...} }
+type GetApiDetailResultResponseArrayInput interface {
+	pulumi.Input
+
+	ToGetApiDetailResultResponseArrayOutput() GetApiDetailResultResponseArrayOutput
+	ToGetApiDetailResultResponseArrayOutputWithContext(context.Context) GetApiDetailResultResponseArrayOutput
+}
+
+type GetApiDetailResultResponseArray []GetApiDetailResultResponseInput
+
+func (GetApiDetailResultResponseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultResponse)(nil)).Elem()
+}
+
+func (i GetApiDetailResultResponseArray) ToGetApiDetailResultResponseArrayOutput() GetApiDetailResultResponseArrayOutput {
+	return i.ToGetApiDetailResultResponseArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiDetailResultResponseArray) ToGetApiDetailResultResponseArrayOutputWithContext(ctx context.Context) GetApiDetailResultResponseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiDetailResultResponseArrayOutput)
+}
+
+type GetApiDetailResultResponseOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultResponseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiDetailResultResponse)(nil)).Elem()
+}
+
+func (o GetApiDetailResultResponseOutput) ToGetApiDetailResultResponseOutput() GetApiDetailResultResponseOutput {
+	return o
+}
+
+func (o GetApiDetailResultResponseOutput) ToGetApiDetailResultResponseOutputWithContext(ctx context.Context) GetApiDetailResultResponseOutput {
+	return o
+}
+
+// param description.
+func (o GetApiDetailResultResponseOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultResponse) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// param description.
+func (o GetApiDetailResultResponseOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultResponse) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// param type.
+func (o GetApiDetailResultResponseOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiDetailResultResponse) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetApiDetailResultResponseArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiDetailResultResponseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiDetailResultResponse)(nil)).Elem()
+}
+
+func (o GetApiDetailResultResponseArrayOutput) ToGetApiDetailResultResponseArrayOutput() GetApiDetailResultResponseArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultResponseArrayOutput) ToGetApiDetailResultResponseArrayOutputWithContext(ctx context.Context) GetApiDetailResultResponseArrayOutput {
+	return o
+}
+
+func (o GetApiDetailResultResponseArrayOutput) Index(i pulumi.IntInput) GetApiDetailResultResponseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiDetailResultResponse {
+		return vs[0].([]GetApiDetailResultResponse)[vs[1].(int)]
+	}).(GetApiDetailResultResponseOutput)
+}
+
+type GetApiGroupResult struct {
+	// Api group info.
+	Contents []GetApiGroupResultContent `pulumi:"contents"`
+	// record count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetApiGroupResultInput is an input type that accepts GetApiGroupResultArgs and GetApiGroupResultOutput values.
+// You can construct a concrete instance of `GetApiGroupResultInput` via:
+//
+//          GetApiGroupResultArgs{...}
+type GetApiGroupResultInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultOutput() GetApiGroupResultOutput
+	ToGetApiGroupResultOutputWithContext(context.Context) GetApiGroupResultOutput
+}
+
+type GetApiGroupResultArgs struct {
+	// Api group info.
+	Contents GetApiGroupResultContentArrayInput `pulumi:"contents"`
+	// record count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetApiGroupResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResult)(nil)).Elem()
+}
+
+func (i GetApiGroupResultArgs) ToGetApiGroupResultOutput() GetApiGroupResultOutput {
+	return i.ToGetApiGroupResultOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultArgs) ToGetApiGroupResultOutputWithContext(ctx context.Context) GetApiGroupResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultOutput)
+}
+
+// GetApiGroupResultArrayInput is an input type that accepts GetApiGroupResultArray and GetApiGroupResultArrayOutput values.
+// You can construct a concrete instance of `GetApiGroupResultArrayInput` via:
+//
+//          GetApiGroupResultArray{ GetApiGroupResultArgs{...} }
+type GetApiGroupResultArrayInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultArrayOutput() GetApiGroupResultArrayOutput
+	ToGetApiGroupResultArrayOutputWithContext(context.Context) GetApiGroupResultArrayOutput
+}
+
+type GetApiGroupResultArray []GetApiGroupResultInput
+
+func (GetApiGroupResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResult)(nil)).Elem()
+}
+
+func (i GetApiGroupResultArray) ToGetApiGroupResultArrayOutput() GetApiGroupResultArrayOutput {
+	return i.ToGetApiGroupResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultArray) ToGetApiGroupResultArrayOutputWithContext(ctx context.Context) GetApiGroupResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultArrayOutput)
+}
+
+type GetApiGroupResultOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResult)(nil)).Elem()
+}
+
+func (o GetApiGroupResultOutput) ToGetApiGroupResultOutput() GetApiGroupResultOutput {
+	return o
+}
+
+func (o GetApiGroupResultOutput) ToGetApiGroupResultOutputWithContext(ctx context.Context) GetApiGroupResultOutput {
+	return o
+}
+
+// Api group info.
+func (o GetApiGroupResultOutput) Contents() GetApiGroupResultContentArrayOutput {
+	return o.ApplyT(func(v GetApiGroupResult) []GetApiGroupResultContent { return v.Contents }).(GetApiGroupResultContentArrayOutput)
+}
+
+// record count.
+func (o GetApiGroupResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApiGroupResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetApiGroupResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResult)(nil)).Elem()
+}
+
+func (o GetApiGroupResultArrayOutput) ToGetApiGroupResultArrayOutput() GetApiGroupResultArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultArrayOutput) ToGetApiGroupResultArrayOutputWithContext(ctx context.Context) GetApiGroupResultArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultArrayOutput) Index(i pulumi.IntInput) GetApiGroupResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiGroupResult {
+		return vs[0].([]GetApiGroupResult)[vs[1].(int)]
+	}).(GetApiGroupResultOutput)
+}
+
+type GetApiGroupResultContent struct {
+	// Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+	AclMode string `pulumi:"aclMode"`
+	// api count.
+	ApiCount int `pulumi:"apiCount"`
+	// Authentication type. secret: Secret key authentication; none: No authentication.
+	AuthType string `pulumi:"authType"`
+	// The gateway group bind with the api group list.
+	BindedGatewayDeployGroups []GetApiGroupResultContentBindedGatewayDeployGroup `pulumi:"bindedGatewayDeployGroups"`
+	// Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedTime string `pulumi:"createdTime"`
+	// Description.Note: This field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// Gateway Instance Id.
+	GatewayInstanceId string `pulumi:"gatewayInstanceId"`
+	// Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+	GatewayInstanceType string `pulumi:"gatewayInstanceType"`
+	// Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupContext string `pulumi:"groupContext"`
+	// Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupId string `pulumi:"groupId"`
+	// Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupName string `pulumi:"groupName"`
+	// Group type. ms: Microservice group; external: External API group.
+	GroupType string `pulumi:"groupType"`
+	// Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceNameKey string `pulumi:"namespaceNameKey"`
+	// Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceNameKeyPosition string `pulumi:"namespaceNameKeyPosition"`
+	// Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceNameKey string `pulumi:"serviceNameKey"`
+	// Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceNameKeyPosition string `pulumi:"serviceNameKeyPosition"`
+	// Publishing status. drafted: Not published. released: Published.
+	Status string `pulumi:"status"`
+	// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedTime string `pulumi:"updatedTime"`
+}
+
+// GetApiGroupResultContentInput is an input type that accepts GetApiGroupResultContentArgs and GetApiGroupResultContentOutput values.
+// You can construct a concrete instance of `GetApiGroupResultContentInput` via:
+//
+//          GetApiGroupResultContentArgs{...}
+type GetApiGroupResultContentInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultContentOutput() GetApiGroupResultContentOutput
+	ToGetApiGroupResultContentOutputWithContext(context.Context) GetApiGroupResultContentOutput
+}
+
+type GetApiGroupResultContentArgs struct {
+	// Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+	AclMode pulumi.StringInput `pulumi:"aclMode"`
+	// api count.
+	ApiCount pulumi.IntInput `pulumi:"apiCount"`
+	// Authentication type. secret: Secret key authentication; none: No authentication.
+	AuthType pulumi.StringInput `pulumi:"authType"`
+	// The gateway group bind with the api group list.
+	BindedGatewayDeployGroups GetApiGroupResultContentBindedGatewayDeployGroupArrayInput `pulumi:"bindedGatewayDeployGroups"`
+	// Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Description.Note: This field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Gateway Instance Id.
+	GatewayInstanceId pulumi.StringInput `pulumi:"gatewayInstanceId"`
+	// Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+	GatewayInstanceType pulumi.StringInput `pulumi:"gatewayInstanceType"`
+	// Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupContext pulumi.StringInput `pulumi:"groupContext"`
+	// Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Group type. ms: Microservice group; external: External API group.
+	GroupType pulumi.StringInput `pulumi:"groupType"`
+	// Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceNameKey pulumi.StringInput `pulumi:"namespaceNameKey"`
+	// Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceNameKeyPosition pulumi.StringInput `pulumi:"namespaceNameKeyPosition"`
+	// Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceNameKey pulumi.StringInput `pulumi:"serviceNameKey"`
+	// Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceNameKeyPosition pulumi.StringInput `pulumi:"serviceNameKeyPosition"`
+	// Publishing status. drafted: Not published. released: Published.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+}
+
+func (GetApiGroupResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResultContent)(nil)).Elem()
+}
+
+func (i GetApiGroupResultContentArgs) ToGetApiGroupResultContentOutput() GetApiGroupResultContentOutput {
+	return i.ToGetApiGroupResultContentOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultContentArgs) ToGetApiGroupResultContentOutputWithContext(ctx context.Context) GetApiGroupResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultContentOutput)
+}
+
+// GetApiGroupResultContentArrayInput is an input type that accepts GetApiGroupResultContentArray and GetApiGroupResultContentArrayOutput values.
+// You can construct a concrete instance of `GetApiGroupResultContentArrayInput` via:
+//
+//          GetApiGroupResultContentArray{ GetApiGroupResultContentArgs{...} }
+type GetApiGroupResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultContentArrayOutput() GetApiGroupResultContentArrayOutput
+	ToGetApiGroupResultContentArrayOutputWithContext(context.Context) GetApiGroupResultContentArrayOutput
+}
+
+type GetApiGroupResultContentArray []GetApiGroupResultContentInput
+
+func (GetApiGroupResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResultContent)(nil)).Elem()
+}
+
+func (i GetApiGroupResultContentArray) ToGetApiGroupResultContentArrayOutput() GetApiGroupResultContentArrayOutput {
+	return i.ToGetApiGroupResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultContentArray) ToGetApiGroupResultContentArrayOutputWithContext(ctx context.Context) GetApiGroupResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultContentArrayOutput)
+}
+
+type GetApiGroupResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResultContent)(nil)).Elem()
+}
+
+func (o GetApiGroupResultContentOutput) ToGetApiGroupResultContentOutput() GetApiGroupResultContentOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentOutput) ToGetApiGroupResultContentOutputWithContext(ctx context.Context) GetApiGroupResultContentOutput {
+	return o
+}
+
+// Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) AclMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.AclMode }).(pulumi.StringOutput)
+}
+
+// api count.
+func (o GetApiGroupResultContentOutput) ApiCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) int { return v.ApiCount }).(pulumi.IntOutput)
+}
+
+// Authentication type. secret: Secret key authentication; none: No authentication.
+func (o GetApiGroupResultContentOutput) AuthType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.AuthType }).(pulumi.StringOutput)
+}
+
+// The gateway group bind with the api group list.
+func (o GetApiGroupResultContentOutput) BindedGatewayDeployGroups() GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) []GetApiGroupResultContentBindedGatewayDeployGroup {
+		return v.BindedGatewayDeployGroups
+	}).(GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput)
+}
+
+// Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Description.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Gateway Instance Id.
+func (o GetApiGroupResultContentOutput) GatewayInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GatewayInstanceId }).(pulumi.StringOutput)
+}
+
+// Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) GatewayInstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GatewayInstanceType }).(pulumi.StringOutput)
+}
+
+// Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) GroupContext() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GroupContext }).(pulumi.StringOutput)
+}
+
+// Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Group type. ms: Microservice group; external: External API group.
+func (o GetApiGroupResultContentOutput) GroupType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.GroupType }).(pulumi.StringOutput)
+}
+
+// Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) NamespaceNameKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.NamespaceNameKey }).(pulumi.StringOutput)
+}
+
+// Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) NamespaceNameKeyPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.NamespaceNameKeyPosition }).(pulumi.StringOutput)
+}
+
+// Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) ServiceNameKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.ServiceNameKey }).(pulumi.StringOutput)
+}
+
+// Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) ServiceNameKeyPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.ServiceNameKeyPosition }).(pulumi.StringOutput)
+}
+
+// Publishing status. drafted: Not published. released: Published.
+func (o GetApiGroupResultContentOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContent) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+type GetApiGroupResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResultContent)(nil)).Elem()
+}
+
+func (o GetApiGroupResultContentArrayOutput) ToGetApiGroupResultContentArrayOutput() GetApiGroupResultContentArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentArrayOutput) ToGetApiGroupResultContentArrayOutputWithContext(ctx context.Context) GetApiGroupResultContentArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentArrayOutput) Index(i pulumi.IntInput) GetApiGroupResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiGroupResultContent {
+		return vs[0].([]GetApiGroupResultContent)[vs[1].(int)]
+	}).(GetApiGroupResultContentOutput)
+}
+
+type GetApiGroupResultContentBindedGatewayDeployGroup struct {
+	// Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName string `pulumi:"applicationName"`
+	// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationType string `pulumi:"applicationType"`
+	// Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterType string `pulumi:"clusterType"`
+	// Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+	DeployGroupId string `pulumi:"deployGroupId"`
+	// Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+	DeployGroupName string `pulumi:"deployGroupName"`
+	// Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupStatus string `pulumi:"groupStatus"`
+}
+
+// GetApiGroupResultContentBindedGatewayDeployGroupInput is an input type that accepts GetApiGroupResultContentBindedGatewayDeployGroupArgs and GetApiGroupResultContentBindedGatewayDeployGroupOutput values.
+// You can construct a concrete instance of `GetApiGroupResultContentBindedGatewayDeployGroupInput` via:
+//
+//          GetApiGroupResultContentBindedGatewayDeployGroupArgs{...}
+type GetApiGroupResultContentBindedGatewayDeployGroupInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultContentBindedGatewayDeployGroupOutput() GetApiGroupResultContentBindedGatewayDeployGroupOutput
+	ToGetApiGroupResultContentBindedGatewayDeployGroupOutputWithContext(context.Context) GetApiGroupResultContentBindedGatewayDeployGroupOutput
+}
+
+type GetApiGroupResultContentBindedGatewayDeployGroupArgs struct {
+	// Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationType pulumi.StringInput `pulumi:"applicationType"`
+	// Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+	DeployGroupId pulumi.StringInput `pulumi:"deployGroupId"`
+	// Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+	DeployGroupName pulumi.StringInput `pulumi:"deployGroupName"`
+	// Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupStatus pulumi.StringInput `pulumi:"groupStatus"`
+}
+
+func (GetApiGroupResultContentBindedGatewayDeployGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (i GetApiGroupResultContentBindedGatewayDeployGroupArgs) ToGetApiGroupResultContentBindedGatewayDeployGroupOutput() GetApiGroupResultContentBindedGatewayDeployGroupOutput {
+	return i.ToGetApiGroupResultContentBindedGatewayDeployGroupOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultContentBindedGatewayDeployGroupArgs) ToGetApiGroupResultContentBindedGatewayDeployGroupOutputWithContext(ctx context.Context) GetApiGroupResultContentBindedGatewayDeployGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultContentBindedGatewayDeployGroupOutput)
+}
+
+// GetApiGroupResultContentBindedGatewayDeployGroupArrayInput is an input type that accepts GetApiGroupResultContentBindedGatewayDeployGroupArray and GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput values.
+// You can construct a concrete instance of `GetApiGroupResultContentBindedGatewayDeployGroupArrayInput` via:
+//
+//          GetApiGroupResultContentBindedGatewayDeployGroupArray{ GetApiGroupResultContentBindedGatewayDeployGroupArgs{...} }
+type GetApiGroupResultContentBindedGatewayDeployGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutput() GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput
+	ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutputWithContext(context.Context) GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput
+}
+
+type GetApiGroupResultContentBindedGatewayDeployGroupArray []GetApiGroupResultContentBindedGatewayDeployGroupInput
+
+func (GetApiGroupResultContentBindedGatewayDeployGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (i GetApiGroupResultContentBindedGatewayDeployGroupArray) ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutput() GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput {
+	return i.ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiGroupResultContentBindedGatewayDeployGroupArray) ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutputWithContext(ctx context.Context) GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput)
+}
+
+type GetApiGroupResultContentBindedGatewayDeployGroupOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultContentBindedGatewayDeployGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiGroupResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ToGetApiGroupResultContentBindedGatewayDeployGroupOutput() GetApiGroupResultContentBindedGatewayDeployGroupOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ToGetApiGroupResultContentBindedGatewayDeployGroupOutputWithContext(ctx context.Context) GetApiGroupResultContentBindedGatewayDeployGroupOutput {
+	return o
+}
+
+// Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ApplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.ApplicationType }).(pulumi.StringOutput)
+}
+
+// Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) DeployGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.DeployGroupId }).(pulumi.StringOutput)
+}
+
+// Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) DeployGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.DeployGroupName }).(pulumi.StringOutput)
+}
+
+// Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApiGroupResultContentBindedGatewayDeployGroupOutput) GroupStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiGroupResultContentBindedGatewayDeployGroup) string { return v.GroupStatus }).(pulumi.StringOutput)
+}
+
+type GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiGroupResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (o GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput) ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutput() GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput) ToGetApiGroupResultContentBindedGatewayDeployGroupArrayOutputWithContext(ctx context.Context) GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput {
+	return o
+}
+
+func (o GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput) Index(i pulumi.IntInput) GetApiGroupResultContentBindedGatewayDeployGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiGroupResultContentBindedGatewayDeployGroup {
+		return vs[0].([]GetApiGroupResultContentBindedGatewayDeployGroup)[vs[1].(int)]
+	}).(GetApiGroupResultContentBindedGatewayDeployGroupOutput)
+}
+
+type GetApplicationAttributeResult struct {
+	// Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupCount int `pulumi:"groupCount"`
+	// Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceCount int `pulumi:"instanceCount"`
+	// Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+	RunInstanceCount int `pulumi:"runInstanceCount"`
+}
+
+// GetApplicationAttributeResultInput is an input type that accepts GetApplicationAttributeResultArgs and GetApplicationAttributeResultOutput values.
+// You can construct a concrete instance of `GetApplicationAttributeResultInput` via:
+//
+//          GetApplicationAttributeResultArgs{...}
+type GetApplicationAttributeResultInput interface {
+	pulumi.Input
+
+	ToGetApplicationAttributeResultOutput() GetApplicationAttributeResultOutput
+	ToGetApplicationAttributeResultOutputWithContext(context.Context) GetApplicationAttributeResultOutput
+}
+
+type GetApplicationAttributeResultArgs struct {
+	// Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+	GroupCount pulumi.IntInput `pulumi:"groupCount"`
+	// Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceCount pulumi.IntInput `pulumi:"instanceCount"`
+	// Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+	RunInstanceCount pulumi.IntInput `pulumi:"runInstanceCount"`
+}
+
+func (GetApplicationAttributeResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApplicationAttributeResult)(nil)).Elem()
+}
+
+func (i GetApplicationAttributeResultArgs) ToGetApplicationAttributeResultOutput() GetApplicationAttributeResultOutput {
+	return i.ToGetApplicationAttributeResultOutputWithContext(context.Background())
+}
+
+func (i GetApplicationAttributeResultArgs) ToGetApplicationAttributeResultOutputWithContext(ctx context.Context) GetApplicationAttributeResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApplicationAttributeResultOutput)
+}
+
+// GetApplicationAttributeResultArrayInput is an input type that accepts GetApplicationAttributeResultArray and GetApplicationAttributeResultArrayOutput values.
+// You can construct a concrete instance of `GetApplicationAttributeResultArrayInput` via:
+//
+//          GetApplicationAttributeResultArray{ GetApplicationAttributeResultArgs{...} }
+type GetApplicationAttributeResultArrayInput interface {
+	pulumi.Input
+
+	ToGetApplicationAttributeResultArrayOutput() GetApplicationAttributeResultArrayOutput
+	ToGetApplicationAttributeResultArrayOutputWithContext(context.Context) GetApplicationAttributeResultArrayOutput
+}
+
+type GetApplicationAttributeResultArray []GetApplicationAttributeResultInput
+
+func (GetApplicationAttributeResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApplicationAttributeResult)(nil)).Elem()
+}
+
+func (i GetApplicationAttributeResultArray) ToGetApplicationAttributeResultArrayOutput() GetApplicationAttributeResultArrayOutput {
+	return i.ToGetApplicationAttributeResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetApplicationAttributeResultArray) ToGetApplicationAttributeResultArrayOutputWithContext(ctx context.Context) GetApplicationAttributeResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApplicationAttributeResultArrayOutput)
+}
+
+type GetApplicationAttributeResultOutput struct{ *pulumi.OutputState }
+
+func (GetApplicationAttributeResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApplicationAttributeResult)(nil)).Elem()
+}
+
+func (o GetApplicationAttributeResultOutput) ToGetApplicationAttributeResultOutput() GetApplicationAttributeResultOutput {
+	return o
+}
+
+func (o GetApplicationAttributeResultOutput) ToGetApplicationAttributeResultOutputWithContext(ctx context.Context) GetApplicationAttributeResultOutput {
+	return o
+}
+
+// Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApplicationAttributeResultOutput) GroupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApplicationAttributeResult) int { return v.GroupCount }).(pulumi.IntOutput)
+}
+
+// Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApplicationAttributeResultOutput) InstanceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApplicationAttributeResult) int { return v.InstanceCount }).(pulumi.IntOutput)
+}
+
+// Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetApplicationAttributeResultOutput) RunInstanceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApplicationAttributeResult) int { return v.RunInstanceCount }).(pulumi.IntOutput)
+}
+
+type GetApplicationAttributeResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApplicationAttributeResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApplicationAttributeResult)(nil)).Elem()
+}
+
+func (o GetApplicationAttributeResultArrayOutput) ToGetApplicationAttributeResultArrayOutput() GetApplicationAttributeResultArrayOutput {
+	return o
+}
+
+func (o GetApplicationAttributeResultArrayOutput) ToGetApplicationAttributeResultArrayOutputWithContext(ctx context.Context) GetApplicationAttributeResultArrayOutput {
+	return o
+}
+
+func (o GetApplicationAttributeResultArrayOutput) Index(i pulumi.IntInput) GetApplicationAttributeResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApplicationAttributeResult {
+		return vs[0].([]GetApplicationAttributeResult)[vs[1].(int)]
+	}).(GetApplicationAttributeResultOutput)
 }
 
 type GetApplicationConfigResult struct {
@@ -4822,6 +8597,623 @@ func (o GetApplicationResultContentServiceConfigListPortArrayOutput) Index(i pul
 	}).(GetApplicationResultContentServiceConfigListPortOutput)
 }
 
+type GetBusinessLogConfigsResult struct {
+	// Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+	Contents []GetBusinessLogConfigsResultContent `pulumi:"contents"`
+	// Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetBusinessLogConfigsResultInput is an input type that accepts GetBusinessLogConfigsResultArgs and GetBusinessLogConfigsResultOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultInput` via:
+//
+//          GetBusinessLogConfigsResultArgs{...}
+type GetBusinessLogConfigsResultInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultOutput() GetBusinessLogConfigsResultOutput
+	ToGetBusinessLogConfigsResultOutputWithContext(context.Context) GetBusinessLogConfigsResultOutput
+}
+
+type GetBusinessLogConfigsResultArgs struct {
+	// Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+	Contents GetBusinessLogConfigsResultContentArrayInput `pulumi:"contents"`
+	// Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetBusinessLogConfigsResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResult)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultArgs) ToGetBusinessLogConfigsResultOutput() GetBusinessLogConfigsResultOutput {
+	return i.ToGetBusinessLogConfigsResultOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultArgs) ToGetBusinessLogConfigsResultOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultOutput)
+}
+
+// GetBusinessLogConfigsResultArrayInput is an input type that accepts GetBusinessLogConfigsResultArray and GetBusinessLogConfigsResultArrayOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultArrayInput` via:
+//
+//          GetBusinessLogConfigsResultArray{ GetBusinessLogConfigsResultArgs{...} }
+type GetBusinessLogConfigsResultArrayInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultArrayOutput() GetBusinessLogConfigsResultArrayOutput
+	ToGetBusinessLogConfigsResultArrayOutputWithContext(context.Context) GetBusinessLogConfigsResultArrayOutput
+}
+
+type GetBusinessLogConfigsResultArray []GetBusinessLogConfigsResultInput
+
+func (GetBusinessLogConfigsResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResult)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultArray) ToGetBusinessLogConfigsResultArrayOutput() GetBusinessLogConfigsResultArrayOutput {
+	return i.ToGetBusinessLogConfigsResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultArray) ToGetBusinessLogConfigsResultArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultArrayOutput)
+}
+
+type GetBusinessLogConfigsResultOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResult)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultOutput) ToGetBusinessLogConfigsResultOutput() GetBusinessLogConfigsResultOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultOutput) ToGetBusinessLogConfigsResultOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultOutput {
+	return o
+}
+
+// Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultOutput) Contents() GetBusinessLogConfigsResultContentArrayOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResult) []GetBusinessLogConfigsResultContent { return v.Contents }).(GetBusinessLogConfigsResultContentArrayOutput)
+}
+
+// Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetBusinessLogConfigsResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResult)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultArrayOutput) ToGetBusinessLogConfigsResultArrayOutput() GetBusinessLogConfigsResultArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultArrayOutput) ToGetBusinessLogConfigsResultArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultArrayOutput) Index(i pulumi.IntInput) GetBusinessLogConfigsResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBusinessLogConfigsResult {
+		return vs[0].([]GetBusinessLogConfigsResult)[vs[1].(int)]
+	}).(GetBusinessLogConfigsResultOutput)
+}
+
+type GetBusinessLogConfigsResultContent struct {
+	// the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigAssociatedGroups []GetBusinessLogConfigsResultContentConfigAssociatedGroup `pulumi:"configAssociatedGroups"`
+	// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigCreateTime string `pulumi:"configCreateTime"`
+	// Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigDesc string `pulumi:"configDesc"`
+	// ConfigId.
+	ConfigId string `pulumi:"configId"`
+	// ConfigName.
+	ConfigName string `pulumi:"configName"`
+	// Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigPath string `pulumi:"configPath"`
+	// Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigPipeline string `pulumi:"configPipeline"`
+	// ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigSchemas []GetBusinessLogConfigsResultContentConfigSchema `pulumi:"configSchemas"`
+	// configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigTags string `pulumi:"configTags"`
+	// Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigUpdateTime string `pulumi:"configUpdateTime"`
+}
+
+// GetBusinessLogConfigsResultContentInput is an input type that accepts GetBusinessLogConfigsResultContentArgs and GetBusinessLogConfigsResultContentOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentInput` via:
+//
+//          GetBusinessLogConfigsResultContentArgs{...}
+type GetBusinessLogConfigsResultContentInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentOutput() GetBusinessLogConfigsResultContentOutput
+	ToGetBusinessLogConfigsResultContentOutputWithContext(context.Context) GetBusinessLogConfigsResultContentOutput
+}
+
+type GetBusinessLogConfigsResultContentArgs struct {
+	// the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigAssociatedGroups GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayInput `pulumi:"configAssociatedGroups"`
+	// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigCreateTime pulumi.StringInput `pulumi:"configCreateTime"`
+	// Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigDesc pulumi.StringInput `pulumi:"configDesc"`
+	// ConfigId.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// ConfigName.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigPath pulumi.StringInput `pulumi:"configPath"`
+	// Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigPipeline pulumi.StringInput `pulumi:"configPipeline"`
+	// ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigSchemas GetBusinessLogConfigsResultContentConfigSchemaArrayInput `pulumi:"configSchemas"`
+	// configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigTags pulumi.StringInput `pulumi:"configTags"`
+	// Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigUpdateTime pulumi.StringInput `pulumi:"configUpdateTime"`
+}
+
+func (GetBusinessLogConfigsResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContent)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentArgs) ToGetBusinessLogConfigsResultContentOutput() GetBusinessLogConfigsResultContentOutput {
+	return i.ToGetBusinessLogConfigsResultContentOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentArgs) ToGetBusinessLogConfigsResultContentOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentOutput)
+}
+
+// GetBusinessLogConfigsResultContentArrayInput is an input type that accepts GetBusinessLogConfigsResultContentArray and GetBusinessLogConfigsResultContentArrayOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentArrayInput` via:
+//
+//          GetBusinessLogConfigsResultContentArray{ GetBusinessLogConfigsResultContentArgs{...} }
+type GetBusinessLogConfigsResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentArrayOutput() GetBusinessLogConfigsResultContentArrayOutput
+	ToGetBusinessLogConfigsResultContentArrayOutputWithContext(context.Context) GetBusinessLogConfigsResultContentArrayOutput
+}
+
+type GetBusinessLogConfigsResultContentArray []GetBusinessLogConfigsResultContentInput
+
+func (GetBusinessLogConfigsResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContent)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentArray) ToGetBusinessLogConfigsResultContentArrayOutput() GetBusinessLogConfigsResultContentArrayOutput {
+	return i.ToGetBusinessLogConfigsResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentArray) ToGetBusinessLogConfigsResultContentArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentArrayOutput)
+}
+
+type GetBusinessLogConfigsResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContent)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentOutput) ToGetBusinessLogConfigsResultContentOutput() GetBusinessLogConfigsResultContentOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentOutput) ToGetBusinessLogConfigsResultContentOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentOutput {
+	return o
+}
+
+// the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigAssociatedGroups() GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) []GetBusinessLogConfigsResultContentConfigAssociatedGroup {
+		return v.ConfigAssociatedGroups
+	}).(GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput)
+}
+
+// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigCreateTime }).(pulumi.StringOutput)
+}
+
+// Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigDesc }).(pulumi.StringOutput)
+}
+
+// ConfigId.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// ConfigName.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigPath }).(pulumi.StringOutput)
+}
+
+// Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigPipeline() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigPipeline }).(pulumi.StringOutput)
+}
+
+// ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigSchemas() GetBusinessLogConfigsResultContentConfigSchemaArrayOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) []GetBusinessLogConfigsResultContentConfigSchema {
+		return v.ConfigSchemas
+	}).(GetBusinessLogConfigsResultContentConfigSchemaArrayOutput)
+}
+
+// configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigTags() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigTags }).(pulumi.StringOutput)
+}
+
+// Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentOutput) ConfigUpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContent) string { return v.ConfigUpdateTime }).(pulumi.StringOutput)
+}
+
+type GetBusinessLogConfigsResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContent)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentArrayOutput) ToGetBusinessLogConfigsResultContentArrayOutput() GetBusinessLogConfigsResultContentArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentArrayOutput) ToGetBusinessLogConfigsResultContentArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentArrayOutput) Index(i pulumi.IntInput) GetBusinessLogConfigsResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBusinessLogConfigsResultContent {
+		return vs[0].([]GetBusinessLogConfigsResultContent)[vs[1].(int)]
+	}).(GetBusinessLogConfigsResultContentOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigAssociatedGroup struct {
+	// Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName string `pulumi:"applicationName"`
+	// Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationType string `pulumi:"applicationType"`
+	// Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+	AssociatedTime string `pulumi:"associatedTime"`
+	// Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterType string `pulumi:"clusterType"`
+	// Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupId string `pulumi:"groupId"`
+	// Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupName string `pulumi:"groupName"`
+	// Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceName string `pulumi:"namespaceName"`
+}
+
+// GetBusinessLogConfigsResultContentConfigAssociatedGroupInput is an input type that accepts GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs and GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentConfigAssociatedGroupInput` via:
+//
+//          GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs{...}
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput
+	ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutputWithContext(context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput
+}
+
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs struct {
+	// Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationType pulumi.StringInput `pulumi:"applicationType"`
+	// Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+	AssociatedTime pulumi.StringInput `pulumi:"associatedTime"`
+	// Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+}
+
+func (GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigAssociatedGroup)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput {
+	return i.ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput)
+}
+
+// GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayInput is an input type that accepts GetBusinessLogConfigsResultContentConfigAssociatedGroupArray and GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayInput` via:
+//
+//          GetBusinessLogConfigsResultContentConfigAssociatedGroupArray{ GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs{...} }
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput
+	ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutputWithContext(context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput
+}
+
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupArray []GetBusinessLogConfigsResultContentConfigAssociatedGroupInput
+
+func (GetBusinessLogConfigsResultContentConfigAssociatedGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContentConfigAssociatedGroup)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentConfigAssociatedGroupArray) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput {
+	return i.ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentConfigAssociatedGroupArray) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigAssociatedGroup)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput {
+	return o
+}
+
+// Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ApplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ApplicationType }).(pulumi.StringOutput)
+}
+
+// Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) AssociatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.AssociatedTime }).(pulumi.StringOutput)
+}
+
+// Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigAssociatedGroup) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContentConfigAssociatedGroup)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput() GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput) ToGetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput) Index(i pulumi.IntInput) GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBusinessLogConfigsResultContentConfigAssociatedGroup {
+		return vs[0].([]GetBusinessLogConfigsResultContentConfigAssociatedGroup)[vs[1].(int)]
+	}).(GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigSchema struct {
+	// content of schema.
+	SchemaContent string `pulumi:"schemaContent"`
+	// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaCreateTime string `pulumi:"schemaCreateTime"`
+	// Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaDateFormat string `pulumi:"schemaDateFormat"`
+	// Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaMultilinePattern string `pulumi:"schemaMultilinePattern"`
+	// User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaPatternLayout string `pulumi:"schemaPatternLayout"`
+	// Schema type.
+	SchemaType int `pulumi:"schemaType"`
+}
+
+// GetBusinessLogConfigsResultContentConfigSchemaInput is an input type that accepts GetBusinessLogConfigsResultContentConfigSchemaArgs and GetBusinessLogConfigsResultContentConfigSchemaOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentConfigSchemaInput` via:
+//
+//          GetBusinessLogConfigsResultContentConfigSchemaArgs{...}
+type GetBusinessLogConfigsResultContentConfigSchemaInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentConfigSchemaOutput() GetBusinessLogConfigsResultContentConfigSchemaOutput
+	ToGetBusinessLogConfigsResultContentConfigSchemaOutputWithContext(context.Context) GetBusinessLogConfigsResultContentConfigSchemaOutput
+}
+
+type GetBusinessLogConfigsResultContentConfigSchemaArgs struct {
+	// content of schema.
+	SchemaContent pulumi.StringInput `pulumi:"schemaContent"`
+	// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaCreateTime pulumi.StringInput `pulumi:"schemaCreateTime"`
+	// Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaDateFormat pulumi.StringInput `pulumi:"schemaDateFormat"`
+	// Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaMultilinePattern pulumi.StringInput `pulumi:"schemaMultilinePattern"`
+	// User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaPatternLayout pulumi.StringInput `pulumi:"schemaPatternLayout"`
+	// Schema type.
+	SchemaType pulumi.IntInput `pulumi:"schemaType"`
+}
+
+func (GetBusinessLogConfigsResultContentConfigSchemaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigSchema)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentConfigSchemaArgs) ToGetBusinessLogConfigsResultContentConfigSchemaOutput() GetBusinessLogConfigsResultContentConfigSchemaOutput {
+	return i.ToGetBusinessLogConfigsResultContentConfigSchemaOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentConfigSchemaArgs) ToGetBusinessLogConfigsResultContentConfigSchemaOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigSchemaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentConfigSchemaOutput)
+}
+
+// GetBusinessLogConfigsResultContentConfigSchemaArrayInput is an input type that accepts GetBusinessLogConfigsResultContentConfigSchemaArray and GetBusinessLogConfigsResultContentConfigSchemaArrayOutput values.
+// You can construct a concrete instance of `GetBusinessLogConfigsResultContentConfigSchemaArrayInput` via:
+//
+//          GetBusinessLogConfigsResultContentConfigSchemaArray{ GetBusinessLogConfigsResultContentConfigSchemaArgs{...} }
+type GetBusinessLogConfigsResultContentConfigSchemaArrayInput interface {
+	pulumi.Input
+
+	ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutput() GetBusinessLogConfigsResultContentConfigSchemaArrayOutput
+	ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutputWithContext(context.Context) GetBusinessLogConfigsResultContentConfigSchemaArrayOutput
+}
+
+type GetBusinessLogConfigsResultContentConfigSchemaArray []GetBusinessLogConfigsResultContentConfigSchemaInput
+
+func (GetBusinessLogConfigsResultContentConfigSchemaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContentConfigSchema)(nil)).Elem()
+}
+
+func (i GetBusinessLogConfigsResultContentConfigSchemaArray) ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutput() GetBusinessLogConfigsResultContentConfigSchemaArrayOutput {
+	return i.ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutputWithContext(context.Background())
+}
+
+func (i GetBusinessLogConfigsResultContentConfigSchemaArray) ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigSchemaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBusinessLogConfigsResultContentConfigSchemaArrayOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigSchemaOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentConfigSchemaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigSchema)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) ToGetBusinessLogConfigsResultContentConfigSchemaOutput() GetBusinessLogConfigsResultContentConfigSchemaOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) ToGetBusinessLogConfigsResultContentConfigSchemaOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigSchemaOutput {
+	return o
+}
+
+// content of schema.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) string { return v.SchemaContent }).(pulumi.StringOutput)
+}
+
+// Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) string { return v.SchemaCreateTime }).(pulumi.StringOutput)
+}
+
+// Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaDateFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) string { return v.SchemaDateFormat }).(pulumi.StringOutput)
+}
+
+// Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaMultilinePattern() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) string { return v.SchemaMultilinePattern }).(pulumi.StringOutput)
+}
+
+// User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaPatternLayout() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) string { return v.SchemaPatternLayout }).(pulumi.StringOutput)
+}
+
+// Schema type.
+func (o GetBusinessLogConfigsResultContentConfigSchemaOutput) SchemaType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBusinessLogConfigsResultContentConfigSchema) int { return v.SchemaType }).(pulumi.IntOutput)
+}
+
+type GetBusinessLogConfigsResultContentConfigSchemaArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBusinessLogConfigsResultContentConfigSchemaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBusinessLogConfigsResultContentConfigSchema)(nil)).Elem()
+}
+
+func (o GetBusinessLogConfigsResultContentConfigSchemaArrayOutput) ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutput() GetBusinessLogConfigsResultContentConfigSchemaArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigSchemaArrayOutput) ToGetBusinessLogConfigsResultContentConfigSchemaArrayOutputWithContext(ctx context.Context) GetBusinessLogConfigsResultContentConfigSchemaArrayOutput {
+	return o
+}
+
+func (o GetBusinessLogConfigsResultContentConfigSchemaArrayOutput) Index(i pulumi.IntInput) GetBusinessLogConfigsResultContentConfigSchemaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBusinessLogConfigsResultContentConfigSchema {
+		return vs[0].([]GetBusinessLogConfigsResultContentConfigSchema)[vs[1].(int)]
+	}).(GetBusinessLogConfigsResultContentConfigSchemaOutput)
+}
+
 type GetClusterResult struct {
 	// Cluster list. Note: This field may return null, indicating no valid values.
 	Contents []GetClusterResultContent `pulumi:"contents"`
@@ -5734,6 +10126,4074 @@ func (o GetClusterResultContentOperationInfoInitArrayOutput) Index(i pulumi.IntI
 	}).(GetClusterResultContentOperationInfoInitOutput)
 }
 
+type GetConfigSummaryResult struct {
+	// config list.
+	Contents []GetConfigSummaryResultContent `pulumi:"contents"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetConfigSummaryResultInput is an input type that accepts GetConfigSummaryResultArgs and GetConfigSummaryResultOutput values.
+// You can construct a concrete instance of `GetConfigSummaryResultInput` via:
+//
+//          GetConfigSummaryResultArgs{...}
+type GetConfigSummaryResultInput interface {
+	pulumi.Input
+
+	ToGetConfigSummaryResultOutput() GetConfigSummaryResultOutput
+	ToGetConfigSummaryResultOutputWithContext(context.Context) GetConfigSummaryResultOutput
+}
+
+type GetConfigSummaryResultArgs struct {
+	// config list.
+	Contents GetConfigSummaryResultContentArrayInput `pulumi:"contents"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetConfigSummaryResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigSummaryResult)(nil)).Elem()
+}
+
+func (i GetConfigSummaryResultArgs) ToGetConfigSummaryResultOutput() GetConfigSummaryResultOutput {
+	return i.ToGetConfigSummaryResultOutputWithContext(context.Background())
+}
+
+func (i GetConfigSummaryResultArgs) ToGetConfigSummaryResultOutputWithContext(ctx context.Context) GetConfigSummaryResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigSummaryResultOutput)
+}
+
+// GetConfigSummaryResultArrayInput is an input type that accepts GetConfigSummaryResultArray and GetConfigSummaryResultArrayOutput values.
+// You can construct a concrete instance of `GetConfigSummaryResultArrayInput` via:
+//
+//          GetConfigSummaryResultArray{ GetConfigSummaryResultArgs{...} }
+type GetConfigSummaryResultArrayInput interface {
+	pulumi.Input
+
+	ToGetConfigSummaryResultArrayOutput() GetConfigSummaryResultArrayOutput
+	ToGetConfigSummaryResultArrayOutputWithContext(context.Context) GetConfigSummaryResultArrayOutput
+}
+
+type GetConfigSummaryResultArray []GetConfigSummaryResultInput
+
+func (GetConfigSummaryResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigSummaryResult)(nil)).Elem()
+}
+
+func (i GetConfigSummaryResultArray) ToGetConfigSummaryResultArrayOutput() GetConfigSummaryResultArrayOutput {
+	return i.ToGetConfigSummaryResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetConfigSummaryResultArray) ToGetConfigSummaryResultArrayOutputWithContext(ctx context.Context) GetConfigSummaryResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigSummaryResultArrayOutput)
+}
+
+type GetConfigSummaryResultOutput struct{ *pulumi.OutputState }
+
+func (GetConfigSummaryResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigSummaryResult)(nil)).Elem()
+}
+
+func (o GetConfigSummaryResultOutput) ToGetConfigSummaryResultOutput() GetConfigSummaryResultOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultOutput) ToGetConfigSummaryResultOutputWithContext(ctx context.Context) GetConfigSummaryResultOutput {
+	return o
+}
+
+// config list.
+func (o GetConfigSummaryResultOutput) Contents() GetConfigSummaryResultContentArrayOutput {
+	return o.ApplyT(func(v GetConfigSummaryResult) []GetConfigSummaryResultContent { return v.Contents }).(GetConfigSummaryResultContentArrayOutput)
+}
+
+// total count.
+func (o GetConfigSummaryResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConfigSummaryResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetConfigSummaryResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetConfigSummaryResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigSummaryResult)(nil)).Elem()
+}
+
+func (o GetConfigSummaryResultArrayOutput) ToGetConfigSummaryResultArrayOutput() GetConfigSummaryResultArrayOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultArrayOutput) ToGetConfigSummaryResultArrayOutputWithContext(ctx context.Context) GetConfigSummaryResultArrayOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultArrayOutput) Index(i pulumi.IntInput) GetConfigSummaryResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConfigSummaryResult {
+		return vs[0].([]GetConfigSummaryResult)[vs[1].(int)]
+	}).(GetConfigSummaryResultOutput)
+}
+
+type GetConfigSummaryResultContent struct {
+	// Application ID. If not passed, the query will be for all.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName string `pulumi:"applicationName"`
+	// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+	ConfigId string `pulumi:"configId"`
+	// Configuration name.Note: This field may return null, indicating that no valid value was found.
+	ConfigName string `pulumi:"configName"`
+	// Config type. Note: This field may return null, indicating that no valid value was found.
+	ConfigType string `pulumi:"configType"`
+	// Configuration value.Note: This field may return null, indicating that no valid value was found.
+	ConfigValue string `pulumi:"configValue"`
+	// Configuration version. Note: This field may return null, indicating that no valid value was found.
+	ConfigVersion string `pulumi:"configVersion"`
+	// Configure version count.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionCount int `pulumi:"configVersionCount"`
+	// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionDesc string `pulumi:"configVersionDesc"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreationTime string `pulumi:"creationTime"`
+	// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+	DeleteFlag bool `pulumi:"deleteFlag"`
+	// Last update time.Note: This field may return null, indicating that no valid value was found.
+	LastUpdateTime string `pulumi:"lastUpdateTime"`
+}
+
+// GetConfigSummaryResultContentInput is an input type that accepts GetConfigSummaryResultContentArgs and GetConfigSummaryResultContentOutput values.
+// You can construct a concrete instance of `GetConfigSummaryResultContentInput` via:
+//
+//          GetConfigSummaryResultContentArgs{...}
+type GetConfigSummaryResultContentInput interface {
+	pulumi.Input
+
+	ToGetConfigSummaryResultContentOutput() GetConfigSummaryResultContentOutput
+	ToGetConfigSummaryResultContentOutputWithContext(context.Context) GetConfigSummaryResultContentOutput
+}
+
+type GetConfigSummaryResultContentArgs struct {
+	// Application ID. If not passed, the query will be for all.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Configuration name.Note: This field may return null, indicating that no valid value was found.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Config type. Note: This field may return null, indicating that no valid value was found.
+	ConfigType pulumi.StringInput `pulumi:"configType"`
+	// Configuration value.Note: This field may return null, indicating that no valid value was found.
+	ConfigValue pulumi.StringInput `pulumi:"configValue"`
+	// Configuration version. Note: This field may return null, indicating that no valid value was found.
+	ConfigVersion pulumi.StringInput `pulumi:"configVersion"`
+	// Configure version count.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionCount pulumi.IntInput `pulumi:"configVersionCount"`
+	// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionDesc pulumi.StringInput `pulumi:"configVersionDesc"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreationTime pulumi.StringInput `pulumi:"creationTime"`
+	// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+	DeleteFlag pulumi.BoolInput `pulumi:"deleteFlag"`
+	// Last update time.Note: This field may return null, indicating that no valid value was found.
+	LastUpdateTime pulumi.StringInput `pulumi:"lastUpdateTime"`
+}
+
+func (GetConfigSummaryResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (i GetConfigSummaryResultContentArgs) ToGetConfigSummaryResultContentOutput() GetConfigSummaryResultContentOutput {
+	return i.ToGetConfigSummaryResultContentOutputWithContext(context.Background())
+}
+
+func (i GetConfigSummaryResultContentArgs) ToGetConfigSummaryResultContentOutputWithContext(ctx context.Context) GetConfigSummaryResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigSummaryResultContentOutput)
+}
+
+// GetConfigSummaryResultContentArrayInput is an input type that accepts GetConfigSummaryResultContentArray and GetConfigSummaryResultContentArrayOutput values.
+// You can construct a concrete instance of `GetConfigSummaryResultContentArrayInput` via:
+//
+//          GetConfigSummaryResultContentArray{ GetConfigSummaryResultContentArgs{...} }
+type GetConfigSummaryResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetConfigSummaryResultContentArrayOutput() GetConfigSummaryResultContentArrayOutput
+	ToGetConfigSummaryResultContentArrayOutputWithContext(context.Context) GetConfigSummaryResultContentArrayOutput
+}
+
+type GetConfigSummaryResultContentArray []GetConfigSummaryResultContentInput
+
+func (GetConfigSummaryResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (i GetConfigSummaryResultContentArray) ToGetConfigSummaryResultContentArrayOutput() GetConfigSummaryResultContentArrayOutput {
+	return i.ToGetConfigSummaryResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetConfigSummaryResultContentArray) ToGetConfigSummaryResultContentArrayOutputWithContext(ctx context.Context) GetConfigSummaryResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigSummaryResultContentArrayOutput)
+}
+
+type GetConfigSummaryResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetConfigSummaryResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (o GetConfigSummaryResultContentOutput) ToGetConfigSummaryResultContentOutput() GetConfigSummaryResultContentOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultContentOutput) ToGetConfigSummaryResultContentOutputWithContext(ctx context.Context) GetConfigSummaryResultContentOutput {
+	return o
+}
+
+// Application ID. If not passed, the query will be for all.
+func (o GetConfigSummaryResultContentOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application Name. Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Configuration name.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Config type. Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigType }).(pulumi.StringOutput)
+}
+
+// Configuration value.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigValue }).(pulumi.StringOutput)
+}
+
+// Configuration version. Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigVersion }).(pulumi.StringOutput)
+}
+
+// Configure version count.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigVersionCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) int { return v.ConfigVersionCount }).(pulumi.IntOutput)
+}
+
+// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) ConfigVersionDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.ConfigVersionDesc }).(pulumi.StringOutput)
+}
+
+// Create time.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) CreationTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.CreationTime }).(pulumi.StringOutput)
+}
+
+// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) DeleteFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) bool { return v.DeleteFlag }).(pulumi.BoolOutput)
+}
+
+// Last update time.Note: This field may return null, indicating that no valid value was found.
+func (o GetConfigSummaryResultContentOutput) LastUpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigSummaryResultContent) string { return v.LastUpdateTime }).(pulumi.StringOutput)
+}
+
+type GetConfigSummaryResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetConfigSummaryResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (o GetConfigSummaryResultContentArrayOutput) ToGetConfigSummaryResultContentArrayOutput() GetConfigSummaryResultContentArrayOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultContentArrayOutput) ToGetConfigSummaryResultContentArrayOutputWithContext(ctx context.Context) GetConfigSummaryResultContentArrayOutput {
+	return o
+}
+
+func (o GetConfigSummaryResultContentArrayOutput) Index(i pulumi.IntInput) GetConfigSummaryResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConfigSummaryResultContent {
+		return vs[0].([]GetConfigSummaryResultContent)[vs[1].(int)]
+	}).(GetConfigSummaryResultContentOutput)
+}
+
+type GetContainerGroupResult struct {
+	// List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+	Contents []GetContainerGroupResultContent `pulumi:"contents"`
+	// Total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetContainerGroupResultInput is an input type that accepts GetContainerGroupResultArgs and GetContainerGroupResultOutput values.
+// You can construct a concrete instance of `GetContainerGroupResultInput` via:
+//
+//          GetContainerGroupResultArgs{...}
+type GetContainerGroupResultInput interface {
+	pulumi.Input
+
+	ToGetContainerGroupResultOutput() GetContainerGroupResultOutput
+	ToGetContainerGroupResultOutputWithContext(context.Context) GetContainerGroupResultOutput
+}
+
+type GetContainerGroupResultArgs struct {
+	// List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+	Contents GetContainerGroupResultContentArrayInput `pulumi:"contents"`
+	// Total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetContainerGroupResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerGroupResult)(nil)).Elem()
+}
+
+func (i GetContainerGroupResultArgs) ToGetContainerGroupResultOutput() GetContainerGroupResultOutput {
+	return i.ToGetContainerGroupResultOutputWithContext(context.Background())
+}
+
+func (i GetContainerGroupResultArgs) ToGetContainerGroupResultOutputWithContext(ctx context.Context) GetContainerGroupResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerGroupResultOutput)
+}
+
+// GetContainerGroupResultArrayInput is an input type that accepts GetContainerGroupResultArray and GetContainerGroupResultArrayOutput values.
+// You can construct a concrete instance of `GetContainerGroupResultArrayInput` via:
+//
+//          GetContainerGroupResultArray{ GetContainerGroupResultArgs{...} }
+type GetContainerGroupResultArrayInput interface {
+	pulumi.Input
+
+	ToGetContainerGroupResultArrayOutput() GetContainerGroupResultArrayOutput
+	ToGetContainerGroupResultArrayOutputWithContext(context.Context) GetContainerGroupResultArrayOutput
+}
+
+type GetContainerGroupResultArray []GetContainerGroupResultInput
+
+func (GetContainerGroupResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerGroupResult)(nil)).Elem()
+}
+
+func (i GetContainerGroupResultArray) ToGetContainerGroupResultArrayOutput() GetContainerGroupResultArrayOutput {
+	return i.ToGetContainerGroupResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetContainerGroupResultArray) ToGetContainerGroupResultArrayOutputWithContext(ctx context.Context) GetContainerGroupResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerGroupResultArrayOutput)
+}
+
+type GetContainerGroupResultOutput struct{ *pulumi.OutputState }
+
+func (GetContainerGroupResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerGroupResult)(nil)).Elem()
+}
+
+func (o GetContainerGroupResultOutput) ToGetContainerGroupResultOutput() GetContainerGroupResultOutput {
+	return o
+}
+
+func (o GetContainerGroupResultOutput) ToGetContainerGroupResultOutputWithContext(ctx context.Context) GetContainerGroupResultOutput {
+	return o
+}
+
+// List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultOutput) Contents() GetContainerGroupResultContentArrayOutput {
+	return o.ApplyT(func(v GetContainerGroupResult) []GetContainerGroupResultContent { return v.Contents }).(GetContainerGroupResultContentArrayOutput)
+}
+
+// Total count.
+func (o GetContainerGroupResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetContainerGroupResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetContainerGroupResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetContainerGroupResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerGroupResult)(nil)).Elem()
+}
+
+func (o GetContainerGroupResultArrayOutput) ToGetContainerGroupResultArrayOutput() GetContainerGroupResultArrayOutput {
+	return o
+}
+
+func (o GetContainerGroupResultArrayOutput) ToGetContainerGroupResultArrayOutputWithContext(ctx context.Context) GetContainerGroupResultArrayOutput {
+	return o
+}
+
+func (o GetContainerGroupResultArrayOutput) Index(i pulumi.IntInput) GetContainerGroupResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetContainerGroupResult {
+		return vs[0].([]GetContainerGroupResult)[vs[1].(int)]
+	}).(GetContainerGroupResultOutput)
+}
+
+type GetContainerGroupResultContent struct {
+	// The Group description.Note: This field may return null, indicating that no valid value was found.
+	Alias string `pulumi:"alias"`
+	// Cluster Id.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.Note: This field may return null, indicating that no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+	CpuLimit string `pulumi:"cpuLimit"`
+	// The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+	CpuRequest string `pulumi:"cpuRequest"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreateTime string `pulumi:"createTime"`
+	// Group Id.Note: This field may return null, indicating that no valid value was found.
+	GroupId string `pulumi:"groupId"`
+	// Group name.Note: This field may return null, indicating that no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+	KubeInjectEnable bool `pulumi:"kubeInjectEnable"`
+	// The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+	MemLimit string `pulumi:"memLimit"`
+	// The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+	MemRequest string `pulumi:"memRequest"`
+	// Namespace Id.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Namespace name.Note: This field may return null, indicating that no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Image name.Note: This field may return null, indicating that no valid value was found.
+	RepoName string `pulumi:"repoName"`
+	// Image server.Note: This field may return null, indicating that no valid value was found.
+	Server string `pulumi:"server"`
+	// Image version Name.Note: This field may return null, indicating that no valid value was found.
+	TagName string `pulumi:"tagName"`
+	// Update type.Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime string `pulumi:"updatedTime"`
+}
+
+// GetContainerGroupResultContentInput is an input type that accepts GetContainerGroupResultContentArgs and GetContainerGroupResultContentOutput values.
+// You can construct a concrete instance of `GetContainerGroupResultContentInput` via:
+//
+//          GetContainerGroupResultContentArgs{...}
+type GetContainerGroupResultContentInput interface {
+	pulumi.Input
+
+	ToGetContainerGroupResultContentOutput() GetContainerGroupResultContentOutput
+	ToGetContainerGroupResultContentOutputWithContext(context.Context) GetContainerGroupResultContentOutput
+}
+
+type GetContainerGroupResultContentArgs struct {
+	// The Group description.Note: This field may return null, indicating that no valid value was found.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Cluster Id.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.Note: This field may return null, indicating that no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+	CpuLimit pulumi.StringInput `pulumi:"cpuLimit"`
+	// The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+	CpuRequest pulumi.StringInput `pulumi:"cpuRequest"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Group Id.Note: This field may return null, indicating that no valid value was found.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Group name.Note: This field may return null, indicating that no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+	KubeInjectEnable pulumi.BoolInput `pulumi:"kubeInjectEnable"`
+	// The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+	MemLimit pulumi.StringInput `pulumi:"memLimit"`
+	// The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+	MemRequest pulumi.StringInput `pulumi:"memRequest"`
+	// Namespace Id.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Namespace name.Note: This field may return null, indicating that no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Image name.Note: This field may return null, indicating that no valid value was found.
+	RepoName pulumi.StringInput `pulumi:"repoName"`
+	// Image server.Note: This field may return null, indicating that no valid value was found.
+	Server pulumi.StringInput `pulumi:"server"`
+	// Image version Name.Note: This field may return null, indicating that no valid value was found.
+	TagName pulumi.StringInput `pulumi:"tagName"`
+	// Update type.Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+}
+
+func (GetContainerGroupResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerGroupResultContent)(nil)).Elem()
+}
+
+func (i GetContainerGroupResultContentArgs) ToGetContainerGroupResultContentOutput() GetContainerGroupResultContentOutput {
+	return i.ToGetContainerGroupResultContentOutputWithContext(context.Background())
+}
+
+func (i GetContainerGroupResultContentArgs) ToGetContainerGroupResultContentOutputWithContext(ctx context.Context) GetContainerGroupResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerGroupResultContentOutput)
+}
+
+// GetContainerGroupResultContentArrayInput is an input type that accepts GetContainerGroupResultContentArray and GetContainerGroupResultContentArrayOutput values.
+// You can construct a concrete instance of `GetContainerGroupResultContentArrayInput` via:
+//
+//          GetContainerGroupResultContentArray{ GetContainerGroupResultContentArgs{...} }
+type GetContainerGroupResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetContainerGroupResultContentArrayOutput() GetContainerGroupResultContentArrayOutput
+	ToGetContainerGroupResultContentArrayOutputWithContext(context.Context) GetContainerGroupResultContentArrayOutput
+}
+
+type GetContainerGroupResultContentArray []GetContainerGroupResultContentInput
+
+func (GetContainerGroupResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerGroupResultContent)(nil)).Elem()
+}
+
+func (i GetContainerGroupResultContentArray) ToGetContainerGroupResultContentArrayOutput() GetContainerGroupResultContentArrayOutput {
+	return i.ToGetContainerGroupResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetContainerGroupResultContentArray) ToGetContainerGroupResultContentArrayOutputWithContext(ctx context.Context) GetContainerGroupResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerGroupResultContentArrayOutput)
+}
+
+type GetContainerGroupResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetContainerGroupResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerGroupResultContent)(nil)).Elem()
+}
+
+func (o GetContainerGroupResultContentOutput) ToGetContainerGroupResultContentOutput() GetContainerGroupResultContentOutput {
+	return o
+}
+
+func (o GetContainerGroupResultContentOutput) ToGetContainerGroupResultContentOutputWithContext(ctx context.Context) GetContainerGroupResultContentOutput {
+	return o
+}
+
+// The Group description.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// Cluster Id.
+func (o GetContainerGroupResultContentOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) CpuLimit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.CpuLimit }).(pulumi.StringOutput)
+}
+
+// The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) CpuRequest() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.CpuRequest }).(pulumi.StringOutput)
+}
+
+// Create time.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Group Id.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Group name.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) KubeInjectEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) bool { return v.KubeInjectEnable }).(pulumi.BoolOutput)
+}
+
+// The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) MemLimit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.MemLimit }).(pulumi.StringOutput)
+}
+
+// The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) MemRequest() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.MemRequest }).(pulumi.StringOutput)
+}
+
+// Namespace Id.
+func (o GetContainerGroupResultContentOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Namespace name.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Image name.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) RepoName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.RepoName }).(pulumi.StringOutput)
+}
+
+// Image server.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) Server() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.Server }).(pulumi.StringOutput)
+}
+
+// Image version Name.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) TagName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.TagName }).(pulumi.StringOutput)
+}
+
+// Update type.Note: This field may return null, indicating that no valid value was found.
+func (o GetContainerGroupResultContentOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetContainerGroupResultContent) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+type GetContainerGroupResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetContainerGroupResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerGroupResultContent)(nil)).Elem()
+}
+
+func (o GetContainerGroupResultContentArrayOutput) ToGetContainerGroupResultContentArrayOutput() GetContainerGroupResultContentArrayOutput {
+	return o
+}
+
+func (o GetContainerGroupResultContentArrayOutput) ToGetContainerGroupResultContentArrayOutputWithContext(ctx context.Context) GetContainerGroupResultContentArrayOutput {
+	return o
+}
+
+func (o GetContainerGroupResultContentArrayOutput) Index(i pulumi.IntInput) GetContainerGroupResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetContainerGroupResultContent {
+		return vs[0].([]GetContainerGroupResultContent)[vs[1].(int)]
+	}).(GetContainerGroupResultContentOutput)
+}
+
+type GetDeliveryConfigByGroupIdResult struct {
+	// Config ID. Note: This field may return null, which means that no valid value was obtained.
+	ConfigId string `pulumi:"configId"`
+	// Config Name. Note: This field may return null, which means that no valid value was obtained.
+	ConfigName string `pulumi:"configName"`
+}
+
+// GetDeliveryConfigByGroupIdResultInput is an input type that accepts GetDeliveryConfigByGroupIdResultArgs and GetDeliveryConfigByGroupIdResultOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigByGroupIdResultInput` via:
+//
+//          GetDeliveryConfigByGroupIdResultArgs{...}
+type GetDeliveryConfigByGroupIdResultInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigByGroupIdResultOutput() GetDeliveryConfigByGroupIdResultOutput
+	ToGetDeliveryConfigByGroupIdResultOutputWithContext(context.Context) GetDeliveryConfigByGroupIdResultOutput
+}
+
+type GetDeliveryConfigByGroupIdResultArgs struct {
+	// Config ID. Note: This field may return null, which means that no valid value was obtained.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Config Name. Note: This field may return null, which means that no valid value was obtained.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+}
+
+func (GetDeliveryConfigByGroupIdResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigByGroupIdResult)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigByGroupIdResultArgs) ToGetDeliveryConfigByGroupIdResultOutput() GetDeliveryConfigByGroupIdResultOutput {
+	return i.ToGetDeliveryConfigByGroupIdResultOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigByGroupIdResultArgs) ToGetDeliveryConfigByGroupIdResultOutputWithContext(ctx context.Context) GetDeliveryConfigByGroupIdResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigByGroupIdResultOutput)
+}
+
+// GetDeliveryConfigByGroupIdResultArrayInput is an input type that accepts GetDeliveryConfigByGroupIdResultArray and GetDeliveryConfigByGroupIdResultArrayOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigByGroupIdResultArrayInput` via:
+//
+//          GetDeliveryConfigByGroupIdResultArray{ GetDeliveryConfigByGroupIdResultArgs{...} }
+type GetDeliveryConfigByGroupIdResultArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigByGroupIdResultArrayOutput() GetDeliveryConfigByGroupIdResultArrayOutput
+	ToGetDeliveryConfigByGroupIdResultArrayOutputWithContext(context.Context) GetDeliveryConfigByGroupIdResultArrayOutput
+}
+
+type GetDeliveryConfigByGroupIdResultArray []GetDeliveryConfigByGroupIdResultInput
+
+func (GetDeliveryConfigByGroupIdResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigByGroupIdResult)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigByGroupIdResultArray) ToGetDeliveryConfigByGroupIdResultArrayOutput() GetDeliveryConfigByGroupIdResultArrayOutput {
+	return i.ToGetDeliveryConfigByGroupIdResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigByGroupIdResultArray) ToGetDeliveryConfigByGroupIdResultArrayOutputWithContext(ctx context.Context) GetDeliveryConfigByGroupIdResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigByGroupIdResultArrayOutput)
+}
+
+type GetDeliveryConfigByGroupIdResultOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigByGroupIdResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigByGroupIdResult)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigByGroupIdResultOutput) ToGetDeliveryConfigByGroupIdResultOutput() GetDeliveryConfigByGroupIdResultOutput {
+	return o
+}
+
+func (o GetDeliveryConfigByGroupIdResultOutput) ToGetDeliveryConfigByGroupIdResultOutputWithContext(ctx context.Context) GetDeliveryConfigByGroupIdResultOutput {
+	return o
+}
+
+// Config ID. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigByGroupIdResultOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigByGroupIdResult) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Config Name. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigByGroupIdResultOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigByGroupIdResult) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+type GetDeliveryConfigByGroupIdResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigByGroupIdResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigByGroupIdResult)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigByGroupIdResultArrayOutput) ToGetDeliveryConfigByGroupIdResultArrayOutput() GetDeliveryConfigByGroupIdResultArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigByGroupIdResultArrayOutput) ToGetDeliveryConfigByGroupIdResultArrayOutputWithContext(ctx context.Context) GetDeliveryConfigByGroupIdResultArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigByGroupIdResultArrayOutput) Index(i pulumi.IntInput) GetDeliveryConfigByGroupIdResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliveryConfigByGroupIdResult {
+		return vs[0].([]GetDeliveryConfigByGroupIdResult)[vs[1].(int)]
+	}).(GetDeliveryConfigByGroupIdResultOutput)
+}
+
+type GetDeliveryConfigsResult struct {
+	// content. Note: This field may return null, which means that no valid value was obtained.
+	Contents []GetDeliveryConfigsResultContent `pulumi:"contents"`
+	// total count. Note: This field may return null, which means that no valid value was obtained.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetDeliveryConfigsResultInput is an input type that accepts GetDeliveryConfigsResultArgs and GetDeliveryConfigsResultOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultInput` via:
+//
+//          GetDeliveryConfigsResultArgs{...}
+type GetDeliveryConfigsResultInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultOutput() GetDeliveryConfigsResultOutput
+	ToGetDeliveryConfigsResultOutputWithContext(context.Context) GetDeliveryConfigsResultOutput
+}
+
+type GetDeliveryConfigsResultArgs struct {
+	// content. Note: This field may return null, which means that no valid value was obtained.
+	Contents GetDeliveryConfigsResultContentArrayInput `pulumi:"contents"`
+	// total count. Note: This field may return null, which means that no valid value was obtained.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetDeliveryConfigsResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResult)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultArgs) ToGetDeliveryConfigsResultOutput() GetDeliveryConfigsResultOutput {
+	return i.ToGetDeliveryConfigsResultOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultArgs) ToGetDeliveryConfigsResultOutputWithContext(ctx context.Context) GetDeliveryConfigsResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultOutput)
+}
+
+// GetDeliveryConfigsResultArrayInput is an input type that accepts GetDeliveryConfigsResultArray and GetDeliveryConfigsResultArrayOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultArrayInput` via:
+//
+//          GetDeliveryConfigsResultArray{ GetDeliveryConfigsResultArgs{...} }
+type GetDeliveryConfigsResultArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultArrayOutput() GetDeliveryConfigsResultArrayOutput
+	ToGetDeliveryConfigsResultArrayOutputWithContext(context.Context) GetDeliveryConfigsResultArrayOutput
+}
+
+type GetDeliveryConfigsResultArray []GetDeliveryConfigsResultInput
+
+func (GetDeliveryConfigsResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResult)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultArray) ToGetDeliveryConfigsResultArrayOutput() GetDeliveryConfigsResultArrayOutput {
+	return i.ToGetDeliveryConfigsResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultArray) ToGetDeliveryConfigsResultArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultArrayOutput)
+}
+
+type GetDeliveryConfigsResultOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResult)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultOutput) ToGetDeliveryConfigsResultOutput() GetDeliveryConfigsResultOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultOutput) ToGetDeliveryConfigsResultOutputWithContext(ctx context.Context) GetDeliveryConfigsResultOutput {
+	return o
+}
+
+// content. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultOutput) Contents() GetDeliveryConfigsResultContentArrayOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResult) []GetDeliveryConfigsResultContent { return v.Contents }).(GetDeliveryConfigsResultContentArrayOutput)
+}
+
+// total count. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetDeliveryConfigsResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResult)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultArrayOutput) ToGetDeliveryConfigsResultArrayOutput() GetDeliveryConfigsResultArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultArrayOutput) ToGetDeliveryConfigsResultArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultArrayOutput) Index(i pulumi.IntInput) GetDeliveryConfigsResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliveryConfigsResult {
+		return vs[0].([]GetDeliveryConfigsResult)[vs[1].(int)]
+	}).(GetDeliveryConfigsResultOutput)
+}
+
+type GetDeliveryConfigsResultContent struct {
+	// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+	CollectPaths []string `pulumi:"collectPaths"`
+	// config id.
+	ConfigId string `pulumi:"configId"`
+	// config name.
+	ConfigName string `pulumi:"configName"`
+	// Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Custom Line Rule.
+	CustomRule string `pulumi:"customRule"`
+	// whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+	EnableAuth bool `pulumi:"enableAuth"`
+	// Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+	EnableGlobalLineRule bool `pulumi:"enableGlobalLineRule"`
+	// Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+	Groups []GetDeliveryConfigsResultContentGroup `pulumi:"groups"`
+	// KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+	KafkaAddress string `pulumi:"kafkaAddress"`
+	// Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+	KafkaInfos []GetDeliveryConfigsResultContentKafkaInfo `pulumi:"kafkaInfos"`
+	// Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+	KafkaVIp string `pulumi:"kafkaVIp"`
+	// Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+	KafkaVPort string `pulumi:"kafkaVPort"`
+	// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+	LineRule string `pulumi:"lineRule"`
+	// Password. Note: This field may return null, which means that no valid value was obtained.
+	Password string `pulumi:"password"`
+	// Topic. Note: This field may return null, which means that no valid value was obtained.
+	Topic string `pulumi:"topic"`
+	// user Name. Note: This field may return null, which means that no valid value was obtained.
+	Username string `pulumi:"username"`
+}
+
+// GetDeliveryConfigsResultContentInput is an input type that accepts GetDeliveryConfigsResultContentArgs and GetDeliveryConfigsResultContentOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentInput` via:
+//
+//          GetDeliveryConfigsResultContentArgs{...}
+type GetDeliveryConfigsResultContentInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentOutput() GetDeliveryConfigsResultContentOutput
+	ToGetDeliveryConfigsResultContentOutputWithContext(context.Context) GetDeliveryConfigsResultContentOutput
+}
+
+type GetDeliveryConfigsResultContentArgs struct {
+	// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+	CollectPaths pulumi.StringArrayInput `pulumi:"collectPaths"`
+	// config id.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// config name.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Custom Line Rule.
+	CustomRule pulumi.StringInput `pulumi:"customRule"`
+	// whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+	EnableAuth pulumi.BoolInput `pulumi:"enableAuth"`
+	// Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+	EnableGlobalLineRule pulumi.BoolInput `pulumi:"enableGlobalLineRule"`
+	// Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+	Groups GetDeliveryConfigsResultContentGroupArrayInput `pulumi:"groups"`
+	// KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+	KafkaAddress pulumi.StringInput `pulumi:"kafkaAddress"`
+	// Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+	KafkaInfos GetDeliveryConfigsResultContentKafkaInfoArrayInput `pulumi:"kafkaInfos"`
+	// Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+	KafkaVIp pulumi.StringInput `pulumi:"kafkaVIp"`
+	// Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+	KafkaVPort pulumi.StringInput `pulumi:"kafkaVPort"`
+	// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+	LineRule pulumi.StringInput `pulumi:"lineRule"`
+	// Password. Note: This field may return null, which means that no valid value was obtained.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Topic. Note: This field may return null, which means that no valid value was obtained.
+	Topic pulumi.StringInput `pulumi:"topic"`
+	// user Name. Note: This field may return null, which means that no valid value was obtained.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (GetDeliveryConfigsResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContent)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentArgs) ToGetDeliveryConfigsResultContentOutput() GetDeliveryConfigsResultContentOutput {
+	return i.ToGetDeliveryConfigsResultContentOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentArgs) ToGetDeliveryConfigsResultContentOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentOutput)
+}
+
+// GetDeliveryConfigsResultContentArrayInput is an input type that accepts GetDeliveryConfigsResultContentArray and GetDeliveryConfigsResultContentArrayOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentArrayInput` via:
+//
+//          GetDeliveryConfigsResultContentArray{ GetDeliveryConfigsResultContentArgs{...} }
+type GetDeliveryConfigsResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentArrayOutput() GetDeliveryConfigsResultContentArrayOutput
+	ToGetDeliveryConfigsResultContentArrayOutputWithContext(context.Context) GetDeliveryConfigsResultContentArrayOutput
+}
+
+type GetDeliveryConfigsResultContentArray []GetDeliveryConfigsResultContentInput
+
+func (GetDeliveryConfigsResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContent)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentArray) ToGetDeliveryConfigsResultContentArrayOutput() GetDeliveryConfigsResultContentArrayOutput {
+	return i.ToGetDeliveryConfigsResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentArray) ToGetDeliveryConfigsResultContentArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentArrayOutput)
+}
+
+type GetDeliveryConfigsResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContent)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentOutput) ToGetDeliveryConfigsResultContentOutput() GetDeliveryConfigsResultContentOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentOutput) ToGetDeliveryConfigsResultContentOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentOutput {
+	return o
+}
+
+// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) CollectPaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) []string { return v.CollectPaths }).(pulumi.StringArrayOutput)
+}
+
+// config id.
+func (o GetDeliveryConfigsResultContentOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// config name.
+func (o GetDeliveryConfigsResultContentOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Custom Line Rule.
+func (o GetDeliveryConfigsResultContentOutput) CustomRule() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.CustomRule }).(pulumi.StringOutput)
+}
+
+// whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) EnableAuth() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) bool { return v.EnableAuth }).(pulumi.BoolOutput)
+}
+
+// Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) EnableGlobalLineRule() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) bool { return v.EnableGlobalLineRule }).(pulumi.BoolOutput)
+}
+
+// Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentOutput) Groups() GetDeliveryConfigsResultContentGroupArrayOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) []GetDeliveryConfigsResultContentGroup { return v.Groups }).(GetDeliveryConfigsResultContentGroupArrayOutput)
+}
+
+// KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) KafkaAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.KafkaAddress }).(pulumi.StringOutput)
+}
+
+// Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) KafkaInfos() GetDeliveryConfigsResultContentKafkaInfoArrayOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) []GetDeliveryConfigsResultContentKafkaInfo {
+		return v.KafkaInfos
+	}).(GetDeliveryConfigsResultContentKafkaInfoArrayOutput)
+}
+
+// Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) KafkaVIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.KafkaVIp }).(pulumi.StringOutput)
+}
+
+// Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) KafkaVPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.KafkaVPort }).(pulumi.StringOutput)
+}
+
+// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) LineRule() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.LineRule }).(pulumi.StringOutput)
+}
+
+// Password. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Topic. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) Topic() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.Topic }).(pulumi.StringOutput)
+}
+
+// user Name. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContent) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type GetDeliveryConfigsResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContent)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentArrayOutput) ToGetDeliveryConfigsResultContentArrayOutput() GetDeliveryConfigsResultContentArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentArrayOutput) ToGetDeliveryConfigsResultContentArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentArrayOutput) Index(i pulumi.IntInput) GetDeliveryConfigsResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliveryConfigsResultContent {
+		return vs[0].([]GetDeliveryConfigsResultContent)[vs[1].(int)]
+	}).(GetDeliveryConfigsResultContentOutput)
+}
+
+type GetDeliveryConfigsResultContentGroup struct {
+	// Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+	AssociateTime string `pulumi:"associateTime"`
+	// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType string `pulumi:"clusterType"`
+	// Group Id.
+	GroupId string `pulumi:"groupId"`
+	// Group Name.
+	GroupName string `pulumi:"groupName"`
+	// Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceName string `pulumi:"namespaceName"`
+}
+
+// GetDeliveryConfigsResultContentGroupInput is an input type that accepts GetDeliveryConfigsResultContentGroupArgs and GetDeliveryConfigsResultContentGroupOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentGroupInput` via:
+//
+//          GetDeliveryConfigsResultContentGroupArgs{...}
+type GetDeliveryConfigsResultContentGroupInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentGroupOutput() GetDeliveryConfigsResultContentGroupOutput
+	ToGetDeliveryConfigsResultContentGroupOutputWithContext(context.Context) GetDeliveryConfigsResultContentGroupOutput
+}
+
+type GetDeliveryConfigsResultContentGroupArgs struct {
+	// Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+	AssociateTime pulumi.StringInput `pulumi:"associateTime"`
+	// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Group Id.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Group Name.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+}
+
+func (GetDeliveryConfigsResultContentGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContentGroup)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentGroupArgs) ToGetDeliveryConfigsResultContentGroupOutput() GetDeliveryConfigsResultContentGroupOutput {
+	return i.ToGetDeliveryConfigsResultContentGroupOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentGroupArgs) ToGetDeliveryConfigsResultContentGroupOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentGroupOutput)
+}
+
+// GetDeliveryConfigsResultContentGroupArrayInput is an input type that accepts GetDeliveryConfigsResultContentGroupArray and GetDeliveryConfigsResultContentGroupArrayOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentGroupArrayInput` via:
+//
+//          GetDeliveryConfigsResultContentGroupArray{ GetDeliveryConfigsResultContentGroupArgs{...} }
+type GetDeliveryConfigsResultContentGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentGroupArrayOutput() GetDeliveryConfigsResultContentGroupArrayOutput
+	ToGetDeliveryConfigsResultContentGroupArrayOutputWithContext(context.Context) GetDeliveryConfigsResultContentGroupArrayOutput
+}
+
+type GetDeliveryConfigsResultContentGroupArray []GetDeliveryConfigsResultContentGroupInput
+
+func (GetDeliveryConfigsResultContentGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContentGroup)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentGroupArray) ToGetDeliveryConfigsResultContentGroupArrayOutput() GetDeliveryConfigsResultContentGroupArrayOutput {
+	return i.ToGetDeliveryConfigsResultContentGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentGroupArray) ToGetDeliveryConfigsResultContentGroupArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentGroupArrayOutput)
+}
+
+type GetDeliveryConfigsResultContentGroupOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContentGroup)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentGroupOutput) ToGetDeliveryConfigsResultContentGroupOutput() GetDeliveryConfigsResultContentGroupOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentGroupOutput) ToGetDeliveryConfigsResultContentGroupOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentGroupOutput {
+	return o
+}
+
+// Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentGroupOutput) AssociateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.AssociateTime }).(pulumi.StringOutput)
+}
+
+// Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentGroupOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentGroupOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster type.
+func (o GetDeliveryConfigsResultContentGroupOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Group Id.
+func (o GetDeliveryConfigsResultContentGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Group Name.
+func (o GetDeliveryConfigsResultContentGroupOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDeliveryConfigsResultContentGroupOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentGroup) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+type GetDeliveryConfigsResultContentGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContentGroup)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentGroupArrayOutput) ToGetDeliveryConfigsResultContentGroupArrayOutput() GetDeliveryConfigsResultContentGroupArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentGroupArrayOutput) ToGetDeliveryConfigsResultContentGroupArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentGroupArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentGroupArrayOutput) Index(i pulumi.IntInput) GetDeliveryConfigsResultContentGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliveryConfigsResultContentGroup {
+		return vs[0].([]GetDeliveryConfigsResultContentGroup)[vs[1].(int)]
+	}).(GetDeliveryConfigsResultContentGroupOutput)
+}
+
+type GetDeliveryConfigsResultContentKafkaInfo struct {
+	// Custom Line Rule.
+	CustomRule string `pulumi:"customRule"`
+	// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+	LineRule string `pulumi:"lineRule"`
+	// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+	Paths []string `pulumi:"paths"`
+	// Topic. Note: This field may return null, which means that no valid value was obtained.
+	Topic string `pulumi:"topic"`
+}
+
+// GetDeliveryConfigsResultContentKafkaInfoInput is an input type that accepts GetDeliveryConfigsResultContentKafkaInfoArgs and GetDeliveryConfigsResultContentKafkaInfoOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentKafkaInfoInput` via:
+//
+//          GetDeliveryConfigsResultContentKafkaInfoArgs{...}
+type GetDeliveryConfigsResultContentKafkaInfoInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentKafkaInfoOutput() GetDeliveryConfigsResultContentKafkaInfoOutput
+	ToGetDeliveryConfigsResultContentKafkaInfoOutputWithContext(context.Context) GetDeliveryConfigsResultContentKafkaInfoOutput
+}
+
+type GetDeliveryConfigsResultContentKafkaInfoArgs struct {
+	// Custom Line Rule.
+	CustomRule pulumi.StringInput `pulumi:"customRule"`
+	// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+	LineRule pulumi.StringInput `pulumi:"lineRule"`
+	// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+	Paths pulumi.StringArrayInput `pulumi:"paths"`
+	// Topic. Note: This field may return null, which means that no valid value was obtained.
+	Topic pulumi.StringInput `pulumi:"topic"`
+}
+
+func (GetDeliveryConfigsResultContentKafkaInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContentKafkaInfo)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentKafkaInfoArgs) ToGetDeliveryConfigsResultContentKafkaInfoOutput() GetDeliveryConfigsResultContentKafkaInfoOutput {
+	return i.ToGetDeliveryConfigsResultContentKafkaInfoOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentKafkaInfoArgs) ToGetDeliveryConfigsResultContentKafkaInfoOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentKafkaInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentKafkaInfoOutput)
+}
+
+// GetDeliveryConfigsResultContentKafkaInfoArrayInput is an input type that accepts GetDeliveryConfigsResultContentKafkaInfoArray and GetDeliveryConfigsResultContentKafkaInfoArrayOutput values.
+// You can construct a concrete instance of `GetDeliveryConfigsResultContentKafkaInfoArrayInput` via:
+//
+//          GetDeliveryConfigsResultContentKafkaInfoArray{ GetDeliveryConfigsResultContentKafkaInfoArgs{...} }
+type GetDeliveryConfigsResultContentKafkaInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliveryConfigsResultContentKafkaInfoArrayOutput() GetDeliveryConfigsResultContentKafkaInfoArrayOutput
+	ToGetDeliveryConfigsResultContentKafkaInfoArrayOutputWithContext(context.Context) GetDeliveryConfigsResultContentKafkaInfoArrayOutput
+}
+
+type GetDeliveryConfigsResultContentKafkaInfoArray []GetDeliveryConfigsResultContentKafkaInfoInput
+
+func (GetDeliveryConfigsResultContentKafkaInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContentKafkaInfo)(nil)).Elem()
+}
+
+func (i GetDeliveryConfigsResultContentKafkaInfoArray) ToGetDeliveryConfigsResultContentKafkaInfoArrayOutput() GetDeliveryConfigsResultContentKafkaInfoArrayOutput {
+	return i.ToGetDeliveryConfigsResultContentKafkaInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliveryConfigsResultContentKafkaInfoArray) ToGetDeliveryConfigsResultContentKafkaInfoArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentKafkaInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliveryConfigsResultContentKafkaInfoArrayOutput)
+}
+
+type GetDeliveryConfigsResultContentKafkaInfoOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentKafkaInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliveryConfigsResultContentKafkaInfo)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) ToGetDeliveryConfigsResultContentKafkaInfoOutput() GetDeliveryConfigsResultContentKafkaInfoOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) ToGetDeliveryConfigsResultContentKafkaInfoOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentKafkaInfoOutput {
+	return o
+}
+
+// Custom Line Rule.
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) CustomRule() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentKafkaInfo) string { return v.CustomRule }).(pulumi.StringOutput)
+}
+
+// Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) LineRule() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentKafkaInfo) string { return v.LineRule }).(pulumi.StringOutput)
+}
+
+// harvest log path. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) Paths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentKafkaInfo) []string { return v.Paths }).(pulumi.StringArrayOutput)
+}
+
+// Topic. Note: This field may return null, which means that no valid value was obtained.
+func (o GetDeliveryConfigsResultContentKafkaInfoOutput) Topic() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliveryConfigsResultContentKafkaInfo) string { return v.Topic }).(pulumi.StringOutput)
+}
+
+type GetDeliveryConfigsResultContentKafkaInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliveryConfigsResultContentKafkaInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliveryConfigsResultContentKafkaInfo)(nil)).Elem()
+}
+
+func (o GetDeliveryConfigsResultContentKafkaInfoArrayOutput) ToGetDeliveryConfigsResultContentKafkaInfoArrayOutput() GetDeliveryConfigsResultContentKafkaInfoArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentKafkaInfoArrayOutput) ToGetDeliveryConfigsResultContentKafkaInfoArrayOutputWithContext(ctx context.Context) GetDeliveryConfigsResultContentKafkaInfoArrayOutput {
+	return o
+}
+
+func (o GetDeliveryConfigsResultContentKafkaInfoArrayOutput) Index(i pulumi.IntInput) GetDeliveryConfigsResultContentKafkaInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliveryConfigsResultContentKafkaInfo {
+		return vs[0].([]GetDeliveryConfigsResultContentKafkaInfo)[vs[1].(int)]
+	}).(GetDeliveryConfigsResultContentKafkaInfoOutput)
+}
+
+type GetGatewayAllGroupApisResult struct {
+	// gateway group Id.
+	GatewayDeployGroupId string `pulumi:"gatewayDeployGroupId"`
+	// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+	GatewayDeployGroupName string `pulumi:"gatewayDeployGroupName"`
+	// Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+	GroupNum int `pulumi:"groupNum"`
+	// Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+	Groups []GetGatewayAllGroupApisResultGroup `pulumi:"groups"`
+}
+
+// GetGatewayAllGroupApisResultInput is an input type that accepts GetGatewayAllGroupApisResultArgs and GetGatewayAllGroupApisResultOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultInput` via:
+//
+//          GetGatewayAllGroupApisResultArgs{...}
+type GetGatewayAllGroupApisResultInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultOutput() GetGatewayAllGroupApisResultOutput
+	ToGetGatewayAllGroupApisResultOutputWithContext(context.Context) GetGatewayAllGroupApisResultOutput
+}
+
+type GetGatewayAllGroupApisResultArgs struct {
+	// gateway group Id.
+	GatewayDeployGroupId pulumi.StringInput `pulumi:"gatewayDeployGroupId"`
+	// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+	GatewayDeployGroupName pulumi.StringInput `pulumi:"gatewayDeployGroupName"`
+	// Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+	GroupNum pulumi.IntInput `pulumi:"groupNum"`
+	// Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+	Groups GetGatewayAllGroupApisResultGroupArrayInput `pulumi:"groups"`
+}
+
+func (GetGatewayAllGroupApisResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResult)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultArgs) ToGetGatewayAllGroupApisResultOutput() GetGatewayAllGroupApisResultOutput {
+	return i.ToGetGatewayAllGroupApisResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultArgs) ToGetGatewayAllGroupApisResultOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultOutput)
+}
+
+// GetGatewayAllGroupApisResultArrayInput is an input type that accepts GetGatewayAllGroupApisResultArray and GetGatewayAllGroupApisResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultArrayInput` via:
+//
+//          GetGatewayAllGroupApisResultArray{ GetGatewayAllGroupApisResultArgs{...} }
+type GetGatewayAllGroupApisResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultArrayOutput() GetGatewayAllGroupApisResultArrayOutput
+	ToGetGatewayAllGroupApisResultArrayOutputWithContext(context.Context) GetGatewayAllGroupApisResultArrayOutput
+}
+
+type GetGatewayAllGroupApisResultArray []GetGatewayAllGroupApisResultInput
+
+func (GetGatewayAllGroupApisResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResult)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultArray) ToGetGatewayAllGroupApisResultArrayOutput() GetGatewayAllGroupApisResultArrayOutput {
+	return i.ToGetGatewayAllGroupApisResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultArray) ToGetGatewayAllGroupApisResultArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultArrayOutput)
+}
+
+type GetGatewayAllGroupApisResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResult)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultOutput) ToGetGatewayAllGroupApisResultOutput() GetGatewayAllGroupApisResultOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultOutput) ToGetGatewayAllGroupApisResultOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultOutput {
+	return o
+}
+
+// gateway group Id.
+func (o GetGatewayAllGroupApisResultOutput) GatewayDeployGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResult) string { return v.GatewayDeployGroupId }).(pulumi.StringOutput)
+}
+
+// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultOutput) GatewayDeployGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResult) string { return v.GatewayDeployGroupName }).(pulumi.StringOutput)
+}
+
+// Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultOutput) GroupNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResult) int { return v.GroupNum }).(pulumi.IntOutput)
+}
+
+// Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultOutput) Groups() GetGatewayAllGroupApisResultGroupArrayOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResult) []GetGatewayAllGroupApisResultGroup { return v.Groups }).(GetGatewayAllGroupApisResultGroupArrayOutput)
+}
+
+type GetGatewayAllGroupApisResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResult)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultArrayOutput) ToGetGatewayAllGroupApisResultArrayOutput() GetGatewayAllGroupApisResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultArrayOutput) ToGetGatewayAllGroupApisResultArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultArrayOutput) Index(i pulumi.IntInput) GetGatewayAllGroupApisResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayAllGroupApisResult {
+		return vs[0].([]GetGatewayAllGroupApisResult)[vs[1].(int)]
+	}).(GetGatewayAllGroupApisResultOutput)
+}
+
+type GetGatewayAllGroupApisResultGroup struct {
+	// gateway instance id.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceId string `pulumi:"gatewayInstanceId"`
+	// Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceType string `pulumi:"gatewayInstanceType"`
+	// Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+	GroupApiCount int `pulumi:"groupApiCount"`
+	// List of APIs under the group.Note: This field may return null, which means no valid value was found.
+	GroupApis []GetGatewayAllGroupApisResultGroupGroupApi `pulumi:"groupApis"`
+	// api group id.Note: This field may return null, which means no valid value was found.
+	GroupId string `pulumi:"groupId"`
+	// api group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+}
+
+// GetGatewayAllGroupApisResultGroupInput is an input type that accepts GetGatewayAllGroupApisResultGroupArgs and GetGatewayAllGroupApisResultGroupOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultGroupInput` via:
+//
+//          GetGatewayAllGroupApisResultGroupArgs{...}
+type GetGatewayAllGroupApisResultGroupInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultGroupOutput() GetGatewayAllGroupApisResultGroupOutput
+	ToGetGatewayAllGroupApisResultGroupOutputWithContext(context.Context) GetGatewayAllGroupApisResultGroupOutput
+}
+
+type GetGatewayAllGroupApisResultGroupArgs struct {
+	// gateway instance id.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceId pulumi.StringInput `pulumi:"gatewayInstanceId"`
+	// Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceType pulumi.StringInput `pulumi:"gatewayInstanceType"`
+	// Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+	GroupApiCount pulumi.IntInput `pulumi:"groupApiCount"`
+	// List of APIs under the group.Note: This field may return null, which means no valid value was found.
+	GroupApis GetGatewayAllGroupApisResultGroupGroupApiArrayInput `pulumi:"groupApis"`
+	// api group id.Note: This field may return null, which means no valid value was found.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// api group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+}
+
+func (GetGatewayAllGroupApisResultGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResultGroup)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultGroupArgs) ToGetGatewayAllGroupApisResultGroupOutput() GetGatewayAllGroupApisResultGroupOutput {
+	return i.ToGetGatewayAllGroupApisResultGroupOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultGroupArgs) ToGetGatewayAllGroupApisResultGroupOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultGroupOutput)
+}
+
+// GetGatewayAllGroupApisResultGroupArrayInput is an input type that accepts GetGatewayAllGroupApisResultGroupArray and GetGatewayAllGroupApisResultGroupArrayOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultGroupArrayInput` via:
+//
+//          GetGatewayAllGroupApisResultGroupArray{ GetGatewayAllGroupApisResultGroupArgs{...} }
+type GetGatewayAllGroupApisResultGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultGroupArrayOutput() GetGatewayAllGroupApisResultGroupArrayOutput
+	ToGetGatewayAllGroupApisResultGroupArrayOutputWithContext(context.Context) GetGatewayAllGroupApisResultGroupArrayOutput
+}
+
+type GetGatewayAllGroupApisResultGroupArray []GetGatewayAllGroupApisResultGroupInput
+
+func (GetGatewayAllGroupApisResultGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResultGroup)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultGroupArray) ToGetGatewayAllGroupApisResultGroupArrayOutput() GetGatewayAllGroupApisResultGroupArrayOutput {
+	return i.ToGetGatewayAllGroupApisResultGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultGroupArray) ToGetGatewayAllGroupApisResultGroupArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultGroupArrayOutput)
+}
+
+type GetGatewayAllGroupApisResultGroupOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResultGroup)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultGroupOutput) ToGetGatewayAllGroupApisResultGroupOutput() GetGatewayAllGroupApisResultGroupOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupOutput) ToGetGatewayAllGroupApisResultGroupOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupOutput {
+	return o
+}
+
+// gateway instance id.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GatewayInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) string { return v.GatewayInstanceId }).(pulumi.StringOutput)
+}
+
+// Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GatewayInstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) string { return v.GatewayInstanceType }).(pulumi.StringOutput)
+}
+
+// Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GroupApiCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) int { return v.GroupApiCount }).(pulumi.IntOutput)
+}
+
+// List of APIs under the group.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GroupApis() GetGatewayAllGroupApisResultGroupGroupApiArrayOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) []GetGatewayAllGroupApisResultGroupGroupApi {
+		return v.GroupApis
+	}).(GetGatewayAllGroupApisResultGroupGroupApiArrayOutput)
+}
+
+// api group id.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// api group name.Note: This field may return null, which means no valid value was found.
+func (o GetGatewayAllGroupApisResultGroupOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroup) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+type GetGatewayAllGroupApisResultGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResultGroup)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultGroupArrayOutput) ToGetGatewayAllGroupApisResultGroupArrayOutput() GetGatewayAllGroupApisResultGroupArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupArrayOutput) ToGetGatewayAllGroupApisResultGroupArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupArrayOutput) Index(i pulumi.IntInput) GetGatewayAllGroupApisResultGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayAllGroupApisResultGroup {
+		return vs[0].([]GetGatewayAllGroupApisResultGroup)[vs[1].(int)]
+	}).(GetGatewayAllGroupApisResultGroupOutput)
+}
+
+type GetGatewayAllGroupApisResultGroupGroupApi struct {
+	// API ID.
+	ApiId string `pulumi:"apiId"`
+	// API method.
+	Method string `pulumi:"method"`
+	// API service name.
+	MicroserviceName string `pulumi:"microserviceName"`
+	// namespace name.
+	NamespaceName string `pulumi:"namespaceName"`
+	// API path.
+	Path string `pulumi:"path"`
+}
+
+// GetGatewayAllGroupApisResultGroupGroupApiInput is an input type that accepts GetGatewayAllGroupApisResultGroupGroupApiArgs and GetGatewayAllGroupApisResultGroupGroupApiOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultGroupGroupApiInput` via:
+//
+//          GetGatewayAllGroupApisResultGroupGroupApiArgs{...}
+type GetGatewayAllGroupApisResultGroupGroupApiInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultGroupGroupApiOutput() GetGatewayAllGroupApisResultGroupGroupApiOutput
+	ToGetGatewayAllGroupApisResultGroupGroupApiOutputWithContext(context.Context) GetGatewayAllGroupApisResultGroupGroupApiOutput
+}
+
+type GetGatewayAllGroupApisResultGroupGroupApiArgs struct {
+	// API ID.
+	ApiId pulumi.StringInput `pulumi:"apiId"`
+	// API method.
+	Method pulumi.StringInput `pulumi:"method"`
+	// API service name.
+	MicroserviceName pulumi.StringInput `pulumi:"microserviceName"`
+	// namespace name.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// API path.
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (GetGatewayAllGroupApisResultGroupGroupApiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResultGroupGroupApi)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultGroupGroupApiArgs) ToGetGatewayAllGroupApisResultGroupGroupApiOutput() GetGatewayAllGroupApisResultGroupGroupApiOutput {
+	return i.ToGetGatewayAllGroupApisResultGroupGroupApiOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultGroupGroupApiArgs) ToGetGatewayAllGroupApisResultGroupGroupApiOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupGroupApiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultGroupGroupApiOutput)
+}
+
+// GetGatewayAllGroupApisResultGroupGroupApiArrayInput is an input type that accepts GetGatewayAllGroupApisResultGroupGroupApiArray and GetGatewayAllGroupApisResultGroupGroupApiArrayOutput values.
+// You can construct a concrete instance of `GetGatewayAllGroupApisResultGroupGroupApiArrayInput` via:
+//
+//          GetGatewayAllGroupApisResultGroupGroupApiArray{ GetGatewayAllGroupApisResultGroupGroupApiArgs{...} }
+type GetGatewayAllGroupApisResultGroupGroupApiArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutput() GetGatewayAllGroupApisResultGroupGroupApiArrayOutput
+	ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutputWithContext(context.Context) GetGatewayAllGroupApisResultGroupGroupApiArrayOutput
+}
+
+type GetGatewayAllGroupApisResultGroupGroupApiArray []GetGatewayAllGroupApisResultGroupGroupApiInput
+
+func (GetGatewayAllGroupApisResultGroupGroupApiArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResultGroupGroupApi)(nil)).Elem()
+}
+
+func (i GetGatewayAllGroupApisResultGroupGroupApiArray) ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutput() GetGatewayAllGroupApisResultGroupGroupApiArrayOutput {
+	return i.ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayAllGroupApisResultGroupGroupApiArray) ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupGroupApiArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayAllGroupApisResultGroupGroupApiArrayOutput)
+}
+
+type GetGatewayAllGroupApisResultGroupGroupApiOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultGroupGroupApiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayAllGroupApisResultGroupGroupApi)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) ToGetGatewayAllGroupApisResultGroupGroupApiOutput() GetGatewayAllGroupApisResultGroupGroupApiOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) ToGetGatewayAllGroupApisResultGroupGroupApiOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupGroupApiOutput {
+	return o
+}
+
+// API ID.
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) ApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroupGroupApi) string { return v.ApiId }).(pulumi.StringOutput)
+}
+
+// API method.
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroupGroupApi) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// API service name.
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) MicroserviceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroupGroupApi) string { return v.MicroserviceName }).(pulumi.StringOutput)
+}
+
+// namespace name.
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroupGroupApi) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// API path.
+func (o GetGatewayAllGroupApisResultGroupGroupApiOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayAllGroupApisResultGroupGroupApi) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type GetGatewayAllGroupApisResultGroupGroupApiArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayAllGroupApisResultGroupGroupApiArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayAllGroupApisResultGroupGroupApi)(nil)).Elem()
+}
+
+func (o GetGatewayAllGroupApisResultGroupGroupApiArrayOutput) ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutput() GetGatewayAllGroupApisResultGroupGroupApiArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupGroupApiArrayOutput) ToGetGatewayAllGroupApisResultGroupGroupApiArrayOutputWithContext(ctx context.Context) GetGatewayAllGroupApisResultGroupGroupApiArrayOutput {
+	return o
+}
+
+func (o GetGatewayAllGroupApisResultGroupGroupApiArrayOutput) Index(i pulumi.IntInput) GetGatewayAllGroupApisResultGroupGroupApiOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayAllGroupApisResultGroupGroupApi {
+		return vs[0].([]GetGatewayAllGroupApisResultGroupGroupApi)[vs[1].(int)]
+	}).(GetGatewayAllGroupApisResultGroupGroupApiOutput)
+}
+
+type GetGroupConfigReleaseResult struct {
+	// Configuration item release list.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseLists []GetGroupConfigReleaseResultConfigReleaseList `pulumi:"configReleaseLists"`
+	// File configuration item release list.Note: This field may return null, which means no valid value was found.
+	FileConfigReleaseLists []GetGroupConfigReleaseResultFileConfigReleaseList `pulumi:"fileConfigReleaseLists"`
+	// Package Id.Note: This field may return null, which means no valid value was found.
+	PackageId string `pulumi:"packageId"`
+	// Package name.Note: This field may return null, which means no valid value was found.
+	PackageName string `pulumi:"packageName"`
+	// Package version.Note: This field may return null, which means no valid value was found.
+	PackageVersion string `pulumi:"packageVersion"`
+	// Release public config list.
+	PublicConfigReleaseLists []GetGroupConfigReleaseResultPublicConfigReleaseList `pulumi:"publicConfigReleaseLists"`
+	// image name.Note: This field may return null, which means no valid value was found.
+	RepoName string `pulumi:"repoName"`
+	// image tag name.Note: This field may return null, which means no valid value was found.
+	TagName string `pulumi:"tagName"`
+}
+
+// GetGroupConfigReleaseResultInput is an input type that accepts GetGroupConfigReleaseResultArgs and GetGroupConfigReleaseResultOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultInput` via:
+//
+//          GetGroupConfigReleaseResultArgs{...}
+type GetGroupConfigReleaseResultInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultOutput() GetGroupConfigReleaseResultOutput
+	ToGetGroupConfigReleaseResultOutputWithContext(context.Context) GetGroupConfigReleaseResultOutput
+}
+
+type GetGroupConfigReleaseResultArgs struct {
+	// Configuration item release list.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseLists GetGroupConfigReleaseResultConfigReleaseListArrayInput `pulumi:"configReleaseLists"`
+	// File configuration item release list.Note: This field may return null, which means no valid value was found.
+	FileConfigReleaseLists GetGroupConfigReleaseResultFileConfigReleaseListArrayInput `pulumi:"fileConfigReleaseLists"`
+	// Package Id.Note: This field may return null, which means no valid value was found.
+	PackageId pulumi.StringInput `pulumi:"packageId"`
+	// Package name.Note: This field may return null, which means no valid value was found.
+	PackageName pulumi.StringInput `pulumi:"packageName"`
+	// Package version.Note: This field may return null, which means no valid value was found.
+	PackageVersion pulumi.StringInput `pulumi:"packageVersion"`
+	// Release public config list.
+	PublicConfigReleaseLists GetGroupConfigReleaseResultPublicConfigReleaseListArrayInput `pulumi:"publicConfigReleaseLists"`
+	// image name.Note: This field may return null, which means no valid value was found.
+	RepoName pulumi.StringInput `pulumi:"repoName"`
+	// image tag name.Note: This field may return null, which means no valid value was found.
+	TagName pulumi.StringInput `pulumi:"tagName"`
+}
+
+func (GetGroupConfigReleaseResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResult)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultArgs) ToGetGroupConfigReleaseResultOutput() GetGroupConfigReleaseResultOutput {
+	return i.ToGetGroupConfigReleaseResultOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultArgs) ToGetGroupConfigReleaseResultOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultOutput)
+}
+
+// GetGroupConfigReleaseResultArrayInput is an input type that accepts GetGroupConfigReleaseResultArray and GetGroupConfigReleaseResultArrayOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultArrayInput` via:
+//
+//          GetGroupConfigReleaseResultArray{ GetGroupConfigReleaseResultArgs{...} }
+type GetGroupConfigReleaseResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultArrayOutput() GetGroupConfigReleaseResultArrayOutput
+	ToGetGroupConfigReleaseResultArrayOutputWithContext(context.Context) GetGroupConfigReleaseResultArrayOutput
+}
+
+type GetGroupConfigReleaseResultArray []GetGroupConfigReleaseResultInput
+
+func (GetGroupConfigReleaseResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResult)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultArray) ToGetGroupConfigReleaseResultArrayOutput() GetGroupConfigReleaseResultArrayOutput {
+	return i.ToGetGroupConfigReleaseResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultArray) ToGetGroupConfigReleaseResultArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultArrayOutput)
+}
+
+type GetGroupConfigReleaseResultOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResult)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultOutput) ToGetGroupConfigReleaseResultOutput() GetGroupConfigReleaseResultOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultOutput) ToGetGroupConfigReleaseResultOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultOutput {
+	return o
+}
+
+// Configuration item release list.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) ConfigReleaseLists() GetGroupConfigReleaseResultConfigReleaseListArrayOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) []GetGroupConfigReleaseResultConfigReleaseList {
+		return v.ConfigReleaseLists
+	}).(GetGroupConfigReleaseResultConfigReleaseListArrayOutput)
+}
+
+// File configuration item release list.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) FileConfigReleaseLists() GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) []GetGroupConfigReleaseResultFileConfigReleaseList {
+		return v.FileConfigReleaseLists
+	}).(GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput)
+}
+
+// Package Id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) PackageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) string { return v.PackageId }).(pulumi.StringOutput)
+}
+
+// Package name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) PackageName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) string { return v.PackageName }).(pulumi.StringOutput)
+}
+
+// Package version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) PackageVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) string { return v.PackageVersion }).(pulumi.StringOutput)
+}
+
+// Release public config list.
+func (o GetGroupConfigReleaseResultOutput) PublicConfigReleaseLists() GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) []GetGroupConfigReleaseResultPublicConfigReleaseList {
+		return v.PublicConfigReleaseLists
+	}).(GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput)
+}
+
+// image name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) RepoName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) string { return v.RepoName }).(pulumi.StringOutput)
+}
+
+// image tag name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultOutput) TagName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResult) string { return v.TagName }).(pulumi.StringOutput)
+}
+
+type GetGroupConfigReleaseResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResult)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultArrayOutput) ToGetGroupConfigReleaseResultArrayOutput() GetGroupConfigReleaseResultArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultArrayOutput) ToGetGroupConfigReleaseResultArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultArrayOutput) Index(i pulumi.IntInput) GetGroupConfigReleaseResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupConfigReleaseResult {
+		return vs[0].([]GetGroupConfigReleaseResult)[vs[1].(int)]
+	}).(GetGroupConfigReleaseResultOutput)
+}
+
+type GetGroupConfigReleaseResultConfigReleaseList struct {
+	// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId string `pulumi:"applicationId"`
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId string `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId string `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName string `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId string `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion string `pulumi:"configVersion"`
+	// groupId.
+	GroupId string `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc string `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime string `pulumi:"releaseTime"`
+}
+
+// GetGroupConfigReleaseResultConfigReleaseListInput is an input type that accepts GetGroupConfigReleaseResultConfigReleaseListArgs and GetGroupConfigReleaseResultConfigReleaseListOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultConfigReleaseListInput` via:
+//
+//          GetGroupConfigReleaseResultConfigReleaseListArgs{...}
+type GetGroupConfigReleaseResultConfigReleaseListInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultConfigReleaseListOutput() GetGroupConfigReleaseResultConfigReleaseListOutput
+	ToGetGroupConfigReleaseResultConfigReleaseListOutputWithContext(context.Context) GetGroupConfigReleaseResultConfigReleaseListOutput
+}
+
+type GetGroupConfigReleaseResultConfigReleaseListArgs struct {
+	// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId pulumi.StringInput `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion pulumi.StringInput `pulumi:"configVersion"`
+	// groupId.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc pulumi.StringInput `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime pulumi.StringInput `pulumi:"releaseTime"`
+}
+
+func (GetGroupConfigReleaseResultConfigReleaseListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultConfigReleaseListArgs) ToGetGroupConfigReleaseResultConfigReleaseListOutput() GetGroupConfigReleaseResultConfigReleaseListOutput {
+	return i.ToGetGroupConfigReleaseResultConfigReleaseListOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultConfigReleaseListArgs) ToGetGroupConfigReleaseResultConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultConfigReleaseListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultConfigReleaseListOutput)
+}
+
+// GetGroupConfigReleaseResultConfigReleaseListArrayInput is an input type that accepts GetGroupConfigReleaseResultConfigReleaseListArray and GetGroupConfigReleaseResultConfigReleaseListArrayOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultConfigReleaseListArrayInput` via:
+//
+//          GetGroupConfigReleaseResultConfigReleaseListArray{ GetGroupConfigReleaseResultConfigReleaseListArgs{...} }
+type GetGroupConfigReleaseResultConfigReleaseListArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultConfigReleaseListArrayOutput() GetGroupConfigReleaseResultConfigReleaseListArrayOutput
+	ToGetGroupConfigReleaseResultConfigReleaseListArrayOutputWithContext(context.Context) GetGroupConfigReleaseResultConfigReleaseListArrayOutput
+}
+
+type GetGroupConfigReleaseResultConfigReleaseListArray []GetGroupConfigReleaseResultConfigReleaseListInput
+
+func (GetGroupConfigReleaseResultConfigReleaseListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultConfigReleaseListArray) ToGetGroupConfigReleaseResultConfigReleaseListArrayOutput() GetGroupConfigReleaseResultConfigReleaseListArrayOutput {
+	return i.ToGetGroupConfigReleaseResultConfigReleaseListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultConfigReleaseListArray) ToGetGroupConfigReleaseResultConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultConfigReleaseListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultConfigReleaseListArrayOutput)
+}
+
+type GetGroupConfigReleaseResultConfigReleaseListOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultConfigReleaseListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ToGetGroupConfigReleaseResultConfigReleaseListOutput() GetGroupConfigReleaseResultConfigReleaseListOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ToGetGroupConfigReleaseResultConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultConfigReleaseListOutput {
+	return o
+}
+
+// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Configuration item name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ConfigReleaseId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ConfigReleaseId }).(pulumi.StringOutput)
+}
+
+// Configuration version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ConfigVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ConfigVersion }).(pulumi.StringOutput)
+}
+
+// groupId.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Configuration item release description.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ReleaseDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ReleaseDesc }).(pulumi.StringOutput)
+}
+
+// Configuration item release time.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultConfigReleaseListOutput) ReleaseTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultConfigReleaseList) string { return v.ReleaseTime }).(pulumi.StringOutput)
+}
+
+type GetGroupConfigReleaseResultConfigReleaseListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultConfigReleaseListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultConfigReleaseListArrayOutput() GetGroupConfigReleaseResultConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultConfigReleaseListArrayOutput) Index(i pulumi.IntInput) GetGroupConfigReleaseResultConfigReleaseListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupConfigReleaseResultConfigReleaseList {
+		return vs[0].([]GetGroupConfigReleaseResultConfigReleaseList)[vs[1].(int)]
+	}).(GetGroupConfigReleaseResultConfigReleaseListOutput)
+}
+
+type GetGroupConfigReleaseResultFileConfigReleaseList struct {
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId string `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId string `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName string `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId string `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion string `pulumi:"configVersion"`
+	// groupId.
+	GroupId string `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc string `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime string `pulumi:"releaseTime"`
+}
+
+// GetGroupConfigReleaseResultFileConfigReleaseListInput is an input type that accepts GetGroupConfigReleaseResultFileConfigReleaseListArgs and GetGroupConfigReleaseResultFileConfigReleaseListOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultFileConfigReleaseListInput` via:
+//
+//          GetGroupConfigReleaseResultFileConfigReleaseListArgs{...}
+type GetGroupConfigReleaseResultFileConfigReleaseListInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultFileConfigReleaseListOutput() GetGroupConfigReleaseResultFileConfigReleaseListOutput
+	ToGetGroupConfigReleaseResultFileConfigReleaseListOutputWithContext(context.Context) GetGroupConfigReleaseResultFileConfigReleaseListOutput
+}
+
+type GetGroupConfigReleaseResultFileConfigReleaseListArgs struct {
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId pulumi.StringInput `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion pulumi.StringInput `pulumi:"configVersion"`
+	// groupId.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc pulumi.StringInput `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime pulumi.StringInput `pulumi:"releaseTime"`
+}
+
+func (GetGroupConfigReleaseResultFileConfigReleaseListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultFileConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultFileConfigReleaseListArgs) ToGetGroupConfigReleaseResultFileConfigReleaseListOutput() GetGroupConfigReleaseResultFileConfigReleaseListOutput {
+	return i.ToGetGroupConfigReleaseResultFileConfigReleaseListOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultFileConfigReleaseListArgs) ToGetGroupConfigReleaseResultFileConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultFileConfigReleaseListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultFileConfigReleaseListOutput)
+}
+
+// GetGroupConfigReleaseResultFileConfigReleaseListArrayInput is an input type that accepts GetGroupConfigReleaseResultFileConfigReleaseListArray and GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultFileConfigReleaseListArrayInput` via:
+//
+//          GetGroupConfigReleaseResultFileConfigReleaseListArray{ GetGroupConfigReleaseResultFileConfigReleaseListArgs{...} }
+type GetGroupConfigReleaseResultFileConfigReleaseListArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutput() GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput
+	ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutputWithContext(context.Context) GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput
+}
+
+type GetGroupConfigReleaseResultFileConfigReleaseListArray []GetGroupConfigReleaseResultFileConfigReleaseListInput
+
+func (GetGroupConfigReleaseResultFileConfigReleaseListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultFileConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultFileConfigReleaseListArray) ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutput() GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput {
+	return i.ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultFileConfigReleaseListArray) ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput)
+}
+
+type GetGroupConfigReleaseResultFileConfigReleaseListOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultFileConfigReleaseListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultFileConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ToGetGroupConfigReleaseResultFileConfigReleaseListOutput() GetGroupConfigReleaseResultFileConfigReleaseListOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ToGetGroupConfigReleaseResultFileConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultFileConfigReleaseListOutput {
+	return o
+}
+
+// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Configuration item name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ConfigReleaseId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ConfigReleaseId }).(pulumi.StringOutput)
+}
+
+// Configuration version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ConfigVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ConfigVersion }).(pulumi.StringOutput)
+}
+
+// groupId.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Configuration item release description.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ReleaseDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ReleaseDesc }).(pulumi.StringOutput)
+}
+
+// Configuration item release time.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultFileConfigReleaseListOutput) ReleaseTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultFileConfigReleaseList) string { return v.ReleaseTime }).(pulumi.StringOutput)
+}
+
+type GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultFileConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutput() GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultFileConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput) Index(i pulumi.IntInput) GetGroupConfigReleaseResultFileConfigReleaseListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupConfigReleaseResultFileConfigReleaseList {
+		return vs[0].([]GetGroupConfigReleaseResultFileConfigReleaseList)[vs[1].(int)]
+	}).(GetGroupConfigReleaseResultFileConfigReleaseListOutput)
+}
+
+type GetGroupConfigReleaseResultPublicConfigReleaseList struct {
+	// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId string `pulumi:"applicationId"`
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId string `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId string `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName string `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId string `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion string `pulumi:"configVersion"`
+	// groupId.
+	GroupId string `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc string `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime string `pulumi:"releaseTime"`
+}
+
+// GetGroupConfigReleaseResultPublicConfigReleaseListInput is an input type that accepts GetGroupConfigReleaseResultPublicConfigReleaseListArgs and GetGroupConfigReleaseResultPublicConfigReleaseListOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultPublicConfigReleaseListInput` via:
+//
+//          GetGroupConfigReleaseResultPublicConfigReleaseListArgs{...}
+type GetGroupConfigReleaseResultPublicConfigReleaseListInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultPublicConfigReleaseListOutput() GetGroupConfigReleaseResultPublicConfigReleaseListOutput
+	ToGetGroupConfigReleaseResultPublicConfigReleaseListOutputWithContext(context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListOutput
+}
+
+type GetGroupConfigReleaseResultPublicConfigReleaseListArgs struct {
+	// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Configuration item name.Note: This field may return null, which means no valid value was found.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+	ConfigReleaseId pulumi.StringInput `pulumi:"configReleaseId"`
+	// Configuration version.Note: This field may return null, which means no valid value was found.
+	ConfigVersion pulumi.StringInput `pulumi:"configVersion"`
+	// groupId.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Configuration item release description.Note: This field may return null, which means no valid value was found.
+	ReleaseDesc pulumi.StringInput `pulumi:"releaseDesc"`
+	// Configuration item release time.Note: This field may return null, which means no valid value was found.
+	ReleaseTime pulumi.StringInput `pulumi:"releaseTime"`
+}
+
+func (GetGroupConfigReleaseResultPublicConfigReleaseListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultPublicConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultPublicConfigReleaseListArgs) ToGetGroupConfigReleaseResultPublicConfigReleaseListOutput() GetGroupConfigReleaseResultPublicConfigReleaseListOutput {
+	return i.ToGetGroupConfigReleaseResultPublicConfigReleaseListOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultPublicConfigReleaseListArgs) ToGetGroupConfigReleaseResultPublicConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultPublicConfigReleaseListOutput)
+}
+
+// GetGroupConfigReleaseResultPublicConfigReleaseListArrayInput is an input type that accepts GetGroupConfigReleaseResultPublicConfigReleaseListArray and GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput values.
+// You can construct a concrete instance of `GetGroupConfigReleaseResultPublicConfigReleaseListArrayInput` via:
+//
+//          GetGroupConfigReleaseResultPublicConfigReleaseListArray{ GetGroupConfigReleaseResultPublicConfigReleaseListArgs{...} }
+type GetGroupConfigReleaseResultPublicConfigReleaseListArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput() GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput
+	ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutputWithContext(context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput
+}
+
+type GetGroupConfigReleaseResultPublicConfigReleaseListArray []GetGroupConfigReleaseResultPublicConfigReleaseListInput
+
+func (GetGroupConfigReleaseResultPublicConfigReleaseListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultPublicConfigReleaseList)(nil)).Elem()
+}
+
+func (i GetGroupConfigReleaseResultPublicConfigReleaseListArray) ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput() GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput {
+	return i.ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupConfigReleaseResultPublicConfigReleaseListArray) ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput)
+}
+
+type GetGroupConfigReleaseResultPublicConfigReleaseListOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupConfigReleaseResultPublicConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ToGetGroupConfigReleaseResultPublicConfigReleaseListOutput() GetGroupConfigReleaseResultPublicConfigReleaseListOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ToGetGroupConfigReleaseResultPublicConfigReleaseListOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListOutput {
+	return o
+}
+
+// Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Configuration item  ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Configuration item name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Configuration item release ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ConfigReleaseId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ConfigReleaseId }).(pulumi.StringOutput)
+}
+
+// Configuration version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ConfigVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ConfigVersion }).(pulumi.StringOutput)
+}
+
+// groupId.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Configuration item release group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Configuration item release description.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ReleaseDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ReleaseDesc }).(pulumi.StringOutput)
+}
+
+// Configuration item release time.Note: This field may return null, which means no valid value was found.
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListOutput) ReleaseTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupConfigReleaseResultPublicConfigReleaseList) string { return v.ReleaseTime }).(pulumi.StringOutput)
+}
+
+type GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupConfigReleaseResultPublicConfigReleaseList)(nil)).Elem()
+}
+
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput() GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput) ToGetGroupConfigReleaseResultPublicConfigReleaseListArrayOutputWithContext(ctx context.Context) GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput {
+	return o
+}
+
+func (o GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput) Index(i pulumi.IntInput) GetGroupConfigReleaseResultPublicConfigReleaseListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupConfigReleaseResultPublicConfigReleaseList {
+		return vs[0].([]GetGroupConfigReleaseResultPublicConfigReleaseList)[vs[1].(int)]
+	}).(GetGroupConfigReleaseResultPublicConfigReleaseListOutput)
+}
+
+type GetGroupGatewaysResult struct {
+	// api group Info.
+	Contents []GetGroupGatewaysResultContent `pulumi:"contents"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGroupGatewaysResultInput is an input type that accepts GetGroupGatewaysResultArgs and GetGroupGatewaysResultOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultInput` via:
+//
+//          GetGroupGatewaysResultArgs{...}
+type GetGroupGatewaysResultInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultOutput() GetGroupGatewaysResultOutput
+	ToGetGroupGatewaysResultOutputWithContext(context.Context) GetGroupGatewaysResultOutput
+}
+
+type GetGroupGatewaysResultArgs struct {
+	// api group Info.
+	Contents GetGroupGatewaysResultContentArrayInput `pulumi:"contents"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGroupGatewaysResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResult)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultArgs) ToGetGroupGatewaysResultOutput() GetGroupGatewaysResultOutput {
+	return i.ToGetGroupGatewaysResultOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultArgs) ToGetGroupGatewaysResultOutputWithContext(ctx context.Context) GetGroupGatewaysResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultOutput)
+}
+
+// GetGroupGatewaysResultArrayInput is an input type that accepts GetGroupGatewaysResultArray and GetGroupGatewaysResultArrayOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultArrayInput` via:
+//
+//          GetGroupGatewaysResultArray{ GetGroupGatewaysResultArgs{...} }
+type GetGroupGatewaysResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultArrayOutput() GetGroupGatewaysResultArrayOutput
+	ToGetGroupGatewaysResultArrayOutputWithContext(context.Context) GetGroupGatewaysResultArrayOutput
+}
+
+type GetGroupGatewaysResultArray []GetGroupGatewaysResultInput
+
+func (GetGroupGatewaysResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResult)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultArray) ToGetGroupGatewaysResultArrayOutput() GetGroupGatewaysResultArrayOutput {
+	return i.ToGetGroupGatewaysResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultArray) ToGetGroupGatewaysResultArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultArrayOutput)
+}
+
+type GetGroupGatewaysResultOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResult)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultOutput) ToGetGroupGatewaysResultOutput() GetGroupGatewaysResultOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultOutput) ToGetGroupGatewaysResultOutputWithContext(ctx context.Context) GetGroupGatewaysResultOutput {
+	return o
+}
+
+// api group Info.
+func (o GetGroupGatewaysResultOutput) Contents() GetGroupGatewaysResultContentArrayOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResult) []GetGroupGatewaysResultContent { return v.Contents }).(GetGroupGatewaysResultContentArrayOutput)
+}
+
+// total count.
+func (o GetGroupGatewaysResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGroupGatewaysResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResult)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultArrayOutput) ToGetGroupGatewaysResultArrayOutput() GetGroupGatewaysResultArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultArrayOutput) ToGetGroupGatewaysResultArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultArrayOutput) Index(i pulumi.IntInput) GetGroupGatewaysResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupGatewaysResult {
+		return vs[0].([]GetGroupGatewaysResult)[vs[1].(int)]
+	}).(GetGroupGatewaysResultOutput)
+}
+
+type GetGroupGatewaysResultContent struct {
+	// ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+	AclMode string `pulumi:"aclMode"`
+	// Number of APIs.Note: This field may return null, which means no valid value was found.
+	ApiCount int `pulumi:"apiCount"`
+	// Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+	AuthType string `pulumi:"authType"`
+	// Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+	BindedGatewayDeployGroups []GetGroupGatewaysResultContentBindedGatewayDeployGroup `pulumi:"bindedGatewayDeployGroups"`
+	// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+	CreatedTime string `pulumi:"createdTime"`
+	// Description.Note: This field may return null, which means no valid value was found.
+	Description string `pulumi:"description"`
+	// Gateway instance ID.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceId string `pulumi:"gatewayInstanceId"`
+	// Gateway instance type.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceType string `pulumi:"gatewayInstanceType"`
+	// api group context.Note: This field may return null, which means no valid value was found.
+	GroupContext string `pulumi:"groupContext"`
+	// api group id.Note: This field may return null, which means no valid value was found.
+	GroupId string `pulumi:"groupId"`
+	// api group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+	GroupType string `pulumi:"groupType"`
+	// Namespace parameter key.Note: This field may return null, which means no valid value was found.
+	NamespaceNameKey string `pulumi:"namespaceNameKey"`
+	// Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+	NamespaceNameKeyPosition string `pulumi:"namespaceNameKeyPosition"`
+	// Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+	ServiceNameKey string `pulumi:"serviceNameKey"`
+	// Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+	ServiceNameKeyPosition string `pulumi:"serviceNameKeyPosition"`
+	// Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+	Status string `pulumi:"status"`
+	// Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+	UpdatedTime string `pulumi:"updatedTime"`
+}
+
+// GetGroupGatewaysResultContentInput is an input type that accepts GetGroupGatewaysResultContentArgs and GetGroupGatewaysResultContentOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultContentInput` via:
+//
+//          GetGroupGatewaysResultContentArgs{...}
+type GetGroupGatewaysResultContentInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultContentOutput() GetGroupGatewaysResultContentOutput
+	ToGetGroupGatewaysResultContentOutputWithContext(context.Context) GetGroupGatewaysResultContentOutput
+}
+
+type GetGroupGatewaysResultContentArgs struct {
+	// ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+	AclMode pulumi.StringInput `pulumi:"aclMode"`
+	// Number of APIs.Note: This field may return null, which means no valid value was found.
+	ApiCount pulumi.IntInput `pulumi:"apiCount"`
+	// Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+	AuthType pulumi.StringInput `pulumi:"authType"`
+	// Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+	BindedGatewayDeployGroups GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayInput `pulumi:"bindedGatewayDeployGroups"`
+	// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Description.Note: This field may return null, which means no valid value was found.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Gateway instance ID.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceId pulumi.StringInput `pulumi:"gatewayInstanceId"`
+	// Gateway instance type.Note: This field may return null, which means no valid value was found.
+	GatewayInstanceType pulumi.StringInput `pulumi:"gatewayInstanceType"`
+	// api group context.Note: This field may return null, which means no valid value was found.
+	GroupContext pulumi.StringInput `pulumi:"groupContext"`
+	// api group id.Note: This field may return null, which means no valid value was found.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// api group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+	GroupType pulumi.StringInput `pulumi:"groupType"`
+	// Namespace parameter key.Note: This field may return null, which means no valid value was found.
+	NamespaceNameKey pulumi.StringInput `pulumi:"namespaceNameKey"`
+	// Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+	NamespaceNameKeyPosition pulumi.StringInput `pulumi:"namespaceNameKeyPosition"`
+	// Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+	ServiceNameKey pulumi.StringInput `pulumi:"serviceNameKey"`
+	// Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+	ServiceNameKeyPosition pulumi.StringInput `pulumi:"serviceNameKeyPosition"`
+	// Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+}
+
+func (GetGroupGatewaysResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResultContent)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultContentArgs) ToGetGroupGatewaysResultContentOutput() GetGroupGatewaysResultContentOutput {
+	return i.ToGetGroupGatewaysResultContentOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultContentArgs) ToGetGroupGatewaysResultContentOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultContentOutput)
+}
+
+// GetGroupGatewaysResultContentArrayInput is an input type that accepts GetGroupGatewaysResultContentArray and GetGroupGatewaysResultContentArrayOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultContentArrayInput` via:
+//
+//          GetGroupGatewaysResultContentArray{ GetGroupGatewaysResultContentArgs{...} }
+type GetGroupGatewaysResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultContentArrayOutput() GetGroupGatewaysResultContentArrayOutput
+	ToGetGroupGatewaysResultContentArrayOutputWithContext(context.Context) GetGroupGatewaysResultContentArrayOutput
+}
+
+type GetGroupGatewaysResultContentArray []GetGroupGatewaysResultContentInput
+
+func (GetGroupGatewaysResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResultContent)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultContentArray) ToGetGroupGatewaysResultContentArrayOutput() GetGroupGatewaysResultContentArrayOutput {
+	return i.ToGetGroupGatewaysResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultContentArray) ToGetGroupGatewaysResultContentArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultContentArrayOutput)
+}
+
+type GetGroupGatewaysResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResultContent)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultContentOutput) ToGetGroupGatewaysResultContentOutput() GetGroupGatewaysResultContentOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentOutput) ToGetGroupGatewaysResultContentOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentOutput {
+	return o
+}
+
+// ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) AclMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.AclMode }).(pulumi.StringOutput)
+}
+
+// Number of APIs.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) ApiCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) int { return v.ApiCount }).(pulumi.IntOutput)
+}
+
+// Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) AuthType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.AuthType }).(pulumi.StringOutput)
+}
+
+// Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) BindedGatewayDeployGroups() GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) []GetGroupGatewaysResultContentBindedGatewayDeployGroup {
+		return v.BindedGatewayDeployGroups
+	}).(GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput)
+}
+
+// Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Description.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Gateway instance ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GatewayInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GatewayInstanceId }).(pulumi.StringOutput)
+}
+
+// Gateway instance type.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GatewayInstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GatewayInstanceType }).(pulumi.StringOutput)
+}
+
+// api group context.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GroupContext() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GroupContext }).(pulumi.StringOutput)
+}
+
+// api group id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// api group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) GroupType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.GroupType }).(pulumi.StringOutput)
+}
+
+// Namespace parameter key.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) NamespaceNameKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.NamespaceNameKey }).(pulumi.StringOutput)
+}
+
+// Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) NamespaceNameKeyPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.NamespaceNameKeyPosition }).(pulumi.StringOutput)
+}
+
+// Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) ServiceNameKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.ServiceNameKey }).(pulumi.StringOutput)
+}
+
+// Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) ServiceNameKeyPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.ServiceNameKeyPosition }).(pulumi.StringOutput)
+}
+
+// Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContent) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+type GetGroupGatewaysResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResultContent)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultContentArrayOutput) ToGetGroupGatewaysResultContentArrayOutput() GetGroupGatewaysResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentArrayOutput) ToGetGroupGatewaysResultContentArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentArrayOutput) Index(i pulumi.IntInput) GetGroupGatewaysResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupGatewaysResultContent {
+		return vs[0].([]GetGroupGatewaysResultContent)[vs[1].(int)]
+	}).(GetGroupGatewaysResultContentOutput)
+}
+
+type GetGroupGatewaysResultContentBindedGatewayDeployGroup struct {
+	// application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId string `pulumi:"applicationId"`
+	// application name.Note: This field may return null, which means no valid value was found.
+	ApplicationName string `pulumi:"applicationName"`
+	// Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+	ApplicationType string `pulumi:"applicationType"`
+	// Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+	ClusterType string `pulumi:"clusterType"`
+	// Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+	DeployGroupId string `pulumi:"deployGroupId"`
+	// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+	DeployGroupName string `pulumi:"deployGroupName"`
+	// Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+	GroupStatus string `pulumi:"groupStatus"`
+}
+
+// GetGroupGatewaysResultContentBindedGatewayDeployGroupInput is an input type that accepts GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs and GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultContentBindedGatewayDeployGroupInput` via:
+//
+//          GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs{...}
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput
+	ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutputWithContext(context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput
+}
+
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs struct {
+	// application ID.Note: This field may return null, which means no valid value was found.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// application name.Note: This field may return null, which means no valid value was found.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+	ApplicationType pulumi.StringInput `pulumi:"applicationType"`
+	// Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+	DeployGroupId pulumi.StringInput `pulumi:"deployGroupId"`
+	// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+	DeployGroupName pulumi.StringInput `pulumi:"deployGroupName"`
+	// Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+	GroupStatus pulumi.StringInput `pulumi:"groupStatus"`
+}
+
+func (GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput {
+	return i.ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput)
+}
+
+// GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayInput is an input type that accepts GetGroupGatewaysResultContentBindedGatewayDeployGroupArray and GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput values.
+// You can construct a concrete instance of `GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayInput` via:
+//
+//          GetGroupGatewaysResultContentBindedGatewayDeployGroupArray{ GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs{...} }
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput
+	ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutputWithContext(context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput
+}
+
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupArray []GetGroupGatewaysResultContentBindedGatewayDeployGroupInput
+
+func (GetGroupGatewaysResultContentBindedGatewayDeployGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (i GetGroupGatewaysResultContentBindedGatewayDeployGroupArray) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput {
+	return i.ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupGatewaysResultContentBindedGatewayDeployGroupArray) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput)
+}
+
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupGatewaysResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput {
+	return o
+}
+
+// application ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// application name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ApplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.ApplicationType }).(pulumi.StringOutput)
+}
+
+// Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) DeployGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.DeployGroupId }).(pulumi.StringOutput)
+}
+
+// Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) DeployGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.DeployGroupName }).(pulumi.StringOutput)
+}
+
+// Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput) GroupStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupGatewaysResultContentBindedGatewayDeployGroup) string { return v.GroupStatus }).(pulumi.StringOutput)
+}
+
+type GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupGatewaysResultContentBindedGatewayDeployGroup)(nil)).Elem()
+}
+
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput() GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput) ToGetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutputWithContext(ctx context.Context) GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput {
+	return o
+}
+
+func (o GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput) Index(i pulumi.IntInput) GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupGatewaysResultContentBindedGatewayDeployGroup {
+		return vs[0].([]GetGroupGatewaysResultContentBindedGatewayDeployGroup)[vs[1].(int)]
+	}).(GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput)
+}
+
+type GetGroupInstancesResult struct {
+	// List of machine instances.Note: This field may return null, which means no valid value was found.
+	Contents []GetGroupInstancesResultContent `pulumi:"contents"`
+	// Total number of machine instances.Note: This field may return null, which means no valid value was found.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGroupInstancesResultInput is an input type that accepts GetGroupInstancesResultArgs and GetGroupInstancesResultOutput values.
+// You can construct a concrete instance of `GetGroupInstancesResultInput` via:
+//
+//          GetGroupInstancesResultArgs{...}
+type GetGroupInstancesResultInput interface {
+	pulumi.Input
+
+	ToGetGroupInstancesResultOutput() GetGroupInstancesResultOutput
+	ToGetGroupInstancesResultOutputWithContext(context.Context) GetGroupInstancesResultOutput
+}
+
+type GetGroupInstancesResultArgs struct {
+	// List of machine instances.Note: This field may return null, which means no valid value was found.
+	Contents GetGroupInstancesResultContentArrayInput `pulumi:"contents"`
+	// Total number of machine instances.Note: This field may return null, which means no valid value was found.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGroupInstancesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupInstancesResult)(nil)).Elem()
+}
+
+func (i GetGroupInstancesResultArgs) ToGetGroupInstancesResultOutput() GetGroupInstancesResultOutput {
+	return i.ToGetGroupInstancesResultOutputWithContext(context.Background())
+}
+
+func (i GetGroupInstancesResultArgs) ToGetGroupInstancesResultOutputWithContext(ctx context.Context) GetGroupInstancesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupInstancesResultOutput)
+}
+
+// GetGroupInstancesResultArrayInput is an input type that accepts GetGroupInstancesResultArray and GetGroupInstancesResultArrayOutput values.
+// You can construct a concrete instance of `GetGroupInstancesResultArrayInput` via:
+//
+//          GetGroupInstancesResultArray{ GetGroupInstancesResultArgs{...} }
+type GetGroupInstancesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupInstancesResultArrayOutput() GetGroupInstancesResultArrayOutput
+	ToGetGroupInstancesResultArrayOutputWithContext(context.Context) GetGroupInstancesResultArrayOutput
+}
+
+type GetGroupInstancesResultArray []GetGroupInstancesResultInput
+
+func (GetGroupInstancesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupInstancesResult)(nil)).Elem()
+}
+
+func (i GetGroupInstancesResultArray) ToGetGroupInstancesResultArrayOutput() GetGroupInstancesResultArrayOutput {
+	return i.ToGetGroupInstancesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupInstancesResultArray) ToGetGroupInstancesResultArrayOutputWithContext(ctx context.Context) GetGroupInstancesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupInstancesResultArrayOutput)
+}
+
+type GetGroupInstancesResultOutput struct{ *pulumi.OutputState }
+
+func (GetGroupInstancesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupInstancesResult)(nil)).Elem()
+}
+
+func (o GetGroupInstancesResultOutput) ToGetGroupInstancesResultOutput() GetGroupInstancesResultOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultOutput) ToGetGroupInstancesResultOutputWithContext(ctx context.Context) GetGroupInstancesResultOutput {
+	return o
+}
+
+// List of machine instances.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultOutput) Contents() GetGroupInstancesResultContentArrayOutput {
+	return o.ApplyT(func(v GetGroupInstancesResult) []GetGroupInstancesResultContent { return v.Contents }).(GetGroupInstancesResultContentArrayOutput)
+}
+
+// Total number of machine instances.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupInstancesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGroupInstancesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupInstancesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupInstancesResult)(nil)).Elem()
+}
+
+func (o GetGroupInstancesResultArrayOutput) ToGetGroupInstancesResultArrayOutput() GetGroupInstancesResultArrayOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultArrayOutput) ToGetGroupInstancesResultArrayOutputWithContext(ctx context.Context) GetGroupInstancesResultArrayOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultArrayOutput) Index(i pulumi.IntInput) GetGroupInstancesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupInstancesResult {
+		return vs[0].([]GetGroupInstancesResult)[vs[1].(int)]
+	}).(GetGroupInstancesResultOutput)
+}
+
+type GetGroupInstancesResultContent struct {
+	// Agent version.Note: This field may return null, which means no valid value was found.
+	AgentVersion string `pulumi:"agentVersion"`
+	// Application id.Note: This field may return null, which means no valid value was found.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application name. Note: This field may return null, which means no valid value was found.
+	ApplicationName string `pulumi:"applicationName"`
+	// application resource id.Note: This field may return null, which means no valid value was found.
+	ApplicationResourceType string `pulumi:"applicationResourceType"`
+	// Application id.Note: This field may return null, which means no valid value was found.
+	ApplicationType string `pulumi:"applicationType"`
+	// Cluster id.Note: This field may return null, which means no valid value was found.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name. Note: This field may return null, which means no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster type.Note: This field may return null, which means no valid value was found.
+	ClusterType string `pulumi:"clusterType"`
+	// Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+	CountInTsf int `pulumi:"countInTsf"`
+	// group id.
+	GroupId string `pulumi:"groupId"`
+	// Group name.Note: This field may return null, which means no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+	InstanceAvailableStatus string `pulumi:"instanceAvailableStatus"`
+	// machine instance charge type.Note: This field may return null, which means no valid value was found.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+	InstanceCreatedTime string `pulumi:"instanceCreatedTime"`
+	// Description.Note: This field may return null, which means no valid value was found.
+	InstanceDesc string `pulumi:"instanceDesc"`
+	// Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+	InstanceExpiredTime string `pulumi:"instanceExpiredTime"`
+	// Machine instance ID.Note: This field may return null, which means no valid value was found.
+	InstanceId string `pulumi:"instanceId"`
+	// InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+	InstanceImportMode string `pulumi:"instanceImportMode"`
+	// Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceLimitCpu float64 `pulumi:"instanceLimitCpu"`
+	// Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceLimitMem float64 `pulumi:"instanceLimitMem"`
+	// Machine name.Note: This field may return null, which means no valid value was found.
+	InstanceName string `pulumi:"instanceName"`
+	// instance pkg version.Note: This field may return null, which means no valid value was found.
+	InstancePkgVersion string `pulumi:"instancePkgVersion"`
+	// VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceTotalCpu float64 `pulumi:"instanceTotalCpu"`
+	// Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceTotalMem float64 `pulumi:"instanceTotalMem"`
+	// CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceUsedCpu float64 `pulumi:"instanceUsedCpu"`
+	// Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceUsedMem float64 `pulumi:"instanceUsedMem"`
+	// Instance zone id.Note: This field may return null, which means no valid value was found.
+	InstanceZoneId string `pulumi:"instanceZoneId"`
+	// Private IP address.Note: This field may return null, which means no valid value was found.
+	LanIp string `pulumi:"lanIp"`
+	// Namespace id.Note: This field may return null, which means no valid value was found.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Container host instance ID.Note: This field may return null, which means no valid value was found.
+	NodeInstanceId string `pulumi:"nodeInstanceId"`
+	// Execution status of the instance.Note: This field may return null, which means no valid value was found.
+	OperationState int `pulumi:"operationState"`
+	// Health checking reason.Note: This field may return null, which means no valid value was found.
+	Reason string `pulumi:"reason"`
+	// Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+	RestrictState string `pulumi:"restrictState"`
+	// Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+	ServiceInstanceStatus string `pulumi:"serviceInstanceStatus"`
+	// Sidecar status.Note: This field may return null, which means no valid value was found.
+	ServiceSidecarStatus string `pulumi:"serviceSidecarStatus"`
+	// Update time.Note: This field may return null, which means no valid value was found.
+	UpdateTime string `pulumi:"updateTime"`
+	// Public IP address.Note: This field may return null, which means no valid value was found.
+	WanIp string `pulumi:"wanIp"`
+}
+
+// GetGroupInstancesResultContentInput is an input type that accepts GetGroupInstancesResultContentArgs and GetGroupInstancesResultContentOutput values.
+// You can construct a concrete instance of `GetGroupInstancesResultContentInput` via:
+//
+//          GetGroupInstancesResultContentArgs{...}
+type GetGroupInstancesResultContentInput interface {
+	pulumi.Input
+
+	ToGetGroupInstancesResultContentOutput() GetGroupInstancesResultContentOutput
+	ToGetGroupInstancesResultContentOutputWithContext(context.Context) GetGroupInstancesResultContentOutput
+}
+
+type GetGroupInstancesResultContentArgs struct {
+	// Agent version.Note: This field may return null, which means no valid value was found.
+	AgentVersion pulumi.StringInput `pulumi:"agentVersion"`
+	// Application id.Note: This field may return null, which means no valid value was found.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application name. Note: This field may return null, which means no valid value was found.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// application resource id.Note: This field may return null, which means no valid value was found.
+	ApplicationResourceType pulumi.StringInput `pulumi:"applicationResourceType"`
+	// Application id.Note: This field may return null, which means no valid value was found.
+	ApplicationType pulumi.StringInput `pulumi:"applicationType"`
+	// Cluster id.Note: This field may return null, which means no valid value was found.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name. Note: This field may return null, which means no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster type.Note: This field may return null, which means no valid value was found.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+	CountInTsf pulumi.IntInput `pulumi:"countInTsf"`
+	// group id.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Group name.Note: This field may return null, which means no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+	InstanceAvailableStatus pulumi.StringInput `pulumi:"instanceAvailableStatus"`
+	// machine instance charge type.Note: This field may return null, which means no valid value was found.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+	InstanceCreatedTime pulumi.StringInput `pulumi:"instanceCreatedTime"`
+	// Description.Note: This field may return null, which means no valid value was found.
+	InstanceDesc pulumi.StringInput `pulumi:"instanceDesc"`
+	// Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+	InstanceExpiredTime pulumi.StringInput `pulumi:"instanceExpiredTime"`
+	// Machine instance ID.Note: This field may return null, which means no valid value was found.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+	InstanceImportMode pulumi.StringInput `pulumi:"instanceImportMode"`
+	// Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceLimitCpu pulumi.Float64Input `pulumi:"instanceLimitCpu"`
+	// Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceLimitMem pulumi.Float64Input `pulumi:"instanceLimitMem"`
+	// Machine name.Note: This field may return null, which means no valid value was found.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// instance pkg version.Note: This field may return null, which means no valid value was found.
+	InstancePkgVersion pulumi.StringInput `pulumi:"instancePkgVersion"`
+	// VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceTotalCpu pulumi.Float64Input `pulumi:"instanceTotalCpu"`
+	// Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceTotalMem pulumi.Float64Input `pulumi:"instanceTotalMem"`
+	// CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceUsedCpu pulumi.Float64Input `pulumi:"instanceUsedCpu"`
+	// Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+	InstanceUsedMem pulumi.Float64Input `pulumi:"instanceUsedMem"`
+	// Instance zone id.Note: This field may return null, which means no valid value was found.
+	InstanceZoneId pulumi.StringInput `pulumi:"instanceZoneId"`
+	// Private IP address.Note: This field may return null, which means no valid value was found.
+	LanIp pulumi.StringInput `pulumi:"lanIp"`
+	// Namespace id.Note: This field may return null, which means no valid value was found.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Namespace name.Note: This field may return null, which means no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Container host instance ID.Note: This field may return null, which means no valid value was found.
+	NodeInstanceId pulumi.StringInput `pulumi:"nodeInstanceId"`
+	// Execution status of the instance.Note: This field may return null, which means no valid value was found.
+	OperationState pulumi.IntInput `pulumi:"operationState"`
+	// Health checking reason.Note: This field may return null, which means no valid value was found.
+	Reason pulumi.StringInput `pulumi:"reason"`
+	// Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+	RestrictState pulumi.StringInput `pulumi:"restrictState"`
+	// Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+	ServiceInstanceStatus pulumi.StringInput `pulumi:"serviceInstanceStatus"`
+	// Sidecar status.Note: This field may return null, which means no valid value was found.
+	ServiceSidecarStatus pulumi.StringInput `pulumi:"serviceSidecarStatus"`
+	// Update time.Note: This field may return null, which means no valid value was found.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Public IP address.Note: This field may return null, which means no valid value was found.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+}
+
+func (GetGroupInstancesResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupInstancesResultContent)(nil)).Elem()
+}
+
+func (i GetGroupInstancesResultContentArgs) ToGetGroupInstancesResultContentOutput() GetGroupInstancesResultContentOutput {
+	return i.ToGetGroupInstancesResultContentOutputWithContext(context.Background())
+}
+
+func (i GetGroupInstancesResultContentArgs) ToGetGroupInstancesResultContentOutputWithContext(ctx context.Context) GetGroupInstancesResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupInstancesResultContentOutput)
+}
+
+// GetGroupInstancesResultContentArrayInput is an input type that accepts GetGroupInstancesResultContentArray and GetGroupInstancesResultContentArrayOutput values.
+// You can construct a concrete instance of `GetGroupInstancesResultContentArrayInput` via:
+//
+//          GetGroupInstancesResultContentArray{ GetGroupInstancesResultContentArgs{...} }
+type GetGroupInstancesResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupInstancesResultContentArrayOutput() GetGroupInstancesResultContentArrayOutput
+	ToGetGroupInstancesResultContentArrayOutputWithContext(context.Context) GetGroupInstancesResultContentArrayOutput
+}
+
+type GetGroupInstancesResultContentArray []GetGroupInstancesResultContentInput
+
+func (GetGroupInstancesResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupInstancesResultContent)(nil)).Elem()
+}
+
+func (i GetGroupInstancesResultContentArray) ToGetGroupInstancesResultContentArrayOutput() GetGroupInstancesResultContentArrayOutput {
+	return i.ToGetGroupInstancesResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupInstancesResultContentArray) ToGetGroupInstancesResultContentArrayOutputWithContext(ctx context.Context) GetGroupInstancesResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupInstancesResultContentArrayOutput)
+}
+
+type GetGroupInstancesResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetGroupInstancesResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupInstancesResultContent)(nil)).Elem()
+}
+
+func (o GetGroupInstancesResultContentOutput) ToGetGroupInstancesResultContentOutput() GetGroupInstancesResultContentOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultContentOutput) ToGetGroupInstancesResultContentOutputWithContext(ctx context.Context) GetGroupInstancesResultContentOutput {
+	return o
+}
+
+// Agent version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) AgentVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.AgentVersion }).(pulumi.StringOutput)
+}
+
+// Application id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application name. Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// application resource id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ApplicationResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ApplicationResourceType }).(pulumi.StringOutput)
+}
+
+// Application id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ApplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ApplicationType }).(pulumi.StringOutput)
+}
+
+// Cluster id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name. Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster type.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) CountInTsf() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) int { return v.CountInTsf }).(pulumi.IntOutput)
+}
+
+// group id.
+func (o GetGroupInstancesResultContentOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Group name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceAvailableStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceAvailableStatus }).(pulumi.StringOutput)
+}
+
+// machine instance charge type.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceCreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceCreatedTime }).(pulumi.StringOutput)
+}
+
+// Description.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceDesc }).(pulumi.StringOutput)
+}
+
+// Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceExpiredTime }).(pulumi.StringOutput)
+}
+
+// Machine instance ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceImportMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceImportMode }).(pulumi.StringOutput)
+}
+
+// Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceLimitCpu() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceLimitCpu }).(pulumi.Float64Output)
+}
+
+// Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceLimitMem() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceLimitMem }).(pulumi.Float64Output)
+}
+
+// Machine name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// instance pkg version.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstancePkgVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstancePkgVersion }).(pulumi.StringOutput)
+}
+
+// VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+// Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceTotalCpu() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceTotalCpu }).(pulumi.Float64Output)
+}
+
+// Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceTotalMem() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceTotalMem }).(pulumi.Float64Output)
+}
+
+// CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceUsedCpu() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceUsedCpu }).(pulumi.Float64Output)
+}
+
+// Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceUsedMem() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) float64 { return v.InstanceUsedMem }).(pulumi.Float64Output)
+}
+
+// Instance zone id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) InstanceZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.InstanceZoneId }).(pulumi.StringOutput)
+}
+
+// Private IP address.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) LanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.LanIp }).(pulumi.StringOutput)
+}
+
+// Namespace id.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Namespace name.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Container host instance ID.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) NodeInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.NodeInstanceId }).(pulumi.StringOutput)
+}
+
+// Execution status of the instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) OperationState() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) int { return v.OperationState }).(pulumi.IntOutput)
+}
+
+// Health checking reason.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) Reason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.Reason }).(pulumi.StringOutput)
+}
+
+// Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) RestrictState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.RestrictState }).(pulumi.StringOutput)
+}
+
+// Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ServiceInstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ServiceInstanceStatus }).(pulumi.StringOutput)
+}
+
+// Sidecar status.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) ServiceSidecarStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.ServiceSidecarStatus }).(pulumi.StringOutput)
+}
+
+// Update time.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Public IP address.Note: This field may return null, which means no valid value was found.
+func (o GetGroupInstancesResultContentOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupInstancesResultContent) string { return v.WanIp }).(pulumi.StringOutput)
+}
+
+type GetGroupInstancesResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupInstancesResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupInstancesResultContent)(nil)).Elem()
+}
+
+func (o GetGroupInstancesResultContentArrayOutput) ToGetGroupInstancesResultContentArrayOutput() GetGroupInstancesResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultContentArrayOutput) ToGetGroupInstancesResultContentArrayOutputWithContext(ctx context.Context) GetGroupInstancesResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupInstancesResultContentArrayOutput) Index(i pulumi.IntInput) GetGroupInstancesResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupInstancesResultContent {
+		return vs[0].([]GetGroupInstancesResultContent)[vs[1].(int)]
+	}).(GetGroupInstancesResultContentOutput)
+}
+
+type GetGroupsResult struct {
+	// Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+	Contents []GetGroupsResultContent `pulumi:"contents"`
+	// Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGroupsResultInput is an input type that accepts GetGroupsResultArgs and GetGroupsResultOutput values.
+// You can construct a concrete instance of `GetGroupsResultInput` via:
+//
+//          GetGroupsResultArgs{...}
+type GetGroupsResultInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultOutput() GetGroupsResultOutput
+	ToGetGroupsResultOutputWithContext(context.Context) GetGroupsResultOutput
+}
+
+type GetGroupsResultArgs struct {
+	// Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+	Contents GetGroupsResultContentArrayInput `pulumi:"contents"`
+	// Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGroupsResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResult)(nil)).Elem()
+}
+
+func (i GetGroupsResultArgs) ToGetGroupsResultOutput() GetGroupsResultOutput {
+	return i.ToGetGroupsResultOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultArgs) ToGetGroupsResultOutputWithContext(ctx context.Context) GetGroupsResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultOutput)
+}
+
+// GetGroupsResultArrayInput is an input type that accepts GetGroupsResultArray and GetGroupsResultArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultArrayInput` via:
+//
+//          GetGroupsResultArray{ GetGroupsResultArgs{...} }
+type GetGroupsResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput
+	ToGetGroupsResultArrayOutputWithContext(context.Context) GetGroupsResultArrayOutput
+}
+
+type GetGroupsResultArray []GetGroupsResultInput
+
+func (GetGroupsResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResult)(nil)).Elem()
+}
+
+func (i GetGroupsResultArray) ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput {
+	return i.ToGetGroupsResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultArray) ToGetGroupsResultArrayOutputWithContext(ctx context.Context) GetGroupsResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultArrayOutput)
+}
+
+type GetGroupsResultOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResult)(nil)).Elem()
+}
+
+func (o GetGroupsResultOutput) ToGetGroupsResultOutput() GetGroupsResultOutput {
+	return o
+}
+
+func (o GetGroupsResultOutput) ToGetGroupsResultOutputWithContext(ctx context.Context) GetGroupsResultOutput {
+	return o
+}
+
+// Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultOutput) Contents() GetGroupsResultContentArrayOutput {
+	return o.ApplyT(func(v GetGroupsResult) []GetGroupsResultContent { return v.Contents }).(GetGroupsResultContentArrayOutput)
+}
+
+// Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGroupsResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResult)(nil)).Elem()
+}
+
+func (o GetGroupsResultArrayOutput) ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultArrayOutput) ToGetGroupsResultArrayOutputWithContext(ctx context.Context) GetGroupsResultArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultArrayOutput) Index(i pulumi.IntInput) GetGroupsResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResult {
+		return vs[0].([]GetGroupsResult)[vs[1].(int)]
+	}).(GetGroupsResultOutput)
+}
+
+type GetGroupsResultContent struct {
+	// Group alias. Note: This field may return null, indicating that no valid value was found.
+	Alias string `pulumi:"alias"`
+	// applicationId.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName string `pulumi:"applicationName"`
+	// Application type. Note: This field may return null, indicating that no valid value was found.
+	ApplicationType string `pulumi:"applicationType"`
+	// clusterId.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name. Note: This field may return null, indicating that no valid value was found.
+	ClusterName string `pulumi:"clusterName"`
+	// Create Time. Note: This field may return null, indicating that no valid value was found.
+	CreateTime string `pulumi:"createTime"`
+	// Group description. Note: This field may return null, indicating that no valid value was found.
+	DeployDesc string `pulumi:"deployDesc"`
+	// Group description. Note: This field may return null, indicating that no valid value was found.
+	GroupDesc string `pulumi:"groupDesc"`
+	// Group ID. Note: This field may return null, indicating that no valid value was found.
+	GroupId string `pulumi:"groupId"`
+	// Group ID. Note: This field may return null, indicating that no valid value was found.
+	GroupName string `pulumi:"groupName"`
+	// Group resource type. Note: This field may return null, indicating that no valid value was found.
+	GroupResourceType string `pulumi:"groupResourceType"`
+	// Microservice type. Note: This field may return null, indicating that no valid value was found.
+	MicroserviceType string `pulumi:"microserviceType"`
+	// namespace Id.
+	NamespaceId string `pulumi:"namespaceId"`
+	// Namespace name. Note: This field may return null, indicating that no valid value was found.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+	StartupParameters string `pulumi:"startupParameters"`
+	// Group update time. Note: This field may return null, indicating that no valid value was found.
+	UpdateTime string `pulumi:"updateTime"`
+	// Update time. Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime int `pulumi:"updatedTime"`
+}
+
+// GetGroupsResultContentInput is an input type that accepts GetGroupsResultContentArgs and GetGroupsResultContentOutput values.
+// You can construct a concrete instance of `GetGroupsResultContentInput` via:
+//
+//          GetGroupsResultContentArgs{...}
+type GetGroupsResultContentInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultContentOutput() GetGroupsResultContentOutput
+	ToGetGroupsResultContentOutputWithContext(context.Context) GetGroupsResultContentOutput
+}
+
+type GetGroupsResultContentArgs struct {
+	// Group alias. Note: This field may return null, indicating that no valid value was found.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// applicationId.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Application type. Note: This field may return null, indicating that no valid value was found.
+	ApplicationType pulumi.StringInput `pulumi:"applicationType"`
+	// clusterId.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name. Note: This field may return null, indicating that no valid value was found.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Create Time. Note: This field may return null, indicating that no valid value was found.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Group description. Note: This field may return null, indicating that no valid value was found.
+	DeployDesc pulumi.StringInput `pulumi:"deployDesc"`
+	// Group description. Note: This field may return null, indicating that no valid value was found.
+	GroupDesc pulumi.StringInput `pulumi:"groupDesc"`
+	// Group ID. Note: This field may return null, indicating that no valid value was found.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Group ID. Note: This field may return null, indicating that no valid value was found.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Group resource type. Note: This field may return null, indicating that no valid value was found.
+	GroupResourceType pulumi.StringInput `pulumi:"groupResourceType"`
+	// Microservice type. Note: This field may return null, indicating that no valid value was found.
+	MicroserviceType pulumi.StringInput `pulumi:"microserviceType"`
+	// namespace Id.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// Namespace name. Note: This field may return null, indicating that no valid value was found.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+	StartupParameters pulumi.StringInput `pulumi:"startupParameters"`
+	// Group update time. Note: This field may return null, indicating that no valid value was found.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Update time. Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime pulumi.IntInput `pulumi:"updatedTime"`
+}
+
+func (GetGroupsResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultContent)(nil)).Elem()
+}
+
+func (i GetGroupsResultContentArgs) ToGetGroupsResultContentOutput() GetGroupsResultContentOutput {
+	return i.ToGetGroupsResultContentOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultContentArgs) ToGetGroupsResultContentOutputWithContext(ctx context.Context) GetGroupsResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultContentOutput)
+}
+
+// GetGroupsResultContentArrayInput is an input type that accepts GetGroupsResultContentArray and GetGroupsResultContentArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultContentArrayInput` via:
+//
+//          GetGroupsResultContentArray{ GetGroupsResultContentArgs{...} }
+type GetGroupsResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultContentArrayOutput() GetGroupsResultContentArrayOutput
+	ToGetGroupsResultContentArrayOutputWithContext(context.Context) GetGroupsResultContentArrayOutput
+}
+
+type GetGroupsResultContentArray []GetGroupsResultContentInput
+
+func (GetGroupsResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultContent)(nil)).Elem()
+}
+
+func (i GetGroupsResultContentArray) ToGetGroupsResultContentArrayOutput() GetGroupsResultContentArrayOutput {
+	return i.ToGetGroupsResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultContentArray) ToGetGroupsResultContentArrayOutputWithContext(ctx context.Context) GetGroupsResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultContentArrayOutput)
+}
+
+type GetGroupsResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultContent)(nil)).Elem()
+}
+
+func (o GetGroupsResultContentOutput) ToGetGroupsResultContentOutput() GetGroupsResultContentOutput {
+	return o
+}
+
+func (o GetGroupsResultContentOutput) ToGetGroupsResultContentOutputWithContext(ctx context.Context) GetGroupsResultContentOutput {
+	return o
+}
+
+// Group alias. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// applicationId.
+func (o GetGroupsResultContentOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application name. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Application type. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) ApplicationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.ApplicationType }).(pulumi.StringOutput)
+}
+
+// clusterId.
+func (o GetGroupsResultContentOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Create Time. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Group description. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) DeployDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.DeployDesc }).(pulumi.StringOutput)
+}
+
+// Group description. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) GroupDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.GroupDesc }).(pulumi.StringOutput)
+}
+
+// Group ID. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Group ID. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Group resource type. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) GroupResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.GroupResourceType }).(pulumi.StringOutput)
+}
+
+// Microservice type. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) MicroserviceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.MicroserviceType }).(pulumi.StringOutput)
+}
+
+// namespace Id.
+func (o GetGroupsResultContentOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// Namespace name. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) StartupParameters() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.StartupParameters }).(pulumi.StringOutput)
+}
+
+// Group update time. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Update time. Note: This field may return null, indicating that no valid value was found.
+func (o GetGroupsResultContentOutput) UpdatedTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultContent) int { return v.UpdatedTime }).(pulumi.IntOutput)
+}
+
+type GetGroupsResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultContent)(nil)).Elem()
+}
+
+func (o GetGroupsResultContentArrayOutput) ToGetGroupsResultContentArrayOutput() GetGroupsResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultContentArrayOutput) ToGetGroupsResultContentArrayOutputWithContext(ctx context.Context) GetGroupsResultContentArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultContentArrayOutput) Index(i pulumi.IntInput) GetGroupsResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultContent {
+		return vs[0].([]GetGroupsResultContent)[vs[1].(int)]
+	}).(GetGroupsResultContentOutput)
+}
+
+type GetMicroserviceApiVersionResult struct {
+	// Application ID.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application Name.
+	ApplicationName string `pulumi:"applicationName"`
+	// application pkg version.
+	PkgVersion string `pulumi:"pkgVersion"`
+}
+
+// GetMicroserviceApiVersionResultInput is an input type that accepts GetMicroserviceApiVersionResultArgs and GetMicroserviceApiVersionResultOutput values.
+// You can construct a concrete instance of `GetMicroserviceApiVersionResultInput` via:
+//
+//          GetMicroserviceApiVersionResultArgs{...}
+type GetMicroserviceApiVersionResultInput interface {
+	pulumi.Input
+
+	ToGetMicroserviceApiVersionResultOutput() GetMicroserviceApiVersionResultOutput
+	ToGetMicroserviceApiVersionResultOutputWithContext(context.Context) GetMicroserviceApiVersionResultOutput
+}
+
+type GetMicroserviceApiVersionResultArgs struct {
+	// Application ID.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application Name.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// application pkg version.
+	PkgVersion pulumi.StringInput `pulumi:"pkgVersion"`
+}
+
+func (GetMicroserviceApiVersionResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMicroserviceApiVersionResult)(nil)).Elem()
+}
+
+func (i GetMicroserviceApiVersionResultArgs) ToGetMicroserviceApiVersionResultOutput() GetMicroserviceApiVersionResultOutput {
+	return i.ToGetMicroserviceApiVersionResultOutputWithContext(context.Background())
+}
+
+func (i GetMicroserviceApiVersionResultArgs) ToGetMicroserviceApiVersionResultOutputWithContext(ctx context.Context) GetMicroserviceApiVersionResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMicroserviceApiVersionResultOutput)
+}
+
+// GetMicroserviceApiVersionResultArrayInput is an input type that accepts GetMicroserviceApiVersionResultArray and GetMicroserviceApiVersionResultArrayOutput values.
+// You can construct a concrete instance of `GetMicroserviceApiVersionResultArrayInput` via:
+//
+//          GetMicroserviceApiVersionResultArray{ GetMicroserviceApiVersionResultArgs{...} }
+type GetMicroserviceApiVersionResultArrayInput interface {
+	pulumi.Input
+
+	ToGetMicroserviceApiVersionResultArrayOutput() GetMicroserviceApiVersionResultArrayOutput
+	ToGetMicroserviceApiVersionResultArrayOutputWithContext(context.Context) GetMicroserviceApiVersionResultArrayOutput
+}
+
+type GetMicroserviceApiVersionResultArray []GetMicroserviceApiVersionResultInput
+
+func (GetMicroserviceApiVersionResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMicroserviceApiVersionResult)(nil)).Elem()
+}
+
+func (i GetMicroserviceApiVersionResultArray) ToGetMicroserviceApiVersionResultArrayOutput() GetMicroserviceApiVersionResultArrayOutput {
+	return i.ToGetMicroserviceApiVersionResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetMicroserviceApiVersionResultArray) ToGetMicroserviceApiVersionResultArrayOutputWithContext(ctx context.Context) GetMicroserviceApiVersionResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMicroserviceApiVersionResultArrayOutput)
+}
+
+type GetMicroserviceApiVersionResultOutput struct{ *pulumi.OutputState }
+
+func (GetMicroserviceApiVersionResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMicroserviceApiVersionResult)(nil)).Elem()
+}
+
+func (o GetMicroserviceApiVersionResultOutput) ToGetMicroserviceApiVersionResultOutput() GetMicroserviceApiVersionResultOutput {
+	return o
+}
+
+func (o GetMicroserviceApiVersionResultOutput) ToGetMicroserviceApiVersionResultOutputWithContext(ctx context.Context) GetMicroserviceApiVersionResultOutput {
+	return o
+}
+
+// Application ID.
+func (o GetMicroserviceApiVersionResultOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMicroserviceApiVersionResult) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application Name.
+func (o GetMicroserviceApiVersionResultOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMicroserviceApiVersionResult) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// application pkg version.
+func (o GetMicroserviceApiVersionResultOutput) PkgVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMicroserviceApiVersionResult) string { return v.PkgVersion }).(pulumi.StringOutput)
+}
+
+type GetMicroserviceApiVersionResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMicroserviceApiVersionResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMicroserviceApiVersionResult)(nil)).Elem()
+}
+
+func (o GetMicroserviceApiVersionResultArrayOutput) ToGetMicroserviceApiVersionResultArrayOutput() GetMicroserviceApiVersionResultArrayOutput {
+	return o
+}
+
+func (o GetMicroserviceApiVersionResultArrayOutput) ToGetMicroserviceApiVersionResultArrayOutputWithContext(ctx context.Context) GetMicroserviceApiVersionResultArrayOutput {
+	return o
+}
+
+func (o GetMicroserviceApiVersionResultArrayOutput) Index(i pulumi.IntInput) GetMicroserviceApiVersionResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMicroserviceApiVersionResult {
+		return vs[0].([]GetMicroserviceApiVersionResult)[vs[1].(int)]
+	}).(GetMicroserviceApiVersionResultOutput)
+}
+
 type GetMicroserviceResult struct {
 	// Microservice list information. Note: This field may return null, indicating that no valid value can be obtained.
 	Contents []GetMicroserviceResultContent `pulumi:"contents"`
@@ -5998,6 +14458,1133 @@ func (o GetMicroserviceResultContentArrayOutput) Index(i pulumi.IntInput) GetMic
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMicroserviceResultContent {
 		return vs[0].([]GetMicroserviceResultContent)[vs[1].(int)]
 	}).(GetMicroserviceResultContentOutput)
+}
+
+type GetMsApiListResult struct {
+	// api list.
+	Contents []GetMsApiListResultContent `pulumi:"contents"`
+	// Quantity.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetMsApiListResultInput is an input type that accepts GetMsApiListResultArgs and GetMsApiListResultOutput values.
+// You can construct a concrete instance of `GetMsApiListResultInput` via:
+//
+//          GetMsApiListResultArgs{...}
+type GetMsApiListResultInput interface {
+	pulumi.Input
+
+	ToGetMsApiListResultOutput() GetMsApiListResultOutput
+	ToGetMsApiListResultOutputWithContext(context.Context) GetMsApiListResultOutput
+}
+
+type GetMsApiListResultArgs struct {
+	// api list.
+	Contents GetMsApiListResultContentArrayInput `pulumi:"contents"`
+	// Quantity.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetMsApiListResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMsApiListResult)(nil)).Elem()
+}
+
+func (i GetMsApiListResultArgs) ToGetMsApiListResultOutput() GetMsApiListResultOutput {
+	return i.ToGetMsApiListResultOutputWithContext(context.Background())
+}
+
+func (i GetMsApiListResultArgs) ToGetMsApiListResultOutputWithContext(ctx context.Context) GetMsApiListResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMsApiListResultOutput)
+}
+
+// GetMsApiListResultArrayInput is an input type that accepts GetMsApiListResultArray and GetMsApiListResultArrayOutput values.
+// You can construct a concrete instance of `GetMsApiListResultArrayInput` via:
+//
+//          GetMsApiListResultArray{ GetMsApiListResultArgs{...} }
+type GetMsApiListResultArrayInput interface {
+	pulumi.Input
+
+	ToGetMsApiListResultArrayOutput() GetMsApiListResultArrayOutput
+	ToGetMsApiListResultArrayOutputWithContext(context.Context) GetMsApiListResultArrayOutput
+}
+
+type GetMsApiListResultArray []GetMsApiListResultInput
+
+func (GetMsApiListResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMsApiListResult)(nil)).Elem()
+}
+
+func (i GetMsApiListResultArray) ToGetMsApiListResultArrayOutput() GetMsApiListResultArrayOutput {
+	return i.ToGetMsApiListResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetMsApiListResultArray) ToGetMsApiListResultArrayOutputWithContext(ctx context.Context) GetMsApiListResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMsApiListResultArrayOutput)
+}
+
+type GetMsApiListResultOutput struct{ *pulumi.OutputState }
+
+func (GetMsApiListResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMsApiListResult)(nil)).Elem()
+}
+
+func (o GetMsApiListResultOutput) ToGetMsApiListResultOutput() GetMsApiListResultOutput {
+	return o
+}
+
+func (o GetMsApiListResultOutput) ToGetMsApiListResultOutputWithContext(ctx context.Context) GetMsApiListResultOutput {
+	return o
+}
+
+// api list.
+func (o GetMsApiListResultOutput) Contents() GetMsApiListResultContentArrayOutput {
+	return o.ApplyT(func(v GetMsApiListResult) []GetMsApiListResultContent { return v.Contents }).(GetMsApiListResultContentArrayOutput)
+}
+
+// Quantity.
+func (o GetMsApiListResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMsApiListResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetMsApiListResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMsApiListResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMsApiListResult)(nil)).Elem()
+}
+
+func (o GetMsApiListResultArrayOutput) ToGetMsApiListResultArrayOutput() GetMsApiListResultArrayOutput {
+	return o
+}
+
+func (o GetMsApiListResultArrayOutput) ToGetMsApiListResultArrayOutputWithContext(ctx context.Context) GetMsApiListResultArrayOutput {
+	return o
+}
+
+func (o GetMsApiListResultArrayOutput) Index(i pulumi.IntInput) GetMsApiListResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMsApiListResult {
+		return vs[0].([]GetMsApiListResult)[vs[1].(int)]
+	}).(GetMsApiListResultOutput)
+}
+
+type GetMsApiListResultContent struct {
+	// Method description. Note: This field may return null, indicating that no valid value was found.
+	Description string `pulumi:"description"`
+	// api method.
+	Method string `pulumi:"method"`
+	// api path.
+	Path string `pulumi:"path"`
+	// API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+	Status int `pulumi:"status"`
+}
+
+// GetMsApiListResultContentInput is an input type that accepts GetMsApiListResultContentArgs and GetMsApiListResultContentOutput values.
+// You can construct a concrete instance of `GetMsApiListResultContentInput` via:
+//
+//          GetMsApiListResultContentArgs{...}
+type GetMsApiListResultContentInput interface {
+	pulumi.Input
+
+	ToGetMsApiListResultContentOutput() GetMsApiListResultContentOutput
+	ToGetMsApiListResultContentOutputWithContext(context.Context) GetMsApiListResultContentOutput
+}
+
+type GetMsApiListResultContentArgs struct {
+	// Method description. Note: This field may return null, indicating that no valid value was found.
+	Description pulumi.StringInput `pulumi:"description"`
+	// api method.
+	Method pulumi.StringInput `pulumi:"method"`
+	// api path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetMsApiListResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMsApiListResultContent)(nil)).Elem()
+}
+
+func (i GetMsApiListResultContentArgs) ToGetMsApiListResultContentOutput() GetMsApiListResultContentOutput {
+	return i.ToGetMsApiListResultContentOutputWithContext(context.Background())
+}
+
+func (i GetMsApiListResultContentArgs) ToGetMsApiListResultContentOutputWithContext(ctx context.Context) GetMsApiListResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMsApiListResultContentOutput)
+}
+
+// GetMsApiListResultContentArrayInput is an input type that accepts GetMsApiListResultContentArray and GetMsApiListResultContentArrayOutput values.
+// You can construct a concrete instance of `GetMsApiListResultContentArrayInput` via:
+//
+//          GetMsApiListResultContentArray{ GetMsApiListResultContentArgs{...} }
+type GetMsApiListResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetMsApiListResultContentArrayOutput() GetMsApiListResultContentArrayOutput
+	ToGetMsApiListResultContentArrayOutputWithContext(context.Context) GetMsApiListResultContentArrayOutput
+}
+
+type GetMsApiListResultContentArray []GetMsApiListResultContentInput
+
+func (GetMsApiListResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMsApiListResultContent)(nil)).Elem()
+}
+
+func (i GetMsApiListResultContentArray) ToGetMsApiListResultContentArrayOutput() GetMsApiListResultContentArrayOutput {
+	return i.ToGetMsApiListResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetMsApiListResultContentArray) ToGetMsApiListResultContentArrayOutputWithContext(ctx context.Context) GetMsApiListResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMsApiListResultContentArrayOutput)
+}
+
+type GetMsApiListResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetMsApiListResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMsApiListResultContent)(nil)).Elem()
+}
+
+func (o GetMsApiListResultContentOutput) ToGetMsApiListResultContentOutput() GetMsApiListResultContentOutput {
+	return o
+}
+
+func (o GetMsApiListResultContentOutput) ToGetMsApiListResultContentOutputWithContext(ctx context.Context) GetMsApiListResultContentOutput {
+	return o
+}
+
+// Method description. Note: This field may return null, indicating that no valid value was found.
+func (o GetMsApiListResultContentOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMsApiListResultContent) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// api method.
+func (o GetMsApiListResultContentOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMsApiListResultContent) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// api path.
+func (o GetMsApiListResultContentOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMsApiListResultContent) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+func (o GetMsApiListResultContentOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMsApiListResultContent) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetMsApiListResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMsApiListResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMsApiListResultContent)(nil)).Elem()
+}
+
+func (o GetMsApiListResultContentArrayOutput) ToGetMsApiListResultContentArrayOutput() GetMsApiListResultContentArrayOutput {
+	return o
+}
+
+func (o GetMsApiListResultContentArrayOutput) ToGetMsApiListResultContentArrayOutputWithContext(ctx context.Context) GetMsApiListResultContentArrayOutput {
+	return o
+}
+
+func (o GetMsApiListResultContentArrayOutput) Index(i pulumi.IntInput) GetMsApiListResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMsApiListResultContent {
+		return vs[0].([]GetMsApiListResultContent)[vs[1].(int)]
+	}).(GetMsApiListResultContentOutput)
+}
+
+type GetPodInstancesResult struct {
+	// Content list.Note: This field may return null, which means no valid value was found.
+	Contents []GetPodInstancesResultContent `pulumi:"contents"`
+	// Total number of records.Note: This field may return null, which means no valid value was found.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetPodInstancesResultInput is an input type that accepts GetPodInstancesResultArgs and GetPodInstancesResultOutput values.
+// You can construct a concrete instance of `GetPodInstancesResultInput` via:
+//
+//          GetPodInstancesResultArgs{...}
+type GetPodInstancesResultInput interface {
+	pulumi.Input
+
+	ToGetPodInstancesResultOutput() GetPodInstancesResultOutput
+	ToGetPodInstancesResultOutputWithContext(context.Context) GetPodInstancesResultOutput
+}
+
+type GetPodInstancesResultArgs struct {
+	// Content list.Note: This field may return null, which means no valid value was found.
+	Contents GetPodInstancesResultContentArrayInput `pulumi:"contents"`
+	// Total number of records.Note: This field may return null, which means no valid value was found.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetPodInstancesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPodInstancesResult)(nil)).Elem()
+}
+
+func (i GetPodInstancesResultArgs) ToGetPodInstancesResultOutput() GetPodInstancesResultOutput {
+	return i.ToGetPodInstancesResultOutputWithContext(context.Background())
+}
+
+func (i GetPodInstancesResultArgs) ToGetPodInstancesResultOutputWithContext(ctx context.Context) GetPodInstancesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPodInstancesResultOutput)
+}
+
+// GetPodInstancesResultArrayInput is an input type that accepts GetPodInstancesResultArray and GetPodInstancesResultArrayOutput values.
+// You can construct a concrete instance of `GetPodInstancesResultArrayInput` via:
+//
+//          GetPodInstancesResultArray{ GetPodInstancesResultArgs{...} }
+type GetPodInstancesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetPodInstancesResultArrayOutput() GetPodInstancesResultArrayOutput
+	ToGetPodInstancesResultArrayOutputWithContext(context.Context) GetPodInstancesResultArrayOutput
+}
+
+type GetPodInstancesResultArray []GetPodInstancesResultInput
+
+func (GetPodInstancesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPodInstancesResult)(nil)).Elem()
+}
+
+func (i GetPodInstancesResultArray) ToGetPodInstancesResultArrayOutput() GetPodInstancesResultArrayOutput {
+	return i.ToGetPodInstancesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetPodInstancesResultArray) ToGetPodInstancesResultArrayOutputWithContext(ctx context.Context) GetPodInstancesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPodInstancesResultArrayOutput)
+}
+
+type GetPodInstancesResultOutput struct{ *pulumi.OutputState }
+
+func (GetPodInstancesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPodInstancesResult)(nil)).Elem()
+}
+
+func (o GetPodInstancesResultOutput) ToGetPodInstancesResultOutput() GetPodInstancesResultOutput {
+	return o
+}
+
+func (o GetPodInstancesResultOutput) ToGetPodInstancesResultOutputWithContext(ctx context.Context) GetPodInstancesResultOutput {
+	return o
+}
+
+// Content list.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultOutput) Contents() GetPodInstancesResultContentArrayOutput {
+	return o.ApplyT(func(v GetPodInstancesResult) []GetPodInstancesResultContent { return v.Contents }).(GetPodInstancesResultContentArrayOutput)
+}
+
+// Total number of records.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPodInstancesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetPodInstancesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPodInstancesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPodInstancesResult)(nil)).Elem()
+}
+
+func (o GetPodInstancesResultArrayOutput) ToGetPodInstancesResultArrayOutput() GetPodInstancesResultArrayOutput {
+	return o
+}
+
+func (o GetPodInstancesResultArrayOutput) ToGetPodInstancesResultArrayOutputWithContext(ctx context.Context) GetPodInstancesResultArrayOutput {
+	return o
+}
+
+func (o GetPodInstancesResultArrayOutput) Index(i pulumi.IntInput) GetPodInstancesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPodInstancesResult {
+		return vs[0].([]GetPodInstancesResult)[vs[1].(int)]
+	}).(GetPodInstancesResultOutput)
+}
+
+type GetPodInstancesResultContent struct {
+	// Instance start time.Note: This field may return null, which means no valid value was found.
+	CreatedAt string `pulumi:"createdAt"`
+	// Instance available status.Note: This field may return null, which means no valid value was found.
+	InstanceAvailableStatus string `pulumi:"instanceAvailableStatus"`
+	// Instance status.Note: This field may return null, which means no valid value was found.
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// Instance ip.Note: This field may return null, which means no valid value was found.
+	Ip string `pulumi:"ip"`
+	// Instance node id.Note: This field may return null, which means no valid value was found.
+	NodeInstanceId string `pulumi:"nodeInstanceId"`
+	// Instance node ip.Note: This field may return null, which means no valid value was found.
+	NodeIp string `pulumi:"nodeIp"`
+	// Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+	PodId string `pulumi:"podId"`
+	// Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+	PodName string `pulumi:"podName"`
+	// Instance ready count.Note: This field may return null, which means no valid value was found.
+	ReadyCount int `pulumi:"readyCount"`
+	// Instance reason for current status.Note: This field may return null, which means no valid value was found.
+	Reason string `pulumi:"reason"`
+	// Instance restart count.Note: This field may return null, which means no valid value was found.
+	RestartCount int `pulumi:"restartCount"`
+	// Instance run time.Note: This field may return null, which means no valid value was found.
+	Runtime string `pulumi:"runtime"`
+	// Instance serve status.Note: This field may return null, which means no valid value was found.
+	ServiceInstanceStatus string `pulumi:"serviceInstanceStatus"`
+	// Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+	Status string `pulumi:"status"`
+}
+
+// GetPodInstancesResultContentInput is an input type that accepts GetPodInstancesResultContentArgs and GetPodInstancesResultContentOutput values.
+// You can construct a concrete instance of `GetPodInstancesResultContentInput` via:
+//
+//          GetPodInstancesResultContentArgs{...}
+type GetPodInstancesResultContentInput interface {
+	pulumi.Input
+
+	ToGetPodInstancesResultContentOutput() GetPodInstancesResultContentOutput
+	ToGetPodInstancesResultContentOutputWithContext(context.Context) GetPodInstancesResultContentOutput
+}
+
+type GetPodInstancesResultContentArgs struct {
+	// Instance start time.Note: This field may return null, which means no valid value was found.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Instance available status.Note: This field may return null, which means no valid value was found.
+	InstanceAvailableStatus pulumi.StringInput `pulumi:"instanceAvailableStatus"`
+	// Instance status.Note: This field may return null, which means no valid value was found.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// Instance ip.Note: This field may return null, which means no valid value was found.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Instance node id.Note: This field may return null, which means no valid value was found.
+	NodeInstanceId pulumi.StringInput `pulumi:"nodeInstanceId"`
+	// Instance node ip.Note: This field may return null, which means no valid value was found.
+	NodeIp pulumi.StringInput `pulumi:"nodeIp"`
+	// Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+	PodId pulumi.StringInput `pulumi:"podId"`
+	// Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+	PodName pulumi.StringInput `pulumi:"podName"`
+	// Instance ready count.Note: This field may return null, which means no valid value was found.
+	ReadyCount pulumi.IntInput `pulumi:"readyCount"`
+	// Instance reason for current status.Note: This field may return null, which means no valid value was found.
+	Reason pulumi.StringInput `pulumi:"reason"`
+	// Instance restart count.Note: This field may return null, which means no valid value was found.
+	RestartCount pulumi.IntInput `pulumi:"restartCount"`
+	// Instance run time.Note: This field may return null, which means no valid value was found.
+	Runtime pulumi.StringInput `pulumi:"runtime"`
+	// Instance serve status.Note: This field may return null, which means no valid value was found.
+	ServiceInstanceStatus pulumi.StringInput `pulumi:"serviceInstanceStatus"`
+	// Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetPodInstancesResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPodInstancesResultContent)(nil)).Elem()
+}
+
+func (i GetPodInstancesResultContentArgs) ToGetPodInstancesResultContentOutput() GetPodInstancesResultContentOutput {
+	return i.ToGetPodInstancesResultContentOutputWithContext(context.Background())
+}
+
+func (i GetPodInstancesResultContentArgs) ToGetPodInstancesResultContentOutputWithContext(ctx context.Context) GetPodInstancesResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPodInstancesResultContentOutput)
+}
+
+// GetPodInstancesResultContentArrayInput is an input type that accepts GetPodInstancesResultContentArray and GetPodInstancesResultContentArrayOutput values.
+// You can construct a concrete instance of `GetPodInstancesResultContentArrayInput` via:
+//
+//          GetPodInstancesResultContentArray{ GetPodInstancesResultContentArgs{...} }
+type GetPodInstancesResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetPodInstancesResultContentArrayOutput() GetPodInstancesResultContentArrayOutput
+	ToGetPodInstancesResultContentArrayOutputWithContext(context.Context) GetPodInstancesResultContentArrayOutput
+}
+
+type GetPodInstancesResultContentArray []GetPodInstancesResultContentInput
+
+func (GetPodInstancesResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPodInstancesResultContent)(nil)).Elem()
+}
+
+func (i GetPodInstancesResultContentArray) ToGetPodInstancesResultContentArrayOutput() GetPodInstancesResultContentArrayOutput {
+	return i.ToGetPodInstancesResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetPodInstancesResultContentArray) ToGetPodInstancesResultContentArrayOutputWithContext(ctx context.Context) GetPodInstancesResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPodInstancesResultContentArrayOutput)
+}
+
+type GetPodInstancesResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetPodInstancesResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPodInstancesResultContent)(nil)).Elem()
+}
+
+func (o GetPodInstancesResultContentOutput) ToGetPodInstancesResultContentOutput() GetPodInstancesResultContentOutput {
+	return o
+}
+
+func (o GetPodInstancesResultContentOutput) ToGetPodInstancesResultContentOutputWithContext(ctx context.Context) GetPodInstancesResultContentOutput {
+	return o
+}
+
+// Instance start time.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Instance available status.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) InstanceAvailableStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.InstanceAvailableStatus }).(pulumi.StringOutput)
+}
+
+// Instance status.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+// Instance ip.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Instance node id.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) NodeInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.NodeInstanceId }).(pulumi.StringOutput)
+}
+
+// Instance node ip.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) NodeIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.NodeIp }).(pulumi.StringOutput)
+}
+
+// Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) PodId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.PodId }).(pulumi.StringOutput)
+}
+
+// Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) PodName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.PodName }).(pulumi.StringOutput)
+}
+
+// Instance ready count.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) ReadyCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) int { return v.ReadyCount }).(pulumi.IntOutput)
+}
+
+// Instance reason for current status.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) Reason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.Reason }).(pulumi.StringOutput)
+}
+
+// Instance restart count.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) RestartCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) int { return v.RestartCount }).(pulumi.IntOutput)
+}
+
+// Instance run time.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) Runtime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.Runtime }).(pulumi.StringOutput)
+}
+
+// Instance serve status.Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) ServiceInstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.ServiceInstanceStatus }).(pulumi.StringOutput)
+}
+
+// Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+func (o GetPodInstancesResultContentOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPodInstancesResultContent) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetPodInstancesResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPodInstancesResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPodInstancesResultContent)(nil)).Elem()
+}
+
+func (o GetPodInstancesResultContentArrayOutput) ToGetPodInstancesResultContentArrayOutput() GetPodInstancesResultContentArrayOutput {
+	return o
+}
+
+func (o GetPodInstancesResultContentArrayOutput) ToGetPodInstancesResultContentArrayOutputWithContext(ctx context.Context) GetPodInstancesResultContentArrayOutput {
+	return o
+}
+
+func (o GetPodInstancesResultContentArrayOutput) Index(i pulumi.IntInput) GetPodInstancesResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPodInstancesResultContent {
+		return vs[0].([]GetPodInstancesResultContent)[vs[1].(int)]
+	}).(GetPodInstancesResultContentOutput)
+}
+
+type GetPublicConfigSummaryResult struct {
+	// config list.
+	Contents []GetPublicConfigSummaryResultContent `pulumi:"contents"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetPublicConfigSummaryResultInput is an input type that accepts GetPublicConfigSummaryResultArgs and GetPublicConfigSummaryResultOutput values.
+// You can construct a concrete instance of `GetPublicConfigSummaryResultInput` via:
+//
+//          GetPublicConfigSummaryResultArgs{...}
+type GetPublicConfigSummaryResultInput interface {
+	pulumi.Input
+
+	ToGetPublicConfigSummaryResultOutput() GetPublicConfigSummaryResultOutput
+	ToGetPublicConfigSummaryResultOutputWithContext(context.Context) GetPublicConfigSummaryResultOutput
+}
+
+type GetPublicConfigSummaryResultArgs struct {
+	// config list.
+	Contents GetPublicConfigSummaryResultContentArrayInput `pulumi:"contents"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetPublicConfigSummaryResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicConfigSummaryResult)(nil)).Elem()
+}
+
+func (i GetPublicConfigSummaryResultArgs) ToGetPublicConfigSummaryResultOutput() GetPublicConfigSummaryResultOutput {
+	return i.ToGetPublicConfigSummaryResultOutputWithContext(context.Background())
+}
+
+func (i GetPublicConfigSummaryResultArgs) ToGetPublicConfigSummaryResultOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicConfigSummaryResultOutput)
+}
+
+// GetPublicConfigSummaryResultArrayInput is an input type that accepts GetPublicConfigSummaryResultArray and GetPublicConfigSummaryResultArrayOutput values.
+// You can construct a concrete instance of `GetPublicConfigSummaryResultArrayInput` via:
+//
+//          GetPublicConfigSummaryResultArray{ GetPublicConfigSummaryResultArgs{...} }
+type GetPublicConfigSummaryResultArrayInput interface {
+	pulumi.Input
+
+	ToGetPublicConfigSummaryResultArrayOutput() GetPublicConfigSummaryResultArrayOutput
+	ToGetPublicConfigSummaryResultArrayOutputWithContext(context.Context) GetPublicConfigSummaryResultArrayOutput
+}
+
+type GetPublicConfigSummaryResultArray []GetPublicConfigSummaryResultInput
+
+func (GetPublicConfigSummaryResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicConfigSummaryResult)(nil)).Elem()
+}
+
+func (i GetPublicConfigSummaryResultArray) ToGetPublicConfigSummaryResultArrayOutput() GetPublicConfigSummaryResultArrayOutput {
+	return i.ToGetPublicConfigSummaryResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublicConfigSummaryResultArray) ToGetPublicConfigSummaryResultArrayOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicConfigSummaryResultArrayOutput)
+}
+
+type GetPublicConfigSummaryResultOutput struct{ *pulumi.OutputState }
+
+func (GetPublicConfigSummaryResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicConfigSummaryResult)(nil)).Elem()
+}
+
+func (o GetPublicConfigSummaryResultOutput) ToGetPublicConfigSummaryResultOutput() GetPublicConfigSummaryResultOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultOutput) ToGetPublicConfigSummaryResultOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultOutput {
+	return o
+}
+
+// config list.
+func (o GetPublicConfigSummaryResultOutput) Contents() GetPublicConfigSummaryResultContentArrayOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResult) []GetPublicConfigSummaryResultContent { return v.Contents }).(GetPublicConfigSummaryResultContentArrayOutput)
+}
+
+// total count.
+func (o GetPublicConfigSummaryResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetPublicConfigSummaryResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublicConfigSummaryResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicConfigSummaryResult)(nil)).Elem()
+}
+
+func (o GetPublicConfigSummaryResultArrayOutput) ToGetPublicConfigSummaryResultArrayOutput() GetPublicConfigSummaryResultArrayOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultArrayOutput) ToGetPublicConfigSummaryResultArrayOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultArrayOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultArrayOutput) Index(i pulumi.IntInput) GetPublicConfigSummaryResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublicConfigSummaryResult {
+		return vs[0].([]GetPublicConfigSummaryResult)[vs[1].(int)]
+	}).(GetPublicConfigSummaryResultOutput)
+}
+
+type GetPublicConfigSummaryResultContent struct {
+	// Application ID.Note: This field may return null, indicating that no valid value was found.
+	ApplicationId string `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName string `pulumi:"applicationName"`
+	// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+	ConfigId string `pulumi:"configId"`
+	// Configuration name.Note: This field may return null, indicating that no valid value was found.
+	ConfigName string `pulumi:"configName"`
+	// Config type. Note: This field may return null, indicating that no valid value was found.
+	ConfigType string `pulumi:"configType"`
+	// Configuration value.Note: This field may return null, indicating that no valid value was found.
+	ConfigValue string `pulumi:"configValue"`
+	// Configuration version. Note: This field may return null, indicating that no valid value was found.
+	ConfigVersion string `pulumi:"configVersion"`
+	// Configure version count.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionCount int `pulumi:"configVersionCount"`
+	// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionDesc string `pulumi:"configVersionDesc"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreationTime string `pulumi:"creationTime"`
+	// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+	DeleteFlag bool `pulumi:"deleteFlag"`
+	// Last update time.Note: This field may return null, indicating that no valid value was found.
+	LastUpdateTime string `pulumi:"lastUpdateTime"`
+}
+
+// GetPublicConfigSummaryResultContentInput is an input type that accepts GetPublicConfigSummaryResultContentArgs and GetPublicConfigSummaryResultContentOutput values.
+// You can construct a concrete instance of `GetPublicConfigSummaryResultContentInput` via:
+//
+//          GetPublicConfigSummaryResultContentArgs{...}
+type GetPublicConfigSummaryResultContentInput interface {
+	pulumi.Input
+
+	ToGetPublicConfigSummaryResultContentOutput() GetPublicConfigSummaryResultContentOutput
+	ToGetPublicConfigSummaryResultContentOutputWithContext(context.Context) GetPublicConfigSummaryResultContentOutput
+}
+
+type GetPublicConfigSummaryResultContentArgs struct {
+	// Application ID.Note: This field may return null, indicating that no valid value was found.
+	ApplicationId pulumi.StringInput `pulumi:"applicationId"`
+	// Application Name. Note: This field may return null, indicating that no valid value was found.
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Configuration name.Note: This field may return null, indicating that no valid value was found.
+	ConfigName pulumi.StringInput `pulumi:"configName"`
+	// Config type. Note: This field may return null, indicating that no valid value was found.
+	ConfigType pulumi.StringInput `pulumi:"configType"`
+	// Configuration value.Note: This field may return null, indicating that no valid value was found.
+	ConfigValue pulumi.StringInput `pulumi:"configValue"`
+	// Configuration version. Note: This field may return null, indicating that no valid value was found.
+	ConfigVersion pulumi.StringInput `pulumi:"configVersion"`
+	// Configure version count.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionCount pulumi.IntInput `pulumi:"configVersionCount"`
+	// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+	ConfigVersionDesc pulumi.StringInput `pulumi:"configVersionDesc"`
+	// Create time.Note: This field may return null, indicating that no valid value was found.
+	CreationTime pulumi.StringInput `pulumi:"creationTime"`
+	// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+	DeleteFlag pulumi.BoolInput `pulumi:"deleteFlag"`
+	// Last update time.Note: This field may return null, indicating that no valid value was found.
+	LastUpdateTime pulumi.StringInput `pulumi:"lastUpdateTime"`
+}
+
+func (GetPublicConfigSummaryResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (i GetPublicConfigSummaryResultContentArgs) ToGetPublicConfigSummaryResultContentOutput() GetPublicConfigSummaryResultContentOutput {
+	return i.ToGetPublicConfigSummaryResultContentOutputWithContext(context.Background())
+}
+
+func (i GetPublicConfigSummaryResultContentArgs) ToGetPublicConfigSummaryResultContentOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicConfigSummaryResultContentOutput)
+}
+
+// GetPublicConfigSummaryResultContentArrayInput is an input type that accepts GetPublicConfigSummaryResultContentArray and GetPublicConfigSummaryResultContentArrayOutput values.
+// You can construct a concrete instance of `GetPublicConfigSummaryResultContentArrayInput` via:
+//
+//          GetPublicConfigSummaryResultContentArray{ GetPublicConfigSummaryResultContentArgs{...} }
+type GetPublicConfigSummaryResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetPublicConfigSummaryResultContentArrayOutput() GetPublicConfigSummaryResultContentArrayOutput
+	ToGetPublicConfigSummaryResultContentArrayOutputWithContext(context.Context) GetPublicConfigSummaryResultContentArrayOutput
+}
+
+type GetPublicConfigSummaryResultContentArray []GetPublicConfigSummaryResultContentInput
+
+func (GetPublicConfigSummaryResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (i GetPublicConfigSummaryResultContentArray) ToGetPublicConfigSummaryResultContentArrayOutput() GetPublicConfigSummaryResultContentArrayOutput {
+	return i.ToGetPublicConfigSummaryResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublicConfigSummaryResultContentArray) ToGetPublicConfigSummaryResultContentArrayOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicConfigSummaryResultContentArrayOutput)
+}
+
+type GetPublicConfigSummaryResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetPublicConfigSummaryResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (o GetPublicConfigSummaryResultContentOutput) ToGetPublicConfigSummaryResultContentOutput() GetPublicConfigSummaryResultContentOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultContentOutput) ToGetPublicConfigSummaryResultContentOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultContentOutput {
+	return o
+}
+
+// Application ID.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ApplicationId }).(pulumi.StringOutput)
+}
+
+// Application Name. Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
+// Configuration name.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigName }).(pulumi.StringOutput)
+}
+
+// Config type. Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigType }).(pulumi.StringOutput)
+}
+
+// Configuration value.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigValue }).(pulumi.StringOutput)
+}
+
+// Configuration version. Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigVersion }).(pulumi.StringOutput)
+}
+
+// Configure version count.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigVersionCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) int { return v.ConfigVersionCount }).(pulumi.IntOutput)
+}
+
+// Configuration version description.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) ConfigVersionDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.ConfigVersionDesc }).(pulumi.StringOutput)
+}
+
+// Create time.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) CreationTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.CreationTime }).(pulumi.StringOutput)
+}
+
+// Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) DeleteFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) bool { return v.DeleteFlag }).(pulumi.BoolOutput)
+}
+
+// Last update time.Note: This field may return null, indicating that no valid value was found.
+func (o GetPublicConfigSummaryResultContentOutput) LastUpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicConfigSummaryResultContent) string { return v.LastUpdateTime }).(pulumi.StringOutput)
+}
+
+type GetPublicConfigSummaryResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublicConfigSummaryResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicConfigSummaryResultContent)(nil)).Elem()
+}
+
+func (o GetPublicConfigSummaryResultContentArrayOutput) ToGetPublicConfigSummaryResultContentArrayOutput() GetPublicConfigSummaryResultContentArrayOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultContentArrayOutput) ToGetPublicConfigSummaryResultContentArrayOutputWithContext(ctx context.Context) GetPublicConfigSummaryResultContentArrayOutput {
+	return o
+}
+
+func (o GetPublicConfigSummaryResultContentArrayOutput) Index(i pulumi.IntInput) GetPublicConfigSummaryResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublicConfigSummaryResultContent {
+		return vs[0].([]GetPublicConfigSummaryResultContent)[vs[1].(int)]
+	}).(GetPublicConfigSummaryResultContentOutput)
+}
+
+type GetRepositoryResult struct {
+	// Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+	Contents []GetRepositoryResultContent `pulumi:"contents"`
+	// Total Repository.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetRepositoryResultInput is an input type that accepts GetRepositoryResultArgs and GetRepositoryResultOutput values.
+// You can construct a concrete instance of `GetRepositoryResultInput` via:
+//
+//          GetRepositoryResultArgs{...}
+type GetRepositoryResultInput interface {
+	pulumi.Input
+
+	ToGetRepositoryResultOutput() GetRepositoryResultOutput
+	ToGetRepositoryResultOutputWithContext(context.Context) GetRepositoryResultOutput
+}
+
+type GetRepositoryResultArgs struct {
+	// Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+	Contents GetRepositoryResultContentArrayInput `pulumi:"contents"`
+	// Total Repository.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetRepositoryResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoryResult)(nil)).Elem()
+}
+
+func (i GetRepositoryResultArgs) ToGetRepositoryResultOutput() GetRepositoryResultOutput {
+	return i.ToGetRepositoryResultOutputWithContext(context.Background())
+}
+
+func (i GetRepositoryResultArgs) ToGetRepositoryResultOutputWithContext(ctx context.Context) GetRepositoryResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoryResultOutput)
+}
+
+// GetRepositoryResultArrayInput is an input type that accepts GetRepositoryResultArray and GetRepositoryResultArrayOutput values.
+// You can construct a concrete instance of `GetRepositoryResultArrayInput` via:
+//
+//          GetRepositoryResultArray{ GetRepositoryResultArgs{...} }
+type GetRepositoryResultArrayInput interface {
+	pulumi.Input
+
+	ToGetRepositoryResultArrayOutput() GetRepositoryResultArrayOutput
+	ToGetRepositoryResultArrayOutputWithContext(context.Context) GetRepositoryResultArrayOutput
+}
+
+type GetRepositoryResultArray []GetRepositoryResultInput
+
+func (GetRepositoryResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoryResult)(nil)).Elem()
+}
+
+func (i GetRepositoryResultArray) ToGetRepositoryResultArrayOutput() GetRepositoryResultArrayOutput {
+	return i.ToGetRepositoryResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetRepositoryResultArray) ToGetRepositoryResultArrayOutputWithContext(ctx context.Context) GetRepositoryResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoryResultArrayOutput)
+}
+
+type GetRepositoryResultOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoryResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoryResult)(nil)).Elem()
+}
+
+func (o GetRepositoryResultOutput) ToGetRepositoryResultOutput() GetRepositoryResultOutput {
+	return o
+}
+
+func (o GetRepositoryResultOutput) ToGetRepositoryResultOutputWithContext(ctx context.Context) GetRepositoryResultOutput {
+	return o
+}
+
+// Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRepositoryResultOutput) Contents() GetRepositoryResultContentArrayOutput {
+	return o.ApplyT(func(v GetRepositoryResult) []GetRepositoryResultContent { return v.Contents }).(GetRepositoryResultContentArrayOutput)
+}
+
+// Total Repository.
+func (o GetRepositoryResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepositoryResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetRepositoryResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoryResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoryResult)(nil)).Elem()
+}
+
+func (o GetRepositoryResultArrayOutput) ToGetRepositoryResultArrayOutput() GetRepositoryResultArrayOutput {
+	return o
+}
+
+func (o GetRepositoryResultArrayOutput) ToGetRepositoryResultArrayOutputWithContext(ctx context.Context) GetRepositoryResultArrayOutput {
+	return o
+}
+
+func (o GetRepositoryResultArrayOutput) Index(i pulumi.IntInput) GetRepositoryResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRepositoryResult {
+		return vs[0].([]GetRepositoryResult)[vs[1].(int)]
+	}).(GetRepositoryResultOutput)
+}
+
+type GetRepositoryResultContent struct {
+	// Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+	BucketName string `pulumi:"bucketName"`
+	// Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+	BucketRegion string `pulumi:"bucketRegion"`
+	// CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+	Directory string `pulumi:"directory"`
+	// Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+	IsUsed bool `pulumi:"isUsed"`
+	// Repository description (default warehouse: default, private warehouse: private).
+	RepositoryDesc string `pulumi:"repositoryDesc"`
+	// repository Id.
+	RepositoryId string `pulumi:"repositoryId"`
+	// Repository Name.
+	RepositoryName string `pulumi:"repositoryName"`
+	// Repository type (default Repository: default, private Repository: private).
+	RepositoryType string `pulumi:"repositoryType"`
+}
+
+// GetRepositoryResultContentInput is an input type that accepts GetRepositoryResultContentArgs and GetRepositoryResultContentOutput values.
+// You can construct a concrete instance of `GetRepositoryResultContentInput` via:
+//
+//          GetRepositoryResultContentArgs{...}
+type GetRepositoryResultContentInput interface {
+	pulumi.Input
+
+	ToGetRepositoryResultContentOutput() GetRepositoryResultContentOutput
+	ToGetRepositoryResultContentOutputWithContext(context.Context) GetRepositoryResultContentOutput
+}
+
+type GetRepositoryResultContentArgs struct {
+	// Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+	BucketName pulumi.StringInput `pulumi:"bucketName"`
+	// Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+	BucketRegion pulumi.StringInput `pulumi:"bucketRegion"`
+	// CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+	Directory pulumi.StringInput `pulumi:"directory"`
+	// Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+	IsUsed pulumi.BoolInput `pulumi:"isUsed"`
+	// Repository description (default warehouse: default, private warehouse: private).
+	RepositoryDesc pulumi.StringInput `pulumi:"repositoryDesc"`
+	// repository Id.
+	RepositoryId pulumi.StringInput `pulumi:"repositoryId"`
+	// Repository Name.
+	RepositoryName pulumi.StringInput `pulumi:"repositoryName"`
+	// Repository type (default Repository: default, private Repository: private).
+	RepositoryType pulumi.StringInput `pulumi:"repositoryType"`
+}
+
+func (GetRepositoryResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoryResultContent)(nil)).Elem()
+}
+
+func (i GetRepositoryResultContentArgs) ToGetRepositoryResultContentOutput() GetRepositoryResultContentOutput {
+	return i.ToGetRepositoryResultContentOutputWithContext(context.Background())
+}
+
+func (i GetRepositoryResultContentArgs) ToGetRepositoryResultContentOutputWithContext(ctx context.Context) GetRepositoryResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoryResultContentOutput)
+}
+
+// GetRepositoryResultContentArrayInput is an input type that accepts GetRepositoryResultContentArray and GetRepositoryResultContentArrayOutput values.
+// You can construct a concrete instance of `GetRepositoryResultContentArrayInput` via:
+//
+//          GetRepositoryResultContentArray{ GetRepositoryResultContentArgs{...} }
+type GetRepositoryResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetRepositoryResultContentArrayOutput() GetRepositoryResultContentArrayOutput
+	ToGetRepositoryResultContentArrayOutputWithContext(context.Context) GetRepositoryResultContentArrayOutput
+}
+
+type GetRepositoryResultContentArray []GetRepositoryResultContentInput
+
+func (GetRepositoryResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoryResultContent)(nil)).Elem()
+}
+
+func (i GetRepositoryResultContentArray) ToGetRepositoryResultContentArrayOutput() GetRepositoryResultContentArrayOutput {
+	return i.ToGetRepositoryResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetRepositoryResultContentArray) ToGetRepositoryResultContentArrayOutputWithContext(ctx context.Context) GetRepositoryResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoryResultContentArrayOutput)
+}
+
+type GetRepositoryResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoryResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoryResultContent)(nil)).Elem()
+}
+
+func (o GetRepositoryResultContentOutput) ToGetRepositoryResultContentOutput() GetRepositoryResultContentOutput {
+	return o
+}
+
+func (o GetRepositoryResultContentOutput) ToGetRepositoryResultContentOutputWithContext(ctx context.Context) GetRepositoryResultContentOutput {
+	return o
+}
+
+// Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRepositoryResultContentOutput) BucketName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.BucketName }).(pulumi.StringOutput)
+}
+
+// Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRepositoryResultContentOutput) BucketRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.BucketRegion }).(pulumi.StringOutput)
+}
+
+// CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetRepositoryResultContentOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRepositoryResultContentOutput) Directory() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.Directory }).(pulumi.StringOutput)
+}
+
+// Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRepositoryResultContentOutput) IsUsed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) bool { return v.IsUsed }).(pulumi.BoolOutput)
+}
+
+// Repository description (default warehouse: default, private warehouse: private).
+func (o GetRepositoryResultContentOutput) RepositoryDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.RepositoryDesc }).(pulumi.StringOutput)
+}
+
+// repository Id.
+func (o GetRepositoryResultContentOutput) RepositoryId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.RepositoryId }).(pulumi.StringOutput)
+}
+
+// Repository Name.
+func (o GetRepositoryResultContentOutput) RepositoryName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.RepositoryName }).(pulumi.StringOutput)
+}
+
+// Repository type (default Repository: default, private Repository: private).
+func (o GetRepositoryResultContentOutput) RepositoryType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoryResultContent) string { return v.RepositoryType }).(pulumi.StringOutput)
+}
+
+type GetRepositoryResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoryResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoryResultContent)(nil)).Elem()
+}
+
+func (o GetRepositoryResultContentArrayOutput) ToGetRepositoryResultContentArrayOutput() GetRepositoryResultContentArrayOutput {
+	return o
+}
+
+func (o GetRepositoryResultContentArrayOutput) ToGetRepositoryResultContentArrayOutputWithContext(ctx context.Context) GetRepositoryResultContentArrayOutput {
+	return o
+}
+
+func (o GetRepositoryResultContentArrayOutput) Index(i pulumi.IntInput) GetRepositoryResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRepositoryResultContent {
+		return vs[0].([]GetRepositoryResultContent)[vs[1].(int)]
+	}).(GetRepositoryResultContentOutput)
 }
 
 type GetUnitRulesResult struct {
@@ -6581,6 +16168,254 @@ func (o GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListArrayOutput) Ind
 	}).(GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListOutput)
 }
 
+type GetUsableUnitNamespacesResult struct {
+	// namespace list.
+	Contents []GetUsableUnitNamespacesResultContent `pulumi:"contents"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetUsableUnitNamespacesResultInput is an input type that accepts GetUsableUnitNamespacesResultArgs and GetUsableUnitNamespacesResultOutput values.
+// You can construct a concrete instance of `GetUsableUnitNamespacesResultInput` via:
+//
+//          GetUsableUnitNamespacesResultArgs{...}
+type GetUsableUnitNamespacesResultInput interface {
+	pulumi.Input
+
+	ToGetUsableUnitNamespacesResultOutput() GetUsableUnitNamespacesResultOutput
+	ToGetUsableUnitNamespacesResultOutputWithContext(context.Context) GetUsableUnitNamespacesResultOutput
+}
+
+type GetUsableUnitNamespacesResultArgs struct {
+	// namespace list.
+	Contents GetUsableUnitNamespacesResultContentArrayInput `pulumi:"contents"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetUsableUnitNamespacesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsableUnitNamespacesResult)(nil)).Elem()
+}
+
+func (i GetUsableUnitNamespacesResultArgs) ToGetUsableUnitNamespacesResultOutput() GetUsableUnitNamespacesResultOutput {
+	return i.ToGetUsableUnitNamespacesResultOutputWithContext(context.Background())
+}
+
+func (i GetUsableUnitNamespacesResultArgs) ToGetUsableUnitNamespacesResultOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsableUnitNamespacesResultOutput)
+}
+
+// GetUsableUnitNamespacesResultArrayInput is an input type that accepts GetUsableUnitNamespacesResultArray and GetUsableUnitNamespacesResultArrayOutput values.
+// You can construct a concrete instance of `GetUsableUnitNamespacesResultArrayInput` via:
+//
+//          GetUsableUnitNamespacesResultArray{ GetUsableUnitNamespacesResultArgs{...} }
+type GetUsableUnitNamespacesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetUsableUnitNamespacesResultArrayOutput() GetUsableUnitNamespacesResultArrayOutput
+	ToGetUsableUnitNamespacesResultArrayOutputWithContext(context.Context) GetUsableUnitNamespacesResultArrayOutput
+}
+
+type GetUsableUnitNamespacesResultArray []GetUsableUnitNamespacesResultInput
+
+func (GetUsableUnitNamespacesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsableUnitNamespacesResult)(nil)).Elem()
+}
+
+func (i GetUsableUnitNamespacesResultArray) ToGetUsableUnitNamespacesResultArrayOutput() GetUsableUnitNamespacesResultArrayOutput {
+	return i.ToGetUsableUnitNamespacesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsableUnitNamespacesResultArray) ToGetUsableUnitNamespacesResultArrayOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsableUnitNamespacesResultArrayOutput)
+}
+
+type GetUsableUnitNamespacesResultOutput struct{ *pulumi.OutputState }
+
+func (GetUsableUnitNamespacesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsableUnitNamespacesResult)(nil)).Elem()
+}
+
+func (o GetUsableUnitNamespacesResultOutput) ToGetUsableUnitNamespacesResultOutput() GetUsableUnitNamespacesResultOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultOutput) ToGetUsableUnitNamespacesResultOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultOutput {
+	return o
+}
+
+// namespace list.
+func (o GetUsableUnitNamespacesResultOutput) Contents() GetUsableUnitNamespacesResultContentArrayOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResult) []GetUsableUnitNamespacesResultContent { return v.Contents }).(GetUsableUnitNamespacesResultContentArrayOutput)
+}
+
+// total count.
+func (o GetUsableUnitNamespacesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetUsableUnitNamespacesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsableUnitNamespacesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsableUnitNamespacesResult)(nil)).Elem()
+}
+
+func (o GetUsableUnitNamespacesResultArrayOutput) ToGetUsableUnitNamespacesResultArrayOutput() GetUsableUnitNamespacesResultArrayOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultArrayOutput) ToGetUsableUnitNamespacesResultArrayOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultArrayOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultArrayOutput) Index(i pulumi.IntInput) GetUsableUnitNamespacesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsableUnitNamespacesResult {
+		return vs[0].([]GetUsableUnitNamespacesResult)[vs[1].(int)]
+	}).(GetUsableUnitNamespacesResultOutput)
+}
+
+type GetUsableUnitNamespacesResultContent struct {
+	// Create time. Note: This field may return null, indicating that no valid value was found.
+	CreatedTime string `pulumi:"createdTime"`
+	// Gateway instance id Note: This field may return null, indicating that no valid value was found.
+	GatewayInstanceId string `pulumi:"gatewayInstanceId"`
+	// Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+	Id string `pulumi:"id"`
+	// namespace id.
+	NamespaceId string `pulumi:"namespaceId"`
+	// namespace name.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Update time. Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime string `pulumi:"updatedTime"`
+}
+
+// GetUsableUnitNamespacesResultContentInput is an input type that accepts GetUsableUnitNamespacesResultContentArgs and GetUsableUnitNamespacesResultContentOutput values.
+// You can construct a concrete instance of `GetUsableUnitNamespacesResultContentInput` via:
+//
+//          GetUsableUnitNamespacesResultContentArgs{...}
+type GetUsableUnitNamespacesResultContentInput interface {
+	pulumi.Input
+
+	ToGetUsableUnitNamespacesResultContentOutput() GetUsableUnitNamespacesResultContentOutput
+	ToGetUsableUnitNamespacesResultContentOutputWithContext(context.Context) GetUsableUnitNamespacesResultContentOutput
+}
+
+type GetUsableUnitNamespacesResultContentArgs struct {
+	// Create time. Note: This field may return null, indicating that no valid value was found.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Gateway instance id Note: This field may return null, indicating that no valid value was found.
+	GatewayInstanceId pulumi.StringInput `pulumi:"gatewayInstanceId"`
+	// Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+	Id pulumi.StringInput `pulumi:"id"`
+	// namespace id.
+	NamespaceId pulumi.StringInput `pulumi:"namespaceId"`
+	// namespace name.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Update time. Note: This field may return null, indicating that no valid value was found.
+	UpdatedTime pulumi.StringInput `pulumi:"updatedTime"`
+}
+
+func (GetUsableUnitNamespacesResultContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsableUnitNamespacesResultContent)(nil)).Elem()
+}
+
+func (i GetUsableUnitNamespacesResultContentArgs) ToGetUsableUnitNamespacesResultContentOutput() GetUsableUnitNamespacesResultContentOutput {
+	return i.ToGetUsableUnitNamespacesResultContentOutputWithContext(context.Background())
+}
+
+func (i GetUsableUnitNamespacesResultContentArgs) ToGetUsableUnitNamespacesResultContentOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsableUnitNamespacesResultContentOutput)
+}
+
+// GetUsableUnitNamespacesResultContentArrayInput is an input type that accepts GetUsableUnitNamespacesResultContentArray and GetUsableUnitNamespacesResultContentArrayOutput values.
+// You can construct a concrete instance of `GetUsableUnitNamespacesResultContentArrayInput` via:
+//
+//          GetUsableUnitNamespacesResultContentArray{ GetUsableUnitNamespacesResultContentArgs{...} }
+type GetUsableUnitNamespacesResultContentArrayInput interface {
+	pulumi.Input
+
+	ToGetUsableUnitNamespacesResultContentArrayOutput() GetUsableUnitNamespacesResultContentArrayOutput
+	ToGetUsableUnitNamespacesResultContentArrayOutputWithContext(context.Context) GetUsableUnitNamespacesResultContentArrayOutput
+}
+
+type GetUsableUnitNamespacesResultContentArray []GetUsableUnitNamespacesResultContentInput
+
+func (GetUsableUnitNamespacesResultContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsableUnitNamespacesResultContent)(nil)).Elem()
+}
+
+func (i GetUsableUnitNamespacesResultContentArray) ToGetUsableUnitNamespacesResultContentArrayOutput() GetUsableUnitNamespacesResultContentArrayOutput {
+	return i.ToGetUsableUnitNamespacesResultContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsableUnitNamespacesResultContentArray) ToGetUsableUnitNamespacesResultContentArrayOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsableUnitNamespacesResultContentArrayOutput)
+}
+
+type GetUsableUnitNamespacesResultContentOutput struct{ *pulumi.OutputState }
+
+func (GetUsableUnitNamespacesResultContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsableUnitNamespacesResultContent)(nil)).Elem()
+}
+
+func (o GetUsableUnitNamespacesResultContentOutput) ToGetUsableUnitNamespacesResultContentOutput() GetUsableUnitNamespacesResultContentOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultContentOutput) ToGetUsableUnitNamespacesResultContentOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultContentOutput {
+	return o
+}
+
+// Create time. Note: This field may return null, indicating that no valid value was found.
+func (o GetUsableUnitNamespacesResultContentOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Gateway instance id Note: This field may return null, indicating that no valid value was found.
+func (o GetUsableUnitNamespacesResultContentOutput) GatewayInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.GatewayInstanceId }).(pulumi.StringOutput)
+}
+
+// Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+func (o GetUsableUnitNamespacesResultContentOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// namespace id.
+func (o GetUsableUnitNamespacesResultContentOutput) NamespaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.NamespaceId }).(pulumi.StringOutput)
+}
+
+// namespace name.
+func (o GetUsableUnitNamespacesResultContentOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Update time. Note: This field may return null, indicating that no valid value was found.
+func (o GetUsableUnitNamespacesResultContentOutput) UpdatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsableUnitNamespacesResultContent) string { return v.UpdatedTime }).(pulumi.StringOutput)
+}
+
+type GetUsableUnitNamespacesResultContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsableUnitNamespacesResultContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsableUnitNamespacesResultContent)(nil)).Elem()
+}
+
+func (o GetUsableUnitNamespacesResultContentArrayOutput) ToGetUsableUnitNamespacesResultContentArrayOutput() GetUsableUnitNamespacesResultContentArrayOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultContentArrayOutput) ToGetUsableUnitNamespacesResultContentArrayOutputWithContext(ctx context.Context) GetUsableUnitNamespacesResultContentArrayOutput {
+	return o
+}
+
+func (o GetUsableUnitNamespacesResultContentArrayOutput) Index(i pulumi.IntInput) GetUsableUnitNamespacesResultContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsableUnitNamespacesResultContent {
+		return vs[0].([]GetUsableUnitNamespacesResultContent)[vs[1].(int)]
+	}).(GetUsableUnitNamespacesResultContentOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApiGroupBindedGatewayDeployGroupInput)(nil)).Elem(), ApiGroupBindedGatewayDeployGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApiGroupBindedGatewayDeployGroupArrayInput)(nil)).Elem(), ApiGroupBindedGatewayDeployGroupArray{})
@@ -6598,22 +16433,44 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterOperationInfoDestroyArrayInput)(nil)).Elem(), ClusterOperationInfoDestroyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterOperationInfoInitInput)(nil)).Elem(), ClusterOperationInfoInitArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterOperationInfoInitArrayInput)(nil)).Elem(), ClusterOperationInfoInitArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvInput)(nil)).Elem(), ContainGroupEnvArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvArrayInput)(nil)).Elem(), ContainGroupEnvArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromInput)(nil)).Elem(), ContainGroupEnvValueFromArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromArrayInput)(nil)).Elem(), ContainGroupEnvValueFromArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromFieldRefInput)(nil)).Elem(), ContainGroupEnvValueFromFieldRefArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromFieldRefArrayInput)(nil)).Elem(), ContainGroupEnvValueFromFieldRefArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromResourceFieldRefInput)(nil)).Elem(), ContainGroupEnvValueFromResourceFieldRefArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupEnvValueFromResourceFieldRefArrayInput)(nil)).Elem(), ContainGroupEnvValueFromResourceFieldRefArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingInput)(nil)).Elem(), ContainGroupHealthCheckSettingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingArrayInput)(nil)).Elem(), ContainGroupHealthCheckSettingArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingLivenessProbeInput)(nil)).Elem(), ContainGroupHealthCheckSettingLivenessProbeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingLivenessProbeArrayInput)(nil)).Elem(), ContainGroupHealthCheckSettingLivenessProbeArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingReadinessProbeInput)(nil)).Elem(), ContainGroupHealthCheckSettingReadinessProbeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupHealthCheckSettingReadinessProbeArrayInput)(nil)).Elem(), ContainGroupHealthCheckSettingReadinessProbeArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupProtocolPortInput)(nil)).Elem(), ContainGroupProtocolPortArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ContainGroupProtocolPortArrayInput)(nil)).Elem(), ContainGroupProtocolPortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupAgentProfileListInput)(nil)).Elem(), DeployContainerGroupAgentProfileListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupAgentProfileListArrayInput)(nil)).Elem(), DeployContainerGroupAgentProfileListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvInput)(nil)).Elem(), DeployContainerGroupEnvArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvArrayInput)(nil)).Elem(), DeployContainerGroupEnvArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromInput)(nil)).Elem(), DeployContainerGroupEnvValueFromArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromPtrInput)(nil)).Elem(), DeployContainerGroupEnvValueFromArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromFieldRefInput)(nil)).Elem(), DeployContainerGroupEnvValueFromFieldRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromFieldRefPtrInput)(nil)).Elem(), DeployContainerGroupEnvValueFromFieldRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromResourceFieldRefInput)(nil)).Elem(), DeployContainerGroupEnvValueFromResourceFieldRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupEnvValueFromResourceFieldRefPtrInput)(nil)).Elem(), DeployContainerGroupEnvValueFromResourceFieldRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsPtrInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsLivenessProbeInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsLivenessProbePtrInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsReadinessProbeInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupHealthCheckSettingsReadinessProbePtrInput)(nil)).Elem(), DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupSchedulingStrategyInput)(nil)).Elem(), DeployContainerGroupSchedulingStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupSchedulingStrategyPtrInput)(nil)).Elem(), DeployContainerGroupSchedulingStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupServiceSettingInput)(nil)).Elem(), DeployContainerGroupServiceSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupServiceSettingPtrInput)(nil)).Elem(), DeployContainerGroupServiceSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupServiceSettingProtocolPortInput)(nil)).Elem(), DeployContainerGroupServiceSettingProtocolPortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupServiceSettingProtocolPortArrayInput)(nil)).Elem(), DeployContainerGroupServiceSettingProtocolPortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupVolumeInfoListInput)(nil)).Elem(), DeployContainerGroupVolumeInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupVolumeInfoListArrayInput)(nil)).Elem(), DeployContainerGroupVolumeInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupVolumeMountInfoListInput)(nil)).Elem(), DeployContainerGroupVolumeMountInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupVolumeMountInfoListArrayInput)(nil)).Elem(), DeployContainerGroupVolumeMountInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupWarmupSettingInput)(nil)).Elem(), DeployContainerGroupWarmupSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployContainerGroupWarmupSettingPtrInput)(nil)).Elem(), DeployContainerGroupWarmupSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupAgentProfileListInput)(nil)).Elem(), DeployVmGroupAgentProfileListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupAgentProfileListArrayInput)(nil)).Elem(), DeployVmGroupAgentProfileListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsPtrInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsLivenessProbeInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsLivenessProbePtrInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsReadinessProbeInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupHealthCheckSettingsReadinessProbePtrInput)(nil)).Elem(), DeployVmGroupHealthCheckSettingsReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupWarmupSettingInput)(nil)).Elem(), DeployVmGroupWarmupSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeployVmGroupWarmupSettingPtrInput)(nil)).Elem(), DeployVmGroupWarmupSettingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAttachmentInstanceAdvancedSettingsInput)(nil)).Elem(), InstancesAttachmentInstanceAdvancedSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAttachmentInstanceAdvancedSettingsPtrInput)(nil)).Elem(), InstancesAttachmentInstanceAdvancedSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaneLaneGroupListInput)(nil)).Elem(), LaneLaneGroupListArgs{})
@@ -6630,6 +16487,24 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*UnitRuleUnitRuleItemListArrayInput)(nil)).Elem(), UnitRuleUnitRuleItemListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UnitRuleUnitRuleItemListUnitRuleTagListInput)(nil)).Elem(), UnitRuleUnitRuleItemListUnitRuleTagListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UnitRuleUnitRuleItemListUnitRuleTagListArrayInput)(nil)).Elem(), UnitRuleUnitRuleItemListUnitRuleTagListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultInput)(nil)).Elem(), GetApiDetailResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultArrayInput)(nil)).Elem(), GetApiDetailResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultDefinitionInput)(nil)).Elem(), GetApiDetailResultDefinitionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultDefinitionArrayInput)(nil)).Elem(), GetApiDetailResultDefinitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultDefinitionPropertyInput)(nil)).Elem(), GetApiDetailResultDefinitionPropertyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultDefinitionPropertyArrayInput)(nil)).Elem(), GetApiDetailResultDefinitionPropertyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultRequestInput)(nil)).Elem(), GetApiDetailResultRequestArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultRequestArrayInput)(nil)).Elem(), GetApiDetailResultRequestArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultResponseInput)(nil)).Elem(), GetApiDetailResultResponseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiDetailResultResponseArrayInput)(nil)).Elem(), GetApiDetailResultResponseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultInput)(nil)).Elem(), GetApiGroupResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultArrayInput)(nil)).Elem(), GetApiGroupResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultContentInput)(nil)).Elem(), GetApiGroupResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultContentArrayInput)(nil)).Elem(), GetApiGroupResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultContentBindedGatewayDeployGroupInput)(nil)).Elem(), GetApiGroupResultContentBindedGatewayDeployGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiGroupResultContentBindedGatewayDeployGroupArrayInput)(nil)).Elem(), GetApiGroupResultContentBindedGatewayDeployGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationAttributeResultInput)(nil)).Elem(), GetApplicationAttributeResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationAttributeResultArrayInput)(nil)).Elem(), GetApplicationAttributeResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationConfigResultInput)(nil)).Elem(), GetApplicationConfigResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationConfigResultArrayInput)(nil)).Elem(), GetApplicationConfigResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationConfigResultContentInput)(nil)).Elem(), GetApplicationConfigResultContentArgs{})
@@ -6652,6 +16527,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationResultContentServiceConfigListHealthCheckArrayInput)(nil)).Elem(), GetApplicationResultContentServiceConfigListHealthCheckArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationResultContentServiceConfigListPortInput)(nil)).Elem(), GetApplicationResultContentServiceConfigListPortArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetApplicationResultContentServiceConfigListPortArrayInput)(nil)).Elem(), GetApplicationResultContentServiceConfigListPortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultInput)(nil)).Elem(), GetBusinessLogConfigsResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultArrayInput)(nil)).Elem(), GetBusinessLogConfigsResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentInput)(nil)).Elem(), GetBusinessLogConfigsResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentArrayInput)(nil)).Elem(), GetBusinessLogConfigsResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigAssociatedGroupInput)(nil)).Elem(), GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayInput)(nil)).Elem(), GetBusinessLogConfigsResultContentConfigAssociatedGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigSchemaInput)(nil)).Elem(), GetBusinessLogConfigsResultContentConfigSchemaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBusinessLogConfigsResultContentConfigSchemaArrayInput)(nil)).Elem(), GetBusinessLogConfigsResultContentConfigSchemaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultInput)(nil)).Elem(), GetClusterResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultArrayInput)(nil)).Elem(), GetClusterResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultContentInput)(nil)).Elem(), GetClusterResultContentArgs{})
@@ -6664,10 +16547,74 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultContentOperationInfoDestroyArrayInput)(nil)).Elem(), GetClusterResultContentOperationInfoDestroyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultContentOperationInfoInitInput)(nil)).Elem(), GetClusterResultContentOperationInfoInitArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterResultContentOperationInfoInitArrayInput)(nil)).Elem(), GetClusterResultContentOperationInfoInitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigSummaryResultInput)(nil)).Elem(), GetConfigSummaryResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigSummaryResultArrayInput)(nil)).Elem(), GetConfigSummaryResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigSummaryResultContentInput)(nil)).Elem(), GetConfigSummaryResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigSummaryResultContentArrayInput)(nil)).Elem(), GetConfigSummaryResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerGroupResultInput)(nil)).Elem(), GetContainerGroupResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerGroupResultArrayInput)(nil)).Elem(), GetContainerGroupResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerGroupResultContentInput)(nil)).Elem(), GetContainerGroupResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerGroupResultContentArrayInput)(nil)).Elem(), GetContainerGroupResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigByGroupIdResultInput)(nil)).Elem(), GetDeliveryConfigByGroupIdResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigByGroupIdResultArrayInput)(nil)).Elem(), GetDeliveryConfigByGroupIdResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultInput)(nil)).Elem(), GetDeliveryConfigsResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultArrayInput)(nil)).Elem(), GetDeliveryConfigsResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentInput)(nil)).Elem(), GetDeliveryConfigsResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentArrayInput)(nil)).Elem(), GetDeliveryConfigsResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentGroupInput)(nil)).Elem(), GetDeliveryConfigsResultContentGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentGroupArrayInput)(nil)).Elem(), GetDeliveryConfigsResultContentGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentKafkaInfoInput)(nil)).Elem(), GetDeliveryConfigsResultContentKafkaInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliveryConfigsResultContentKafkaInfoArrayInput)(nil)).Elem(), GetDeliveryConfigsResultContentKafkaInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultInput)(nil)).Elem(), GetGatewayAllGroupApisResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultArrayInput)(nil)).Elem(), GetGatewayAllGroupApisResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultGroupInput)(nil)).Elem(), GetGatewayAllGroupApisResultGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultGroupArrayInput)(nil)).Elem(), GetGatewayAllGroupApisResultGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultGroupGroupApiInput)(nil)).Elem(), GetGatewayAllGroupApisResultGroupGroupApiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayAllGroupApisResultGroupGroupApiArrayInput)(nil)).Elem(), GetGatewayAllGroupApisResultGroupGroupApiArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultInput)(nil)).Elem(), GetGroupConfigReleaseResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultArrayInput)(nil)).Elem(), GetGroupConfigReleaseResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultConfigReleaseListInput)(nil)).Elem(), GetGroupConfigReleaseResultConfigReleaseListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultConfigReleaseListArrayInput)(nil)).Elem(), GetGroupConfigReleaseResultConfigReleaseListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultFileConfigReleaseListInput)(nil)).Elem(), GetGroupConfigReleaseResultFileConfigReleaseListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultFileConfigReleaseListArrayInput)(nil)).Elem(), GetGroupConfigReleaseResultFileConfigReleaseListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultPublicConfigReleaseListInput)(nil)).Elem(), GetGroupConfigReleaseResultPublicConfigReleaseListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupConfigReleaseResultPublicConfigReleaseListArrayInput)(nil)).Elem(), GetGroupConfigReleaseResultPublicConfigReleaseListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultInput)(nil)).Elem(), GetGroupGatewaysResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultArrayInput)(nil)).Elem(), GetGroupGatewaysResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultContentInput)(nil)).Elem(), GetGroupGatewaysResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultContentArrayInput)(nil)).Elem(), GetGroupGatewaysResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultContentBindedGatewayDeployGroupInput)(nil)).Elem(), GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayInput)(nil)).Elem(), GetGroupGatewaysResultContentBindedGatewayDeployGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupInstancesResultInput)(nil)).Elem(), GetGroupInstancesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupInstancesResultArrayInput)(nil)).Elem(), GetGroupInstancesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupInstancesResultContentInput)(nil)).Elem(), GetGroupInstancesResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupInstancesResultContentArrayInput)(nil)).Elem(), GetGroupInstancesResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultInput)(nil)).Elem(), GetGroupsResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultArrayInput)(nil)).Elem(), GetGroupsResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultContentInput)(nil)).Elem(), GetGroupsResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultContentArrayInput)(nil)).Elem(), GetGroupsResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceApiVersionResultInput)(nil)).Elem(), GetMicroserviceApiVersionResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceApiVersionResultArrayInput)(nil)).Elem(), GetMicroserviceApiVersionResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceResultInput)(nil)).Elem(), GetMicroserviceResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceResultArrayInput)(nil)).Elem(), GetMicroserviceResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceResultContentInput)(nil)).Elem(), GetMicroserviceResultContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMicroserviceResultContentArrayInput)(nil)).Elem(), GetMicroserviceResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMsApiListResultInput)(nil)).Elem(), GetMsApiListResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMsApiListResultArrayInput)(nil)).Elem(), GetMsApiListResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMsApiListResultContentInput)(nil)).Elem(), GetMsApiListResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMsApiListResultContentArrayInput)(nil)).Elem(), GetMsApiListResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPodInstancesResultInput)(nil)).Elem(), GetPodInstancesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPodInstancesResultArrayInput)(nil)).Elem(), GetPodInstancesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPodInstancesResultContentInput)(nil)).Elem(), GetPodInstancesResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPodInstancesResultContentArrayInput)(nil)).Elem(), GetPodInstancesResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicConfigSummaryResultInput)(nil)).Elem(), GetPublicConfigSummaryResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicConfigSummaryResultArrayInput)(nil)).Elem(), GetPublicConfigSummaryResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicConfigSummaryResultContentInput)(nil)).Elem(), GetPublicConfigSummaryResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicConfigSummaryResultContentArrayInput)(nil)).Elem(), GetPublicConfigSummaryResultContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoryResultInput)(nil)).Elem(), GetRepositoryResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoryResultArrayInput)(nil)).Elem(), GetRepositoryResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoryResultContentInput)(nil)).Elem(), GetRepositoryResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoryResultContentArrayInput)(nil)).Elem(), GetRepositoryResultContentArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultInput)(nil)).Elem(), GetUnitRulesResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultArrayInput)(nil)).Elem(), GetUnitRulesResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultContentInput)(nil)).Elem(), GetUnitRulesResultContentArgs{})
@@ -6676,6 +16623,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultContentUnitRuleItemListArrayInput)(nil)).Elem(), GetUnitRulesResultContentUnitRuleItemListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListInput)(nil)).Elem(), GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListArrayInput)(nil)).Elem(), GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsableUnitNamespacesResultInput)(nil)).Elem(), GetUsableUnitNamespacesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsableUnitNamespacesResultArrayInput)(nil)).Elem(), GetUsableUnitNamespacesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsableUnitNamespacesResultContentInput)(nil)).Elem(), GetUsableUnitNamespacesResultContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsableUnitNamespacesResultContentArrayInput)(nil)).Elem(), GetUsableUnitNamespacesResultContentArray{})
 	pulumi.RegisterOutputType(ApiGroupBindedGatewayDeployGroupOutput{})
 	pulumi.RegisterOutputType(ApiGroupBindedGatewayDeployGroupArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationServiceConfigListOutput{})
@@ -6692,22 +16643,44 @@ func init() {
 	pulumi.RegisterOutputType(ClusterOperationInfoDestroyArrayOutput{})
 	pulumi.RegisterOutputType(ClusterOperationInfoInitOutput{})
 	pulumi.RegisterOutputType(ClusterOperationInfoInitArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromFieldRefOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromFieldRefArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromResourceFieldRefOutput{})
-	pulumi.RegisterOutputType(ContainGroupEnvValueFromResourceFieldRefArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingLivenessProbeOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingLivenessProbeArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingReadinessProbeOutput{})
-	pulumi.RegisterOutputType(ContainGroupHealthCheckSettingReadinessProbeArrayOutput{})
-	pulumi.RegisterOutputType(ContainGroupProtocolPortOutput{})
-	pulumi.RegisterOutputType(ContainGroupProtocolPortArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupAgentProfileListOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupAgentProfileListArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromFieldRefOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromFieldRefPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromResourceFieldRefOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupEnvValueFromResourceFieldRefPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsLivenessProbeOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsLivenessProbePtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsReadinessProbeOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupHealthCheckSettingsReadinessProbePtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupSchedulingStrategyOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupSchedulingStrategyPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupServiceSettingOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupServiceSettingPtrOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupServiceSettingProtocolPortOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupServiceSettingProtocolPortArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupVolumeInfoListOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupVolumeInfoListArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupVolumeMountInfoListOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupVolumeMountInfoListArrayOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupWarmupSettingOutput{})
+	pulumi.RegisterOutputType(DeployContainerGroupWarmupSettingPtrOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupAgentProfileListOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupAgentProfileListArrayOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsLivenessProbeOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsLivenessProbePtrOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsReadinessProbeOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupHealthCheckSettingsReadinessProbePtrOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupWarmupSettingOutput{})
+	pulumi.RegisterOutputType(DeployVmGroupWarmupSettingPtrOutput{})
 	pulumi.RegisterOutputType(InstancesAttachmentInstanceAdvancedSettingsOutput{})
 	pulumi.RegisterOutputType(InstancesAttachmentInstanceAdvancedSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LaneLaneGroupListOutput{})
@@ -6724,6 +16697,24 @@ func init() {
 	pulumi.RegisterOutputType(UnitRuleUnitRuleItemListArrayOutput{})
 	pulumi.RegisterOutputType(UnitRuleUnitRuleItemListUnitRuleTagListOutput{})
 	pulumi.RegisterOutputType(UnitRuleUnitRuleItemListUnitRuleTagListArrayOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultArrayOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultDefinitionOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultDefinitionArrayOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultDefinitionPropertyOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultDefinitionPropertyArrayOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultRequestOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultRequestArrayOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultResponseOutput{})
+	pulumi.RegisterOutputType(GetApiDetailResultResponseArrayOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultArrayOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultContentOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultContentBindedGatewayDeployGroupOutput{})
+	pulumi.RegisterOutputType(GetApiGroupResultContentBindedGatewayDeployGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetApplicationAttributeResultOutput{})
+	pulumi.RegisterOutputType(GetApplicationAttributeResultArrayOutput{})
 	pulumi.RegisterOutputType(GetApplicationConfigResultOutput{})
 	pulumi.RegisterOutputType(GetApplicationConfigResultArrayOutput{})
 	pulumi.RegisterOutputType(GetApplicationConfigResultContentOutput{})
@@ -6746,6 +16737,14 @@ func init() {
 	pulumi.RegisterOutputType(GetApplicationResultContentServiceConfigListHealthCheckArrayOutput{})
 	pulumi.RegisterOutputType(GetApplicationResultContentServiceConfigListPortOutput{})
 	pulumi.RegisterOutputType(GetApplicationResultContentServiceConfigListPortArrayOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultArrayOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentConfigAssociatedGroupOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentConfigAssociatedGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentConfigSchemaOutput{})
+	pulumi.RegisterOutputType(GetBusinessLogConfigsResultContentConfigSchemaArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterResultOutput{})
 	pulumi.RegisterOutputType(GetClusterResultArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterResultContentOutput{})
@@ -6758,10 +16757,74 @@ func init() {
 	pulumi.RegisterOutputType(GetClusterResultContentOperationInfoDestroyArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterResultContentOperationInfoInitOutput{})
 	pulumi.RegisterOutputType(GetClusterResultContentOperationInfoInitArrayOutput{})
+	pulumi.RegisterOutputType(GetConfigSummaryResultOutput{})
+	pulumi.RegisterOutputType(GetConfigSummaryResultArrayOutput{})
+	pulumi.RegisterOutputType(GetConfigSummaryResultContentOutput{})
+	pulumi.RegisterOutputType(GetConfigSummaryResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetContainerGroupResultOutput{})
+	pulumi.RegisterOutputType(GetContainerGroupResultArrayOutput{})
+	pulumi.RegisterOutputType(GetContainerGroupResultContentOutput{})
+	pulumi.RegisterOutputType(GetContainerGroupResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigByGroupIdResultOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigByGroupIdResultArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentGroupOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentKafkaInfoOutput{})
+	pulumi.RegisterOutputType(GetDeliveryConfigsResultContentKafkaInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultGroupOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultGroupGroupApiOutput{})
+	pulumi.RegisterOutputType(GetGatewayAllGroupApisResultGroupGroupApiArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultConfigReleaseListOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultConfigReleaseListArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultFileConfigReleaseListOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultFileConfigReleaseListArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultPublicConfigReleaseListOutput{})
+	pulumi.RegisterOutputType(GetGroupConfigReleaseResultPublicConfigReleaseListArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultContentOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultContentBindedGatewayDeployGroupOutput{})
+	pulumi.RegisterOutputType(GetGroupGatewaysResultContentBindedGatewayDeployGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupInstancesResultOutput{})
+	pulumi.RegisterOutputType(GetGroupInstancesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupInstancesResultContentOutput{})
+	pulumi.RegisterOutputType(GetGroupInstancesResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultContentOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetMicroserviceApiVersionResultOutput{})
+	pulumi.RegisterOutputType(GetMicroserviceApiVersionResultArrayOutput{})
 	pulumi.RegisterOutputType(GetMicroserviceResultOutput{})
 	pulumi.RegisterOutputType(GetMicroserviceResultArrayOutput{})
 	pulumi.RegisterOutputType(GetMicroserviceResultContentOutput{})
 	pulumi.RegisterOutputType(GetMicroserviceResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetMsApiListResultOutput{})
+	pulumi.RegisterOutputType(GetMsApiListResultArrayOutput{})
+	pulumi.RegisterOutputType(GetMsApiListResultContentOutput{})
+	pulumi.RegisterOutputType(GetMsApiListResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetPodInstancesResultOutput{})
+	pulumi.RegisterOutputType(GetPodInstancesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetPodInstancesResultContentOutput{})
+	pulumi.RegisterOutputType(GetPodInstancesResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetPublicConfigSummaryResultOutput{})
+	pulumi.RegisterOutputType(GetPublicConfigSummaryResultArrayOutput{})
+	pulumi.RegisterOutputType(GetPublicConfigSummaryResultContentOutput{})
+	pulumi.RegisterOutputType(GetPublicConfigSummaryResultContentArrayOutput{})
+	pulumi.RegisterOutputType(GetRepositoryResultOutput{})
+	pulumi.RegisterOutputType(GetRepositoryResultArrayOutput{})
+	pulumi.RegisterOutputType(GetRepositoryResultContentOutput{})
+	pulumi.RegisterOutputType(GetRepositoryResultContentArrayOutput{})
 	pulumi.RegisterOutputType(GetUnitRulesResultOutput{})
 	pulumi.RegisterOutputType(GetUnitRulesResultArrayOutput{})
 	pulumi.RegisterOutputType(GetUnitRulesResultContentOutput{})
@@ -6770,4 +16833,8 @@ func init() {
 	pulumi.RegisterOutputType(GetUnitRulesResultContentUnitRuleItemListArrayOutput{})
 	pulumi.RegisterOutputType(GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListOutput{})
 	pulumi.RegisterOutputType(GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListArrayOutput{})
+	pulumi.RegisterOutputType(GetUsableUnitNamespacesResultOutput{})
+	pulumi.RegisterOutputType(GetUsableUnitNamespacesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetUsableUnitNamespacesResultContentOutput{})
+	pulumi.RegisterOutputType(GetUsableUnitNamespacesResultContentArrayOutput{})
 }

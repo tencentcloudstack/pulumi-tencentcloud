@@ -212,8 +212,7 @@ def get_records(domain: Optional[str] = None,
         subdomain="www")
     pulumi.export("result", record.results)
     ```
-
-    Use verbose filter
+    ### Use verbose filter
 
     ```python
     import pulumi
@@ -312,8 +311,7 @@ def get_records_output(domain: Optional[pulumi.Input[Optional[str]]] = None,
         subdomain="www")
     pulumi.export("result", record.results)
     ```
-
-    Use verbose filter
+    ### Use verbose filter
 
     ```python
     import pulumi

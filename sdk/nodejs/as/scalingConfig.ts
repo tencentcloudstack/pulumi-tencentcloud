@@ -39,8 +39,7 @@ import * as utilities from "../utilities";
  *     userData: "dGVzdA==",
  * });
  * ```
- *
- * Using SPOT charge type
+ * ### Using SPOT charge type
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

@@ -21,8 +21,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Using public network access whitelist
+ * ### Using public network access whitelist
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -41,8 +40,7 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
- *
- * Create with Replications
+ * ### Create with Replications
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

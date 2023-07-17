@@ -11,14 +11,33 @@ from . import outputs
 
 __all__ = [
     'RocketmqClusterVpc',
+    'GetProInstanceDetailClusterInfoResult',
+    'GetProInstanceDetailClusterInfoNodeDistributionResult',
+    'GetProInstanceDetailClusterSpecInfoResult',
+    'GetProInstanceDetailNetworkAccessPointInfoResult',
+    'GetProInstancesFilterResult',
+    'GetProInstancesInstanceResult',
+    'GetPublishersFilterResult',
+    'GetPublishersPublisherResult',
+    'GetPublishersSortResult',
+    'GetRabbitmqNodeListFilterResult',
+    'GetRabbitmqNodeListNodeListResult',
+    'GetRabbitmqVipInstanceFilterResult',
+    'GetRabbitmqVipInstanceInstanceResult',
     'GetRocketmqClusterClusterListResult',
     'GetRocketmqClusterClusterListConfigResult',
     'GetRocketmqClusterClusterListInfoResult',
     'GetRocketmqClusterClusterListInfoVpcResult',
     'GetRocketmqGroupGroupResult',
+    'GetRocketmqMessagesMessageTrackResult',
     'GetRocketmqNamespaceNamespaceResult',
     'GetRocketmqRoleRoleSetResult',
     'GetRocketmqTopicTopicResult',
+    'GetVipInstanceClusterInfoResult',
+    'GetVipInstanceClusterInfoVpcResult',
+    'GetVipInstanceInstanceConfigResult',
+    'GetVipInstanceInstanceConfigNodeDistributionResult',
+    'GetVipInstanceInstanceConfigTopicDistributionResult',
 ]
 
 @pulumi.output_type
@@ -69,6 +88,866 @@ class RocketmqClusterVpc(dict):
         Vpc ID.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetProInstanceDetailClusterInfoResult(dict):
+    def __init__(__self__, *,
+                 can_edit_route: bool,
+                 cluster_id: str,
+                 cluster_name: str,
+                 create_time: str,
+                 max_storage: int,
+                 node_distributions: Sequence['outputs.GetProInstanceDetailClusterInfoNodeDistributionResult'],
+                 remark: str,
+                 status: int,
+                 version: str):
+        """
+        :param bool can_edit_route: Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+        :param str cluster_id: Cluster Id.
+        :param str cluster_name: Cluster name.
+        :param str create_time: Creation time.
+        :param int max_storage: Maximum storage capacity, unit: MB.
+        :param Sequence['GetProInstanceDetailClusterInfoNodeDistributionArgs'] node_distributions: Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+        :param str remark: Descriptive information.
+        :param int status: Cluster status, 0: creating, 1: normal, 2: isolated.
+        :param str version: cluster version.
+        """
+        pulumi.set(__self__, "can_edit_route", can_edit_route)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "max_storage", max_storage)
+        pulumi.set(__self__, "node_distributions", node_distributions)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="canEditRoute")
+    def can_edit_route(self) -> bool:
+        """
+        Can the route be modifiedNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "can_edit_route")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster Id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="maxStorage")
+    def max_storage(self) -> int:
+        """
+        Maximum storage capacity, unit: MB.
+        """
+        return pulumi.get(self, "max_storage")
+
+    @property
+    @pulumi.getter(name="nodeDistributions")
+    def node_distributions(self) -> Sequence['outputs.GetProInstanceDetailClusterInfoNodeDistributionResult']:
+        """
+        Node distributionNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "node_distributions")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Descriptive information.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Cluster status, 0: creating, 1: normal, 2: isolated.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        cluster version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetProInstanceDetailClusterInfoNodeDistributionResult(dict):
+    def __init__(__self__, *,
+                 node_count: int,
+                 zone_id: str,
+                 zone_name: str):
+        """
+        :param int node_count: Number of nodes.
+        :param str zone_id: Availability zone ID.
+        :param str zone_name: Availability zone.
+        """
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        """
+        Number of nodes.
+        """
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        """
+        Availability zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        Availability zone.
+        """
+        return pulumi.get(self, "zone_name")
+
+
+@pulumi.output_type
+class GetProInstanceDetailClusterSpecInfoResult(dict):
+    def __init__(__self__, *,
+                 max_band_width: int,
+                 max_namespaces: int,
+                 max_topics: int,
+                 max_tps: int,
+                 scalable_tps: int,
+                 spec_name: str):
+        """
+        :param int max_band_width: peak bandwidth. Unit: mbps.
+        :param int max_namespaces: Maximum number of namespaces.
+        :param int max_topics: Maximum number of topic partitions.
+        :param int max_tps: peak tps.
+        :param int scalable_tps: Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+        :param str spec_name: Cluster specification name.
+        """
+        pulumi.set(__self__, "max_band_width", max_band_width)
+        pulumi.set(__self__, "max_namespaces", max_namespaces)
+        pulumi.set(__self__, "max_topics", max_topics)
+        pulumi.set(__self__, "max_tps", max_tps)
+        pulumi.set(__self__, "scalable_tps", scalable_tps)
+        pulumi.set(__self__, "spec_name", spec_name)
+
+    @property
+    @pulumi.getter(name="maxBandWidth")
+    def max_band_width(self) -> int:
+        """
+        peak bandwidth. Unit: mbps.
+        """
+        return pulumi.get(self, "max_band_width")
+
+    @property
+    @pulumi.getter(name="maxNamespaces")
+    def max_namespaces(self) -> int:
+        """
+        Maximum number of namespaces.
+        """
+        return pulumi.get(self, "max_namespaces")
+
+    @property
+    @pulumi.getter(name="maxTopics")
+    def max_topics(self) -> int:
+        """
+        Maximum number of topic partitions.
+        """
+        return pulumi.get(self, "max_topics")
+
+    @property
+    @pulumi.getter(name="maxTps")
+    def max_tps(self) -> int:
+        """
+        peak tps.
+        """
+        return pulumi.get(self, "max_tps")
+
+    @property
+    @pulumi.getter(name="scalableTps")
+    def scalable_tps(self) -> int:
+        """
+        Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "scalable_tps")
+
+    @property
+    @pulumi.getter(name="specName")
+    def spec_name(self) -> str:
+        """
+        Cluster specification name.
+        """
+        return pulumi.get(self, "spec_name")
+
+
+@pulumi.output_type
+class GetProInstanceDetailNetworkAccessPointInfoResult(dict):
+    def __init__(__self__, *,
+                 endpoint: str,
+                 instance_id: str,
+                 route_type: int,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str endpoint: access address.
+        :param str instance_id: instance id.
+        :param int route_type: Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+        :param str subnet_id: Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "route_type", route_type)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> str:
+        """
+        access address.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="routeType")
+    def route_type(self) -> int:
+        """
+        Access point type: 0: support network access point 1: VPC access point 2: public network access point.
+        """
+        return pulumi.get(self, "route_type")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet id, support network and public network access point, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        The id of the vpc, the supporting network and the access point of the public network, this field is emptyNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetProInstancesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: The name of the filter parameter.
+        :param Sequence[str] values: value.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        The name of the filter parameter.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        value.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetProInstancesInstanceResult(dict):
+    def __init__(__self__, *,
+                 auto_renew_flag: int,
+                 config_display: str,
+                 expire_time: int,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_version: str,
+                 max_band_width: int,
+                 max_storage: int,
+                 max_tps: int,
+                 pay_mode: int,
+                 remark: str,
+                 scalable_tps: int,
+                 spec_name: str,
+                 status: int,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param int auto_renew_flag: Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+        :param str config_display: Instance configuration specification name.
+        :param int expire_time: Instance expiration time, in milliseconds.
+        :param str instance_id: Instance ID.
+        :param str instance_name: Instance name.
+        :param str instance_version: Instance version.
+        :param int max_band_width: Peak bandwidth. Unit: mbps.
+        :param int max_storage: Storage capacity, in GB.
+        :param int max_tps: Peak TPS.
+        :param int pay_mode: 0-postpaid, 1-prepaid.
+        :param str remark: RemarksNote: This field may return null, indicating that no valid value can be obtained.
+        :param int scalable_tps: Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+        :param str spec_name: Instance Configuration ID.
+        :param int status: Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+        :param str subnet_id: Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        pulumi.set(__self__, "config_display", config_display)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_version", instance_version)
+        pulumi.set(__self__, "max_band_width", max_band_width)
+        pulumi.set(__self__, "max_storage", max_storage)
+        pulumi.set(__self__, "max_tps", max_tps)
+        pulumi.set(__self__, "pay_mode", pay_mode)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "scalable_tps", scalable_tps)
+        pulumi.set(__self__, "spec_name", spec_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> int:
+        """
+        Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="configDisplay")
+    def config_display(self) -> str:
+        """
+        Instance configuration specification name.
+        """
+        return pulumi.get(self, "config_display")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> int:
+        """
+        Instance expiration time, in milliseconds.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceVersion")
+    def instance_version(self) -> str:
+        """
+        Instance version.
+        """
+        return pulumi.get(self, "instance_version")
+
+    @property
+    @pulumi.getter(name="maxBandWidth")
+    def max_band_width(self) -> int:
+        """
+        Peak bandwidth. Unit: mbps.
+        """
+        return pulumi.get(self, "max_band_width")
+
+    @property
+    @pulumi.getter(name="maxStorage")
+    def max_storage(self) -> int:
+        """
+        Storage capacity, in GB.
+        """
+        return pulumi.get(self, "max_storage")
+
+    @property
+    @pulumi.getter(name="maxTps")
+    def max_tps(self) -> int:
+        """
+        Peak TPS.
+        """
+        return pulumi.get(self, "max_tps")
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> int:
+        """
+        0-postpaid, 1-prepaid.
+        """
+        return pulumi.get(self, "pay_mode")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        RemarksNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="scalableTps")
+    def scalable_tps(self) -> int:
+        """
+        Elastic TPS outside specificationNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "scalable_tps")
+
+    @property
+    @pulumi.getter(name="specName")
+    def spec_name(self) -> str:
+        """
+        Instance Configuration ID.
+        """
+        return pulumi.get(self, "spec_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetPublishersFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: The name of the filter parameter.
+        :param Sequence[str] values: value.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        The name of the filter parameter.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        value.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetPublishersPublisherResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 average_msg_size: float,
+                 client_version: str,
+                 connected_since: str,
+                 msg_rate_in: float,
+                 msg_throughput_in: float,
+                 partition: int,
+                 producer_id: int,
+                 producer_name: str):
+        """
+        :param str address: producer addressNote: This field may return null, indicating that no valid value can be obtained.
+        :param float average_msg_size: Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+        :param str client_version: client versionNote: This field may return null, indicating that no valid value can be obtained.
+        :param str connected_since: connection timeNote: This field may return null, indicating that no valid value can be obtained.
+        :param float msg_rate_in: Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+        :param float msg_throughput_in: Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+        :param int partition: The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+        :param int producer_id: producer idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str producer_name: producer nameNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "average_msg_size", average_msg_size)
+        pulumi.set(__self__, "client_version", client_version)
+        pulumi.set(__self__, "connected_since", connected_since)
+        pulumi.set(__self__, "msg_rate_in", msg_rate_in)
+        pulumi.set(__self__, "msg_throughput_in", msg_throughput_in)
+        pulumi.set(__self__, "partition", partition)
+        pulumi.set(__self__, "producer_id", producer_id)
+        pulumi.set(__self__, "producer_name", producer_name)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        producer addressNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="averageMsgSize")
+    def average_msg_size(self) -> float:
+        """
+        Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "average_msg_size")
+
+    @property
+    @pulumi.getter(name="clientVersion")
+    def client_version(self) -> str:
+        """
+        client versionNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "client_version")
+
+    @property
+    @pulumi.getter(name="connectedSince")
+    def connected_since(self) -> str:
+        """
+        connection timeNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "connected_since")
+
+    @property
+    @pulumi.getter(name="msgRateIn")
+    def msg_rate_in(self) -> float:
+        """
+        Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "msg_rate_in")
+
+    @property
+    @pulumi.getter(name="msgThroughputIn")
+    def msg_throughput_in(self) -> float:
+        """
+        Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "msg_throughput_in")
+
+    @property
+    @pulumi.getter
+    def partition(self) -> int:
+        """
+        The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "partition")
+
+    @property
+    @pulumi.getter(name="producerId")
+    def producer_id(self) -> int:
+        """
+        producer idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "producer_id")
+
+    @property
+    @pulumi.getter(name="producerName")
+    def producer_name(self) -> str:
+        """
+        producer nameNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "producer_name")
+
+
+@pulumi.output_type
+class GetPublishersSortResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 order: str):
+        """
+        :param str name: sorter.
+        :param str order: Ascending ASC, descending DESC.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order", order)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        sorter.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> str:
+        """
+        Ascending ASC, descending DESC.
+        """
+        return pulumi.get(self, "order")
+
+
+@pulumi.output_type
+class GetRabbitmqNodeListFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetRabbitmqNodeListNodeListResult(dict):
+    def __init__(__self__, *,
+                 cpu_usage: str,
+                 disk_usage: str,
+                 memory: int,
+                 node_name: str,
+                 node_status: str,
+                 process_number: int):
+        pulumi.set(__self__, "cpu_usage", cpu_usage)
+        pulumi.set(__self__, "disk_usage", disk_usage)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "node_name", node_name)
+        pulumi.set(__self__, "node_status", node_status)
+        pulumi.set(__self__, "process_number", process_number)
+
+    @property
+    @pulumi.getter(name="cpuUsage")
+    def cpu_usage(self) -> str:
+        return pulumi.get(self, "cpu_usage")
+
+    @property
+    @pulumi.getter(name="diskUsage")
+    def disk_usage(self) -> str:
+        return pulumi.get(self, "disk_usage")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="nodeName")
+    def node_name(self) -> str:
+        return pulumi.get(self, "node_name")
+
+    @property
+    @pulumi.getter(name="nodeStatus")
+    def node_status(self) -> str:
+        return pulumi.get(self, "node_status")
+
+    @property
+    @pulumi.getter(name="processNumber")
+    def process_number(self) -> int:
+        return pulumi.get(self, "process_number")
+
+
+@pulumi.output_type
+class GetRabbitmqVipInstanceFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetRabbitmqVipInstanceInstanceResult(dict):
+    def __init__(__self__, *,
+                 auto_renew_flag: int,
+                 config_display: str,
+                 exception_information: str,
+                 expire_time: int,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_version: str,
+                 max_band_width: int,
+                 max_storage: int,
+                 max_tps: int,
+                 node_count: int,
+                 pay_mode: int,
+                 remark: str,
+                 spec_name: str,
+                 status: int):
+        pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        pulumi.set(__self__, "config_display", config_display)
+        pulumi.set(__self__, "exception_information", exception_information)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_version", instance_version)
+        pulumi.set(__self__, "max_band_width", max_band_width)
+        pulumi.set(__self__, "max_storage", max_storage)
+        pulumi.set(__self__, "max_tps", max_tps)
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "pay_mode", pay_mode)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "spec_name", spec_name)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> int:
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="configDisplay")
+    def config_display(self) -> str:
+        return pulumi.get(self, "config_display")
+
+    @property
+    @pulumi.getter(name="exceptionInformation")
+    def exception_information(self) -> str:
+        return pulumi.get(self, "exception_information")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> int:
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceVersion")
+    def instance_version(self) -> str:
+        return pulumi.get(self, "instance_version")
+
+    @property
+    @pulumi.getter(name="maxBandWidth")
+    def max_band_width(self) -> int:
+        return pulumi.get(self, "max_band_width")
+
+    @property
+    @pulumi.getter(name="maxStorage")
+    def max_storage(self) -> int:
+        return pulumi.get(self, "max_storage")
+
+    @property
+    @pulumi.getter(name="maxTps")
+    def max_tps(self) -> int:
+        return pulumi.get(self, "max_tps")
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> int:
+        return pulumi.get(self, "pay_mode")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="specName")
+    def spec_name(self) -> str:
+        return pulumi.get(self, "spec_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        return pulumi.get(self, "status")
 
 
 @pulumi.output_type
@@ -525,6 +1404,57 @@ class GetRocketmqGroupGroupResult(dict):
 
 
 @pulumi.output_type
+class GetRocketmqMessagesMessageTrackResult(dict):
+    def __init__(__self__, *,
+                 consume_status: str,
+                 exception_desc: str,
+                 group: str,
+                 track_type: str):
+        """
+        :param str consume_status: consumption status.
+        :param str exception_desc: Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+        :param str group: consumer group.
+        :param str track_type: message track type.
+        """
+        pulumi.set(__self__, "consume_status", consume_status)
+        pulumi.set(__self__, "exception_desc", exception_desc)
+        pulumi.set(__self__, "group", group)
+        pulumi.set(__self__, "track_type", track_type)
+
+    @property
+    @pulumi.getter(name="consumeStatus")
+    def consume_status(self) -> str:
+        """
+        consumption status.
+        """
+        return pulumi.get(self, "consume_status")
+
+    @property
+    @pulumi.getter(name="exceptionDesc")
+    def exception_desc(self) -> str:
+        """
+        Exception informationNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "exception_desc")
+
+    @property
+    @pulumi.getter
+    def group(self) -> str:
+        """
+        consumer group.
+        """
+        return pulumi.get(self, "group")
+
+    @property
+    @pulumi.getter(name="trackType")
+    def track_type(self) -> str:
+        """
+        message track type.
+        """
+        return pulumi.get(self, "track_type")
+
+
+@pulumi.output_type
 class GetRocketmqNamespaceNamespaceResult(dict):
     def __init__(__self__, *,
                  namespace_id: str,
@@ -719,5 +1649,268 @@ class GetRocketmqTopicTopicResult(dict):
         Update time in milliseconds.
         """
         return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetVipInstanceClusterInfoResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 create_time: int,
+                 http_public_endpoint: str,
+                 http_vpc_endpoint: str,
+                 is_vip: bool,
+                 isolate_time: int,
+                 public_end_point: str,
+                 region: str,
+                 remark: str,
+                 rocket_mq_flag: bool,
+                 status: int,
+                 support_namespace_endpoint: bool,
+                 vpc_end_point: str,
+                 vpcs: Sequence['outputs.GetVipInstanceClusterInfoVpcResult']):
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "http_public_endpoint", http_public_endpoint)
+        pulumi.set(__self__, "http_vpc_endpoint", http_vpc_endpoint)
+        pulumi.set(__self__, "is_vip", is_vip)
+        pulumi.set(__self__, "isolate_time", isolate_time)
+        pulumi.set(__self__, "public_end_point", public_end_point)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "rocket_mq_flag", rocket_mq_flag)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "support_namespace_endpoint", support_namespace_endpoint)
+        pulumi.set(__self__, "vpc_end_point", vpc_end_point)
+        pulumi.set(__self__, "vpcs", vpcs)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="httpPublicEndpoint")
+    def http_public_endpoint(self) -> str:
+        return pulumi.get(self, "http_public_endpoint")
+
+    @property
+    @pulumi.getter(name="httpVpcEndpoint")
+    def http_vpc_endpoint(self) -> str:
+        return pulumi.get(self, "http_vpc_endpoint")
+
+    @property
+    @pulumi.getter(name="isVip")
+    def is_vip(self) -> bool:
+        return pulumi.get(self, "is_vip")
+
+    @property
+    @pulumi.getter(name="isolateTime")
+    def isolate_time(self) -> int:
+        return pulumi.get(self, "isolate_time")
+
+    @property
+    @pulumi.getter(name="publicEndPoint")
+    def public_end_point(self) -> str:
+        return pulumi.get(self, "public_end_point")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="rocketMqFlag")
+    def rocket_mq_flag(self) -> bool:
+        return pulumi.get(self, "rocket_mq_flag")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="supportNamespaceEndpoint")
+    def support_namespace_endpoint(self) -> bool:
+        return pulumi.get(self, "support_namespace_endpoint")
+
+    @property
+    @pulumi.getter(name="vpcEndPoint")
+    def vpc_end_point(self) -> str:
+        return pulumi.get(self, "vpc_end_point")
+
+    @property
+    @pulumi.getter
+    def vpcs(self) -> Sequence['outputs.GetVipInstanceClusterInfoVpcResult']:
+        return pulumi.get(self, "vpcs")
+
+
+@pulumi.output_type
+class GetVipInstanceClusterInfoVpcResult(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 vpc_id: str):
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetVipInstanceInstanceConfigResult(dict):
+    def __init__(__self__, *,
+                 config_display: str,
+                 max_group_num: int,
+                 max_namespace_num: int,
+                 max_queues_per_topic: int,
+                 max_topic_num: int,
+                 max_tps_per_namespace: int,
+                 node_count: int,
+                 node_distributions: Sequence['outputs.GetVipInstanceInstanceConfigNodeDistributionResult'],
+                 topic_distributions: Sequence['outputs.GetVipInstanceInstanceConfigTopicDistributionResult'],
+                 used_group_num: int,
+                 used_namespace_num: int,
+                 used_topic_num: int):
+        pulumi.set(__self__, "config_display", config_display)
+        pulumi.set(__self__, "max_group_num", max_group_num)
+        pulumi.set(__self__, "max_namespace_num", max_namespace_num)
+        pulumi.set(__self__, "max_queues_per_topic", max_queues_per_topic)
+        pulumi.set(__self__, "max_topic_num", max_topic_num)
+        pulumi.set(__self__, "max_tps_per_namespace", max_tps_per_namespace)
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "node_distributions", node_distributions)
+        pulumi.set(__self__, "topic_distributions", topic_distributions)
+        pulumi.set(__self__, "used_group_num", used_group_num)
+        pulumi.set(__self__, "used_namespace_num", used_namespace_num)
+        pulumi.set(__self__, "used_topic_num", used_topic_num)
+
+    @property
+    @pulumi.getter(name="configDisplay")
+    def config_display(self) -> str:
+        return pulumi.get(self, "config_display")
+
+    @property
+    @pulumi.getter(name="maxGroupNum")
+    def max_group_num(self) -> int:
+        return pulumi.get(self, "max_group_num")
+
+    @property
+    @pulumi.getter(name="maxNamespaceNum")
+    def max_namespace_num(self) -> int:
+        return pulumi.get(self, "max_namespace_num")
+
+    @property
+    @pulumi.getter(name="maxQueuesPerTopic")
+    def max_queues_per_topic(self) -> int:
+        return pulumi.get(self, "max_queues_per_topic")
+
+    @property
+    @pulumi.getter(name="maxTopicNum")
+    def max_topic_num(self) -> int:
+        return pulumi.get(self, "max_topic_num")
+
+    @property
+    @pulumi.getter(name="maxTpsPerNamespace")
+    def max_tps_per_namespace(self) -> int:
+        return pulumi.get(self, "max_tps_per_namespace")
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter(name="nodeDistributions")
+    def node_distributions(self) -> Sequence['outputs.GetVipInstanceInstanceConfigNodeDistributionResult']:
+        return pulumi.get(self, "node_distributions")
+
+    @property
+    @pulumi.getter(name="topicDistributions")
+    def topic_distributions(self) -> Sequence['outputs.GetVipInstanceInstanceConfigTopicDistributionResult']:
+        return pulumi.get(self, "topic_distributions")
+
+    @property
+    @pulumi.getter(name="usedGroupNum")
+    def used_group_num(self) -> int:
+        return pulumi.get(self, "used_group_num")
+
+    @property
+    @pulumi.getter(name="usedNamespaceNum")
+    def used_namespace_num(self) -> int:
+        return pulumi.get(self, "used_namespace_num")
+
+    @property
+    @pulumi.getter(name="usedTopicNum")
+    def used_topic_num(self) -> int:
+        return pulumi.get(self, "used_topic_num")
+
+
+@pulumi.output_type
+class GetVipInstanceInstanceConfigNodeDistributionResult(dict):
+    def __init__(__self__, *,
+                 node_count: int,
+                 zone_id: str,
+                 zone_name: str):
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        return pulumi.get(self, "zone_name")
+
+
+@pulumi.output_type
+class GetVipInstanceInstanceConfigTopicDistributionResult(dict):
+    def __init__(__self__, *,
+                 count: int,
+                 topic_type: str):
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "topic_type", topic_type)
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="topicType")
+    def topic_type(self) -> str:
+        return pulumi.get(self, "topic_type")
 
 

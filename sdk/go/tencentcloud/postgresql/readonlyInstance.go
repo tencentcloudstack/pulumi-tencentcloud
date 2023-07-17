@@ -25,7 +25,21 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
+// 		newRoGroup, err := Postgresql.NewReadonlyGroup(ctx, "newRoGroup", &Postgresql.ReadonlyGroupArgs{
+// 			MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
+// 			ProjectId:                pulumi.Int(0),
+// 			VpcId:                    pulumi.Any(local.Vpc_id),
+// 			SubnetId:                 pulumi.Any(local.Subnet_id),
+// 			ReplayLagEliminate:       pulumi.Int(1),
+// 			ReplayLatencyEliminate:   pulumi.Int(1),
+// 			MaxReplayLag:             pulumi.Int(100),
+// 			MaxReplayLatency:         pulumi.Int(512),
+// 			MinDelayEliminateReserve: pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
 // 			AutoRenewFlag:      pulumi.Int(0),
 // 			DbVersion:          pulumi.String("10.4"),
 // 			InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
@@ -36,10 +50,10 @@ import (
 // 			SecurityGroupsIds: pulumi.StringArray{
 // 				pulumi.String("sg-fefj5n6r"),
 // 			},
-// 			Storage:  pulumi.Int(250),
-// 			SubnetId: pulumi.String("subnet-enm92y0m"),
-// 			VpcId:    pulumi.String("vpc-86v957zb"),
-// 			Zone:     pulumi.String("ap-guangzhou-6"),
+// 			Storage:         pulumi.Int(250),
+// 			SubnetId:        pulumi.String("subnet-enm92y0m"),
+// 			VpcId:           pulumi.String("vpc-86v957zb"),
+// 			ReadOnlyGroupId: newRoGroup.ID(),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -54,7 +68,7 @@ import (
 // postgresql readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -69,6 +83,8 @@ type ReadonlyInstance struct {
 	DbVersion pulumi.StringOutput `pulumi:"dbVersion"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
+	// The instance ID of this readonly resource.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId pulumi.StringOutput `pulumi:"masterDbInstanceId"`
 	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
@@ -79,8 +95,14 @@ type ReadonlyInstance struct {
 	NeedSupportIpv6 pulumi.IntPtrOutput `pulumi:"needSupportIpv6"`
 	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
+	// IP for private access.
+	PrivateAccessIp pulumi.StringOutput `pulumi:"privateAccessIp"`
+	// Port for private access.
+	PrivateAccessPort pulumi.IntOutput `pulumi:"privateAccessPort"`
 	// Project ID.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
+	// RO group ID.
+	ReadOnlyGroupId pulumi.StringPtrOutput `pulumi:"readOnlyGroupId"`
 	// ID of security group.
 	SecurityGroupsIds pulumi.StringArrayOutput `pulumi:"securityGroupsIds"`
 	// Instance storage capacity in GB.
@@ -162,6 +184,8 @@ type readonlyInstanceState struct {
 	DbVersion *string `pulumi:"dbVersion"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
+	// The instance ID of this readonly resource.
+	InstanceId *string `pulumi:"instanceId"`
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId *string `pulumi:"masterDbInstanceId"`
 	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
@@ -172,8 +196,14 @@ type readonlyInstanceState struct {
 	NeedSupportIpv6 *int `pulumi:"needSupportIpv6"`
 	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	Period *int `pulumi:"period"`
+	// IP for private access.
+	PrivateAccessIp *string `pulumi:"privateAccessIp"`
+	// Port for private access.
+	PrivateAccessPort *int `pulumi:"privateAccessPort"`
 	// Project ID.
 	ProjectId *int `pulumi:"projectId"`
+	// RO group ID.
+	ReadOnlyGroupId *string `pulumi:"readOnlyGroupId"`
 	// ID of security group.
 	SecurityGroupsIds []string `pulumi:"securityGroupsIds"`
 	// Instance storage capacity in GB.
@@ -199,6 +229,8 @@ type ReadonlyInstanceState struct {
 	DbVersion pulumi.StringPtrInput
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType pulumi.StringPtrInput
+	// The instance ID of this readonly resource.
+	InstanceId pulumi.StringPtrInput
 	// ID of the primary instance to which the read-only replica belongs.
 	MasterDbInstanceId pulumi.StringPtrInput
 	// Memory size(in GB). Allowed value must be larger than `memory` that data source `Postgresql.getSpecinfos` provides.
@@ -209,8 +241,14 @@ type ReadonlyInstanceState struct {
 	NeedSupportIpv6 pulumi.IntPtrInput
 	// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	Period pulumi.IntPtrInput
+	// IP for private access.
+	PrivateAccessIp pulumi.StringPtrInput
+	// Port for private access.
+	PrivateAccessPort pulumi.IntPtrInput
 	// Project ID.
 	ProjectId pulumi.IntPtrInput
+	// RO group ID.
+	ReadOnlyGroupId pulumi.StringPtrInput
 	// ID of security group.
 	SecurityGroupsIds pulumi.StringArrayInput
 	// Instance storage capacity in GB.
@@ -250,6 +288,8 @@ type readonlyInstanceArgs struct {
 	Period *int `pulumi:"period"`
 	// Project ID.
 	ProjectId int `pulumi:"projectId"`
+	// RO group ID.
+	ReadOnlyGroupId *string `pulumi:"readOnlyGroupId"`
 	// ID of security group.
 	SecurityGroupsIds []string `pulumi:"securityGroupsIds"`
 	// Instance storage capacity in GB.
@@ -286,6 +326,8 @@ type ReadonlyInstanceArgs struct {
 	Period pulumi.IntPtrInput
 	// Project ID.
 	ProjectId pulumi.IntInput
+	// RO group ID.
+	ReadOnlyGroupId pulumi.StringPtrInput
 	// ID of security group.
 	SecurityGroupsIds pulumi.StringArrayInput
 	// Instance storage capacity in GB.
@@ -412,6 +454,11 @@ func (o ReadonlyInstanceOutput) InstanceChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.InstanceChargeType }).(pulumi.StringPtrOutput)
 }
 
+// The instance ID of this readonly resource.
+func (o ReadonlyInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
 // ID of the primary instance to which the read-only replica belongs.
 func (o ReadonlyInstanceOutput) MasterDbInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.MasterDbInstanceId }).(pulumi.StringOutput)
@@ -437,9 +484,24 @@ func (o ReadonlyInstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
+// IP for private access.
+func (o ReadonlyInstanceOutput) PrivateAccessIp() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.PrivateAccessIp }).(pulumi.StringOutput)
+}
+
+// Port for private access.
+func (o ReadonlyInstanceOutput) PrivateAccessPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.PrivateAccessPort }).(pulumi.IntOutput)
+}
+
 // Project ID.
 func (o ReadonlyInstanceOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// RO group ID.
+func (o ReadonlyInstanceOutput) ReadOnlyGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.ReadOnlyGroupId }).(pulumi.StringPtrOutput)
 }
 
 // ID of security group.

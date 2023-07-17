@@ -69,6 +69,8 @@ type TagRetentionRule struct {
 	NamespaceName pulumi.StringOutput `pulumi:"namespaceName"`
 	// The main instance ID.
 	RegistryId pulumi.StringOutput `pulumi:"registryId"`
+	// The ID of the retention task.
+	RetentionId pulumi.IntOutput `pulumi:"retentionId"`
 	// Retention Policy.
 	RetentionRule TagRetentionRuleRetentionRuleOutput `pulumi:"retentionRule"`
 }
@@ -123,6 +125,8 @@ type tagRetentionRuleState struct {
 	NamespaceName *string `pulumi:"namespaceName"`
 	// The main instance ID.
 	RegistryId *string `pulumi:"registryId"`
+	// The ID of the retention task.
+	RetentionId *int `pulumi:"retentionId"`
 	// Retention Policy.
 	RetentionRule *TagRetentionRuleRetentionRule `pulumi:"retentionRule"`
 }
@@ -136,6 +140,8 @@ type TagRetentionRuleState struct {
 	NamespaceName pulumi.StringPtrInput
 	// The main instance ID.
 	RegistryId pulumi.StringPtrInput
+	// The ID of the retention task.
+	RetentionId pulumi.IntPtrInput
 	// Retention Policy.
 	RetentionRule TagRetentionRuleRetentionRulePtrInput
 }
@@ -276,6 +282,11 @@ func (o TagRetentionRuleOutput) NamespaceName() pulumi.StringOutput {
 // The main instance ID.
 func (o TagRetentionRuleOutput) RegistryId() pulumi.StringOutput {
 	return o.ApplyT(func(v *TagRetentionRule) pulumi.StringOutput { return v.RegistryId }).(pulumi.StringOutput)
+}
+
+// The ID of the retention task.
+func (o TagRetentionRuleOutput) RetentionId() pulumi.IntOutput {
+	return o.ApplyT(func(v *TagRetentionRule) pulumi.IntOutput { return v.RetentionId }).(pulumi.IntOutput)
 }
 
 // Retention Policy.

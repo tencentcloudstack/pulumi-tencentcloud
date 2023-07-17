@@ -20,8 +20,7 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-xxxxxx",
  * });
  * ```
- *
- * or
+ * ### or
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

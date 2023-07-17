@@ -29,6 +29,7 @@ class ConfigExtraArgs:
                  group_id: Optional[pulumi.Input[str]] = None,
                  group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  host_file: Optional[pulumi.Input['ConfigExtraHostFileArgs']] = None,
+                 log_format: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  user_define_rule: Optional[pulumi.Input[str]] = None):
         """
@@ -47,6 +48,7 @@ class ConfigExtraArgs:
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input['ConfigExtraHostFileArgs'] host_file: Node file config info.
+        :param pulumi.Input[str] log_format: Log format.
         :param pulumi.Input[str] name: Collection configuration name.
         :param pulumi.Input[str] user_define_rule: Custom collection rule, which is a serialized JSON string.
         """
@@ -71,6 +73,8 @@ class ConfigExtraArgs:
             pulumi.set(__self__, "group_ids", group_ids)
         if host_file is not None:
             pulumi.set(__self__, "host_file", host_file)
+        if log_format is not None:
+            pulumi.set(__self__, "log_format", log_format)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if user_define_rule is not None:
@@ -245,6 +249,18 @@ class ConfigExtraArgs:
         pulumi.set(self, "host_file", value)
 
     @property
+    @pulumi.getter(name="logFormat")
+    def log_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Log format.
+        """
+        return pulumi.get(self, "log_format")
+
+    @log_format.setter
+    def log_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "log_format", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -280,6 +296,7 @@ class _ConfigExtraState:
                  group_id: Optional[pulumi.Input[str]] = None,
                  group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  host_file: Optional[pulumi.Input['ConfigExtraHostFileArgs']] = None,
+                 log_format: Optional[pulumi.Input[str]] = None,
                  log_type: Optional[pulumi.Input[str]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  logset_name: Optional[pulumi.Input[str]] = None,
@@ -298,6 +315,7 @@ class _ConfigExtraState:
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input['ConfigExtraHostFileArgs'] host_file: Node file config info.
+        :param pulumi.Input[str] log_format: Log format.
         :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
@@ -323,6 +341,8 @@ class _ConfigExtraState:
             pulumi.set(__self__, "group_ids", group_ids)
         if host_file is not None:
             pulumi.set(__self__, "host_file", host_file)
+        if log_format is not None:
+            pulumi.set(__self__, "log_format", log_format)
         if log_type is not None:
             pulumi.set(__self__, "log_type", log_type)
         if logset_id is not None:
@@ -437,6 +457,18 @@ class _ConfigExtraState:
         pulumi.set(self, "host_file", value)
 
     @property
+    @pulumi.getter(name="logFormat")
+    def log_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Log format.
+        """
+        return pulumi.get(self, "log_format")
+
+    @log_format.setter
+    def log_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "log_format", value)
+
+    @property
     @pulumi.getter(name="logType")
     def log_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -546,6 +578,7 @@ class ConfigExtra(pulumi.CustomResource):
                  group_id: Optional[pulumi.Input[str]] = None,
                  group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  host_file: Optional[pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']]] = None,
+                 log_format: Optional[pulumi.Input[str]] = None,
                  log_type: Optional[pulumi.Input[str]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  logset_name: Optional[pulumi.Input[str]] = None,
@@ -564,14 +597,43 @@ class ConfigExtra(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        logset = tencentcloud.cls.Logset("logset",
+            logset_name="tf-config-extra-test",
+            tags={
+                "test": "test",
+            })
+        topic = tencentcloud.cls.Topic("topic",
+            auto_split=True,
+            logset_id=logset.id,
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "test": "test",
+            },
+            topic_name="tf-config-extra-test")
+        group = tencentcloud.cls.MachineGroup("group",
+            group_name="tf-config-extra-test",
+            service_logging=True,
+            auto_update=True,
+            update_end_time="19:05:00",
+            update_start_time="17:05:00",
+            machine_group_type=tencentcloud.cls.MachineGroupMachineGroupTypeArgs(
+                type="ip",
+                values=[
+                    "192.168.1.1",
+                    "192.168.1.2",
+                ],
+            ))
         extra = tencentcloud.cls.ConfigExtra("extra",
-            topic_id=tencentcloud_cls_topic["topic"]["id"],
+            topic_id=topic.id,
             type="container_file",
             log_type="json_log",
             config_flag="label_k8s",
-            logset_id=tencentcloud_cls_logset["logset"]["id"],
-            logset_name=tencentcloud_cls_logset["logset"]["logset_name"],
-            topic_name=tencentcloud_cls_topic["topic"]["topic_name"],
+            logset_id=logset.id,
+            logset_name=logset.logset_name,
+            topic_name=topic.topic_name,
             container_file=tencentcloud.cls.ConfigExtraContainerFileArgs(
                 container="nginx",
                 file_pattern="log",
@@ -584,7 +646,15 @@ class ConfigExtra(pulumi.CustomResource):
                     namespace="default",
                 ),
             ),
-            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+            group_id=group.id)
+        ```
+
+        ## Import
+
+        cls config_extra can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -597,6 +667,7 @@ class ConfigExtra(pulumi.CustomResource):
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']] host_file: Node file config info.
+        :param pulumi.Input[str] log_format: Log format.
         :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
@@ -621,14 +692,43 @@ class ConfigExtra(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        logset = tencentcloud.cls.Logset("logset",
+            logset_name="tf-config-extra-test",
+            tags={
+                "test": "test",
+            })
+        topic = tencentcloud.cls.Topic("topic",
+            auto_split=True,
+            logset_id=logset.id,
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "test": "test",
+            },
+            topic_name="tf-config-extra-test")
+        group = tencentcloud.cls.MachineGroup("group",
+            group_name="tf-config-extra-test",
+            service_logging=True,
+            auto_update=True,
+            update_end_time="19:05:00",
+            update_start_time="17:05:00",
+            machine_group_type=tencentcloud.cls.MachineGroupMachineGroupTypeArgs(
+                type="ip",
+                values=[
+                    "192.168.1.1",
+                    "192.168.1.2",
+                ],
+            ))
         extra = tencentcloud.cls.ConfigExtra("extra",
-            topic_id=tencentcloud_cls_topic["topic"]["id"],
+            topic_id=topic.id,
             type="container_file",
             log_type="json_log",
             config_flag="label_k8s",
-            logset_id=tencentcloud_cls_logset["logset"]["id"],
-            logset_name=tencentcloud_cls_logset["logset"]["logset_name"],
-            topic_name=tencentcloud_cls_topic["topic"]["topic_name"],
+            logset_id=logset.id,
+            logset_name=logset.logset_name,
+            topic_name=topic.topic_name,
             container_file=tencentcloud.cls.ConfigExtraContainerFileArgs(
                 container="nginx",
                 file_pattern="log",
@@ -641,7 +741,15 @@ class ConfigExtra(pulumi.CustomResource):
                     namespace="default",
                 ),
             ),
-            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+            group_id=group.id)
+        ```
+
+        ## Import
+
+        cls config_extra can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -667,6 +775,7 @@ class ConfigExtra(pulumi.CustomResource):
                  group_id: Optional[pulumi.Input[str]] = None,
                  group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  host_file: Optional[pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']]] = None,
+                 log_format: Optional[pulumi.Input[str]] = None,
                  log_type: Optional[pulumi.Input[str]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  logset_name: Optional[pulumi.Input[str]] = None,
@@ -699,6 +808,7 @@ class ConfigExtra(pulumi.CustomResource):
             __props__.__dict__["group_id"] = group_id
             __props__.__dict__["group_ids"] = group_ids
             __props__.__dict__["host_file"] = host_file
+            __props__.__dict__["log_format"] = log_format
             if log_type is None and not opts.urn:
                 raise TypeError("Missing required property 'log_type'")
             __props__.__dict__["log_type"] = log_type
@@ -737,6 +847,7 @@ class ConfigExtra(pulumi.CustomResource):
             group_id: Optional[pulumi.Input[str]] = None,
             group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             host_file: Optional[pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']]] = None,
+            log_format: Optional[pulumi.Input[str]] = None,
             log_type: Optional[pulumi.Input[str]] = None,
             logset_id: Optional[pulumi.Input[str]] = None,
             logset_name: Optional[pulumi.Input[str]] = None,
@@ -760,6 +871,7 @@ class ConfigExtra(pulumi.CustomResource):
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']] host_file: Node file config info.
+        :param pulumi.Input[str] log_format: Log format.
         :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
@@ -781,6 +893,7 @@ class ConfigExtra(pulumi.CustomResource):
         __props__.__dict__["group_id"] = group_id
         __props__.__dict__["group_ids"] = group_ids
         __props__.__dict__["host_file"] = host_file
+        __props__.__dict__["log_format"] = log_format
         __props__.__dict__["log_type"] = log_type
         __props__.__dict__["logset_id"] = logset_id
         __props__.__dict__["logset_name"] = logset_name
@@ -809,7 +922,7 @@ class ConfigExtra(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="containerStdout")
-    def container_stdout(self) -> pulumi.Output[Optional['outputs.ConfigExtraContainerStdout']]:
+    def container_stdout(self) -> pulumi.Output['outputs.ConfigExtraContainerStdout']:
         """
         Container stdout info.
         """
@@ -825,7 +938,7 @@ class ConfigExtra(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="extractRule")
-    def extract_rule(self) -> pulumi.Output[Optional['outputs.ConfigExtraExtractRule']]:
+    def extract_rule(self) -> pulumi.Output['outputs.ConfigExtraExtractRule']:
         """
         Extraction rule. If ExtractRule is set, LogType must be set.
         """
@@ -849,11 +962,19 @@ class ConfigExtra(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="hostFile")
-    def host_file(self) -> pulumi.Output[Optional['outputs.ConfigExtraHostFile']]:
+    def host_file(self) -> pulumi.Output['outputs.ConfigExtraHostFile']:
         """
         Node file config info.
         """
         return pulumi.get(self, "host_file")
+
+    @property
+    @pulumi.getter(name="logFormat")
+    def log_format(self) -> pulumi.Output[Optional[str]]:
+        """
+        Log format.
+        """
+        return pulumi.get(self, "log_format")
 
     @property
     @pulumi.getter(name="logType")

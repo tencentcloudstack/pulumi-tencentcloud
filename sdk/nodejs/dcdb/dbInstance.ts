@@ -108,6 +108,10 @@ export class DbInstance extends pulumi.CustomResource {
      */
     public readonly dcnRegion!: pulumi.Output<string | undefined>;
     /**
+     * Whether to open the extranet access.
+     */
+    public readonly extranetAccess!: pulumi.Output<boolean | undefined>;
+    /**
      * &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
      */
     public readonly initParams!: pulumi.Output<outputs.Dcdb.DbInstanceInitParam[] | undefined>;
@@ -156,6 +160,14 @@ export class DbInstance extends pulumi.CustomResource {
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
+     * The field is required to specify VIP.
+     */
+    public readonly vip!: pulumi.Output<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    public readonly vipv6!: pulumi.Output<string>;
+    /**
      * Voucher ID list, currently only supports specifying one voucher.
      */
     public readonly voucherIds!: pulumi.Output<string[] | undefined>;
@@ -163,6 +175,10 @@ export class DbInstance extends pulumi.CustomResource {
      * Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
      */
     public readonly vpcId!: pulumi.Output<string | undefined>;
+    /**
+     * Intranet port.
+     */
+    public /*out*/ readonly vport!: pulumi.Output<number>;
     /**
      * &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
      */
@@ -186,6 +202,7 @@ export class DbInstance extends pulumi.CustomResource {
             resourceInputs["dbVersionId"] = state ? state.dbVersionId : undefined;
             resourceInputs["dcnInstanceId"] = state ? state.dcnInstanceId : undefined;
             resourceInputs["dcnRegion"] = state ? state.dcnRegion : undefined;
+            resourceInputs["extranetAccess"] = state ? state.extranetAccess : undefined;
             resourceInputs["initParams"] = state ? state.initParams : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["ipv6Flag"] = state ? state.ipv6Flag : undefined;
@@ -198,8 +215,11 @@ export class DbInstance extends pulumi.CustomResource {
             resourceInputs["shardNodeCount"] = state ? state.shardNodeCount : undefined;
             resourceInputs["shardStorage"] = state ? state.shardStorage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
+            resourceInputs["vip"] = state ? state.vip : undefined;
+            resourceInputs["vipv6"] = state ? state.vipv6 : undefined;
             resourceInputs["voucherIds"] = state ? state.voucherIds : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["vport"] = state ? state.vport : undefined;
             resourceInputs["zones"] = state ? state.zones : undefined;
         } else {
             const args = argsOrState as DbInstanceArgs | undefined;
@@ -226,6 +246,7 @@ export class DbInstance extends pulumi.CustomResource {
             resourceInputs["dbVersionId"] = args ? args.dbVersionId : undefined;
             resourceInputs["dcnInstanceId"] = args ? args.dcnInstanceId : undefined;
             resourceInputs["dcnRegion"] = args ? args.dcnRegion : undefined;
+            resourceInputs["extranetAccess"] = args ? args.extranetAccess : undefined;
             resourceInputs["initParams"] = args ? args.initParams : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["ipv6Flag"] = args ? args.ipv6Flag : undefined;
@@ -238,9 +259,12 @@ export class DbInstance extends pulumi.CustomResource {
             resourceInputs["shardNodeCount"] = args ? args.shardNodeCount : undefined;
             resourceInputs["shardStorage"] = args ? args.shardStorage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
+            resourceInputs["vipv6"] = args ? args.vipv6 : undefined;
             resourceInputs["voucherIds"] = args ? args.voucherIds : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zones"] = args ? args.zones : undefined;
+            resourceInputs["vport"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DbInstance.__pulumiType, name, resourceInputs, opts);
@@ -271,6 +295,10 @@ export interface DbInstanceState {
      * DCN source region.
      */
     dcnRegion?: pulumi.Input<string>;
+    /**
+     * Whether to open the extranet access.
+     */
+    extranetAccess?: pulumi.Input<boolean>;
     /**
      * &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
      */
@@ -320,6 +348,14 @@ export interface DbInstanceState {
      */
     subnetId?: pulumi.Input<string>;
     /**
+     * The field is required to specify VIP.
+     */
+    vip?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    vipv6?: pulumi.Input<string>;
+    /**
      * Voucher ID list, currently only supports specifying one voucher.
      */
     voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
@@ -327,6 +363,10 @@ export interface DbInstanceState {
      * Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Intranet port.
+     */
+    vport?: pulumi.Input<number>;
     /**
      * &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
      */
@@ -357,6 +397,10 @@ export interface DbInstanceArgs {
      * DCN source region.
      */
     dcnRegion?: pulumi.Input<string>;
+    /**
+     * Whether to open the extranet access.
+     */
+    extranetAccess?: pulumi.Input<boolean>;
     /**
      * &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
      */
@@ -405,6 +449,14 @@ export interface DbInstanceArgs {
      * Virtual private network subnet ID, required when VpcId is not empty.
      */
     subnetId?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIP.
+     */
+    vip?: pulumi.Input<string>;
+    /**
+     * The field is required to specify VIPv6.
+     */
+    vipv6?: pulumi.Input<string>;
     /**
      * Voucher ID list, currently only supports specifying one voucher.
      */

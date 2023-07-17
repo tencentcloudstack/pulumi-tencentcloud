@@ -147,6 +147,17 @@ export namespace ApiGateway {
 }
 
 export namespace As {
+    export interface GetInstancesFilterArgs {
+        /**
+         * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface GetInstancesFilter {
         /**
          * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
@@ -158,15 +169,17 @@ export namespace As {
         values: string[];
     }
 
-    export interface GetInstancesFilterArgs {
-        /**
-         * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Value of the field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+    export interface LoadBalancerForwardLoadBalancer {
+        listenerId: pulumi.Input<string>;
+        loadBalancerId: pulumi.Input<string>;
+        locationId?: pulumi.Input<string>;
+        region?: pulumi.Input<string>;
+        targetAttributes: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancerTargetAttribute>[]>;
+    }
+
+    export interface LoadBalancerForwardLoadBalancerTargetAttribute {
+        port: pulumi.Input<number>;
+        weight: pulumi.Input<number>;
     }
 
     export interface ScalingConfigDataDisk {
@@ -228,7 +241,6 @@ export namespace As {
          */
         weight: pulumi.Input<number>;
     }
-
 }
 
 export namespace Audit {
@@ -301,6 +313,29 @@ export namespace Ccn {
     }
 
     export interface InstancesAcceptAttachInstance {
+        /**
+         * Description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Attachment Instance ID.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Instance Region.
+         */
+        instanceRegion: pulumi.Input<string>;
+        /**
+         * InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+         */
+        instanceType?: pulumi.Input<string>;
+        /**
+         * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        routeTableId?: pulumi.Input<string>;
+    }
+
+    export interface InstancesRejectAttachInstance {
         /**
          * Description.
          */
@@ -2321,6 +2356,25 @@ export namespace Ci {
 }
 
 export namespace Ckafka {
+    export interface AclRuleRuleList {
+        /**
+         * The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
+         */
+        host: pulumi.Input<string>;
+        /**
+         * Acl operation mode, enumeration value (all operations All, read Read, write Write).
+         */
+        operation: pulumi.Input<string>;
+        /**
+         * permission type, (Deny|Allow).
+         */
+        permissionType: pulumi.Input<string>;
+        /**
+         * User list, the default is User:, which means that any user can access, and the current user can only be the user included in the user list. The input format needs to be prefixed with [User:]. For example, user A is passed in as User:A.
+         */
+        principal: pulumi.Input<string>;
+    }
+
     export interface ConnectResourceClickhouseConnectParam {
         /**
          * Whether to update to the associated Datahub task, default: false.
@@ -2659,15 +2713,3179 @@ export namespace Ckafka {
         userName: pulumi.Input<string>;
     }
 
-    export interface GetInstancesFilterArgs {
+    export interface DatahubTaskSourceResource {
         /**
-         * The field that needs to be filtered.
+         * ClickHouse config, Type CLICKHOUSE requierd.
          */
-        name: pulumi.Input<string>;
+        clickHouseParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceClickHouseParam>;
         /**
-         * The filtered value of the field.
+         * Cls configuration, Required when Type is CLS.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        clsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceClsParam>;
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceCosParam>;
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceCtsdbParam>;
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceDtsParam>;
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParam>;
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEventBusParam>;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceKafkaParam>;
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceMariaDbParam>;
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceMongoDbParam>;
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceMySqlParam>;
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourcePostgreSqlParam>;
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceScfParam>;
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceSqlServerParam>;
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceTdwParam>;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceTopicParam>;
+        /**
+         * resource type.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: pulumi.Input<string>;
+        /**
+         * ClickHouse database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceClickHouseParamDropCls>;
+        /**
+         * Whether ClickHouse discards the message that fails to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * ClickHouse ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * ClickHouse passwd.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * ClickHouse port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceClickHouseParamSchema>[]>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * instance vip.
+         */
+        serviceVip?: pulumi.Input<string>;
+        /**
+         * ClickHouse table.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: pulumi.Input<string>;
+        /**
+         * ClickHouse user name.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskSourceResourceClickHouseParamSchema {
+        /**
+         * Whether the column item is allowed to be empty.
+         */
+        allowNull: pulumi.Input<boolean>;
+        /**
+         * column name.
+         */
+        columnName: pulumi.Input<string>;
+        /**
+         * The json Key name corresponding to this column.
+         */
+        jsonKey: pulumi.Input<string>;
+        /**
+         * type of table column.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceClsParam {
+        /**
+         * Required when Decode Json is false.
+         */
+        contentKey?: pulumi.Input<string>;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: pulumi.Input<boolean>;
+        /**
+         * LogSet id.
+         */
+        logSet?: pulumi.Input<string>;
+        /**
+         * cls id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize?: pulumi.Input<number>;
+        /**
+         * time interval.
+         */
+        aggregateInterval?: pulumi.Input<number>;
+        /**
+         * cos bucket name.
+         */
+        bucketName: pulumi.Input<string>;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat?: pulumi.Input<string>;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType?: pulumi.Input<string>;
+        /**
+         * ObjectKey.
+         */
+        objectKey?: pulumi.Input<string>;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix?: pulumi.Input<string>;
+        /**
+         * region code.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric?: pulumi.Input<string>;
+        /**
+         * resource id.
+         */
+        resource?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId?: pulumi.Input<string>;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword?: pulumi.Input<string>;
+        /**
+         * Dts account.
+         */
+        groupUser?: pulumi.Input<string>;
+        /**
+         * Dts connection ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Dts connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Dts instance Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Dts topic.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey?: pulumi.Input<string>;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey?: pulumi.Input<string>;
+        /**
+         * Es date suffix.
+         */
+        dateFormat?: pulumi.Input<string>;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField?: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropCls>;
+        /**
+         * dead letter queue.
+         */
+        dropDlq?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlq>;
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage?: pulumi.Input<boolean>;
+        /**
+         * Whether Es discards the message of parsing failure.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * Es index name.
+         */
+        index?: pulumi.Input<string>;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType?: pulumi.Input<string>;
+        /**
+         * Es Password.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * Es connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Resource.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * instance vip.
+         */
+        serviceVip?: pulumi.Input<string>;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: pulumi.Input<string>;
+        /**
+         * Es UserName.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: pulumi.Input<string>;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqKafkaParam>;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: pulumi.Input<number>;
+        /**
+         * retry interval.
+         */
+        retryInterval?: pulumi.Input<number>;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqTopicParam>;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskSourceResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName?: pulumi.Input<string>;
+        /**
+         * SCF namespace.
+         */
+        namespace?: pulumi.Input<string>;
+        /**
+         * SCF version and alias.
+         */
+        qualifier?: pulumi.Input<string>;
+        /**
+         * instance id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * resource type. EB_COS/EB_ES/EB_CLS.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskSourceResourceKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceMariaDbParam {
+        /**
+         * MariaDB database name, * for all database.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: pulumi.Input<string>;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: pulumi.Input<boolean>;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: pulumi.Input<boolean>;
+        /**
+         * Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * MariaDB connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * schema_only|initial, default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: pulumi.Input<string>;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: pulumi.Input<boolean>;
+        /**
+         * MongoDB database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent?: pulumi.Input<string>;
+        /**
+         * MongoDB database password.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline?: pulumi.Input<string>;
+        /**
+         * MongoDB connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference?: pulumi.Input<string>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * MongoDB database user name.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn?: pulumi.Input<string>;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode?: pulumi.Input<string>;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode?: pulumi.Input<string>;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource?: pulumi.Input<string>;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom?: pulumi.Input<string>;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: pulumi.Input<string>;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: pulumi.Input<string>;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping>[]>;
+        /**
+         * MySQL database name, * is the whole database.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic?: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceMySqlParamDropCls>;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: pulumi.Input<string>;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: pulumi.Input<boolean>;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: pulumi.Input<boolean>;
+        /**
+         * Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+         */
+        isTableRegular?: pulumi.Input<boolean>;
+        /**
+         * Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * MySQL connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase?: pulumi.Input<string>;
+        /**
+         * whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex?: pulumi.Input<string>;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: pulumi.Input<boolean>;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: pulumi.Input<boolean>;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: pulumi.Input<string>;
+        /**
+         * current column size.
+         */
+        columnSize?: pulumi.Input<string>;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: pulumi.Input<string>;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: pulumi.Input<string>;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: pulumi.Input<string>;
+        /**
+         * message type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceMySqlParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskSourceResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat?: pulumi.Input<string>;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: pulumi.Input<string>;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: pulumi.Input<string>;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping>[]>;
+        /**
+         * PostgreSQL database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular?: pulumi.Input<boolean>;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * PostgreSQL connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * never|initial, default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: pulumi.Input<boolean>;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: pulumi.Input<boolean>;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: pulumi.Input<string>;
+        /**
+         * current column size.
+         */
+        columnSize?: pulumi.Input<string>;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: pulumi.Input<string>;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: pulumi.Input<string>;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: pulumi.Input<string>;
+        /**
+         * message type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize?: pulumi.Input<number>;
+        /**
+         * SCF function name.
+         */
+        functionName: pulumi.Input<string>;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries?: pulumi.Input<number>;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace?: pulumi.Input<string>;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * SQLServer connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: pulumi.Input<string>;
+        /**
+         * default true.
+         */
+        isDomestic?: pulumi.Input<boolean>;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost?: pulumi.Input<string>;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort?: pulumi.Input<number>;
+        /**
+         * Tdw tid.
+         */
+        tid: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskSourceResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResource {
+        /**
+         * ClickHouse config, Type CLICKHOUSE requierd.
+         */
+        clickHouseParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceClickHouseParam>;
+        /**
+         * Cls configuration, Required when Type is CLS.
+         */
+        clsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceClsParam>;
+        /**
+         * Cos configuration, required when Type is COS.
+         */
+        cosParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceCosParam>;
+        /**
+         * Ctsdb configuration, Required when Type is CTSDB.
+         */
+        ctsdbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceCtsdbParam>;
+        /**
+         * Dts configuration, required when Type is DTS.
+         */
+        dtsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceDtsParam>;
+        /**
+         * Es configuration, required when Type is ES.
+         */
+        esParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParam>;
+        /**
+         * EB configuration, required when type is EB.
+         */
+        eventBusParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEventBusParam>;
+        /**
+         * ckafka configuration, required when Type is KAFKA.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceKafkaParam>;
+        /**
+         * MariaDB configuration, Required when Type is MARIADB.
+         */
+        mariaDbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceMariaDbParam>;
+        /**
+         * MongoDB config, Required when Type is MONGODB.
+         */
+        mongoDbParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceMongoDbParam>;
+        /**
+         * MySQL configuration, Required when Type is MYSQL.
+         */
+        mySqlParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceMySqlParam>;
+        /**
+         * PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+         */
+        postgreSqlParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourcePostgreSqlParam>;
+        /**
+         * Scf configuration, Required when Type is SCF.
+         */
+        scfParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceScfParam>;
+        /**
+         * SQLServer configuration, Required when Type is SQLSERVER.
+         */
+        sqlServerParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceSqlServerParam>;
+        /**
+         * Tdw configuration, required when Type is TDW.
+         */
+        tdwParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceTdwParam>;
+        /**
+         * Topic configuration, Required when Type is Topic.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceTopicParam>;
+        /**
+         * Resource Type.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParam {
+        /**
+         * ClickHouse cluster.
+         */
+        cluster: pulumi.Input<string>;
+        /**
+         * ClickHouse database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceClickHouseParamDropCls>;
+        /**
+         * Whether ClickHouse discards the message that fails to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * ClickHouse ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * ClickHouse passwd.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * ClickHouse port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * ClickHouse schema.
+         */
+        schemas: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceClickHouseParamSchema>[]>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * instance vip.
+         */
+        serviceVip?: pulumi.Input<string>;
+        /**
+         * ClickHouse table.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: pulumi.Input<string>;
+        /**
+         * ClickHouse user name.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResourceClickHouseParamSchema {
+        /**
+         * Whether the column item is allowed to be empty.
+         */
+        allowNull: pulumi.Input<boolean>;
+        /**
+         * column name.
+         */
+        columnName: pulumi.Input<string>;
+        /**
+         * The json Key name corresponding to this column.
+         */
+        jsonKey: pulumi.Input<string>;
+        /**
+         * type of table column.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceClsParam {
+        /**
+         * Required when Decode Json is false.
+         */
+        contentKey?: pulumi.Input<string>;
+        /**
+         * Whether the produced information is in json format.
+         */
+        decodeJson: pulumi.Input<boolean>;
+        /**
+         * LogSet id.
+         */
+        logSet?: pulumi.Input<string>;
+        /**
+         * cls id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+         */
+        timeField?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceCosParam {
+        /**
+         * The size of aggregated messages MB.
+         */
+        aggregateBatchSize?: pulumi.Input<number>;
+        /**
+         * time interval.
+         */
+        aggregateInterval?: pulumi.Input<number>;
+        /**
+         * cos bucket name.
+         */
+        bucketName: pulumi.Input<string>;
+        /**
+         * Partition format formatted according to strptime time.
+         */
+        directoryTimeFormat?: pulumi.Input<string>;
+        /**
+         * The file format after message aggregation csv|json.
+         */
+        formatOutputType?: pulumi.Input<string>;
+        /**
+         * ObjectKey.
+         */
+        objectKey?: pulumi.Input<string>;
+        /**
+         * Dumped object directory prefix.
+         */
+        objectKeyPrefix?: pulumi.Input<string>;
+        /**
+         * region code.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceCtsdbParam {
+        /**
+         * Ctsdb metric.
+         */
+        ctsdbMetric?: pulumi.Input<string>;
+        /**
+         * resource id.
+         */
+        resource?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceDtsParam {
+        /**
+         * Dts consumer group Id.
+         */
+        groupId?: pulumi.Input<string>;
+        /**
+         * Dts consumer group passwd.
+         */
+        groupPassword?: pulumi.Input<string>;
+        /**
+         * Dts account.
+         */
+        groupUser?: pulumi.Input<string>;
+        /**
+         * Dts connection ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Dts connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Dts instance Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Dts topic.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+         */
+        tranSql?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParam {
+        /**
+         * key for data in non-json format.
+         */
+        contentKey?: pulumi.Input<string>;
+        /**
+         * When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+         */
+        databasePrimaryKey?: pulumi.Input<string>;
+        /**
+         * Es date suffix.
+         */
+        dateFormat?: pulumi.Input<string>;
+        /**
+         * The field name of the document ID value dumped into Es.
+         */
+        documentIdField?: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropCls>;
+        /**
+         * dead letter queue.
+         */
+        dropDlq?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlq>;
+        /**
+         * Whether Es discards messages in non-json format.
+         */
+        dropInvalidJsonMessage?: pulumi.Input<boolean>;
+        /**
+         * Whether Es discards the message of parsing failure.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * Es index name.
+         */
+        index?: pulumi.Input<string>;
+        /**
+         * Es custom index name type, STRING, JSONPATH, the default is STRING.
+         */
+        indexType?: pulumi.Input<string>;
+        /**
+         * Es Password.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * Es connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Resource.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * instance vip.
+         */
+        serviceVip?: pulumi.Input<string>;
+        /**
+         * instance vpc id.
+         */
+        uniqVpcId?: pulumi.Input<string>;
+        /**
+         * Es UserName.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlq {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: pulumi.Input<string>;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqKafkaParam>;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: pulumi.Input<number>;
+        /**
+         * retry interval.
+         */
+        retryInterval?: pulumi.Input<number>;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqTopicParam>;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceEsParamDropDlqTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResourceEventBusParam {
+        /**
+         * SCF function name.
+         */
+        functionName?: pulumi.Input<string>;
+        /**
+         * SCF namespace.
+         */
+        namespace?: pulumi.Input<string>;
+        /**
+         * SCF version and alias.
+         */
+        qualifier?: pulumi.Input<string>;
+        /**
+         * instance id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * resource type. EB_COS/EB_ES/EB_CLS.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTargetResourceKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceMariaDbParam {
+        /**
+         * MariaDB database name, * for all database.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: pulumi.Input<string>;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: pulumi.Input<boolean>;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: pulumi.Input<boolean>;
+        /**
+         * Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * MariaDB connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * schema_only|initial, default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceMongoDbParam {
+        /**
+         * MongoDB collection.
+         */
+        collection: pulumi.Input<string>;
+        /**
+         * Whether to copy the stock data, the default parameter is true.
+         */
+        copyExisting: pulumi.Input<boolean>;
+        /**
+         * MongoDB database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Mongo DB connection ip.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+         */
+        listeningEvent?: pulumi.Input<string>;
+        /**
+         * MongoDB database password.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * aggregation pipeline.
+         */
+        pipeline?: pulumi.Input<string>;
+        /**
+         * MongoDB connection port.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * Master-slave priority, default master node.
+         */
+        readPreference?: pulumi.Input<string>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt?: pulumi.Input<boolean>;
+        /**
+         * MongoDB database user name.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParam {
+        /**
+         * the name of the column to be monitored.
+         */
+        dataSourceIncrementColumn?: pulumi.Input<string>;
+        /**
+         * TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+         */
+        dataSourceIncrementMode?: pulumi.Input<string>;
+        /**
+         * TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+         */
+        dataSourceMonitorMode?: pulumi.Input<string>;
+        /**
+         * When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+         */
+        dataSourceMonitorResource?: pulumi.Input<string>;
+        /**
+         * HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+         */
+        dataSourceStartFrom?: pulumi.Input<string>;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: pulumi.Input<string>;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: pulumi.Input<string>;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping>[]>;
+        /**
+         * MySQL database name, * is the whole database.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+         */
+        ddlTopic?: pulumi.Input<string>;
+        /**
+         * When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+         */
+        dropCls?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceMySqlParamDropCls>;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+         */
+        includeContentChanges?: pulumi.Input<string>;
+        /**
+         * If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+         */
+        includeQuery?: pulumi.Input<boolean>;
+        /**
+         * When the Table input is a prefix, the value of this item is true, otherwise it is false.
+         */
+        isTablePrefix?: pulumi.Input<boolean>;
+        /**
+         * Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+         */
+        isTableRegular?: pulumi.Input<boolean>;
+        /**
+         * Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * output format, DEFAULT, CANAL_1, CANAL_2.
+         */
+        outputFormat?: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * MySQL connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * database name of signal table.
+         */
+        signalDatabase?: pulumi.Input<string>;
+        /**
+         * whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Regular expression for routing events to specific topics, defaults to (.*).
+         */
+        topicRegex?: pulumi.Input<string>;
+        /**
+         * TopicRegex, $1, $2.
+         */
+        topicReplacement?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: pulumi.Input<boolean>;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: pulumi.Input<boolean>;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: pulumi.Input<string>;
+        /**
+         * current column size.
+         */
+        columnSize?: pulumi.Input<string>;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: pulumi.Input<string>;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: pulumi.Input<string>;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: pulumi.Input<string>;
+        /**
+         * message type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceMySqlParamDropCls {
+        /**
+         * cls log set.
+         */
+        dropClsLogSet?: pulumi.Input<string>;
+        /**
+         * Delivery account of cls.
+         */
+        dropClsOwneruin?: pulumi.Input<string>;
+        /**
+         * The region where the cls is delivered.
+         */
+        dropClsRegion?: pulumi.Input<string>;
+        /**
+         * topic of cls.
+         */
+        dropClsTopicId?: pulumi.Input<string>;
+        /**
+         * Whether to deliver to cls.
+         */
+        dropInvalidMessageToCls?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTargetResourcePostgreSqlParam {
+        /**
+         * Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+         */
+        dataFormat?: pulumi.Input<string>;
+        /**
+         * INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+         */
+        dataTargetInsertMode?: pulumi.Input<string>;
+        /**
+         * When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+         */
+        dataTargetPrimaryKeyField?: pulumi.Input<string>;
+        /**
+         * Mapping relationship between tables and messages.
+         */
+        dataTargetRecordMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping>[]>;
+        /**
+         * PostgreSQL database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Whether to discard messages that fail to parse, the default is true.
+         */
+        dropInvalidMessage?: pulumi.Input<boolean>;
+        /**
+         * Whether the input table is a regular expression.
+         */
+        isTableRegular?: pulumi.Input<boolean>;
+        /**
+         * Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+         */
+        keyColumns?: pulumi.Input<string>;
+        /**
+         * (decoderbufs/pgoutput), default decoderbufs.
+         */
+        pluginName: pulumi.Input<string>;
+        /**
+         * If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+         */
+        recordWithSchema?: pulumi.Input<boolean>;
+        /**
+         * PostgreSQL connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * never|initial, default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping {
+        /**
+         * Whether the message is allowed to be empty.
+         */
+        allowNull?: pulumi.Input<boolean>;
+        /**
+         * Whether it is an auto-increment column.
+         */
+        autoIncrement?: pulumi.Input<boolean>;
+        /**
+         * Corresponding mapping column name.
+         */
+        columnName?: pulumi.Input<string>;
+        /**
+         * current column size.
+         */
+        columnSize?: pulumi.Input<string>;
+        /**
+         * current column precision.
+         */
+        decimalDigits?: pulumi.Input<string>;
+        /**
+         * Database table default parameters.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Database table extra fields.
+         */
+        extraInfo?: pulumi.Input<string>;
+        /**
+         * The key name of the message.
+         */
+        jsonKey?: pulumi.Input<string>;
+        /**
+         * message type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceScfParam {
+        /**
+         * The maximum number of messages sent in each batch, the default is 1000.
+         */
+        batchSize?: pulumi.Input<number>;
+        /**
+         * SCF function name.
+         */
+        functionName: pulumi.Input<string>;
+        /**
+         * The number of retries after the SCF call fails, the default is 5.
+         */
+        maxRetries?: pulumi.Input<number>;
+        /**
+         * SCF cloud function namespace, the default is default.
+         */
+        namespace?: pulumi.Input<string>;
+        /**
+         * SCF cloud function version and alias, the default is DEFAULT.
+         */
+        qualifier?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceSqlServerParam {
+        /**
+         * SQLServer database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * SQLServer connection Id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * schema_only|initial default initial.
+         */
+        snapshotMode?: pulumi.Input<string>;
+        /**
+         * SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceTdwParam {
+        /**
+         * Tdw bid.
+         */
+        bid: pulumi.Input<string>;
+        /**
+         * default true.
+         */
+        isDomestic?: pulumi.Input<boolean>;
+        /**
+         * TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+         */
+        tdwHost?: pulumi.Input<string>;
+        /**
+         * TDW port, default 8099.
+         */
+        tdwPort?: pulumi.Input<number>;
+        /**
+         * Tdw tid.
+         */
+        tid: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTargetResourceTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTransformParam {
+        /**
+         * Analysis result.
+         */
+        analyseResults?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamAnalyseResult>[]>;
+        /**
+         * parsing format, JSON | DELIMITER| REGULAR.
+         */
+        analysisFormat: pulumi.Input<string>;
+        /**
+         * Raw data.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Whether to keep parsing failure data.
+         */
+        failureParam: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFailureParam>;
+        /**
+         * filter.
+         */
+        filterParams?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFilterParam>[]>;
+        /**
+         * Map.
+         */
+        mapParams?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamMapParam>[]>;
+        /**
+         * output format.
+         */
+        outputFormat: pulumi.Input<string>;
+        /**
+         * delimiter, regular expression.
+         */
+        regex?: pulumi.Input<string>;
+        /**
+         * Test Results.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * Data source, TOPIC pulls from the source topic, CUSTOMIZE custom.
+         */
+        sourceType: pulumi.Input<string>;
+        /**
+         * Whether the underlying engine uses eb.
+         */
+        useEventBus?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTransformParamAnalyseResult {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformParamFailureParam {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: pulumi.Input<string>;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFailureParamKafkaParam>;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: pulumi.Input<number>;
+        /**
+         * retry interval.
+         */
+        retryInterval?: pulumi.Input<number>;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFailureParamTopicParam>;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFailureParamKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformParamFailureParamTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTransformParamFilterParam {
+        /**
+         * Key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+         */
+        matchMode: pulumi.Input<string>;
+        /**
+         * REGULAR.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * Value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformParamMapParam {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParam {
+        /**
+         * data process.
+         */
+        batchAnalyse?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamBatchAnalyse>;
+        /**
+         * Raw data.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * fail process.
+         */
+        failureParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFailureParam>;
+        /**
+         * processing chain.
+         */
+        fieldChains: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChain>[]>;
+        /**
+         * filter.
+         */
+        filterParams?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFilterParam>[]>;
+        /**
+         * Whether to keep the data source Topic metadata information (source Topic, Partition, Offset), the default is false.
+         */
+        keepMetadata?: pulumi.Input<boolean>;
+        /**
+         * output format, JSON, ROW, default JSON.
+         */
+        outputFormat?: pulumi.Input<string>;
+        /**
+         * result.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * The output format is ROW Required.
+         */
+        rowParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamRowParam>;
+        /**
+         * data source.
+         */
+        sourceType?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamBatchAnalyse {
+        /**
+         * ONE BY ONE single output, MERGE combined output.
+         */
+        format: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParam {
+        /**
+         * dlq type, CKAFKA|TOPIC.
+         */
+        dlqType?: pulumi.Input<string>;
+        /**
+         * Ckafka type dlq.
+         */
+        kafkaParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFailureParamKafkaParam>;
+        /**
+         * retry times.
+         */
+        maxRetryAttempts?: pulumi.Input<number>;
+        /**
+         * retry interval.
+         */
+        retryInterval?: pulumi.Input<number>;
+        /**
+         * DIP Topic type dead letter queue.
+         */
+        topicParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFailureParamTopicParam>;
+        /**
+         * type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamKafkaParam {
+        /**
+         * Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         */
+        enableToleration?: pulumi.Input<boolean>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * Partition num.
+         */
+        partitionNum?: pulumi.Input<number>;
+        /**
+         * Qps limit.
+         */
+        qpsLimit?: pulumi.Input<number>;
+        /**
+         * resource id.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * resource id name.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * Whether it is a self-built cluster.
+         */
+        selfBuilt: pulumi.Input<boolean>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         */
+        tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFailureParamKafkaParamTableMapping>[]>;
+        /**
+         * Topic name, multiple separated by,.
+         */
+        topic?: pulumi.Input<string>;
+        /**
+         * Topic Id.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+        /**
+         * Distribute to multiple topics switch, the default is false.
+         */
+        useTableMapping?: pulumi.Input<boolean>;
+        /**
+         * Zone ID.
+         */
+        zoneId?: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamKafkaParamTableMapping {
+        /**
+         * database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * table name,use, to separate.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Topic name.
+         */
+        topic: pulumi.Input<string>;
+        /**
+         * Topic ID.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFailureParamTopicParam {
+        /**
+         * Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+         */
+        compressionType?: pulumi.Input<string>;
+        /**
+         * 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+         */
+        msgMultiple?: pulumi.Input<number>;
+        /**
+         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         */
+        offsetType?: pulumi.Input<string>;
+        /**
+         * The topic name of the topic sold separately.
+         */
+        resource: pulumi.Input<string>;
+        /**
+         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         */
+        startTime?: pulumi.Input<number>;
+        /**
+         * TopicId.
+         */
+        topicId?: pulumi.Input<string>;
+        /**
+         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+         */
+        useAutoCreateTopic?: pulumi.Input<boolean>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChain {
+        /**
+         * analyze.
+         */
+        analyse: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyse>;
+        /**
+         * Parsing results in JSON format.
+         */
+        analyseJsonResult?: pulumi.Input<string>;
+        /**
+         * Analysis result.
+         */
+        analyseResults?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResult>[]>;
+        /**
+         * Test Results.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * data processing.
+         */
+        sMTs?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMT>[]>;
+        /**
+         * secondary analysis.
+         */
+        secondaryAnalyse?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyse>;
+        /**
+         * Secondary parsing results in JSON format.
+         */
+        secondaryAnalyseJsonResult?: pulumi.Input<string>;
+        /**
+         * Secondary Analysis Results.
+         */
+        secondaryAnalyseResults?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResult>[]>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyse {
+        /**
+         * Parsing format, JSON, DELIMITER delimiter, REGULAR regular extraction, SOURCE processing all results of the upper layer.
+         */
+        format: pulumi.Input<string>;
+        /**
+         * KEY to be processed again - KEY expression.
+         */
+        inputValue?: pulumi.Input<string>;
+        /**
+         * KEY to be processed again - mode.
+         */
+        inputValueType?: pulumi.Input<string>;
+        /**
+         * delimiter, regular expression.
+         */
+        regex?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResult {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: pulumi.Input<string>;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: pulumi.Input<string>;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value?: pulumi.Input<string>;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate>;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate>[]>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDate>;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplace>;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKV>;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplace>;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplace>;
+        /**
+         * result.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplit>;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstr>;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecode>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: pulumi.Input<string>;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: pulumi.Input<string>;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: pulumi.Input<string>;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: pulumi.Input<string>;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Regular.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * been replaced value.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: pulumi.Input<number>;
+        /**
+         * interception starting position.
+         */
+        start: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMT {
+        /**
+         * KEY.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: pulumi.Input<string>;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: pulumi.Input<string>;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: pulumi.Input<string>;
+        /**
+         * VALUE.
+         */
+        value?: pulumi.Input<string>;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperate>;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperate>[]>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateDate>;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplace>;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateKV>;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplace>;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateReplace>;
+        /**
+         * result.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateSplit>;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateSubstr>;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecode>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: pulumi.Input<string>;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: pulumi.Input<string>;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: pulumi.Input<string>;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: pulumi.Input<string>;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Regular.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * been replaced value.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: pulumi.Input<number>;
+        /**
+         * interception starting position.
+         */
+        start: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyse {
+        /**
+         * delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResult {
+        /**
+         * KEY.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+         */
+        operate: pulumi.Input<string>;
+        /**
+         * OriginalValue.
+         */
+        originalValue?: pulumi.Input<string>;
+        /**
+         * data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+         */
+        schemeType: pulumi.Input<string>;
+        /**
+         * VALUE.
+         */
+        value?: pulumi.Input<string>;
+        /**
+         * VALUE process.
+         */
+        valueOperate?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate>;
+        /**
+         * VALUE process chain.
+         */
+        valueOperates?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate>[]>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate {
+        /**
+         * Time conversion, required when TYPE=DATE.
+         */
+        date?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDate>;
+        /**
+         * Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+         */
+        jsonPathReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplace>;
+        /**
+         * Key-value secondary analysis, must be passed when TYPE=KV.
+         */
+        kV?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV>;
+        /**
+         * Regular replacement, required when TYPE=REGEX REPLACE.
+         */
+        regexReplace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplace>;
+        /**
+         * replace, TYPE=REPLACE is required.
+         */
+        replace?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplace>;
+        /**
+         * result.
+         */
+        result?: pulumi.Input<string>;
+        /**
+         * The value supports one split and multiple values, required when TYPE=SPLIT.
+         */
+        split?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplit>;
+        /**
+         * Substr, TYPE=SUBSTR is required.
+         */
+        substr?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstr>;
+        /**
+         * Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Url parsing.
+         */
+        urlDecode?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecode>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDate {
+        /**
+         * Time format.
+         */
+        format?: pulumi.Input<string>;
+        /**
+         * input type, string|unix.
+         */
+        targetType?: pulumi.Input<string>;
+        /**
+         * default GMT+8.
+         */
+        timeZone?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplace {
+        /**
+         * Replacement value, Jsonpath expression or string.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Replaced value, Jsonpath expression.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV {
+        /**
+         * delimiter.
+         */
+        delimiter: pulumi.Input<string>;
+        /**
+         * Keep the source Key, the default is false not to keep.
+         */
+        keepOriginalKey?: pulumi.Input<string>;
+        /**
+         * Key-value secondary analysis delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * Regular.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplace {
+        /**
+         * new value.
+         */
+        newValue: pulumi.Input<string>;
+        /**
+         * been replaced value.
+         */
+        oldValue: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplit {
+        /**
+         * delimiter.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstr {
+        /**
+         * cut-off position.
+         */
+        end: pulumi.Input<number>;
+        /**
+         * interception starting position.
+         */
+        start: pulumi.Input<number>;
+    }
+
+    export interface DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecode {
+        /**
+         * code.
+         */
+        charsetName?: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamFilterParam {
+        /**
+         * Key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+         */
+        matchMode: pulumi.Input<string>;
+        /**
+         * REGULAR.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * Value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface DatahubTaskTransformsParamRowParam {
+        /**
+         * delimiter.
+         */
+        entryDelimiter?: pulumi.Input<string>;
+        /**
+         * key, value delimiter.
+         */
+        keyValueDelimiter?: pulumi.Input<string>;
+        /**
+         * row content, KEY_VALUE, VALUE.
+         */
+        rowContent: pulumi.Input<string>;
     }
 
     export interface GetInstancesFilter {
@@ -2679,6 +5897,17 @@ export namespace Ckafka {
          * The filtered value of the field.
          */
         values: string[];
+    }
+
+    export interface GetInstancesFilterArgs {
+        /**
+         * The field that needs to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The filtered value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceConfig {
@@ -2725,7 +5954,6 @@ export namespace Ckafka {
          */
         value: pulumi.Input<string>;
     }
-
 }
 
 export namespace Clb {
@@ -2778,6 +6006,160 @@ export namespace Clb {
         functionQualifierType?: pulumi.Input<string>;
     }
 
+    export interface GetClusterResourcesFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetClusterResourcesFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCrossTargetsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCrossTargetsFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetExclusiveClustersFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetExclusiveClustersFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstanceDetailFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstanceDetailFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetListenersByTargetsBackendArgs {
+        /**
+         * Private network IP to be queried, which can be of the CVM or ENI.
+         */
+        privateIp: pulumi.Input<string>;
+        /**
+         * VPC ID.
+         */
+        vpcId: pulumi.Input<string>;
+    }
+
+    export interface GetListenersByTargetsBackend {
+        /**
+         * Private network IP to be queried, which can be of the CVM or ENI.
+         */
+        privateIp: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
+    }
+
+    export interface GetResourcesFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetResourcesFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
+    export interface GetTargetGroupListFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetTargetGroupListFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
+    }
+
     export interface InstanceSnatIp {
         /**
          * Snat IP address, If set to empty will auto allocated.
@@ -2787,6 +6169,41 @@ export namespace Clb {
          * Snat subnet ID.
          */
         subnetId: pulumi.Input<string>;
+    }
+
+    export interface ReplaceCertForLbsCertificate {
+        /**
+         * Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         */
+        certCaContent?: pulumi.Input<string>;
+        /**
+         * ID of a client certificate. When the listener adopts mutual authentication (i.e., SSLMode = mutual), if you leave this parameter empty, you must upload the client certificate, including CertCaContent and CertCaName.
+         */
+        certCaId?: pulumi.Input<string>;
+        /**
+         * Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         */
+        certCaName?: pulumi.Input<string>;
+        /**
+         * Content of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certContent?: pulumi.Input<string>;
+        /**
+         * ID of a server certificate. If you leave this parameter empty, you must upload the certificate, including CertContent, CertKey, and CertName.
+         */
+        certId?: pulumi.Input<string>;
+        /**
+         * Key of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certKey?: pulumi.Input<string>;
+        /**
+         * Name of the uploaded server certificate. If there is no CertId, this parameter is required.
+         */
+        certName?: pulumi.Input<string>;
+        /**
+         * Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication).
+         */
+        sslMode?: pulumi.Input<string>;
     }
 
     export interface SnatIpIp {
@@ -2818,10 +6235,188 @@ export namespace Clb {
          */
         weight?: pulumi.Input<number>;
     }
-
 }
 
 export namespace Cls {
+    export interface AlarmAlarmTarget {
+        /**
+         * search end time of offset.
+         */
+        endTimeOffset: pulumi.Input<number>;
+        /**
+         * logset id.
+         */
+        logsetId: pulumi.Input<string>;
+        /**
+         * the number of alarm object.
+         */
+        number: pulumi.Input<number>;
+        /**
+         * query rules.
+         */
+        query: pulumi.Input<string>;
+        /**
+         * search start time of offset.
+         */
+        startTimeOffset: pulumi.Input<number>;
+        /**
+         * topic id.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface AlarmAnalysis {
+        /**
+         * configuration.
+         */
+        configInfos?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAnalysisConfigInfo>[]>;
+        /**
+         * analysis content.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * analysis name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * analysis type.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface AlarmAnalysisConfigInfo {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface AlarmCallBack {
+        /**
+         * callback body.
+         */
+        body: pulumi.Input<string>;
+        /**
+         * callback headers.
+         */
+        headers?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface AlarmMonitorTime {
+        /**
+         * time period or point in time.
+         */
+        time: pulumi.Input<number>;
+        /**
+         * Period for periodic execution, Fixed for regular execution.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface AlarmNoticeNoticeReceiver {
+        /**
+         * end time allowed to receive messages.
+         */
+        endTime?: pulumi.Input<string>;
+        /**
+         * index.
+         */
+        index?: pulumi.Input<number>;
+        /**
+         * receiver channels, Email,Sms,WeChat or Phone.
+         */
+        receiverChannels: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * receiver id.
+         */
+        receiverIds: pulumi.Input<pulumi.Input<number>[]>;
+        /**
+         * receiver type, Uin or Group.
+         */
+        receiverType: pulumi.Input<string>;
+        /**
+         * start time allowed to receive messages.
+         */
+        startTime?: pulumi.Input<string>;
+    }
+
+    export interface AlarmNoticeWebCallback {
+        /**
+         * abandoned.
+         */
+        body?: pulumi.Input<string>;
+        /**
+         * callback type, WeCom or Http.
+         */
+        callbackType: pulumi.Input<string>;
+        /**
+         * abandoned.
+         */
+        headers?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * index.
+         */
+        index?: pulumi.Input<number>;
+        /**
+         * Method, POST or PUT.
+         */
+        method?: pulumi.Input<string>;
+        /**
+         * callback url.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface CkafkaConsumerCkafka {
+        /**
+         * instance id.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * instance name.
+         */
+        instanceName: pulumi.Input<string>;
+        /**
+         * topic id of ckafka.
+         */
+        topicId: pulumi.Input<string>;
+        /**
+         * topic name of ckafka.
+         */
+        topicName: pulumi.Input<string>;
+        /**
+         * vip.
+         */
+        vip: pulumi.Input<string>;
+        /**
+         * vport.
+         */
+        vport: pulumi.Input<string>;
+    }
+
+    export interface CkafkaConsumerContent {
+        /**
+         * whether to deliver the TAG info.
+         */
+        enableTag: pulumi.Input<boolean>;
+        /**
+         * metadata info list.
+         */
+        metaFields: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * whether to tiling tag json.
+         */
+        tagJsonNotTiled?: pulumi.Input<boolean>;
+        /**
+         * delivery timestamp precision,1 for second, 2 for millisecond.
+         */
+        timestampAccuracy?: pulumi.Input<number>;
+    }
+
     export interface ConfigExcludePath {
         /**
          * Type. Valid values: File, Path.
@@ -3015,6 +6610,10 @@ export namespace Cls {
 
     export interface ConfigExtractRule {
         /**
+         * syslog system log collection specifies the address and port that the collector listens to.
+         */
+        address?: pulumi.Input<string>;
+        /**
          * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
          */
         backtracking?: pulumi.Input<number>;
@@ -3031,6 +6630,14 @@ export namespace Cls {
          */
         filterKeyRegexes?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtractRuleFilterKeyRegex>[]>;
         /**
+         * GBK encoding. Default 0.
+         */
+        isGbk?: pulumi.Input<number>;
+        /**
+         * standard json. Default 0.
+         */
+        jsonStandard?: pulumi.Input<number>;
+        /**
          * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
          */
         keys?: pulumi.Input<pulumi.Input<string>[]>;
@@ -3038,6 +6645,26 @@ export namespace Cls {
          * Full log matching rule, which is valid only if logType is fullregex_log.
          */
         logRegex?: pulumi.Input<string>;
+        /**
+         * metadata tags.
+         */
+        metaTags?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtractRuleMetaTag>[]>;
+        /**
+         * metadata type.
+         */
+        metadataType?: pulumi.Input<number>;
+        /**
+         * parse protocol.
+         */
+        parseProtocol?: pulumi.Input<string>;
+        /**
+         * metadata path regex.
+         */
+        pathRegex?: pulumi.Input<string>;
+        /**
+         * syslog protocol, tcp or udp.
+         */
+        protocol?: pulumi.Input<string>;
         /**
          * Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
          */
@@ -3065,6 +6692,114 @@ export namespace Cls {
          * Filter rule regex corresponding to key.
          */
         regex?: pulumi.Input<string>;
+    }
+
+    export interface ConfigExtractRuleMetaTag {
+        /**
+         * tag key.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * tag value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface CosRechargeExtractRuleInfo {
+        /**
+         * syslog address.
+         */
+        address?: pulumi.Input<string>;
+        /**
+         * backtracking data volume in incremental acquisition mode.
+         */
+        backtracking?: pulumi.Input<number>;
+        /**
+         * begin line regex.
+         */
+        beginRegex?: pulumi.Input<string>;
+        /**
+         * log delimiter.
+         */
+        delimiter?: pulumi.Input<string>;
+        /**
+         * rules that need to filter logs.
+         */
+        filterKeyRegexes?: pulumi.Input<pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfoFilterKeyRegex>[]>;
+        /**
+         * gbk encoding.
+         */
+        isGbk?: pulumi.Input<number>;
+        /**
+         * is standard json.
+         */
+        jsonStandard?: pulumi.Input<number>;
+        /**
+         * key list.
+         */
+        keys?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * log regex.
+         */
+        logRegex?: pulumi.Input<string>;
+        /**
+         * metadata tag list.
+         */
+        metaTags?: pulumi.Input<pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfoMetaTag>[]>;
+        /**
+         * metadata type.
+         */
+        metadataType?: pulumi.Input<number>;
+        /**
+         * parse protocol.
+         */
+        parseProtocol?: pulumi.Input<string>;
+        /**
+         * metadata path regex.
+         */
+        pathRegex?: pulumi.Input<string>;
+        /**
+         * syslog protocol.
+         */
+        protocol?: pulumi.Input<string>;
+        /**
+         * time format.
+         */
+        timeFormat?: pulumi.Input<string>;
+        /**
+         * time key.
+         */
+        timeKey?: pulumi.Input<string>;
+        /**
+         * parsing failure log key.
+         */
+        unMatchLogKey?: pulumi.Input<string>;
+        /**
+         * whether to upload the parsing failure log.
+         */
+        unMatchUpLoadSwitch?: pulumi.Input<boolean>;
+    }
+
+    export interface CosRechargeExtractRuleInfoFilterKeyRegex {
+        /**
+         * need filter log key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * need filter log regex.
+         */
+        regex: pulumi.Input<string>;
+    }
+
+    export interface CosRechargeExtractRuleInfoMetaTag {
+        /**
+         * metadata key.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * metadata value.
+         */
+        value?: pulumi.Input<string>;
     }
 
     export interface CosShipperCompress {
@@ -3261,9 +6996,226 @@ export namespace Cls {
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
+
 }
 
 export namespace Cos {
+    export interface BatchManifest {
+        /**
+         * The location information of the list of objects.
+         */
+        location: pulumi.Input<inputs.Cos.BatchManifestLocation>;
+        /**
+         * Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+         */
+        spec: pulumi.Input<inputs.Cos.BatchManifestSpec>;
+    }
+
+    export interface BatchManifestLocation {
+        /**
+         * Specifies the etag of the object list. Length 1-1024 bytes.
+         */
+        etag: pulumi.Input<string>;
+        /**
+         * Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+         */
+        objectArn: pulumi.Input<string>;
+        /**
+         * Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+         */
+        objectVersionId?: pulumi.Input<string>;
+    }
+
+    export interface BatchManifestSpec {
+        /**
+         * Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+         */
+        fields?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+         */
+        format: pulumi.Input<string>;
+    }
+
+    export interface BatchOperation {
+        /**
+         * Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+         */
+        cosInitiateRestoreObject?: pulumi.Input<inputs.Cos.BatchOperationCosInitiateRestoreObject>;
+        /**
+         * Specifies the specific parameters for the batch copy operation on the objects in the list.
+         */
+        cosPutObjectCopy?: pulumi.Input<inputs.Cos.BatchOperationCosPutObjectCopy>;
+    }
+
+    export interface BatchOperationCosInitiateRestoreObject {
+        /**
+         * Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+         */
+        expirationInDays: pulumi.Input<number>;
+        /**
+         * Select archive recovery model. Available values: Bulk, Standard.
+         */
+        jobTier: pulumi.Input<string>;
+    }
+
+    export interface BatchOperationCosPutObjectCopy {
+        /**
+         * This element specifies how ACL is copied. Valid values:
+         * - Copy: inherits the source object ACL
+         * - Replaced: replace source ACL
+         * - Add: add a new ACL based on the source ACL.
+         */
+        accessControlDirective?: pulumi.Input<string>;
+        /**
+         * Controls the specific access to the object.
+         */
+        accessControlGrants?: pulumi.Input<inputs.Cos.BatchOperationCosPutObjectCopyAccessControlGrants>;
+        /**
+         * Defines the ACL property of the object. Valid values: private, public-read.
+         */
+        cannedAccessControlList?: pulumi.Input<string>;
+        /**
+         * This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+         */
+        metadataDirective?: pulumi.Input<string>;
+        /**
+         * When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+         */
+        modifiedSinceConstraint?: pulumi.Input<number>;
+        /**
+         * Configure the metadata for the object.
+         */
+        newObjectMetadata?: pulumi.Input<inputs.Cos.BatchOperationCosPutObjectCopyNewObjectMetadata>;
+        /**
+         * The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+         */
+        newObjectTaggings?: pulumi.Input<pulumi.Input<inputs.Cos.BatchOperationCosPutObjectCopyNewObjectTagging>[]>;
+        /**
+         * Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+         */
+        prefixReplace?: pulumi.Input<boolean>;
+        /**
+         * This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+         */
+        resourcesPrefix?: pulumi.Input<string>;
+        /**
+         * Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+         */
+        storageClass?: pulumi.Input<string>;
+        /**
+         * This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+         */
+        taggingDirective?: pulumi.Input<string>;
+        /**
+         * This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+         */
+        targetKeyPrefix?: pulumi.Input<string>;
+        /**
+         * Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+         */
+        targetResource: pulumi.Input<string>;
+        /**
+         * When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+         */
+        unmodifiedSinceConstraint?: pulumi.Input<number>;
+    }
+
+    export interface BatchOperationCosPutObjectCopyAccessControlGrants {
+        /**
+         * User name.
+         */
+        displayName?: pulumi.Input<string>;
+        /**
+         * User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+         */
+        identifier: pulumi.Input<string>;
+        /**
+         * Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+         */
+        permission: pulumi.Input<string>;
+        /**
+         * Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+         */
+        typeIdentifier: pulumi.Input<string>;
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectMetadata {
+        /**
+         * The caching instructions defined in RFC 2616 are saved as object metadata.
+         */
+        cacheControl?: pulumi.Input<string>;
+        /**
+         * The file name defined in RFC 2616 is saved as object metadata.
+         */
+        contentDisposition?: pulumi.Input<string>;
+        /**
+         * The encoding format defined in RFC 2616 is saved as object metadata.
+         */
+        contentEncoding?: pulumi.Input<string>;
+        /**
+         * The content types defined in RFC 2616 are saved as object metadata.
+         */
+        contentType?: pulumi.Input<string>;
+        /**
+         * The cache expiration time defined in RFC 2616 is saved as object metadata.
+         */
+        httpExpiresDate?: pulumi.Input<string>;
+        /**
+         * Server encryption algorithm. Currently, only AES256 is supported.
+         */
+        sseAlgorithm?: pulumi.Input<string>;
+        /**
+         * Includes user-defined metadata.
+         */
+        userMetadatas?: pulumi.Input<pulumi.Input<inputs.Cos.BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata>[]>;
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface BatchOperationCosPutObjectCopyNewObjectTagging {
+        /**
+         * key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface BatchReport {
+        /**
+         * Delivery bucket for task completion reports.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * Whether to output the task completion report.
+         */
+        enabled: pulumi.Input<string>;
+        /**
+         * Task completion report format information. Legal value: Report_CSV_V1.
+         */
+        format: pulumi.Input<string>;
+        /**
+         * Prefix information for the task completion report. Length 0-256 bytes.
+         */
+        prefix?: pulumi.Input<string>;
+        /**
+         * Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+         */
+        reportScope: pulumi.Input<string>;
+    }
+
     export interface BucketCorsRule {
         /**
          * Specifies which headers are allowed.
@@ -3318,6 +7270,72 @@ export namespace Cos {
          * Private key of certificate.
          */
         privateKey: pulumi.Input<string>;
+    }
+
+    export interface BucketInventoryDestination {
+        /**
+         * ID of the bucket owner.
+         */
+        accountId?: pulumi.Input<string>;
+        /**
+         * Bucket name.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * Server-side encryption for the inventory result.
+         */
+        encryption?: pulumi.Input<inputs.Cos.BucketInventoryDestinationEncryption>;
+        /**
+         * Format of the inventory result. Valid value: CSV.
+         */
+        format: pulumi.Input<string>;
+        /**
+         * Prefix of the inventory result.
+         */
+        prefix?: pulumi.Input<string>;
+    }
+
+    export interface BucketInventoryDestinationEncryption {
+        /**
+         * Encryption with COS-managed key. This field can be left empty.
+         */
+        sseCos?: pulumi.Input<string>;
+    }
+
+    export interface BucketInventoryFilter {
+        /**
+         * Creation time range of the objects to analyze.
+         */
+        period?: pulumi.Input<inputs.Cos.BucketInventoryFilterPeriod>;
+        /**
+         * Prefix of the objects to analyze.
+         */
+        prefix?: pulumi.Input<string>;
+    }
+
+    export interface BucketInventoryFilterPeriod {
+        /**
+         * Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+         */
+        endTime?: pulumi.Input<string>;
+        /**
+         * Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+         */
+        startTime?: pulumi.Input<string>;
+    }
+
+    export interface BucketInventoryOptionalFields {
+        /**
+         * Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+         */
+        fields?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface BucketInventorySchedule {
+        /**
+         * Frequency of the inventory job. Enumerated values: Daily, Weekly.
+         */
+        frequency: pulumi.Input<string>;
     }
 
     export interface BucketLifecycleRule {
@@ -3573,6 +7591,17 @@ export namespace Cvm {
         vpcId: pulumi.Input<string>;
     }
 
+    export interface GetChcHostsFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter values.
+         */
+        values: string[];
+    }
+
     export interface GetChcHostsFilterArgs {
         /**
          * Filter name.
@@ -3584,13 +7613,13 @@ export namespace Cvm {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetChcHostsFilter {
+    export interface GetInstancesModificationFilter {
         /**
-         * Filter name.
+         * Fields to be filtered.
          */
         name: string;
         /**
-         * Filter values.
+         * Value of the field.
          */
         values: string[];
     }
@@ -3606,15 +7635,14 @@ export namespace Cvm {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetInstancesModificationFilter {
-        /**
-         * Fields to be filtered.
-         */
-        name: string;
-        /**
-         * Value of the field.
-         */
-        values: string[];
+    export interface ImportImageTagSpecification {
+        resourceType: pulumi.Input<string>;
+        tags: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecificationTag>[]>;
+    }
+
+    export interface ImportImageTagSpecificationTag {
+        key: pulumi.Input<string>;
+        value: pulumi.Input<string>;
     }
 
     export interface LaunchTemplateActionTimer {
@@ -4156,9 +8184,75 @@ export namespace Cvm {
          */
         vpcId: pulumi.Input<string>;
     }
+
+    export interface ModifyInstanceDiskTypeDataDisk {
+        cdcId?: pulumi.Input<string>;
+        deleteWithInstance?: pulumi.Input<boolean>;
+        diskId?: pulumi.Input<string>;
+        diskSize: pulumi.Input<number>;
+        diskType?: pulumi.Input<string>;
+        encrypt?: pulumi.Input<boolean>;
+        kmsKeyId?: pulumi.Input<string>;
+        snapshotId?: pulumi.Input<string>;
+        throughputPerformance?: pulumi.Input<number>;
+    }
+
+    export interface ModifyInstanceDiskTypeSystemDisk {
+        cdcId?: pulumi.Input<string>;
+        diskId?: pulumi.Input<string>;
+        diskSize?: pulumi.Input<number>;
+        diskType?: pulumi.Input<string>;
+    }
+
+    export interface RenewHostHostChargePrepaid {
+        period: pulumi.Input<number>;
+        renewFlag?: pulumi.Input<string>;
+    }
+
+    export interface RenewInstanceInstanceChargePrepaid {
+        /**
+         * Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+         */
+        period: pulumi.Input<number>;
+        /**
+         * Auto renewal flag. Valid values:
+         * - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+         * - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+         * - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+         * Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+         */
+        renewFlag?: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Cynosdb {
+    export interface AccountPrivilegesDatabasePrivilege {
+        /**
+         * Database.
+         */
+        db: pulumi.Input<string>;
+        /**
+         * Database privileges.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface AccountPrivilegesTablePrivilege {
+        /**
+         * Database name.
+         */
+        db: pulumi.Input<string>;
+        /**
+         * Table privileges.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        tableName: pulumi.Input<string>;
+    }
+
     export interface AuditLogFileFilter {
         /**
          * Affects the number of rows. Indicates that the audit log whose number of affected rows is greater than this value is filtered.
@@ -4212,6 +8306,21 @@ export namespace Cynosdb {
          * User name.
          */
         users?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface ClusterDatabasesUserHostPrivilege {
+        /**
+         * .
+         */
+        dbHost: pulumi.Input<string>;
+        /**
+         * .
+         */
+        dbPrivilege: pulumi.Input<string>;
+        /**
+         * Authorized Users.
+         */
+        dbUserName: pulumi.Input<string>;
     }
 
     export interface ClusterParamItem {
@@ -4273,6 +8382,275 @@ export namespace Cynosdb {
         instanceName?: pulumi.Input<string>;
     }
 
+    export interface ExportInstanceErrorLogsErrorLogItemExport {
+        /**
+         * log content.
+         */
+        content?: pulumi.Input<string>;
+        /**
+         * Log level, optional values note, warning, error.
+         */
+        level?: pulumi.Input<string>;
+        /**
+         * time.
+         */
+        timestamp?: pulumi.Input<string>;
+    }
+
+    export interface GetAccountAllGrantPrivilegesAccount {
+        /**
+         * Account.
+         */
+        accountName: string;
+        /**
+         * Host, default `%`.
+         */
+        host?: string;
+    }
+
+    export interface GetAccountAllGrantPrivilegesAccountArgs {
+        /**
+         * Account.
+         */
+        accountName: pulumi.Input<string>;
+        /**
+         * Host, default `%`.
+         */
+        host?: pulumi.Input<string>;
+    }
+
+    export interface GetAuditLogsFilterArgs {
+        /**
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         */
+        affectRows?: pulumi.Input<number>;
+        /**
+         * Database name.
+         */
+        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+         */
+        execTime?: pulumi.Input<number>;
+        /**
+         * Client address.
+         */
+        hosts?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Audit policy name.
+         */
+        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: pulumi.Input<number>;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: pulumi.Input<string>;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: pulumi.Input<string>;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Thread ID.
+         */
+        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * User name.
+         */
+        users?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetAuditLogsFilter {
+        /**
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         */
+        affectRows?: number;
+        /**
+         * Database name.
+         */
+        dbNames?: string[];
+        /**
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+         */
+        execTime?: number;
+        /**
+         * Client address.
+         */
+        hosts?: string[];
+        /**
+         * Audit policy name.
+         */
+        policyNames?: string[];
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: number;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: string;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: string;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: string[];
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: string[];
+        /**
+         * Table name.
+         */
+        tableNames?: string[];
+        /**
+         * Thread ID.
+         */
+        threadIds?: string[];
+        /**
+         * User name.
+         */
+        users?: string[];
+    }
+
+    export interface GetProxyNodeFilter {
+        /**
+         * Exact match or not.
+         */
+        exactMatch?: boolean;
+        /**
+         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         */
+        name?: string;
+        /**
+         * Search String.
+         */
+        names: string[];
+        /**
+         * Operator.
+         */
+        operator?: string;
+        /**
+         * Search String.
+         */
+        values: string[];
+    }
+
+    export interface GetProxyNodeFilterArgs {
+        /**
+         * Exact match or not.
+         */
+        exactMatch?: pulumi.Input<boolean>;
+        /**
+         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Search String.
+         */
+        names: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Operator.
+         */
+        operator?: pulumi.Input<string>;
+        /**
+         * Search String.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface InstanceParamInstanceParamList {
+        /**
+         * Current value of parameter.
+         */
+        currentValue: pulumi.Input<string>;
+        /**
+         * Parameter Name.
+         */
+        paramName: pulumi.Input<string>;
+    }
+
+    export interface ParamTemplateParamList {
+        /**
+         * Current value.
+         */
+        currentValue?: pulumi.Input<string>;
+        /**
+         * Parameter Name.
+         */
+        paramName?: pulumi.Input<string>;
+    }
+
+    export interface ProxyEndPointInstanceWeight {
+        /**
+         * Instance Id.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Instance Weight.
+         */
+        weight: pulumi.Input<number>;
+    }
+
+    export interface ProxyProxyZone {
+        /**
+         * Number of proxy nodes.
+         */
+        proxyNodeCount?: pulumi.Input<number>;
+        /**
+         * Proxy node availability zone.
+         */
+        proxyNodeZone?: pulumi.Input<string>;
+    }
+
+    export interface RollBackClusterRollbackDatabase {
+        /**
+         * New database name.
+         */
+        newDatabase: pulumi.Input<string>;
+        /**
+         * Old database name.
+         */
+        oldDatabase: pulumi.Input<string>;
+    }
+
+    export interface RollBackClusterRollbackTable {
+        /**
+         * New database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Tables.
+         */
+        tables: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackTableTable>[]>;
+    }
+
+    export interface RollBackClusterRollbackTableTable {
+        /**
+         * New table name.
+         */
+        newTable: pulumi.Input<string>;
+        /**
+         * Old table name.
+         */
+        oldTable: pulumi.Input<string>;
+    }
 }
 
 export namespace Dayu {
@@ -5067,10 +9445,31 @@ export namespace Dbbrain {
          */
         users?: pulumi.Input<pulumi.Input<string>[]>;
     }
-
 }
 
 export namespace Dc {
+    export interface GetPublicDirectConnectTunnelRoutesFilter {
+        /**
+         * Fields to be filtered.
+         */
+        name: string;
+        /**
+         * filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetPublicDirectConnectTunnelRoutesFilterArgs {
+        /**
+         * Fields to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filter value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
 }
 
 export namespace Dcdb {
@@ -5178,6 +9577,112 @@ export namespace Dcdb {
         value: pulumi.Input<string>;
     }
 
+    export interface GetUpgradePriceAddShardConfigArgs {
+        /**
+         * The number of new shards.
+         */
+        shardCount: pulumi.Input<number>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
+    }
+
+    export interface GetUpgradePriceAddShardConfig {
+        /**
+         * The number of new shards.
+         */
+        shardCount: number;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+    }
+
+    export interface GetUpgradePriceExpandShardConfig {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: string[];
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard node count.
+         */
+        shardNodeCount?: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+    }
+
+    export interface GetUpgradePriceExpandShardConfigArgs {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard node count.
+         */
+        shardNodeCount?: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
+    }
+
+    export interface GetUpgradePriceSplitShardConfig {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: string[];
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: number;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: number;
+        /**
+         * Data split ratio, fixed at 50%.
+         */
+        splitRate: number;
+    }
+
+    export interface GetUpgradePriceSplitShardConfigArgs {
+        /**
+         * List of shard ID.
+         */
+        shardInstanceIds: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
+        /**
+         * Data split ratio, fixed at 50%.
+         */
+        splitRate: pulumi.Input<number>;
+    }
+
     export interface HourdbInstanceResourceTag {
         /**
          * tag key.
@@ -5191,6 +9696,50 @@ export namespace Dcdb {
 }
 
 export namespace Dcx {
+    export interface ExtraConfigBfdInfo {
+        /**
+         * detect interval.
+         */
+        interval?: pulumi.Input<number>;
+        /**
+         * detect times.
+         */
+        probeFailedTimes?: pulumi.Input<number>;
+    }
+
+    export interface ExtraConfigBgpPeer {
+        /**
+         * user idc BGP Asn.
+         */
+        asn?: pulumi.Input<number>;
+        /**
+         * user bgp key.
+         */
+        authKey?: pulumi.Input<string>;
+    }
+
+    export interface ExtraConfigNqaInfo {
+        /**
+         * detect ip.
+         */
+        destinationIp?: pulumi.Input<string>;
+        /**
+         * detect interval.
+         */
+        interval?: pulumi.Input<number>;
+        /**
+         * detect times.
+         */
+        probeFailedTimes?: pulumi.Input<number>;
+    }
+
+    export interface ExtraConfigRouteFilterPrefixes {
+        /**
+         * user network prefixes.
+         */
+        cidr?: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Dnats {
@@ -5259,17 +9808,6 @@ export namespace Dts {
         viewName?: pulumi.Input<string>;
     }
 
-    export interface GetMigrateJobsTagFilter {
-        /**
-         * tag key.
-         */
-        tagKey?: string;
-        /**
-         * tag value.
-         */
-        tagValue?: string;
-    }
-
     export interface GetMigrateJobsTagFilterArgs {
         /**
          * tag key.
@@ -5279,6 +9817,17 @@ export namespace Dts {
          * tag value.
          */
         tagValue?: pulumi.Input<string>;
+    }
+
+    export interface GetMigrateJobsTagFilter {
+        /**
+         * tag key.
+         */
+        tagKey?: string;
+        /**
+         * tag value.
+         */
+        tagValue?: string;
     }
 
     export interface GetSyncJobsTagFilter {
@@ -5752,6 +10301,392 @@ export namespace Dts {
         tagValue?: pulumi.Input<string>;
     }
 
+    export interface SyncConfigDstInfo {
+        /**
+         * The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        account?: pulumi.Input<string>;
+        /**
+         * The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountMode?: pulumi.Input<string>;
+        /**
+         * The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountRole?: pulumi.Input<string>;
+        /**
+         * Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ccnId?: pulumi.Input<string>;
+        /**
+         * CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cvmInstanceId?: pulumi.Input<string>;
+        /**
+         * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbKernel?: pulumi.Input<string>;
+        /**
+         * Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: pulumi.Input<string>;
+        /**
+         * Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        encryptConn?: pulumi.Input<string>;
+        /**
+         * Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        engineVersion?: pulumi.Input<string>;
+        /**
+         * Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        instanceId?: pulumi.Input<string>;
+        /**
+         * The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        region?: pulumi.Input<string>;
+        /**
+         * The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        role?: pulumi.Input<string>;
+        /**
+         * External role id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        roleExternalId?: pulumi.Input<string>;
+        /**
+         * The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId?: pulumi.Input<string>;
+        /**
+         * Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        supplier?: pulumi.Input<string>;
+        /**
+         * Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretId?: pulumi.Input<string>;
+        /**
+         * Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretKey?: pulumi.Input<string>;
+        /**
+         * Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpToken?: pulumi.Input<string>;
+        /**
+         * Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqDcgId?: pulumi.Input<string>;
+        /**
+         * VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqVpnGwId?: pulumi.Input<string>;
+        /**
+         * Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        user?: pulumi.Input<string>;
+        /**
+         * Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId?: pulumi.Input<string>;
+    }
+
+    export interface SyncConfigObjects {
+        /**
+         * For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        advancedObjects?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databases?: pulumi.Input<pulumi.Input<inputs.Dts.SyncConfigObjectsDatabase>[]>;
+        /**
+         * Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        mode?: pulumi.Input<string>;
+        /**
+         * OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        onlineDdl?: pulumi.Input<inputs.Dts.SyncConfigObjectsOnlineDdl>;
+    }
+
+    export interface SyncConfigObjectsDatabase {
+        /**
+         * DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbMode?: pulumi.Input<string>;
+        /**
+         * The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: pulumi.Input<string>;
+        /**
+         * Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        eventMode?: pulumi.Input<string>;
+        /**
+         * When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        events?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functionMode?: pulumi.Input<string>;
+        /**
+         * Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functions?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newDbName?: pulumi.Input<string>;
+        /**
+         * Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newSchemaName?: pulumi.Input<string>;
+        /**
+         * Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedureMode?: pulumi.Input<string>;
+        /**
+         * Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedures?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName?: pulumi.Input<string>;
+        /**
+         * Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableMode?: pulumi.Input<string>;
+        /**
+         * A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tables?: pulumi.Input<pulumi.Input<inputs.Dts.SyncConfigObjectsDatabaseTable>[]>;
+        /**
+         * Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggerMode?: pulumi.Input<string>;
+        /**
+         * When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggers?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewMode?: pulumi.Input<string>;
+        /**
+         * View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        views?: pulumi.Input<pulumi.Input<inputs.Dts.SyncConfigObjectsDatabaseView>[]>;
+    }
+
+    export interface SyncConfigObjectsDatabaseTable {
+        /**
+         * Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        filterCondition?: pulumi.Input<string>;
+        /**
+         * New table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newTableName?: pulumi.Input<string>;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName?: pulumi.Input<string>;
+    }
+
+    export interface SyncConfigObjectsDatabaseView {
+        /**
+         * New view name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newViewName?: pulumi.Input<string>;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName?: pulumi.Input<string>;
+    }
+
+    export interface SyncConfigObjectsOnlineDdl {
+        /**
+         * status.
+         */
+        status?: pulumi.Input<string>;
+    }
+
+    export interface SyncConfigOptions {
+        /**
+         * Whether to add additional columns. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        addAdditionalColumn?: pulumi.Input<boolean>;
+        /**
+         * Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleOption?: pulumi.Input<inputs.Dts.SyncConfigOptionsConflictHandleOption>;
+        /**
+         * Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleType?: pulumi.Input<string>;
+        /**
+         * DDL synchronization options, specifically describe which DDLs to synchronize. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlOptions?: pulumi.Input<pulumi.Input<inputs.Dts.SyncConfigOptionsDdlOption>[]>;
+        /**
+         * The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), InitializeAfterDelete (delete and re-initialize), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dealOfExistSameTable?: pulumi.Input<string>;
+        /**
+         * Synchronous initialization options, Data (full data initialization), Structure (structure initialization), Full (full data and structure initialization, default), None (incremental only). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        initType?: pulumi.Input<string>;
+        /**
+         * DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), leave blank (not selected), PartialDDL (custom, work with DdlOptions). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        opTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface SyncConfigOptionsConflictHandleOption {
+        /**
+         * Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionColumn?: pulumi.Input<string>;
+        /**
+         * Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOperator?: pulumi.Input<string>;
+        /**
+         * Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOrderInSrcAndDst?: pulumi.Input<string>;
+    }
+
+    export interface SyncConfigOptionsDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: pulumi.Input<string>;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface SyncConfigSrcInfo {
+        /**
+         * The account to which the instance belongs. This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        account?: pulumi.Input<string>;
+        /**
+         * The account to which the resource belongs is empty or self (represents resources within this account), other (represents cross-account resources). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountMode?: pulumi.Input<string>;
+        /**
+         * The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        accountRole?: pulumi.Input<string>;
+        /**
+         * Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ccnId?: pulumi.Input<string>;
+        /**
+         * CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cvmInstanceId?: pulumi.Input<string>;
+        /**
+         * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbKernel?: pulumi.Input<string>;
+        /**
+         * Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: pulumi.Input<string>;
+        /**
+         * Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        encryptConn?: pulumi.Input<string>;
+        /**
+         * Database version, valid only when the instance is an RDS instance, ignored by other instances, the format is: 5.6 or 5.7, the default is 5.6. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        engineVersion?: pulumi.Input<string>;
+        /**
+         * Database instance id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        instanceId?: pulumi.Input<string>;
+        /**
+         * The IP address of the instance, which is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Password, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * Instance port, this item is required when the access type is non-cdb. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * The english name of region. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        region?: pulumi.Input<string>;
+        /**
+         * The node type of tdsql mysql version, the enumeration value is proxy, set. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        role?: pulumi.Input<string>;
+        /**
+         * External role id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        roleExternalId?: pulumi.Input<string>;
+        /**
+         * The subnet ID under the private network, this item is required for the private network, leased line, and VPN access methods. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subnetId?: pulumi.Input<string>;
+        /**
+         * Cloud vendor type, when the instance is an RDS instance, fill in aliyun, in other cases fill in others, the default is others. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        supplier?: pulumi.Input<string>;
+        /**
+         * Temporary key Id, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretId?: pulumi.Input<string>;
+        /**
+         * Temporary key Key, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpSecretKey?: pulumi.Input<string>;
+        /**
+         * Temporary Token, required if it is a cross-account instance. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpToken?: pulumi.Input<string>;
+        /**
+         * Leased line gateway ID, which is required for the leased line access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqDcgId?: pulumi.Input<string>;
+        /**
+         * VPN gateway ID, which is required for the VPN access type. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        uniqVpnGwId?: pulumi.Input<string>;
+        /**
+         * Username, required for instances that require username and password authentication for access. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        user?: pulumi.Input<string>;
+        /**
+         * Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        vpcId?: pulumi.Input<string>;
+    }
+
     export interface SyncJobTag {
         /**
          * tag key.
@@ -5762,6 +10697,9 @@ export namespace Dts {
          */
         tagValue?: pulumi.Input<string>;
     }
+}
+
+export namespace Eip {
 }
 
 export namespace Eips {
@@ -5796,7 +10734,7 @@ export namespace Elasticsearch {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+         * Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -6714,6 +11652,17 @@ export namespace Kubernetes {
         lanIp?: pulumi.Input<string>;
     }
 
+    export interface EncryptionProtectionKmsConfiguration {
+        /**
+         * kms id.
+         */
+        keyId?: pulumi.Input<string>;
+        /**
+         * kms region.
+         */
+        kmsRegion?: pulumi.Input<string>;
+    }
+
     export interface NodePoolAutoScalingConfig {
         /**
          * Backup CVM instance types if specified instance type sold out or mismatch.
@@ -7184,6 +12133,36 @@ export namespace Kubernetes {
 }
 
 export namespace Lighthouse {
+    export interface DiskAutoMountConfiguration {
+        /**
+         * The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+         */
+        fileSystemType?: pulumi.Input<string>;
+        /**
+         * Instance ID to be mounted. The specified instance must be in the Running state.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+         */
+        mountPoint?: pulumi.Input<string>;
+    }
+
+    export interface DiskDiskChargePrepaid {
+        /**
+         * new purchase cycle.
+         */
+        period: pulumi.Input<number>;
+        /**
+         * Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+         */
+        renewFlag?: pulumi.Input<string>;
+        /**
+         * newly purchased unit. Default: m.
+         */
+        timeUnit?: pulumi.Input<string>;
+    }
+
     export interface FirewallRuleFirewallRule {
         /**
          * Valid values are ACCEPT, DROP. Default value is ACCEPT.
@@ -7207,6 +12186,17 @@ export namespace Lighthouse {
         protocol: pulumi.Input<string>;
     }
 
+    export interface GetBundleFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
     export interface GetBundleFilterArgs {
         /**
          * Field to be filtered.
@@ -7218,7 +12208,84 @@ export namespace Lighthouse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetBundleFilter {
+    export interface GetDiskConfigFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDiskConfigFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
+    export interface GetDisksFilter {
+        /**
+         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetDisksFilterArgs {
+        /**
+         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetModifyInstanceBundleFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetModifyInstanceBundleFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
+    }
+
+    export interface GetResetInstanceBlueprintFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetResetInstanceBlueprintFilter {
         /**
          * Field to be filtered.
          */
@@ -7307,9 +12374,144 @@ export namespace Lighthouse {
          */
         password?: pulumi.Input<string>;
     }
+
+    export interface RenewDiskRenewDiskChargePrepaid {
+        /**
+         * Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+         */
+        curInstanceDeadline?: pulumi.Input<string>;
+        /**
+         * Renewal period.
+         */
+        period?: pulumi.Input<number>;
+        /**
+         * Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+         */
+        renewFlag?: pulumi.Input<string>;
+        /**
+         * newly purchased unit. Default: m.
+         */
+        timeUnit?: pulumi.Input<string>;
+    }
+
+    export interface RenewInstanceInstanceChargePrepaid {
+        /**
+         * The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+         */
+        period: pulumi.Input<number>;
+        /**
+         * Automatic renewal logo. Values:
+         * - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+         * - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+         * - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+         * Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+         */
+        renewFlag?: pulumi.Input<string>;
+    }
 }
 
 export namespace Mariadb {
+    export interface AccountPrivilegesAccounts {
+        /**
+         * user host.
+         */
+        host: pulumi.Input<string>;
+        /**
+         * user name.
+         */
+        user: pulumi.Input<string>;
+    }
+
+    export interface AccountPrivilegesColumnPrivilege {
+        /**
+         * Column name.
+         */
+        column: pulumi.Input<string>;
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface AccountPrivilegesDatabasePrivilege {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface AccountPrivilegesFunctionPrivilege {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Function name.
+         */
+        functionName: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface AccountPrivilegesProcedurePrivilege {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Procedure name.
+         */
+        procedure: pulumi.Input<string>;
+    }
+
+    export interface AccountPrivilegesTablePrivilege {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        table: pulumi.Input<string>;
+    }
+
+    export interface AccountPrivilegesViewPrivilege {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Permission information.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * View name.
+         */
+        view: pulumi.Input<string>;
+    }
+
     export interface InstanceInitParam {
         /**
          * parameter name.
@@ -7331,7 +12533,6 @@ export namespace Mariadb {
          */
         value: pulumi.Input<string>;
     }
-
 }
 
 export namespace Mdl {
@@ -10085,13 +15286,35 @@ export namespace Mysql {
         users?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
+    export interface BackupDownloadRestrictionLimitVpc {
+        /**
+         * Restrict downloads from regions. Currently only the current region is supported.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * List of vpcs to limit downloads.
+         */
+        vpcLists: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface ParamTemplateParamList {
         /**
          * The value of parameter.
          */
         currentValue?: pulumi.Input<string>;
         /**
-         * The name of parameter template.
+         * The name of parameter.
+         */
+        name?: pulumi.Input<string>;
+    }
+
+    export interface PasswordComplexityParamList {
+        /**
+         * Parameter value.
+         */
+        currentValue?: pulumi.Input<string>;
+        /**
+         * Parameter name.
          */
         name?: pulumi.Input<string>;
     }
@@ -10141,6 +15364,99 @@ export namespace Mysql {
         tableName: pulumi.Input<string>;
     }
 
+    export interface ProxyProxyNodeCustom {
+        /**
+         * Number of CPU cores.
+         */
+        cpu: pulumi.Input<number>;
+        /**
+         * Memory size.
+         */
+        mem: pulumi.Input<number>;
+        /**
+         * Number of nodes.
+         */
+        nodeCount: pulumi.Input<number>;
+        /**
+         * Region.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Zone.
+         */
+        zone: pulumi.Input<string>;
+    }
+
+    export interface RoGroupRoGroupInfo {
+        /**
+         * The minimum number of reserved instances. It can be set to any value less than or equal to the number of RO instances under this RO group. Note that if the setting value is greater than the number of RO instances, it will not be removed; if it is set to 0, all instances whose latency exceeds the limit will be removed.
+         */
+        minRoInGroup?: pulumi.Input<number>;
+        /**
+         * Delayed replication time.
+         */
+        replicationDelayTime?: pulumi.Input<number>;
+        /**
+         * RO group name.
+         */
+        roGroupName?: pulumi.Input<string>;
+        /**
+         * RO instance maximum latency threshold. The unit is seconds, the minimum value is 1. Note that the RO group must have enabled instance delay culling policy for this value to be valid.
+         */
+        roMaxDelayTime?: pulumi.Input<number>;
+        /**
+         * Whether to enable delayed culling of instances. Supported values are: 1 - on; 0 - not on. Note that if you enable instance delay culling, you must set the delay threshold (RoMaxDelayTime) parameter.
+         */
+        roOfflineDelay?: pulumi.Input<number>;
+        /**
+         * weight mode. Supported values include: `system` - automatically assigned by the system; `custom` - user-defined settings. Note that if the `custom` mode is set, the RO instance weight configuration (RoWeightValues) parameter must be set.
+         */
+        weightMode?: pulumi.Input<string>;
+    }
+
+    export interface RoGroupRoWeightValue {
+        /**
+         * RO instance ID.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Weights. The value range is [0, 100].
+         */
+        weight: pulumi.Input<number>;
+    }
+
+    export interface RollbackDatabase {
+        /**
+         * The original database name before rollback.
+         */
+        databaseName: pulumi.Input<string>;
+        /**
+         * The new database name after rollback.
+         */
+        newDatabaseName: pulumi.Input<string>;
+    }
+
+    export interface RollbackTable {
+        /**
+         * Database name.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Database table details.
+         */
+        tables: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackTableTable>[]>;
+    }
+
+    export interface RollbackTableTable {
+        /**
+         * New database table name after rollback.
+         */
+        newTableName: pulumi.Input<string>;
+        /**
+         * The original database table name before rollback.
+         */
+        tableName: pulumi.Input<string>;
+    }
 }
 
 export namespace Nat {
@@ -10163,6 +15479,96 @@ export namespace Placement {
 }
 
 export namespace Postgresql {
+    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        ipRestrictionEffect?: string;
+        /**
+         * Whether it is allowed to download IP list of the backup files.
+         */
+        ipSets?: string[];
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         */
+        restrictionType?: string;
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         */
+        vpcIdSets?: string[];
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        vpcRestrictionEffect?: string;
+    }
+
+    export interface GetBackupDownloadUrlsBackupDownloadRestrictionArgs {
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        ipRestrictionEffect?: pulumi.Input<string>;
+        /**
+         * Whether it is allowed to download IP list of the backup files.
+         */
+        ipSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         */
+        restrictionType?: pulumi.Input<string>;
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         */
+        vpcIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        vpcRestrictionEffect?: pulumi.Input<string>;
+    }
+
+    export interface GetBaseBackupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetBaseBackupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
+    }
+
+    export interface GetLogBackupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
+    }
+
+    export interface GetLogBackupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface GetParameterTemplatesFilter {
         /**
          * Filter name.
@@ -10183,6 +15589,28 @@ export namespace Postgresql {
          * One or more filter values.
          */
         values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetReadonlyGroupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetReadonlyGroupsFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * One or more filter values.
+         */
+        values?: string[];
     }
 
     export interface InstanceBackupPlan {
@@ -10225,7 +15653,6 @@ export namespace Postgresql {
          */
         name: pulumi.Input<string>;
     }
-
 }
 
 export namespace PrivateDns {
@@ -10269,6 +15696,9 @@ export namespace PrivateDns {
          */
         uniqVpcId: pulumi.Input<string>;
     }
+}
+
+export namespace Projects {
 }
 
 export namespace Protocol {
@@ -10826,6 +16256,17 @@ export namespace Pts {
 }
 
 export namespace Redis {
+    export interface BackupDownloadRestrictionLimitVpc {
+        /**
+         * Customize the region of the VPC to which the backup file is downloaded.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Customize the list of VPCs to download backup files.
+         */
+        vpcLists: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface GetBackupDownloadInfoLimitVpcArgs {
         /**
          * Customize the region of the VPC to which the backup file is downloaded.
@@ -10912,7 +16353,6 @@ export namespace Redis {
          */
         value: pulumi.Input<string>;
     }
-
 }
 
 export namespace Reserved {
@@ -10991,6 +16431,24 @@ export namespace Scf {
          * ID of user.
          */
         userId: pulumi.Input<string>;
+    }
+
+    export interface FunctionEventInvokeConfigAsyncTriggerConfig {
+        /**
+         * Message retention period.
+         */
+        msgTtl: pulumi.Input<number>;
+        /**
+         * Async retry configuration of function upon user error.
+         */
+        retryConfigs: pulumi.Input<pulumi.Input<inputs.Scf.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig>[]>;
+    }
+
+    export interface FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig {
+        /**
+         * Number of retry attempts.
+         */
+        retryNum: pulumi.Input<number>;
     }
 
     export interface FunctionImageConfig {
@@ -11081,6 +16539,28 @@ export namespace Scf {
         type?: pulumi.Input<string>;
     }
 
+    export interface GetTriggersFilter {
+        /**
+         * Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+         */
+        name: string;
+        /**
+         * Filter values of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetTriggersFilterArgs {
+        /**
+         * Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface LayerContent {
         /**
          * Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
@@ -11098,6 +16578,25 @@ export namespace Scf {
          * Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
          */
         zipFile?: pulumi.Input<string>;
+    }
+
+    export interface ProvisionedConcurrencyConfigTriggerAction {
+        /**
+         * The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+         */
+        provisionedType?: pulumi.Input<string>;
+        /**
+         * Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerCronConfig: pulumi.Input<string>;
+        /**
+         * Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerName: pulumi.Input<string>;
+        /**
+         * Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        triggerProvisionedConcurrencyNum: pulumi.Input<number>;
     }
 }
 
@@ -11233,6 +16732,50 @@ export namespace Ses {
 }
 
 export namespace Sqlserver {
+    export interface BusinessIntelligenceInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        tagKey?: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        tagValue?: pulumi.Input<string>;
+    }
+
+    export interface ConfigInstanceParamParamList {
+        /**
+         * Parameter value.
+         */
+        currentValue?: pulumi.Input<string>;
+        /**
+         * Parameter name.
+         */
+        name?: pulumi.Input<string>;
+    }
+
+    export interface ConfigInstanceRoGroupWeightPair {
+        /**
+         * Read-only instance ID, in the format: mssqlro-3l3fgqn7.
+         */
+        readOnlyInstanceId: pulumi.Input<string>;
+        /**
+         * Read-only instance weight, the range is 0-100.
+         */
+        readOnlyWeight: pulumi.Input<number>;
+    }
+
+    export interface GeneralCloudInstanceResourceTag {
+        /**
+         * tag key.
+         */
+        tagKey?: pulumi.Input<string>;
+        /**
+         * tag value.
+         */
+        tagValue?: pulumi.Input<string>;
+    }
+
     export interface MigrationMigrateDbSet {
         /**
          * Name of the migration database.
@@ -11314,6 +16857,61 @@ export namespace Sqlserver {
          * Publish the database.
          */
         publishDatabase: pulumi.Input<string>;
+    }
+
+    export interface RestoreInstanceEncryption {
+        /**
+         * Database name.
+         */
+        dbName?: pulumi.Input<string>;
+        /**
+         * encryption, `enable` encrypted, `disable` unencrypted.
+         */
+        status?: pulumi.Input<string>;
+    }
+
+    export interface RestoreInstanceRenameRestore {
+        /**
+         * New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
+         */
+        newName: pulumi.Input<string>;
+        /**
+         * Database name. If the OldName database does not exist, a failure will be returned.It can be left empty in offline migration tasks.
+         */
+        oldName: pulumi.Input<string>;
+    }
+
+    export interface RollbackInstanceEncryption {
+        /**
+         * Database name.
+         */
+        dbName?: pulumi.Input<string>;
+        /**
+         * encryption, `enable` encrypted, `disable` unencrypted.
+         */
+        status?: pulumi.Input<string>;
+    }
+
+    export interface RollbackInstanceRenameRestore {
+        /**
+         * New database name.
+         */
+        newName: pulumi.Input<string>;
+        /**
+         * Database name. If the OldName database does not exist, a failure will be returned. It can be left empty in offline migration tasks.
+         */
+        oldName: pulumi.Input<string>;
+    }
+
+    export interface StartXeventEventConfig {
+        /**
+         * Event type. Valid values: slow (set threshold for slow SQL ), blocked (set threshold for the blocking and deadlock).
+         */
+        eventType: pulumi.Input<string>;
+        /**
+         * Threshold in milliseconds. Valid values: 0(disable), non-zero (enable).
+         */
+        threshold: pulumi.Input<number>;
     }
 
 }
@@ -11628,6 +17226,10 @@ export namespace Tcm {
 
     export interface MeshConfig {
         /**
+         * Sidecar inject configuration.
+         */
+        inject?: pulumi.Input<inputs.Tcm.MeshConfigInject>;
+        /**
          * Istio configuration.
          */
         istio?: pulumi.Input<inputs.Tcm.MeshConfigIstio>;
@@ -11636,9 +17238,28 @@ export namespace Tcm {
          */
         prometheus?: pulumi.Input<inputs.Tcm.MeshConfigPrometheus>;
         /**
+         * Default sidecar requests and limits.
+         */
+        sidecarResources?: pulumi.Input<inputs.Tcm.MeshConfigSidecarResources>;
+        /**
          * Tracing config.
          */
         tracing?: pulumi.Input<inputs.Tcm.MeshConfigTracing>;
+    }
+
+    export interface MeshConfigInject {
+        /**
+         * IP ranges that should not be proxied.
+         */
+        excludeIpRanges?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Let istio-proxy(sidecar) start first, before app container.
+         */
+        holdApplicationUntilProxyStarts?: pulumi.Input<boolean>;
+        /**
+         * Let istio-proxy(sidecar) stop last, after app container.
+         */
+        holdProxyUntilApplicationEnds?: pulumi.Input<boolean>;
     }
 
     export interface MeshConfigIstio {
@@ -11655,13 +17276,17 @@ export namespace Tcm {
          */
         enablePilotHttp?: pulumi.Input<boolean>;
         /**
-         * Outbound traffic policy.
+         * Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
          */
         outboundTrafficPolicy: pulumi.Input<string>;
         /**
          * SmartDNS configuration.
          */
         smartDns?: pulumi.Input<inputs.Tcm.MeshConfigIstioSmartDns>;
+        /**
+         * Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+         */
+        tracing?: pulumi.Input<inputs.Tcm.MeshConfigIstioTracing>;
     }
 
     export interface MeshConfigIstioSmartDns {
@@ -11673,6 +17298,47 @@ export namespace Tcm {
          * Enable dns proxy.
          */
         istioMetaDnsCapture?: pulumi.Input<boolean>;
+    }
+
+    export interface MeshConfigIstioTracing {
+        /**
+         * APM config.
+         */
+        apm?: pulumi.Input<inputs.Tcm.MeshConfigIstioTracingApm>;
+        /**
+         * Whether enable tracing.
+         */
+        enable?: pulumi.Input<boolean>;
+        /**
+         * Tracing sampling, 0.0-1.0.
+         */
+        sampling?: pulumi.Input<number>;
+        /**
+         * Third party zipkin config.
+         */
+        zipkin?: pulumi.Input<inputs.Tcm.MeshConfigIstioTracingZipkin>;
+    }
+
+    export interface MeshConfigIstioTracingApm {
+        /**
+         * Whether enable APM.
+         */
+        enable: pulumi.Input<boolean>;
+        /**
+         * Instance id of the APM.
+         */
+        instanceId?: pulumi.Input<string>;
+        /**
+         * Region.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface MeshConfigIstioTracingZipkin {
+        /**
+         * Zipkin address.
+         */
+        address: pulumi.Input<string>;
     }
 
     export interface MeshConfigPrometheus {
@@ -11723,6 +17389,39 @@ export namespace Tcm {
          * Vpc id.
          */
         vpcId?: pulumi.Input<string>;
+    }
+
+    export interface MeshConfigSidecarResources {
+        /**
+         * Sidecar limits.
+         */
+        limits?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshConfigSidecarResourcesLimit>[]>;
+        /**
+         * Sidecar requests.
+         */
+        requests?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshConfigSidecarResourcesRequest>[]>;
+    }
+
+    export interface MeshConfigSidecarResourcesLimit {
+        /**
+         * Resource type name, `cpu/memory`.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+         */
+        quantity?: pulumi.Input<string>;
+    }
+
+    export interface MeshConfigSidecarResourcesRequest {
+        /**
+         * Resource type name, `cpu/memory`.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+         */
+        quantity?: pulumi.Input<string>;
     }
 
     export interface MeshConfigTracing {
@@ -12011,6 +17710,17 @@ export namespace Tcr {
         cveId?: pulumi.Input<string>;
     }
 
+    export interface ServiceAccountPermission {
+        /**
+         * Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        actions: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        resource: pulumi.Input<string>;
+    }
+
     export interface TagRetentionRuleRetentionRule {
         /**
          * The supported policies are latestPushedK (retain the latest `k` pushed versions) and nDaysSinceLastPush (retain pushed versions within the last `n` days).
@@ -12078,13 +17788,98 @@ export namespace Tcr {
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
-
 }
 
 export namespace Tdcpg {
 }
 
 export namespace Tdmq {
+    export interface GetProInstancesFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
+    }
+
+    export interface GetProInstancesFilterArgs {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetPublishersFilterArgs {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetPublishersFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
+    }
+
+    export interface GetPublishersSortArgs {
+        /**
+         * sorter.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Ascending ASC, descending DESC.
+         */
+        order: pulumi.Input<string>;
+    }
+
+    export interface GetPublishersSort {
+        /**
+         * sorter.
+         */
+        name: string;
+        /**
+         * Ascending ASC, descending DESC.
+         */
+        order: string;
+    }
+
+    export interface GetRabbitmqNodeListFilterArgs {
+        name?: pulumi.Input<string>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetRabbitmqNodeListFilter {
+        name?: string;
+        values?: string[];
+    }
+
+    export interface GetRabbitmqVipInstanceFilterArgs {
+        name?: pulumi.Input<string>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetRabbitmqVipInstanceFilter {
+        name?: string;
+        values?: string[];
+    }
+
     export interface RocketmqClusterVpc {
         /**
          * Subnet ID.
@@ -14024,6 +19819,39 @@ export namespace Teo {
     }
 }
 
+export namespace Tse {
+    export interface InstanceEngineRegionInfo {
+        /**
+         * Engine node region.
+         */
+        engineRegion: pulumi.Input<string>;
+        /**
+         * The number of nodes allocated in this region.
+         */
+        replica: pulumi.Input<number>;
+        /**
+         * Cluster network information.
+         */
+        vpcInfos: pulumi.Input<pulumi.Input<inputs.Tse.InstanceEngineRegionInfoVpcInfo>[]>;
+    }
+
+    export interface InstanceEngineRegionInfoVpcInfo {
+        /**
+         * Intranet access addressNote: This field may return null, indicating that a valid value is not available..
+         */
+        intranetAddress?: pulumi.Input<string>;
+        /**
+         * Subnet ID.
+         */
+        subnetId: pulumi.Input<string>;
+        /**
+         * Vpc Id.
+         */
+        vpcId: pulumi.Input<string>;
+    }
+
+}
+
 export namespace Tsf {
     export interface ApiGroupBindedGatewayDeployGroup {
         /**
@@ -14149,168 +19977,409 @@ export namespace Tsf {
         supported?: pulumi.Input<boolean>;
     }
 
-    export interface ContainGroupEnv {
+    export interface DeployContainerGroupAgentProfileList {
         /**
-         * environment variable name.
+         * Agent type.
          */
-        name?: pulumi.Input<string>;
+        agentType?: pulumi.Input<string>;
         /**
-         * environment variable value.
+         * Agent version.
+         */
+        agentVersion?: pulumi.Input<string>;
+    }
+
+    export interface DeployContainerGroupEnv {
+        /**
+         * env param name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * value of env.
          */
         value?: pulumi.Input<string>;
         /**
-         * k8s ValueFrom.
+         * Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        valueFroms?: pulumi.Input<pulumi.Input<inputs.Tsf.ContainGroupEnvValueFrom>[]>;
+        valueFrom?: pulumi.Input<inputs.Tsf.DeployContainerGroupEnvValueFrom>;
     }
 
-    export interface ContainGroupEnvValueFrom {
+    export interface DeployContainerGroupEnvValueFrom {
         /**
-         * FieldRef for k8s env.
+         * The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        fieldReves?: pulumi.Input<pulumi.Input<inputs.Tsf.ContainGroupEnvValueFromFieldRef>[]>;
+        fieldRef?: pulumi.Input<inputs.Tsf.DeployContainerGroupEnvValueFromFieldRef>;
         /**
-         * ResourceFieldRef of k8s env.
+         * The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        resourceFieldReves?: pulumi.Input<pulumi.Input<inputs.Tsf.ContainGroupEnvValueFromResourceFieldRef>[]>;
+        resourceFieldRef?: pulumi.Input<inputs.Tsf.DeployContainerGroupEnvValueFromResourceFieldRef>;
     }
 
-    export interface ContainGroupEnvValueFromFieldRef {
+    export interface DeployContainerGroupEnvValueFromFieldRef {
         /**
-         * FieldPath of k8s.
+         * The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
          */
         fieldPath?: pulumi.Input<string>;
     }
 
-    export interface ContainGroupEnvValueFromResourceFieldRef {
+    export interface DeployContainerGroupEnvValueFromResourceFieldRef {
         /**
-         * Resource of k8s.
+         * The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
          */
         resource?: pulumi.Input<string>;
     }
 
-    export interface ContainGroupHealthCheckSetting {
+    export interface DeployContainerGroupHealthCheckSettings {
         /**
-         * live health check.
+         * Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        livenessProbes?: pulumi.Input<pulumi.Input<inputs.Tsf.ContainGroupHealthCheckSettingLivenessProbe>[]>;
+        livenessProbe?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettingsLivenessProbe>;
         /**
-         * readiness health check.
+         * Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        readinessProbes?: pulumi.Input<pulumi.Input<inputs.Tsf.ContainGroupHealthCheckSettingReadinessProbe>[]>;
+        readinessProbe?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettingsReadinessProbe>;
     }
 
-    export interface ContainGroupHealthCheckSettingLivenessProbe {
+    export interface DeployContainerGroupHealthCheckSettingsLivenessProbe {
         /**
-         * health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+         * The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        actionType?: pulumi.Input<string>;
+        actionType: pulumi.Input<string>;
         /**
-         * Execute command check mode, the command to execute.
+         * The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
         commands?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from success to failure.
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
          */
         failureThreshold?: pulumi.Input<number>;
         /**
-         * The time for the container to delay starting the health check.
+         * The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
          */
         initialDelaySeconds?: pulumi.Input<number>;
         /**
-         * The request path of the HTTP health check interface.
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
         path?: pulumi.Input<string>;
         /**
-         * The interval at which health checks are performed.
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
         periodSeconds?: pulumi.Input<number>;
         /**
-         * service port.
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
          */
         port?: pulumi.Input<number>;
         /**
-         * The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
          */
         scheme?: pulumi.Input<string>;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from failure to success.
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
          */
         successThreshold?: pulumi.Input<number>;
         /**
-         * The maximum timeout for each health check response.
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
          */
         timeoutSeconds?: pulumi.Input<number>;
         /**
-         * TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
          */
         type?: pulumi.Input<string>;
     }
 
-    export interface ContainGroupHealthCheckSettingReadinessProbe {
+    export interface DeployContainerGroupHealthCheckSettingsReadinessProbe {
         /**
-         * health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+         * The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
          */
-        actionType?: pulumi.Input<string>;
+        actionType: pulumi.Input<string>;
         /**
-         * Execute command check mode, the command to execute.
+         * The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
          */
         commands?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from success to failure.
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
          */
         failureThreshold?: pulumi.Input<number>;
         /**
-         * The time for the container to delay starting the health check.
+         * The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
          */
         initialDelaySeconds?: pulumi.Input<number>;
         /**
-         * The request path of the HTTP health check interface.
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
         path?: pulumi.Input<string>;
         /**
-         * The interval at which health checks are performed.
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
          */
         periodSeconds?: pulumi.Input<number>;
         /**
-         * service port.
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
          */
         port?: pulumi.Input<number>;
         /**
-         * The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
          */
         scheme?: pulumi.Input<string>;
         /**
-         * Indicates the number of consecutive health check successes for the backend container from failure to success.
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
          */
         successThreshold?: pulumi.Input<number>;
         /**
-         * The maximum timeout for each health check response.
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
          */
         timeoutSeconds?: pulumi.Input<number>;
         /**
-         * TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
          */
         type?: pulumi.Input<string>;
     }
 
-    export interface ContainGroupProtocolPort {
+    export interface DeployContainerGroupSchedulingStrategy {
         /**
-         * host port.
+         * NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface DeployContainerGroupServiceSetting {
+        /**
+         * 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        accessType: pulumi.Input<number>;
+        /**
+         * When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        allowDeleteService?: pulumi.Input<boolean>;
+        /**
+         * Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        disableService?: pulumi.Input<boolean>;
+        /**
+         * Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        headlessService?: pulumi.Input<boolean>;
+        /**
+         * Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        openSessionAffinity?: pulumi.Input<boolean>;
+        /**
+         * Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        protocolPorts: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupServiceSettingProtocolPort>[]>;
+        /**
+         * Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        sessionAffinityTimeoutSeconds?: pulumi.Input<number>;
+        /**
+         * subnet Id.
+         */
+        subnetId: pulumi.Input<string>;
+    }
+
+    export interface DeployContainerGroupServiceSettingProtocolPort {
+        /**
+         * node port.
          */
         nodePort?: pulumi.Input<number>;
         /**
-         * service port.
+         * port.
          */
         port: pulumi.Input<number>;
         /**
-         * TCP UDP.
+         * TCP or UDP.
          */
         protocol: pulumi.Input<string>;
         /**
          * container port.
          */
         targetPort: pulumi.Input<number>;
+    }
+
+    export interface DeployContainerGroupVolumeInfoList {
+        /**
+         * volume config.
+         */
+        volumeConfig?: pulumi.Input<string>;
+        /**
+         * volume name.
+         */
+        volumeName: pulumi.Input<string>;
+        /**
+         * volume type.
+         */
+        volumeType: pulumi.Input<string>;
+    }
+
+    export interface DeployContainerGroupVolumeMountInfoList {
+        /**
+         * Read and write access mode. 1: Read-only. 2: Read-write.
+         */
+        readOrWrite?: pulumi.Input<string>;
+        /**
+         * mount volume name.
+         */
+        volumeMountName: pulumi.Input<string>;
+        /**
+         * mount path.
+         */
+        volumeMountPath: pulumi.Input<string>;
+        /**
+         * mount subPath.
+         */
+        volumeMountSubPath?: pulumi.Input<string>;
+    }
+
+    export interface DeployContainerGroupWarmupSetting {
+        /**
+         * Preheating curvature, with a value between 1 and 5.
+         */
+        curvature?: pulumi.Input<number>;
+        /**
+         * Whether to enable preheating.
+         */
+        enabled?: pulumi.Input<boolean>;
+        /**
+         * Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+         */
+        enabledProtection?: pulumi.Input<boolean>;
+        /**
+         * warmup time.
+         */
+        warmupTime?: pulumi.Input<number>;
+    }
+
+    export interface DeployVmGroupAgentProfileList {
+        /**
+         * Agent type.
+         */
+        agentType?: pulumi.Input<string>;
+        /**
+         * Agent version.
+         */
+        agentVersion?: pulumi.Input<string>;
+    }
+
+    export interface DeployVmGroupHealthCheckSettings {
+        /**
+         * Survival health check. Note: This field may return null, indicating that no valid value was found.
+         */
+        livenessProbe?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettingsLivenessProbe>;
+        /**
+         * Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        readinessProbe?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettingsReadinessProbe>;
+    }
+
+    export interface DeployVmGroupHealthCheckSettingsLivenessProbe {
+        /**
+         * Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+         */
+        actionType: pulumi.Input<string>;
+        /**
+         * The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commands?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        failureThreshold?: pulumi.Input<number>;
+        /**
+         * The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        initialDelaySeconds?: pulumi.Input<number>;
+        /**
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path?: pulumi.Input<string>;
+        /**
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        periodSeconds?: pulumi.Input<number>;
+        /**
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        scheme?: pulumi.Input<string>;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        successThreshold?: pulumi.Input<number>;
+        /**
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeoutSeconds?: pulumi.Input<number>;
+        /**
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DeployVmGroupHealthCheckSettingsReadinessProbe {
+        /**
+         * The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        actionType: pulumi.Input<string>;
+        /**
+         * The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        commands?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        failureThreshold?: pulumi.Input<number>;
+        /**
+         * The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        initialDelaySeconds?: pulumi.Input<number>;
+        /**
+         * The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path?: pulumi.Input<string>;
+        /**
+         * The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        periodSeconds?: pulumi.Input<number>;
+        /**
+         * The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        scheme?: pulumi.Input<string>;
+        /**
+         * The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        successThreshold?: pulumi.Input<number>;
+        /**
+         * The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeoutSeconds?: pulumi.Input<number>;
+        /**
+         * The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface DeployVmGroupWarmupSetting {
+        /**
+         * Preheating curvature, with a value between 1 and 5.
+         */
+        curvature?: pulumi.Input<number>;
+        /**
+         * Whether to enable preheating.
+         */
+        enabled?: pulumi.Input<boolean>;
+        /**
+         * Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+         */
+        enabledProtection?: pulumi.Input<boolean>;
+        /**
+         * warmup time.
+         */
+        warmupTime?: pulumi.Input<number>;
     }
 
     export interface InstancesAttachmentInstanceAdvancedSettings {
@@ -14872,6 +20941,177 @@ export namespace Vpc {
          * Specify storage topic id, required while `storageType` is `ckafka`.
          */
         storageTopic?: pulumi.Input<string>;
+    }
+
+    export interface GetClassicLinkInstancesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+         */
+        values: string[];
+    }
+
+    export interface GetClassicLinkInstancesFilterArgs {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCvmInstancesFilterArgs {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCvmInstancesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: string[];
+    }
+
+    export interface GetNetDetectStatesFilterArgs {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetNetDetectStatesFilter {
+        /**
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+         */
+        name: string;
+        /**
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+         */
+        values: string[];
+    }
+
+    export interface Ipv6EniAddressIpv6Address {
+        /**
+         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+         */
+        address: pulumi.Input<string>;
+        /**
+         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
+         */
+        addressId?: pulumi.Input<string>;
+        /**
+         * Description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Whether the public network IP is blocked.
+         */
+        isWanIpBlocked?: pulumi.Input<boolean>;
+        /**
+         * Whether to master `IP`.
+         */
+        primary?: pulumi.Input<boolean>;
+        /**
+         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+         */
+        state?: pulumi.Input<string>;
+    }
+
+    export interface Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
+        /**
+         * `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+         */
+        ipv6CidrBlock: pulumi.Input<string>;
+        /**
+         * Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+         */
+        subnetId: pulumi.Input<string>;
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSet {
+        egresses?: pulumi.Input<pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetEgress>[]>;
+        ingresses?: pulumi.Input<pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetIngress>[]>;
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+        action?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        description?: pulumi.Input<string>;
+        destinationCidr?: pulumi.Input<string>;
+        destinationPort?: pulumi.Input<string>;
+        networkAclDirection?: pulumi.Input<string>;
+        networkAclQuintupleEntryId?: pulumi.Input<string>;
+        priority?: pulumi.Input<number>;
+        protocol?: pulumi.Input<string>;
+        sourceCidr?: pulumi.Input<string>;
+        sourcePort?: pulumi.Input<string>;
+    }
+
+    export interface NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+        action?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        description?: pulumi.Input<string>;
+        destinationCidr?: pulumi.Input<string>;
+        destinationPort?: pulumi.Input<string>;
+        networkAclDirection?: pulumi.Input<string>;
+        networkAclQuintupleEntryId?: pulumi.Input<string>;
+        priority?: pulumi.Input<number>;
+        protocol?: pulumi.Input<string>;
+        sourceCidr?: pulumi.Input<string>;
+        sourcePort?: pulumi.Input<string>;
+    }
+
+    export interface SnapshotPolicyAttachmentInstance {
+        /**
+         * InstanceId.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Instance name.
+         */
+        instanceName?: pulumi.Input<string>;
+        /**
+         * The region where the instance is located.
+         */
+        instanceRegion: pulumi.Input<string>;
+        /**
+         * Instance type, currently supports set: `securitygroup`.
+         */
+        instanceType: pulumi.Input<string>;
+        /**
+         * Snapshot policy Id.
+         */
+        snapshotPolicyId?: pulumi.Input<string>;
+    }
+
+    export interface SnapshotPolicyBackupPolicy {
+        /**
+         * Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+         */
+        backupDay: pulumi.Input<string>;
+        /**
+         * Backup time point, format:HH:mm:ss.
+         */
+        backupTime: pulumi.Input<string>;
     }
 
 }

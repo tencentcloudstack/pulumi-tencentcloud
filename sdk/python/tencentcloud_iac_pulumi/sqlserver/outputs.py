@@ -10,23 +10,239 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'BusinessIntelligenceInstanceResourceTag',
+    'ConfigInstanceParamParamList',
+    'ConfigInstanceRoGroupWeightPair',
+    'GeneralCloudInstanceResourceTag',
     'MigrationMigrateDbSet',
     'MigrationRenameRestore',
     'MigrationSource',
     'MigrationTarget',
     'PublishSubscribeDatabaseTuple',
+    'RestoreInstanceEncryption',
+    'RestoreInstanceRenameRestore',
+    'RollbackInstanceEncryption',
+    'RollbackInstanceRenameRestore',
+    'StartXeventEventConfig',
     'GetAccountDbAttachmentsListResult',
     'GetAccountsListResult',
+    'GetBackupCommandsListResult',
+    'GetBackupUploadSizeCosUploadBackupFileSetResult',
     'GetBackupsListResult',
     'GetBasicInstancesInstanceListResult',
     'GetDbsDbListResult',
+    'GetInsAttributeTdeConfigResult',
+    'GetInstanceParamRecordsItemResult',
     'GetInstancesInstanceListResult',
+    'GetProjectSecurityGroupsSecurityGroupSetResult',
+    'GetProjectSecurityGroupsSecurityGroupSetInboundSetResult',
+    'GetProjectSecurityGroupsSecurityGroupSetOutboundSetResult',
     'GetPublishSubscribesPublishSubscribeListResult',
     'GetPublishSubscribesPublishSubscribeListDatabaseTupleResult',
+    'GetQueryXeventEventResult',
     'GetReadonlyGroupsListResult',
+    'GetRegionsRegionSetResult',
+    'GetRollbackTimeDetailResult',
+    'GetSlowlogsSlowlogResult',
     'GetZoneConfigZoneListResult',
     'GetZoneConfigZoneListSpecinfoListResult',
 ]
+
+@pulumi.output_type
+class BusinessIntelligenceInstanceResourceTag(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tagKey":
+            suggest = "tag_key"
+        elif key == "tagValue":
+            suggest = "tag_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BusinessIntelligenceInstanceResourceTag. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BusinessIntelligenceInstanceResourceTag.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BusinessIntelligenceInstanceResourceTag.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 tag_key: Optional[str] = None,
+                 tag_value: Optional[str] = None):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        if tag_key is not None:
+            pulumi.set(__self__, "tag_key", tag_key)
+        if tag_value is not None:
+            pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> Optional[str]:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> Optional[str]:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class ConfigInstanceParamParamList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "currentValue":
+            suggest = "current_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConfigInstanceParamParamList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConfigInstanceParamParamList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConfigInstanceParamParamList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 current_value: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str current_value: Parameter value.
+        :param str name: Parameter name.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[str]:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class ConfigInstanceRoGroupWeightPair(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "readOnlyInstanceId":
+            suggest = "read_only_instance_id"
+        elif key == "readOnlyWeight":
+            suggest = "read_only_weight"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConfigInstanceRoGroupWeightPair. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConfigInstanceRoGroupWeightPair.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConfigInstanceRoGroupWeightPair.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 read_only_instance_id: str,
+                 read_only_weight: int):
+        """
+        :param str read_only_instance_id: Read-only instance ID, in the format: mssqlro-3l3fgqn7.
+        :param int read_only_weight: Read-only instance weight, the range is 0-100.
+        """
+        pulumi.set(__self__, "read_only_instance_id", read_only_instance_id)
+        pulumi.set(__self__, "read_only_weight", read_only_weight)
+
+    @property
+    @pulumi.getter(name="readOnlyInstanceId")
+    def read_only_instance_id(self) -> str:
+        """
+        Read-only instance ID, in the format: mssqlro-3l3fgqn7.
+        """
+        return pulumi.get(self, "read_only_instance_id")
+
+    @property
+    @pulumi.getter(name="readOnlyWeight")
+    def read_only_weight(self) -> int:
+        """
+        Read-only instance weight, the range is 0-100.
+        """
+        return pulumi.get(self, "read_only_weight")
+
+
+@pulumi.output_type
+class GeneralCloudInstanceResourceTag(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tagKey":
+            suggest = "tag_key"
+        elif key == "tagValue":
+            suggest = "tag_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in GeneralCloudInstanceResourceTag. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        GeneralCloudInstanceResourceTag.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        GeneralCloudInstanceResourceTag.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 tag_key: Optional[str] = None,
+                 tag_value: Optional[str] = None):
+        """
+        :param str tag_key: tag key.
+        :param str tag_value: tag value.
+        """
+        if tag_key is not None:
+            pulumi.set(__self__, "tag_key", tag_key)
+        if tag_value is not None:
+            pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> Optional[str]:
+        """
+        tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> Optional[str]:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
 
 @pulumi.output_type
 class MigrationMigrateDbSet(dict):
@@ -366,6 +582,244 @@ class PublishSubscribeDatabaseTuple(dict):
 
 
 @pulumi.output_type
+class RestoreInstanceEncryption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbName":
+            suggest = "db_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RestoreInstanceEncryption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RestoreInstanceEncryption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RestoreInstanceEncryption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_name: Optional[str] = None,
+                 status: Optional[str] = None):
+        """
+        :param str db_name: Database name.
+        :param str status: encryption, `enable` encrypted, `disable` unencrypted.
+        """
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[str]:
+        """
+        encryption, `enable` encrypted, `disable` unencrypted.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class RestoreInstanceRenameRestore(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newName":
+            suggest = "new_name"
+        elif key == "oldName":
+            suggest = "old_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RestoreInstanceRenameRestore. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RestoreInstanceRenameRestore.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RestoreInstanceRenameRestore.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_name: str,
+                 old_name: str):
+        """
+        :param str new_name: New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
+        :param str old_name: Database name. If the OldName database does not exist, a failure will be returned.It can be left empty in offline migration tasks.
+        """
+        pulumi.set(__self__, "new_name", new_name)
+        pulumi.set(__self__, "old_name", old_name)
+
+    @property
+    @pulumi.getter(name="newName")
+    def new_name(self) -> str:
+        """
+        New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
+        """
+        return pulumi.get(self, "new_name")
+
+    @property
+    @pulumi.getter(name="oldName")
+    def old_name(self) -> str:
+        """
+        Database name. If the OldName database does not exist, a failure will be returned.It can be left empty in offline migration tasks.
+        """
+        return pulumi.get(self, "old_name")
+
+
+@pulumi.output_type
+class RollbackInstanceEncryption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbName":
+            suggest = "db_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollbackInstanceEncryption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollbackInstanceEncryption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollbackInstanceEncryption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_name: Optional[str] = None,
+                 status: Optional[str] = None):
+        """
+        :param str db_name: Database name.
+        :param str status: encryption, `enable` encrypted, `disable` unencrypted.
+        """
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[str]:
+        """
+        encryption, `enable` encrypted, `disable` unencrypted.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class RollbackInstanceRenameRestore(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newName":
+            suggest = "new_name"
+        elif key == "oldName":
+            suggest = "old_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RollbackInstanceRenameRestore. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RollbackInstanceRenameRestore.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RollbackInstanceRenameRestore.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_name: str,
+                 old_name: str):
+        """
+        :param str new_name: New database name.
+        :param str old_name: Database name. If the OldName database does not exist, a failure will be returned. It can be left empty in offline migration tasks.
+        """
+        pulumi.set(__self__, "new_name", new_name)
+        pulumi.set(__self__, "old_name", old_name)
+
+    @property
+    @pulumi.getter(name="newName")
+    def new_name(self) -> str:
+        """
+        New database name.
+        """
+        return pulumi.get(self, "new_name")
+
+    @property
+    @pulumi.getter(name="oldName")
+    def old_name(self) -> str:
+        """
+        Database name. If the OldName database does not exist, a failure will be returned. It can be left empty in offline migration tasks.
+        """
+        return pulumi.get(self, "old_name")
+
+
+@pulumi.output_type
+class StartXeventEventConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "eventType":
+            suggest = "event_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StartXeventEventConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StartXeventEventConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StartXeventEventConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 event_type: str,
+                 threshold: int):
+        """
+        :param str event_type: Event type. Valid values: slow (set threshold for slow SQL ), blocked (set threshold for the blocking and deadlock).
+        :param int threshold: Threshold in milliseconds. Valid values: 0(disable), non-zero (enable).
+        """
+        pulumi.set(__self__, "event_type", event_type)
+        pulumi.set(__self__, "threshold", threshold)
+
+    @property
+    @pulumi.getter(name="eventType")
+    def event_type(self) -> str:
+        """
+        Event type. Valid values: slow (set threshold for slow SQL ), blocked (set threshold for the blocking and deadlock).
+        """
+        return pulumi.get(self, "event_type")
+
+    @property
+    @pulumi.getter
+    def threshold(self) -> int:
+        """
+        Threshold in milliseconds. Valid values: 0(disable), non-zero (enable).
+        """
+        return pulumi.get(self, "threshold")
+
+
+@pulumi.output_type
 class GetAccountDbAttachmentsListResult(dict):
     def __init__(__self__, *,
                  account_name: str,
@@ -487,6 +941,64 @@ class GetAccountsListResult(dict):
         Last updated time of the SQL Server account.
         """
         return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetBackupCommandsListResult(dict):
+    def __init__(__self__, *,
+                 command: str,
+                 request_id: str):
+        """
+        :param str command: Create backup command.
+        :param str request_id: Request ID.
+        """
+        pulumi.set(__self__, "command", command)
+        pulumi.set(__self__, "request_id", request_id)
+
+    @property
+    @pulumi.getter
+    def command(self) -> str:
+        """
+        Create backup command.
+        """
+        return pulumi.get(self, "command")
+
+    @property
+    @pulumi.getter(name="requestId")
+    def request_id(self) -> str:
+        """
+        Request ID.
+        """
+        return pulumi.get(self, "request_id")
+
+
+@pulumi.output_type
+class GetBackupUploadSizeCosUploadBackupFileSetResult(dict):
+    def __init__(__self__, *,
+                 file_name: str,
+                 size: int):
+        """
+        :param str file_name: Backup name.
+        :param int size: Backup size.
+        """
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "size", size)
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Backup name.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        Backup size.
+        """
+        return pulumi.get(self, "size")
 
 
 @pulumi.output_type
@@ -896,6 +1408,121 @@ class GetDbsDbListResult(dict):
 
 
 @pulumi.output_type
+class GetInsAttributeTdeConfigResult(dict):
+    def __init__(__self__, *,
+                 certificate_attribution: str,
+                 encryption: str,
+                 quote_uin: str):
+        """
+        :param str certificate_attribution: Certificate ownership. Self - indicates using the account's own certificate, others - indicates referencing certificates from other accounts, and none - indicates no certificate.
+        :param str encryption: TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+        :param str quote_uin: Other primary account IDs referenced when activating TDE encryption
+               Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "certificate_attribution", certificate_attribution)
+        pulumi.set(__self__, "encryption", encryption)
+        pulumi.set(__self__, "quote_uin", quote_uin)
+
+    @property
+    @pulumi.getter(name="certificateAttribution")
+    def certificate_attribution(self) -> str:
+        """
+        Certificate ownership. Self - indicates using the account's own certificate, others - indicates referencing certificates from other accounts, and none - indicates no certificate.
+        """
+        return pulumi.get(self, "certificate_attribution")
+
+    @property
+    @pulumi.getter
+    def encryption(self) -> str:
+        """
+        TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+        """
+        return pulumi.get(self, "encryption")
+
+    @property
+    @pulumi.getter(name="quoteUin")
+    def quote_uin(self) -> str:
+        """
+        Other primary account IDs referenced when activating TDE encryption
+        Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "quote_uin")
+
+
+@pulumi.output_type
+class GetInstanceParamRecordsItemResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 modify_time: str,
+                 new_value: str,
+                 old_value: str,
+                 param_name: str,
+                 status: int):
+        """
+        :param str instance_id: Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
+        :param str modify_time: Modification time.
+        :param str new_value: Parameter value after modification.
+        :param str old_value: Parameter value before modification.
+        :param str param_name: Parameter name.
+        :param int status: Parameter modification status. Valid values: 1 (initializing and waiting for modification), 2 (modification succeed), 3 (modification failed), 4 (modifying).
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+        pulumi.set(__self__, "param_name", param_name)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Modification time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> str:
+        """
+        Parameter value after modification.
+        """
+        return pulumi.get(self, "new_value")
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> str:
+        """
+        Parameter value before modification.
+        """
+        return pulumi.get(self, "old_value")
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "param_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Parameter modification status. Valid values: 1 (initializing and waiting for modification), 2 (modification succeed), 3 (modification failed), 4 (modifying).
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
 class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
@@ -1101,6 +1728,214 @@ class GetInstancesInstanceListResult(dict):
 
 
 @pulumi.output_type
+class GetProjectSecurityGroupsSecurityGroupSetResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 inbound_sets: Sequence['outputs.GetProjectSecurityGroupsSecurityGroupSetInboundSetResult'],
+                 outbound_sets: Sequence['outputs.GetProjectSecurityGroupsSecurityGroupSetOutboundSetResult'],
+                 project_id: int,
+                 security_group_id: str,
+                 security_group_name: str,
+                 security_group_remark: str):
+        """
+        :param str create_time: Creation time, time format: yyyy-mm-dd hh:mm:ss.
+        :param Sequence['GetProjectSecurityGroupsSecurityGroupSetInboundSetArgs'] inbound_sets: inbound rules.
+        :param Sequence['GetProjectSecurityGroupsSecurityGroupSetOutboundSetArgs'] outbound_sets: outbound rules.
+        :param int project_id: Project ID, which can be viewed through the console project management.
+        :param str security_group_id: Security group ID.
+        :param str security_group_name: security group name.
+        :param str security_group_remark: Security Group Remarks.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "inbound_sets", inbound_sets)
+        pulumi.set(__self__, "outbound_sets", outbound_sets)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "security_group_name", security_group_name)
+        pulumi.set(__self__, "security_group_remark", security_group_remark)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time, time format: yyyy-mm-dd hh:mm:ss.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="inboundSets")
+    def inbound_sets(self) -> Sequence['outputs.GetProjectSecurityGroupsSecurityGroupSetInboundSetResult']:
+        """
+        inbound rules.
+        """
+        return pulumi.get(self, "inbound_sets")
+
+    @property
+    @pulumi.getter(name="outboundSets")
+    def outbound_sets(self) -> Sequence['outputs.GetProjectSecurityGroupsSecurityGroupSetOutboundSetResult']:
+        """
+        outbound rules.
+        """
+        return pulumi.get(self, "outbound_sets")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID, which can be viewed through the console project management.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="securityGroupName")
+    def security_group_name(self) -> str:
+        """
+        security group name.
+        """
+        return pulumi.get(self, "security_group_name")
+
+    @property
+    @pulumi.getter(name="securityGroupRemark")
+    def security_group_remark(self) -> str:
+        """
+        Security Group Remarks.
+        """
+        return pulumi.get(self, "security_group_remark")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsSecurityGroupSetInboundSetResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 dir: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, ACCEPT or DROP.
+        :param str cidr_ip: Destination IP or IP segment, such as 172.16.0.0/12.
+        :param str dir: The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+        :param str ip_protocol: Network protocol, support UDP, TCP, etc.
+        :param str port_range: port or port range.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "dir", dir)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Destination IP or IP segment, such as 172.16.0.0/12.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def dir(self) -> str:
+        """
+        The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+        """
+        return pulumi.get(self, "dir")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol, support UDP, TCP, etc.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        port or port range.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsSecurityGroupSetOutboundSetResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 dir: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, ACCEPT or DROP.
+        :param str cidr_ip: Destination IP or IP segment, such as 172.16.0.0/12.
+        :param str dir: The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+        :param str ip_protocol: Network protocol, support UDP, TCP, etc.
+        :param str port_range: port or port range.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "dir", dir)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, ACCEPT or DROP.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Destination IP or IP segment, such as 172.16.0.0/12.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter
+    def dir(self) -> str:
+        """
+        The direction defined by the rules, OUTPUT-outgoing rules INPUT-inbound rules.
+        """
+        return pulumi.get(self, "dir")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol, support UDP, TCP, etc.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        port or port range.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
 class GetPublishSubscribesPublishSubscribeListResult(dict):
     def __init__(__self__, *,
                  database_tuples: Sequence['outputs.GetPublishSubscribesPublishSubscribeListDatabaseTupleResult'],
@@ -1258,6 +2093,112 @@ class GetPublishSubscribesPublishSubscribeListDatabaseTupleResult(dict):
 
 
 @pulumi.output_type
+class GetQueryXeventEventResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 event_type: str,
+                 external_addr: str,
+                 file_name: str,
+                 id: int,
+                 internal_addr: str,
+                 size: int,
+                 start_time: str,
+                 status: int):
+        """
+        :param str end_time: Generation end time of an extended file.
+        :param str event_type: Event type. Valid values: slow (Slow SQL event), blocked (blocking event), deadlock` (deadlock event).
+        :param str external_addr: Download address on the public network.
+        :param str file_name: File name of an extended event.
+        :param int id: ID.
+        :param str internal_addr: Download address on the private network.
+        :param int size: File size of an extended event.
+        :param str start_time: Generation start time of an extended file.
+        :param int status: Event record status. Valid values: 1 (succeeded), 2 (failed).
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "event_type", event_type)
+        pulumi.set(__self__, "external_addr", external_addr)
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "internal_addr", internal_addr)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Generation end time of an extended file.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="eventType")
+    def event_type(self) -> str:
+        """
+        Event type. Valid values: slow (Slow SQL event), blocked (blocking event), deadlock` (deadlock event).
+        """
+        return pulumi.get(self, "event_type")
+
+    @property
+    @pulumi.getter(name="externalAddr")
+    def external_addr(self) -> str:
+        """
+        Download address on the public network.
+        """
+        return pulumi.get(self, "external_addr")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        File name of an extended event.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="internalAddr")
+    def internal_addr(self) -> str:
+        """
+        Download address on the private network.
+        """
+        return pulumi.get(self, "internal_addr")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size of an extended event.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Generation start time of an extended file.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Event record status. Valid values: 1 (succeeded), 2 (failed).
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
 class GetReadonlyGroupsListResult(dict):
     def __init__(__self__, *,
                  id: str,
@@ -1372,6 +2313,192 @@ class GetReadonlyGroupsListResult(dict):
         Virtual port of the readonly group.
         """
         return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetRegionsRegionSetResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 region_id: int,
+                 region_name: str,
+                 region_state: str):
+        """
+        :param str region: Region ID in the format of ap-guangzhou.
+        :param int region_id: Numeric ID of region.
+        :param str region_name: Region name.
+        :param str region_state: Current purchasability of this region. UNAVAILABLE: not purchasable, AVAILABLE: purchasable.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "region_state", region_state)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region ID in the format of ap-guangzhou.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Numeric ID of region.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="regionState")
+    def region_state(self) -> str:
+        """
+        Current purchasability of this region. UNAVAILABLE: not purchasable, AVAILABLE: purchasable.
+        """
+        return pulumi.get(self, "region_state")
+
+
+@pulumi.output_type
+class GetRollbackTimeDetailResult(dict):
+    def __init__(__self__, *,
+                 db_name: str,
+                 end_time: str,
+                 start_time: str):
+        """
+        :param str db_name: Database name.
+        :param str end_time: End time of time range available for rollback.
+        :param str start_time: Start time of time range available for rollback.
+        """
+        pulumi.set(__self__, "db_name", db_name)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_name")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        End time of time range available for rollback.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time of time range available for rollback.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetSlowlogsSlowlogResult(dict):
+    def __init__(__self__, *,
+                 count: int,
+                 end_time: str,
+                 external_addr: str,
+                 id: int,
+                 internal_addr: str,
+                 size: int,
+                 start_time: str,
+                 status: int):
+        """
+        :param int count: Number of logs in file.
+        :param str end_time: Query end time.
+        :param str external_addr: Download address for public network.
+        :param int id: Unique ID of slow query log file.
+        :param str internal_addr: Download address for private network.
+        :param int size: File size in KB.
+        :param str start_time: Query start time.
+        :param int status: Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "external_addr", external_addr)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "internal_addr", internal_addr)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        Number of logs in file.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Query end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="externalAddr")
+    def external_addr(self) -> str:
+        """
+        Download address for public network.
+        """
+        return pulumi.get(self, "external_addr")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Unique ID of slow query log file.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="internalAddr")
+    def internal_addr(self) -> str:
+        """
+        Download address for private network.
+        """
+        return pulumi.get(self, "internal_addr")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size in KB.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Query start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status (1: success, 2: failure) Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status")
 
 
 @pulumi.output_type

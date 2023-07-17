@@ -82,13 +82,13 @@ type Instance struct {
 	// CPU cores.
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-	DeviceType pulumi.StringPtrOutput `pulumi:"deviceType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
 	// Zone information about first slave instance.
-	FirstSlaveZone pulumi.StringPtrOutput `pulumi:"firstSlaveZone"`
+	FirstSlaveZone pulumi.StringOutput `pulumi:"firstSlaveZone"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
@@ -107,6 +107,8 @@ type Instance struct {
 	IntranetPort pulumi.IntPtrOutput `pulumi:"intranetPort"`
 	// Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
 	Locked pulumi.IntOutput `pulumi:"locked"`
+	// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+	MaxDeayTime pulumi.IntPtrOutput `pulumi:"maxDeayTime"`
 	// Memory size (in MB).
 	MemSize pulumi.IntOutput `pulumi:"memSize"`
 	// Specify parameter template id.
@@ -143,6 +145,8 @@ type Instance struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Indicates which kind of operations is being executed.
 	TaskStatus pulumi.IntOutput `pulumi:"taskStatus"`
+	// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+	UpgradeSubversion pulumi.IntPtrOutput `pulumi:"upgradeSubversion"`
 	// Disk size (in GB).
 	VolumeSize pulumi.IntOutput `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
@@ -198,7 +202,7 @@ type instanceState struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
@@ -222,6 +226,8 @@ type instanceState struct {
 	IntranetPort *int `pulumi:"intranetPort"`
 	// Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
 	Locked *int `pulumi:"locked"`
+	// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+	MaxDeayTime *int `pulumi:"maxDeayTime"`
 	// Memory size (in MB).
 	MemSize *int `pulumi:"memSize"`
 	// Specify parameter template id.
@@ -258,6 +264,8 @@ type instanceState struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// Indicates which kind of operations is being executed.
 	TaskStatus *int `pulumi:"taskStatus"`
+	// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+	UpgradeSubversion *int `pulumi:"upgradeSubversion"`
 	// Disk size (in GB).
 	VolumeSize *int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
@@ -275,7 +283,7 @@ type InstanceState struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
@@ -299,6 +307,8 @@ type InstanceState struct {
 	IntranetPort pulumi.IntPtrInput
 	// Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
 	Locked pulumi.IntPtrInput
+	// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+	MaxDeayTime pulumi.IntPtrInput
 	// Memory size (in MB).
 	MemSize pulumi.IntPtrInput
 	// Specify parameter template id.
@@ -335,6 +345,8 @@ type InstanceState struct {
 	Tags pulumi.MapInput
 	// Indicates which kind of operations is being executed.
 	TaskStatus pulumi.IntPtrInput
+	// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+	UpgradeSubversion pulumi.IntPtrInput
 	// Disk size (in GB).
 	VolumeSize pulumi.IntPtrInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
@@ -356,7 +368,7 @@ type instanceArgs struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
@@ -370,6 +382,8 @@ type instanceArgs struct {
 	InternetService *int `pulumi:"internetService"`
 	// Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
 	IntranetPort *int `pulumi:"intranetPort"`
+	// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+	MaxDeayTime *int `pulumi:"maxDeayTime"`
 	// Memory size (in MB).
 	MemSize int `pulumi:"memSize"`
 	// Specify parameter template id.
@@ -402,6 +416,8 @@ type instanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+	UpgradeSubversion *int `pulumi:"upgradeSubversion"`
 	// Disk size (in GB).
 	VolumeSize int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
@@ -420,7 +436,7 @@ type InstanceArgs struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
@@ -434,6 +450,8 @@ type InstanceArgs struct {
 	InternetService pulumi.IntPtrInput
 	// Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
 	IntranetPort pulumi.IntPtrInput
+	// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+	MaxDeayTime pulumi.IntPtrInput
 	// Memory size (in MB).
 	MemSize pulumi.IntInput
 	// Specify parameter template id.
@@ -466,6 +484,8 @@ type InstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
+	// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+	UpgradeSubversion pulumi.IntPtrInput
 	// Disk size (in GB).
 	VolumeSize pulumi.IntInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
@@ -580,11 +600,11 @@ func (o InstanceOutput) Cpu() pulumi.IntOutput {
 }
 
 // Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-func (o InstanceOutput) DeviceType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.DeviceType }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) DeviceType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
 }
 
-// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 func (o InstanceOutput) EngineVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.EngineVersion }).(pulumi.StringPtrOutput)
 }
@@ -595,8 +615,8 @@ func (o InstanceOutput) FastUpgrade() pulumi.IntPtrOutput {
 }
 
 // Zone information about first slave instance.
-func (o InstanceOutput) FirstSlaveZone() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.FirstSlaveZone }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) FirstSlaveZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.FirstSlaveZone }).(pulumi.StringOutput)
 }
 
 // Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -642,6 +662,11 @@ func (o InstanceOutput) IntranetPort() pulumi.IntPtrOutput {
 // Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
 func (o InstanceOutput) Locked() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Locked }).(pulumi.IntOutput)
+}
+
+// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+func (o InstanceOutput) MaxDeayTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.MaxDeayTime }).(pulumi.IntPtrOutput)
 }
 
 // Memory size (in MB).
@@ -726,6 +751,11 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 // Indicates which kind of operations is being executed.
 func (o InstanceOutput) TaskStatus() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.TaskStatus }).(pulumi.IntOutput)
+}
+
+// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+func (o InstanceOutput) UpgradeSubversion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.UpgradeSubversion }).(pulumi.IntPtrOutput)
 }
 
 // Disk size (in GB).

@@ -181,6 +181,7 @@ class ModifyDiagDbInstanceOperation(pulumi.CustomResource):
             instance_ids=["%s"],
             product="mysql")
         ```
+
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
@@ -224,6 +225,7 @@ class ModifyDiagDbInstanceOperation(pulumi.CustomResource):
             instance_ids=["%s"],
             product="mysql")
         ```
+
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud

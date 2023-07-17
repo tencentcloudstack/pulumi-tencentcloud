@@ -71,6 +71,8 @@ type Cluster struct {
 	MaxCpu pulumi.Float64PtrOutput `pulumi:"maxCpu"`
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MinCpu pulumi.Float64PtrOutput `pulumi:"minCpu"`
+	// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+	OldIpReserveHours pulumi.IntPtrOutput `pulumi:"oldIpReserveHours"`
 	// Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 	ParamItems ClusterParamItemArrayOutput `pulumi:"paramItems"`
 	// Password of `root` account.
@@ -103,8 +105,10 @@ type Cluster struct {
 	ServerlessStatus pulumi.StringOutput `pulumi:"serverlessStatus"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag pulumi.StringPtrOutput `pulumi:"serverlessStatusFlag"`
-	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit pulumi.IntPtrOutput `pulumi:"storageLimit"`
+	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+	StoragePayMode pulumi.IntOutput `pulumi:"storagePayMode"`
 	// Used storage of CynosDB cluster, unit in MB.
 	StorageUsed pulumi.IntOutput `pulumi:"storageUsed"`
 	// ID of the subnet within this VPC.
@@ -214,6 +218,8 @@ type clusterState struct {
 	MaxCpu *float64 `pulumi:"maxCpu"`
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MinCpu *float64 `pulumi:"minCpu"`
+	// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+	OldIpReserveHours *int `pulumi:"oldIpReserveHours"`
 	// Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 	ParamItems []ClusterParamItem `pulumi:"paramItems"`
 	// Password of `root` account.
@@ -246,8 +252,10 @@ type clusterState struct {
 	ServerlessStatus *string `pulumi:"serverlessStatus"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag *string `pulumi:"serverlessStatusFlag"`
-	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit *int `pulumi:"storageLimit"`
+	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+	StoragePayMode *int `pulumi:"storagePayMode"`
 	// Used storage of CynosDB cluster, unit in MB.
 	StorageUsed *int `pulumi:"storageUsed"`
 	// ID of the subnet within this VPC.
@@ -307,6 +315,8 @@ type ClusterState struct {
 	MaxCpu pulumi.Float64PtrInput
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MinCpu pulumi.Float64PtrInput
+	// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+	OldIpReserveHours pulumi.IntPtrInput
 	// Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 	ParamItems ClusterParamItemArrayInput
 	// Password of `root` account.
@@ -339,8 +349,10 @@ type ClusterState struct {
 	ServerlessStatus pulumi.StringPtrInput
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag pulumi.StringPtrInput
-	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit pulumi.IntPtrInput
+	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+	StoragePayMode pulumi.IntPtrInput
 	// Used storage of CynosDB cluster, unit in MB.
 	StorageUsed pulumi.IntPtrInput
 	// ID of the subnet within this VPC.
@@ -390,6 +402,8 @@ type clusterArgs struct {
 	MaxCpu *float64 `pulumi:"maxCpu"`
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MinCpu *float64 `pulumi:"minCpu"`
+	// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+	OldIpReserveHours *int `pulumi:"oldIpReserveHours"`
 	// Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 	ParamItems []ClusterParamItem `pulumi:"paramItems"`
 	// Password of `root` account.
@@ -408,8 +422,10 @@ type clusterArgs struct {
 	RwGroupSgs []string `pulumi:"rwGroupSgs"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag *string `pulumi:"serverlessStatusFlag"`
-	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit *int `pulumi:"storageLimit"`
+	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+	StoragePayMode *int `pulumi:"storagePayMode"`
 	// ID of the subnet within this VPC.
 	SubnetId string `pulumi:"subnetId"`
 	// The tags of the CynosDB cluster.
@@ -454,6 +470,8 @@ type ClusterArgs struct {
 	MaxCpu pulumi.Float64PtrInput
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MinCpu pulumi.Float64PtrInput
+	// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+	OldIpReserveHours pulumi.IntPtrInput
 	// Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 	ParamItems ClusterParamItemArrayInput
 	// Password of `root` account.
@@ -472,8 +490,10 @@ type ClusterArgs struct {
 	RwGroupSgs pulumi.StringArrayInput
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag pulumi.StringPtrInput
-	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit pulumi.IntPtrInput
+	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+	StoragePayMode pulumi.IntPtrInput
 	// ID of the subnet within this VPC.
 	SubnetId pulumi.StringInput
 	// The tags of the CynosDB cluster.
@@ -689,6 +709,11 @@ func (o ClusterOutput) MinCpu() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.Float64PtrOutput { return v.MinCpu }).(pulumi.Float64PtrOutput)
 }
 
+// Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+func (o ClusterOutput) OldIpReserveHours() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.OldIpReserveHours }).(pulumi.IntPtrOutput)
+}
+
 // Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
 func (o ClusterOutput) ParamItems() ClusterParamItemArrayOutput {
 	return o.ApplyT(func(v *Cluster) ClusterParamItemArrayOutput { return v.ParamItems }).(ClusterParamItemArrayOutput)
@@ -769,9 +794,14 @@ func (o ClusterOutput) ServerlessStatusFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ServerlessStatusFlag }).(pulumi.StringPtrOutput)
 }
 
-// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 func (o ClusterOutput) StorageLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.StorageLimit }).(pulumi.IntPtrOutput)
+}
+
+// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+func (o ClusterOutput) StoragePayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.StoragePayMode }).(pulumi.IntOutput)
 }
 
 // Used storage of CynosDB cluster, unit in MB.

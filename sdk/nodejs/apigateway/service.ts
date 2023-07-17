@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  * Use this resource to create API gateway service.
  *
  * ## Example Usage
+ * ### Shared Service
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -25,6 +26,34 @@ import * as utilities from "../utilities";
  *     releaseLimit: 500,
  *     serviceDesc: "your nice service",
  *     serviceName: "niceservice",
+ *     tags: {
+ *         "test-key1": "test-value1",
+ *         "test-key2": "test-value2",
+ *     },
+ *     testLimit: 500,
+ * });
+ * ```
+ * ### Exclusive Service
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const service = new tencentcloud.ApiGateway.Service("service", {
+ *     instanceId: "instance-rc6fcv4e",
+ *     ipVersion: "IPv4",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     preLimit: 500,
+ *     protocol: "http&https",
+ *     releaseLimit: 500,
+ *     serviceDesc: "your nice service",
+ *     serviceName: "service",
+ *     tags: {
+ *         "test-key1": "test-value1",
+ *     },
  *     testLimit: 500,
  * });
  * ```
@@ -74,7 +103,9 @@ export class Service extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     * It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     *
+     * @deprecated It has been deprecated from version 1.81.9.
      */
     public readonly exclusiveSetName!: pulumi.Output<string | undefined>;
     /**
@@ -85,6 +116,10 @@ export class Service extends pulumi.CustomResource {
      * Port number for https access over private network.
      */
     public /*out*/ readonly innerHttpsPort!: pulumi.Output<number>;
+    /**
+     * Exclusive instance ID.
+     */
+    public readonly instanceId!: pulumi.Output<string | undefined>;
     /**
      * Private network access subdomain name.
      */
@@ -126,6 +161,10 @@ export class Service extends pulumi.CustomResource {
      */
     public readonly serviceName!: pulumi.Output<string>;
     /**
+     * Tag description list.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     public readonly testLimit!: pulumi.Output<number>;
@@ -152,6 +191,7 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["exclusiveSetName"] = state ? state.exclusiveSetName : undefined;
             resourceInputs["innerHttpPort"] = state ? state.innerHttpPort : undefined;
             resourceInputs["innerHttpsPort"] = state ? state.innerHttpsPort : undefined;
+            resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["internalSubDomain"] = state ? state.internalSubDomain : undefined;
             resourceInputs["ipVersion"] = state ? state.ipVersion : undefined;
             resourceInputs["modifyTime"] = state ? state.modifyTime : undefined;
@@ -162,6 +202,7 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["releaseLimit"] = state ? state.releaseLimit : undefined;
             resourceInputs["serviceDesc"] = state ? state.serviceDesc : undefined;
             resourceInputs["serviceName"] = state ? state.serviceName : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["testLimit"] = state ? state.testLimit : undefined;
             resourceInputs["usagePlanLists"] = state ? state.usagePlanLists : undefined;
         } else {
@@ -176,6 +217,7 @@ export class Service extends pulumi.CustomResource {
                 throw new Error("Missing required property 'serviceName'");
             }
             resourceInputs["exclusiveSetName"] = args ? args.exclusiveSetName : undefined;
+            resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["ipVersion"] = args ? args.ipVersion : undefined;
             resourceInputs["netTypes"] = args ? args.netTypes : undefined;
             resourceInputs["preLimit"] = args ? args.preLimit : undefined;
@@ -183,6 +225,7 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["releaseLimit"] = args ? args.releaseLimit : undefined;
             resourceInputs["serviceDesc"] = args ? args.serviceDesc : undefined;
             resourceInputs["serviceName"] = args ? args.serviceName : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["testLimit"] = args ? args.testLimit : undefined;
             resourceInputs["apiLists"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -211,7 +254,9 @@ export interface ServiceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     * It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     *
+     * @deprecated It has been deprecated from version 1.81.9.
      */
     exclusiveSetName?: pulumi.Input<string>;
     /**
@@ -222,6 +267,10 @@ export interface ServiceState {
      * Port number for https access over private network.
      */
     innerHttpsPort?: pulumi.Input<number>;
+    /**
+     * Exclusive instance ID.
+     */
+    instanceId?: pulumi.Input<string>;
     /**
      * Private network access subdomain name.
      */
@@ -263,6 +312,10 @@ export interface ServiceState {
      */
     serviceName?: pulumi.Input<string>;
     /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
+    /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     testLimit?: pulumi.Input<number>;
@@ -277,9 +330,15 @@ export interface ServiceState {
  */
 export interface ServiceArgs {
     /**
-     * Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     * It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+     *
+     * @deprecated It has been deprecated from version 1.81.9.
      */
     exclusiveSetName?: pulumi.Input<string>;
+    /**
+     * Exclusive instance ID.
+     */
+    instanceId?: pulumi.Input<string>;
     /**
      * IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
      */
@@ -308,6 +367,10 @@ export interface ServiceArgs {
      * Custom service name.
      */
     serviceName: pulumi.Input<string>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */

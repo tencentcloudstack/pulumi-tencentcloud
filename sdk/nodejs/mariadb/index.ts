@@ -6,29 +6,60 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./account";
+export * from "./accountPrivileges";
+export * from "./backupTime";
+export * from "./cancelDcnJob";
 export * from "./dedicatedclusterDbInstance";
 export * from "./encryptAttributes";
+export * from "./flushBinlog";
 export * from "./getAccounts";
 export * from "./getDatabaseObjects";
 export * from "./getDatabaseTable";
 export * from "./getDatabases";
 export * from "./getDbInstances";
+export * from "./getDcnDetail";
+export * from "./getFileDownloadUrl";
+export * from "./getFlow";
+export * from "./getInstanceNodeInfo";
+export * from "./getInstanceSpecs";
+export * from "./getLogFiles";
+export * from "./getOrders";
+export * from "./getPrice";
+export * from "./getProjectSecurityGroups";
+export * from "./getRenewalPrice";
+export * from "./getSaleInfo";
 export * from "./getSecurityGroups";
+export * from "./getSlowLogs";
+export * from "./getUpgradePrice";
 export * from "./hourDbInstance";
 export * from "./instance";
+export * from "./instanceConfig";
 export * from "./logFileRetentionPeriod";
+export * from "./operateHourDbInstance";
 export * from "./parameters";
+export * from "./renewInstance";
+export * from "./restartInstance";
 export * from "./securityGroups";
+export * from "./switchHa";
 
 // Import resources to register:
 import { Account } from "./account";
+import { AccountPrivileges } from "./accountPrivileges";
+import { BackupTime } from "./backupTime";
+import { CancelDcnJob } from "./cancelDcnJob";
 import { DedicatedclusterDbInstance } from "./dedicatedclusterDbInstance";
 import { EncryptAttributes } from "./encryptAttributes";
+import { FlushBinlog } from "./flushBinlog";
 import { HourDbInstance } from "./hourDbInstance";
 import { Instance } from "./instance";
+import { InstanceConfig } from "./instanceConfig";
 import { LogFileRetentionPeriod } from "./logFileRetentionPeriod";
+import { OperateHourDbInstance } from "./operateHourDbInstance";
 import { Parameters } from "./parameters";
+import { RenewInstance } from "./renewInstance";
+import { RestartInstance } from "./restartInstance";
 import { SecurityGroups } from "./securityGroups";
+import { SwitchHa } from "./switchHa";
 
 const _module = {
     version: utilities.getVersion(),
@@ -36,30 +67,57 @@ const _module = {
         switch (type) {
             case "tencentcloud:Mariadb/account:Account":
                 return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/accountPrivileges:AccountPrivileges":
+                return new AccountPrivileges(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/backupTime:BackupTime":
+                return new BackupTime(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/cancelDcnJob:CancelDcnJob":
+                return new CancelDcnJob(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance":
                 return new DedicatedclusterDbInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/encryptAttributes:EncryptAttributes":
                 return new EncryptAttributes(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/flushBinlog:FlushBinlog":
+                return new FlushBinlog(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/hourDbInstance:HourDbInstance":
                 return new HourDbInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/instanceConfig:InstanceConfig":
+                return new InstanceConfig(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod":
                 return new LogFileRetentionPeriod(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/operateHourDbInstance:OperateHourDbInstance":
+                return new OperateHourDbInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/parameters:Parameters":
                 return new Parameters(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/renewInstance:RenewInstance":
+                return new RenewInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/restartInstance:RestartInstance":
+                return new RestartInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mariadb/securityGroups:SecurityGroups":
                 return new SecurityGroups(name, <any>undefined, { urn })
+            case "tencentcloud:Mariadb/switchHa:SwitchHa":
+                return new SwitchHa(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/accountPrivileges", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/backupTime", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/cancelDcnJob", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/dedicatedclusterDbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/encryptAttributes", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/flushBinlog", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/hourDbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/instanceConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/logFileRetentionPeriod", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/operateHourDbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/parameters", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/renewInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/restartInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/securityGroups", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mariadb/switchHa", _module)

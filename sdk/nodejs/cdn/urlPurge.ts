@@ -18,8 +18,7 @@ import * as utilities from "../utilities";
  *     urls: ["https://www.example.com/a"],
  * });
  * ```
- *
- * argument to request new purge task with same urls
+ * ### argument to request new purge task with same urls
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

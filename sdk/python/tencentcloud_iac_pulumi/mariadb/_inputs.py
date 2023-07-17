@@ -9,9 +9,365 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AccountPrivilegesAccountsArgs',
+    'AccountPrivilegesColumnPrivilegeArgs',
+    'AccountPrivilegesDatabasePrivilegeArgs',
+    'AccountPrivilegesFunctionPrivilegeArgs',
+    'AccountPrivilegesProcedurePrivilegeArgs',
+    'AccountPrivilegesTablePrivilegeArgs',
+    'AccountPrivilegesViewPrivilegeArgs',
     'InstanceInitParamArgs',
     'ParametersParamArgs',
 ]
+
+@pulumi.input_type
+class AccountPrivilegesAccountsArgs:
+    def __init__(__self__, *,
+                 host: pulumi.Input[str],
+                 user: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] host: user host.
+        :param pulumi.Input[str] user: user name.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "user", user)
+
+    @property
+    @pulumi.getter
+    def host(self) -> pulumi.Input[str]:
+        """
+        user host.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter
+    def user(self) -> pulumi.Input[str]:
+        """
+        user name.
+        """
+        return pulumi.get(self, "user")
+
+    @user.setter
+    def user(self, value: pulumi.Input[str]):
+        pulumi.set(self, "user", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesColumnPrivilegeArgs:
+    def __init__(__self__, *,
+                 column: pulumi.Input[str],
+                 database: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 table: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] column: Column name.
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        :param pulumi.Input[str] table: Table name.
+        """
+        pulumi.set(__self__, "column", column)
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table", table)
+
+    @property
+    @pulumi.getter
+    def column(self) -> pulumi.Input[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column")
+
+    @column.setter
+    def column(self, value: pulumi.Input[str]):
+        pulumi.set(self, "column", value)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesDatabasePrivilegeArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesFunctionPrivilegeArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 function_name: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[str] function_name: Function name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "function_name", function_name)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> pulumi.Input[str]:
+        """
+        Function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesProcedurePrivilegeArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 procedure: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        :param pulumi.Input[str] procedure: Procedure name.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "procedure", procedure)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> pulumi.Input[str]:
+        """
+        Procedure name.
+        """
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: pulumi.Input[str]):
+        pulumi.set(self, "procedure", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesTablePrivilegeArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 table: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        :param pulumi.Input[str] table: Table name.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table", table)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesViewPrivilegeArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 view: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Permission information.
+        :param pulumi.Input[str] view: View name.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "view", view)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Permission information.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+    @property
+    @pulumi.getter
+    def view(self) -> pulumi.Input[str]:
+        """
+        View name.
+        """
+        return pulumi.get(self, "view")
+
+    @view.setter
+    def view(self, value: pulumi.Input[str]):
+        pulumi.set(self, "view", value)
+
 
 @pulumi.input_type
 class InstanceInitParamArgs:

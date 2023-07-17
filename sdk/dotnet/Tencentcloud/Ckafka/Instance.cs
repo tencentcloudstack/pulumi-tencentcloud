@@ -16,49 +16,105 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// &gt; **NOTE:** It only support create prepaid ckafka instance.
     /// 
     /// ## Example Usage
+    /// ### Basic Instance
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Ckafka.Instance("foo", new Tencentcloud.Ckafka.InstanceArgs
+    ///         var config = new Config();
+    ///         var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
+    ///         var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
+    ///         var gz = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             BandWidth = 40,
+    ///             Name = "ap-guangzhou-3",
+    ///             Product = "ckafka",
+    ///         }));
+    ///         var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new Tencentcloud.Ckafka.InstanceArgs
+    ///         {
+    ///             InstanceName = "ckafka-instance-type-tf-test",
+    ///             ZoneId = gz.Apply(gz =&gt; gz.Zones?[0]?.Id),
+    ///             Period = 1,
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
+    ///             MsgRetentionTime = 1300,
+    ///             RenewFlag = 0,
+    ///             KafkaVersion = "2.4.1",
+    ///             DiskSize = 1000,
+    ///             DiskType = "CLOUD_BASIC",
+    ///             SpecificationsType = "standard",
+    ///             InstanceType = 2,
     ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
     ///             {
     ///                 AutoCreateTopicEnable = true,
     ///                 DefaultNumPartitions = 3,
     ///                 DefaultReplicationFactor = 3,
     ///             },
-    ///             DiskSize = 500,
-    ///             DiskType = "CLOUD_BASIC",
     ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
     ///             {
-    ///                 BottomRetention = 0,
-    ///                 DiskQuotaPercentage = 0,
     ///                 Enable = 1,
-    ///                 StepForwardPercentage = 0,
     ///             },
-    ///             InstanceName = "ckafka-instance-tf-test",
-    ///             KafkaVersion = "1.1.1",
-    ///             MsgRetentionTime = 1300,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Multi zone Instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
+    ///         var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
+    ///         var gz3 = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Name = "ap-guangzhou-3",
+    ///             Product = "ckafka",
+    ///         }));
+    ///         var gz6 = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Name = "ap-guangzhou-6",
+    ///             Product = "ckafka",
+    ///         }));
+    ///         var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new Tencentcloud.Ckafka.InstanceArgs
+    ///         {
+    ///             InstanceName = "ckafka-instance-maz-tf-test",
+    ///             ZoneId = gz3.Apply(gz3 =&gt; gz3.Zones?[0]?.Id),
     ///             MultiZoneFlag = true,
-    ///             Partition = 800,
-    ///             Period = 1,
-    ///             PublicNetwork = 3,
-    ///             RenewFlag = 0,
-    ///             SpecificationsType = "profession",
-    ///             SubnetId = "subnet-4vwihrzk",
-    ///             VpcId = "vpc-82p1t1nv",
-    ///             ZoneId = 100006,
     ///             ZoneIds = 
     ///             {
-    ///                 100006,
-    ///                 100007,
+    ///                 gz3.Apply(gz3 =&gt; gz3.Zones?[0]?.Id),
+    ///                 gz6.Apply(gz6 =&gt; gz6.Zones?[0]?.Id),
+    ///             },
+    ///             Period = 1,
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
+    ///             MsgRetentionTime = 1300,
+    ///             RenewFlag = 0,
+    ///             KafkaVersion = "1.1.1",
+    ///             DiskSize = 500,
+    ///             DiskType = "CLOUD_BASIC",
+    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///             {
+    ///                 AutoCreateTopicEnable = true,
+    ///                 DefaultNumPartitions = 3,
+    ///                 DefaultReplicationFactor = 3,
+    ///             },
+    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///             {
+    ///                 Enable = 1,
     ///             },
     ///         });
     ///     }
@@ -126,6 +182,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<string> KafkaVersion { get; private set; } = null!;
 
         /// <summary>
+        /// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        /// </summary>
+        [Output("maxMessageByte")]
+        public Output<int> MaxMessageByte { get; private set; } = null!;
+
+        /// <summary>
         /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Output("msgRetentionTime")]
@@ -150,7 +212,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
-        /// Bandwidth of the public network.
+        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         /// </summary>
         [Output("publicNetwork")]
         public Output<int> PublicNetwork { get; private set; } = null!;
@@ -317,6 +379,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? KafkaVersion { get; set; }
 
         /// <summary>
+        /// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        /// </summary>
+        [Input("maxMessageByte")]
+        public Input<int>? MaxMessageByte { get; set; }
+
+        /// <summary>
         /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Input("msgRetentionTime")]
@@ -341,7 +409,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Bandwidth of the public network.
+        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
@@ -475,6 +543,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? KafkaVersion { get; set; }
 
         /// <summary>
+        /// The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        /// </summary>
+        [Input("maxMessageByte")]
+        public Input<int>? MaxMessageByte { get; set; }
+
+        /// <summary>
         /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Input("msgRetentionTime")]
@@ -499,7 +573,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Bandwidth of the public network.
+        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }

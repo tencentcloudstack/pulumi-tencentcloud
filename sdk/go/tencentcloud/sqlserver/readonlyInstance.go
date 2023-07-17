@@ -96,6 +96,10 @@ type ReadonlyInstance struct {
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Port for private access.
 	Vport pulumi.IntOutput `pulumi:"vport"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 }
 
 // NewReadonlyInstance registers a new resource with the given unique name, arguments, and options.
@@ -182,6 +186,10 @@ type readonlyInstanceState struct {
 	VpcId *string `pulumi:"vpcId"`
 	// Port for private access.
 	Vport *int `pulumi:"vport"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 type ReadonlyInstanceState struct {
@@ -227,6 +235,10 @@ type ReadonlyInstanceState struct {
 	VpcId pulumi.StringPtrInput
 	// Port for private access.
 	Vport pulumi.IntPtrInput
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (ReadonlyInstanceState) ElementType() reflect.Type {
@@ -266,6 +278,10 @@ type readonlyInstanceArgs struct {
 	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
 	VpcId *string `pulumi:"vpcId"`
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 // The set of arguments for constructing a ReadonlyInstance resource.
@@ -302,6 +318,10 @@ type ReadonlyInstanceArgs struct {
 	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
 	VpcId pulumi.StringPtrInput
+	// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+	//
+	// Deprecated: It has been deprecated from version 1.81.2.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (ReadonlyInstanceArgs) ElementType() reflect.Type {
@@ -494,6 +514,13 @@ func (o ReadonlyInstanceOutput) VpcId() pulumi.StringPtrOutput {
 // Port for private access.
 func (o ReadonlyInstanceOutput) Vport() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Vport }).(pulumi.IntOutput)
+}
+
+// It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
+//
+// Deprecated: It has been deprecated from version 1.81.2.
+func (o ReadonlyInstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 type ReadonlyInstanceArrayOutput struct{ *pulumi.OutputState }

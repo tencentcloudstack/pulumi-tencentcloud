@@ -99,15 +99,12 @@ class ConfigAttachment(pulumi.CustomResource):
         """
         Provides a resource to create a cls config attachment
 
-        ## Example Usage
+        ## Import
 
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        cls config_attachment can be imported using the id, e.g.
 
-        attach = tencentcloud.cls.ConfigAttachment("attach",
-            config_id=tencentcloud_cls_config["config"]["id"],
-            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```sh
+         $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -124,15 +121,12 @@ class ConfigAttachment(pulumi.CustomResource):
         """
         Provides a resource to create a cls config attachment
 
-        ## Example Usage
+        ## Import
 
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        cls config_attachment can be imported using the id, e.g.
 
-        attach = tencentcloud.cls.ConfigAttachment("attach",
-            config_id=tencentcloud_cls_config["config"]["id"],
-            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```sh
+         $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
         ```
 
         :param str resource_name: The name of the resource.

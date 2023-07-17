@@ -14,8 +14,7 @@ import (
 // Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
 //
 // ## Example Usage
-//
-// dnsCheck way:
+// ### dnsCheck way:
 //
 // ```go
 // package main
@@ -38,8 +37,7 @@ import (
 // 	})
 // }
 // ```
-//
-// fileCheck way:
+// ### fileCheck way:
 //
 // ```go
 // package main

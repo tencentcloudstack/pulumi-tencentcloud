@@ -17,25 +17,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Nat.Gateway("foo", new Tencentcloud.Nat.GatewayArgs
+    ///         var foo = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync(new Tencentcloud.Vpc.GetInstancesArgs
     ///         {
+    ///             Name = "Default-VPC",
+    ///         }));
+    ///         // Create EIP
+    ///         var eipDevDnat = new Tencentcloud.Eip.Instance("eipDevDnat", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///         var newEip = new Tencentcloud.Eip.Instance("newEip", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///         var myNat = new Tencentcloud.Nat.Gateway("myNat", new Tencentcloud.Nat.GatewayArgs
+    ///         {
+    ///             VpcId = foo.Apply(foo =&gt; foo.InstanceLists?[0]?.VpcId),
+    ///             MaxConcurrent = 10000000,
+    ///             Bandwidth = 1000,
+    ///             Zone = "ap-guangzhou-3",
     ///             AssignedEipSets = 
     ///             {
-    ///                 "1.1.1.1",
+    ///                 eipDevDnat.PublicIp,
+    ///                 newEip.PublicIp,
     ///             },
-    ///             Bandwidth = 100,
-    ///             MaxConcurrent = 1000000,
     ///             Tags = 
     ///             {
-    ///                 { "test", "tf" },
+    ///                 { "tf", "test" },
     ///             },
-    ///             VpcId = "vpc-4xxr2cy7",
     ///         });
     ///     }
     /// 
@@ -94,6 +108,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// The availability zone, such as `ap-guangzhou-3`.
+        /// </summary>
+        [Output("zone")]
+        public Output<string> Zone { get; private set; } = null!;
 
 
         /// <summary>
@@ -190,6 +210,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
+        /// <summary>
+        /// The availability zone, such as `ap-guangzhou-3`.
+        /// </summary>
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
+
         public GatewayArgs()
         {
         }
@@ -250,6 +276,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// The availability zone, such as `ap-guangzhou-3`.
+        /// </summary>
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
 
         public GatewayState()
         {

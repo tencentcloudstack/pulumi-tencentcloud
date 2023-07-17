@@ -9,26 +9,82 @@ export * from "./acl";
 export * from "./aclAttachment";
 export * from "./bandwidthPackage";
 export * from "./bandwidthPackageAttachment";
+export * from "./classicLinkAttachment";
+export * from "./dhcpAssociateAddress";
+export * from "./dhcpIp";
+export * from "./enableEndPointConnect";
 export * from "./endPoint";
 export * from "./endPointService";
 export * from "./endPointServiceWhiteList";
 export * from "./flowLog";
+export * from "./flowLogConfig";
+export * from "./getAccountAttributes";
 export * from "./getAcls";
+export * from "./getBandwidthPackageBillUsage";
+export * from "./getBandwidthPackageQuota";
+export * from "./getClassicLinkInstances";
+export * from "./getCvmInstances";
+export * from "./getGatewayFlowMonitorDetail";
+export * from "./getGatewayFlowQos";
 export * from "./getInstances";
+export * from "./getLimits";
+export * from "./getNetDetectStateCheck";
+export * from "./getNetDetectStates";
+export * from "./getNetworkInterfaceLimit";
+export * from "./getPrivateIpAddresses";
+export * from "./getProductQuota";
+export * from "./getResourceDashboard";
+export * from "./getRouteConflicts";
 export * from "./getRouteTables";
+export * from "./getSecurityGroupLimits";
+export * from "./getSecurityGroupReferences";
+export * from "./getSgSnapshotFileContent";
+export * from "./getSnapshotFiles";
+export * from "./getSubnetResourceDashboard";
 export * from "./getSubnets";
+export * from "./getTemplateLimits";
+export * from "./getUsedIpAddress";
 export * from "./instance";
+export * from "./ipv6CidrBlock";
+export * from "./ipv6EniAddress";
+export * from "./ipv6SubnetCidrBlock";
+export * from "./localGateway";
+export * from "./netDetect";
+export * from "./networkAclQuintuple";
+export * from "./notifyRoutes";
+export * from "./resumeSnapshotInstance";
+export * from "./snapshotPolicy";
+export * from "./snapshotPolicyAttachment";
+export * from "./snapshotPolicyConfig";
+export * from "./trafficPackage";
 
 // Import resources to register:
 import { Acl } from "./acl";
 import { AclAttachment } from "./aclAttachment";
 import { BandwidthPackage } from "./bandwidthPackage";
 import { BandwidthPackageAttachment } from "./bandwidthPackageAttachment";
+import { ClassicLinkAttachment } from "./classicLinkAttachment";
+import { DhcpAssociateAddress } from "./dhcpAssociateAddress";
+import { DhcpIp } from "./dhcpIp";
+import { EnableEndPointConnect } from "./enableEndPointConnect";
 import { EndPoint } from "./endPoint";
 import { EndPointService } from "./endPointService";
 import { EndPointServiceWhiteList } from "./endPointServiceWhiteList";
 import { FlowLog } from "./flowLog";
+import { FlowLogConfig } from "./flowLogConfig";
 import { Instance } from "./instance";
+import { Ipv6CidrBlock } from "./ipv6CidrBlock";
+import { Ipv6EniAddress } from "./ipv6EniAddress";
+import { Ipv6SubnetCidrBlock } from "./ipv6SubnetCidrBlock";
+import { LocalGateway } from "./localGateway";
+import { NetDetect } from "./netDetect";
+import { NetworkAclQuintuple } from "./networkAclQuintuple";
+import { NotifyRoutes } from "./notifyRoutes";
+import { ResumeSnapshotInstance } from "./resumeSnapshotInstance";
+import { SnapshotPolicy } from "./snapshotPolicy";
+import { SnapshotPolicyAttachment } from "./snapshotPolicyAttachment";
+import { SnapshotPolicyConfig } from "./snapshotPolicyConfig";
+import { TrafficPackage } from "./trafficPackage";
 
 const _module = {
     version: utilities.getVersion(),
@@ -42,6 +98,14 @@ const _module = {
                 return new BandwidthPackage(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment":
                 return new BandwidthPackageAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/classicLinkAttachment:ClassicLinkAttachment":
+                return new ClassicLinkAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/dhcpAssociateAddress:DhcpAssociateAddress":
+                return new DhcpAssociateAddress(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/dhcpIp:DhcpIp":
+                return new DhcpIp(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/enableEndPointConnect:EnableEndPointConnect":
+                return new EnableEndPointConnect(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/endPoint:EndPoint":
                 return new EndPoint(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/endPointService:EndPointService":
@@ -50,8 +114,34 @@ const _module = {
                 return new EndPointServiceWhiteList(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/flowLog:FlowLog":
                 return new FlowLog(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/flowLogConfig:FlowLogConfig":
+                return new FlowLogConfig(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock":
+                return new Ipv6CidrBlock(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/ipv6EniAddress:Ipv6EniAddress":
+                return new Ipv6EniAddress(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock":
+                return new Ipv6SubnetCidrBlock(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/localGateway:LocalGateway":
+                return new LocalGateway(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/netDetect:NetDetect":
+                return new NetDetect(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/networkAclQuintuple:NetworkAclQuintuple":
+                return new NetworkAclQuintuple(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/notifyRoutes:NotifyRoutes":
+                return new NotifyRoutes(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
+                return new ResumeSnapshotInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
+                return new SnapshotPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment":
+                return new SnapshotPolicyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig":
+                return new SnapshotPolicyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/trafficPackage:TrafficPackage":
+                return new TrafficPackage(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -61,8 +151,25 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/acl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/aclAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/bandwidthPackage", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/bandwidthPackageAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/classicLinkAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/dhcpAssociateAddress", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/dhcpIp", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/enableEndPointConnect", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPointService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/endPointServiceWhiteList", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/flowLog", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/flowLogConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/ipv6CidrBlock", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/ipv6EniAddress", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/ipv6SubnetCidrBlock", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/localGateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/netDetect", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/networkAclQuintuple", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/notifyRoutes", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/resumeSnapshotInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/trafficPackage", _module)

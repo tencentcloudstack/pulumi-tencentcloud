@@ -23,8 +23,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Dc/gateway:Gateway":
 		r = &Gateway{}
+	case "tencentcloud:Dc/gatewayAttachment:GatewayAttachment":
+		r = &GatewayAttachment{}
 	case "tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute":
 		r = &GatewayCcnRoute{}
+	case "tencentcloud:Dc/instance:Instance":
+		r = &Instance{}
+	case "tencentcloud:Dc/internetAddress:InternetAddress":
+		r = &InternetAddress{}
+	case "tencentcloud:Dc/internetAddressConfig:InternetAddressConfig":
+		r = &InternetAddressConfig{}
+	case "tencentcloud:Dc/shareDcxConfig:ShareDcxConfig":
+		r = &ShareDcxConfig{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -45,7 +55,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dc/gatewayAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dc/gatewayCcnRoute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dc/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dc/internetAddress",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dc/internetAddressConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dc/shareDcxConfig",
 		&module{version},
 	)
 }

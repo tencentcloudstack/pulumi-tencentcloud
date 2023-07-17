@@ -6,14 +6,28 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./gateway";
+export * from "./gatewayAttachment";
 export * from "./gatewayCcnRoute";
+export * from "./getAccessPoints";
 export * from "./getGatewayCcnRoutes";
 export * from "./getGatewayInstances";
 export * from "./getInstances";
+export * from "./getInternetAddressQuota";
+export * from "./getInternetAddressStatistics";
+export * from "./getPublicDirectConnectTunnelRoutes";
+export * from "./instance";
+export * from "./internetAddress";
+export * from "./internetAddressConfig";
+export * from "./shareDcxConfig";
 
 // Import resources to register:
 import { Gateway } from "./gateway";
+import { GatewayAttachment } from "./gatewayAttachment";
 import { GatewayCcnRoute } from "./gatewayCcnRoute";
+import { Instance } from "./instance";
+import { InternetAddress } from "./internetAddress";
+import { InternetAddressConfig } from "./internetAddressConfig";
+import { ShareDcxConfig } from "./shareDcxConfig";
 
 const _module = {
     version: utilities.getVersion(),
@@ -21,12 +35,27 @@ const _module = {
         switch (type) {
             case "tencentcloud:Dc/gateway:Gateway":
                 return new Gateway(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/gatewayAttachment:GatewayAttachment":
+                return new GatewayAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute":
                 return new GatewayCcnRoute(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/instance:Instance":
+                return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/internetAddress:InternetAddress":
+                return new InternetAddress(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/internetAddressConfig:InternetAddressConfig":
+                return new InternetAddressConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/shareDcxConfig:ShareDcxConfig":
+                return new ShareDcxConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gatewayAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gatewayCcnRoute", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/internetAddress", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/internetAddressConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/shareDcxConfig", _module)

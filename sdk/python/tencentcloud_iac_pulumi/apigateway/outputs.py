@@ -1578,7 +1578,7 @@ class GetServicesListResult(dict):
                  usage_plan_lists: Sequence['outputs.GetServicesListUsagePlanListResult']):
         """
         :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-        :param str exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param str exclusive_set_name: (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         :param int inner_http_port: Port number for http access over private network.
         :param int inner_https_port: Port number for https access over private network.
         :param str internal_sub_domain: Private network access sub-domain name.
@@ -1619,7 +1619,7 @@ class GetServicesListResult(dict):
     @pulumi.getter(name="exclusiveSetName")
     def exclusive_set_name(self) -> str:
         """
-        Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        (**Deprecated**) It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         """
         return pulumi.get(self, "exclusive_set_name")
 

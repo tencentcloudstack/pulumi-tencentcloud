@@ -19,6 +19,8 @@ class InstanceArgs:
                  memory: pulumi.Input[int],
                  root_password: pulumi.Input[str],
                  storage: pulumi.Input[int],
+                 subnet_id: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str],
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  backup_plan: Optional[pulumi.Input['InstanceBackupPlanArgs']] = None,
@@ -40,22 +42,22 @@ class InstanceArgs:
                  public_access_switch: Optional[pulumi.Input[bool]] = None,
                  root_user: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
-                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 vpc_id: Optional[pulumi.Input[str]] = None):
+                 voucher_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Instance resource.
-        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         :param pulumi.Input[int] storage: Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `_postgresql.get_specinfos` provides.
+        :param pulumi.Input[str] subnet_id: ID of subnet.
+        :param pulumi.Input[str] vpc_id: ID of VPC.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input['InstanceBackupPlanArgs'] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
-        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
@@ -66,20 +68,20 @@ class InstanceArgs:
         :param pulumi.Input[int] max_standby_streaming_delay: max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
-        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
         :param pulumi.Input[str] root_user: Instance root account name. This parameter is optional, Default value is `root`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
-        :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this postgresql.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: Specify Voucher Ids if `auto_voucher` was `1`, only support using 1 vouchers for now.
-        :param pulumi.Input[str] vpc_id: ID of VPC.
         """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "memory", memory)
         pulumi.set(__self__, "root_password", root_password)
         pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         if auto_voucher is not None:
@@ -125,20 +127,16 @@ class InstanceArgs:
             pulumi.set(__self__, "root_user", root_user)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
-        if subnet_id is not None:
-            pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if voucher_ids is not None:
             pulumi.set(__self__, "voucher_ids", voucher_ids)
-        if vpc_id is not None:
-            pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> pulumi.Input[str]:
         """
-        Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -183,6 +181,30 @@ class InstanceArgs:
         pulumi.set(self, "storage", value)
 
     @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        ID of subnet.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        """
+        ID of VPC.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
+
+    @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
@@ -222,7 +244,7 @@ class InstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -246,7 +268,7 @@ class InstanceArgs:
     @pulumi.getter(name="dbKernelVersion")
     def db_kernel_version(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         """
         return pulumi.get(self, "db_kernel_version")
 
@@ -378,7 +400,7 @@ class InstanceArgs:
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
         """
-        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "period")
 
@@ -435,18 +457,6 @@ class InstanceArgs:
         pulumi.set(self, "security_groups", value)
 
     @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        ID of subnet.
-        """
-        return pulumi.get(self, "subnet_id")
-
-    @subnet_id.setter
-    def subnet_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "subnet_id", value)
-
-    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -469,18 +479,6 @@ class InstanceArgs:
     @voucher_ids.setter
     def voucher_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "voucher_ids", value)
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        ID of VPC.
-        """
-        return pulumi.get(self, "vpc_id")
-
-    @vpc_id.setter
-    def vpc_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "vpc_id", value)
 
 
 @pulumi.input_type
@@ -525,12 +523,12 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
-        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         :param pulumi.Input['InstanceBackupPlanArgs'] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
-        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
@@ -542,7 +540,7 @@ class _InstanceState:
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
-        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] private_access_ip: IP for private access.
         :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
@@ -661,7 +659,7 @@ class _InstanceState:
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> Optional[pulumi.Input[str]]:
         """
-        Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -685,7 +683,7 @@ class _InstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -721,7 +719,7 @@ class _InstanceState:
     @pulumi.getter(name="dbKernelVersion")
     def db_kernel_version(self) -> Optional[pulumi.Input[str]]:
         """
-        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         """
         return pulumi.get(self, "db_kernel_version")
 
@@ -865,7 +863,7 @@ class _InstanceState:
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
         """
-        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "period")
 
@@ -1092,6 +1090,8 @@ class Instance(pulumi.CustomResource):
         """
         Use this resource to create postgresql instance.
 
+        > **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+
         ## Example Usage
 
         ```python
@@ -1127,8 +1127,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        Create a multi available zone bucket
+        ### Create a multi available zone bucket
 
         ```python
         import pulumi
@@ -1175,8 +1174,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        create pgsql with kms key
+        ### create pgsql with kms key
 
         ```python
         import pulumi
@@ -1210,6 +1208,40 @@ class Instance(pulumi.CustomResource):
             },
             vpc_id="vpc-86v957zb")
         ```
+        ### upgrade kernel version
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        test = tencentcloud.postgresql.Instance("test",
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zone"]["zones"][5]["name"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=local["vpc_id"],
+            subnet_id=local["subnet_id"],
+            engine_version="13.3",
+            root_password="*",
+            charset="LATIN1",
+            project_id=0,
+            public_access_switch=False,
+            security_groups=[local["sg_id"]],
+            memory=4,
+            storage=250,
+            backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
+                min_backup_start_time="01:10:11",
+                max_backup_start_time="02:10:11",
+                base_backup_retention_period=5,
+                backup_periods=[
+                    "monday",
+                    "thursday",
+                    "sunday",
+                ],
+            ),
+            db_kernel_version="v13.3_r1.4",
+            tags={
+                "tf": "teest",
+            })
+        ```
 
         ## Import
 
@@ -1223,11 +1255,11 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
-        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         :param pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
-        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
@@ -1239,7 +1271,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
-        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
         :param pulumi.Input[bool] public_access_switch: Indicates whether to enable the access to an instance from public network or not.
         :param pulumi.Input[str] root_password: Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
@@ -1260,6 +1292,8 @@ class Instance(pulumi.CustomResource):
         """
         Use this resource to create postgresql instance.
 
+        > **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+
         ## Example Usage
 
         ```python
@@ -1295,8 +1329,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        Create a multi available zone bucket
+        ### Create a multi available zone bucket
 
         ```python
         import pulumi
@@ -1343,8 +1376,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        create pgsql with kms key
+        ### create pgsql with kms key
 
         ```python
         import pulumi
@@ -1377,6 +1409,40 @@ class Instance(pulumi.CustomResource):
                 "tf": "test",
             },
             vpc_id="vpc-86v957zb")
+        ```
+        ### upgrade kernel version
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        test = tencentcloud.postgresql.Instance("test",
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zone"]["zones"][5]["name"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=local["vpc_id"],
+            subnet_id=local["subnet_id"],
+            engine_version="13.3",
+            root_password="*",
+            charset="LATIN1",
+            project_id=0,
+            public_access_switch=False,
+            security_groups=[local["sg_id"]],
+            memory=4,
+            storage=250,
+            backup_plan=tencentcloud.postgresql.InstanceBackupPlanArgs(
+                min_backup_start_time="01:10:11",
+                max_backup_start_time="02:10:11",
+                base_backup_retention_period=5,
+                backup_periods=[
+                    "monday",
+                    "thursday",
+                    "sunday",
+                ],
+            ),
+            db_kernel_version="v13.3_r1.4",
+            tags={
+                "tf": "teest",
+            })
         ```
 
         ## Import
@@ -1481,9 +1547,13 @@ class Instance(pulumi.CustomResource):
             if storage is None and not opts.urn:
                 raise TypeError("Missing required property 'storage'")
             __props__.__dict__["storage"] = storage
+            if subnet_id is None and not opts.urn:
+                raise TypeError("Missing required property 'subnet_id'")
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
             __props__.__dict__["voucher_ids"] = voucher_ids
+            if vpc_id is None and not opts.urn:
+                raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["private_access_ip"] = None
@@ -1545,12 +1615,12 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
-        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        :param pulumi.Input[str] availability_zone: Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         :param pulumi.Input[pulumi.InputType['InstanceBackupPlanArgs']] backup_plan: Specify DB backup plan.
-        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        :param pulumi.Input[str] charge_type: Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] charset: Charset of the root account. Valid values are `UTF8`,`LATIN1`.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
-        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        :param pulumi.Input[str] db_kernel_version: PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
@@ -1562,7 +1632,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `_postgresql.get_specinfos` provides.
         :param pulumi.Input[str] name: Name of the postgresql instance.
         :param pulumi.Input[int] need_support_tde: Whether to support data transparent encryption, 1: yes, 0: no (default).
-        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[int] period: Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         :param pulumi.Input[str] private_access_ip: IP for private access.
         :param pulumi.Input[int] private_access_port: Port for private access.
         :param pulumi.Input[int] project_id: Project id, default value is `0`.
@@ -1640,7 +1710,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> pulumi.Output[str]:
         """
-        Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         """
         return pulumi.get(self, "availability_zone")
 
@@ -1656,7 +1726,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "charge_type")
 
@@ -1680,7 +1750,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="dbKernelVersion")
     def db_kernel_version(self) -> pulumi.Output[str]:
         """
-        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         """
         return pulumi.get(self, "db_kernel_version")
 
@@ -1776,7 +1846,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def period(self) -> pulumi.Output[Optional[int]]:
         """
-        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         """
         return pulumi.get(self, "period")
 
@@ -1862,7 +1932,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Output[Optional[str]]:
+    def subnet_id(self) -> pulumi.Output[str]:
         """
         ID of subnet.
         """
@@ -1894,7 +1964,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Output[Optional[str]]:
+    def vpc_id(self) -> pulumi.Output[str]:
         """
         ID of VPC.
         """

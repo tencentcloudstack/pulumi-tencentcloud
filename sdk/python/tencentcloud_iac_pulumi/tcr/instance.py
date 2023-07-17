@@ -458,8 +458,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        Using public network access whitelist
+        ### Using public network access whitelist
 
         ```python
         import pulumi
@@ -477,8 +476,7 @@ class Instance(pulumi.CustomResource):
                 ),
             ])
         ```
-
-        Create with Replications
+        ### Create with Replications
 
         ```python
         import pulumi
@@ -561,8 +559,7 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         ```
-
-        Using public network access whitelist
+        ### Using public network access whitelist
 
         ```python
         import pulumi
@@ -580,8 +577,7 @@ class Instance(pulumi.CustomResource):
                 ),
             ])
         ```
-
-        Create with Replications
+        ### Create with Replications
 
         ```python
         import pulumi

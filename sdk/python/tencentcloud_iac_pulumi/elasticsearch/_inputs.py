@@ -104,7 +104,7 @@ class InstanceNodeInfoListArgs:
         :param pulumi.Input[int] node_num: Number of nodes.
         :param pulumi.Input[str] node_type: Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
         :param pulumi.Input[int] disk_size: Node disk size. Unit is GB, and default value is `100`.
-        :param pulumi.Input[str] disk_type: Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+        :param pulumi.Input[str] disk_type: Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
         :param pulumi.Input[bool] encrypt: Decides to encrypt this disk or not.
         :param pulumi.Input[str] type: Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
         """
@@ -159,7 +159,7 @@ class InstanceNodeInfoListArgs:
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
+        Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 

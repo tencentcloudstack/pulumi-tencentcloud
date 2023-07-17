@@ -23,6 +23,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// {
     ///     public MyStack()
     ///     {
+    ///         var newRoGroup = new Tencentcloud.Postgresql.ReadonlyGroup("newRoGroup", new Tencentcloud.Postgresql.ReadonlyGroupArgs
+    ///         {
+    ///             MasterDbInstanceId = local.Pgsql_id,
+    ///             ProjectId = 0,
+    ///             VpcId = local.Vpc_id,
+    ///             SubnetId = local.Subnet_id,
+    ///             ReplayLagEliminate = 1,
+    ///             ReplayLatencyEliminate = 1,
+    ///             MaxReplayLag = 100,
+    ///             MaxReplayLatency = 512,
+    ///             MinDelayEliminateReserve = 1,
+    ///         });
     ///         var foo = new Tencentcloud.Postgresql.ReadonlyInstance("foo", new Tencentcloud.Postgresql.ReadonlyInstanceArgs
     ///         {
     ///             AutoRenewFlag = 0,
@@ -39,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///             Storage = 250,
     ///             SubnetId = "subnet-enm92y0m",
     ///             VpcId = "vpc-86v957zb",
-    ///             Zone = "ap-guangzhou-6",
+    ///             ReadOnlyGroupId = newRoGroup.Id,
     ///         });
     ///     }
     /// 
@@ -51,7 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// postgresql readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+    ///  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance")]
@@ -88,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string?> InstanceChargeType { get; private set; } = null!;
 
         /// <summary>
+        /// The instance ID of this readonly resource.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the primary instance to which the read-only replica belongs.
         /// </summary>
         [Output("masterDbInstanceId")]
@@ -118,10 +136,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
+        /// IP for private access.
+        /// </summary>
+        [Output("privateAccessIp")]
+        public Output<string> PrivateAccessIp { get; private set; } = null!;
+
+        /// <summary>
+        /// Port for private access.
+        /// </summary>
+        [Output("privateAccessPort")]
+        public Output<int> PrivateAccessPort { get; private set; } = null!;
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Output("projectId")]
         public Output<int> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// RO group ID.
+        /// </summary>
+        [Output("readOnlyGroupId")]
+        public Output<string?> ReadOnlyGroupId { get; private set; } = null!;
 
         /// <summary>
         /// ID of security group.
@@ -266,6 +302,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("projectId", required: true)]
         public Input<int> ProjectId { get; set; } = null!;
 
+        /// <summary>
+        /// RO group ID.
+        /// </summary>
+        [Input("readOnlyGroupId")]
+        public Input<string>? ReadOnlyGroupId { get; set; }
+
         [Input("securityGroupsIds", required: true)]
         private InputList<string>? _securityGroupsIds;
 
@@ -352,6 +394,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
+        /// The instance ID of this readonly resource.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
         /// ID of the primary instance to which the read-only replica belongs.
         /// </summary>
         [Input("masterDbInstanceId")]
@@ -382,10 +430,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? Period { get; set; }
 
         /// <summary>
+        /// IP for private access.
+        /// </summary>
+        [Input("privateAccessIp")]
+        public Input<string>? PrivateAccessIp { get; set; }
+
+        /// <summary>
+        /// Port for private access.
+        /// </summary>
+        [Input("privateAccessPort")]
+        public Input<int>? PrivateAccessPort { get; set; }
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
+        /// RO group ID.
+        /// </summary>
+        [Input("readOnlyGroupId")]
+        public Input<string>? ReadOnlyGroupId { get; set; }
 
         [Input("securityGroupsIds")]
         private InputList<string>? _securityGroupsIds;

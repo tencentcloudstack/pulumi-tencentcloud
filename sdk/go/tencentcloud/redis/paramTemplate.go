@@ -42,8 +42,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Copy from another template
+// ### Copy from another template
 //
 // ```go
 // package main

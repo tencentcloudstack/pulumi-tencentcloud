@@ -166,8 +166,7 @@ class BandwidthLimit(pulumi.CustomResource):
         Provides a resource to limit CCN bandwidth.
 
         ## Example Usage
-
-        Set the upper limit of regional outbound bandwidth
+        ### Set the upper limit of regional outbound bandwidth
 
         ```python
         import pulumi
@@ -185,8 +184,7 @@ class BandwidthLimit(pulumi.CustomResource):
             region=other_region1,
             bandwidth_limit=500)
         ```
-
-        Set the upper limit between regions
+        ### Set the upper limit between regions
 
         ```python
         import pulumi
@@ -227,8 +225,7 @@ class BandwidthLimit(pulumi.CustomResource):
         Provides a resource to limit CCN bandwidth.
 
         ## Example Usage
-
-        Set the upper limit of regional outbound bandwidth
+        ### Set the upper limit of regional outbound bandwidth
 
         ```python
         import pulumi
@@ -246,8 +243,7 @@ class BandwidthLimit(pulumi.CustomResource):
             region=other_region1,
             bandwidth_limit=500)
         ```
-
-        Set the upper limit between regions
+        ### Set the upper limit between regions
 
         ```python
         import pulumi

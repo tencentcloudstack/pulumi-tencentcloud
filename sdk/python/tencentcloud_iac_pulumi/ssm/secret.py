@@ -14,21 +14,27 @@ __all__ = ['SecretArgs', 'Secret']
 class SecretArgs:
     def __init__(__self__, *,
                  secret_name: pulumi.Input[str],
+                 additional_config: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  is_enabled: Optional[pulumi.Input[bool]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  recovery_window_in_days: Optional[pulumi.Input[int]] = None,
+                 secret_type: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Secret resource.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         pulumi.set(__self__, "secret_name", secret_name)
+        if additional_config is not None:
+            pulumi.set(__self__, "additional_config", additional_config)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if is_enabled is not None:
@@ -37,6 +43,8 @@ class SecretArgs:
             pulumi.set(__self__, "kms_key_id", kms_key_id)
         if recovery_window_in_days is not None:
             pulumi.set(__self__, "recovery_window_in_days", recovery_window_in_days)
+        if secret_type is not None:
+            pulumi.set(__self__, "secret_type", secret_type)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -51,6 +59,18 @@ class SecretArgs:
     @secret_name.setter
     def secret_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "secret_name", value)
+
+    @property
+    @pulumi.getter(name="additionalConfig")
+    def additional_config(self) -> Optional[pulumi.Input[str]]:
+        """
+        Additional config for specific secret types in JSON string format.
+        """
+        return pulumi.get(self, "additional_config")
+
+    @additional_config.setter
+    def additional_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "additional_config", value)
 
     @property
     @pulumi.getter
@@ -101,6 +121,18 @@ class SecretArgs:
         pulumi.set(self, "recovery_window_in_days", value)
 
     @property
+    @pulumi.getter(name="secretType")
+    def secret_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        """
+        return pulumi.get(self, "secret_type")
+
+    @secret_type.setter
+    def secret_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "secret_type", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -116,23 +148,29 @@ class SecretArgs:
 @pulumi.input_type
 class _SecretState:
     def __init__(__self__, *,
+                 additional_config: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  is_enabled: Optional[pulumi.Input[bool]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  recovery_window_in_days: Optional[pulumi.Input[int]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
+                 secret_type: Optional[pulumi.Input[int]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Secret resources.
+        :param pulumi.Input[str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
+        if additional_config is not None:
+            pulumi.set(__self__, "additional_config", additional_config)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if is_enabled is not None:
@@ -143,10 +181,24 @@ class _SecretState:
             pulumi.set(__self__, "recovery_window_in_days", recovery_window_in_days)
         if secret_name is not None:
             pulumi.set(__self__, "secret_name", secret_name)
+        if secret_type is not None:
+            pulumi.set(__self__, "secret_type", secret_type)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="additionalConfig")
+    def additional_config(self) -> Optional[pulumi.Input[str]]:
+        """
+        Additional config for specific secret types in JSON string format.
+        """
+        return pulumi.get(self, "additional_config")
+
+    @additional_config.setter
+    def additional_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "additional_config", value)
 
     @property
     @pulumi.getter
@@ -209,6 +261,18 @@ class _SecretState:
         pulumi.set(self, "secret_name", value)
 
     @property
+    @pulumi.getter(name="secretType")
+    def secret_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        """
+        return pulumi.get(self, "secret_type")
+
+    @secret_type.setter
+    def secret_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "secret_type", value)
+
+    @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
@@ -238,30 +302,59 @@ class Secret(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 additional_config: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  is_enabled: Optional[pulumi.Input[bool]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  recovery_window_in_days: Optional[pulumi.Input[int]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
+                 secret_type: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provide a resource to create a SSM secret.
 
         ## Example Usage
+        ### Create user defined secret
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.ssm.Secret("foo",
-            description="test secret",
+            description="user defined secret",
             is_enabled=True,
             recovery_window_in_days=0,
             secret_name="test",
             tags={
                 "test-tag": "test",
             })
+        ```
+        ### Create redis secret
+
+        ```python
+        import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        instance = tencentcloud.Redis.get_instances(zone="ap-guangzhou-6")
+        secret = tencentcloud.ssm.Secret("secret",
+            secret_name="for-redis-test",
+            description="redis secret",
+            is_enabled=False,
+            secret_type=4,
+            additional_config=json.dumps({
+                "Region": "ap-guangzhou",
+                "Privilege": "r",
+                "InstanceId": instance.instance_lists[0].redis_id,
+                "ReadonlyPolicy": ["master"],
+                "Remark": "for tf test",
+            }),
+            tags={
+                "test-tag": "test",
+            },
+            recovery_window_in_days=0)
         ```
 
         ## Import
@@ -274,11 +367,13 @@ class Secret(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         ...
@@ -291,19 +386,46 @@ class Secret(pulumi.CustomResource):
         Provide a resource to create a SSM secret.
 
         ## Example Usage
+        ### Create user defined secret
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.ssm.Secret("foo",
-            description="test secret",
+            description="user defined secret",
             is_enabled=True,
             recovery_window_in_days=0,
             secret_name="test",
             tags={
                 "test-tag": "test",
             })
+        ```
+        ### Create redis secret
+
+        ```python
+        import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        instance = tencentcloud.Redis.get_instances(zone="ap-guangzhou-6")
+        secret = tencentcloud.ssm.Secret("secret",
+            secret_name="for-redis-test",
+            description="redis secret",
+            is_enabled=False,
+            secret_type=4,
+            additional_config=json.dumps({
+                "Region": "ap-guangzhou",
+                "Privilege": "r",
+                "InstanceId": instance.instance_lists[0].redis_id,
+                "ReadonlyPolicy": ["master"],
+                "Remark": "for tf test",
+            }),
+            tags={
+                "test-tag": "test",
+            },
+            recovery_window_in_days=0)
         ```
 
         ## Import
@@ -329,11 +451,13 @@ class Secret(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 additional_config: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  is_enabled: Optional[pulumi.Input[bool]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  recovery_window_in_days: Optional[pulumi.Input[int]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
+                 secret_type: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
@@ -349,6 +473,7 @@ class Secret(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SecretArgs.__new__(SecretArgs)
 
+            __props__.__dict__["additional_config"] = additional_config
             __props__.__dict__["description"] = description
             __props__.__dict__["is_enabled"] = is_enabled
             __props__.__dict__["kms_key_id"] = kms_key_id
@@ -356,6 +481,7 @@ class Secret(pulumi.CustomResource):
             if secret_name is None and not opts.urn:
                 raise TypeError("Missing required property 'secret_name'")
             __props__.__dict__["secret_name"] = secret_name
+            __props__.__dict__["secret_type"] = secret_type
             __props__.__dict__["tags"] = tags
             __props__.__dict__["status"] = None
         super(Secret, __self__).__init__(
@@ -368,11 +494,13 @@ class Secret(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            additional_config: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             is_enabled: Optional[pulumi.Input[bool]] = None,
             kms_key_id: Optional[pulumi.Input[str]] = None,
             recovery_window_in_days: Optional[pulumi.Input[int]] = None,
             secret_name: Optional[pulumi.Input[str]] = None,
+            secret_type: Optional[pulumi.Input[int]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Secret':
         """
@@ -382,11 +510,13 @@ class Secret(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
@@ -394,14 +524,24 @@ class Secret(pulumi.CustomResource):
 
         __props__ = _SecretState.__new__(_SecretState)
 
+        __props__.__dict__["additional_config"] = additional_config
         __props__.__dict__["description"] = description
         __props__.__dict__["is_enabled"] = is_enabled
         __props__.__dict__["kms_key_id"] = kms_key_id
         __props__.__dict__["recovery_window_in_days"] = recovery_window_in_days
         __props__.__dict__["secret_name"] = secret_name
+        __props__.__dict__["secret_type"] = secret_type
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
         return Secret(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="additionalConfig")
+    def additional_config(self) -> pulumi.Output[Optional[str]]:
+        """
+        Additional config for specific secret types in JSON string format.
+        """
+        return pulumi.get(self, "additional_config")
 
     @property
     @pulumi.getter
@@ -442,6 +582,14 @@ class Secret(pulumi.CustomResource):
         Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
+
+    @property
+    @pulumi.getter(name="secretType")
+    def secret_type(self) -> pulumi.Output[int]:
+        """
+        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        """
+        return pulumi.get(self, "secret_type")
 
     @property
     @pulumi.getter

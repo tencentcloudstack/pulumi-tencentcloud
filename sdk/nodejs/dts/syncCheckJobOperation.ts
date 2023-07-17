@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a dts syncCheckJobOperation
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const syncCheckJobOperation = new tencentcloud.Dts.SyncCheckJobOperation("sync_check_job_operation", {
+ *     jobId: "",
+ * });
+ * ```
+ */
 export class SyncCheckJobOperation extends pulumi.CustomResource {
     /**
      * Get an existing SyncCheckJobOperation resource's state with the given name, ID, and optional extra

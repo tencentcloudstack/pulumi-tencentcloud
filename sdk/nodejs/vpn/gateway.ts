@@ -6,8 +6,53 @@ import * as utilities from "../utilities";
 
 /**
  * ## Example Usage
+ * ### VPC SSL VPN gateway
  *
- * POSTPAID_BY_HOUR VPN gateway
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ *     bandwidth: 5,
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     type: "SSL",
+ *     vpcId: "vpc-86v957zb",
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ * ### CCN IPEC VPN gateway
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ *     bandwidth: 5,
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     type: "CCN",
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ * ### CCN SSL VPN gateway
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myCgw = new tencentcloud.Vpn.Gateway("my_cgw", {
+ *     bandwidth: 5,
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     type: "SSL_CCN",
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ * ### POSTPAID_BY_HOUR VPN gateway
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -22,8 +67,7 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
- *
- * PREPAID VPN gateway
+ * ### PREPAID VPN gateway
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -138,11 +182,11 @@ export class Gateway extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+     * Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
      */
     public readonly type!: pulumi.Output<string>;
     /**
-     * ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+     * ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
      */
     public readonly vpcId!: pulumi.Output<string | undefined>;
     /**
@@ -275,11 +319,11 @@ export interface GatewayState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+     * Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
      */
     type?: pulumi.Input<string>;
     /**
-     * ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+     * ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
      */
     vpcId?: pulumi.Input<string>;
     /**
@@ -325,11 +369,11 @@ export interface GatewayArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+     * Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
      */
     type?: pulumi.Input<string>;
     /**
-     * ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+     * ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
      */
     vpcId?: pulumi.Input<string>;
     /**

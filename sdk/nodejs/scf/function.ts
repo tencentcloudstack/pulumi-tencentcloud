@@ -22,8 +22,7 @@ import * as utilities from "../utilities";
  *     runtime: "Python3.6",
  * });
  * ```
- *
- * Using CFS config
+ * ### Using CFS config
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -144,6 +143,10 @@ export class Function extends pulumi.CustomResource {
      */
     public /*out*/ readonly errNo!: pulumi.Output<number>;
     /**
+     * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+     */
+    public readonly funcType!: pulumi.Output<string>;
+    /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
     public readonly handler!: pulumi.Output<string>;
@@ -261,6 +264,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["enablePublicNet"] = state ? state.enablePublicNet : undefined;
             resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["errNo"] = state ? state.errNo : undefined;
+            resourceInputs["funcType"] = state ? state.funcType : undefined;
             resourceInputs["handler"] = state ? state.handler : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["imageConfigs"] = state ? state.imageConfigs : undefined;
@@ -301,6 +305,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["enableEipConfig"] = args ? args.enableEipConfig : undefined;
             resourceInputs["enablePublicNet"] = args ? args.enablePublicNet : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
+            resourceInputs["funcType"] = args ? args.funcType : undefined;
             resourceInputs["handler"] = args ? args.handler : undefined;
             resourceInputs["imageConfigs"] = args ? args.imageConfigs : undefined;
             resourceInputs["l5Enable"] = args ? args.l5Enable : undefined;
@@ -403,6 +408,10 @@ export interface FunctionState {
      * SCF function code error code.
      */
     errNo?: pulumi.Input<number>;
+    /**
+     * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+     */
+    funcType?: pulumi.Input<string>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
@@ -537,6 +546,10 @@ export interface FunctionArgs {
      * Environment of the SCF function.
      */
     environment?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+     */
+    funcType?: pulumi.Input<string>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */

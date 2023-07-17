@@ -55,7 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// </summary>
         public readonly string HealthCheckHttpPath;
         /// <summary>
-        /// Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Interval time of health check. The value range is 2-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         /// </summary>
         public readonly int HealthCheckIntervalTime;
         /// <summary>

@@ -11,8 +11,10 @@ export * from "./backupStorageLocation";
 export * from "./cluster";
 export * from "./clusterAttachment";
 export * from "./clusterEndpoint";
+export * from "./encryptionProtection";
 export * from "./getAvailableClusterVersions";
 export * from "./getCharts";
+export * from "./getClusterAuthenticationOptions";
 export * from "./getClusterCommonNames";
 export * from "./getClusterLevels";
 export * from "./getClusters";
@@ -27,6 +29,7 @@ import { BackupStorageLocation } from "./backupStorageLocation";
 import { Cluster } from "./cluster";
 import { ClusterAttachment } from "./clusterAttachment";
 import { ClusterEndpoint } from "./clusterEndpoint";
+import { EncryptionProtection } from "./encryptionProtection";
 import { NodePool } from "./nodePool";
 import { ScaleWorker } from "./scaleWorker";
 import { ServerlessNodePool } from "./serverlessNodePool";
@@ -47,6 +50,8 @@ const _module = {
                 return new ClusterAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint":
                 return new ClusterEndpoint(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
+                return new EncryptionProtection(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/nodePool:NodePool":
                 return new NodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
@@ -64,6 +69,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageL
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterEndpoint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/encryptionProtection", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/scaleWorker", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/serverlessNodePool", _module)

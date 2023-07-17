@@ -101,10 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
         /// </summary>
         [Output("deviceType")]
-        public Output<string?> DeviceType { get; private set; } = null!;
+        public Output<string> DeviceType { get; private set; } = null!;
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Output("engineVersion")]
         public Output<string?> EngineVersion { get; private set; } = null!;
@@ -119,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// Zone information about first slave instance.
         /// </summary>
         [Output("firstSlaveZone")]
-        public Output<string?> FirstSlaveZone { get; private set; } = null!;
+        public Output<string> FirstSlaveZone { get; private set; } = null!;
 
         /// <summary>
         /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -174,6 +174,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("locked")]
         public Output<int> Locked { get; private set; } = null!;
+
+        /// <summary>
+        /// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Output("maxDeayTime")]
+        public Output<int?> MaxDeayTime { get; private set; } = null!;
 
         /// <summary>
         /// Memory size (in MB).
@@ -272,6 +278,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<int> TaskStatus { get; private set; } = null!;
 
         /// <summary>
+        /// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Output("upgradeSubversion")]
+        public Output<int?> UpgradeSubversion { get; private set; } = null!;
+
+        /// <summary>
         /// Disk size (in GB).
         /// </summary>
         [Output("volumeSize")]
@@ -361,7 +373,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -401,6 +413,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("intranetPort")]
         public Input<int>? IntranetPort { get; set; }
+
+        /// <summary>
+        /// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Input("maxDeayTime")]
+        public Input<int>? MaxDeayTime { get; set; }
 
         /// <summary>
         /// Memory size (in MB).
@@ -505,6 +523,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
 
         /// <summary>
+        /// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Input("upgradeSubversion")]
+        public Input<int>? UpgradeSubversion { get; set; }
+
+        /// <summary>
         /// Disk size (in GB).
         /// </summary>
         [Input("volumeSize", required: true)]
@@ -554,7 +578,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -624,6 +648,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("locked")]
         public Input<int>? Locked { get; set; }
+
+        /// <summary>
+        /// Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Input("maxDeayTime")]
+        public Input<int>? MaxDeayTime { get; set; }
 
         /// <summary>
         /// Memory size (in MB).
@@ -738,6 +768,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("taskStatus")]
         public Input<int>? TaskStatus { get; set; }
+
+        /// <summary>
+        /// Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        /// </summary>
+        [Input("upgradeSubversion")]
+        public Input<int>? UpgradeSubversion { get; set; }
 
         /// <summary>
         /// Disk size (in GB).

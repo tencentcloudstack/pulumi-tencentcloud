@@ -96,7 +96,7 @@ class ClusterArgs:
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
@@ -544,7 +544,7 @@ class ClusterArgs:
     @pulumi.getter(name="clusterVersion")
     def cluster_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         """
         return pulumi.get(self, "cluster_version")
 
@@ -986,7 +986,7 @@ class _ClusterState:
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
@@ -1490,7 +1490,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterVersion")
     def cluster_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         """
         return pulumi.get(self, "cluster_version")
 
@@ -2007,7 +2007,306 @@ class Cluster(pulumi.CustomResource):
         Provide a resource to create a kubernetes cluster.
 
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
-        **NOTE:**  We recommend the usage of one cluster without worker config + node pool to manage cluster and nodes. It's a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
+
+        > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `worker_config`, then adds nodes by the `Kubernetes.NodePool` resource.
+        It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "10.31.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc_first.instance_lists[0].vpc_id,
+            cluster_cidr=cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_first.instance_lists[0].subnet_id,
+                    img_id="img-rkiynh11",
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_second.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                    cam_role_name="CVM_QcsRole",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Use Kubelet
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "10.31.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc_first.instance_lists[0].vpc_id,
+            cluster_cidr=cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_first.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_second.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    cam_role_name="CVM_QcsRole",
+                    key_ids="skey-11112222",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            extra_args=["root-dir=/var/lib/kubelet"])
+        ```
+        ### Use node pool global config
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = config.get("vpc")
+        if vpc is None:
+            vpc = "vpc-dk8zmwuf"
+        subnet = config.get("subnet")
+        if subnet is None:
+            subnet = "subnet-pqfek0t8"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA1.LARGE8"
+        test_node_pool_global_config = tencentcloud.kubernetes.Cluster("testNodePoolGlobalConfig",
+            vpc_id=vpc,
+            cluster_cidr="10.1.0.0/16",
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=subnet,
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                key_ids="skey-11112222",
+            )],
+            node_pool_global_configs=[tencentcloud.kubernetes.ClusterNodePoolGlobalConfigArgs(
+                is_scale_in_enabled=True,
+                expander="random",
+                ignore_daemon_sets_utilization=True,
+                max_concurrent_scale_in=5,
+                scale_in_delay=15,
+                scale_in_unneeded_time=15,
+                scale_in_utilization_threshold=30,
+                skip_nodes_with_local_storage=False,
+                skip_nodes_with_system_pods=True,
+            )],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Using VPC-CNI network type
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-1"
+        vpc = config.get("vpc")
+        if vpc is None:
+            vpc = "vpc-r1m1fyx5"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.SMALL2"
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=256,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            network_type="VPC-CNI",
+            eni_subnet_ids=["subnet-bk1etlyu"],
+            service_cidr="10.1.0.0/24",
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id="subnet-t5dv27rs",
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                key_ids="skey-11112222",
+            )],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Using ops options
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            cluster_audit=tencentcloud.kubernetes.ClusterClusterAuditArgs(
+                enabled=True,
+                log_set_id="",
+                log_set_topic="",
+            ),
+            event_persistence=tencentcloud.kubernetes.ClusterEventPersistenceArgs(
+                enabled=True,
+                log_set_id="",
+                log_set_topic="",
+            ),
+            log_agent=tencentcloud.kubernetes.ClusterLogAgentArgs(
+                enabled=True,
+                kubelet_root_dir="",
+            ))
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -2035,7 +2334,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
@@ -2076,7 +2375,306 @@ class Cluster(pulumi.CustomResource):
         Provide a resource to create a kubernetes cluster.
 
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
-        **NOTE:**  We recommend the usage of one cluster without worker config + node pool to manage cluster and nodes. It's a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
+
+        > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `worker_config`, then adds nodes by the `Kubernetes.NodePool` resource.
+        It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "10.31.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc_first.instance_lists[0].vpc_id,
+            cluster_cidr=cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_first.instance_lists[0].subnet_id,
+                    img_id="img-rkiynh11",
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_second.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                    cam_role_name="CVM_QcsRole",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Use Kubelet
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        cluster_cidr = config.get("clusterCidr")
+        if cluster_cidr is None:
+            cluster_cidr = "10.31.0.0/16"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        vpc_first = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        vpc_second = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc_first.instance_lists[0].vpc_id,
+            cluster_cidr=cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_first.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    key_ids="skey-11112222",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=vpc_second.instance_lists[0].subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    cam_role_name="CVM_QcsRole",
+                    key_ids="skey-11112222",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            extra_args=["root-dir=/var/lib/kubelet"])
+        ```
+        ### Use node pool global config
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = config.get("vpc")
+        if vpc is None:
+            vpc = "vpc-dk8zmwuf"
+        subnet = config.get("subnet")
+        if subnet is None:
+            subnet = "subnet-pqfek0t8"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA1.LARGE8"
+        test_node_pool_global_config = tencentcloud.kubernetes.Cluster("testNodePoolGlobalConfig",
+            vpc_id=vpc,
+            cluster_cidr="10.1.0.0/16",
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=32,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=subnet,
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                key_ids="skey-11112222",
+            )],
+            node_pool_global_configs=[tencentcloud.kubernetes.ClusterNodePoolGlobalConfigArgs(
+                is_scale_in_enabled=True,
+                expander="random",
+                ignore_daemon_sets_utilization=True,
+                max_concurrent_scale_in=5,
+                scale_in_delay=15,
+                scale_in_unneeded_time=15,
+                scale_in_utilization_threshold=30,
+                skip_nodes_with_local_storage=False,
+                skip_nodes_with_system_pods=True,
+            )],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Using VPC-CNI network type
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-1"
+        vpc = config.get("vpc")
+        if vpc is None:
+            vpc = "vpc-r1m1fyx5"
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.SMALL2"
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            vpc_id=vpc,
+            cluster_max_pod_num=32,
+            cluster_name="test",
+            cluster_desc="test cluster desc",
+            cluster_max_service_num=256,
+            cluster_internet=True,
+            cluster_deploy_type="MANAGED_CLUSTER",
+            network_type="VPC-CNI",
+            eni_subnet_ids=["subnet-bk1etlyu"],
+            service_cidr="10.1.0.0/24",
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=availability_zone,
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id="subnet-t5dv27rs",
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                key_ids="skey-11112222",
+            )],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        ```
+        ### Using ops options
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+            cluster_audit=tencentcloud.kubernetes.ClusterClusterAuditArgs(
+                enabled=True,
+                log_set_id="",
+                log_set_topic="",
+            ),
+            event_persistence=tencentcloud.kubernetes.ClusterEventPersistenceArgs(
+                enabled=True,
+                log_set_id="",
+                log_set_topic="",
+            ),
+            log_agent=tencentcloud.kubernetes.ClusterLogAgentArgs(
+                enabled=True,
+                kubelet_root_dir="",
+            ))
+        ```
 
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
@@ -2343,7 +2941,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
-        :param pulumi.Input[str] cluster_version: Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
@@ -2671,9 +3269,9 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clusterVersion")
-    def cluster_version(self) -> pulumi.Output[Optional[str]]:
+    def cluster_version(self) -> pulumi.Output[str]:
         """
-        Version of the cluster, Default is '1.10.5'. Use `_kubernetes.get_available_cluster_versions` to get the available versions.
+        Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         """
         return pulumi.get(self, "cluster_version")
 

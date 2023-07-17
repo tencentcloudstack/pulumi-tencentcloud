@@ -37,6 +37,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Namespace{}
 	case "tencentcloud:Tcr/repository:Repository":
 		r = &Repository{}
+	case "tencentcloud:Tcr/serviceAccount:ServiceAccount":
+		r = &ServiceAccount{}
+	case "tencentcloud:Tcr/tagRetentionExecutionConfig:TagRetentionExecutionConfig":
+		r = &TagRetentionExecutionConfig{}
 	case "tencentcloud:Tcr/tagRetentionRule:TagRetentionRule":
 		r = &TagRetentionRule{}
 	case "tencentcloud:Tcr/token:Token":
@@ -96,6 +100,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tcr/repository",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/serviceAccount",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tcr/tagRetentionExecutionConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

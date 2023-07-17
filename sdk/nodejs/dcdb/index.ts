@@ -7,26 +7,54 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./account";
 export * from "./accountPrivileges";
+export * from "./activateHourInstanceOperation";
+export * from "./cancelDcnJobOperation";
 export * from "./dbInstance";
 export * from "./dbParameters";
+export * from "./dbSyncModeConfig";
+export * from "./encryptAttributesConfig";
+export * from "./flushBinlogOperation";
 export * from "./getAccounts";
 export * from "./getDatabaseObjects";
 export * from "./getDatabaseTables";
 export * from "./getDatabases";
+export * from "./getFileDownloadUrl";
+export * from "./getInstanceNodeInfo";
 export * from "./getInstances";
+export * from "./getLogFiles";
+export * from "./getOrders";
 export * from "./getParameters";
+export * from "./getPrice";
+export * from "./getProjectSecurityGroups";
+export * from "./getProjects";
+export * from "./getRenewalPrice";
+export * from "./getSaleInfo";
 export * from "./getSecurityGroups";
+export * from "./getShardSpec";
 export * from "./getShards";
+export * from "./getSlowLogs";
+export * from "./getUpgradePrice";
 export * from "./hourdbInstance";
+export * from "./instanceConfig";
+export * from "./isolateHourInstanceOperation";
 export * from "./securityGroupAttachment";
+export * from "./switchDbInstanceHaOperation";
 
 // Import resources to register:
 import { Account } from "./account";
 import { AccountPrivileges } from "./accountPrivileges";
+import { ActivateHourInstanceOperation } from "./activateHourInstanceOperation";
+import { CancelDcnJobOperation } from "./cancelDcnJobOperation";
 import { DbInstance } from "./dbInstance";
 import { DbParameters } from "./dbParameters";
+import { DbSyncModeConfig } from "./dbSyncModeConfig";
+import { EncryptAttributesConfig } from "./encryptAttributesConfig";
+import { FlushBinlogOperation } from "./flushBinlogOperation";
 import { HourdbInstance } from "./hourdbInstance";
+import { InstanceConfig } from "./instanceConfig";
+import { IsolateHourInstanceOperation } from "./isolateHourInstanceOperation";
 import { SecurityGroupAttachment } from "./securityGroupAttachment";
+import { SwitchDbInstanceHaOperation } from "./switchDbInstanceHaOperation";
 
 const _module = {
     version: utilities.getVersion(),
@@ -36,14 +64,30 @@ const _module = {
                 return new Account(name, <any>undefined, { urn })
             case "tencentcloud:Dcdb/accountPrivileges:AccountPrivileges":
                 return new AccountPrivileges(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/activateHourInstanceOperation:ActivateHourInstanceOperation":
+                return new ActivateHourInstanceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/cancelDcnJobOperation:CancelDcnJobOperation":
+                return new CancelDcnJobOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dcdb/dbInstance:DbInstance":
                 return new DbInstance(name, <any>undefined, { urn })
             case "tencentcloud:Dcdb/dbParameters:DbParameters":
                 return new DbParameters(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig":
+                return new DbSyncModeConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig":
+                return new EncryptAttributesConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/flushBinlogOperation:FlushBinlogOperation":
+                return new FlushBinlogOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dcdb/hourdbInstance:HourdbInstance":
                 return new HourdbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/instanceConfig:InstanceConfig":
+                return new InstanceConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/isolateHourInstanceOperation:IsolateHourInstanceOperation":
+                return new IsolateHourInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment":
                 return new SecurityGroupAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Dcdb/switchDbInstanceHaOperation:SwitchDbInstanceHaOperation":
+                return new SwitchDbInstanceHaOperation(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -51,7 +95,15 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/accountPrivileges", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/activateHourInstanceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/cancelDcnJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/dbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/dbParameters", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/dbSyncModeConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/encryptAttributesConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/flushBinlogOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/hourdbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/instanceConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/isolateHourInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/securityGroupAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dcdb/switchDbInstanceHaOperation", _module)

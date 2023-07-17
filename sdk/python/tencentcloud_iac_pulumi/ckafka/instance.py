@@ -24,6 +24,7 @@ class InstanceArgs:
                  dynamic_retention_config: Optional[pulumi.Input['InstanceDynamicRetentionConfigArgs']] = None,
                  instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
+                 max_message_byte: Optional[pulumi.Input[int]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
                  partition: Optional[pulumi.Input[int]] = None,
@@ -48,11 +49,12 @@ class InstanceArgs:
         :param pulumi.Input['InstanceDynamicRetentionConfigArgs'] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
+        :param pulumi.Input[int] max_message_byte: The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Bandwidth of the public network.
+        :param pulumi.Input[int] public_network: It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
@@ -78,6 +80,8 @@ class InstanceArgs:
             pulumi.set(__self__, "instance_type", instance_type)
         if kafka_version is not None:
             pulumi.set(__self__, "kafka_version", kafka_version)
+        if max_message_byte is not None:
+            pulumi.set(__self__, "max_message_byte", max_message_byte)
         if msg_retention_time is not None:
             pulumi.set(__self__, "msg_retention_time", msg_retention_time)
         if multi_zone_flag is not None:
@@ -86,6 +90,9 @@ class InstanceArgs:
             pulumi.set(__self__, "partition", partition)
         if period is not None:
             pulumi.set(__self__, "period", period)
+        if public_network is not None:
+            warnings.warn("""It has been deprecated from version 1.81.6. If set public network value, it will cause error.""", DeprecationWarning)
+            pulumi.log.warn("""public_network is deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.""")
         if public_network is not None:
             pulumi.set(__self__, "public_network", public_network)
         if rebalance_time is not None:
@@ -217,6 +224,18 @@ class InstanceArgs:
         pulumi.set(self, "kafka_version", value)
 
     @property
+    @pulumi.getter(name="maxMessageByte")
+    def max_message_byte(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        """
+        return pulumi.get(self, "max_message_byte")
+
+    @max_message_byte.setter
+    def max_message_byte(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_message_byte", value)
+
+    @property
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> Optional[pulumi.Input[int]]:
         """
@@ -268,7 +287,7 @@ class InstanceArgs:
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> Optional[pulumi.Input[int]]:
         """
-        Bandwidth of the public network.
+        It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 
@@ -384,6 +403,7 @@ class _InstanceState:
                  instance_name: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
+                 max_message_byte: Optional[pulumi.Input[int]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
                  partition: Optional[pulumi.Input[int]] = None,
@@ -410,11 +430,12 @@ class _InstanceState:
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
+        :param pulumi.Input[int] max_message_byte: The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Bandwidth of the public network.
+        :param pulumi.Input[int] public_network: It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
@@ -443,6 +464,8 @@ class _InstanceState:
             pulumi.set(__self__, "instance_type", instance_type)
         if kafka_version is not None:
             pulumi.set(__self__, "kafka_version", kafka_version)
+        if max_message_byte is not None:
+            pulumi.set(__self__, "max_message_byte", max_message_byte)
         if msg_retention_time is not None:
             pulumi.set(__self__, "msg_retention_time", msg_retention_time)
         if multi_zone_flag is not None:
@@ -451,6 +474,9 @@ class _InstanceState:
             pulumi.set(__self__, "partition", partition)
         if period is not None:
             pulumi.set(__self__, "period", period)
+        if public_network is not None:
+            warnings.warn("""It has been deprecated from version 1.81.6. If set public network value, it will cause error.""", DeprecationWarning)
+            pulumi.log.warn("""public_network is deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.""")
         if public_network is not None:
             pulumi.set(__self__, "public_network", public_network)
         if rebalance_time is not None:
@@ -576,6 +602,18 @@ class _InstanceState:
         pulumi.set(self, "kafka_version", value)
 
     @property
+    @pulumi.getter(name="maxMessageByte")
+    def max_message_byte(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        """
+        return pulumi.get(self, "max_message_byte")
+
+    @max_message_byte.setter
+    def max_message_byte(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_message_byte", value)
+
+    @property
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> Optional[pulumi.Input[int]]:
         """
@@ -627,7 +665,7 @@ class _InstanceState:
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> Optional[pulumi.Input[int]]:
         """
-        Bandwidth of the public network.
+        It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 
@@ -781,6 +819,7 @@ class Instance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
+                 max_message_byte: Optional[pulumi.Input[int]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
                  partition: Optional[pulumi.Input[int]] = None,
@@ -802,42 +841,86 @@ class Instance(pulumi.CustomResource):
         > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
+        ### Basic Instance
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ckafka.Instance("foo",
-            band_width=40,
+        config = pulumi.Config()
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-68vi2d3h"
+        subnet_id = config.get("subnetId")
+        if subnet_id is None:
+            subnet_id = "subnet-ob6clqwk"
+        gz = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
+            product="ckafka")
+        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
+            instance_name="ckafka-instance-type-tf-test",
+            zone_id=gz.zones[0].id,
+            period=1,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            renew_flag=0,
+            kafka_version="2.4.1",
+            disk_size=1000,
+            disk_type="CLOUD_BASIC",
+            specifications_type="standard",
+            instance_type=2,
             config=tencentcloud.ckafka.InstanceConfigArgs(
                 auto_create_topic_enable=True,
                 default_num_partitions=3,
                 default_replication_factor=3,
             ),
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
+        ```
+        ### Multi zone Instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-68vi2d3h"
+        subnet_id = config.get("subnetId")
+        if subnet_id is None:
+            subnet_id = "subnet-ob6clqwk"
+        gz3 = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
+            product="ckafka")
+        gz6 = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-6",
+            product="ckafka")
+        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
+            instance_name="ckafka-instance-maz-tf-test",
+            zone_id=gz3.zones[0].id,
+            multi_zone_flag=True,
+            zone_ids=[
+                gz3.zones[0].id,
+                gz6.zones[0].id,
+            ],
+            period=1,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            renew_flag=0,
+            kafka_version="1.1.1",
             disk_size=500,
             disk_type="CLOUD_BASIC",
-            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
-                bottom_retention=0,
-                disk_quota_percentage=0,
-                enable=1,
-                step_forward_percentage=0,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
             ),
-            instance_name="ckafka-instance-tf-test",
-            kafka_version="1.1.1",
-            msg_retention_time=1300,
-            multi_zone_flag=True,
-            partition=800,
-            period=1,
-            public_network=3,
-            renew_flag=0,
-            specifications_type="profession",
-            subnet_id="subnet-4vwihrzk",
-            vpc_id="vpc-82p1t1nv",
-            zone_id=100006,
-            zone_ids=[
-                100006,
-                100007,
-            ])
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
         ```
 
         ## Import
@@ -858,11 +941,12 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
+        :param pulumi.Input[int] max_message_byte: The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Bandwidth of the public network.
+        :param pulumi.Input[int] public_network: It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
@@ -885,42 +969,86 @@ class Instance(pulumi.CustomResource):
         > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
+        ### Basic Instance
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ckafka.Instance("foo",
-            band_width=40,
+        config = pulumi.Config()
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-68vi2d3h"
+        subnet_id = config.get("subnetId")
+        if subnet_id is None:
+            subnet_id = "subnet-ob6clqwk"
+        gz = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
+            product="ckafka")
+        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
+            instance_name="ckafka-instance-type-tf-test",
+            zone_id=gz.zones[0].id,
+            period=1,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            renew_flag=0,
+            kafka_version="2.4.1",
+            disk_size=1000,
+            disk_type="CLOUD_BASIC",
+            specifications_type="standard",
+            instance_type=2,
             config=tencentcloud.ckafka.InstanceConfigArgs(
                 auto_create_topic_enable=True,
                 default_num_partitions=3,
                 default_replication_factor=3,
             ),
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
+        ```
+        ### Multi zone Instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-68vi2d3h"
+        subnet_id = config.get("subnetId")
+        if subnet_id is None:
+            subnet_id = "subnet-ob6clqwk"
+        gz3 = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
+            product="ckafka")
+        gz6 = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-6",
+            product="ckafka")
+        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
+            instance_name="ckafka-instance-maz-tf-test",
+            zone_id=gz3.zones[0].id,
+            multi_zone_flag=True,
+            zone_ids=[
+                gz3.zones[0].id,
+                gz6.zones[0].id,
+            ],
+            period=1,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            renew_flag=0,
+            kafka_version="1.1.1",
             disk_size=500,
             disk_type="CLOUD_BASIC",
-            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
-                bottom_retention=0,
-                disk_quota_percentage=0,
-                enable=1,
-                step_forward_percentage=0,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
             ),
-            instance_name="ckafka-instance-tf-test",
-            kafka_version="1.1.1",
-            msg_retention_time=1300,
-            multi_zone_flag=True,
-            partition=800,
-            period=1,
-            public_network=3,
-            renew_flag=0,
-            specifications_type="profession",
-            subnet_id="subnet-4vwihrzk",
-            vpc_id="vpc-82p1t1nv",
-            zone_id=100006,
-            zone_ids=[
-                100006,
-                100007,
-            ])
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
         ```
 
         ## Import
@@ -954,6 +1082,7 @@ class Instance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[int]] = None,
                  kafka_version: Optional[pulumi.Input[str]] = None,
+                 max_message_byte: Optional[pulumi.Input[int]] = None,
                  msg_retention_time: Optional[pulumi.Input[int]] = None,
                  multi_zone_flag: Optional[pulumi.Input[bool]] = None,
                  partition: Optional[pulumi.Input[int]] = None,
@@ -992,10 +1121,14 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["instance_name"] = instance_name
             __props__.__dict__["instance_type"] = instance_type
             __props__.__dict__["kafka_version"] = kafka_version
+            __props__.__dict__["max_message_byte"] = max_message_byte
             __props__.__dict__["msg_retention_time"] = msg_retention_time
             __props__.__dict__["multi_zone_flag"] = multi_zone_flag
             __props__.__dict__["partition"] = partition
             __props__.__dict__["period"] = period
+            if public_network is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.6. If set public network value, it will cause error.""", DeprecationWarning)
+                pulumi.log.warn("""public_network is deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.""")
             __props__.__dict__["public_network"] = public_network
             __props__.__dict__["rebalance_time"] = rebalance_time
             __props__.__dict__["renew_flag"] = renew_flag
@@ -1031,6 +1164,7 @@ class Instance(pulumi.CustomResource):
             instance_name: Optional[pulumi.Input[str]] = None,
             instance_type: Optional[pulumi.Input[int]] = None,
             kafka_version: Optional[pulumi.Input[str]] = None,
+            max_message_byte: Optional[pulumi.Input[int]] = None,
             msg_retention_time: Optional[pulumi.Input[int]] = None,
             multi_zone_flag: Optional[pulumi.Input[bool]] = None,
             partition: Optional[pulumi.Input[int]] = None,
@@ -1062,11 +1196,12 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[int] instance_type: Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
+        :param pulumi.Input[int] max_message_byte: The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
         :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
         :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
-        :param pulumi.Input[int] public_network: Bandwidth of the public network.
+        :param pulumi.Input[int] public_network: It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
         :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] specifications_type: Specifications type of instance. Allowed values are `standard`, `profession`. Default is `profession`.
@@ -1091,6 +1226,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["instance_type"] = instance_type
         __props__.__dict__["kafka_version"] = kafka_version
+        __props__.__dict__["max_message_byte"] = max_message_byte
         __props__.__dict__["msg_retention_time"] = msg_retention_time
         __props__.__dict__["multi_zone_flag"] = multi_zone_flag
         __props__.__dict__["partition"] = partition
@@ -1174,6 +1310,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "kafka_version")
 
     @property
+    @pulumi.getter(name="maxMessageByte")
+    def max_message_byte(self) -> pulumi.Output[int]:
+        """
+        The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
+        """
+        return pulumi.get(self, "max_message_byte")
+
+    @property
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> pulumi.Output[int]:
         """
@@ -1209,7 +1353,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="publicNetwork")
     def public_network(self) -> pulumi.Output[int]:
         """
-        Bandwidth of the public network.
+        It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
         """
         return pulumi.get(self, "public_network")
 

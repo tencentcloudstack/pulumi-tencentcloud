@@ -37,8 +37,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Use verbose filter
+// ### Use verbose filter
 //
 // ```go
 // package main

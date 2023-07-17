@@ -9,8 +9,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CLB instance.
  *
  * ## Example Usage
- *
- * INTERNAL CLB
+ * ### INTERNAL CLB
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -27,8 +26,7 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-7007ll7q",
  * });
  * ```
- *
- * OPEN CLB
+ * ### OPEN CLB
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -47,8 +45,30 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-da7ffa61",
  * });
  * ```
+ * ### Dynamic Vip Instance
  *
- * Default enable
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
+ * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
+ * const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
+ *     networkType: "OPEN",
+ *     clbName: "clb-instance-open",
+ *     projectId: 0,
+ *     vpcId: fooInstance.id,
+ *     targetRegionInfoRegion: "ap-guangzhou",
+ *     targetRegionInfoVpcId: fooInstance.id,
+ *     securityGroups: [fooGroup.id],
+ *     dynamicVip: true,
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * export const domain = clbOpen.domain;
+ * ```
+ * ### Default enable
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -84,8 +104,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * CREATE multiple instance
+ * ### CREATE multiple instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -97,8 +116,7 @@ import * as utilities from "../utilities";
  *     networkType: "OPEN",
  * });
  * ```
- *
- * CREATE instance with log
+ * ### CREATE instance with log
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -190,6 +208,14 @@ export class Instance extends pulumi.CustomResource {
      * The virtual service address table of the CLB.
      */
     public /*out*/ readonly clbVips!: pulumi.Output<string[]>;
+    /**
+     * Domain name of the CLB instance.
+     */
+    public /*out*/ readonly domain!: pulumi.Output<string>;
+    /**
+     * If create dynamic vip CLB instance, `true` or `false`.
+     */
+    public readonly dynamicVip!: pulumi.Output<boolean | undefined>;
     /**
      * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
      */
@@ -284,6 +310,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = state ? state.clbName : undefined;
             resourceInputs["clbVips"] = state ? state.clbVips : undefined;
+            resourceInputs["domain"] = state ? state.domain : undefined;
+            resourceInputs["dynamicVip"] = state ? state.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = state ? state.internetBandwidthMaxOut : undefined;
             resourceInputs["internetChargeType"] = state ? state.internetChargeType : undefined;
             resourceInputs["loadBalancerPassToTarget"] = state ? state.loadBalancerPassToTarget : undefined;
@@ -314,6 +342,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["addressIpVersion"] = args ? args.addressIpVersion : undefined;
             resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = args ? args.clbName : undefined;
+            resourceInputs["dynamicVip"] = args ? args.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = args ? args.internetBandwidthMaxOut : undefined;
             resourceInputs["internetChargeType"] = args ? args.internetChargeType : undefined;
             resourceInputs["loadBalancerPassToTarget"] = args ? args.loadBalancerPassToTarget : undefined;
@@ -333,6 +362,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
             resourceInputs["clbVips"] = undefined /*out*/;
+            resourceInputs["domain"] = undefined /*out*/;
             resourceInputs["vipIsp"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -360,6 +390,14 @@ export interface InstanceState {
      * The virtual service address table of the CLB.
      */
     clbVips?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Domain name of the CLB instance.
+     */
+    domain?: pulumi.Input<string>;
+    /**
+     * If create dynamic vip CLB instance, `true` or `false`.
+     */
+    dynamicVip?: pulumi.Input<boolean>;
     /**
      * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
      */
@@ -454,6 +492,10 @@ export interface InstanceArgs {
      * Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
     clbName: pulumi.Input<string>;
+    /**
+     * If create dynamic vip CLB instance, `true` or `false`.
+     */
+    dynamicVip?: pulumi.Input<boolean>;
     /**
      * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
      */

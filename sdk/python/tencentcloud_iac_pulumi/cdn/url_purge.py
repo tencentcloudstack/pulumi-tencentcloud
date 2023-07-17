@@ -208,8 +208,7 @@ class UrlPurge(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.UrlPurge("foo", urls=["https://www.example.com/a"])
         ```
-
-        argument to request new purge task with same urls
+        ### argument to request new purge task with same urls
 
         ```python
         import pulumi
@@ -244,8 +243,7 @@ class UrlPurge(pulumi.CustomResource):
 
         foo = tencentcloud.cdn.UrlPurge("foo", urls=["https://www.example.com/a"])
         ```
-
-        argument to request new purge task with same urls
+        ### argument to request new purge task with same urls
 
         ```python
         import pulumi

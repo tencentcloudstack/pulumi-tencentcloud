@@ -8,10 +8,15 @@ import typing
 from .create_image_signature_operation import *
 from .customized_domain import *
 from .delete_image_operation import *
+from .get_image_manifests import *
 from .get_images import *
 from .get_instances import *
 from .get_namespaces import *
+from .get_replication_instance_create_tasks import *
+from .get_replication_instance_sync_status import *
 from .get_repositories import *
+from .get_tag_retention_execution_tasks import *
+from .get_tag_retention_executions import *
 from .get_tokens import *
 from .get_vpc_attachments import *
 from .get_webhook_trigger_logs import *
@@ -20,6 +25,8 @@ from .instance import *
 from .manage_replication_operation import *
 from .namespace import *
 from .repository import *
+from .service_account import *
+from .tag_retention_execution_config import *
 from .tag_retention_rule import *
 from .token import *
 from .vpc_attachment import *

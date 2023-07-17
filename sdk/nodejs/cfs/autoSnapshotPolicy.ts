@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfs autoSnapshotPolicy
  *
  * ## Example Usage
- *
- * use day of week
+ * ### use day of week
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -22,8 +21,7 @@ import * as utilities from "../utilities";
  *     policyName: "policy_name",
  * });
  * ```
- *
- * use day of month
+ * ### use day of month
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -36,8 +34,7 @@ import * as utilities from "../utilities";
  *     policyName: "policy_name",
  * });
  * ```
- *
- * use interval days
+ * ### use interval days
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

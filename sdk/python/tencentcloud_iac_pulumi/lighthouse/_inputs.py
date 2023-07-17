@@ -9,14 +9,130 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'DiskAutoMountConfigurationArgs',
+    'DiskDiskChargePrepaidArgs',
     'FirewallRuleFirewallRuleArgs',
     'InstanceContainerArgs',
     'InstanceContainerEnvArgs',
     'InstanceContainerPublishPortArgs',
     'InstanceContainerVolumeArgs',
     'InstanceLoginConfigurationArgs',
+    'RenewDiskRenewDiskChargePrepaidArgs',
+    'RenewInstanceInstanceChargePrepaidArgs',
     'GetBundleFilterArgs',
+    'GetDiskConfigFilterArgs',
+    'GetDisksFilterArgs',
+    'GetModifyInstanceBundleFilterArgs',
+    'GetResetInstanceBlueprintFilterArgs',
 ]
+
+@pulumi.input_type
+class DiskAutoMountConfigurationArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 file_system_type: Optional[pulumi.Input[str]] = None,
+                 mount_point: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] instance_id: Instance ID to be mounted. The specified instance must be in the Running state.
+        :param pulumi.Input[str] file_system_type: The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+        :param pulumi.Input[str] mount_point: The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        if file_system_type is not None:
+            pulumi.set(__self__, "file_system_type", file_system_type)
+        if mount_point is not None:
+            pulumi.set(__self__, "mount_point", mount_point)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        Instance ID to be mounted. The specified instance must be in the Running state.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter(name="fileSystemType")
+    def file_system_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+        """
+        return pulumi.get(self, "file_system_type")
+
+    @file_system_type.setter
+    def file_system_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "file_system_type", value)
+
+    @property
+    @pulumi.getter(name="mountPoint")
+    def mount_point(self) -> Optional[pulumi.Input[str]]:
+        """
+        The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+        """
+        return pulumi.get(self, "mount_point")
+
+    @mount_point.setter
+    def mount_point(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mount_point", value)
+
+
+@pulumi.input_type
+class DiskDiskChargePrepaidArgs:
+    def __init__(__self__, *,
+                 period: pulumi.Input[int],
+                 renew_flag: Optional[pulumi.Input[str]] = None,
+                 time_unit: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] period: new purchase cycle.
+        :param pulumi.Input[str] renew_flag: Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+        :param pulumi.Input[str] time_unit: newly purchased unit. Default: m.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+        if time_unit is not None:
+            pulumi.set(__self__, "time_unit", time_unit)
+
+    @property
+    @pulumi.getter
+    def period(self) -> pulumi.Input[int]:
+        """
+        new purchase cycle.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[int]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @renew_flag.setter
+    def renew_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "renew_flag", value)
+
+    @property
+    @pulumi.getter(name="timeUnit")
+    def time_unit(self) -> Optional[pulumi.Input[str]]:
+        """
+        newly purchased unit. Default: m.
+        """
+        return pulumi.get(self, "time_unit")
+
+    @time_unit.setter
+    def time_unit(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_unit", value)
+
 
 @pulumi.input_type
 class FirewallRuleFirewallRuleArgs:
@@ -389,7 +505,272 @@ class InstanceLoginConfigurationArgs:
 
 
 @pulumi.input_type
+class RenewDiskRenewDiskChargePrepaidArgs:
+    def __init__(__self__, *,
+                 cur_instance_deadline: Optional[pulumi.Input[str]] = None,
+                 period: Optional[pulumi.Input[int]] = None,
+                 renew_flag: Optional[pulumi.Input[str]] = None,
+                 time_unit: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cur_instance_deadline: Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+        :param pulumi.Input[int] period: Renewal period.
+        :param pulumi.Input[str] renew_flag: Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+        :param pulumi.Input[str] time_unit: newly purchased unit. Default: m.
+        """
+        if cur_instance_deadline is not None:
+            pulumi.set(__self__, "cur_instance_deadline", cur_instance_deadline)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+        if time_unit is not None:
+            pulumi.set(__self__, "time_unit", time_unit)
+
+    @property
+    @pulumi.getter(name="curInstanceDeadline")
+    def cur_instance_deadline(self) -> Optional[pulumi.Input[str]]:
+        """
+        Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+        """
+        return pulumi.get(self, "cur_instance_deadline")
+
+    @cur_instance_deadline.setter
+    def cur_instance_deadline(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cur_instance_deadline", value)
+
+    @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Renewal period.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @renew_flag.setter
+    def renew_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "renew_flag", value)
+
+    @property
+    @pulumi.getter(name="timeUnit")
+    def time_unit(self) -> Optional[pulumi.Input[str]]:
+        """
+        newly purchased unit. Default: m.
+        """
+        return pulumi.get(self, "time_unit")
+
+    @time_unit.setter
+    def time_unit(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_unit", value)
+
+
+@pulumi.input_type
+class RenewInstanceInstanceChargePrepaidArgs:
+    def __init__(__self__, *,
+                 period: pulumi.Input[int],
+                 renew_flag: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] period: The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+        :param pulumi.Input[str] renew_flag: Automatic renewal logo. Values:
+               - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+               - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+               - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+               Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> pulumi.Input[int]:
+        """
+        The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[int]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Automatic renewal logo. Values:
+        - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+        - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+        - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+        Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+        """
+        return pulumi.get(self, "renew_flag")
+
+    @renew_flag.setter
+    def renew_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "renew_flag", value)
+
+
+@pulumi.input_type
 class GetBundleFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetDiskConfigFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetDisksFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+        :param Sequence[str] values: Value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Value of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetModifyInstanceBundleFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetResetInstanceBlueprintFilterArgs:
     def __init__(__self__, *,
                  name: str,
                  values: Sequence[str]):

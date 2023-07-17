@@ -35,6 +35,7 @@ class ClusterArgs:
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  max_cpu: Optional[pulumi.Input[float]] = None,
                  min_cpu: Optional[pulumi.Input[float]] = None,
+                 old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prarm_template_id: Optional[pulumi.Input[int]] = None,
@@ -44,6 +45,7 @@ class ClusterArgs:
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
+                 storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Cluster resource.
@@ -67,6 +69,7 @@ class ClusterArgs:
         :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
         :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
@@ -75,7 +78,8 @@ class ClusterArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
-        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
         """
         pulumi.set(__self__, "available_zone", available_zone)
@@ -111,6 +115,8 @@ class ClusterArgs:
             pulumi.set(__self__, "max_cpu", max_cpu)
         if min_cpu is not None:
             pulumi.set(__self__, "min_cpu", min_cpu)
+        if old_ip_reserve_hours is not None:
+            pulumi.set(__self__, "old_ip_reserve_hours", old_ip_reserve_hours)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
         if port is not None:
@@ -129,6 +135,8 @@ class ClusterArgs:
             pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
+        if storage_pay_mode is not None:
+            pulumi.set(__self__, "storage_pay_mode", storage_pay_mode)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -373,6 +381,18 @@ class ClusterArgs:
         pulumi.set(self, "min_cpu", value)
 
     @property
+    @pulumi.getter(name="oldIpReserveHours")
+    def old_ip_reserve_hours(self) -> Optional[pulumi.Input[int]]:
+        """
+        Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        """
+        return pulumi.get(self, "old_ip_reserve_hours")
+
+    @old_ip_reserve_hours.setter
+    def old_ip_reserve_hours(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "old_ip_reserve_hours", value)
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
@@ -472,13 +492,25 @@ class ClusterArgs:
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         """
         return pulumi.get(self, "storage_limit")
 
     @storage_limit.setter
     def storage_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_limit", value)
+
+    @property
+    @pulumi.getter(name="storagePayMode")
+    def storage_pay_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        """
+        return pulumi.get(self, "storage_pay_mode")
+
+    @storage_pay_mode.setter
+    def storage_pay_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_pay_mode", value)
 
     @property
     @pulumi.getter
@@ -520,6 +552,7 @@ class _ClusterState:
                  instance_storage_size: Optional[pulumi.Input[int]] = None,
                  max_cpu: Optional[pulumi.Input[float]] = None,
                  min_cpu: Optional[pulumi.Input[float]] = None,
+                 old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -537,6 +570,7 @@ class _ClusterState:
                  serverless_status: Optional[pulumi.Input[str]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
+                 storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  storage_used: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -567,6 +601,7 @@ class _ClusterState:
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
@@ -583,7 +618,8 @@ class _ClusterState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
-        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
@@ -637,6 +673,8 @@ class _ClusterState:
             pulumi.set(__self__, "max_cpu", max_cpu)
         if min_cpu is not None:
             pulumi.set(__self__, "min_cpu", min_cpu)
+        if old_ip_reserve_hours is not None:
+            pulumi.set(__self__, "old_ip_reserve_hours", old_ip_reserve_hours)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
         if password is not None:
@@ -671,6 +709,8 @@ class _ClusterState:
             pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
+        if storage_pay_mode is not None:
+            pulumi.set(__self__, "storage_pay_mode", storage_pay_mode)
         if storage_used is not None:
             pulumi.set(__self__, "storage_used", storage_used)
         if subnet_id is not None:
@@ -969,6 +1009,18 @@ class _ClusterState:
         pulumi.set(self, "min_cpu", value)
 
     @property
+    @pulumi.getter(name="oldIpReserveHours")
+    def old_ip_reserve_hours(self) -> Optional[pulumi.Input[int]]:
+        """
+        Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        """
+        return pulumi.get(self, "old_ip_reserve_hours")
+
+    @old_ip_reserve_hours.setter
+    def old_ip_reserve_hours(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "old_ip_reserve_hours", value)
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
@@ -1164,13 +1216,25 @@ class _ClusterState:
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         """
         return pulumi.get(self, "storage_limit")
 
     @storage_limit.setter
     def storage_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_limit", value)
+
+    @property
+    @pulumi.getter(name="storagePayMode")
+    def storage_pay_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        """
+        return pulumi.get(self, "storage_pay_mode")
+
+    @storage_pay_mode.setter
+    def storage_pay_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_pay_mode", value)
 
     @property
     @pulumi.getter(name="storageUsed")
@@ -1243,6 +1307,7 @@ class Cluster(pulumi.CustomResource):
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  max_cpu: Optional[pulumi.Input[float]] = None,
                  min_cpu: Optional[pulumi.Input[float]] = None,
+                 old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -1253,6 +1318,7 @@ class Cluster(pulumi.CustomResource):
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
+                 storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -1287,6 +1353,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
@@ -1296,7 +1363,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
-        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
@@ -1350,6 +1418,7 @@ class Cluster(pulumi.CustomResource):
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  max_cpu: Optional[pulumi.Input[float]] = None,
                  min_cpu: Optional[pulumi.Input[float]] = None,
+                 old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -1360,6 +1429,7 @@ class Cluster(pulumi.CustomResource):
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
+                 storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -1402,6 +1472,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["instance_memory_size"] = instance_memory_size
             __props__.__dict__["max_cpu"] = max_cpu
             __props__.__dict__["min_cpu"] = min_cpu
+            __props__.__dict__["old_ip_reserve_hours"] = old_ip_reserve_hours
             __props__.__dict__["param_items"] = param_items
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
@@ -1414,6 +1485,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["rw_group_sgs"] = rw_group_sgs
             __props__.__dict__["serverless_status_flag"] = serverless_status_flag
             __props__.__dict__["storage_limit"] = storage_limit
+            __props__.__dict__["storage_pay_mode"] = storage_pay_mode
             if subnet_id is None and not opts.urn:
                 raise TypeError("Missing required property 'subnet_id'")
             __props__.__dict__["subnet_id"] = subnet_id
@@ -1470,6 +1542,7 @@ class Cluster(pulumi.CustomResource):
             instance_storage_size: Optional[pulumi.Input[int]] = None,
             max_cpu: Optional[pulumi.Input[float]] = None,
             min_cpu: Optional[pulumi.Input[float]] = None,
+            old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
             param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
             password: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
@@ -1487,6 +1560,7 @@ class Cluster(pulumi.CustomResource):
             serverless_status: Optional[pulumi.Input[str]] = None,
             serverless_status_flag: Optional[pulumi.Input[str]] = None,
             storage_limit: Optional[pulumi.Input[int]] = None,
+            storage_pay_mode: Optional[pulumi.Input[int]] = None,
             storage_used: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1522,6 +1596,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
+        :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
@@ -1538,7 +1613,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
-        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
@@ -1572,6 +1648,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["instance_storage_size"] = instance_storage_size
         __props__.__dict__["max_cpu"] = max_cpu
         __props__.__dict__["min_cpu"] = min_cpu
+        __props__.__dict__["old_ip_reserve_hours"] = old_ip_reserve_hours
         __props__.__dict__["param_items"] = param_items
         __props__.__dict__["password"] = password
         __props__.__dict__["port"] = port
@@ -1589,6 +1666,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["serverless_status"] = serverless_status
         __props__.__dict__["serverless_status_flag"] = serverless_status_flag
         __props__.__dict__["storage_limit"] = storage_limit
+        __props__.__dict__["storage_pay_mode"] = storage_pay_mode
         __props__.__dict__["storage_used"] = storage_used
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
@@ -1788,6 +1866,14 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "min_cpu")
 
     @property
+    @pulumi.getter(name="oldIpReserveHours")
+    def old_ip_reserve_hours(self) -> pulumi.Output[Optional[int]]:
+        """
+        Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
+        """
+        return pulumi.get(self, "old_ip_reserve_hours")
+
+    @property
     @pulumi.getter(name="paramItems")
     def param_items(self) -> pulumi.Output[Optional[Sequence['outputs.ClusterParamItem']]]:
         """
@@ -1919,9 +2005,17 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> pulumi.Output[Optional[int]]:
         """
-        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+        Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         """
         return pulumi.get(self, "storage_limit")
+
+    @property
+    @pulumi.getter(name="storagePayMode")
+    def storage_pay_mode(self) -> pulumi.Output[int]:
+        """
+        Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
+        """
+        return pulumi.get(self, "storage_pay_mode")
 
     @property
     @pulumi.getter(name="storageUsed")

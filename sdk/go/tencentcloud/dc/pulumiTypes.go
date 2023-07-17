@@ -10,6 +10,299 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type GetAccessPointsAccessPointSet struct {
+	// Unique access point ID.
+	AccessPointId string `pulumi:"accessPointId"`
+	// Access point name.
+	AccessPointName string `pulumi:"accessPointName"`
+	// Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+	AccessPointType string `pulumi:"accessPointType"`
+	// Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+	Area string `pulumi:"area"`
+	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+	AvailablePortTypes []string `pulumi:"availablePortTypes"`
+	// City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+	City string `pulumi:"city"`
+	// Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+	Coordinates []GetAccessPointsAccessPointSetCoordinate `pulumi:"coordinates"`
+	// List of ISPs supported by access point.
+	LineOperators []string `pulumi:"lineOperators"`
+	// Access point location.
+	Location string `pulumi:"location"`
+	// Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+	RegionId string `pulumi:"regionId"`
+	// Access point status. Valid values: available, unavailable.
+	State string `pulumi:"state"`
+}
+
+// GetAccessPointsAccessPointSetInput is an input type that accepts GetAccessPointsAccessPointSetArgs and GetAccessPointsAccessPointSetOutput values.
+// You can construct a concrete instance of `GetAccessPointsAccessPointSetInput` via:
+//
+//          GetAccessPointsAccessPointSetArgs{...}
+type GetAccessPointsAccessPointSetInput interface {
+	pulumi.Input
+
+	ToGetAccessPointsAccessPointSetOutput() GetAccessPointsAccessPointSetOutput
+	ToGetAccessPointsAccessPointSetOutputWithContext(context.Context) GetAccessPointsAccessPointSetOutput
+}
+
+type GetAccessPointsAccessPointSetArgs struct {
+	// Unique access point ID.
+	AccessPointId pulumi.StringInput `pulumi:"accessPointId"`
+	// Access point name.
+	AccessPointName pulumi.StringInput `pulumi:"accessPointName"`
+	// Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+	AccessPointType pulumi.StringInput `pulumi:"accessPointType"`
+	// Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+	Area pulumi.StringInput `pulumi:"area"`
+	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+	AvailablePortTypes pulumi.StringArrayInput `pulumi:"availablePortTypes"`
+	// City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+	City pulumi.StringInput `pulumi:"city"`
+	// Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+	Coordinates GetAccessPointsAccessPointSetCoordinateArrayInput `pulumi:"coordinates"`
+	// List of ISPs supported by access point.
+	LineOperators pulumi.StringArrayInput `pulumi:"lineOperators"`
+	// Access point location.
+	Location pulumi.StringInput `pulumi:"location"`
+	// Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Access point status. Valid values: available, unavailable.
+	State pulumi.StringInput `pulumi:"state"`
+}
+
+func (GetAccessPointsAccessPointSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessPointsAccessPointSet)(nil)).Elem()
+}
+
+func (i GetAccessPointsAccessPointSetArgs) ToGetAccessPointsAccessPointSetOutput() GetAccessPointsAccessPointSetOutput {
+	return i.ToGetAccessPointsAccessPointSetOutputWithContext(context.Background())
+}
+
+func (i GetAccessPointsAccessPointSetArgs) ToGetAccessPointsAccessPointSetOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessPointsAccessPointSetOutput)
+}
+
+// GetAccessPointsAccessPointSetArrayInput is an input type that accepts GetAccessPointsAccessPointSetArray and GetAccessPointsAccessPointSetArrayOutput values.
+// You can construct a concrete instance of `GetAccessPointsAccessPointSetArrayInput` via:
+//
+//          GetAccessPointsAccessPointSetArray{ GetAccessPointsAccessPointSetArgs{...} }
+type GetAccessPointsAccessPointSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccessPointsAccessPointSetArrayOutput() GetAccessPointsAccessPointSetArrayOutput
+	ToGetAccessPointsAccessPointSetArrayOutputWithContext(context.Context) GetAccessPointsAccessPointSetArrayOutput
+}
+
+type GetAccessPointsAccessPointSetArray []GetAccessPointsAccessPointSetInput
+
+func (GetAccessPointsAccessPointSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessPointsAccessPointSet)(nil)).Elem()
+}
+
+func (i GetAccessPointsAccessPointSetArray) ToGetAccessPointsAccessPointSetArrayOutput() GetAccessPointsAccessPointSetArrayOutput {
+	return i.ToGetAccessPointsAccessPointSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccessPointsAccessPointSetArray) ToGetAccessPointsAccessPointSetArrayOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessPointsAccessPointSetArrayOutput)
+}
+
+type GetAccessPointsAccessPointSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccessPointsAccessPointSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessPointsAccessPointSet)(nil)).Elem()
+}
+
+func (o GetAccessPointsAccessPointSetOutput) ToGetAccessPointsAccessPointSetOutput() GetAccessPointsAccessPointSetOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetOutput) ToGetAccessPointsAccessPointSetOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetOutput {
+	return o
+}
+
+// Unique access point ID.
+func (o GetAccessPointsAccessPointSetOutput) AccessPointId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.AccessPointId }).(pulumi.StringOutput)
+}
+
+// Access point name.
+func (o GetAccessPointsAccessPointSetOutput) AccessPointName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.AccessPointName }).(pulumi.StringOutput)
+}
+
+// Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetAccessPointsAccessPointSetOutput) AccessPointType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.AccessPointType }).(pulumi.StringOutput)
+}
+
+// Access point regionNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetAccessPointsAccessPointSetOutput) Area() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.Area }).(pulumi.StringOutput)
+}
+
+// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.Note: this field may return `null`, indicating that no valid value is obtained.
+func (o GetAccessPointsAccessPointSetOutput) AvailablePortTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) []string { return v.AvailablePortTypes }).(pulumi.StringArrayOutput)
+}
+
+// City where the access point is locatedNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetAccessPointsAccessPointSetOutput) City() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.City }).(pulumi.StringOutput)
+}
+
+// Latitude and longitude of the access pointNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetAccessPointsAccessPointSetOutput) Coordinates() GetAccessPointsAccessPointSetCoordinateArrayOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) []GetAccessPointsAccessPointSetCoordinate { return v.Coordinates }).(GetAccessPointsAccessPointSetCoordinateArrayOutput)
+}
+
+// List of ISPs supported by access point.
+func (o GetAccessPointsAccessPointSetOutput) LineOperators() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) []string { return v.LineOperators }).(pulumi.StringArrayOutput)
+}
+
+// Access point location.
+func (o GetAccessPointsAccessPointSetOutput) Location() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.Location }).(pulumi.StringOutput)
+}
+
+// Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
+func (o GetAccessPointsAccessPointSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Access point status. Valid values: available, unavailable.
+func (o GetAccessPointsAccessPointSetOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSet) string { return v.State }).(pulumi.StringOutput)
+}
+
+type GetAccessPointsAccessPointSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccessPointsAccessPointSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessPointsAccessPointSet)(nil)).Elem()
+}
+
+func (o GetAccessPointsAccessPointSetArrayOutput) ToGetAccessPointsAccessPointSetArrayOutput() GetAccessPointsAccessPointSetArrayOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetArrayOutput) ToGetAccessPointsAccessPointSetArrayOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetArrayOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetArrayOutput) Index(i pulumi.IntInput) GetAccessPointsAccessPointSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessPointsAccessPointSet {
+		return vs[0].([]GetAccessPointsAccessPointSet)[vs[1].(int)]
+	}).(GetAccessPointsAccessPointSetOutput)
+}
+
+type GetAccessPointsAccessPointSetCoordinate struct {
+	// Latitude.
+	Lat float64 `pulumi:"lat"`
+	// Longitude.
+	Lng float64 `pulumi:"lng"`
+}
+
+// GetAccessPointsAccessPointSetCoordinateInput is an input type that accepts GetAccessPointsAccessPointSetCoordinateArgs and GetAccessPointsAccessPointSetCoordinateOutput values.
+// You can construct a concrete instance of `GetAccessPointsAccessPointSetCoordinateInput` via:
+//
+//          GetAccessPointsAccessPointSetCoordinateArgs{...}
+type GetAccessPointsAccessPointSetCoordinateInput interface {
+	pulumi.Input
+
+	ToGetAccessPointsAccessPointSetCoordinateOutput() GetAccessPointsAccessPointSetCoordinateOutput
+	ToGetAccessPointsAccessPointSetCoordinateOutputWithContext(context.Context) GetAccessPointsAccessPointSetCoordinateOutput
+}
+
+type GetAccessPointsAccessPointSetCoordinateArgs struct {
+	// Latitude.
+	Lat pulumi.Float64Input `pulumi:"lat"`
+	// Longitude.
+	Lng pulumi.Float64Input `pulumi:"lng"`
+}
+
+func (GetAccessPointsAccessPointSetCoordinateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessPointsAccessPointSetCoordinate)(nil)).Elem()
+}
+
+func (i GetAccessPointsAccessPointSetCoordinateArgs) ToGetAccessPointsAccessPointSetCoordinateOutput() GetAccessPointsAccessPointSetCoordinateOutput {
+	return i.ToGetAccessPointsAccessPointSetCoordinateOutputWithContext(context.Background())
+}
+
+func (i GetAccessPointsAccessPointSetCoordinateArgs) ToGetAccessPointsAccessPointSetCoordinateOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetCoordinateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessPointsAccessPointSetCoordinateOutput)
+}
+
+// GetAccessPointsAccessPointSetCoordinateArrayInput is an input type that accepts GetAccessPointsAccessPointSetCoordinateArray and GetAccessPointsAccessPointSetCoordinateArrayOutput values.
+// You can construct a concrete instance of `GetAccessPointsAccessPointSetCoordinateArrayInput` via:
+//
+//          GetAccessPointsAccessPointSetCoordinateArray{ GetAccessPointsAccessPointSetCoordinateArgs{...} }
+type GetAccessPointsAccessPointSetCoordinateArrayInput interface {
+	pulumi.Input
+
+	ToGetAccessPointsAccessPointSetCoordinateArrayOutput() GetAccessPointsAccessPointSetCoordinateArrayOutput
+	ToGetAccessPointsAccessPointSetCoordinateArrayOutputWithContext(context.Context) GetAccessPointsAccessPointSetCoordinateArrayOutput
+}
+
+type GetAccessPointsAccessPointSetCoordinateArray []GetAccessPointsAccessPointSetCoordinateInput
+
+func (GetAccessPointsAccessPointSetCoordinateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessPointsAccessPointSetCoordinate)(nil)).Elem()
+}
+
+func (i GetAccessPointsAccessPointSetCoordinateArray) ToGetAccessPointsAccessPointSetCoordinateArrayOutput() GetAccessPointsAccessPointSetCoordinateArrayOutput {
+	return i.ToGetAccessPointsAccessPointSetCoordinateArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccessPointsAccessPointSetCoordinateArray) ToGetAccessPointsAccessPointSetCoordinateArrayOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetCoordinateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessPointsAccessPointSetCoordinateArrayOutput)
+}
+
+type GetAccessPointsAccessPointSetCoordinateOutput struct{ *pulumi.OutputState }
+
+func (GetAccessPointsAccessPointSetCoordinateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessPointsAccessPointSetCoordinate)(nil)).Elem()
+}
+
+func (o GetAccessPointsAccessPointSetCoordinateOutput) ToGetAccessPointsAccessPointSetCoordinateOutput() GetAccessPointsAccessPointSetCoordinateOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetCoordinateOutput) ToGetAccessPointsAccessPointSetCoordinateOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetCoordinateOutput {
+	return o
+}
+
+// Latitude.
+func (o GetAccessPointsAccessPointSetCoordinateOutput) Lat() pulumi.Float64Output {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSetCoordinate) float64 { return v.Lat }).(pulumi.Float64Output)
+}
+
+// Longitude.
+func (o GetAccessPointsAccessPointSetCoordinateOutput) Lng() pulumi.Float64Output {
+	return o.ApplyT(func(v GetAccessPointsAccessPointSetCoordinate) float64 { return v.Lng }).(pulumi.Float64Output)
+}
+
+type GetAccessPointsAccessPointSetCoordinateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccessPointsAccessPointSetCoordinateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessPointsAccessPointSetCoordinate)(nil)).Elem()
+}
+
+func (o GetAccessPointsAccessPointSetCoordinateArrayOutput) ToGetAccessPointsAccessPointSetCoordinateArrayOutput() GetAccessPointsAccessPointSetCoordinateArrayOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetCoordinateArrayOutput) ToGetAccessPointsAccessPointSetCoordinateArrayOutputWithContext(ctx context.Context) GetAccessPointsAccessPointSetCoordinateArrayOutput {
+	return o
+}
+
+func (o GetAccessPointsAccessPointSetCoordinateArrayOutput) Index(i pulumi.IntInput) GetAccessPointsAccessPointSetCoordinateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessPointsAccessPointSetCoordinate {
+		return vs[0].([]GetAccessPointsAccessPointSetCoordinate)[vs[1].(int)]
+	}).(GetAccessPointsAccessPointSetCoordinateOutput)
+}
+
 type GetGatewayCcnRoutesInstanceList struct {
 	// As path list of the BGP.
 	AsPaths []string `pulumi:"asPaths"`
@@ -571,17 +864,391 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	}).(GetInstancesInstanceListOutput)
 }
 
+type GetInternetAddressStatisticsInternetAddressStatistic struct {
+	// region.
+	Region string `pulumi:"region"`
+	// Number of Internet public network addresses.
+	SubnetNum int `pulumi:"subnetNum"`
+}
+
+// GetInternetAddressStatisticsInternetAddressStatisticInput is an input type that accepts GetInternetAddressStatisticsInternetAddressStatisticArgs and GetInternetAddressStatisticsInternetAddressStatisticOutput values.
+// You can construct a concrete instance of `GetInternetAddressStatisticsInternetAddressStatisticInput` via:
+//
+//          GetInternetAddressStatisticsInternetAddressStatisticArgs{...}
+type GetInternetAddressStatisticsInternetAddressStatisticInput interface {
+	pulumi.Input
+
+	ToGetInternetAddressStatisticsInternetAddressStatisticOutput() GetInternetAddressStatisticsInternetAddressStatisticOutput
+	ToGetInternetAddressStatisticsInternetAddressStatisticOutputWithContext(context.Context) GetInternetAddressStatisticsInternetAddressStatisticOutput
+}
+
+type GetInternetAddressStatisticsInternetAddressStatisticArgs struct {
+	// region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Number of Internet public network addresses.
+	SubnetNum pulumi.IntInput `pulumi:"subnetNum"`
+}
+
+func (GetInternetAddressStatisticsInternetAddressStatisticArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInternetAddressStatisticsInternetAddressStatistic)(nil)).Elem()
+}
+
+func (i GetInternetAddressStatisticsInternetAddressStatisticArgs) ToGetInternetAddressStatisticsInternetAddressStatisticOutput() GetInternetAddressStatisticsInternetAddressStatisticOutput {
+	return i.ToGetInternetAddressStatisticsInternetAddressStatisticOutputWithContext(context.Background())
+}
+
+func (i GetInternetAddressStatisticsInternetAddressStatisticArgs) ToGetInternetAddressStatisticsInternetAddressStatisticOutputWithContext(ctx context.Context) GetInternetAddressStatisticsInternetAddressStatisticOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInternetAddressStatisticsInternetAddressStatisticOutput)
+}
+
+// GetInternetAddressStatisticsInternetAddressStatisticArrayInput is an input type that accepts GetInternetAddressStatisticsInternetAddressStatisticArray and GetInternetAddressStatisticsInternetAddressStatisticArrayOutput values.
+// You can construct a concrete instance of `GetInternetAddressStatisticsInternetAddressStatisticArrayInput` via:
+//
+//          GetInternetAddressStatisticsInternetAddressStatisticArray{ GetInternetAddressStatisticsInternetAddressStatisticArgs{...} }
+type GetInternetAddressStatisticsInternetAddressStatisticArrayInput interface {
+	pulumi.Input
+
+	ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutput() GetInternetAddressStatisticsInternetAddressStatisticArrayOutput
+	ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutputWithContext(context.Context) GetInternetAddressStatisticsInternetAddressStatisticArrayOutput
+}
+
+type GetInternetAddressStatisticsInternetAddressStatisticArray []GetInternetAddressStatisticsInternetAddressStatisticInput
+
+func (GetInternetAddressStatisticsInternetAddressStatisticArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInternetAddressStatisticsInternetAddressStatistic)(nil)).Elem()
+}
+
+func (i GetInternetAddressStatisticsInternetAddressStatisticArray) ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutput() GetInternetAddressStatisticsInternetAddressStatisticArrayOutput {
+	return i.ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutputWithContext(context.Background())
+}
+
+func (i GetInternetAddressStatisticsInternetAddressStatisticArray) ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutputWithContext(ctx context.Context) GetInternetAddressStatisticsInternetAddressStatisticArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInternetAddressStatisticsInternetAddressStatisticArrayOutput)
+}
+
+type GetInternetAddressStatisticsInternetAddressStatisticOutput struct{ *pulumi.OutputState }
+
+func (GetInternetAddressStatisticsInternetAddressStatisticOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInternetAddressStatisticsInternetAddressStatistic)(nil)).Elem()
+}
+
+func (o GetInternetAddressStatisticsInternetAddressStatisticOutput) ToGetInternetAddressStatisticsInternetAddressStatisticOutput() GetInternetAddressStatisticsInternetAddressStatisticOutput {
+	return o
+}
+
+func (o GetInternetAddressStatisticsInternetAddressStatisticOutput) ToGetInternetAddressStatisticsInternetAddressStatisticOutputWithContext(ctx context.Context) GetInternetAddressStatisticsInternetAddressStatisticOutput {
+	return o
+}
+
+// region.
+func (o GetInternetAddressStatisticsInternetAddressStatisticOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInternetAddressStatisticsInternetAddressStatistic) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Number of Internet public network addresses.
+func (o GetInternetAddressStatisticsInternetAddressStatisticOutput) SubnetNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInternetAddressStatisticsInternetAddressStatistic) int { return v.SubnetNum }).(pulumi.IntOutput)
+}
+
+type GetInternetAddressStatisticsInternetAddressStatisticArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInternetAddressStatisticsInternetAddressStatisticArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInternetAddressStatisticsInternetAddressStatistic)(nil)).Elem()
+}
+
+func (o GetInternetAddressStatisticsInternetAddressStatisticArrayOutput) ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutput() GetInternetAddressStatisticsInternetAddressStatisticArrayOutput {
+	return o
+}
+
+func (o GetInternetAddressStatisticsInternetAddressStatisticArrayOutput) ToGetInternetAddressStatisticsInternetAddressStatisticArrayOutputWithContext(ctx context.Context) GetInternetAddressStatisticsInternetAddressStatisticArrayOutput {
+	return o
+}
+
+func (o GetInternetAddressStatisticsInternetAddressStatisticArrayOutput) Index(i pulumi.IntInput) GetInternetAddressStatisticsInternetAddressStatisticOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInternetAddressStatisticsInternetAddressStatistic {
+		return vs[0].([]GetInternetAddressStatisticsInternetAddressStatistic)[vs[1].(int)]
+	}).(GetInternetAddressStatisticsInternetAddressStatisticOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesFilter struct {
+	// Fields to be filtered.
+	Name string `pulumi:"name"`
+	// filter value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetPublicDirectConnectTunnelRoutesFilterInput is an input type that accepts GetPublicDirectConnectTunnelRoutesFilterArgs and GetPublicDirectConnectTunnelRoutesFilterOutput values.
+// You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesFilterInput` via:
+//
+//          GetPublicDirectConnectTunnelRoutesFilterArgs{...}
+type GetPublicDirectConnectTunnelRoutesFilterInput interface {
+	pulumi.Input
+
+	ToGetPublicDirectConnectTunnelRoutesFilterOutput() GetPublicDirectConnectTunnelRoutesFilterOutput
+	ToGetPublicDirectConnectTunnelRoutesFilterOutputWithContext(context.Context) GetPublicDirectConnectTunnelRoutesFilterOutput
+}
+
+type GetPublicDirectConnectTunnelRoutesFilterArgs struct {
+	// Fields to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// filter value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetPublicDirectConnectTunnelRoutesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesFilter)(nil)).Elem()
+}
+
+func (i GetPublicDirectConnectTunnelRoutesFilterArgs) ToGetPublicDirectConnectTunnelRoutesFilterOutput() GetPublicDirectConnectTunnelRoutesFilterOutput {
+	return i.ToGetPublicDirectConnectTunnelRoutesFilterOutputWithContext(context.Background())
+}
+
+func (i GetPublicDirectConnectTunnelRoutesFilterArgs) ToGetPublicDirectConnectTunnelRoutesFilterOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicDirectConnectTunnelRoutesFilterOutput)
+}
+
+// GetPublicDirectConnectTunnelRoutesFilterArrayInput is an input type that accepts GetPublicDirectConnectTunnelRoutesFilterArray and GetPublicDirectConnectTunnelRoutesFilterArrayOutput values.
+// You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesFilterArrayInput` via:
+//
+//          GetPublicDirectConnectTunnelRoutesFilterArray{ GetPublicDirectConnectTunnelRoutesFilterArgs{...} }
+type GetPublicDirectConnectTunnelRoutesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetPublicDirectConnectTunnelRoutesFilterArrayOutput() GetPublicDirectConnectTunnelRoutesFilterArrayOutput
+	ToGetPublicDirectConnectTunnelRoutesFilterArrayOutputWithContext(context.Context) GetPublicDirectConnectTunnelRoutesFilterArrayOutput
+}
+
+type GetPublicDirectConnectTunnelRoutesFilterArray []GetPublicDirectConnectTunnelRoutesFilterInput
+
+func (GetPublicDirectConnectTunnelRoutesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicDirectConnectTunnelRoutesFilter)(nil)).Elem()
+}
+
+func (i GetPublicDirectConnectTunnelRoutesFilterArray) ToGetPublicDirectConnectTunnelRoutesFilterArrayOutput() GetPublicDirectConnectTunnelRoutesFilterArrayOutput {
+	return i.ToGetPublicDirectConnectTunnelRoutesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublicDirectConnectTunnelRoutesFilterArray) ToGetPublicDirectConnectTunnelRoutesFilterArrayOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicDirectConnectTunnelRoutesFilterArrayOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetPublicDirectConnectTunnelRoutesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesFilter)(nil)).Elem()
+}
+
+func (o GetPublicDirectConnectTunnelRoutesFilterOutput) ToGetPublicDirectConnectTunnelRoutesFilterOutput() GetPublicDirectConnectTunnelRoutesFilterOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesFilterOutput) ToGetPublicDirectConnectTunnelRoutesFilterOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesFilterOutput {
+	return o
+}
+
+// Fields to be filtered.
+func (o GetPublicDirectConnectTunnelRoutesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// filter value of the field.
+func (o GetPublicDirectConnectTunnelRoutesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublicDirectConnectTunnelRoutesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicDirectConnectTunnelRoutesFilter)(nil)).Elem()
+}
+
+func (o GetPublicDirectConnectTunnelRoutesFilterArrayOutput) ToGetPublicDirectConnectTunnelRoutesFilterArrayOutput() GetPublicDirectConnectTunnelRoutesFilterArrayOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesFilterArrayOutput) ToGetPublicDirectConnectTunnelRoutesFilterArrayOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesFilterArrayOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesFilterArrayOutput) Index(i pulumi.IntInput) GetPublicDirectConnectTunnelRoutesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublicDirectConnectTunnelRoutesFilter {
+		return vs[0].([]GetPublicDirectConnectTunnelRoutesFilter)[vs[1].(int)]
+	}).(GetPublicDirectConnectTunnelRoutesFilterOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesRoute struct {
+	// ASPath info.
+	AsPaths []string `pulumi:"asPaths"`
+	// Network CIDR.
+	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
+	// Route next hop ip.
+	NextHop string `pulumi:"nextHop"`
+	// direct connect tunnel route id.
+	RouteId string `pulumi:"routeId"`
+	// Route type: BGP/STATIC route.
+	RouteType string `pulumi:"routeType"`
+	// ENABLE: routing is enabled, DISABLE: routing is disabled.
+	Status string `pulumi:"status"`
+}
+
+// GetPublicDirectConnectTunnelRoutesRouteInput is an input type that accepts GetPublicDirectConnectTunnelRoutesRouteArgs and GetPublicDirectConnectTunnelRoutesRouteOutput values.
+// You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesRouteInput` via:
+//
+//          GetPublicDirectConnectTunnelRoutesRouteArgs{...}
+type GetPublicDirectConnectTunnelRoutesRouteInput interface {
+	pulumi.Input
+
+	ToGetPublicDirectConnectTunnelRoutesRouteOutput() GetPublicDirectConnectTunnelRoutesRouteOutput
+	ToGetPublicDirectConnectTunnelRoutesRouteOutputWithContext(context.Context) GetPublicDirectConnectTunnelRoutesRouteOutput
+}
+
+type GetPublicDirectConnectTunnelRoutesRouteArgs struct {
+	// ASPath info.
+	AsPaths pulumi.StringArrayInput `pulumi:"asPaths"`
+	// Network CIDR.
+	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
+	// Route next hop ip.
+	NextHop pulumi.StringInput `pulumi:"nextHop"`
+	// direct connect tunnel route id.
+	RouteId pulumi.StringInput `pulumi:"routeId"`
+	// Route type: BGP/STATIC route.
+	RouteType pulumi.StringInput `pulumi:"routeType"`
+	// ENABLE: routing is enabled, DISABLE: routing is disabled.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetPublicDirectConnectTunnelRoutesRouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesRoute)(nil)).Elem()
+}
+
+func (i GetPublicDirectConnectTunnelRoutesRouteArgs) ToGetPublicDirectConnectTunnelRoutesRouteOutput() GetPublicDirectConnectTunnelRoutesRouteOutput {
+	return i.ToGetPublicDirectConnectTunnelRoutesRouteOutputWithContext(context.Background())
+}
+
+func (i GetPublicDirectConnectTunnelRoutesRouteArgs) ToGetPublicDirectConnectTunnelRoutesRouteOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesRouteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicDirectConnectTunnelRoutesRouteOutput)
+}
+
+// GetPublicDirectConnectTunnelRoutesRouteArrayInput is an input type that accepts GetPublicDirectConnectTunnelRoutesRouteArray and GetPublicDirectConnectTunnelRoutesRouteArrayOutput values.
+// You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesRouteArrayInput` via:
+//
+//          GetPublicDirectConnectTunnelRoutesRouteArray{ GetPublicDirectConnectTunnelRoutesRouteArgs{...} }
+type GetPublicDirectConnectTunnelRoutesRouteArrayInput interface {
+	pulumi.Input
+
+	ToGetPublicDirectConnectTunnelRoutesRouteArrayOutput() GetPublicDirectConnectTunnelRoutesRouteArrayOutput
+	ToGetPublicDirectConnectTunnelRoutesRouteArrayOutputWithContext(context.Context) GetPublicDirectConnectTunnelRoutesRouteArrayOutput
+}
+
+type GetPublicDirectConnectTunnelRoutesRouteArray []GetPublicDirectConnectTunnelRoutesRouteInput
+
+func (GetPublicDirectConnectTunnelRoutesRouteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicDirectConnectTunnelRoutesRoute)(nil)).Elem()
+}
+
+func (i GetPublicDirectConnectTunnelRoutesRouteArray) ToGetPublicDirectConnectTunnelRoutesRouteArrayOutput() GetPublicDirectConnectTunnelRoutesRouteArrayOutput {
+	return i.ToGetPublicDirectConnectTunnelRoutesRouteArrayOutputWithContext(context.Background())
+}
+
+func (i GetPublicDirectConnectTunnelRoutesRouteArray) ToGetPublicDirectConnectTunnelRoutesRouteArrayOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesRouteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPublicDirectConnectTunnelRoutesRouteArrayOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesRouteOutput struct{ *pulumi.OutputState }
+
+func (GetPublicDirectConnectTunnelRoutesRouteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesRoute)(nil)).Elem()
+}
+
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) ToGetPublicDirectConnectTunnelRoutesRouteOutput() GetPublicDirectConnectTunnelRoutesRouteOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) ToGetPublicDirectConnectTunnelRoutesRouteOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesRouteOutput {
+	return o
+}
+
+// ASPath info.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) AsPaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) []string { return v.AsPaths }).(pulumi.StringArrayOutput)
+}
+
+// Network CIDR.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+}
+
+// Route next hop ip.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) NextHop() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) string { return v.NextHop }).(pulumi.StringOutput)
+}
+
+// direct connect tunnel route id.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) RouteId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) string { return v.RouteId }).(pulumi.StringOutput)
+}
+
+// Route type: BGP/STATIC route.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) RouteType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) string { return v.RouteType }).(pulumi.StringOutput)
+}
+
+// ENABLE: routing is enabled, DISABLE: routing is disabled.
+func (o GetPublicDirectConnectTunnelRoutesRouteOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicDirectConnectTunnelRoutesRoute) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetPublicDirectConnectTunnelRoutesRouteArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPublicDirectConnectTunnelRoutesRouteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPublicDirectConnectTunnelRoutesRoute)(nil)).Elem()
+}
+
+func (o GetPublicDirectConnectTunnelRoutesRouteArrayOutput) ToGetPublicDirectConnectTunnelRoutesRouteArrayOutput() GetPublicDirectConnectTunnelRoutesRouteArrayOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesRouteArrayOutput) ToGetPublicDirectConnectTunnelRoutesRouteArrayOutputWithContext(ctx context.Context) GetPublicDirectConnectTunnelRoutesRouteArrayOutput {
+	return o
+}
+
+func (o GetPublicDirectConnectTunnelRoutesRouteArrayOutput) Index(i pulumi.IntInput) GetPublicDirectConnectTunnelRoutesRouteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPublicDirectConnectTunnelRoutesRoute {
+		return vs[0].([]GetPublicDirectConnectTunnelRoutesRoute)[vs[1].(int)]
+	}).(GetPublicDirectConnectTunnelRoutesRouteOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessPointsAccessPointSetInput)(nil)).Elem(), GetAccessPointsAccessPointSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessPointsAccessPointSetArrayInput)(nil)).Elem(), GetAccessPointsAccessPointSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessPointsAccessPointSetCoordinateInput)(nil)).Elem(), GetAccessPointsAccessPointSetCoordinateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessPointsAccessPointSetCoordinateArrayInput)(nil)).Elem(), GetAccessPointsAccessPointSetCoordinateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCcnRoutesInstanceListInput)(nil)).Elem(), GetGatewayCcnRoutesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCcnRoutesInstanceListArrayInput)(nil)).Elem(), GetGatewayCcnRoutesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayInstancesInstanceListInput)(nil)).Elem(), GetGatewayInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayInstancesInstanceListArrayInput)(nil)).Elem(), GetGatewayInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetAddressStatisticsInternetAddressStatisticInput)(nil)).Elem(), GetInternetAddressStatisticsInternetAddressStatisticArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetAddressStatisticsInternetAddressStatisticArrayInput)(nil)).Elem(), GetInternetAddressStatisticsInternetAddressStatisticArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesFilterInput)(nil)).Elem(), GetPublicDirectConnectTunnelRoutesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesFilterArrayInput)(nil)).Elem(), GetPublicDirectConnectTunnelRoutesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesRouteInput)(nil)).Elem(), GetPublicDirectConnectTunnelRoutesRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPublicDirectConnectTunnelRoutesRouteArrayInput)(nil)).Elem(), GetPublicDirectConnectTunnelRoutesRouteArray{})
+	pulumi.RegisterOutputType(GetAccessPointsAccessPointSetOutput{})
+	pulumi.RegisterOutputType(GetAccessPointsAccessPointSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccessPointsAccessPointSetCoordinateOutput{})
+	pulumi.RegisterOutputType(GetAccessPointsAccessPointSetCoordinateArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayCcnRoutesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetGatewayCcnRoutesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetGatewayInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInternetAddressStatisticsInternetAddressStatisticOutput{})
+	pulumi.RegisterOutputType(GetInternetAddressStatisticsInternetAddressStatisticArrayOutput{})
+	pulumi.RegisterOutputType(GetPublicDirectConnectTunnelRoutesFilterOutput{})
+	pulumi.RegisterOutputType(GetPublicDirectConnectTunnelRoutesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetPublicDirectConnectTunnelRoutesRouteOutput{})
+	pulumi.RegisterOutputType(GetPublicDirectConnectTunnelRoutesRouteArrayOutput{})
 }

@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
  *
  * ## Example Usage
- *
- * dnsCheck way:
+ * ### dnsCheck way:
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -20,8 +19,7 @@ import * as utilities from "../utilities";
  *     verifyType: "dnsCheck",
  * });
  * ```
- *
- * fileCheck way:
+ * ### fileCheck way:
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

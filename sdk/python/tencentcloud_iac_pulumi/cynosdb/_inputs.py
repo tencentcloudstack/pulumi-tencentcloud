@@ -9,13 +9,116 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AccountPrivilegesDatabasePrivilegeArgs',
+    'AccountPrivilegesTablePrivilegeArgs',
     'AuditLogFileFilterArgs',
+    'ClusterDatabasesUserHostPrivilegeArgs',
     'ClusterParamItemArgs',
     'ClusterRoGroupAddrArgs',
     'ClusterRoGroupInstanceArgs',
     'ClusterRwGroupAddrArgs',
     'ClusterRwGroupInstanceArgs',
+    'ExportInstanceErrorLogsErrorLogItemExportArgs',
+    'InstanceParamInstanceParamListArgs',
+    'ParamTemplateParamListArgs',
+    'ProxyEndPointInstanceWeightArgs',
+    'ProxyProxyZoneArgs',
+    'RollBackClusterRollbackDatabaseArgs',
+    'RollBackClusterRollbackTableArgs',
+    'RollBackClusterRollbackTableTableArgs',
+    'GetAccountAllGrantPrivilegesAccountArgs',
+    'GetAuditLogsFilterArgs',
+    'GetProxyNodeFilterArgs',
 ]
+
+@pulumi.input_type
+class AccountPrivilegesDatabasePrivilegeArgs:
+    def __init__(__self__, *,
+                 db: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] db: Database.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Database privileges.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+
+    @property
+    @pulumi.getter
+    def db(self) -> pulumi.Input[str]:
+        """
+        Database.
+        """
+        return pulumi.get(self, "db")
+
+    @db.setter
+    def db(self, value: pulumi.Input[str]):
+        pulumi.set(self, "db", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Database privileges.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesTablePrivilegeArgs:
+    def __init__(__self__, *,
+                 db: pulumi.Input[str],
+                 privileges: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 table_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] db: Database name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privileges: Table privileges.
+        :param pulumi.Input[str] table_name: Table name.
+        """
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "privileges", privileges)
+        pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter
+    def db(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db")
+
+    @db.setter
+    def db(self, value: pulumi.Input[str]):
+        pulumi.set(self, "db", value)
+
+    @property
+    @pulumi.getter
+    def privileges(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Table privileges.
+        """
+        return pulumi.get(self, "privileges")
+
+    @privileges.setter
+    def privileges(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "privileges", value)
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> pulumi.Input[str]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @table_name.setter
+    def table_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table_name", value)
+
 
 @pulumi.input_type
 class AuditLogFileFilterArgs:
@@ -233,6 +336,58 @@ class AuditLogFileFilterArgs:
 
 
 @pulumi.input_type
+class ClusterDatabasesUserHostPrivilegeArgs:
+    def __init__(__self__, *,
+                 db_host: pulumi.Input[str],
+                 db_privilege: pulumi.Input[str],
+                 db_user_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] db_host: .
+        :param pulumi.Input[str] db_privilege: .
+        :param pulumi.Input[str] db_user_name: Authorized Users.
+        """
+        pulumi.set(__self__, "db_host", db_host)
+        pulumi.set(__self__, "db_privilege", db_privilege)
+        pulumi.set(__self__, "db_user_name", db_user_name)
+
+    @property
+    @pulumi.getter(name="dbHost")
+    def db_host(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "db_host")
+
+    @db_host.setter
+    def db_host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "db_host", value)
+
+    @property
+    @pulumi.getter(name="dbPrivilege")
+    def db_privilege(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "db_privilege")
+
+    @db_privilege.setter
+    def db_privilege(self, value: pulumi.Input[str]):
+        pulumi.set(self, "db_privilege", value)
+
+    @property
+    @pulumi.getter(name="dbUserName")
+    def db_user_name(self) -> pulumi.Input[str]:
+        """
+        Authorized Users.
+        """
+        return pulumi.get(self, "db_user_name")
+
+    @db_user_name.setter
+    def db_user_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "db_user_name", value)
+
+
+@pulumi.input_type
 class ClusterParamItemArgs:
     def __init__(__self__, *,
                  current_value: pulumi.Input[str],
@@ -439,5 +594,661 @@ class ClusterRwGroupInstanceArgs:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+
+@pulumi.input_type
+class ExportInstanceErrorLogsErrorLogItemExportArgs:
+    def __init__(__self__, *,
+                 content: Optional[pulumi.Input[str]] = None,
+                 level: Optional[pulumi.Input[str]] = None,
+                 timestamp: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] content: log content.
+        :param pulumi.Input[str] level: Log level, optional values note, warning, error.
+        :param pulumi.Input[str] timestamp: time.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if level is not None:
+            pulumi.set(__self__, "level", level)
+        if timestamp is not None:
+            pulumi.set(__self__, "timestamp", timestamp)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[pulumi.Input[str]]:
+        """
+        log content.
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter
+    def level(self) -> Optional[pulumi.Input[str]]:
+        """
+        Log level, optional values note, warning, error.
+        """
+        return pulumi.get(self, "level")
+
+    @level.setter
+    def level(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "level", value)
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> Optional[pulumi.Input[str]]:
+        """
+        time.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @timestamp.setter
+    def timestamp(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "timestamp", value)
+
+
+@pulumi.input_type
+class InstanceParamInstanceParamListArgs:
+    def __init__(__self__, *,
+                 current_value: pulumi.Input[str],
+                 param_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] current_value: Current value of parameter.
+        :param pulumi.Input[str] param_name: Parameter Name.
+        """
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "param_name", param_name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> pulumi.Input[str]:
+        """
+        Current value of parameter.
+        """
+        return pulumi.get(self, "current_value")
+
+    @current_value.setter
+    def current_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "current_value", value)
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> pulumi.Input[str]:
+        """
+        Parameter Name.
+        """
+        return pulumi.get(self, "param_name")
+
+    @param_name.setter
+    def param_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "param_name", value)
+
+
+@pulumi.input_type
+class ParamTemplateParamListArgs:
+    def __init__(__self__, *,
+                 current_value: Optional[pulumi.Input[str]] = None,
+                 param_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] current_value: Current value.
+        :param pulumi.Input[str] param_name: Parameter Name.
+        """
+        if current_value is not None:
+            pulumi.set(__self__, "current_value", current_value)
+        if param_name is not None:
+            pulumi.set(__self__, "param_name", param_name)
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Current value.
+        """
+        return pulumi.get(self, "current_value")
+
+    @current_value.setter
+    def current_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "current_value", value)
+
+    @property
+    @pulumi.getter(name="paramName")
+    def param_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter Name.
+        """
+        return pulumi.get(self, "param_name")
+
+    @param_name.setter
+    def param_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "param_name", value)
+
+
+@pulumi.input_type
+class ProxyEndPointInstanceWeightArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 weight: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] instance_id: Instance Id.
+        :param pulumi.Input[int] weight: Instance Weight.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        Instance Id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        """
+        Instance Weight.
+        """
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class ProxyProxyZoneArgs:
+    def __init__(__self__, *,
+                 proxy_node_count: Optional[pulumi.Input[int]] = None,
+                 proxy_node_zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] proxy_node_count: Number of proxy nodes.
+        :param pulumi.Input[str] proxy_node_zone: Proxy node availability zone.
+        """
+        if proxy_node_count is not None:
+            pulumi.set(__self__, "proxy_node_count", proxy_node_count)
+        if proxy_node_zone is not None:
+            pulumi.set(__self__, "proxy_node_zone", proxy_node_zone)
+
+    @property
+    @pulumi.getter(name="proxyNodeCount")
+    def proxy_node_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of proxy nodes.
+        """
+        return pulumi.get(self, "proxy_node_count")
+
+    @proxy_node_count.setter
+    def proxy_node_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "proxy_node_count", value)
+
+    @property
+    @pulumi.getter(name="proxyNodeZone")
+    def proxy_node_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        Proxy node availability zone.
+        """
+        return pulumi.get(self, "proxy_node_zone")
+
+    @proxy_node_zone.setter
+    def proxy_node_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "proxy_node_zone", value)
+
+
+@pulumi.input_type
+class RollBackClusterRollbackDatabaseArgs:
+    def __init__(__self__, *,
+                 new_database: pulumi.Input[str],
+                 old_database: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_database: New database name.
+        :param pulumi.Input[str] old_database: Old database name.
+        """
+        pulumi.set(__self__, "new_database", new_database)
+        pulumi.set(__self__, "old_database", old_database)
+
+    @property
+    @pulumi.getter(name="newDatabase")
+    def new_database(self) -> pulumi.Input[str]:
+        """
+        New database name.
+        """
+        return pulumi.get(self, "new_database")
+
+    @new_database.setter
+    def new_database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_database", value)
+
+    @property
+    @pulumi.getter(name="oldDatabase")
+    def old_database(self) -> pulumi.Input[str]:
+        """
+        Old database name.
+        """
+        return pulumi.get(self, "old_database")
+
+    @old_database.setter
+    def old_database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_database", value)
+
+
+@pulumi.input_type
+class RollBackClusterRollbackTableArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 tables: pulumi.Input[Sequence[pulumi.Input['RollBackClusterRollbackTableTableArgs']]]):
+        """
+        :param pulumi.Input[str] database: New database name.
+        :param pulumi.Input[Sequence[pulumi.Input['RollBackClusterRollbackTableTableArgs']]] tables: Tables.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "tables", tables)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        New database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def tables(self) -> pulumi.Input[Sequence[pulumi.Input['RollBackClusterRollbackTableTableArgs']]]:
+        """
+        Tables.
+        """
+        return pulumi.get(self, "tables")
+
+    @tables.setter
+    def tables(self, value: pulumi.Input[Sequence[pulumi.Input['RollBackClusterRollbackTableTableArgs']]]):
+        pulumi.set(self, "tables", value)
+
+
+@pulumi.input_type
+class RollBackClusterRollbackTableTableArgs:
+    def __init__(__self__, *,
+                 new_table: pulumi.Input[str],
+                 old_table: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_table: New table name.
+        :param pulumi.Input[str] old_table: Old table name.
+        """
+        pulumi.set(__self__, "new_table", new_table)
+        pulumi.set(__self__, "old_table", old_table)
+
+    @property
+    @pulumi.getter(name="newTable")
+    def new_table(self) -> pulumi.Input[str]:
+        """
+        New table name.
+        """
+        return pulumi.get(self, "new_table")
+
+    @new_table.setter
+    def new_table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_table", value)
+
+    @property
+    @pulumi.getter(name="oldTable")
+    def old_table(self) -> pulumi.Input[str]:
+        """
+        Old table name.
+        """
+        return pulumi.get(self, "old_table")
+
+    @old_table.setter
+    def old_table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_table", value)
+
+
+@pulumi.input_type
+class GetAccountAllGrantPrivilegesAccountArgs:
+    def __init__(__self__, *,
+                 account_name: str,
+                 host: Optional[str] = None):
+        """
+        :param str account_name: Account.
+        :param str host: Host, default `%`.
+        """
+        pulumi.set(__self__, "account_name", account_name)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+
+    @property
+    @pulumi.getter(name="accountName")
+    def account_name(self) -> str:
+        """
+        Account.
+        """
+        return pulumi.get(self, "account_name")
+
+    @account_name.setter
+    def account_name(self, value: str):
+        pulumi.set(self, "account_name", value)
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[str]:
+        """
+        Host, default `%`.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: Optional[str]):
+        pulumi.set(self, "host", value)
+
+
+@pulumi.input_type
+class GetAuditLogsFilterArgs:
+    def __init__(__self__, *,
+                 affect_rows: Optional[int] = None,
+                 db_names: Optional[Sequence[str]] = None,
+                 exec_time: Optional[int] = None,
+                 hosts: Optional[Sequence[str]] = None,
+                 policy_names: Optional[Sequence[str]] = None,
+                 sent_rows: Optional[int] = None,
+                 sql: Optional[str] = None,
+                 sql_type: Optional[str] = None,
+                 sql_types: Optional[Sequence[str]] = None,
+                 sqls: Optional[Sequence[str]] = None,
+                 table_names: Optional[Sequence[str]] = None,
+                 thread_ids: Optional[Sequence[str]] = None,
+                 users: Optional[Sequence[str]] = None):
+        """
+        :param int affect_rows: Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        :param Sequence[str] db_names: Database name.
+        :param int exec_time: Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        :param Sequence[str] hosts: Client address.
+        :param Sequence[str] policy_names: Audit policy name.
+        :param int sent_rows: Returns the number of rows.
+        :param str sql: SQL statement. Supports fuzzy matching.
+        :param str sql_type: SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sql_types: SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        :param Sequence[str] sqls: SQL statement. Supports passing multiple SQL statements.
+        :param Sequence[str] table_names: Table name.
+        :param Sequence[str] thread_ids: Thread ID.
+        :param Sequence[str] users: User name.
+        """
+        if affect_rows is not None:
+            pulumi.set(__self__, "affect_rows", affect_rows)
+        if db_names is not None:
+            pulumi.set(__self__, "db_names", db_names)
+        if exec_time is not None:
+            pulumi.set(__self__, "exec_time", exec_time)
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if policy_names is not None:
+            pulumi.set(__self__, "policy_names", policy_names)
+        if sent_rows is not None:
+            pulumi.set(__self__, "sent_rows", sent_rows)
+        if sql is not None:
+            pulumi.set(__self__, "sql", sql)
+        if sql_type is not None:
+            pulumi.set(__self__, "sql_type", sql_type)
+        if sql_types is not None:
+            pulumi.set(__self__, "sql_types", sql_types)
+        if sqls is not None:
+            pulumi.set(__self__, "sqls", sqls)
+        if table_names is not None:
+            pulumi.set(__self__, "table_names", table_names)
+        if thread_ids is not None:
+            pulumi.set(__self__, "thread_ids", thread_ids)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+
+    @property
+    @pulumi.getter(name="affectRows")
+    def affect_rows(self) -> Optional[int]:
+        """
+        Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+        """
+        return pulumi.get(self, "affect_rows")
+
+    @affect_rows.setter
+    def affect_rows(self, value: Optional[int]):
+        pulumi.set(self, "affect_rows", value)
+
+    @property
+    @pulumi.getter(name="dbNames")
+    def db_names(self) -> Optional[Sequence[str]]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "db_names")
+
+    @db_names.setter
+    def db_names(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "db_names", value)
+
+    @property
+    @pulumi.getter(name="execTime")
+    def exec_time(self) -> Optional[int]:
+        """
+        Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+        """
+        return pulumi.get(self, "exec_time")
+
+    @exec_time.setter
+    def exec_time(self, value: Optional[int]):
+        pulumi.set(self, "exec_time", value)
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[Sequence[str]]:
+        """
+        Client address.
+        """
+        return pulumi.get(self, "hosts")
+
+    @hosts.setter
+    def hosts(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "hosts", value)
+
+    @property
+    @pulumi.getter(name="policyNames")
+    def policy_names(self) -> Optional[Sequence[str]]:
+        """
+        Audit policy name.
+        """
+        return pulumi.get(self, "policy_names")
+
+    @policy_names.setter
+    def policy_names(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "policy_names", value)
+
+    @property
+    @pulumi.getter(name="sentRows")
+    def sent_rows(self) -> Optional[int]:
+        """
+        Returns the number of rows.
+        """
+        return pulumi.get(self, "sent_rows")
+
+    @sent_rows.setter
+    def sent_rows(self, value: Optional[int]):
+        pulumi.set(self, "sent_rows", value)
+
+    @property
+    @pulumi.getter
+    def sql(self) -> Optional[str]:
+        """
+        SQL statement. Supports fuzzy matching.
+        """
+        return pulumi.get(self, "sql")
+
+    @sql.setter
+    def sql(self, value: Optional[str]):
+        pulumi.set(self, "sql", value)
+
+    @property
+    @pulumi.getter(name="sqlType")
+    def sql_type(self) -> Optional[str]:
+        """
+        SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_type")
+
+    @sql_type.setter
+    def sql_type(self, value: Optional[str]):
+        pulumi.set(self, "sql_type", value)
+
+    @property
+    @pulumi.getter(name="sqlTypes")
+    def sql_types(self) -> Optional[Sequence[str]]:
+        """
+        SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+        """
+        return pulumi.get(self, "sql_types")
+
+    @sql_types.setter
+    def sql_types(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "sql_types", value)
+
+    @property
+    @pulumi.getter
+    def sqls(self) -> Optional[Sequence[str]]:
+        """
+        SQL statement. Supports passing multiple SQL statements.
+        """
+        return pulumi.get(self, "sqls")
+
+    @sqls.setter
+    def sqls(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "sqls", value)
+
+    @property
+    @pulumi.getter(name="tableNames")
+    def table_names(self) -> Optional[Sequence[str]]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_names")
+
+    @table_names.setter
+    def table_names(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "table_names", value)
+
+    @property
+    @pulumi.getter(name="threadIds")
+    def thread_ids(self) -> Optional[Sequence[str]]:
+        """
+        Thread ID.
+        """
+        return pulumi.get(self, "thread_ids")
+
+    @thread_ids.setter
+    def thread_ids(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "thread_ids", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[Sequence[str]]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "users", value)
+
+
+@pulumi.input_type
+class GetProxyNodeFilterArgs:
+    def __init__(__self__, *,
+                 names: Sequence[str],
+                 values: Sequence[str],
+                 exact_match: Optional[bool] = None,
+                 name: Optional[str] = None,
+                 operator: Optional[str] = None):
+        """
+        :param Sequence[str] names: Search String.
+        :param Sequence[str] values: Search String.
+        :param bool exact_match: Exact match or not.
+        :param str name: Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+        :param str operator: Operator.
+        """
+        pulumi.set(__self__, "names", names)
+        pulumi.set(__self__, "values", values)
+        if exact_match is not None:
+            pulumi.set(__self__, "exact_match", exact_match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if operator is not None:
+            pulumi.set(__self__, "operator", operator)
+
+    @property
+    @pulumi.getter
+    def names(self) -> Sequence[str]:
+        """
+        Search String.
+        """
+        return pulumi.get(self, "names")
+
+    @names.setter
+    def names(self, value: Sequence[str]):
+        pulumi.set(self, "names", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Search String.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+    @property
+    @pulumi.getter(name="exactMatch")
+    def exact_match(self) -> Optional[bool]:
+        """
+        Exact match or not.
+        """
+        return pulumi.get(self, "exact_match")
+
+    @exact_match.setter
+    def exact_match(self, value: Optional[bool]):
+        pulumi.set(self, "exact_match", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> Optional[str]:
+        """
+        Operator.
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: Optional[str]):
+        pulumi.set(self, "operator", value)
 
 

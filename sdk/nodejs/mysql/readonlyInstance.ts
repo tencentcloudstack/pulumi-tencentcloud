@@ -30,6 +30,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-12mt3l31",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * mysql read-only database instances can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
+ * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
     /**
@@ -74,7 +82,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
     /**
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
-    public readonly deviceType!: pulumi.Output<string | undefined>;
+    public readonly deviceType!: pulumi.Output<string>;
     /**
      * Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
      */

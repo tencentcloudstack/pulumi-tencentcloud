@@ -21,10 +21,16 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Eip/addressTransform:AddressTransform":
+		r = &AddressTransform{}
 	case "tencentcloud:Eip/association:Association":
 		r = &Association{}
 	case "tencentcloud:Eip/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Eip/normalAddressReturn:NormalAddressReturn":
+		r = &NormalAddressReturn{}
+	case "tencentcloud:Eip/publicAddressAdjust:PublicAddressAdjust":
+		r = &PublicAddressAdjust{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -40,12 +46,27 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Eip/addressTransform",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Eip/association",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Eip/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Eip/normalAddressReturn",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Eip/publicAddressAdjust",
 		&module{version},
 	)
 }

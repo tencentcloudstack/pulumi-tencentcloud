@@ -7,9 +7,13 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./account";
 export * from "./backupConfig";
+export * from "./backupDownloadRestriction";
+export * from "./backupOperation";
+export * from "./clearInstanceOperation";
 export * from "./connectionConfig";
 export * from "./getBackup";
 export * from "./getBackupDownloadInfo";
+export * from "./getInstanceNodeInfo";
 export * from "./getInstanceShards";
 export * from "./getInstanceTaskList";
 export * from "./getInstanceZoneInfo";
@@ -21,20 +25,39 @@ export * from "./maintenanceWindow";
 export * from "./param";
 export * from "./paramTemplate";
 export * from "./readOnly";
+export * from "./renewInstanceOperation";
 export * from "./replicaReadonly";
+export * from "./replicateAttachment";
+export * from "./securityGroupAttachment";
 export * from "./ssl";
+export * from "./startupInstanceOperation";
+export * from "./switchMaster";
+export * from "./upgradeCacheVersionOperation";
+export * from "./upgradeMultiZoneOperation";
+export * from "./upgradeProxyVersionOperation";
 
 // Import resources to register:
 import { Account } from "./account";
 import { BackupConfig } from "./backupConfig";
+import { BackupDownloadRestriction } from "./backupDownloadRestriction";
+import { BackupOperation } from "./backupOperation";
+import { ClearInstanceOperation } from "./clearInstanceOperation";
 import { ConnectionConfig } from "./connectionConfig";
 import { Instance } from "./instance";
 import { MaintenanceWindow } from "./maintenanceWindow";
 import { Param } from "./param";
 import { ParamTemplate } from "./paramTemplate";
 import { ReadOnly } from "./readOnly";
+import { RenewInstanceOperation } from "./renewInstanceOperation";
 import { ReplicaReadonly } from "./replicaReadonly";
+import { ReplicateAttachment } from "./replicateAttachment";
+import { SecurityGroupAttachment } from "./securityGroupAttachment";
 import { Ssl } from "./ssl";
+import { StartupInstanceOperation } from "./startupInstanceOperation";
+import { SwitchMaster } from "./switchMaster";
+import { UpgradeCacheVersionOperation } from "./upgradeCacheVersionOperation";
+import { UpgradeMultiZoneOperation } from "./upgradeMultiZoneOperation";
+import { UpgradeProxyVersionOperation } from "./upgradeProxyVersionOperation";
 
 const _module = {
     version: utilities.getVersion(),
@@ -44,6 +67,12 @@ const _module = {
                 return new Account(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupConfig:BackupConfig":
                 return new BackupConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
+                return new BackupDownloadRestriction(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/backupOperation:BackupOperation":
+                return new BackupOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation":
+                return new ClearInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Redis/connectionConfig:ConnectionConfig":
                 return new ConnectionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/instance:Instance":
@@ -56,10 +85,26 @@ const _module = {
                 return new ParamTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Redis/readOnly:ReadOnly":
                 return new ReadOnly(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/renewInstanceOperation:RenewInstanceOperation":
+                return new RenewInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Redis/replicaReadonly:ReplicaReadonly":
                 return new ReplicaReadonly(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/replicateAttachment:ReplicateAttachment":
+                return new ReplicateAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/securityGroupAttachment:SecurityGroupAttachment":
+                return new SecurityGroupAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Redis/ssl:Ssl":
                 return new Ssl(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/startupInstanceOperation:StartupInstanceOperation":
+                return new StartupInstanceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/switchMaster:SwitchMaster":
+                return new SwitchMaster(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/upgradeCacheVersionOperation:UpgradeCacheVersionOperation":
+                return new UpgradeCacheVersionOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/upgradeMultiZoneOperation:UpgradeMultiZoneOperation":
+                return new UpgradeMultiZoneOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/upgradeProxyVersionOperation:UpgradeProxyVersionOperation":
+                return new UpgradeProxyVersionOperation(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -67,11 +112,22 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupDownloadRestriction", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/clearInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/connectionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/param", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/paramTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/readOnly", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/renewInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/replicaReadonly", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/replicateAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/securityGroupAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/ssl", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/startupInstanceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/switchMaster", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/upgradeCacheVersionOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/upgradeMultiZoneOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/upgradeProxyVersionOperation", _module)

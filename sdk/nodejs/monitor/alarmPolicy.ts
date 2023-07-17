@@ -9,8 +9,7 @@ import * as utilities from "../utilities";
  * Provides a alarm policy resource for monitor.
  *
  * ## Example Usage
- *
- * cvmDevice alarm policy
+ * ### cvmDevice alarm policy
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -49,8 +48,7 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
- *
- * k8sCluster alarm policy
+ * ### k8sCluster alarm policy
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -124,8 +122,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * cvmDevice alarm policy binding cvm by tag
+ * ### cvmDevice alarm policy binding cvm by tag
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

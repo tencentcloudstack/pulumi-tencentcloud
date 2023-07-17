@@ -35,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// }
     /// ```
-    /// 
-    /// Using public network access whitelist
+    /// ### Using public network access whitelist
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -66,8 +65,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// }
     /// ```
-    /// 
-    /// Create with Replications
+    /// ### Create with Replications
     /// 
     /// ```csharp
     /// using Pulumi;

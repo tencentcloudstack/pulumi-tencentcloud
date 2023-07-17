@@ -18,6 +18,7 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // )
@@ -28,7 +29,21 @@ import (
 // 			Description:   pulumi.String("terraform-test"),
 // 			EngineType:    pulumi.String("InnoDB"),
 // 			EngineVersion: pulumi.String("8.0"),
-// 			TemplateType:  pulumi.String("HIGH_STABILITY"),
+// 			ParamLists: mysql.ParamTemplateParamListArray{
+// 				&mysql.ParamTemplateParamListArgs{
+// 					CurrentValue: pulumi.String("1"),
+// 					Name:         pulumi.String("auto_increment_increment"),
+// 				},
+// 				&mysql.ParamTemplateParamListArgs{
+// 					CurrentValue: pulumi.String("1"),
+// 					Name:         pulumi.String("auto_increment_offset"),
+// 				},
+// 				&mysql.ParamTemplateParamListArgs{
+// 					CurrentValue: pulumi.String("ON"),
+// 					Name:         pulumi.String("automatic_sp_privileges"),
+// 				},
+// 			},
+// 			TemplateType: pulumi.String("HIGH_STABILITY"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -140,6 +155,10 @@ type paramTemplateArgs struct {
 	EngineVersion *string `pulumi:"engineVersion"`
 	// The name of parameter template.
 	Name *string `pulumi:"name"`
+	// parameter list.
+	ParamLists []ParamTemplateParamList `pulumi:"paramLists"`
+	// The ID of source parameter template.
+	TemplateId *int `pulumi:"templateId"`
 	// The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
 	TemplateType *string `pulumi:"templateType"`
 }
@@ -154,6 +173,10 @@ type ParamTemplateArgs struct {
 	EngineVersion pulumi.StringPtrInput
 	// The name of parameter template.
 	Name pulumi.StringPtrInput
+	// parameter list.
+	ParamLists ParamTemplateParamListArrayInput
+	// The ID of source parameter template.
+	TemplateId pulumi.IntPtrInput
 	// The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
 	TemplateType pulumi.StringPtrInput
 }

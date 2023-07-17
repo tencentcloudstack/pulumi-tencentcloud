@@ -19,8 +19,7 @@ import * as utilities from "../utilities";
  *     storageId: "disk-kdt0sq6m",
  * }));
  * ```
- *
- * The following snippet shows the new supported query params
+ * ### The following snippet shows the new supported query params
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

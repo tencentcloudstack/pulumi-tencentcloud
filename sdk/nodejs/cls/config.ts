@@ -45,6 +45,14 @@ import * as utilities from "../utilities";
  *     path: "/var/log/kubernetes",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * cls config can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cls/config:Config config config_id
+ * ```
  */
 export class Config extends pulumi.CustomResource {
     /**

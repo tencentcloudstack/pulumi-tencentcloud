@@ -8,6 +8,7 @@ import typing
 from .compare_task import *
 from .compare_task_stop_operation import *
 from .get_compare_tasks import *
+from .get_migrate_db_instances import *
 from .get_migrate_jobs import *
 from .get_sync_jobs import *
 from .migrate_job import *
@@ -16,7 +17,15 @@ from .migrate_job_resume_operation import *
 from .migrate_job_start_operation import *
 from .migrate_service import *
 from .sync_check_job_operation import *
+from .sync_config import *
 from .sync_job import *
+from .sync_job_continue_operation import *
+from .sync_job_isolate_operation import *
+from .sync_job_pause_operation import *
+from .sync_job_recover_operation import *
+from .sync_job_resize_operation import *
 from .sync_job_resume_operation import *
+from .sync_job_start_operation import *
+from .sync_job_stop_operation import *
 from ._inputs import *
 from . import outputs

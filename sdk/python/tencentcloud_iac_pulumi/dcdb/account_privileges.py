@@ -26,11 +26,11 @@ class AccountPrivilegesArgs:
         The set of arguments for constructing a AccountPrivileges resource.
         :param pulumi.Input['AccountPrivilegesAccountArgs'] account: The account of the database, including username and host.
         :param pulumi.Input[str] instance_id: The ID of instance.
-        :param pulumi.Input['AccountPrivilegesColumnPrivilegesArgs'] column_privileges: &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs'] database_privileges: &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
-        :param pulumi.Input['AccountPrivilegesTablePrivilegesArgs'] table_privileges: &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input['AccountPrivilegesViewPrivilegesArgs'] view_privileges: &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        :param pulumi.Input['AccountPrivilegesColumnPrivilegesArgs'] column_privileges: Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs'] database_privileges: Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
+        :param pulumi.Input['AccountPrivilegesTablePrivilegesArgs'] table_privileges: Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input['AccountPrivilegesViewPrivilegesArgs'] view_privileges: Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         pulumi.set(__self__, "account", account)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -73,7 +73,7 @@ class AccountPrivilegesArgs:
     @pulumi.getter(name="columnPrivileges")
     def column_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesColumnPrivilegesArgs']]:
         """
-        &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "column_privileges")
 
@@ -85,7 +85,7 @@ class AccountPrivilegesArgs:
     @pulumi.getter(name="databasePrivileges")
     def database_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs']]:
         """
-        &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "database_privileges")
 
@@ -97,7 +97,7 @@ class AccountPrivilegesArgs:
     @pulumi.getter(name="globalPrivileges")
     def global_privileges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         """
         return pulumi.get(self, "global_privileges")
 
@@ -109,7 +109,7 @@ class AccountPrivilegesArgs:
     @pulumi.getter(name="tablePrivileges")
     def table_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesTablePrivilegesArgs']]:
         """
-        &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "table_privileges")
 
@@ -121,7 +121,7 @@ class AccountPrivilegesArgs:
     @pulumi.getter(name="viewPrivileges")
     def view_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesViewPrivilegesArgs']]:
         """
-        &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "view_privileges")
 
@@ -143,12 +143,12 @@ class _AccountPrivilegesState:
         """
         Input properties used for looking up and filtering AccountPrivileges resources.
         :param pulumi.Input['AccountPrivilegesAccountArgs'] account: The account of the database, including username and host.
-        :param pulumi.Input['AccountPrivilegesColumnPrivilegesArgs'] column_privileges: &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs'] database_privileges: &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        :param pulumi.Input['AccountPrivilegesColumnPrivilegesArgs'] column_privileges: Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs'] database_privileges: Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         :param pulumi.Input[str] instance_id: The ID of instance.
-        :param pulumi.Input['AccountPrivilegesTablePrivilegesArgs'] table_privileges: &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input['AccountPrivilegesViewPrivilegesArgs'] view_privileges: &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        :param pulumi.Input['AccountPrivilegesTablePrivilegesArgs'] table_privileges: Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input['AccountPrivilegesViewPrivilegesArgs'] view_privileges: Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         if account is not None:
             pulumi.set(__self__, "account", account)
@@ -181,7 +181,7 @@ class _AccountPrivilegesState:
     @pulumi.getter(name="columnPrivileges")
     def column_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesColumnPrivilegesArgs']]:
         """
-        &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "column_privileges")
 
@@ -193,7 +193,7 @@ class _AccountPrivilegesState:
     @pulumi.getter(name="databasePrivileges")
     def database_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesDatabasePrivilegesArgs']]:
         """
-        &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "database_privileges")
 
@@ -205,7 +205,7 @@ class _AccountPrivilegesState:
     @pulumi.getter(name="globalPrivileges")
     def global_privileges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         """
         return pulumi.get(self, "global_privileges")
 
@@ -229,7 +229,7 @@ class _AccountPrivilegesState:
     @pulumi.getter(name="tablePrivileges")
     def table_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesTablePrivilegesArgs']]:
         """
-        &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "table_privileges")
 
@@ -241,7 +241,7 @@ class _AccountPrivilegesState:
     @pulumi.getter(name="viewPrivileges")
     def view_privileges(self) -> Optional[pulumi.Input['AccountPrivilegesViewPrivilegesArgs']]:
         """
-        &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "view_privileges")
 
@@ -277,12 +277,12 @@ class AccountPrivileges(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['AccountPrivilegesAccountArgs']] account: The account of the database, including username and host.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesColumnPrivilegesArgs']] column_privileges: &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesDatabasePrivilegesArgs']] database_privileges: &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesColumnPrivilegesArgs']] column_privileges: Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesDatabasePrivilegesArgs']] database_privileges: Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         :param pulumi.Input[str] instance_id: The ID of instance.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesTablePrivilegesArgs']] table_privileges: &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesViewPrivilegesArgs']] view_privileges: &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesTablePrivilegesArgs']] table_privileges: Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesViewPrivilegesArgs']] view_privileges: Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         ...
     @overload
@@ -373,12 +373,12 @@ class AccountPrivileges(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['AccountPrivilegesAccountArgs']] account: The account of the database, including username and host.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesColumnPrivilegesArgs']] column_privileges: &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesDatabasePrivilegesArgs']] database_privileges: &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesColumnPrivilegesArgs']] column_privileges: Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesDatabasePrivilegesArgs']] database_privileges: Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] global_privileges: Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         :param pulumi.Input[str] instance_id: The ID of instance.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesTablePrivilegesArgs']] table_privileges: &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
-        :param pulumi.Input[pulumi.InputType['AccountPrivilegesViewPrivilegesArgs']] view_privileges: &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesTablePrivilegesArgs']] table_privileges: Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
+        :param pulumi.Input[pulumi.InputType['AccountPrivilegesViewPrivilegesArgs']] view_privileges: Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -405,7 +405,7 @@ class AccountPrivileges(pulumi.CustomResource):
     @pulumi.getter(name="columnPrivileges")
     def column_privileges(self) -> pulumi.Output[Optional['outputs.AccountPrivilegesColumnPrivileges']]:
         """
-        &amp;quot;Permissions for columns in database tables. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, REFERENCES.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "column_privileges")
 
@@ -413,7 +413,7 @@ class AccountPrivileges(pulumi.CustomResource):
     @pulumi.getter(name="databasePrivileges")
     def database_privileges(self) -> pulumi.Output[Optional['outputs.AccountPrivilegesDatabasePrivileges']]:
         """
-        &amp;quot;Database permissions. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,&amp;quot;&amp;quot;LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "database_privileges")
 
@@ -421,7 +421,7 @@ class AccountPrivileges(pulumi.CustomResource):
     @pulumi.getter(name="globalPrivileges")
     def global_privileges(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        &amp;quot;Global permissions. Among them, the optional value of the permission in GlobalPrivileges is:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,&amp;quot;&amp;quot;CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.&amp;quot;.
+        Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
         """
         return pulumi.get(self, "global_privileges")
 
@@ -437,7 +437,7 @@ class AccountPrivileges(pulumi.CustomResource):
     @pulumi.getter(name="tablePrivileges")
     def table_privileges(self) -> pulumi.Output[Optional['outputs.AccountPrivilegesTablePrivileges']]:
         """
-        &amp;quot;Permissions for tables in the database. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "table_privileges")
 
@@ -445,7 +445,7 @@ class AccountPrivileges(pulumi.CustomResource):
     @pulumi.getter(name="viewPrivileges")
     def view_privileges(self) -> pulumi.Output[Optional['outputs.AccountPrivilegesViewPrivileges']]:
         """
-        &amp;quot;Permissions for database views. Optional values for the Privileges permission are:&amp;quot;&amp;quot;SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.&amp;quot;&amp;quot;Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.&amp;quot;.
+        Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
         """
         return pulumi.get(self, "view_privileges")
 

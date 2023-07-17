@@ -10,6 +10,7 @@ import * as utilities from "../utilities";
  * > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
  *
  * ## Example Usage
+ * ### Install cbs addon by passing values
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -20,34 +21,74 @@ import * as utilities from "../utilities";
  *     // version = "1.0.5"
  *     values: ["rootdir=/var/lib/kubelet"],
  * });
- * const addonTcr = new tencentcloud.Kubernetes.AddonAttachment("addon_tcr", {
+ * ```
+ * ### Install tcr addon by passing values
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mytcr = new tencentcloud.tcr.Instance("mytcr", {
+ *     instanceType: "basic",
+ *     deleteBucket: true,
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const tcrId = mytcr.id;
+ * const tcrName = mytcr.name;
+ * const myNs = new tencentcloud.tcr.Namespace("myNs", {
+ *     instanceId: tcrId,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * const nsName = myNs.name;
+ * const myToken = new tencentcloud.tcr.Token("myToken", {
+ *     instanceId: tcrId,
+ *     description: "tcr token",
+ * });
+ * const userName = myToken.userName;
+ * const token = myToken.token;
+ * const myIns = tencentcloud.Tcr.getInstancesOutput({
+ *     instanceId: tcrId,
+ * });
+ * const endPoint = myIns.apply(myIns => myIns.instanceLists?[0]?.internalEndPoint);
+ * const addonTcr = new tencentcloud.kubernetes.AddonAttachment("addonTcr", {
  *     clusterId: "cls-xxxxxxxx",
- *     // version = "1.0.0"
+ *     version: "1.0.0",
  *     values: [
- *         // imagePullSecretsCrs is an array which can configure image pull
- *         "global.imagePullSecretsCrs[0].name=unique-sample-vpc",
- *         "global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system",
+ *         pulumi.interpolate`global.imagePullSecretsCrs[0].name=${tcrId}-vpc`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[0].namespaces=${nsName}`,
  *         "global.imagePullSecretsCrs[0].serviceAccounts=*",
  *         "global.imagePullSecretsCrs[0].type=docker",
- *         "global.imagePullSecretsCrs[0].dockerUsername=100012345678",
- *         "global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token",
- *         "global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com",
- *         "global.imagePullSecretsCrs[1].name=sample-public",
- *         "global.imagePullSecretsCrs[1].namespaces=*",
+ *         pulumi.interpolate`global.imagePullSecretsCrs[0].dockerUsername=${userName}`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[0].dockerPassword=${token}`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[0].dockerServer=${tcrName}-vpc.tencentcloudcr.com`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].name=${tcrId}-public`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].namespaces=${nsName}`,
  *         "global.imagePullSecretsCrs[1].serviceAccounts=*",
  *         "global.imagePullSecretsCrs[1].type=docker",
- *         "global.imagePullSecretsCrs[1].dockerUsername=100012345678",
- *         "global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token",
- *         "global.imagePullSecretsCrs[1].dockerServer=sample",
- *         // Specify global hosts
- *         "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
- *         "global.hosts[0].ip=10.16.0.49",
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerUsername=${userName}`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerPassword=${token}`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerServer=${tcrName}-tencentcloudcr.com`,
+ *         "global.cluster.region=gz",
+ *         "global.cluster.longregion=ap-guangzhou",
+ *         pulumi.interpolate`global.hosts[0].domain=${tcrName}-vpc.tencentcloudcr.com`,
+ *         endPoint.apply(endPoint => `global.hosts[0].ip=${endPoint}`),
  *         "global.hosts[0].disabled=false",
+ *         pulumi.interpolate`global.hosts[1].domain=${tcrName}-tencentcloudcr.com`,
+ *         endPoint.apply(endPoint => `global.hosts[1].ip=${endPoint}`),
+ *         "global.hosts[1].disabled=false",
  *     ],
  * });
  * ```
- *
- * Install new addon by passing spec json to reqBody directly
+ * ### Install new addon by passing spec json to reqBody directly
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

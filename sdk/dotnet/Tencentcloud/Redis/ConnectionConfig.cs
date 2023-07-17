@@ -14,10 +14,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     public partial class ConnectionConfig : Pulumi.CustomResource
     {
         /// <summary>
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
+        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
+        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
+        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
+        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
+        /// shards in the standard architecture = 1.
+        /// </summary>
+        [Output("addBandwidth")]
+        public Output<int> AddBandwidth { get; private set; } = null!;
+
+        /// <summary>
         /// Additional bandwidth, greater than 0, in MB.
         /// </summary>
         [Output("bandwidth")]
         public Output<int?> Bandwidth { get; private set; } = null!;
+
+        /// <summary>
+        /// standard bandwidth. Refers to the bandwidth allocated by the system to each node when an instance is purchased.
+        /// </summary>
+        [Output("baseBandwidth")]
+        public Output<int> BaseBandwidth { get; private set; } = null!;
 
         /// <summary>
         /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper
@@ -32,6 +49,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Additional bandwidth is capped.
+        /// </summary>
+        [Output("maxAddBandwidth")]
+        public Output<int> MaxAddBandwidth { get; private set; } = null!;
+
+        /// <summary>
+        /// Additional bandwidth sets the lower limit.
+        /// </summary>
+        [Output("minAddBandwidth")]
+        public Output<int> MinAddBandwidth { get; private set; } = null!;
+
+        /// <summary>
+        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards *
+        /// (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in
+        /// Mb/s.
+        /// </summary>
+        [Output("totalBandwidth")]
+        public Output<int> TotalBandwidth { get; private set; } = null!;
 
 
         /// <summary>
@@ -81,6 +118,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     public sealed class ConnectionConfigArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
+        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
+        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
+        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
+        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
+        /// shards in the standard architecture = 1.
+        /// </summary>
+        [Input("addBandwidth")]
+        public Input<int>? AddBandwidth { get; set; }
+
+        /// <summary>
         /// Additional bandwidth, greater than 0, in MB.
         /// </summary>
         [Input("bandwidth")]
@@ -108,10 +156,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     public sealed class ConnectionConfigState : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
+        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
+        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
+        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
+        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
+        /// shards in the standard architecture = 1.
+        /// </summary>
+        [Input("addBandwidth")]
+        public Input<int>? AddBandwidth { get; set; }
+
+        /// <summary>
         /// Additional bandwidth, greater than 0, in MB.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
+
+        /// <summary>
+        /// standard bandwidth. Refers to the bandwidth allocated by the system to each node when an instance is purchased.
+        /// </summary>
+        [Input("baseBandwidth")]
+        public Input<int>? BaseBandwidth { get; set; }
 
         /// <summary>
         /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper
@@ -126,6 +191,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
+        /// Additional bandwidth is capped.
+        /// </summary>
+        [Input("maxAddBandwidth")]
+        public Input<int>? MaxAddBandwidth { get; set; }
+
+        /// <summary>
+        /// Additional bandwidth sets the lower limit.
+        /// </summary>
+        [Input("minAddBandwidth")]
+        public Input<int>? MinAddBandwidth { get; set; }
+
+        /// <summary>
+        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards *
+        /// (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in
+        /// Mb/s.
+        /// </summary>
+        [Input("totalBandwidth")]
+        public Input<int>? TotalBandwidth { get; set; }
 
         public ConnectionConfigState()
         {

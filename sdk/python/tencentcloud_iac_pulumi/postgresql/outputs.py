@@ -7,16 +7,38 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
     'InstanceBackupPlan',
     'InstanceDbNodeSet',
     'ParameterTemplateModifyParamEntrySet',
+    'GetBackupDownloadUrlsBackupDownloadRestrictionResult',
+    'GetBaseBackupsBaseBackupSetResult',
+    'GetBaseBackupsFilterResult',
+    'GetDbInstanceClassesClassInfoSetResult',
+    'GetDbInstanceVersionsVersionSetResult',
+    'GetDefaultParametersParamInfoSetResult',
+    'GetDefaultParametersParamInfoSetSpecRelationSetResult',
+    'GetDefaultParametersParamInfoSetVersionRelationSetResult',
     'GetInstancesInstanceListResult',
+    'GetLogBackupsFilterResult',
+    'GetLogBackupsLogBackupSetResult',
     'GetParameterTemplatesFilterResult',
     'GetParameterTemplatesListResult',
+    'GetReadonlyGroupsFilterResult',
+    'GetReadonlyGroupsReadOnlyGroupListResult',
+    'GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoResult',
+    'GetReadonlyGroupsReadOnlyGroupListNetworkAccessListResult',
+    'GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListResult',
+    'GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoResult',
+    'GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetResult',
+    'GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListResult',
+    'GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListResult',
+    'GetRegionsRegionSetResult',
     'GetSpecinfosListResult',
     'GetXlogsListResult',
+    'GetZonesZoneSetResult',
 ]
 
 @pulumi.output_type
@@ -171,6 +193,773 @@ class ParameterTemplateModifyParamEntrySet(dict):
         The parameter name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetBackupDownloadUrlsBackupDownloadRestrictionResult(dict):
+    def __init__(__self__, *,
+                 ip_restriction_effect: Optional[str] = None,
+                 ip_sets: Optional[Sequence[str]] = None,
+                 restriction_type: Optional[str] = None,
+                 vpc_id_sets: Optional[Sequence[str]] = None,
+                 vpc_restriction_effect: Optional[str] = None):
+        """
+        :param str ip_restriction_effect: Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        :param Sequence[str] ip_sets: Whether it is allowed to download IP list of the backup files.
+        :param str restriction_type: Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+        :param Sequence[str] vpc_id_sets: Whether it is allowed to download the VPC ID list of the backup files.
+        :param str vpc_restriction_effect: Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        if ip_restriction_effect is not None:
+            pulumi.set(__self__, "ip_restriction_effect", ip_restriction_effect)
+        if ip_sets is not None:
+            pulumi.set(__self__, "ip_sets", ip_sets)
+        if restriction_type is not None:
+            pulumi.set(__self__, "restriction_type", restriction_type)
+        if vpc_id_sets is not None:
+            pulumi.set(__self__, "vpc_id_sets", vpc_id_sets)
+        if vpc_restriction_effect is not None:
+            pulumi.set(__self__, "vpc_restriction_effect", vpc_restriction_effect)
+
+    @property
+    @pulumi.getter(name="ipRestrictionEffect")
+    def ip_restriction_effect(self) -> Optional[str]:
+        """
+        Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        return pulumi.get(self, "ip_restriction_effect")
+
+    @property
+    @pulumi.getter(name="ipSets")
+    def ip_sets(self) -> Optional[Sequence[str]]:
+        """
+        Whether it is allowed to download IP list of the backup files.
+        """
+        return pulumi.get(self, "ip_sets")
+
+    @property
+    @pulumi.getter(name="restrictionType")
+    def restriction_type(self) -> Optional[str]:
+        """
+        Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+        """
+        return pulumi.get(self, "restriction_type")
+
+    @property
+    @pulumi.getter(name="vpcIdSets")
+    def vpc_id_sets(self) -> Optional[Sequence[str]]:
+        """
+        Whether it is allowed to download the VPC ID list of the backup files.
+        """
+        return pulumi.get(self, "vpc_id_sets")
+
+    @property
+    @pulumi.getter(name="vpcRestrictionEffect")
+    def vpc_restriction_effect(self) -> Optional[str]:
+        """
+        Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+        """
+        return pulumi.get(self, "vpc_restriction_effect")
+
+
+@pulumi.output_type
+class GetBaseBackupsBaseBackupSetResult(dict):
+    def __init__(__self__, *,
+                 backup_method: str,
+                 backup_mode: str,
+                 db_instance_id: str,
+                 expire_time: str,
+                 finish_time: str,
+                 id: str,
+                 name: str,
+                 size: int,
+                 start_time: str,
+                 state: str):
+        """
+        :param str backup_method: Backup method, including physical and logical.
+        :param str backup_mode: Backup mode, including automatic and manual.
+        :param str db_instance_id: Instance ID.
+        :param str expire_time: Backup expiration time.
+        :param str finish_time: Backup end time.
+        :param str id: Unique ID of a backup file.
+        :param str name: Filter name.
+        :param int size: Backup set size in bytes.
+        :param str start_time: Backup start time.
+        :param str state: Backup task status.
+        """
+        pulumi.set(__self__, "backup_method", backup_method)
+        pulumi.set(__self__, "backup_mode", backup_mode)
+        pulumi.set(__self__, "db_instance_id", db_instance_id)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter(name="backupMethod")
+    def backup_method(self) -> str:
+        """
+        Backup method, including physical and logical.
+        """
+        return pulumi.get(self, "backup_method")
+
+    @property
+    @pulumi.getter(name="backupMode")
+    def backup_mode(self) -> str:
+        """
+        Backup mode, including automatic and manual.
+        """
+        return pulumi.get(self, "backup_mode")
+
+    @property
+    @pulumi.getter(name="dbInstanceId")
+    def db_instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "db_instance_id")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Backup expiration time.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Backup end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Unique ID of a backup file.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        Backup set size in bytes.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Backup start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        Backup task status.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetBaseBackupsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetDbInstanceClassesClassInfoSetResult(dict):
+    def __init__(__self__, *,
+                 cpu: int,
+                 max_storage: int,
+                 memory: int,
+                 min_storage: int,
+                 qps: int,
+                 spec_code: str):
+        """
+        :param int cpu: Number of CPU cores.
+        :param int max_storage: Maximum storage capacity in GB supported by this specification.
+        :param int memory: Memory size in MB.
+        :param int min_storage: Minimum storage capacity in GB supported by this specification.
+        :param int qps: Estimated QPS for this specification.
+        :param str spec_code: Specification ID.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "max_storage", max_storage)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "min_storage", min_storage)
+        pulumi.set(__self__, "qps", qps)
+        pulumi.set(__self__, "spec_code", spec_code)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of CPU cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="maxStorage")
+    def max_storage(self) -> int:
+        """
+        Maximum storage capacity in GB supported by this specification.
+        """
+        return pulumi.get(self, "max_storage")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size in MB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="minStorage")
+    def min_storage(self) -> int:
+        """
+        Minimum storage capacity in GB supported by this specification.
+        """
+        return pulumi.get(self, "min_storage")
+
+    @property
+    @pulumi.getter
+    def qps(self) -> int:
+        """
+        Estimated QPS for this specification.
+        """
+        return pulumi.get(self, "qps")
+
+    @property
+    @pulumi.getter(name="specCode")
+    def spec_code(self) -> str:
+        """
+        Specification ID.
+        """
+        return pulumi.get(self, "spec_code")
+
+
+@pulumi.output_type
+class GetDbInstanceVersionsVersionSetResult(dict):
+    def __init__(__self__, *,
+                 available_upgrade_targets: Sequence[str],
+                 db_engine: str,
+                 db_kernel_version: str,
+                 db_major_version: str,
+                 db_version: str,
+                 status: str,
+                 supported_feature_names: Sequence[str]):
+        """
+        :param Sequence[str] available_upgrade_targets: List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+        :param str db_engine: Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).
+        :param str db_kernel_version: Database kernel version, such as v12.4_r1.3.
+        :param str db_major_version: Database major version, such as 12.
+        :param str db_version: Database version, such as 12.4.
+        :param str status: Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+        :param Sequence[str] supported_feature_names: List of features supported by the database kernel, such as:TDE: Supports data encryption.
+        """
+        pulumi.set(__self__, "available_upgrade_targets", available_upgrade_targets)
+        pulumi.set(__self__, "db_engine", db_engine)
+        pulumi.set(__self__, "db_kernel_version", db_kernel_version)
+        pulumi.set(__self__, "db_major_version", db_major_version)
+        pulumi.set(__self__, "db_version", db_version)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "supported_feature_names", supported_feature_names)
+
+    @property
+    @pulumi.getter(name="availableUpgradeTargets")
+    def available_upgrade_targets(self) -> Sequence[str]:
+        """
+        List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+        """
+        return pulumi.get(self, "available_upgrade_targets")
+
+    @property
+    @pulumi.getter(name="dbEngine")
+    def db_engine(self) -> str:
+        """
+        Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).
+        """
+        return pulumi.get(self, "db_engine")
+
+    @property
+    @pulumi.getter(name="dbKernelVersion")
+    def db_kernel_version(self) -> str:
+        """
+        Database kernel version, such as v12.4_r1.3.
+        """
+        return pulumi.get(self, "db_kernel_version")
+
+    @property
+    @pulumi.getter(name="dbMajorVersion")
+    def db_major_version(self) -> str:
+        """
+        Database major version, such as 12.
+        """
+        return pulumi.get(self, "db_major_version")
+
+    @property
+    @pulumi.getter(name="dbVersion")
+    def db_version(self) -> str:
+        """
+        Database version, such as 12.4.
+        """
+        return pulumi.get(self, "db_version")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="supportedFeatureNames")
+    def supported_feature_names(self) -> Sequence[str]:
+        """
+        List of features supported by the database kernel, such as:TDE: Supports data encryption.
+        """
+        return pulumi.get(self, "supported_feature_names")
+
+
+@pulumi.output_type
+class GetDefaultParametersParamInfoSetResult(dict):
+    def __init__(__self__, *,
+                 advanced: bool,
+                 classification_cn: str,
+                 classification_en: str,
+                 current_value: str,
+                 default_value: str,
+                 enum_values: Sequence[str],
+                 id: int,
+                 last_modify_time: str,
+                 max: float,
+                 min: float,
+                 name: str,
+                 need_reboot: bool,
+                 param_description_ch: str,
+                 param_description_en: str,
+                 param_value_type: str,
+                 spec_related: bool,
+                 spec_relation_sets: Sequence['outputs.GetDefaultParametersParamInfoSetSpecRelationSetResult'],
+                 standby_related: int,
+                 unit: str,
+                 version_relation_sets: Sequence['outputs.GetDefaultParametersParamInfoSetVersionRelationSetResult']):
+        """
+        :param bool advanced: Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str classification_cn: Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str classification_en: Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str current_value: Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str default_value: Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence[str] enum_values: Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param int id: Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str last_modify_time: The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param float max: The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param float min: The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param str name: Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param bool need_reboot: Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param str param_description_ch: Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str param_description_en: Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str param_value_type: Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutil_enum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param bool spec_related: Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        :param Sequence['GetDefaultParametersParamInfoSetSpecRelationSetArgs'] spec_relation_sets: Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int standby_related: Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetDefaultParametersParamInfoSetVersionRelationSetArgs'] version_relation_sets: Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "advanced", advanced)
+        pulumi.set(__self__, "classification_cn", classification_cn)
+        pulumi.set(__self__, "classification_en", classification_en)
+        pulumi.set(__self__, "current_value", current_value)
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "enum_values", enum_values)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "last_modify_time", last_modify_time)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "need_reboot", need_reboot)
+        pulumi.set(__self__, "param_description_ch", param_description_ch)
+        pulumi.set(__self__, "param_description_en", param_description_en)
+        pulumi.set(__self__, "param_value_type", param_value_type)
+        pulumi.set(__self__, "spec_related", spec_related)
+        pulumi.set(__self__, "spec_relation_sets", spec_relation_sets)
+        pulumi.set(__self__, "standby_related", standby_related)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "version_relation_sets", version_relation_sets)
+
+    @property
+    @pulumi.getter
+    def advanced(self) -> bool:
+        """
+        Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "advanced")
+
+    @property
+    @pulumi.getter(name="classificationCn")
+    def classification_cn(self) -> str:
+        """
+        Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "classification_cn")
+
+    @property
+    @pulumi.getter(name="classificationEn")
+    def classification_en(self) -> str:
+        """
+        Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "classification_en")
+
+    @property
+    @pulumi.getter(name="currentValue")
+    def current_value(self) -> str:
+        """
+        Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "current_value")
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Sequence[str]:
+        """
+        Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="lastModifyTime")
+    def last_modify_time(self) -> str:
+        """
+        The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "last_modify_time")
+
+    @property
+    @pulumi.getter
+    def max(self) -> float:
+        """
+        The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> float:
+        """
+        The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="needReboot")
+    def need_reboot(self) -> bool:
+        """
+        Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "need_reboot")
+
+    @property
+    @pulumi.getter(name="paramDescriptionCh")
+    def param_description_ch(self) -> str:
+        """
+        Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "param_description_ch")
+
+    @property
+    @pulumi.getter(name="paramDescriptionEn")
+    def param_description_en(self) -> str:
+        """
+        Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "param_description_en")
+
+    @property
+    @pulumi.getter(name="paramValueType")
+    def param_value_type(self) -> str:
+        """
+        Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutil_enum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "param_value_type")
+
+    @property
+    @pulumi.getter(name="specRelated")
+    def spec_related(self) -> bool:
+        """
+        Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "spec_related")
+
+    @property
+    @pulumi.getter(name="specRelationSets")
+    def spec_relation_sets(self) -> Sequence['outputs.GetDefaultParametersParamInfoSetSpecRelationSetResult']:
+        """
+        Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "spec_relation_sets")
+
+    @property
+    @pulumi.getter(name="standbyRelated")
+    def standby_related(self) -> int:
+        """
+        Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "standby_related")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter(name="versionRelationSets")
+    def version_relation_sets(self) -> Sequence['outputs.GetDefaultParametersParamInfoSetVersionRelationSetResult']:
+        """
+        Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "version_relation_sets")
+
+
+@pulumi.output_type
+class GetDefaultParametersParamInfoSetSpecRelationSetResult(dict):
+    def __init__(__self__, *,
+                 enum_values: Sequence[str],
+                 max: float,
+                 memory: str,
+                 min: float,
+                 name: str,
+                 unit: str,
+                 value: str):
+        """
+        :param Sequence[str] enum_values: Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param float max: The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param str memory: The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+        :param float min: The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param str name: Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str value: Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "enum_values", enum_values)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Sequence[str]:
+        """
+        Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter
+    def max(self) -> float:
+        """
+        The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> str:
+        """
+        The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def min(self) -> float:
+        """
+        The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetDefaultParametersParamInfoSetVersionRelationSetResult(dict):
+    def __init__(__self__, *,
+                 db_kernel_version: str,
+                 enum_values: Sequence[str],
+                 max: float,
+                 min: float,
+                 name: str,
+                 unit: str,
+                 value: str):
+        """
+        :param str db_kernel_version: The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] enum_values: Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param float max: The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param float min: The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        :param str name: Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str value: Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "db_kernel_version", db_kernel_version)
+        pulumi.set(__self__, "enum_values", enum_values)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="dbKernelVersion")
+    def db_kernel_version(self) -> str:
+        """
+        The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "db_kernel_version")
+
+    @property
+    @pulumi.getter(name="enumValues")
+    def enum_values(self) -> Sequence[str]:
+        """
+        Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "enum_values")
+
+    @property
+    @pulumi.getter
+    def max(self) -> float:
+        """
+        The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> float:
+        """
+        The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -401,6 +1190,154 @@ class GetInstancesInstanceListResult(dict):
 
 
 @pulumi.output_type
+class GetLogBackupsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetLogBackupsLogBackupSetResult(dict):
+    def __init__(__self__, *,
+                 backup_method: str,
+                 backup_mode: str,
+                 db_instance_id: str,
+                 expire_time: str,
+                 finish_time: str,
+                 id: str,
+                 name: str,
+                 size: int,
+                 start_time: str,
+                 state: str):
+        """
+        :param str backup_method: Backup method, including physical and logical.
+        :param str backup_mode: Backup mode, including automatic and manual.
+        :param str db_instance_id: Instance ID.
+        :param str expire_time: Backup expiration time.
+        :param str finish_time: Backup end time.
+        :param str id: Unique ID of a backup file.
+        :param str name: Filter name.
+        :param int size: Backup set size in bytes.
+        :param str start_time: Backup start time.
+        :param str state: Backup task status.
+        """
+        pulumi.set(__self__, "backup_method", backup_method)
+        pulumi.set(__self__, "backup_mode", backup_mode)
+        pulumi.set(__self__, "db_instance_id", db_instance_id)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter(name="backupMethod")
+    def backup_method(self) -> str:
+        """
+        Backup method, including physical and logical.
+        """
+        return pulumi.get(self, "backup_method")
+
+    @property
+    @pulumi.getter(name="backupMode")
+    def backup_mode(self) -> str:
+        """
+        Backup mode, including automatic and manual.
+        """
+        return pulumi.get(self, "backup_mode")
+
+    @property
+    @pulumi.getter(name="dbInstanceId")
+    def db_instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "db_instance_id")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Backup expiration time.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Backup end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Unique ID of a backup file.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        Backup set size in bytes.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Backup start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        Backup task status.
+        """
+        return pulumi.get(self, "state")
+
+
+@pulumi.output_type
 class GetParameterTemplatesFilterResult(dict):
     def __init__(__self__, *,
                  name: Optional[str] = None,
@@ -491,6 +1428,1178 @@ class GetParameterTemplatesListResult(dict):
         parameter template name.
         """
         return pulumi.get(self, "template_name")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: One or more filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListResult(dict):
+    def __init__(__self__, *,
+                 db_instance_net_infos: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoResult'],
+                 master_db_instance_id: str,
+                 max_replay_lag: float,
+                 max_replay_latency: int,
+                 min_delay_eliminate_reserve: int,
+                 network_access_lists: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListNetworkAccessListResult'],
+                 project_id: int,
+                 read_only_db_instance_lists: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListResult'],
+                 read_only_group_id: str,
+                 read_only_group_name: str,
+                 rebalance: int,
+                 region: str,
+                 replay_lag_eliminate: int,
+                 replay_latency_eliminate: int,
+                 status: str,
+                 subnet_id: str,
+                 vpc_id: str,
+                 zone: str):
+        """
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs'] db_instance_net_infos: instance network connection information.
+        :param str master_db_instance_id: Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+        :param float max_replay_lag: delay time size threshold.
+        :param int max_replay_latency: delay space size threshold.
+        :param int min_delay_eliminate_reserve: Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs'] network_access_lists: Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+        :param int project_id: project ID.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs'] read_only_db_instance_lists: instance details.
+        :param str read_only_group_id: read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str read_only_group_name: read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+        :param int rebalance: automatic load balancing switch.
+        :param str region: region id.
+        :param int replay_lag_eliminate: delay time switch.
+        :param int replay_latency_eliminate: delay size switch.
+        :param str status: state.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: virtual network id.
+        :param str zone: region id.
+        """
+        pulumi.set(__self__, "db_instance_net_infos", db_instance_net_infos)
+        pulumi.set(__self__, "master_db_instance_id", master_db_instance_id)
+        pulumi.set(__self__, "max_replay_lag", max_replay_lag)
+        pulumi.set(__self__, "max_replay_latency", max_replay_latency)
+        pulumi.set(__self__, "min_delay_eliminate_reserve", min_delay_eliminate_reserve)
+        pulumi.set(__self__, "network_access_lists", network_access_lists)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "read_only_db_instance_lists", read_only_db_instance_lists)
+        pulumi.set(__self__, "read_only_group_id", read_only_group_id)
+        pulumi.set(__self__, "read_only_group_name", read_only_group_name)
+        pulumi.set(__self__, "rebalance", rebalance)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "replay_lag_eliminate", replay_lag_eliminate)
+        pulumi.set(__self__, "replay_latency_eliminate", replay_latency_eliminate)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="dbInstanceNetInfos")
+    def db_instance_net_infos(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoResult']:
+        """
+        instance network connection information.
+        """
+        return pulumi.get(self, "db_instance_net_infos")
+
+    @property
+    @pulumi.getter(name="masterDbInstanceId")
+    def master_db_instance_id(self) -> str:
+        """
+        Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "master_db_instance_id")
+
+    @property
+    @pulumi.getter(name="maxReplayLag")
+    def max_replay_lag(self) -> float:
+        """
+        delay time size threshold.
+        """
+        return pulumi.get(self, "max_replay_lag")
+
+    @property
+    @pulumi.getter(name="maxReplayLatency")
+    def max_replay_latency(self) -> int:
+        """
+        delay space size threshold.
+        """
+        return pulumi.get(self, "max_replay_latency")
+
+    @property
+    @pulumi.getter(name="minDelayEliminateReserve")
+    def min_delay_eliminate_reserve(self) -> int:
+        """
+        Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "min_delay_eliminate_reserve")
+
+    @property
+    @pulumi.getter(name="networkAccessLists")
+    def network_access_lists(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListNetworkAccessListResult']:
+        """
+        Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "network_access_lists")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="readOnlyDbInstanceLists")
+    def read_only_db_instance_lists(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListResult']:
+        """
+        instance details.
+        """
+        return pulumi.get(self, "read_only_db_instance_lists")
+
+    @property
+    @pulumi.getter(name="readOnlyGroupId")
+    def read_only_group_id(self) -> str:
+        """
+        read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "read_only_group_id")
+
+    @property
+    @pulumi.getter(name="readOnlyGroupName")
+    def read_only_group_name(self) -> str:
+        """
+        read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "read_only_group_name")
+
+    @property
+    @pulumi.getter
+    def rebalance(self) -> int:
+        """
+        automatic load balancing switch.
+        """
+        return pulumi.get(self, "rebalance")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region id.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="replayLagEliminate")
+    def replay_lag_eliminate(self) -> int:
+        """
+        delay time switch.
+        """
+        return pulumi.get(self, "replay_lag_eliminate")
+
+    @property
+    @pulumi.getter(name="replayLatencyEliminate")
+    def replay_latency_eliminate(self) -> int:
+        """
+        delay size switch.
+        """
+        return pulumi.get(self, "replay_latency_eliminate")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        region id.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 ip: str,
+                 net_type: str,
+                 port: int,
+                 protocol_type: str,
+                 status: str,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str address: DNS domain name.
+        :param str ip: IP address.
+        :param str net_type: network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+        :param int port: connection port address.
+        :param str protocol_type: The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+        :param str status: state.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: virtual network id.
+        """
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "net_type", net_type)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol_type", protocol_type)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        DNS domain name.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="netType")
+    def net_type(self) -> str:
+        """
+        network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+        """
+        return pulumi.get(self, "net_type")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        connection port address.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="protocolType")
+    def protocol_type(self) -> str:
+        """
+        The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "protocol_type")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListNetworkAccessListResult(dict):
+    def __init__(__self__, *,
+                 resource_id: str,
+                 resource_type: int,
+                 subnet_id: str,
+                 vip: str,
+                 vip6: str,
+                 vpc_id: str,
+                 vpc_status: int,
+                 vport: int):
+        """
+        :param str resource_id: Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+        :param int resource_type: Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vip: IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vip6: IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: virtual network id.
+        :param int vpc_status: Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+        :param int vport: access portNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vip6", vip6)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vpc_status", vpc_status)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> int:
+        """
+        Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vip6(self) -> str:
+        """
+        IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vip6")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter(name="vpcStatus")
+    def vpc_status(self) -> int:
+        """
+        Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_status")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        access portNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 auto_renew: int,
+                 create_time: str,
+                 db_charset: str,
+                 db_engine: str,
+                 db_engine_config: str,
+                 db_instance_class: str,
+                 db_instance_cpu: int,
+                 db_instance_id: str,
+                 db_instance_memory: int,
+                 db_instance_name: str,
+                 db_instance_net_infos: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoResult'],
+                 db_instance_status: str,
+                 db_instance_storage: int,
+                 db_instance_type: str,
+                 db_instance_version: str,
+                 db_kernel_version: str,
+                 db_major_version: str,
+                 db_node_sets: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetResult'],
+                 db_version: str,
+                 expire_time: str,
+                 is_support_tde: int,
+                 isolated_time: str,
+                 master_db_instance_id: str,
+                 network_access_lists: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListResult'],
+                 offline_time: str,
+                 pay_type: str,
+                 project_id: int,
+                 read_only_instance_num: int,
+                 region: str,
+                 status_in_readonly_group: str,
+                 subnet_id: str,
+                 support_ipv6: int,
+                 tag_lists: Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListResult'],
+                 type: str,
+                 uid: int,
+                 update_time: str,
+                 vpc_id: str,
+                 zone: str):
+        """
+        :param int app_id: user&#39;s AppId.
+        :param int auto_renew: auto-renew, 1: auto-renew, 0: no auto-renew.
+        :param str create_time: instance creation time.
+        :param str db_charset: instance DB character set.
+        :param str db_engine: Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssql_compatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+        :param str db_engine_config: Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+        :param str db_instance_class: sales specification ID.
+        :param int db_instance_cpu: the number of CPUs allocated by the instance.
+        :param str db_instance_id: instance ID.
+        :param int db_instance_memory: the memory size allocated by the instance, unit: GB.
+        :param str db_instance_name: instance name.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs'] db_instance_net_infos: instance network connection information.
+        :param str db_instance_status: Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+        :param int db_instance_storage: the size of the storage space allocated by the instance, unit: GB.
+        :param str db_instance_type: instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+        :param str db_instance_version: instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+        :param str db_kernel_version: Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+        :param str db_major_version: PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs'] db_node_sets: Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+        :param str db_version: PostgreSQL version.
+        :param str expire_time: instance expiration time.
+        :param int is_support_tde: Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+        :param str isolated_time: instance isolation time.
+        :param str master_db_instance_id: Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs'] network_access_lists: Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+        :param str offline_time: offline timeNote: This field may return null, indicating that no valid value can be obtained.
+        :param str pay_type: billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+        :param int project_id: project ID.
+        :param int read_only_instance_num: Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+        :param str region: region id.
+        :param str status_in_readonly_group: Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param int support_ipv6: Whether the instance supports Ipv6, 1: support, 0: not support.
+        :param Sequence['GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs'] tag_lists: Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+        :param str type: machine type.
+        :param int uid: Uid of the instance.
+        :param str update_time: The time when the instance performed the last update.
+        :param str vpc_id: virtual network id.
+        :param str zone: region id.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "auto_renew", auto_renew)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "db_charset", db_charset)
+        pulumi.set(__self__, "db_engine", db_engine)
+        pulumi.set(__self__, "db_engine_config", db_engine_config)
+        pulumi.set(__self__, "db_instance_class", db_instance_class)
+        pulumi.set(__self__, "db_instance_cpu", db_instance_cpu)
+        pulumi.set(__self__, "db_instance_id", db_instance_id)
+        pulumi.set(__self__, "db_instance_memory", db_instance_memory)
+        pulumi.set(__self__, "db_instance_name", db_instance_name)
+        pulumi.set(__self__, "db_instance_net_infos", db_instance_net_infos)
+        pulumi.set(__self__, "db_instance_status", db_instance_status)
+        pulumi.set(__self__, "db_instance_storage", db_instance_storage)
+        pulumi.set(__self__, "db_instance_type", db_instance_type)
+        pulumi.set(__self__, "db_instance_version", db_instance_version)
+        pulumi.set(__self__, "db_kernel_version", db_kernel_version)
+        pulumi.set(__self__, "db_major_version", db_major_version)
+        pulumi.set(__self__, "db_node_sets", db_node_sets)
+        pulumi.set(__self__, "db_version", db_version)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "is_support_tde", is_support_tde)
+        pulumi.set(__self__, "isolated_time", isolated_time)
+        pulumi.set(__self__, "master_db_instance_id", master_db_instance_id)
+        pulumi.set(__self__, "network_access_lists", network_access_lists)
+        pulumi.set(__self__, "offline_time", offline_time)
+        pulumi.set(__self__, "pay_type", pay_type)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "read_only_instance_num", read_only_instance_num)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status_in_readonly_group", status_in_readonly_group)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "support_ipv6", support_ipv6)
+        pulumi.set(__self__, "tag_lists", tag_lists)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uid", uid)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        user&#39;s AppId.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="autoRenew")
+    def auto_renew(self) -> int:
+        """
+        auto-renew, 1: auto-renew, 0: no auto-renew.
+        """
+        return pulumi.get(self, "auto_renew")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        instance creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dbCharset")
+    def db_charset(self) -> str:
+        """
+        instance DB character set.
+        """
+        return pulumi.get(self, "db_charset")
+
+    @property
+    @pulumi.getter(name="dbEngine")
+    def db_engine(self) -> str:
+        """
+        Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssql_compatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_engine")
+
+    @property
+    @pulumi.getter(name="dbEngineConfig")
+    def db_engine_config(self) -> str:
+        """
+        Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_engine_config")
+
+    @property
+    @pulumi.getter(name="dbInstanceClass")
+    def db_instance_class(self) -> str:
+        """
+        sales specification ID.
+        """
+        return pulumi.get(self, "db_instance_class")
+
+    @property
+    @pulumi.getter(name="dbInstanceCpu")
+    def db_instance_cpu(self) -> int:
+        """
+        the number of CPUs allocated by the instance.
+        """
+        return pulumi.get(self, "db_instance_cpu")
+
+    @property
+    @pulumi.getter(name="dbInstanceId")
+    def db_instance_id(self) -> str:
+        """
+        instance ID.
+        """
+        return pulumi.get(self, "db_instance_id")
+
+    @property
+    @pulumi.getter(name="dbInstanceMemory")
+    def db_instance_memory(self) -> int:
+        """
+        the memory size allocated by the instance, unit: GB.
+        """
+        return pulumi.get(self, "db_instance_memory")
+
+    @property
+    @pulumi.getter(name="dbInstanceName")
+    def db_instance_name(self) -> str:
+        """
+        instance name.
+        """
+        return pulumi.get(self, "db_instance_name")
+
+    @property
+    @pulumi.getter(name="dbInstanceNetInfos")
+    def db_instance_net_infos(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoResult']:
+        """
+        instance network connection information.
+        """
+        return pulumi.get(self, "db_instance_net_infos")
+
+    @property
+    @pulumi.getter(name="dbInstanceStatus")
+    def db_instance_status(self) -> str:
+        """
+        Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+        """
+        return pulumi.get(self, "db_instance_status")
+
+    @property
+    @pulumi.getter(name="dbInstanceStorage")
+    def db_instance_storage(self) -> int:
+        """
+        the size of the storage space allocated by the instance, unit: GB.
+        """
+        return pulumi.get(self, "db_instance_storage")
+
+    @property
+    @pulumi.getter(name="dbInstanceType")
+    def db_instance_type(self) -> str:
+        """
+        instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+        """
+        return pulumi.get(self, "db_instance_type")
+
+    @property
+    @pulumi.getter(name="dbInstanceVersion")
+    def db_instance_version(self) -> str:
+        """
+        instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+        """
+        return pulumi.get(self, "db_instance_version")
+
+    @property
+    @pulumi.getter(name="dbKernelVersion")
+    def db_kernel_version(self) -> str:
+        """
+        Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_kernel_version")
+
+    @property
+    @pulumi.getter(name="dbMajorVersion")
+    def db_major_version(self) -> str:
+        """
+        PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_major_version")
+
+    @property
+    @pulumi.getter(name="dbNodeSets")
+    def db_node_sets(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetResult']:
+        """
+        Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_node_sets")
+
+    @property
+    @pulumi.getter(name="dbVersion")
+    def db_version(self) -> str:
+        """
+        PostgreSQL version.
+        """
+        return pulumi.get(self, "db_version")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        instance expiration time.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="isSupportTDE")
+    def is_support_tde(self) -> int:
+        """
+        Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "is_support_tde")
+
+    @property
+    @pulumi.getter(name="isolatedTime")
+    def isolated_time(self) -> str:
+        """
+        instance isolation time.
+        """
+        return pulumi.get(self, "isolated_time")
+
+    @property
+    @pulumi.getter(name="masterDbInstanceId")
+    def master_db_instance_id(self) -> str:
+        """
+        Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "master_db_instance_id")
+
+    @property
+    @pulumi.getter(name="networkAccessLists")
+    def network_access_lists(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListResult']:
+        """
+        Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "network_access_lists")
+
+    @property
+    @pulumi.getter(name="offlineTime")
+    def offline_time(self) -> str:
+        """
+        offline timeNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "offline_time")
+
+    @property
+    @pulumi.getter(name="payType")
+    def pay_type(self) -> str:
+        """
+        billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+        """
+        return pulumi.get(self, "pay_type")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="readOnlyInstanceNum")
+    def read_only_instance_num(self) -> int:
+        """
+        Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "read_only_instance_num")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region id.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="statusInReadonlyGroup")
+    def status_in_readonly_group(self) -> str:
+        """
+        Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "status_in_readonly_group")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="supportIpv6")
+    def support_ipv6(self) -> int:
+        """
+        Whether the instance supports Ipv6, 1: support, 0: not support.
+        """
+        return pulumi.get(self, "support_ipv6")
+
+    @property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> Sequence['outputs.GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListResult']:
+        """
+        Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        machine type.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uid(self) -> int:
+        """
+        Uid of the instance.
+        """
+        return pulumi.get(self, "uid")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        The time when the instance performed the last update.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        region id.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 ip: str,
+                 net_type: str,
+                 port: int,
+                 protocol_type: str,
+                 status: str,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str address: DNS domain name.
+        :param str ip: IP address.
+        :param str net_type: network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+        :param int port: connection port address.
+        :param str protocol_type: The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+        :param str status: state.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: virtual network id.
+        """
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "net_type", net_type)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol_type", protocol_type)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        DNS domain name.
+        """
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="netType")
+    def net_type(self) -> str:
+        """
+        network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+        """
+        return pulumi.get(self, "net_type")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        connection port address.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="protocolType")
+    def protocol_type(self) -> str:
+        """
+        The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "protocol_type")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetResult(dict):
+    def __init__(__self__, *,
+                 role: str,
+                 zone: str):
+        """
+        :param str role: Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+        :param str zone: region id.
+        """
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        """
+        Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        region id.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListResult(dict):
+    def __init__(__self__, *,
+                 resource_id: str,
+                 resource_type: int,
+                 subnet_id: str,
+                 vip: str,
+                 vip6: str,
+                 vpc_id: str,
+                 vpc_status: int,
+                 vport: int):
+        """
+        :param str resource_id: Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+        :param int resource_type: Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+        :param str subnet_id: subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vip: IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vip6: IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+        :param str vpc_id: virtual network id.
+        :param int vpc_status: Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+        :param int vport: access portNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vip6", vip6)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "vpc_status", vpc_status)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> int:
+        """
+        Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vip6(self) -> str:
+        """
+        IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vip6")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        virtual network id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter(name="vpcStatus")
+    def vpc_status(self) -> int:
+        """
+        Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vpc_status")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        access portNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: label key.
+        :param str tag_value: tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        label key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetRegionsRegionSetResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 region_id: int,
+                 region_name: str,
+                 region_state: str,
+                 support_international: int):
+        """
+        :param str region: Region abbreviation.
+        :param int region_id: Region number.
+        :param str region_name: Region name.
+        :param str region_state: Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+        :param int support_international: Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "region_state", region_state)
+        pulumi.set(__self__, "support_international", support_international)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region abbreviation.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region number.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="regionState")
+    def region_state(self) -> str:
+        """
+        Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+        """
+        return pulumi.get(self, "region_state")
+
+    @property
+    @pulumi.getter(name="supportInternational")
+    def support_international(self) -> int:
+        """
+        Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "support_international")
 
 
 @pulumi.output_type
@@ -659,5 +2768,78 @@ class GetXlogsListResult(dict):
         Xlog start time, format `yyyy-MM-dd hh:mm:ss`, start time cannot before 7 days ago.
         """
         return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetZonesZoneSetResult(dict):
+    def __init__(__self__, *,
+                 standby_zone_sets: Sequence[str],
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str,
+                 zone_state: str,
+                 zone_support_ipv6: int):
+        """
+        :param Sequence[str] standby_zone_sets: AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str zone: AZ abbreviation.
+        :param int zone_id: AZ number.
+        :param str zone_name: AZ name.
+        :param str zone_state: Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+        :param int zone_support_ipv6: Whether the AZ supports IPv6 address access.
+        """
+        pulumi.set(__self__, "standby_zone_sets", standby_zone_sets)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+        pulumi.set(__self__, "zone_state", zone_state)
+        pulumi.set(__self__, "zone_support_ipv6", zone_support_ipv6)
+
+    @property
+    @pulumi.getter(name="standbyZoneSets")
+    def standby_zone_sets(self) -> Sequence[str]:
+        """
+        AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "standby_zone_sets")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        AZ abbreviation.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        AZ number.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        AZ name.
+        """
+        return pulumi.get(self, "zone_name")
+
+    @property
+    @pulumi.getter(name="zoneState")
+    def zone_state(self) -> str:
+        """
+        Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+        """
+        return pulumi.get(self, "zone_state")
+
+    @property
+    @pulumi.getter(name="zoneSupportIpv6")
+    def zone_support_ipv6(self) -> int:
+        """
+        Whether the AZ supports IPv6 address access.
+        """
+        return pulumi.get(self, "zone_support_ipv6")
 
 

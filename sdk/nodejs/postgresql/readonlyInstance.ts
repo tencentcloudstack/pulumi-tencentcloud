@@ -11,9 +11,20 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Postgresql.ReadonlyInstance("foo", {
+ * const newRoGroup = new tencentcloud.postgresql.ReadonlyGroup("newRoGroup", {
+ *     masterDbInstanceId: local.pgsql_id,
+ *     projectId: 0,
+ *     vpcId: local.vpc_id,
+ *     subnetId: local.subnet_id,
+ *     replayLagEliminate: 1,
+ *     replayLatencyEliminate: 1,
+ *     maxReplayLag: 100,
+ *     maxReplayLatency: 512,
+ *     minDelayEliminateReserve: 1,
+ * });
+ * const foo = new tencentcloud.postgresql.ReadonlyInstance("foo", {
  *     autoRenewFlag: 0,
  *     dbVersion: "10.4",
  *     instanceChargeType: "POSTPAID_BY_HOUR",
@@ -25,7 +36,7 @@ import * as utilities from "../utilities";
  *     storage: 250,
  *     subnetId: "subnet-enm92y0m",
  *     vpcId: "vpc-86v957zb",
- *     zone: "ap-guangzhou-6",
+ *     readOnlyGroupId: newRoGroup.id,
  * });
  * ```
  *
@@ -34,7 +45,7 @@ import * as utilities from "../utilities";
  * postgresql readonly instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo pgro-bcqx8b9a
+ *  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
  * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
@@ -86,6 +97,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly instanceChargeType!: pulumi.Output<string | undefined>;
     /**
+     * The instance ID of this readonly resource.
+     */
+    public /*out*/ readonly instanceId!: pulumi.Output<string>;
+    /**
      * ID of the primary instance to which the read-only replica belongs.
      */
     public readonly masterDbInstanceId!: pulumi.Output<string>;
@@ -106,9 +121,21 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
+     * IP for private access.
+     */
+    public /*out*/ readonly privateAccessIp!: pulumi.Output<string>;
+    /**
+     * Port for private access.
+     */
+    public /*out*/ readonly privateAccessPort!: pulumi.Output<number>;
+    /**
      * Project ID.
      */
     public readonly projectId!: pulumi.Output<number>;
+    /**
+     * RO group ID.
+     */
+    public readonly readOnlyGroupId!: pulumi.Output<string | undefined>;
     /**
      * ID of security group.
      */
@@ -152,12 +179,16 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dbVersion"] = state ? state.dbVersion : undefined;
             resourceInputs["instanceChargeType"] = state ? state.instanceChargeType : undefined;
+            resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["masterDbInstanceId"] = state ? state.masterDbInstanceId : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["needSupportIpv6"] = state ? state.needSupportIpv6 : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
+            resourceInputs["privateAccessIp"] = state ? state.privateAccessIp : undefined;
+            resourceInputs["privateAccessPort"] = state ? state.privateAccessPort : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["readOnlyGroupId"] = state ? state.readOnlyGroupId : undefined;
             resourceInputs["securityGroupsIds"] = state ? state.securityGroupsIds : undefined;
             resourceInputs["storage"] = state ? state.storage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
@@ -203,6 +234,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["needSupportIpv6"] = args ? args.needSupportIpv6 : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["readOnlyGroupId"] = args ? args.readOnlyGroupId : undefined;
             resourceInputs["securityGroupsIds"] = args ? args.securityGroupsIds : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
@@ -210,6 +242,9 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["instanceId"] = undefined /*out*/;
+            resourceInputs["privateAccessIp"] = undefined /*out*/;
+            resourceInputs["privateAccessPort"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ReadonlyInstance.__pulumiType, name, resourceInputs, opts);
@@ -241,6 +276,10 @@ export interface ReadonlyInstanceState {
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
+     * The instance ID of this readonly resource.
+     */
+    instanceId?: pulumi.Input<string>;
+    /**
      * ID of the primary instance to which the read-only replica belongs.
      */
     masterDbInstanceId?: pulumi.Input<string>;
@@ -261,9 +300,21 @@ export interface ReadonlyInstanceState {
      */
     period?: pulumi.Input<number>;
     /**
+     * IP for private access.
+     */
+    privateAccessIp?: pulumi.Input<string>;
+    /**
+     * Port for private access.
+     */
+    privateAccessPort?: pulumi.Input<number>;
+    /**
      * Project ID.
      */
     projectId?: pulumi.Input<number>;
+    /**
+     * RO group ID.
+     */
+    readOnlyGroupId?: pulumi.Input<string>;
     /**
      * ID of security group.
      */
@@ -334,6 +385,10 @@ export interface ReadonlyInstanceArgs {
      * Project ID.
      */
     projectId: pulumi.Input<number>;
+    /**
+     * RO group ID.
+     */
+    readOnlyGroupId?: pulumi.Input<string>;
     /**
      * ID of security group.
      */

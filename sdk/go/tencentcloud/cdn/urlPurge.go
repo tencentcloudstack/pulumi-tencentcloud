@@ -37,8 +37,7 @@ import (
 // 	})
 // }
 // ```
-//
-// argument to request new purge task with same urls
+// ### argument to request new purge task with same urls
 //
 // ```go
 // package main

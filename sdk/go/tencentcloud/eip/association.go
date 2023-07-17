@@ -38,8 +38,7 @@ import (
 // 	})
 // }
 // ```
-//
-// or
+// ### or
 //
 // ```go
 // package main

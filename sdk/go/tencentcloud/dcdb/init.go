@@ -25,14 +25,30 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Account{}
 	case "tencentcloud:Dcdb/accountPrivileges:AccountPrivileges":
 		r = &AccountPrivileges{}
+	case "tencentcloud:Dcdb/activateHourInstanceOperation:ActivateHourInstanceOperation":
+		r = &ActivateHourInstanceOperation{}
+	case "tencentcloud:Dcdb/cancelDcnJobOperation:CancelDcnJobOperation":
+		r = &CancelDcnJobOperation{}
 	case "tencentcloud:Dcdb/dbInstance:DbInstance":
 		r = &DbInstance{}
 	case "tencentcloud:Dcdb/dbParameters:DbParameters":
 		r = &DbParameters{}
+	case "tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig":
+		r = &DbSyncModeConfig{}
+	case "tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig":
+		r = &EncryptAttributesConfig{}
+	case "tencentcloud:Dcdb/flushBinlogOperation:FlushBinlogOperation":
+		r = &FlushBinlogOperation{}
 	case "tencentcloud:Dcdb/hourdbInstance:HourdbInstance":
 		r = &HourdbInstance{}
+	case "tencentcloud:Dcdb/instanceConfig:InstanceConfig":
+		r = &InstanceConfig{}
+	case "tencentcloud:Dcdb/isolateHourInstanceOperation:IsolateHourInstanceOperation":
+		r = &IsolateHourInstanceOperation{}
 	case "tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment":
 		r = &SecurityGroupAttachment{}
+	case "tencentcloud:Dcdb/switchDbInstanceHaOperation:SwitchDbInstanceHaOperation":
+		r = &SwitchDbInstanceHaOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -58,6 +74,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dcdb/activateHourInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dcdb/cancelDcnJobOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dcdb/dbInstance",
 		&module{version},
 	)
@@ -68,12 +94,42 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dcdb/dbSyncModeConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dcdb/encryptAttributesConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dcdb/flushBinlogOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dcdb/hourdbInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dcdb/instanceConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dcdb/isolateHourInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dcdb/securityGroupAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dcdb/switchDbInstanceHaOperation",
 		&module{version},
 	)
 }

@@ -20,11 +20,17 @@ class HourdbInstanceArgs:
                  shard_node_count: pulumi.Input[int],
                  shard_storage: pulumi.Input[int],
                  db_version_id: Optional[pulumi.Input[str]] = None,
+                 dcn_instance_id: Optional[pulumi.Input[str]] = None,
+                 dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 ipv6_flag: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input['HourdbInstanceResourceTagArgs']]]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -34,11 +40,17 @@ class HourdbInstanceArgs:
         :param pulumi.Input[int] shard_node_count: node count for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_storage: storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[str] db_version_id: db engine version, default to Percona 5.7.17.
+        :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
+        :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
         :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[Sequence[pulumi.Input['HourdbInstanceResourceTagArgs']]] resource_tags: resource tags.
         :param pulumi.Input[str] security_group_id: security group id.
-        :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
+        :param pulumi.Input[str] subnet_id: subnet id, its required when vpcId is set.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[str] vpc_id: vpc id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone.
         """
@@ -48,8 +60,16 @@ class HourdbInstanceArgs:
         pulumi.set(__self__, "shard_storage", shard_storage)
         if db_version_id is not None:
             pulumi.set(__self__, "db_version_id", db_version_id)
+        if dcn_instance_id is not None:
+            pulumi.set(__self__, "dcn_instance_id", dcn_instance_id)
+        if dcn_region is not None:
+            pulumi.set(__self__, "dcn_region", dcn_region)
+        if extranet_access is not None:
+            pulumi.set(__self__, "extranet_access", extranet_access)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if ipv6_flag is not None:
+            pulumi.set(__self__, "ipv6_flag", ipv6_flag)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if resource_tags is not None:
@@ -58,6 +78,10 @@ class HourdbInstanceArgs:
             pulumi.set(__self__, "security_group_id", security_group_id)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vipv6 is not None:
+            pulumi.set(__self__, "vipv6", vipv6)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zones is not None:
@@ -124,6 +148,42 @@ class HourdbInstanceArgs:
         pulumi.set(self, "db_version_id", value)
 
     @property
+    @pulumi.getter(name="dcnInstanceId")
+    def dcn_instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        DCN source instance ID.
+        """
+        return pulumi.get(self, "dcn_instance_id")
+
+    @dcn_instance_id.setter
+    def dcn_instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dcn_instance_id", value)
+
+    @property
+    @pulumi.getter(name="dcnRegion")
+    def dcn_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        DCN source region.
+        """
+        return pulumi.get(self, "dcn_region")
+
+    @dcn_region.setter
+    def dcn_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dcn_region", value)
+
+    @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
+
+    @extranet_access.setter
+    def extranet_access(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "extranet_access", value)
+
+    @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -134,6 +194,18 @@ class HourdbInstanceArgs:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="ipv6Flag")
+    def ipv6_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to support IPv6.
+        """
+        return pulumi.get(self, "ipv6_flag")
+
+    @ipv6_flag.setter
+    def ipv6_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ipv6_flag", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -175,13 +247,37 @@ class HourdbInstanceArgs:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        subnet id, it&amp;#39;s required when vpcId is set.
+        subnet id, its required when vpcId is set.
         """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
     def subnet_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
+
+    @vipv6.setter
+    def vipv6(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vipv6", value)
 
     @property
     @pulumi.getter(name="vpcId")
@@ -212,7 +308,11 @@ class HourdbInstanceArgs:
 class _HourdbInstanceState:
     def __init__(__self__, *,
                  db_version_id: Optional[pulumi.Input[str]] = None,
+                 dcn_instance_id: Optional[pulumi.Input[str]] = None,
+                 dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 ipv6_flag: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input['HourdbInstanceResourceTagArgs']]]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -221,12 +321,19 @@ class _HourdbInstanceState:
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 vport: Optional[pulumi.Input[int]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering HourdbInstance resources.
         :param pulumi.Input[str] db_version_id: db engine version, default to Percona 5.7.17.
+        :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
+        :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
         :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[Sequence[pulumi.Input['HourdbInstanceResourceTagArgs']]] resource_tags: resource tags.
         :param pulumi.Input[str] security_group_id: security group id.
@@ -234,14 +341,25 @@ class _HourdbInstanceState:
         :param pulumi.Input[int] shard_memory: memory(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_node_count: node count for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_storage: storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
-        :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
+        :param pulumi.Input[str] subnet_id: subnet id, its required when vpcId is set.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[str] vpc_id: vpc id.
+        :param pulumi.Input[int] vport: Intranet port.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone.
         """
         if db_version_id is not None:
             pulumi.set(__self__, "db_version_id", db_version_id)
+        if dcn_instance_id is not None:
+            pulumi.set(__self__, "dcn_instance_id", dcn_instance_id)
+        if dcn_region is not None:
+            pulumi.set(__self__, "dcn_region", dcn_region)
+        if extranet_access is not None:
+            pulumi.set(__self__, "extranet_access", extranet_access)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if ipv6_flag is not None:
+            pulumi.set(__self__, "ipv6_flag", ipv6_flag)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if resource_tags is not None:
@@ -258,8 +376,14 @@ class _HourdbInstanceState:
             pulumi.set(__self__, "shard_storage", shard_storage)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vipv6 is not None:
+            pulumi.set(__self__, "vipv6", vipv6)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
         if zones is not None:
             pulumi.set(__self__, "zones", zones)
 
@@ -276,6 +400,42 @@ class _HourdbInstanceState:
         pulumi.set(self, "db_version_id", value)
 
     @property
+    @pulumi.getter(name="dcnInstanceId")
+    def dcn_instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        DCN source instance ID.
+        """
+        return pulumi.get(self, "dcn_instance_id")
+
+    @dcn_instance_id.setter
+    def dcn_instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dcn_instance_id", value)
+
+    @property
+    @pulumi.getter(name="dcnRegion")
+    def dcn_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        DCN source region.
+        """
+        return pulumi.get(self, "dcn_region")
+
+    @dcn_region.setter
+    def dcn_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dcn_region", value)
+
+    @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
+
+    @extranet_access.setter
+    def extranet_access(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "extranet_access", value)
+
+    @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -286,6 +446,18 @@ class _HourdbInstanceState:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="ipv6Flag")
+    def ipv6_flag(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to support IPv6.
+        """
+        return pulumi.get(self, "ipv6_flag")
+
+    @ipv6_flag.setter
+    def ipv6_flag(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ipv6_flag", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -375,13 +547,37 @@ class _HourdbInstanceState:
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
-        subnet id, it&amp;#39;s required when vpcId is set.
+        subnet id, its required when vpcId is set.
         """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
     def subnet_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
+
+    @vipv6.setter
+    def vipv6(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vipv6", value)
 
     @property
     @pulumi.getter(name="vpcId")
@@ -394,6 +590,18 @@ class _HourdbInstanceState:
     @vpc_id.setter
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
+
+    @property
+    @pulumi.getter
+    def vport(self) -> Optional[pulumi.Input[int]]:
+        """
+        Intranet port.
+        """
+        return pulumi.get(self, "vport")
+
+    @vport.setter
+    def vport(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vport", value)
 
     @property
     @pulumi.getter
@@ -414,7 +622,11 @@ class HourdbInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  db_version_id: Optional[pulumi.Input[str]] = None,
+                 dcn_instance_id: Optional[pulumi.Input[str]] = None,
+                 dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 ipv6_flag: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['HourdbInstanceResourceTagArgs']]]]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -423,6 +635,8 @@ class HourdbInstance(pulumi.CustomResource):
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -466,7 +680,11 @@ class HourdbInstance(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] db_version_id: db engine version, default to Percona 5.7.17.
+        :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
+        :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
         :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['HourdbInstanceResourceTagArgs']]]] resource_tags: resource tags.
         :param pulumi.Input[str] security_group_id: security group id.
@@ -474,7 +692,9 @@ class HourdbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] shard_memory: memory(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_node_count: node count for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_storage: storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
-        :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
+        :param pulumi.Input[str] subnet_id: subnet id, its required when vpcId is set.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[str] vpc_id: vpc id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone.
         """
@@ -537,7 +757,11 @@ class HourdbInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  db_version_id: Optional[pulumi.Input[str]] = None,
+                 dcn_instance_id: Optional[pulumi.Input[str]] = None,
+                 dcn_region: Optional[pulumi.Input[str]] = None,
+                 extranet_access: Optional[pulumi.Input[bool]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 ipv6_flag: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['HourdbInstanceResourceTagArgs']]]]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
@@ -546,6 +770,8 @@ class HourdbInstance(pulumi.CustomResource):
                  shard_node_count: Optional[pulumi.Input[int]] = None,
                  shard_storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vipv6: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -563,7 +789,11 @@ class HourdbInstance(pulumi.CustomResource):
             __props__ = HourdbInstanceArgs.__new__(HourdbInstanceArgs)
 
             __props__.__dict__["db_version_id"] = db_version_id
+            __props__.__dict__["dcn_instance_id"] = dcn_instance_id
+            __props__.__dict__["dcn_region"] = dcn_region
+            __props__.__dict__["extranet_access"] = extranet_access
             __props__.__dict__["instance_name"] = instance_name
+            __props__.__dict__["ipv6_flag"] = ipv6_flag
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["resource_tags"] = resource_tags
             __props__.__dict__["security_group_id"] = security_group_id
@@ -580,8 +810,11 @@ class HourdbInstance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'shard_storage'")
             __props__.__dict__["shard_storage"] = shard_storage
             __props__.__dict__["subnet_id"] = subnet_id
+            __props__.__dict__["vip"] = vip
+            __props__.__dict__["vipv6"] = vipv6
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["zones"] = zones
+            __props__.__dict__["vport"] = None
         super(HourdbInstance, __self__).__init__(
             'tencentcloud:Dcdb/hourdbInstance:HourdbInstance',
             resource_name,
@@ -593,7 +826,11 @@ class HourdbInstance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             db_version_id: Optional[pulumi.Input[str]] = None,
+            dcn_instance_id: Optional[pulumi.Input[str]] = None,
+            dcn_region: Optional[pulumi.Input[str]] = None,
+            extranet_access: Optional[pulumi.Input[bool]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
+            ipv6_flag: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             resource_tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['HourdbInstanceResourceTagArgs']]]]] = None,
             security_group_id: Optional[pulumi.Input[str]] = None,
@@ -602,7 +839,10 @@ class HourdbInstance(pulumi.CustomResource):
             shard_node_count: Optional[pulumi.Input[int]] = None,
             shard_storage: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
+            vip: Optional[pulumi.Input[str]] = None,
+            vipv6: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
+            vport: Optional[pulumi.Input[int]] = None,
             zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'HourdbInstance':
         """
         Get an existing HourdbInstance resource's state with the given name, id, and optional extra
@@ -612,7 +852,11 @@ class HourdbInstance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] db_version_id: db engine version, default to Percona 5.7.17.
+        :param pulumi.Input[str] dcn_instance_id: DCN source instance ID.
+        :param pulumi.Input[str] dcn_region: DCN source region.
+        :param pulumi.Input[bool] extranet_access: Whether to open the extranet access.
         :param pulumi.Input[str] instance_name: name of this instance.
+        :param pulumi.Input[int] ipv6_flag: Whether to support IPv6.
         :param pulumi.Input[int] project_id: project id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['HourdbInstanceResourceTagArgs']]]] resource_tags: resource tags.
         :param pulumi.Input[str] security_group_id: security group id.
@@ -620,8 +864,11 @@ class HourdbInstance(pulumi.CustomResource):
         :param pulumi.Input[int] shard_memory: memory(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_node_count: node count for each shard. It can be obtained by querying api DescribeShardSpec.
         :param pulumi.Input[int] shard_storage: storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
-        :param pulumi.Input[str] subnet_id: subnet id, it&amp;#39;s required when vpcId is set.
+        :param pulumi.Input[str] subnet_id: subnet id, its required when vpcId is set.
+        :param pulumi.Input[str] vip: The field is required to specify VIP.
+        :param pulumi.Input[str] vipv6: The field is required to specify VIPv6.
         :param pulumi.Input[str] vpc_id: vpc id.
+        :param pulumi.Input[int] vport: Intranet port.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: available zone.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -629,7 +876,11 @@ class HourdbInstance(pulumi.CustomResource):
         __props__ = _HourdbInstanceState.__new__(_HourdbInstanceState)
 
         __props__.__dict__["db_version_id"] = db_version_id
+        __props__.__dict__["dcn_instance_id"] = dcn_instance_id
+        __props__.__dict__["dcn_region"] = dcn_region
+        __props__.__dict__["extranet_access"] = extranet_access
         __props__.__dict__["instance_name"] = instance_name
+        __props__.__dict__["ipv6_flag"] = ipv6_flag
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["resource_tags"] = resource_tags
         __props__.__dict__["security_group_id"] = security_group_id
@@ -638,7 +889,10 @@ class HourdbInstance(pulumi.CustomResource):
         __props__.__dict__["shard_node_count"] = shard_node_count
         __props__.__dict__["shard_storage"] = shard_storage
         __props__.__dict__["subnet_id"] = subnet_id
+        __props__.__dict__["vip"] = vip
+        __props__.__dict__["vipv6"] = vipv6
         __props__.__dict__["vpc_id"] = vpc_id
+        __props__.__dict__["vport"] = vport
         __props__.__dict__["zones"] = zones
         return HourdbInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -651,12 +905,44 @@ class HourdbInstance(pulumi.CustomResource):
         return pulumi.get(self, "db_version_id")
 
     @property
+    @pulumi.getter(name="dcnInstanceId")
+    def dcn_instance_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        DCN source instance ID.
+        """
+        return pulumi.get(self, "dcn_instance_id")
+
+    @property
+    @pulumi.getter(name="dcnRegion")
+    def dcn_region(self) -> pulumi.Output[Optional[str]]:
+        """
+        DCN source region.
+        """
+        return pulumi.get(self, "dcn_region")
+
+    @property
+    @pulumi.getter(name="extranetAccess")
+    def extranet_access(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to open the extranet access.
+        """
+        return pulumi.get(self, "extranet_access")
+
+    @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Output[Optional[str]]:
         """
         name of this instance.
         """
         return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="ipv6Flag")
+    def ipv6_flag(self) -> pulumi.Output[Optional[int]]:
+        """
+        Whether to support IPv6.
+        """
+        return pulumi.get(self, "ipv6_flag")
 
     @property
     @pulumi.getter(name="projectId")
@@ -718,9 +1004,25 @@ class HourdbInstance(pulumi.CustomResource):
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Output[Optional[str]]:
         """
-        subnet id, it&amp;#39;s required when vpcId is set.
+        subnet id, its required when vpcId is set.
         """
         return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> pulumi.Output[str]:
+        """
+        The field is required to specify VIP.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vipv6(self) -> pulumi.Output[str]:
+        """
+        The field is required to specify VIPv6.
+        """
+        return pulumi.get(self, "vipv6")
 
     @property
     @pulumi.getter(name="vpcId")
@@ -729,6 +1031,14 @@ class HourdbInstance(pulumi.CustomResource):
         vpc id.
         """
         return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> pulumi.Output[int]:
+        """
+        Intranet port.
+        """
+        return pulumi.get(self, "vport")
 
     @property
     @pulumi.getter

@@ -81,6 +81,10 @@ export class TagRetentionRule extends pulumi.CustomResource {
      */
     public readonly registryId!: pulumi.Output<string>;
     /**
+     * The ID of the retention task.
+     */
+    public /*out*/ readonly retentionId!: pulumi.Output<number>;
+    /**
      * Retention Policy.
      */
     public readonly retentionRule!: pulumi.Output<outputs.Tcr.TagRetentionRuleRetentionRule>;
@@ -102,6 +106,7 @@ export class TagRetentionRule extends pulumi.CustomResource {
             resourceInputs["disabled"] = state ? state.disabled : undefined;
             resourceInputs["namespaceName"] = state ? state.namespaceName : undefined;
             resourceInputs["registryId"] = state ? state.registryId : undefined;
+            resourceInputs["retentionId"] = state ? state.retentionId : undefined;
             resourceInputs["retentionRule"] = state ? state.retentionRule : undefined;
         } else {
             const args = argsOrState as TagRetentionRuleArgs | undefined;
@@ -122,6 +127,7 @@ export class TagRetentionRule extends pulumi.CustomResource {
             resourceInputs["namespaceName"] = args ? args.namespaceName : undefined;
             resourceInputs["registryId"] = args ? args.registryId : undefined;
             resourceInputs["retentionRule"] = args ? args.retentionRule : undefined;
+            resourceInputs["retentionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TagRetentionRule.__pulumiType, name, resourceInputs, opts);
@@ -148,6 +154,10 @@ export interface TagRetentionRuleState {
      * The main instance ID.
      */
     registryId?: pulumi.Input<string>;
+    /**
+     * The ID of the retention task.
+     */
+    retentionId?: pulumi.Input<number>;
     /**
      * Retention Policy.
      */

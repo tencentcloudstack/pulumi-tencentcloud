@@ -10,6 +10,28 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
 {
+    /// <summary>
+    /// Provides a resource to create a dts sync_job_resume_operation
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var syncJobResumeOperation = new Tencentcloud.Dts.SyncJobResumeOperation("syncJobResumeOperation", new Tencentcloud.Dts.SyncJobResumeOperationArgs
+    ///         {
+    ///             JobId = "sync-werwfs23",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJobResumeOperation:SyncJobResumeOperation")]
     public partial class SyncJobResumeOperation : Pulumi.CustomResource
     {

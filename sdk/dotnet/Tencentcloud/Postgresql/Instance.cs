@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// <summary>
     /// Use this resource to create postgresql instance.
     /// 
+    /// &gt; **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -61,8 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// }
     /// ```
-    /// 
-    /// Create a multi available zone bucket
+    /// ### Create a multi available zone bucket
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -123,8 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// }
     /// ```
-    /// 
-    /// create pgsql with kms key
+    /// ### create pgsql with kms key
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -170,6 +170,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// }
     /// ```
+    /// ### upgrade kernel version
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.Postgresql.Instance("test", new Tencentcloud.Postgresql.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name,
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = local.Vpc_id,
+    ///             SubnetId = local.Subnet_id,
+    ///             EngineVersion = "13.3",
+    ///             RootPassword = "*",
+    ///             Charset = "LATIN1",
+    ///             ProjectId = 0,
+    ///             PublicAccessSwitch = false,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 local.Sg_id,
+    ///             },
+    ///             Memory = 4,
+    ///             Storage = 250,
+    ///             BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
+    ///             {
+    ///                 MinBackupStartTime = "01:10:11",
+    ///                 MaxBackupStartTime = "02:10:11",
+    ///                 BaseBackupRetentionPeriod = 5,
+    ///                 BackupPeriods = 
+    ///                 {
+    ///                     "monday",
+    ///                     "thursday",
+    ///                     "sunday",
+    ///                 },
+    ///             },
+    ///             DbKernelVersion = "v13.3_r1.4",
+    ///             Tags = 
+    ///             {
+    ///                 { "tf", "teest" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -195,7 +244,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int?> AutoVoucher { get; private set; } = null!;
 
         /// <summary>
-        /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        /// Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         /// </summary>
         [Output("availabilityZone")]
         public Output<string> AvailabilityZone { get; private set; } = null!;
@@ -207,7 +256,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<Outputs.InstanceBackupPlan?> BackupPlan { get; private set; } = null!;
 
         /// <summary>
-        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -225,7 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         /// </summary>
         [Output("dbKernelVersion")]
         public Output<string> DbKernelVersion { get; private set; } = null!;
@@ -297,7 +346,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> NeedSupportTde { get; private set; } = null!;
 
         /// <summary>
-        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Output("period")]
         public Output<int?> Period { get; private set; } = null!;
@@ -366,7 +415,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// ID of subnet.
         /// </summary>
         [Output("subnetId")]
-        public Output<string?> SubnetId { get; private set; } = null!;
+        public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
         /// The available tags within this postgresql.
@@ -390,7 +439,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// ID of VPC.
         /// </summary>
         [Output("vpcId")]
-        public Output<string?> VpcId { get; private set; } = null!;
+        public Output<string> VpcId { get; private set; } = null!;
 
 
         /// <summary>
@@ -452,7 +501,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? AutoVoucher { get; set; }
 
         /// <summary>
-        /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        /// Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         /// </summary>
         [Input("availabilityZone", required: true)]
         public Input<string> AvailabilityZone { get; set; } = null!;
@@ -464,7 +513,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<Inputs.InstanceBackupPlanArgs>? BackupPlan { get; set; }
 
         /// <summary>
-        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -476,7 +525,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? Charset { get; set; }
 
         /// <summary>
-        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         /// </summary>
         [Input("dbKernelVersion")]
         public Input<string>? DbKernelVersion { get; set; }
@@ -554,7 +603,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportTde { get; set; }
 
         /// <summary>
-        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
@@ -604,8 +653,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// ID of subnet.
         /// </summary>
-        [Input("subnetId")]
-        public Input<string>? SubnetId { get; set; }
+        [Input("subnetId", required: true)]
+        public Input<string> SubnetId { get; set; } = null!;
 
         [Input("tags")]
         private InputMap<object>? _tags;
@@ -634,8 +683,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// ID of VPC.
         /// </summary>
-        [Input("vpcId")]
-        public Input<string>? VpcId { get; set; }
+        [Input("vpcId", required: true)]
+        public Input<string> VpcId { get; set; } = null!;
 
         public InstanceArgs()
         {
@@ -657,7 +706,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? AutoVoucher { get; set; }
 
         /// <summary>
-        /// Availability zone. NOTE: If value modified but included in `db_node_set`, the diff will be suppressed.
+        /// Availability zone. NOTE: This field could not be modified, please use `db_node_set` instead of modification. The changes on this field will be suppressed when using the `db_node_set`.
         /// </summary>
         [Input("availabilityZone")]
         public Input<string>? AvailabilityZone { get; set; }
@@ -669,7 +718,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<Inputs.InstanceBackupPlanGetArgs>? BackupPlan { get; set; }
 
         /// <summary>
-        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`.
+        /// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -687,7 +736,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created.
+        /// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
         /// </summary>
         [Input("dbKernelVersion")]
         public Input<string>? DbKernelVersion { get; set; }
@@ -765,7 +814,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? NeedSupportTde { get; set; }
 
         /// <summary>
-        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }

@@ -83,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Output<string> RegistryId { get; private set; } = null!;
 
         /// <summary>
+        /// The ID of the retention task.
+        /// </summary>
+        [Output("retentionId")]
+        public Output<int> RetentionId { get; private set; } = null!;
+
+        /// <summary>
         /// Retention Policy.
         /// </summary>
         [Output("retentionRule")]
@@ -195,6 +201,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("registryId")]
         public Input<string>? RegistryId { get; set; }
+
+        /// <summary>
+        /// The ID of the retention task.
+        /// </summary>
+        [Input("retentionId")]
+        public Input<int>? RetentionId { get; set; }
 
         /// <summary>
         /// Retention Policy.

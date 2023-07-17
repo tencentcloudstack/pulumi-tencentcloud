@@ -10,6 +10,2079 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type BatchManifest struct {
+	// The location information of the list of objects.
+	Location BatchManifestLocation `pulumi:"location"`
+	// Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+	Spec BatchManifestSpec `pulumi:"spec"`
+}
+
+// BatchManifestInput is an input type that accepts BatchManifestArgs and BatchManifestOutput values.
+// You can construct a concrete instance of `BatchManifestInput` via:
+//
+//          BatchManifestArgs{...}
+type BatchManifestInput interface {
+	pulumi.Input
+
+	ToBatchManifestOutput() BatchManifestOutput
+	ToBatchManifestOutputWithContext(context.Context) BatchManifestOutput
+}
+
+type BatchManifestArgs struct {
+	// The location information of the list of objects.
+	Location BatchManifestLocationInput `pulumi:"location"`
+	// Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+	Spec BatchManifestSpecInput `pulumi:"spec"`
+}
+
+func (BatchManifestArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifest)(nil)).Elem()
+}
+
+func (i BatchManifestArgs) ToBatchManifestOutput() BatchManifestOutput {
+	return i.ToBatchManifestOutputWithContext(context.Background())
+}
+
+func (i BatchManifestArgs) ToBatchManifestOutputWithContext(ctx context.Context) BatchManifestOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestOutput)
+}
+
+func (i BatchManifestArgs) ToBatchManifestPtrOutput() BatchManifestPtrOutput {
+	return i.ToBatchManifestPtrOutputWithContext(context.Background())
+}
+
+func (i BatchManifestArgs) ToBatchManifestPtrOutputWithContext(ctx context.Context) BatchManifestPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestOutput).ToBatchManifestPtrOutputWithContext(ctx)
+}
+
+// BatchManifestPtrInput is an input type that accepts BatchManifestArgs, BatchManifestPtr and BatchManifestPtrOutput values.
+// You can construct a concrete instance of `BatchManifestPtrInput` via:
+//
+//          BatchManifestArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchManifestPtrInput interface {
+	pulumi.Input
+
+	ToBatchManifestPtrOutput() BatchManifestPtrOutput
+	ToBatchManifestPtrOutputWithContext(context.Context) BatchManifestPtrOutput
+}
+
+type batchManifestPtrType BatchManifestArgs
+
+func BatchManifestPtr(v *BatchManifestArgs) BatchManifestPtrInput {
+	return (*batchManifestPtrType)(v)
+}
+
+func (*batchManifestPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifest)(nil)).Elem()
+}
+
+func (i *batchManifestPtrType) ToBatchManifestPtrOutput() BatchManifestPtrOutput {
+	return i.ToBatchManifestPtrOutputWithContext(context.Background())
+}
+
+func (i *batchManifestPtrType) ToBatchManifestPtrOutputWithContext(ctx context.Context) BatchManifestPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestPtrOutput)
+}
+
+type BatchManifestOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifest)(nil)).Elem()
+}
+
+func (o BatchManifestOutput) ToBatchManifestOutput() BatchManifestOutput {
+	return o
+}
+
+func (o BatchManifestOutput) ToBatchManifestOutputWithContext(ctx context.Context) BatchManifestOutput {
+	return o
+}
+
+func (o BatchManifestOutput) ToBatchManifestPtrOutput() BatchManifestPtrOutput {
+	return o.ToBatchManifestPtrOutputWithContext(context.Background())
+}
+
+func (o BatchManifestOutput) ToBatchManifestPtrOutputWithContext(ctx context.Context) BatchManifestPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchManifest) *BatchManifest {
+		return &v
+	}).(BatchManifestPtrOutput)
+}
+
+// The location information of the list of objects.
+func (o BatchManifestOutput) Location() BatchManifestLocationOutput {
+	return o.ApplyT(func(v BatchManifest) BatchManifestLocation { return v.Location }).(BatchManifestLocationOutput)
+}
+
+// Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+func (o BatchManifestOutput) Spec() BatchManifestSpecOutput {
+	return o.ApplyT(func(v BatchManifest) BatchManifestSpec { return v.Spec }).(BatchManifestSpecOutput)
+}
+
+type BatchManifestPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifest)(nil)).Elem()
+}
+
+func (o BatchManifestPtrOutput) ToBatchManifestPtrOutput() BatchManifestPtrOutput {
+	return o
+}
+
+func (o BatchManifestPtrOutput) ToBatchManifestPtrOutputWithContext(ctx context.Context) BatchManifestPtrOutput {
+	return o
+}
+
+func (o BatchManifestPtrOutput) Elem() BatchManifestOutput {
+	return o.ApplyT(func(v *BatchManifest) BatchManifest {
+		if v != nil {
+			return *v
+		}
+		var ret BatchManifest
+		return ret
+	}).(BatchManifestOutput)
+}
+
+// The location information of the list of objects.
+func (o BatchManifestPtrOutput) Location() BatchManifestLocationPtrOutput {
+	return o.ApplyT(func(v *BatchManifest) *BatchManifestLocation {
+		if v == nil {
+			return nil
+		}
+		return &v.Location
+	}).(BatchManifestLocationPtrOutput)
+}
+
+// Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+func (o BatchManifestPtrOutput) Spec() BatchManifestSpecPtrOutput {
+	return o.ApplyT(func(v *BatchManifest) *BatchManifestSpec {
+		if v == nil {
+			return nil
+		}
+		return &v.Spec
+	}).(BatchManifestSpecPtrOutput)
+}
+
+type BatchManifestLocation struct {
+	// Specifies the etag of the object list. Length 1-1024 bytes.
+	Etag string `pulumi:"etag"`
+	// Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+	ObjectArn string `pulumi:"objectArn"`
+	// Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+	ObjectVersionId *string `pulumi:"objectVersionId"`
+}
+
+// BatchManifestLocationInput is an input type that accepts BatchManifestLocationArgs and BatchManifestLocationOutput values.
+// You can construct a concrete instance of `BatchManifestLocationInput` via:
+//
+//          BatchManifestLocationArgs{...}
+type BatchManifestLocationInput interface {
+	pulumi.Input
+
+	ToBatchManifestLocationOutput() BatchManifestLocationOutput
+	ToBatchManifestLocationOutputWithContext(context.Context) BatchManifestLocationOutput
+}
+
+type BatchManifestLocationArgs struct {
+	// Specifies the etag of the object list. Length 1-1024 bytes.
+	Etag pulumi.StringInput `pulumi:"etag"`
+	// Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+	ObjectArn pulumi.StringInput `pulumi:"objectArn"`
+	// Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+	ObjectVersionId pulumi.StringPtrInput `pulumi:"objectVersionId"`
+}
+
+func (BatchManifestLocationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifestLocation)(nil)).Elem()
+}
+
+func (i BatchManifestLocationArgs) ToBatchManifestLocationOutput() BatchManifestLocationOutput {
+	return i.ToBatchManifestLocationOutputWithContext(context.Background())
+}
+
+func (i BatchManifestLocationArgs) ToBatchManifestLocationOutputWithContext(ctx context.Context) BatchManifestLocationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestLocationOutput)
+}
+
+func (i BatchManifestLocationArgs) ToBatchManifestLocationPtrOutput() BatchManifestLocationPtrOutput {
+	return i.ToBatchManifestLocationPtrOutputWithContext(context.Background())
+}
+
+func (i BatchManifestLocationArgs) ToBatchManifestLocationPtrOutputWithContext(ctx context.Context) BatchManifestLocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestLocationOutput).ToBatchManifestLocationPtrOutputWithContext(ctx)
+}
+
+// BatchManifestLocationPtrInput is an input type that accepts BatchManifestLocationArgs, BatchManifestLocationPtr and BatchManifestLocationPtrOutput values.
+// You can construct a concrete instance of `BatchManifestLocationPtrInput` via:
+//
+//          BatchManifestLocationArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchManifestLocationPtrInput interface {
+	pulumi.Input
+
+	ToBatchManifestLocationPtrOutput() BatchManifestLocationPtrOutput
+	ToBatchManifestLocationPtrOutputWithContext(context.Context) BatchManifestLocationPtrOutput
+}
+
+type batchManifestLocationPtrType BatchManifestLocationArgs
+
+func BatchManifestLocationPtr(v *BatchManifestLocationArgs) BatchManifestLocationPtrInput {
+	return (*batchManifestLocationPtrType)(v)
+}
+
+func (*batchManifestLocationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifestLocation)(nil)).Elem()
+}
+
+func (i *batchManifestLocationPtrType) ToBatchManifestLocationPtrOutput() BatchManifestLocationPtrOutput {
+	return i.ToBatchManifestLocationPtrOutputWithContext(context.Background())
+}
+
+func (i *batchManifestLocationPtrType) ToBatchManifestLocationPtrOutputWithContext(ctx context.Context) BatchManifestLocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestLocationPtrOutput)
+}
+
+type BatchManifestLocationOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestLocationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifestLocation)(nil)).Elem()
+}
+
+func (o BatchManifestLocationOutput) ToBatchManifestLocationOutput() BatchManifestLocationOutput {
+	return o
+}
+
+func (o BatchManifestLocationOutput) ToBatchManifestLocationOutputWithContext(ctx context.Context) BatchManifestLocationOutput {
+	return o
+}
+
+func (o BatchManifestLocationOutput) ToBatchManifestLocationPtrOutput() BatchManifestLocationPtrOutput {
+	return o.ToBatchManifestLocationPtrOutputWithContext(context.Background())
+}
+
+func (o BatchManifestLocationOutput) ToBatchManifestLocationPtrOutputWithContext(ctx context.Context) BatchManifestLocationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchManifestLocation) *BatchManifestLocation {
+		return &v
+	}).(BatchManifestLocationPtrOutput)
+}
+
+// Specifies the etag of the object list. Length 1-1024 bytes.
+func (o BatchManifestLocationOutput) Etag() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchManifestLocation) string { return v.Etag }).(pulumi.StringOutput)
+}
+
+// Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+func (o BatchManifestLocationOutput) ObjectArn() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchManifestLocation) string { return v.ObjectArn }).(pulumi.StringOutput)
+}
+
+// Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+func (o BatchManifestLocationOutput) ObjectVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchManifestLocation) *string { return v.ObjectVersionId }).(pulumi.StringPtrOutput)
+}
+
+type BatchManifestLocationPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestLocationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifestLocation)(nil)).Elem()
+}
+
+func (o BatchManifestLocationPtrOutput) ToBatchManifestLocationPtrOutput() BatchManifestLocationPtrOutput {
+	return o
+}
+
+func (o BatchManifestLocationPtrOutput) ToBatchManifestLocationPtrOutputWithContext(ctx context.Context) BatchManifestLocationPtrOutput {
+	return o
+}
+
+func (o BatchManifestLocationPtrOutput) Elem() BatchManifestLocationOutput {
+	return o.ApplyT(func(v *BatchManifestLocation) BatchManifestLocation {
+		if v != nil {
+			return *v
+		}
+		var ret BatchManifestLocation
+		return ret
+	}).(BatchManifestLocationOutput)
+}
+
+// Specifies the etag of the object list. Length 1-1024 bytes.
+func (o BatchManifestLocationPtrOutput) Etag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchManifestLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Etag
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+func (o BatchManifestLocationPtrOutput) ObjectArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchManifestLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ObjectArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+func (o BatchManifestLocationPtrOutput) ObjectVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchManifestLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ObjectVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchManifestSpec struct {
+	// Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+	Fields []string `pulumi:"fields"`
+	// Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+	Format string `pulumi:"format"`
+}
+
+// BatchManifestSpecInput is an input type that accepts BatchManifestSpecArgs and BatchManifestSpecOutput values.
+// You can construct a concrete instance of `BatchManifestSpecInput` via:
+//
+//          BatchManifestSpecArgs{...}
+type BatchManifestSpecInput interface {
+	pulumi.Input
+
+	ToBatchManifestSpecOutput() BatchManifestSpecOutput
+	ToBatchManifestSpecOutputWithContext(context.Context) BatchManifestSpecOutput
+}
+
+type BatchManifestSpecArgs struct {
+	// Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+	Fields pulumi.StringArrayInput `pulumi:"fields"`
+	// Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+	Format pulumi.StringInput `pulumi:"format"`
+}
+
+func (BatchManifestSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifestSpec)(nil)).Elem()
+}
+
+func (i BatchManifestSpecArgs) ToBatchManifestSpecOutput() BatchManifestSpecOutput {
+	return i.ToBatchManifestSpecOutputWithContext(context.Background())
+}
+
+func (i BatchManifestSpecArgs) ToBatchManifestSpecOutputWithContext(ctx context.Context) BatchManifestSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestSpecOutput)
+}
+
+func (i BatchManifestSpecArgs) ToBatchManifestSpecPtrOutput() BatchManifestSpecPtrOutput {
+	return i.ToBatchManifestSpecPtrOutputWithContext(context.Background())
+}
+
+func (i BatchManifestSpecArgs) ToBatchManifestSpecPtrOutputWithContext(ctx context.Context) BatchManifestSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestSpecOutput).ToBatchManifestSpecPtrOutputWithContext(ctx)
+}
+
+// BatchManifestSpecPtrInput is an input type that accepts BatchManifestSpecArgs, BatchManifestSpecPtr and BatchManifestSpecPtrOutput values.
+// You can construct a concrete instance of `BatchManifestSpecPtrInput` via:
+//
+//          BatchManifestSpecArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchManifestSpecPtrInput interface {
+	pulumi.Input
+
+	ToBatchManifestSpecPtrOutput() BatchManifestSpecPtrOutput
+	ToBatchManifestSpecPtrOutputWithContext(context.Context) BatchManifestSpecPtrOutput
+}
+
+type batchManifestSpecPtrType BatchManifestSpecArgs
+
+func BatchManifestSpecPtr(v *BatchManifestSpecArgs) BatchManifestSpecPtrInput {
+	return (*batchManifestSpecPtrType)(v)
+}
+
+func (*batchManifestSpecPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifestSpec)(nil)).Elem()
+}
+
+func (i *batchManifestSpecPtrType) ToBatchManifestSpecPtrOutput() BatchManifestSpecPtrOutput {
+	return i.ToBatchManifestSpecPtrOutputWithContext(context.Background())
+}
+
+func (i *batchManifestSpecPtrType) ToBatchManifestSpecPtrOutputWithContext(ctx context.Context) BatchManifestSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchManifestSpecPtrOutput)
+}
+
+type BatchManifestSpecOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchManifestSpec)(nil)).Elem()
+}
+
+func (o BatchManifestSpecOutput) ToBatchManifestSpecOutput() BatchManifestSpecOutput {
+	return o
+}
+
+func (o BatchManifestSpecOutput) ToBatchManifestSpecOutputWithContext(ctx context.Context) BatchManifestSpecOutput {
+	return o
+}
+
+func (o BatchManifestSpecOutput) ToBatchManifestSpecPtrOutput() BatchManifestSpecPtrOutput {
+	return o.ToBatchManifestSpecPtrOutputWithContext(context.Background())
+}
+
+func (o BatchManifestSpecOutput) ToBatchManifestSpecPtrOutputWithContext(ctx context.Context) BatchManifestSpecPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchManifestSpec) *BatchManifestSpec {
+		return &v
+	}).(BatchManifestSpecPtrOutput)
+}
+
+// Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+func (o BatchManifestSpecOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchManifestSpec) []string { return v.Fields }).(pulumi.StringArrayOutput)
+}
+
+// Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+func (o BatchManifestSpecOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchManifestSpec) string { return v.Format }).(pulumi.StringOutput)
+}
+
+type BatchManifestSpecPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchManifestSpecPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchManifestSpec)(nil)).Elem()
+}
+
+func (o BatchManifestSpecPtrOutput) ToBatchManifestSpecPtrOutput() BatchManifestSpecPtrOutput {
+	return o
+}
+
+func (o BatchManifestSpecPtrOutput) ToBatchManifestSpecPtrOutputWithContext(ctx context.Context) BatchManifestSpecPtrOutput {
+	return o
+}
+
+func (o BatchManifestSpecPtrOutput) Elem() BatchManifestSpecOutput {
+	return o.ApplyT(func(v *BatchManifestSpec) BatchManifestSpec {
+		if v != nil {
+			return *v
+		}
+		var ret BatchManifestSpec
+		return ret
+	}).(BatchManifestSpecOutput)
+}
+
+// Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+func (o BatchManifestSpecPtrOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchManifestSpec) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Fields
+	}).(pulumi.StringArrayOutput)
+}
+
+// Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+func (o BatchManifestSpecPtrOutput) Format() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchManifestSpec) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Format
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchOperation struct {
+	// Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+	CosInitiateRestoreObject *BatchOperationCosInitiateRestoreObject `pulumi:"cosInitiateRestoreObject"`
+	// Specifies the specific parameters for the batch copy operation on the objects in the list.
+	CosPutObjectCopy *BatchOperationCosPutObjectCopy `pulumi:"cosPutObjectCopy"`
+}
+
+// BatchOperationInput is an input type that accepts BatchOperationArgs and BatchOperationOutput values.
+// You can construct a concrete instance of `BatchOperationInput` via:
+//
+//          BatchOperationArgs{...}
+type BatchOperationInput interface {
+	pulumi.Input
+
+	ToBatchOperationOutput() BatchOperationOutput
+	ToBatchOperationOutputWithContext(context.Context) BatchOperationOutput
+}
+
+type BatchOperationArgs struct {
+	// Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+	CosInitiateRestoreObject BatchOperationCosInitiateRestoreObjectPtrInput `pulumi:"cosInitiateRestoreObject"`
+	// Specifies the specific parameters for the batch copy operation on the objects in the list.
+	CosPutObjectCopy BatchOperationCosPutObjectCopyPtrInput `pulumi:"cosPutObjectCopy"`
+}
+
+func (BatchOperationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperation)(nil)).Elem()
+}
+
+func (i BatchOperationArgs) ToBatchOperationOutput() BatchOperationOutput {
+	return i.ToBatchOperationOutputWithContext(context.Background())
+}
+
+func (i BatchOperationArgs) ToBatchOperationOutputWithContext(ctx context.Context) BatchOperationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationOutput)
+}
+
+func (i BatchOperationArgs) ToBatchOperationPtrOutput() BatchOperationPtrOutput {
+	return i.ToBatchOperationPtrOutputWithContext(context.Background())
+}
+
+func (i BatchOperationArgs) ToBatchOperationPtrOutputWithContext(ctx context.Context) BatchOperationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationOutput).ToBatchOperationPtrOutputWithContext(ctx)
+}
+
+// BatchOperationPtrInput is an input type that accepts BatchOperationArgs, BatchOperationPtr and BatchOperationPtrOutput values.
+// You can construct a concrete instance of `BatchOperationPtrInput` via:
+//
+//          BatchOperationArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchOperationPtrInput interface {
+	pulumi.Input
+
+	ToBatchOperationPtrOutput() BatchOperationPtrOutput
+	ToBatchOperationPtrOutputWithContext(context.Context) BatchOperationPtrOutput
+}
+
+type batchOperationPtrType BatchOperationArgs
+
+func BatchOperationPtr(v *BatchOperationArgs) BatchOperationPtrInput {
+	return (*batchOperationPtrType)(v)
+}
+
+func (*batchOperationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperation)(nil)).Elem()
+}
+
+func (i *batchOperationPtrType) ToBatchOperationPtrOutput() BatchOperationPtrOutput {
+	return i.ToBatchOperationPtrOutputWithContext(context.Background())
+}
+
+func (i *batchOperationPtrType) ToBatchOperationPtrOutputWithContext(ctx context.Context) BatchOperationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationPtrOutput)
+}
+
+type BatchOperationOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperation)(nil)).Elem()
+}
+
+func (o BatchOperationOutput) ToBatchOperationOutput() BatchOperationOutput {
+	return o
+}
+
+func (o BatchOperationOutput) ToBatchOperationOutputWithContext(ctx context.Context) BatchOperationOutput {
+	return o
+}
+
+func (o BatchOperationOutput) ToBatchOperationPtrOutput() BatchOperationPtrOutput {
+	return o.ToBatchOperationPtrOutputWithContext(context.Background())
+}
+
+func (o BatchOperationOutput) ToBatchOperationPtrOutputWithContext(ctx context.Context) BatchOperationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchOperation) *BatchOperation {
+		return &v
+	}).(BatchOperationPtrOutput)
+}
+
+// Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+func (o BatchOperationOutput) CosInitiateRestoreObject() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o.ApplyT(func(v BatchOperation) *BatchOperationCosInitiateRestoreObject { return v.CosInitiateRestoreObject }).(BatchOperationCosInitiateRestoreObjectPtrOutput)
+}
+
+// Specifies the specific parameters for the batch copy operation on the objects in the list.
+func (o BatchOperationOutput) CosPutObjectCopy() BatchOperationCosPutObjectCopyPtrOutput {
+	return o.ApplyT(func(v BatchOperation) *BatchOperationCosPutObjectCopy { return v.CosPutObjectCopy }).(BatchOperationCosPutObjectCopyPtrOutput)
+}
+
+type BatchOperationPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperation)(nil)).Elem()
+}
+
+func (o BatchOperationPtrOutput) ToBatchOperationPtrOutput() BatchOperationPtrOutput {
+	return o
+}
+
+func (o BatchOperationPtrOutput) ToBatchOperationPtrOutputWithContext(ctx context.Context) BatchOperationPtrOutput {
+	return o
+}
+
+func (o BatchOperationPtrOutput) Elem() BatchOperationOutput {
+	return o.ApplyT(func(v *BatchOperation) BatchOperation {
+		if v != nil {
+			return *v
+		}
+		var ret BatchOperation
+		return ret
+	}).(BatchOperationOutput)
+}
+
+// Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+func (o BatchOperationPtrOutput) CosInitiateRestoreObject() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o.ApplyT(func(v *BatchOperation) *BatchOperationCosInitiateRestoreObject {
+		if v == nil {
+			return nil
+		}
+		return v.CosInitiateRestoreObject
+	}).(BatchOperationCosInitiateRestoreObjectPtrOutput)
+}
+
+// Specifies the specific parameters for the batch copy operation on the objects in the list.
+func (o BatchOperationPtrOutput) CosPutObjectCopy() BatchOperationCosPutObjectCopyPtrOutput {
+	return o.ApplyT(func(v *BatchOperation) *BatchOperationCosPutObjectCopy {
+		if v == nil {
+			return nil
+		}
+		return v.CosPutObjectCopy
+	}).(BatchOperationCosPutObjectCopyPtrOutput)
+}
+
+type BatchOperationCosInitiateRestoreObject struct {
+	// Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+	ExpirationInDays int `pulumi:"expirationInDays"`
+	// Select archive recovery model. Available values: Bulk, Standard.
+	JobTier string `pulumi:"jobTier"`
+}
+
+// BatchOperationCosInitiateRestoreObjectInput is an input type that accepts BatchOperationCosInitiateRestoreObjectArgs and BatchOperationCosInitiateRestoreObjectOutput values.
+// You can construct a concrete instance of `BatchOperationCosInitiateRestoreObjectInput` via:
+//
+//          BatchOperationCosInitiateRestoreObjectArgs{...}
+type BatchOperationCosInitiateRestoreObjectInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosInitiateRestoreObjectOutput() BatchOperationCosInitiateRestoreObjectOutput
+	ToBatchOperationCosInitiateRestoreObjectOutputWithContext(context.Context) BatchOperationCosInitiateRestoreObjectOutput
+}
+
+type BatchOperationCosInitiateRestoreObjectArgs struct {
+	// Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+	ExpirationInDays pulumi.IntInput `pulumi:"expirationInDays"`
+	// Select archive recovery model. Available values: Bulk, Standard.
+	JobTier pulumi.StringInput `pulumi:"jobTier"`
+}
+
+func (BatchOperationCosInitiateRestoreObjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosInitiateRestoreObject)(nil)).Elem()
+}
+
+func (i BatchOperationCosInitiateRestoreObjectArgs) ToBatchOperationCosInitiateRestoreObjectOutput() BatchOperationCosInitiateRestoreObjectOutput {
+	return i.ToBatchOperationCosInitiateRestoreObjectOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosInitiateRestoreObjectArgs) ToBatchOperationCosInitiateRestoreObjectOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosInitiateRestoreObjectOutput)
+}
+
+func (i BatchOperationCosInitiateRestoreObjectArgs) ToBatchOperationCosInitiateRestoreObjectPtrOutput() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return i.ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosInitiateRestoreObjectArgs) ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosInitiateRestoreObjectOutput).ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(ctx)
+}
+
+// BatchOperationCosInitiateRestoreObjectPtrInput is an input type that accepts BatchOperationCosInitiateRestoreObjectArgs, BatchOperationCosInitiateRestoreObjectPtr and BatchOperationCosInitiateRestoreObjectPtrOutput values.
+// You can construct a concrete instance of `BatchOperationCosInitiateRestoreObjectPtrInput` via:
+//
+//          BatchOperationCosInitiateRestoreObjectArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchOperationCosInitiateRestoreObjectPtrInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosInitiateRestoreObjectPtrOutput() BatchOperationCosInitiateRestoreObjectPtrOutput
+	ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(context.Context) BatchOperationCosInitiateRestoreObjectPtrOutput
+}
+
+type batchOperationCosInitiateRestoreObjectPtrType BatchOperationCosInitiateRestoreObjectArgs
+
+func BatchOperationCosInitiateRestoreObjectPtr(v *BatchOperationCosInitiateRestoreObjectArgs) BatchOperationCosInitiateRestoreObjectPtrInput {
+	return (*batchOperationCosInitiateRestoreObjectPtrType)(v)
+}
+
+func (*batchOperationCosInitiateRestoreObjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosInitiateRestoreObject)(nil)).Elem()
+}
+
+func (i *batchOperationCosInitiateRestoreObjectPtrType) ToBatchOperationCosInitiateRestoreObjectPtrOutput() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return i.ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(context.Background())
+}
+
+func (i *batchOperationCosInitiateRestoreObjectPtrType) ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosInitiateRestoreObjectPtrOutput)
+}
+
+type BatchOperationCosInitiateRestoreObjectOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosInitiateRestoreObjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosInitiateRestoreObject)(nil)).Elem()
+}
+
+func (o BatchOperationCosInitiateRestoreObjectOutput) ToBatchOperationCosInitiateRestoreObjectOutput() BatchOperationCosInitiateRestoreObjectOutput {
+	return o
+}
+
+func (o BatchOperationCosInitiateRestoreObjectOutput) ToBatchOperationCosInitiateRestoreObjectOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectOutput {
+	return o
+}
+
+func (o BatchOperationCosInitiateRestoreObjectOutput) ToBatchOperationCosInitiateRestoreObjectPtrOutput() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o.ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(context.Background())
+}
+
+func (o BatchOperationCosInitiateRestoreObjectOutput) ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchOperationCosInitiateRestoreObject) *BatchOperationCosInitiateRestoreObject {
+		return &v
+	}).(BatchOperationCosInitiateRestoreObjectPtrOutput)
+}
+
+// Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+func (o BatchOperationCosInitiateRestoreObjectOutput) ExpirationInDays() pulumi.IntOutput {
+	return o.ApplyT(func(v BatchOperationCosInitiateRestoreObject) int { return v.ExpirationInDays }).(pulumi.IntOutput)
+}
+
+// Select archive recovery model. Available values: Bulk, Standard.
+func (o BatchOperationCosInitiateRestoreObjectOutput) JobTier() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosInitiateRestoreObject) string { return v.JobTier }).(pulumi.StringOutput)
+}
+
+type BatchOperationCosInitiateRestoreObjectPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosInitiateRestoreObjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosInitiateRestoreObject)(nil)).Elem()
+}
+
+func (o BatchOperationCosInitiateRestoreObjectPtrOutput) ToBatchOperationCosInitiateRestoreObjectPtrOutput() BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosInitiateRestoreObjectPtrOutput) ToBatchOperationCosInitiateRestoreObjectPtrOutputWithContext(ctx context.Context) BatchOperationCosInitiateRestoreObjectPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosInitiateRestoreObjectPtrOutput) Elem() BatchOperationCosInitiateRestoreObjectOutput {
+	return o.ApplyT(func(v *BatchOperationCosInitiateRestoreObject) BatchOperationCosInitiateRestoreObject {
+		if v != nil {
+			return *v
+		}
+		var ret BatchOperationCosInitiateRestoreObject
+		return ret
+	}).(BatchOperationCosInitiateRestoreObjectOutput)
+}
+
+// Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+func (o BatchOperationCosInitiateRestoreObjectPtrOutput) ExpirationInDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosInitiateRestoreObject) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ExpirationInDays
+	}).(pulumi.IntPtrOutput)
+}
+
+// Select archive recovery model. Available values: Bulk, Standard.
+func (o BatchOperationCosInitiateRestoreObjectPtrOutput) JobTier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosInitiateRestoreObject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.JobTier
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopy struct {
+	// This element specifies how ACL is copied. Valid values:
+	// - Copy: inherits the source object ACL
+	// - Replaced: replace source ACL
+	// - Add: add a new ACL based on the source ACL.
+	AccessControlDirective *string `pulumi:"accessControlDirective"`
+	// Controls the specific access to the object.
+	AccessControlGrants *BatchOperationCosPutObjectCopyAccessControlGrants `pulumi:"accessControlGrants"`
+	// Defines the ACL property of the object. Valid values: private, public-read.
+	CannedAccessControlList *string `pulumi:"cannedAccessControlList"`
+	// This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+	MetadataDirective *string `pulumi:"metadataDirective"`
+	// When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+	ModifiedSinceConstraint *int `pulumi:"modifiedSinceConstraint"`
+	// Configure the metadata for the object.
+	NewObjectMetadata *BatchOperationCosPutObjectCopyNewObjectMetadata `pulumi:"newObjectMetadata"`
+	// The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+	NewObjectTaggings []BatchOperationCosPutObjectCopyNewObjectTagging `pulumi:"newObjectTaggings"`
+	// Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+	PrefixReplace *bool `pulumi:"prefixReplace"`
+	// This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+	ResourcesPrefix *string `pulumi:"resourcesPrefix"`
+	// Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+	StorageClass *string `pulumi:"storageClass"`
+	// This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+	TaggingDirective *string `pulumi:"taggingDirective"`
+	// This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+	TargetKeyPrefix *string `pulumi:"targetKeyPrefix"`
+	// Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+	TargetResource string `pulumi:"targetResource"`
+	// When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+	UnmodifiedSinceConstraint *int `pulumi:"unmodifiedSinceConstraint"`
+}
+
+// BatchOperationCosPutObjectCopyInput is an input type that accepts BatchOperationCosPutObjectCopyArgs and BatchOperationCosPutObjectCopyOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyInput` via:
+//
+//          BatchOperationCosPutObjectCopyArgs{...}
+type BatchOperationCosPutObjectCopyInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyOutput() BatchOperationCosPutObjectCopyOutput
+	ToBatchOperationCosPutObjectCopyOutputWithContext(context.Context) BatchOperationCosPutObjectCopyOutput
+}
+
+type BatchOperationCosPutObjectCopyArgs struct {
+	// This element specifies how ACL is copied. Valid values:
+	// - Copy: inherits the source object ACL
+	// - Replaced: replace source ACL
+	// - Add: add a new ACL based on the source ACL.
+	AccessControlDirective pulumi.StringPtrInput `pulumi:"accessControlDirective"`
+	// Controls the specific access to the object.
+	AccessControlGrants BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput `pulumi:"accessControlGrants"`
+	// Defines the ACL property of the object. Valid values: private, public-read.
+	CannedAccessControlList pulumi.StringPtrInput `pulumi:"cannedAccessControlList"`
+	// This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+	MetadataDirective pulumi.StringPtrInput `pulumi:"metadataDirective"`
+	// When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+	ModifiedSinceConstraint pulumi.IntPtrInput `pulumi:"modifiedSinceConstraint"`
+	// Configure the metadata for the object.
+	NewObjectMetadata BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput `pulumi:"newObjectMetadata"`
+	// The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+	NewObjectTaggings BatchOperationCosPutObjectCopyNewObjectTaggingArrayInput `pulumi:"newObjectTaggings"`
+	// Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+	PrefixReplace pulumi.BoolPtrInput `pulumi:"prefixReplace"`
+	// This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+	ResourcesPrefix pulumi.StringPtrInput `pulumi:"resourcesPrefix"`
+	// Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+	StorageClass pulumi.StringPtrInput `pulumi:"storageClass"`
+	// This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+	TaggingDirective pulumi.StringPtrInput `pulumi:"taggingDirective"`
+	// This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+	TargetKeyPrefix pulumi.StringPtrInput `pulumi:"targetKeyPrefix"`
+	// Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+	TargetResource pulumi.StringInput `pulumi:"targetResource"`
+	// When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+	UnmodifiedSinceConstraint pulumi.IntPtrInput `pulumi:"unmodifiedSinceConstraint"`
+}
+
+func (BatchOperationCosPutObjectCopyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopy)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyArgs) ToBatchOperationCosPutObjectCopyOutput() BatchOperationCosPutObjectCopyOutput {
+	return i.ToBatchOperationCosPutObjectCopyOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyArgs) ToBatchOperationCosPutObjectCopyOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyOutput)
+}
+
+func (i BatchOperationCosPutObjectCopyArgs) ToBatchOperationCosPutObjectCopyPtrOutput() BatchOperationCosPutObjectCopyPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyPtrOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyArgs) ToBatchOperationCosPutObjectCopyPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyOutput).ToBatchOperationCosPutObjectCopyPtrOutputWithContext(ctx)
+}
+
+// BatchOperationCosPutObjectCopyPtrInput is an input type that accepts BatchOperationCosPutObjectCopyArgs, BatchOperationCosPutObjectCopyPtr and BatchOperationCosPutObjectCopyPtrOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyPtrInput` via:
+//
+//          BatchOperationCosPutObjectCopyArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchOperationCosPutObjectCopyPtrInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyPtrOutput() BatchOperationCosPutObjectCopyPtrOutput
+	ToBatchOperationCosPutObjectCopyPtrOutputWithContext(context.Context) BatchOperationCosPutObjectCopyPtrOutput
+}
+
+type batchOperationCosPutObjectCopyPtrType BatchOperationCosPutObjectCopyArgs
+
+func BatchOperationCosPutObjectCopyPtr(v *BatchOperationCosPutObjectCopyArgs) BatchOperationCosPutObjectCopyPtrInput {
+	return (*batchOperationCosPutObjectCopyPtrType)(v)
+}
+
+func (*batchOperationCosPutObjectCopyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopy)(nil)).Elem()
+}
+
+func (i *batchOperationCosPutObjectCopyPtrType) ToBatchOperationCosPutObjectCopyPtrOutput() BatchOperationCosPutObjectCopyPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyPtrOutputWithContext(context.Background())
+}
+
+func (i *batchOperationCosPutObjectCopyPtrType) ToBatchOperationCosPutObjectCopyPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopy)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyOutput) ToBatchOperationCosPutObjectCopyOutput() BatchOperationCosPutObjectCopyOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyOutput) ToBatchOperationCosPutObjectCopyOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyOutput) ToBatchOperationCosPutObjectCopyPtrOutput() BatchOperationCosPutObjectCopyPtrOutput {
+	return o.ToBatchOperationCosPutObjectCopyPtrOutputWithContext(context.Background())
+}
+
+func (o BatchOperationCosPutObjectCopyOutput) ToBatchOperationCosPutObjectCopyPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchOperationCosPutObjectCopy) *BatchOperationCosPutObjectCopy {
+		return &v
+	}).(BatchOperationCosPutObjectCopyPtrOutput)
+}
+
+// This element specifies how ACL is copied. Valid values:
+// - Copy: inherits the source object ACL
+// - Replaced: replace source ACL
+// - Add: add a new ACL based on the source ACL.
+func (o BatchOperationCosPutObjectCopyOutput) AccessControlDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.AccessControlDirective }).(pulumi.StringPtrOutput)
+}
+
+// Controls the specific access to the object.
+func (o BatchOperationCosPutObjectCopyOutput) AccessControlGrants() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *BatchOperationCosPutObjectCopyAccessControlGrants {
+		return v.AccessControlGrants
+	}).(BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput)
+}
+
+// Defines the ACL property of the object. Valid values: private, public-read.
+func (o BatchOperationCosPutObjectCopyOutput) CannedAccessControlList() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.CannedAccessControlList }).(pulumi.StringPtrOutput)
+}
+
+// This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+func (o BatchOperationCosPutObjectCopyOutput) MetadataDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.MetadataDirective }).(pulumi.StringPtrOutput)
+}
+
+// When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+func (o BatchOperationCosPutObjectCopyOutput) ModifiedSinceConstraint() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *int { return v.ModifiedSinceConstraint }).(pulumi.IntPtrOutput)
+}
+
+// Configure the metadata for the object.
+func (o BatchOperationCosPutObjectCopyOutput) NewObjectMetadata() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *BatchOperationCosPutObjectCopyNewObjectMetadata {
+		return v.NewObjectMetadata
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput)
+}
+
+// The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+func (o BatchOperationCosPutObjectCopyOutput) NewObjectTaggings() BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) []BatchOperationCosPutObjectCopyNewObjectTagging {
+		return v.NewObjectTaggings
+	}).(BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput)
+}
+
+// Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+func (o BatchOperationCosPutObjectCopyOutput) PrefixReplace() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *bool { return v.PrefixReplace }).(pulumi.BoolPtrOutput)
+}
+
+// This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+func (o BatchOperationCosPutObjectCopyOutput) ResourcesPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.ResourcesPrefix }).(pulumi.StringPtrOutput)
+}
+
+// Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+func (o BatchOperationCosPutObjectCopyOutput) StorageClass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.StorageClass }).(pulumi.StringPtrOutput)
+}
+
+// This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+func (o BatchOperationCosPutObjectCopyOutput) TaggingDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.TaggingDirective }).(pulumi.StringPtrOutput)
+}
+
+// This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+func (o BatchOperationCosPutObjectCopyOutput) TargetKeyPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *string { return v.TargetKeyPrefix }).(pulumi.StringPtrOutput)
+}
+
+// Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+func (o BatchOperationCosPutObjectCopyOutput) TargetResource() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) string { return v.TargetResource }).(pulumi.StringOutput)
+}
+
+// When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+func (o BatchOperationCosPutObjectCopyOutput) UnmodifiedSinceConstraint() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopy) *int { return v.UnmodifiedSinceConstraint }).(pulumi.IntPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopy)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyPtrOutput) ToBatchOperationCosPutObjectCopyPtrOutput() BatchOperationCosPutObjectCopyPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyPtrOutput) ToBatchOperationCosPutObjectCopyPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyPtrOutput) Elem() BatchOperationCosPutObjectCopyOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) BatchOperationCosPutObjectCopy {
+		if v != nil {
+			return *v
+		}
+		var ret BatchOperationCosPutObjectCopy
+		return ret
+	}).(BatchOperationCosPutObjectCopyOutput)
+}
+
+// This element specifies how ACL is copied. Valid values:
+// - Copy: inherits the source object ACL
+// - Replaced: replace source ACL
+// - Add: add a new ACL based on the source ACL.
+func (o BatchOperationCosPutObjectCopyPtrOutput) AccessControlDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccessControlDirective
+	}).(pulumi.StringPtrOutput)
+}
+
+// Controls the specific access to the object.
+func (o BatchOperationCosPutObjectCopyPtrOutput) AccessControlGrants() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *BatchOperationCosPutObjectCopyAccessControlGrants {
+		if v == nil {
+			return nil
+		}
+		return v.AccessControlGrants
+	}).(BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput)
+}
+
+// Defines the ACL property of the object. Valid values: private, public-read.
+func (o BatchOperationCosPutObjectCopyPtrOutput) CannedAccessControlList() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CannedAccessControlList
+	}).(pulumi.StringPtrOutput)
+}
+
+// This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+func (o BatchOperationCosPutObjectCopyPtrOutput) MetadataDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetadataDirective
+	}).(pulumi.StringPtrOutput)
+}
+
+// When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+func (o BatchOperationCosPutObjectCopyPtrOutput) ModifiedSinceConstraint() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ModifiedSinceConstraint
+	}).(pulumi.IntPtrOutput)
+}
+
+// Configure the metadata for the object.
+func (o BatchOperationCosPutObjectCopyPtrOutput) NewObjectMetadata() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *BatchOperationCosPutObjectCopyNewObjectMetadata {
+		if v == nil {
+			return nil
+		}
+		return v.NewObjectMetadata
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput)
+}
+
+// The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+func (o BatchOperationCosPutObjectCopyPtrOutput) NewObjectTaggings() BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) []BatchOperationCosPutObjectCopyNewObjectTagging {
+		if v == nil {
+			return nil
+		}
+		return v.NewObjectTaggings
+	}).(BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput)
+}
+
+// Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+func (o BatchOperationCosPutObjectCopyPtrOutput) PrefixReplace() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.PrefixReplace
+	}).(pulumi.BoolPtrOutput)
+}
+
+// This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+func (o BatchOperationCosPutObjectCopyPtrOutput) ResourcesPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourcesPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+func (o BatchOperationCosPutObjectCopyPtrOutput) StorageClass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageClass
+	}).(pulumi.StringPtrOutput)
+}
+
+// This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+func (o BatchOperationCosPutObjectCopyPtrOutput) TaggingDirective() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TaggingDirective
+	}).(pulumi.StringPtrOutput)
+}
+
+// This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+func (o BatchOperationCosPutObjectCopyPtrOutput) TargetKeyPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetKeyPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+func (o BatchOperationCosPutObjectCopyPtrOutput) TargetResource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TargetResource
+	}).(pulumi.StringPtrOutput)
+}
+
+// When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+func (o BatchOperationCosPutObjectCopyPtrOutput) UnmodifiedSinceConstraint() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.UnmodifiedSinceConstraint
+	}).(pulumi.IntPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyAccessControlGrants struct {
+	// User name.
+	DisplayName *string `pulumi:"displayName"`
+	// User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+	Identifier string `pulumi:"identifier"`
+	// Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+	Permission string `pulumi:"permission"`
+	// Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+	TypeIdentifier string `pulumi:"typeIdentifier"`
+}
+
+// BatchOperationCosPutObjectCopyAccessControlGrantsInput is an input type that accepts BatchOperationCosPutObjectCopyAccessControlGrantsArgs and BatchOperationCosPutObjectCopyAccessControlGrantsOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyAccessControlGrantsInput` via:
+//
+//          BatchOperationCosPutObjectCopyAccessControlGrantsArgs{...}
+type BatchOperationCosPutObjectCopyAccessControlGrantsInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyAccessControlGrantsOutput() BatchOperationCosPutObjectCopyAccessControlGrantsOutput
+	ToBatchOperationCosPutObjectCopyAccessControlGrantsOutputWithContext(context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsOutput
+}
+
+type BatchOperationCosPutObjectCopyAccessControlGrantsArgs struct {
+	// User name.
+	DisplayName pulumi.StringPtrInput `pulumi:"displayName"`
+	// User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+	Identifier pulumi.StringInput `pulumi:"identifier"`
+	// Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+	Permission pulumi.StringInput `pulumi:"permission"`
+	// Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+	TypeIdentifier pulumi.StringInput `pulumi:"typeIdentifier"`
+}
+
+func (BatchOperationCosPutObjectCopyAccessControlGrantsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyAccessControlGrants)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyAccessControlGrantsArgs) ToBatchOperationCosPutObjectCopyAccessControlGrantsOutput() BatchOperationCosPutObjectCopyAccessControlGrantsOutput {
+	return i.ToBatchOperationCosPutObjectCopyAccessControlGrantsOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyAccessControlGrantsArgs) ToBatchOperationCosPutObjectCopyAccessControlGrantsOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyAccessControlGrantsOutput)
+}
+
+func (i BatchOperationCosPutObjectCopyAccessControlGrantsArgs) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyAccessControlGrantsArgs) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyAccessControlGrantsOutput).ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(ctx)
+}
+
+// BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput is an input type that accepts BatchOperationCosPutObjectCopyAccessControlGrantsArgs, BatchOperationCosPutObjectCopyAccessControlGrantsPtr and BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput` via:
+//
+//          BatchOperationCosPutObjectCopyAccessControlGrantsArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput
+	ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput
+}
+
+type batchOperationCosPutObjectCopyAccessControlGrantsPtrType BatchOperationCosPutObjectCopyAccessControlGrantsArgs
+
+func BatchOperationCosPutObjectCopyAccessControlGrantsPtr(v *BatchOperationCosPutObjectCopyAccessControlGrantsArgs) BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput {
+	return (*batchOperationCosPutObjectCopyAccessControlGrantsPtrType)(v)
+}
+
+func (*batchOperationCosPutObjectCopyAccessControlGrantsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopyAccessControlGrants)(nil)).Elem()
+}
+
+func (i *batchOperationCosPutObjectCopyAccessControlGrantsPtrType) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(context.Background())
+}
+
+func (i *batchOperationCosPutObjectCopyAccessControlGrantsPtrType) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyAccessControlGrantsOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyAccessControlGrantsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyAccessControlGrants)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsOutput() BatchOperationCosPutObjectCopyAccessControlGrantsOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o.ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(context.Background())
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchOperationCosPutObjectCopyAccessControlGrants) *BatchOperationCosPutObjectCopyAccessControlGrants {
+		return &v
+	}).(BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput)
+}
+
+// User name.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) DisplayName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyAccessControlGrants) *string { return v.DisplayName }).(pulumi.StringPtrOutput)
+}
+
+// User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) Identifier() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyAccessControlGrants) string { return v.Identifier }).(pulumi.StringOutput)
+}
+
+// Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) Permission() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyAccessControlGrants) string { return v.Permission }).(pulumi.StringOutput)
+}
+
+// Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsOutput) TypeIdentifier() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyAccessControlGrants) string { return v.TypeIdentifier }).(pulumi.StringOutput)
+}
+
+type BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopyAccessControlGrants)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput() BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) ToBatchOperationCosPutObjectCopyAccessControlGrantsPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) Elem() BatchOperationCosPutObjectCopyAccessControlGrantsOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyAccessControlGrants) BatchOperationCosPutObjectCopyAccessControlGrants {
+		if v != nil {
+			return *v
+		}
+		var ret BatchOperationCosPutObjectCopyAccessControlGrants
+		return ret
+	}).(BatchOperationCosPutObjectCopyAccessControlGrantsOutput)
+}
+
+// User name.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) DisplayName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyAccessControlGrants) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DisplayName
+	}).(pulumi.StringPtrOutput)
+}
+
+// User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) Identifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyAccessControlGrants) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Identifier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) Permission() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyAccessControlGrants) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Permission
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+func (o BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput) TypeIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyAccessControlGrants) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TypeIdentifier
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadata struct {
+	// The caching instructions defined in RFC 2616 are saved as object metadata.
+	CacheControl *string `pulumi:"cacheControl"`
+	// The file name defined in RFC 2616 is saved as object metadata.
+	ContentDisposition *string `pulumi:"contentDisposition"`
+	// The encoding format defined in RFC 2616 is saved as object metadata.
+	ContentEncoding *string `pulumi:"contentEncoding"`
+	// The content types defined in RFC 2616 are saved as object metadata.
+	ContentType *string `pulumi:"contentType"`
+	// The cache expiration time defined in RFC 2616 is saved as object metadata.
+	HttpExpiresDate *string `pulumi:"httpExpiresDate"`
+	// Server encryption algorithm. Currently, only AES256 is supported.
+	SseAlgorithm *string `pulumi:"sseAlgorithm"`
+	// Includes user-defined metadata.
+	UserMetadatas []BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata `pulumi:"userMetadatas"`
+}
+
+// BatchOperationCosPutObjectCopyNewObjectMetadataInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectMetadataArgs and BatchOperationCosPutObjectCopyNewObjectMetadataOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectMetadataInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectMetadataArgs{...}
+type BatchOperationCosPutObjectCopyNewObjectMetadataInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataOutput
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataOutput
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataArgs struct {
+	// The caching instructions defined in RFC 2616 are saved as object metadata.
+	CacheControl pulumi.StringPtrInput `pulumi:"cacheControl"`
+	// The file name defined in RFC 2616 is saved as object metadata.
+	ContentDisposition pulumi.StringPtrInput `pulumi:"contentDisposition"`
+	// The encoding format defined in RFC 2616 is saved as object metadata.
+	ContentEncoding pulumi.StringPtrInput `pulumi:"contentEncoding"`
+	// The content types defined in RFC 2616 are saved as object metadata.
+	ContentType pulumi.StringPtrInput `pulumi:"contentType"`
+	// The cache expiration time defined in RFC 2616 is saved as object metadata.
+	HttpExpiresDate pulumi.StringPtrInput `pulumi:"httpExpiresDate"`
+	// Server encryption algorithm. Currently, only AES256 is supported.
+	SseAlgorithm pulumi.StringPtrInput `pulumi:"sseAlgorithm"`
+	// Includes user-defined metadata.
+	UserMetadatas BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayInput `pulumi:"userMetadatas"`
+}
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadata)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectMetadataOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectMetadataOutput)
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectMetadataOutput).ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(ctx)
+}
+
+// BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectMetadataArgs, BatchOperationCosPutObjectCopyNewObjectMetadataPtr and BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectMetadataArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput
+}
+
+type batchOperationCosPutObjectCopyNewObjectMetadataPtrType BatchOperationCosPutObjectCopyNewObjectMetadataArgs
+
+func BatchOperationCosPutObjectCopyNewObjectMetadataPtr(v *BatchOperationCosPutObjectCopyNewObjectMetadataArgs) BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput {
+	return (*batchOperationCosPutObjectCopyNewObjectMetadataPtrType)(v)
+}
+
+func (*batchOperationCosPutObjectCopyNewObjectMetadataPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopyNewObjectMetadata)(nil)).Elem()
+}
+
+func (i *batchOperationCosPutObjectCopyNewObjectMetadataPtrType) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(context.Background())
+}
+
+func (i *batchOperationCosPutObjectCopyNewObjectMetadataPtrType) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadata)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o.ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(context.Background())
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchOperationCosPutObjectCopyNewObjectMetadata) *BatchOperationCosPutObjectCopyNewObjectMetadata {
+		return &v
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput)
+}
+
+// The caching instructions defined in RFC 2616 are saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) CacheControl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.CacheControl }).(pulumi.StringPtrOutput)
+}
+
+// The file name defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ContentDisposition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.ContentDisposition }).(pulumi.StringPtrOutput)
+}
+
+// The encoding format defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ContentEncoding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.ContentEncoding }).(pulumi.StringPtrOutput)
+}
+
+// The content types defined in RFC 2616 are saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) ContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.ContentType }).(pulumi.StringPtrOutput)
+}
+
+// The cache expiration time defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) HttpExpiresDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.HttpExpiresDate }).(pulumi.StringPtrOutput)
+}
+
+// Server encryption algorithm. Currently, only AES256 is supported.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) SseAlgorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) *string { return v.SseAlgorithm }).(pulumi.StringPtrOutput)
+}
+
+// Includes user-defined metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataOutput) UserMetadatas() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadata) []BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata {
+		return v.UserMetadatas
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchOperationCosPutObjectCopyNewObjectMetadata)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput() BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataPtrOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) Elem() BatchOperationCosPutObjectCopyNewObjectMetadataOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) BatchOperationCosPutObjectCopyNewObjectMetadata {
+		if v != nil {
+			return *v
+		}
+		var ret BatchOperationCosPutObjectCopyNewObjectMetadata
+		return ret
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataOutput)
+}
+
+// The caching instructions defined in RFC 2616 are saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) CacheControl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CacheControl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The file name defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ContentDisposition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentDisposition
+	}).(pulumi.StringPtrOutput)
+}
+
+// The encoding format defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ContentEncoding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentEncoding
+	}).(pulumi.StringPtrOutput)
+}
+
+// The content types defined in RFC 2616 are saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) ContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The cache expiration time defined in RFC 2616 is saved as object metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) HttpExpiresDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpExpiresDate
+	}).(pulumi.StringPtrOutput)
+}
+
+// Server encryption algorithm. Currently, only AES256 is supported.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) SseAlgorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SseAlgorithm
+	}).(pulumi.StringPtrOutput)
+}
+
+// Includes user-defined metadata.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput) UserMetadatas() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return o.ApplyT(func(v *BatchOperationCosPutObjectCopyNewObjectMetadata) []BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata {
+		if v == nil {
+			return nil
+		}
+		return v.UserMetadatas
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata struct {
+	// key.
+	Key string `pulumi:"key"`
+	// value.
+	Value string `pulumi:"value"`
+}
+
+// BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs and BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs{...}
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs struct {
+	// key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput)
+}
+
+// BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray and BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray{ BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs{...} }
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput
+	ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray []BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataInput
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput {
+	return o
+}
+
+// key.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// value.
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput() BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput) ToBatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput) Index(i pulumi.IntInput) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata {
+		return vs[0].([]BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadata)[vs[1].(int)]
+	}).(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectTagging struct {
+	// key.
+	Key string `pulumi:"key"`
+	// value.
+	Value string `pulumi:"value"`
+}
+
+// BatchOperationCosPutObjectCopyNewObjectTaggingInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectTaggingArgs and BatchOperationCosPutObjectCopyNewObjectTaggingOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectTaggingInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectTaggingArgs{...}
+type BatchOperationCosPutObjectCopyNewObjectTaggingInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectTaggingOutput() BatchOperationCosPutObjectCopyNewObjectTaggingOutput
+	ToBatchOperationCosPutObjectCopyNewObjectTaggingOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingOutput
+}
+
+type BatchOperationCosPutObjectCopyNewObjectTaggingArgs struct {
+	// key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (BatchOperationCosPutObjectCopyNewObjectTaggingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectTagging)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectTaggingArgs) ToBatchOperationCosPutObjectCopyNewObjectTaggingOutput() BatchOperationCosPutObjectCopyNewObjectTaggingOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectTaggingOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectTaggingArgs) ToBatchOperationCosPutObjectCopyNewObjectTaggingOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectTaggingOutput)
+}
+
+// BatchOperationCosPutObjectCopyNewObjectTaggingArrayInput is an input type that accepts BatchOperationCosPutObjectCopyNewObjectTaggingArray and BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput values.
+// You can construct a concrete instance of `BatchOperationCosPutObjectCopyNewObjectTaggingArrayInput` via:
+//
+//          BatchOperationCosPutObjectCopyNewObjectTaggingArray{ BatchOperationCosPutObjectCopyNewObjectTaggingArgs{...} }
+type BatchOperationCosPutObjectCopyNewObjectTaggingArrayInput interface {
+	pulumi.Input
+
+	ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput() BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput
+	ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutputWithContext(context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput
+}
+
+type BatchOperationCosPutObjectCopyNewObjectTaggingArray []BatchOperationCosPutObjectCopyNewObjectTaggingInput
+
+func (BatchOperationCosPutObjectCopyNewObjectTaggingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchOperationCosPutObjectCopyNewObjectTagging)(nil)).Elem()
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectTaggingArray) ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput() BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return i.ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutputWithContext(context.Background())
+}
+
+func (i BatchOperationCosPutObjectCopyNewObjectTaggingArray) ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectTaggingOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectTaggingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectTagging)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingOutput) ToBatchOperationCosPutObjectCopyNewObjectTaggingOutput() BatchOperationCosPutObjectCopyNewObjectTaggingOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingOutput) ToBatchOperationCosPutObjectCopyNewObjectTaggingOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingOutput {
+	return o
+}
+
+// key.
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectTagging) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// value.
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchOperationCosPutObjectCopyNewObjectTagging) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput struct{ *pulumi.OutputState }
+
+func (BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchOperationCosPutObjectCopyNewObjectTagging)(nil)).Elem()
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput) ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput() BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput) ToBatchOperationCosPutObjectCopyNewObjectTaggingArrayOutputWithContext(ctx context.Context) BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput {
+	return o
+}
+
+func (o BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput) Index(i pulumi.IntInput) BatchOperationCosPutObjectCopyNewObjectTaggingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BatchOperationCosPutObjectCopyNewObjectTagging {
+		return vs[0].([]BatchOperationCosPutObjectCopyNewObjectTagging)[vs[1].(int)]
+	}).(BatchOperationCosPutObjectCopyNewObjectTaggingOutput)
+}
+
+type BatchReport struct {
+	// Delivery bucket for task completion reports.
+	Bucket string `pulumi:"bucket"`
+	// Whether to output the task completion report.
+	Enabled string `pulumi:"enabled"`
+	// Task completion report format information. Legal value: Report_CSV_V1.
+	Format string `pulumi:"format"`
+	// Prefix information for the task completion report. Length 0-256 bytes.
+	Prefix *string `pulumi:"prefix"`
+	// Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+	ReportScope string `pulumi:"reportScope"`
+}
+
+// BatchReportInput is an input type that accepts BatchReportArgs and BatchReportOutput values.
+// You can construct a concrete instance of `BatchReportInput` via:
+//
+//          BatchReportArgs{...}
+type BatchReportInput interface {
+	pulumi.Input
+
+	ToBatchReportOutput() BatchReportOutput
+	ToBatchReportOutputWithContext(context.Context) BatchReportOutput
+}
+
+type BatchReportArgs struct {
+	// Delivery bucket for task completion reports.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Whether to output the task completion report.
+	Enabled pulumi.StringInput `pulumi:"enabled"`
+	// Task completion report format information. Legal value: Report_CSV_V1.
+	Format pulumi.StringInput `pulumi:"format"`
+	// Prefix information for the task completion report. Length 0-256 bytes.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+	ReportScope pulumi.StringInput `pulumi:"reportScope"`
+}
+
+func (BatchReportArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchReport)(nil)).Elem()
+}
+
+func (i BatchReportArgs) ToBatchReportOutput() BatchReportOutput {
+	return i.ToBatchReportOutputWithContext(context.Background())
+}
+
+func (i BatchReportArgs) ToBatchReportOutputWithContext(ctx context.Context) BatchReportOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchReportOutput)
+}
+
+func (i BatchReportArgs) ToBatchReportPtrOutput() BatchReportPtrOutput {
+	return i.ToBatchReportPtrOutputWithContext(context.Background())
+}
+
+func (i BatchReportArgs) ToBatchReportPtrOutputWithContext(ctx context.Context) BatchReportPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchReportOutput).ToBatchReportPtrOutputWithContext(ctx)
+}
+
+// BatchReportPtrInput is an input type that accepts BatchReportArgs, BatchReportPtr and BatchReportPtrOutput values.
+// You can construct a concrete instance of `BatchReportPtrInput` via:
+//
+//          BatchReportArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchReportPtrInput interface {
+	pulumi.Input
+
+	ToBatchReportPtrOutput() BatchReportPtrOutput
+	ToBatchReportPtrOutputWithContext(context.Context) BatchReportPtrOutput
+}
+
+type batchReportPtrType BatchReportArgs
+
+func BatchReportPtr(v *BatchReportArgs) BatchReportPtrInput {
+	return (*batchReportPtrType)(v)
+}
+
+func (*batchReportPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchReport)(nil)).Elem()
+}
+
+func (i *batchReportPtrType) ToBatchReportPtrOutput() BatchReportPtrOutput {
+	return i.ToBatchReportPtrOutputWithContext(context.Background())
+}
+
+func (i *batchReportPtrType) ToBatchReportPtrOutputWithContext(ctx context.Context) BatchReportPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchReportPtrOutput)
+}
+
+type BatchReportOutput struct{ *pulumi.OutputState }
+
+func (BatchReportOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchReport)(nil)).Elem()
+}
+
+func (o BatchReportOutput) ToBatchReportOutput() BatchReportOutput {
+	return o
+}
+
+func (o BatchReportOutput) ToBatchReportOutputWithContext(ctx context.Context) BatchReportOutput {
+	return o
+}
+
+func (o BatchReportOutput) ToBatchReportPtrOutput() BatchReportPtrOutput {
+	return o.ToBatchReportPtrOutputWithContext(context.Background())
+}
+
+func (o BatchReportOutput) ToBatchReportPtrOutputWithContext(ctx context.Context) BatchReportPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchReport) *BatchReport {
+		return &v
+	}).(BatchReportPtrOutput)
+}
+
+// Delivery bucket for task completion reports.
+func (o BatchReportOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchReport) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Whether to output the task completion report.
+func (o BatchReportOutput) Enabled() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchReport) string { return v.Enabled }).(pulumi.StringOutput)
+}
+
+// Task completion report format information. Legal value: Report_CSV_V1.
+func (o BatchReportOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchReport) string { return v.Format }).(pulumi.StringOutput)
+}
+
+// Prefix information for the task completion report. Length 0-256 bytes.
+func (o BatchReportOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchReport) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+func (o BatchReportOutput) ReportScope() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchReport) string { return v.ReportScope }).(pulumi.StringOutput)
+}
+
+type BatchReportPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchReportPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchReport)(nil)).Elem()
+}
+
+func (o BatchReportPtrOutput) ToBatchReportPtrOutput() BatchReportPtrOutput {
+	return o
+}
+
+func (o BatchReportPtrOutput) ToBatchReportPtrOutputWithContext(ctx context.Context) BatchReportPtrOutput {
+	return o
+}
+
+func (o BatchReportPtrOutput) Elem() BatchReportOutput {
+	return o.ApplyT(func(v *BatchReport) BatchReport {
+		if v != nil {
+			return *v
+		}
+		var ret BatchReport
+		return ret
+	}).(BatchReportOutput)
+}
+
+// Delivery bucket for task completion reports.
+func (o BatchReportPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchReport) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Bucket
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to output the task completion report.
+func (o BatchReportPtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchReport) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task completion report format information. Legal value: Report_CSV_V1.
+func (o BatchReportPtrOutput) Format() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchReport) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Format
+	}).(pulumi.StringPtrOutput)
+}
+
+// Prefix information for the task completion report. Length 0-256 bytes.
+func (o BatchReportPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchReport) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+func (o BatchReportPtrOutput) ReportScope() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchReport) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ReportScope
+	}).(pulumi.StringPtrOutput)
+}
+
 type BucketCorsRule struct {
 	// Specifies which headers are allowed.
 	AllowedHeaders []string `pulumi:"allowedHeaders"`
@@ -614,6 +2687,942 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertP
 			return nil
 		}
 		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryDestination struct {
+	// ID of the bucket owner.
+	AccountId *string `pulumi:"accountId"`
+	// Bucket name.
+	Bucket string `pulumi:"bucket"`
+	// Server-side encryption for the inventory result.
+	Encryption *BucketInventoryDestinationEncryption `pulumi:"encryption"`
+	// Format of the inventory result. Valid value: CSV.
+	Format string `pulumi:"format"`
+	// Prefix of the inventory result.
+	Prefix *string `pulumi:"prefix"`
+}
+
+// BucketInventoryDestinationInput is an input type that accepts BucketInventoryDestinationArgs and BucketInventoryDestinationOutput values.
+// You can construct a concrete instance of `BucketInventoryDestinationInput` via:
+//
+//          BucketInventoryDestinationArgs{...}
+type BucketInventoryDestinationInput interface {
+	pulumi.Input
+
+	ToBucketInventoryDestinationOutput() BucketInventoryDestinationOutput
+	ToBucketInventoryDestinationOutputWithContext(context.Context) BucketInventoryDestinationOutput
+}
+
+type BucketInventoryDestinationArgs struct {
+	// ID of the bucket owner.
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// Bucket name.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Server-side encryption for the inventory result.
+	Encryption BucketInventoryDestinationEncryptionPtrInput `pulumi:"encryption"`
+	// Format of the inventory result. Valid value: CSV.
+	Format pulumi.StringInput `pulumi:"format"`
+	// Prefix of the inventory result.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+}
+
+func (BucketInventoryDestinationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryDestination)(nil)).Elem()
+}
+
+func (i BucketInventoryDestinationArgs) ToBucketInventoryDestinationOutput() BucketInventoryDestinationOutput {
+	return i.ToBucketInventoryDestinationOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryDestinationArgs) ToBucketInventoryDestinationOutputWithContext(ctx context.Context) BucketInventoryDestinationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationOutput)
+}
+
+func (i BucketInventoryDestinationArgs) ToBucketInventoryDestinationPtrOutput() BucketInventoryDestinationPtrOutput {
+	return i.ToBucketInventoryDestinationPtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryDestinationArgs) ToBucketInventoryDestinationPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationOutput).ToBucketInventoryDestinationPtrOutputWithContext(ctx)
+}
+
+// BucketInventoryDestinationPtrInput is an input type that accepts BucketInventoryDestinationArgs, BucketInventoryDestinationPtr and BucketInventoryDestinationPtrOutput values.
+// You can construct a concrete instance of `BucketInventoryDestinationPtrInput` via:
+//
+//          BucketInventoryDestinationArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventoryDestinationPtrInput interface {
+	pulumi.Input
+
+	ToBucketInventoryDestinationPtrOutput() BucketInventoryDestinationPtrOutput
+	ToBucketInventoryDestinationPtrOutputWithContext(context.Context) BucketInventoryDestinationPtrOutput
+}
+
+type bucketInventoryDestinationPtrType BucketInventoryDestinationArgs
+
+func BucketInventoryDestinationPtr(v *BucketInventoryDestinationArgs) BucketInventoryDestinationPtrInput {
+	return (*bucketInventoryDestinationPtrType)(v)
+}
+
+func (*bucketInventoryDestinationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryDestination)(nil)).Elem()
+}
+
+func (i *bucketInventoryDestinationPtrType) ToBucketInventoryDestinationPtrOutput() BucketInventoryDestinationPtrOutput {
+	return i.ToBucketInventoryDestinationPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventoryDestinationPtrType) ToBucketInventoryDestinationPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationPtrOutput)
+}
+
+type BucketInventoryDestinationOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryDestinationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryDestination)(nil)).Elem()
+}
+
+func (o BucketInventoryDestinationOutput) ToBucketInventoryDestinationOutput() BucketInventoryDestinationOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationOutput) ToBucketInventoryDestinationOutputWithContext(ctx context.Context) BucketInventoryDestinationOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationOutput) ToBucketInventoryDestinationPtrOutput() BucketInventoryDestinationPtrOutput {
+	return o.ToBucketInventoryDestinationPtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryDestinationOutput) ToBucketInventoryDestinationPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventoryDestination) *BucketInventoryDestination {
+		return &v
+	}).(BucketInventoryDestinationPtrOutput)
+}
+
+// ID of the bucket owner.
+func (o BucketInventoryDestinationOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryDestination) *string { return v.AccountId }).(pulumi.StringPtrOutput)
+}
+
+// Bucket name.
+func (o BucketInventoryDestinationOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketInventoryDestination) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Server-side encryption for the inventory result.
+func (o BucketInventoryDestinationOutput) Encryption() BucketInventoryDestinationEncryptionPtrOutput {
+	return o.ApplyT(func(v BucketInventoryDestination) *BucketInventoryDestinationEncryption { return v.Encryption }).(BucketInventoryDestinationEncryptionPtrOutput)
+}
+
+// Format of the inventory result. Valid value: CSV.
+func (o BucketInventoryDestinationOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketInventoryDestination) string { return v.Format }).(pulumi.StringOutput)
+}
+
+// Prefix of the inventory result.
+func (o BucketInventoryDestinationOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryDestination) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryDestinationPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryDestinationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryDestination)(nil)).Elem()
+}
+
+func (o BucketInventoryDestinationPtrOutput) ToBucketInventoryDestinationPtrOutput() BucketInventoryDestinationPtrOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationPtrOutput) ToBucketInventoryDestinationPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationPtrOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationPtrOutput) Elem() BucketInventoryDestinationOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) BucketInventoryDestination {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventoryDestination
+		return ret
+	}).(BucketInventoryDestinationOutput)
+}
+
+// ID of the bucket owner.
+func (o BucketInventoryDestinationPtrOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccountId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Bucket name.
+func (o BucketInventoryDestinationPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Bucket
+	}).(pulumi.StringPtrOutput)
+}
+
+// Server-side encryption for the inventory result.
+func (o BucketInventoryDestinationPtrOutput) Encryption() BucketInventoryDestinationEncryptionPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) *BucketInventoryDestinationEncryption {
+		if v == nil {
+			return nil
+		}
+		return v.Encryption
+	}).(BucketInventoryDestinationEncryptionPtrOutput)
+}
+
+// Format of the inventory result. Valid value: CSV.
+func (o BucketInventoryDestinationPtrOutput) Format() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Format
+	}).(pulumi.StringPtrOutput)
+}
+
+// Prefix of the inventory result.
+func (o BucketInventoryDestinationPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestination) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryDestinationEncryption struct {
+	// Encryption with COS-managed key. This field can be left empty.
+	SseCos *string `pulumi:"sseCos"`
+}
+
+// BucketInventoryDestinationEncryptionInput is an input type that accepts BucketInventoryDestinationEncryptionArgs and BucketInventoryDestinationEncryptionOutput values.
+// You can construct a concrete instance of `BucketInventoryDestinationEncryptionInput` via:
+//
+//          BucketInventoryDestinationEncryptionArgs{...}
+type BucketInventoryDestinationEncryptionInput interface {
+	pulumi.Input
+
+	ToBucketInventoryDestinationEncryptionOutput() BucketInventoryDestinationEncryptionOutput
+	ToBucketInventoryDestinationEncryptionOutputWithContext(context.Context) BucketInventoryDestinationEncryptionOutput
+}
+
+type BucketInventoryDestinationEncryptionArgs struct {
+	// Encryption with COS-managed key. This field can be left empty.
+	SseCos pulumi.StringPtrInput `pulumi:"sseCos"`
+}
+
+func (BucketInventoryDestinationEncryptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (i BucketInventoryDestinationEncryptionArgs) ToBucketInventoryDestinationEncryptionOutput() BucketInventoryDestinationEncryptionOutput {
+	return i.ToBucketInventoryDestinationEncryptionOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryDestinationEncryptionArgs) ToBucketInventoryDestinationEncryptionOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationEncryptionOutput)
+}
+
+func (i BucketInventoryDestinationEncryptionArgs) ToBucketInventoryDestinationEncryptionPtrOutput() BucketInventoryDestinationEncryptionPtrOutput {
+	return i.ToBucketInventoryDestinationEncryptionPtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryDestinationEncryptionArgs) ToBucketInventoryDestinationEncryptionPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationEncryptionOutput).ToBucketInventoryDestinationEncryptionPtrOutputWithContext(ctx)
+}
+
+// BucketInventoryDestinationEncryptionPtrInput is an input type that accepts BucketInventoryDestinationEncryptionArgs, BucketInventoryDestinationEncryptionPtr and BucketInventoryDestinationEncryptionPtrOutput values.
+// You can construct a concrete instance of `BucketInventoryDestinationEncryptionPtrInput` via:
+//
+//          BucketInventoryDestinationEncryptionArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventoryDestinationEncryptionPtrInput interface {
+	pulumi.Input
+
+	ToBucketInventoryDestinationEncryptionPtrOutput() BucketInventoryDestinationEncryptionPtrOutput
+	ToBucketInventoryDestinationEncryptionPtrOutputWithContext(context.Context) BucketInventoryDestinationEncryptionPtrOutput
+}
+
+type bucketInventoryDestinationEncryptionPtrType BucketInventoryDestinationEncryptionArgs
+
+func BucketInventoryDestinationEncryptionPtr(v *BucketInventoryDestinationEncryptionArgs) BucketInventoryDestinationEncryptionPtrInput {
+	return (*bucketInventoryDestinationEncryptionPtrType)(v)
+}
+
+func (*bucketInventoryDestinationEncryptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (i *bucketInventoryDestinationEncryptionPtrType) ToBucketInventoryDestinationEncryptionPtrOutput() BucketInventoryDestinationEncryptionPtrOutput {
+	return i.ToBucketInventoryDestinationEncryptionPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventoryDestinationEncryptionPtrType) ToBucketInventoryDestinationEncryptionPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryDestinationEncryptionPtrOutput)
+}
+
+type BucketInventoryDestinationEncryptionOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryDestinationEncryptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (o BucketInventoryDestinationEncryptionOutput) ToBucketInventoryDestinationEncryptionOutput() BucketInventoryDestinationEncryptionOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationEncryptionOutput) ToBucketInventoryDestinationEncryptionOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationEncryptionOutput) ToBucketInventoryDestinationEncryptionPtrOutput() BucketInventoryDestinationEncryptionPtrOutput {
+	return o.ToBucketInventoryDestinationEncryptionPtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryDestinationEncryptionOutput) ToBucketInventoryDestinationEncryptionPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventoryDestinationEncryption) *BucketInventoryDestinationEncryption {
+		return &v
+	}).(BucketInventoryDestinationEncryptionPtrOutput)
+}
+
+// Encryption with COS-managed key. This field can be left empty.
+func (o BucketInventoryDestinationEncryptionOutput) SseCos() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryDestinationEncryption) *string { return v.SseCos }).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryDestinationEncryptionPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryDestinationEncryptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (o BucketInventoryDestinationEncryptionPtrOutput) ToBucketInventoryDestinationEncryptionPtrOutput() BucketInventoryDestinationEncryptionPtrOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationEncryptionPtrOutput) ToBucketInventoryDestinationEncryptionPtrOutputWithContext(ctx context.Context) BucketInventoryDestinationEncryptionPtrOutput {
+	return o
+}
+
+func (o BucketInventoryDestinationEncryptionPtrOutput) Elem() BucketInventoryDestinationEncryptionOutput {
+	return o.ApplyT(func(v *BucketInventoryDestinationEncryption) BucketInventoryDestinationEncryption {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventoryDestinationEncryption
+		return ret
+	}).(BucketInventoryDestinationEncryptionOutput)
+}
+
+// Encryption with COS-managed key. This field can be left empty.
+func (o BucketInventoryDestinationEncryptionPtrOutput) SseCos() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryDestinationEncryption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SseCos
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryFilter struct {
+	// Creation time range of the objects to analyze.
+	Period *BucketInventoryFilterPeriod `pulumi:"period"`
+	// Prefix of the objects to analyze.
+	Prefix *string `pulumi:"prefix"`
+}
+
+// BucketInventoryFilterInput is an input type that accepts BucketInventoryFilterArgs and BucketInventoryFilterOutput values.
+// You can construct a concrete instance of `BucketInventoryFilterInput` via:
+//
+//          BucketInventoryFilterArgs{...}
+type BucketInventoryFilterInput interface {
+	pulumi.Input
+
+	ToBucketInventoryFilterOutput() BucketInventoryFilterOutput
+	ToBucketInventoryFilterOutputWithContext(context.Context) BucketInventoryFilterOutput
+}
+
+type BucketInventoryFilterArgs struct {
+	// Creation time range of the objects to analyze.
+	Period BucketInventoryFilterPeriodPtrInput `pulumi:"period"`
+	// Prefix of the objects to analyze.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+}
+
+func (BucketInventoryFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryFilter)(nil)).Elem()
+}
+
+func (i BucketInventoryFilterArgs) ToBucketInventoryFilterOutput() BucketInventoryFilterOutput {
+	return i.ToBucketInventoryFilterOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryFilterArgs) ToBucketInventoryFilterOutputWithContext(ctx context.Context) BucketInventoryFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterOutput)
+}
+
+func (i BucketInventoryFilterArgs) ToBucketInventoryFilterPtrOutput() BucketInventoryFilterPtrOutput {
+	return i.ToBucketInventoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryFilterArgs) ToBucketInventoryFilterPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterOutput).ToBucketInventoryFilterPtrOutputWithContext(ctx)
+}
+
+// BucketInventoryFilterPtrInput is an input type that accepts BucketInventoryFilterArgs, BucketInventoryFilterPtr and BucketInventoryFilterPtrOutput values.
+// You can construct a concrete instance of `BucketInventoryFilterPtrInput` via:
+//
+//          BucketInventoryFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventoryFilterPtrInput interface {
+	pulumi.Input
+
+	ToBucketInventoryFilterPtrOutput() BucketInventoryFilterPtrOutput
+	ToBucketInventoryFilterPtrOutputWithContext(context.Context) BucketInventoryFilterPtrOutput
+}
+
+type bucketInventoryFilterPtrType BucketInventoryFilterArgs
+
+func BucketInventoryFilterPtr(v *BucketInventoryFilterArgs) BucketInventoryFilterPtrInput {
+	return (*bucketInventoryFilterPtrType)(v)
+}
+
+func (*bucketInventoryFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryFilter)(nil)).Elem()
+}
+
+func (i *bucketInventoryFilterPtrType) ToBucketInventoryFilterPtrOutput() BucketInventoryFilterPtrOutput {
+	return i.ToBucketInventoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventoryFilterPtrType) ToBucketInventoryFilterPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterPtrOutput)
+}
+
+type BucketInventoryFilterOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryFilter)(nil)).Elem()
+}
+
+func (o BucketInventoryFilterOutput) ToBucketInventoryFilterOutput() BucketInventoryFilterOutput {
+	return o
+}
+
+func (o BucketInventoryFilterOutput) ToBucketInventoryFilterOutputWithContext(ctx context.Context) BucketInventoryFilterOutput {
+	return o
+}
+
+func (o BucketInventoryFilterOutput) ToBucketInventoryFilterPtrOutput() BucketInventoryFilterPtrOutput {
+	return o.ToBucketInventoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryFilterOutput) ToBucketInventoryFilterPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventoryFilter) *BucketInventoryFilter {
+		return &v
+	}).(BucketInventoryFilterPtrOutput)
+}
+
+// Creation time range of the objects to analyze.
+func (o BucketInventoryFilterOutput) Period() BucketInventoryFilterPeriodPtrOutput {
+	return o.ApplyT(func(v BucketInventoryFilter) *BucketInventoryFilterPeriod { return v.Period }).(BucketInventoryFilterPeriodPtrOutput)
+}
+
+// Prefix of the objects to analyze.
+func (o BucketInventoryFilterOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryFilter) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryFilter)(nil)).Elem()
+}
+
+func (o BucketInventoryFilterPtrOutput) ToBucketInventoryFilterPtrOutput() BucketInventoryFilterPtrOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPtrOutput) ToBucketInventoryFilterPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPtrOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPtrOutput) Elem() BucketInventoryFilterOutput {
+	return o.ApplyT(func(v *BucketInventoryFilter) BucketInventoryFilter {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventoryFilter
+		return ret
+	}).(BucketInventoryFilterOutput)
+}
+
+// Creation time range of the objects to analyze.
+func (o BucketInventoryFilterPtrOutput) Period() BucketInventoryFilterPeriodPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryFilter) *BucketInventoryFilterPeriod {
+		if v == nil {
+			return nil
+		}
+		return v.Period
+	}).(BucketInventoryFilterPeriodPtrOutput)
+}
+
+// Prefix of the objects to analyze.
+func (o BucketInventoryFilterPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryFilterPeriod struct {
+	// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+	EndTime *string `pulumi:"endTime"`
+	// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+	StartTime *string `pulumi:"startTime"`
+}
+
+// BucketInventoryFilterPeriodInput is an input type that accepts BucketInventoryFilterPeriodArgs and BucketInventoryFilterPeriodOutput values.
+// You can construct a concrete instance of `BucketInventoryFilterPeriodInput` via:
+//
+//          BucketInventoryFilterPeriodArgs{...}
+type BucketInventoryFilterPeriodInput interface {
+	pulumi.Input
+
+	ToBucketInventoryFilterPeriodOutput() BucketInventoryFilterPeriodOutput
+	ToBucketInventoryFilterPeriodOutputWithContext(context.Context) BucketInventoryFilterPeriodOutput
+}
+
+type BucketInventoryFilterPeriodArgs struct {
+	// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+}
+
+func (BucketInventoryFilterPeriodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (i BucketInventoryFilterPeriodArgs) ToBucketInventoryFilterPeriodOutput() BucketInventoryFilterPeriodOutput {
+	return i.ToBucketInventoryFilterPeriodOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryFilterPeriodArgs) ToBucketInventoryFilterPeriodOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterPeriodOutput)
+}
+
+func (i BucketInventoryFilterPeriodArgs) ToBucketInventoryFilterPeriodPtrOutput() BucketInventoryFilterPeriodPtrOutput {
+	return i.ToBucketInventoryFilterPeriodPtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryFilterPeriodArgs) ToBucketInventoryFilterPeriodPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterPeriodOutput).ToBucketInventoryFilterPeriodPtrOutputWithContext(ctx)
+}
+
+// BucketInventoryFilterPeriodPtrInput is an input type that accepts BucketInventoryFilterPeriodArgs, BucketInventoryFilterPeriodPtr and BucketInventoryFilterPeriodPtrOutput values.
+// You can construct a concrete instance of `BucketInventoryFilterPeriodPtrInput` via:
+//
+//          BucketInventoryFilterPeriodArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventoryFilterPeriodPtrInput interface {
+	pulumi.Input
+
+	ToBucketInventoryFilterPeriodPtrOutput() BucketInventoryFilterPeriodPtrOutput
+	ToBucketInventoryFilterPeriodPtrOutputWithContext(context.Context) BucketInventoryFilterPeriodPtrOutput
+}
+
+type bucketInventoryFilterPeriodPtrType BucketInventoryFilterPeriodArgs
+
+func BucketInventoryFilterPeriodPtr(v *BucketInventoryFilterPeriodArgs) BucketInventoryFilterPeriodPtrInput {
+	return (*bucketInventoryFilterPeriodPtrType)(v)
+}
+
+func (*bucketInventoryFilterPeriodPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (i *bucketInventoryFilterPeriodPtrType) ToBucketInventoryFilterPeriodPtrOutput() BucketInventoryFilterPeriodPtrOutput {
+	return i.ToBucketInventoryFilterPeriodPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventoryFilterPeriodPtrType) ToBucketInventoryFilterPeriodPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryFilterPeriodPtrOutput)
+}
+
+type BucketInventoryFilterPeriodOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryFilterPeriodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (o BucketInventoryFilterPeriodOutput) ToBucketInventoryFilterPeriodOutput() BucketInventoryFilterPeriodOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPeriodOutput) ToBucketInventoryFilterPeriodOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPeriodOutput) ToBucketInventoryFilterPeriodPtrOutput() BucketInventoryFilterPeriodPtrOutput {
+	return o.ToBucketInventoryFilterPeriodPtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryFilterPeriodOutput) ToBucketInventoryFilterPeriodPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventoryFilterPeriod) *BucketInventoryFilterPeriod {
+		return &v
+	}).(BucketInventoryFilterPeriodPtrOutput)
+}
+
+// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+func (o BucketInventoryFilterPeriodOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryFilterPeriod) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+func (o BucketInventoryFilterPeriodOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketInventoryFilterPeriod) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryFilterPeriodPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryFilterPeriodPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (o BucketInventoryFilterPeriodPtrOutput) ToBucketInventoryFilterPeriodPtrOutput() BucketInventoryFilterPeriodPtrOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPeriodPtrOutput) ToBucketInventoryFilterPeriodPtrOutputWithContext(ctx context.Context) BucketInventoryFilterPeriodPtrOutput {
+	return o
+}
+
+func (o BucketInventoryFilterPeriodPtrOutput) Elem() BucketInventoryFilterPeriodOutput {
+	return o.ApplyT(func(v *BucketInventoryFilterPeriod) BucketInventoryFilterPeriod {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventoryFilterPeriod
+		return ret
+	}).(BucketInventoryFilterPeriodOutput)
+}
+
+// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+func (o BucketInventoryFilterPeriodPtrOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryFilterPeriod) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EndTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+func (o BucketInventoryFilterPeriodPtrOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventoryFilterPeriod) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StartTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketInventoryOptionalFields struct {
+	// Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+	Fields []string `pulumi:"fields"`
+}
+
+// BucketInventoryOptionalFieldsInput is an input type that accepts BucketInventoryOptionalFieldsArgs and BucketInventoryOptionalFieldsOutput values.
+// You can construct a concrete instance of `BucketInventoryOptionalFieldsInput` via:
+//
+//          BucketInventoryOptionalFieldsArgs{...}
+type BucketInventoryOptionalFieldsInput interface {
+	pulumi.Input
+
+	ToBucketInventoryOptionalFieldsOutput() BucketInventoryOptionalFieldsOutput
+	ToBucketInventoryOptionalFieldsOutputWithContext(context.Context) BucketInventoryOptionalFieldsOutput
+}
+
+type BucketInventoryOptionalFieldsArgs struct {
+	// Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+	Fields pulumi.StringArrayInput `pulumi:"fields"`
+}
+
+func (BucketInventoryOptionalFieldsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryOptionalFields)(nil)).Elem()
+}
+
+func (i BucketInventoryOptionalFieldsArgs) ToBucketInventoryOptionalFieldsOutput() BucketInventoryOptionalFieldsOutput {
+	return i.ToBucketInventoryOptionalFieldsOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryOptionalFieldsArgs) ToBucketInventoryOptionalFieldsOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryOptionalFieldsOutput)
+}
+
+func (i BucketInventoryOptionalFieldsArgs) ToBucketInventoryOptionalFieldsPtrOutput() BucketInventoryOptionalFieldsPtrOutput {
+	return i.ToBucketInventoryOptionalFieldsPtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryOptionalFieldsArgs) ToBucketInventoryOptionalFieldsPtrOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryOptionalFieldsOutput).ToBucketInventoryOptionalFieldsPtrOutputWithContext(ctx)
+}
+
+// BucketInventoryOptionalFieldsPtrInput is an input type that accepts BucketInventoryOptionalFieldsArgs, BucketInventoryOptionalFieldsPtr and BucketInventoryOptionalFieldsPtrOutput values.
+// You can construct a concrete instance of `BucketInventoryOptionalFieldsPtrInput` via:
+//
+//          BucketInventoryOptionalFieldsArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventoryOptionalFieldsPtrInput interface {
+	pulumi.Input
+
+	ToBucketInventoryOptionalFieldsPtrOutput() BucketInventoryOptionalFieldsPtrOutput
+	ToBucketInventoryOptionalFieldsPtrOutputWithContext(context.Context) BucketInventoryOptionalFieldsPtrOutput
+}
+
+type bucketInventoryOptionalFieldsPtrType BucketInventoryOptionalFieldsArgs
+
+func BucketInventoryOptionalFieldsPtr(v *BucketInventoryOptionalFieldsArgs) BucketInventoryOptionalFieldsPtrInput {
+	return (*bucketInventoryOptionalFieldsPtrType)(v)
+}
+
+func (*bucketInventoryOptionalFieldsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryOptionalFields)(nil)).Elem()
+}
+
+func (i *bucketInventoryOptionalFieldsPtrType) ToBucketInventoryOptionalFieldsPtrOutput() BucketInventoryOptionalFieldsPtrOutput {
+	return i.ToBucketInventoryOptionalFieldsPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventoryOptionalFieldsPtrType) ToBucketInventoryOptionalFieldsPtrOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryOptionalFieldsPtrOutput)
+}
+
+type BucketInventoryOptionalFieldsOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryOptionalFieldsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventoryOptionalFields)(nil)).Elem()
+}
+
+func (o BucketInventoryOptionalFieldsOutput) ToBucketInventoryOptionalFieldsOutput() BucketInventoryOptionalFieldsOutput {
+	return o
+}
+
+func (o BucketInventoryOptionalFieldsOutput) ToBucketInventoryOptionalFieldsOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsOutput {
+	return o
+}
+
+func (o BucketInventoryOptionalFieldsOutput) ToBucketInventoryOptionalFieldsPtrOutput() BucketInventoryOptionalFieldsPtrOutput {
+	return o.ToBucketInventoryOptionalFieldsPtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryOptionalFieldsOutput) ToBucketInventoryOptionalFieldsPtrOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventoryOptionalFields) *BucketInventoryOptionalFields {
+		return &v
+	}).(BucketInventoryOptionalFieldsPtrOutput)
+}
+
+// Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+func (o BucketInventoryOptionalFieldsOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketInventoryOptionalFields) []string { return v.Fields }).(pulumi.StringArrayOutput)
+}
+
+type BucketInventoryOptionalFieldsPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryOptionalFieldsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventoryOptionalFields)(nil)).Elem()
+}
+
+func (o BucketInventoryOptionalFieldsPtrOutput) ToBucketInventoryOptionalFieldsPtrOutput() BucketInventoryOptionalFieldsPtrOutput {
+	return o
+}
+
+func (o BucketInventoryOptionalFieldsPtrOutput) ToBucketInventoryOptionalFieldsPtrOutputWithContext(ctx context.Context) BucketInventoryOptionalFieldsPtrOutput {
+	return o
+}
+
+func (o BucketInventoryOptionalFieldsPtrOutput) Elem() BucketInventoryOptionalFieldsOutput {
+	return o.ApplyT(func(v *BucketInventoryOptionalFields) BucketInventoryOptionalFields {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventoryOptionalFields
+		return ret
+	}).(BucketInventoryOptionalFieldsOutput)
+}
+
+// Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+func (o BucketInventoryOptionalFieldsPtrOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BucketInventoryOptionalFields) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Fields
+	}).(pulumi.StringArrayOutput)
+}
+
+type BucketInventorySchedule struct {
+	// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+	Frequency string `pulumi:"frequency"`
+}
+
+// BucketInventoryScheduleInput is an input type that accepts BucketInventoryScheduleArgs and BucketInventoryScheduleOutput values.
+// You can construct a concrete instance of `BucketInventoryScheduleInput` via:
+//
+//          BucketInventoryScheduleArgs{...}
+type BucketInventoryScheduleInput interface {
+	pulumi.Input
+
+	ToBucketInventoryScheduleOutput() BucketInventoryScheduleOutput
+	ToBucketInventoryScheduleOutputWithContext(context.Context) BucketInventoryScheduleOutput
+}
+
+type BucketInventoryScheduleArgs struct {
+	// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+	Frequency pulumi.StringInput `pulumi:"frequency"`
+}
+
+func (BucketInventoryScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventorySchedule)(nil)).Elem()
+}
+
+func (i BucketInventoryScheduleArgs) ToBucketInventoryScheduleOutput() BucketInventoryScheduleOutput {
+	return i.ToBucketInventoryScheduleOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryScheduleArgs) ToBucketInventoryScheduleOutputWithContext(ctx context.Context) BucketInventoryScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryScheduleOutput)
+}
+
+func (i BucketInventoryScheduleArgs) ToBucketInventorySchedulePtrOutput() BucketInventorySchedulePtrOutput {
+	return i.ToBucketInventorySchedulePtrOutputWithContext(context.Background())
+}
+
+func (i BucketInventoryScheduleArgs) ToBucketInventorySchedulePtrOutputWithContext(ctx context.Context) BucketInventorySchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventoryScheduleOutput).ToBucketInventorySchedulePtrOutputWithContext(ctx)
+}
+
+// BucketInventorySchedulePtrInput is an input type that accepts BucketInventoryScheduleArgs, BucketInventorySchedulePtr and BucketInventorySchedulePtrOutput values.
+// You can construct a concrete instance of `BucketInventorySchedulePtrInput` via:
+//
+//          BucketInventoryScheduleArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketInventorySchedulePtrInput interface {
+	pulumi.Input
+
+	ToBucketInventorySchedulePtrOutput() BucketInventorySchedulePtrOutput
+	ToBucketInventorySchedulePtrOutputWithContext(context.Context) BucketInventorySchedulePtrOutput
+}
+
+type bucketInventorySchedulePtrType BucketInventoryScheduleArgs
+
+func BucketInventorySchedulePtr(v *BucketInventoryScheduleArgs) BucketInventorySchedulePtrInput {
+	return (*bucketInventorySchedulePtrType)(v)
+}
+
+func (*bucketInventorySchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventorySchedule)(nil)).Elem()
+}
+
+func (i *bucketInventorySchedulePtrType) ToBucketInventorySchedulePtrOutput() BucketInventorySchedulePtrOutput {
+	return i.ToBucketInventorySchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *bucketInventorySchedulePtrType) ToBucketInventorySchedulePtrOutputWithContext(ctx context.Context) BucketInventorySchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketInventorySchedulePtrOutput)
+}
+
+type BucketInventoryScheduleOutput struct{ *pulumi.OutputState }
+
+func (BucketInventoryScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketInventorySchedule)(nil)).Elem()
+}
+
+func (o BucketInventoryScheduleOutput) ToBucketInventoryScheduleOutput() BucketInventoryScheduleOutput {
+	return o
+}
+
+func (o BucketInventoryScheduleOutput) ToBucketInventoryScheduleOutputWithContext(ctx context.Context) BucketInventoryScheduleOutput {
+	return o
+}
+
+func (o BucketInventoryScheduleOutput) ToBucketInventorySchedulePtrOutput() BucketInventorySchedulePtrOutput {
+	return o.ToBucketInventorySchedulePtrOutputWithContext(context.Background())
+}
+
+func (o BucketInventoryScheduleOutput) ToBucketInventorySchedulePtrOutputWithContext(ctx context.Context) BucketInventorySchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketInventorySchedule) *BucketInventorySchedule {
+		return &v
+	}).(BucketInventorySchedulePtrOutput)
+}
+
+// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+func (o BucketInventoryScheduleOutput) Frequency() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketInventorySchedule) string { return v.Frequency }).(pulumi.StringOutput)
+}
+
+type BucketInventorySchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (BucketInventorySchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketInventorySchedule)(nil)).Elem()
+}
+
+func (o BucketInventorySchedulePtrOutput) ToBucketInventorySchedulePtrOutput() BucketInventorySchedulePtrOutput {
+	return o
+}
+
+func (o BucketInventorySchedulePtrOutput) ToBucketInventorySchedulePtrOutputWithContext(ctx context.Context) BucketInventorySchedulePtrOutput {
+	return o
+}
+
+func (o BucketInventorySchedulePtrOutput) Elem() BucketInventoryScheduleOutput {
+	return o.ApplyT(func(v *BucketInventorySchedule) BucketInventorySchedule {
+		if v != nil {
+			return *v
+		}
+		var ret BucketInventorySchedule
+		return ret
+	}).(BucketInventoryScheduleOutput)
+}
+
+// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+func (o BucketInventorySchedulePtrOutput) Frequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketInventorySchedule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Frequency
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -1880,6 +4889,1424 @@ func (o BucketWebsitePtrOutput) IndexDocument() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetBatchsJob struct {
+	// Job creation time.
+	CreationTime string `pulumi:"creationTime"`
+	// Mission description. The length is limited to 0-256 bytes.
+	Description string `pulumi:"description"`
+	// Job ID. The length is limited to 1-64 bytes.
+	JobId string `pulumi:"jobId"`
+	// Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+	Operation string `pulumi:"operation"`
+	// Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+	Priority int `pulumi:"priority"`
+	// Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+	ProgressSummaries []GetBatchsJobProgressSummary `pulumi:"progressSummaries"`
+	// Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+	Status string `pulumi:"status"`
+	// The end time of the batch processing job.
+	TerminationDate string `pulumi:"terminationDate"`
+}
+
+// GetBatchsJobInput is an input type that accepts GetBatchsJobArgs and GetBatchsJobOutput values.
+// You can construct a concrete instance of `GetBatchsJobInput` via:
+//
+//          GetBatchsJobArgs{...}
+type GetBatchsJobInput interface {
+	pulumi.Input
+
+	ToGetBatchsJobOutput() GetBatchsJobOutput
+	ToGetBatchsJobOutputWithContext(context.Context) GetBatchsJobOutput
+}
+
+type GetBatchsJobArgs struct {
+	// Job creation time.
+	CreationTime pulumi.StringInput `pulumi:"creationTime"`
+	// Mission description. The length is limited to 0-256 bytes.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Job ID. The length is limited to 1-64 bytes.
+	JobId pulumi.StringInput `pulumi:"jobId"`
+	// Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+	ProgressSummaries GetBatchsJobProgressSummaryArrayInput `pulumi:"progressSummaries"`
+	// Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+	Status pulumi.StringInput `pulumi:"status"`
+	// The end time of the batch processing job.
+	TerminationDate pulumi.StringInput `pulumi:"terminationDate"`
+}
+
+func (GetBatchsJobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBatchsJob)(nil)).Elem()
+}
+
+func (i GetBatchsJobArgs) ToGetBatchsJobOutput() GetBatchsJobOutput {
+	return i.ToGetBatchsJobOutputWithContext(context.Background())
+}
+
+func (i GetBatchsJobArgs) ToGetBatchsJobOutputWithContext(ctx context.Context) GetBatchsJobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBatchsJobOutput)
+}
+
+// GetBatchsJobArrayInput is an input type that accepts GetBatchsJobArray and GetBatchsJobArrayOutput values.
+// You can construct a concrete instance of `GetBatchsJobArrayInput` via:
+//
+//          GetBatchsJobArray{ GetBatchsJobArgs{...} }
+type GetBatchsJobArrayInput interface {
+	pulumi.Input
+
+	ToGetBatchsJobArrayOutput() GetBatchsJobArrayOutput
+	ToGetBatchsJobArrayOutputWithContext(context.Context) GetBatchsJobArrayOutput
+}
+
+type GetBatchsJobArray []GetBatchsJobInput
+
+func (GetBatchsJobArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBatchsJob)(nil)).Elem()
+}
+
+func (i GetBatchsJobArray) ToGetBatchsJobArrayOutput() GetBatchsJobArrayOutput {
+	return i.ToGetBatchsJobArrayOutputWithContext(context.Background())
+}
+
+func (i GetBatchsJobArray) ToGetBatchsJobArrayOutputWithContext(ctx context.Context) GetBatchsJobArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBatchsJobArrayOutput)
+}
+
+type GetBatchsJobOutput struct{ *pulumi.OutputState }
+
+func (GetBatchsJobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBatchsJob)(nil)).Elem()
+}
+
+func (o GetBatchsJobOutput) ToGetBatchsJobOutput() GetBatchsJobOutput {
+	return o
+}
+
+func (o GetBatchsJobOutput) ToGetBatchsJobOutputWithContext(ctx context.Context) GetBatchsJobOutput {
+	return o
+}
+
+// Job creation time.
+func (o GetBatchsJobOutput) CreationTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.CreationTime }).(pulumi.StringOutput)
+}
+
+// Mission description. The length is limited to 0-256 bytes.
+func (o GetBatchsJobOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Job ID. The length is limited to 1-64 bytes.
+func (o GetBatchsJobOutput) JobId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.JobId }).(pulumi.StringOutput)
+}
+
+// Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.
+func (o GetBatchsJobOutput) Operation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.Operation }).(pulumi.StringOutput)
+}
+
+// Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.
+func (o GetBatchsJobOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBatchsJob) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.
+func (o GetBatchsJobOutput) ProgressSummaries() GetBatchsJobProgressSummaryArrayOutput {
+	return o.ApplyT(func(v GetBatchsJob) []GetBatchsJobProgressSummary { return v.ProgressSummaries }).(GetBatchsJobProgressSummaryArrayOutput)
+}
+
+// Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+func (o GetBatchsJobOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// The end time of the batch processing job.
+func (o GetBatchsJobOutput) TerminationDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBatchsJob) string { return v.TerminationDate }).(pulumi.StringOutput)
+}
+
+type GetBatchsJobArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBatchsJobArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBatchsJob)(nil)).Elem()
+}
+
+func (o GetBatchsJobArrayOutput) ToGetBatchsJobArrayOutput() GetBatchsJobArrayOutput {
+	return o
+}
+
+func (o GetBatchsJobArrayOutput) ToGetBatchsJobArrayOutputWithContext(ctx context.Context) GetBatchsJobArrayOutput {
+	return o
+}
+
+func (o GetBatchsJobArrayOutput) Index(i pulumi.IntInput) GetBatchsJobOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBatchsJob {
+		return vs[0].([]GetBatchsJob)[vs[1].(int)]
+	}).(GetBatchsJobOutput)
+}
+
+type GetBatchsJobProgressSummary struct {
+	// The current failed Operand.
+	NumberOfTasksFailed int `pulumi:"numberOfTasksFailed"`
+	// The current successful Operand.
+	NumberOfTasksSucceeded int `pulumi:"numberOfTasksSucceeded"`
+	// Total Operand.
+	TotalNumberOfTasks int `pulumi:"totalNumberOfTasks"`
+}
+
+// GetBatchsJobProgressSummaryInput is an input type that accepts GetBatchsJobProgressSummaryArgs and GetBatchsJobProgressSummaryOutput values.
+// You can construct a concrete instance of `GetBatchsJobProgressSummaryInput` via:
+//
+//          GetBatchsJobProgressSummaryArgs{...}
+type GetBatchsJobProgressSummaryInput interface {
+	pulumi.Input
+
+	ToGetBatchsJobProgressSummaryOutput() GetBatchsJobProgressSummaryOutput
+	ToGetBatchsJobProgressSummaryOutputWithContext(context.Context) GetBatchsJobProgressSummaryOutput
+}
+
+type GetBatchsJobProgressSummaryArgs struct {
+	// The current failed Operand.
+	NumberOfTasksFailed pulumi.IntInput `pulumi:"numberOfTasksFailed"`
+	// The current successful Operand.
+	NumberOfTasksSucceeded pulumi.IntInput `pulumi:"numberOfTasksSucceeded"`
+	// Total Operand.
+	TotalNumberOfTasks pulumi.IntInput `pulumi:"totalNumberOfTasks"`
+}
+
+func (GetBatchsJobProgressSummaryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBatchsJobProgressSummary)(nil)).Elem()
+}
+
+func (i GetBatchsJobProgressSummaryArgs) ToGetBatchsJobProgressSummaryOutput() GetBatchsJobProgressSummaryOutput {
+	return i.ToGetBatchsJobProgressSummaryOutputWithContext(context.Background())
+}
+
+func (i GetBatchsJobProgressSummaryArgs) ToGetBatchsJobProgressSummaryOutputWithContext(ctx context.Context) GetBatchsJobProgressSummaryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBatchsJobProgressSummaryOutput)
+}
+
+// GetBatchsJobProgressSummaryArrayInput is an input type that accepts GetBatchsJobProgressSummaryArray and GetBatchsJobProgressSummaryArrayOutput values.
+// You can construct a concrete instance of `GetBatchsJobProgressSummaryArrayInput` via:
+//
+//          GetBatchsJobProgressSummaryArray{ GetBatchsJobProgressSummaryArgs{...} }
+type GetBatchsJobProgressSummaryArrayInput interface {
+	pulumi.Input
+
+	ToGetBatchsJobProgressSummaryArrayOutput() GetBatchsJobProgressSummaryArrayOutput
+	ToGetBatchsJobProgressSummaryArrayOutputWithContext(context.Context) GetBatchsJobProgressSummaryArrayOutput
+}
+
+type GetBatchsJobProgressSummaryArray []GetBatchsJobProgressSummaryInput
+
+func (GetBatchsJobProgressSummaryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBatchsJobProgressSummary)(nil)).Elem()
+}
+
+func (i GetBatchsJobProgressSummaryArray) ToGetBatchsJobProgressSummaryArrayOutput() GetBatchsJobProgressSummaryArrayOutput {
+	return i.ToGetBatchsJobProgressSummaryArrayOutputWithContext(context.Background())
+}
+
+func (i GetBatchsJobProgressSummaryArray) ToGetBatchsJobProgressSummaryArrayOutputWithContext(ctx context.Context) GetBatchsJobProgressSummaryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBatchsJobProgressSummaryArrayOutput)
+}
+
+type GetBatchsJobProgressSummaryOutput struct{ *pulumi.OutputState }
+
+func (GetBatchsJobProgressSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBatchsJobProgressSummary)(nil)).Elem()
+}
+
+func (o GetBatchsJobProgressSummaryOutput) ToGetBatchsJobProgressSummaryOutput() GetBatchsJobProgressSummaryOutput {
+	return o
+}
+
+func (o GetBatchsJobProgressSummaryOutput) ToGetBatchsJobProgressSummaryOutputWithContext(ctx context.Context) GetBatchsJobProgressSummaryOutput {
+	return o
+}
+
+// The current failed Operand.
+func (o GetBatchsJobProgressSummaryOutput) NumberOfTasksFailed() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBatchsJobProgressSummary) int { return v.NumberOfTasksFailed }).(pulumi.IntOutput)
+}
+
+// The current successful Operand.
+func (o GetBatchsJobProgressSummaryOutput) NumberOfTasksSucceeded() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBatchsJobProgressSummary) int { return v.NumberOfTasksSucceeded }).(pulumi.IntOutput)
+}
+
+// Total Operand.
+func (o GetBatchsJobProgressSummaryOutput) TotalNumberOfTasks() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBatchsJobProgressSummary) int { return v.TotalNumberOfTasks }).(pulumi.IntOutput)
+}
+
+type GetBatchsJobProgressSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBatchsJobProgressSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBatchsJobProgressSummary)(nil)).Elem()
+}
+
+func (o GetBatchsJobProgressSummaryArrayOutput) ToGetBatchsJobProgressSummaryArrayOutput() GetBatchsJobProgressSummaryArrayOutput {
+	return o
+}
+
+func (o GetBatchsJobProgressSummaryArrayOutput) ToGetBatchsJobProgressSummaryArrayOutputWithContext(ctx context.Context) GetBatchsJobProgressSummaryArrayOutput {
+	return o
+}
+
+func (o GetBatchsJobProgressSummaryArrayOutput) Index(i pulumi.IntInput) GetBatchsJobProgressSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBatchsJobProgressSummary {
+		return vs[0].([]GetBatchsJobProgressSummary)[vs[1].(int)]
+	}).(GetBatchsJobProgressSummaryOutput)
+}
+
+type GetBucketInventorysInventory struct {
+	// Information about the inventory result destination.
+	Destinations []GetBucketInventorysInventoryDestination `pulumi:"destinations"`
+	// Filters objects prefixed with the specified value to analyze.
+	Filters []GetBucketInventorysInventoryFilter `pulumi:"filters"`
+	// Whether to enable the inventory. true or false.
+	Id string `pulumi:"id"`
+	// Whether to include object versions in the inventory. All or No.
+	IncludedObjectVersions string `pulumi:"includedObjectVersions"`
+	// Whether to enable the inventory. true or false.
+	IsEnabled      string                                      `pulumi:"isEnabled"`
+	OptionalFields []GetBucketInventorysInventoryOptionalField `pulumi:"optionalFields"`
+	// Inventory job cycle.
+	Schedules []GetBucketInventorysInventorySchedule `pulumi:"schedules"`
+}
+
+// GetBucketInventorysInventoryInput is an input type that accepts GetBucketInventorysInventoryArgs and GetBucketInventorysInventoryOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryInput` via:
+//
+//          GetBucketInventorysInventoryArgs{...}
+type GetBucketInventorysInventoryInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryOutput() GetBucketInventorysInventoryOutput
+	ToGetBucketInventorysInventoryOutputWithContext(context.Context) GetBucketInventorysInventoryOutput
+}
+
+type GetBucketInventorysInventoryArgs struct {
+	// Information about the inventory result destination.
+	Destinations GetBucketInventorysInventoryDestinationArrayInput `pulumi:"destinations"`
+	// Filters objects prefixed with the specified value to analyze.
+	Filters GetBucketInventorysInventoryFilterArrayInput `pulumi:"filters"`
+	// Whether to enable the inventory. true or false.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Whether to include object versions in the inventory. All or No.
+	IncludedObjectVersions pulumi.StringInput `pulumi:"includedObjectVersions"`
+	// Whether to enable the inventory. true or false.
+	IsEnabled      pulumi.StringInput                                  `pulumi:"isEnabled"`
+	OptionalFields GetBucketInventorysInventoryOptionalFieldArrayInput `pulumi:"optionalFields"`
+	// Inventory job cycle.
+	Schedules GetBucketInventorysInventoryScheduleArrayInput `pulumi:"schedules"`
+}
+
+func (GetBucketInventorysInventoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventory)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryArgs) ToGetBucketInventorysInventoryOutput() GetBucketInventorysInventoryOutput {
+	return i.ToGetBucketInventorysInventoryOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryArgs) ToGetBucketInventorysInventoryOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryOutput)
+}
+
+// GetBucketInventorysInventoryArrayInput is an input type that accepts GetBucketInventorysInventoryArray and GetBucketInventorysInventoryArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryArrayInput` via:
+//
+//          GetBucketInventorysInventoryArray{ GetBucketInventorysInventoryArgs{...} }
+type GetBucketInventorysInventoryArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryArrayOutput() GetBucketInventorysInventoryArrayOutput
+	ToGetBucketInventorysInventoryArrayOutputWithContext(context.Context) GetBucketInventorysInventoryArrayOutput
+}
+
+type GetBucketInventorysInventoryArray []GetBucketInventorysInventoryInput
+
+func (GetBucketInventorysInventoryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventory)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryArray) ToGetBucketInventorysInventoryArrayOutput() GetBucketInventorysInventoryArrayOutput {
+	return i.ToGetBucketInventorysInventoryArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryArray) ToGetBucketInventorysInventoryArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryArrayOutput)
+}
+
+type GetBucketInventorysInventoryOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventory)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryOutput) ToGetBucketInventorysInventoryOutput() GetBucketInventorysInventoryOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryOutput) ToGetBucketInventorysInventoryOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOutput {
+	return o
+}
+
+// Information about the inventory result destination.
+func (o GetBucketInventorysInventoryOutput) Destinations() GetBucketInventorysInventoryDestinationArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) []GetBucketInventorysInventoryDestination { return v.Destinations }).(GetBucketInventorysInventoryDestinationArrayOutput)
+}
+
+// Filters objects prefixed with the specified value to analyze.
+func (o GetBucketInventorysInventoryOutput) Filters() GetBucketInventorysInventoryFilterArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) []GetBucketInventorysInventoryFilter { return v.Filters }).(GetBucketInventorysInventoryFilterArrayOutput)
+}
+
+// Whether to enable the inventory. true or false.
+func (o GetBucketInventorysInventoryOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Whether to include object versions in the inventory. All or No.
+func (o GetBucketInventorysInventoryOutput) IncludedObjectVersions() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) string { return v.IncludedObjectVersions }).(pulumi.StringOutput)
+}
+
+// Whether to enable the inventory. true or false.
+func (o GetBucketInventorysInventoryOutput) IsEnabled() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) string { return v.IsEnabled }).(pulumi.StringOutput)
+}
+
+func (o GetBucketInventorysInventoryOutput) OptionalFields() GetBucketInventorysInventoryOptionalFieldArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) []GetBucketInventorysInventoryOptionalField {
+		return v.OptionalFields
+	}).(GetBucketInventorysInventoryOptionalFieldArrayOutput)
+}
+
+// Inventory job cycle.
+func (o GetBucketInventorysInventoryOutput) Schedules() GetBucketInventorysInventoryScheduleArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventory) []GetBucketInventorysInventorySchedule { return v.Schedules }).(GetBucketInventorysInventoryScheduleArrayOutput)
+}
+
+type GetBucketInventorysInventoryArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventory)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryArrayOutput) ToGetBucketInventorysInventoryArrayOutput() GetBucketInventorysInventoryArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryArrayOutput) ToGetBucketInventorysInventoryArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventory {
+		return vs[0].([]GetBucketInventorysInventory)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryOutput)
+}
+
+type GetBucketInventorysInventoryDestination struct {
+	// ID of the bucket owner.
+	AccountId string `pulumi:"accountId"`
+	// Bucket.
+	Bucket string `pulumi:"bucket"`
+	// Server-side encryption for the inventory result.
+	Encryptions []GetBucketInventorysInventoryDestinationEncryption `pulumi:"encryptions"`
+	// Format of the inventory result. Valid value: CSV.
+	Format string `pulumi:"format"`
+	// Prefix of the objects to analyze.
+	Prefix string `pulumi:"prefix"`
+}
+
+// GetBucketInventorysInventoryDestinationInput is an input type that accepts GetBucketInventorysInventoryDestinationArgs and GetBucketInventorysInventoryDestinationOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryDestinationInput` via:
+//
+//          GetBucketInventorysInventoryDestinationArgs{...}
+type GetBucketInventorysInventoryDestinationInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryDestinationOutput() GetBucketInventorysInventoryDestinationOutput
+	ToGetBucketInventorysInventoryDestinationOutputWithContext(context.Context) GetBucketInventorysInventoryDestinationOutput
+}
+
+type GetBucketInventorysInventoryDestinationArgs struct {
+	// ID of the bucket owner.
+	AccountId pulumi.StringInput `pulumi:"accountId"`
+	// Bucket.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Server-side encryption for the inventory result.
+	Encryptions GetBucketInventorysInventoryDestinationEncryptionArrayInput `pulumi:"encryptions"`
+	// Format of the inventory result. Valid value: CSV.
+	Format pulumi.StringInput `pulumi:"format"`
+	// Prefix of the objects to analyze.
+	Prefix pulumi.StringInput `pulumi:"prefix"`
+}
+
+func (GetBucketInventorysInventoryDestinationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryDestination)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryDestinationArgs) ToGetBucketInventorysInventoryDestinationOutput() GetBucketInventorysInventoryDestinationOutput {
+	return i.ToGetBucketInventorysInventoryDestinationOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryDestinationArgs) ToGetBucketInventorysInventoryDestinationOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryDestinationOutput)
+}
+
+// GetBucketInventorysInventoryDestinationArrayInput is an input type that accepts GetBucketInventorysInventoryDestinationArray and GetBucketInventorysInventoryDestinationArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryDestinationArrayInput` via:
+//
+//          GetBucketInventorysInventoryDestinationArray{ GetBucketInventorysInventoryDestinationArgs{...} }
+type GetBucketInventorysInventoryDestinationArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryDestinationArrayOutput() GetBucketInventorysInventoryDestinationArrayOutput
+	ToGetBucketInventorysInventoryDestinationArrayOutputWithContext(context.Context) GetBucketInventorysInventoryDestinationArrayOutput
+}
+
+type GetBucketInventorysInventoryDestinationArray []GetBucketInventorysInventoryDestinationInput
+
+func (GetBucketInventorysInventoryDestinationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryDestination)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryDestinationArray) ToGetBucketInventorysInventoryDestinationArrayOutput() GetBucketInventorysInventoryDestinationArrayOutput {
+	return i.ToGetBucketInventorysInventoryDestinationArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryDestinationArray) ToGetBucketInventorysInventoryDestinationArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryDestinationArrayOutput)
+}
+
+type GetBucketInventorysInventoryDestinationOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryDestinationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryDestination)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryDestinationOutput) ToGetBucketInventorysInventoryDestinationOutput() GetBucketInventorysInventoryDestinationOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationOutput) ToGetBucketInventorysInventoryDestinationOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationOutput {
+	return o
+}
+
+// ID of the bucket owner.
+func (o GetBucketInventorysInventoryDestinationOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestination) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Bucket.
+func (o GetBucketInventorysInventoryDestinationOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestination) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Server-side encryption for the inventory result.
+func (o GetBucketInventorysInventoryDestinationOutput) Encryptions() GetBucketInventorysInventoryDestinationEncryptionArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestination) []GetBucketInventorysInventoryDestinationEncryption {
+		return v.Encryptions
+	}).(GetBucketInventorysInventoryDestinationEncryptionArrayOutput)
+}
+
+// Format of the inventory result. Valid value: CSV.
+func (o GetBucketInventorysInventoryDestinationOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestination) string { return v.Format }).(pulumi.StringOutput)
+}
+
+// Prefix of the objects to analyze.
+func (o GetBucketInventorysInventoryDestinationOutput) Prefix() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestination) string { return v.Prefix }).(pulumi.StringOutput)
+}
+
+type GetBucketInventorysInventoryDestinationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryDestinationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryDestination)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryDestinationArrayOutput) ToGetBucketInventorysInventoryDestinationArrayOutput() GetBucketInventorysInventoryDestinationArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationArrayOutput) ToGetBucketInventorysInventoryDestinationArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryDestinationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventoryDestination {
+		return vs[0].([]GetBucketInventorysInventoryDestination)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryDestinationOutput)
+}
+
+type GetBucketInventorysInventoryDestinationEncryption struct {
+	// Encryption with COS-managed key. This field can be left empty.
+	SseCos string `pulumi:"sseCos"`
+}
+
+// GetBucketInventorysInventoryDestinationEncryptionInput is an input type that accepts GetBucketInventorysInventoryDestinationEncryptionArgs and GetBucketInventorysInventoryDestinationEncryptionOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryDestinationEncryptionInput` via:
+//
+//          GetBucketInventorysInventoryDestinationEncryptionArgs{...}
+type GetBucketInventorysInventoryDestinationEncryptionInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryDestinationEncryptionOutput() GetBucketInventorysInventoryDestinationEncryptionOutput
+	ToGetBucketInventorysInventoryDestinationEncryptionOutputWithContext(context.Context) GetBucketInventorysInventoryDestinationEncryptionOutput
+}
+
+type GetBucketInventorysInventoryDestinationEncryptionArgs struct {
+	// Encryption with COS-managed key. This field can be left empty.
+	SseCos pulumi.StringInput `pulumi:"sseCos"`
+}
+
+func (GetBucketInventorysInventoryDestinationEncryptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryDestinationEncryptionArgs) ToGetBucketInventorysInventoryDestinationEncryptionOutput() GetBucketInventorysInventoryDestinationEncryptionOutput {
+	return i.ToGetBucketInventorysInventoryDestinationEncryptionOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryDestinationEncryptionArgs) ToGetBucketInventorysInventoryDestinationEncryptionOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationEncryptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryDestinationEncryptionOutput)
+}
+
+// GetBucketInventorysInventoryDestinationEncryptionArrayInput is an input type that accepts GetBucketInventorysInventoryDestinationEncryptionArray and GetBucketInventorysInventoryDestinationEncryptionArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryDestinationEncryptionArrayInput` via:
+//
+//          GetBucketInventorysInventoryDestinationEncryptionArray{ GetBucketInventorysInventoryDestinationEncryptionArgs{...} }
+type GetBucketInventorysInventoryDestinationEncryptionArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryDestinationEncryptionArrayOutput() GetBucketInventorysInventoryDestinationEncryptionArrayOutput
+	ToGetBucketInventorysInventoryDestinationEncryptionArrayOutputWithContext(context.Context) GetBucketInventorysInventoryDestinationEncryptionArrayOutput
+}
+
+type GetBucketInventorysInventoryDestinationEncryptionArray []GetBucketInventorysInventoryDestinationEncryptionInput
+
+func (GetBucketInventorysInventoryDestinationEncryptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryDestinationEncryptionArray) ToGetBucketInventorysInventoryDestinationEncryptionArrayOutput() GetBucketInventorysInventoryDestinationEncryptionArrayOutput {
+	return i.ToGetBucketInventorysInventoryDestinationEncryptionArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryDestinationEncryptionArray) ToGetBucketInventorysInventoryDestinationEncryptionArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationEncryptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryDestinationEncryptionArrayOutput)
+}
+
+type GetBucketInventorysInventoryDestinationEncryptionOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryDestinationEncryptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryDestinationEncryptionOutput) ToGetBucketInventorysInventoryDestinationEncryptionOutput() GetBucketInventorysInventoryDestinationEncryptionOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationEncryptionOutput) ToGetBucketInventorysInventoryDestinationEncryptionOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationEncryptionOutput {
+	return o
+}
+
+// Encryption with COS-managed key. This field can be left empty.
+func (o GetBucketInventorysInventoryDestinationEncryptionOutput) SseCos() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryDestinationEncryption) string { return v.SseCos }).(pulumi.StringOutput)
+}
+
+type GetBucketInventorysInventoryDestinationEncryptionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryDestinationEncryptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryDestinationEncryption)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryDestinationEncryptionArrayOutput) ToGetBucketInventorysInventoryDestinationEncryptionArrayOutput() GetBucketInventorysInventoryDestinationEncryptionArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationEncryptionArrayOutput) ToGetBucketInventorysInventoryDestinationEncryptionArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryDestinationEncryptionArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryDestinationEncryptionArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryDestinationEncryptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventoryDestinationEncryption {
+		return vs[0].([]GetBucketInventorysInventoryDestinationEncryption)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryDestinationEncryptionOutput)
+}
+
+type GetBucketInventorysInventoryFilter struct {
+	// Creation time range of the objects to analyze.
+	Periods []GetBucketInventorysInventoryFilterPeriod `pulumi:"periods"`
+	// Prefix of the objects to analyze.
+	Prefix string `pulumi:"prefix"`
+}
+
+// GetBucketInventorysInventoryFilterInput is an input type that accepts GetBucketInventorysInventoryFilterArgs and GetBucketInventorysInventoryFilterOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryFilterInput` via:
+//
+//          GetBucketInventorysInventoryFilterArgs{...}
+type GetBucketInventorysInventoryFilterInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryFilterOutput() GetBucketInventorysInventoryFilterOutput
+	ToGetBucketInventorysInventoryFilterOutputWithContext(context.Context) GetBucketInventorysInventoryFilterOutput
+}
+
+type GetBucketInventorysInventoryFilterArgs struct {
+	// Creation time range of the objects to analyze.
+	Periods GetBucketInventorysInventoryFilterPeriodArrayInput `pulumi:"periods"`
+	// Prefix of the objects to analyze.
+	Prefix pulumi.StringInput `pulumi:"prefix"`
+}
+
+func (GetBucketInventorysInventoryFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryFilter)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryFilterArgs) ToGetBucketInventorysInventoryFilterOutput() GetBucketInventorysInventoryFilterOutput {
+	return i.ToGetBucketInventorysInventoryFilterOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryFilterArgs) ToGetBucketInventorysInventoryFilterOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryFilterOutput)
+}
+
+// GetBucketInventorysInventoryFilterArrayInput is an input type that accepts GetBucketInventorysInventoryFilterArray and GetBucketInventorysInventoryFilterArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryFilterArrayInput` via:
+//
+//          GetBucketInventorysInventoryFilterArray{ GetBucketInventorysInventoryFilterArgs{...} }
+type GetBucketInventorysInventoryFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryFilterArrayOutput() GetBucketInventorysInventoryFilterArrayOutput
+	ToGetBucketInventorysInventoryFilterArrayOutputWithContext(context.Context) GetBucketInventorysInventoryFilterArrayOutput
+}
+
+type GetBucketInventorysInventoryFilterArray []GetBucketInventorysInventoryFilterInput
+
+func (GetBucketInventorysInventoryFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryFilter)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryFilterArray) ToGetBucketInventorysInventoryFilterArrayOutput() GetBucketInventorysInventoryFilterArrayOutput {
+	return i.ToGetBucketInventorysInventoryFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryFilterArray) ToGetBucketInventorysInventoryFilterArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryFilterArrayOutput)
+}
+
+type GetBucketInventorysInventoryFilterOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryFilter)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryFilterOutput) ToGetBucketInventorysInventoryFilterOutput() GetBucketInventorysInventoryFilterOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterOutput) ToGetBucketInventorysInventoryFilterOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterOutput {
+	return o
+}
+
+// Creation time range of the objects to analyze.
+func (o GetBucketInventorysInventoryFilterOutput) Periods() GetBucketInventorysInventoryFilterPeriodArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryFilter) []GetBucketInventorysInventoryFilterPeriod {
+		return v.Periods
+	}).(GetBucketInventorysInventoryFilterPeriodArrayOutput)
+}
+
+// Prefix of the objects to analyze.
+func (o GetBucketInventorysInventoryFilterOutput) Prefix() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryFilter) string { return v.Prefix }).(pulumi.StringOutput)
+}
+
+type GetBucketInventorysInventoryFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryFilter)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryFilterArrayOutput) ToGetBucketInventorysInventoryFilterArrayOutput() GetBucketInventorysInventoryFilterArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterArrayOutput) ToGetBucketInventorysInventoryFilterArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventoryFilter {
+		return vs[0].([]GetBucketInventorysInventoryFilter)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryFilterOutput)
+}
+
+type GetBucketInventorysInventoryFilterPeriod struct {
+	// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+	EndTime string `pulumi:"endTime"`
+	// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+	StartTime string `pulumi:"startTime"`
+}
+
+// GetBucketInventorysInventoryFilterPeriodInput is an input type that accepts GetBucketInventorysInventoryFilterPeriodArgs and GetBucketInventorysInventoryFilterPeriodOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryFilterPeriodInput` via:
+//
+//          GetBucketInventorysInventoryFilterPeriodArgs{...}
+type GetBucketInventorysInventoryFilterPeriodInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryFilterPeriodOutput() GetBucketInventorysInventoryFilterPeriodOutput
+	ToGetBucketInventorysInventoryFilterPeriodOutputWithContext(context.Context) GetBucketInventorysInventoryFilterPeriodOutput
+}
+
+type GetBucketInventorysInventoryFilterPeriodArgs struct {
+	// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+}
+
+func (GetBucketInventorysInventoryFilterPeriodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryFilterPeriodArgs) ToGetBucketInventorysInventoryFilterPeriodOutput() GetBucketInventorysInventoryFilterPeriodOutput {
+	return i.ToGetBucketInventorysInventoryFilterPeriodOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryFilterPeriodArgs) ToGetBucketInventorysInventoryFilterPeriodOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterPeriodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryFilterPeriodOutput)
+}
+
+// GetBucketInventorysInventoryFilterPeriodArrayInput is an input type that accepts GetBucketInventorysInventoryFilterPeriodArray and GetBucketInventorysInventoryFilterPeriodArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryFilterPeriodArrayInput` via:
+//
+//          GetBucketInventorysInventoryFilterPeriodArray{ GetBucketInventorysInventoryFilterPeriodArgs{...} }
+type GetBucketInventorysInventoryFilterPeriodArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryFilterPeriodArrayOutput() GetBucketInventorysInventoryFilterPeriodArrayOutput
+	ToGetBucketInventorysInventoryFilterPeriodArrayOutputWithContext(context.Context) GetBucketInventorysInventoryFilterPeriodArrayOutput
+}
+
+type GetBucketInventorysInventoryFilterPeriodArray []GetBucketInventorysInventoryFilterPeriodInput
+
+func (GetBucketInventorysInventoryFilterPeriodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryFilterPeriodArray) ToGetBucketInventorysInventoryFilterPeriodArrayOutput() GetBucketInventorysInventoryFilterPeriodArrayOutput {
+	return i.ToGetBucketInventorysInventoryFilterPeriodArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryFilterPeriodArray) ToGetBucketInventorysInventoryFilterPeriodArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterPeriodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryFilterPeriodArrayOutput)
+}
+
+type GetBucketInventorysInventoryFilterPeriodOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryFilterPeriodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryFilterPeriodOutput) ToGetBucketInventorysInventoryFilterPeriodOutput() GetBucketInventorysInventoryFilterPeriodOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterPeriodOutput) ToGetBucketInventorysInventoryFilterPeriodOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterPeriodOutput {
+	return o
+}
+
+// Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+func (o GetBucketInventorysInventoryFilterPeriodOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryFilterPeriod) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+func (o GetBucketInventorysInventoryFilterPeriodOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryFilterPeriod) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+type GetBucketInventorysInventoryFilterPeriodArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryFilterPeriodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryFilterPeriod)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryFilterPeriodArrayOutput) ToGetBucketInventorysInventoryFilterPeriodArrayOutput() GetBucketInventorysInventoryFilterPeriodArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterPeriodArrayOutput) ToGetBucketInventorysInventoryFilterPeriodArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryFilterPeriodArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryFilterPeriodArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryFilterPeriodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventoryFilterPeriod {
+		return vs[0].([]GetBucketInventorysInventoryFilterPeriod)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryFilterPeriodOutput)
+}
+
+type GetBucketInventorysInventoryOptionalField struct {
+	Fields []string `pulumi:"fields"`
+}
+
+// GetBucketInventorysInventoryOptionalFieldInput is an input type that accepts GetBucketInventorysInventoryOptionalFieldArgs and GetBucketInventorysInventoryOptionalFieldOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryOptionalFieldInput` via:
+//
+//          GetBucketInventorysInventoryOptionalFieldArgs{...}
+type GetBucketInventorysInventoryOptionalFieldInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryOptionalFieldOutput() GetBucketInventorysInventoryOptionalFieldOutput
+	ToGetBucketInventorysInventoryOptionalFieldOutputWithContext(context.Context) GetBucketInventorysInventoryOptionalFieldOutput
+}
+
+type GetBucketInventorysInventoryOptionalFieldArgs struct {
+	Fields pulumi.StringArrayInput `pulumi:"fields"`
+}
+
+func (GetBucketInventorysInventoryOptionalFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryOptionalField)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryOptionalFieldArgs) ToGetBucketInventorysInventoryOptionalFieldOutput() GetBucketInventorysInventoryOptionalFieldOutput {
+	return i.ToGetBucketInventorysInventoryOptionalFieldOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryOptionalFieldArgs) ToGetBucketInventorysInventoryOptionalFieldOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOptionalFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryOptionalFieldOutput)
+}
+
+// GetBucketInventorysInventoryOptionalFieldArrayInput is an input type that accepts GetBucketInventorysInventoryOptionalFieldArray and GetBucketInventorysInventoryOptionalFieldArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryOptionalFieldArrayInput` via:
+//
+//          GetBucketInventorysInventoryOptionalFieldArray{ GetBucketInventorysInventoryOptionalFieldArgs{...} }
+type GetBucketInventorysInventoryOptionalFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryOptionalFieldArrayOutput() GetBucketInventorysInventoryOptionalFieldArrayOutput
+	ToGetBucketInventorysInventoryOptionalFieldArrayOutputWithContext(context.Context) GetBucketInventorysInventoryOptionalFieldArrayOutput
+}
+
+type GetBucketInventorysInventoryOptionalFieldArray []GetBucketInventorysInventoryOptionalFieldInput
+
+func (GetBucketInventorysInventoryOptionalFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryOptionalField)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryOptionalFieldArray) ToGetBucketInventorysInventoryOptionalFieldArrayOutput() GetBucketInventorysInventoryOptionalFieldArrayOutput {
+	return i.ToGetBucketInventorysInventoryOptionalFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryOptionalFieldArray) ToGetBucketInventorysInventoryOptionalFieldArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOptionalFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryOptionalFieldArrayOutput)
+}
+
+type GetBucketInventorysInventoryOptionalFieldOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryOptionalFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventoryOptionalField)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldOutput) ToGetBucketInventorysInventoryOptionalFieldOutput() GetBucketInventorysInventoryOptionalFieldOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldOutput) ToGetBucketInventorysInventoryOptionalFieldOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOptionalFieldOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventoryOptionalField) []string { return v.Fields }).(pulumi.StringArrayOutput)
+}
+
+type GetBucketInventorysInventoryOptionalFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryOptionalFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventoryOptionalField)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldArrayOutput) ToGetBucketInventorysInventoryOptionalFieldArrayOutput() GetBucketInventorysInventoryOptionalFieldArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldArrayOutput) ToGetBucketInventorysInventoryOptionalFieldArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryOptionalFieldArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryOptionalFieldArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryOptionalFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventoryOptionalField {
+		return vs[0].([]GetBucketInventorysInventoryOptionalField)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryOptionalFieldOutput)
+}
+
+type GetBucketInventorysInventorySchedule struct {
+	// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+	Frequency string `pulumi:"frequency"`
+}
+
+// GetBucketInventorysInventoryScheduleInput is an input type that accepts GetBucketInventorysInventoryScheduleArgs and GetBucketInventorysInventoryScheduleOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryScheduleInput` via:
+//
+//          GetBucketInventorysInventoryScheduleArgs{...}
+type GetBucketInventorysInventoryScheduleInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryScheduleOutput() GetBucketInventorysInventoryScheduleOutput
+	ToGetBucketInventorysInventoryScheduleOutputWithContext(context.Context) GetBucketInventorysInventoryScheduleOutput
+}
+
+type GetBucketInventorysInventoryScheduleArgs struct {
+	// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+	Frequency pulumi.StringInput `pulumi:"frequency"`
+}
+
+func (GetBucketInventorysInventoryScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventorySchedule)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryScheduleArgs) ToGetBucketInventorysInventoryScheduleOutput() GetBucketInventorysInventoryScheduleOutput {
+	return i.ToGetBucketInventorysInventoryScheduleOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryScheduleArgs) ToGetBucketInventorysInventoryScheduleOutputWithContext(ctx context.Context) GetBucketInventorysInventoryScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryScheduleOutput)
+}
+
+// GetBucketInventorysInventoryScheduleArrayInput is an input type that accepts GetBucketInventorysInventoryScheduleArray and GetBucketInventorysInventoryScheduleArrayOutput values.
+// You can construct a concrete instance of `GetBucketInventorysInventoryScheduleArrayInput` via:
+//
+//          GetBucketInventorysInventoryScheduleArray{ GetBucketInventorysInventoryScheduleArgs{...} }
+type GetBucketInventorysInventoryScheduleArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketInventorysInventoryScheduleArrayOutput() GetBucketInventorysInventoryScheduleArrayOutput
+	ToGetBucketInventorysInventoryScheduleArrayOutputWithContext(context.Context) GetBucketInventorysInventoryScheduleArrayOutput
+}
+
+type GetBucketInventorysInventoryScheduleArray []GetBucketInventorysInventoryScheduleInput
+
+func (GetBucketInventorysInventoryScheduleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventorySchedule)(nil)).Elem()
+}
+
+func (i GetBucketInventorysInventoryScheduleArray) ToGetBucketInventorysInventoryScheduleArrayOutput() GetBucketInventorysInventoryScheduleArrayOutput {
+	return i.ToGetBucketInventorysInventoryScheduleArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketInventorysInventoryScheduleArray) ToGetBucketInventorysInventoryScheduleArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryScheduleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketInventorysInventoryScheduleArrayOutput)
+}
+
+type GetBucketInventorysInventoryScheduleOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketInventorysInventorySchedule)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryScheduleOutput) ToGetBucketInventorysInventoryScheduleOutput() GetBucketInventorysInventoryScheduleOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryScheduleOutput) ToGetBucketInventorysInventoryScheduleOutputWithContext(ctx context.Context) GetBucketInventorysInventoryScheduleOutput {
+	return o
+}
+
+// Frequency of the inventory job. Enumerated values: Daily, Weekly.
+func (o GetBucketInventorysInventoryScheduleOutput) Frequency() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketInventorysInventorySchedule) string { return v.Frequency }).(pulumi.StringOutput)
+}
+
+type GetBucketInventorysInventoryScheduleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketInventorysInventoryScheduleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketInventorysInventorySchedule)(nil)).Elem()
+}
+
+func (o GetBucketInventorysInventoryScheduleArrayOutput) ToGetBucketInventorysInventoryScheduleArrayOutput() GetBucketInventorysInventoryScheduleArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryScheduleArrayOutput) ToGetBucketInventorysInventoryScheduleArrayOutputWithContext(ctx context.Context) GetBucketInventorysInventoryScheduleArrayOutput {
+	return o
+}
+
+func (o GetBucketInventorysInventoryScheduleArrayOutput) Index(i pulumi.IntInput) GetBucketInventorysInventoryScheduleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketInventorysInventorySchedule {
+		return vs[0].([]GetBucketInventorysInventorySchedule)[vs[1].(int)]
+	}).(GetBucketInventorysInventoryScheduleOutput)
+}
+
+type GetBucketMultipartUploadsUpload struct {
+	// The starting time of multipart upload.
+	Initiated string `pulumi:"initiated"`
+	// Used to represent the information of the initiator of this upload.
+	Initiators []GetBucketMultipartUploadsUploadInitiator `pulumi:"initiators"`
+	// Name of the Object.
+	Key string `pulumi:"key"`
+	// Information used to represent the owner of these chunks.
+	Owners []GetBucketMultipartUploadsUploadOwner `pulumi:"owners"`
+	// Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+	StorageClass string `pulumi:"storageClass"`
+	// Mark the ID of this multipart upload.
+	UploadId string `pulumi:"uploadId"`
+}
+
+// GetBucketMultipartUploadsUploadInput is an input type that accepts GetBucketMultipartUploadsUploadArgs and GetBucketMultipartUploadsUploadOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadInput` via:
+//
+//          GetBucketMultipartUploadsUploadArgs{...}
+type GetBucketMultipartUploadsUploadInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadOutput() GetBucketMultipartUploadsUploadOutput
+	ToGetBucketMultipartUploadsUploadOutputWithContext(context.Context) GetBucketMultipartUploadsUploadOutput
+}
+
+type GetBucketMultipartUploadsUploadArgs struct {
+	// The starting time of multipart upload.
+	Initiated pulumi.StringInput `pulumi:"initiated"`
+	// Used to represent the information of the initiator of this upload.
+	Initiators GetBucketMultipartUploadsUploadInitiatorArrayInput `pulumi:"initiators"`
+	// Name of the Object.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Information used to represent the owner of these chunks.
+	Owners GetBucketMultipartUploadsUploadOwnerArrayInput `pulumi:"owners"`
+	// Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+	StorageClass pulumi.StringInput `pulumi:"storageClass"`
+	// Mark the ID of this multipart upload.
+	UploadId pulumi.StringInput `pulumi:"uploadId"`
+}
+
+func (GetBucketMultipartUploadsUploadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUpload)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadArgs) ToGetBucketMultipartUploadsUploadOutput() GetBucketMultipartUploadsUploadOutput {
+	return i.ToGetBucketMultipartUploadsUploadOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadArgs) ToGetBucketMultipartUploadsUploadOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadOutput)
+}
+
+// GetBucketMultipartUploadsUploadArrayInput is an input type that accepts GetBucketMultipartUploadsUploadArray and GetBucketMultipartUploadsUploadArrayOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadArrayInput` via:
+//
+//          GetBucketMultipartUploadsUploadArray{ GetBucketMultipartUploadsUploadArgs{...} }
+type GetBucketMultipartUploadsUploadArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadArrayOutput() GetBucketMultipartUploadsUploadArrayOutput
+	ToGetBucketMultipartUploadsUploadArrayOutputWithContext(context.Context) GetBucketMultipartUploadsUploadArrayOutput
+}
+
+type GetBucketMultipartUploadsUploadArray []GetBucketMultipartUploadsUploadInput
+
+func (GetBucketMultipartUploadsUploadArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUpload)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadArray) ToGetBucketMultipartUploadsUploadArrayOutput() GetBucketMultipartUploadsUploadArrayOutput {
+	return i.ToGetBucketMultipartUploadsUploadArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadArray) ToGetBucketMultipartUploadsUploadArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadArrayOutput)
+}
+
+type GetBucketMultipartUploadsUploadOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUpload)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadOutput) ToGetBucketMultipartUploadsUploadOutput() GetBucketMultipartUploadsUploadOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadOutput) ToGetBucketMultipartUploadsUploadOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOutput {
+	return o
+}
+
+// The starting time of multipart upload.
+func (o GetBucketMultipartUploadsUploadOutput) Initiated() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) string { return v.Initiated }).(pulumi.StringOutput)
+}
+
+// Used to represent the information of the initiator of this upload.
+func (o GetBucketMultipartUploadsUploadOutput) Initiators() GetBucketMultipartUploadsUploadInitiatorArrayOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) []GetBucketMultipartUploadsUploadInitiator {
+		return v.Initiators
+	}).(GetBucketMultipartUploadsUploadInitiatorArrayOutput)
+}
+
+// Name of the Object.
+func (o GetBucketMultipartUploadsUploadOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Information used to represent the owner of these chunks.
+func (o GetBucketMultipartUploadsUploadOutput) Owners() GetBucketMultipartUploadsUploadOwnerArrayOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) []GetBucketMultipartUploadsUploadOwner { return v.Owners }).(GetBucketMultipartUploadsUploadOwnerArrayOutput)
+}
+
+// Used to represent the storage level of a chunk. Enumerated value: STANDARD,STANDARD_IA,ARCHIVE.
+func (o GetBucketMultipartUploadsUploadOutput) StorageClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) string { return v.StorageClass }).(pulumi.StringOutput)
+}
+
+// Mark the ID of this multipart upload.
+func (o GetBucketMultipartUploadsUploadOutput) UploadId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUpload) string { return v.UploadId }).(pulumi.StringOutput)
+}
+
+type GetBucketMultipartUploadsUploadArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUpload)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadArrayOutput) ToGetBucketMultipartUploadsUploadArrayOutput() GetBucketMultipartUploadsUploadArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadArrayOutput) ToGetBucketMultipartUploadsUploadArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadArrayOutput) Index(i pulumi.IntInput) GetBucketMultipartUploadsUploadOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketMultipartUploadsUpload {
+		return vs[0].([]GetBucketMultipartUploadsUpload)[vs[1].(int)]
+	}).(GetBucketMultipartUploadsUploadOutput)
+}
+
+type GetBucketMultipartUploadsUploadInitiator struct {
+	// Abbreviation for user identity ID (UIN).
+	DisplayName string `pulumi:"displayName"`
+	// The user's unique CAM identity ID.
+	Id string `pulumi:"id"`
+}
+
+// GetBucketMultipartUploadsUploadInitiatorInput is an input type that accepts GetBucketMultipartUploadsUploadInitiatorArgs and GetBucketMultipartUploadsUploadInitiatorOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadInitiatorInput` via:
+//
+//          GetBucketMultipartUploadsUploadInitiatorArgs{...}
+type GetBucketMultipartUploadsUploadInitiatorInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadInitiatorOutput() GetBucketMultipartUploadsUploadInitiatorOutput
+	ToGetBucketMultipartUploadsUploadInitiatorOutputWithContext(context.Context) GetBucketMultipartUploadsUploadInitiatorOutput
+}
+
+type GetBucketMultipartUploadsUploadInitiatorArgs struct {
+	// Abbreviation for user identity ID (UIN).
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// The user's unique CAM identity ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetBucketMultipartUploadsUploadInitiatorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUploadInitiator)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadInitiatorArgs) ToGetBucketMultipartUploadsUploadInitiatorOutput() GetBucketMultipartUploadsUploadInitiatorOutput {
+	return i.ToGetBucketMultipartUploadsUploadInitiatorOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadInitiatorArgs) ToGetBucketMultipartUploadsUploadInitiatorOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadInitiatorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadInitiatorOutput)
+}
+
+// GetBucketMultipartUploadsUploadInitiatorArrayInput is an input type that accepts GetBucketMultipartUploadsUploadInitiatorArray and GetBucketMultipartUploadsUploadInitiatorArrayOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadInitiatorArrayInput` via:
+//
+//          GetBucketMultipartUploadsUploadInitiatorArray{ GetBucketMultipartUploadsUploadInitiatorArgs{...} }
+type GetBucketMultipartUploadsUploadInitiatorArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadInitiatorArrayOutput() GetBucketMultipartUploadsUploadInitiatorArrayOutput
+	ToGetBucketMultipartUploadsUploadInitiatorArrayOutputWithContext(context.Context) GetBucketMultipartUploadsUploadInitiatorArrayOutput
+}
+
+type GetBucketMultipartUploadsUploadInitiatorArray []GetBucketMultipartUploadsUploadInitiatorInput
+
+func (GetBucketMultipartUploadsUploadInitiatorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUploadInitiator)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadInitiatorArray) ToGetBucketMultipartUploadsUploadInitiatorArrayOutput() GetBucketMultipartUploadsUploadInitiatorArrayOutput {
+	return i.ToGetBucketMultipartUploadsUploadInitiatorArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadInitiatorArray) ToGetBucketMultipartUploadsUploadInitiatorArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadInitiatorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadInitiatorArrayOutput)
+}
+
+type GetBucketMultipartUploadsUploadInitiatorOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadInitiatorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUploadInitiator)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadInitiatorOutput) ToGetBucketMultipartUploadsUploadInitiatorOutput() GetBucketMultipartUploadsUploadInitiatorOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadInitiatorOutput) ToGetBucketMultipartUploadsUploadInitiatorOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadInitiatorOutput {
+	return o
+}
+
+// Abbreviation for user identity ID (UIN).
+func (o GetBucketMultipartUploadsUploadInitiatorOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUploadInitiator) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// The user's unique CAM identity ID.
+func (o GetBucketMultipartUploadsUploadInitiatorOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUploadInitiator) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetBucketMultipartUploadsUploadInitiatorArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadInitiatorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUploadInitiator)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadInitiatorArrayOutput) ToGetBucketMultipartUploadsUploadInitiatorArrayOutput() GetBucketMultipartUploadsUploadInitiatorArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadInitiatorArrayOutput) ToGetBucketMultipartUploadsUploadInitiatorArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadInitiatorArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadInitiatorArrayOutput) Index(i pulumi.IntInput) GetBucketMultipartUploadsUploadInitiatorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketMultipartUploadsUploadInitiator {
+		return vs[0].([]GetBucketMultipartUploadsUploadInitiator)[vs[1].(int)]
+	}).(GetBucketMultipartUploadsUploadInitiatorOutput)
+}
+
+type GetBucketMultipartUploadsUploadOwner struct {
+	// Abbreviation for user identity ID (UIN).
+	DisplayName string `pulumi:"displayName"`
+	// The user's unique CAM identity ID.
+	Id string `pulumi:"id"`
+}
+
+// GetBucketMultipartUploadsUploadOwnerInput is an input type that accepts GetBucketMultipartUploadsUploadOwnerArgs and GetBucketMultipartUploadsUploadOwnerOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadOwnerInput` via:
+//
+//          GetBucketMultipartUploadsUploadOwnerArgs{...}
+type GetBucketMultipartUploadsUploadOwnerInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadOwnerOutput() GetBucketMultipartUploadsUploadOwnerOutput
+	ToGetBucketMultipartUploadsUploadOwnerOutputWithContext(context.Context) GetBucketMultipartUploadsUploadOwnerOutput
+}
+
+type GetBucketMultipartUploadsUploadOwnerArgs struct {
+	// Abbreviation for user identity ID (UIN).
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// The user's unique CAM identity ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetBucketMultipartUploadsUploadOwnerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUploadOwner)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadOwnerArgs) ToGetBucketMultipartUploadsUploadOwnerOutput() GetBucketMultipartUploadsUploadOwnerOutput {
+	return i.ToGetBucketMultipartUploadsUploadOwnerOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadOwnerArgs) ToGetBucketMultipartUploadsUploadOwnerOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOwnerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadOwnerOutput)
+}
+
+// GetBucketMultipartUploadsUploadOwnerArrayInput is an input type that accepts GetBucketMultipartUploadsUploadOwnerArray and GetBucketMultipartUploadsUploadOwnerArrayOutput values.
+// You can construct a concrete instance of `GetBucketMultipartUploadsUploadOwnerArrayInput` via:
+//
+//          GetBucketMultipartUploadsUploadOwnerArray{ GetBucketMultipartUploadsUploadOwnerArgs{...} }
+type GetBucketMultipartUploadsUploadOwnerArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketMultipartUploadsUploadOwnerArrayOutput() GetBucketMultipartUploadsUploadOwnerArrayOutput
+	ToGetBucketMultipartUploadsUploadOwnerArrayOutputWithContext(context.Context) GetBucketMultipartUploadsUploadOwnerArrayOutput
+}
+
+type GetBucketMultipartUploadsUploadOwnerArray []GetBucketMultipartUploadsUploadOwnerInput
+
+func (GetBucketMultipartUploadsUploadOwnerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUploadOwner)(nil)).Elem()
+}
+
+func (i GetBucketMultipartUploadsUploadOwnerArray) ToGetBucketMultipartUploadsUploadOwnerArrayOutput() GetBucketMultipartUploadsUploadOwnerArrayOutput {
+	return i.ToGetBucketMultipartUploadsUploadOwnerArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketMultipartUploadsUploadOwnerArray) ToGetBucketMultipartUploadsUploadOwnerArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOwnerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketMultipartUploadsUploadOwnerArrayOutput)
+}
+
+type GetBucketMultipartUploadsUploadOwnerOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadOwnerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketMultipartUploadsUploadOwner)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadOwnerOutput) ToGetBucketMultipartUploadsUploadOwnerOutput() GetBucketMultipartUploadsUploadOwnerOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadOwnerOutput) ToGetBucketMultipartUploadsUploadOwnerOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOwnerOutput {
+	return o
+}
+
+// Abbreviation for user identity ID (UIN).
+func (o GetBucketMultipartUploadsUploadOwnerOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUploadOwner) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// The user's unique CAM identity ID.
+func (o GetBucketMultipartUploadsUploadOwnerOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketMultipartUploadsUploadOwner) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetBucketMultipartUploadsUploadOwnerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketMultipartUploadsUploadOwnerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketMultipartUploadsUploadOwner)(nil)).Elem()
+}
+
+func (o GetBucketMultipartUploadsUploadOwnerArrayOutput) ToGetBucketMultipartUploadsUploadOwnerArrayOutput() GetBucketMultipartUploadsUploadOwnerArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadOwnerArrayOutput) ToGetBucketMultipartUploadsUploadOwnerArrayOutputWithContext(ctx context.Context) GetBucketMultipartUploadsUploadOwnerArrayOutput {
+	return o
+}
+
+func (o GetBucketMultipartUploadsUploadOwnerArrayOutput) Index(i pulumi.IntInput) GetBucketMultipartUploadsUploadOwnerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketMultipartUploadsUploadOwner {
+		return vs[0].([]GetBucketMultipartUploadsUploadOwner)[vs[1].(int)]
+	}).(GetBucketMultipartUploadsUploadOwnerOutput)
+}
+
 type GetBucketsBucketList struct {
 	// Bucket access control configurations.
 	Acl string `pulumi:"acl"`
@@ -3111,6 +7538,28 @@ func (o GetBucketsBucketListWebsiteArrayOutput) Index(i pulumi.IntInput) GetBuck
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestInput)(nil)).Elem(), BatchManifestArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestPtrInput)(nil)).Elem(), BatchManifestArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestLocationInput)(nil)).Elem(), BatchManifestLocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestLocationPtrInput)(nil)).Elem(), BatchManifestLocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestSpecInput)(nil)).Elem(), BatchManifestSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchManifestSpecPtrInput)(nil)).Elem(), BatchManifestSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationInput)(nil)).Elem(), BatchOperationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationPtrInput)(nil)).Elem(), BatchOperationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosInitiateRestoreObjectInput)(nil)).Elem(), BatchOperationCosInitiateRestoreObjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosInitiateRestoreObjectPtrInput)(nil)).Elem(), BatchOperationCosInitiateRestoreObjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyInput)(nil)).Elem(), BatchOperationCosPutObjectCopyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyPtrInput)(nil)).Elem(), BatchOperationCosPutObjectCopyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyAccessControlGrantsInput)(nil)).Elem(), BatchOperationCosPutObjectCopyAccessControlGrantsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyAccessControlGrantsPtrInput)(nil)).Elem(), BatchOperationCosPutObjectCopyAccessControlGrantsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectMetadataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataPtrInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectMetadataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectTaggingInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectTaggingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchOperationCosPutObjectCopyNewObjectTaggingArrayInput)(nil)).Elem(), BatchOperationCosPutObjectCopyNewObjectTaggingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchReportInput)(nil)).Elem(), BatchReportArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchReportPtrInput)(nil)).Elem(), BatchReportArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleInput)(nil)).Elem(), BucketCorsRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleArrayInput)(nil)).Elem(), BucketCorsRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateArgs{})
@@ -3119,6 +7568,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationInput)(nil)).Elem(), BucketInventoryDestinationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationPtrInput)(nil)).Elem(), BucketInventoryDestinationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationEncryptionInput)(nil)).Elem(), BucketInventoryDestinationEncryptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationEncryptionPtrInput)(nil)).Elem(), BucketInventoryDestinationEncryptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryFilterInput)(nil)).Elem(), BucketInventoryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryFilterPtrInput)(nil)).Elem(), BucketInventoryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryFilterPeriodInput)(nil)).Elem(), BucketInventoryFilterPeriodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryFilterPeriodPtrInput)(nil)).Elem(), BucketInventoryFilterPeriodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryOptionalFieldsInput)(nil)).Elem(), BucketInventoryOptionalFieldsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryOptionalFieldsPtrInput)(nil)).Elem(), BucketInventoryOptionalFieldsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryScheduleInput)(nil)).Elem(), BucketInventoryScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventorySchedulePtrInput)(nil)).Elem(), BucketInventoryScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleInput)(nil)).Elem(), BucketLifecycleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleArrayInput)(nil)).Elem(), BucketLifecycleRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
@@ -3137,6 +7598,30 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleArrayInput)(nil)).Elem(), BucketReplicaRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsiteInput)(nil)).Elem(), BucketWebsiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsitePtrInput)(nil)).Elem(), BucketWebsiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBatchsJobInput)(nil)).Elem(), GetBatchsJobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBatchsJobArrayInput)(nil)).Elem(), GetBatchsJobArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBatchsJobProgressSummaryInput)(nil)).Elem(), GetBatchsJobProgressSummaryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBatchsJobProgressSummaryArrayInput)(nil)).Elem(), GetBatchsJobProgressSummaryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryInput)(nil)).Elem(), GetBucketInventorysInventoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryArrayInput)(nil)).Elem(), GetBucketInventorysInventoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryDestinationInput)(nil)).Elem(), GetBucketInventorysInventoryDestinationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryDestinationArrayInput)(nil)).Elem(), GetBucketInventorysInventoryDestinationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryDestinationEncryptionInput)(nil)).Elem(), GetBucketInventorysInventoryDestinationEncryptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryDestinationEncryptionArrayInput)(nil)).Elem(), GetBucketInventorysInventoryDestinationEncryptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryFilterInput)(nil)).Elem(), GetBucketInventorysInventoryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryFilterArrayInput)(nil)).Elem(), GetBucketInventorysInventoryFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryFilterPeriodInput)(nil)).Elem(), GetBucketInventorysInventoryFilterPeriodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryFilterPeriodArrayInput)(nil)).Elem(), GetBucketInventorysInventoryFilterPeriodArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryOptionalFieldInput)(nil)).Elem(), GetBucketInventorysInventoryOptionalFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryOptionalFieldArrayInput)(nil)).Elem(), GetBucketInventorysInventoryOptionalFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryScheduleInput)(nil)).Elem(), GetBucketInventorysInventoryScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketInventorysInventoryScheduleArrayInput)(nil)).Elem(), GetBucketInventorysInventoryScheduleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadInput)(nil)).Elem(), GetBucketMultipartUploadsUploadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadArrayInput)(nil)).Elem(), GetBucketMultipartUploadsUploadArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadInitiatorInput)(nil)).Elem(), GetBucketMultipartUploadsUploadInitiatorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadInitiatorArrayInput)(nil)).Elem(), GetBucketMultipartUploadsUploadInitiatorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadOwnerInput)(nil)).Elem(), GetBucketMultipartUploadsUploadOwnerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketMultipartUploadsUploadOwnerArrayInput)(nil)).Elem(), GetBucketMultipartUploadsUploadOwnerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListInput)(nil)).Elem(), GetBucketsBucketListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListArrayInput)(nil)).Elem(), GetBucketsBucketListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListCorsRuleInput)(nil)).Elem(), GetBucketsBucketListCorsRuleArgs{})
@@ -3157,6 +7642,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListOriginPullRuleArrayInput)(nil)).Elem(), GetBucketsBucketListOriginPullRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListWebsiteInput)(nil)).Elem(), GetBucketsBucketListWebsiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListWebsiteArrayInput)(nil)).Elem(), GetBucketsBucketListWebsiteArray{})
+	pulumi.RegisterOutputType(BatchManifestOutput{})
+	pulumi.RegisterOutputType(BatchManifestPtrOutput{})
+	pulumi.RegisterOutputType(BatchManifestLocationOutput{})
+	pulumi.RegisterOutputType(BatchManifestLocationPtrOutput{})
+	pulumi.RegisterOutputType(BatchManifestSpecOutput{})
+	pulumi.RegisterOutputType(BatchManifestSpecPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationOutput{})
+	pulumi.RegisterOutputType(BatchOperationPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosInitiateRestoreObjectOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosInitiateRestoreObjectPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyAccessControlGrantsOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyAccessControlGrantsPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectMetadataOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectMetadataPtrOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArrayOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectTaggingOutput{})
+	pulumi.RegisterOutputType(BatchOperationCosPutObjectCopyNewObjectTaggingArrayOutput{})
+	pulumi.RegisterOutputType(BatchReportOutput{})
+	pulumi.RegisterOutputType(BatchReportPtrOutput{})
 	pulumi.RegisterOutputType(BucketCorsRuleOutput{})
 	pulumi.RegisterOutputType(BucketCorsRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateOutput{})
@@ -3165,6 +7672,18 @@ func init() {
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput{})
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput{})
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryDestinationOutput{})
+	pulumi.RegisterOutputType(BucketInventoryDestinationPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryDestinationEncryptionOutput{})
+	pulumi.RegisterOutputType(BucketInventoryDestinationEncryptionPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryFilterOutput{})
+	pulumi.RegisterOutputType(BucketInventoryFilterPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryFilterPeriodOutput{})
+	pulumi.RegisterOutputType(BucketInventoryFilterPeriodPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryOptionalFieldsOutput{})
+	pulumi.RegisterOutputType(BucketInventoryOptionalFieldsPtrOutput{})
+	pulumi.RegisterOutputType(BucketInventoryScheduleOutput{})
+	pulumi.RegisterOutputType(BucketInventorySchedulePtrOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationOutput{})
@@ -3183,6 +7702,30 @@ func init() {
 	pulumi.RegisterOutputType(BucketReplicaRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketWebsiteOutput{})
 	pulumi.RegisterOutputType(BucketWebsitePtrOutput{})
+	pulumi.RegisterOutputType(GetBatchsJobOutput{})
+	pulumi.RegisterOutputType(GetBatchsJobArrayOutput{})
+	pulumi.RegisterOutputType(GetBatchsJobProgressSummaryOutput{})
+	pulumi.RegisterOutputType(GetBatchsJobProgressSummaryArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryDestinationOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryDestinationArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryDestinationEncryptionOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryDestinationEncryptionArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryFilterOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryFilterPeriodOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryFilterPeriodArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryOptionalFieldOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryOptionalFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryScheduleOutput{})
+	pulumi.RegisterOutputType(GetBucketInventorysInventoryScheduleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadInitiatorOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadInitiatorArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadOwnerOutput{})
+	pulumi.RegisterOutputType(GetBucketMultipartUploadsUploadOwnerArrayOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListArrayOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListCorsRuleOutput{})

@@ -14,8 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const basic = new tencentcloud.Tcm.Mesh("basic", {
+ * const mesh = new tencentcloud.Tcm.Mesh("mesh", {
  *     config: {
+ *         inject: {
+ *             excludeIpRanges: ["172.16.0.0/16"],
+ *             holdApplicationUntilProxyStarts: true,
+ *             holdProxyUntilApplicationEnds: true,
+ *         },
  *         istio: {
  *             disableHttpRetry: true,
  *             disablePolicyChecks: true,
@@ -25,13 +30,53 @@ import * as utilities from "../utilities";
  *                 istioMetaDnsAutoAllocate: true,
  *                 istioMetaDnsCapture: true,
  *             },
+ *             tracing: {
+ *                 enable: false,
+ *             },
+ *         },
+ *         prometheus: {
+ *             customProm: {
+ *                 authType: "none",
+ *                 url: "https://10.0.0.1:1000",
+ *                 vpcId: "vpc-j9yhbzpn",
+ *             },
+ *         },
+ *         sidecarResources: {
+ *             limits: [
+ *                 {
+ *                     name: "cpu",
+ *                     quantity: "2",
+ *                 },
+ *                 {
+ *                     name: "memory",
+ *                     quantity: "1Gi",
+ *                 },
+ *             ],
+ *             requests: [
+ *                 {
+ *                     name: "cpu",
+ *                     quantity: "100m",
+ *                 },
+ *                 {
+ *                     name: "memory",
+ *                     quantity: "128Mi",
+ *                 },
+ *             ],
+ *         },
+ *         tracing: {
+ *             apm: {
+ *                 enable: true,
+ *                 region: "ap-guangzhou",
+ *             },
+ *             enable: true,
+ *             sampling: 1,
  *         },
  *     },
  *     displayName: "test_mesh",
  *     meshVersion: "1.12.5",
  *     tagLists: [{
  *         key: "key",
- *         passthrough: true,
+ *         passthrough: false,
  *         value: "value",
  *     }],
  *     type: "HOSTED",

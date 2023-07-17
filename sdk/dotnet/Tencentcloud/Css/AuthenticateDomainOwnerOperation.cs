@@ -14,8 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
     /// 
     /// ## Example Usage
-    /// 
-    /// dnsCheck way:
+    /// ### dnsCheck way:
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -34,8 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// }
     /// ```
-    /// 
-    /// fileCheck way:
+    /// ### fileCheck way:
     /// 
     /// ```csharp
     /// using Pulumi;

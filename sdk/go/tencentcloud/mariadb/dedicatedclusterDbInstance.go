@@ -63,12 +63,16 @@ type DedicatedclusterDbInstance struct {
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
 	// instance memory.
 	Memory pulumi.IntOutput `pulumi:"memory"`
+	// project id.
+	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// instance disk storage.
 	Storage pulumi.IntOutput `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
+	// vip.
+	Vip pulumi.StringOutput `pulumi:"vip"`
 	// vpc id.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
@@ -125,12 +129,16 @@ type dedicatedclusterDbInstanceState struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// instance memory.
 	Memory *int `pulumi:"memory"`
+	// project id.
+	ProjectId *int `pulumi:"projectId"`
 	// instance disk storage.
 	Storage *int `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// vip.
+	Vip *string `pulumi:"vip"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
 }
@@ -146,12 +154,16 @@ type DedicatedclusterDbInstanceState struct {
 	InstanceName pulumi.StringPtrInput
 	// instance memory.
 	Memory pulumi.IntPtrInput
+	// project id.
+	ProjectId pulumi.IntPtrInput
 	// instance disk storage.
 	Storage pulumi.IntPtrInput
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// vip.
+	Vip pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
 }
@@ -171,12 +183,16 @@ type dedicatedclusterDbInstanceArgs struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// instance memory.
 	Memory int `pulumi:"memory"`
+	// project id.
+	ProjectId *int `pulumi:"projectId"`
 	// instance disk storage.
 	Storage int `pulumi:"storage"`
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// vip.
+	Vip *string `pulumi:"vip"`
 	// vpc id.
 	VpcId *string `pulumi:"vpcId"`
 }
@@ -193,12 +209,16 @@ type DedicatedclusterDbInstanceArgs struct {
 	InstanceName pulumi.StringPtrInput
 	// instance memory.
 	Memory pulumi.IntInput
+	// project id.
+	ProjectId pulumi.IntPtrInput
 	// instance disk storage.
 	Storage pulumi.IntInput
 	// subnet id, it&amp;#39;s required when vpcId is set.
 	SubnetId pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// vip.
+	Vip pulumi.StringPtrInput
 	// vpc id.
 	VpcId pulumi.StringPtrInput
 }
@@ -315,6 +335,11 @@ func (o DedicatedclusterDbInstanceOutput) Memory() pulumi.IntOutput {
 	return o.ApplyT(func(v *DedicatedclusterDbInstance) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
 }
 
+// project id.
+func (o DedicatedclusterDbInstanceOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DedicatedclusterDbInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
 // instance disk storage.
 func (o DedicatedclusterDbInstanceOutput) Storage() pulumi.IntOutput {
 	return o.ApplyT(func(v *DedicatedclusterDbInstance) pulumi.IntOutput { return v.Storage }).(pulumi.IntOutput)
@@ -328,6 +353,11 @@ func (o DedicatedclusterDbInstanceOutput) SubnetId() pulumi.StringPtrOutput {
 // Tag description list.
 func (o DedicatedclusterDbInstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *DedicatedclusterDbInstance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
+}
+
+// vip.
+func (o DedicatedclusterDbInstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *DedicatedclusterDbInstance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
 }
 
 // vpc id.

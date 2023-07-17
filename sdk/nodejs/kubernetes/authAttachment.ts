@@ -64,8 +64,7 @@ import * as utilities from "../utilities";
  *     autoCreateDiscoveryAnonymousAuth: true,
  * });
  * ```
- *
- * Use the TKE default issuer and jwksUri
+ * ### Use the TKE default issuer and jwksUri
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

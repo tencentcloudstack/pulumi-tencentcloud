@@ -16,6 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// &gt; **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
     /// 
     /// ## Example Usage
+    /// ### Install cbs addon by passing values
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -33,36 +34,95 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 "rootdir=/var/lib/kubelet",
     ///             },
     ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Install tcr addon by passing values
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var mytcr = new Tencentcloud.Tcr.Instance("mytcr", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var tcrId = mytcr.Id;
+    ///         var tcrName = mytcr.Name;
+    ///         var myNs = new Tencentcloud.Tcr.Namespace("myNs", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = tcrId,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "cve-xxxxx",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var nsName = myNs.Name;
+    ///         var myToken = new Tencentcloud.Tcr.Token("myToken", new Tencentcloud.Tcr.TokenArgs
+    ///         {
+    ///             InstanceId = tcrId,
+    ///             Description = "tcr token",
+    ///         });
+    ///         var userName = myToken.UserName;
+    ///         var token = myToken.Token;
+    ///         var myIns = Tencentcloud.Tcr.GetInstances.Invoke(new Tencentcloud.Tcr.GetInstancesInvokeArgs
+    ///         {
+    ///             InstanceId = tcrId,
+    ///         });
+    ///         var endPoint = myIns.Apply(myIns =&gt; myIns.InstanceLists?[0]?.InternalEndPoint);
     ///         var addonTcr = new Tencentcloud.Kubernetes.AddonAttachment("addonTcr", new Tencentcloud.Kubernetes.AddonAttachmentArgs
     ///         {
     ///             ClusterId = "cls-xxxxxxxx",
+    ///             Version = "1.0.0",
     ///             Values = 
     ///             {
-    ///                 "global.imagePullSecretsCrs[0].name=unique-sample-vpc",
-    ///                 "global.imagePullSecretsCrs[0].namespaces=tcr-assistant-system",
+    ///                 tcrId.Apply(tcrId =&gt; $"global.imagePullSecretsCrs[0].name={tcrId}-vpc"),
+    ///                 nsName.Apply(nsName =&gt; $"global.imagePullSecretsCrs[0].namespaces={nsName}"),
     ///                 "global.imagePullSecretsCrs[0].serviceAccounts=*",
     ///                 "global.imagePullSecretsCrs[0].type=docker",
-    ///                 "global.imagePullSecretsCrs[0].dockerUsername=100012345678",
-    ///                 "global.imagePullSecretsCrs[0].dockerPassword=a.b.tcr-token",
-    ///                 "global.imagePullSecretsCrs[0].dockerServer=xxxx.tencentcloudcr.com",
-    ///                 "global.imagePullSecretsCrs[1].name=sample-public",
-    ///                 "global.imagePullSecretsCrs[1].namespaces=*",
+    ///                 userName.Apply(userName =&gt; $"global.imagePullSecretsCrs[0].dockerUsername={userName}"),
+    ///                 token.Apply(token =&gt; $"global.imagePullSecretsCrs[0].dockerPassword={token}"),
+    ///                 tcrName.Apply(tcrName =&gt; $"global.imagePullSecretsCrs[0].dockerServer={tcrName}-vpc.tencentcloudcr.com"),
+    ///                 tcrId.Apply(tcrId =&gt; $"global.imagePullSecretsCrs[1].name={tcrId}-public"),
+    ///                 nsName.Apply(nsName =&gt; $"global.imagePullSecretsCrs[1].namespaces={nsName}"),
     ///                 "global.imagePullSecretsCrs[1].serviceAccounts=*",
     ///                 "global.imagePullSecretsCrs[1].type=docker",
-    ///                 "global.imagePullSecretsCrs[1].dockerUsername=100012345678",
-    ///                 "global.imagePullSecretsCrs[1].dockerPassword=a.b.tcr-token",
-    ///                 "global.imagePullSecretsCrs[1].dockerServer=sample",
-    ///                 "global.hosts[0].domain=sample-vpc.tencentcloudcr.com",
-    ///                 "global.hosts[0].ip=10.16.0.49",
+    ///                 userName.Apply(userName =&gt; $"global.imagePullSecretsCrs[1].dockerUsername={userName}"),
+    ///                 token.Apply(token =&gt; $"global.imagePullSecretsCrs[1].dockerPassword={token}"),
+    ///                 tcrName.Apply(tcrName =&gt; $"global.imagePullSecretsCrs[1].dockerServer={tcrName}-tencentcloudcr.com"),
+    ///                 "global.cluster.region=gz",
+    ///                 "global.cluster.longregion=ap-guangzhou",
+    ///                 tcrName.Apply(tcrName =&gt; $"global.hosts[0].domain={tcrName}-vpc.tencentcloudcr.com"),
+    ///                 endPoint.Apply(endPoint =&gt; $"global.hosts[0].ip={endPoint}"),
     ///                 "global.hosts[0].disabled=false",
+    ///                 tcrName.Apply(tcrName =&gt; $"global.hosts[1].domain={tcrName}-tencentcloudcr.com"),
+    ///                 endPoint.Apply(endPoint =&gt; $"global.hosts[1].ip={endPoint}"),
+    ///                 "global.hosts[1].disabled=false",
     ///             },
     ///         });
     ///     }
     /// 
     /// }
     /// ```
-    /// 
-    /// Install new addon by passing spec json to req_body directly
+    /// ### Install new addon by passing spec json to req_body directly
     /// 
     /// ```csharp
     /// using Pulumi;

@@ -332,7 +332,7 @@ class AuditLogFile(pulumi.CustomResource):
 
         audit_log_file = tencentcloud.cynosdb.AuditLogFile("auditLogFile",
             end_time="2022-08-12 10:29:20",
-            instance_id="xxxxxxx",
+            instance_id="cynosdbmysql-ins-afqx1hy0",
             start_time="2022-07-12 10:29:20")
         ```
 
@@ -365,7 +365,7 @@ class AuditLogFile(pulumi.CustomResource):
 
         audit_log_file = tencentcloud.cynosdb.AuditLogFile("auditLogFile",
             end_time="2022-08-12 10:29:20",
-            instance_id="xxxxxxx",
+            instance_id="cynosdbmysql-ins-afqx1hy0",
             start_time="2022-07-12 10:29:20")
         ```
 

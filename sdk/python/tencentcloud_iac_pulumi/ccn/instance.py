@@ -282,8 +282,7 @@ class Instance(pulumi.CustomResource):
         Provides a resource to create a CCN instance.
 
         ## Example Usage
-
-        Create a prepaid CCN
+        ### Create a prepaid CCN
 
         ```python
         import pulumi
@@ -295,8 +294,7 @@ class Instance(pulumi.CustomResource):
             description="ci-temp-test-ccn-des",
             qos="AG")
         ```
-
-        Create a post-paid regional export speed limit type CCN
+        ### Create a post-paid regional export speed limit type CCN
 
         ```python
         import pulumi
@@ -308,8 +306,7 @@ class Instance(pulumi.CustomResource):
             description="ci-temp-test-ccn-des",
             qos="AG")
         ```
-
-        Create a post-paid inter-regional rate limit type CNN
+        ### Create a post-paid inter-regional rate limit type CNN
 
         ```python
         import pulumi
@@ -349,8 +346,7 @@ class Instance(pulumi.CustomResource):
         Provides a resource to create a CCN instance.
 
         ## Example Usage
-
-        Create a prepaid CCN
+        ### Create a prepaid CCN
 
         ```python
         import pulumi
@@ -362,8 +358,7 @@ class Instance(pulumi.CustomResource):
             description="ci-temp-test-ccn-des",
             qos="AG")
         ```
-
-        Create a post-paid regional export speed limit type CCN
+        ### Create a post-paid regional export speed limit type CCN
 
         ```python
         import pulumi
@@ -375,8 +370,7 @@ class Instance(pulumi.CustomResource):
             description="ci-temp-test-ccn-des",
             qos="AG")
         ```
-
-        Create a post-paid inter-regional rate limit type CNN
+        ### Create a post-paid inter-regional rate limit type CNN
 
         ```python
         import pulumi

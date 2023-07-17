@@ -3837,6 +3837,162 @@ func (o ClusterWorkerInstancesListArrayOutput) Index(i pulumi.IntInput) ClusterW
 	}).(ClusterWorkerInstancesListOutput)
 }
 
+type EncryptionProtectionKmsConfiguration struct {
+	// kms id.
+	KeyId *string `pulumi:"keyId"`
+	// kms region.
+	KmsRegion *string `pulumi:"kmsRegion"`
+}
+
+// EncryptionProtectionKmsConfigurationInput is an input type that accepts EncryptionProtectionKmsConfigurationArgs and EncryptionProtectionKmsConfigurationOutput values.
+// You can construct a concrete instance of `EncryptionProtectionKmsConfigurationInput` via:
+//
+//          EncryptionProtectionKmsConfigurationArgs{...}
+type EncryptionProtectionKmsConfigurationInput interface {
+	pulumi.Input
+
+	ToEncryptionProtectionKmsConfigurationOutput() EncryptionProtectionKmsConfigurationOutput
+	ToEncryptionProtectionKmsConfigurationOutputWithContext(context.Context) EncryptionProtectionKmsConfigurationOutput
+}
+
+type EncryptionProtectionKmsConfigurationArgs struct {
+	// kms id.
+	KeyId pulumi.StringPtrInput `pulumi:"keyId"`
+	// kms region.
+	KmsRegion pulumi.StringPtrInput `pulumi:"kmsRegion"`
+}
+
+func (EncryptionProtectionKmsConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*EncryptionProtectionKmsConfiguration)(nil)).Elem()
+}
+
+func (i EncryptionProtectionKmsConfigurationArgs) ToEncryptionProtectionKmsConfigurationOutput() EncryptionProtectionKmsConfigurationOutput {
+	return i.ToEncryptionProtectionKmsConfigurationOutputWithContext(context.Background())
+}
+
+func (i EncryptionProtectionKmsConfigurationArgs) ToEncryptionProtectionKmsConfigurationOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EncryptionProtectionKmsConfigurationOutput)
+}
+
+func (i EncryptionProtectionKmsConfigurationArgs) ToEncryptionProtectionKmsConfigurationPtrOutput() EncryptionProtectionKmsConfigurationPtrOutput {
+	return i.ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i EncryptionProtectionKmsConfigurationArgs) ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EncryptionProtectionKmsConfigurationOutput).ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(ctx)
+}
+
+// EncryptionProtectionKmsConfigurationPtrInput is an input type that accepts EncryptionProtectionKmsConfigurationArgs, EncryptionProtectionKmsConfigurationPtr and EncryptionProtectionKmsConfigurationPtrOutput values.
+// You can construct a concrete instance of `EncryptionProtectionKmsConfigurationPtrInput` via:
+//
+//          EncryptionProtectionKmsConfigurationArgs{...}
+//
+//  or:
+//
+//          nil
+type EncryptionProtectionKmsConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToEncryptionProtectionKmsConfigurationPtrOutput() EncryptionProtectionKmsConfigurationPtrOutput
+	ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(context.Context) EncryptionProtectionKmsConfigurationPtrOutput
+}
+
+type encryptionProtectionKmsConfigurationPtrType EncryptionProtectionKmsConfigurationArgs
+
+func EncryptionProtectionKmsConfigurationPtr(v *EncryptionProtectionKmsConfigurationArgs) EncryptionProtectionKmsConfigurationPtrInput {
+	return (*encryptionProtectionKmsConfigurationPtrType)(v)
+}
+
+func (*encryptionProtectionKmsConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**EncryptionProtectionKmsConfiguration)(nil)).Elem()
+}
+
+func (i *encryptionProtectionKmsConfigurationPtrType) ToEncryptionProtectionKmsConfigurationPtrOutput() EncryptionProtectionKmsConfigurationPtrOutput {
+	return i.ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *encryptionProtectionKmsConfigurationPtrType) ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EncryptionProtectionKmsConfigurationPtrOutput)
+}
+
+type EncryptionProtectionKmsConfigurationOutput struct{ *pulumi.OutputState }
+
+func (EncryptionProtectionKmsConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*EncryptionProtectionKmsConfiguration)(nil)).Elem()
+}
+
+func (o EncryptionProtectionKmsConfigurationOutput) ToEncryptionProtectionKmsConfigurationOutput() EncryptionProtectionKmsConfigurationOutput {
+	return o
+}
+
+func (o EncryptionProtectionKmsConfigurationOutput) ToEncryptionProtectionKmsConfigurationOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationOutput {
+	return o
+}
+
+func (o EncryptionProtectionKmsConfigurationOutput) ToEncryptionProtectionKmsConfigurationPtrOutput() EncryptionProtectionKmsConfigurationPtrOutput {
+	return o.ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o EncryptionProtectionKmsConfigurationOutput) ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v EncryptionProtectionKmsConfiguration) *EncryptionProtectionKmsConfiguration {
+		return &v
+	}).(EncryptionProtectionKmsConfigurationPtrOutput)
+}
+
+// kms id.
+func (o EncryptionProtectionKmsConfigurationOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v EncryptionProtectionKmsConfiguration) *string { return v.KeyId }).(pulumi.StringPtrOutput)
+}
+
+// kms region.
+func (o EncryptionProtectionKmsConfigurationOutput) KmsRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v EncryptionProtectionKmsConfiguration) *string { return v.KmsRegion }).(pulumi.StringPtrOutput)
+}
+
+type EncryptionProtectionKmsConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (EncryptionProtectionKmsConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**EncryptionProtectionKmsConfiguration)(nil)).Elem()
+}
+
+func (o EncryptionProtectionKmsConfigurationPtrOutput) ToEncryptionProtectionKmsConfigurationPtrOutput() EncryptionProtectionKmsConfigurationPtrOutput {
+	return o
+}
+
+func (o EncryptionProtectionKmsConfigurationPtrOutput) ToEncryptionProtectionKmsConfigurationPtrOutputWithContext(ctx context.Context) EncryptionProtectionKmsConfigurationPtrOutput {
+	return o
+}
+
+func (o EncryptionProtectionKmsConfigurationPtrOutput) Elem() EncryptionProtectionKmsConfigurationOutput {
+	return o.ApplyT(func(v *EncryptionProtectionKmsConfiguration) EncryptionProtectionKmsConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret EncryptionProtectionKmsConfiguration
+		return ret
+	}).(EncryptionProtectionKmsConfigurationOutput)
+}
+
+// kms id.
+func (o EncryptionProtectionKmsConfigurationPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EncryptionProtectionKmsConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// kms region.
+func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EncryptionProtectionKmsConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.KmsRegion
+	}).(pulumi.StringPtrOutput)
+}
+
 type NodePoolAutoScalingConfig struct {
 	// Backup CVM instance types if specified instance type sold out or mismatch.
 	BackupInstanceTypes []string `pulumi:"backupInstanceTypes"`
@@ -6995,6 +7151,245 @@ func (o GetChartsChartListArrayOutput) Index(i pulumi.IntInput) GetChartsChartLi
 	}).(GetChartsChartListOutput)
 }
 
+type GetClusterAuthenticationOptionsOidcConfig struct {
+	// Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateClientIds []string `pulumi:"autoCreateClientIds"`
+	// Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateOidcConfig bool `pulumi:"autoCreateOidcConfig"`
+	// Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoInstallPodIdentityWebhookAddon bool `pulumi:"autoInstallPodIdentityWebhookAddon"`
+}
+
+// GetClusterAuthenticationOptionsOidcConfigInput is an input type that accepts GetClusterAuthenticationOptionsOidcConfigArgs and GetClusterAuthenticationOptionsOidcConfigOutput values.
+// You can construct a concrete instance of `GetClusterAuthenticationOptionsOidcConfigInput` via:
+//
+//          GetClusterAuthenticationOptionsOidcConfigArgs{...}
+type GetClusterAuthenticationOptionsOidcConfigInput interface {
+	pulumi.Input
+
+	ToGetClusterAuthenticationOptionsOidcConfigOutput() GetClusterAuthenticationOptionsOidcConfigOutput
+	ToGetClusterAuthenticationOptionsOidcConfigOutputWithContext(context.Context) GetClusterAuthenticationOptionsOidcConfigOutput
+}
+
+type GetClusterAuthenticationOptionsOidcConfigArgs struct {
+	// Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateClientIds pulumi.StringArrayInput `pulumi:"autoCreateClientIds"`
+	// Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateOidcConfig pulumi.BoolInput `pulumi:"autoCreateOidcConfig"`
+	// Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoInstallPodIdentityWebhookAddon pulumi.BoolInput `pulumi:"autoInstallPodIdentityWebhookAddon"`
+}
+
+func (GetClusterAuthenticationOptionsOidcConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAuthenticationOptionsOidcConfig)(nil)).Elem()
+}
+
+func (i GetClusterAuthenticationOptionsOidcConfigArgs) ToGetClusterAuthenticationOptionsOidcConfigOutput() GetClusterAuthenticationOptionsOidcConfigOutput {
+	return i.ToGetClusterAuthenticationOptionsOidcConfigOutputWithContext(context.Background())
+}
+
+func (i GetClusterAuthenticationOptionsOidcConfigArgs) ToGetClusterAuthenticationOptionsOidcConfigOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsOidcConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAuthenticationOptionsOidcConfigOutput)
+}
+
+// GetClusterAuthenticationOptionsOidcConfigArrayInput is an input type that accepts GetClusterAuthenticationOptionsOidcConfigArray and GetClusterAuthenticationOptionsOidcConfigArrayOutput values.
+// You can construct a concrete instance of `GetClusterAuthenticationOptionsOidcConfigArrayInput` via:
+//
+//          GetClusterAuthenticationOptionsOidcConfigArray{ GetClusterAuthenticationOptionsOidcConfigArgs{...} }
+type GetClusterAuthenticationOptionsOidcConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAuthenticationOptionsOidcConfigArrayOutput() GetClusterAuthenticationOptionsOidcConfigArrayOutput
+	ToGetClusterAuthenticationOptionsOidcConfigArrayOutputWithContext(context.Context) GetClusterAuthenticationOptionsOidcConfigArrayOutput
+}
+
+type GetClusterAuthenticationOptionsOidcConfigArray []GetClusterAuthenticationOptionsOidcConfigInput
+
+func (GetClusterAuthenticationOptionsOidcConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAuthenticationOptionsOidcConfig)(nil)).Elem()
+}
+
+func (i GetClusterAuthenticationOptionsOidcConfigArray) ToGetClusterAuthenticationOptionsOidcConfigArrayOutput() GetClusterAuthenticationOptionsOidcConfigArrayOutput {
+	return i.ToGetClusterAuthenticationOptionsOidcConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAuthenticationOptionsOidcConfigArray) ToGetClusterAuthenticationOptionsOidcConfigArrayOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsOidcConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAuthenticationOptionsOidcConfigArrayOutput)
+}
+
+type GetClusterAuthenticationOptionsOidcConfigOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAuthenticationOptionsOidcConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAuthenticationOptionsOidcConfig)(nil)).Elem()
+}
+
+func (o GetClusterAuthenticationOptionsOidcConfigOutput) ToGetClusterAuthenticationOptionsOidcConfigOutput() GetClusterAuthenticationOptionsOidcConfigOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsOidcConfigOutput) ToGetClusterAuthenticationOptionsOidcConfigOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsOidcConfigOutput {
+	return o
+}
+
+// Creating ClientId of the identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+func (o GetClusterAuthenticationOptionsOidcConfigOutput) AutoCreateClientIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsOidcConfig) []string { return v.AutoCreateClientIds }).(pulumi.StringArrayOutput)
+}
+
+// Creating an identity provider. Note: This field may return `null`, indicating that no valid value can be obtained.
+func (o GetClusterAuthenticationOptionsOidcConfigOutput) AutoCreateOidcConfig() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsOidcConfig) bool { return v.AutoCreateOidcConfig }).(pulumi.BoolOutput)
+}
+
+// Creating the PodIdentityWebhook component. Note: This field may return `null`, indicating that no valid value can be obtained.
+func (o GetClusterAuthenticationOptionsOidcConfigOutput) AutoInstallPodIdentityWebhookAddon() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsOidcConfig) bool { return v.AutoInstallPodIdentityWebhookAddon }).(pulumi.BoolOutput)
+}
+
+type GetClusterAuthenticationOptionsOidcConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAuthenticationOptionsOidcConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAuthenticationOptionsOidcConfig)(nil)).Elem()
+}
+
+func (o GetClusterAuthenticationOptionsOidcConfigArrayOutput) ToGetClusterAuthenticationOptionsOidcConfigArrayOutput() GetClusterAuthenticationOptionsOidcConfigArrayOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsOidcConfigArrayOutput) ToGetClusterAuthenticationOptionsOidcConfigArrayOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsOidcConfigArrayOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsOidcConfigArrayOutput) Index(i pulumi.IntInput) GetClusterAuthenticationOptionsOidcConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAuthenticationOptionsOidcConfig {
+		return vs[0].([]GetClusterAuthenticationOptionsOidcConfig)[vs[1].(int)]
+	}).(GetClusterAuthenticationOptionsOidcConfigOutput)
+}
+
+type GetClusterAuthenticationOptionsServiceAccount struct {
+	// If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+	AutoCreateDiscoveryAnonymousAuth bool `pulumi:"autoCreateDiscoveryAnonymousAuth"`
+	// service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+	Issuer string `pulumi:"issuer"`
+	// service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+	JwksUri string `pulumi:"jwksUri"`
+	// Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+	UseTkeDefault bool `pulumi:"useTkeDefault"`
+}
+
+// GetClusterAuthenticationOptionsServiceAccountInput is an input type that accepts GetClusterAuthenticationOptionsServiceAccountArgs and GetClusterAuthenticationOptionsServiceAccountOutput values.
+// You can construct a concrete instance of `GetClusterAuthenticationOptionsServiceAccountInput` via:
+//
+//          GetClusterAuthenticationOptionsServiceAccountArgs{...}
+type GetClusterAuthenticationOptionsServiceAccountInput interface {
+	pulumi.Input
+
+	ToGetClusterAuthenticationOptionsServiceAccountOutput() GetClusterAuthenticationOptionsServiceAccountOutput
+	ToGetClusterAuthenticationOptionsServiceAccountOutputWithContext(context.Context) GetClusterAuthenticationOptionsServiceAccountOutput
+}
+
+type GetClusterAuthenticationOptionsServiceAccountArgs struct {
+	// If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+	AutoCreateDiscoveryAnonymousAuth pulumi.BoolInput `pulumi:"autoCreateDiscoveryAnonymousAuth"`
+	// service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+	Issuer pulumi.StringInput `pulumi:"issuer"`
+	// service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+	JwksUri pulumi.StringInput `pulumi:"jwksUri"`
+	// Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+	UseTkeDefault pulumi.BoolInput `pulumi:"useTkeDefault"`
+}
+
+func (GetClusterAuthenticationOptionsServiceAccountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccount)(nil)).Elem()
+}
+
+func (i GetClusterAuthenticationOptionsServiceAccountArgs) ToGetClusterAuthenticationOptionsServiceAccountOutput() GetClusterAuthenticationOptionsServiceAccountOutput {
+	return i.ToGetClusterAuthenticationOptionsServiceAccountOutputWithContext(context.Background())
+}
+
+func (i GetClusterAuthenticationOptionsServiceAccountArgs) ToGetClusterAuthenticationOptionsServiceAccountOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsServiceAccountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAuthenticationOptionsServiceAccountOutput)
+}
+
+// GetClusterAuthenticationOptionsServiceAccountArrayInput is an input type that accepts GetClusterAuthenticationOptionsServiceAccountArray and GetClusterAuthenticationOptionsServiceAccountArrayOutput values.
+// You can construct a concrete instance of `GetClusterAuthenticationOptionsServiceAccountArrayInput` via:
+//
+//          GetClusterAuthenticationOptionsServiceAccountArray{ GetClusterAuthenticationOptionsServiceAccountArgs{...} }
+type GetClusterAuthenticationOptionsServiceAccountArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAuthenticationOptionsServiceAccountArrayOutput() GetClusterAuthenticationOptionsServiceAccountArrayOutput
+	ToGetClusterAuthenticationOptionsServiceAccountArrayOutputWithContext(context.Context) GetClusterAuthenticationOptionsServiceAccountArrayOutput
+}
+
+type GetClusterAuthenticationOptionsServiceAccountArray []GetClusterAuthenticationOptionsServiceAccountInput
+
+func (GetClusterAuthenticationOptionsServiceAccountArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAuthenticationOptionsServiceAccount)(nil)).Elem()
+}
+
+func (i GetClusterAuthenticationOptionsServiceAccountArray) ToGetClusterAuthenticationOptionsServiceAccountArrayOutput() GetClusterAuthenticationOptionsServiceAccountArrayOutput {
+	return i.ToGetClusterAuthenticationOptionsServiceAccountArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAuthenticationOptionsServiceAccountArray) ToGetClusterAuthenticationOptionsServiceAccountArrayOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsServiceAccountArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAuthenticationOptionsServiceAccountArrayOutput)
+}
+
+type GetClusterAuthenticationOptionsServiceAccountOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAuthenticationOptionsServiceAccountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccount)(nil)).Elem()
+}
+
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) ToGetClusterAuthenticationOptionsServiceAccountOutput() GetClusterAuthenticationOptionsServiceAccountOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) ToGetClusterAuthenticationOptionsServiceAccountOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsServiceAccountOutput {
+	return o
+}
+
+// If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`. Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) AutoCreateDiscoveryAnonymousAuth() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsServiceAccount) bool { return v.AutoCreateDiscoveryAnonymousAuth }).(pulumi.BoolOutput)
+}
+
+// service-account-issuer. Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) Issuer() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsServiceAccount) string { return v.Issuer }).(pulumi.StringOutput)
+}
+
+// service-account-jwks-uri. Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) JwksUri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsServiceAccount) string { return v.JwksUri }).(pulumi.StringOutput)
+}
+
+// Use TKE default issuer and jwksuri. Note: This field may return `null`, indicating that no valid values can be obtained.
+func (o GetClusterAuthenticationOptionsServiceAccountOutput) UseTkeDefault() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterAuthenticationOptionsServiceAccount) bool { return v.UseTkeDefault }).(pulumi.BoolOutput)
+}
+
+type GetClusterAuthenticationOptionsServiceAccountArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAuthenticationOptionsServiceAccountArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAuthenticationOptionsServiceAccount)(nil)).Elem()
+}
+
+func (o GetClusterAuthenticationOptionsServiceAccountArrayOutput) ToGetClusterAuthenticationOptionsServiceAccountArrayOutput() GetClusterAuthenticationOptionsServiceAccountArrayOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsServiceAccountArrayOutput) ToGetClusterAuthenticationOptionsServiceAccountArrayOutputWithContext(ctx context.Context) GetClusterAuthenticationOptionsServiceAccountArrayOutput {
+	return o
+}
+
+func (o GetClusterAuthenticationOptionsServiceAccountArrayOutput) Index(i pulumi.IntInput) GetClusterAuthenticationOptionsServiceAccountOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAuthenticationOptionsServiceAccount {
+		return vs[0].([]GetClusterAuthenticationOptionsServiceAccount)[vs[1].(int)]
+	}).(GetClusterAuthenticationOptionsServiceAccountOutput)
+}
+
 type GetClusterCommonNamesList struct {
 	// The CommonName in the certificate of the client corresponding to the sub-account.
 	CommonNames string `pulumi:"commonNames"`
@@ -7968,6 +8363,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigDataDiskArrayInput)(nil)).Elem(), ClusterWorkerConfigDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListInput)(nil)).Elem(), ClusterWorkerInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListArrayInput)(nil)).Elem(), ClusterWorkerInstancesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationPtrInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigPtrInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigDataDiskInput)(nil)).Elem(), NodePoolAutoScalingConfigDataDiskArgs{})
@@ -7998,6 +8395,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableClusterVersionsClusterArrayInput)(nil)).Elem(), GetAvailableClusterVersionsClusterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChartsChartListInput)(nil)).Elem(), GetChartsChartListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChartsChartListArrayInput)(nil)).Elem(), GetChartsChartListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsOidcConfigInput)(nil)).Elem(), GetClusterAuthenticationOptionsOidcConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsOidcConfigArrayInput)(nil)).Elem(), GetClusterAuthenticationOptionsOidcConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccountInput)(nil)).Elem(), GetClusterAuthenticationOptionsServiceAccountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccountArrayInput)(nil)).Elem(), GetClusterAuthenticationOptionsServiceAccountArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListInput)(nil)).Elem(), GetClusterCommonNamesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListArrayInput)(nil)).Elem(), GetClusterCommonNamesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterLevelsListInput)(nil)).Elem(), GetClusterLevelsListArgs{})
@@ -8048,6 +8449,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterWorkerConfigDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListArrayOutput{})
+	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationOutput{})
+	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigDataDiskOutput{})
@@ -8078,6 +8481,10 @@ func init() {
 	pulumi.RegisterOutputType(GetAvailableClusterVersionsClusterArrayOutput{})
 	pulumi.RegisterOutputType(GetChartsChartListOutput{})
 	pulumi.RegisterOutputType(GetChartsChartListArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsOidcConfigOutput{})
+	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsOidcConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsServiceAccountOutput{})
+	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsServiceAccountArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterLevelsListOutput{})

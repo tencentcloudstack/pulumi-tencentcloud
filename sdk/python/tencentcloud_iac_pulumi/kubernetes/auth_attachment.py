@@ -288,8 +288,7 @@ class AuthAttachment(pulumi.CustomResource):
             issuer=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com"),
             auto_create_discovery_anonymous_auth=True)
         ```
-
-        Use the TKE default issuer and jwks_uri
+        ### Use the TKE default issuer and jwks_uri
 
         ```python
         import pulumi
@@ -419,8 +418,7 @@ class AuthAttachment(pulumi.CustomResource):
             issuer=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com"),
             auto_create_discovery_anonymous_auth=True)
         ```
-
-        Use the TKE default issuer and jwks_uri
+        ### Use the TKE default issuer and jwks_uri
 
         ```python
         import pulumi

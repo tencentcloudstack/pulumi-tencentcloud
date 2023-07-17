@@ -9,6 +9,7 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AclRuleRuleListArgs',
     'ConnectResourceClickhouseConnectParamArgs',
     'ConnectResourceDorisConnectParamArgs',
     'ConnectResourceDtsConnectParamArgs',
@@ -19,11 +20,183 @@ __all__ = [
     'ConnectResourceMysqlConnectParamArgs',
     'ConnectResourcePostgresqlConnectParamArgs',
     'ConnectResourceSqlserverConnectParamArgs',
+    'DatahubTaskSourceResourceArgs',
+    'DatahubTaskSourceResourceClickHouseParamArgs',
+    'DatahubTaskSourceResourceClickHouseParamDropClsArgs',
+    'DatahubTaskSourceResourceClickHouseParamSchemaArgs',
+    'DatahubTaskSourceResourceClsParamArgs',
+    'DatahubTaskSourceResourceCosParamArgs',
+    'DatahubTaskSourceResourceCtsdbParamArgs',
+    'DatahubTaskSourceResourceDtsParamArgs',
+    'DatahubTaskSourceResourceEsParamArgs',
+    'DatahubTaskSourceResourceEsParamDropClsArgs',
+    'DatahubTaskSourceResourceEsParamDropDlqArgs',
+    'DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs',
+    'DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs',
+    'DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs',
+    'DatahubTaskSourceResourceEventBusParamArgs',
+    'DatahubTaskSourceResourceKafkaParamArgs',
+    'DatahubTaskSourceResourceKafkaParamTableMappingArgs',
+    'DatahubTaskSourceResourceMariaDbParamArgs',
+    'DatahubTaskSourceResourceMongoDbParamArgs',
+    'DatahubTaskSourceResourceMySqlParamArgs',
+    'DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs',
+    'DatahubTaskSourceResourceMySqlParamDropClsArgs',
+    'DatahubTaskSourceResourcePostgreSqlParamArgs',
+    'DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs',
+    'DatahubTaskSourceResourceScfParamArgs',
+    'DatahubTaskSourceResourceSqlServerParamArgs',
+    'DatahubTaskSourceResourceTdwParamArgs',
+    'DatahubTaskSourceResourceTopicParamArgs',
+    'DatahubTaskTargetResourceArgs',
+    'DatahubTaskTargetResourceClickHouseParamArgs',
+    'DatahubTaskTargetResourceClickHouseParamDropClsArgs',
+    'DatahubTaskTargetResourceClickHouseParamSchemaArgs',
+    'DatahubTaskTargetResourceClsParamArgs',
+    'DatahubTaskTargetResourceCosParamArgs',
+    'DatahubTaskTargetResourceCtsdbParamArgs',
+    'DatahubTaskTargetResourceDtsParamArgs',
+    'DatahubTaskTargetResourceEsParamArgs',
+    'DatahubTaskTargetResourceEsParamDropClsArgs',
+    'DatahubTaskTargetResourceEsParamDropDlqArgs',
+    'DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs',
+    'DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs',
+    'DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs',
+    'DatahubTaskTargetResourceEventBusParamArgs',
+    'DatahubTaskTargetResourceKafkaParamArgs',
+    'DatahubTaskTargetResourceKafkaParamTableMappingArgs',
+    'DatahubTaskTargetResourceMariaDbParamArgs',
+    'DatahubTaskTargetResourceMongoDbParamArgs',
+    'DatahubTaskTargetResourceMySqlParamArgs',
+    'DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs',
+    'DatahubTaskTargetResourceMySqlParamDropClsArgs',
+    'DatahubTaskTargetResourcePostgreSqlParamArgs',
+    'DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs',
+    'DatahubTaskTargetResourceScfParamArgs',
+    'DatahubTaskTargetResourceSqlServerParamArgs',
+    'DatahubTaskTargetResourceTdwParamArgs',
+    'DatahubTaskTargetResourceTopicParamArgs',
+    'DatahubTaskTransformParamArgs',
+    'DatahubTaskTransformParamAnalyseResultArgs',
+    'DatahubTaskTransformParamFailureParamArgs',
+    'DatahubTaskTransformParamFailureParamKafkaParamArgs',
+    'DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs',
+    'DatahubTaskTransformParamFailureParamTopicParamArgs',
+    'DatahubTaskTransformParamFilterParamArgs',
+    'DatahubTaskTransformParamMapParamArgs',
+    'DatahubTaskTransformsParamArgs',
+    'DatahubTaskTransformsParamBatchAnalyseArgs',
+    'DatahubTaskTransformsParamFailureParamArgs',
+    'DatahubTaskTransformsParamFailureParamKafkaParamArgs',
+    'DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs',
+    'DatahubTaskTransformsParamFailureParamTopicParamArgs',
+    'DatahubTaskTransformsParamFieldChainArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs',
+    'DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs',
+    'DatahubTaskTransformsParamFieldChainSMTArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs',
+    'DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs',
+    'DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs',
+    'DatahubTaskTransformsParamFilterParamArgs',
+    'DatahubTaskTransformsParamRowParamArgs',
     'InstanceConfigArgs',
     'InstanceDynamicRetentionConfigArgs',
     'InstanceTagArgs',
     'GetInstancesFilterArgs',
 ]
+
+@pulumi.input_type
+class AclRuleRuleListArgs:
+    def __init__(__self__, *,
+                 host: pulumi.Input[str],
+                 operation: pulumi.Input[str],
+                 permission_type: pulumi.Input[str],
+                 principal: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] host: The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
+        :param pulumi.Input[str] operation: Acl operation mode, enumeration value (all operations All, read Read, write Write).
+        :param pulumi.Input[str] permission_type: permission type, (Deny|Allow).
+        :param pulumi.Input[str] principal: User list, the default is User:, which means that any user can access, and the current user can only be the user included in the user list. The input format needs to be prefixed with [User:]. For example, user A is passed in as User:A.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "operation", operation)
+        pulumi.set(__self__, "permission_type", permission_type)
+        pulumi.set(__self__, "principal", principal)
+
+    @property
+    @pulumi.getter
+    def host(self) -> pulumi.Input[str]:
+        """
+        The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter
+    def operation(self) -> pulumi.Input[str]:
+        """
+        Acl operation mode, enumeration value (all operations All, read Read, write Write).
+        """
+        return pulumi.get(self, "operation")
+
+    @operation.setter
+    def operation(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operation", value)
+
+    @property
+    @pulumi.getter(name="permissionType")
+    def permission_type(self) -> pulumi.Input[str]:
+        """
+        permission type, (Deny|Allow).
+        """
+        return pulumi.get(self, "permission_type")
+
+    @permission_type.setter
+    def permission_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "permission_type", value)
+
+    @property
+    @pulumi.getter
+    def principal(self) -> pulumi.Input[str]:
+        """
+        User list, the default is User:, which means that any user can access, and the current user can only be the user included in the user list. The input format needs to be prefixed with [User:]. For example, user A is passed in as User:A.
+        """
+        return pulumi.get(self, "principal")
+
+    @principal.setter
+    def principal(self, value: pulumi.Input[str]):
+        pulumi.set(self, "principal", value)
+
 
 @pulumi.input_type
 class ConnectResourceClickhouseConnectParamArgs:
@@ -1284,6 +1457,11992 @@ class ConnectResourceSqlserverConnectParamArgs:
     @uniq_vpc_id.setter
     def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "uniq_vpc_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 click_house_param: Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamArgs']] = None,
+                 cls_param: Optional[pulumi.Input['DatahubTaskSourceResourceClsParamArgs']] = None,
+                 cos_param: Optional[pulumi.Input['DatahubTaskSourceResourceCosParamArgs']] = None,
+                 ctsdb_param: Optional[pulumi.Input['DatahubTaskSourceResourceCtsdbParamArgs']] = None,
+                 dts_param: Optional[pulumi.Input['DatahubTaskSourceResourceDtsParamArgs']] = None,
+                 es_param: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamArgs']] = None,
+                 event_bus_param: Optional[pulumi.Input['DatahubTaskSourceResourceEventBusParamArgs']] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskSourceResourceKafkaParamArgs']] = None,
+                 maria_db_param: Optional[pulumi.Input['DatahubTaskSourceResourceMariaDbParamArgs']] = None,
+                 mongo_db_param: Optional[pulumi.Input['DatahubTaskSourceResourceMongoDbParamArgs']] = None,
+                 my_sql_param: Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamArgs']] = None,
+                 postgre_sql_param: Optional[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamArgs']] = None,
+                 scf_param: Optional[pulumi.Input['DatahubTaskSourceResourceScfParamArgs']] = None,
+                 sql_server_param: Optional[pulumi.Input['DatahubTaskSourceResourceSqlServerParamArgs']] = None,
+                 tdw_param: Optional[pulumi.Input['DatahubTaskSourceResourceTdwParamArgs']] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskSourceResourceTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: resource type.
+        :param pulumi.Input['DatahubTaskSourceResourceClickHouseParamArgs'] click_house_param: ClickHouse config, Type CLICKHOUSE requierd.
+        :param pulumi.Input['DatahubTaskSourceResourceClsParamArgs'] cls_param: Cls configuration, Required when Type is CLS.
+        :param pulumi.Input['DatahubTaskSourceResourceCosParamArgs'] cos_param: Cos configuration, required when Type is COS.
+        :param pulumi.Input['DatahubTaskSourceResourceCtsdbParamArgs'] ctsdb_param: Ctsdb configuration, Required when Type is CTSDB.
+        :param pulumi.Input['DatahubTaskSourceResourceDtsParamArgs'] dts_param: Dts configuration, required when Type is DTS.
+        :param pulumi.Input['DatahubTaskSourceResourceEsParamArgs'] es_param: Es configuration, required when Type is ES.
+        :param pulumi.Input['DatahubTaskSourceResourceEventBusParamArgs'] event_bus_param: EB configuration, required when type is EB.
+        :param pulumi.Input['DatahubTaskSourceResourceKafkaParamArgs'] kafka_param: ckafka configuration, required when Type is KAFKA.
+        :param pulumi.Input['DatahubTaskSourceResourceMariaDbParamArgs'] maria_db_param: MariaDB configuration, Required when Type is MARIADB.
+        :param pulumi.Input['DatahubTaskSourceResourceMongoDbParamArgs'] mongo_db_param: MongoDB config, Required when Type is MONGODB.
+        :param pulumi.Input['DatahubTaskSourceResourceMySqlParamArgs'] my_sql_param: MySQL configuration, Required when Type is MYSQL.
+        :param pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamArgs'] postgre_sql_param: PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+        :param pulumi.Input['DatahubTaskSourceResourceScfParamArgs'] scf_param: Scf configuration, Required when Type is SCF.
+        :param pulumi.Input['DatahubTaskSourceResourceSqlServerParamArgs'] sql_server_param: SQLServer configuration, Required when Type is SQLSERVER.
+        :param pulumi.Input['DatahubTaskSourceResourceTdwParamArgs'] tdw_param: Tdw configuration, required when Type is TDW.
+        :param pulumi.Input['DatahubTaskSourceResourceTopicParamArgs'] topic_param: Topic configuration, Required when Type is Topic.
+        """
+        pulumi.set(__self__, "type", type)
+        if click_house_param is not None:
+            pulumi.set(__self__, "click_house_param", click_house_param)
+        if cls_param is not None:
+            pulumi.set(__self__, "cls_param", cls_param)
+        if cos_param is not None:
+            pulumi.set(__self__, "cos_param", cos_param)
+        if ctsdb_param is not None:
+            pulumi.set(__self__, "ctsdb_param", ctsdb_param)
+        if dts_param is not None:
+            pulumi.set(__self__, "dts_param", dts_param)
+        if es_param is not None:
+            pulumi.set(__self__, "es_param", es_param)
+        if event_bus_param is not None:
+            pulumi.set(__self__, "event_bus_param", event_bus_param)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if maria_db_param is not None:
+            pulumi.set(__self__, "maria_db_param", maria_db_param)
+        if mongo_db_param is not None:
+            pulumi.set(__self__, "mongo_db_param", mongo_db_param)
+        if my_sql_param is not None:
+            pulumi.set(__self__, "my_sql_param", my_sql_param)
+        if postgre_sql_param is not None:
+            pulumi.set(__self__, "postgre_sql_param", postgre_sql_param)
+        if scf_param is not None:
+            pulumi.set(__self__, "scf_param", scf_param)
+        if sql_server_param is not None:
+            pulumi.set(__self__, "sql_server_param", sql_server_param)
+        if tdw_param is not None:
+            pulumi.set(__self__, "tdw_param", tdw_param)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        resource type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="clickHouseParam")
+    def click_house_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamArgs']]:
+        """
+        ClickHouse config, Type CLICKHOUSE requierd.
+        """
+        return pulumi.get(self, "click_house_param")
+
+    @click_house_param.setter
+    def click_house_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamArgs']]):
+        pulumi.set(self, "click_house_param", value)
+
+    @property
+    @pulumi.getter(name="clsParam")
+    def cls_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceClsParamArgs']]:
+        """
+        Cls configuration, Required when Type is CLS.
+        """
+        return pulumi.get(self, "cls_param")
+
+    @cls_param.setter
+    def cls_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceClsParamArgs']]):
+        pulumi.set(self, "cls_param", value)
+
+    @property
+    @pulumi.getter(name="cosParam")
+    def cos_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceCosParamArgs']]:
+        """
+        Cos configuration, required when Type is COS.
+        """
+        return pulumi.get(self, "cos_param")
+
+    @cos_param.setter
+    def cos_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceCosParamArgs']]):
+        pulumi.set(self, "cos_param", value)
+
+    @property
+    @pulumi.getter(name="ctsdbParam")
+    def ctsdb_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceCtsdbParamArgs']]:
+        """
+        Ctsdb configuration, Required when Type is CTSDB.
+        """
+        return pulumi.get(self, "ctsdb_param")
+
+    @ctsdb_param.setter
+    def ctsdb_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceCtsdbParamArgs']]):
+        pulumi.set(self, "ctsdb_param", value)
+
+    @property
+    @pulumi.getter(name="dtsParam")
+    def dts_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceDtsParamArgs']]:
+        """
+        Dts configuration, required when Type is DTS.
+        """
+        return pulumi.get(self, "dts_param")
+
+    @dts_param.setter
+    def dts_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceDtsParamArgs']]):
+        pulumi.set(self, "dts_param", value)
+
+    @property
+    @pulumi.getter(name="esParam")
+    def es_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEsParamArgs']]:
+        """
+        Es configuration, required when Type is ES.
+        """
+        return pulumi.get(self, "es_param")
+
+    @es_param.setter
+    def es_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamArgs']]):
+        pulumi.set(self, "es_param", value)
+
+    @property
+    @pulumi.getter(name="eventBusParam")
+    def event_bus_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEventBusParamArgs']]:
+        """
+        EB configuration, required when type is EB.
+        """
+        return pulumi.get(self, "event_bus_param")
+
+    @event_bus_param.setter
+    def event_bus_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEventBusParamArgs']]):
+        pulumi.set(self, "event_bus_param", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceKafkaParamArgs']]:
+        """
+        ckafka configuration, required when Type is KAFKA.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="mariaDbParam")
+    def maria_db_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceMariaDbParamArgs']]:
+        """
+        MariaDB configuration, Required when Type is MARIADB.
+        """
+        return pulumi.get(self, "maria_db_param")
+
+    @maria_db_param.setter
+    def maria_db_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceMariaDbParamArgs']]):
+        pulumi.set(self, "maria_db_param", value)
+
+    @property
+    @pulumi.getter(name="mongoDbParam")
+    def mongo_db_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceMongoDbParamArgs']]:
+        """
+        MongoDB config, Required when Type is MONGODB.
+        """
+        return pulumi.get(self, "mongo_db_param")
+
+    @mongo_db_param.setter
+    def mongo_db_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceMongoDbParamArgs']]):
+        pulumi.set(self, "mongo_db_param", value)
+
+    @property
+    @pulumi.getter(name="mySqlParam")
+    def my_sql_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamArgs']]:
+        """
+        MySQL configuration, Required when Type is MYSQL.
+        """
+        return pulumi.get(self, "my_sql_param")
+
+    @my_sql_param.setter
+    def my_sql_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamArgs']]):
+        pulumi.set(self, "my_sql_param", value)
+
+    @property
+    @pulumi.getter(name="postgreSqlParam")
+    def postgre_sql_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamArgs']]:
+        """
+        PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+        """
+        return pulumi.get(self, "postgre_sql_param")
+
+    @postgre_sql_param.setter
+    def postgre_sql_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamArgs']]):
+        pulumi.set(self, "postgre_sql_param", value)
+
+    @property
+    @pulumi.getter(name="scfParam")
+    def scf_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceScfParamArgs']]:
+        """
+        Scf configuration, Required when Type is SCF.
+        """
+        return pulumi.get(self, "scf_param")
+
+    @scf_param.setter
+    def scf_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceScfParamArgs']]):
+        pulumi.set(self, "scf_param", value)
+
+    @property
+    @pulumi.getter(name="sqlServerParam")
+    def sql_server_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceSqlServerParamArgs']]:
+        """
+        SQLServer configuration, Required when Type is SQLSERVER.
+        """
+        return pulumi.get(self, "sql_server_param")
+
+    @sql_server_param.setter
+    def sql_server_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceSqlServerParamArgs']]):
+        pulumi.set(self, "sql_server_param", value)
+
+    @property
+    @pulumi.getter(name="tdwParam")
+    def tdw_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceTdwParamArgs']]:
+        """
+        Tdw configuration, required when Type is TDW.
+        """
+        return pulumi.get(self, "tdw_param")
+
+    @tdw_param.setter
+    def tdw_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceTdwParamArgs']]):
+        pulumi.set(self, "tdw_param", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceTopicParamArgs']]:
+        """
+        Topic configuration, Required when Type is Topic.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceClickHouseParamArgs:
+    def __init__(__self__, *,
+                 cluster: pulumi.Input[str],
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 schemas: pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceClickHouseParamSchemaArgs']]],
+                 table: pulumi.Input[str],
+                 drop_cls: Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamDropClsArgs']] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 service_vip: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cluster: ClickHouse cluster.
+        :param pulumi.Input[str] database: ClickHouse database name.
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceClickHouseParamSchemaArgs']]] schemas: ClickHouse schema.
+        :param pulumi.Input[str] table: ClickHouse table.
+        :param pulumi.Input['DatahubTaskSourceResourceClickHouseParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input[bool] drop_invalid_message: Whether ClickHouse discards the message that fails to parse, the default is true.
+        :param pulumi.Input[str] ip: ClickHouse ip.
+        :param pulumi.Input[str] password: ClickHouse passwd.
+        :param pulumi.Input[int] port: ClickHouse port.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] service_vip: instance vip.
+        :param pulumi.Input[str] type: ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+        :param pulumi.Input[str] uniq_vpc_id: instance vpc id.
+        :param pulumi.Input[str] user_name: ClickHouse user name.
+        """
+        pulumi.set(__self__, "cluster", cluster)
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "schemas", schemas)
+        pulumi.set(__self__, "table", table)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def cluster(self) -> pulumi.Input[str]:
+        """
+        ClickHouse cluster.
+        """
+        return pulumi.get(self, "cluster")
+
+    @cluster.setter
+    def cluster(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster", value)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        ClickHouse database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def schemas(self) -> pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceClickHouseParamSchemaArgs']]]:
+        """
+        ClickHouse schema.
+        """
+        return pulumi.get(self, "schemas")
+
+    @schemas.setter
+    def schemas(self, value: pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceClickHouseParamSchemaArgs']]]):
+        pulumi.set(self, "schemas", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        ClickHouse table.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceClickHouseParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether ClickHouse discards the message that fails to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse passwd.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        ClickHouse port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vip.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @service_vip.setter
+    def service_vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_vip", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vpc id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse user name.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceClickHouseParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceClickHouseParamSchemaArgs:
+    def __init__(__self__, *,
+                 allow_null: pulumi.Input[bool],
+                 column_name: pulumi.Input[str],
+                 json_key: pulumi.Input[str],
+                 type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the column item is allowed to be empty.
+        :param pulumi.Input[str] column_name: column name.
+        :param pulumi.Input[str] json_key: The json Key name corresponding to this column.
+        :param pulumi.Input[str] type: type of table column.
+        """
+        pulumi.set(__self__, "allow_null", allow_null)
+        pulumi.set(__self__, "column_name", column_name)
+        pulumi.set(__self__, "json_key", json_key)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> pulumi.Input[bool]:
+        """
+        Whether the column item is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> pulumi.Input[str]:
+        """
+        column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> pulumi.Input[str]:
+        """
+        The json Key name corresponding to this column.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type of table column.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceClsParamArgs:
+    def __init__(__self__, *,
+                 decode_json: pulumi.Input[bool],
+                 resource: pulumi.Input[str],
+                 content_key: Optional[pulumi.Input[str]] = None,
+                 log_set: Optional[pulumi.Input[str]] = None,
+                 time_field: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] decode_json: Whether the produced information is in json format.
+        :param pulumi.Input[str] resource: cls id.
+        :param pulumi.Input[str] content_key: Required when Decode Json is false.
+        :param pulumi.Input[str] log_set: LogSet id.
+        :param pulumi.Input[str] time_field: Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+        """
+        pulumi.set(__self__, "decode_json", decode_json)
+        pulumi.set(__self__, "resource", resource)
+        if content_key is not None:
+            pulumi.set(__self__, "content_key", content_key)
+        if log_set is not None:
+            pulumi.set(__self__, "log_set", log_set)
+        if time_field is not None:
+            pulumi.set(__self__, "time_field", time_field)
+
+    @property
+    @pulumi.getter(name="decodeJson")
+    def decode_json(self) -> pulumi.Input[bool]:
+        """
+        Whether the produced information is in json format.
+        """
+        return pulumi.get(self, "decode_json")
+
+    @decode_json.setter
+    def decode_json(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "decode_json", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        cls id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="contentKey")
+    def content_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Required when Decode Json is false.
+        """
+        return pulumi.get(self, "content_key")
+
+    @content_key.setter
+    def content_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_key", value)
+
+    @property
+    @pulumi.getter(name="logSet")
+    def log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        LogSet id.
+        """
+        return pulumi.get(self, "log_set")
+
+    @log_set.setter
+    def log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "log_set", value)
+
+    @property
+    @pulumi.getter(name="timeField")
+    def time_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+        """
+        return pulumi.get(self, "time_field")
+
+    @time_field.setter
+    def time_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_field", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceCosParamArgs:
+    def __init__(__self__, *,
+                 bucket_name: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 aggregate_batch_size: Optional[pulumi.Input[int]] = None,
+                 aggregate_interval: Optional[pulumi.Input[int]] = None,
+                 directory_time_format: Optional[pulumi.Input[str]] = None,
+                 format_output_type: Optional[pulumi.Input[str]] = None,
+                 object_key: Optional[pulumi.Input[str]] = None,
+                 object_key_prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket_name: cos bucket name.
+        :param pulumi.Input[str] region: region code.
+        :param pulumi.Input[int] aggregate_batch_size: The size of aggregated messages MB.
+        :param pulumi.Input[int] aggregate_interval: time interval.
+        :param pulumi.Input[str] directory_time_format: Partition format formatted according to strptime time.
+        :param pulumi.Input[str] format_output_type: The file format after message aggregation csv|json.
+        :param pulumi.Input[str] object_key: ObjectKey.
+        :param pulumi.Input[str] object_key_prefix: Dumped object directory prefix.
+        """
+        pulumi.set(__self__, "bucket_name", bucket_name)
+        pulumi.set(__self__, "region", region)
+        if aggregate_batch_size is not None:
+            pulumi.set(__self__, "aggregate_batch_size", aggregate_batch_size)
+        if aggregate_interval is not None:
+            pulumi.set(__self__, "aggregate_interval", aggregate_interval)
+        if directory_time_format is not None:
+            pulumi.set(__self__, "directory_time_format", directory_time_format)
+        if format_output_type is not None:
+            pulumi.set(__self__, "format_output_type", format_output_type)
+        if object_key is not None:
+            pulumi.set(__self__, "object_key", object_key)
+        if object_key_prefix is not None:
+            pulumi.set(__self__, "object_key_prefix", object_key_prefix)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> pulumi.Input[str]:
+        """
+        cos bucket name.
+        """
+        return pulumi.get(self, "bucket_name")
+
+    @bucket_name.setter
+    def bucket_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket_name", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        region code.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="aggregateBatchSize")
+    def aggregate_batch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of aggregated messages MB.
+        """
+        return pulumi.get(self, "aggregate_batch_size")
+
+    @aggregate_batch_size.setter
+    def aggregate_batch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "aggregate_batch_size", value)
+
+    @property
+    @pulumi.getter(name="aggregateInterval")
+    def aggregate_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        time interval.
+        """
+        return pulumi.get(self, "aggregate_interval")
+
+    @aggregate_interval.setter
+    def aggregate_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "aggregate_interval", value)
+
+    @property
+    @pulumi.getter(name="directoryTimeFormat")
+    def directory_time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Partition format formatted according to strptime time.
+        """
+        return pulumi.get(self, "directory_time_format")
+
+    @directory_time_format.setter
+    def directory_time_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "directory_time_format", value)
+
+    @property
+    @pulumi.getter(name="formatOutputType")
+    def format_output_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file format after message aggregation csv|json.
+        """
+        return pulumi.get(self, "format_output_type")
+
+    @format_output_type.setter
+    def format_output_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "format_output_type", value)
+
+    @property
+    @pulumi.getter(name="objectKey")
+    def object_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        ObjectKey.
+        """
+        return pulumi.get(self, "object_key")
+
+    @object_key.setter
+    def object_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "object_key", value)
+
+    @property
+    @pulumi.getter(name="objectKeyPrefix")
+    def object_key_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dumped object directory prefix.
+        """
+        return pulumi.get(self, "object_key_prefix")
+
+    @object_key_prefix.setter
+    def object_key_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "object_key_prefix", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceCtsdbParamArgs:
+    def __init__(__self__, *,
+                 ctsdb_metric: Optional[pulumi.Input[str]] = None,
+                 resource: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ctsdb_metric: Ctsdb metric.
+        :param pulumi.Input[str] resource: resource id.
+        """
+        if ctsdb_metric is not None:
+            pulumi.set(__self__, "ctsdb_metric", ctsdb_metric)
+        if resource is not None:
+            pulumi.set(__self__, "resource", resource)
+
+    @property
+    @pulumi.getter(name="ctsdbMetric")
+    def ctsdb_metric(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ctsdb metric.
+        """
+        return pulumi.get(self, "ctsdb_metric")
+
+    @ctsdb_metric.setter
+    def ctsdb_metric(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ctsdb_metric", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceDtsParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 group_password: Optional[pulumi.Input[str]] = None,
+                 group_user: Optional[pulumi.Input[str]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 tran_sql: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: Dts instance Id.
+        :param pulumi.Input[str] group_id: Dts consumer group Id.
+        :param pulumi.Input[str] group_password: Dts consumer group passwd.
+        :param pulumi.Input[str] group_user: Dts account.
+        :param pulumi.Input[str] ip: Dts connection ip.
+        :param pulumi.Input[int] port: Dts connection port.
+        :param pulumi.Input[str] topic: Dts topic.
+        :param pulumi.Input[bool] tran_sql: False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+        """
+        pulumi.set(__self__, "resource", resource)
+        if group_id is not None:
+            pulumi.set(__self__, "group_id", group_id)
+        if group_password is not None:
+            pulumi.set(__self__, "group_password", group_password)
+        if group_user is not None:
+            pulumi.set(__self__, "group_user", group_user)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if tran_sql is not None:
+            pulumi.set(__self__, "tran_sql", tran_sql)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        Dts instance Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts consumer group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @group_id.setter
+    def group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_id", value)
+
+    @property
+    @pulumi.getter(name="groupPassword")
+    def group_password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts consumer group passwd.
+        """
+        return pulumi.get(self, "group_password")
+
+    @group_password.setter
+    def group_password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_password", value)
+
+    @property
+    @pulumi.getter(name="groupUser")
+    def group_user(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts account.
+        """
+        return pulumi.get(self, "group_user")
+
+    @group_user.setter
+    def group_user(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_user", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts connection ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Dts connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts topic.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="tranSql")
+    def tran_sql(self) -> Optional[pulumi.Input[bool]]:
+        """
+        False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+        """
+        return pulumi.get(self, "tran_sql")
+
+    @tran_sql.setter
+    def tran_sql(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "tran_sql", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 content_key: Optional[pulumi.Input[str]] = None,
+                 database_primary_key: Optional[pulumi.Input[str]] = None,
+                 date_format: Optional[pulumi.Input[str]] = None,
+                 document_id_field: Optional[pulumi.Input[str]] = None,
+                 drop_cls: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropClsArgs']] = None,
+                 drop_dlq: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqArgs']] = None,
+                 drop_invalid_json_message: Optional[pulumi.Input[bool]] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 index: Optional[pulumi.Input[str]] = None,
+                 index_type: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 service_vip: Optional[pulumi.Input[str]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] resource: Resource.
+        :param pulumi.Input[str] content_key: key for data in non-json format.
+        :param pulumi.Input[str] database_primary_key: When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+        :param pulumi.Input[str] date_format: Es date suffix.
+        :param pulumi.Input[str] document_id_field: The field name of the document ID value dumped into Es.
+        :param pulumi.Input['DatahubTaskSourceResourceEsParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqArgs'] drop_dlq: dead letter queue.
+        :param pulumi.Input[bool] drop_invalid_json_message: Whether Es discards messages in non-json format.
+        :param pulumi.Input[bool] drop_invalid_message: Whether Es discards the message of parsing failure.
+        :param pulumi.Input[str] index: Es index name.
+        :param pulumi.Input[str] index_type: Es custom index name type, STRING, JSONPATH, the default is STRING.
+        :param pulumi.Input[str] password: Es Password.
+        :param pulumi.Input[int] port: Es connection port.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] service_vip: instance vip.
+        :param pulumi.Input[str] uniq_vpc_id: instance vpc id.
+        :param pulumi.Input[str] user_name: Es UserName.
+        """
+        pulumi.set(__self__, "resource", resource)
+        if content_key is not None:
+            pulumi.set(__self__, "content_key", content_key)
+        if database_primary_key is not None:
+            pulumi.set(__self__, "database_primary_key", database_primary_key)
+        if date_format is not None:
+            pulumi.set(__self__, "date_format", date_format)
+        if document_id_field is not None:
+            pulumi.set(__self__, "document_id_field", document_id_field)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_dlq is not None:
+            pulumi.set(__self__, "drop_dlq", drop_dlq)
+        if drop_invalid_json_message is not None:
+            pulumi.set(__self__, "drop_invalid_json_message", drop_invalid_json_message)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if index_type is not None:
+            pulumi.set(__self__, "index_type", index_type)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        Resource.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="contentKey")
+    def content_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key for data in non-json format.
+        """
+        return pulumi.get(self, "content_key")
+
+    @content_key.setter
+    def content_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_key", value)
+
+    @property
+    @pulumi.getter(name="databasePrimaryKey")
+    def database_primary_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+        """
+        return pulumi.get(self, "database_primary_key")
+
+    @database_primary_key.setter
+    def database_primary_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_primary_key", value)
+
+    @property
+    @pulumi.getter(name="dateFormat")
+    def date_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es date suffix.
+        """
+        return pulumi.get(self, "date_format")
+
+    @date_format.setter
+    def date_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "date_format", value)
+
+    @property
+    @pulumi.getter(name="documentIdField")
+    def document_id_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field name of the document ID value dumped into Es.
+        """
+        return pulumi.get(self, "document_id_field")
+
+    @document_id_field.setter
+    def document_id_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "document_id_field", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropDlq")
+    def drop_dlq(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqArgs']]:
+        """
+        dead letter queue.
+        """
+        return pulumi.get(self, "drop_dlq")
+
+    @drop_dlq.setter
+    def drop_dlq(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqArgs']]):
+        pulumi.set(self, "drop_dlq", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidJsonMessage")
+    def drop_invalid_json_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Es discards messages in non-json format.
+        """
+        return pulumi.get(self, "drop_invalid_json_message")
+
+    @drop_invalid_json_message.setter
+    def drop_invalid_json_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_json_message", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Es discards the message of parsing failure.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es index name.
+        """
+        return pulumi.get(self, "index")
+
+    @index.setter
+    def index(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "index", value)
+
+    @property
+    @pulumi.getter(name="indexType")
+    def index_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es custom index name type, STRING, JSONPATH, the default is STRING.
+        """
+        return pulumi.get(self, "index_type")
+
+    @index_type.setter
+    def index_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "index_type", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es Password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Es connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vip.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @service_vip.setter
+    def service_vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_vip", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vpc id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es UserName.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamDropDlqArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 dlq_type: Optional[pulumi.Input[str]] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs']] = None,
+                 max_retry_attempts: Optional[pulumi.Input[int]] = None,
+                 retry_interval: Optional[pulumi.Input[int]] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        :param pulumi.Input[str] dlq_type: dlq type, CKAFKA|TOPIC.
+        :param pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs'] kafka_param: Ckafka type dlq.
+        :param pulumi.Input[int] max_retry_attempts: retry times.
+        :param pulumi.Input[int] retry_interval: retry interval.
+        :param pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs'] topic_param: DIP Topic type dead letter queue.
+        """
+        pulumi.set(__self__, "type", type)
+        if dlq_type is not None:
+            pulumi.set(__self__, "dlq_type", dlq_type)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if max_retry_attempts is not None:
+            pulumi.set(__self__, "max_retry_attempts", max_retry_attempts)
+        if retry_interval is not None:
+            pulumi.set(__self__, "retry_interval", retry_interval)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="dlqType")
+    def dlq_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        dlq type, CKAFKA|TOPIC.
+        """
+        return pulumi.get(self, "dlq_type")
+
+    @dlq_type.setter
+    def dlq_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dlq_type", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs']]:
+        """
+        Ckafka type dlq.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="maxRetryAttempts")
+    def max_retry_attempts(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry times.
+        """
+        return pulumi.get(self, "max_retry_attempts")
+
+    @max_retry_attempts.setter
+    def max_retry_attempts(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retry_attempts", value)
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry interval.
+        """
+        return pulumi.get(self, "retry_interval")
+
+    @retry_interval.setter
+    def retry_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_interval", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs']]:
+        """
+        DIP Topic type dead letter queue.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceEventBusParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 type: pulumi.Input[str],
+                 function_name: Optional[pulumi.Input[str]] = None,
+                 namespace: Optional[pulumi.Input[str]] = None,
+                 qualifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] resource: instance id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] type: resource type. EB_COS/EB_ES/EB_CLS.
+        :param pulumi.Input[str] function_name: SCF function name.
+        :param pulumi.Input[str] namespace: SCF namespace.
+        :param pulumi.Input[str] qualifier: SCF version and alias.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        pulumi.set(__self__, "type", type)
+        if function_name is not None:
+            pulumi.set(__self__, "function_name", function_name)
+        if namespace is not None:
+            pulumi.set(__self__, "namespace", namespace)
+        if qualifier is not None:
+            pulumi.set(__self__, "qualifier", qualifier)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        resource type. EB_COS/EB_ES/EB_CLS.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF version and alias.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @qualifier.setter
+    def qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "qualifier", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceMariaDbParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 include_content_changes: Optional[pulumi.Input[str]] = None,
+                 include_query: Optional[pulumi.Input[bool]] = None,
+                 is_table_prefix: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 output_format: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: MariaDB database name, * for all database.
+        :param pulumi.Input[str] resource: MariaDB connection Id.
+        :param pulumi.Input[str] table: MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        :param pulumi.Input[str] include_content_changes: If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        :param pulumi.Input[bool] include_query: If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        :param pulumi.Input[bool] is_table_prefix: When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        :param pulumi.Input[str] key_columns: Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[str] output_format: output format, DEFAULT, CANAL_1, CANAL_2.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] snapshot_mode: schema_only|initial, default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if include_content_changes is not None:
+            pulumi.set(__self__, "include_content_changes", include_content_changes)
+        if include_query is not None:
+            pulumi.set(__self__, "include_query", include_query)
+        if is_table_prefix is not None:
+            pulumi.set(__self__, "is_table_prefix", is_table_prefix)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if output_format is not None:
+            pulumi.set(__self__, "output_format", output_format)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MariaDB database name, * for all database.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        MariaDB connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="includeContentChanges")
+    def include_content_changes(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        """
+        return pulumi.get(self, "include_content_changes")
+
+    @include_content_changes.setter
+    def include_content_changes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "include_content_changes", value)
+
+    @property
+    @pulumi.getter(name="includeQuery")
+    def include_query(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        """
+        return pulumi.get(self, "include_query")
+
+    @include_query.setter
+    def include_query(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "include_query", value)
+
+    @property
+    @pulumi.getter(name="isTablePrefix")
+    def is_table_prefix(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        """
+        return pulumi.get(self, "is_table_prefix")
+
+    @is_table_prefix.setter
+    def is_table_prefix(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_prefix", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        output format, DEFAULT, CANAL_1, CANAL_2.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        schema_only|initial, default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceMongoDbParamArgs:
+    def __init__(__self__, *,
+                 collection: pulumi.Input[str],
+                 copy_existing: pulumi.Input[bool],
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 ip: Optional[pulumi.Input[str]] = None,
+                 listening_event: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 pipeline: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 read_preference: Optional[pulumi.Input[str]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] collection: MongoDB collection.
+        :param pulumi.Input[bool] copy_existing: Whether to copy the stock data, the default parameter is true.
+        :param pulumi.Input[str] database: MongoDB database name.
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[str] ip: Mongo DB connection ip.
+        :param pulumi.Input[str] listening_event: Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+        :param pulumi.Input[str] password: MongoDB database password.
+        :param pulumi.Input[str] pipeline: aggregation pipeline.
+        :param pulumi.Input[int] port: MongoDB connection port.
+        :param pulumi.Input[str] read_preference: Master-slave priority, default master node.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] user_name: MongoDB database user name.
+        """
+        pulumi.set(__self__, "collection", collection)
+        pulumi.set(__self__, "copy_existing", copy_existing)
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if listening_event is not None:
+            pulumi.set(__self__, "listening_event", listening_event)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if pipeline is not None:
+            pulumi.set(__self__, "pipeline", pipeline)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if read_preference is not None:
+            pulumi.set(__self__, "read_preference", read_preference)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def collection(self) -> pulumi.Input[str]:
+        """
+        MongoDB collection.
+        """
+        return pulumi.get(self, "collection")
+
+    @collection.setter
+    def collection(self, value: pulumi.Input[str]):
+        pulumi.set(self, "collection", value)
+
+    @property
+    @pulumi.getter(name="copyExisting")
+    def copy_existing(self) -> pulumi.Input[bool]:
+        """
+        Whether to copy the stock data, the default parameter is true.
+        """
+        return pulumi.get(self, "copy_existing")
+
+    @copy_existing.setter
+    def copy_existing(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "copy_existing", value)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MongoDB database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mongo DB connection ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter(name="listeningEvent")
+    def listening_event(self) -> Optional[pulumi.Input[str]]:
+        """
+        Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+        """
+        return pulumi.get(self, "listening_event")
+
+    @listening_event.setter
+    def listening_event(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "listening_event", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        MongoDB database password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def pipeline(self) -> Optional[pulumi.Input[str]]:
+        """
+        aggregation pipeline.
+        """
+        return pulumi.get(self, "pipeline")
+
+    @pipeline.setter
+    def pipeline(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pipeline", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        MongoDB connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="readPreference")
+    def read_preference(self) -> Optional[pulumi.Input[str]]:
+        """
+        Master-slave priority, default master node.
+        """
+        return pulumi.get(self, "read_preference")
+
+    @read_preference.setter
+    def read_preference(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "read_preference", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        MongoDB database user name.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceMySqlParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 data_source_increment_column: Optional[pulumi.Input[str]] = None,
+                 data_source_increment_mode: Optional[pulumi.Input[str]] = None,
+                 data_source_monitor_mode: Optional[pulumi.Input[str]] = None,
+                 data_source_monitor_resource: Optional[pulumi.Input[str]] = None,
+                 data_source_start_from: Optional[pulumi.Input[str]] = None,
+                 data_target_insert_mode: Optional[pulumi.Input[str]] = None,
+                 data_target_primary_key_field: Optional[pulumi.Input[str]] = None,
+                 data_target_record_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs']]]] = None,
+                 ddl_topic: Optional[pulumi.Input[str]] = None,
+                 drop_cls: Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamDropClsArgs']] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 include_content_changes: Optional[pulumi.Input[str]] = None,
+                 include_query: Optional[pulumi.Input[bool]] = None,
+                 is_table_prefix: Optional[pulumi.Input[bool]] = None,
+                 is_table_regular: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 output_format: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 signal_database: Optional[pulumi.Input[str]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None,
+                 topic_regex: Optional[pulumi.Input[str]] = None,
+                 topic_replacement: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: MySQL database name, * is the whole database.
+        :param pulumi.Input[str] resource: MySQL connection Id.
+        :param pulumi.Input[str] table: The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+        :param pulumi.Input[str] data_source_increment_column: the name of the column to be monitored.
+        :param pulumi.Input[str] data_source_increment_mode: TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+        :param pulumi.Input[str] data_source_monitor_mode: TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+        :param pulumi.Input[str] data_source_monitor_resource: When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+        :param pulumi.Input[str] data_source_start_from: HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+        :param pulumi.Input[str] data_target_insert_mode: INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        :param pulumi.Input[str] data_target_primary_key_field: When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs']]] data_target_record_mappings: Mapping relationship between tables and messages.
+        :param pulumi.Input[str] ddl_topic: The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+        :param pulumi.Input['DatahubTaskSourceResourceMySqlParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input[bool] drop_invalid_message: Whether to discard messages that fail to parse, the default is true.
+        :param pulumi.Input[str] include_content_changes: If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        :param pulumi.Input[bool] include_query: If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        :param pulumi.Input[bool] is_table_prefix: When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        :param pulumi.Input[bool] is_table_regular: Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+        :param pulumi.Input[str] key_columns: Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[str] output_format: output format, DEFAULT, CANAL_1, CANAL_2.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] signal_database: database name of signal table.
+        :param pulumi.Input[str] snapshot_mode: whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+        :param pulumi.Input[str] topic_regex: Regular expression for routing events to specific topics, defaults to (.*).
+        :param pulumi.Input[str] topic_replacement: TopicRegex, $1, $2.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if data_source_increment_column is not None:
+            pulumi.set(__self__, "data_source_increment_column", data_source_increment_column)
+        if data_source_increment_mode is not None:
+            pulumi.set(__self__, "data_source_increment_mode", data_source_increment_mode)
+        if data_source_monitor_mode is not None:
+            pulumi.set(__self__, "data_source_monitor_mode", data_source_monitor_mode)
+        if data_source_monitor_resource is not None:
+            pulumi.set(__self__, "data_source_monitor_resource", data_source_monitor_resource)
+        if data_source_start_from is not None:
+            pulumi.set(__self__, "data_source_start_from", data_source_start_from)
+        if data_target_insert_mode is not None:
+            pulumi.set(__self__, "data_target_insert_mode", data_target_insert_mode)
+        if data_target_primary_key_field is not None:
+            pulumi.set(__self__, "data_target_primary_key_field", data_target_primary_key_field)
+        if data_target_record_mappings is not None:
+            pulumi.set(__self__, "data_target_record_mappings", data_target_record_mappings)
+        if ddl_topic is not None:
+            pulumi.set(__self__, "ddl_topic", ddl_topic)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if include_content_changes is not None:
+            pulumi.set(__self__, "include_content_changes", include_content_changes)
+        if include_query is not None:
+            pulumi.set(__self__, "include_query", include_query)
+        if is_table_prefix is not None:
+            pulumi.set(__self__, "is_table_prefix", is_table_prefix)
+        if is_table_regular is not None:
+            pulumi.set(__self__, "is_table_regular", is_table_regular)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if output_format is not None:
+            pulumi.set(__self__, "output_format", output_format)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if signal_database is not None:
+            pulumi.set(__self__, "signal_database", signal_database)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+        if topic_regex is not None:
+            pulumi.set(__self__, "topic_regex", topic_regex)
+        if topic_replacement is not None:
+            pulumi.set(__self__, "topic_replacement", topic_replacement)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MySQL database name, * is the whole database.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        MySQL connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dataSourceIncrementColumn")
+    def data_source_increment_column(self) -> Optional[pulumi.Input[str]]:
+        """
+        the name of the column to be monitored.
+        """
+        return pulumi.get(self, "data_source_increment_column")
+
+    @data_source_increment_column.setter
+    def data_source_increment_column(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_increment_column", value)
+
+    @property
+    @pulumi.getter(name="dataSourceIncrementMode")
+    def data_source_increment_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+        """
+        return pulumi.get(self, "data_source_increment_mode")
+
+    @data_source_increment_mode.setter
+    def data_source_increment_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_increment_mode", value)
+
+    @property
+    @pulumi.getter(name="dataSourceMonitorMode")
+    def data_source_monitor_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+        """
+        return pulumi.get(self, "data_source_monitor_mode")
+
+    @data_source_monitor_mode.setter
+    def data_source_monitor_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_monitor_mode", value)
+
+    @property
+    @pulumi.getter(name="dataSourceMonitorResource")
+    def data_source_monitor_resource(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+        """
+        return pulumi.get(self, "data_source_monitor_resource")
+
+    @data_source_monitor_resource.setter
+    def data_source_monitor_resource(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_monitor_resource", value)
+
+    @property
+    @pulumi.getter(name="dataSourceStartFrom")
+    def data_source_start_from(self) -> Optional[pulumi.Input[str]]:
+        """
+        HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+        """
+        return pulumi.get(self, "data_source_start_from")
+
+    @data_source_start_from.setter
+    def data_source_start_from(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_start_from", value)
+
+    @property
+    @pulumi.getter(name="dataTargetInsertMode")
+    def data_target_insert_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        """
+        return pulumi.get(self, "data_target_insert_mode")
+
+    @data_target_insert_mode.setter
+    def data_target_insert_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_insert_mode", value)
+
+    @property
+    @pulumi.getter(name="dataTargetPrimaryKeyField")
+    def data_target_primary_key_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        """
+        return pulumi.get(self, "data_target_primary_key_field")
+
+    @data_target_primary_key_field.setter
+    def data_target_primary_key_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_primary_key_field", value)
+
+    @property
+    @pulumi.getter(name="dataTargetRecordMappings")
+    def data_target_record_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs']]]]:
+        """
+        Mapping relationship between tables and messages.
+        """
+        return pulumi.get(self, "data_target_record_mappings")
+
+    @data_target_record_mappings.setter
+    def data_target_record_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs']]]]):
+        pulumi.set(self, "data_target_record_mappings", value)
+
+    @property
+    @pulumi.getter(name="ddlTopic")
+    def ddl_topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+        """
+        return pulumi.get(self, "ddl_topic")
+
+    @ddl_topic.setter
+    def ddl_topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ddl_topic", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskSourceResourceMySqlParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to discard messages that fail to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter(name="includeContentChanges")
+    def include_content_changes(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        """
+        return pulumi.get(self, "include_content_changes")
+
+    @include_content_changes.setter
+    def include_content_changes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "include_content_changes", value)
+
+    @property
+    @pulumi.getter(name="includeQuery")
+    def include_query(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        """
+        return pulumi.get(self, "include_query")
+
+    @include_query.setter
+    def include_query(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "include_query", value)
+
+    @property
+    @pulumi.getter(name="isTablePrefix")
+    def is_table_prefix(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        """
+        return pulumi.get(self, "is_table_prefix")
+
+    @is_table_prefix.setter
+    def is_table_prefix(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_prefix", value)
+
+    @property
+    @pulumi.getter(name="isTableRegular")
+    def is_table_regular(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+        """
+        return pulumi.get(self, "is_table_regular")
+
+    @is_table_regular.setter
+    def is_table_regular(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_regular", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        output format, DEFAULT, CANAL_1, CANAL_2.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="signalDatabase")
+    def signal_database(self) -> Optional[pulumi.Input[str]]:
+        """
+        database name of signal table.
+        """
+        return pulumi.get(self, "signal_database")
+
+    @signal_database.setter
+    def signal_database(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "signal_database", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+    @property
+    @pulumi.getter(name="topicRegex")
+    def topic_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Regular expression for routing events to specific topics, defaults to (.*).
+        """
+        return pulumi.get(self, "topic_regex")
+
+    @topic_regex.setter
+    def topic_regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_regex", value)
+
+    @property
+    @pulumi.getter(name="topicReplacement")
+    def topic_replacement(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicRegex, $1, $2.
+        """
+        return pulumi.get(self, "topic_replacement")
+
+    @topic_replacement.setter
+    def topic_replacement(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_replacement", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs:
+    def __init__(__self__, *,
+                 allow_null: Optional[pulumi.Input[bool]] = None,
+                 auto_increment: Optional[pulumi.Input[bool]] = None,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 column_size: Optional[pulumi.Input[str]] = None,
+                 decimal_digits: Optional[pulumi.Input[str]] = None,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 extra_info: Optional[pulumi.Input[str]] = None,
+                 json_key: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
+        :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
+        :param pulumi.Input[str] column_name: Corresponding mapping column name.
+        :param pulumi.Input[str] column_size: current column size.
+        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] default_value: Database table default parameters.
+        :param pulumi.Input[str] extra_info: Database table extra fields.
+        :param pulumi.Input[str] json_key: The key name of the message.
+        :param pulumi.Input[str] type: message type.
+        """
+        if allow_null is not None:
+            pulumi.set(__self__, "allow_null", allow_null)
+        if auto_increment is not None:
+            pulumi.set(__self__, "auto_increment", auto_increment)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if column_size is not None:
+            pulumi.set(__self__, "column_size", column_size)
+        if decimal_digits is not None:
+            pulumi.set(__self__, "decimal_digits", decimal_digits)
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if extra_info is not None:
+            pulumi.set(__self__, "extra_info", extra_info)
+        if json_key is not None:
+            pulumi.set(__self__, "json_key", json_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the message is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="autoIncrement")
+    def auto_increment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is an auto-increment column.
+        """
+        return pulumi.get(self, "auto_increment")
+
+    @auto_increment.setter
+    def auto_increment(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_increment", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Corresponding mapping column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="columnSize")
+    def column_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column size.
+        """
+        return pulumi.get(self, "column_size")
+
+    @column_size.setter
+    def column_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_size", value)
+
+    @property
+    @pulumi.getter(name="decimalDigits")
+    def decimal_digits(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column precision.
+        """
+        return pulumi.get(self, "decimal_digits")
+
+    @decimal_digits.setter
+    def decimal_digits(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "decimal_digits", value)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table default parameters.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter(name="extraInfo")
+    def extra_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table extra fields.
+        """
+        return pulumi.get(self, "extra_info")
+
+    @extra_info.setter
+    def extra_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extra_info", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key name of the message.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        message type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceMySqlParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourcePostgreSqlParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 plugin_name: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 data_format: Optional[pulumi.Input[str]] = None,
+                 data_target_insert_mode: Optional[pulumi.Input[str]] = None,
+                 data_target_primary_key_field: Optional[pulumi.Input[str]] = None,
+                 data_target_record_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs']]]] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 is_table_regular: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: PostgreSQL database name.
+        :param pulumi.Input[str] plugin_name: (decoderbufs/pgoutput), default decoderbufs.
+        :param pulumi.Input[str] resource: PostgreSQL connection Id.
+        :param pulumi.Input[str] table: PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+        :param pulumi.Input[str] data_format: Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+        :param pulumi.Input[str] data_target_insert_mode: INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        :param pulumi.Input[str] data_target_primary_key_field: When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs']]] data_target_record_mappings: Mapping relationship between tables and messages.
+        :param pulumi.Input[bool] drop_invalid_message: Whether to discard messages that fail to parse, the default is true.
+        :param pulumi.Input[bool] is_table_regular: Whether the input table is a regular expression.
+        :param pulumi.Input[str] key_columns: Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] snapshot_mode: never|initial, default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "plugin_name", plugin_name)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if data_format is not None:
+            pulumi.set(__self__, "data_format", data_format)
+        if data_target_insert_mode is not None:
+            pulumi.set(__self__, "data_target_insert_mode", data_target_insert_mode)
+        if data_target_primary_key_field is not None:
+            pulumi.set(__self__, "data_target_primary_key_field", data_target_primary_key_field)
+        if data_target_record_mappings is not None:
+            pulumi.set(__self__, "data_target_record_mappings", data_target_record_mappings)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if is_table_regular is not None:
+            pulumi.set(__self__, "is_table_regular", is_table_regular)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> pulumi.Input[str]:
+        """
+        (decoderbufs/pgoutput), default decoderbufs.
+        """
+        return pulumi.get(self, "plugin_name")
+
+    @plugin_name.setter
+    def plugin_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "plugin_name", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dataFormat")
+    def data_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+        """
+        return pulumi.get(self, "data_format")
+
+    @data_format.setter
+    def data_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_format", value)
+
+    @property
+    @pulumi.getter(name="dataTargetInsertMode")
+    def data_target_insert_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        """
+        return pulumi.get(self, "data_target_insert_mode")
+
+    @data_target_insert_mode.setter
+    def data_target_insert_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_insert_mode", value)
+
+    @property
+    @pulumi.getter(name="dataTargetPrimaryKeyField")
+    def data_target_primary_key_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        """
+        return pulumi.get(self, "data_target_primary_key_field")
+
+    @data_target_primary_key_field.setter
+    def data_target_primary_key_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_primary_key_field", value)
+
+    @property
+    @pulumi.getter(name="dataTargetRecordMappings")
+    def data_target_record_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs']]]]:
+        """
+        Mapping relationship between tables and messages.
+        """
+        return pulumi.get(self, "data_target_record_mappings")
+
+    @data_target_record_mappings.setter
+    def data_target_record_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs']]]]):
+        pulumi.set(self, "data_target_record_mappings", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to discard messages that fail to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter(name="isTableRegular")
+    def is_table_regular(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the input table is a regular expression.
+        """
+        return pulumi.get(self, "is_table_regular")
+
+    @is_table_regular.setter
+    def is_table_regular(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_regular", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        never|initial, default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs:
+    def __init__(__self__, *,
+                 allow_null: Optional[pulumi.Input[bool]] = None,
+                 auto_increment: Optional[pulumi.Input[bool]] = None,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 column_size: Optional[pulumi.Input[str]] = None,
+                 decimal_digits: Optional[pulumi.Input[str]] = None,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 extra_info: Optional[pulumi.Input[str]] = None,
+                 json_key: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
+        :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
+        :param pulumi.Input[str] column_name: Corresponding mapping column name.
+        :param pulumi.Input[str] column_size: current column size.
+        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] default_value: Database table default parameters.
+        :param pulumi.Input[str] extra_info: Database table extra fields.
+        :param pulumi.Input[str] json_key: The key name of the message.
+        :param pulumi.Input[str] type: message type.
+        """
+        if allow_null is not None:
+            pulumi.set(__self__, "allow_null", allow_null)
+        if auto_increment is not None:
+            pulumi.set(__self__, "auto_increment", auto_increment)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if column_size is not None:
+            pulumi.set(__self__, "column_size", column_size)
+        if decimal_digits is not None:
+            pulumi.set(__self__, "decimal_digits", decimal_digits)
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if extra_info is not None:
+            pulumi.set(__self__, "extra_info", extra_info)
+        if json_key is not None:
+            pulumi.set(__self__, "json_key", json_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the message is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="autoIncrement")
+    def auto_increment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is an auto-increment column.
+        """
+        return pulumi.get(self, "auto_increment")
+
+    @auto_increment.setter
+    def auto_increment(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_increment", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Corresponding mapping column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="columnSize")
+    def column_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column size.
+        """
+        return pulumi.get(self, "column_size")
+
+    @column_size.setter
+    def column_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_size", value)
+
+    @property
+    @pulumi.getter(name="decimalDigits")
+    def decimal_digits(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column precision.
+        """
+        return pulumi.get(self, "decimal_digits")
+
+    @decimal_digits.setter
+    def decimal_digits(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "decimal_digits", value)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table default parameters.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter(name="extraInfo")
+    def extra_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table extra fields.
+        """
+        return pulumi.get(self, "extra_info")
+
+    @extra_info.setter
+    def extra_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extra_info", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key name of the message.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        message type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceScfParamArgs:
+    def __init__(__self__, *,
+                 function_name: pulumi.Input[str],
+                 batch_size: Optional[pulumi.Input[int]] = None,
+                 max_retries: Optional[pulumi.Input[int]] = None,
+                 namespace: Optional[pulumi.Input[str]] = None,
+                 qualifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] function_name: SCF function name.
+        :param pulumi.Input[int] batch_size: The maximum number of messages sent in each batch, the default is 1000.
+        :param pulumi.Input[int] max_retries: The number of retries after the SCF call fails, the default is 5.
+        :param pulumi.Input[str] namespace: SCF cloud function namespace, the default is default.
+        :param pulumi.Input[str] qualifier: SCF cloud function version and alias, the default is DEFAULT.
+        """
+        pulumi.set(__self__, "function_name", function_name)
+        if batch_size is not None:
+            pulumi.set(__self__, "batch_size", batch_size)
+        if max_retries is not None:
+            pulumi.set(__self__, "max_retries", max_retries)
+        if namespace is not None:
+            pulumi.set(__self__, "namespace", namespace)
+        if qualifier is not None:
+            pulumi.set(__self__, "qualifier", qualifier)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> pulumi.Input[str]:
+        """
+        SCF function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of messages sent in each batch, the default is 1000.
+        """
+        return pulumi.get(self, "batch_size")
+
+    @batch_size.setter
+    def batch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_size", value)
+
+    @property
+    @pulumi.getter(name="maxRetries")
+    def max_retries(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of retries after the SCF call fails, the default is 5.
+        """
+        return pulumi.get(self, "max_retries")
+
+    @max_retries.setter
+    def max_retries(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retries", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF cloud function namespace, the default is default.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF cloud function version and alias, the default is DEFAULT.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @qualifier.setter
+    def qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "qualifier", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceSqlServerParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: SQLServer database name.
+        :param pulumi.Input[str] resource: SQLServer connection Id.
+        :param pulumi.Input[str] table: SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        :param pulumi.Input[str] snapshot_mode: schema_only|initial default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        SQLServer database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        SQLServer connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        schema_only|initial default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceTdwParamArgs:
+    def __init__(__self__, *,
+                 bid: pulumi.Input[str],
+                 tid: pulumi.Input[str],
+                 is_domestic: Optional[pulumi.Input[bool]] = None,
+                 tdw_host: Optional[pulumi.Input[str]] = None,
+                 tdw_port: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] bid: Tdw bid.
+        :param pulumi.Input[str] tid: Tdw tid.
+        :param pulumi.Input[bool] is_domestic: default true.
+        :param pulumi.Input[str] tdw_host: TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+        :param pulumi.Input[int] tdw_port: TDW port, default 8099.
+        """
+        pulumi.set(__self__, "bid", bid)
+        pulumi.set(__self__, "tid", tid)
+        if is_domestic is not None:
+            pulumi.set(__self__, "is_domestic", is_domestic)
+        if tdw_host is not None:
+            pulumi.set(__self__, "tdw_host", tdw_host)
+        if tdw_port is not None:
+            pulumi.set(__self__, "tdw_port", tdw_port)
+
+    @property
+    @pulumi.getter
+    def bid(self) -> pulumi.Input[str]:
+        """
+        Tdw bid.
+        """
+        return pulumi.get(self, "bid")
+
+    @bid.setter
+    def bid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bid", value)
+
+    @property
+    @pulumi.getter
+    def tid(self) -> pulumi.Input[str]:
+        """
+        Tdw tid.
+        """
+        return pulumi.get(self, "tid")
+
+    @tid.setter
+    def tid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tid", value)
+
+    @property
+    @pulumi.getter(name="isDomestic")
+    def is_domestic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        default true.
+        """
+        return pulumi.get(self, "is_domestic")
+
+    @is_domestic.setter
+    def is_domestic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_domestic", value)
+
+    @property
+    @pulumi.getter(name="tdwHost")
+    def tdw_host(self) -> Optional[pulumi.Input[str]]:
+        """
+        TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+        """
+        return pulumi.get(self, "tdw_host")
+
+    @tdw_host.setter
+    def tdw_host(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tdw_host", value)
+
+    @property
+    @pulumi.getter(name="tdwPort")
+    def tdw_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        TDW port, default 8099.
+        """
+        return pulumi.get(self, "tdw_port")
+
+    @tdw_port.setter
+    def tdw_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "tdw_port", value)
+
+
+@pulumi.input_type
+class DatahubTaskSourceResourceTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 click_house_param: Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamArgs']] = None,
+                 cls_param: Optional[pulumi.Input['DatahubTaskTargetResourceClsParamArgs']] = None,
+                 cos_param: Optional[pulumi.Input['DatahubTaskTargetResourceCosParamArgs']] = None,
+                 ctsdb_param: Optional[pulumi.Input['DatahubTaskTargetResourceCtsdbParamArgs']] = None,
+                 dts_param: Optional[pulumi.Input['DatahubTaskTargetResourceDtsParamArgs']] = None,
+                 es_param: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamArgs']] = None,
+                 event_bus_param: Optional[pulumi.Input['DatahubTaskTargetResourceEventBusParamArgs']] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskTargetResourceKafkaParamArgs']] = None,
+                 maria_db_param: Optional[pulumi.Input['DatahubTaskTargetResourceMariaDbParamArgs']] = None,
+                 mongo_db_param: Optional[pulumi.Input['DatahubTaskTargetResourceMongoDbParamArgs']] = None,
+                 my_sql_param: Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamArgs']] = None,
+                 postgre_sql_param: Optional[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamArgs']] = None,
+                 scf_param: Optional[pulumi.Input['DatahubTaskTargetResourceScfParamArgs']] = None,
+                 sql_server_param: Optional[pulumi.Input['DatahubTaskTargetResourceSqlServerParamArgs']] = None,
+                 tdw_param: Optional[pulumi.Input['DatahubTaskTargetResourceTdwParamArgs']] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskTargetResourceTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: Resource Type.
+        :param pulumi.Input['DatahubTaskTargetResourceClickHouseParamArgs'] click_house_param: ClickHouse config, Type CLICKHOUSE requierd.
+        :param pulumi.Input['DatahubTaskTargetResourceClsParamArgs'] cls_param: Cls configuration, Required when Type is CLS.
+        :param pulumi.Input['DatahubTaskTargetResourceCosParamArgs'] cos_param: Cos configuration, required when Type is COS.
+        :param pulumi.Input['DatahubTaskTargetResourceCtsdbParamArgs'] ctsdb_param: Ctsdb configuration, Required when Type is CTSDB.
+        :param pulumi.Input['DatahubTaskTargetResourceDtsParamArgs'] dts_param: Dts configuration, required when Type is DTS.
+        :param pulumi.Input['DatahubTaskTargetResourceEsParamArgs'] es_param: Es configuration, required when Type is ES.
+        :param pulumi.Input['DatahubTaskTargetResourceEventBusParamArgs'] event_bus_param: EB configuration, required when type is EB.
+        :param pulumi.Input['DatahubTaskTargetResourceKafkaParamArgs'] kafka_param: ckafka configuration, required when Type is KAFKA.
+        :param pulumi.Input['DatahubTaskTargetResourceMariaDbParamArgs'] maria_db_param: MariaDB configuration, Required when Type is MARIADB.
+        :param pulumi.Input['DatahubTaskTargetResourceMongoDbParamArgs'] mongo_db_param: MongoDB config, Required when Type is MONGODB.
+        :param pulumi.Input['DatahubTaskTargetResourceMySqlParamArgs'] my_sql_param: MySQL configuration, Required when Type is MYSQL.
+        :param pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamArgs'] postgre_sql_param: PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+        :param pulumi.Input['DatahubTaskTargetResourceScfParamArgs'] scf_param: Scf configuration, Required when Type is SCF.
+        :param pulumi.Input['DatahubTaskTargetResourceSqlServerParamArgs'] sql_server_param: SQLServer configuration, Required when Type is SQLSERVER.
+        :param pulumi.Input['DatahubTaskTargetResourceTdwParamArgs'] tdw_param: Tdw configuration, required when Type is TDW.
+        :param pulumi.Input['DatahubTaskTargetResourceTopicParamArgs'] topic_param: Topic configuration, Required when Type is Topic.
+        """
+        pulumi.set(__self__, "type", type)
+        if click_house_param is not None:
+            pulumi.set(__self__, "click_house_param", click_house_param)
+        if cls_param is not None:
+            pulumi.set(__self__, "cls_param", cls_param)
+        if cos_param is not None:
+            pulumi.set(__self__, "cos_param", cos_param)
+        if ctsdb_param is not None:
+            pulumi.set(__self__, "ctsdb_param", ctsdb_param)
+        if dts_param is not None:
+            pulumi.set(__self__, "dts_param", dts_param)
+        if es_param is not None:
+            pulumi.set(__self__, "es_param", es_param)
+        if event_bus_param is not None:
+            pulumi.set(__self__, "event_bus_param", event_bus_param)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if maria_db_param is not None:
+            pulumi.set(__self__, "maria_db_param", maria_db_param)
+        if mongo_db_param is not None:
+            pulumi.set(__self__, "mongo_db_param", mongo_db_param)
+        if my_sql_param is not None:
+            pulumi.set(__self__, "my_sql_param", my_sql_param)
+        if postgre_sql_param is not None:
+            pulumi.set(__self__, "postgre_sql_param", postgre_sql_param)
+        if scf_param is not None:
+            pulumi.set(__self__, "scf_param", scf_param)
+        if sql_server_param is not None:
+            pulumi.set(__self__, "sql_server_param", sql_server_param)
+        if tdw_param is not None:
+            pulumi.set(__self__, "tdw_param", tdw_param)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Resource Type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="clickHouseParam")
+    def click_house_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamArgs']]:
+        """
+        ClickHouse config, Type CLICKHOUSE requierd.
+        """
+        return pulumi.get(self, "click_house_param")
+
+    @click_house_param.setter
+    def click_house_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamArgs']]):
+        pulumi.set(self, "click_house_param", value)
+
+    @property
+    @pulumi.getter(name="clsParam")
+    def cls_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceClsParamArgs']]:
+        """
+        Cls configuration, Required when Type is CLS.
+        """
+        return pulumi.get(self, "cls_param")
+
+    @cls_param.setter
+    def cls_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceClsParamArgs']]):
+        pulumi.set(self, "cls_param", value)
+
+    @property
+    @pulumi.getter(name="cosParam")
+    def cos_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceCosParamArgs']]:
+        """
+        Cos configuration, required when Type is COS.
+        """
+        return pulumi.get(self, "cos_param")
+
+    @cos_param.setter
+    def cos_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceCosParamArgs']]):
+        pulumi.set(self, "cos_param", value)
+
+    @property
+    @pulumi.getter(name="ctsdbParam")
+    def ctsdb_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceCtsdbParamArgs']]:
+        """
+        Ctsdb configuration, Required when Type is CTSDB.
+        """
+        return pulumi.get(self, "ctsdb_param")
+
+    @ctsdb_param.setter
+    def ctsdb_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceCtsdbParamArgs']]):
+        pulumi.set(self, "ctsdb_param", value)
+
+    @property
+    @pulumi.getter(name="dtsParam")
+    def dts_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceDtsParamArgs']]:
+        """
+        Dts configuration, required when Type is DTS.
+        """
+        return pulumi.get(self, "dts_param")
+
+    @dts_param.setter
+    def dts_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceDtsParamArgs']]):
+        pulumi.set(self, "dts_param", value)
+
+    @property
+    @pulumi.getter(name="esParam")
+    def es_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEsParamArgs']]:
+        """
+        Es configuration, required when Type is ES.
+        """
+        return pulumi.get(self, "es_param")
+
+    @es_param.setter
+    def es_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamArgs']]):
+        pulumi.set(self, "es_param", value)
+
+    @property
+    @pulumi.getter(name="eventBusParam")
+    def event_bus_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEventBusParamArgs']]:
+        """
+        EB configuration, required when type is EB.
+        """
+        return pulumi.get(self, "event_bus_param")
+
+    @event_bus_param.setter
+    def event_bus_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEventBusParamArgs']]):
+        pulumi.set(self, "event_bus_param", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceKafkaParamArgs']]:
+        """
+        ckafka configuration, required when Type is KAFKA.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="mariaDbParam")
+    def maria_db_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceMariaDbParamArgs']]:
+        """
+        MariaDB configuration, Required when Type is MARIADB.
+        """
+        return pulumi.get(self, "maria_db_param")
+
+    @maria_db_param.setter
+    def maria_db_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceMariaDbParamArgs']]):
+        pulumi.set(self, "maria_db_param", value)
+
+    @property
+    @pulumi.getter(name="mongoDbParam")
+    def mongo_db_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceMongoDbParamArgs']]:
+        """
+        MongoDB config, Required when Type is MONGODB.
+        """
+        return pulumi.get(self, "mongo_db_param")
+
+    @mongo_db_param.setter
+    def mongo_db_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceMongoDbParamArgs']]):
+        pulumi.set(self, "mongo_db_param", value)
+
+    @property
+    @pulumi.getter(name="mySqlParam")
+    def my_sql_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamArgs']]:
+        """
+        MySQL configuration, Required when Type is MYSQL.
+        """
+        return pulumi.get(self, "my_sql_param")
+
+    @my_sql_param.setter
+    def my_sql_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamArgs']]):
+        pulumi.set(self, "my_sql_param", value)
+
+    @property
+    @pulumi.getter(name="postgreSqlParam")
+    def postgre_sql_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamArgs']]:
+        """
+        PostgreSQL configuration, Required when Type is POSTGRESQL or TDSQL C_POSTGRESQL.
+        """
+        return pulumi.get(self, "postgre_sql_param")
+
+    @postgre_sql_param.setter
+    def postgre_sql_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamArgs']]):
+        pulumi.set(self, "postgre_sql_param", value)
+
+    @property
+    @pulumi.getter(name="scfParam")
+    def scf_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceScfParamArgs']]:
+        """
+        Scf configuration, Required when Type is SCF.
+        """
+        return pulumi.get(self, "scf_param")
+
+    @scf_param.setter
+    def scf_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceScfParamArgs']]):
+        pulumi.set(self, "scf_param", value)
+
+    @property
+    @pulumi.getter(name="sqlServerParam")
+    def sql_server_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceSqlServerParamArgs']]:
+        """
+        SQLServer configuration, Required when Type is SQLSERVER.
+        """
+        return pulumi.get(self, "sql_server_param")
+
+    @sql_server_param.setter
+    def sql_server_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceSqlServerParamArgs']]):
+        pulumi.set(self, "sql_server_param", value)
+
+    @property
+    @pulumi.getter(name="tdwParam")
+    def tdw_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceTdwParamArgs']]:
+        """
+        Tdw configuration, required when Type is TDW.
+        """
+        return pulumi.get(self, "tdw_param")
+
+    @tdw_param.setter
+    def tdw_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceTdwParamArgs']]):
+        pulumi.set(self, "tdw_param", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceTopicParamArgs']]:
+        """
+        Topic configuration, Required when Type is Topic.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceClickHouseParamArgs:
+    def __init__(__self__, *,
+                 cluster: pulumi.Input[str],
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 schemas: pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceClickHouseParamSchemaArgs']]],
+                 table: pulumi.Input[str],
+                 drop_cls: Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamDropClsArgs']] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 service_vip: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cluster: ClickHouse cluster.
+        :param pulumi.Input[str] database: ClickHouse database name.
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceClickHouseParamSchemaArgs']]] schemas: ClickHouse schema.
+        :param pulumi.Input[str] table: ClickHouse table.
+        :param pulumi.Input['DatahubTaskTargetResourceClickHouseParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input[bool] drop_invalid_message: Whether ClickHouse discards the message that fails to parse, the default is true.
+        :param pulumi.Input[str] ip: ClickHouse ip.
+        :param pulumi.Input[str] password: ClickHouse passwd.
+        :param pulumi.Input[int] port: ClickHouse port.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] service_vip: instance vip.
+        :param pulumi.Input[str] type: ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+        :param pulumi.Input[str] uniq_vpc_id: instance vpc id.
+        :param pulumi.Input[str] user_name: ClickHouse user name.
+        """
+        pulumi.set(__self__, "cluster", cluster)
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "schemas", schemas)
+        pulumi.set(__self__, "table", table)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def cluster(self) -> pulumi.Input[str]:
+        """
+        ClickHouse cluster.
+        """
+        return pulumi.get(self, "cluster")
+
+    @cluster.setter
+    def cluster(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster", value)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        ClickHouse database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def schemas(self) -> pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceClickHouseParamSchemaArgs']]]:
+        """
+        ClickHouse schema.
+        """
+        return pulumi.get(self, "schemas")
+
+    @schemas.setter
+    def schemas(self, value: pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceClickHouseParamSchemaArgs']]]):
+        pulumi.set(self, "schemas", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        ClickHouse table.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceClickHouseParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether ClickHouse discards the message that fails to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse passwd.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        ClickHouse port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vip.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @service_vip.setter
+    def service_vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_vip", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vpc id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        ClickHouse user name.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceClickHouseParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceClickHouseParamSchemaArgs:
+    def __init__(__self__, *,
+                 allow_null: pulumi.Input[bool],
+                 column_name: pulumi.Input[str],
+                 json_key: pulumi.Input[str],
+                 type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the column item is allowed to be empty.
+        :param pulumi.Input[str] column_name: column name.
+        :param pulumi.Input[str] json_key: The json Key name corresponding to this column.
+        :param pulumi.Input[str] type: type of table column.
+        """
+        pulumi.set(__self__, "allow_null", allow_null)
+        pulumi.set(__self__, "column_name", column_name)
+        pulumi.set(__self__, "json_key", json_key)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> pulumi.Input[bool]:
+        """
+        Whether the column item is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> pulumi.Input[str]:
+        """
+        column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> pulumi.Input[str]:
+        """
+        The json Key name corresponding to this column.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type of table column.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceClsParamArgs:
+    def __init__(__self__, *,
+                 decode_json: pulumi.Input[bool],
+                 resource: pulumi.Input[str],
+                 content_key: Optional[pulumi.Input[str]] = None,
+                 log_set: Optional[pulumi.Input[str]] = None,
+                 time_field: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] decode_json: Whether the produced information is in json format.
+        :param pulumi.Input[str] resource: cls id.
+        :param pulumi.Input[str] content_key: Required when Decode Json is false.
+        :param pulumi.Input[str] log_set: LogSet id.
+        :param pulumi.Input[str] time_field: Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+        """
+        pulumi.set(__self__, "decode_json", decode_json)
+        pulumi.set(__self__, "resource", resource)
+        if content_key is not None:
+            pulumi.set(__self__, "content_key", content_key)
+        if log_set is not None:
+            pulumi.set(__self__, "log_set", log_set)
+        if time_field is not None:
+            pulumi.set(__self__, "time_field", time_field)
+
+    @property
+    @pulumi.getter(name="decodeJson")
+    def decode_json(self) -> pulumi.Input[bool]:
+        """
+        Whether the produced information is in json format.
+        """
+        return pulumi.get(self, "decode_json")
+
+    @decode_json.setter
+    def decode_json(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "decode_json", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        cls id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="contentKey")
+    def content_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Required when Decode Json is false.
+        """
+        return pulumi.get(self, "content_key")
+
+    @content_key.setter
+    def content_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_key", value)
+
+    @property
+    @pulumi.getter(name="logSet")
+    def log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        LogSet id.
+        """
+        return pulumi.get(self, "log_set")
+
+    @log_set.setter
+    def log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "log_set", value)
+
+    @property
+    @pulumi.getter(name="timeField")
+    def time_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify the content of a field in the message as the time of the cls log. The format of the field content needs to be a second-level timestamp.
+        """
+        return pulumi.get(self, "time_field")
+
+    @time_field.setter
+    def time_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_field", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceCosParamArgs:
+    def __init__(__self__, *,
+                 bucket_name: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 aggregate_batch_size: Optional[pulumi.Input[int]] = None,
+                 aggregate_interval: Optional[pulumi.Input[int]] = None,
+                 directory_time_format: Optional[pulumi.Input[str]] = None,
+                 format_output_type: Optional[pulumi.Input[str]] = None,
+                 object_key: Optional[pulumi.Input[str]] = None,
+                 object_key_prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket_name: cos bucket name.
+        :param pulumi.Input[str] region: region code.
+        :param pulumi.Input[int] aggregate_batch_size: The size of aggregated messages MB.
+        :param pulumi.Input[int] aggregate_interval: time interval.
+        :param pulumi.Input[str] directory_time_format: Partition format formatted according to strptime time.
+        :param pulumi.Input[str] format_output_type: The file format after message aggregation csv|json.
+        :param pulumi.Input[str] object_key: ObjectKey.
+        :param pulumi.Input[str] object_key_prefix: Dumped object directory prefix.
+        """
+        pulumi.set(__self__, "bucket_name", bucket_name)
+        pulumi.set(__self__, "region", region)
+        if aggregate_batch_size is not None:
+            pulumi.set(__self__, "aggregate_batch_size", aggregate_batch_size)
+        if aggregate_interval is not None:
+            pulumi.set(__self__, "aggregate_interval", aggregate_interval)
+        if directory_time_format is not None:
+            pulumi.set(__self__, "directory_time_format", directory_time_format)
+        if format_output_type is not None:
+            pulumi.set(__self__, "format_output_type", format_output_type)
+        if object_key is not None:
+            pulumi.set(__self__, "object_key", object_key)
+        if object_key_prefix is not None:
+            pulumi.set(__self__, "object_key_prefix", object_key_prefix)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> pulumi.Input[str]:
+        """
+        cos bucket name.
+        """
+        return pulumi.get(self, "bucket_name")
+
+    @bucket_name.setter
+    def bucket_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket_name", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        region code.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="aggregateBatchSize")
+    def aggregate_batch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of aggregated messages MB.
+        """
+        return pulumi.get(self, "aggregate_batch_size")
+
+    @aggregate_batch_size.setter
+    def aggregate_batch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "aggregate_batch_size", value)
+
+    @property
+    @pulumi.getter(name="aggregateInterval")
+    def aggregate_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        time interval.
+        """
+        return pulumi.get(self, "aggregate_interval")
+
+    @aggregate_interval.setter
+    def aggregate_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "aggregate_interval", value)
+
+    @property
+    @pulumi.getter(name="directoryTimeFormat")
+    def directory_time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Partition format formatted according to strptime time.
+        """
+        return pulumi.get(self, "directory_time_format")
+
+    @directory_time_format.setter
+    def directory_time_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "directory_time_format", value)
+
+    @property
+    @pulumi.getter(name="formatOutputType")
+    def format_output_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file format after message aggregation csv|json.
+        """
+        return pulumi.get(self, "format_output_type")
+
+    @format_output_type.setter
+    def format_output_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "format_output_type", value)
+
+    @property
+    @pulumi.getter(name="objectKey")
+    def object_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        ObjectKey.
+        """
+        return pulumi.get(self, "object_key")
+
+    @object_key.setter
+    def object_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "object_key", value)
+
+    @property
+    @pulumi.getter(name="objectKeyPrefix")
+    def object_key_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dumped object directory prefix.
+        """
+        return pulumi.get(self, "object_key_prefix")
+
+    @object_key_prefix.setter
+    def object_key_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "object_key_prefix", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceCtsdbParamArgs:
+    def __init__(__self__, *,
+                 ctsdb_metric: Optional[pulumi.Input[str]] = None,
+                 resource: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ctsdb_metric: Ctsdb metric.
+        :param pulumi.Input[str] resource: resource id.
+        """
+        if ctsdb_metric is not None:
+            pulumi.set(__self__, "ctsdb_metric", ctsdb_metric)
+        if resource is not None:
+            pulumi.set(__self__, "resource", resource)
+
+    @property
+    @pulumi.getter(name="ctsdbMetric")
+    def ctsdb_metric(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ctsdb metric.
+        """
+        return pulumi.get(self, "ctsdb_metric")
+
+    @ctsdb_metric.setter
+    def ctsdb_metric(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ctsdb_metric", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceDtsParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 group_password: Optional[pulumi.Input[str]] = None,
+                 group_user: Optional[pulumi.Input[str]] = None,
+                 ip: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 tran_sql: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: Dts instance Id.
+        :param pulumi.Input[str] group_id: Dts consumer group Id.
+        :param pulumi.Input[str] group_password: Dts consumer group passwd.
+        :param pulumi.Input[str] group_user: Dts account.
+        :param pulumi.Input[str] ip: Dts connection ip.
+        :param pulumi.Input[int] port: Dts connection port.
+        :param pulumi.Input[str] topic: Dts topic.
+        :param pulumi.Input[bool] tran_sql: False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+        """
+        pulumi.set(__self__, "resource", resource)
+        if group_id is not None:
+            pulumi.set(__self__, "group_id", group_id)
+        if group_password is not None:
+            pulumi.set(__self__, "group_password", group_password)
+        if group_user is not None:
+            pulumi.set(__self__, "group_user", group_user)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if tran_sql is not None:
+            pulumi.set(__self__, "tran_sql", tran_sql)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        Dts instance Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts consumer group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @group_id.setter
+    def group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_id", value)
+
+    @property
+    @pulumi.getter(name="groupPassword")
+    def group_password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts consumer group passwd.
+        """
+        return pulumi.get(self, "group_password")
+
+    @group_password.setter
+    def group_password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_password", value)
+
+    @property
+    @pulumi.getter(name="groupUser")
+    def group_user(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts account.
+        """
+        return pulumi.get(self, "group_user")
+
+    @group_user.setter
+    def group_user(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_user", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts connection ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Dts connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dts topic.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="tranSql")
+    def tran_sql(self) -> Optional[pulumi.Input[bool]]:
+        """
+        False to synchronize the original data, true to synchronize the parsed json format data, the default is true.
+        """
+        return pulumi.get(self, "tran_sql")
+
+    @tran_sql.setter
+    def tran_sql(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "tran_sql", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 content_key: Optional[pulumi.Input[str]] = None,
+                 database_primary_key: Optional[pulumi.Input[str]] = None,
+                 date_format: Optional[pulumi.Input[str]] = None,
+                 document_id_field: Optional[pulumi.Input[str]] = None,
+                 drop_cls: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropClsArgs']] = None,
+                 drop_dlq: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqArgs']] = None,
+                 drop_invalid_json_message: Optional[pulumi.Input[bool]] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 index: Optional[pulumi.Input[str]] = None,
+                 index_type: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 service_vip: Optional[pulumi.Input[str]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] resource: Resource.
+        :param pulumi.Input[str] content_key: key for data in non-json format.
+        :param pulumi.Input[str] database_primary_key: When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+        :param pulumi.Input[str] date_format: Es date suffix.
+        :param pulumi.Input[str] document_id_field: The field name of the document ID value dumped into Es.
+        :param pulumi.Input['DatahubTaskTargetResourceEsParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqArgs'] drop_dlq: dead letter queue.
+        :param pulumi.Input[bool] drop_invalid_json_message: Whether Es discards messages in non-json format.
+        :param pulumi.Input[bool] drop_invalid_message: Whether Es discards the message of parsing failure.
+        :param pulumi.Input[str] index: Es index name.
+        :param pulumi.Input[str] index_type: Es custom index name type, STRING, JSONPATH, the default is STRING.
+        :param pulumi.Input[str] password: Es Password.
+        :param pulumi.Input[int] port: Es connection port.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] service_vip: instance vip.
+        :param pulumi.Input[str] uniq_vpc_id: instance vpc id.
+        :param pulumi.Input[str] user_name: Es UserName.
+        """
+        pulumi.set(__self__, "resource", resource)
+        if content_key is not None:
+            pulumi.set(__self__, "content_key", content_key)
+        if database_primary_key is not None:
+            pulumi.set(__self__, "database_primary_key", database_primary_key)
+        if date_format is not None:
+            pulumi.set(__self__, "date_format", date_format)
+        if document_id_field is not None:
+            pulumi.set(__self__, "document_id_field", document_id_field)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_dlq is not None:
+            pulumi.set(__self__, "drop_dlq", drop_dlq)
+        if drop_invalid_json_message is not None:
+            pulumi.set(__self__, "drop_invalid_json_message", drop_invalid_json_message)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if index_type is not None:
+            pulumi.set(__self__, "index_type", index_type)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if service_vip is not None:
+            pulumi.set(__self__, "service_vip", service_vip)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        Resource.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="contentKey")
+    def content_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key for data in non-json format.
+        """
+        return pulumi.get(self, "content_key")
+
+    @content_key.setter
+    def content_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_key", value)
+
+    @property
+    @pulumi.getter(name="databasePrimaryKey")
+    def database_primary_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        When the message dumped to ES is the binlog of Database, if you need to synchronize database operations, that is, fill in the primary key of the database table when adding, deleting, and modifying operations to ES.
+        """
+        return pulumi.get(self, "database_primary_key")
+
+    @database_primary_key.setter
+    def database_primary_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_primary_key", value)
+
+    @property
+    @pulumi.getter(name="dateFormat")
+    def date_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es date suffix.
+        """
+        return pulumi.get(self, "date_format")
+
+    @date_format.setter
+    def date_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "date_format", value)
+
+    @property
+    @pulumi.getter(name="documentIdField")
+    def document_id_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        The field name of the document ID value dumped into Es.
+        """
+        return pulumi.get(self, "document_id_field")
+
+    @document_id_field.setter
+    def document_id_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "document_id_field", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropDlq")
+    def drop_dlq(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqArgs']]:
+        """
+        dead letter queue.
+        """
+        return pulumi.get(self, "drop_dlq")
+
+    @drop_dlq.setter
+    def drop_dlq(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqArgs']]):
+        pulumi.set(self, "drop_dlq", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidJsonMessage")
+    def drop_invalid_json_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Es discards messages in non-json format.
+        """
+        return pulumi.get(self, "drop_invalid_json_message")
+
+    @drop_invalid_json_message.setter
+    def drop_invalid_json_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_json_message", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Es discards the message of parsing failure.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es index name.
+        """
+        return pulumi.get(self, "index")
+
+    @index.setter
+    def index(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "index", value)
+
+    @property
+    @pulumi.getter(name="indexType")
+    def index_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es custom index name type, STRING, JSONPATH, the default is STRING.
+        """
+        return pulumi.get(self, "index_type")
+
+    @index_type.setter
+    def index_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "index_type", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es Password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Es connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="serviceVip")
+    def service_vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vip.
+        """
+        return pulumi.get(self, "service_vip")
+
+    @service_vip.setter
+    def service_vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_vip", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        instance vpc id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Es UserName.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamDropDlqArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 dlq_type: Optional[pulumi.Input[str]] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs']] = None,
+                 max_retry_attempts: Optional[pulumi.Input[int]] = None,
+                 retry_interval: Optional[pulumi.Input[int]] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        :param pulumi.Input[str] dlq_type: dlq type, CKAFKA|TOPIC.
+        :param pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs'] kafka_param: Ckafka type dlq.
+        :param pulumi.Input[int] max_retry_attempts: retry times.
+        :param pulumi.Input[int] retry_interval: retry interval.
+        :param pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs'] topic_param: DIP Topic type dead letter queue.
+        """
+        pulumi.set(__self__, "type", type)
+        if dlq_type is not None:
+            pulumi.set(__self__, "dlq_type", dlq_type)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if max_retry_attempts is not None:
+            pulumi.set(__self__, "max_retry_attempts", max_retry_attempts)
+        if retry_interval is not None:
+            pulumi.set(__self__, "retry_interval", retry_interval)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="dlqType")
+    def dlq_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        dlq type, CKAFKA|TOPIC.
+        """
+        return pulumi.get(self, "dlq_type")
+
+    @dlq_type.setter
+    def dlq_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dlq_type", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs']]:
+        """
+        Ckafka type dlq.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="maxRetryAttempts")
+    def max_retry_attempts(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry times.
+        """
+        return pulumi.get(self, "max_retry_attempts")
+
+    @max_retry_attempts.setter
+    def max_retry_attempts(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retry_attempts", value)
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry interval.
+        """
+        return pulumi.get(self, "retry_interval")
+
+    @retry_interval.setter
+    def retry_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_interval", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs']]:
+        """
+        DIP Topic type dead letter queue.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceEventBusParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 type: pulumi.Input[str],
+                 function_name: Optional[pulumi.Input[str]] = None,
+                 namespace: Optional[pulumi.Input[str]] = None,
+                 qualifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] resource: instance id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] type: resource type. EB_COS/EB_ES/EB_CLS.
+        :param pulumi.Input[str] function_name: SCF function name.
+        :param pulumi.Input[str] namespace: SCF namespace.
+        :param pulumi.Input[str] qualifier: SCF version and alias.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        pulumi.set(__self__, "type", type)
+        if function_name is not None:
+            pulumi.set(__self__, "function_name", function_name)
+        if namespace is not None:
+            pulumi.set(__self__, "namespace", namespace)
+        if qualifier is not None:
+            pulumi.set(__self__, "qualifier", qualifier)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        resource type. EB_COS/EB_ES/EB_CLS.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF version and alias.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @qualifier.setter
+    def qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "qualifier", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceMariaDbParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 include_content_changes: Optional[pulumi.Input[str]] = None,
+                 include_query: Optional[pulumi.Input[bool]] = None,
+                 is_table_prefix: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 output_format: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: MariaDB database name, * for all database.
+        :param pulumi.Input[str] resource: MariaDB connection Id.
+        :param pulumi.Input[str] table: MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        :param pulumi.Input[str] include_content_changes: If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        :param pulumi.Input[bool] include_query: If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        :param pulumi.Input[bool] is_table_prefix: When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        :param pulumi.Input[str] key_columns: Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[str] output_format: output format, DEFAULT, CANAL_1, CANAL_2.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] snapshot_mode: schema_only|initial, default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if include_content_changes is not None:
+            pulumi.set(__self__, "include_content_changes", include_content_changes)
+        if include_query is not None:
+            pulumi.set(__self__, "include_query", include_query)
+        if is_table_prefix is not None:
+            pulumi.set(__self__, "is_table_prefix", is_table_prefix)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if output_format is not None:
+            pulumi.set(__self__, "output_format", output_format)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MariaDB database name, * for all database.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        MariaDB connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        MariaDB db name, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="includeContentChanges")
+    def include_content_changes(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        """
+        return pulumi.get(self, "include_content_changes")
+
+    @include_content_changes.setter
+    def include_content_changes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "include_content_changes", value)
+
+    @property
+    @pulumi.getter(name="includeQuery")
+    def include_query(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        """
+        return pulumi.get(self, "include_query")
+
+    @include_query.setter
+    def include_query(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "include_query", value)
+
+    @property
+    @pulumi.getter(name="isTablePrefix")
+    def is_table_prefix(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        """
+        return pulumi.get(self, "is_table_prefix")
+
+    @is_table_prefix.setter
+    def is_table_prefix(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_prefix", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format  library 1. table 1: field 1, field 2; library 2. table 2: field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        output format, DEFAULT, CANAL_1, CANAL_2.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        schema_only|initial, default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceMongoDbParamArgs:
+    def __init__(__self__, *,
+                 collection: pulumi.Input[str],
+                 copy_existing: pulumi.Input[bool],
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 ip: Optional[pulumi.Input[str]] = None,
+                 listening_event: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 pipeline: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 read_preference: Optional[pulumi.Input[str]] = None,
+                 self_built: Optional[pulumi.Input[bool]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] collection: MongoDB collection.
+        :param pulumi.Input[bool] copy_existing: Whether to copy the stock data, the default parameter is true.
+        :param pulumi.Input[str] database: MongoDB database name.
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[str] ip: Mongo DB connection ip.
+        :param pulumi.Input[str] listening_event: Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+        :param pulumi.Input[str] password: MongoDB database password.
+        :param pulumi.Input[str] pipeline: aggregation pipeline.
+        :param pulumi.Input[int] port: MongoDB connection port.
+        :param pulumi.Input[str] read_preference: Master-slave priority, default master node.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] user_name: MongoDB database user name.
+        """
+        pulumi.set(__self__, "collection", collection)
+        pulumi.set(__self__, "copy_existing", copy_existing)
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+        if listening_event is not None:
+            pulumi.set(__self__, "listening_event", listening_event)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if pipeline is not None:
+            pulumi.set(__self__, "pipeline", pipeline)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if read_preference is not None:
+            pulumi.set(__self__, "read_preference", read_preference)
+        if self_built is not None:
+            pulumi.set(__self__, "self_built", self_built)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def collection(self) -> pulumi.Input[str]:
+        """
+        MongoDB collection.
+        """
+        return pulumi.get(self, "collection")
+
+    @collection.setter
+    def collection(self, value: pulumi.Input[str]):
+        pulumi.set(self, "collection", value)
+
+    @property
+    @pulumi.getter(name="copyExisting")
+    def copy_existing(self) -> pulumi.Input[bool]:
+        """
+        Whether to copy the stock data, the default parameter is true.
+        """
+        return pulumi.get(self, "copy_existing")
+
+    @copy_existing.setter
+    def copy_existing(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "copy_existing", value)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MongoDB database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mongo DB connection ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter(name="listeningEvent")
+    def listening_event(self) -> Optional[pulumi.Input[str]]:
+        """
+        Listening event type, if it is empty, it means select all. Values include insert, update, replace, delete, invalidate, drop, dropdatabase, rename, used between multiple types, separated by commas.
+        """
+        return pulumi.get(self, "listening_event")
+
+    @listening_event.setter
+    def listening_event(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "listening_event", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        MongoDB database password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def pipeline(self) -> Optional[pulumi.Input[str]]:
+        """
+        aggregation pipeline.
+        """
+        return pulumi.get(self, "pipeline")
+
+    @pipeline.setter
+    def pipeline(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pipeline", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        MongoDB connection port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="readPreference")
+    def read_preference(self) -> Optional[pulumi.Input[str]]:
+        """
+        Master-slave priority, default master node.
+        """
+        return pulumi.get(self, "read_preference")
+
+    @read_preference.setter
+    def read_preference(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "read_preference", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        MongoDB database user name.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceMySqlParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 data_source_increment_column: Optional[pulumi.Input[str]] = None,
+                 data_source_increment_mode: Optional[pulumi.Input[str]] = None,
+                 data_source_monitor_mode: Optional[pulumi.Input[str]] = None,
+                 data_source_monitor_resource: Optional[pulumi.Input[str]] = None,
+                 data_source_start_from: Optional[pulumi.Input[str]] = None,
+                 data_target_insert_mode: Optional[pulumi.Input[str]] = None,
+                 data_target_primary_key_field: Optional[pulumi.Input[str]] = None,
+                 data_target_record_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs']]]] = None,
+                 ddl_topic: Optional[pulumi.Input[str]] = None,
+                 drop_cls: Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamDropClsArgs']] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 include_content_changes: Optional[pulumi.Input[str]] = None,
+                 include_query: Optional[pulumi.Input[bool]] = None,
+                 is_table_prefix: Optional[pulumi.Input[bool]] = None,
+                 is_table_regular: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 output_format: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 signal_database: Optional[pulumi.Input[str]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None,
+                 topic_regex: Optional[pulumi.Input[str]] = None,
+                 topic_replacement: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: MySQL database name, * is the whole database.
+        :param pulumi.Input[str] resource: MySQL connection Id.
+        :param pulumi.Input[str] table: The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+        :param pulumi.Input[str] data_source_increment_column: the name of the column to be monitored.
+        :param pulumi.Input[str] data_source_increment_mode: TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+        :param pulumi.Input[str] data_source_monitor_mode: TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+        :param pulumi.Input[str] data_source_monitor_resource: When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+        :param pulumi.Input[str] data_source_start_from: HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+        :param pulumi.Input[str] data_target_insert_mode: INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        :param pulumi.Input[str] data_target_primary_key_field: When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs']]] data_target_record_mappings: Mapping relationship between tables and messages.
+        :param pulumi.Input[str] ddl_topic: The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+        :param pulumi.Input['DatahubTaskTargetResourceMySqlParamDropClsArgs'] drop_cls: When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        :param pulumi.Input[bool] drop_invalid_message: Whether to discard messages that fail to parse, the default is true.
+        :param pulumi.Input[str] include_content_changes: If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        :param pulumi.Input[bool] include_query: If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        :param pulumi.Input[bool] is_table_prefix: When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        :param pulumi.Input[bool] is_table_regular: Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+        :param pulumi.Input[str] key_columns: Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[str] output_format: output format, DEFAULT, CANAL_1, CANAL_2.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] signal_database: database name of signal table.
+        :param pulumi.Input[str] snapshot_mode: whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+        :param pulumi.Input[str] topic_regex: Regular expression for routing events to specific topics, defaults to (.*).
+        :param pulumi.Input[str] topic_replacement: TopicRegex, $1, $2.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if data_source_increment_column is not None:
+            pulumi.set(__self__, "data_source_increment_column", data_source_increment_column)
+        if data_source_increment_mode is not None:
+            pulumi.set(__self__, "data_source_increment_mode", data_source_increment_mode)
+        if data_source_monitor_mode is not None:
+            pulumi.set(__self__, "data_source_monitor_mode", data_source_monitor_mode)
+        if data_source_monitor_resource is not None:
+            pulumi.set(__self__, "data_source_monitor_resource", data_source_monitor_resource)
+        if data_source_start_from is not None:
+            pulumi.set(__self__, "data_source_start_from", data_source_start_from)
+        if data_target_insert_mode is not None:
+            pulumi.set(__self__, "data_target_insert_mode", data_target_insert_mode)
+        if data_target_primary_key_field is not None:
+            pulumi.set(__self__, "data_target_primary_key_field", data_target_primary_key_field)
+        if data_target_record_mappings is not None:
+            pulumi.set(__self__, "data_target_record_mappings", data_target_record_mappings)
+        if ddl_topic is not None:
+            pulumi.set(__self__, "ddl_topic", ddl_topic)
+        if drop_cls is not None:
+            pulumi.set(__self__, "drop_cls", drop_cls)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if include_content_changes is not None:
+            pulumi.set(__self__, "include_content_changes", include_content_changes)
+        if include_query is not None:
+            pulumi.set(__self__, "include_query", include_query)
+        if is_table_prefix is not None:
+            pulumi.set(__self__, "is_table_prefix", is_table_prefix)
+        if is_table_regular is not None:
+            pulumi.set(__self__, "is_table_regular", is_table_regular)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if output_format is not None:
+            pulumi.set(__self__, "output_format", output_format)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if signal_database is not None:
+            pulumi.set(__self__, "signal_database", signal_database)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+        if topic_regex is not None:
+            pulumi.set(__self__, "topic_regex", topic_regex)
+        if topic_replacement is not None:
+            pulumi.set(__self__, "topic_replacement", topic_replacement)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        MySQL database name, * is the whole database.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        MySQL connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        The name of the MySQL data table,  is the non-system table in all the monitored databases, which can be separated by, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name, when a regular expression needs to be filled in, the format is data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dataSourceIncrementColumn")
+    def data_source_increment_column(self) -> Optional[pulumi.Input[str]]:
+        """
+        the name of the column to be monitored.
+        """
+        return pulumi.get(self, "data_source_increment_column")
+
+    @data_source_increment_column.setter
+    def data_source_increment_column(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_increment_column", value)
+
+    @property
+    @pulumi.getter(name="dataSourceIncrementMode")
+    def data_source_increment_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        TIMESTAMP indicates that the incremental column is of timestamp type, INCREMENT indicates that the incremental column is of self-incrementing id type.
+        """
+        return pulumi.get(self, "data_source_increment_mode")
+
+    @data_source_increment_mode.setter
+    def data_source_increment_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_increment_mode", value)
+
+    @property
+    @pulumi.getter(name="dataSourceMonitorMode")
+    def data_source_monitor_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        TABLE indicates that the read item is a table, QUERY indicates that the read item is a query.
+        """
+        return pulumi.get(self, "data_source_monitor_mode")
+
+    @data_source_monitor_mode.setter
+    def data_source_monitor_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_monitor_mode", value)
+
+    @property
+    @pulumi.getter(name="dataSourceMonitorResource")
+    def data_source_monitor_resource(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataMonitorMode=TABLE, pass in the Table that needs to be read; when DataMonitorMode=QUERY, pass in the query sql statement that needs to be read.
+        """
+        return pulumi.get(self, "data_source_monitor_resource")
+
+    @data_source_monitor_resource.setter
+    def data_source_monitor_resource(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_monitor_resource", value)
+
+    @property
+    @pulumi.getter(name="dataSourceStartFrom")
+    def data_source_start_from(self) -> Optional[pulumi.Input[str]]:
+        """
+        HEAD means copy stock + incremental data, TAIL means copy only incremental data.
+        """
+        return pulumi.get(self, "data_source_start_from")
+
+    @data_source_start_from.setter
+    def data_source_start_from(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_source_start_from", value)
+
+    @property
+    @pulumi.getter(name="dataTargetInsertMode")
+    def data_target_insert_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        """
+        return pulumi.get(self, "data_target_insert_mode")
+
+    @data_target_insert_mode.setter
+    def data_target_insert_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_insert_mode", value)
+
+    @property
+    @pulumi.getter(name="dataTargetPrimaryKeyField")
+    def data_target_primary_key_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        """
+        return pulumi.get(self, "data_target_primary_key_field")
+
+    @data_target_primary_key_field.setter
+    def data_target_primary_key_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_primary_key_field", value)
+
+    @property
+    @pulumi.getter(name="dataTargetRecordMappings")
+    def data_target_record_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs']]]]:
+        """
+        Mapping relationship between tables and messages.
+        """
+        return pulumi.get(self, "data_target_record_mappings")
+
+    @data_target_record_mappings.setter
+    def data_target_record_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs']]]]):
+        pulumi.set(self, "data_target_record_mappings", value)
+
+    @property
+    @pulumi.getter(name="ddlTopic")
+    def ddl_topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Topic that stores the Ddl information of My SQL, if it is empty, it will not be stored by default.
+        """
+        return pulumi.get(self, "ddl_topic")
+
+    @ddl_topic.setter
+    def ddl_topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ddl_topic", value)
+
+    @property
+    @pulumi.getter(name="dropCls")
+    def drop_cls(self) -> Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamDropClsArgs']]:
+        """
+        When the member parameter Drop Invalid Message To Cls is set to true, the Drop Invalid Message parameter is invalid.
+        """
+        return pulumi.get(self, "drop_cls")
+
+    @drop_cls.setter
+    def drop_cls(self, value: Optional[pulumi.Input['DatahubTaskTargetResourceMySqlParamDropClsArgs']]):
+        pulumi.set(self, "drop_cls", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to discard messages that fail to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter(name="includeContentChanges")
+    def include_content_changes(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the value is all, DDL data and DML data will also be written to the selected topic; if the value is dml, only DML data will be written to the selected topic.
+        """
+        return pulumi.get(self, "include_content_changes")
+
+    @include_content_changes.setter
+    def include_content_changes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "include_content_changes", value)
+
+    @property
+    @pulumi.getter(name="includeQuery")
+    def include_query(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, and the value of the binlog rows query log events configuration item in My SQL is ON, the data flowing into the topic contains the original SQL statement; if the value is false, the data flowing into the topic does not contain Original SQL statement.
+        """
+        return pulumi.get(self, "include_query")
+
+    @include_query.setter
+    def include_query(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "include_query", value)
+
+    @property
+    @pulumi.getter(name="isTablePrefix")
+    def is_table_prefix(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When the Table input is a prefix, the value of this item is true, otherwise it is false.
+        """
+        return pulumi.get(self, "is_table_prefix")
+
+    @is_table_prefix.setter
+    def is_table_prefix(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_prefix", value)
+
+    @property
+    @pulumi.getter(name="isTableRegular")
+    def is_table_regular(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the input table is a regular expression, if this option and Is Table Prefix are true at the same time, the judgment priority of this option is higher than Is Table Prefix.
+        """
+        return pulumi.get(self, "is_table_regular")
+
+    @is_table_regular.setter
+    def is_table_regular(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_regular", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format library1.table1 field 1,field 2;library 2.table2 field 2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        output format, DEFAULT, CANAL_1, CANAL_2.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="signalDatabase")
+    def signal_database(self) -> Optional[pulumi.Input[str]]:
+        """
+        database name of signal table.
+        """
+        return pulumi.get(self, "signal_database")
+
+    @signal_database.setter
+    def signal_database(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "signal_database", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        whether to Copy inventory information (schema_only does not copy, initial full amount), the default is initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+    @property
+    @pulumi.getter(name="topicRegex")
+    def topic_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Regular expression for routing events to specific topics, defaults to (.*).
+        """
+        return pulumi.get(self, "topic_regex")
+
+    @topic_regex.setter
+    def topic_regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_regex", value)
+
+    @property
+    @pulumi.getter(name="topicReplacement")
+    def topic_replacement(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicRegex, $1, $2.
+        """
+        return pulumi.get(self, "topic_replacement")
+
+    @topic_replacement.setter
+    def topic_replacement(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_replacement", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs:
+    def __init__(__self__, *,
+                 allow_null: Optional[pulumi.Input[bool]] = None,
+                 auto_increment: Optional[pulumi.Input[bool]] = None,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 column_size: Optional[pulumi.Input[str]] = None,
+                 decimal_digits: Optional[pulumi.Input[str]] = None,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 extra_info: Optional[pulumi.Input[str]] = None,
+                 json_key: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
+        :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
+        :param pulumi.Input[str] column_name: Corresponding mapping column name.
+        :param pulumi.Input[str] column_size: current column size.
+        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] default_value: Database table default parameters.
+        :param pulumi.Input[str] extra_info: Database table extra fields.
+        :param pulumi.Input[str] json_key: The key name of the message.
+        :param pulumi.Input[str] type: message type.
+        """
+        if allow_null is not None:
+            pulumi.set(__self__, "allow_null", allow_null)
+        if auto_increment is not None:
+            pulumi.set(__self__, "auto_increment", auto_increment)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if column_size is not None:
+            pulumi.set(__self__, "column_size", column_size)
+        if decimal_digits is not None:
+            pulumi.set(__self__, "decimal_digits", decimal_digits)
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if extra_info is not None:
+            pulumi.set(__self__, "extra_info", extra_info)
+        if json_key is not None:
+            pulumi.set(__self__, "json_key", json_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the message is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="autoIncrement")
+    def auto_increment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is an auto-increment column.
+        """
+        return pulumi.get(self, "auto_increment")
+
+    @auto_increment.setter
+    def auto_increment(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_increment", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Corresponding mapping column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="columnSize")
+    def column_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column size.
+        """
+        return pulumi.get(self, "column_size")
+
+    @column_size.setter
+    def column_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_size", value)
+
+    @property
+    @pulumi.getter(name="decimalDigits")
+    def decimal_digits(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column precision.
+        """
+        return pulumi.get(self, "decimal_digits")
+
+    @decimal_digits.setter
+    def decimal_digits(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "decimal_digits", value)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table default parameters.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter(name="extraInfo")
+    def extra_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table extra fields.
+        """
+        return pulumi.get(self, "extra_info")
+
+    @extra_info.setter
+    def extra_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extra_info", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key name of the message.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        message type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceMySqlParamDropClsArgs:
+    def __init__(__self__, *,
+                 drop_cls_log_set: Optional[pulumi.Input[str]] = None,
+                 drop_cls_owneruin: Optional[pulumi.Input[str]] = None,
+                 drop_cls_region: Optional[pulumi.Input[str]] = None,
+                 drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
+                 drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] drop_cls_log_set: cls log set.
+        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
+        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
+        """
+        if drop_cls_log_set is not None:
+            pulumi.set(__self__, "drop_cls_log_set", drop_cls_log_set)
+        if drop_cls_owneruin is not None:
+            pulumi.set(__self__, "drop_cls_owneruin", drop_cls_owneruin)
+        if drop_cls_region is not None:
+            pulumi.set(__self__, "drop_cls_region", drop_cls_region)
+        if drop_cls_topic_id is not None:
+            pulumi.set(__self__, "drop_cls_topic_id", drop_cls_topic_id)
+        if drop_invalid_message_to_cls is not None:
+            pulumi.set(__self__, "drop_invalid_message_to_cls", drop_invalid_message_to_cls)
+
+    @property
+    @pulumi.getter(name="dropClsLogSet")
+    def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
+        """
+        cls log set.
+        """
+        return pulumi.get(self, "drop_cls_log_set")
+
+    @drop_cls_log_set.setter
+    def drop_cls_log_set(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_log_set", value)
+
+    @property
+    @pulumi.getter(name="dropClsOwneruin")
+    def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delivery account of cls.
+        """
+        return pulumi.get(self, "drop_cls_owneruin")
+
+    @drop_cls_owneruin.setter
+    def drop_cls_owneruin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_owneruin", value)
+
+    @property
+    @pulumi.getter(name="dropClsRegion")
+    def drop_cls_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region where the cls is delivered.
+        """
+        return pulumi.get(self, "drop_cls_region")
+
+    @drop_cls_region.setter
+    def drop_cls_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_region", value)
+
+    @property
+    @pulumi.getter(name="dropClsTopicId")
+    def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic of cls.
+        """
+        return pulumi.get(self, "drop_cls_topic_id")
+
+    @drop_cls_topic_id.setter
+    def drop_cls_topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "drop_cls_topic_id", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessageToCls")
+    def drop_invalid_message_to_cls(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver to cls.
+        """
+        return pulumi.get(self, "drop_invalid_message_to_cls")
+
+    @drop_invalid_message_to_cls.setter
+    def drop_invalid_message_to_cls(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message_to_cls", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourcePostgreSqlParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 plugin_name: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 data_format: Optional[pulumi.Input[str]] = None,
+                 data_target_insert_mode: Optional[pulumi.Input[str]] = None,
+                 data_target_primary_key_field: Optional[pulumi.Input[str]] = None,
+                 data_target_record_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs']]]] = None,
+                 drop_invalid_message: Optional[pulumi.Input[bool]] = None,
+                 is_table_regular: Optional[pulumi.Input[bool]] = None,
+                 key_columns: Optional[pulumi.Input[str]] = None,
+                 record_with_schema: Optional[pulumi.Input[bool]] = None,
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: PostgreSQL database name.
+        :param pulumi.Input[str] plugin_name: (decoderbufs/pgoutput), default decoderbufs.
+        :param pulumi.Input[str] resource: PostgreSQL connection Id.
+        :param pulumi.Input[str] table: PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+        :param pulumi.Input[str] data_format: Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+        :param pulumi.Input[str] data_target_insert_mode: INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        :param pulumi.Input[str] data_target_primary_key_field: When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs']]] data_target_record_mappings: Mapping relationship between tables and messages.
+        :param pulumi.Input[bool] drop_invalid_message: Whether to discard messages that fail to parse, the default is true.
+        :param pulumi.Input[bool] is_table_regular: Whether the input table is a regular expression.
+        :param pulumi.Input[str] key_columns: Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        :param pulumi.Input[bool] record_with_schema: If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        :param pulumi.Input[str] snapshot_mode: never|initial, default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "plugin_name", plugin_name)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if data_format is not None:
+            pulumi.set(__self__, "data_format", data_format)
+        if data_target_insert_mode is not None:
+            pulumi.set(__self__, "data_target_insert_mode", data_target_insert_mode)
+        if data_target_primary_key_field is not None:
+            pulumi.set(__self__, "data_target_primary_key_field", data_target_primary_key_field)
+        if data_target_record_mappings is not None:
+            pulumi.set(__self__, "data_target_record_mappings", data_target_record_mappings)
+        if drop_invalid_message is not None:
+            pulumi.set(__self__, "drop_invalid_message", drop_invalid_message)
+        if is_table_regular is not None:
+            pulumi.set(__self__, "is_table_regular", is_table_regular)
+        if key_columns is not None:
+            pulumi.set(__self__, "key_columns", key_columns)
+        if record_with_schema is not None:
+            pulumi.set(__self__, "record_with_schema", record_with_schema)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> pulumi.Input[str]:
+        """
+        (decoderbufs/pgoutput), default decoderbufs.
+        """
+        return pulumi.get(self, "plugin_name")
+
+    @plugin_name.setter
+    def plugin_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "plugin_name", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        PostgreSQL tableName, * is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of Schema name.Data table name, and you need to fill in a regular expression When, the format is Schema name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="dataFormat")
+    def data_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
+        """
+        return pulumi.get(self, "data_format")
+
+    @data_format.setter
+    def data_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_format", value)
+
+    @property
+    @pulumi.getter(name="dataTargetInsertMode")
+    def data_target_insert_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        INSERT means insert using Insert mode, UPSERT means insert using Upsert mode.
+        """
+        return pulumi.get(self, "data_target_insert_mode")
+
+    @data_target_insert_mode.setter
+    def data_target_insert_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_insert_mode", value)
+
+    @property
+    @pulumi.getter(name="dataTargetPrimaryKeyField")
+    def data_target_primary_key_field(self) -> Optional[pulumi.Input[str]]:
+        """
+        When DataInsertMode=UPSERT, pass in the primary key that the current upsert depends on.
+        """
+        return pulumi.get(self, "data_target_primary_key_field")
+
+    @data_target_primary_key_field.setter
+    def data_target_primary_key_field(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_target_primary_key_field", value)
+
+    @property
+    @pulumi.getter(name="dataTargetRecordMappings")
+    def data_target_record_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs']]]]:
+        """
+        Mapping relationship between tables and messages.
+        """
+        return pulumi.get(self, "data_target_record_mappings")
+
+    @data_target_record_mappings.setter
+    def data_target_record_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs']]]]):
+        pulumi.set(self, "data_target_record_mappings", value)
+
+    @property
+    @pulumi.getter(name="dropInvalidMessage")
+    def drop_invalid_message(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to discard messages that fail to parse, the default is true.
+        """
+        return pulumi.get(self, "drop_invalid_message")
+
+    @drop_invalid_message.setter
+    def drop_invalid_message(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "drop_invalid_message", value)
+
+    @property
+    @pulumi.getter(name="isTableRegular")
+    def is_table_regular(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the input table is a regular expression.
+        """
+        return pulumi.get(self, "is_table_regular")
+
+    @is_table_regular.setter
+    def is_table_regular(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_table_regular", value)
+
+    @property
+    @pulumi.getter(name="keyColumns")
+    def key_columns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format  library1.table1:field 1,field2;library2.table2:field2, between tables; (semicolon) separated, between fields, (comma) separated. The table that is not specified defaults to the primary key of the table.
+        """
+        return pulumi.get(self, "key_columns")
+
+    @key_columns.setter
+    def key_columns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_columns", value)
+
+    @property
+    @pulumi.getter(name="recordWithSchema")
+    def record_with_schema(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If the value is true, the message will carry the schema corresponding to the message structure, if the value is false, it will not carry.
+        """
+        return pulumi.get(self, "record_with_schema")
+
+    @record_with_schema.setter
+    def record_with_schema(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "record_with_schema", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        never|initial, default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs:
+    def __init__(__self__, *,
+                 allow_null: Optional[pulumi.Input[bool]] = None,
+                 auto_increment: Optional[pulumi.Input[bool]] = None,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 column_size: Optional[pulumi.Input[str]] = None,
+                 decimal_digits: Optional[pulumi.Input[str]] = None,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 extra_info: Optional[pulumi.Input[str]] = None,
+                 json_key: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
+        :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
+        :param pulumi.Input[str] column_name: Corresponding mapping column name.
+        :param pulumi.Input[str] column_size: current column size.
+        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] default_value: Database table default parameters.
+        :param pulumi.Input[str] extra_info: Database table extra fields.
+        :param pulumi.Input[str] json_key: The key name of the message.
+        :param pulumi.Input[str] type: message type.
+        """
+        if allow_null is not None:
+            pulumi.set(__self__, "allow_null", allow_null)
+        if auto_increment is not None:
+            pulumi.set(__self__, "auto_increment", auto_increment)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if column_size is not None:
+            pulumi.set(__self__, "column_size", column_size)
+        if decimal_digits is not None:
+            pulumi.set(__self__, "decimal_digits", decimal_digits)
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if extra_info is not None:
+            pulumi.set(__self__, "extra_info", extra_info)
+        if json_key is not None:
+            pulumi.set(__self__, "json_key", json_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="allowNull")
+    def allow_null(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the message is allowed to be empty.
+        """
+        return pulumi.get(self, "allow_null")
+
+    @allow_null.setter
+    def allow_null(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_null", value)
+
+    @property
+    @pulumi.getter(name="autoIncrement")
+    def auto_increment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether it is an auto-increment column.
+        """
+        return pulumi.get(self, "auto_increment")
+
+    @auto_increment.setter
+    def auto_increment(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_increment", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Corresponding mapping column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="columnSize")
+    def column_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column size.
+        """
+        return pulumi.get(self, "column_size")
+
+    @column_size.setter
+    def column_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_size", value)
+
+    @property
+    @pulumi.getter(name="decimalDigits")
+    def decimal_digits(self) -> Optional[pulumi.Input[str]]:
+        """
+        current column precision.
+        """
+        return pulumi.get(self, "decimal_digits")
+
+    @decimal_digits.setter
+    def decimal_digits(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "decimal_digits", value)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table default parameters.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter(name="extraInfo")
+    def extra_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database table extra fields.
+        """
+        return pulumi.get(self, "extra_info")
+
+    @extra_info.setter
+    def extra_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extra_info", value)
+
+    @property
+    @pulumi.getter(name="jsonKey")
+    def json_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key name of the message.
+        """
+        return pulumi.get(self, "json_key")
+
+    @json_key.setter
+    def json_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "json_key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        message type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceScfParamArgs:
+    def __init__(__self__, *,
+                 function_name: pulumi.Input[str],
+                 batch_size: Optional[pulumi.Input[int]] = None,
+                 max_retries: Optional[pulumi.Input[int]] = None,
+                 namespace: Optional[pulumi.Input[str]] = None,
+                 qualifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] function_name: SCF function name.
+        :param pulumi.Input[int] batch_size: The maximum number of messages sent in each batch, the default is 1000.
+        :param pulumi.Input[int] max_retries: The number of retries after the SCF call fails, the default is 5.
+        :param pulumi.Input[str] namespace: SCF cloud function namespace, the default is default.
+        :param pulumi.Input[str] qualifier: SCF cloud function version and alias, the default is DEFAULT.
+        """
+        pulumi.set(__self__, "function_name", function_name)
+        if batch_size is not None:
+            pulumi.set(__self__, "batch_size", batch_size)
+        if max_retries is not None:
+            pulumi.set(__self__, "max_retries", max_retries)
+        if namespace is not None:
+            pulumi.set(__self__, "namespace", namespace)
+        if qualifier is not None:
+            pulumi.set(__self__, "qualifier", qualifier)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> pulumi.Input[str]:
+        """
+        SCF function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of messages sent in each batch, the default is 1000.
+        """
+        return pulumi.get(self, "batch_size")
+
+    @batch_size.setter
+    def batch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_size", value)
+
+    @property
+    @pulumi.getter(name="maxRetries")
+    def max_retries(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of retries after the SCF call fails, the default is 5.
+        """
+        return pulumi.get(self, "max_retries")
+
+    @max_retries.setter
+    def max_retries(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retries", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF cloud function namespace, the default is default.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        SCF cloud function version and alias, the default is DEFAULT.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @qualifier.setter
+    def qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "qualifier", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceSqlServerParamArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 resource: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 snapshot_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] database: SQLServer database name.
+        :param pulumi.Input[str] resource: SQLServer connection Id.
+        :param pulumi.Input[str] table: SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        :param pulumi.Input[str] snapshot_mode: schema_only|initial default initial.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "table", table)
+        if snapshot_mode is not None:
+            pulumi.set(__self__, "snapshot_mode", snapshot_mode)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        SQLServer database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        SQLServer connection Id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        SQLServer table, *is the non-system table in all the monitored databases, you can use, to monitor multiple data tables, but the data table needs to be filled in the format of data database name.data table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter(name="snapshotMode")
+    def snapshot_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        schema_only|initial default initial.
+        """
+        return pulumi.get(self, "snapshot_mode")
+
+    @snapshot_mode.setter
+    def snapshot_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "snapshot_mode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceTdwParamArgs:
+    def __init__(__self__, *,
+                 bid: pulumi.Input[str],
+                 tid: pulumi.Input[str],
+                 is_domestic: Optional[pulumi.Input[bool]] = None,
+                 tdw_host: Optional[pulumi.Input[str]] = None,
+                 tdw_port: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] bid: Tdw bid.
+        :param pulumi.Input[str] tid: Tdw tid.
+        :param pulumi.Input[bool] is_domestic: default true.
+        :param pulumi.Input[str] tdw_host: TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+        :param pulumi.Input[int] tdw_port: TDW port, default 8099.
+        """
+        pulumi.set(__self__, "bid", bid)
+        pulumi.set(__self__, "tid", tid)
+        if is_domestic is not None:
+            pulumi.set(__self__, "is_domestic", is_domestic)
+        if tdw_host is not None:
+            pulumi.set(__self__, "tdw_host", tdw_host)
+        if tdw_port is not None:
+            pulumi.set(__self__, "tdw_port", tdw_port)
+
+    @property
+    @pulumi.getter
+    def bid(self) -> pulumi.Input[str]:
+        """
+        Tdw bid.
+        """
+        return pulumi.get(self, "bid")
+
+    @bid.setter
+    def bid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bid", value)
+
+    @property
+    @pulumi.getter
+    def tid(self) -> pulumi.Input[str]:
+        """
+        Tdw tid.
+        """
+        return pulumi.get(self, "tid")
+
+    @tid.setter
+    def tid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tid", value)
+
+    @property
+    @pulumi.getter(name="isDomestic")
+    def is_domestic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        default true.
+        """
+        return pulumi.get(self, "is_domestic")
+
+    @is_domestic.setter
+    def is_domestic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_domestic", value)
+
+    @property
+    @pulumi.getter(name="tdwHost")
+    def tdw_host(self) -> Optional[pulumi.Input[str]]:
+        """
+        TDW address, defalt tl-tdbank-tdmanager.tencent-distribute.com.
+        """
+        return pulumi.get(self, "tdw_host")
+
+    @tdw_host.setter
+    def tdw_host(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tdw_host", value)
+
+    @property
+    @pulumi.getter(name="tdwPort")
+    def tdw_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        TDW port, default 8099.
+        """
+        return pulumi.get(self, "tdw_port")
+
+    @tdw_port.setter
+    def tdw_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "tdw_port", value)
+
+
+@pulumi.input_type
+class DatahubTaskTargetResourceTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamArgs:
+    def __init__(__self__, *,
+                 analysis_format: pulumi.Input[str],
+                 content: pulumi.Input[str],
+                 failure_param: pulumi.Input['DatahubTaskTransformParamFailureParamArgs'],
+                 output_format: pulumi.Input[str],
+                 source_type: pulumi.Input[str],
+                 analyse_results: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamAnalyseResultArgs']]]] = None,
+                 filter_params: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFilterParamArgs']]]] = None,
+                 map_params: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamMapParamArgs']]]] = None,
+                 regex: Optional[pulumi.Input[str]] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 use_event_bus: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] analysis_format: parsing format, JSON | DELIMITER| REGULAR.
+        :param pulumi.Input[str] content: Raw data.
+        :param pulumi.Input['DatahubTaskTransformParamFailureParamArgs'] failure_param: Whether to keep parsing failure data.
+        :param pulumi.Input[str] output_format: output format.
+        :param pulumi.Input[str] source_type: Data source, TOPIC pulls from the source topic, CUSTOMIZE custom.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamAnalyseResultArgs']]] analyse_results: Analysis result.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFilterParamArgs']]] filter_params: filter.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamMapParamArgs']]] map_params: Map.
+        :param pulumi.Input[str] regex: delimiter, regular expression.
+        :param pulumi.Input[str] result: Test Results.
+        :param pulumi.Input[bool] use_event_bus: Whether the underlying engine uses eb.
+        """
+        pulumi.set(__self__, "analysis_format", analysis_format)
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "failure_param", failure_param)
+        pulumi.set(__self__, "output_format", output_format)
+        pulumi.set(__self__, "source_type", source_type)
+        if analyse_results is not None:
+            pulumi.set(__self__, "analyse_results", analyse_results)
+        if filter_params is not None:
+            pulumi.set(__self__, "filter_params", filter_params)
+        if map_params is not None:
+            pulumi.set(__self__, "map_params", map_params)
+        if regex is not None:
+            pulumi.set(__self__, "regex", regex)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if use_event_bus is not None:
+            pulumi.set(__self__, "use_event_bus", use_event_bus)
+
+    @property
+    @pulumi.getter(name="analysisFormat")
+    def analysis_format(self) -> pulumi.Input[str]:
+        """
+        parsing format, JSON | DELIMITER| REGULAR.
+        """
+        return pulumi.get(self, "analysis_format")
+
+    @analysis_format.setter
+    def analysis_format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "analysis_format", value)
+
+    @property
+    @pulumi.getter
+    def content(self) -> pulumi.Input[str]:
+        """
+        Raw data.
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: pulumi.Input[str]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter(name="failureParam")
+    def failure_param(self) -> pulumi.Input['DatahubTaskTransformParamFailureParamArgs']:
+        """
+        Whether to keep parsing failure data.
+        """
+        return pulumi.get(self, "failure_param")
+
+    @failure_param.setter
+    def failure_param(self, value: pulumi.Input['DatahubTaskTransformParamFailureParamArgs']):
+        pulumi.set(self, "failure_param", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> pulumi.Input[str]:
+        """
+        output format.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter(name="sourceType")
+    def source_type(self) -> pulumi.Input[str]:
+        """
+        Data source, TOPIC pulls from the source topic, CUSTOMIZE custom.
+        """
+        return pulumi.get(self, "source_type")
+
+    @source_type.setter
+    def source_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "source_type", value)
+
+    @property
+    @pulumi.getter(name="analyseResults")
+    def analyse_results(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamAnalyseResultArgs']]]]:
+        """
+        Analysis result.
+        """
+        return pulumi.get(self, "analyse_results")
+
+    @analyse_results.setter
+    def analyse_results(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamAnalyseResultArgs']]]]):
+        pulumi.set(self, "analyse_results", value)
+
+    @property
+    @pulumi.getter(name="filterParams")
+    def filter_params(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFilterParamArgs']]]]:
+        """
+        filter.
+        """
+        return pulumi.get(self, "filter_params")
+
+    @filter_params.setter
+    def filter_params(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFilterParamArgs']]]]):
+        pulumi.set(self, "filter_params", value)
+
+    @property
+    @pulumi.getter(name="mapParams")
+    def map_params(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamMapParamArgs']]]]:
+        """
+        Map.
+        """
+        return pulumi.get(self, "map_params")
+
+    @map_params.setter
+    def map_params(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamMapParamArgs']]]]):
+        pulumi.set(self, "map_params", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        delimiter, regular expression.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "regex", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        Test Results.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter(name="useEventBus")
+    def use_event_bus(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the underlying engine uses eb.
+        """
+        return pulumi.get(self, "use_event_bus")
+
+    @use_event_bus.setter
+    def use_event_bus(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_event_bus", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamAnalyseResultArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] type: Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamFailureParamArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 dlq_type: Optional[pulumi.Input[str]] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamArgs']] = None,
+                 max_retry_attempts: Optional[pulumi.Input[int]] = None,
+                 retry_interval: Optional[pulumi.Input[int]] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskTransformParamFailureParamTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        :param pulumi.Input[str] dlq_type: dlq type, CKAFKA|TOPIC.
+        :param pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamArgs'] kafka_param: Ckafka type dlq.
+        :param pulumi.Input[int] max_retry_attempts: retry times.
+        :param pulumi.Input[int] retry_interval: retry interval.
+        :param pulumi.Input['DatahubTaskTransformParamFailureParamTopicParamArgs'] topic_param: DIP Topic type dead letter queue.
+        """
+        pulumi.set(__self__, "type", type)
+        if dlq_type is not None:
+            pulumi.set(__self__, "dlq_type", dlq_type)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if max_retry_attempts is not None:
+            pulumi.set(__self__, "max_retry_attempts", max_retry_attempts)
+        if retry_interval is not None:
+            pulumi.set(__self__, "retry_interval", retry_interval)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="dlqType")
+    def dlq_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        dlq type, CKAFKA|TOPIC.
+        """
+        return pulumi.get(self, "dlq_type")
+
+    @dlq_type.setter
+    def dlq_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dlq_type", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamArgs']]:
+        """
+        Ckafka type dlq.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="maxRetryAttempts")
+    def max_retry_attempts(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry times.
+        """
+        return pulumi.get(self, "max_retry_attempts")
+
+    @max_retry_attempts.setter
+    def max_retry_attempts(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retry_attempts", value)
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry interval.
+        """
+        return pulumi.get(self, "retry_interval")
+
+    @retry_interval.setter
+    def retry_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_interval", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskTransformParamFailureParamTopicParamArgs']]:
+        """
+        DIP Topic type dead letter queue.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskTransformParamFailureParamTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamFailureParamKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamFailureParamTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamFilterParamArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 match_mode: pulumi.Input[str],
+                 value: pulumi.Input[str],
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: Key.
+        :param pulumi.Input[str] match_mode: Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+        :param pulumi.Input[str] value: Value.
+        :param pulumi.Input[str] type: REGULAR.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "match_mode", match_mode)
+        pulumi.set(__self__, "value", value)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter(name="matchMode")
+    def match_mode(self) -> pulumi.Input[str]:
+        """
+        Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+        """
+        return pulumi.get(self, "match_mode")
+
+    @match_mode.setter
+    def match_mode(self, value: pulumi.Input[str]):
+        pulumi.set(self, "match_mode", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        REGULAR.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformParamMapParamArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] type: Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type, DEFAULT default, DATE system default - timestamp, CUSTOMIZE custom, MAPPING mapping.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamArgs:
+    def __init__(__self__, *,
+                 content: pulumi.Input[str],
+                 field_chains: pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainArgs']]],
+                 batch_analyse: Optional[pulumi.Input['DatahubTaskTransformsParamBatchAnalyseArgs']] = None,
+                 failure_param: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamArgs']] = None,
+                 filter_params: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFilterParamArgs']]]] = None,
+                 keep_metadata: Optional[pulumi.Input[bool]] = None,
+                 output_format: Optional[pulumi.Input[str]] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 row_param: Optional[pulumi.Input['DatahubTaskTransformsParamRowParamArgs']] = None,
+                 source_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] content: Raw data.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainArgs']]] field_chains: processing chain.
+        :param pulumi.Input['DatahubTaskTransformsParamBatchAnalyseArgs'] batch_analyse: data process.
+        :param pulumi.Input['DatahubTaskTransformsParamFailureParamArgs'] failure_param: fail process.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFilterParamArgs']]] filter_params: filter.
+        :param pulumi.Input[bool] keep_metadata: Whether to keep the data source Topic metadata information (source Topic, Partition, Offset), the default is false.
+        :param pulumi.Input[str] output_format: output format, JSON, ROW, default JSON.
+        :param pulumi.Input[str] result: result.
+        :param pulumi.Input['DatahubTaskTransformsParamRowParamArgs'] row_param: The output format is ROW Required.
+        :param pulumi.Input[str] source_type: data source.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "field_chains", field_chains)
+        if batch_analyse is not None:
+            pulumi.set(__self__, "batch_analyse", batch_analyse)
+        if failure_param is not None:
+            pulumi.set(__self__, "failure_param", failure_param)
+        if filter_params is not None:
+            pulumi.set(__self__, "filter_params", filter_params)
+        if keep_metadata is not None:
+            pulumi.set(__self__, "keep_metadata", keep_metadata)
+        if output_format is not None:
+            pulumi.set(__self__, "output_format", output_format)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if row_param is not None:
+            pulumi.set(__self__, "row_param", row_param)
+        if source_type is not None:
+            pulumi.set(__self__, "source_type", source_type)
+
+    @property
+    @pulumi.getter
+    def content(self) -> pulumi.Input[str]:
+        """
+        Raw data.
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: pulumi.Input[str]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter(name="fieldChains")
+    def field_chains(self) -> pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainArgs']]]:
+        """
+        processing chain.
+        """
+        return pulumi.get(self, "field_chains")
+
+    @field_chains.setter
+    def field_chains(self, value: pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainArgs']]]):
+        pulumi.set(self, "field_chains", value)
+
+    @property
+    @pulumi.getter(name="batchAnalyse")
+    def batch_analyse(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamBatchAnalyseArgs']]:
+        """
+        data process.
+        """
+        return pulumi.get(self, "batch_analyse")
+
+    @batch_analyse.setter
+    def batch_analyse(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamBatchAnalyseArgs']]):
+        pulumi.set(self, "batch_analyse", value)
+
+    @property
+    @pulumi.getter(name="failureParam")
+    def failure_param(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamArgs']]:
+        """
+        fail process.
+        """
+        return pulumi.get(self, "failure_param")
+
+    @failure_param.setter
+    def failure_param(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamArgs']]):
+        pulumi.set(self, "failure_param", value)
+
+    @property
+    @pulumi.getter(name="filterParams")
+    def filter_params(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFilterParamArgs']]]]:
+        """
+        filter.
+        """
+        return pulumi.get(self, "filter_params")
+
+    @filter_params.setter
+    def filter_params(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFilterParamArgs']]]]):
+        pulumi.set(self, "filter_params", value)
+
+    @property
+    @pulumi.getter(name="keepMetadata")
+    def keep_metadata(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to keep the data source Topic metadata information (source Topic, Partition, Offset), the default is false.
+        """
+        return pulumi.get(self, "keep_metadata")
+
+    @keep_metadata.setter
+    def keep_metadata(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "keep_metadata", value)
+
+    @property
+    @pulumi.getter(name="outputFormat")
+    def output_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        output format, JSON, ROW, default JSON.
+        """
+        return pulumi.get(self, "output_format")
+
+    @output_format.setter
+    def output_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_format", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        result.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter(name="rowParam")
+    def row_param(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamRowParamArgs']]:
+        """
+        The output format is ROW Required.
+        """
+        return pulumi.get(self, "row_param")
+
+    @row_param.setter
+    def row_param(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamRowParamArgs']]):
+        pulumi.set(self, "row_param", value)
+
+    @property
+    @pulumi.getter(name="sourceType")
+    def source_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        data source.
+        """
+        return pulumi.get(self, "source_type")
+
+    @source_type.setter
+    def source_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamBatchAnalyseArgs:
+    def __init__(__self__, *,
+                 format: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] format: ONE BY ONE single output, MERGE combined output.
+        """
+        pulumi.set(__self__, "format", format)
+
+    @property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[str]:
+        """
+        ONE BY ONE single output, MERGE combined output.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFailureParamArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 dlq_type: Optional[pulumi.Input[str]] = None,
+                 kafka_param: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamArgs']] = None,
+                 max_retry_attempts: Optional[pulumi.Input[int]] = None,
+                 retry_interval: Optional[pulumi.Input[int]] = None,
+                 topic_param: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamTopicParamArgs']] = None):
+        """
+        :param pulumi.Input[str] type: type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        :param pulumi.Input[str] dlq_type: dlq type, CKAFKA|TOPIC.
+        :param pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamArgs'] kafka_param: Ckafka type dlq.
+        :param pulumi.Input[int] max_retry_attempts: retry times.
+        :param pulumi.Input[int] retry_interval: retry interval.
+        :param pulumi.Input['DatahubTaskTransformsParamFailureParamTopicParamArgs'] topic_param: DIP Topic type dead letter queue.
+        """
+        pulumi.set(__self__, "type", type)
+        if dlq_type is not None:
+            pulumi.set(__self__, "dlq_type", dlq_type)
+        if kafka_param is not None:
+            pulumi.set(__self__, "kafka_param", kafka_param)
+        if max_retry_attempts is not None:
+            pulumi.set(__self__, "max_retry_attempts", max_retry_attempts)
+        if retry_interval is not None:
+            pulumi.set(__self__, "retry_interval", retry_interval)
+        if topic_param is not None:
+            pulumi.set(__self__, "topic_param", topic_param)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type, DLQ dead letter queue, IGNORE_ERROR|DROP.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="dlqType")
+    def dlq_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        dlq type, CKAFKA|TOPIC.
+        """
+        return pulumi.get(self, "dlq_type")
+
+    @dlq_type.setter
+    def dlq_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dlq_type", value)
+
+    @property
+    @pulumi.getter(name="kafkaParam")
+    def kafka_param(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamArgs']]:
+        """
+        Ckafka type dlq.
+        """
+        return pulumi.get(self, "kafka_param")
+
+    @kafka_param.setter
+    def kafka_param(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamArgs']]):
+        pulumi.set(self, "kafka_param", value)
+
+    @property
+    @pulumi.getter(name="maxRetryAttempts")
+    def max_retry_attempts(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry times.
+        """
+        return pulumi.get(self, "max_retry_attempts")
+
+    @max_retry_attempts.setter
+    def max_retry_attempts(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_retry_attempts", value)
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        retry interval.
+        """
+        return pulumi.get(self, "retry_interval")
+
+    @retry_interval.setter
+    def retry_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_interval", value)
+
+    @property
+    @pulumi.getter(name="topicParam")
+    def topic_param(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamTopicParamArgs']]:
+        """
+        DIP Topic type dead letter queue.
+        """
+        return pulumi.get(self, "topic_param")
+
+    @topic_param.setter
+    def topic_param(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFailureParamTopicParamArgs']]):
+        pulumi.set(self, "topic_param", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 self_built: pulumi.Input[bool],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 enable_toleration: Optional[pulumi.Input[bool]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 partition_num: Optional[pulumi.Input[int]] = None,
+                 qps_limit: Optional[pulumi.Input[int]] = None,
+                 resource_name: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 table_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]]] = None,
+                 topic: Optional[pulumi.Input[str]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None,
+                 use_table_mapping: Optional[pulumi.Input[bool]] = None,
+                 zone_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] resource: resource id.
+        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] partition_num: Partition num.
+        :param pulumi.Input[int] qps_limit: Qps limit.
+        :param pulumi.Input[str] resource_name: resource id name.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
+        :param pulumi.Input[str] topic_id: Topic Id.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[int] zone_id: Zone ID.
+        """
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "self_built", self_built)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if enable_toleration is not None:
+            pulumi.set(__self__, "enable_toleration", enable_toleration)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if partition_num is not None:
+            pulumi.set(__self__, "partition_num", partition_num)
+        if qps_limit is not None:
+            pulumi.set(__self__, "qps_limit", qps_limit)
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if table_mappings is not None:
+            pulumi.set(__self__, "table_mappings", table_mappings)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+        if use_table_mapping is not None:
+            pulumi.set(__self__, "use_table_mapping", use_table_mapping)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        resource id.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="selfBuilt")
+    def self_built(self) -> pulumi.Input[bool]:
+        """
+        Whether it is a self-built cluster.
+        """
+        return pulumi.get(self, "self_built")
+
+    @self_built.setter
+    def self_built(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "self_built", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="enableToleration")
+    def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable the fault-tolerant instance and enable the dead-letter queue.
+        """
+        return pulumi.get(self, "enable_toleration")
+
+    @enable_toleration.setter
+    def enable_toleration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_toleration", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="partitionNum")
+    def partition_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        Partition num.
+        """
+        return pulumi.get(self, "partition_num")
+
+    @partition_num.setter
+    def partition_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "partition_num", value)
+
+    @property
+    @pulumi.getter(name="qpsLimit")
+    def qps_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        Qps limit.
+        """
+        return pulumi.get(self, "qps_limit")
+
+    @qps_limit.setter
+    def qps_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "qps_limit", value)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        resource id name.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @resource_name.setter
+    def resource_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_name", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="tableMappings")
+    def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]]]:
+        """
+        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        """
+        return pulumi.get(self, "table_mappings")
+
+    @table_mappings.setter
+    def table_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]]]):
+        pulumi.set(self, "table_mappings", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic name, multiple separated by,.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Topic Id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+    @property
+    @pulumi.getter(name="useTableMapping")
+    def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Distribute to multiple topics switch, the default is false.
+        """
+        return pulumi.get(self, "use_table_mapping")
+
+    @use_table_mapping.setter
+    def use_table_mapping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_table_mapping", value)
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Zone ID.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @zone_id.setter
+    def zone_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "zone_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs:
+    def __init__(__self__, *,
+                 database: pulumi.Input[str],
+                 table: pulumi.Input[str],
+                 topic: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] database: database name.
+        :param pulumi.Input[str] table: table name,use, to separate.
+        :param pulumi.Input[str] topic: Topic name.
+        :param pulumi.Input[str] topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[str]:
+        """
+        database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[str]:
+        """
+        table name,use, to separate.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[str]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[str]:
+        """
+        Topic name.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFailureParamTopicParamArgs:
+    def __init__(__self__, *,
+                 resource: pulumi.Input[str],
+                 compression_type: Optional[pulumi.Input[str]] = None,
+                 msg_multiple: Optional[pulumi.Input[int]] = None,
+                 offset_type: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[int]] = None,
+                 topic_id: Optional[pulumi.Input[str]] = None,
+                 use_auto_create_topic: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] resource: The topic name of the topic sold separately.
+        :param pulumi.Input[str] compression_type: Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
+        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        pulumi.set(__self__, "resource", resource)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if msg_multiple is not None:
+            pulumi.set(__self__, "msg_multiple", msg_multiple)
+        if offset_type is not None:
+            pulumi.set(__self__, "offset_type", offset_type)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if topic_id is not None:
+            pulumi.set(__self__, "topic_id", topic_id)
+        if use_auto_create_topic is not None:
+            pulumi.set(__self__, "use_auto_create_topic", use_auto_create_topic)
+
+    @property
+    @pulumi.getter
+    def resource(self) -> pulumi.Input[str]:
+        """
+        The topic name of the topic sold separately.
+        """
+        return pulumi.get(self, "resource")
+
+    @resource.setter
+    def resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource", value)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to perform compression when writing a topic, if it is not enabled, fill in none, if it is enabled, you can choose one of gzip, snappy, lz4 to fill in.
+        """
+        return pulumi.get(self, "compression_type")
+
+    @compression_type.setter
+    def compression_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compression_type", value)
+
+    @property
+    @pulumi.getter(name="msgMultiple")
+    def msg_multiple(self) -> Optional[pulumi.Input[int]]:
+        """
+        1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
+        """
+        return pulumi.get(self, "msg_multiple")
+
+    @msg_multiple.setter
+    def msg_multiple(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "msg_multiple", value)
+
+    @property
+    @pulumi.getter(name="offsetType")
+    def offset_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        """
+        return pulumi.get(self, "offset_type")
+
+    @offset_type.setter
+    def offset_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "offset_type", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        TopicId.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="useAutoCreateTopic")
+    def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
+        """
+        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
+        """
+        return pulumi.get(self, "use_auto_create_topic")
+
+    @use_auto_create_topic.setter
+    def use_auto_create_topic(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_auto_create_topic", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainArgs:
+    def __init__(__self__, *,
+                 analyse: pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseArgs'],
+                 analyse_json_result: Optional[pulumi.Input[str]] = None,
+                 analyse_results: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultArgs']]]] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 s_mts: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTArgs']]]] = None,
+                 secondary_analyse: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs']] = None,
+                 secondary_analyse_json_result: Optional[pulumi.Input[str]] = None,
+                 secondary_analyse_results: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs']]]] = None):
+        """
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseArgs'] analyse: analyze.
+        :param pulumi.Input[str] analyse_json_result: Parsing results in JSON format.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultArgs']]] analyse_results: Analysis result.
+        :param pulumi.Input[str] result: Test Results.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTArgs']]] s_mts: data processing.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs'] secondary_analyse: secondary analysis.
+        :param pulumi.Input[str] secondary_analyse_json_result: Secondary parsing results in JSON format.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs']]] secondary_analyse_results: Secondary Analysis Results.
+        """
+        pulumi.set(__self__, "analyse", analyse)
+        if analyse_json_result is not None:
+            pulumi.set(__self__, "analyse_json_result", analyse_json_result)
+        if analyse_results is not None:
+            pulumi.set(__self__, "analyse_results", analyse_results)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if s_mts is not None:
+            pulumi.set(__self__, "s_mts", s_mts)
+        if secondary_analyse is not None:
+            pulumi.set(__self__, "secondary_analyse", secondary_analyse)
+        if secondary_analyse_json_result is not None:
+            pulumi.set(__self__, "secondary_analyse_json_result", secondary_analyse_json_result)
+        if secondary_analyse_results is not None:
+            pulumi.set(__self__, "secondary_analyse_results", secondary_analyse_results)
+
+    @property
+    @pulumi.getter
+    def analyse(self) -> pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseArgs']:
+        """
+        analyze.
+        """
+        return pulumi.get(self, "analyse")
+
+    @analyse.setter
+    def analyse(self, value: pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseArgs']):
+        pulumi.set(self, "analyse", value)
+
+    @property
+    @pulumi.getter(name="analyseJsonResult")
+    def analyse_json_result(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parsing results in JSON format.
+        """
+        return pulumi.get(self, "analyse_json_result")
+
+    @analyse_json_result.setter
+    def analyse_json_result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "analyse_json_result", value)
+
+    @property
+    @pulumi.getter(name="analyseResults")
+    def analyse_results(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultArgs']]]]:
+        """
+        Analysis result.
+        """
+        return pulumi.get(self, "analyse_results")
+
+    @analyse_results.setter
+    def analyse_results(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultArgs']]]]):
+        pulumi.set(self, "analyse_results", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        Test Results.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter(name="sMTs")
+    def s_mts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTArgs']]]]:
+        """
+        data processing.
+        """
+        return pulumi.get(self, "s_mts")
+
+    @s_mts.setter
+    def s_mts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTArgs']]]]):
+        pulumi.set(self, "s_mts", value)
+
+    @property
+    @pulumi.getter(name="secondaryAnalyse")
+    def secondary_analyse(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs']]:
+        """
+        secondary analysis.
+        """
+        return pulumi.get(self, "secondary_analyse")
+
+    @secondary_analyse.setter
+    def secondary_analyse(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs']]):
+        pulumi.set(self, "secondary_analyse", value)
+
+    @property
+    @pulumi.getter(name="secondaryAnalyseJsonResult")
+    def secondary_analyse_json_result(self) -> Optional[pulumi.Input[str]]:
+        """
+        Secondary parsing results in JSON format.
+        """
+        return pulumi.get(self, "secondary_analyse_json_result")
+
+    @secondary_analyse_json_result.setter
+    def secondary_analyse_json_result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "secondary_analyse_json_result", value)
+
+    @property
+    @pulumi.getter(name="secondaryAnalyseResults")
+    def secondary_analyse_results(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs']]]]:
+        """
+        Secondary Analysis Results.
+        """
+        return pulumi.get(self, "secondary_analyse_results")
+
+    @secondary_analyse_results.setter
+    def secondary_analyse_results(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs']]]]):
+        pulumi.set(self, "secondary_analyse_results", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseArgs:
+    def __init__(__self__, *,
+                 format: pulumi.Input[str],
+                 input_value: Optional[pulumi.Input[str]] = None,
+                 input_value_type: Optional[pulumi.Input[str]] = None,
+                 regex: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] format: Parsing format, JSON, DELIMITER delimiter, REGULAR regular extraction, SOURCE processing all results of the upper layer.
+        :param pulumi.Input[str] input_value: KEY to be processed again - KEY expression.
+        :param pulumi.Input[str] input_value_type: KEY to be processed again - mode.
+        :param pulumi.Input[str] regex: delimiter, regular expression.
+        """
+        pulumi.set(__self__, "format", format)
+        if input_value is not None:
+            pulumi.set(__self__, "input_value", input_value)
+        if input_value_type is not None:
+            pulumi.set(__self__, "input_value_type", input_value_type)
+        if regex is not None:
+            pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[str]:
+        """
+        Parsing format, JSON, DELIMITER delimiter, REGULAR regular extraction, SOURCE processing all results of the upper layer.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="inputValue")
+    def input_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        KEY to be processed again - KEY expression.
+        """
+        return pulumi.get(self, "input_value")
+
+    @input_value.setter
+    def input_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_value", value)
+
+    @property
+    @pulumi.getter(name="inputValueType")
+    def input_value_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        KEY to be processed again - mode.
+        """
+        return pulumi.get(self, "input_value_type")
+
+    @input_value_type.setter
+    def input_value_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_value_type", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        delimiter, regular expression.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 operate: pulumi.Input[str],
+                 scheme_type: pulumi.Input[str],
+                 original_value: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None,
+                 value_operate: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']] = None,
+                 value_operates: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]]] = None):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] operate: Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        :param pulumi.Input[str] scheme_type: data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        :param pulumi.Input[str] original_value: OriginalValue.
+        :param pulumi.Input[str] value: value.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs'] value_operate: VALUE process.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]] value_operates: VALUE process chain.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operate", operate)
+        pulumi.set(__self__, "scheme_type", scheme_type)
+        if original_value is not None:
+            pulumi.set(__self__, "original_value", original_value)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+        if value_operate is not None:
+            pulumi.set(__self__, "value_operate", value_operate)
+        if value_operates is not None:
+            pulumi.set(__self__, "value_operates", value_operates)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operate(self) -> pulumi.Input[str]:
+        """
+        Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operate", value)
+
+    @property
+    @pulumi.getter(name="schemeType")
+    def scheme_type(self) -> pulumi.Input[str]:
+        """
+        data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        """
+        return pulumi.get(self, "scheme_type")
+
+    @scheme_type.setter
+    def scheme_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "scheme_type", value)
+
+    @property
+    @pulumi.getter(name="originalValue")
+    def original_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        OriginalValue.
+        """
+        return pulumi.get(self, "original_value")
+
+    @original_value.setter
+    def original_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "original_value", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="valueOperate")
+    def value_operate(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]:
+        """
+        VALUE process.
+        """
+        return pulumi.get(self, "value_operate")
+
+    @value_operate.setter
+    def value_operate(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]):
+        pulumi.set(self, "value_operate", value)
+
+    @property
+    @pulumi.getter(name="valueOperates")
+    def value_operates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]]]:
+        """
+        VALUE process chain.
+        """
+        return pulumi.get(self, "value_operates")
+
+    @value_operates.setter
+    def value_operates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs']]]]):
+        pulumi.set(self, "value_operates", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 date: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs']] = None,
+                 json_path_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs']] = None,
+                 k_v: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs']] = None,
+                 regex_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs']] = None,
+                 replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs']] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 split: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs']] = None,
+                 substr: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs']] = None,
+                 url_decode: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs']] = None):
+        """
+        :param pulumi.Input[str] type: Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs'] date: Time conversion, required when TYPE=DATE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs'] json_path_replace: Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs'] k_v: Key-value secondary analysis, must be passed when TYPE=KV.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs'] regex_replace: Regular replacement, required when TYPE=REGEX REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs'] replace: replace, TYPE=REPLACE is required.
+        :param pulumi.Input[str] result: result.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs'] split: The value supports one split and multiple values, required when TYPE=SPLIT.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs'] substr: Substr, TYPE=SUBSTR is required.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs'] url_decode: Url parsing.
+        """
+        pulumi.set(__self__, "type", type)
+        if date is not None:
+            pulumi.set(__self__, "date", date)
+        if json_path_replace is not None:
+            pulumi.set(__self__, "json_path_replace", json_path_replace)
+        if k_v is not None:
+            pulumi.set(__self__, "k_v", k_v)
+        if regex_replace is not None:
+            pulumi.set(__self__, "regex_replace", regex_replace)
+        if replace is not None:
+            pulumi.set(__self__, "replace", replace)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if split is not None:
+            pulumi.set(__self__, "split", split)
+        if substr is not None:
+            pulumi.set(__self__, "substr", substr)
+        if url_decode is not None:
+            pulumi.set(__self__, "url_decode", url_decode)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def date(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs']]:
+        """
+        Time conversion, required when TYPE=DATE.
+        """
+        return pulumi.get(self, "date")
+
+    @date.setter
+    def date(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs']]):
+        pulumi.set(self, "date", value)
+
+    @property
+    @pulumi.getter(name="jsonPathReplace")
+    def json_path_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs']]:
+        """
+        Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        """
+        return pulumi.get(self, "json_path_replace")
+
+    @json_path_replace.setter
+    def json_path_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs']]):
+        pulumi.set(self, "json_path_replace", value)
+
+    @property
+    @pulumi.getter(name="kV")
+    def k_v(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs']]:
+        """
+        Key-value secondary analysis, must be passed when TYPE=KV.
+        """
+        return pulumi.get(self, "k_v")
+
+    @k_v.setter
+    def k_v(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs']]):
+        pulumi.set(self, "k_v", value)
+
+    @property
+    @pulumi.getter(name="regexReplace")
+    def regex_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs']]:
+        """
+        Regular replacement, required when TYPE=REGEX REPLACE.
+        """
+        return pulumi.get(self, "regex_replace")
+
+    @regex_replace.setter
+    def regex_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs']]):
+        pulumi.set(self, "regex_replace", value)
+
+    @property
+    @pulumi.getter
+    def replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs']]:
+        """
+        replace, TYPE=REPLACE is required.
+        """
+        return pulumi.get(self, "replace")
+
+    @replace.setter
+    def replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs']]):
+        pulumi.set(self, "replace", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        result.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter
+    def split(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs']]:
+        """
+        The value supports one split and multiple values, required when TYPE=SPLIT.
+        """
+        return pulumi.get(self, "split")
+
+    @split.setter
+    def split(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs']]):
+        pulumi.set(self, "split", value)
+
+    @property
+    @pulumi.getter
+    def substr(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs']]:
+        """
+        Substr, TYPE=SUBSTR is required.
+        """
+        return pulumi.get(self, "substr")
+
+    @substr.setter
+    def substr(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs']]):
+        pulumi.set(self, "substr", value)
+
+    @property
+    @pulumi.getter(name="urlDecode")
+    def url_decode(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs']]:
+        """
+        Url parsing.
+        """
+        return pulumi.get(self, "url_decode")
+
+    @url_decode.setter
+    def url_decode(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs']]):
+        pulumi.set(self, "url_decode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs:
+    def __init__(__self__, *,
+                 format: Optional[pulumi.Input[str]] = None,
+                 target_type: Optional[pulumi.Input[str]] = None,
+                 time_zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] format: Time format.
+        :param pulumi.Input[str] target_type: input type, string|unix.
+        :param pulumi.Input[str] time_zone: default GMT+8.
+        """
+        if format is not None:
+            pulumi.set(__self__, "format", format)
+        if target_type is not None:
+            pulumi.set(__self__, "target_type", target_type)
+        if time_zone is not None:
+            pulumi.set(__self__, "time_zone", time_zone)
+
+    @property
+    @pulumi.getter
+    def format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time format.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        input type, string|unix.
+        """
+        return pulumi.get(self, "target_type")
+
+    @target_type.setter
+    def target_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        default GMT+8.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @time_zone.setter
+    def time_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_zone", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: Replacement value, Jsonpath expression or string.
+        :param pulumi.Input[str] old_value: Replaced value, Jsonpath expression.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        Replacement value, Jsonpath expression or string.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        Replaced value, Jsonpath expression.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs:
+    def __init__(__self__, *,
+                 delimiter: pulumi.Input[str],
+                 regex: pulumi.Input[str],
+                 keep_original_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] delimiter: delimiter.
+        :param pulumi.Input[str] regex: Key-value secondary analysis delimiter.
+        :param pulumi.Input[str] keep_original_key: Keep the source Key, the default is false not to keep.
+        """
+        pulumi.set(__self__, "delimiter", delimiter)
+        pulumi.set(__self__, "regex", regex)
+        if keep_original_key is not None:
+            pulumi.set(__self__, "keep_original_key", keep_original_key)
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @delimiter.setter
+    def delimiter(self, value: pulumi.Input[str]):
+        pulumi.set(self, "delimiter", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Key-value secondary analysis delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+    @property
+    @pulumi.getter(name="keepOriginalKey")
+    def keep_original_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Keep the source Key, the default is false not to keep.
+        """
+        return pulumi.get(self, "keep_original_key")
+
+    @keep_original_key.setter
+    def keep_original_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "keep_original_key", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] regex: Regular.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Regular.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] old_value: been replaced value.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        been replaced value.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs:
+    def __init__(__self__, *,
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] regex: delimiter.
+        """
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs:
+    def __init__(__self__, *,
+                 end: pulumi.Input[int],
+                 start: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] end: cut-off position.
+        :param pulumi.Input[int] start: interception starting position.
+        """
+        pulumi.set(__self__, "end", end)
+        pulumi.set(__self__, "start", start)
+
+    @property
+    @pulumi.getter
+    def end(self) -> pulumi.Input[int]:
+        """
+        cut-off position.
+        """
+        return pulumi.get(self, "end")
+
+    @end.setter
+    def end(self, value: pulumi.Input[int]):
+        pulumi.set(self, "end", value)
+
+    @property
+    @pulumi.getter
+    def start(self) -> pulumi.Input[int]:
+        """
+        interception starting position.
+        """
+        return pulumi.get(self, "start")
+
+    @start.setter
+    def start(self, value: pulumi.Input[int]):
+        pulumi.set(self, "start", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs:
+    def __init__(__self__, *,
+                 charset_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] charset_name: code.
+        """
+        if charset_name is not None:
+            pulumi.set(__self__, "charset_name", charset_name)
+
+    @property
+    @pulumi.getter(name="charsetName")
+    def charset_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        code.
+        """
+        return pulumi.get(self, "charset_name")
+
+    @charset_name.setter
+    def charset_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "charset_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 operate: pulumi.Input[str],
+                 scheme_type: pulumi.Input[str],
+                 original_value: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None,
+                 value_operate: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']] = None,
+                 value_operates: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]]] = None):
+        """
+        :param pulumi.Input[str] key: KEY.
+        :param pulumi.Input[str] operate: Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        :param pulumi.Input[str] scheme_type: data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        :param pulumi.Input[str] original_value: OriginalValue.
+        :param pulumi.Input[str] value: VALUE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs'] value_operate: VALUE process.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]] value_operates: VALUE process chain.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operate", operate)
+        pulumi.set(__self__, "scheme_type", scheme_type)
+        if original_value is not None:
+            pulumi.set(__self__, "original_value", original_value)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+        if value_operate is not None:
+            pulumi.set(__self__, "value_operate", value_operate)
+        if value_operates is not None:
+            pulumi.set(__self__, "value_operates", value_operates)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        KEY.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operate(self) -> pulumi.Input[str]:
+        """
+        Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operate", value)
+
+    @property
+    @pulumi.getter(name="schemeType")
+    def scheme_type(self) -> pulumi.Input[str]:
+        """
+        data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        """
+        return pulumi.get(self, "scheme_type")
+
+    @scheme_type.setter
+    def scheme_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "scheme_type", value)
+
+    @property
+    @pulumi.getter(name="originalValue")
+    def original_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        OriginalValue.
+        """
+        return pulumi.get(self, "original_value")
+
+    @original_value.setter
+    def original_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "original_value", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        VALUE.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="valueOperate")
+    def value_operate(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]:
+        """
+        VALUE process.
+        """
+        return pulumi.get(self, "value_operate")
+
+    @value_operate.setter
+    def value_operate(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]):
+        pulumi.set(self, "value_operate", value)
+
+    @property
+    @pulumi.getter(name="valueOperates")
+    def value_operates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]]]:
+        """
+        VALUE process chain.
+        """
+        return pulumi.get(self, "value_operates")
+
+    @value_operates.setter
+    def value_operates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateArgs']]]]):
+        pulumi.set(self, "value_operates", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 date: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs']] = None,
+                 json_path_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs']] = None,
+                 k_v: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs']] = None,
+                 regex_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs']] = None,
+                 replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs']] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 split: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs']] = None,
+                 substr: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs']] = None,
+                 url_decode: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs']] = None):
+        """
+        :param pulumi.Input[str] type: Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs'] date: Time conversion, required when TYPE=DATE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs'] json_path_replace: Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs'] k_v: Key-value secondary analysis, must be passed when TYPE=KV.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs'] regex_replace: Regular replacement, required when TYPE=REGEX REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs'] replace: replace, TYPE=REPLACE is required.
+        :param pulumi.Input[str] result: result.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs'] split: The value supports one split and multiple values, required when TYPE=SPLIT.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs'] substr: Substr, TYPE=SUBSTR is required.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs'] url_decode: Url parsing.
+        """
+        pulumi.set(__self__, "type", type)
+        if date is not None:
+            pulumi.set(__self__, "date", date)
+        if json_path_replace is not None:
+            pulumi.set(__self__, "json_path_replace", json_path_replace)
+        if k_v is not None:
+            pulumi.set(__self__, "k_v", k_v)
+        if regex_replace is not None:
+            pulumi.set(__self__, "regex_replace", regex_replace)
+        if replace is not None:
+            pulumi.set(__self__, "replace", replace)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if split is not None:
+            pulumi.set(__self__, "split", split)
+        if substr is not None:
+            pulumi.set(__self__, "substr", substr)
+        if url_decode is not None:
+            pulumi.set(__self__, "url_decode", url_decode)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def date(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs']]:
+        """
+        Time conversion, required when TYPE=DATE.
+        """
+        return pulumi.get(self, "date")
+
+    @date.setter
+    def date(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs']]):
+        pulumi.set(self, "date", value)
+
+    @property
+    @pulumi.getter(name="jsonPathReplace")
+    def json_path_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs']]:
+        """
+        Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        """
+        return pulumi.get(self, "json_path_replace")
+
+    @json_path_replace.setter
+    def json_path_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs']]):
+        pulumi.set(self, "json_path_replace", value)
+
+    @property
+    @pulumi.getter(name="kV")
+    def k_v(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs']]:
+        """
+        Key-value secondary analysis, must be passed when TYPE=KV.
+        """
+        return pulumi.get(self, "k_v")
+
+    @k_v.setter
+    def k_v(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs']]):
+        pulumi.set(self, "k_v", value)
+
+    @property
+    @pulumi.getter(name="regexReplace")
+    def regex_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs']]:
+        """
+        Regular replacement, required when TYPE=REGEX REPLACE.
+        """
+        return pulumi.get(self, "regex_replace")
+
+    @regex_replace.setter
+    def regex_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs']]):
+        pulumi.set(self, "regex_replace", value)
+
+    @property
+    @pulumi.getter
+    def replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs']]:
+        """
+        replace, TYPE=REPLACE is required.
+        """
+        return pulumi.get(self, "replace")
+
+    @replace.setter
+    def replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs']]):
+        pulumi.set(self, "replace", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        result.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter
+    def split(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs']]:
+        """
+        The value supports one split and multiple values, required when TYPE=SPLIT.
+        """
+        return pulumi.get(self, "split")
+
+    @split.setter
+    def split(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs']]):
+        pulumi.set(self, "split", value)
+
+    @property
+    @pulumi.getter
+    def substr(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs']]:
+        """
+        Substr, TYPE=SUBSTR is required.
+        """
+        return pulumi.get(self, "substr")
+
+    @substr.setter
+    def substr(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs']]):
+        pulumi.set(self, "substr", value)
+
+    @property
+    @pulumi.getter(name="urlDecode")
+    def url_decode(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs']]:
+        """
+        Url parsing.
+        """
+        return pulumi.get(self, "url_decode")
+
+    @url_decode.setter
+    def url_decode(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs']]):
+        pulumi.set(self, "url_decode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs:
+    def __init__(__self__, *,
+                 format: Optional[pulumi.Input[str]] = None,
+                 target_type: Optional[pulumi.Input[str]] = None,
+                 time_zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] format: Time format.
+        :param pulumi.Input[str] target_type: input type, string|unix.
+        :param pulumi.Input[str] time_zone: default GMT+8.
+        """
+        if format is not None:
+            pulumi.set(__self__, "format", format)
+        if target_type is not None:
+            pulumi.set(__self__, "target_type", target_type)
+        if time_zone is not None:
+            pulumi.set(__self__, "time_zone", time_zone)
+
+    @property
+    @pulumi.getter
+    def format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time format.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        input type, string|unix.
+        """
+        return pulumi.get(self, "target_type")
+
+    @target_type.setter
+    def target_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        default GMT+8.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @time_zone.setter
+    def time_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_zone", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: Replacement value, Jsonpath expression or string.
+        :param pulumi.Input[str] old_value: Replaced value, Jsonpath expression.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        Replacement value, Jsonpath expression or string.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        Replaced value, Jsonpath expression.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs:
+    def __init__(__self__, *,
+                 delimiter: pulumi.Input[str],
+                 regex: pulumi.Input[str],
+                 keep_original_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] delimiter: delimiter.
+        :param pulumi.Input[str] regex: Key-value secondary analysis delimiter.
+        :param pulumi.Input[str] keep_original_key: Keep the source Key, the default is false not to keep.
+        """
+        pulumi.set(__self__, "delimiter", delimiter)
+        pulumi.set(__self__, "regex", regex)
+        if keep_original_key is not None:
+            pulumi.set(__self__, "keep_original_key", keep_original_key)
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @delimiter.setter
+    def delimiter(self, value: pulumi.Input[str]):
+        pulumi.set(self, "delimiter", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Key-value secondary analysis delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+    @property
+    @pulumi.getter(name="keepOriginalKey")
+    def keep_original_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Keep the source Key, the default is false not to keep.
+        """
+        return pulumi.get(self, "keep_original_key")
+
+    @keep_original_key.setter
+    def keep_original_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "keep_original_key", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] regex: Regular.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Regular.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] old_value: been replaced value.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        been replaced value.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs:
+    def __init__(__self__, *,
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] regex: delimiter.
+        """
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs:
+    def __init__(__self__, *,
+                 end: pulumi.Input[int],
+                 start: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] end: cut-off position.
+        :param pulumi.Input[int] start: interception starting position.
+        """
+        pulumi.set(__self__, "end", end)
+        pulumi.set(__self__, "start", start)
+
+    @property
+    @pulumi.getter
+    def end(self) -> pulumi.Input[int]:
+        """
+        cut-off position.
+        """
+        return pulumi.get(self, "end")
+
+    @end.setter
+    def end(self, value: pulumi.Input[int]):
+        pulumi.set(self, "end", value)
+
+    @property
+    @pulumi.getter
+    def start(self) -> pulumi.Input[int]:
+        """
+        interception starting position.
+        """
+        return pulumi.get(self, "start")
+
+    @start.setter
+    def start(self, value: pulumi.Input[int]):
+        pulumi.set(self, "start", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs:
+    def __init__(__self__, *,
+                 charset_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] charset_name: code.
+        """
+        if charset_name is not None:
+            pulumi.set(__self__, "charset_name", charset_name)
+
+    @property
+    @pulumi.getter(name="charsetName")
+    def charset_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        code.
+        """
+        return pulumi.get(self, "charset_name")
+
+    @charset_name.setter
+    def charset_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "charset_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs:
+    def __init__(__self__, *,
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] regex: delimiter.
+        """
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 operate: pulumi.Input[str],
+                 scheme_type: pulumi.Input[str],
+                 original_value: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None,
+                 value_operate: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']] = None,
+                 value_operates: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]]] = None):
+        """
+        :param pulumi.Input[str] key: KEY.
+        :param pulumi.Input[str] operate: Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        :param pulumi.Input[str] scheme_type: data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        :param pulumi.Input[str] original_value: OriginalValue.
+        :param pulumi.Input[str] value: VALUE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs'] value_operate: VALUE process.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]] value_operates: VALUE process chain.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operate", operate)
+        pulumi.set(__self__, "scheme_type", scheme_type)
+        if original_value is not None:
+            pulumi.set(__self__, "original_value", original_value)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+        if value_operate is not None:
+            pulumi.set(__self__, "value_operate", value_operate)
+        if value_operates is not None:
+            pulumi.set(__self__, "value_operates", value_operates)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        KEY.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operate(self) -> pulumi.Input[str]:
+        """
+        Operation, DATE system preset - timestamp, CUSTOMIZE customization, MAPPING mapping, JSONPATH.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operate", value)
+
+    @property
+    @pulumi.getter(name="schemeType")
+    def scheme_type(self) -> pulumi.Input[str]:
+        """
+        data type, ORIGINAL, STRING, INT64, FLOAT64, BOOLEAN, MAP, ARRAY.
+        """
+        return pulumi.get(self, "scheme_type")
+
+    @scheme_type.setter
+    def scheme_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "scheme_type", value)
+
+    @property
+    @pulumi.getter(name="originalValue")
+    def original_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        OriginalValue.
+        """
+        return pulumi.get(self, "original_value")
+
+    @original_value.setter
+    def original_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "original_value", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        VALUE.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="valueOperate")
+    def value_operate(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]:
+        """
+        VALUE process.
+        """
+        return pulumi.get(self, "value_operate")
+
+    @value_operate.setter
+    def value_operate(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]):
+        pulumi.set(self, "value_operate", value)
+
+    @property
+    @pulumi.getter(name="valueOperates")
+    def value_operates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]]]:
+        """
+        VALUE process chain.
+        """
+        return pulumi.get(self, "value_operates")
+
+    @value_operates.setter
+    def value_operates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs']]]]):
+        pulumi.set(self, "value_operates", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 date: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs']] = None,
+                 json_path_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs']] = None,
+                 k_v: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs']] = None,
+                 regex_replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs']] = None,
+                 replace: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs']] = None,
+                 result: Optional[pulumi.Input[str]] = None,
+                 split: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs']] = None,
+                 substr: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs']] = None,
+                 url_decode: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs']] = None):
+        """
+        :param pulumi.Input[str] type: Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs'] date: Time conversion, required when TYPE=DATE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs'] json_path_replace: Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs'] k_v: Key-value secondary analysis, must be passed when TYPE=KV.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs'] regex_replace: Regular replacement, required when TYPE=REGEX REPLACE.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs'] replace: replace, TYPE=REPLACE is required.
+        :param pulumi.Input[str] result: result.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs'] split: The value supports one split and multiple values, required when TYPE=SPLIT.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs'] substr: Substr, TYPE=SUBSTR is required.
+        :param pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs'] url_decode: Url parsing.
+        """
+        pulumi.set(__self__, "type", type)
+        if date is not None:
+            pulumi.set(__self__, "date", date)
+        if json_path_replace is not None:
+            pulumi.set(__self__, "json_path_replace", json_path_replace)
+        if k_v is not None:
+            pulumi.set(__self__, "k_v", k_v)
+        if regex_replace is not None:
+            pulumi.set(__self__, "regex_replace", regex_replace)
+        if replace is not None:
+            pulumi.set(__self__, "replace", replace)
+        if result is not None:
+            pulumi.set(__self__, "result", result)
+        if split is not None:
+            pulumi.set(__self__, "split", split)
+        if substr is not None:
+            pulumi.set(__self__, "substr", substr)
+        if url_decode is not None:
+            pulumi.set(__self__, "url_decode", url_decode)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Processing mode, REPLACE replacement, SUBSTR interception, DATE date conversion, TRIM removal of leading and trailing spaces, REGEX REPLACE regular replacement, URL DECODE, LOWERCASE conversion to lowercase.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def date(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs']]:
+        """
+        Time conversion, required when TYPE=DATE.
+        """
+        return pulumi.get(self, "date")
+
+    @date.setter
+    def date(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs']]):
+        pulumi.set(self, "date", value)
+
+    @property
+    @pulumi.getter(name="jsonPathReplace")
+    def json_path_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs']]:
+        """
+        Json Path replacement, must pass when TYPE=JSON PATH REPLACE.
+        """
+        return pulumi.get(self, "json_path_replace")
+
+    @json_path_replace.setter
+    def json_path_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs']]):
+        pulumi.set(self, "json_path_replace", value)
+
+    @property
+    @pulumi.getter(name="kV")
+    def k_v(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs']]:
+        """
+        Key-value secondary analysis, must be passed when TYPE=KV.
+        """
+        return pulumi.get(self, "k_v")
+
+    @k_v.setter
+    def k_v(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs']]):
+        pulumi.set(self, "k_v", value)
+
+    @property
+    @pulumi.getter(name="regexReplace")
+    def regex_replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs']]:
+        """
+        Regular replacement, required when TYPE=REGEX REPLACE.
+        """
+        return pulumi.get(self, "regex_replace")
+
+    @regex_replace.setter
+    def regex_replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs']]):
+        pulumi.set(self, "regex_replace", value)
+
+    @property
+    @pulumi.getter
+    def replace(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs']]:
+        """
+        replace, TYPE=REPLACE is required.
+        """
+        return pulumi.get(self, "replace")
+
+    @replace.setter
+    def replace(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs']]):
+        pulumi.set(self, "replace", value)
+
+    @property
+    @pulumi.getter
+    def result(self) -> Optional[pulumi.Input[str]]:
+        """
+        result.
+        """
+        return pulumi.get(self, "result")
+
+    @result.setter
+    def result(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "result", value)
+
+    @property
+    @pulumi.getter
+    def split(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs']]:
+        """
+        The value supports one split and multiple values, required when TYPE=SPLIT.
+        """
+        return pulumi.get(self, "split")
+
+    @split.setter
+    def split(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs']]):
+        pulumi.set(self, "split", value)
+
+    @property
+    @pulumi.getter
+    def substr(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs']]:
+        """
+        Substr, TYPE=SUBSTR is required.
+        """
+        return pulumi.get(self, "substr")
+
+    @substr.setter
+    def substr(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs']]):
+        pulumi.set(self, "substr", value)
+
+    @property
+    @pulumi.getter(name="urlDecode")
+    def url_decode(self) -> Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs']]:
+        """
+        Url parsing.
+        """
+        return pulumi.get(self, "url_decode")
+
+    @url_decode.setter
+    def url_decode(self, value: Optional[pulumi.Input['DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs']]):
+        pulumi.set(self, "url_decode", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs:
+    def __init__(__self__, *,
+                 format: Optional[pulumi.Input[str]] = None,
+                 target_type: Optional[pulumi.Input[str]] = None,
+                 time_zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] format: Time format.
+        :param pulumi.Input[str] target_type: input type, string|unix.
+        :param pulumi.Input[str] time_zone: default GMT+8.
+        """
+        if format is not None:
+            pulumi.set(__self__, "format", format)
+        if target_type is not None:
+            pulumi.set(__self__, "target_type", target_type)
+        if time_zone is not None:
+            pulumi.set(__self__, "time_zone", time_zone)
+
+    @property
+    @pulumi.getter
+    def format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time format.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        input type, string|unix.
+        """
+        return pulumi.get(self, "target_type")
+
+    @target_type.setter
+    def target_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        default GMT+8.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @time_zone.setter
+    def time_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_zone", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: Replacement value, Jsonpath expression or string.
+        :param pulumi.Input[str] old_value: Replaced value, Jsonpath expression.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        Replacement value, Jsonpath expression or string.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        Replaced value, Jsonpath expression.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs:
+    def __init__(__self__, *,
+                 delimiter: pulumi.Input[str],
+                 regex: pulumi.Input[str],
+                 keep_original_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] delimiter: delimiter.
+        :param pulumi.Input[str] regex: Key-value secondary analysis delimiter.
+        :param pulumi.Input[str] keep_original_key: Keep the source Key, the default is false not to keep.
+        """
+        pulumi.set(__self__, "delimiter", delimiter)
+        pulumi.set(__self__, "regex", regex)
+        if keep_original_key is not None:
+            pulumi.set(__self__, "keep_original_key", keep_original_key)
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @delimiter.setter
+    def delimiter(self, value: pulumi.Input[str]):
+        pulumi.set(self, "delimiter", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Key-value secondary analysis delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+    @property
+    @pulumi.getter(name="keepOriginalKey")
+    def keep_original_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Keep the source Key, the default is false not to keep.
+        """
+        return pulumi.get(self, "keep_original_key")
+
+    @keep_original_key.setter
+    def keep_original_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "keep_original_key", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] regex: Regular.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        Regular.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs:
+    def __init__(__self__, *,
+                 new_value: pulumi.Input[str],
+                 old_value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] new_value: new value.
+        :param pulumi.Input[str] old_value: been replaced value.
+        """
+        pulumi.set(__self__, "new_value", new_value)
+        pulumi.set(__self__, "old_value", old_value)
+
+    @property
+    @pulumi.getter(name="newValue")
+    def new_value(self) -> pulumi.Input[str]:
+        """
+        new value.
+        """
+        return pulumi.get(self, "new_value")
+
+    @new_value.setter
+    def new_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "new_value", value)
+
+    @property
+    @pulumi.getter(name="oldValue")
+    def old_value(self) -> pulumi.Input[str]:
+        """
+        been replaced value.
+        """
+        return pulumi.get(self, "old_value")
+
+    @old_value.setter
+    def old_value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "old_value", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs:
+    def __init__(__self__, *,
+                 regex: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] regex: delimiter.
+        """
+        pulumi.set(__self__, "regex", regex)
+
+    @property
+    @pulumi.getter
+    def regex(self) -> pulumi.Input[str]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "regex")
+
+    @regex.setter
+    def regex(self, value: pulumi.Input[str]):
+        pulumi.set(self, "regex", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs:
+    def __init__(__self__, *,
+                 end: pulumi.Input[int],
+                 start: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] end: cut-off position.
+        :param pulumi.Input[int] start: interception starting position.
+        """
+        pulumi.set(__self__, "end", end)
+        pulumi.set(__self__, "start", start)
+
+    @property
+    @pulumi.getter
+    def end(self) -> pulumi.Input[int]:
+        """
+        cut-off position.
+        """
+        return pulumi.get(self, "end")
+
+    @end.setter
+    def end(self, value: pulumi.Input[int]):
+        pulumi.set(self, "end", value)
+
+    @property
+    @pulumi.getter
+    def start(self) -> pulumi.Input[int]:
+        """
+        interception starting position.
+        """
+        return pulumi.get(self, "start")
+
+    @start.setter
+    def start(self, value: pulumi.Input[int]):
+        pulumi.set(self, "start", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs:
+    def __init__(__self__, *,
+                 charset_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] charset_name: code.
+        """
+        if charset_name is not None:
+            pulumi.set(__self__, "charset_name", charset_name)
+
+    @property
+    @pulumi.getter(name="charsetName")
+    def charset_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        code.
+        """
+        return pulumi.get(self, "charset_name")
+
+    @charset_name.setter
+    def charset_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "charset_name", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamFilterParamArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 match_mode: pulumi.Input[str],
+                 value: pulumi.Input[str],
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: Key.
+        :param pulumi.Input[str] match_mode: Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+        :param pulumi.Input[str] value: Value.
+        :param pulumi.Input[str] type: REGULAR.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "match_mode", match_mode)
+        pulumi.set(__self__, "value", value)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter(name="matchMode")
+    def match_mode(self) -> pulumi.Input[str]:
+        """
+        Matching mode, prefix matches PREFIX, suffix matches SUFFIX, contains matches CONTAINS, except matches EXCEPT, value matches NUMBER, IP matches IP.
+        """
+        return pulumi.get(self, "match_mode")
+
+    @match_mode.setter
+    def match_mode(self, value: pulumi.Input[str]):
+        pulumi.set(self, "match_mode", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        REGULAR.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DatahubTaskTransformsParamRowParamArgs:
+    def __init__(__self__, *,
+                 row_content: pulumi.Input[str],
+                 entry_delimiter: Optional[pulumi.Input[str]] = None,
+                 key_value_delimiter: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] row_content: row content, KEY_VALUE, VALUE.
+        :param pulumi.Input[str] entry_delimiter: delimiter.
+        :param pulumi.Input[str] key_value_delimiter: key, value delimiter.
+        """
+        pulumi.set(__self__, "row_content", row_content)
+        if entry_delimiter is not None:
+            pulumi.set(__self__, "entry_delimiter", entry_delimiter)
+        if key_value_delimiter is not None:
+            pulumi.set(__self__, "key_value_delimiter", key_value_delimiter)
+
+    @property
+    @pulumi.getter(name="rowContent")
+    def row_content(self) -> pulumi.Input[str]:
+        """
+        row content, KEY_VALUE, VALUE.
+        """
+        return pulumi.get(self, "row_content")
+
+    @row_content.setter
+    def row_content(self, value: pulumi.Input[str]):
+        pulumi.set(self, "row_content", value)
+
+    @property
+    @pulumi.getter(name="entryDelimiter")
+    def entry_delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        delimiter.
+        """
+        return pulumi.get(self, "entry_delimiter")
+
+    @entry_delimiter.setter
+    def entry_delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "entry_delimiter", value)
+
+    @property
+    @pulumi.getter(name="keyValueDelimiter")
+    def key_value_delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        key, value delimiter.
+        """
+        return pulumi.get(self, "key_value_delimiter")
+
+    @key_value_delimiter.setter
+    def key_value_delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_value_delimiter", value)
 
 
 @pulumi.input_type

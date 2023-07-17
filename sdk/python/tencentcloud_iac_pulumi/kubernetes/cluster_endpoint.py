@@ -20,6 +20,7 @@ class ClusterEndpointArgs:
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
                  cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
+                 extensive_parameters: Optional[pulumi.Input[str]] = None,
                  managed_cluster_internet_security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ClusterEndpoint resource.
@@ -30,6 +31,7 @@ class ClusterEndpointArgs:
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
+        :param pulumi.Input[str] extensive_parameters: The LB parameter. Only used for public network access.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
@@ -45,6 +47,8 @@ class ClusterEndpointArgs:
             pulumi.set(__self__, "cluster_intranet_domain", cluster_intranet_domain)
         if cluster_intranet_subnet_id is not None:
             pulumi.set(__self__, "cluster_intranet_subnet_id", cluster_intranet_subnet_id)
+        if extensive_parameters is not None:
+            pulumi.set(__self__, "extensive_parameters", extensive_parameters)
         if managed_cluster_internet_security_policies is not None:
             warnings.warn("""this argument was deprecated, use `cluster_internet_security_group` instead.""", DeprecationWarning)
             pulumi.log.warn("""managed_cluster_internet_security_policies is deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.""")
@@ -136,6 +140,18 @@ class ClusterEndpointArgs:
         pulumi.set(self, "cluster_intranet_subnet_id", value)
 
     @property
+    @pulumi.getter(name="extensiveParameters")
+    def extensive_parameters(self) -> Optional[pulumi.Input[str]]:
+        """
+        The LB parameter. Only used for public network access.
+        """
+        return pulumi.get(self, "extensive_parameters")
+
+    @extensive_parameters.setter
+    def extensive_parameters(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extensive_parameters", value)
+
+    @property
     @pulumi.getter(name="managedClusterInternetSecurityPolicies")
     def managed_cluster_internet_security_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -162,6 +178,7 @@ class _ClusterEndpointState:
                  cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 extensive_parameters: Optional[pulumi.Input[str]] = None,
                  managed_cluster_internet_security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  pgw_endpoint: Optional[pulumi.Input[str]] = None,
@@ -179,6 +196,7 @@ class _ClusterEndpointState:
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[str] domain: Domain name for access.
+        :param pulumi.Input[str] extensive_parameters: The LB parameter. Only used for public network access.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[str] password: Password of account.
         :param pulumi.Input[str] pgw_endpoint: The Intranet address used for access.
@@ -206,6 +224,8 @@ class _ClusterEndpointState:
             pulumi.set(__self__, "cluster_intranet_subnet_id", cluster_intranet_subnet_id)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
+        if extensive_parameters is not None:
+            pulumi.set(__self__, "extensive_parameters", extensive_parameters)
         if managed_cluster_internet_security_policies is not None:
             warnings.warn("""this argument was deprecated, use `cluster_internet_security_group` instead.""", DeprecationWarning)
             pulumi.log.warn("""managed_cluster_internet_security_policies is deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.""")
@@ -351,6 +371,18 @@ class _ClusterEndpointState:
         pulumi.set(self, "domain", value)
 
     @property
+    @pulumi.getter(name="extensiveParameters")
+    def extensive_parameters(self) -> Optional[pulumi.Input[str]]:
+        """
+        The LB parameter. Only used for public network access.
+        """
+        return pulumi.get(self, "extensive_parameters")
+
+    @extensive_parameters.setter
+    def extensive_parameters(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extensive_parameters", value)
+
+    @property
     @pulumi.getter(name="managedClusterInternetSecurityPolicies")
     def managed_cluster_internet_security_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -411,6 +443,7 @@ class ClusterEndpoint(pulumi.CustomResource):
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
                  cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
+                 extensive_parameters: Optional[pulumi.Input[str]] = None,
                  managed_cluster_internet_security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
@@ -435,6 +468,7 @@ class ClusterEndpoint(pulumi.CustomResource):
         :param pulumi.Input[bool] cluster_intranet: Open intranet access or not.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
+        :param pulumi.Input[str] extensive_parameters: The LB parameter. Only used for public network access.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         """
         ...
@@ -478,6 +512,7 @@ class ClusterEndpoint(pulumi.CustomResource):
                  cluster_intranet: Optional[pulumi.Input[bool]] = None,
                  cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
                  cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
+                 extensive_parameters: Optional[pulumi.Input[str]] = None,
                  managed_cluster_internet_security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
@@ -502,6 +537,7 @@ class ClusterEndpoint(pulumi.CustomResource):
             __props__.__dict__["cluster_intranet"] = cluster_intranet
             __props__.__dict__["cluster_intranet_domain"] = cluster_intranet_domain
             __props__.__dict__["cluster_intranet_subnet_id"] = cluster_intranet_subnet_id
+            __props__.__dict__["extensive_parameters"] = extensive_parameters
             if managed_cluster_internet_security_policies is not None and not opts.urn:
                 warnings.warn("""this argument was deprecated, use `cluster_internet_security_group` instead.""", DeprecationWarning)
                 pulumi.log.warn("""managed_cluster_internet_security_policies is deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.""")
@@ -534,6 +570,7 @@ class ClusterEndpoint(pulumi.CustomResource):
             cluster_intranet_domain: Optional[pulumi.Input[str]] = None,
             cluster_intranet_subnet_id: Optional[pulumi.Input[str]] = None,
             domain: Optional[pulumi.Input[str]] = None,
+            extensive_parameters: Optional[pulumi.Input[str]] = None,
             managed_cluster_internet_security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             password: Optional[pulumi.Input[str]] = None,
             pgw_endpoint: Optional[pulumi.Input[str]] = None,
@@ -556,6 +593,7 @@ class ClusterEndpoint(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[str] domain: Domain name for access.
+        :param pulumi.Input[str] extensive_parameters: The LB parameter. Only used for public network access.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[str] password: Password of account.
         :param pulumi.Input[str] pgw_endpoint: The Intranet address used for access.
@@ -576,6 +614,7 @@ class ClusterEndpoint(pulumi.CustomResource):
         __props__.__dict__["cluster_intranet_domain"] = cluster_intranet_domain
         __props__.__dict__["cluster_intranet_subnet_id"] = cluster_intranet_subnet_id
         __props__.__dict__["domain"] = domain
+        __props__.__dict__["extensive_parameters"] = extensive_parameters
         __props__.__dict__["managed_cluster_internet_security_policies"] = managed_cluster_internet_security_policies
         __props__.__dict__["password"] = password
         __props__.__dict__["pgw_endpoint"] = pgw_endpoint
@@ -669,6 +708,14 @@ class ClusterEndpoint(pulumi.CustomResource):
         Domain name for access.
         """
         return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="extensiveParameters")
+    def extensive_parameters(self) -> pulumi.Output[Optional[str]]:
+        """
+        The LB parameter. Only used for public network access.
+        """
+        return pulumi.get(self, "extensive_parameters")
 
     @property
     @pulumi.getter(name="managedClusterInternetSecurityPolicies")

@@ -27,6 +27,7 @@ class InstanceArgs:
                  force_delete: Optional[pulumi.Input[bool]] = None,
                  internet_service: Optional[pulumi.Input[int]] = None,
                  intranet_port: Optional[pulumi.Input[int]] = None,
+                 max_deay_time: Optional[pulumi.Input[int]] = None,
                  param_template_id: Optional[pulumi.Input[int]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  pay_type: Optional[pulumi.Input[int]] = None,
@@ -40,6 +41,7 @@ class InstanceArgs:
                  slave_sync_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 upgrade_subversion: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
@@ -51,12 +53,13 @@ class InstanceArgs:
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[int] internet_service: Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
+        :param pulumi.Input[int] max_deay_time: Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
         :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
@@ -70,6 +73,7 @@ class InstanceArgs:
         :param pulumi.Input[int] slave_sync_mode: Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
+        :param pulumi.Input[int] upgrade_subversion: Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
         """
         pulumi.set(__self__, "instance_name", instance_name)
@@ -97,6 +101,8 @@ class InstanceArgs:
             pulumi.set(__self__, "internet_service", internet_service)
         if intranet_port is not None:
             pulumi.set(__self__, "intranet_port", intranet_port)
+        if max_deay_time is not None:
+            pulumi.set(__self__, "max_deay_time", max_deay_time)
         if param_template_id is not None:
             pulumi.set(__self__, "param_template_id", param_template_id)
         if parameters is not None:
@@ -129,6 +135,8 @@ class InstanceArgs:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if upgrade_subversion is not None:
+            pulumi.set(__self__, "upgrade_subversion", upgrade_subversion)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -232,7 +240,7 @@ class InstanceArgs:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
-        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         """
         return pulumi.get(self, "engine_version")
 
@@ -299,6 +307,18 @@ class InstanceArgs:
     @intranet_port.setter
     def intranet_port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "intranet_port", value)
+
+    @property
+    @pulumi.getter(name="maxDeayTime")
+    def max_deay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "max_deay_time")
+
+    @max_deay_time.setter
+    def max_deay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_deay_time", value)
 
     @property
     @pulumi.getter(name="paramTemplateId")
@@ -457,6 +477,18 @@ class InstanceArgs:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter(name="upgradeSubversion")
+    def upgrade_subversion(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "upgrade_subversion")
+
+    @upgrade_subversion.setter
+    def upgrade_subversion(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "upgrade_subversion", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -489,6 +521,7 @@ class _InstanceState:
                  intranet_ip: Optional[pulumi.Input[str]] = None,
                  intranet_port: Optional[pulumi.Input[int]] = None,
                  locked: Optional[pulumi.Input[int]] = None,
+                 max_deay_time: Optional[pulumi.Input[int]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  param_template_id: Optional[pulumi.Input[int]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -505,6 +538,7 @@ class _InstanceState:
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  task_status: Optional[pulumi.Input[int]] = None,
+                 upgrade_subversion: Optional[pulumi.Input[int]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
@@ -514,7 +548,7 @@ class _InstanceState:
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -526,6 +560,7 @@ class _InstanceState:
         :param pulumi.Input[str] intranet_ip: instance intranet IP.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
         :param pulumi.Input[int] locked: Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
+        :param pulumi.Input[int] max_deay_time: Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
@@ -542,6 +577,7 @@ class _InstanceState:
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[int] task_status: Indicates which kind of operations is being executed.
+        :param pulumi.Input[int] upgrade_subversion: Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
         """
@@ -579,6 +615,8 @@ class _InstanceState:
             pulumi.set(__self__, "intranet_port", intranet_port)
         if locked is not None:
             pulumi.set(__self__, "locked", locked)
+        if max_deay_time is not None:
+            pulumi.set(__self__, "max_deay_time", max_deay_time)
         if mem_size is not None:
             pulumi.set(__self__, "mem_size", mem_size)
         if param_template_id is not None:
@@ -617,6 +655,8 @@ class _InstanceState:
             pulumi.set(__self__, "tags", tags)
         if task_status is not None:
             pulumi.set(__self__, "task_status", task_status)
+        if upgrade_subversion is not None:
+            pulumi.set(__self__, "upgrade_subversion", upgrade_subversion)
         if volume_size is not None:
             pulumi.set(__self__, "volume_size", volume_size)
         if vpc_id is not None:
@@ -686,7 +726,7 @@ class _InstanceState:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
-        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         """
         return pulumi.get(self, "engine_version")
 
@@ -825,6 +865,18 @@ class _InstanceState:
     @locked.setter
     def locked(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "locked", value)
+
+    @property
+    @pulumi.getter(name="maxDeayTime")
+    def max_deay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "max_deay_time")
+
+    @max_deay_time.setter
+    def max_deay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_deay_time", value)
 
     @property
     @pulumi.getter(name="memSize")
@@ -1019,6 +1071,18 @@ class _InstanceState:
         pulumi.set(self, "task_status", value)
 
     @property
+    @pulumi.getter(name="upgradeSubversion")
+    def upgrade_subversion(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "upgrade_subversion")
+
+    @upgrade_subversion.setter
+    def upgrade_subversion(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "upgrade_subversion", value)
+
+    @property
     @pulumi.getter(name="volumeSize")
     def volume_size(self) -> Optional[pulumi.Input[int]]:
         """
@@ -1060,6 +1124,7 @@ class Instance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  internet_service: Optional[pulumi.Input[int]] = None,
                  intranet_port: Optional[pulumi.Input[int]] = None,
+                 max_deay_time: Optional[pulumi.Input[int]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  param_template_id: Optional[pulumi.Input[int]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1074,6 +1139,7 @@ class Instance(pulumi.CustomResource):
                  slave_sync_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 upgrade_subversion: Optional[pulumi.Input[int]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1130,13 +1196,14 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         :param pulumi.Input[str] instance_name: The name of a mysql instance.
         :param pulumi.Input[int] internet_service: Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
+        :param pulumi.Input[int] max_deay_time: Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
@@ -1151,6 +1218,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] slave_sync_mode: Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
+        :param pulumi.Input[int] upgrade_subversion: Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
         """
@@ -1233,6 +1301,7 @@ class Instance(pulumi.CustomResource):
                  instance_name: Optional[pulumi.Input[str]] = None,
                  internet_service: Optional[pulumi.Input[int]] = None,
                  intranet_port: Optional[pulumi.Input[int]] = None,
+                 max_deay_time: Optional[pulumi.Input[int]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  param_template_id: Optional[pulumi.Input[int]] = None,
                  parameters: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1247,6 +1316,7 @@ class Instance(pulumi.CustomResource):
                  slave_sync_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 upgrade_subversion: Optional[pulumi.Input[int]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1277,6 +1347,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["instance_name"] = instance_name
             __props__.__dict__["internet_service"] = internet_service
             __props__.__dict__["intranet_port"] = intranet_port
+            __props__.__dict__["max_deay_time"] = max_deay_time
             if mem_size is None and not opts.urn:
                 raise TypeError("Missing required property 'mem_size'")
             __props__.__dict__["mem_size"] = mem_size
@@ -1299,6 +1370,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["slave_sync_mode"] = slave_sync_mode
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["upgrade_subversion"] = upgrade_subversion
             if volume_size is None and not opts.urn:
                 raise TypeError("Missing required property 'volume_size'")
             __props__.__dict__["volume_size"] = volume_size
@@ -1337,6 +1409,7 @@ class Instance(pulumi.CustomResource):
             intranet_ip: Optional[pulumi.Input[str]] = None,
             intranet_port: Optional[pulumi.Input[int]] = None,
             locked: Optional[pulumi.Input[int]] = None,
+            max_deay_time: Optional[pulumi.Input[int]] = None,
             mem_size: Optional[pulumi.Input[int]] = None,
             param_template_id: Optional[pulumi.Input[int]] = None,
             parameters: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1353,6 +1426,7 @@ class Instance(pulumi.CustomResource):
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             task_status: Optional[pulumi.Input[int]] = None,
+            upgrade_subversion: Optional[pulumi.Input[int]] = None,
             volume_size: Optional[pulumi.Input[int]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None) -> 'Instance':
         """
@@ -1367,7 +1441,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
-        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -1379,6 +1453,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] intranet_ip: instance intranet IP.
         :param pulumi.Input[int] intranet_port: Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
         :param pulumi.Input[int] locked: Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
+        :param pulumi.Input[int] max_deay_time: Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] mem_size: Memory size (in MB).
         :param pulumi.Input[int] param_template_id: Specify parameter template id.
         :param pulumi.Input[Mapping[str, Any]] parameters: List of parameters to use.
@@ -1395,6 +1470,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[int] task_status: Indicates which kind of operations is being executed.
+        :param pulumi.Input[int] upgrade_subversion: Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
         """
@@ -1419,6 +1495,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["intranet_ip"] = intranet_ip
         __props__.__dict__["intranet_port"] = intranet_port
         __props__.__dict__["locked"] = locked
+        __props__.__dict__["max_deay_time"] = max_deay_time
         __props__.__dict__["mem_size"] = mem_size
         __props__.__dict__["param_template_id"] = param_template_id
         __props__.__dict__["parameters"] = parameters
@@ -1435,6 +1512,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["task_status"] = task_status
+        __props__.__dict__["upgrade_subversion"] = upgrade_subversion
         __props__.__dict__["volume_size"] = volume_size
         __props__.__dict__["vpc_id"] = vpc_id
         return Instance(resource_name, opts=opts, __props__=__props__)
@@ -1473,7 +1551,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="deviceType")
-    def device_type(self) -> pulumi.Output[Optional[str]]:
+    def device_type(self) -> pulumi.Output[str]:
         """
         Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
         """
@@ -1483,7 +1561,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> pulumi.Output[Optional[str]]:
         """
-        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7.
+        The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         """
         return pulumi.get(self, "engine_version")
 
@@ -1497,7 +1575,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="firstSlaveZone")
-    def first_slave_zone(self) -> pulumi.Output[Optional[str]]:
+    def first_slave_zone(self) -> pulumi.Output[str]:
         """
         Zone information about first slave instance.
         """
@@ -1574,6 +1652,14 @@ class Instance(pulumi.CustomResource):
         Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
         """
         return pulumi.get(self, "locked")
+
+    @property
+    @pulumi.getter(name="maxDeayTime")
+    def max_deay_time(self) -> pulumi.Output[Optional[int]]:
+        """
+        Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "max_deay_time")
 
     @property
     @pulumi.getter(name="memSize")
@@ -1702,6 +1788,14 @@ class Instance(pulumi.CustomResource):
         Indicates which kind of operations is being executed.
         """
         return pulumi.get(self, "task_status")
+
+    @property
+    @pulumi.getter(name="upgradeSubversion")
+    def upgrade_subversion(self) -> pulumi.Output[Optional[int]]:
+        """
+        Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
+        """
+        return pulumi.get(self, "upgrade_subversion")
 
     @property
     @pulumi.getter(name="volumeSize")

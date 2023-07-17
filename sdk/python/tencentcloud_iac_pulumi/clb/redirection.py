@@ -264,8 +264,7 @@ class Redirection(pulumi.CustomResource):
         Provides a resource to create a CLB redirection.
 
         ## Example Usage
-
-        Manual Rewrite
+        ### Manual Rewrite
 
         ```python
         import pulumi
@@ -278,8 +277,7 @@ class Redirection(pulumi.CustomResource):
             target_listener_id="lbl-asj1hzuo",
             target_rule_id="loc-4xxr2cy7")
         ```
-
-        Auto Rewrite
+        ### Auto Rewrite
 
         ```python
         import pulumi
@@ -320,8 +318,7 @@ class Redirection(pulumi.CustomResource):
         Provides a resource to create a CLB redirection.
 
         ## Example Usage
-
-        Manual Rewrite
+        ### Manual Rewrite
 
         ```python
         import pulumi
@@ -334,8 +331,7 @@ class Redirection(pulumi.CustomResource):
             target_listener_id="lbl-asj1hzuo",
             target_rule_id="loc-4xxr2cy7")
         ```
-
-        Auto Rewrite
+        ### Auto Rewrite
 
         ```python
         import pulumi

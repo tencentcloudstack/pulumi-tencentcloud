@@ -86,7 +86,7 @@ type ListenerRule struct {
 	HealthCheckHttpMethod pulumi.StringOutput `pulumi:"healthCheckHttpMethod"`
 	// Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
 	HealthCheckHttpPath pulumi.StringOutput `pulumi:"healthCheckHttpPath"`
-	// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntOutput `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
@@ -176,7 +176,7 @@ type listenerRuleState struct {
 	HealthCheckHttpMethod *string `pulumi:"healthCheckHttpMethod"`
 	// Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
-	// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
@@ -225,7 +225,7 @@ type ListenerRuleState struct {
 	HealthCheckHttpMethod pulumi.StringPtrInput
 	// Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
 	HealthCheckHttpPath pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
@@ -278,7 +278,7 @@ type listenerRuleArgs struct {
 	HealthCheckHttpMethod *string `pulumi:"healthCheckHttpMethod"`
 	// Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
-	// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
@@ -326,7 +326,7 @@ type ListenerRuleArgs struct {
 	HealthCheckHttpMethod pulumi.StringPtrInput
 	// Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
 	HealthCheckHttpPath pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
@@ -492,7 +492,7 @@ func (o ListenerRuleOutput) HealthCheckHttpPath() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.HealthCheckHttpPath }).(pulumi.StringOutput)
 }
 
-// Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+// Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerRuleOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.IntOutput { return v.HealthCheckIntervalTime }).(pulumi.IntOutput)
 }

@@ -14,15 +14,35 @@ __all__ = [
     'FunctionAliasRoutingConfigAdditionalVersionMatch',
     'FunctionAliasRoutingConfigAdditionalVersionWeight',
     'FunctionCfsConfig',
+    'FunctionEventInvokeConfigAsyncTriggerConfig',
+    'FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig',
     'FunctionImageConfig',
     'FunctionLayer',
     'FunctionTrigger',
     'FunctionTriggerInfo',
     'LayerContent',
+    'ProvisionedConcurrencyConfigTriggerAction',
+    'GetAccountInfoAccountLimitResult',
+    'GetAccountInfoAccountLimitNamespaceResult',
+    'GetAccountInfoAccountLimitNamespaceTriggerResult',
+    'GetAccountInfoAccountUsageResult',
+    'GetAccountInfoAccountUsageNamespaceResult',
+    'GetAsyncEventManagementEventListResult',
+    'GetAsyncEventStatusResultResult',
+    'GetFunctionAliasesAliasResult',
+    'GetFunctionAliasesAliasRoutingConfigResult',
+    'GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchResult',
+    'GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightResult',
+    'GetFunctionVersionsVersionResult',
     'GetFunctionsFunctionResult',
     'GetFunctionsFunctionTriggerInfoResult',
+    'GetLayerVersionsLayerVersionResult',
+    'GetLayersLayerResult',
     'GetLogsLogResult',
     'GetNamespacesNamespaceResult',
+    'GetRequestStatusDataResult',
+    'GetTriggersFilterResult',
+    'GetTriggersTriggerResult',
 ]
 
 @pulumi.output_type
@@ -283,6 +303,89 @@ class FunctionCfsConfig(dict):
     @pulumi.getter(name="mountVpcId")
     def mount_vpc_id(self) -> Optional[str]:
         return pulumi.get(self, "mount_vpc_id")
+
+
+@pulumi.output_type
+class FunctionEventInvokeConfigAsyncTriggerConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "msgTtl":
+            suggest = "msg_ttl"
+        elif key == "retryConfigs":
+            suggest = "retry_configs"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionEventInvokeConfigAsyncTriggerConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionEventInvokeConfigAsyncTriggerConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionEventInvokeConfigAsyncTriggerConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 msg_ttl: int,
+                 retry_configs: Sequence['outputs.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig']):
+        """
+        :param int msg_ttl: Message retention period.
+        :param Sequence['FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs'] retry_configs: Async retry configuration of function upon user error.
+        """
+        pulumi.set(__self__, "msg_ttl", msg_ttl)
+        pulumi.set(__self__, "retry_configs", retry_configs)
+
+    @property
+    @pulumi.getter(name="msgTtl")
+    def msg_ttl(self) -> int:
+        """
+        Message retention period.
+        """
+        return pulumi.get(self, "msg_ttl")
+
+    @property
+    @pulumi.getter(name="retryConfigs")
+    def retry_configs(self) -> Sequence['outputs.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig']:
+        """
+        Async retry configuration of function upon user error.
+        """
+        return pulumi.get(self, "retry_configs")
+
+
+@pulumi.output_type
+class FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "retryNum":
+            suggest = "retry_num"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 retry_num: int):
+        """
+        :param int retry_num: Number of retry attempts.
+        """
+        pulumi.set(__self__, "retry_num", retry_num)
+
+    @property
+    @pulumi.getter(name="retryNum")
+    def retry_num(self) -> int:
+        """
+        Number of retry attempts.
+        """
+        return pulumi.get(self, "retry_num")
 
 
 @pulumi.output_type
@@ -694,6 +797,858 @@ class LayerContent(dict):
         Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
         """
         return pulumi.get(self, "zip_file")
+
+
+@pulumi.output_type
+class ProvisionedConcurrencyConfigTriggerAction(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "triggerCronConfig":
+            suggest = "trigger_cron_config"
+        elif key == "triggerName":
+            suggest = "trigger_name"
+        elif key == "triggerProvisionedConcurrencyNum":
+            suggest = "trigger_provisioned_concurrency_num"
+        elif key == "provisionedType":
+            suggest = "provisioned_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProvisionedConcurrencyConfigTriggerAction. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProvisionedConcurrencyConfigTriggerAction.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProvisionedConcurrencyConfigTriggerAction.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 trigger_cron_config: str,
+                 trigger_name: str,
+                 trigger_provisioned_concurrency_num: int,
+                 provisioned_type: Optional[str] = None):
+        """
+        :param str trigger_cron_config: Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+        :param str trigger_name: Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+        :param int trigger_provisioned_concurrency_num: Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+        :param str provisioned_type: The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+        """
+        pulumi.set(__self__, "trigger_cron_config", trigger_cron_config)
+        pulumi.set(__self__, "trigger_name", trigger_name)
+        pulumi.set(__self__, "trigger_provisioned_concurrency_num", trigger_provisioned_concurrency_num)
+        if provisioned_type is not None:
+            pulumi.set(__self__, "provisioned_type", provisioned_type)
+
+    @property
+    @pulumi.getter(name="triggerCronConfig")
+    def trigger_cron_config(self) -> str:
+        """
+        Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_cron_config")
+
+    @property
+    @pulumi.getter(name="triggerName")
+    def trigger_name(self) -> str:
+        """
+        Scheduled action name Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_name")
+
+    @property
+    @pulumi.getter(name="triggerProvisionedConcurrencyNum")
+    def trigger_provisioned_concurrency_num(self) -> int:
+        """
+        Target provisioned concurrency of the scheduled scaling action Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trigger_provisioned_concurrency_num")
+
+    @property
+    @pulumi.getter(name="provisionedType")
+    def provisioned_type(self) -> Optional[str]:
+        """
+        The provision type. Value: Default Note: This field may return null, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "provisioned_type")
+
+
+@pulumi.output_type
+class GetAccountInfoAccountLimitResult(dict):
+    def __init__(__self__, *,
+                 namespaces: Sequence['outputs.GetAccountInfoAccountLimitNamespaceResult'],
+                 namespaces_count: int):
+        """
+        :param Sequence['GetAccountInfoAccountLimitNamespaceArgs'] namespaces: Namespace name.
+        :param int namespaces_count: Number of namespaces.
+        """
+        pulumi.set(__self__, "namespaces", namespaces)
+        pulumi.set(__self__, "namespaces_count", namespaces_count)
+
+    @property
+    @pulumi.getter
+    def namespaces(self) -> Sequence['outputs.GetAccountInfoAccountLimitNamespaceResult']:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "namespaces")
+
+    @property
+    @pulumi.getter(name="namespacesCount")
+    def namespaces_count(self) -> int:
+        """
+        Number of namespaces.
+        """
+        return pulumi.get(self, "namespaces_count")
+
+
+@pulumi.output_type
+class GetAccountInfoAccountLimitNamespaceResult(dict):
+    def __init__(__self__, *,
+                 concurrent_executions: int,
+                 functions_count: int,
+                 init_timeout_limit: int,
+                 max_msg_ttl: int,
+                 min_msg_ttl: int,
+                 namespace: str,
+                 retry_num_limit: int,
+                 test_model_limit: int,
+                 timeout_limit: int,
+                 triggers: Sequence['outputs.GetAccountInfoAccountLimitNamespaceTriggerResult']):
+        """
+        :param int concurrent_executions: Concurrency.
+        :param int functions_count: Number of functions in namespace.
+        :param int init_timeout_limit: Initialization timeout limit.
+        :param int max_msg_ttl: Upper limit of message retention time for async retry.
+        :param int min_msg_ttl: Lower limit of message retention time for async retry.
+        :param str namespace: Namespace name.
+        :param int retry_num_limit: Limit of async retry attempt quantity.
+        :param int test_model_limit: Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+        :param int timeout_limit: Timeout limit.
+        :param Sequence['GetAccountInfoAccountLimitNamespaceTriggerArgs'] triggers: Trigger information.
+        """
+        pulumi.set(__self__, "concurrent_executions", concurrent_executions)
+        pulumi.set(__self__, "functions_count", functions_count)
+        pulumi.set(__self__, "init_timeout_limit", init_timeout_limit)
+        pulumi.set(__self__, "max_msg_ttl", max_msg_ttl)
+        pulumi.set(__self__, "min_msg_ttl", min_msg_ttl)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "retry_num_limit", retry_num_limit)
+        pulumi.set(__self__, "test_model_limit", test_model_limit)
+        pulumi.set(__self__, "timeout_limit", timeout_limit)
+        pulumi.set(__self__, "triggers", triggers)
+
+    @property
+    @pulumi.getter(name="concurrentExecutions")
+    def concurrent_executions(self) -> int:
+        """
+        Concurrency.
+        """
+        return pulumi.get(self, "concurrent_executions")
+
+    @property
+    @pulumi.getter(name="functionsCount")
+    def functions_count(self) -> int:
+        """
+        Number of functions in namespace.
+        """
+        return pulumi.get(self, "functions_count")
+
+    @property
+    @pulumi.getter(name="initTimeoutLimit")
+    def init_timeout_limit(self) -> int:
+        """
+        Initialization timeout limit.
+        """
+        return pulumi.get(self, "init_timeout_limit")
+
+    @property
+    @pulumi.getter(name="maxMsgTtl")
+    def max_msg_ttl(self) -> int:
+        """
+        Upper limit of message retention time for async retry.
+        """
+        return pulumi.get(self, "max_msg_ttl")
+
+    @property
+    @pulumi.getter(name="minMsgTtl")
+    def min_msg_ttl(self) -> int:
+        """
+        Lower limit of message retention time for async retry.
+        """
+        return pulumi.get(self, "min_msg_ttl")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="retryNumLimit")
+    def retry_num_limit(self) -> int:
+        """
+        Limit of async retry attempt quantity.
+        """
+        return pulumi.get(self, "retry_num_limit")
+
+    @property
+    @pulumi.getter(name="testModelLimit")
+    def test_model_limit(self) -> int:
+        """
+        Test event limit Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "test_model_limit")
+
+    @property
+    @pulumi.getter(name="timeoutLimit")
+    def timeout_limit(self) -> int:
+        """
+        Timeout limit.
+        """
+        return pulumi.get(self, "timeout_limit")
+
+    @property
+    @pulumi.getter
+    def triggers(self) -> Sequence['outputs.GetAccountInfoAccountLimitNamespaceTriggerResult']:
+        """
+        Trigger information.
+        """
+        return pulumi.get(self, "triggers")
+
+
+@pulumi.output_type
+class GetAccountInfoAccountLimitNamespaceTriggerResult(dict):
+    def __init__(__self__, *,
+                 apigw: int,
+                 ckafka: int,
+                 clb: int,
+                 cls: int,
+                 cm: int,
+                 cmq: int,
+                 cos: int,
+                 eb: int,
+                 mps: int,
+                 timer: int,
+                 total: int,
+                 vod: int):
+        """
+        :param int apigw: Number of API Gateway triggers.
+        :param int ckafka: Number of CKafka triggers.
+        :param int clb: Number of CLB triggers.
+        :param int cls: Number of CLS triggers.
+        :param int cm: Number of CM triggers.
+        :param int cmq: Number of CMQ triggers.
+        :param int cos: Number of COS triggers.
+        :param int eb: Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+        :param int mps: Number of MPS triggers.
+        :param int timer: Number of timer triggers.
+        :param int total: Total number of triggers.
+        :param int vod: Number of VOD triggers.
+        """
+        pulumi.set(__self__, "apigw", apigw)
+        pulumi.set(__self__, "ckafka", ckafka)
+        pulumi.set(__self__, "clb", clb)
+        pulumi.set(__self__, "cls", cls)
+        pulumi.set(__self__, "cm", cm)
+        pulumi.set(__self__, "cmq", cmq)
+        pulumi.set(__self__, "cos", cos)
+        pulumi.set(__self__, "eb", eb)
+        pulumi.set(__self__, "mps", mps)
+        pulumi.set(__self__, "timer", timer)
+        pulumi.set(__self__, "total", total)
+        pulumi.set(__self__, "vod", vod)
+
+    @property
+    @pulumi.getter
+    def apigw(self) -> int:
+        """
+        Number of API Gateway triggers.
+        """
+        return pulumi.get(self, "apigw")
+
+    @property
+    @pulumi.getter
+    def ckafka(self) -> int:
+        """
+        Number of CKafka triggers.
+        """
+        return pulumi.get(self, "ckafka")
+
+    @property
+    @pulumi.getter
+    def clb(self) -> int:
+        """
+        Number of CLB triggers.
+        """
+        return pulumi.get(self, "clb")
+
+    @property
+    @pulumi.getter
+    def cls(self) -> int:
+        """
+        Number of CLS triggers.
+        """
+        return pulumi.get(self, "cls")
+
+    @property
+    @pulumi.getter
+    def cm(self) -> int:
+        """
+        Number of CM triggers.
+        """
+        return pulumi.get(self, "cm")
+
+    @property
+    @pulumi.getter
+    def cmq(self) -> int:
+        """
+        Number of CMQ triggers.
+        """
+        return pulumi.get(self, "cmq")
+
+    @property
+    @pulumi.getter
+    def cos(self) -> int:
+        """
+        Number of COS triggers.
+        """
+        return pulumi.get(self, "cos")
+
+    @property
+    @pulumi.getter
+    def eb(self) -> int:
+        """
+        Number of EventBridge triggers Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "eb")
+
+    @property
+    @pulumi.getter
+    def mps(self) -> int:
+        """
+        Number of MPS triggers.
+        """
+        return pulumi.get(self, "mps")
+
+    @property
+    @pulumi.getter
+    def timer(self) -> int:
+        """
+        Number of timer triggers.
+        """
+        return pulumi.get(self, "timer")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total number of triggers.
+        """
+        return pulumi.get(self, "total")
+
+    @property
+    @pulumi.getter
+    def vod(self) -> int:
+        """
+        Number of VOD triggers.
+        """
+        return pulumi.get(self, "vod")
+
+
+@pulumi.output_type
+class GetAccountInfoAccountUsageResult(dict):
+    def __init__(__self__, *,
+                 namespaces: Sequence['outputs.GetAccountInfoAccountUsageNamespaceResult'],
+                 namespaces_count: int,
+                 total_allocated_concurrency_mem: int,
+                 total_concurrency_mem: int,
+                 user_concurrency_mem_limit: int):
+        """
+        :param Sequence['GetAccountInfoAccountUsageNamespaceArgs'] namespaces: Namespace name.
+        :param int namespaces_count: Number of namespaces.
+        :param int total_allocated_concurrency_mem: Quota of configured user concurrency memory in the current region.
+        :param int total_concurrency_mem: Upper limit of user concurrency memory in the current region.
+        :param int user_concurrency_mem_limit: Quota of account concurrency actually configured by user.
+        """
+        pulumi.set(__self__, "namespaces", namespaces)
+        pulumi.set(__self__, "namespaces_count", namespaces_count)
+        pulumi.set(__self__, "total_allocated_concurrency_mem", total_allocated_concurrency_mem)
+        pulumi.set(__self__, "total_concurrency_mem", total_concurrency_mem)
+        pulumi.set(__self__, "user_concurrency_mem_limit", user_concurrency_mem_limit)
+
+    @property
+    @pulumi.getter
+    def namespaces(self) -> Sequence['outputs.GetAccountInfoAccountUsageNamespaceResult']:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "namespaces")
+
+    @property
+    @pulumi.getter(name="namespacesCount")
+    def namespaces_count(self) -> int:
+        """
+        Number of namespaces.
+        """
+        return pulumi.get(self, "namespaces_count")
+
+    @property
+    @pulumi.getter(name="totalAllocatedConcurrencyMem")
+    def total_allocated_concurrency_mem(self) -> int:
+        """
+        Quota of configured user concurrency memory in the current region.
+        """
+        return pulumi.get(self, "total_allocated_concurrency_mem")
+
+    @property
+    @pulumi.getter(name="totalConcurrencyMem")
+    def total_concurrency_mem(self) -> int:
+        """
+        Upper limit of user concurrency memory in the current region.
+        """
+        return pulumi.get(self, "total_concurrency_mem")
+
+    @property
+    @pulumi.getter(name="userConcurrencyMemLimit")
+    def user_concurrency_mem_limit(self) -> int:
+        """
+        Quota of account concurrency actually configured by user.
+        """
+        return pulumi.get(self, "user_concurrency_mem_limit")
+
+
+@pulumi.output_type
+class GetAccountInfoAccountUsageNamespaceResult(dict):
+    def __init__(__self__, *,
+                 functions: Sequence[str],
+                 functions_count: int,
+                 namespace: str,
+                 total_allocated_concurrency_mem: int,
+                 total_allocated_provisioned_mem: int,
+                 total_concurrency_mem: int):
+        """
+        :param Sequence[str] functions: Function array.
+        :param int functions_count: Number of functions in namespace.
+        :param str namespace: Namespace name.
+        :param int total_allocated_concurrency_mem: Quota of configured user concurrency memory in the current region.
+        :param int total_allocated_provisioned_mem: Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+        :param int total_concurrency_mem: Upper limit of user concurrency memory in the current region.
+        """
+        pulumi.set(__self__, "functions", functions)
+        pulumi.set(__self__, "functions_count", functions_count)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "total_allocated_concurrency_mem", total_allocated_concurrency_mem)
+        pulumi.set(__self__, "total_allocated_provisioned_mem", total_allocated_provisioned_mem)
+        pulumi.set(__self__, "total_concurrency_mem", total_concurrency_mem)
+
+    @property
+    @pulumi.getter
+    def functions(self) -> Sequence[str]:
+        """
+        Function array.
+        """
+        return pulumi.get(self, "functions")
+
+    @property
+    @pulumi.getter(name="functionsCount")
+    def functions_count(self) -> int:
+        """
+        Number of functions in namespace.
+        """
+        return pulumi.get(self, "functions_count")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="totalAllocatedConcurrencyMem")
+    def total_allocated_concurrency_mem(self) -> int:
+        """
+        Quota of configured user concurrency memory in the current region.
+        """
+        return pulumi.get(self, "total_allocated_concurrency_mem")
+
+    @property
+    @pulumi.getter(name="totalAllocatedProvisionedMem")
+    def total_allocated_provisioned_mem(self) -> int:
+        """
+        Provisioned concurrency usage of the namespace Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "total_allocated_provisioned_mem")
+
+    @property
+    @pulumi.getter(name="totalConcurrencyMem")
+    def total_concurrency_mem(self) -> int:
+        """
+        Upper limit of user concurrency memory in the current region.
+        """
+        return pulumi.get(self, "total_concurrency_mem")
+
+
+@pulumi.output_type
+class GetAsyncEventManagementEventListResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 invoke_request_id: str,
+                 invoke_type: str,
+                 qualifier: str,
+                 start_time: str,
+                 status: str):
+        """
+        :param str end_time: Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+        :param str invoke_request_id: Filter (event invocation request ID).
+        :param str invoke_type: Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+        :param str qualifier: Filter (function version).
+        :param str start_time: Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+        :param str status: Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "invoke_request_id", invoke_request_id)
+        pulumi.set(__self__, "invoke_type", invoke_type)
+        pulumi.set(__self__, "qualifier", qualifier)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Invocation end time in the format of %Y-%m-%d %H:%M:%S.%f.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="invokeRequestId")
+    def invoke_request_id(self) -> str:
+        """
+        Filter (event invocation request ID).
+        """
+        return pulumi.get(self, "invoke_request_id")
+
+    @property
+    @pulumi.getter(name="invokeType")
+    def invoke_type(self) -> str:
+        """
+        Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
+        """
+        return pulumi.get(self, "invoke_type")
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> str:
+        """
+        Filter (function version).
+        """
+        return pulumi.get(self, "qualifier")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Invocation start time in the format of %Y-%m-%d %H:%M:%S.%f.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetAsyncEventStatusResultResult(dict):
+    def __init__(__self__, *,
+                 invoke_request_id: str,
+                 status: str,
+                 status_code: int):
+        """
+        :param str invoke_request_id: ID of the async execution request.
+        :param str status: Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+        :param int status_code: Request status code.
+        """
+        pulumi.set(__self__, "invoke_request_id", invoke_request_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_code", status_code)
+
+    @property
+    @pulumi.getter(name="invokeRequestId")
+    def invoke_request_id(self) -> str:
+        """
+        ID of the async execution request.
+        """
+        return pulumi.get(self, "invoke_request_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="statusCode")
+    def status_code(self) -> int:
+        """
+        Request status code.
+        """
+        return pulumi.get(self, "status_code")
+
+
+@pulumi.output_type
+class GetFunctionAliasesAliasResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 description: str,
+                 function_version: str,
+                 mod_time: str,
+                 name: str,
+                 routing_configs: Sequence['outputs.GetFunctionAliasesAliasRoutingConfigResult']):
+        """
+        :param str add_time: Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+        :param str description: DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+        :param str function_version: If this parameter is provided, only aliases associated with this function version will be returned.
+        :param str mod_time: Update timeNote: this field may return null, indicating that no valid values can be obtained.
+        :param str name: Alias name.
+        :param Sequence['GetFunctionAliasesAliasRoutingConfigArgs'] routing_configs: Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "function_version", function_version)
+        pulumi.set(__self__, "mod_time", mod_time)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "routing_configs", routing_configs)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        DescriptionNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="functionVersion")
+    def function_version(self) -> str:
+        """
+        If this parameter is provided, only aliases associated with this function version will be returned.
+        """
+        return pulumi.get(self, "function_version")
+
+    @property
+    @pulumi.getter(name="modTime")
+    def mod_time(self) -> str:
+        """
+        Update timeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "mod_time")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Alias name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="routingConfigs")
+    def routing_configs(self) -> Sequence['outputs.GetFunctionAliasesAliasRoutingConfigResult']:
+        """
+        Routing information of aliasNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "routing_configs")
+
+
+@pulumi.output_type
+class GetFunctionAliasesAliasRoutingConfigResult(dict):
+    def __init__(__self__, *,
+                 addition_version_matchs: Sequence['outputs.GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchResult'],
+                 additional_version_weights: Sequence['outputs.GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightResult']):
+        """
+        :param Sequence['GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs'] addition_version_matchs: Additional version with rule-based routing.
+        :param Sequence['GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs'] additional_version_weights: Additional version with random weight-based routing.
+        """
+        pulumi.set(__self__, "addition_version_matchs", addition_version_matchs)
+        pulumi.set(__self__, "additional_version_weights", additional_version_weights)
+
+    @property
+    @pulumi.getter(name="additionVersionMatchs")
+    def addition_version_matchs(self) -> Sequence['outputs.GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchResult']:
+        """
+        Additional version with rule-based routing.
+        """
+        return pulumi.get(self, "addition_version_matchs")
+
+    @property
+    @pulumi.getter(name="additionalVersionWeights")
+    def additional_version_weights(self) -> Sequence['outputs.GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightResult']:
+        """
+        Additional version with random weight-based routing.
+        """
+        return pulumi.get(self, "additional_version_weights")
+
+
+@pulumi.output_type
+class GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchResult(dict):
+    def __init__(__self__, *,
+                 expression: str,
+                 key: str,
+                 method: str,
+                 version: str):
+        """
+        :param str expression: Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+        :param str key: Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+        :param str method: Match method. Valid values:range: range matchexact: exact string match.
+        :param str version: Function version name.
+        """
+        pulumi.set(__self__, "expression", expression)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def expression(self) -> str:
+        """
+        Rule requirements for range match:It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integersRule requirements for exact match:Exact string match.
+        """
+        return pulumi.get(self, "expression")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching ruleHeader method:Enter invoke.headers.User for `key` and pass in `RoutingKey:{User:value}` when invoking a function through `invoke` for invocation based on rule matching.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        Match method. Valid values:range: range matchexact: exact string match.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Function version name.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightResult(dict):
+    def __init__(__self__, *,
+                 version: str,
+                 weight: float):
+        """
+        :param str version: Function version name.
+        :param float weight: Version weight.
+        """
+        pulumi.set(__self__, "version", version)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Function version name.
+        """
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> float:
+        """
+        Version weight.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetFunctionVersionsVersionResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 description: str,
+                 mod_time: str,
+                 status: str,
+                 version: str):
+        """
+        :param str add_time: The creation timeNote: This field may return null, indicating that no valid value was found.
+        :param str description: Version descriptionNote: This field may return null, indicating that no valid values is found.
+        :param str mod_time: Update timeNote: This field may return null, indicating that no valid value was found.
+        :param str status: Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+        :param str version: Function version name.
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "mod_time", mod_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        The creation timeNote: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Version descriptionNote: This field may return null, indicating that no valid values is found.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="modTime")
+    def mod_time(self) -> str:
+        """
+        Update timeNote: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "mod_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Version statusNote: this field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Function version name.
+        """
+        return pulumi.get(self, "version")
 
 
 @pulumi.output_type
@@ -1129,6 +2084,196 @@ class GetFunctionsFunctionTriggerInfoResult(dict):
 
 
 @pulumi.output_type
+class GetLayerVersionsLayerVersionResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 compatible_runtimes: Sequence[str],
+                 description: str,
+                 layer_name: str,
+                 layer_version: int,
+                 license_info: str,
+                 stamp: str,
+                 status: str):
+        """
+        :param str add_time: Creation time.
+        :param Sequence[str] compatible_runtimes: Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+        :param str description: Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+        :param str layer_name: Layer name.
+        :param int layer_version: Version number.
+        :param str license_info: License informationNote: This field may return null, indicating that no valid values can be obtained.
+        :param str stamp: StampNote: This field may return null, indicating that no valid values can be obtained.
+        :param str status: Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "compatible_runtimes", compatible_runtimes)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "layer_name", layer_name)
+        pulumi.set(__self__, "layer_version", layer_version)
+        pulumi.set(__self__, "license_info", license_info)
+        pulumi.set(__self__, "stamp", stamp)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="compatibleRuntimes")
+    def compatible_runtimes(self) -> Sequence[str]:
+        """
+        Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "compatible_runtimes")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="layerName")
+    def layer_name(self) -> str:
+        """
+        Layer name.
+        """
+        return pulumi.get(self, "layer_name")
+
+    @property
+    @pulumi.getter(name="layerVersion")
+    def layer_version(self) -> int:
+        """
+        Version number.
+        """
+        return pulumi.get(self, "layer_version")
+
+    @property
+    @pulumi.getter(name="licenseInfo")
+    def license_info(self) -> str:
+        """
+        License informationNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "license_info")
+
+    @property
+    @pulumi.getter
+    def stamp(self) -> str:
+        """
+        StampNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "stamp")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetLayersLayerResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 compatible_runtimes: Sequence[str],
+                 description: str,
+                 layer_name: str,
+                 layer_version: int,
+                 license_info: str,
+                 stamp: str,
+                 status: str):
+        """
+        :param str add_time: Creation time.
+        :param Sequence[str] compatible_runtimes: Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+        :param str description: Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+        :param str layer_name: Layer name.
+        :param int layer_version: Version number.
+        :param str license_info: License informationNote: This field may return null, indicating that no valid values can be obtained.
+        :param str stamp: StampNote: This field may return null, indicating that no valid values can be obtained.
+        :param str status: Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "compatible_runtimes", compatible_runtimes)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "layer_name", layer_name)
+        pulumi.set(__self__, "layer_version", layer_version)
+        pulumi.set(__self__, "license_info", license_info)
+        pulumi.set(__self__, "stamp", stamp)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="compatibleRuntimes")
+    def compatible_runtimes(self) -> Sequence[str]:
+        """
+        Runtime applicable to a versionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "compatible_runtimes")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Version descriptionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="layerName")
+    def layer_name(self) -> str:
+        """
+        Layer name.
+        """
+        return pulumi.get(self, "layer_name")
+
+    @property
+    @pulumi.getter(name="layerVersion")
+    def layer_version(self) -> int:
+        """
+        Version number.
+        """
+        return pulumi.get(self, "layer_version")
+
+    @property
+    @pulumi.getter(name="licenseInfo")
+    def license_info(self) -> str:
+        """
+        License informationNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "license_info")
+
+    @property
+    @pulumi.getter
+    def stamp(self) -> str:
+        """
+        StampNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "stamp")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81).
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
 class GetLogsLogResult(dict):
     def __init__(__self__, *,
                  bill_duration: int,
@@ -1325,6 +2470,269 @@ class GetNamespacesNamespaceResult(dict):
     def type(self) -> str:
         """
         Type of the SCF namespace.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetRequestStatusDataResult(dict):
+    def __init__(__self__, *,
+                 duration: float,
+                 function_name: str,
+                 mem_usage: float,
+                 request_id: str,
+                 ret_code: int,
+                 ret_msg: str,
+                 retry_num: int,
+                 start_time: str):
+        """
+        :param float duration: Time consumed for the request in ms.
+        :param str function_name: Function name.
+        :param float mem_usage: Time consumed by the request in MB.
+        :param str request_id: Request ID.
+        :param int ret_code: Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+        :param str ret_msg: Return value after the function is executed.
+        :param int retry_num: Retry Attempts.
+        :param str start_time: Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+        """
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "function_name", function_name)
+        pulumi.set(__self__, "mem_usage", mem_usage)
+        pulumi.set(__self__, "request_id", request_id)
+        pulumi.set(__self__, "ret_code", ret_code)
+        pulumi.set(__self__, "ret_msg", ret_msg)
+        pulumi.set(__self__, "retry_num", retry_num)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter
+    def duration(self) -> float:
+        """
+        Time consumed for the request in ms.
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> str:
+        """
+        Function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @property
+    @pulumi.getter(name="memUsage")
+    def mem_usage(self) -> float:
+        """
+        Time consumed by the request in MB.
+        """
+        return pulumi.get(self, "mem_usage")
+
+    @property
+    @pulumi.getter(name="requestId")
+    def request_id(self) -> str:
+        """
+        Request ID.
+        """
+        return pulumi.get(self, "request_id")
+
+    @property
+    @pulumi.getter(name="retCode")
+    def ret_code(self) -> int:
+        """
+        Result of the request. `0`: succeeded, `1`: running, `-1`: exception.
+        """
+        return pulumi.get(self, "ret_code")
+
+    @property
+    @pulumi.getter(name="retMsg")
+    def ret_msg(self) -> str:
+        """
+        Return value after the function is executed.
+        """
+        return pulumi.get(self, "ret_msg")
+
+    @property
+    @pulumi.getter(name="retryNum")
+    def retry_num(self) -> int:
+        """
+        Retry Attempts.
+        """
+        return pulumi.get(self, "retry_num")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetTriggersFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+        :param Sequence[str] values: Filter values of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields to be filtered. Up to 10 conditions allowed.Values of Name: VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip. Values limit: 1.Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.When Name is Runtime, CustomImage refers to the image type function.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter values of the field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetTriggersTriggerResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 available_status: str,
+                 bind_status: str,
+                 custom_argument: str,
+                 enable: int,
+                 mod_time: str,
+                 qualifier: str,
+                 resource_id: str,
+                 trigger_attribute: str,
+                 trigger_desc: str,
+                 trigger_name: str,
+                 type: str):
+        """
+        :param str add_time: Trigger creation time.
+        :param str available_status: Whether the trigger is available.
+        :param str bind_status: Trigger-Function binding status.
+        :param str custom_argument: Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param int enable: Whether to enable.
+        :param str mod_time: Trigger last modified time.
+        :param str qualifier: Function version or alias.
+        :param str resource_id: Minimum resource ID of trigger.
+        :param str trigger_attribute: Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+        :param str trigger_desc: Detailed configuration of trigger.
+        :param str trigger_name: Trigger name.
+        :param str type: Trigger type.
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "available_status", available_status)
+        pulumi.set(__self__, "bind_status", bind_status)
+        pulumi.set(__self__, "custom_argument", custom_argument)
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "mod_time", mod_time)
+        pulumi.set(__self__, "qualifier", qualifier)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "trigger_attribute", trigger_attribute)
+        pulumi.set(__self__, "trigger_desc", trigger_desc)
+        pulumi.set(__self__, "trigger_name", trigger_name)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        Trigger creation time.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="availableStatus")
+    def available_status(self) -> str:
+        """
+        Whether the trigger is available.
+        """
+        return pulumi.get(self, "available_status")
+
+    @property
+    @pulumi.getter(name="bindStatus")
+    def bind_status(self) -> str:
+        """
+        Trigger-Function binding status.
+        """
+        return pulumi.get(self, "bind_status")
+
+    @property
+    @pulumi.getter(name="customArgument")
+    def custom_argument(self) -> str:
+        """
+        Custom parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "custom_argument")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> int:
+        """
+        Whether to enable.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="modTime")
+    def mod_time(self) -> str:
+        """
+        Trigger last modified time.
+        """
+        return pulumi.get(self, "mod_time")
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> str:
+        """
+        Function version or alias.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Minimum resource ID of trigger.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="triggerAttribute")
+    def trigger_attribute(self) -> str:
+        """
+        Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console.
+        """
+        return pulumi.get(self, "trigger_attribute")
+
+    @property
+    @pulumi.getter(name="triggerDesc")
+    def trigger_desc(self) -> str:
+        """
+        Detailed configuration of trigger.
+        """
+        return pulumi.get(self, "trigger_desc")
+
+    @property
+    @pulumi.getter(name="triggerName")
+    def trigger_name(self) -> str:
+        """
+        Trigger name.
+        """
+        return pulumi.get(self, "trigger_name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Trigger type.
         """
         return pulumi.get(self, "type")
 

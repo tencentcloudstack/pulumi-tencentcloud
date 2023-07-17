@@ -29,6 +29,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &FunctionTargetsAttachment{}
 	case "tencentcloud:Clb/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig":
+		r = &InstanceMixIpTargetConfig{}
+	case "tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig":
+		r = &InstanceSlaConfig{}
 	case "tencentcloud:Clb/listener:Listener":
 		r = &Listener{}
 	case "tencentcloud:Clb/listenerRule:ListenerRule":
@@ -39,6 +43,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &LogTopic{}
 	case "tencentcloud:Clb/redirection:Redirection":
 		r = &Redirection{}
+	case "tencentcloud:Clb/replaceCertForLbs:ReplaceCertForLbs":
+		r = &ReplaceCertForLbs{}
+	case "tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment":
+		r = &SecurityGroupAttachment{}
 	case "tencentcloud:Clb/snatIp:SnatIp":
 		r = &SnatIp{}
 	case "tencentcloud:Clb/targetGroup:TargetGroup":
@@ -82,6 +90,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Clb/instanceMixIpTargetConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/instanceSlaConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Clb/listener",
 		&module{version},
 	)
@@ -103,6 +121,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/redirection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/replaceCertForLbs",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/securityGroupAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

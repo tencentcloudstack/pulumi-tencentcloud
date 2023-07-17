@@ -5,42 +5,164 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./account";
+export * from "./accountPrivileges";
 export * from "./auditLogFile";
+export * from "./binlogSaveDays";
 export * from "./cluster";
+export * from "./clusterDatabases";
+export * from "./clusterPasswordComplexity";
+export * from "./clusterResourcePackagesAttachment";
+export * from "./clusterSlaveZone";
+export * from "./exportInstanceErrorLogs";
+export * from "./exportInstanceSlowQueries";
+export * from "./getAccountAllGrantPrivileges";
 export * from "./getAccounts";
+export * from "./getAuditLogs";
+export * from "./getBackupDownloadUrl";
+export * from "./getBinlogDownloadUrl";
+export * from "./getCluster";
+export * from "./getClusterDetailDatabases";
 export * from "./getClusterInstanceGroups";
+export * from "./getClusterParamLogs";
 export * from "./getClusterParams";
 export * from "./getClusters";
+export * from "./getDescribeInstanceErrorLogs";
+export * from "./getDescribeInstanceSlowQueries";
+export * from "./getInstanceSlowQueries";
 export * from "./getInstances";
 export * from "./getParamTemplates";
+export * from "./getProjectSecurityGroups";
+export * from "./getProxyNode";
+export * from "./getProxyVersion";
+export * from "./getResourcePackageList";
+export * from "./getResourcePackageSaleSpecs";
+export * from "./getRollbackTimeRange";
+export * from "./getZone";
 export * from "./getZoneConfig";
+export * from "./instanceParam";
+export * from "./isolateInstance";
+export * from "./paramTemplate";
+export * from "./proxy";
+export * from "./proxyEndPoint";
+export * from "./readOnlyInstanceExclusiveAccess";
 export * from "./readonlyInstance";
+export * from "./reloadProxyNode";
+export * from "./resourcePackage";
+export * from "./restartInstance";
+export * from "./rollBackCluster";
 export * from "./securityGroup";
+export * from "./upgradeProxyVersion";
+export * from "./wan";
 
 // Import resources to register:
+import { Account } from "./account";
+import { AccountPrivileges } from "./accountPrivileges";
 import { AuditLogFile } from "./auditLogFile";
+import { BinlogSaveDays } from "./binlogSaveDays";
 import { Cluster } from "./cluster";
+import { ClusterDatabases } from "./clusterDatabases";
+import { ClusterPasswordComplexity } from "./clusterPasswordComplexity";
+import { ClusterResourcePackagesAttachment } from "./clusterResourcePackagesAttachment";
+import { ClusterSlaveZone } from "./clusterSlaveZone";
+import { ExportInstanceErrorLogs } from "./exportInstanceErrorLogs";
+import { ExportInstanceSlowQueries } from "./exportInstanceSlowQueries";
+import { InstanceParam } from "./instanceParam";
+import { IsolateInstance } from "./isolateInstance";
+import { ParamTemplate } from "./paramTemplate";
+import { Proxy } from "./proxy";
+import { ProxyEndPoint } from "./proxyEndPoint";
+import { ReadOnlyInstanceExclusiveAccess } from "./readOnlyInstanceExclusiveAccess";
 import { ReadonlyInstance } from "./readonlyInstance";
+import { ReloadProxyNode } from "./reloadProxyNode";
+import { ResourcePackage } from "./resourcePackage";
+import { RestartInstance } from "./restartInstance";
+import { RollBackCluster } from "./rollBackCluster";
 import { SecurityGroup } from "./securityGroup";
+import { UpgradeProxyVersion } from "./upgradeProxyVersion";
+import { Wan } from "./wan";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cynosdb/account:Account":
+                return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges":
+                return new AccountPrivileges(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/auditLogFile:AuditLogFile":
                 return new AuditLogFile(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays":
+                return new BinlogSaveDays(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases":
+                return new ClusterDatabases(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity":
+                return new ClusterPasswordComplexity(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment":
+                return new ClusterResourcePackagesAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone":
+                return new ClusterSlaveZone(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs":
+                return new ExportInstanceErrorLogs(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries":
+                return new ExportInstanceSlowQueries(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/instanceParam:InstanceParam":
+                return new InstanceParam(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/isolateInstance:IsolateInstance":
+                return new IsolateInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/paramTemplate:ParamTemplate":
+                return new ParamTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/proxy:Proxy":
+                return new Proxy(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/proxyEndPoint:ProxyEndPoint":
+                return new ProxyEndPoint(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/readOnlyInstanceExclusiveAccess:ReadOnlyInstanceExclusiveAccess":
+                return new ReadOnlyInstanceExclusiveAccess(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance":
                 return new ReadonlyInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode":
+                return new ReloadProxyNode(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/resourcePackage:ResourcePackage":
+                return new ResourcePackage(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/restartInstance:RestartInstance":
+                return new RestartInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/rollBackCluster:RollBackCluster":
+                return new RollBackCluster(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/securityGroup:SecurityGroup":
                 return new SecurityGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/upgradeProxyVersion:UpgradeProxyVersion":
+                return new UpgradeProxyVersion(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/wan:Wan":
+                return new Wan(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/accountPrivileges", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/auditLogFile", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/binlogSaveDays", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/cluster", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterDatabases", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterPasswordComplexity", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterResourcePackagesAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterSlaveZone", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/exportInstanceErrorLogs", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/exportInstanceSlowQueries", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/instanceParam", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/isolateInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/paramTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/proxy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/proxyEndPoint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/readOnlyInstanceExclusiveAccess", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/readonlyInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/reloadProxyNode", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/resourcePackage", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/restartInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/rollBackCluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/securityGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/upgradeProxyVersion", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/wan", _module)

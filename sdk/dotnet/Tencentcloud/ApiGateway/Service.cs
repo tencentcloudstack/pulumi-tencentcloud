@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Use this resource to create API gateway service.
     /// 
     /// ## Example Usage
+    /// ### Shared Service
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -36,6 +37,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///             ReleaseLimit = 500,
     ///             ServiceDesc = "your nice service",
     ///             ServiceName = "niceservice",
+    ///             Tags = 
+    ///             {
+    ///                 { "test-key1", "test-value1" },
+    ///                 { "test-key2", "test-value2" },
+    ///             },
+    ///             TestLimit = 500,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Exclusive Service
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             InstanceId = "instance-rc6fcv4e",
+    ///             IpVersion = "IPv4",
+    ///             NetTypes = 
+    ///             {
+    ///                 "INNER",
+    ///                 "OUTER",
+    ///             },
+    ///             PreLimit = 500,
+    ///             Protocol = "http&amp;https",
+    ///             ReleaseLimit = 500,
+    ///             ServiceDesc = "your nice service",
+    ///             ServiceName = "service",
+    ///             Tags = 
+    ///             {
+    ///                 { "test-key1", "test-value1" },
+    ///             },
     ///             TestLimit = 500,
     ///         });
     ///     }
@@ -67,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        /// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         /// </summary>
         [Output("exclusiveSetName")]
         public Output<string?> ExclusiveSetName { get; private set; } = null!;
@@ -83,6 +123,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Output("innerHttpsPort")]
         public Output<int> InnerHttpsPort { get; private set; } = null!;
+
+        /// <summary>
+        /// Exclusive instance ID.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string?> InstanceId { get; private set; } = null!;
 
         /// <summary>
         /// Private network access subdomain name.
@@ -145,6 +191,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string> ServiceName { get; private set; } = null!;
 
         /// <summary>
+        /// Tag description list.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         /// </summary>
         [Output("testLimit")]
@@ -204,10 +256,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     public sealed class ServiceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        /// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         /// </summary>
         [Input("exclusiveSetName")]
         public Input<string>? ExclusiveSetName { get; set; }
+
+        /// <summary>
+        /// Exclusive instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
 
         /// <summary>
         /// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
@@ -257,6 +315,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         [Input("serviceName", required: true)]
         public Input<string> ServiceName { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         /// </summary>
@@ -289,7 +359,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        /// It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
         /// </summary>
         [Input("exclusiveSetName")]
         public Input<string>? ExclusiveSetName { get; set; }
@@ -305,6 +375,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("innerHttpsPort")]
         public Input<int>? InnerHttpsPort { get; set; }
+
+        /// <summary>
+        /// Exclusive instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
 
         /// <summary>
         /// Private network access subdomain name.
@@ -371,6 +447,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("serviceName")]
         public Input<string>? ServiceName { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.

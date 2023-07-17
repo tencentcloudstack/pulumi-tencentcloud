@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Outputs
     public sealed class MeshConfig
     {
         /// <summary>
+        /// Sidecar inject configuration.
+        /// </summary>
+        public readonly Outputs.MeshConfigInject? Inject;
+        /// <summary>
         /// Istio configuration.
         /// </summary>
         public readonly Outputs.MeshConfigIstio? Istio;
@@ -23,20 +27,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Outputs
         /// </summary>
         public readonly Outputs.MeshConfigPrometheus? Prometheus;
         /// <summary>
+        /// Default sidecar requests and limits.
+        /// </summary>
+        public readonly Outputs.MeshConfigSidecarResources? SidecarResources;
+        /// <summary>
         /// Tracing config.
         /// </summary>
         public readonly Outputs.MeshConfigTracing? Tracing;
 
         [OutputConstructor]
         private MeshConfig(
+            Outputs.MeshConfigInject? inject,
+
             Outputs.MeshConfigIstio? istio,
 
             Outputs.MeshConfigPrometheus? prometheus,
 
+            Outputs.MeshConfigSidecarResources? sidecarResources,
+
             Outputs.MeshConfigTracing? tracing)
         {
+            Inject = inject;
             Istio = istio;
             Prometheus = prometheus;
+            SidecarResources = sidecarResources;
             Tracing = tracing;
         }
     }

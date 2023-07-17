@@ -436,6 +436,206 @@ func (o ChcConfigDeployVirtualPrivateCloudPtrOutput) VpcId() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
+type ImportImageTagSpecification struct {
+	ResourceType string                           `pulumi:"resourceType"`
+	Tags         []ImportImageTagSpecificationTag `pulumi:"tags"`
+}
+
+// ImportImageTagSpecificationInput is an input type that accepts ImportImageTagSpecificationArgs and ImportImageTagSpecificationOutput values.
+// You can construct a concrete instance of `ImportImageTagSpecificationInput` via:
+//
+//          ImportImageTagSpecificationArgs{...}
+type ImportImageTagSpecificationInput interface {
+	pulumi.Input
+
+	ToImportImageTagSpecificationOutput() ImportImageTagSpecificationOutput
+	ToImportImageTagSpecificationOutputWithContext(context.Context) ImportImageTagSpecificationOutput
+}
+
+type ImportImageTagSpecificationArgs struct {
+	ResourceType pulumi.StringInput                       `pulumi:"resourceType"`
+	Tags         ImportImageTagSpecificationTagArrayInput `pulumi:"tags"`
+}
+
+func (ImportImageTagSpecificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImportImageTagSpecification)(nil)).Elem()
+}
+
+func (i ImportImageTagSpecificationArgs) ToImportImageTagSpecificationOutput() ImportImageTagSpecificationOutput {
+	return i.ToImportImageTagSpecificationOutputWithContext(context.Background())
+}
+
+func (i ImportImageTagSpecificationArgs) ToImportImageTagSpecificationOutputWithContext(ctx context.Context) ImportImageTagSpecificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImportImageTagSpecificationOutput)
+}
+
+// ImportImageTagSpecificationArrayInput is an input type that accepts ImportImageTagSpecificationArray and ImportImageTagSpecificationArrayOutput values.
+// You can construct a concrete instance of `ImportImageTagSpecificationArrayInput` via:
+//
+//          ImportImageTagSpecificationArray{ ImportImageTagSpecificationArgs{...} }
+type ImportImageTagSpecificationArrayInput interface {
+	pulumi.Input
+
+	ToImportImageTagSpecificationArrayOutput() ImportImageTagSpecificationArrayOutput
+	ToImportImageTagSpecificationArrayOutputWithContext(context.Context) ImportImageTagSpecificationArrayOutput
+}
+
+type ImportImageTagSpecificationArray []ImportImageTagSpecificationInput
+
+func (ImportImageTagSpecificationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ImportImageTagSpecification)(nil)).Elem()
+}
+
+func (i ImportImageTagSpecificationArray) ToImportImageTagSpecificationArrayOutput() ImportImageTagSpecificationArrayOutput {
+	return i.ToImportImageTagSpecificationArrayOutputWithContext(context.Background())
+}
+
+func (i ImportImageTagSpecificationArray) ToImportImageTagSpecificationArrayOutputWithContext(ctx context.Context) ImportImageTagSpecificationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImportImageTagSpecificationArrayOutput)
+}
+
+type ImportImageTagSpecificationOutput struct{ *pulumi.OutputState }
+
+func (ImportImageTagSpecificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImportImageTagSpecification)(nil)).Elem()
+}
+
+func (o ImportImageTagSpecificationOutput) ToImportImageTagSpecificationOutput() ImportImageTagSpecificationOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationOutput) ToImportImageTagSpecificationOutputWithContext(ctx context.Context) ImportImageTagSpecificationOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ImportImageTagSpecification) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+func (o ImportImageTagSpecificationOutput) Tags() ImportImageTagSpecificationTagArrayOutput {
+	return o.ApplyT(func(v ImportImageTagSpecification) []ImportImageTagSpecificationTag { return v.Tags }).(ImportImageTagSpecificationTagArrayOutput)
+}
+
+type ImportImageTagSpecificationArrayOutput struct{ *pulumi.OutputState }
+
+func (ImportImageTagSpecificationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ImportImageTagSpecification)(nil)).Elem()
+}
+
+func (o ImportImageTagSpecificationArrayOutput) ToImportImageTagSpecificationArrayOutput() ImportImageTagSpecificationArrayOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationArrayOutput) ToImportImageTagSpecificationArrayOutputWithContext(ctx context.Context) ImportImageTagSpecificationArrayOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationArrayOutput) Index(i pulumi.IntInput) ImportImageTagSpecificationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ImportImageTagSpecification {
+		return vs[0].([]ImportImageTagSpecification)[vs[1].(int)]
+	}).(ImportImageTagSpecificationOutput)
+}
+
+type ImportImageTagSpecificationTag struct {
+	Key   string `pulumi:"key"`
+	Value string `pulumi:"value"`
+}
+
+// ImportImageTagSpecificationTagInput is an input type that accepts ImportImageTagSpecificationTagArgs and ImportImageTagSpecificationTagOutput values.
+// You can construct a concrete instance of `ImportImageTagSpecificationTagInput` via:
+//
+//          ImportImageTagSpecificationTagArgs{...}
+type ImportImageTagSpecificationTagInput interface {
+	pulumi.Input
+
+	ToImportImageTagSpecificationTagOutput() ImportImageTagSpecificationTagOutput
+	ToImportImageTagSpecificationTagOutputWithContext(context.Context) ImportImageTagSpecificationTagOutput
+}
+
+type ImportImageTagSpecificationTagArgs struct {
+	Key   pulumi.StringInput `pulumi:"key"`
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ImportImageTagSpecificationTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImportImageTagSpecificationTag)(nil)).Elem()
+}
+
+func (i ImportImageTagSpecificationTagArgs) ToImportImageTagSpecificationTagOutput() ImportImageTagSpecificationTagOutput {
+	return i.ToImportImageTagSpecificationTagOutputWithContext(context.Background())
+}
+
+func (i ImportImageTagSpecificationTagArgs) ToImportImageTagSpecificationTagOutputWithContext(ctx context.Context) ImportImageTagSpecificationTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImportImageTagSpecificationTagOutput)
+}
+
+// ImportImageTagSpecificationTagArrayInput is an input type that accepts ImportImageTagSpecificationTagArray and ImportImageTagSpecificationTagArrayOutput values.
+// You can construct a concrete instance of `ImportImageTagSpecificationTagArrayInput` via:
+//
+//          ImportImageTagSpecificationTagArray{ ImportImageTagSpecificationTagArgs{...} }
+type ImportImageTagSpecificationTagArrayInput interface {
+	pulumi.Input
+
+	ToImportImageTagSpecificationTagArrayOutput() ImportImageTagSpecificationTagArrayOutput
+	ToImportImageTagSpecificationTagArrayOutputWithContext(context.Context) ImportImageTagSpecificationTagArrayOutput
+}
+
+type ImportImageTagSpecificationTagArray []ImportImageTagSpecificationTagInput
+
+func (ImportImageTagSpecificationTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ImportImageTagSpecificationTag)(nil)).Elem()
+}
+
+func (i ImportImageTagSpecificationTagArray) ToImportImageTagSpecificationTagArrayOutput() ImportImageTagSpecificationTagArrayOutput {
+	return i.ToImportImageTagSpecificationTagArrayOutputWithContext(context.Background())
+}
+
+func (i ImportImageTagSpecificationTagArray) ToImportImageTagSpecificationTagArrayOutputWithContext(ctx context.Context) ImportImageTagSpecificationTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ImportImageTagSpecificationTagArrayOutput)
+}
+
+type ImportImageTagSpecificationTagOutput struct{ *pulumi.OutputState }
+
+func (ImportImageTagSpecificationTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ImportImageTagSpecificationTag)(nil)).Elem()
+}
+
+func (o ImportImageTagSpecificationTagOutput) ToImportImageTagSpecificationTagOutput() ImportImageTagSpecificationTagOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationTagOutput) ToImportImageTagSpecificationTagOutputWithContext(ctx context.Context) ImportImageTagSpecificationTagOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ImportImageTagSpecificationTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+func (o ImportImageTagSpecificationTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ImportImageTagSpecificationTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ImportImageTagSpecificationTagArrayOutput struct{ *pulumi.OutputState }
+
+func (ImportImageTagSpecificationTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ImportImageTagSpecificationTag)(nil)).Elem()
+}
+
+func (o ImportImageTagSpecificationTagArrayOutput) ToImportImageTagSpecificationTagArrayOutput() ImportImageTagSpecificationTagArrayOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationTagArrayOutput) ToImportImageTagSpecificationTagArrayOutputWithContext(ctx context.Context) ImportImageTagSpecificationTagArrayOutput {
+	return o
+}
+
+func (o ImportImageTagSpecificationTagArrayOutput) Index(i pulumi.IntInput) ImportImageTagSpecificationTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ImportImageTagSpecificationTag {
+		return vs[0].([]ImportImageTagSpecificationTag)[vs[1].(int)]
+	}).(ImportImageTagSpecificationTagOutput)
+}
+
 type LaunchTemplateActionTimer struct {
 	// Execution time.
 	ActionTime *string `pulumi:"actionTime"`
@@ -6320,6 +6520,646 @@ func (o LaunchTemplateVirtualPrivateCloudPtrOutput) VpcId() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
+type ModifyInstanceDiskTypeDataDisk struct {
+	CdcId                 *string `pulumi:"cdcId"`
+	DeleteWithInstance    *bool   `pulumi:"deleteWithInstance"`
+	DiskId                *string `pulumi:"diskId"`
+	DiskSize              int     `pulumi:"diskSize"`
+	DiskType              *string `pulumi:"diskType"`
+	Encrypt               *bool   `pulumi:"encrypt"`
+	KmsKeyId              *string `pulumi:"kmsKeyId"`
+	SnapshotId            *string `pulumi:"snapshotId"`
+	ThroughputPerformance *int    `pulumi:"throughputPerformance"`
+}
+
+// ModifyInstanceDiskTypeDataDiskInput is an input type that accepts ModifyInstanceDiskTypeDataDiskArgs and ModifyInstanceDiskTypeDataDiskOutput values.
+// You can construct a concrete instance of `ModifyInstanceDiskTypeDataDiskInput` via:
+//
+//          ModifyInstanceDiskTypeDataDiskArgs{...}
+type ModifyInstanceDiskTypeDataDiskInput interface {
+	pulumi.Input
+
+	ToModifyInstanceDiskTypeDataDiskOutput() ModifyInstanceDiskTypeDataDiskOutput
+	ToModifyInstanceDiskTypeDataDiskOutputWithContext(context.Context) ModifyInstanceDiskTypeDataDiskOutput
+}
+
+type ModifyInstanceDiskTypeDataDiskArgs struct {
+	CdcId                 pulumi.StringPtrInput `pulumi:"cdcId"`
+	DeleteWithInstance    pulumi.BoolPtrInput   `pulumi:"deleteWithInstance"`
+	DiskId                pulumi.StringPtrInput `pulumi:"diskId"`
+	DiskSize              pulumi.IntInput       `pulumi:"diskSize"`
+	DiskType              pulumi.StringPtrInput `pulumi:"diskType"`
+	Encrypt               pulumi.BoolPtrInput   `pulumi:"encrypt"`
+	KmsKeyId              pulumi.StringPtrInput `pulumi:"kmsKeyId"`
+	SnapshotId            pulumi.StringPtrInput `pulumi:"snapshotId"`
+	ThroughputPerformance pulumi.IntPtrInput    `pulumi:"throughputPerformance"`
+}
+
+func (ModifyInstanceDiskTypeDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ModifyInstanceDiskTypeDataDisk)(nil)).Elem()
+}
+
+func (i ModifyInstanceDiskTypeDataDiskArgs) ToModifyInstanceDiskTypeDataDiskOutput() ModifyInstanceDiskTypeDataDiskOutput {
+	return i.ToModifyInstanceDiskTypeDataDiskOutputWithContext(context.Background())
+}
+
+func (i ModifyInstanceDiskTypeDataDiskArgs) ToModifyInstanceDiskTypeDataDiskOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ModifyInstanceDiskTypeDataDiskOutput)
+}
+
+// ModifyInstanceDiskTypeDataDiskArrayInput is an input type that accepts ModifyInstanceDiskTypeDataDiskArray and ModifyInstanceDiskTypeDataDiskArrayOutput values.
+// You can construct a concrete instance of `ModifyInstanceDiskTypeDataDiskArrayInput` via:
+//
+//          ModifyInstanceDiskTypeDataDiskArray{ ModifyInstanceDiskTypeDataDiskArgs{...} }
+type ModifyInstanceDiskTypeDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToModifyInstanceDiskTypeDataDiskArrayOutput() ModifyInstanceDiskTypeDataDiskArrayOutput
+	ToModifyInstanceDiskTypeDataDiskArrayOutputWithContext(context.Context) ModifyInstanceDiskTypeDataDiskArrayOutput
+}
+
+type ModifyInstanceDiskTypeDataDiskArray []ModifyInstanceDiskTypeDataDiskInput
+
+func (ModifyInstanceDiskTypeDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ModifyInstanceDiskTypeDataDisk)(nil)).Elem()
+}
+
+func (i ModifyInstanceDiskTypeDataDiskArray) ToModifyInstanceDiskTypeDataDiskArrayOutput() ModifyInstanceDiskTypeDataDiskArrayOutput {
+	return i.ToModifyInstanceDiskTypeDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ModifyInstanceDiskTypeDataDiskArray) ToModifyInstanceDiskTypeDataDiskArrayOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ModifyInstanceDiskTypeDataDiskArrayOutput)
+}
+
+type ModifyInstanceDiskTypeDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ModifyInstanceDiskTypeDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ModifyInstanceDiskTypeDataDisk)(nil)).Elem()
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) ToModifyInstanceDiskTypeDataDiskOutput() ModifyInstanceDiskTypeDataDiskOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) ToModifyInstanceDiskTypeDataDiskOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeDataDiskOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.CdcId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.DiskId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.KmsKeyId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) SnapshotId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeDataDiskOutput) ThroughputPerformance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeDataDisk) *int { return v.ThroughputPerformance }).(pulumi.IntPtrOutput)
+}
+
+type ModifyInstanceDiskTypeDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ModifyInstanceDiskTypeDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ModifyInstanceDiskTypeDataDisk)(nil)).Elem()
+}
+
+func (o ModifyInstanceDiskTypeDataDiskArrayOutput) ToModifyInstanceDiskTypeDataDiskArrayOutput() ModifyInstanceDiskTypeDataDiskArrayOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeDataDiskArrayOutput) ToModifyInstanceDiskTypeDataDiskArrayOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeDataDiskArrayOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeDataDiskArrayOutput) Index(i pulumi.IntInput) ModifyInstanceDiskTypeDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ModifyInstanceDiskTypeDataDisk {
+		return vs[0].([]ModifyInstanceDiskTypeDataDisk)[vs[1].(int)]
+	}).(ModifyInstanceDiskTypeDataDiskOutput)
+}
+
+type ModifyInstanceDiskTypeSystemDisk struct {
+	CdcId    *string `pulumi:"cdcId"`
+	DiskId   *string `pulumi:"diskId"`
+	DiskSize *int    `pulumi:"diskSize"`
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ModifyInstanceDiskTypeSystemDiskInput is an input type that accepts ModifyInstanceDiskTypeSystemDiskArgs and ModifyInstanceDiskTypeSystemDiskOutput values.
+// You can construct a concrete instance of `ModifyInstanceDiskTypeSystemDiskInput` via:
+//
+//          ModifyInstanceDiskTypeSystemDiskArgs{...}
+type ModifyInstanceDiskTypeSystemDiskInput interface {
+	pulumi.Input
+
+	ToModifyInstanceDiskTypeSystemDiskOutput() ModifyInstanceDiskTypeSystemDiskOutput
+	ToModifyInstanceDiskTypeSystemDiskOutputWithContext(context.Context) ModifyInstanceDiskTypeSystemDiskOutput
+}
+
+type ModifyInstanceDiskTypeSystemDiskArgs struct {
+	CdcId    pulumi.StringPtrInput `pulumi:"cdcId"`
+	DiskId   pulumi.StringPtrInput `pulumi:"diskId"`
+	DiskSize pulumi.IntPtrInput    `pulumi:"diskSize"`
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ModifyInstanceDiskTypeSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ModifyInstanceDiskTypeSystemDisk)(nil)).Elem()
+}
+
+func (i ModifyInstanceDiskTypeSystemDiskArgs) ToModifyInstanceDiskTypeSystemDiskOutput() ModifyInstanceDiskTypeSystemDiskOutput {
+	return i.ToModifyInstanceDiskTypeSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ModifyInstanceDiskTypeSystemDiskArgs) ToModifyInstanceDiskTypeSystemDiskOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ModifyInstanceDiskTypeSystemDiskOutput)
+}
+
+func (i ModifyInstanceDiskTypeSystemDiskArgs) ToModifyInstanceDiskTypeSystemDiskPtrOutput() ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return i.ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ModifyInstanceDiskTypeSystemDiskArgs) ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ModifyInstanceDiskTypeSystemDiskOutput).ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ModifyInstanceDiskTypeSystemDiskPtrInput is an input type that accepts ModifyInstanceDiskTypeSystemDiskArgs, ModifyInstanceDiskTypeSystemDiskPtr and ModifyInstanceDiskTypeSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ModifyInstanceDiskTypeSystemDiskPtrInput` via:
+//
+//          ModifyInstanceDiskTypeSystemDiskArgs{...}
+//
+//  or:
+//
+//          nil
+type ModifyInstanceDiskTypeSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToModifyInstanceDiskTypeSystemDiskPtrOutput() ModifyInstanceDiskTypeSystemDiskPtrOutput
+	ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(context.Context) ModifyInstanceDiskTypeSystemDiskPtrOutput
+}
+
+type modifyInstanceDiskTypeSystemDiskPtrType ModifyInstanceDiskTypeSystemDiskArgs
+
+func ModifyInstanceDiskTypeSystemDiskPtr(v *ModifyInstanceDiskTypeSystemDiskArgs) ModifyInstanceDiskTypeSystemDiskPtrInput {
+	return (*modifyInstanceDiskTypeSystemDiskPtrType)(v)
+}
+
+func (*modifyInstanceDiskTypeSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ModifyInstanceDiskTypeSystemDisk)(nil)).Elem()
+}
+
+func (i *modifyInstanceDiskTypeSystemDiskPtrType) ToModifyInstanceDiskTypeSystemDiskPtrOutput() ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return i.ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *modifyInstanceDiskTypeSystemDiskPtrType) ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ModifyInstanceDiskTypeSystemDiskPtrOutput)
+}
+
+type ModifyInstanceDiskTypeSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ModifyInstanceDiskTypeSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ModifyInstanceDiskTypeSystemDisk)(nil)).Elem()
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) ToModifyInstanceDiskTypeSystemDiskOutput() ModifyInstanceDiskTypeSystemDiskOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) ToModifyInstanceDiskTypeSystemDiskOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) ToModifyInstanceDiskTypeSystemDiskPtrOutput() ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return o.ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ModifyInstanceDiskTypeSystemDisk) *ModifyInstanceDiskTypeSystemDisk {
+		return &v
+	}).(ModifyInstanceDiskTypeSystemDiskPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.CdcId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.DiskId }).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ModifyInstanceDiskTypeSystemDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+type ModifyInstanceDiskTypeSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ModifyInstanceDiskTypeSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ModifyInstanceDiskTypeSystemDisk)(nil)).Elem()
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) ToModifyInstanceDiskTypeSystemDiskPtrOutput() ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) ToModifyInstanceDiskTypeSystemDiskPtrOutputWithContext(ctx context.Context) ModifyInstanceDiskTypeSystemDiskPtrOutput {
+	return o
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) Elem() ModifyInstanceDiskTypeSystemDiskOutput {
+	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) ModifyInstanceDiskTypeSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ModifyInstanceDiskTypeSystemDisk
+		return ret
+	}).(ModifyInstanceDiskTypeSystemDiskOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CdcId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o ModifyInstanceDiskTypeSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ModifyInstanceDiskTypeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type RenewHostHostChargePrepaid struct {
+	Period    int     `pulumi:"period"`
+	RenewFlag *string `pulumi:"renewFlag"`
+}
+
+// RenewHostHostChargePrepaidInput is an input type that accepts RenewHostHostChargePrepaidArgs and RenewHostHostChargePrepaidOutput values.
+// You can construct a concrete instance of `RenewHostHostChargePrepaidInput` via:
+//
+//          RenewHostHostChargePrepaidArgs{...}
+type RenewHostHostChargePrepaidInput interface {
+	pulumi.Input
+
+	ToRenewHostHostChargePrepaidOutput() RenewHostHostChargePrepaidOutput
+	ToRenewHostHostChargePrepaidOutputWithContext(context.Context) RenewHostHostChargePrepaidOutput
+}
+
+type RenewHostHostChargePrepaidArgs struct {
+	Period    pulumi.IntInput       `pulumi:"period"`
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+}
+
+func (RenewHostHostChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewHostHostChargePrepaid)(nil)).Elem()
+}
+
+func (i RenewHostHostChargePrepaidArgs) ToRenewHostHostChargePrepaidOutput() RenewHostHostChargePrepaidOutput {
+	return i.ToRenewHostHostChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i RenewHostHostChargePrepaidArgs) ToRenewHostHostChargePrepaidOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewHostHostChargePrepaidOutput)
+}
+
+func (i RenewHostHostChargePrepaidArgs) ToRenewHostHostChargePrepaidPtrOutput() RenewHostHostChargePrepaidPtrOutput {
+	return i.ToRenewHostHostChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i RenewHostHostChargePrepaidArgs) ToRenewHostHostChargePrepaidPtrOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewHostHostChargePrepaidOutput).ToRenewHostHostChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// RenewHostHostChargePrepaidPtrInput is an input type that accepts RenewHostHostChargePrepaidArgs, RenewHostHostChargePrepaidPtr and RenewHostHostChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `RenewHostHostChargePrepaidPtrInput` via:
+//
+//          RenewHostHostChargePrepaidArgs{...}
+//
+//  or:
+//
+//          nil
+type RenewHostHostChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToRenewHostHostChargePrepaidPtrOutput() RenewHostHostChargePrepaidPtrOutput
+	ToRenewHostHostChargePrepaidPtrOutputWithContext(context.Context) RenewHostHostChargePrepaidPtrOutput
+}
+
+type renewHostHostChargePrepaidPtrType RenewHostHostChargePrepaidArgs
+
+func RenewHostHostChargePrepaidPtr(v *RenewHostHostChargePrepaidArgs) RenewHostHostChargePrepaidPtrInput {
+	return (*renewHostHostChargePrepaidPtrType)(v)
+}
+
+func (*renewHostHostChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewHostHostChargePrepaid)(nil)).Elem()
+}
+
+func (i *renewHostHostChargePrepaidPtrType) ToRenewHostHostChargePrepaidPtrOutput() RenewHostHostChargePrepaidPtrOutput {
+	return i.ToRenewHostHostChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *renewHostHostChargePrepaidPtrType) ToRenewHostHostChargePrepaidPtrOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewHostHostChargePrepaidPtrOutput)
+}
+
+type RenewHostHostChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (RenewHostHostChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewHostHostChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewHostHostChargePrepaidOutput) ToRenewHostHostChargePrepaidOutput() RenewHostHostChargePrepaidOutput {
+	return o
+}
+
+func (o RenewHostHostChargePrepaidOutput) ToRenewHostHostChargePrepaidOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidOutput {
+	return o
+}
+
+func (o RenewHostHostChargePrepaidOutput) ToRenewHostHostChargePrepaidPtrOutput() RenewHostHostChargePrepaidPtrOutput {
+	return o.ToRenewHostHostChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o RenewHostHostChargePrepaidOutput) ToRenewHostHostChargePrepaidPtrOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RenewHostHostChargePrepaid) *RenewHostHostChargePrepaid {
+		return &v
+	}).(RenewHostHostChargePrepaidPtrOutput)
+}
+
+func (o RenewHostHostChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v RenewHostHostChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+func (o RenewHostHostChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewHostHostChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+type RenewHostHostChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (RenewHostHostChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewHostHostChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewHostHostChargePrepaidPtrOutput) ToRenewHostHostChargePrepaidPtrOutput() RenewHostHostChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewHostHostChargePrepaidPtrOutput) ToRenewHostHostChargePrepaidPtrOutputWithContext(ctx context.Context) RenewHostHostChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewHostHostChargePrepaidPtrOutput) Elem() RenewHostHostChargePrepaidOutput {
+	return o.ApplyT(func(v *RenewHostHostChargePrepaid) RenewHostHostChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret RenewHostHostChargePrepaid
+		return ret
+	}).(RenewHostHostChargePrepaidOutput)
+}
+
+func (o RenewHostHostChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RenewHostHostChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RenewHostHostChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewHostHostChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaid struct {
+	// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+	Period int `pulumi:"period"`
+	// Auto renewal flag. Valid values:
+	// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+	// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+	// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+	//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+	RenewFlag *string `pulumi:"renewFlag"`
+}
+
+// RenewInstanceInstanceChargePrepaidInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs and RenewInstanceInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidInput` via:
+//
+//          RenewInstanceInstanceChargePrepaidArgs{...}
+type RenewInstanceInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput
+	ToRenewInstanceInstanceChargePrepaidOutputWithContext(context.Context) RenewInstanceInstanceChargePrepaidOutput
+}
+
+type RenewInstanceInstanceChargePrepaidArgs struct {
+	// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Auto renewal flag. Valid values:
+	// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+	// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+	// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+	//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+}
+
+func (RenewInstanceInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidOutput)
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidOutput).ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// RenewInstanceInstanceChargePrepaidPtrInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs, RenewInstanceInstanceChargePrepaidPtr and RenewInstanceInstanceChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidPtrInput` via:
+//
+//          RenewInstanceInstanceChargePrepaidArgs{...}
+//
+//  or:
+//
+//          nil
+type RenewInstanceInstanceChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput
+	ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Context) RenewInstanceInstanceChargePrepaidPtrOutput
+}
+
+type renewInstanceInstanceChargePrepaidPtrType RenewInstanceInstanceChargePrepaidArgs
+
+func RenewInstanceInstanceChargePrepaidPtr(v *RenewInstanceInstanceChargePrepaidArgs) RenewInstanceInstanceChargePrepaidPtrInput {
+	return (*renewInstanceInstanceChargePrepaidPtrType)(v)
+}
+
+func (*renewInstanceInstanceChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i *renewInstanceInstanceChargePrepaidPtrType) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *renewInstanceInstanceChargePrepaidPtrType) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (RenewInstanceInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RenewInstanceInstanceChargePrepaid) *RenewInstanceInstanceChargePrepaid {
+		return &v
+	}).(RenewInstanceInstanceChargePrepaidPtrOutput)
+}
+
+// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+func (o RenewInstanceInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Auto renewal flag. Valid values:
+// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+func (o RenewInstanceInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (RenewInstanceInstanceChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) Elem() RenewInstanceInstanceChargePrepaidOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) RenewInstanceInstanceChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret RenewInstanceInstanceChargePrepaid
+		return ret
+	}).(RenewInstanceInstanceChargePrepaidOutput)
+}
+
+// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60. Note: This field may return null, indicating that no valid value is found.
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Auto renewal flag. Valid values:
+// - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
+// - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
+// - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
+//   Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetChcDeniedActionsChcHostDeniedActionSet struct {
 	// CHC instance ID.
 	ChcId string `pulumi:"chcId"`
@@ -7221,6 +8061,333 @@ func (o GetChcHostsFilterArrayOutput) Index(i pulumi.IntInput) GetChcHostsFilter
 	}).(GetChcHostsFilterOutput)
 }
 
+type GetImageSharePermissionSharePermissionSet struct {
+	// ID of the account with which the image is shared.
+	AccountId string `pulumi:"accountId"`
+	// Time when an image was shared.
+	CreatedTime string `pulumi:"createdTime"`
+}
+
+// GetImageSharePermissionSharePermissionSetInput is an input type that accepts GetImageSharePermissionSharePermissionSetArgs and GetImageSharePermissionSharePermissionSetOutput values.
+// You can construct a concrete instance of `GetImageSharePermissionSharePermissionSetInput` via:
+//
+//          GetImageSharePermissionSharePermissionSetArgs{...}
+type GetImageSharePermissionSharePermissionSetInput interface {
+	pulumi.Input
+
+	ToGetImageSharePermissionSharePermissionSetOutput() GetImageSharePermissionSharePermissionSetOutput
+	ToGetImageSharePermissionSharePermissionSetOutputWithContext(context.Context) GetImageSharePermissionSharePermissionSetOutput
+}
+
+type GetImageSharePermissionSharePermissionSetArgs struct {
+	// ID of the account with which the image is shared.
+	AccountId pulumi.StringInput `pulumi:"accountId"`
+	// Time when an image was shared.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+}
+
+func (GetImageSharePermissionSharePermissionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImageSharePermissionSharePermissionSet)(nil)).Elem()
+}
+
+func (i GetImageSharePermissionSharePermissionSetArgs) ToGetImageSharePermissionSharePermissionSetOutput() GetImageSharePermissionSharePermissionSetOutput {
+	return i.ToGetImageSharePermissionSharePermissionSetOutputWithContext(context.Background())
+}
+
+func (i GetImageSharePermissionSharePermissionSetArgs) ToGetImageSharePermissionSharePermissionSetOutputWithContext(ctx context.Context) GetImageSharePermissionSharePermissionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImageSharePermissionSharePermissionSetOutput)
+}
+
+// GetImageSharePermissionSharePermissionSetArrayInput is an input type that accepts GetImageSharePermissionSharePermissionSetArray and GetImageSharePermissionSharePermissionSetArrayOutput values.
+// You can construct a concrete instance of `GetImageSharePermissionSharePermissionSetArrayInput` via:
+//
+//          GetImageSharePermissionSharePermissionSetArray{ GetImageSharePermissionSharePermissionSetArgs{...} }
+type GetImageSharePermissionSharePermissionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetImageSharePermissionSharePermissionSetArrayOutput() GetImageSharePermissionSharePermissionSetArrayOutput
+	ToGetImageSharePermissionSharePermissionSetArrayOutputWithContext(context.Context) GetImageSharePermissionSharePermissionSetArrayOutput
+}
+
+type GetImageSharePermissionSharePermissionSetArray []GetImageSharePermissionSharePermissionSetInput
+
+func (GetImageSharePermissionSharePermissionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImageSharePermissionSharePermissionSet)(nil)).Elem()
+}
+
+func (i GetImageSharePermissionSharePermissionSetArray) ToGetImageSharePermissionSharePermissionSetArrayOutput() GetImageSharePermissionSharePermissionSetArrayOutput {
+	return i.ToGetImageSharePermissionSharePermissionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetImageSharePermissionSharePermissionSetArray) ToGetImageSharePermissionSharePermissionSetArrayOutputWithContext(ctx context.Context) GetImageSharePermissionSharePermissionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImageSharePermissionSharePermissionSetArrayOutput)
+}
+
+type GetImageSharePermissionSharePermissionSetOutput struct{ *pulumi.OutputState }
+
+func (GetImageSharePermissionSharePermissionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImageSharePermissionSharePermissionSet)(nil)).Elem()
+}
+
+func (o GetImageSharePermissionSharePermissionSetOutput) ToGetImageSharePermissionSharePermissionSetOutput() GetImageSharePermissionSharePermissionSetOutput {
+	return o
+}
+
+func (o GetImageSharePermissionSharePermissionSetOutput) ToGetImageSharePermissionSharePermissionSetOutputWithContext(ctx context.Context) GetImageSharePermissionSharePermissionSetOutput {
+	return o
+}
+
+// ID of the account with which the image is shared.
+func (o GetImageSharePermissionSharePermissionSetOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImageSharePermissionSharePermissionSet) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Time when an image was shared.
+func (o GetImageSharePermissionSharePermissionSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImageSharePermissionSharePermissionSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+type GetImageSharePermissionSharePermissionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetImageSharePermissionSharePermissionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImageSharePermissionSharePermissionSet)(nil)).Elem()
+}
+
+func (o GetImageSharePermissionSharePermissionSetArrayOutput) ToGetImageSharePermissionSharePermissionSetArrayOutput() GetImageSharePermissionSharePermissionSetArrayOutput {
+	return o
+}
+
+func (o GetImageSharePermissionSharePermissionSetArrayOutput) ToGetImageSharePermissionSharePermissionSetArrayOutputWithContext(ctx context.Context) GetImageSharePermissionSharePermissionSetArrayOutput {
+	return o
+}
+
+func (o GetImageSharePermissionSharePermissionSetArrayOutput) Index(i pulumi.IntInput) GetImageSharePermissionSharePermissionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetImageSharePermissionSharePermissionSet {
+		return vs[0].([]GetImageSharePermissionSharePermissionSet)[vs[1].(int)]
+	}).(GetImageSharePermissionSharePermissionSetOutput)
+}
+
+type GetImportImageOsImportImageOsListSupported struct {
+	// Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+	Linuxes []string `pulumi:"linuxes"`
+	// Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+	Windows []string `pulumi:"windows"`
+}
+
+// GetImportImageOsImportImageOsListSupportedInput is an input type that accepts GetImportImageOsImportImageOsListSupportedArgs and GetImportImageOsImportImageOsListSupportedOutput values.
+// You can construct a concrete instance of `GetImportImageOsImportImageOsListSupportedInput` via:
+//
+//          GetImportImageOsImportImageOsListSupportedArgs{...}
+type GetImportImageOsImportImageOsListSupportedInput interface {
+	pulumi.Input
+
+	ToGetImportImageOsImportImageOsListSupportedOutput() GetImportImageOsImportImageOsListSupportedOutput
+	ToGetImportImageOsImportImageOsListSupportedOutputWithContext(context.Context) GetImportImageOsImportImageOsListSupportedOutput
+}
+
+type GetImportImageOsImportImageOsListSupportedArgs struct {
+	// Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+	Linuxes pulumi.StringArrayInput `pulumi:"linuxes"`
+	// Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+	Windows pulumi.StringArrayInput `pulumi:"windows"`
+}
+
+func (GetImportImageOsImportImageOsListSupportedArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImportImageOsImportImageOsListSupported)(nil)).Elem()
+}
+
+func (i GetImportImageOsImportImageOsListSupportedArgs) ToGetImportImageOsImportImageOsListSupportedOutput() GetImportImageOsImportImageOsListSupportedOutput {
+	return i.ToGetImportImageOsImportImageOsListSupportedOutputWithContext(context.Background())
+}
+
+func (i GetImportImageOsImportImageOsListSupportedArgs) ToGetImportImageOsImportImageOsListSupportedOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsListSupportedOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImportImageOsImportImageOsListSupportedOutput)
+}
+
+// GetImportImageOsImportImageOsListSupportedArrayInput is an input type that accepts GetImportImageOsImportImageOsListSupportedArray and GetImportImageOsImportImageOsListSupportedArrayOutput values.
+// You can construct a concrete instance of `GetImportImageOsImportImageOsListSupportedArrayInput` via:
+//
+//          GetImportImageOsImportImageOsListSupportedArray{ GetImportImageOsImportImageOsListSupportedArgs{...} }
+type GetImportImageOsImportImageOsListSupportedArrayInput interface {
+	pulumi.Input
+
+	ToGetImportImageOsImportImageOsListSupportedArrayOutput() GetImportImageOsImportImageOsListSupportedArrayOutput
+	ToGetImportImageOsImportImageOsListSupportedArrayOutputWithContext(context.Context) GetImportImageOsImportImageOsListSupportedArrayOutput
+}
+
+type GetImportImageOsImportImageOsListSupportedArray []GetImportImageOsImportImageOsListSupportedInput
+
+func (GetImportImageOsImportImageOsListSupportedArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImportImageOsImportImageOsListSupported)(nil)).Elem()
+}
+
+func (i GetImportImageOsImportImageOsListSupportedArray) ToGetImportImageOsImportImageOsListSupportedArrayOutput() GetImportImageOsImportImageOsListSupportedArrayOutput {
+	return i.ToGetImportImageOsImportImageOsListSupportedArrayOutputWithContext(context.Background())
+}
+
+func (i GetImportImageOsImportImageOsListSupportedArray) ToGetImportImageOsImportImageOsListSupportedArrayOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsListSupportedArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImportImageOsImportImageOsListSupportedArrayOutput)
+}
+
+type GetImportImageOsImportImageOsListSupportedOutput struct{ *pulumi.OutputState }
+
+func (GetImportImageOsImportImageOsListSupportedOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImportImageOsImportImageOsListSupported)(nil)).Elem()
+}
+
+func (o GetImportImageOsImportImageOsListSupportedOutput) ToGetImportImageOsImportImageOsListSupportedOutput() GetImportImageOsImportImageOsListSupportedOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsListSupportedOutput) ToGetImportImageOsImportImageOsListSupportedOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsListSupportedOutput {
+	return o
+}
+
+// Supported Linux OS Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetImportImageOsImportImageOsListSupportedOutput) Linuxes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetImportImageOsImportImageOsListSupported) []string { return v.Linuxes }).(pulumi.StringArrayOutput)
+}
+
+// Supported Windows OS Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetImportImageOsImportImageOsListSupportedOutput) Windows() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetImportImageOsImportImageOsListSupported) []string { return v.Windows }).(pulumi.StringArrayOutput)
+}
+
+type GetImportImageOsImportImageOsListSupportedArrayOutput struct{ *pulumi.OutputState }
+
+func (GetImportImageOsImportImageOsListSupportedArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImportImageOsImportImageOsListSupported)(nil)).Elem()
+}
+
+func (o GetImportImageOsImportImageOsListSupportedArrayOutput) ToGetImportImageOsImportImageOsListSupportedArrayOutput() GetImportImageOsImportImageOsListSupportedArrayOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsListSupportedArrayOutput) ToGetImportImageOsImportImageOsListSupportedArrayOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsListSupportedArrayOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsListSupportedArrayOutput) Index(i pulumi.IntInput) GetImportImageOsImportImageOsListSupportedOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetImportImageOsImportImageOsListSupported {
+		return vs[0].([]GetImportImageOsImportImageOsListSupported)[vs[1].(int)]
+	}).(GetImportImageOsImportImageOsListSupportedOutput)
+}
+
+type GetImportImageOsImportImageOsVersionSet struct {
+	// Supported operating system architecture.
+	Architectures []string `pulumi:"architectures"`
+	// Operating system type.
+	OsName string `pulumi:"osName"`
+	// Supported operating system versions.
+	OsVersions []string `pulumi:"osVersions"`
+}
+
+// GetImportImageOsImportImageOsVersionSetInput is an input type that accepts GetImportImageOsImportImageOsVersionSetArgs and GetImportImageOsImportImageOsVersionSetOutput values.
+// You can construct a concrete instance of `GetImportImageOsImportImageOsVersionSetInput` via:
+//
+//          GetImportImageOsImportImageOsVersionSetArgs{...}
+type GetImportImageOsImportImageOsVersionSetInput interface {
+	pulumi.Input
+
+	ToGetImportImageOsImportImageOsVersionSetOutput() GetImportImageOsImportImageOsVersionSetOutput
+	ToGetImportImageOsImportImageOsVersionSetOutputWithContext(context.Context) GetImportImageOsImportImageOsVersionSetOutput
+}
+
+type GetImportImageOsImportImageOsVersionSetArgs struct {
+	// Supported operating system architecture.
+	Architectures pulumi.StringArrayInput `pulumi:"architectures"`
+	// Operating system type.
+	OsName pulumi.StringInput `pulumi:"osName"`
+	// Supported operating system versions.
+	OsVersions pulumi.StringArrayInput `pulumi:"osVersions"`
+}
+
+func (GetImportImageOsImportImageOsVersionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImportImageOsImportImageOsVersionSet)(nil)).Elem()
+}
+
+func (i GetImportImageOsImportImageOsVersionSetArgs) ToGetImportImageOsImportImageOsVersionSetOutput() GetImportImageOsImportImageOsVersionSetOutput {
+	return i.ToGetImportImageOsImportImageOsVersionSetOutputWithContext(context.Background())
+}
+
+func (i GetImportImageOsImportImageOsVersionSetArgs) ToGetImportImageOsImportImageOsVersionSetOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsVersionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImportImageOsImportImageOsVersionSetOutput)
+}
+
+// GetImportImageOsImportImageOsVersionSetArrayInput is an input type that accepts GetImportImageOsImportImageOsVersionSetArray and GetImportImageOsImportImageOsVersionSetArrayOutput values.
+// You can construct a concrete instance of `GetImportImageOsImportImageOsVersionSetArrayInput` via:
+//
+//          GetImportImageOsImportImageOsVersionSetArray{ GetImportImageOsImportImageOsVersionSetArgs{...} }
+type GetImportImageOsImportImageOsVersionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetImportImageOsImportImageOsVersionSetArrayOutput() GetImportImageOsImportImageOsVersionSetArrayOutput
+	ToGetImportImageOsImportImageOsVersionSetArrayOutputWithContext(context.Context) GetImportImageOsImportImageOsVersionSetArrayOutput
+}
+
+type GetImportImageOsImportImageOsVersionSetArray []GetImportImageOsImportImageOsVersionSetInput
+
+func (GetImportImageOsImportImageOsVersionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImportImageOsImportImageOsVersionSet)(nil)).Elem()
+}
+
+func (i GetImportImageOsImportImageOsVersionSetArray) ToGetImportImageOsImportImageOsVersionSetArrayOutput() GetImportImageOsImportImageOsVersionSetArrayOutput {
+	return i.ToGetImportImageOsImportImageOsVersionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetImportImageOsImportImageOsVersionSetArray) ToGetImportImageOsImportImageOsVersionSetArrayOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsVersionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetImportImageOsImportImageOsVersionSetArrayOutput)
+}
+
+type GetImportImageOsImportImageOsVersionSetOutput struct{ *pulumi.OutputState }
+
+func (GetImportImageOsImportImageOsVersionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetImportImageOsImportImageOsVersionSet)(nil)).Elem()
+}
+
+func (o GetImportImageOsImportImageOsVersionSetOutput) ToGetImportImageOsImportImageOsVersionSetOutput() GetImportImageOsImportImageOsVersionSetOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsVersionSetOutput) ToGetImportImageOsImportImageOsVersionSetOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsVersionSetOutput {
+	return o
+}
+
+// Supported operating system architecture.
+func (o GetImportImageOsImportImageOsVersionSetOutput) Architectures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetImportImageOsImportImageOsVersionSet) []string { return v.Architectures }).(pulumi.StringArrayOutput)
+}
+
+// Operating system type.
+func (o GetImportImageOsImportImageOsVersionSetOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetImportImageOsImportImageOsVersionSet) string { return v.OsName }).(pulumi.StringOutput)
+}
+
+// Supported operating system versions.
+func (o GetImportImageOsImportImageOsVersionSetOutput) OsVersions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetImportImageOsImportImageOsVersionSet) []string { return v.OsVersions }).(pulumi.StringArrayOutput)
+}
+
+type GetImportImageOsImportImageOsVersionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetImportImageOsImportImageOsVersionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetImportImageOsImportImageOsVersionSet)(nil)).Elem()
+}
+
+func (o GetImportImageOsImportImageOsVersionSetArrayOutput) ToGetImportImageOsImportImageOsVersionSetArrayOutput() GetImportImageOsImportImageOsVersionSetArrayOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsVersionSetArrayOutput) ToGetImportImageOsImportImageOsVersionSetArrayOutputWithContext(ctx context.Context) GetImportImageOsImportImageOsVersionSetArrayOutput {
+	return o
+}
+
+func (o GetImportImageOsImportImageOsVersionSetArrayOutput) Index(i pulumi.IntInput) GetImportImageOsImportImageOsVersionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetImportImageOsImportImageOsVersionSet {
+		return vs[0].([]GetImportImageOsImportImageOsVersionSet)[vs[1].(int)]
+	}).(GetImportImageOsImportImageOsVersionSetOutput)
+}
+
 type GetInstancesModificationFilter struct {
 	// Fields to be filtered.
 	Name string `pulumi:"name"`
@@ -7604,6 +8771,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigBmcVirtualPrivateCloudPtrInput)(nil)).Elem(), ChcConfigBmcVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigDeployVirtualPrivateCloudInput)(nil)).Elem(), ChcConfigDeployVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigDeployVirtualPrivateCloudPtrInput)(nil)).Elem(), ChcConfigDeployVirtualPrivateCloudArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ImportImageTagSpecificationInput)(nil)).Elem(), ImportImageTagSpecificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ImportImageTagSpecificationArrayInput)(nil)).Elem(), ImportImageTagSpecificationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ImportImageTagSpecificationTagInput)(nil)).Elem(), ImportImageTagSpecificationTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ImportImageTagSpecificationTagArrayInput)(nil)).Elem(), ImportImageTagSpecificationTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateActionTimerInput)(nil)).Elem(), LaunchTemplateActionTimerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateActionTimerPtrInput)(nil)).Elem(), LaunchTemplateActionTimerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateActionTimerExternalsInput)(nil)).Elem(), LaunchTemplateActionTimerExternalsArgs{})
@@ -7676,6 +8847,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateVersionVirtualPrivateCloudPtrInput)(nil)).Elem(), LaunchTemplateVersionVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateVirtualPrivateCloudInput)(nil)).Elem(), LaunchTemplateVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LaunchTemplateVirtualPrivateCloudPtrInput)(nil)).Elem(), LaunchTemplateVirtualPrivateCloudArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ModifyInstanceDiskTypeDataDiskInput)(nil)).Elem(), ModifyInstanceDiskTypeDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ModifyInstanceDiskTypeDataDiskArrayInput)(nil)).Elem(), ModifyInstanceDiskTypeDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ModifyInstanceDiskTypeSystemDiskInput)(nil)).Elem(), ModifyInstanceDiskTypeSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ModifyInstanceDiskTypeSystemDiskPtrInput)(nil)).Elem(), ModifyInstanceDiskTypeSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewHostHostChargePrepaidInput)(nil)).Elem(), RenewHostHostChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewHostHostChargePrepaidPtrInput)(nil)).Elem(), RenewHostHostChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidPtrInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcDeniedActionsChcHostDeniedActionSetInput)(nil)).Elem(), GetChcDeniedActionsChcHostDeniedActionSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcDeniedActionsChcHostDeniedActionSetArrayInput)(nil)).Elem(), GetChcDeniedActionsChcHostDeniedActionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcHostsChcHostSetInput)(nil)).Elem(), GetChcHostsChcHostSetArgs{})
@@ -7688,6 +8867,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcHostsChcHostSetPlacementArrayInput)(nil)).Elem(), GetChcHostsChcHostSetPlacementArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcHostsFilterInput)(nil)).Elem(), GetChcHostsFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcHostsFilterArrayInput)(nil)).Elem(), GetChcHostsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImageSharePermissionSharePermissionSetInput)(nil)).Elem(), GetImageSharePermissionSharePermissionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImageSharePermissionSharePermissionSetArrayInput)(nil)).Elem(), GetImageSharePermissionSharePermissionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImportImageOsImportImageOsListSupportedInput)(nil)).Elem(), GetImportImageOsImportImageOsListSupportedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImportImageOsImportImageOsListSupportedArrayInput)(nil)).Elem(), GetImportImageOsImportImageOsListSupportedArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImportImageOsImportImageOsVersionSetInput)(nil)).Elem(), GetImportImageOsImportImageOsVersionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetImportImageOsImportImageOsVersionSetArrayInput)(nil)).Elem(), GetImportImageOsImportImageOsVersionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationFilterInput)(nil)).Elem(), GetInstancesModificationFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationFilterArrayInput)(nil)).Elem(), GetInstancesModificationFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListArgs{})
@@ -7698,6 +8883,10 @@ func init() {
 	pulumi.RegisterOutputType(ChcConfigBmcVirtualPrivateCloudPtrOutput{})
 	pulumi.RegisterOutputType(ChcConfigDeployVirtualPrivateCloudOutput{})
 	pulumi.RegisterOutputType(ChcConfigDeployVirtualPrivateCloudPtrOutput{})
+	pulumi.RegisterOutputType(ImportImageTagSpecificationOutput{})
+	pulumi.RegisterOutputType(ImportImageTagSpecificationArrayOutput{})
+	pulumi.RegisterOutputType(ImportImageTagSpecificationTagOutput{})
+	pulumi.RegisterOutputType(ImportImageTagSpecificationTagArrayOutput{})
 	pulumi.RegisterOutputType(LaunchTemplateActionTimerOutput{})
 	pulumi.RegisterOutputType(LaunchTemplateActionTimerPtrOutput{})
 	pulumi.RegisterOutputType(LaunchTemplateActionTimerExternalsOutput{})
@@ -7770,6 +8959,14 @@ func init() {
 	pulumi.RegisterOutputType(LaunchTemplateVersionVirtualPrivateCloudPtrOutput{})
 	pulumi.RegisterOutputType(LaunchTemplateVirtualPrivateCloudOutput{})
 	pulumi.RegisterOutputType(LaunchTemplateVirtualPrivateCloudPtrOutput{})
+	pulumi.RegisterOutputType(ModifyInstanceDiskTypeDataDiskOutput{})
+	pulumi.RegisterOutputType(ModifyInstanceDiskTypeDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ModifyInstanceDiskTypeSystemDiskOutput{})
+	pulumi.RegisterOutputType(ModifyInstanceDiskTypeSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(RenewHostHostChargePrepaidOutput{})
+	pulumi.RegisterOutputType(RenewHostHostChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(GetChcDeniedActionsChcHostDeniedActionSetOutput{})
 	pulumi.RegisterOutputType(GetChcDeniedActionsChcHostDeniedActionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetChcHostsChcHostSetOutput{})
@@ -7782,6 +8979,12 @@ func init() {
 	pulumi.RegisterOutputType(GetChcHostsChcHostSetPlacementArrayOutput{})
 	pulumi.RegisterOutputType(GetChcHostsFilterOutput{})
 	pulumi.RegisterOutputType(GetChcHostsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetImageSharePermissionSharePermissionSetOutput{})
+	pulumi.RegisterOutputType(GetImageSharePermissionSharePermissionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetImportImageOsImportImageOsListSupportedOutput{})
+	pulumi.RegisterOutputType(GetImportImageOsImportImageOsListSupportedArrayOutput{})
+	pulumi.RegisterOutputType(GetImportImageOsImportImageOsVersionSetOutput{})
+	pulumi.RegisterOutputType(GetImportImageOsImportImageOsVersionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesModificationFilterOutput{})
 	pulumi.RegisterOutputType(GetInstancesModificationFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesModificationInstanceTypeConfigStatusListOutput{})

@@ -14,10 +14,17 @@ __all__ = [
     'AccessLogConfigSelectedRangeItemArgs',
     'ClusterAttachmentClusterListArgs',
     'MeshConfigArgs',
+    'MeshConfigInjectArgs',
     'MeshConfigIstioArgs',
     'MeshConfigIstioSmartDnsArgs',
+    'MeshConfigIstioTracingArgs',
+    'MeshConfigIstioTracingApmArgs',
+    'MeshConfigIstioTracingZipkinArgs',
     'MeshConfigPrometheusArgs',
     'MeshConfigPrometheusCustomPromArgs',
+    'MeshConfigSidecarResourcesArgs',
+    'MeshConfigSidecarResourcesLimitArgs',
+    'MeshConfigSidecarResourcesRequestArgs',
     'MeshConfigTracingArgs',
     'MeshConfigTracingApmArgs',
     'MeshConfigTracingZipkinArgs',
@@ -261,20 +268,40 @@ class ClusterAttachmentClusterListArgs:
 @pulumi.input_type
 class MeshConfigArgs:
     def __init__(__self__, *,
+                 inject: Optional[pulumi.Input['MeshConfigInjectArgs']] = None,
                  istio: Optional[pulumi.Input['MeshConfigIstioArgs']] = None,
                  prometheus: Optional[pulumi.Input['MeshConfigPrometheusArgs']] = None,
+                 sidecar_resources: Optional[pulumi.Input['MeshConfigSidecarResourcesArgs']] = None,
                  tracing: Optional[pulumi.Input['MeshConfigTracingArgs']] = None):
         """
+        :param pulumi.Input['MeshConfigInjectArgs'] inject: Sidecar inject configuration.
         :param pulumi.Input['MeshConfigIstioArgs'] istio: Istio configuration.
         :param pulumi.Input['MeshConfigPrometheusArgs'] prometheus: Prometheus configuration.
+        :param pulumi.Input['MeshConfigSidecarResourcesArgs'] sidecar_resources: Default sidecar requests and limits.
         :param pulumi.Input['MeshConfigTracingArgs'] tracing: Tracing config.
         """
+        if inject is not None:
+            pulumi.set(__self__, "inject", inject)
         if istio is not None:
             pulumi.set(__self__, "istio", istio)
         if prometheus is not None:
             pulumi.set(__self__, "prometheus", prometheus)
+        if sidecar_resources is not None:
+            pulumi.set(__self__, "sidecar_resources", sidecar_resources)
         if tracing is not None:
             pulumi.set(__self__, "tracing", tracing)
+
+    @property
+    @pulumi.getter
+    def inject(self) -> Optional[pulumi.Input['MeshConfigInjectArgs']]:
+        """
+        Sidecar inject configuration.
+        """
+        return pulumi.get(self, "inject")
+
+    @inject.setter
+    def inject(self, value: Optional[pulumi.Input['MeshConfigInjectArgs']]):
+        pulumi.set(self, "inject", value)
 
     @property
     @pulumi.getter
@@ -301,6 +328,18 @@ class MeshConfigArgs:
         pulumi.set(self, "prometheus", value)
 
     @property
+    @pulumi.getter(name="sidecarResources")
+    def sidecar_resources(self) -> Optional[pulumi.Input['MeshConfigSidecarResourcesArgs']]:
+        """
+        Default sidecar requests and limits.
+        """
+        return pulumi.get(self, "sidecar_resources")
+
+    @sidecar_resources.setter
+    def sidecar_resources(self, value: Optional[pulumi.Input['MeshConfigSidecarResourcesArgs']]):
+        pulumi.set(self, "sidecar_resources", value)
+
+    @property
     @pulumi.getter
     def tracing(self) -> Optional[pulumi.Input['MeshConfigTracingArgs']]:
         """
@@ -314,19 +353,76 @@ class MeshConfigArgs:
 
 
 @pulumi.input_type
+class MeshConfigInjectArgs:
+    def __init__(__self__, *,
+                 exclude_ip_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 hold_application_until_proxy_starts: Optional[pulumi.Input[bool]] = None,
+                 hold_proxy_until_application_ends: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exclude_ip_ranges: IP ranges that should not be proxied.
+        :param pulumi.Input[bool] hold_application_until_proxy_starts: Let istio-proxy(sidecar) start first, before app container.
+        :param pulumi.Input[bool] hold_proxy_until_application_ends: Let istio-proxy(sidecar) stop last, after app container.
+        """
+        if exclude_ip_ranges is not None:
+            pulumi.set(__self__, "exclude_ip_ranges", exclude_ip_ranges)
+        if hold_application_until_proxy_starts is not None:
+            pulumi.set(__self__, "hold_application_until_proxy_starts", hold_application_until_proxy_starts)
+        if hold_proxy_until_application_ends is not None:
+            pulumi.set(__self__, "hold_proxy_until_application_ends", hold_proxy_until_application_ends)
+
+    @property
+    @pulumi.getter(name="excludeIpRanges")
+    def exclude_ip_ranges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        IP ranges that should not be proxied.
+        """
+        return pulumi.get(self, "exclude_ip_ranges")
+
+    @exclude_ip_ranges.setter
+    def exclude_ip_ranges(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "exclude_ip_ranges", value)
+
+    @property
+    @pulumi.getter(name="holdApplicationUntilProxyStarts")
+    def hold_application_until_proxy_starts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Let istio-proxy(sidecar) start first, before app container.
+        """
+        return pulumi.get(self, "hold_application_until_proxy_starts")
+
+    @hold_application_until_proxy_starts.setter
+    def hold_application_until_proxy_starts(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "hold_application_until_proxy_starts", value)
+
+    @property
+    @pulumi.getter(name="holdProxyUntilApplicationEnds")
+    def hold_proxy_until_application_ends(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Let istio-proxy(sidecar) stop last, after app container.
+        """
+        return pulumi.get(self, "hold_proxy_until_application_ends")
+
+    @hold_proxy_until_application_ends.setter
+    def hold_proxy_until_application_ends(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "hold_proxy_until_application_ends", value)
+
+
+@pulumi.input_type
 class MeshConfigIstioArgs:
     def __init__(__self__, *,
                  outbound_traffic_policy: pulumi.Input[str],
                  disable_http_retry: Optional[pulumi.Input[bool]] = None,
                  disable_policy_checks: Optional[pulumi.Input[bool]] = None,
                  enable_pilot_http: Optional[pulumi.Input[bool]] = None,
-                 smart_dns: Optional[pulumi.Input['MeshConfigIstioSmartDnsArgs']] = None):
+                 smart_dns: Optional[pulumi.Input['MeshConfigIstioSmartDnsArgs']] = None,
+                 tracing: Optional[pulumi.Input['MeshConfigIstioTracingArgs']] = None):
         """
-        :param pulumi.Input[str] outbound_traffic_policy: Outbound traffic policy.
+        :param pulumi.Input[str] outbound_traffic_policy: Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
         :param pulumi.Input[bool] disable_http_retry: Disable http retry.
         :param pulumi.Input[bool] disable_policy_checks: Disable policy checks.
         :param pulumi.Input[bool] enable_pilot_http: Enable HTTP/1.0 support.
         :param pulumi.Input['MeshConfigIstioSmartDnsArgs'] smart_dns: SmartDNS configuration.
+        :param pulumi.Input['MeshConfigIstioTracingArgs'] tracing: Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
         """
         pulumi.set(__self__, "outbound_traffic_policy", outbound_traffic_policy)
         if disable_http_retry is not None:
@@ -337,12 +433,14 @@ class MeshConfigIstioArgs:
             pulumi.set(__self__, "enable_pilot_http", enable_pilot_http)
         if smart_dns is not None:
             pulumi.set(__self__, "smart_dns", smart_dns)
+        if tracing is not None:
+            pulumi.set(__self__, "tracing", tracing)
 
     @property
     @pulumi.getter(name="outboundTrafficPolicy")
     def outbound_traffic_policy(self) -> pulumi.Input[str]:
         """
-        Outbound traffic policy.
+        Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
         """
         return pulumi.get(self, "outbound_traffic_policy")
 
@@ -398,6 +496,18 @@ class MeshConfigIstioArgs:
     def smart_dns(self, value: Optional[pulumi.Input['MeshConfigIstioSmartDnsArgs']]):
         pulumi.set(self, "smart_dns", value)
 
+    @property
+    @pulumi.getter
+    def tracing(self) -> Optional[pulumi.Input['MeshConfigIstioTracingArgs']]:
+        """
+        Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+        """
+        return pulumi.get(self, "tracing")
+
+    @tracing.setter
+    def tracing(self, value: Optional[pulumi.Input['MeshConfigIstioTracingArgs']]):
+        pulumi.set(self, "tracing", value)
+
 
 @pulumi.input_type
 class MeshConfigIstioSmartDnsArgs:
@@ -436,6 +546,153 @@ class MeshConfigIstioSmartDnsArgs:
     @istio_meta_dns_capture.setter
     def istio_meta_dns_capture(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "istio_meta_dns_capture", value)
+
+
+@pulumi.input_type
+class MeshConfigIstioTracingArgs:
+    def __init__(__self__, *,
+                 apm: Optional[pulumi.Input['MeshConfigIstioTracingApmArgs']] = None,
+                 enable: Optional[pulumi.Input[bool]] = None,
+                 sampling: Optional[pulumi.Input[float]] = None,
+                 zipkin: Optional[pulumi.Input['MeshConfigIstioTracingZipkinArgs']] = None):
+        """
+        :param pulumi.Input['MeshConfigIstioTracingApmArgs'] apm: APM config.
+        :param pulumi.Input[bool] enable: Whether enable tracing.
+        :param pulumi.Input[float] sampling: Tracing sampling, 0.0-1.0.
+        :param pulumi.Input['MeshConfigIstioTracingZipkinArgs'] zipkin: Third party zipkin config.
+        """
+        if apm is not None:
+            pulumi.set(__self__, "apm", apm)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if sampling is not None:
+            pulumi.set(__self__, "sampling", sampling)
+        if zipkin is not None:
+            pulumi.set(__self__, "zipkin", zipkin)
+
+    @property
+    @pulumi.getter
+    def apm(self) -> Optional[pulumi.Input['MeshConfigIstioTracingApmArgs']]:
+        """
+        APM config.
+        """
+        return pulumi.get(self, "apm")
+
+    @apm.setter
+    def apm(self, value: Optional[pulumi.Input['MeshConfigIstioTracingApmArgs']]):
+        pulumi.set(self, "apm", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether enable tracing.
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def sampling(self) -> Optional[pulumi.Input[float]]:
+        """
+        Tracing sampling, 0.0-1.0.
+        """
+        return pulumi.get(self, "sampling")
+
+    @sampling.setter
+    def sampling(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "sampling", value)
+
+    @property
+    @pulumi.getter
+    def zipkin(self) -> Optional[pulumi.Input['MeshConfigIstioTracingZipkinArgs']]:
+        """
+        Third party zipkin config.
+        """
+        return pulumi.get(self, "zipkin")
+
+    @zipkin.setter
+    def zipkin(self, value: Optional[pulumi.Input['MeshConfigIstioTracingZipkinArgs']]):
+        pulumi.set(self, "zipkin", value)
+
+
+@pulumi.input_type
+class MeshConfigIstioTracingApmArgs:
+    def __init__(__self__, *,
+                 enable: pulumi.Input[bool],
+                 instance_id: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enable: Whether enable APM.
+        :param pulumi.Input[str] instance_id: Instance id of the APM.
+        :param pulumi.Input[str] region: Region.
+        """
+        pulumi.set(__self__, "enable", enable)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> pulumi.Input[bool]:
+        """
+        Whether enable APM.
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance id of the APM.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class MeshConfigIstioTracingZipkinArgs:
+    def __init__(__self__, *,
+                 address: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] address: Zipkin address.
+        """
+        pulumi.set(__self__, "address", address)
+
+    @property
+    @pulumi.getter
+    def address(self) -> pulumi.Input[str]:
+        """
+        Zipkin address.
+        """
+        return pulumi.get(self, "address")
+
+    @address.setter
+    def address(self, value: pulumi.Input[str]):
+        pulumi.set(self, "address", value)
 
 
 @pulumi.input_type
@@ -624,6 +881,123 @@ class MeshConfigPrometheusCustomPromArgs:
     @vpc_id.setter
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class MeshConfigSidecarResourcesArgs:
+    def __init__(__self__, *,
+                 limits: Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesLimitArgs']]]] = None,
+                 requests: Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesRequestArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesLimitArgs']]] limits: Sidecar limits.
+        :param pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesRequestArgs']]] requests: Sidecar requests.
+        """
+        if limits is not None:
+            pulumi.set(__self__, "limits", limits)
+        if requests is not None:
+            pulumi.set(__self__, "requests", requests)
+
+    @property
+    @pulumi.getter
+    def limits(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesLimitArgs']]]]:
+        """
+        Sidecar limits.
+        """
+        return pulumi.get(self, "limits")
+
+    @limits.setter
+    def limits(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesLimitArgs']]]]):
+        pulumi.set(self, "limits", value)
+
+    @property
+    @pulumi.getter
+    def requests(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesRequestArgs']]]]:
+        """
+        Sidecar requests.
+        """
+        return pulumi.get(self, "requests")
+
+    @requests.setter
+    def requests(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MeshConfigSidecarResourcesRequestArgs']]]]):
+        pulumi.set(self, "requests", value)
+
+
+@pulumi.input_type
+class MeshConfigSidecarResourcesLimitArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None,
+                 quantity: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Resource type name, `cpu/memory`.
+        :param pulumi.Input[str] quantity: Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if quantity is not None:
+            pulumi.set(__self__, "quantity", quantity)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource type name, `cpu/memory`.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def quantity(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+        """
+        return pulumi.get(self, "quantity")
+
+    @quantity.setter
+    def quantity(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "quantity", value)
+
+
+@pulumi.input_type
+class MeshConfigSidecarResourcesRequestArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None,
+                 quantity: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Resource type name, `cpu/memory`.
+        :param pulumi.Input[str] quantity: Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if quantity is not None:
+            pulumi.set(__self__, "quantity", quantity)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource type name, `cpu/memory`.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def quantity(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+        """
+        return pulumi.get(self, "quantity")
+
+    @quantity.setter
+    def quantity(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "quantity", value)
 
 
 @pulumi.input_type

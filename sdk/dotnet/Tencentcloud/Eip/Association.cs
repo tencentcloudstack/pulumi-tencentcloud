@@ -34,8 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// }
     /// ```
-    /// 
-    /// or
+    /// ### or
     /// 
     /// ```csharp
     /// using Pulumi;

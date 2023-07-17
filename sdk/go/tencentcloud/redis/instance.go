@@ -17,6 +17,40 @@ import (
 //
 // > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 //
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		zone, err := Redis.GetZoneConfig(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewInstance(ctx, "redisInstanceTest2", &Redis.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+// 			Password:         pulumi.String("test12345789"),
+// 			MemSize:          pulumi.Int(8192),
+// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+// 			Port:             pulumi.Int(6379),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
 // ## Import
 //
 // Redis instance can be imported, e.g.
@@ -37,7 +71,7 @@ type Instance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
-	// IP address of an instance.
+	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip pulumi.StringOutput `pulumi:"ip"`
 	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntOutput `pulumi:"memSize"`
@@ -47,16 +81,20 @@ type Instance struct {
 	NoAuth pulumi.BoolPtrOutput `pulumi:"noAuth"`
 	// Readonly Primary/Replica nodes.
 	NodeInfos InstanceNodeInfoArrayOutput `pulumi:"nodeInfos"`
+	// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+	OperationNetwork pulumi.StringPtrOutput `pulumi:"operationNetwork"`
 	// Specify params template id. If not set, will use default template.
 	ParamsTemplateId pulumi.StringPtrOutput `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
+	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+	Recycle pulumi.IntPtrOutput `pulumi:"recycle"`
 	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrOutput `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
@@ -69,7 +107,7 @@ type Instance struct {
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// Specifies which subnet the instance should belong to.
+	// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -77,9 +115,9 @@ type Instance struct {
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
-	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 	TypeId pulumi.IntPtrOutput `pulumi:"typeId"`
-	// ID of the vpc with which the instance is to be associated.
+	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -129,7 +167,7 @@ type instanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// IP address of an instance.
+	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip *string `pulumi:"ip"`
 	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize *int `pulumi:"memSize"`
@@ -139,16 +177,20 @@ type instanceState struct {
 	NoAuth *bool `pulumi:"noAuth"`
 	// Readonly Primary/Replica nodes.
 	NodeInfos []InstanceNodeInfo `pulumi:"nodeInfos"`
+	// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+	OperationNetwork *string `pulumi:"operationNetwork"`
 	// Specify params template id. If not set, will use default template.
 	ParamsTemplateId *string `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 	Port *int `pulumi:"port"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
+	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+	Recycle *int `pulumi:"recycle"`
 	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
@@ -161,7 +203,7 @@ type instanceState struct {
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status *string `pulumi:"status"`
-	// Specifies which subnet the instance should belong to.
+	// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -169,9 +211,9 @@ type instanceState struct {
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type *string `pulumi:"type"`
-	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 	TypeId *int `pulumi:"typeId"`
-	// ID of the vpc with which the instance is to be associated.
+	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
 }
 
@@ -186,7 +228,7 @@ type InstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrInput
-	// IP address of an instance.
+	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 	Ip pulumi.StringPtrInput
 	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntPtrInput
@@ -196,16 +238,20 @@ type InstanceState struct {
 	NoAuth pulumi.BoolPtrInput
 	// Readonly Primary/Replica nodes.
 	NodeInfos InstanceNodeInfoArrayInput
+	// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+	OperationNetwork pulumi.StringPtrInput
 	// Specify params template id. If not set, will use default template.
 	ParamsTemplateId pulumi.StringPtrInput
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 	Port pulumi.IntPtrInput
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
+	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+	Recycle pulumi.IntPtrInput
 	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
@@ -218,7 +264,7 @@ type InstanceState struct {
 	SecurityGroups pulumi.StringArrayInput
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status pulumi.StringPtrInput
-	// Specifies which subnet the instance should belong to.
+	// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -226,9 +272,9 @@ type InstanceState struct {
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrInput
-	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 	TypeId pulumi.IntPtrInput
-	// ID of the vpc with which the instance is to be associated.
+	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -245,22 +291,28 @@ type instanceArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete *bool `pulumi:"forceDelete"`
+	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
+	Ip *string `pulumi:"ip"`
 	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize int `pulumi:"memSize"`
 	// Instance name.
 	Name *string `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth *bool `pulumi:"noAuth"`
+	// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+	OperationNetwork *string `pulumi:"operationNetwork"`
 	// Specify params template id. If not set, will use default template.
 	ParamsTemplateId *string `pulumi:"paramsTemplateId"`
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 	Port *int `pulumi:"port"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
+	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+	Recycle *int `pulumi:"recycle"`
 	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
@@ -271,7 +323,7 @@ type instanceArgs struct {
 	ReplicasReadOnly *bool `pulumi:"replicasReadOnly"`
 	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups []string `pulumi:"securityGroups"`
-	// Specifies which subnet the instance should belong to.
+	// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -279,9 +331,9 @@ type instanceArgs struct {
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type *string `pulumi:"type"`
-	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 	TypeId *int `pulumi:"typeId"`
-	// ID of the vpc with which the instance is to be associated.
+	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
 }
 
@@ -295,22 +347,28 @@ type InstanceArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrInput
+	// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
+	Ip pulumi.StringPtrInput
 	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntInput
 	// Instance name.
 	Name pulumi.StringPtrInput
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrInput
+	// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+	OperationNetwork pulumi.StringPtrInput
 	// Specify params template id. If not set, will use default template.
 	ParamsTemplateId pulumi.StringPtrInput
 	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 	Port pulumi.IntPtrInput
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
+	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+	Recycle pulumi.IntPtrInput
 	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
@@ -321,7 +379,7 @@ type InstanceArgs struct {
 	ReplicasReadOnly pulumi.BoolPtrInput
 	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups pulumi.StringArrayInput
-	// Specifies which subnet the instance should belong to.
+	// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
@@ -329,9 +387,9 @@ type InstanceArgs struct {
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrInput
-	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 	TypeId pulumi.IntPtrInput
-	// ID of the vpc with which the instance is to be associated.
+	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -447,7 +505,7 @@ func (o InstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
-// IP address of an instance.
+// IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
 func (o InstanceOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Ip }).(pulumi.StringOutput)
 }
@@ -472,6 +530,11 @@ func (o InstanceOutput) NodeInfos() InstanceNodeInfoArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceNodeInfoArrayOutput { return v.NodeInfos }).(InstanceNodeInfoArrayOutput)
 }
 
+// Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
+func (o InstanceOutput) OperationNetwork() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.OperationNetwork }).(pulumi.StringPtrOutput)
+}
+
 // Specify params template id. If not set, will use default template.
 func (o InstanceOutput) ParamsTemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ParamsTemplateId }).(pulumi.StringPtrOutput)
@@ -482,7 +545,7 @@ func (o InstanceOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
 
-// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+// The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
 func (o InstanceOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
 }
@@ -495,6 +558,11 @@ func (o InstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 // Specifies which project the instance should belong to.
 func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
+func (o InstanceOutput) Recycle() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Recycle }).(pulumi.IntPtrOutput)
 }
 
 // The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
@@ -527,7 +595,7 @@ func (o InstanceOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// Specifies which subnet the instance should belong to.
+// Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 func (o InstanceOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
@@ -544,12 +612,12 @@ func (o InstanceOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
+// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.
 func (o InstanceOutput) TypeId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.TypeId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the vpc with which the instance is to be associated.
+// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 func (o InstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

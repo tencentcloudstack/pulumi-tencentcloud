@@ -69,11 +69,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     ///                 AdjDarMethod = "scale",
     ///                 AudioBitrateAdjMethod = "0",
     ///                 DeleteMetadata = "false",
-    ///                 HlsEncrypt = new Tencentcloud.Ci.Inputs.MediaTranscodeTemplateTransConfigHlsEncryptArgs
-    ///                 {
-    ///                     IsHlsEncrypt = "false",
-    ///                     UriKey = "",
-    ///                 },
     ///                 IsCheckAudioBitrate = "false",
     ///                 IsCheckReso = "false",
     ///                 IsCheckVideoBitrate = "false",

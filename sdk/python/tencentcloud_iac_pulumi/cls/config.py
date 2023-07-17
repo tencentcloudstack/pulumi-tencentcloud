@@ -304,6 +304,14 @@ class Config(pulumi.CustomResource):
             path="/var/log/kubernetes")
         ```
 
+        ## Import
+
+        cls config can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/config:Config config config_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigExcludePathArgs']]]] exclude_paths: Collection path blocklist.
@@ -358,6 +366,14 @@ class Config(pulumi.CustomResource):
             log_type="json_log",
             output="4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
             path="/var/log/kubernetes")
+        ```
+
+        ## Import
+
+        cls config can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/config:Config config config_id
         ```
 
         :param str resource_name: The name of the resource.

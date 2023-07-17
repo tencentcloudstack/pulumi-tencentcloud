@@ -11,8 +11,10 @@ from .backup_storage_location import *
 from .cluster import *
 from .cluster_attachment import *
 from .cluster_endpoint import *
+from .encryption_protection import *
 from .get_available_cluster_versions import *
 from .get_charts import *
+from .get_cluster_authentication_options import *
 from .get_cluster_common_names import *
 from .get_cluster_levels import *
 from .get_clusters import *

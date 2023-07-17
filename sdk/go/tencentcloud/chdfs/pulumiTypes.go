@@ -687,6 +687,211 @@ func (o GetAccessGroupsAccessGroupArrayOutput) Index(i pulumi.IntInput) GetAcces
 	}).(GetAccessGroupsAccessGroupOutput)
 }
 
+type GetFileSystemsFileSystem struct {
+	// appid of the user.
+	AppId int `pulumi:"appId"`
+	// block size of the file system(byte).
+	BlockSize int `pulumi:"blockSize"`
+	// capacity of the file system(byte).
+	CapacityQuota int `pulumi:"capacityQuota"`
+	// create time.
+	CreateTime string `pulumi:"createTime"`
+	// desc of the file system.
+	Description string `pulumi:"description"`
+	// check the ranger address or not.
+	EnableRanger bool `pulumi:"enableRanger"`
+	// file system id.
+	FileSystemId string `pulumi:"fileSystemId"`
+	// file system name.
+	FileSystemName string `pulumi:"fileSystemName"`
+	// check POSIX ACL or not.
+	PosixAcl bool `pulumi:"posixAcl"`
+	// ranger address list.
+	RangerServiceAddresses []string `pulumi:"rangerServiceAddresses"`
+	// region of the file system.
+	Region string `pulumi:"region"`
+	// status of the file system(1: creating create success 3: create failed).
+	Status int `pulumi:"status"`
+	// super users of the file system.
+	SuperUsers []string `pulumi:"superUsers"`
+}
+
+// GetFileSystemsFileSystemInput is an input type that accepts GetFileSystemsFileSystemArgs and GetFileSystemsFileSystemOutput values.
+// You can construct a concrete instance of `GetFileSystemsFileSystemInput` via:
+//
+//          GetFileSystemsFileSystemArgs{...}
+type GetFileSystemsFileSystemInput interface {
+	pulumi.Input
+
+	ToGetFileSystemsFileSystemOutput() GetFileSystemsFileSystemOutput
+	ToGetFileSystemsFileSystemOutputWithContext(context.Context) GetFileSystemsFileSystemOutput
+}
+
+type GetFileSystemsFileSystemArgs struct {
+	// appid of the user.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// block size of the file system(byte).
+	BlockSize pulumi.IntInput `pulumi:"blockSize"`
+	// capacity of the file system(byte).
+	CapacityQuota pulumi.IntInput `pulumi:"capacityQuota"`
+	// create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// desc of the file system.
+	Description pulumi.StringInput `pulumi:"description"`
+	// check the ranger address or not.
+	EnableRanger pulumi.BoolInput `pulumi:"enableRanger"`
+	// file system id.
+	FileSystemId pulumi.StringInput `pulumi:"fileSystemId"`
+	// file system name.
+	FileSystemName pulumi.StringInput `pulumi:"fileSystemName"`
+	// check POSIX ACL or not.
+	PosixAcl pulumi.BoolInput `pulumi:"posixAcl"`
+	// ranger address list.
+	RangerServiceAddresses pulumi.StringArrayInput `pulumi:"rangerServiceAddresses"`
+	// region of the file system.
+	Region pulumi.StringInput `pulumi:"region"`
+	// status of the file system(1: creating create success 3: create failed).
+	Status pulumi.IntInput `pulumi:"status"`
+	// super users of the file system.
+	SuperUsers pulumi.StringArrayInput `pulumi:"superUsers"`
+}
+
+func (GetFileSystemsFileSystemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemsFileSystem)(nil)).Elem()
+}
+
+func (i GetFileSystemsFileSystemArgs) ToGetFileSystemsFileSystemOutput() GetFileSystemsFileSystemOutput {
+	return i.ToGetFileSystemsFileSystemOutputWithContext(context.Background())
+}
+
+func (i GetFileSystemsFileSystemArgs) ToGetFileSystemsFileSystemOutputWithContext(ctx context.Context) GetFileSystemsFileSystemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemsFileSystemOutput)
+}
+
+// GetFileSystemsFileSystemArrayInput is an input type that accepts GetFileSystemsFileSystemArray and GetFileSystemsFileSystemArrayOutput values.
+// You can construct a concrete instance of `GetFileSystemsFileSystemArrayInput` via:
+//
+//          GetFileSystemsFileSystemArray{ GetFileSystemsFileSystemArgs{...} }
+type GetFileSystemsFileSystemArrayInput interface {
+	pulumi.Input
+
+	ToGetFileSystemsFileSystemArrayOutput() GetFileSystemsFileSystemArrayOutput
+	ToGetFileSystemsFileSystemArrayOutputWithContext(context.Context) GetFileSystemsFileSystemArrayOutput
+}
+
+type GetFileSystemsFileSystemArray []GetFileSystemsFileSystemInput
+
+func (GetFileSystemsFileSystemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemsFileSystem)(nil)).Elem()
+}
+
+func (i GetFileSystemsFileSystemArray) ToGetFileSystemsFileSystemArrayOutput() GetFileSystemsFileSystemArrayOutput {
+	return i.ToGetFileSystemsFileSystemArrayOutputWithContext(context.Background())
+}
+
+func (i GetFileSystemsFileSystemArray) ToGetFileSystemsFileSystemArrayOutputWithContext(ctx context.Context) GetFileSystemsFileSystemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemsFileSystemArrayOutput)
+}
+
+type GetFileSystemsFileSystemOutput struct{ *pulumi.OutputState }
+
+func (GetFileSystemsFileSystemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemsFileSystem)(nil)).Elem()
+}
+
+func (o GetFileSystemsFileSystemOutput) ToGetFileSystemsFileSystemOutput() GetFileSystemsFileSystemOutput {
+	return o
+}
+
+func (o GetFileSystemsFileSystemOutput) ToGetFileSystemsFileSystemOutputWithContext(ctx context.Context) GetFileSystemsFileSystemOutput {
+	return o
+}
+
+// appid of the user.
+func (o GetFileSystemsFileSystemOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// block size of the file system(byte).
+func (o GetFileSystemsFileSystemOutput) BlockSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) int { return v.BlockSize }).(pulumi.IntOutput)
+}
+
+// capacity of the file system(byte).
+func (o GetFileSystemsFileSystemOutput) CapacityQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) int { return v.CapacityQuota }).(pulumi.IntOutput)
+}
+
+// create time.
+func (o GetFileSystemsFileSystemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// desc of the file system.
+func (o GetFileSystemsFileSystemOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// check the ranger address or not.
+func (o GetFileSystemsFileSystemOutput) EnableRanger() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) bool { return v.EnableRanger }).(pulumi.BoolOutput)
+}
+
+// file system id.
+func (o GetFileSystemsFileSystemOutput) FileSystemId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) string { return v.FileSystemId }).(pulumi.StringOutput)
+}
+
+// file system name.
+func (o GetFileSystemsFileSystemOutput) FileSystemName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) string { return v.FileSystemName }).(pulumi.StringOutput)
+}
+
+// check POSIX ACL or not.
+func (o GetFileSystemsFileSystemOutput) PosixAcl() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) bool { return v.PosixAcl }).(pulumi.BoolOutput)
+}
+
+// ranger address list.
+func (o GetFileSystemsFileSystemOutput) RangerServiceAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) []string { return v.RangerServiceAddresses }).(pulumi.StringArrayOutput)
+}
+
+// region of the file system.
+func (o GetFileSystemsFileSystemOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// status of the file system(1: creating create success 3: create failed).
+func (o GetFileSystemsFileSystemOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// super users of the file system.
+func (o GetFileSystemsFileSystemOutput) SuperUsers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystem) []string { return v.SuperUsers }).(pulumi.StringArrayOutput)
+}
+
+type GetFileSystemsFileSystemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFileSystemsFileSystemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemsFileSystem)(nil)).Elem()
+}
+
+func (o GetFileSystemsFileSystemArrayOutput) ToGetFileSystemsFileSystemArrayOutput() GetFileSystemsFileSystemArrayOutput {
+	return o
+}
+
+func (o GetFileSystemsFileSystemArrayOutput) ToGetFileSystemsFileSystemArrayOutputWithContext(ctx context.Context) GetFileSystemsFileSystemArrayOutput {
+	return o
+}
+
+func (o GetFileSystemsFileSystemArrayOutput) Index(i pulumi.IntInput) GetFileSystemsFileSystemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFileSystemsFileSystem {
+		return vs[0].([]GetFileSystemsFileSystem)[vs[1].(int)]
+	}).(GetFileSystemsFileSystemOutput)
+}
+
 type GetMountPointsMountPoint struct {
 	// associated group ids.
 	AccessGroupIds []string `pulumi:"accessGroupIds"`
@@ -838,6 +1043,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LifeCycleRuleLifeCycleRuleTransitionArrayInput)(nil)).Elem(), LifeCycleRuleLifeCycleRuleTransitionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupInput)(nil)).Elem(), GetAccessGroupsAccessGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupArrayInput)(nil)).Elem(), GetAccessGroupsAccessGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemInput)(nil)).Elem(), GetFileSystemsFileSystemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemArrayInput)(nil)).Elem(), GetFileSystemsFileSystemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMountPointsMountPointInput)(nil)).Elem(), GetMountPointsMountPointArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMountPointsMountPointArrayInput)(nil)).Elem(), GetMountPointsMountPointArray{})
 	pulumi.RegisterOutputType(AccessRuleAccessRuleOutput{})
@@ -848,6 +1055,8 @@ func init() {
 	pulumi.RegisterOutputType(LifeCycleRuleLifeCycleRuleTransitionArrayOutput{})
 	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupOutput{})
 	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetFileSystemsFileSystemOutput{})
+	pulumi.RegisterOutputType(GetFileSystemsFileSystemArrayOutput{})
 	pulumi.RegisterOutputType(GetMountPointsMountPointOutput{})
 	pulumi.RegisterOutputType(GetMountPointsMountPointArrayOutput{})
 }

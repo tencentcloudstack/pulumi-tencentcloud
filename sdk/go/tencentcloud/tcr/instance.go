@@ -38,8 +38,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using public network access whitelist
+// ### Using public network access whitelist
 //
 // ```go
 // package main
@@ -71,8 +70,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Create with Replications
+// ### Create with Replications
 //
 // ```go
 // package main

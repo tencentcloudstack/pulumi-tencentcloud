@@ -27,18 +27,72 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AccountDbAttachment{}
 	case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
 		r = &BasicInstance{}
+	case "tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile":
+		r = &BusinessIntelligenceFile{}
+	case "tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance":
+		r = &BusinessIntelligenceInstance{}
+	case "tencentcloud:Sqlserver/completeExpansion:CompleteExpansion":
+		r = &CompleteExpansion{}
 	case "tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy":
 		r = &ConfigBackupStrategy{}
+	case "tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc":
+		r = &ConfigDatabaseCdc{}
+	case "tencentcloud:Sqlserver/configDatabaseCt:ConfigDatabaseCt":
+		r = &ConfigDatabaseCt{}
+	case "tencentcloud:Sqlserver/configDatabaseMdf:ConfigDatabaseMdf":
+		r = &ConfigDatabaseMdf{}
+	case "tencentcloud:Sqlserver/configInstanceParam:ConfigInstanceParam":
+		r = &ConfigInstanceParam{}
+	case "tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup":
+		r = &ConfigInstanceRoGroup{}
+	case "tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups":
+		r = &ConfigInstanceSecurityGroups{}
+	case "tencentcloud:Sqlserver/configTerminateDbInstance:ConfigTerminateDbInstance":
+		r = &ConfigTerminateDbInstance{}
+	case "tencentcloud:Sqlserver/databaseTde:DatabaseTde":
+		r = &DatabaseTde{}
 	case "tencentcloud:Sqlserver/db:Db":
 		r = &Db{}
+	case "tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration":
+		r = &FullBackupMigration{}
+	case "tencentcloud:Sqlserver/generalBackup:GeneralBackup":
+		r = &GeneralBackup{}
+	case "tencentcloud:Sqlserver/generalClone:GeneralClone":
+		r = &GeneralClone{}
+	case "tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance":
+		r = &GeneralCloudInstance{}
+	case "tencentcloud:Sqlserver/generalCloudRoInstance:GeneralCloudRoInstance":
+		r = &GeneralCloudRoInstance{}
+	case "tencentcloud:Sqlserver/generalCommunication:GeneralCommunication":
+		r = &GeneralCommunication{}
+	case "tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration":
+		r = &IncreBackupMigration{}
 	case "tencentcloud:Sqlserver/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Sqlserver/instanceTde:InstanceTde":
+		r = &InstanceTde{}
 	case "tencentcloud:Sqlserver/migration:Migration":
 		r = &Migration{}
 	case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
 		r = &PublishSubscribe{}
 	case "tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance":
+		r = &RenewDbInstance{}
+	case "tencentcloud:Sqlserver/renewPostpaidDbInstance:RenewPostpaidDbInstance":
+		r = &RenewPostpaidDbInstance{}
+	case "tencentcloud:Sqlserver/restartDbInstance:RestartDbInstance":
+		r = &RestartDbInstance{}
+	case "tencentcloud:Sqlserver/restoreInstance:RestoreInstance":
+		r = &RestoreInstance{}
+	case "tencentcloud:Sqlserver/rollbackInstance:RollbackInstance":
+		r = &RollbackInstance{}
+	case "tencentcloud:Sqlserver/startBackupFullMigration:StartBackupFullMigration":
+		r = &StartBackupFullMigration{}
+	case "tencentcloud:Sqlserver/startBackupIncrementalMigration:StartBackupIncrementalMigration":
+		r = &StartBackupIncrementalMigration{}
+	case "tencentcloud:Sqlserver/startXevent:StartXevent":
+		r = &StartXevent{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -69,7 +123,62 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Sqlserver/businessIntelligenceFile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/businessIntelligenceInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/completeExpansion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Sqlserver/configBackupStrategy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configDatabaseCdc",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configDatabaseCt",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configDatabaseMdf",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configInstanceParam",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configInstanceRoGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configInstanceSecurityGroups",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/configTerminateDbInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/databaseTde",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -79,7 +188,47 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Sqlserver/fullBackupMigration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/generalBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/generalClone",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/generalCloudInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/generalCloudRoInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/generalCommunication",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/increBackupMigration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Sqlserver/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/instanceTde",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -95,6 +244,46 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Sqlserver/readonlyInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/renewDbInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/renewPostpaidDbInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/restartDbInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/restoreInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/rollbackInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/startBackupFullMigration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/startBackupIncrementalMigration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/startXevent",
 		&module{version},
 	)
 }

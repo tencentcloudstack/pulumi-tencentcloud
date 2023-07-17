@@ -10,8 +10,7 @@ import * as utilities from "../utilities";
  * > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
  *
  * ## Example Usage
- *
- * Use blackbox-exporter
+ * ### Use blackbox-exporter
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -25,8 +24,7 @@ import * as utilities from "../utilities";
  *     kubeType: 1,
  * });
  * ```
- *
- * Use es-exporter
+ * ### Use es-exporter
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

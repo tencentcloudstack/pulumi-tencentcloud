@@ -14,14 +14,46 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
+ * const logset = new tencentcloud.cls.Logset("logset", {
+ *     logsetName: "tf-config-extra-test",
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const topic = new tencentcloud.cls.Topic("topic", {
+ *     autoSplit: true,
+ *     logsetId: logset.id,
+ *     maxSplitPartitions: 20,
+ *     partitionCount: 1,
+ *     period: 10,
+ *     storageType: "hot",
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     topicName: "tf-config-extra-test",
+ * });
+ * const group = new tencentcloud.cls.MachineGroup("group", {
+ *     groupName: "tf-config-extra-test",
+ *     serviceLogging: true,
+ *     autoUpdate: true,
+ *     updateEndTime: "19:05:00",
+ *     updateStartTime: "17:05:00",
+ *     machineGroupType: {
+ *         type: "ip",
+ *         values: [
+ *             "192.168.1.1",
+ *             "192.168.1.2",
+ *         ],
+ *     },
+ * });
  * const extra = new tencentcloud.cls.ConfigExtra("extra", {
- *     topicId: tencentcloud_cls_topic.topic.id,
+ *     topicId: topic.id,
  *     type: "container_file",
  *     logType: "json_log",
  *     configFlag: "label_k8s",
- *     logsetId: tencentcloud_cls_logset.logset.id,
- *     logsetName: tencentcloud_cls_logset.logset.logset_name,
- *     topicName: tencentcloud_cls_topic.topic.topic_name,
+ *     logsetId: logset.id,
+ *     logsetName: logset.logsetName,
+ *     topicName: topic.topicName,
  *     containerFile: {
  *         container: "nginx",
  *         filePattern: "log",
@@ -34,8 +66,16 @@ import * as utilities from "../utilities";
  *             namespace: "default",
  *         },
  *     },
- *     groupId: "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+ *     groupId: group.id,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * cls config_extra can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
  * ```
  */
 export class ConfigExtra extends pulumi.CustomResource {
@@ -77,7 +117,7 @@ export class ConfigExtra extends pulumi.CustomResource {
     /**
      * Container stdout info.
      */
-    public readonly containerStdout!: pulumi.Output<outputs.Cls.ConfigExtraContainerStdout | undefined>;
+    public readonly containerStdout!: pulumi.Output<outputs.Cls.ConfigExtraContainerStdout>;
     /**
      * Collection path blocklist.
      */
@@ -85,7 +125,7 @@ export class ConfigExtra extends pulumi.CustomResource {
     /**
      * Extraction rule. If ExtractRule is set, LogType must be set.
      */
-    public readonly extractRule!: pulumi.Output<outputs.Cls.ConfigExtraExtractRule | undefined>;
+    public readonly extractRule!: pulumi.Output<outputs.Cls.ConfigExtraExtractRule>;
     /**
      * Binding group id.
      */
@@ -97,7 +137,11 @@ export class ConfigExtra extends pulumi.CustomResource {
     /**
      * Node file config info.
      */
-    public readonly hostFile!: pulumi.Output<outputs.Cls.ConfigExtraHostFile | undefined>;
+    public readonly hostFile!: pulumi.Output<outputs.Cls.ConfigExtraHostFile>;
+    /**
+     * Log format.
+     */
+    public readonly logFormat!: pulumi.Output<string | undefined>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
@@ -152,6 +196,7 @@ export class ConfigExtra extends pulumi.CustomResource {
             resourceInputs["groupId"] = state ? state.groupId : undefined;
             resourceInputs["groupIds"] = state ? state.groupIds : undefined;
             resourceInputs["hostFile"] = state ? state.hostFile : undefined;
+            resourceInputs["logFormat"] = state ? state.logFormat : undefined;
             resourceInputs["logType"] = state ? state.logType : undefined;
             resourceInputs["logsetId"] = state ? state.logsetId : undefined;
             resourceInputs["logsetName"] = state ? state.logsetName : undefined;
@@ -191,6 +236,7 @@ export class ConfigExtra extends pulumi.CustomResource {
             resourceInputs["groupId"] = args ? args.groupId : undefined;
             resourceInputs["groupIds"] = args ? args.groupIds : undefined;
             resourceInputs["hostFile"] = args ? args.hostFile : undefined;
+            resourceInputs["logFormat"] = args ? args.logFormat : undefined;
             resourceInputs["logType"] = args ? args.logType : undefined;
             resourceInputs["logsetId"] = args ? args.logsetId : undefined;
             resourceInputs["logsetName"] = args ? args.logsetName : undefined;
@@ -241,6 +287,10 @@ export interface ConfigExtraState {
      * Node file config info.
      */
     hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
+    /**
+     * Log format.
+     */
+    logFormat?: pulumi.Input<string>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
@@ -311,6 +361,10 @@ export interface ConfigExtraArgs {
      * Node file config info.
      */
     hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
+    /**
+     * Log format.
+     */
+    logFormat?: pulumi.Input<string>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */

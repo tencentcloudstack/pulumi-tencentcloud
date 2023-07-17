@@ -14,6 +14,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// Provide a resource to create serverless node pool of cluster.
     /// 
     /// ## Example Usage
+    /// ### Add serverless node pool to a cluster
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZone,
+    ///         }));
+    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
+    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
+    ///         var sg = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
+    ///         {
+    ///             Name = "default",
+    ///         }));
+    ///         var sgId = sg.Apply(sg =&gt; sg.SecurityGroups?[0]?.SecurityGroupId);
+    ///         var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = vpcId,
+    ///             ClusterCidr = exampleClusterCidr,
+    ///             ClusterMaxPodNum = 32,
+    ///             ClusterName = "tf_example_cluster",
+    ///             ClusterDesc = "tf example cluster",
+    ///             ClusterMaxServiceNum = 32,
+    ///             ClusterVersion = "1.18.4",
+    ///             ClusterDeployType = "MANAGED_CLUSTER",
+    ///         });
+    ///         var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("exampleServerlessNodePool", new Tencentcloud.Kubernetes.ServerlessNodePoolArgs
+    ///         {
+    ///             ClusterId = exampleCluster.Id,
+    ///             ServerlessNodes = 
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
+    ///                 {
+    ///                     DisplayName = "tf_example_serverless_node1",
+    ///                     SubnetId = subnetId,
+    ///                 },
+    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
+    ///                 {
+    ///                     DisplayName = "tf_example_serverless_node2",
+    ///                     SubnetId = subnetId,
+    ///                 },
+    ///             },
+    ///             SecurityGroupIds = 
+    ///             {
+    ///                 sgId,
+    ///             },
+    ///             Labels = 
+    ///             {
+    ///                 { "label1", "value1" },
+    ///                 { "label2", "value2" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Adding taints to the virtual nodes under this node pool
+    /// 
+    /// The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,30 +93,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// {
     ///     public MyStack()
     ///     {
-    ///         var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("exampleServerlessNodePool", new Tencentcloud.Kubernetes.ServerlessNodePoolArgs
+    ///         var example = new Tencentcloud.Kubernetes.ServerlessNodePool("example", new Tencentcloud.Kubernetes.ServerlessNodePoolArgs
     ///         {
     ///             ClusterId = tencentcloud_kubernetes_cluster.Example.Id,
     ///             ServerlessNodes = 
     ///             {
     ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
     ///                 {
-    ///                     DisplayName = "serverless_node1",
-    ///                     SubnetId = "subnet-xxx",
+    ///                     DisplayName = "tf_example_serverless_node1",
+    ///                     SubnetId = local.Subnet_id,
     ///                 },
     ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
     ///                 {
-    ///                     DisplayName = "serverless_node2",
-    ///                     SubnetId = "subnet-xxx",
+    ///                     DisplayName = "tf_example_serverless_node2",
+    ///                     SubnetId = local.Subnet_id,
     ///                 },
     ///             },
     ///             SecurityGroupIds = 
     ///             {
-    ///                 "sg-xxx",
+    ///                 local.Sg_id,
     ///             },
     ///             Labels = 
     ///             {
-    ///                 { "example1", "test1" },
-    ///                 { "example2", "test2" },
+    ///                 { "label1", "value1" },
+    ///                 { "label2", "value2" },
+    ///             },
+    ///             Taints = 
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
+    ///                 {
+    ///                     Key = "key1",
+    ///                     Value = "value1",
+    ///                     Effect = "NoSchedule",
+    ///                 },
+    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
+    ///                 {
+    ///                     Key = "key1",
+    ///                     Value = "value1",
+    ///                     Effect = "NoExecute",
+    ///                 },
     ///             },
     ///         });
     ///     }

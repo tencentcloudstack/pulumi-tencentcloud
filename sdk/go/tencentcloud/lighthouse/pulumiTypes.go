@@ -10,6 +10,356 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type DiskAutoMountConfiguration struct {
+	// The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+	FileSystemType *string `pulumi:"fileSystemType"`
+	// Instance ID to be mounted. The specified instance must be in the Running state.
+	InstanceId string `pulumi:"instanceId"`
+	// The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+	MountPoint *string `pulumi:"mountPoint"`
+}
+
+// DiskAutoMountConfigurationInput is an input type that accepts DiskAutoMountConfigurationArgs and DiskAutoMountConfigurationOutput values.
+// You can construct a concrete instance of `DiskAutoMountConfigurationInput` via:
+//
+//          DiskAutoMountConfigurationArgs{...}
+type DiskAutoMountConfigurationInput interface {
+	pulumi.Input
+
+	ToDiskAutoMountConfigurationOutput() DiskAutoMountConfigurationOutput
+	ToDiskAutoMountConfigurationOutputWithContext(context.Context) DiskAutoMountConfigurationOutput
+}
+
+type DiskAutoMountConfigurationArgs struct {
+	// The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+	FileSystemType pulumi.StringPtrInput `pulumi:"fileSystemType"`
+	// Instance ID to be mounted. The specified instance must be in the Running state.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+	MountPoint pulumi.StringPtrInput `pulumi:"mountPoint"`
+}
+
+func (DiskAutoMountConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiskAutoMountConfiguration)(nil)).Elem()
+}
+
+func (i DiskAutoMountConfigurationArgs) ToDiskAutoMountConfigurationOutput() DiskAutoMountConfigurationOutput {
+	return i.ToDiskAutoMountConfigurationOutputWithContext(context.Background())
+}
+
+func (i DiskAutoMountConfigurationArgs) ToDiskAutoMountConfigurationOutputWithContext(ctx context.Context) DiskAutoMountConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskAutoMountConfigurationOutput)
+}
+
+func (i DiskAutoMountConfigurationArgs) ToDiskAutoMountConfigurationPtrOutput() DiskAutoMountConfigurationPtrOutput {
+	return i.ToDiskAutoMountConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i DiskAutoMountConfigurationArgs) ToDiskAutoMountConfigurationPtrOutputWithContext(ctx context.Context) DiskAutoMountConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskAutoMountConfigurationOutput).ToDiskAutoMountConfigurationPtrOutputWithContext(ctx)
+}
+
+// DiskAutoMountConfigurationPtrInput is an input type that accepts DiskAutoMountConfigurationArgs, DiskAutoMountConfigurationPtr and DiskAutoMountConfigurationPtrOutput values.
+// You can construct a concrete instance of `DiskAutoMountConfigurationPtrInput` via:
+//
+//          DiskAutoMountConfigurationArgs{...}
+//
+//  or:
+//
+//          nil
+type DiskAutoMountConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToDiskAutoMountConfigurationPtrOutput() DiskAutoMountConfigurationPtrOutput
+	ToDiskAutoMountConfigurationPtrOutputWithContext(context.Context) DiskAutoMountConfigurationPtrOutput
+}
+
+type diskAutoMountConfigurationPtrType DiskAutoMountConfigurationArgs
+
+func DiskAutoMountConfigurationPtr(v *DiskAutoMountConfigurationArgs) DiskAutoMountConfigurationPtrInput {
+	return (*diskAutoMountConfigurationPtrType)(v)
+}
+
+func (*diskAutoMountConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DiskAutoMountConfiguration)(nil)).Elem()
+}
+
+func (i *diskAutoMountConfigurationPtrType) ToDiskAutoMountConfigurationPtrOutput() DiskAutoMountConfigurationPtrOutput {
+	return i.ToDiskAutoMountConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *diskAutoMountConfigurationPtrType) ToDiskAutoMountConfigurationPtrOutputWithContext(ctx context.Context) DiskAutoMountConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskAutoMountConfigurationPtrOutput)
+}
+
+type DiskAutoMountConfigurationOutput struct{ *pulumi.OutputState }
+
+func (DiskAutoMountConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiskAutoMountConfiguration)(nil)).Elem()
+}
+
+func (o DiskAutoMountConfigurationOutput) ToDiskAutoMountConfigurationOutput() DiskAutoMountConfigurationOutput {
+	return o
+}
+
+func (o DiskAutoMountConfigurationOutput) ToDiskAutoMountConfigurationOutputWithContext(ctx context.Context) DiskAutoMountConfigurationOutput {
+	return o
+}
+
+func (o DiskAutoMountConfigurationOutput) ToDiskAutoMountConfigurationPtrOutput() DiskAutoMountConfigurationPtrOutput {
+	return o.ToDiskAutoMountConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o DiskAutoMountConfigurationOutput) ToDiskAutoMountConfigurationPtrOutputWithContext(ctx context.Context) DiskAutoMountConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DiskAutoMountConfiguration) *DiskAutoMountConfiguration {
+		return &v
+	}).(DiskAutoMountConfigurationPtrOutput)
+}
+
+// The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+func (o DiskAutoMountConfigurationOutput) FileSystemType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiskAutoMountConfiguration) *string { return v.FileSystemType }).(pulumi.StringPtrOutput)
+}
+
+// Instance ID to be mounted. The specified instance must be in the Running state.
+func (o DiskAutoMountConfigurationOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v DiskAutoMountConfiguration) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+func (o DiskAutoMountConfigurationOutput) MountPoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiskAutoMountConfiguration) *string { return v.MountPoint }).(pulumi.StringPtrOutput)
+}
+
+type DiskAutoMountConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (DiskAutoMountConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DiskAutoMountConfiguration)(nil)).Elem()
+}
+
+func (o DiskAutoMountConfigurationPtrOutput) ToDiskAutoMountConfigurationPtrOutput() DiskAutoMountConfigurationPtrOutput {
+	return o
+}
+
+func (o DiskAutoMountConfigurationPtrOutput) ToDiskAutoMountConfigurationPtrOutputWithContext(ctx context.Context) DiskAutoMountConfigurationPtrOutput {
+	return o
+}
+
+func (o DiskAutoMountConfigurationPtrOutput) Elem() DiskAutoMountConfigurationOutput {
+	return o.ApplyT(func(v *DiskAutoMountConfiguration) DiskAutoMountConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret DiskAutoMountConfiguration
+		return ret
+	}).(DiskAutoMountConfigurationOutput)
+}
+
+// The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
+func (o DiskAutoMountConfigurationPtrOutput) FileSystemType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DiskAutoMountConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FileSystemType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Instance ID to be mounted. The specified instance must be in the Running state.
+func (o DiskAutoMountConfigurationPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DiskAutoMountConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.
+func (o DiskAutoMountConfigurationPtrOutput) MountPoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DiskAutoMountConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MountPoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type DiskDiskChargePrepaid struct {
+	// new purchase cycle.
+	Period int `pulumi:"period"`
+	// Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+	RenewFlag *string `pulumi:"renewFlag"`
+	// newly purchased unit. Default: m.
+	TimeUnit *string `pulumi:"timeUnit"`
+}
+
+// DiskDiskChargePrepaidInput is an input type that accepts DiskDiskChargePrepaidArgs and DiskDiskChargePrepaidOutput values.
+// You can construct a concrete instance of `DiskDiskChargePrepaidInput` via:
+//
+//          DiskDiskChargePrepaidArgs{...}
+type DiskDiskChargePrepaidInput interface {
+	pulumi.Input
+
+	ToDiskDiskChargePrepaidOutput() DiskDiskChargePrepaidOutput
+	ToDiskDiskChargePrepaidOutputWithContext(context.Context) DiskDiskChargePrepaidOutput
+}
+
+type DiskDiskChargePrepaidArgs struct {
+	// new purchase cycle.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+	// newly purchased unit. Default: m.
+	TimeUnit pulumi.StringPtrInput `pulumi:"timeUnit"`
+}
+
+func (DiskDiskChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiskDiskChargePrepaid)(nil)).Elem()
+}
+
+func (i DiskDiskChargePrepaidArgs) ToDiskDiskChargePrepaidOutput() DiskDiskChargePrepaidOutput {
+	return i.ToDiskDiskChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i DiskDiskChargePrepaidArgs) ToDiskDiskChargePrepaidOutputWithContext(ctx context.Context) DiskDiskChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskDiskChargePrepaidOutput)
+}
+
+func (i DiskDiskChargePrepaidArgs) ToDiskDiskChargePrepaidPtrOutput() DiskDiskChargePrepaidPtrOutput {
+	return i.ToDiskDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i DiskDiskChargePrepaidArgs) ToDiskDiskChargePrepaidPtrOutputWithContext(ctx context.Context) DiskDiskChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskDiskChargePrepaidOutput).ToDiskDiskChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// DiskDiskChargePrepaidPtrInput is an input type that accepts DiskDiskChargePrepaidArgs, DiskDiskChargePrepaidPtr and DiskDiskChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `DiskDiskChargePrepaidPtrInput` via:
+//
+//          DiskDiskChargePrepaidArgs{...}
+//
+//  or:
+//
+//          nil
+type DiskDiskChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToDiskDiskChargePrepaidPtrOutput() DiskDiskChargePrepaidPtrOutput
+	ToDiskDiskChargePrepaidPtrOutputWithContext(context.Context) DiskDiskChargePrepaidPtrOutput
+}
+
+type diskDiskChargePrepaidPtrType DiskDiskChargePrepaidArgs
+
+func DiskDiskChargePrepaidPtr(v *DiskDiskChargePrepaidArgs) DiskDiskChargePrepaidPtrInput {
+	return (*diskDiskChargePrepaidPtrType)(v)
+}
+
+func (*diskDiskChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DiskDiskChargePrepaid)(nil)).Elem()
+}
+
+func (i *diskDiskChargePrepaidPtrType) ToDiskDiskChargePrepaidPtrOutput() DiskDiskChargePrepaidPtrOutput {
+	return i.ToDiskDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *diskDiskChargePrepaidPtrType) ToDiskDiskChargePrepaidPtrOutputWithContext(ctx context.Context) DiskDiskChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiskDiskChargePrepaidPtrOutput)
+}
+
+type DiskDiskChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (DiskDiskChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiskDiskChargePrepaid)(nil)).Elem()
+}
+
+func (o DiskDiskChargePrepaidOutput) ToDiskDiskChargePrepaidOutput() DiskDiskChargePrepaidOutput {
+	return o
+}
+
+func (o DiskDiskChargePrepaidOutput) ToDiskDiskChargePrepaidOutputWithContext(ctx context.Context) DiskDiskChargePrepaidOutput {
+	return o
+}
+
+func (o DiskDiskChargePrepaidOutput) ToDiskDiskChargePrepaidPtrOutput() DiskDiskChargePrepaidPtrOutput {
+	return o.ToDiskDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o DiskDiskChargePrepaidOutput) ToDiskDiskChargePrepaidPtrOutputWithContext(ctx context.Context) DiskDiskChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DiskDiskChargePrepaid) *DiskDiskChargePrepaid {
+		return &v
+	}).(DiskDiskChargePrepaidPtrOutput)
+}
+
+// new purchase cycle.
+func (o DiskDiskChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v DiskDiskChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+func (o DiskDiskChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiskDiskChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+// newly purchased unit. Default: m.
+func (o DiskDiskChargePrepaidOutput) TimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiskDiskChargePrepaid) *string { return v.TimeUnit }).(pulumi.StringPtrOutput)
+}
+
+type DiskDiskChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (DiskDiskChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DiskDiskChargePrepaid)(nil)).Elem()
+}
+
+func (o DiskDiskChargePrepaidPtrOutput) ToDiskDiskChargePrepaidPtrOutput() DiskDiskChargePrepaidPtrOutput {
+	return o
+}
+
+func (o DiskDiskChargePrepaidPtrOutput) ToDiskDiskChargePrepaidPtrOutputWithContext(ctx context.Context) DiskDiskChargePrepaidPtrOutput {
+	return o
+}
+
+func (o DiskDiskChargePrepaidPtrOutput) Elem() DiskDiskChargePrepaidOutput {
+	return o.ApplyT(func(v *DiskDiskChargePrepaid) DiskDiskChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret DiskDiskChargePrepaid
+		return ret
+	}).(DiskDiskChargePrepaidOutput)
+}
+
+// new purchase cycle.
+func (o DiskDiskChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DiskDiskChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Automatic renewal flag. Value: `NOTIFY_AND_AUTO_RENEW`: Notice expires and auto-renews. `NOTIFY_AND_MANUAL_RENEW`: Notification expires without automatic renewal, users need to manually renew. `DISABLE_NOTIFY_AND_AUTO_RENEW`: No automatic renewal and no notification. Default: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the disk will be automatically renewed monthly when the account balance is sufficient.
+func (o DiskDiskChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DiskDiskChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+// newly purchased unit. Default: m.
+func (o DiskDiskChargePrepaidPtrOutput) TimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DiskDiskChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeUnit
+	}).(pulumi.StringPtrOutput)
+}
+
 type FirewallRuleFirewallRule struct {
 	// Valid values are ACCEPT, DROP. Default value is ACCEPT.
 	Action *string `pulumi:"action"`
@@ -777,6 +1127,487 @@ func (o InstanceLoginConfigurationPtrOutput) Password() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type RenewDiskRenewDiskChargePrepaid struct {
+	// Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+	CurInstanceDeadline *string `pulumi:"curInstanceDeadline"`
+	// Renewal period.
+	Period *int `pulumi:"period"`
+	// Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+	RenewFlag *string `pulumi:"renewFlag"`
+	// newly purchased unit. Default: m.
+	TimeUnit *string `pulumi:"timeUnit"`
+}
+
+// RenewDiskRenewDiskChargePrepaidInput is an input type that accepts RenewDiskRenewDiskChargePrepaidArgs and RenewDiskRenewDiskChargePrepaidOutput values.
+// You can construct a concrete instance of `RenewDiskRenewDiskChargePrepaidInput` via:
+//
+//          RenewDiskRenewDiskChargePrepaidArgs{...}
+type RenewDiskRenewDiskChargePrepaidInput interface {
+	pulumi.Input
+
+	ToRenewDiskRenewDiskChargePrepaidOutput() RenewDiskRenewDiskChargePrepaidOutput
+	ToRenewDiskRenewDiskChargePrepaidOutputWithContext(context.Context) RenewDiskRenewDiskChargePrepaidOutput
+}
+
+type RenewDiskRenewDiskChargePrepaidArgs struct {
+	// Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+	CurInstanceDeadline pulumi.StringPtrInput `pulumi:"curInstanceDeadline"`
+	// Renewal period.
+	Period pulumi.IntPtrInput `pulumi:"period"`
+	// Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+	// newly purchased unit. Default: m.
+	TimeUnit pulumi.StringPtrInput `pulumi:"timeUnit"`
+}
+
+func (RenewDiskRenewDiskChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewDiskRenewDiskChargePrepaid)(nil)).Elem()
+}
+
+func (i RenewDiskRenewDiskChargePrepaidArgs) ToRenewDiskRenewDiskChargePrepaidOutput() RenewDiskRenewDiskChargePrepaidOutput {
+	return i.ToRenewDiskRenewDiskChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i RenewDiskRenewDiskChargePrepaidArgs) ToRenewDiskRenewDiskChargePrepaidOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewDiskRenewDiskChargePrepaidOutput)
+}
+
+func (i RenewDiskRenewDiskChargePrepaidArgs) ToRenewDiskRenewDiskChargePrepaidPtrOutput() RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return i.ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i RenewDiskRenewDiskChargePrepaidArgs) ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewDiskRenewDiskChargePrepaidOutput).ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// RenewDiskRenewDiskChargePrepaidPtrInput is an input type that accepts RenewDiskRenewDiskChargePrepaidArgs, RenewDiskRenewDiskChargePrepaidPtr and RenewDiskRenewDiskChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `RenewDiskRenewDiskChargePrepaidPtrInput` via:
+//
+//          RenewDiskRenewDiskChargePrepaidArgs{...}
+//
+//  or:
+//
+//          nil
+type RenewDiskRenewDiskChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToRenewDiskRenewDiskChargePrepaidPtrOutput() RenewDiskRenewDiskChargePrepaidPtrOutput
+	ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(context.Context) RenewDiskRenewDiskChargePrepaidPtrOutput
+}
+
+type renewDiskRenewDiskChargePrepaidPtrType RenewDiskRenewDiskChargePrepaidArgs
+
+func RenewDiskRenewDiskChargePrepaidPtr(v *RenewDiskRenewDiskChargePrepaidArgs) RenewDiskRenewDiskChargePrepaidPtrInput {
+	return (*renewDiskRenewDiskChargePrepaidPtrType)(v)
+}
+
+func (*renewDiskRenewDiskChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewDiskRenewDiskChargePrepaid)(nil)).Elem()
+}
+
+func (i *renewDiskRenewDiskChargePrepaidPtrType) ToRenewDiskRenewDiskChargePrepaidPtrOutput() RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return i.ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *renewDiskRenewDiskChargePrepaidPtrType) ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewDiskRenewDiskChargePrepaidPtrOutput)
+}
+
+type RenewDiskRenewDiskChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (RenewDiskRenewDiskChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewDiskRenewDiskChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewDiskRenewDiskChargePrepaidOutput) ToRenewDiskRenewDiskChargePrepaidOutput() RenewDiskRenewDiskChargePrepaidOutput {
+	return o
+}
+
+func (o RenewDiskRenewDiskChargePrepaidOutput) ToRenewDiskRenewDiskChargePrepaidOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidOutput {
+	return o
+}
+
+func (o RenewDiskRenewDiskChargePrepaidOutput) ToRenewDiskRenewDiskChargePrepaidPtrOutput() RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return o.ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o RenewDiskRenewDiskChargePrepaidOutput) ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RenewDiskRenewDiskChargePrepaid) *RenewDiskRenewDiskChargePrepaid {
+		return &v
+	}).(RenewDiskRenewDiskChargePrepaidPtrOutput)
+}
+
+// Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+func (o RenewDiskRenewDiskChargePrepaidOutput) CurInstanceDeadline() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewDiskRenewDiskChargePrepaid) *string { return v.CurInstanceDeadline }).(pulumi.StringPtrOutput)
+}
+
+// Renewal period.
+func (o RenewDiskRenewDiskChargePrepaidOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RenewDiskRenewDiskChargePrepaid) *int { return v.Period }).(pulumi.IntPtrOutput)
+}
+
+// Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+func (o RenewDiskRenewDiskChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewDiskRenewDiskChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+// newly purchased unit. Default: m.
+func (o RenewDiskRenewDiskChargePrepaidOutput) TimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewDiskRenewDiskChargePrepaid) *string { return v.TimeUnit }).(pulumi.StringPtrOutput)
+}
+
+type RenewDiskRenewDiskChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (RenewDiskRenewDiskChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewDiskRenewDiskChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) ToRenewDiskRenewDiskChargePrepaidPtrOutput() RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) ToRenewDiskRenewDiskChargePrepaidPtrOutputWithContext(ctx context.Context) RenewDiskRenewDiskChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) Elem() RenewDiskRenewDiskChargePrepaidOutput {
+	return o.ApplyT(func(v *RenewDiskRenewDiskChargePrepaid) RenewDiskRenewDiskChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret RenewDiskRenewDiskChargePrepaid
+		return ret
+	}).(RenewDiskRenewDiskChargePrepaidOutput)
+}
+
+// Current instance expiration time. Such as 2018-01-01 00:00:00. Specifying this parameter can align the expiration time of the instance attached to the disk. One of this parameter and Period must be specified, and cannot be specified at the same time.
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) CurInstanceDeadline() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewDiskRenewDiskChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CurInstanceDeadline
+	}).(pulumi.StringPtrOutput)
+}
+
+// Renewal period.
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RenewDiskRenewDiskChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Automatic renewal falg. Value:NOTIFY_AND_AUTO_RENEW: Notice expires and auto-renews.NOTIFY_AND_MANUAL_RENEW: Notification expires without automatic renewal, users need to manually renew.DISABLE_NOTIFY_AND_AUTO_RENEW: No automatic renewal and no notification.Default: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the disk will be automatically renewed monthly when the account balance is sufficient.
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewDiskRenewDiskChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+// newly purchased unit. Default: m.
+func (o RenewDiskRenewDiskChargePrepaidPtrOutput) TimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewDiskRenewDiskChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeUnit
+	}).(pulumi.StringPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaid struct {
+	// The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+	Period int `pulumi:"period"`
+	// Automatic renewal logo. Values:
+	// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+	// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+	// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+	//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+	RenewFlag *string `pulumi:"renewFlag"`
+}
+
+// RenewInstanceInstanceChargePrepaidInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs and RenewInstanceInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidInput` via:
+//
+//          RenewInstanceInstanceChargePrepaidArgs{...}
+type RenewInstanceInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput
+	ToRenewInstanceInstanceChargePrepaidOutputWithContext(context.Context) RenewInstanceInstanceChargePrepaidOutput
+}
+
+type RenewInstanceInstanceChargePrepaidArgs struct {
+	// The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+	Period pulumi.IntInput `pulumi:"period"`
+	// Automatic renewal logo. Values:
+	// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+	// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+	// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+	//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+}
+
+func (RenewInstanceInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidOutput)
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidOutput).ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// RenewInstanceInstanceChargePrepaidPtrInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs, RenewInstanceInstanceChargePrepaidPtr and RenewInstanceInstanceChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidPtrInput` via:
+//
+//          RenewInstanceInstanceChargePrepaidArgs{...}
+//
+//  or:
+//
+//          nil
+type RenewInstanceInstanceChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput
+	ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Context) RenewInstanceInstanceChargePrepaidPtrOutput
+}
+
+type renewInstanceInstanceChargePrepaidPtrType RenewInstanceInstanceChargePrepaidArgs
+
+func RenewInstanceInstanceChargePrepaidPtr(v *RenewInstanceInstanceChargePrepaidArgs) RenewInstanceInstanceChargePrepaidPtrInput {
+	return (*renewInstanceInstanceChargePrepaidPtrType)(v)
+}
+
+func (*renewInstanceInstanceChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i *renewInstanceInstanceChargePrepaidPtrType) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *renewInstanceInstanceChargePrepaidPtrType) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RenewInstanceInstanceChargePrepaidPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (RenewInstanceInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidOutput() RenewInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o.ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o RenewInstanceInstanceChargePrepaidOutput) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RenewInstanceInstanceChargePrepaid) *RenewInstanceInstanceChargePrepaid {
+		return &v
+	}).(RenewInstanceInstanceChargePrepaidPtrOutput)
+}
+
+// The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+func (o RenewInstanceInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Automatic renewal logo. Values:
+// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+func (o RenewInstanceInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+type RenewInstanceInstanceChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (RenewInstanceInstanceChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RenewInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) ToRenewInstanceInstanceChargePrepaidPtrOutput() RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) ToRenewInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) RenewInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) Elem() RenewInstanceInstanceChargePrepaidOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) RenewInstanceInstanceChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret RenewInstanceInstanceChargePrepaid
+		return ret
+	}).(RenewInstanceInstanceChargePrepaidOutput)
+}
+
+// The duration of purchasing an instance. Unit is month. Valid values are (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60).
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Automatic renewal logo. Values:
+// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+func (o RenewInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetAllSceneSceneSet struct {
+	// Use scene description.
+	Description string `pulumi:"description"`
+	// Use the scene presentation name.
+	DisplayName string `pulumi:"displayName"`
+	// Use scene Id.
+	SceneId string `pulumi:"sceneId"`
+}
+
+// GetAllSceneSceneSetInput is an input type that accepts GetAllSceneSceneSetArgs and GetAllSceneSceneSetOutput values.
+// You can construct a concrete instance of `GetAllSceneSceneSetInput` via:
+//
+//          GetAllSceneSceneSetArgs{...}
+type GetAllSceneSceneSetInput interface {
+	pulumi.Input
+
+	ToGetAllSceneSceneSetOutput() GetAllSceneSceneSetOutput
+	ToGetAllSceneSceneSetOutputWithContext(context.Context) GetAllSceneSceneSetOutput
+}
+
+type GetAllSceneSceneSetArgs struct {
+	// Use scene description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Use the scene presentation name.
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// Use scene Id.
+	SceneId pulumi.StringInput `pulumi:"sceneId"`
+}
+
+func (GetAllSceneSceneSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAllSceneSceneSet)(nil)).Elem()
+}
+
+func (i GetAllSceneSceneSetArgs) ToGetAllSceneSceneSetOutput() GetAllSceneSceneSetOutput {
+	return i.ToGetAllSceneSceneSetOutputWithContext(context.Background())
+}
+
+func (i GetAllSceneSceneSetArgs) ToGetAllSceneSceneSetOutputWithContext(ctx context.Context) GetAllSceneSceneSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAllSceneSceneSetOutput)
+}
+
+// GetAllSceneSceneSetArrayInput is an input type that accepts GetAllSceneSceneSetArray and GetAllSceneSceneSetArrayOutput values.
+// You can construct a concrete instance of `GetAllSceneSceneSetArrayInput` via:
+//
+//          GetAllSceneSceneSetArray{ GetAllSceneSceneSetArgs{...} }
+type GetAllSceneSceneSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAllSceneSceneSetArrayOutput() GetAllSceneSceneSetArrayOutput
+	ToGetAllSceneSceneSetArrayOutputWithContext(context.Context) GetAllSceneSceneSetArrayOutput
+}
+
+type GetAllSceneSceneSetArray []GetAllSceneSceneSetInput
+
+func (GetAllSceneSceneSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAllSceneSceneSet)(nil)).Elem()
+}
+
+func (i GetAllSceneSceneSetArray) ToGetAllSceneSceneSetArrayOutput() GetAllSceneSceneSetArrayOutput {
+	return i.ToGetAllSceneSceneSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAllSceneSceneSetArray) ToGetAllSceneSceneSetArrayOutputWithContext(ctx context.Context) GetAllSceneSceneSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAllSceneSceneSetArrayOutput)
+}
+
+type GetAllSceneSceneSetOutput struct{ *pulumi.OutputState }
+
+func (GetAllSceneSceneSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAllSceneSceneSet)(nil)).Elem()
+}
+
+func (o GetAllSceneSceneSetOutput) ToGetAllSceneSceneSetOutput() GetAllSceneSceneSetOutput {
+	return o
+}
+
+func (o GetAllSceneSceneSetOutput) ToGetAllSceneSceneSetOutputWithContext(ctx context.Context) GetAllSceneSceneSetOutput {
+	return o
+}
+
+// Use scene description.
+func (o GetAllSceneSceneSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAllSceneSceneSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Use the scene presentation name.
+func (o GetAllSceneSceneSetOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAllSceneSceneSet) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Use scene Id.
+func (o GetAllSceneSceneSetOutput) SceneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAllSceneSceneSet) string { return v.SceneId }).(pulumi.StringOutput)
+}
+
+type GetAllSceneSceneSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAllSceneSceneSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAllSceneSceneSet)(nil)).Elem()
+}
+
+func (o GetAllSceneSceneSetArrayOutput) ToGetAllSceneSceneSetArrayOutput() GetAllSceneSceneSetArrayOutput {
+	return o
+}
+
+func (o GetAllSceneSceneSetArrayOutput) ToGetAllSceneSceneSetArrayOutputWithContext(ctx context.Context) GetAllSceneSceneSetArrayOutput {
+	return o
+}
+
+func (o GetAllSceneSceneSetArrayOutput) Index(i pulumi.IntInput) GetAllSceneSceneSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAllSceneSceneSet {
+		return vs[0].([]GetAllSceneSceneSet)[vs[1].(int)]
+	}).(GetAllSceneSceneSetOutput)
+}
+
 type GetBundleBundleSet struct {
 	// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
 	BundleDisplayLabel string `pulumi:"bundleDisplayLabel"`
@@ -1327,6 +2158,628 @@ func (o GetBundleFilterArrayOutput) Index(i pulumi.IntInput) GetBundleFilterOutp
 	}).(GetBundleFilterOutput)
 }
 
+type GetDiskConfigDiskConfigSet struct {
+	// Cloud disk sale status.
+	DiskSalesState string `pulumi:"diskSalesState"`
+	// Cloud disk increment.
+	DiskStepSize int `pulumi:"diskStepSize"`
+	// Cloud disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum cloud disk size.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum cloud disk size.
+	MinDiskSize int `pulumi:"minDiskSize"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetDiskConfigDiskConfigSetInput is an input type that accepts GetDiskConfigDiskConfigSetArgs and GetDiskConfigDiskConfigSetOutput values.
+// You can construct a concrete instance of `GetDiskConfigDiskConfigSetInput` via:
+//
+//          GetDiskConfigDiskConfigSetArgs{...}
+type GetDiskConfigDiskConfigSetInput interface {
+	pulumi.Input
+
+	ToGetDiskConfigDiskConfigSetOutput() GetDiskConfigDiskConfigSetOutput
+	ToGetDiskConfigDiskConfigSetOutputWithContext(context.Context) GetDiskConfigDiskConfigSetOutput
+}
+
+type GetDiskConfigDiskConfigSetArgs struct {
+	// Cloud disk sale status.
+	DiskSalesState pulumi.StringInput `pulumi:"diskSalesState"`
+	// Cloud disk increment.
+	DiskStepSize pulumi.IntInput `pulumi:"diskStepSize"`
+	// Cloud disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum cloud disk size.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum cloud disk size.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetDiskConfigDiskConfigSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiskConfigDiskConfigSet)(nil)).Elem()
+}
+
+func (i GetDiskConfigDiskConfigSetArgs) ToGetDiskConfigDiskConfigSetOutput() GetDiskConfigDiskConfigSetOutput {
+	return i.ToGetDiskConfigDiskConfigSetOutputWithContext(context.Background())
+}
+
+func (i GetDiskConfigDiskConfigSetArgs) ToGetDiskConfigDiskConfigSetOutputWithContext(ctx context.Context) GetDiskConfigDiskConfigSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskConfigDiskConfigSetOutput)
+}
+
+// GetDiskConfigDiskConfigSetArrayInput is an input type that accepts GetDiskConfigDiskConfigSetArray and GetDiskConfigDiskConfigSetArrayOutput values.
+// You can construct a concrete instance of `GetDiskConfigDiskConfigSetArrayInput` via:
+//
+//          GetDiskConfigDiskConfigSetArray{ GetDiskConfigDiskConfigSetArgs{...} }
+type GetDiskConfigDiskConfigSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDiskConfigDiskConfigSetArrayOutput() GetDiskConfigDiskConfigSetArrayOutput
+	ToGetDiskConfigDiskConfigSetArrayOutputWithContext(context.Context) GetDiskConfigDiskConfigSetArrayOutput
+}
+
+type GetDiskConfigDiskConfigSetArray []GetDiskConfigDiskConfigSetInput
+
+func (GetDiskConfigDiskConfigSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiskConfigDiskConfigSet)(nil)).Elem()
+}
+
+func (i GetDiskConfigDiskConfigSetArray) ToGetDiskConfigDiskConfigSetArrayOutput() GetDiskConfigDiskConfigSetArrayOutput {
+	return i.ToGetDiskConfigDiskConfigSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiskConfigDiskConfigSetArray) ToGetDiskConfigDiskConfigSetArrayOutputWithContext(ctx context.Context) GetDiskConfigDiskConfigSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskConfigDiskConfigSetArrayOutput)
+}
+
+type GetDiskConfigDiskConfigSetOutput struct{ *pulumi.OutputState }
+
+func (GetDiskConfigDiskConfigSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiskConfigDiskConfigSet)(nil)).Elem()
+}
+
+func (o GetDiskConfigDiskConfigSetOutput) ToGetDiskConfigDiskConfigSetOutput() GetDiskConfigDiskConfigSetOutput {
+	return o
+}
+
+func (o GetDiskConfigDiskConfigSetOutput) ToGetDiskConfigDiskConfigSetOutputWithContext(ctx context.Context) GetDiskConfigDiskConfigSetOutput {
+	return o
+}
+
+// Cloud disk sale status.
+func (o GetDiskConfigDiskConfigSetOutput) DiskSalesState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) string { return v.DiskSalesState }).(pulumi.StringOutput)
+}
+
+// Cloud disk increment.
+func (o GetDiskConfigDiskConfigSetOutput) DiskStepSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) int { return v.DiskStepSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type.
+func (o GetDiskConfigDiskConfigSetOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum cloud disk size.
+func (o GetDiskConfigDiskConfigSetOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum cloud disk size.
+func (o GetDiskConfigDiskConfigSetOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+// Availability zone.
+func (o GetDiskConfigDiskConfigSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiskConfigDiskConfigSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetDiskConfigDiskConfigSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiskConfigDiskConfigSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiskConfigDiskConfigSet)(nil)).Elem()
+}
+
+func (o GetDiskConfigDiskConfigSetArrayOutput) ToGetDiskConfigDiskConfigSetArrayOutput() GetDiskConfigDiskConfigSetArrayOutput {
+	return o
+}
+
+func (o GetDiskConfigDiskConfigSetArrayOutput) ToGetDiskConfigDiskConfigSetArrayOutputWithContext(ctx context.Context) GetDiskConfigDiskConfigSetArrayOutput {
+	return o
+}
+
+func (o GetDiskConfigDiskConfigSetArrayOutput) Index(i pulumi.IntInput) GetDiskConfigDiskConfigSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiskConfigDiskConfigSet {
+		return vs[0].([]GetDiskConfigDiskConfigSet)[vs[1].(int)]
+	}).(GetDiskConfigDiskConfigSetOutput)
+}
+
+type GetDiskConfigFilter struct {
+	// Field to be filtered.
+	Name string `pulumi:"name"`
+	// Filter value of field.
+	Values []string `pulumi:"values"`
+}
+
+// GetDiskConfigFilterInput is an input type that accepts GetDiskConfigFilterArgs and GetDiskConfigFilterOutput values.
+// You can construct a concrete instance of `GetDiskConfigFilterInput` via:
+//
+//          GetDiskConfigFilterArgs{...}
+type GetDiskConfigFilterInput interface {
+	pulumi.Input
+
+	ToGetDiskConfigFilterOutput() GetDiskConfigFilterOutput
+	ToGetDiskConfigFilterOutputWithContext(context.Context) GetDiskConfigFilterOutput
+}
+
+type GetDiskConfigFilterArgs struct {
+	// Field to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetDiskConfigFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiskConfigFilter)(nil)).Elem()
+}
+
+func (i GetDiskConfigFilterArgs) ToGetDiskConfigFilterOutput() GetDiskConfigFilterOutput {
+	return i.ToGetDiskConfigFilterOutputWithContext(context.Background())
+}
+
+func (i GetDiskConfigFilterArgs) ToGetDiskConfigFilterOutputWithContext(ctx context.Context) GetDiskConfigFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskConfigFilterOutput)
+}
+
+// GetDiskConfigFilterArrayInput is an input type that accepts GetDiskConfigFilterArray and GetDiskConfigFilterArrayOutput values.
+// You can construct a concrete instance of `GetDiskConfigFilterArrayInput` via:
+//
+//          GetDiskConfigFilterArray{ GetDiskConfigFilterArgs{...} }
+type GetDiskConfigFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDiskConfigFilterArrayOutput() GetDiskConfigFilterArrayOutput
+	ToGetDiskConfigFilterArrayOutputWithContext(context.Context) GetDiskConfigFilterArrayOutput
+}
+
+type GetDiskConfigFilterArray []GetDiskConfigFilterInput
+
+func (GetDiskConfigFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiskConfigFilter)(nil)).Elem()
+}
+
+func (i GetDiskConfigFilterArray) ToGetDiskConfigFilterArrayOutput() GetDiskConfigFilterArrayOutput {
+	return i.ToGetDiskConfigFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiskConfigFilterArray) ToGetDiskConfigFilterArrayOutputWithContext(ctx context.Context) GetDiskConfigFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskConfigFilterArrayOutput)
+}
+
+type GetDiskConfigFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDiskConfigFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiskConfigFilter)(nil)).Elem()
+}
+
+func (o GetDiskConfigFilterOutput) ToGetDiskConfigFilterOutput() GetDiskConfigFilterOutput {
+	return o
+}
+
+func (o GetDiskConfigFilterOutput) ToGetDiskConfigFilterOutputWithContext(ctx context.Context) GetDiskConfigFilterOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetDiskConfigFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiskConfigFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of field.
+func (o GetDiskConfigFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDiskConfigFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetDiskConfigFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiskConfigFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiskConfigFilter)(nil)).Elem()
+}
+
+func (o GetDiskConfigFilterArrayOutput) ToGetDiskConfigFilterArrayOutput() GetDiskConfigFilterArrayOutput {
+	return o
+}
+
+func (o GetDiskConfigFilterArrayOutput) ToGetDiskConfigFilterArrayOutputWithContext(ctx context.Context) GetDiskConfigFilterArrayOutput {
+	return o
+}
+
+func (o GetDiskConfigFilterArrayOutput) Index(i pulumi.IntInput) GetDiskConfigFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiskConfigFilter {
+		return vs[0].([]GetDiskConfigFilter)[vs[1].(int)]
+	}).(GetDiskConfigFilterOutput)
+}
+
+type GetDisksDiskList struct {
+	// Disk attach state.
+	Attached bool `pulumi:"attached"`
+	// Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	CreatedTime string `pulumi:"createdTime"`
+	// Whether to release with the instance.
+	DeleteWithInstance bool `pulumi:"deleteWithInstance"`
+	// Number of existing backup points of cloud disk.
+	DiskBackupCount int `pulumi:"diskBackupCount"`
+	// Number of backup points quota for cloud disk.
+	DiskBackupQuota int `pulumi:"diskBackupQuota"`
+	// Disk charge type.
+	DiskChargeType string `pulumi:"diskChargeType"`
+	// Disk id.
+	DiskId string `pulumi:"diskId"`
+	// Disk name.
+	DiskName string `pulumi:"diskName"`
+	// Disk size.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+	DiskState string `pulumi:"diskState"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Disk usage.
+	DiskUsage string `pulumi:"diskUsage"`
+	// Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// Instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	IsolatedTime string `pulumi:"isolatedTime"`
+	// Latest operation.
+	LatestOperation string `pulumi:"latestOperation"`
+	// Latest operation request id.
+	LatestOperationRequestId string `pulumi:"latestOperationRequestId"`
+	// Latest operation state.
+	LatestOperationState string `pulumi:"latestOperationState"`
+	// Renew flag.
+	RenewFlag string `pulumi:"renewFlag"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetDisksDiskListInput is an input type that accepts GetDisksDiskListArgs and GetDisksDiskListOutput values.
+// You can construct a concrete instance of `GetDisksDiskListInput` via:
+//
+//          GetDisksDiskListArgs{...}
+type GetDisksDiskListInput interface {
+	pulumi.Input
+
+	ToGetDisksDiskListOutput() GetDisksDiskListOutput
+	ToGetDisksDiskListOutputWithContext(context.Context) GetDisksDiskListOutput
+}
+
+type GetDisksDiskListArgs struct {
+	// Disk attach state.
+	Attached pulumi.BoolInput `pulumi:"attached"`
+	// Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Whether to release with the instance.
+	DeleteWithInstance pulumi.BoolInput `pulumi:"deleteWithInstance"`
+	// Number of existing backup points of cloud disk.
+	DiskBackupCount pulumi.IntInput `pulumi:"diskBackupCount"`
+	// Number of backup points quota for cloud disk.
+	DiskBackupQuota pulumi.IntInput `pulumi:"diskBackupQuota"`
+	// Disk charge type.
+	DiskChargeType pulumi.StringInput `pulumi:"diskChargeType"`
+	// Disk id.
+	DiskId pulumi.StringInput `pulumi:"diskId"`
+	// Disk name.
+	DiskName pulumi.StringInput `pulumi:"diskName"`
+	// Disk size.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+	DiskState pulumi.StringInput `pulumi:"diskState"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Disk usage.
+	DiskUsage pulumi.StringInput `pulumi:"diskUsage"`
+	// Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// Instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+	IsolatedTime pulumi.StringInput `pulumi:"isolatedTime"`
+	// Latest operation.
+	LatestOperation pulumi.StringInput `pulumi:"latestOperation"`
+	// Latest operation request id.
+	LatestOperationRequestId pulumi.StringInput `pulumi:"latestOperationRequestId"`
+	// Latest operation state.
+	LatestOperationState pulumi.StringInput `pulumi:"latestOperationState"`
+	// Renew flag.
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetDisksDiskListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksDiskList)(nil)).Elem()
+}
+
+func (i GetDisksDiskListArgs) ToGetDisksDiskListOutput() GetDisksDiskListOutput {
+	return i.ToGetDisksDiskListOutputWithContext(context.Background())
+}
+
+func (i GetDisksDiskListArgs) ToGetDisksDiskListOutputWithContext(ctx context.Context) GetDisksDiskListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksDiskListOutput)
+}
+
+// GetDisksDiskListArrayInput is an input type that accepts GetDisksDiskListArray and GetDisksDiskListArrayOutput values.
+// You can construct a concrete instance of `GetDisksDiskListArrayInput` via:
+//
+//          GetDisksDiskListArray{ GetDisksDiskListArgs{...} }
+type GetDisksDiskListArrayInput interface {
+	pulumi.Input
+
+	ToGetDisksDiskListArrayOutput() GetDisksDiskListArrayOutput
+	ToGetDisksDiskListArrayOutputWithContext(context.Context) GetDisksDiskListArrayOutput
+}
+
+type GetDisksDiskListArray []GetDisksDiskListInput
+
+func (GetDisksDiskListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksDiskList)(nil)).Elem()
+}
+
+func (i GetDisksDiskListArray) ToGetDisksDiskListArrayOutput() GetDisksDiskListArrayOutput {
+	return i.ToGetDisksDiskListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDisksDiskListArray) ToGetDisksDiskListArrayOutputWithContext(ctx context.Context) GetDisksDiskListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksDiskListArrayOutput)
+}
+
+type GetDisksDiskListOutput struct{ *pulumi.OutputState }
+
+func (GetDisksDiskListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksDiskList)(nil)).Elem()
+}
+
+func (o GetDisksDiskListOutput) ToGetDisksDiskListOutput() GetDisksDiskListOutput {
+	return o
+}
+
+func (o GetDisksDiskListOutput) ToGetDisksDiskListOutputWithContext(ctx context.Context) GetDisksDiskListOutput {
+	return o
+}
+
+// Disk attach state.
+func (o GetDisksDiskListOutput) Attached() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDisksDiskList) bool { return v.Attached }).(pulumi.BoolOutput)
+}
+
+// Created time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+func (o GetDisksDiskListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Whether to release with the instance.
+func (o GetDisksDiskListOutput) DeleteWithInstance() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDisksDiskList) bool { return v.DeleteWithInstance }).(pulumi.BoolOutput)
+}
+
+// Number of existing backup points of cloud disk.
+func (o GetDisksDiskListOutput) DiskBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDisksDiskList) int { return v.DiskBackupCount }).(pulumi.IntOutput)
+}
+
+// Number of backup points quota for cloud disk.
+func (o GetDisksDiskListOutput) DiskBackupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDisksDiskList) int { return v.DiskBackupQuota }).(pulumi.IntOutput)
+}
+
+// Disk charge type.
+func (o GetDisksDiskListOutput) DiskChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskChargeType }).(pulumi.StringOutput)
+}
+
+// Disk id.
+func (o GetDisksDiskListOutput) DiskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskId }).(pulumi.StringOutput)
+}
+
+// Disk name.
+func (o GetDisksDiskListOutput) DiskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskName }).(pulumi.StringOutput)
+}
+
+// Disk size.
+func (o GetDisksDiskListOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDisksDiskList) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk state. Valid values:`PENDING`, `UNATTACHED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `SHUTDOWN`, `CREATED_FAILED`, `TERMINATING`, `DELETING`, `FREEZING`.
+func (o GetDisksDiskListOutput) DiskState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskState }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetDisksDiskListOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Disk usage.
+func (o GetDisksDiskListOutput) DiskUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.DiskUsage }).(pulumi.StringOutput)
+}
+
+// Expired time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+func (o GetDisksDiskListOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.ExpiredTime }).(pulumi.StringOutput)
+}
+
+// Instance id.
+func (o GetDisksDiskListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Isolated time. Expressed according to the ISO8601 standard, and using UTC time. The format is `YYYY-MM-DDThh:mm:ssZ`.
+func (o GetDisksDiskListOutput) IsolatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.IsolatedTime }).(pulumi.StringOutput)
+}
+
+// Latest operation.
+func (o GetDisksDiskListOutput) LatestOperation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.LatestOperation }).(pulumi.StringOutput)
+}
+
+// Latest operation request id.
+func (o GetDisksDiskListOutput) LatestOperationRequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.LatestOperationRequestId }).(pulumi.StringOutput)
+}
+
+// Latest operation state.
+func (o GetDisksDiskListOutput) LatestOperationState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.LatestOperationState }).(pulumi.StringOutput)
+}
+
+// Renew flag.
+func (o GetDisksDiskListOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+// Availability zone.
+func (o GetDisksDiskListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksDiskList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetDisksDiskListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDisksDiskListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksDiskList)(nil)).Elem()
+}
+
+func (o GetDisksDiskListArrayOutput) ToGetDisksDiskListArrayOutput() GetDisksDiskListArrayOutput {
+	return o
+}
+
+func (o GetDisksDiskListArrayOutput) ToGetDisksDiskListArrayOutputWithContext(ctx context.Context) GetDisksDiskListArrayOutput {
+	return o
+}
+
+func (o GetDisksDiskListArrayOutput) Index(i pulumi.IntInput) GetDisksDiskListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDisksDiskList {
+		return vs[0].([]GetDisksDiskList)[vs[1].(int)]
+	}).(GetDisksDiskListOutput)
+}
+
+type GetDisksFilter struct {
+	// Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+	Name string `pulumi:"name"`
+	// Value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetDisksFilterInput is an input type that accepts GetDisksFilterArgs and GetDisksFilterOutput values.
+// You can construct a concrete instance of `GetDisksFilterInput` via:
+//
+//          GetDisksFilterArgs{...}
+type GetDisksFilterInput interface {
+	pulumi.Input
+
+	ToGetDisksFilterOutput() GetDisksFilterOutput
+	ToGetDisksFilterOutputWithContext(context.Context) GetDisksFilterOutput
+}
+
+type GetDisksFilterArgs struct {
+	// Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetDisksFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksFilter)(nil)).Elem()
+}
+
+func (i GetDisksFilterArgs) ToGetDisksFilterOutput() GetDisksFilterOutput {
+	return i.ToGetDisksFilterOutputWithContext(context.Background())
+}
+
+func (i GetDisksFilterArgs) ToGetDisksFilterOutputWithContext(ctx context.Context) GetDisksFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksFilterOutput)
+}
+
+// GetDisksFilterArrayInput is an input type that accepts GetDisksFilterArray and GetDisksFilterArrayOutput values.
+// You can construct a concrete instance of `GetDisksFilterArrayInput` via:
+//
+//          GetDisksFilterArray{ GetDisksFilterArgs{...} }
+type GetDisksFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDisksFilterArrayOutput() GetDisksFilterArrayOutput
+	ToGetDisksFilterArrayOutputWithContext(context.Context) GetDisksFilterArrayOutput
+}
+
+type GetDisksFilterArray []GetDisksFilterInput
+
+func (GetDisksFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksFilter)(nil)).Elem()
+}
+
+func (i GetDisksFilterArray) ToGetDisksFilterArrayOutput() GetDisksFilterArrayOutput {
+	return i.ToGetDisksFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDisksFilterArray) ToGetDisksFilterArrayOutputWithContext(ctx context.Context) GetDisksFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDisksFilterArrayOutput)
+}
+
+type GetDisksFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDisksFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDisksFilter)(nil)).Elem()
+}
+
+func (o GetDisksFilterOutput) ToGetDisksFilterOutput() GetDisksFilterOutput {
+	return o
+}
+
+func (o GetDisksFilterOutput) ToGetDisksFilterOutputWithContext(ctx context.Context) GetDisksFilterOutput {
+	return o
+}
+
+// Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+func (o GetDisksFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDisksFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the field.
+func (o GetDisksFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDisksFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetDisksFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDisksFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDisksFilter)(nil)).Elem()
+}
+
+func (o GetDisksFilterArrayOutput) ToGetDisksFilterArrayOutput() GetDisksFilterArrayOutput {
+	return o
+}
+
+func (o GetDisksFilterArrayOutput) ToGetDisksFilterArrayOutputWithContext(ctx context.Context) GetDisksFilterArrayOutput {
+	return o
+}
+
+func (o GetDisksFilterArrayOutput) Index(i pulumi.IntInput) GetDisksFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDisksFilter {
+		return vs[0].([]GetDisksFilter)[vs[1].(int)]
+	}).(GetDisksFilterOutput)
+}
+
 type GetFirewallRulesTemplateFirewallRuleSet struct {
 	// Valid values are (ACCEPT, DROP). Default value is ACCEPT.
 	Action string `pulumi:"action"`
@@ -1469,7 +2922,2839 @@ func (o GetFirewallRulesTemplateFirewallRuleSetArrayOutput) Index(i pulumi.IntIn
 	}).(GetFirewallRulesTemplateFirewallRuleSetOutput)
 }
 
+type GetInstanceBlueprintBlueprintInstanceSet struct {
+	// Blueprint instance information.
+	Blueprints []GetInstanceBlueprintBlueprintInstanceSetBlueprint `pulumi:"blueprints"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Software list.
+	SoftwareSets []GetInstanceBlueprintBlueprintInstanceSetSoftwareSet `pulumi:"softwareSets"`
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetArgs and GetInstanceBlueprintBlueprintInstanceSetOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetArgs{...}
+type GetInstanceBlueprintBlueprintInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetOutput() GetInstanceBlueprintBlueprintInstanceSetOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetArgs struct {
+	// Blueprint instance information.
+	Blueprints GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput `pulumi:"blueprints"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Software list.
+	SoftwareSets GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput `pulumi:"softwareSets"`
+}
+
+func (GetInstanceBlueprintBlueprintInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetOutput() GetInstanceBlueprintBlueprintInstanceSetOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetOutput)
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetArray and GetInstanceBlueprintBlueprintInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetArrayInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetArray{ GetInstanceBlueprintBlueprintInstanceSetArgs{...} }
+type GetInstanceBlueprintBlueprintInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetArrayOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetArrayOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetArrayOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetArray []GetInstanceBlueprintBlueprintInstanceSetInput
+
+func (GetInstanceBlueprintBlueprintInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetArray) ToGetInstanceBlueprintBlueprintInstanceSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetArrayOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetArray) ToGetInstanceBlueprintBlueprintInstanceSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetArrayOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetOutput() GetInstanceBlueprintBlueprintInstanceSetOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetOutput {
+	return o
+}
+
+// Blueprint instance information.
+func (o GetInstanceBlueprintBlueprintInstanceSetOutput) Blueprints() GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSet) []GetInstanceBlueprintBlueprintInstanceSetBlueprint {
+		return v.Blueprints
+	}).(GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput)
+}
+
+// Instance ID.
+func (o GetInstanceBlueprintBlueprintInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Software list.
+func (o GetInstanceBlueprintBlueprintInstanceSetOutput) SoftwareSets() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSet) []GetInstanceBlueprintBlueprintInstanceSetSoftwareSet {
+		return v.SoftwareSets
+	}).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetArrayOutput) Index(i pulumi.IntInput) GetInstanceBlueprintBlueprintInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceBlueprintBlueprintInstanceSet {
+		return vs[0].([]GetInstanceBlueprintBlueprintInstanceSet)[vs[1].(int)]
+	}).(GetInstanceBlueprintBlueprintInstanceSetOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetBlueprint struct {
+	// Blueprint ID, which is the unique identifier of Blueprint.
+	BlueprintId string `pulumi:"blueprintId"`
+	// Blueprint name.
+	BlueprintName string `pulumi:"blueprintName"`
+	// Blueprint status.
+	BlueprintState string `pulumi:"blueprintState"`
+	// Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+	BlueprintType string `pulumi:"blueprintType"`
+	// URL of official website of the open-source project.
+	CommunityUrl string `pulumi:"communityUrl"`
+	// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime string `pulumi:"createdTime"`
+	// Image description information.
+	Description string `pulumi:"description"`
+	// Blueprint title to be displayed.
+	DisplayTitle string `pulumi:"displayTitle"`
+	// Blueprint version to be displayed.
+	DisplayVersion string `pulumi:"displayVersion"`
+	// Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+	DockerVersion string `pulumi:"dockerVersion"`
+	// Guide documentation URL.
+	GuideUrl string `pulumi:"guideUrl"`
+	// ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+	ImageId string `pulumi:"imageId"`
+	// Software picture URL.
+	ImageUrl string `pulumi:"imageUrl"`
+	// OS name.
+	OsName string `pulumi:"osName"`
+	// OS type.
+	Platform string `pulumi:"platform"`
+	// OS type, such as LINUX_UNIX and WINDOWS.
+	PlatformType string `pulumi:"platformType"`
+	// Memory size required by blueprint in GB.
+	RequiredMemorySize int `pulumi:"requiredMemorySize"`
+	// System disk size required by blueprint in GB.
+	RequiredSystemDiskSize int `pulumi:"requiredSystemDiskSize"`
+	// Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+	SceneIdSets []string `pulumi:"sceneIdSets"`
+	// Whether the blueprint supports automation tools.
+	SupportAutomationTools bool `pulumi:"supportAutomationTools"`
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetBlueprintInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs and GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetBlueprintInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...}
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs struct {
+	// Blueprint ID, which is the unique identifier of Blueprint.
+	BlueprintId pulumi.StringInput `pulumi:"blueprintId"`
+	// Blueprint name.
+	BlueprintName pulumi.StringInput `pulumi:"blueprintName"`
+	// Blueprint status.
+	BlueprintState pulumi.StringInput `pulumi:"blueprintState"`
+	// Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+	BlueprintType pulumi.StringInput `pulumi:"blueprintType"`
+	// URL of official website of the open-source project.
+	CommunityUrl pulumi.StringInput `pulumi:"communityUrl"`
+	// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Image description information.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Blueprint title to be displayed.
+	DisplayTitle pulumi.StringInput `pulumi:"displayTitle"`
+	// Blueprint version to be displayed.
+	DisplayVersion pulumi.StringInput `pulumi:"displayVersion"`
+	// Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+	DockerVersion pulumi.StringInput `pulumi:"dockerVersion"`
+	// Guide documentation URL.
+	GuideUrl pulumi.StringInput `pulumi:"guideUrl"`
+	// ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+	ImageId pulumi.StringInput `pulumi:"imageId"`
+	// Software picture URL.
+	ImageUrl pulumi.StringInput `pulumi:"imageUrl"`
+	// OS name.
+	OsName pulumi.StringInput `pulumi:"osName"`
+	// OS type.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// OS type, such as LINUX_UNIX and WINDOWS.
+	PlatformType pulumi.StringInput `pulumi:"platformType"`
+	// Memory size required by blueprint in GB.
+	RequiredMemorySize pulumi.IntInput `pulumi:"requiredMemorySize"`
+	// System disk size required by blueprint in GB.
+	RequiredSystemDiskSize pulumi.IntInput `pulumi:"requiredSystemDiskSize"`
+	// Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+	SceneIdSets pulumi.StringArrayInput `pulumi:"sceneIdSets"`
+	// Whether the blueprint supports automation tools.
+	SupportAutomationTools pulumi.BoolInput `pulumi:"supportAutomationTools"`
+}
+
+func (GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetBlueprint)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput)
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetBlueprintArray and GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetBlueprintArray{ GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...} }
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintArray []GetInstanceBlueprintBlueprintInstanceSetBlueprintInput
+
+func (GetInstanceBlueprintBlueprintInstanceSetBlueprintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetBlueprint)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetBlueprintArray) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetBlueprintArray) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetBlueprint)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput {
+	return o
+}
+
+// Blueprint ID, which is the unique identifier of Blueprint.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) BlueprintId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.BlueprintId }).(pulumi.StringOutput)
+}
+
+// Blueprint name.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) BlueprintName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.BlueprintName }).(pulumi.StringOutput)
+}
+
+// Blueprint status.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) BlueprintState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.BlueprintState }).(pulumi.StringOutput)
+}
+
+// Blueprint type, such as APP_OS, PURE_OS, and PRIVATE.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) BlueprintType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.BlueprintType }).(pulumi.StringOutput)
+}
+
+// URL of official website of the open-source project.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) CommunityUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.CommunityUrl }).(pulumi.StringOutput)
+}
+
+// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Image description information.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Blueprint title to be displayed.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) DisplayTitle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.DisplayTitle }).(pulumi.StringOutput)
+}
+
+// Blueprint version to be displayed.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) DisplayVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.DisplayVersion }).(pulumi.StringOutput)
+}
+
+// Docker version.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) DockerVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.DockerVersion }).(pulumi.StringOutput)
+}
+
+// Guide documentation URL.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) GuideUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.GuideUrl }).(pulumi.StringOutput)
+}
+
+// ID of the Lighthouse blueprint shared from a CVM imageNote: this field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) ImageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.ImageId }).(pulumi.StringOutput)
+}
+
+// Software picture URL.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) ImageUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.ImageUrl }).(pulumi.StringOutput)
+}
+
+// OS name.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.OsName }).(pulumi.StringOutput)
+}
+
+// OS type.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// OS type, such as LINUX_UNIX and WINDOWS.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) PlatformType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) string { return v.PlatformType }).(pulumi.StringOutput)
+}
+
+// Memory size required by blueprint in GB.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) RequiredMemorySize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) int { return v.RequiredMemorySize }).(pulumi.IntOutput)
+}
+
+// System disk size required by blueprint in GB.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) RequiredSystemDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) int { return v.RequiredSystemDiskSize }).(pulumi.IntOutput)
+}
+
+// Array of IDs of scenes associated with a blueprintNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) SceneIdSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) []string { return v.SceneIdSets }).(pulumi.StringArrayOutput)
+}
+
+// Whether the blueprint supports automation tools.
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput) SupportAutomationTools() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetBlueprint) bool { return v.SupportAutomationTools }).(pulumi.BoolOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetBlueprint)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput() GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput) Index(i pulumi.IntInput) GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceBlueprintBlueprintInstanceSetBlueprint {
+		return vs[0].([]GetInstanceBlueprintBlueprintInstanceSetBlueprint)[vs[1].(int)]
+	}).(GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSet struct {
+	// List of software details.
+	DetailSets []GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet `pulumi:"detailSets"`
+	// Software picture URL.
+	ImageUrl string `pulumi:"imageUrl"`
+	// Software installation directory.
+	InstallDir string `pulumi:"installDir"`
+	// Software name.
+	Name string `pulumi:"name"`
+	// Software version.
+	Version string `pulumi:"version"`
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...}
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs struct {
+	// List of software details.
+	DetailSets GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput `pulumi:"detailSets"`
+	// Software picture URL.
+	ImageUrl pulumi.StringInput `pulumi:"imageUrl"`
+	// Software installation directory.
+	InstallDir pulumi.StringInput `pulumi:"installDir"`
+	// Software name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Software version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput)
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...} }
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray []GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetSoftwareSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput {
+	return o
+}
+
+// List of software details.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) DetailSets() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSet) []GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet {
+		return v.DetailSets
+	}).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput)
+}
+
+// Software picture URL.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) ImageUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSet) string { return v.ImageUrl }).(pulumi.StringOutput)
+}
+
+// Software installation directory.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) InstallDir() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSet) string { return v.InstallDir }).(pulumi.StringOutput)
+}
+
+// Software name.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Software version.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSet) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetSoftwareSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput) Index(i pulumi.IntInput) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceBlueprintBlueprintInstanceSetSoftwareSet {
+		return vs[0].([]GetInstanceBlueprintBlueprintInstanceSetSoftwareSet)[vs[1].(int)]
+	}).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet struct {
+	// Unique detail key.
+	Key string `pulumi:"key"`
+	// Detail title.
+	Title string `pulumi:"title"`
+	// Detail value.
+	Value string `pulumi:"value"`
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...}
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs struct {
+	// Unique detail key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Detail title.
+	Title pulumi.StringInput `pulumi:"title"`
+	// Detail value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput)
+}
+
+// GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput` via:
+//
+//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...} }
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput
+	ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutputWithContext(context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray []GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput {
+	return i.ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput {
+	return o
+}
+
+// Unique detail key.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Detail title.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) Title() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet) string { return v.Title }).(pulumi.StringOutput)
+}
+
+// Detail value.
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput() GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput) ToGetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput) Index(i pulumi.IntInput) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet {
+		return vs[0].([]GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet)[vs[1].(int)]
+	}).(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput)
+}
+
+type GetInstanceDiskNumAttachDetailSet struct {
+	// Number of elastic cloud disks mounted to the instance.
+	AttachedDiskCount int `pulumi:"attachedDiskCount"`
+	// Instance Id.
+	InstanceId string `pulumi:"instanceId"`
+	// Number of elastic cloud disks that can be mounted.
+	MaxAttachCount int `pulumi:"maxAttachCount"`
+}
+
+// GetInstanceDiskNumAttachDetailSetInput is an input type that accepts GetInstanceDiskNumAttachDetailSetArgs and GetInstanceDiskNumAttachDetailSetOutput values.
+// You can construct a concrete instance of `GetInstanceDiskNumAttachDetailSetInput` via:
+//
+//          GetInstanceDiskNumAttachDetailSetArgs{...}
+type GetInstanceDiskNumAttachDetailSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceDiskNumAttachDetailSetOutput() GetInstanceDiskNumAttachDetailSetOutput
+	ToGetInstanceDiskNumAttachDetailSetOutputWithContext(context.Context) GetInstanceDiskNumAttachDetailSetOutput
+}
+
+type GetInstanceDiskNumAttachDetailSetArgs struct {
+	// Number of elastic cloud disks mounted to the instance.
+	AttachedDiskCount pulumi.IntInput `pulumi:"attachedDiskCount"`
+	// Instance Id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Number of elastic cloud disks that can be mounted.
+	MaxAttachCount pulumi.IntInput `pulumi:"maxAttachCount"`
+}
+
+func (GetInstanceDiskNumAttachDetailSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDiskNumAttachDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceDiskNumAttachDetailSetArgs) ToGetInstanceDiskNumAttachDetailSetOutput() GetInstanceDiskNumAttachDetailSetOutput {
+	return i.ToGetInstanceDiskNumAttachDetailSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDiskNumAttachDetailSetArgs) ToGetInstanceDiskNumAttachDetailSetOutputWithContext(ctx context.Context) GetInstanceDiskNumAttachDetailSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDiskNumAttachDetailSetOutput)
+}
+
+// GetInstanceDiskNumAttachDetailSetArrayInput is an input type that accepts GetInstanceDiskNumAttachDetailSetArray and GetInstanceDiskNumAttachDetailSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceDiskNumAttachDetailSetArrayInput` via:
+//
+//          GetInstanceDiskNumAttachDetailSetArray{ GetInstanceDiskNumAttachDetailSetArgs{...} }
+type GetInstanceDiskNumAttachDetailSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceDiskNumAttachDetailSetArrayOutput() GetInstanceDiskNumAttachDetailSetArrayOutput
+	ToGetInstanceDiskNumAttachDetailSetArrayOutputWithContext(context.Context) GetInstanceDiskNumAttachDetailSetArrayOutput
+}
+
+type GetInstanceDiskNumAttachDetailSetArray []GetInstanceDiskNumAttachDetailSetInput
+
+func (GetInstanceDiskNumAttachDetailSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDiskNumAttachDetailSet)(nil)).Elem()
+}
+
+func (i GetInstanceDiskNumAttachDetailSetArray) ToGetInstanceDiskNumAttachDetailSetArrayOutput() GetInstanceDiskNumAttachDetailSetArrayOutput {
+	return i.ToGetInstanceDiskNumAttachDetailSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceDiskNumAttachDetailSetArray) ToGetInstanceDiskNumAttachDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceDiskNumAttachDetailSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceDiskNumAttachDetailSetArrayOutput)
+}
+
+type GetInstanceDiskNumAttachDetailSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDiskNumAttachDetailSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceDiskNumAttachDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceDiskNumAttachDetailSetOutput) ToGetInstanceDiskNumAttachDetailSetOutput() GetInstanceDiskNumAttachDetailSetOutput {
+	return o
+}
+
+func (o GetInstanceDiskNumAttachDetailSetOutput) ToGetInstanceDiskNumAttachDetailSetOutputWithContext(ctx context.Context) GetInstanceDiskNumAttachDetailSetOutput {
+	return o
+}
+
+// Number of elastic cloud disks mounted to the instance.
+func (o GetInstanceDiskNumAttachDetailSetOutput) AttachedDiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDiskNumAttachDetailSet) int { return v.AttachedDiskCount }).(pulumi.IntOutput)
+}
+
+// Instance Id.
+func (o GetInstanceDiskNumAttachDetailSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceDiskNumAttachDetailSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Number of elastic cloud disks that can be mounted.
+func (o GetInstanceDiskNumAttachDetailSetOutput) MaxAttachCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceDiskNumAttachDetailSet) int { return v.MaxAttachCount }).(pulumi.IntOutput)
+}
+
+type GetInstanceDiskNumAttachDetailSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceDiskNumAttachDetailSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceDiskNumAttachDetailSet)(nil)).Elem()
+}
+
+func (o GetInstanceDiskNumAttachDetailSetArrayOutput) ToGetInstanceDiskNumAttachDetailSetArrayOutput() GetInstanceDiskNumAttachDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceDiskNumAttachDetailSetArrayOutput) ToGetInstanceDiskNumAttachDetailSetArrayOutputWithContext(ctx context.Context) GetInstanceDiskNumAttachDetailSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceDiskNumAttachDetailSetArrayOutput) Index(i pulumi.IntInput) GetInstanceDiskNumAttachDetailSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceDiskNumAttachDetailSet {
+		return vs[0].([]GetInstanceDiskNumAttachDetailSet)[vs[1].(int)]
+	}).(GetInstanceDiskNumAttachDetailSetOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSet struct {
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// List of traffic package details.
+	TrafficPackageSets []GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet `pulumi:"trafficPackageSets"`
+}
+
+// GetInstanceTrafficPackageInstanceTrafficPackageSetInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetArgs and GetInstanceTrafficPackageInstanceTrafficPackageSetOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetInput` via:
+//
+//          GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...}
+type GetInstanceTrafficPackageInstanceTrafficPackageSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetOutput
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutputWithContext(context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetOutput
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetArgs struct {
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// List of traffic package details.
+	TrafficPackageSets GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput `pulumi:"trafficPackageSets"`
+}
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSet)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetArgs) ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetOutput {
+	return i.ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetArgs) ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficPackageInstanceTrafficPackageSetOutput)
+}
+
+// GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetArray and GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput` via:
+//
+//          GetInstanceTrafficPackageInstanceTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...} }
+type GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutputWithContext(context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetArray []GetInstanceTrafficPackageInstanceTrafficPackageSetInput
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficPackageInstanceTrafficPackageSet)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetArray) ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput {
+	return i.ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetArray) ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSet)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetOutput {
+	return o
+}
+
+// Instance ID.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// List of traffic package details.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetOutput) TrafficPackageSets() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSet) []GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet {
+		return v.TrafficPackageSets
+	}).(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficPackageInstanceTrafficPackageSet)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput) Index(i pulumi.IntInput) GetInstanceTrafficPackageInstanceTrafficPackageSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceTrafficPackageInstanceTrafficPackageSet {
+		return vs[0].([]GetInstanceTrafficPackageInstanceTrafficPackageSet)[vs[1].(int)]
+	}).(GetInstanceTrafficPackageInstanceTrafficPackageSetOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet struct {
+	// The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+	Deadline string `pulumi:"deadline"`
+	// The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	EndTime string `pulumi:"endTime"`
+	// The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	StartTime string `pulumi:"startTime"`
+	// Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+	Status string `pulumi:"status"`
+	// The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+	TrafficOverflow int `pulumi:"trafficOverflow"`
+	// Traffic packet ID.
+	TrafficPackageId string `pulumi:"trafficPackageId"`
+	// The remaining traffic during the effective period of the traffic packet, in bytes.
+	TrafficPackageRemaining int `pulumi:"trafficPackageRemaining"`
+	// The total traffic in bytes during the effective period of the traffic packet.
+	TrafficPackageTotal int `pulumi:"trafficPackageTotal"`
+	// Traffic has been used during the effective period of the traffic packet, in bytes.
+	TrafficUsed int `pulumi:"trafficUsed"`
+}
+
+// GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs and GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput` via:
+//
+//          GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...}
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutputWithContext(context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs struct {
+	// The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+	Deadline pulumi.StringInput `pulumi:"deadline"`
+	// The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+	Status pulumi.StringInput `pulumi:"status"`
+	// The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+	TrafficOverflow pulumi.IntInput `pulumi:"trafficOverflow"`
+	// Traffic packet ID.
+	TrafficPackageId pulumi.StringInput `pulumi:"trafficPackageId"`
+	// The remaining traffic during the effective period of the traffic packet, in bytes.
+	TrafficPackageRemaining pulumi.IntInput `pulumi:"trafficPackageRemaining"`
+	// The total traffic in bytes during the effective period of the traffic packet.
+	TrafficPackageTotal pulumi.IntInput `pulumi:"trafficPackageTotal"`
+	// Traffic has been used during the effective period of the traffic packet, in bytes.
+	TrafficUsed pulumi.IntInput `pulumi:"trafficUsed"`
+}
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput {
+	return i.ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput)
+}
+
+// GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray and GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput values.
+// You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput` via:
+//
+//          GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...} }
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput
+	ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutputWithContext(context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray []GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet)(nil)).Elem()
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput {
+	return i.ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput {
+	return o
+}
+
+// The expiration time of the traffic package. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ..
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) Deadline() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) string { return v.Deadline }).(pulumi.StringOutput)
+}
+
+// The end time of the effective period of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// The start time of the effective cycle of the traffic packet. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Traffic packet status:- `NETWORK_NORMAL`: normal.- `OVERDUE_NETWORK_DISABLED`: network disconnection due to arrears.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// The amount of traffic that exceeds the quota of the traffic packet during the effective period of the traffic packet, in bytes.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) TrafficOverflow() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) int {
+		return v.TrafficOverflow
+	}).(pulumi.IntOutput)
+}
+
+// Traffic packet ID.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) TrafficPackageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) string {
+		return v.TrafficPackageId
+	}).(pulumi.StringOutput)
+}
+
+// The remaining traffic during the effective period of the traffic packet, in bytes.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) TrafficPackageRemaining() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) int {
+		return v.TrafficPackageRemaining
+	}).(pulumi.IntOutput)
+}
+
+// The total traffic in bytes during the effective period of the traffic packet.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) TrafficPackageTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) int {
+		return v.TrafficPackageTotal
+	}).(pulumi.IntOutput)
+}
+
+// Traffic has been used during the effective period of the traffic packet, in bytes.
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput) TrafficUsed() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet) int { return v.TrafficUsed }).(pulumi.IntOutput)
+}
+
+type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet)(nil)).Elem()
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput() GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput) ToGetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutputWithContext(ctx context.Context) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput {
+	return o
+}
+
+func (o GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput) Index(i pulumi.IntInput) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet {
+		return vs[0].([]GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet)[vs[1].(int)]
+	}).(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput)
+}
+
+type GetModifyInstanceBundleFilter struct {
+	// Field to be filtered.
+	Name string `pulumi:"name"`
+	// Filter value of field.
+	Values []string `pulumi:"values"`
+}
+
+// GetModifyInstanceBundleFilterInput is an input type that accepts GetModifyInstanceBundleFilterArgs and GetModifyInstanceBundleFilterOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleFilterInput` via:
+//
+//          GetModifyInstanceBundleFilterArgs{...}
+type GetModifyInstanceBundleFilterInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleFilterOutput() GetModifyInstanceBundleFilterOutput
+	ToGetModifyInstanceBundleFilterOutputWithContext(context.Context) GetModifyInstanceBundleFilterOutput
+}
+
+type GetModifyInstanceBundleFilterArgs struct {
+	// Field to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetModifyInstanceBundleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleFilter)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleFilterArgs) ToGetModifyInstanceBundleFilterOutput() GetModifyInstanceBundleFilterOutput {
+	return i.ToGetModifyInstanceBundleFilterOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleFilterArgs) ToGetModifyInstanceBundleFilterOutputWithContext(ctx context.Context) GetModifyInstanceBundleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleFilterOutput)
+}
+
+// GetModifyInstanceBundleFilterArrayInput is an input type that accepts GetModifyInstanceBundleFilterArray and GetModifyInstanceBundleFilterArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleFilterArrayInput` via:
+//
+//          GetModifyInstanceBundleFilterArray{ GetModifyInstanceBundleFilterArgs{...} }
+type GetModifyInstanceBundleFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleFilterArrayOutput() GetModifyInstanceBundleFilterArrayOutput
+	ToGetModifyInstanceBundleFilterArrayOutputWithContext(context.Context) GetModifyInstanceBundleFilterArrayOutput
+}
+
+type GetModifyInstanceBundleFilterArray []GetModifyInstanceBundleFilterInput
+
+func (GetModifyInstanceBundleFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleFilter)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleFilterArray) ToGetModifyInstanceBundleFilterArrayOutput() GetModifyInstanceBundleFilterArrayOutput {
+	return i.ToGetModifyInstanceBundleFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleFilterArray) ToGetModifyInstanceBundleFilterArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleFilterArrayOutput)
+}
+
+type GetModifyInstanceBundleFilterOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleFilter)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleFilterOutput) ToGetModifyInstanceBundleFilterOutput() GetModifyInstanceBundleFilterOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleFilterOutput) ToGetModifyInstanceBundleFilterOutputWithContext(ctx context.Context) GetModifyInstanceBundleFilterOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetModifyInstanceBundleFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of field.
+func (o GetModifyInstanceBundleFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetModifyInstanceBundleFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleFilter)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleFilterArrayOutput) ToGetModifyInstanceBundleFilterArrayOutput() GetModifyInstanceBundleFilterArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleFilterArrayOutput) ToGetModifyInstanceBundleFilterArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleFilterArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleFilterArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleFilter {
+		return vs[0].([]GetModifyInstanceBundleFilter)[vs[1].(int)]
+	}).(GetModifyInstanceBundleFilterOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSet struct {
+	// Package information.
+	Bundles []GetModifyInstanceBundleModifyBundleSetBundle `pulumi:"bundles"`
+	// Change the status of the package. Value:
+	// - SOLD_OUT: the package is sold out;
+	// - AVAILABLE: support package changes;
+	// - UNAVAILABLE: package changes are not supported for the time being.
+	ModifyBundleState string `pulumi:"modifyBundleState"`
+	// Change the price difference to be made up after the instance package.
+	ModifyPrices []GetModifyInstanceBundleModifyBundleSetModifyPrice `pulumi:"modifyPrices"`
+	// Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+	NotSupportModifyMessage string `pulumi:"notSupportModifyMessage"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetArgs and GetModifyInstanceBundleModifyBundleSetOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetArgs{...}
+type GetModifyInstanceBundleModifyBundleSetInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetOutput() GetModifyInstanceBundleModifyBundleSetOutput
+	ToGetModifyInstanceBundleModifyBundleSetOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetArgs struct {
+	// Package information.
+	Bundles GetModifyInstanceBundleModifyBundleSetBundleArrayInput `pulumi:"bundles"`
+	// Change the status of the package. Value:
+	// - SOLD_OUT: the package is sold out;
+	// - AVAILABLE: support package changes;
+	// - UNAVAILABLE: package changes are not supported for the time being.
+	ModifyBundleState pulumi.StringInput `pulumi:"modifyBundleState"`
+	// Change the price difference to be made up after the instance package.
+	ModifyPrices GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput `pulumi:"modifyPrices"`
+	// Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+	NotSupportModifyMessage pulumi.StringInput `pulumi:"notSupportModifyMessage"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSet)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetArgs) ToGetModifyInstanceBundleModifyBundleSetOutput() GetModifyInstanceBundleModifyBundleSetOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetArgs) ToGetModifyInstanceBundleModifyBundleSetOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetArray and GetModifyInstanceBundleModifyBundleSetArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetArray{ GetModifyInstanceBundleModifyBundleSetArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetArrayOutput() GetModifyInstanceBundleModifyBundleSetArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetArray []GetModifyInstanceBundleModifyBundleSetInput
+
+func (GetModifyInstanceBundleModifyBundleSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSet)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetArray) ToGetModifyInstanceBundleModifyBundleSetArrayOutput() GetModifyInstanceBundleModifyBundleSetArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetArray) ToGetModifyInstanceBundleModifyBundleSetArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSet)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetOutput) ToGetModifyInstanceBundleModifyBundleSetOutput() GetModifyInstanceBundleModifyBundleSetOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetOutput) ToGetModifyInstanceBundleModifyBundleSetOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetOutput {
+	return o
+}
+
+// Package information.
+func (o GetModifyInstanceBundleModifyBundleSetOutput) Bundles() GetModifyInstanceBundleModifyBundleSetBundleArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSet) []GetModifyInstanceBundleModifyBundleSetBundle {
+		return v.Bundles
+	}).(GetModifyInstanceBundleModifyBundleSetBundleArrayOutput)
+}
+
+// Change the status of the package. Value:
+// - SOLD_OUT: the package is sold out;
+// - AVAILABLE: support package changes;
+// - UNAVAILABLE: package changes are not supported for the time being.
+func (o GetModifyInstanceBundleModifyBundleSetOutput) ModifyBundleState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSet) string { return v.ModifyBundleState }).(pulumi.StringOutput)
+}
+
+// Change the price difference to be made up after the instance package.
+func (o GetModifyInstanceBundleModifyBundleSetOutput) ModifyPrices() GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSet) []GetModifyInstanceBundleModifyBundleSetModifyPrice {
+		return v.ModifyPrices
+	}).(GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput)
+}
+
+// Package change reason information is not supported. When the package status is changed to `AVAILABLE`, the information is empty.
+func (o GetModifyInstanceBundleModifyBundleSetOutput) NotSupportModifyMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSet) string { return v.NotSupportModifyMessage }).(pulumi.StringOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSet)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetArrayOutput) ToGetModifyInstanceBundleModifyBundleSetArrayOutput() GetModifyInstanceBundleModifyBundleSetArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetArrayOutput) ToGetModifyInstanceBundleModifyBundleSetArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSet {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSet)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundle struct {
+	// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+	BundleDisplayLabel string `pulumi:"bundleDisplayLabel"`
+	// Package ID.
+	BundleId string `pulumi:"bundleId"`
+	// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+	BundleSalesState string `pulumi:"bundleSalesState"`
+	// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+	BundleType string `pulumi:"bundleType"`
+	// Package type description information.
+	BundleTypeDescription string `pulumi:"bundleTypeDescription"`
+	// CPU.
+	Cpu int `pulumi:"cpu"`
+	// Network billing mode.
+	InternetChargeType string `pulumi:"internetChargeType"`
+	// Peak bandwidth in Mbps.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+	// Memory size in GB.
+	Memory int `pulumi:"memory"`
+	// Monthly network traffic in Gb.
+	MonthlyTraffic int `pulumi:"monthlyTraffic"`
+	// Current package unit price information.
+	Prices []GetModifyInstanceBundleModifyBundleSetBundlePrice `pulumi:"prices"`
+	// Whether Linux/Unix is supported.
+	SupportLinuxUnixPlatform bool `pulumi:"supportLinuxUnixPlatform"`
+	// Whether Windows is supported.
+	SupportWindowsPlatform bool `pulumi:"supportWindowsPlatform"`
+	// System disk size.
+	SystemDiskSize int `pulumi:"systemDiskSize"`
+	// System disk type.
+	SystemDiskType string `pulumi:"systemDiskType"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundleInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundleArgs and GetModifyInstanceBundleModifyBundleSetBundleOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundleInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundleArgs{...}
+type GetModifyInstanceBundleModifyBundleSetBundleInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundleOutput() GetModifyInstanceBundleModifyBundleSetBundleOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundleOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundleOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundleArgs struct {
+	// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+	BundleDisplayLabel pulumi.StringInput `pulumi:"bundleDisplayLabel"`
+	// Package ID.
+	BundleId pulumi.StringInput `pulumi:"bundleId"`
+	// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+	BundleSalesState pulumi.StringInput `pulumi:"bundleSalesState"`
+	// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+	BundleType pulumi.StringInput `pulumi:"bundleType"`
+	// Package type description information.
+	BundleTypeDescription pulumi.StringInput `pulumi:"bundleTypeDescription"`
+	// CPU.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Network billing mode.
+	InternetChargeType pulumi.StringInput `pulumi:"internetChargeType"`
+	// Peak bandwidth in Mbps.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+	// Memory size in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Monthly network traffic in Gb.
+	MonthlyTraffic pulumi.IntInput `pulumi:"monthlyTraffic"`
+	// Current package unit price information.
+	Prices GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput `pulumi:"prices"`
+	// Whether Linux/Unix is supported.
+	SupportLinuxUnixPlatform pulumi.BoolInput `pulumi:"supportLinuxUnixPlatform"`
+	// Whether Windows is supported.
+	SupportWindowsPlatform pulumi.BoolInput `pulumi:"supportWindowsPlatform"`
+	// System disk size.
+	SystemDiskSize pulumi.IntInput `pulumi:"systemDiskSize"`
+	// System disk type.
+	SystemDiskType pulumi.StringInput `pulumi:"systemDiskType"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetBundleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundle)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundleArgs) ToGetModifyInstanceBundleModifyBundleSetBundleOutput() GetModifyInstanceBundleModifyBundleSetBundleOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundleOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundleArgs) ToGetModifyInstanceBundleModifyBundleSetBundleOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundleOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundleArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundleArray and GetModifyInstanceBundleModifyBundleSetBundleArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundleArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundleArray{ GetModifyInstanceBundleModifyBundleSetBundleArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetBundleArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutput() GetModifyInstanceBundleModifyBundleSetBundleArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundleArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundleArray []GetModifyInstanceBundleModifyBundleSetBundleInput
+
+func (GetModifyInstanceBundleModifyBundleSetBundleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundle)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundleArray) ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutput() GetModifyInstanceBundleModifyBundleSetBundleArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundleArray) ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundleArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundleOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundle)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) ToGetModifyInstanceBundleModifyBundleSetBundleOutput() GetModifyInstanceBundleModifyBundleSetBundleOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) ToGetModifyInstanceBundleModifyBundleSetBundleOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundleOutput {
+	return o
+}
+
+// Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) BundleDisplayLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.BundleDisplayLabel }).(pulumi.StringOutput)
+}
+
+// Package ID.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) BundleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.BundleId }).(pulumi.StringOutput)
+}
+
+// Package sale status. Valid values are AVAILABLE, SOLD_OUT.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) BundleSalesState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.BundleSalesState }).(pulumi.StringOutput)
+}
+
+// Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) BundleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.BundleType }).(pulumi.StringOutput)
+}
+
+// Package type description information.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) BundleTypeDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.BundleTypeDescription }).(pulumi.StringOutput)
+}
+
+// CPU.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Network billing mode.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) InternetChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.InternetChargeType }).(pulumi.StringOutput)
+}
+
+// Peak bandwidth in Mbps.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+// Memory size in GB.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Monthly network traffic in Gb.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) MonthlyTraffic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) int { return v.MonthlyTraffic }).(pulumi.IntOutput)
+}
+
+// Current package unit price information.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) Prices() GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) []GetModifyInstanceBundleModifyBundleSetBundlePrice {
+		return v.Prices
+	}).(GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput)
+}
+
+// Whether Linux/Unix is supported.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) SupportLinuxUnixPlatform() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) bool { return v.SupportLinuxUnixPlatform }).(pulumi.BoolOutput)
+}
+
+// Whether Windows is supported.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) SupportWindowsPlatform() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) bool { return v.SupportWindowsPlatform }).(pulumi.BoolOutput)
+}
+
+// System disk size.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) SystemDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) int { return v.SystemDiskSize }).(pulumi.IntOutput)
+}
+
+// System disk type.
+func (o GetModifyInstanceBundleModifyBundleSetBundleOutput) SystemDiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundle) string { return v.SystemDiskType }).(pulumi.StringOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundle)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundleArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutput() GetModifyInstanceBundleModifyBundleSetBundleArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundleArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundleArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundleArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundleArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetBundleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSetBundle {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSetBundle)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetBundleOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePrice struct {
+	// Instance price.
+	InstancePrices []GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice `pulumi:"instancePrices"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundlePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceArgs and GetModifyInstanceBundleModifyBundleSetBundlePriceOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...}
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceArgs struct {
+	// Instance price.
+	InstancePrices GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput `pulumi:"instancePrices"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceArgs) ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceArgs) ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundlePriceOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceArray and GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundlePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceArray []GetModifyInstanceBundleModifyBundleSetBundlePriceInput
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundlePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceArray) ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceArray) ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceOutput {
+	return o
+}
+
+// Instance price.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceOutput) InstancePrices() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePrice) []GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice {
+		return v.InstancePrices
+	}).(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundlePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetBundlePriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSetBundlePrice {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSetBundlePrice)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetBundlePriceOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice struct {
+	// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+	Currency string `pulumi:"currency"`
+	// Discount.
+	Discount float64 `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice float64 `pulumi:"discountPrice"`
+	// Original unit price of the package.
+	OriginalBundlePrice float64 `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice float64 `pulumi:"originalPrice"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs and GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...}
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs struct {
+	// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+	Currency pulumi.StringInput `pulumi:"currency"`
+	// Discount.
+	Discount pulumi.Float64Input `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice pulumi.Float64Input `pulumi:"discountPrice"`
+	// Original unit price of the package.
+	OriginalBundlePrice pulumi.Float64Input `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice pulumi.Float64Input `pulumi:"originalPrice"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray and GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray []GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput {
+	return o
+}
+
+// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// Discount.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) Discount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice) float64 { return v.Discount }).(pulumi.Float64Output)
+}
+
+// Discounted price.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) DiscountPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice) float64 { return v.DiscountPrice }).(pulumi.Float64Output)
+}
+
+// Original unit price of the package.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) OriginalBundlePrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice) float64 {
+		return v.OriginalBundlePrice
+	}).(pulumi.Float64Output)
+}
+
+// Original price.
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput) OriginalPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice) float64 { return v.OriginalPrice }).(pulumi.Float64Output)
+}
+
+type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPrice struct {
+	// Instance price.
+	InstancePrices []GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice `pulumi:"instancePrices"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetModifyPriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceArgs and GetModifyInstanceBundleModifyBundleSetModifyPriceOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...}
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceOutput
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceArgs struct {
+	// Instance price.
+	InstancePrices GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput `pulumi:"instancePrices"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceArgs) ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceArgs) ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetModifyPriceOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceArray and GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetModifyPriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceArray []GetModifyInstanceBundleModifyBundleSetModifyPriceInput
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetModifyPrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceArray) ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceArray) ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceOutput {
+	return o
+}
+
+// Instance price.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceOutput) InstancePrices() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPrice) []GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice {
+		return v.InstancePrices
+	}).(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetModifyPrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetModifyPriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSetModifyPrice {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSetModifyPrice)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetModifyPriceOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice struct {
+	// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+	Currency string `pulumi:"currency"`
+	// Discount.
+	Discount float64 `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice float64 `pulumi:"discountPrice"`
+	// Original unit price of the package.
+	OriginalBundlePrice float64 `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice float64 `pulumi:"originalPrice"`
+}
+
+// GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs and GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...}
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs struct {
+	// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+	Currency pulumi.StringInput `pulumi:"currency"`
+	// Discount.
+	Discount pulumi.Float64Input `pulumi:"discount"`
+	// Discounted price.
+	DiscountPrice pulumi.Float64Input `pulumi:"discountPrice"`
+	// Original unit price of the package.
+	OriginalBundlePrice pulumi.Float64Input `pulumi:"originalBundlePrice"`
+	// Original price.
+	OriginalPrice pulumi.Float64Input `pulumi:"originalPrice"`
+}
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput)
+}
+
+// GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray and GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput values.
+// You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput` via:
+//
+//          GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...} }
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput interface {
+	pulumi.Input
+
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput
+	ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutputWithContext(context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray []GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice)(nil)).Elem()
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput {
+	return i.ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput {
+	return o
+}
+
+// A monetary unit of price. Value range CNY: RMB. USD: us dollar.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// Discount.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) Discount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice) float64 { return v.Discount }).(pulumi.Float64Output)
+}
+
+// Discounted price.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) DiscountPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice) float64 { return v.DiscountPrice }).(pulumi.Float64Output)
+}
+
+// Original unit price of the package.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) OriginalBundlePrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice) float64 {
+		return v.OriginalBundlePrice
+	}).(pulumi.Float64Output)
+}
+
+// Original price.
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput) OriginalPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice) float64 { return v.OriginalPrice }).(pulumi.Float64Output)
+}
+
+type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice)(nil)).Elem()
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput() GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput) ToGetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutputWithContext(ctx context.Context) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput {
+	return o
+}
+
+func (o GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput) Index(i pulumi.IntInput) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice {
+		return vs[0].([]GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice)[vs[1].(int)]
+	}).(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput)
+}
+
+type GetRegionRegionSet struct {
+	// Whether the region is in the Chinese mainland.
+	IsChinaMainland bool `pulumi:"isChinaMainland"`
+	// Region name.
+	Region string `pulumi:"region"`
+	// Region description.
+	RegionName string `pulumi:"regionName"`
+	// Region availability status.
+	RegionState string `pulumi:"regionState"`
+}
+
+// GetRegionRegionSetInput is an input type that accepts GetRegionRegionSetArgs and GetRegionRegionSetOutput values.
+// You can construct a concrete instance of `GetRegionRegionSetInput` via:
+//
+//          GetRegionRegionSetArgs{...}
+type GetRegionRegionSetInput interface {
+	pulumi.Input
+
+	ToGetRegionRegionSetOutput() GetRegionRegionSetOutput
+	ToGetRegionRegionSetOutputWithContext(context.Context) GetRegionRegionSetOutput
+}
+
+type GetRegionRegionSetArgs struct {
+	// Whether the region is in the Chinese mainland.
+	IsChinaMainland pulumi.BoolInput `pulumi:"isChinaMainland"`
+	// Region name.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region description.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Region availability status.
+	RegionState pulumi.StringInput `pulumi:"regionState"`
+}
+
+func (GetRegionRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionRegionSetArgs) ToGetRegionRegionSetOutput() GetRegionRegionSetOutput {
+	return i.ToGetRegionRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetRegionRegionSetArgs) ToGetRegionRegionSetOutputWithContext(ctx context.Context) GetRegionRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionRegionSetOutput)
+}
+
+// GetRegionRegionSetArrayInput is an input type that accepts GetRegionRegionSetArray and GetRegionRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetRegionRegionSetArrayInput` via:
+//
+//          GetRegionRegionSetArray{ GetRegionRegionSetArgs{...} }
+type GetRegionRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRegionRegionSetArrayOutput() GetRegionRegionSetArrayOutput
+	ToGetRegionRegionSetArrayOutputWithContext(context.Context) GetRegionRegionSetArrayOutput
+}
+
+type GetRegionRegionSetArray []GetRegionRegionSetInput
+
+func (GetRegionRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionRegionSetArray) ToGetRegionRegionSetArrayOutput() GetRegionRegionSetArrayOutput {
+	return i.ToGetRegionRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRegionRegionSetArray) ToGetRegionRegionSetArrayOutputWithContext(ctx context.Context) GetRegionRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionRegionSetArrayOutput)
+}
+
+type GetRegionRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetRegionRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionRegionSetOutput) ToGetRegionRegionSetOutput() GetRegionRegionSetOutput {
+	return o
+}
+
+func (o GetRegionRegionSetOutput) ToGetRegionRegionSetOutputWithContext(ctx context.Context) GetRegionRegionSetOutput {
+	return o
+}
+
+// Whether the region is in the Chinese mainland.
+func (o GetRegionRegionSetOutput) IsChinaMainland() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRegionRegionSet) bool { return v.IsChinaMainland }).(pulumi.BoolOutput)
+}
+
+// Region name.
+func (o GetRegionRegionSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionRegionSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region description.
+func (o GetRegionRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Region availability status.
+func (o GetRegionRegionSetOutput) RegionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionRegionSet) string { return v.RegionState }).(pulumi.StringOutput)
+}
+
+type GetRegionRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionRegionSetArrayOutput) ToGetRegionRegionSetArrayOutput() GetRegionRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionRegionSetArrayOutput) ToGetRegionRegionSetArrayOutputWithContext(ctx context.Context) GetRegionRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionRegionSetArrayOutput) Index(i pulumi.IntInput) GetRegionRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionRegionSet {
+		return vs[0].([]GetRegionRegionSet)[vs[1].(int)]
+	}).(GetRegionRegionSetOutput)
+}
+
+type GetResetInstanceBlueprintFilter struct {
+	// Field to be filtered.
+	Name string `pulumi:"name"`
+	// Filter value of field.
+	Values []string `pulumi:"values"`
+}
+
+// GetResetInstanceBlueprintFilterInput is an input type that accepts GetResetInstanceBlueprintFilterArgs and GetResetInstanceBlueprintFilterOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintFilterInput` via:
+//
+//          GetResetInstanceBlueprintFilterArgs{...}
+type GetResetInstanceBlueprintFilterInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintFilterOutput() GetResetInstanceBlueprintFilterOutput
+	ToGetResetInstanceBlueprintFilterOutputWithContext(context.Context) GetResetInstanceBlueprintFilterOutput
+}
+
+type GetResetInstanceBlueprintFilterArgs struct {
+	// Field to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetResetInstanceBlueprintFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintFilter)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintFilterArgs) ToGetResetInstanceBlueprintFilterOutput() GetResetInstanceBlueprintFilterOutput {
+	return i.ToGetResetInstanceBlueprintFilterOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintFilterArgs) ToGetResetInstanceBlueprintFilterOutputWithContext(ctx context.Context) GetResetInstanceBlueprintFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintFilterOutput)
+}
+
+// GetResetInstanceBlueprintFilterArrayInput is an input type that accepts GetResetInstanceBlueprintFilterArray and GetResetInstanceBlueprintFilterArrayOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintFilterArrayInput` via:
+//
+//          GetResetInstanceBlueprintFilterArray{ GetResetInstanceBlueprintFilterArgs{...} }
+type GetResetInstanceBlueprintFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintFilterArrayOutput() GetResetInstanceBlueprintFilterArrayOutput
+	ToGetResetInstanceBlueprintFilterArrayOutputWithContext(context.Context) GetResetInstanceBlueprintFilterArrayOutput
+}
+
+type GetResetInstanceBlueprintFilterArray []GetResetInstanceBlueprintFilterInput
+
+func (GetResetInstanceBlueprintFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintFilter)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintFilterArray) ToGetResetInstanceBlueprintFilterArrayOutput() GetResetInstanceBlueprintFilterArrayOutput {
+	return i.ToGetResetInstanceBlueprintFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintFilterArray) ToGetResetInstanceBlueprintFilterArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintFilterArrayOutput)
+}
+
+type GetResetInstanceBlueprintFilterOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintFilter)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintFilterOutput) ToGetResetInstanceBlueprintFilterOutput() GetResetInstanceBlueprintFilterOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintFilterOutput) ToGetResetInstanceBlueprintFilterOutputWithContext(ctx context.Context) GetResetInstanceBlueprintFilterOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetResetInstanceBlueprintFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of field.
+func (o GetResetInstanceBlueprintFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetResetInstanceBlueprintFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintFilter)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintFilterArrayOutput) ToGetResetInstanceBlueprintFilterArrayOutput() GetResetInstanceBlueprintFilterArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintFilterArrayOutput) ToGetResetInstanceBlueprintFilterArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintFilterArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintFilterArrayOutput) Index(i pulumi.IntInput) GetResetInstanceBlueprintFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResetInstanceBlueprintFilter {
+		return vs[0].([]GetResetInstanceBlueprintFilter)[vs[1].(int)]
+	}).(GetResetInstanceBlueprintFilterOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSet struct {
+	// Mirror details.
+	BlueprintInfos []GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo `pulumi:"blueprintInfos"`
+	// Whether the instance image can be reset to the target image.
+	IsResettable bool `pulumi:"isResettable"`
+	// The information cannot be reset. when the mirror can be reset ''.
+	NonResettableMessage string `pulumi:"nonResettableMessage"`
+}
+
+// GetResetInstanceBlueprintResetInstanceBlueprintSetInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetArgs and GetResetInstanceBlueprintResetInstanceBlueprintSetOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetInput` via:
+//
+//          GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...}
+type GetResetInstanceBlueprintResetInstanceBlueprintSetInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetOutput
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutputWithContext(context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetOutput
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetArgs struct {
+	// Mirror details.
+	BlueprintInfos GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput `pulumi:"blueprintInfos"`
+	// Whether the instance image can be reset to the target image.
+	IsResettable pulumi.BoolInput `pulumi:"isResettable"`
+	// The information cannot be reset. when the mirror can be reset ''.
+	NonResettableMessage pulumi.StringInput `pulumi:"nonResettableMessage"`
+}
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSet)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetArgs) ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetOutput {
+	return i.ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetArgs) ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintResetInstanceBlueprintSetOutput)
+}
+
+// GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetArray and GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput` via:
+//
+//          GetResetInstanceBlueprintResetInstanceBlueprintSetArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...} }
+type GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutputWithContext(context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetArray []GetResetInstanceBlueprintResetInstanceBlueprintSetInput
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintResetInstanceBlueprintSet)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetArray) ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput {
+	return i.ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetArray) ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSet)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetOutput {
+	return o
+}
+
+// Mirror details.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) BlueprintInfos() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSet) []GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo {
+		return v.BlueprintInfos
+	}).(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput)
+}
+
+// Whether the instance image can be reset to the target image.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) IsResettable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSet) bool { return v.IsResettable }).(pulumi.BoolOutput)
+}
+
+// The information cannot be reset. when the mirror can be reset ''.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) NonResettableMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSet) string { return v.NonResettableMessage }).(pulumi.StringOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintResetInstanceBlueprintSet)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput) Index(i pulumi.IntInput) GetResetInstanceBlueprintResetInstanceBlueprintSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResetInstanceBlueprintResetInstanceBlueprintSet {
+		return vs[0].([]GetResetInstanceBlueprintResetInstanceBlueprintSet)[vs[1].(int)]
+	}).(GetResetInstanceBlueprintResetInstanceBlueprintSetOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo struct {
+	// Image ID, which is the unique identity of Blueprint.
+	BlueprintId string `pulumi:"blueprintId"`
+	// Mirror name.
+	BlueprintName string `pulumi:"blueprintName"`
+	// Mirror status.
+	BlueprintState string `pulumi:"blueprintState"`
+	// Image type, such as APP_OS, PURE_OS, PRIVATE.
+	BlueprintType string `pulumi:"blueprintType"`
+	// The official website Url.
+	CommunityUrl string `pulumi:"communityUrl"`
+	// Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime string `pulumi:"createdTime"`
+	// Mirror description information.
+	Description string `pulumi:"description"`
+	// The mirror image shows the title to the public.
+	DisplayTitle string `pulumi:"displayTitle"`
+	// The image shows the version to the public.
+	DisplayVersion string `pulumi:"displayVersion"`
+	// Docker version number.
+	DockerVersion string `pulumi:"dockerVersion"`
+	// Guide article Url.
+	GuideUrl string `pulumi:"guideUrl"`
+	// CVM image ID after sharing the CVM image to the lightweight application server.
+	ImageId string `pulumi:"imageId"`
+	// Mirror image URL.
+	ImageUrl string `pulumi:"imageUrl"`
+	// Operating system name.
+	OsName string `pulumi:"osName"`
+	// Operating system platform.
+	Platform string `pulumi:"platform"`
+	// Operating system platform type, such as LINUX_UNIX, WINDOWS.
+	PlatformType string `pulumi:"platformType"`
+	// Memory required for mirroring (in GB).
+	RequiredMemorySize int `pulumi:"requiredMemorySize"`
+	// The size of the system disk required for image (in GB).
+	RequiredSystemDiskSize int `pulumi:"requiredSystemDiskSize"`
+	// The mirror association uses the scene Id list.
+	SceneIdSets []string `pulumi:"sceneIdSets"`
+	// Whether the image supports automation helper.
+	SupportAutomationTools bool `pulumi:"supportAutomationTools"`
+}
+
+// GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs and GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput` via:
+//
+//          GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...}
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutputWithContext(context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs struct {
+	// Image ID, which is the unique identity of Blueprint.
+	BlueprintId pulumi.StringInput `pulumi:"blueprintId"`
+	// Mirror name.
+	BlueprintName pulumi.StringInput `pulumi:"blueprintName"`
+	// Mirror status.
+	BlueprintState pulumi.StringInput `pulumi:"blueprintState"`
+	// Image type, such as APP_OS, PURE_OS, PRIVATE.
+	BlueprintType pulumi.StringInput `pulumi:"blueprintType"`
+	// The official website Url.
+	CommunityUrl pulumi.StringInput `pulumi:"communityUrl"`
+	// Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Mirror description information.
+	Description pulumi.StringInput `pulumi:"description"`
+	// The mirror image shows the title to the public.
+	DisplayTitle pulumi.StringInput `pulumi:"displayTitle"`
+	// The image shows the version to the public.
+	DisplayVersion pulumi.StringInput `pulumi:"displayVersion"`
+	// Docker version number.
+	DockerVersion pulumi.StringInput `pulumi:"dockerVersion"`
+	// Guide article Url.
+	GuideUrl pulumi.StringInput `pulumi:"guideUrl"`
+	// CVM image ID after sharing the CVM image to the lightweight application server.
+	ImageId pulumi.StringInput `pulumi:"imageId"`
+	// Mirror image URL.
+	ImageUrl pulumi.StringInput `pulumi:"imageUrl"`
+	// Operating system name.
+	OsName pulumi.StringInput `pulumi:"osName"`
+	// Operating system platform.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// Operating system platform type, such as LINUX_UNIX, WINDOWS.
+	PlatformType pulumi.StringInput `pulumi:"platformType"`
+	// Memory required for mirroring (in GB).
+	RequiredMemorySize pulumi.IntInput `pulumi:"requiredMemorySize"`
+	// The size of the system disk required for image (in GB).
+	RequiredSystemDiskSize pulumi.IntInput `pulumi:"requiredSystemDiskSize"`
+	// The mirror association uses the scene Id list.
+	SceneIdSets pulumi.StringArrayInput `pulumi:"sceneIdSets"`
+	// Whether the image supports automation helper.
+	SupportAutomationTools pulumi.BoolInput `pulumi:"supportAutomationTools"`
+}
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput {
+	return i.ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput)
+}
+
+// GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray and GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput values.
+// You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput` via:
+//
+//          GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...} }
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput
+	ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutputWithContext(context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray []GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo)(nil)).Elem()
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput {
+	return i.ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput {
+	return o
+}
+
+// Image ID, which is the unique identity of Blueprint.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) BlueprintId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.BlueprintId }).(pulumi.StringOutput)
+}
+
+// Mirror name.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) BlueprintName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.BlueprintName }).(pulumi.StringOutput)
+}
+
+// Mirror status.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) BlueprintState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string {
+		return v.BlueprintState
+	}).(pulumi.StringOutput)
+}
+
+// Image type, such as APP_OS, PURE_OS, PRIVATE.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) BlueprintType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.BlueprintType }).(pulumi.StringOutput)
+}
+
+// The official website Url.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) CommunityUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.CommunityUrl }).(pulumi.StringOutput)
+}
+
+// Creation time. Expressed according to the ISO8601 standard, and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Mirror description information.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The mirror image shows the title to the public.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) DisplayTitle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.DisplayTitle }).(pulumi.StringOutput)
+}
+
+// The image shows the version to the public.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) DisplayVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string {
+		return v.DisplayVersion
+	}).(pulumi.StringOutput)
+}
+
+// Docker version number.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) DockerVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.DockerVersion }).(pulumi.StringOutput)
+}
+
+// Guide article Url.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) GuideUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.GuideUrl }).(pulumi.StringOutput)
+}
+
+// CVM image ID after sharing the CVM image to the lightweight application server.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) ImageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.ImageId }).(pulumi.StringOutput)
+}
+
+// Mirror image URL.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) ImageUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.ImageUrl }).(pulumi.StringOutput)
+}
+
+// Operating system name.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.OsName }).(pulumi.StringOutput)
+}
+
+// Operating system platform.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// Operating system platform type, such as LINUX_UNIX, WINDOWS.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) PlatformType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) string { return v.PlatformType }).(pulumi.StringOutput)
+}
+
+// Memory required for mirroring (in GB).
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) RequiredMemorySize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) int {
+		return v.RequiredMemorySize
+	}).(pulumi.IntOutput)
+}
+
+// The size of the system disk required for image (in GB).
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) RequiredSystemDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) int {
+		return v.RequiredSystemDiskSize
+	}).(pulumi.IntOutput)
+}
+
+// The mirror association uses the scene Id list.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) SceneIdSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) []string { return v.SceneIdSets }).(pulumi.StringArrayOutput)
+}
+
+// Whether the image supports automation helper.
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput) SupportAutomationTools() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo) bool {
+		return v.SupportAutomationTools
+	}).(pulumi.BoolOutput)
+}
+
+type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo)(nil)).Elem()
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput() GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput) ToGetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutputWithContext(ctx context.Context) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput {
+	return o
+}
+
+func (o GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput) Index(i pulumi.IntInput) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo {
+		return vs[0].([]GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo)[vs[1].(int)]
+	}).(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput)
+}
+
+type GetSceneSceneSet struct {
+	// Use scene description.
+	Description string `pulumi:"description"`
+	// Use the scene presentation name.
+	DisplayName string `pulumi:"displayName"`
+	// Use scene Id.
+	SceneId string `pulumi:"sceneId"`
+}
+
+// GetSceneSceneSetInput is an input type that accepts GetSceneSceneSetArgs and GetSceneSceneSetOutput values.
+// You can construct a concrete instance of `GetSceneSceneSetInput` via:
+//
+//          GetSceneSceneSetArgs{...}
+type GetSceneSceneSetInput interface {
+	pulumi.Input
+
+	ToGetSceneSceneSetOutput() GetSceneSceneSetOutput
+	ToGetSceneSceneSetOutputWithContext(context.Context) GetSceneSceneSetOutput
+}
+
+type GetSceneSceneSetArgs struct {
+	// Use scene description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Use the scene presentation name.
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// Use scene Id.
+	SceneId pulumi.StringInput `pulumi:"sceneId"`
+}
+
+func (GetSceneSceneSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSceneSceneSet)(nil)).Elem()
+}
+
+func (i GetSceneSceneSetArgs) ToGetSceneSceneSetOutput() GetSceneSceneSetOutput {
+	return i.ToGetSceneSceneSetOutputWithContext(context.Background())
+}
+
+func (i GetSceneSceneSetArgs) ToGetSceneSceneSetOutputWithContext(ctx context.Context) GetSceneSceneSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSceneSceneSetOutput)
+}
+
+// GetSceneSceneSetArrayInput is an input type that accepts GetSceneSceneSetArray and GetSceneSceneSetArrayOutput values.
+// You can construct a concrete instance of `GetSceneSceneSetArrayInput` via:
+//
+//          GetSceneSceneSetArray{ GetSceneSceneSetArgs{...} }
+type GetSceneSceneSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSceneSceneSetArrayOutput() GetSceneSceneSetArrayOutput
+	ToGetSceneSceneSetArrayOutputWithContext(context.Context) GetSceneSceneSetArrayOutput
+}
+
+type GetSceneSceneSetArray []GetSceneSceneSetInput
+
+func (GetSceneSceneSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSceneSceneSet)(nil)).Elem()
+}
+
+func (i GetSceneSceneSetArray) ToGetSceneSceneSetArrayOutput() GetSceneSceneSetArrayOutput {
+	return i.ToGetSceneSceneSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSceneSceneSetArray) ToGetSceneSceneSetArrayOutputWithContext(ctx context.Context) GetSceneSceneSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSceneSceneSetArrayOutput)
+}
+
+type GetSceneSceneSetOutput struct{ *pulumi.OutputState }
+
+func (GetSceneSceneSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSceneSceneSet)(nil)).Elem()
+}
+
+func (o GetSceneSceneSetOutput) ToGetSceneSceneSetOutput() GetSceneSceneSetOutput {
+	return o
+}
+
+func (o GetSceneSceneSetOutput) ToGetSceneSceneSetOutputWithContext(ctx context.Context) GetSceneSceneSetOutput {
+	return o
+}
+
+// Use scene description.
+func (o GetSceneSceneSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSceneSceneSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Use the scene presentation name.
+func (o GetSceneSceneSetOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSceneSceneSet) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Use scene Id.
+func (o GetSceneSceneSetOutput) SceneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSceneSceneSet) string { return v.SceneId }).(pulumi.StringOutput)
+}
+
+type GetSceneSceneSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSceneSceneSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSceneSceneSet)(nil)).Elem()
+}
+
+func (o GetSceneSceneSetArrayOutput) ToGetSceneSceneSetArrayOutput() GetSceneSceneSetArrayOutput {
+	return o
+}
+
+func (o GetSceneSceneSetArrayOutput) ToGetSceneSceneSetArrayOutputWithContext(ctx context.Context) GetSceneSceneSetArrayOutput {
+	return o
+}
+
+func (o GetSceneSceneSetArrayOutput) Index(i pulumi.IntInput) GetSceneSceneSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSceneSceneSet {
+		return vs[0].([]GetSceneSceneSet)[vs[1].(int)]
+	}).(GetSceneSceneSetOutput)
+}
+
+type GetZoneZoneInfoSet struct {
+	// Instance purchase page availability zone display label.
+	InstanceDisplayLabel string `pulumi:"instanceDisplayLabel"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+	// Chinese name of availability zone.
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetZoneZoneInfoSetInput is an input type that accepts GetZoneZoneInfoSetArgs and GetZoneZoneInfoSetOutput values.
+// You can construct a concrete instance of `GetZoneZoneInfoSetInput` via:
+//
+//          GetZoneZoneInfoSetArgs{...}
+type GetZoneZoneInfoSetInput interface {
+	pulumi.Input
+
+	ToGetZoneZoneInfoSetOutput() GetZoneZoneInfoSetOutput
+	ToGetZoneZoneInfoSetOutputWithContext(context.Context) GetZoneZoneInfoSetOutput
+}
+
+type GetZoneZoneInfoSetArgs struct {
+	// Instance purchase page availability zone display label.
+	InstanceDisplayLabel pulumi.StringInput `pulumi:"instanceDisplayLabel"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// Chinese name of availability zone.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetZoneZoneInfoSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneZoneInfoSet)(nil)).Elem()
+}
+
+func (i GetZoneZoneInfoSetArgs) ToGetZoneZoneInfoSetOutput() GetZoneZoneInfoSetOutput {
+	return i.ToGetZoneZoneInfoSetOutputWithContext(context.Background())
+}
+
+func (i GetZoneZoneInfoSetArgs) ToGetZoneZoneInfoSetOutputWithContext(ctx context.Context) GetZoneZoneInfoSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneZoneInfoSetOutput)
+}
+
+// GetZoneZoneInfoSetArrayInput is an input type that accepts GetZoneZoneInfoSetArray and GetZoneZoneInfoSetArrayOutput values.
+// You can construct a concrete instance of `GetZoneZoneInfoSetArrayInput` via:
+//
+//          GetZoneZoneInfoSetArray{ GetZoneZoneInfoSetArgs{...} }
+type GetZoneZoneInfoSetArrayInput interface {
+	pulumi.Input
+
+	ToGetZoneZoneInfoSetArrayOutput() GetZoneZoneInfoSetArrayOutput
+	ToGetZoneZoneInfoSetArrayOutputWithContext(context.Context) GetZoneZoneInfoSetArrayOutput
+}
+
+type GetZoneZoneInfoSetArray []GetZoneZoneInfoSetInput
+
+func (GetZoneZoneInfoSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneZoneInfoSet)(nil)).Elem()
+}
+
+func (i GetZoneZoneInfoSetArray) ToGetZoneZoneInfoSetArrayOutput() GetZoneZoneInfoSetArrayOutput {
+	return i.ToGetZoneZoneInfoSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetZoneZoneInfoSetArray) ToGetZoneZoneInfoSetArrayOutputWithContext(ctx context.Context) GetZoneZoneInfoSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneZoneInfoSetArrayOutput)
+}
+
+type GetZoneZoneInfoSetOutput struct{ *pulumi.OutputState }
+
+func (GetZoneZoneInfoSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneZoneInfoSet)(nil)).Elem()
+}
+
+func (o GetZoneZoneInfoSetOutput) ToGetZoneZoneInfoSetOutput() GetZoneZoneInfoSetOutput {
+	return o
+}
+
+func (o GetZoneZoneInfoSetOutput) ToGetZoneZoneInfoSetOutputWithContext(ctx context.Context) GetZoneZoneInfoSetOutput {
+	return o
+}
+
+// Instance purchase page availability zone display label.
+func (o GetZoneZoneInfoSetOutput) InstanceDisplayLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneZoneInfoSet) string { return v.InstanceDisplayLabel }).(pulumi.StringOutput)
+}
+
+// Availability zone.
+func (o GetZoneZoneInfoSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneZoneInfoSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// Chinese name of availability zone.
+func (o GetZoneZoneInfoSetOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneZoneInfoSet) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetZoneZoneInfoSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZoneZoneInfoSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneZoneInfoSet)(nil)).Elem()
+}
+
+func (o GetZoneZoneInfoSetArrayOutput) ToGetZoneZoneInfoSetArrayOutput() GetZoneZoneInfoSetArrayOutput {
+	return o
+}
+
+func (o GetZoneZoneInfoSetArrayOutput) ToGetZoneZoneInfoSetArrayOutputWithContext(ctx context.Context) GetZoneZoneInfoSetArrayOutput {
+	return o
+}
+
+func (o GetZoneZoneInfoSetArrayOutput) Index(i pulumi.IntInput) GetZoneZoneInfoSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneZoneInfoSet {
+		return vs[0].([]GetZoneZoneInfoSet)[vs[1].(int)]
+	}).(GetZoneZoneInfoSetOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskAutoMountConfigurationInput)(nil)).Elem(), DiskAutoMountConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskAutoMountConfigurationPtrInput)(nil)).Elem(), DiskAutoMountConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskDiskChargePrepaidInput)(nil)).Elem(), DiskDiskChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskDiskChargePrepaidPtrInput)(nil)).Elem(), DiskDiskChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleInput)(nil)).Elem(), FirewallRuleFirewallRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleArrayInput)(nil)).Elem(), FirewallRuleFirewallRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerInput)(nil)).Elem(), InstanceContainerArgs{})
@@ -1482,6 +5767,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerVolumeArrayInput)(nil)).Elem(), InstanceContainerVolumeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceLoginConfigurationInput)(nil)).Elem(), InstanceLoginConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceLoginConfigurationPtrInput)(nil)).Elem(), InstanceLoginConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewDiskRenewDiskChargePrepaidInput)(nil)).Elem(), RenewDiskRenewDiskChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewDiskRenewDiskChargePrepaidPtrInput)(nil)).Elem(), RenewDiskRenewDiskChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidPtrInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAllSceneSceneSetInput)(nil)).Elem(), GetAllSceneSceneSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAllSceneSceneSetArrayInput)(nil)).Elem(), GetAllSceneSceneSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetInput)(nil)).Elem(), GetBundleBundleSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetArrayInput)(nil)).Elem(), GetBundleBundleSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInput)(nil)).Elem(), GetBundleBundleSetPriceArgs{})
@@ -1490,8 +5781,60 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInstancePriceArrayInput)(nil)).Elem(), GetBundleBundleSetPriceInstancePriceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleFilterInput)(nil)).Elem(), GetBundleFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleFilterArrayInput)(nil)).Elem(), GetBundleFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskConfigDiskConfigSetInput)(nil)).Elem(), GetDiskConfigDiskConfigSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskConfigDiskConfigSetArrayInput)(nil)).Elem(), GetDiskConfigDiskConfigSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskConfigFilterInput)(nil)).Elem(), GetDiskConfigFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskConfigFilterArrayInput)(nil)).Elem(), GetDiskConfigFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksDiskListInput)(nil)).Elem(), GetDisksDiskListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksDiskListArrayInput)(nil)).Elem(), GetDisksDiskListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksFilterInput)(nil)).Elem(), GetDisksFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDisksFilterArrayInput)(nil)).Elem(), GetDisksFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSetInput)(nil)).Elem(), GetFirewallRulesTemplateFirewallRuleSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFirewallRulesTemplateFirewallRuleSetArrayInput)(nil)).Elem(), GetFirewallRulesTemplateFirewallRuleSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetArrayInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetBlueprintInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetBlueprintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput)(nil)).Elem(), GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDiskNumAttachDetailSetInput)(nil)).Elem(), GetInstanceDiskNumAttachDetailSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceDiskNumAttachDetailSetArrayInput)(nil)).Elem(), GetInstanceDiskNumAttachDetailSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetInput)(nil)).Elem(), GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput)(nil)).Elem(), GetInstanceTrafficPackageInstanceTrafficPackageSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput)(nil)).Elem(), GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput)(nil)).Elem(), GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleFilterInput)(nil)).Elem(), GetModifyInstanceBundleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleFilterArrayInput)(nil)).Elem(), GetModifyInstanceBundleFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundleInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundleArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundlePriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetModifyPriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput)(nil)).Elem(), GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionRegionSetInput)(nil)).Elem(), GetRegionRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionRegionSetArrayInput)(nil)).Elem(), GetRegionRegionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintFilterInput)(nil)).Elem(), GetResetInstanceBlueprintFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintFilterArrayInput)(nil)).Elem(), GetResetInstanceBlueprintFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetInput)(nil)).Elem(), GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput)(nil)).Elem(), GetResetInstanceBlueprintResetInstanceBlueprintSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput)(nil)).Elem(), GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput)(nil)).Elem(), GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSceneSceneSetInput)(nil)).Elem(), GetSceneSceneSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSceneSceneSetArrayInput)(nil)).Elem(), GetSceneSceneSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneZoneInfoSetInput)(nil)).Elem(), GetZoneZoneInfoSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneZoneInfoSetArrayInput)(nil)).Elem(), GetZoneZoneInfoSetArray{})
+	pulumi.RegisterOutputType(DiskAutoMountConfigurationOutput{})
+	pulumi.RegisterOutputType(DiskAutoMountConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(DiskDiskChargePrepaidOutput{})
+	pulumi.RegisterOutputType(DiskDiskChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerOutput{})
@@ -1504,6 +5847,12 @@ func init() {
 	pulumi.RegisterOutputType(InstanceContainerVolumeArrayOutput{})
 	pulumi.RegisterOutputType(InstanceLoginConfigurationOutput{})
 	pulumi.RegisterOutputType(InstanceLoginConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(RenewDiskRenewDiskChargePrepaidOutput{})
+	pulumi.RegisterOutputType(RenewDiskRenewDiskChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(GetAllSceneSceneSetOutput{})
+	pulumi.RegisterOutputType(GetAllSceneSceneSetArrayOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetArrayOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetPriceOutput{})
@@ -1512,6 +5861,54 @@ func init() {
 	pulumi.RegisterOutputType(GetBundleBundleSetPriceInstancePriceArrayOutput{})
 	pulumi.RegisterOutputType(GetBundleFilterOutput{})
 	pulumi.RegisterOutputType(GetBundleFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDiskConfigDiskConfigSetOutput{})
+	pulumi.RegisterOutputType(GetDiskConfigDiskConfigSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDiskConfigFilterOutput{})
+	pulumi.RegisterOutputType(GetDiskConfigFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDisksDiskListOutput{})
+	pulumi.RegisterOutputType(GetDisksDiskListArrayOutput{})
+	pulumi.RegisterOutputType(GetDisksFilterOutput{})
+	pulumi.RegisterOutputType(GetDisksFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetFirewallRulesTemplateFirewallRuleSetOutput{})
 	pulumi.RegisterOutputType(GetFirewallRulesTemplateFirewallRuleSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceDiskNumAttachDetailSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceDiskNumAttachDetailSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficPackageInstanceTrafficPackageSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput{})
+	pulumi.RegisterOutputType(GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleFilterOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundleOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundleArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundlePriceOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetModifyPriceOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput{})
+	pulumi.RegisterOutputType(GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput{})
+	pulumi.RegisterOutputType(GetRegionRegionSetOutput{})
+	pulumi.RegisterOutputType(GetRegionRegionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintFilterOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintResetInstanceBlueprintSetOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput{})
+	pulumi.RegisterOutputType(GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetSceneSceneSetOutput{})
+	pulumi.RegisterOutputType(GetSceneSceneSetArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneZoneInfoSetOutput{})
+	pulumi.RegisterOutputType(GetZoneZoneInfoSetArrayOutput{})
 }

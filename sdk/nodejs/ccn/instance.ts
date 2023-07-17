@@ -8,8 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CCN instance.
  *
  * ## Example Usage
- *
- * Create a prepaid CCN
+ * ### Create a prepaid CCN
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -22,8 +21,7 @@ import * as utilities from "../utilities";
  *     qos: "AG",
  * });
  * ```
- *
- * Create a post-paid regional export speed limit type CCN
+ * ### Create a post-paid regional export speed limit type CCN
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -36,8 +34,7 @@ import * as utilities from "../utilities";
  *     qos: "AG",
  * });
  * ```
- *
- * Create a post-paid inter-regional rate limit type CNN
+ * ### Create a post-paid inter-regional rate limit type CNN
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";

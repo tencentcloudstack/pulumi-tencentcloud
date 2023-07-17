@@ -117,28 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// }
     /// ```
-    /// 
-    /// Continue the a migration job
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "continue",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
-    /// Complete a migration job when the status is readyComplete
+    /// ### Continue the a migration job
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -157,8 +136,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// }
     /// ```
+    /// ### Complete a migration job when the status is readyComplete
     /// 
-    /// Stop a running migration job
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
+    ///         {
+    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///             Action = "continue",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Stop a running migration job
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -177,8 +174,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// }
     /// ```
-    /// 
-    /// Isolate a stopped/canceled migration job
+    /// ### Isolate a stopped/canceled migration job
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -197,8 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// }
     /// ```
-    /// 
-    /// Recover a isolated migration job
+    /// ### Recover a isolated migration job
     /// 
     /// ```csharp
     /// using Pulumi;

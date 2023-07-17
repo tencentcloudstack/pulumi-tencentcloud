@@ -233,8 +233,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
         Provides a resource to create a cfs auto_snapshot_policy
 
         ## Example Usage
-
-        use day of week
+        ### use day of week
 
         ```python
         import pulumi
@@ -246,8 +245,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             hour="2,3",
             policy_name="policy_name")
         ```
-
-        use day of month
+        ### use day of month
 
         ```python
         import pulumi
@@ -259,8 +257,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             hour="2,3",
             policy_name="policy_name")
         ```
-
-        use interval days
+        ### use interval days
 
         ```python
         import pulumi
@@ -300,8 +297,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
         Provides a resource to create a cfs auto_snapshot_policy
 
         ## Example Usage
-
-        use day of week
+        ### use day of week
 
         ```python
         import pulumi
@@ -313,8 +309,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             hour="2,3",
             policy_name="policy_name")
         ```
-
-        use day of month
+        ### use day of month
 
         ```python
         import pulumi
@@ -326,8 +321,7 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             hour="2,3",
             policy_name="policy_name")
         ```
-
-        use interval days
+        ### use interval days
 
         ```python
         import pulumi

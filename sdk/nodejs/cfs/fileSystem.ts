@@ -8,6 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cloud file system(CFS).
  *
  * ## Example Usage
+ * ### Standard Nfs CFS
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -19,6 +20,55 @@ import * as utilities from "../utilities";
  *     protocol: "NFS",
  *     subnetId: "subnet-9mu2t9iw",
  *     vpcId: "vpc-ah9fbkap",
+ * });
+ * ```
+ * ### High-Performance Nfs CFS
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ *     accessGroupId: "pgroup-drwt29od",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     protocol: "NFS",
+ *     storageType: "HP",
+ *     subnetId: "subnet-enm92y0m",
+ *     vpcId: "vpc-86v957zb",
+ * });
+ * ```
+ * ### Standard Turbo CFS
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ *     accessGroupId: "pgroup-drwt29od",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     capacity: 20480,
+ *     ccnId: "ccn-39lqkygf",
+ *     cidrBlock: "11.0.0.0/24",
+ *     netInterface: "CCN",
+ *     protocol: "TURBO",
+ *     storageType: "TB",
+ * });
+ * ```
+ * ### High-Performance Turbo CFS
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ *     accessGroupId: "pgroup-drwt29od",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     capacity: 10240,
+ *     ccnId: "ccn-39lqkygf",
+ *     cidrBlock: "11.0.0.0/24",
+ *     netInterface: "CCN",
+ *     protocol: "TURBO",
+ *     storageType: "TP",
  * });
  * ```
  *
@@ -67,6 +117,18 @@ export class FileSystem extends pulumi.CustomResource {
      */
     public readonly availabilityZone!: pulumi.Output<string>;
     /**
+     * File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+     */
+    public readonly capacity!: pulumi.Output<number>;
+    /**
+     * CCN instance ID (required if the network type is CCN).
+     */
+    public readonly ccnId!: pulumi.Output<string>;
+    /**
+     * CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+     */
+    public readonly cidrBlock!: pulumi.Output<string>;
+    /**
      * Create time of the file system.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -83,11 +145,15 @@ export class FileSystem extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+     * Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+     */
+    public readonly netInterface!: pulumi.Output<string | undefined>;
+    /**
+     * File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
      */
     public readonly protocol!: pulumi.Output<string | undefined>;
     /**
-     * File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+     * Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
      */
     public readonly storageType!: pulumi.Output<string | undefined>;
     /**
@@ -118,10 +184,14 @@ export class FileSystem extends pulumi.CustomResource {
             const state = argsOrState as FileSystemState | undefined;
             resourceInputs["accessGroupId"] = state ? state.accessGroupId : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
+            resourceInputs["capacity"] = state ? state.capacity : undefined;
+            resourceInputs["ccnId"] = state ? state.ccnId : undefined;
+            resourceInputs["cidrBlock"] = state ? state.cidrBlock : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["fsId"] = state ? state.fsId : undefined;
             resourceInputs["mountIp"] = state ? state.mountIp : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["netInterface"] = state ? state.netInterface : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
             resourceInputs["storageType"] = state ? state.storageType : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
@@ -135,16 +205,14 @@ export class FileSystem extends pulumi.CustomResource {
             if ((!args || args.availabilityZone === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'availabilityZone'");
             }
-            if ((!args || args.subnetId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'subnetId'");
-            }
-            if ((!args || args.vpcId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'vpcId'");
-            }
             resourceInputs["accessGroupId"] = args ? args.accessGroupId : undefined;
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
+            resourceInputs["capacity"] = args ? args.capacity : undefined;
+            resourceInputs["ccnId"] = args ? args.ccnId : undefined;
+            resourceInputs["cidrBlock"] = args ? args.cidrBlock : undefined;
             resourceInputs["mountIp"] = args ? args.mountIp : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["netInterface"] = args ? args.netInterface : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["storageType"] = args ? args.storageType : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
@@ -171,6 +239,18 @@ export interface FileSystemState {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
+     * File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+     */
+    capacity?: pulumi.Input<number>;
+    /**
+     * CCN instance ID (required if the network type is CCN).
+     */
+    ccnId?: pulumi.Input<string>;
+    /**
+     * CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+     */
+    cidrBlock?: pulumi.Input<string>;
+    /**
      * Create time of the file system.
      */
     createTime?: pulumi.Input<string>;
@@ -187,11 +267,15 @@ export interface FileSystemState {
      */
     name?: pulumi.Input<string>;
     /**
-     * File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+     * Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+     */
+    netInterface?: pulumi.Input<string>;
+    /**
+     * File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
      */
     protocol?: pulumi.Input<string>;
     /**
-     * File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+     * Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
      */
     storageType?: pulumi.Input<string>;
     /**
@@ -221,6 +305,18 @@ export interface FileSystemArgs {
      */
     availabilityZone: pulumi.Input<string>;
     /**
+     * File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+     */
+    capacity?: pulumi.Input<number>;
+    /**
+     * CCN instance ID (required if the network type is CCN).
+     */
+    ccnId?: pulumi.Input<string>;
+    /**
+     * CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+     */
+    cidrBlock?: pulumi.Input<string>;
+    /**
      * IP of mount point.
      */
     mountIp?: pulumi.Input<string>;
@@ -229,17 +325,21 @@ export interface FileSystemArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * File service protocol. Valid values are `NFS` and `CIFS`. and the default is `NFS`.
+     * Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
+     */
+    netInterface?: pulumi.Input<string>;
+    /**
+     * File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
      */
     protocol?: pulumi.Input<string>;
     /**
-     * File service StorageType. Valid values are `SD` and `HP`. and the default is `SD`.
+     * Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
      */
     storageType?: pulumi.Input<string>;
     /**
      * ID of a subnet.
      */
-    subnetId: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
     /**
      * Instance tags.
      */
@@ -247,5 +347,5 @@ export interface FileSystemArgs {
     /**
      * ID of a VPC network.
      */
-    vpcId: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string>;
 }

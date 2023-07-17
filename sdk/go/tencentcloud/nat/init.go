@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Gateway{}
 	case "tencentcloud:Nat/gatewaySnat:GatewaySnat":
 		r = &GatewaySnat{}
+	case "tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute":
+		r = &RefreshNatDcRoute{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -46,6 +48,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Nat/gatewaySnat",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Nat/refreshNatDcRoute",
 		&module{version},
 	)
 }

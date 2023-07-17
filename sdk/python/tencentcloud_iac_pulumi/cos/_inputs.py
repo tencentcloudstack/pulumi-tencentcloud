@@ -9,10 +9,27 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'BatchManifestArgs',
+    'BatchManifestLocationArgs',
+    'BatchManifestSpecArgs',
+    'BatchOperationArgs',
+    'BatchOperationCosInitiateRestoreObjectArgs',
+    'BatchOperationCosPutObjectCopyArgs',
+    'BatchOperationCosPutObjectCopyAccessControlGrantsArgs',
+    'BatchOperationCosPutObjectCopyNewObjectMetadataArgs',
+    'BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs',
+    'BatchOperationCosPutObjectCopyNewObjectTaggingArgs',
+    'BatchReportArgs',
     'BucketCorsRuleArgs',
     'BucketDomainCertificateAttachmentDomainCertificateArgs',
     'BucketDomainCertificateAttachmentDomainCertificateCertificateArgs',
     'BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs',
+    'BucketInventoryDestinationArgs',
+    'BucketInventoryDestinationEncryptionArgs',
+    'BucketInventoryFilterArgs',
+    'BucketInventoryFilterPeriodArgs',
+    'BucketInventoryOptionalFieldsArgs',
+    'BucketInventoryScheduleArgs',
     'BucketLifecycleRuleArgs',
     'BucketLifecycleRuleExpirationArgs',
     'BucketLifecycleRuleNonCurrentExpirationArgs',
@@ -23,6 +40,790 @@ __all__ = [
     'BucketReplicaRuleArgs',
     'BucketWebsiteArgs',
 ]
+
+@pulumi.input_type
+class BatchManifestArgs:
+    def __init__(__self__, *,
+                 location: pulumi.Input['BatchManifestLocationArgs'],
+                 spec: pulumi.Input['BatchManifestSpecArgs']):
+        """
+        :param pulumi.Input['BatchManifestLocationArgs'] location: The location information of the list of objects.
+        :param pulumi.Input['BatchManifestSpecArgs'] spec: Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+        """
+        pulumi.set(__self__, "location", location)
+        pulumi.set(__self__, "spec", spec)
+
+    @property
+    @pulumi.getter
+    def location(self) -> pulumi.Input['BatchManifestLocationArgs']:
+        """
+        The location information of the list of objects.
+        """
+        return pulumi.get(self, "location")
+
+    @location.setter
+    def location(self, value: pulumi.Input['BatchManifestLocationArgs']):
+        pulumi.set(self, "location", value)
+
+    @property
+    @pulumi.getter
+    def spec(self) -> pulumi.Input['BatchManifestSpecArgs']:
+        """
+        Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.
+        """
+        return pulumi.get(self, "spec")
+
+    @spec.setter
+    def spec(self, value: pulumi.Input['BatchManifestSpecArgs']):
+        pulumi.set(self, "spec", value)
+
+
+@pulumi.input_type
+class BatchManifestLocationArgs:
+    def __init__(__self__, *,
+                 etag: pulumi.Input[str],
+                 object_arn: pulumi.Input[str],
+                 object_version_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] etag: Specifies the etag of the object list. Length 1-1024 bytes.
+        :param pulumi.Input[str] object_arn: Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+        :param pulumi.Input[str] object_version_id: Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+        """
+        pulumi.set(__self__, "etag", etag)
+        pulumi.set(__self__, "object_arn", object_arn)
+        if object_version_id is not None:
+            pulumi.set(__self__, "object_version_id", object_version_id)
+
+    @property
+    @pulumi.getter
+    def etag(self) -> pulumi.Input[str]:
+        """
+        Specifies the etag of the object list. Length 1-1024 bytes.
+        """
+        return pulumi.get(self, "etag")
+
+    @etag.setter
+    def etag(self, value: pulumi.Input[str]):
+        pulumi.set(self, "etag", value)
+
+    @property
+    @pulumi.getter(name="objectArn")
+    def object_arn(self) -> pulumi.Input[str]:
+        """
+        Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.
+        """
+        return pulumi.get(self, "object_arn")
+
+    @object_arn.setter
+    def object_arn(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object_arn", value)
+
+    @property
+    @pulumi.getter(name="objectVersionId")
+    def object_version_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specifies the version of the object manifest ID, which is 1-1024 bytes long.
+        """
+        return pulumi.get(self, "object_version_id")
+
+    @object_version_id.setter
+    def object_version_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "object_version_id", value)
+
+
+@pulumi.input_type
+class BatchManifestSpecArgs:
+    def __init__(__self__, *,
+                 format: pulumi.Input[str],
+                 fields: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] format: Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] fields: Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+        """
+        pulumi.set(__self__, "format", format)
+        if fields is not None:
+            pulumi.set(__self__, "fields", fields)
+
+    @property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[str]:
+        """
+        Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter
+    def fields(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.
+        """
+        return pulumi.get(self, "fields")
+
+    @fields.setter
+    def fields(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "fields", value)
+
+
+@pulumi.input_type
+class BatchOperationArgs:
+    def __init__(__self__, *,
+                 cos_initiate_restore_object: Optional[pulumi.Input['BatchOperationCosInitiateRestoreObjectArgs']] = None,
+                 cos_put_object_copy: Optional[pulumi.Input['BatchOperationCosPutObjectCopyArgs']] = None):
+        """
+        :param pulumi.Input['BatchOperationCosInitiateRestoreObjectArgs'] cos_initiate_restore_object: Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+        :param pulumi.Input['BatchOperationCosPutObjectCopyArgs'] cos_put_object_copy: Specifies the specific parameters for the batch copy operation on the objects in the list.
+        """
+        if cos_initiate_restore_object is not None:
+            pulumi.set(__self__, "cos_initiate_restore_object", cos_initiate_restore_object)
+        if cos_put_object_copy is not None:
+            pulumi.set(__self__, "cos_put_object_copy", cos_put_object_copy)
+
+    @property
+    @pulumi.getter(name="cosInitiateRestoreObject")
+    def cos_initiate_restore_object(self) -> Optional[pulumi.Input['BatchOperationCosInitiateRestoreObjectArgs']]:
+        """
+        Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.
+        """
+        return pulumi.get(self, "cos_initiate_restore_object")
+
+    @cos_initiate_restore_object.setter
+    def cos_initiate_restore_object(self, value: Optional[pulumi.Input['BatchOperationCosInitiateRestoreObjectArgs']]):
+        pulumi.set(self, "cos_initiate_restore_object", value)
+
+    @property
+    @pulumi.getter(name="cosPutObjectCopy")
+    def cos_put_object_copy(self) -> Optional[pulumi.Input['BatchOperationCosPutObjectCopyArgs']]:
+        """
+        Specifies the specific parameters for the batch copy operation on the objects in the list.
+        """
+        return pulumi.get(self, "cos_put_object_copy")
+
+    @cos_put_object_copy.setter
+    def cos_put_object_copy(self, value: Optional[pulumi.Input['BatchOperationCosPutObjectCopyArgs']]):
+        pulumi.set(self, "cos_put_object_copy", value)
+
+
+@pulumi.input_type
+class BatchOperationCosInitiateRestoreObjectArgs:
+    def __init__(__self__, *,
+                 expiration_in_days: pulumi.Input[int],
+                 job_tier: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] expiration_in_days: Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+        :param pulumi.Input[str] job_tier: Select archive recovery model. Available values: Bulk, Standard.
+        """
+        pulumi.set(__self__, "expiration_in_days", expiration_in_days)
+        pulumi.set(__self__, "job_tier", job_tier)
+
+    @property
+    @pulumi.getter(name="expirationInDays")
+    def expiration_in_days(self) -> pulumi.Input[int]:
+        """
+        Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.
+        """
+        return pulumi.get(self, "expiration_in_days")
+
+    @expiration_in_days.setter
+    def expiration_in_days(self, value: pulumi.Input[int]):
+        pulumi.set(self, "expiration_in_days", value)
+
+    @property
+    @pulumi.getter(name="jobTier")
+    def job_tier(self) -> pulumi.Input[str]:
+        """
+        Select archive recovery model. Available values: Bulk, Standard.
+        """
+        return pulumi.get(self, "job_tier")
+
+    @job_tier.setter
+    def job_tier(self, value: pulumi.Input[str]):
+        pulumi.set(self, "job_tier", value)
+
+
+@pulumi.input_type
+class BatchOperationCosPutObjectCopyArgs:
+    def __init__(__self__, *,
+                 target_resource: pulumi.Input[str],
+                 access_control_directive: Optional[pulumi.Input[str]] = None,
+                 access_control_grants: Optional[pulumi.Input['BatchOperationCosPutObjectCopyAccessControlGrantsArgs']] = None,
+                 canned_access_control_list: Optional[pulumi.Input[str]] = None,
+                 metadata_directive: Optional[pulumi.Input[str]] = None,
+                 modified_since_constraint: Optional[pulumi.Input[int]] = None,
+                 new_object_metadata: Optional[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataArgs']] = None,
+                 new_object_taggings: Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectTaggingArgs']]]] = None,
+                 prefix_replace: Optional[pulumi.Input[bool]] = None,
+                 resources_prefix: Optional[pulumi.Input[str]] = None,
+                 storage_class: Optional[pulumi.Input[str]] = None,
+                 tagging_directive: Optional[pulumi.Input[str]] = None,
+                 target_key_prefix: Optional[pulumi.Input[str]] = None,
+                 unmodified_since_constraint: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] target_resource: Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+        :param pulumi.Input[str] access_control_directive: This element specifies how ACL is copied. Valid values:
+               - Copy: inherits the source object ACL
+               - Replaced: replace source ACL
+               - Add: add a new ACL based on the source ACL.
+        :param pulumi.Input['BatchOperationCosPutObjectCopyAccessControlGrantsArgs'] access_control_grants: Controls the specific access to the object.
+        :param pulumi.Input[str] canned_access_control_list: Defines the ACL property of the object. Valid values: private, public-read.
+        :param pulumi.Input[str] metadata_directive: This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+        :param pulumi.Input[int] modified_since_constraint: When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+        :param pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataArgs'] new_object_metadata: Configure the metadata for the object.
+        :param pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectTaggingArgs']]] new_object_taggings: The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+        :param pulumi.Input[bool] prefix_replace: Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+        :param pulumi.Input[str] resources_prefix: This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+        :param pulumi.Input[str] storage_class: Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+        :param pulumi.Input[str] tagging_directive: This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+        :param pulumi.Input[str] target_key_prefix: This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+        :param pulumi.Input[int] unmodified_since_constraint: When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        pulumi.set(__self__, "target_resource", target_resource)
+        if access_control_directive is not None:
+            pulumi.set(__self__, "access_control_directive", access_control_directive)
+        if access_control_grants is not None:
+            pulumi.set(__self__, "access_control_grants", access_control_grants)
+        if canned_access_control_list is not None:
+            pulumi.set(__self__, "canned_access_control_list", canned_access_control_list)
+        if metadata_directive is not None:
+            pulumi.set(__self__, "metadata_directive", metadata_directive)
+        if modified_since_constraint is not None:
+            pulumi.set(__self__, "modified_since_constraint", modified_since_constraint)
+        if new_object_metadata is not None:
+            pulumi.set(__self__, "new_object_metadata", new_object_metadata)
+        if new_object_taggings is not None:
+            pulumi.set(__self__, "new_object_taggings", new_object_taggings)
+        if prefix_replace is not None:
+            pulumi.set(__self__, "prefix_replace", prefix_replace)
+        if resources_prefix is not None:
+            pulumi.set(__self__, "resources_prefix", resources_prefix)
+        if storage_class is not None:
+            pulumi.set(__self__, "storage_class", storage_class)
+        if tagging_directive is not None:
+            pulumi.set(__self__, "tagging_directive", tagging_directive)
+        if target_key_prefix is not None:
+            pulumi.set(__self__, "target_key_prefix", target_key_prefix)
+        if unmodified_since_constraint is not None:
+            pulumi.set(__self__, "unmodified_since_constraint", unmodified_since_constraint)
+
+    @property
+    @pulumi.getter(name="targetResource")
+    def target_resource(self) -> pulumi.Input[str]:
+        """
+        Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.
+        """
+        return pulumi.get(self, "target_resource")
+
+    @target_resource.setter
+    def target_resource(self, value: pulumi.Input[str]):
+        pulumi.set(self, "target_resource", value)
+
+    @property
+    @pulumi.getter(name="accessControlDirective")
+    def access_control_directive(self) -> Optional[pulumi.Input[str]]:
+        """
+        This element specifies how ACL is copied. Valid values:
+        - Copy: inherits the source object ACL
+        - Replaced: replace source ACL
+        - Add: add a new ACL based on the source ACL.
+        """
+        return pulumi.get(self, "access_control_directive")
+
+    @access_control_directive.setter
+    def access_control_directive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_control_directive", value)
+
+    @property
+    @pulumi.getter(name="accessControlGrants")
+    def access_control_grants(self) -> Optional[pulumi.Input['BatchOperationCosPutObjectCopyAccessControlGrantsArgs']]:
+        """
+        Controls the specific access to the object.
+        """
+        return pulumi.get(self, "access_control_grants")
+
+    @access_control_grants.setter
+    def access_control_grants(self, value: Optional[pulumi.Input['BatchOperationCosPutObjectCopyAccessControlGrantsArgs']]):
+        pulumi.set(self, "access_control_grants", value)
+
+    @property
+    @pulumi.getter(name="cannedAccessControlList")
+    def canned_access_control_list(self) -> Optional[pulumi.Input[str]]:
+        """
+        Defines the ACL property of the object. Valid values: private, public-read.
+        """
+        return pulumi.get(self, "canned_access_control_list")
+
+    @canned_access_control_list.setter
+    def canned_access_control_list(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "canned_access_control_list", value)
+
+    @property
+    @pulumi.getter(name="metadataDirective")
+    def metadata_directive(self) -> Optional[pulumi.Input[str]]:
+        """
+        This element specifies whether to copy object metadata from the source object or replace it with metadata in the < NewObjectMetadata > element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.
+        """
+        return pulumi.get(self, "metadata_directive")
+
+    @metadata_directive.setter
+    def metadata_directive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "metadata_directive", value)
+
+    @property
+    @pulumi.getter(name="modifiedSinceConstraint")
+    def modified_since_constraint(self) -> Optional[pulumi.Input[int]]:
+        """
+        When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        return pulumi.get(self, "modified_since_constraint")
+
+    @modified_since_constraint.setter
+    def modified_since_constraint(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "modified_since_constraint", value)
+
+    @property
+    @pulumi.getter(name="newObjectMetadata")
+    def new_object_metadata(self) -> Optional[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataArgs']]:
+        """
+        Configure the metadata for the object.
+        """
+        return pulumi.get(self, "new_object_metadata")
+
+    @new_object_metadata.setter
+    def new_object_metadata(self, value: Optional[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataArgs']]):
+        pulumi.set(self, "new_object_metadata", value)
+
+    @property
+    @pulumi.getter(name="newObjectTaggings")
+    def new_object_taggings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectTaggingArgs']]]]:
+        """
+        The label of the configuration object, which must be specified when the < TaggingDirective > value is Replace or Add.
+        """
+        return pulumi.get(self, "new_object_taggings")
+
+    @new_object_taggings.setter
+    def new_object_taggings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectTaggingArgs']]]]):
+        pulumi.set(self, "new_object_taggings", value)
+
+    @property
+    @pulumi.getter(name="prefixReplace")
+    def prefix_replace(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <ResourcesPrefix> and <TargetKeyPrefix>. Default value: false.
+        """
+        return pulumi.get(self, "prefix_replace")
+
+    @prefix_replace.setter
+    def prefix_replace(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "prefix_replace", value)
+
+    @property
+    @pulumi.getter(name="resourcesPrefix")
+    def resources_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field is valid only when the < PrefixReplace > value is true. Specify the source object prefix to be replaced, and the replacement directory should end with `/`. Can be empty with a maximum length of 1024 bytes.
+        """
+        return pulumi.get(self, "resources_prefix")
+
+    @resources_prefix.setter
+    def resources_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resources_prefix", value)
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> Optional[pulumi.Input[str]]:
+        """
+        Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.
+        """
+        return pulumi.get(self, "storage_class")
+
+    @storage_class.setter
+    def storage_class(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_class", value)
+
+    @property
+    @pulumi.getter(name="taggingDirective")
+    def tagging_directive(self) -> Optional[pulumi.Input[str]]:
+        """
+        This element specifies whether to copy the object tag from the source object or replace it with the tag in the < NewObjectTagging > element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.
+        """
+        return pulumi.get(self, "tagging_directive")
+
+    @tagging_directive.setter
+    def tagging_directive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tagging_directive", value)
+
+    @property
+    @pulumi.getter(name="targetKeyPrefix")
+    def target_key_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field is valid only when the <PrefixReplace> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.
+        """
+        return pulumi.get(self, "target_key_prefix")
+
+    @target_key_prefix.setter
+    def target_key_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_key_prefix", value)
+
+    @property
+    @pulumi.getter(name="unmodifiedSinceConstraint")
+    def unmodified_since_constraint(self) -> Optional[pulumi.Input[int]]:
+        """
+        When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.
+        """
+        return pulumi.get(self, "unmodified_since_constraint")
+
+    @unmodified_since_constraint.setter
+    def unmodified_since_constraint(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unmodified_since_constraint", value)
+
+
+@pulumi.input_type
+class BatchOperationCosPutObjectCopyAccessControlGrantsArgs:
+    def __init__(__self__, *,
+                 identifier: pulumi.Input[str],
+                 permission: pulumi.Input[str],
+                 type_identifier: pulumi.Input[str],
+                 display_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] identifier: User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+        :param pulumi.Input[str] permission: Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+        :param pulumi.Input[str] type_identifier: Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+        :param pulumi.Input[str] display_name: User name.
+        """
+        pulumi.set(__self__, "identifier", identifier)
+        pulumi.set(__self__, "permission", permission)
+        pulumi.set(__self__, "type_identifier", type_identifier)
+        if display_name is not None:
+            pulumi.set(__self__, "display_name", display_name)
+
+    @property
+    @pulumi.getter
+    def identifier(self) -> pulumi.Input[str]:
+        """
+        User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.
+        """
+        return pulumi.get(self, "identifier")
+
+    @identifier.setter
+    def identifier(self, value: pulumi.Input[str]):
+        pulumi.set(self, "identifier", value)
+
+    @property
+    @pulumi.getter
+    def permission(self) -> pulumi.Input[str]:
+        """
+        Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.
+        """
+        return pulumi.get(self, "permission")
+
+    @permission.setter
+    def permission(self, value: pulumi.Input[str]):
+        pulumi.set(self, "permission", value)
+
+    @property
+    @pulumi.getter(name="typeIdentifier")
+    def type_identifier(self) -> pulumi.Input[str]:
+        """
+        Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.
+        """
+        return pulumi.get(self, "type_identifier")
+
+    @type_identifier.setter
+    def type_identifier(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type_identifier", value)
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        User name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @display_name.setter
+    def display_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "display_name", value)
+
+
+@pulumi.input_type
+class BatchOperationCosPutObjectCopyNewObjectMetadataArgs:
+    def __init__(__self__, *,
+                 cache_control: Optional[pulumi.Input[str]] = None,
+                 content_disposition: Optional[pulumi.Input[str]] = None,
+                 content_encoding: Optional[pulumi.Input[str]] = None,
+                 content_type: Optional[pulumi.Input[str]] = None,
+                 http_expires_date: Optional[pulumi.Input[str]] = None,
+                 sse_algorithm: Optional[pulumi.Input[str]] = None,
+                 user_metadatas: Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs']]]] = None):
+        """
+        :param pulumi.Input[str] cache_control: The caching instructions defined in RFC 2616 are saved as object metadata.
+        :param pulumi.Input[str] content_disposition: The file name defined in RFC 2616 is saved as object metadata.
+        :param pulumi.Input[str] content_encoding: The encoding format defined in RFC 2616 is saved as object metadata.
+        :param pulumi.Input[str] content_type: The content types defined in RFC 2616 are saved as object metadata.
+        :param pulumi.Input[str] http_expires_date: The cache expiration time defined in RFC 2616 is saved as object metadata.
+        :param pulumi.Input[str] sse_algorithm: Server encryption algorithm. Currently, only AES256 is supported.
+        :param pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs']]] user_metadatas: Includes user-defined metadata.
+        """
+        if cache_control is not None:
+            pulumi.set(__self__, "cache_control", cache_control)
+        if content_disposition is not None:
+            pulumi.set(__self__, "content_disposition", content_disposition)
+        if content_encoding is not None:
+            pulumi.set(__self__, "content_encoding", content_encoding)
+        if content_type is not None:
+            pulumi.set(__self__, "content_type", content_type)
+        if http_expires_date is not None:
+            pulumi.set(__self__, "http_expires_date", http_expires_date)
+        if sse_algorithm is not None:
+            pulumi.set(__self__, "sse_algorithm", sse_algorithm)
+        if user_metadatas is not None:
+            pulumi.set(__self__, "user_metadatas", user_metadatas)
+
+    @property
+    @pulumi.getter(name="cacheControl")
+    def cache_control(self) -> Optional[pulumi.Input[str]]:
+        """
+        The caching instructions defined in RFC 2616 are saved as object metadata.
+        """
+        return pulumi.get(self, "cache_control")
+
+    @cache_control.setter
+    def cache_control(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cache_control", value)
+
+    @property
+    @pulumi.getter(name="contentDisposition")
+    def content_disposition(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file name defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "content_disposition")
+
+    @content_disposition.setter
+    def content_disposition(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_disposition", value)
+
+    @property
+    @pulumi.getter(name="contentEncoding")
+    def content_encoding(self) -> Optional[pulumi.Input[str]]:
+        """
+        The encoding format defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "content_encoding")
+
+    @content_encoding.setter
+    def content_encoding(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_encoding", value)
+
+    @property
+    @pulumi.getter(name="contentType")
+    def content_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The content types defined in RFC 2616 are saved as object metadata.
+        """
+        return pulumi.get(self, "content_type")
+
+    @content_type.setter
+    def content_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_type", value)
+
+    @property
+    @pulumi.getter(name="httpExpiresDate")
+    def http_expires_date(self) -> Optional[pulumi.Input[str]]:
+        """
+        The cache expiration time defined in RFC 2616 is saved as object metadata.
+        """
+        return pulumi.get(self, "http_expires_date")
+
+    @http_expires_date.setter
+    def http_expires_date(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "http_expires_date", value)
+
+    @property
+    @pulumi.getter(name="sseAlgorithm")
+    def sse_algorithm(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server encryption algorithm. Currently, only AES256 is supported.
+        """
+        return pulumi.get(self, "sse_algorithm")
+
+    @sse_algorithm.setter
+    def sse_algorithm(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sse_algorithm", value)
+
+    @property
+    @pulumi.getter(name="userMetadatas")
+    def user_metadatas(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs']]]]:
+        """
+        Includes user-defined metadata.
+        """
+        return pulumi.get(self, "user_metadatas")
+
+    @user_metadatas.setter
+    def user_metadatas(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs']]]]):
+        pulumi.set(self, "user_metadatas", value)
+
+
+@pulumi.input_type
+class BatchOperationCosPutObjectCopyNewObjectMetadataUserMetadataArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class BatchOperationCosPutObjectCopyNewObjectTaggingArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class BatchReportArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 enabled: pulumi.Input[str],
+                 format: pulumi.Input[str],
+                 report_scope: pulumi.Input[str],
+                 prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: Delivery bucket for task completion reports.
+        :param pulumi.Input[str] enabled: Whether to output the task completion report.
+        :param pulumi.Input[str] format: Task completion report format information. Legal value: Report_CSV_V1.
+        :param pulumi.Input[str] report_scope: Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+        :param pulumi.Input[str] prefix: Prefix information for the task completion report. Length 0-256 bytes.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "format", format)
+        pulumi.set(__self__, "report_scope", report_scope)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        Delivery bucket for task completion reports.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[str]:
+        """
+        Whether to output the task completion report.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[str]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[str]:
+        """
+        Task completion report format information. Legal value: Report_CSV_V1.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="reportScope")
+    def report_scope(self) -> pulumi.Input[str]:
+        """
+        Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.
+        """
+        return pulumi.get(self, "report_scope")
+
+    @report_scope.setter
+    def report_scope(self, value: pulumi.Input[str]):
+        pulumi.set(self, "report_scope", value)
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prefix information for the task completion report. Length 0-256 bytes.
+        """
+        return pulumi.get(self, "prefix")
+
+    @prefix.setter
+    def prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prefix", value)
+
 
 @pulumi.input_type
 class BucketCorsRuleArgs:
@@ -217,6 +1018,237 @@ class BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArg
     @private_key.setter
     def private_key(self, value: pulumi.Input[str]):
         pulumi.set(self, "private_key", value)
+
+
+@pulumi.input_type
+class BucketInventoryDestinationArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 format: pulumi.Input[str],
+                 account_id: Optional[pulumi.Input[str]] = None,
+                 encryption: Optional[pulumi.Input['BucketInventoryDestinationEncryptionArgs']] = None,
+                 prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: Bucket name.
+        :param pulumi.Input[str] format: Format of the inventory result. Valid value: CSV.
+        :param pulumi.Input[str] account_id: ID of the bucket owner.
+        :param pulumi.Input['BucketInventoryDestinationEncryptionArgs'] encryption: Server-side encryption for the inventory result.
+        :param pulumi.Input[str] prefix: Prefix of the inventory result.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "format", format)
+        if account_id is not None:
+            pulumi.set(__self__, "account_id", account_id)
+        if encryption is not None:
+            pulumi.set(__self__, "encryption", encryption)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        Bucket name.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[str]:
+        """
+        Format of the inventory result. Valid value: CSV.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format", value)
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the bucket owner.
+        """
+        return pulumi.get(self, "account_id")
+
+    @account_id.setter
+    def account_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "account_id", value)
+
+    @property
+    @pulumi.getter
+    def encryption(self) -> Optional[pulumi.Input['BucketInventoryDestinationEncryptionArgs']]:
+        """
+        Server-side encryption for the inventory result.
+        """
+        return pulumi.get(self, "encryption")
+
+    @encryption.setter
+    def encryption(self, value: Optional[pulumi.Input['BucketInventoryDestinationEncryptionArgs']]):
+        pulumi.set(self, "encryption", value)
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prefix of the inventory result.
+        """
+        return pulumi.get(self, "prefix")
+
+    @prefix.setter
+    def prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prefix", value)
+
+
+@pulumi.input_type
+class BucketInventoryDestinationEncryptionArgs:
+    def __init__(__self__, *,
+                 sse_cos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sse_cos: Encryption with COS-managed key. This field can be left empty.
+        """
+        if sse_cos is not None:
+            pulumi.set(__self__, "sse_cos", sse_cos)
+
+    @property
+    @pulumi.getter(name="sseCos")
+    def sse_cos(self) -> Optional[pulumi.Input[str]]:
+        """
+        Encryption with COS-managed key. This field can be left empty.
+        """
+        return pulumi.get(self, "sse_cos")
+
+    @sse_cos.setter
+    def sse_cos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sse_cos", value)
+
+
+@pulumi.input_type
+class BucketInventoryFilterArgs:
+    def __init__(__self__, *,
+                 period: Optional[pulumi.Input['BucketInventoryFilterPeriodArgs']] = None,
+                 prefix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['BucketInventoryFilterPeriodArgs'] period: Creation time range of the objects to analyze.
+        :param pulumi.Input[str] prefix: Prefix of the objects to analyze.
+        """
+        if period is not None:
+            pulumi.set(__self__, "period", period)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input['BucketInventoryFilterPeriodArgs']]:
+        """
+        Creation time range of the objects to analyze.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input['BucketInventoryFilterPeriodArgs']]):
+        pulumi.set(self, "period", value)
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Prefix of the objects to analyze.
+        """
+        return pulumi.get(self, "prefix")
+
+    @prefix.setter
+    def prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prefix", value)
+
+
+@pulumi.input_type
+class BucketInventoryFilterPeriodArgs:
+    def __init__(__self__, *,
+                 end_time: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] end_time: Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        :param pulumi.Input[str] start_time: Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        if end_time is not None:
+            pulumi.set(__self__, "end_time", end_time)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.
+        """
+        return pulumi.get(self, "end_time")
+
+    @end_time.setter
+    def end_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "end_time", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "start_time", value)
+
+
+@pulumi.input_type
+class BucketInventoryOptionalFieldsArgs:
+    def __init__(__self__, *,
+                 fields: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] fields: Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+        """
+        if fields is not None:
+            pulumi.set(__self__, "fields", fields)
+
+    @property
+    @pulumi.getter
+    def fields(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+        """
+        return pulumi.get(self, "fields")
+
+    @fields.setter
+    def fields(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "fields", value)
+
+
+@pulumi.input_type
+class BucketInventoryScheduleArgs:
+    def __init__(__self__, *,
+                 frequency: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] frequency: Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        pulumi.set(__self__, "frequency", frequency)
+
+    @property
+    @pulumi.getter
+    def frequency(self) -> pulumi.Input[str]:
+        """
+        Frequency of the inventory job. Enumerated values: Daily, Weekly.
+        """
+        return pulumi.get(self, "frequency")
+
+    @frequency.setter
+    def frequency(self, value: pulumi.Input[str]):
+        pulumi.set(self, "frequency", value)
 
 
 @pulumi.input_type

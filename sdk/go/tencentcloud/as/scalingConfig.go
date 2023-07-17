@@ -61,8 +61,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using SPOT charge type
+// ### Using SPOT charge type
 //
 // ```go
 // package main

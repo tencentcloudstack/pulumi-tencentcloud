@@ -27,7 +27,7 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cynosdb.NewAuditLogFile(ctx, "auditLogFile", &Cynosdb.AuditLogFileArgs{
 // 			EndTime:    pulumi.String("2022-08-12 10:29:20"),
-// 			InstanceId: pulumi.String("xxxxxxx"),
+// 			InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
 // 			StartTime:  pulumi.String("2022-07-12 10:29:20"),
 // 		})
 // 		if err != nil {

@@ -20,8 +20,11 @@ class BucketArgs:
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
+                 enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
+                 intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
+                 intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -41,19 +44,22 @@ class BucketArgs:
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
+        :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
+        :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
         :param pulumi.Input[str] log_target_bucket: The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`. User must have full access on this bucket.
-        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone.
         :param pulumi.Input[Sequence[pulumi.Input['BucketOriginDomainRuleArgs']]] origin_domain_rules: Bucket Origin Domain settings.
         :param pulumi.Input[Sequence[pulumi.Input['BucketOriginPullRuleArgs']]] origin_pull_rules: Bucket Origin-Pull settings.
         :param pulumi.Input[str] replica_role: Request initiator identifier, format: `qcs::cam::uin/<owneruin>:uin/<subuin>`. NOTE: only `versioning_enable` is true can configure this argument.
         :param pulumi.Input[Sequence[pulumi.Input['BucketReplicaRuleArgs']]] replica_rules: List of replica rule. NOTE: only `versioning_enable` is true and `replica_role` set can configure this argument.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of a bucket.
-        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning.
+        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         :param pulumi.Input['BucketWebsiteArgs'] website: A website object(documented below).
         """
         pulumi.set(__self__, "bucket", bucket)
@@ -65,10 +71,16 @@ class BucketArgs:
             pulumi.set(__self__, "acl_body", acl_body)
         if cors_rules is not None:
             pulumi.set(__self__, "cors_rules", cors_rules)
+        if enable_intelligent_tiering is not None:
+            pulumi.set(__self__, "enable_intelligent_tiering", enable_intelligent_tiering)
         if encryption_algorithm is not None:
             pulumi.set(__self__, "encryption_algorithm", encryption_algorithm)
         if force_clean is not None:
             pulumi.set(__self__, "force_clean", force_clean)
+        if intelligent_tiering_days is not None:
+            pulumi.set(__self__, "intelligent_tiering_days", intelligent_tiering_days)
+        if intelligent_tiering_request_frequent is not None:
+            pulumi.set(__self__, "intelligent_tiering_request_frequent", intelligent_tiering_request_frequent)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -155,6 +167,18 @@ class BucketArgs:
         pulumi.set(self, "cors_rules", value)
 
     @property
+    @pulumi.getter(name="enableIntelligentTiering")
+    def enable_intelligent_tiering(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        """
+        return pulumi.get(self, "enable_intelligent_tiering")
+
+    @enable_intelligent_tiering.setter
+    def enable_intelligent_tiering(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_intelligent_tiering", value)
+
+    @property
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
@@ -177,6 +201,30 @@ class BucketArgs:
     @force_clean.setter
     def force_clean(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "force_clean", value)
+
+    @property
+    @pulumi.getter(name="intelligentTieringDays")
+    def intelligent_tiering_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        """
+        return pulumi.get(self, "intelligent_tiering_days")
+
+    @intelligent_tiering_days.setter
+    def intelligent_tiering_days(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "intelligent_tiering_days", value)
+
+    @property
+    @pulumi.getter(name="intelligentTieringRequestFrequent")
+    def intelligent_tiering_request_frequent(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        """
+        return pulumi.get(self, "intelligent_tiering_request_frequent")
+
+    @intelligent_tiering_request_frequent.setter
+    def intelligent_tiering_request_frequent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "intelligent_tiering_request_frequent", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -230,7 +278,7 @@ class BucketArgs:
     @pulumi.getter(name="multiAz")
     def multi_az(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        Indicates whether to create a bucket of multi available zone.
         """
         return pulumi.get(self, "multi_az")
 
@@ -302,7 +350,7 @@ class BucketArgs:
     @pulumi.getter(name="versioningEnable")
     def versioning_enable(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable bucket versioning.
+        Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         """
         return pulumi.get(self, "versioning_enable")
 
@@ -332,8 +380,11 @@ class _BucketState:
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
                  cos_bucket_url: Optional[pulumi.Input[str]] = None,
+                 enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
+                 intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
+                 intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -354,19 +405,22 @@ class _BucketState:
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
+        :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
+        :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
         :param pulumi.Input[str] log_target_bucket: The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`. User must have full access on this bucket.
-        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone.
         :param pulumi.Input[Sequence[pulumi.Input['BucketOriginDomainRuleArgs']]] origin_domain_rules: Bucket Origin Domain settings.
         :param pulumi.Input[Sequence[pulumi.Input['BucketOriginPullRuleArgs']]] origin_pull_rules: Bucket Origin-Pull settings.
         :param pulumi.Input[str] replica_role: Request initiator identifier, format: `qcs::cam::uin/<owneruin>:uin/<subuin>`. NOTE: only `versioning_enable` is true can configure this argument.
         :param pulumi.Input[Sequence[pulumi.Input['BucketReplicaRuleArgs']]] replica_rules: List of replica rule. NOTE: only `versioning_enable` is true and `replica_role` set can configure this argument.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of a bucket.
-        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning.
+        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         :param pulumi.Input['BucketWebsiteArgs'] website: A website object(documented below).
         """
         if acceleration_enable is not None:
@@ -381,10 +435,16 @@ class _BucketState:
             pulumi.set(__self__, "cors_rules", cors_rules)
         if cos_bucket_url is not None:
             pulumi.set(__self__, "cos_bucket_url", cos_bucket_url)
+        if enable_intelligent_tiering is not None:
+            pulumi.set(__self__, "enable_intelligent_tiering", enable_intelligent_tiering)
         if encryption_algorithm is not None:
             pulumi.set(__self__, "encryption_algorithm", encryption_algorithm)
         if force_clean is not None:
             pulumi.set(__self__, "force_clean", force_clean)
+        if intelligent_tiering_days is not None:
+            pulumi.set(__self__, "intelligent_tiering_days", intelligent_tiering_days)
+        if intelligent_tiering_request_frequent is not None:
+            pulumi.set(__self__, "intelligent_tiering_request_frequent", intelligent_tiering_request_frequent)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -483,6 +543,18 @@ class _BucketState:
         pulumi.set(self, "cos_bucket_url", value)
 
     @property
+    @pulumi.getter(name="enableIntelligentTiering")
+    def enable_intelligent_tiering(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        """
+        return pulumi.get(self, "enable_intelligent_tiering")
+
+    @enable_intelligent_tiering.setter
+    def enable_intelligent_tiering(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_intelligent_tiering", value)
+
+    @property
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
@@ -505,6 +577,30 @@ class _BucketState:
     @force_clean.setter
     def force_clean(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "force_clean", value)
+
+    @property
+    @pulumi.getter(name="intelligentTieringDays")
+    def intelligent_tiering_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        """
+        return pulumi.get(self, "intelligent_tiering_days")
+
+    @intelligent_tiering_days.setter
+    def intelligent_tiering_days(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "intelligent_tiering_days", value)
+
+    @property
+    @pulumi.getter(name="intelligentTieringRequestFrequent")
+    def intelligent_tiering_request_frequent(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        """
+        return pulumi.get(self, "intelligent_tiering_request_frequent")
+
+    @intelligent_tiering_request_frequent.setter
+    def intelligent_tiering_request_frequent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "intelligent_tiering_request_frequent", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -558,7 +654,7 @@ class _BucketState:
     @pulumi.getter(name="multiAz")
     def multi_az(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        Indicates whether to create a bucket of multi available zone.
         """
         return pulumi.get(self, "multi_az")
 
@@ -630,7 +726,7 @@ class _BucketState:
     @pulumi.getter(name="versioningEnable")
     def versioning_enable(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable bucket versioning.
+        Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         """
         return pulumi.get(self, "versioning_enable")
 
@@ -661,8 +757,11 @@ class Bucket(pulumi.CustomResource):
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
+                 enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
+                 intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
+                 intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -680,8 +779,7 @@ class Bucket(pulumi.CustomResource):
         Provides a COS resource to create a COS bucket and set its attributes.
 
         ## Example Usage
-
-        Private Bucket
+        ### Private Bucket
 
         ```python
         import pulumi
@@ -691,8 +789,7 @@ class Bucket(pulumi.CustomResource):
             acl="private",
             bucket="mycos-1258798060")
         ```
-
-        Creation of multiple available zone bucket
+        ### Creation of multiple available zone bucket
 
         ```python
         import pulumi
@@ -705,8 +802,7 @@ class Bucket(pulumi.CustomResource):
             multi_az=True,
             versioning_enable=True)
         ```
-
-        Using verbose acl
+        ### Using verbose acl
 
         ```python
         import pulumi
@@ -714,38 +810,70 @@ class Bucket(pulumi.CustomResource):
 
         with_acl_body = tencentcloud.cos.Bucket("withAclBody",
             acl_body=\"\"\"<AccessControlPolicy>
-            <Owner>
-                <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-            </Owner>
-            <AccessControlList>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-                        <URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-                    </Grantee>
-                    <Permission>READ</Permission>
-                </Grant>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-                        <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-                        <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
-                    </Grantee>
-                    <Permission>WRITE</Permission>
-                </Grant>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-                        <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-                        <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
-                    </Grantee>
-                    <Permission>READ_ACP</Permission>
-                </Grant>
-            </AccessControlList>
+        	<Owner>
+        		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        	</Owner>
+        	<AccessControlList>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>READ</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>FULL_CONTROL</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>WRITE_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>READ_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>WRITE_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>READ</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>WRITE</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>FULL_CONTROL</Permission>
+        		</Grant>
+        	</AccessControlList>
         </AccessControlPolicy>
 
         \"\"\",
             bucket="mycos-1258798060")
         ```
-
-        Static Website
+        ### Static Website
 
         ```python
         import pulumi
@@ -759,8 +887,7 @@ class Bucket(pulumi.CustomResource):
             ))
         pulumi.export("endpointTest", mycos.website.endpoint)
         ```
-
-        Using CORS
+        ### Using CORS
 
         ```python
         import pulumi
@@ -780,8 +907,7 @@ class Bucket(pulumi.CustomResource):
                 max_age_seconds=300,
             )])
         ```
-
-        Using object lifecycle
+        ### Using object lifecycle
 
         ```python
         import pulumi
@@ -801,8 +927,7 @@ class Bucket(pulumi.CustomResource):
                 )],
             )])
         ```
-
-        Using custom origin domain settings
+        ### Using custom origin domain settings
 
         ```python
         import pulumi
@@ -817,8 +942,7 @@ class Bucket(pulumi.CustomResource):
                 type="REST",
             )])
         ```
-
-        Using origin-pull settings
+        ### Using origin-pull settings
 
         ```python
         import pulumi
@@ -844,8 +968,7 @@ class Bucket(pulumi.CustomResource):
                 sync_back_to_source=False,
             )])
         ```
-
-        Using replication
+        ### Using replication
 
         ```python
         import pulumi
@@ -867,8 +990,7 @@ class Bucket(pulumi.CustomResource):
             )],
             versioning_enable=True)
         ```
-
-        Setting log status
+        ### Setting log status
 
         ```python
         import pulumi
@@ -924,19 +1046,22 @@ class Bucket(pulumi.CustomResource):
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
+        :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
+        :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
         :param pulumi.Input[str] log_target_bucket: The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`. User must have full access on this bucket.
-        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketOriginDomainRuleArgs']]]] origin_domain_rules: Bucket Origin Domain settings.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketOriginPullRuleArgs']]]] origin_pull_rules: Bucket Origin-Pull settings.
         :param pulumi.Input[str] replica_role: Request initiator identifier, format: `qcs::cam::uin/<owneruin>:uin/<subuin>`. NOTE: only `versioning_enable` is true can configure this argument.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketReplicaRuleArgs']]]] replica_rules: List of replica rule. NOTE: only `versioning_enable` is true and `replica_role` set can configure this argument.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of a bucket.
-        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning.
+        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         :param pulumi.Input[pulumi.InputType['BucketWebsiteArgs']] website: A website object(documented below).
         """
         ...
@@ -949,8 +1074,7 @@ class Bucket(pulumi.CustomResource):
         Provides a COS resource to create a COS bucket and set its attributes.
 
         ## Example Usage
-
-        Private Bucket
+        ### Private Bucket
 
         ```python
         import pulumi
@@ -960,8 +1084,7 @@ class Bucket(pulumi.CustomResource):
             acl="private",
             bucket="mycos-1258798060")
         ```
-
-        Creation of multiple available zone bucket
+        ### Creation of multiple available zone bucket
 
         ```python
         import pulumi
@@ -974,8 +1097,7 @@ class Bucket(pulumi.CustomResource):
             multi_az=True,
             versioning_enable=True)
         ```
-
-        Using verbose acl
+        ### Using verbose acl
 
         ```python
         import pulumi
@@ -983,38 +1105,70 @@ class Bucket(pulumi.CustomResource):
 
         with_acl_body = tencentcloud.cos.Bucket("withAclBody",
             acl_body=\"\"\"<AccessControlPolicy>
-            <Owner>
-                <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-            </Owner>
-            <AccessControlList>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
-                        <URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
-                    </Grantee>
-                    <Permission>READ</Permission>
-                </Grant>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-                        <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-                        <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
-                    </Grantee>
-                    <Permission>WRITE</Permission>
-                </Grant>
-                <Grant>
-                    <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
-                        <ID>qcs::cam::uin/100000000001:uin/100000000001</ID>
-                        <DisplayName>qcs::cam::uin/100000000001:uin/100000000001</DisplayName>
-                    </Grantee>
-                    <Permission>READ_ACP</Permission>
-                </Grant>
-            </AccessControlList>
+        	<Owner>
+        		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        	</Owner>
+        	<AccessControlList>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>READ</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>FULL_CONTROL</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>WRITE_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>READ_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>WRITE_ACP</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>READ</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
+        				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>
+        			</Grantee>
+        			<Permission>WRITE</Permission>
+        		</Grant>
+        		<Grant>
+        			<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
+        				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>
+        			</Grantee>
+        			<Permission>FULL_CONTROL</Permission>
+        		</Grant>
+        	</AccessControlList>
         </AccessControlPolicy>
 
         \"\"\",
             bucket="mycos-1258798060")
         ```
-
-        Static Website
+        ### Static Website
 
         ```python
         import pulumi
@@ -1028,8 +1182,7 @@ class Bucket(pulumi.CustomResource):
             ))
         pulumi.export("endpointTest", mycos.website.endpoint)
         ```
-
-        Using CORS
+        ### Using CORS
 
         ```python
         import pulumi
@@ -1049,8 +1202,7 @@ class Bucket(pulumi.CustomResource):
                 max_age_seconds=300,
             )])
         ```
-
-        Using object lifecycle
+        ### Using object lifecycle
 
         ```python
         import pulumi
@@ -1070,8 +1222,7 @@ class Bucket(pulumi.CustomResource):
                 )],
             )])
         ```
-
-        Using custom origin domain settings
+        ### Using custom origin domain settings
 
         ```python
         import pulumi
@@ -1086,8 +1237,7 @@ class Bucket(pulumi.CustomResource):
                 type="REST",
             )])
         ```
-
-        Using origin-pull settings
+        ### Using origin-pull settings
 
         ```python
         import pulumi
@@ -1113,8 +1263,7 @@ class Bucket(pulumi.CustomResource):
                 sync_back_to_source=False,
             )])
         ```
-
-        Using replication
+        ### Using replication
 
         ```python
         import pulumi
@@ -1136,8 +1285,7 @@ class Bucket(pulumi.CustomResource):
             )],
             versioning_enable=True)
         ```
-
-        Setting log status
+        ### Setting log status
 
         ```python
         import pulumi
@@ -1206,8 +1354,11 @@ class Bucket(pulumi.CustomResource):
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
+                 enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
+                 intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
+                 intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1241,8 +1392,11 @@ class Bucket(pulumi.CustomResource):
                 raise TypeError("Missing required property 'bucket'")
             __props__.__dict__["bucket"] = bucket
             __props__.__dict__["cors_rules"] = cors_rules
+            __props__.__dict__["enable_intelligent_tiering"] = enable_intelligent_tiering
             __props__.__dict__["encryption_algorithm"] = encryption_algorithm
             __props__.__dict__["force_clean"] = force_clean
+            __props__.__dict__["intelligent_tiering_days"] = intelligent_tiering_days
+            __props__.__dict__["intelligent_tiering_request_frequent"] = intelligent_tiering_request_frequent
             __props__.__dict__["lifecycle_rules"] = lifecycle_rules
             __props__.__dict__["log_enable"] = log_enable
             __props__.__dict__["log_prefix"] = log_prefix
@@ -1272,8 +1426,11 @@ class Bucket(pulumi.CustomResource):
             bucket: Optional[pulumi.Input[str]] = None,
             cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
             cos_bucket_url: Optional[pulumi.Input[str]] = None,
+            enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
             encryption_algorithm: Optional[pulumi.Input[str]] = None,
             force_clean: Optional[pulumi.Input[bool]] = None,
+            intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
+            intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
             lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
             log_enable: Optional[pulumi.Input[bool]] = None,
             log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1299,19 +1456,22 @@ class Bucket(pulumi.CustomResource):
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
+        :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
         :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
+        :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
         :param pulumi.Input[str] log_target_bucket: The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`. User must have full access on this bucket.
-        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        :param pulumi.Input[bool] multi_az: Indicates whether to create a bucket of multi available zone.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketOriginDomainRuleArgs']]]] origin_domain_rules: Bucket Origin Domain settings.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketOriginPullRuleArgs']]]] origin_pull_rules: Bucket Origin-Pull settings.
         :param pulumi.Input[str] replica_role: Request initiator identifier, format: `qcs::cam::uin/<owneruin>:uin/<subuin>`. NOTE: only `versioning_enable` is true can configure this argument.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketReplicaRuleArgs']]]] replica_rules: List of replica rule. NOTE: only `versioning_enable` is true and `replica_role` set can configure this argument.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of a bucket.
-        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning.
+        :param pulumi.Input[bool] versioning_enable: Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         :param pulumi.Input[pulumi.InputType['BucketWebsiteArgs']] website: A website object(documented below).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1324,8 +1484,11 @@ class Bucket(pulumi.CustomResource):
         __props__.__dict__["bucket"] = bucket
         __props__.__dict__["cors_rules"] = cors_rules
         __props__.__dict__["cos_bucket_url"] = cos_bucket_url
+        __props__.__dict__["enable_intelligent_tiering"] = enable_intelligent_tiering
         __props__.__dict__["encryption_algorithm"] = encryption_algorithm
         __props__.__dict__["force_clean"] = force_clean
+        __props__.__dict__["intelligent_tiering_days"] = intelligent_tiering_days
+        __props__.__dict__["intelligent_tiering_request_frequent"] = intelligent_tiering_request_frequent
         __props__.__dict__["lifecycle_rules"] = lifecycle_rules
         __props__.__dict__["log_enable"] = log_enable
         __props__.__dict__["log_prefix"] = log_prefix
@@ -1389,6 +1552,14 @@ class Bucket(pulumi.CustomResource):
         return pulumi.get(self, "cos_bucket_url")
 
     @property
+    @pulumi.getter(name="enableIntelligentTiering")
+    def enable_intelligent_tiering(self) -> pulumi.Output[bool]:
+        """
+        Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
+        """
+        return pulumi.get(self, "enable_intelligent_tiering")
+
+    @property
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
@@ -1403,6 +1574,22 @@ class Bucket(pulumi.CustomResource):
         Force cleanup all objects before delete bucket.
         """
         return pulumi.get(self, "force_clean")
+
+    @property
+    @pulumi.getter(name="intelligentTieringDays")
+    def intelligent_tiering_days(self) -> pulumi.Output[int]:
+        """
+        Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
+        """
+        return pulumi.get(self, "intelligent_tiering_days")
+
+    @property
+    @pulumi.getter(name="intelligentTieringRequestFrequent")
+    def intelligent_tiering_request_frequent(self) -> pulumi.Output[int]:
+        """
+        Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        """
+        return pulumi.get(self, "intelligent_tiering_request_frequent")
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -1440,7 +1627,7 @@ class Bucket(pulumi.CustomResource):
     @pulumi.getter(name="multiAz")
     def multi_az(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether to create a bucket of multi available zone. NOTE: If set to true, the versioning must enable.
+        Indicates whether to create a bucket of multi available zone.
         """
         return pulumi.get(self, "multi_az")
 
@@ -1488,7 +1675,7 @@ class Bucket(pulumi.CustomResource):
     @pulumi.getter(name="versioningEnable")
     def versioning_enable(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable bucket versioning.
+        Enable bucket versioning. NOTE: The `multi_az` feature is true for the current bucket, cannot disable version control.
         """
         return pulumi.get(self, "versioning_enable")
 

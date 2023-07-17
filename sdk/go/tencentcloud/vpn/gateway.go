@@ -12,8 +12,89 @@ import (
 )
 
 // ## Example Usage
+// ### VPC SSL VPN gateway
 //
-// POSTPAID_BY_HOUR VPN gateway
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth: pulumi.Int(5),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			Type:  pulumi.String("SSL"),
+// 			VpcId: pulumi.String("vpc-86v957zb"),
+// 			Zone:  pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### CCN IPEC VPN gateway
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth: pulumi.Int(5),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			Type: pulumi.String("CCN"),
+// 			Zone: pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### CCN SSL VPN gateway
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewGateway(ctx, "myCgw", &Vpn.GatewayArgs{
+// 			Bandwidth: pulumi.Int(5),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			Type: pulumi.String("SSL_CCN"),
+// 			Zone: pulumi.String("ap-guangzhou-3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### POSTPAID_BY_HOUR VPN gateway
 //
 // ```go
 // package main
@@ -40,8 +121,7 @@ import (
 // 	})
 // }
 // ```
-//
-// PREPAID VPN gateway
+// ### PREPAID VPN gateway
 //
 // ```go
 // package main
@@ -111,9 +191,9 @@ type Gateway struct {
 	State pulumi.StringOutput `pulumi:"state"`
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+	// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 	Type pulumi.StringOutput `pulumi:"type"`
-	// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Zone of the VPN gateway.
 	Zone pulumi.StringOutput `pulumi:"zone"`
@@ -182,9 +262,9 @@ type gatewayState struct {
 	State *string `pulumi:"state"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+	// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 	Type *string `pulumi:"type"`
-	// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId *string `pulumi:"vpcId"`
 	// Zone of the VPN gateway.
 	Zone *string `pulumi:"zone"`
@@ -221,9 +301,9 @@ type GatewayState struct {
 	State pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
-	// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+	// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 	Type pulumi.StringPtrInput
-	// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId pulumi.StringPtrInput
 	// Zone of the VPN gateway.
 	Zone pulumi.StringPtrInput
@@ -250,9 +330,9 @@ type gatewayArgs struct {
 	PrepaidRenewFlag *string `pulumi:"prepaidRenewFlag"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+	// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 	Type *string `pulumi:"type"`
-	// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId *string `pulumi:"vpcId"`
 	// Zone of the VPN gateway.
 	Zone string `pulumi:"zone"`
@@ -276,9 +356,9 @@ type GatewayArgs struct {
 	PrepaidRenewFlag pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
-	// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+	// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 	Type pulumi.StringPtrInput
-	// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId pulumi.StringPtrInput
 	// Zone of the VPN gateway.
 	Zone pulumi.StringInput
@@ -446,12 +526,12 @@ func (o GatewayOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
+// Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
 func (o GatewayOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
-// ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
+// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 func (o GatewayOutput) VpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }

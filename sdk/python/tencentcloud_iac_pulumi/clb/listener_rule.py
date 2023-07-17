@@ -50,7 +50,7 @@ class ListenerRuleArgs:
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[str] health_check_http_method: Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
-        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
         :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
@@ -261,7 +261,7 @@ class ListenerRuleArgs:
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> Optional[pulumi.Input[int]]:
         """
-        Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         """
         return pulumi.get(self, "health_check_interval_time")
 
@@ -405,7 +405,7 @@ class _ListenerRuleState:
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[str] health_check_http_method: Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
-        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
         :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
@@ -601,7 +601,7 @@ class _ListenerRuleState:
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> Optional[pulumi.Input[int]]:
         """
-        Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         """
         return pulumi.get(self, "health_check_interval_time")
 
@@ -822,7 +822,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[str] health_check_http_method: Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
-        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
         :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
@@ -1012,7 +1012,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
         :param pulumi.Input[str] health_check_http_method: Methods of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol. The default is `HEAD`, the available value are `HEAD` and `GET`.
         :param pulumi.Input[str] health_check_http_path: Path of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
-        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_check_interval_time: Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Time out of health check. The value range is 2-60.
         :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
@@ -1146,7 +1146,7 @@ class ListenerRule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> pulumi.Output[int]:
         """
-        Interval time of health check. Valid value ranges: (5~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        Interval time of health check. Valid value ranges: (2~300) sec. and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         """
         return pulumi.get(self, "health_check_interval_time")
 

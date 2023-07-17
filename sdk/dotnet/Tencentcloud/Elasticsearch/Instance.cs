@@ -14,24 +14,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// Provides an elasticsearch instance resource.
     /// 
     /// ## Example Usage
+    /// ### Create a basic version of elasticsearch instance paid by the hour
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Elasticsearch.Instance("foo", new Tencentcloud.Elasticsearch.InstanceArgs
+    ///         var availabilityZone = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             InstanceName = "tf-test",
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             Version = "7.5.1",
-    ///             VpcId = @var.Vpc_id,
-    ///             SubnetId = @var.Subnet_id,
+    ///             Product = "es",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var example = new Tencentcloud.Elasticsearch.Instance("example", new Tencentcloud.Elasticsearch.InstanceArgs
+    ///         {
+    ///             InstanceName = "tf_example_es",
+    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
+    ///             Version = "7.10.1",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
     ///             Password = "Test12345",
     ///             LicenseType = "basic",
+    ///             BasicSecurityType = 2,
     ///             WebNodeTypeInfos = 
     ///             {
     ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
@@ -45,20 +62,111 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
     ///                 {
     ///                     NodeNum = 2,
-    ///                     NodeType = "ES.S1.MEDIUM4",
+    ///                     NodeType = "ES.S1.MEDIUM8",
     ///                     Encrypt = false,
     ///                 },
     ///             },
     ///             EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
     ///             {
-    ///                 BlackLists = 
-    ///                 {
-    ///                     "9.9.9.9",
-    ///                     "8.8.8.8",
-    ///                 },
     ///                 WhiteLists = 
     ///                 {
-    ///                     "0.0.0.0",
+    ///                     "127.0.0.1",
+    ///                 },
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a basic version of elasticsearch instance for multi-availability zone deployment
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var availabilityZone = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "es",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var subnetMultiZone = new Tencentcloud.Subnet.Instance("subnetMultiZone", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[1]?.Name),
+    ///             CidrBlock = "10.0.2.0/24",
+    ///         });
+    ///         var exampleMultiZone = new Tencentcloud.Elasticsearch.Instance("exampleMultiZone", new Tencentcloud.Elasticsearch.InstanceArgs
+    ///         {
+    ///             InstanceName = "tf_example_es",
+    ///             AvailabilityZone = "-",
+    ///             Version = "7.10.1",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = "-",
+    ///             Password = "Test12345",
+    ///             LicenseType = "basic",
+    ///             BasicSecurityType = 2,
+    ///             DeployMode = 1,
+    ///             MultiZoneInfos = 
+    ///             {
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
+    ///                 {
+    ///                     AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
+    ///                     SubnetId = subnet.Id,
+    ///                 },
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
+    ///                 {
+    ///                     AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[1]?.Name),
+    ///                     SubnetId = subnetMultiZone.Id,
+    ///                 },
+    ///             },
+    ///             WebNodeTypeInfos = 
+    ///             {
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///                 {
+    ///                     NodeNum = 1,
+    ///                     NodeType = "ES.S1.MEDIUM4",
+    ///                 },
+    ///             },
+    ///             NodeInfoLists = 
+    ///             {
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///                 {
+    ///                     Type = "dedicatedMaster",
+    ///                     NodeNum = 3,
+    ///                     NodeType = "ES.S1.MEDIUM8",
+    ///                     Encrypt = false,
+    ///                 },
+    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///                 {
+    ///                     Type = "hotData",
+    ///                     NodeNum = 2,
+    ///                     NodeType = "ES.S1.MEDIUM8",
+    ///                     Encrypt = false,
+    ///                 },
+    ///             },
+    ///             EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///             {
+    ///                 WhiteLists = 
+    ///                 {
+    ///                     "127.0.0.1",
     ///                 },
     ///             },
     ///             Tags = 
@@ -83,7 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Availability zone. When create multi-az es, this parameter must be omitted.
+        /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Output("availabilityZone")]
         public Output<string?> AvailabilityZone { get; private set; } = null!;
@@ -173,7 +281,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<ImmutableArray<Outputs.InstanceNodeInfoList>> NodeInfoLists { get; private set; } = null!;
 
         /// <summary>
-        /// Password to an instance.
+        /// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
@@ -185,7 +293,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<string?> RenewFlag { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Output("subnetId")]
         public Output<string?> SubnetId { get; private set; } = null!;
@@ -197,7 +305,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         /// </summary>
         [Output("version")]
         public Output<string> Version { get; private set; } = null!;
@@ -262,7 +370,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Availability zone. When create multi-az es, this parameter must be omitted.
+        /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Input("availabilityZone")]
         public Input<string>? AvailabilityZone { get; set; }
@@ -334,7 +442,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
 
         /// <summary>
-        /// Password to an instance.
+        /// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.
         /// </summary>
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
@@ -346,7 +454,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? RenewFlag { get; set; }
 
         /// <summary>
-        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -364,7 +472,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
 
         /// <summary>
-        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         /// </summary>
         [Input("version", required: true)]
         public Input<string> Version { get; set; } = null!;
@@ -395,7 +503,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     public sealed class InstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Availability zone. When create multi-az es, this parameter must be omitted.
+        /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Input("availabilityZone")]
         public Input<string>? AvailabilityZone { get; set; }
@@ -497,7 +605,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
 
         /// <summary>
-        /// Password to an instance.
+        /// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
@@ -509,7 +617,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? RenewFlag { get; set; }
 
         /// <summary>
-        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted.
+        /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be omitted or `-`.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -527,7 +635,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
 
         /// <summary>
-        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2` and `7.5.1`.
+        /// Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
         /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }

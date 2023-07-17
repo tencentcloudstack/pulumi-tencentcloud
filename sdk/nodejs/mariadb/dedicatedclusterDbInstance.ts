@@ -82,6 +82,10 @@ export class DedicatedclusterDbInstance extends pulumi.CustomResource {
      */
     public readonly memory!: pulumi.Output<number>;
     /**
+     * project id.
+     */
+    public readonly projectId!: pulumi.Output<number | undefined>;
+    /**
      * instance disk storage.
      */
     public readonly storage!: pulumi.Output<number>;
@@ -93,6 +97,10 @@ export class DedicatedclusterDbInstance extends pulumi.CustomResource {
      * Tag description list.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
+     * vip.
+     */
+    public readonly vip!: pulumi.Output<string>;
     /**
      * vpc id.
      */
@@ -116,9 +124,11 @@ export class DedicatedclusterDbInstance extends pulumi.CustomResource {
             resourceInputs["goodsNum"] = state ? state.goodsNum : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["storage"] = state ? state.storage : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["vip"] = state ? state.vip : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as DedicatedclusterDbInstanceArgs | undefined;
@@ -139,9 +149,11 @@ export class DedicatedclusterDbInstance extends pulumi.CustomResource {
             resourceInputs["goodsNum"] = args ? args.goodsNum : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -174,6 +186,10 @@ export interface DedicatedclusterDbInstanceState {
      */
     memory?: pulumi.Input<number>;
     /**
+     * project id.
+     */
+    projectId?: pulumi.Input<number>;
+    /**
      * instance disk storage.
      */
     storage?: pulumi.Input<number>;
@@ -185,6 +201,10 @@ export interface DedicatedclusterDbInstanceState {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * vip.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * vpc id.
      */
@@ -216,6 +236,10 @@ export interface DedicatedclusterDbInstanceArgs {
      */
     memory: pulumi.Input<number>;
     /**
+     * project id.
+     */
+    projectId?: pulumi.Input<number>;
+    /**
      * instance disk storage.
      */
     storage: pulumi.Input<number>;
@@ -227,6 +251,10 @@ export interface DedicatedclusterDbInstanceArgs {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * vip.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * vpc id.
      */

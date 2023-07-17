@@ -590,10 +590,14 @@ func (o ClusterAttachmentClusterListArrayOutput) Index(i pulumi.IntInput) Cluste
 }
 
 type MeshConfig struct {
+	// Sidecar inject configuration.
+	Inject *MeshConfigInject `pulumi:"inject"`
 	// Istio configuration.
 	Istio *MeshConfigIstio `pulumi:"istio"`
 	// Prometheus configuration.
 	Prometheus *MeshConfigPrometheus `pulumi:"prometheus"`
+	// Default sidecar requests and limits.
+	SidecarResources *MeshConfigSidecarResources `pulumi:"sidecarResources"`
 	// Tracing config.
 	Tracing *MeshConfigTracing `pulumi:"tracing"`
 }
@@ -610,10 +614,14 @@ type MeshConfigInput interface {
 }
 
 type MeshConfigArgs struct {
+	// Sidecar inject configuration.
+	Inject MeshConfigInjectPtrInput `pulumi:"inject"`
 	// Istio configuration.
 	Istio MeshConfigIstioPtrInput `pulumi:"istio"`
 	// Prometheus configuration.
 	Prometheus MeshConfigPrometheusPtrInput `pulumi:"prometheus"`
+	// Default sidecar requests and limits.
+	SidecarResources MeshConfigSidecarResourcesPtrInput `pulumi:"sidecarResources"`
 	// Tracing config.
 	Tracing MeshConfigTracingPtrInput `pulumi:"tracing"`
 }
@@ -695,6 +703,11 @@ func (o MeshConfigOutput) ToMeshConfigPtrOutputWithContext(ctx context.Context) 
 	}).(MeshConfigPtrOutput)
 }
 
+// Sidecar inject configuration.
+func (o MeshConfigOutput) Inject() MeshConfigInjectPtrOutput {
+	return o.ApplyT(func(v MeshConfig) *MeshConfigInject { return v.Inject }).(MeshConfigInjectPtrOutput)
+}
+
 // Istio configuration.
 func (o MeshConfigOutput) Istio() MeshConfigIstioPtrOutput {
 	return o.ApplyT(func(v MeshConfig) *MeshConfigIstio { return v.Istio }).(MeshConfigIstioPtrOutput)
@@ -703,6 +716,11 @@ func (o MeshConfigOutput) Istio() MeshConfigIstioPtrOutput {
 // Prometheus configuration.
 func (o MeshConfigOutput) Prometheus() MeshConfigPrometheusPtrOutput {
 	return o.ApplyT(func(v MeshConfig) *MeshConfigPrometheus { return v.Prometheus }).(MeshConfigPrometheusPtrOutput)
+}
+
+// Default sidecar requests and limits.
+func (o MeshConfigOutput) SidecarResources() MeshConfigSidecarResourcesPtrOutput {
+	return o.ApplyT(func(v MeshConfig) *MeshConfigSidecarResources { return v.SidecarResources }).(MeshConfigSidecarResourcesPtrOutput)
 }
 
 // Tracing config.
@@ -734,6 +752,16 @@ func (o MeshConfigPtrOutput) Elem() MeshConfigOutput {
 	}).(MeshConfigOutput)
 }
 
+// Sidecar inject configuration.
+func (o MeshConfigPtrOutput) Inject() MeshConfigInjectPtrOutput {
+	return o.ApplyT(func(v *MeshConfig) *MeshConfigInject {
+		if v == nil {
+			return nil
+		}
+		return v.Inject
+	}).(MeshConfigInjectPtrOutput)
+}
+
 // Istio configuration.
 func (o MeshConfigPtrOutput) Istio() MeshConfigIstioPtrOutput {
 	return o.ApplyT(func(v *MeshConfig) *MeshConfigIstio {
@@ -754,6 +782,16 @@ func (o MeshConfigPtrOutput) Prometheus() MeshConfigPrometheusPtrOutput {
 	}).(MeshConfigPrometheusPtrOutput)
 }
 
+// Default sidecar requests and limits.
+func (o MeshConfigPtrOutput) SidecarResources() MeshConfigSidecarResourcesPtrOutput {
+	return o.ApplyT(func(v *MeshConfig) *MeshConfigSidecarResources {
+		if v == nil {
+			return nil
+		}
+		return v.SidecarResources
+	}).(MeshConfigSidecarResourcesPtrOutput)
+}
+
 // Tracing config.
 func (o MeshConfigPtrOutput) Tracing() MeshConfigTracingPtrOutput {
 	return o.ApplyT(func(v *MeshConfig) *MeshConfigTracing {
@@ -764,6 +802,181 @@ func (o MeshConfigPtrOutput) Tracing() MeshConfigTracingPtrOutput {
 	}).(MeshConfigTracingPtrOutput)
 }
 
+type MeshConfigInject struct {
+	// IP ranges that should not be proxied.
+	ExcludeIpRanges []string `pulumi:"excludeIpRanges"`
+	// Let istio-proxy(sidecar) start first, before app container.
+	HoldApplicationUntilProxyStarts *bool `pulumi:"holdApplicationUntilProxyStarts"`
+	// Let istio-proxy(sidecar) stop last, after app container.
+	HoldProxyUntilApplicationEnds *bool `pulumi:"holdProxyUntilApplicationEnds"`
+}
+
+// MeshConfigInjectInput is an input type that accepts MeshConfigInjectArgs and MeshConfigInjectOutput values.
+// You can construct a concrete instance of `MeshConfigInjectInput` via:
+//
+//          MeshConfigInjectArgs{...}
+type MeshConfigInjectInput interface {
+	pulumi.Input
+
+	ToMeshConfigInjectOutput() MeshConfigInjectOutput
+	ToMeshConfigInjectOutputWithContext(context.Context) MeshConfigInjectOutput
+}
+
+type MeshConfigInjectArgs struct {
+	// IP ranges that should not be proxied.
+	ExcludeIpRanges pulumi.StringArrayInput `pulumi:"excludeIpRanges"`
+	// Let istio-proxy(sidecar) start first, before app container.
+	HoldApplicationUntilProxyStarts pulumi.BoolPtrInput `pulumi:"holdApplicationUntilProxyStarts"`
+	// Let istio-proxy(sidecar) stop last, after app container.
+	HoldProxyUntilApplicationEnds pulumi.BoolPtrInput `pulumi:"holdProxyUntilApplicationEnds"`
+}
+
+func (MeshConfigInjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigInject)(nil)).Elem()
+}
+
+func (i MeshConfigInjectArgs) ToMeshConfigInjectOutput() MeshConfigInjectOutput {
+	return i.ToMeshConfigInjectOutputWithContext(context.Background())
+}
+
+func (i MeshConfigInjectArgs) ToMeshConfigInjectOutputWithContext(ctx context.Context) MeshConfigInjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigInjectOutput)
+}
+
+func (i MeshConfigInjectArgs) ToMeshConfigInjectPtrOutput() MeshConfigInjectPtrOutput {
+	return i.ToMeshConfigInjectPtrOutputWithContext(context.Background())
+}
+
+func (i MeshConfigInjectArgs) ToMeshConfigInjectPtrOutputWithContext(ctx context.Context) MeshConfigInjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigInjectOutput).ToMeshConfigInjectPtrOutputWithContext(ctx)
+}
+
+// MeshConfigInjectPtrInput is an input type that accepts MeshConfigInjectArgs, MeshConfigInjectPtr and MeshConfigInjectPtrOutput values.
+// You can construct a concrete instance of `MeshConfigInjectPtrInput` via:
+//
+//          MeshConfigInjectArgs{...}
+//
+//  or:
+//
+//          nil
+type MeshConfigInjectPtrInput interface {
+	pulumi.Input
+
+	ToMeshConfigInjectPtrOutput() MeshConfigInjectPtrOutput
+	ToMeshConfigInjectPtrOutputWithContext(context.Context) MeshConfigInjectPtrOutput
+}
+
+type meshConfigInjectPtrType MeshConfigInjectArgs
+
+func MeshConfigInjectPtr(v *MeshConfigInjectArgs) MeshConfigInjectPtrInput {
+	return (*meshConfigInjectPtrType)(v)
+}
+
+func (*meshConfigInjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigInject)(nil)).Elem()
+}
+
+func (i *meshConfigInjectPtrType) ToMeshConfigInjectPtrOutput() MeshConfigInjectPtrOutput {
+	return i.ToMeshConfigInjectPtrOutputWithContext(context.Background())
+}
+
+func (i *meshConfigInjectPtrType) ToMeshConfigInjectPtrOutputWithContext(ctx context.Context) MeshConfigInjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigInjectPtrOutput)
+}
+
+type MeshConfigInjectOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigInjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigInject)(nil)).Elem()
+}
+
+func (o MeshConfigInjectOutput) ToMeshConfigInjectOutput() MeshConfigInjectOutput {
+	return o
+}
+
+func (o MeshConfigInjectOutput) ToMeshConfigInjectOutputWithContext(ctx context.Context) MeshConfigInjectOutput {
+	return o
+}
+
+func (o MeshConfigInjectOutput) ToMeshConfigInjectPtrOutput() MeshConfigInjectPtrOutput {
+	return o.ToMeshConfigInjectPtrOutputWithContext(context.Background())
+}
+
+func (o MeshConfigInjectOutput) ToMeshConfigInjectPtrOutputWithContext(ctx context.Context) MeshConfigInjectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MeshConfigInject) *MeshConfigInject {
+		return &v
+	}).(MeshConfigInjectPtrOutput)
+}
+
+// IP ranges that should not be proxied.
+func (o MeshConfigInjectOutput) ExcludeIpRanges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v MeshConfigInject) []string { return v.ExcludeIpRanges }).(pulumi.StringArrayOutput)
+}
+
+// Let istio-proxy(sidecar) start first, before app container.
+func (o MeshConfigInjectOutput) HoldApplicationUntilProxyStarts() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v MeshConfigInject) *bool { return v.HoldApplicationUntilProxyStarts }).(pulumi.BoolPtrOutput)
+}
+
+// Let istio-proxy(sidecar) stop last, after app container.
+func (o MeshConfigInjectOutput) HoldProxyUntilApplicationEnds() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v MeshConfigInject) *bool { return v.HoldProxyUntilApplicationEnds }).(pulumi.BoolPtrOutput)
+}
+
+type MeshConfigInjectPtrOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigInjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigInject)(nil)).Elem()
+}
+
+func (o MeshConfigInjectPtrOutput) ToMeshConfigInjectPtrOutput() MeshConfigInjectPtrOutput {
+	return o
+}
+
+func (o MeshConfigInjectPtrOutput) ToMeshConfigInjectPtrOutputWithContext(ctx context.Context) MeshConfigInjectPtrOutput {
+	return o
+}
+
+func (o MeshConfigInjectPtrOutput) Elem() MeshConfigInjectOutput {
+	return o.ApplyT(func(v *MeshConfigInject) MeshConfigInject {
+		if v != nil {
+			return *v
+		}
+		var ret MeshConfigInject
+		return ret
+	}).(MeshConfigInjectOutput)
+}
+
+// IP ranges that should not be proxied.
+func (o MeshConfigInjectPtrOutput) ExcludeIpRanges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *MeshConfigInject) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ExcludeIpRanges
+	}).(pulumi.StringArrayOutput)
+}
+
+// Let istio-proxy(sidecar) start first, before app container.
+func (o MeshConfigInjectPtrOutput) HoldApplicationUntilProxyStarts() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MeshConfigInject) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HoldApplicationUntilProxyStarts
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Let istio-proxy(sidecar) stop last, after app container.
+func (o MeshConfigInjectPtrOutput) HoldProxyUntilApplicationEnds() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MeshConfigInject) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HoldProxyUntilApplicationEnds
+	}).(pulumi.BoolPtrOutput)
+}
+
 type MeshConfigIstio struct {
 	// Disable http retry.
 	DisableHttpRetry *bool `pulumi:"disableHttpRetry"`
@@ -771,10 +984,12 @@ type MeshConfigIstio struct {
 	DisablePolicyChecks *bool `pulumi:"disablePolicyChecks"`
 	// Enable HTTP/1.0 support.
 	EnablePilotHttp *bool `pulumi:"enablePilotHttp"`
-	// Outbound traffic policy.
+	// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
 	OutboundTrafficPolicy string `pulumi:"outboundTrafficPolicy"`
 	// SmartDNS configuration.
 	SmartDns *MeshConfigIstioSmartDns `pulumi:"smartDns"`
+	// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+	Tracing *MeshConfigIstioTracing `pulumi:"tracing"`
 }
 
 // MeshConfigIstioInput is an input type that accepts MeshConfigIstioArgs and MeshConfigIstioOutput values.
@@ -795,10 +1010,12 @@ type MeshConfigIstioArgs struct {
 	DisablePolicyChecks pulumi.BoolPtrInput `pulumi:"disablePolicyChecks"`
 	// Enable HTTP/1.0 support.
 	EnablePilotHttp pulumi.BoolPtrInput `pulumi:"enablePilotHttp"`
-	// Outbound traffic policy.
+	// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
 	OutboundTrafficPolicy pulumi.StringInput `pulumi:"outboundTrafficPolicy"`
 	// SmartDNS configuration.
 	SmartDns MeshConfigIstioSmartDnsPtrInput `pulumi:"smartDns"`
+	// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+	Tracing MeshConfigIstioTracingPtrInput `pulumi:"tracing"`
 }
 
 func (MeshConfigIstioArgs) ElementType() reflect.Type {
@@ -893,7 +1110,7 @@ func (o MeshConfigIstioOutput) EnablePilotHttp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v MeshConfigIstio) *bool { return v.EnablePilotHttp }).(pulumi.BoolPtrOutput)
 }
 
-// Outbound traffic policy.
+// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
 func (o MeshConfigIstioOutput) OutboundTrafficPolicy() pulumi.StringOutput {
 	return o.ApplyT(func(v MeshConfigIstio) string { return v.OutboundTrafficPolicy }).(pulumi.StringOutput)
 }
@@ -901,6 +1118,11 @@ func (o MeshConfigIstioOutput) OutboundTrafficPolicy() pulumi.StringOutput {
 // SmartDNS configuration.
 func (o MeshConfigIstioOutput) SmartDns() MeshConfigIstioSmartDnsPtrOutput {
 	return o.ApplyT(func(v MeshConfigIstio) *MeshConfigIstioSmartDns { return v.SmartDns }).(MeshConfigIstioSmartDnsPtrOutput)
+}
+
+// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+func (o MeshConfigIstioOutput) Tracing() MeshConfigIstioTracingPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstio) *MeshConfigIstioTracing { return v.Tracing }).(MeshConfigIstioTracingPtrOutput)
 }
 
 type MeshConfigIstioPtrOutput struct{ *pulumi.OutputState }
@@ -957,7 +1179,7 @@ func (o MeshConfigIstioPtrOutput) EnablePilotHttp() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Outbound traffic policy.
+// Outbound traffic policy, REGISTRY_ONLY or ALLOW_ANY, see https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig-OutboundTrafficPolicy-Mode.
 func (o MeshConfigIstioPtrOutput) OutboundTrafficPolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MeshConfigIstio) *string {
 		if v == nil {
@@ -975,6 +1197,16 @@ func (o MeshConfigIstioPtrOutput) SmartDns() MeshConfigIstioSmartDnsPtrOutput {
 		}
 		return v.SmartDns
 	}).(MeshConfigIstioSmartDnsPtrOutput)
+}
+
+// Tracing config(Deprecated, please use MeshConfig.Tracing for configuration).
+func (o MeshConfigIstioPtrOutput) Tracing() MeshConfigIstioTracingPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstio) *MeshConfigIstioTracing {
+		if v == nil {
+			return nil
+		}
+		return v.Tracing
+	}).(MeshConfigIstioTracingPtrOutput)
 }
 
 type MeshConfigIstioSmartDns struct {
@@ -1131,6 +1363,512 @@ func (o MeshConfigIstioSmartDnsPtrOutput) IstioMetaDnsCapture() pulumi.BoolPtrOu
 		}
 		return v.IstioMetaDnsCapture
 	}).(pulumi.BoolPtrOutput)
+}
+
+type MeshConfigIstioTracing struct {
+	// APM config.
+	Apm *MeshConfigIstioTracingApm `pulumi:"apm"`
+	// Whether enable tracing.
+	Enable *bool `pulumi:"enable"`
+	// Tracing sampling, 0.0-1.0.
+	Sampling *float64 `pulumi:"sampling"`
+	// Third party zipkin config.
+	Zipkin *MeshConfigIstioTracingZipkin `pulumi:"zipkin"`
+}
+
+// MeshConfigIstioTracingInput is an input type that accepts MeshConfigIstioTracingArgs and MeshConfigIstioTracingOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingInput` via:
+//
+//          MeshConfigIstioTracingArgs{...}
+type MeshConfigIstioTracingInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingOutput() MeshConfigIstioTracingOutput
+	ToMeshConfigIstioTracingOutputWithContext(context.Context) MeshConfigIstioTracingOutput
+}
+
+type MeshConfigIstioTracingArgs struct {
+	// APM config.
+	Apm MeshConfigIstioTracingApmPtrInput `pulumi:"apm"`
+	// Whether enable tracing.
+	Enable pulumi.BoolPtrInput `pulumi:"enable"`
+	// Tracing sampling, 0.0-1.0.
+	Sampling pulumi.Float64PtrInput `pulumi:"sampling"`
+	// Third party zipkin config.
+	Zipkin MeshConfigIstioTracingZipkinPtrInput `pulumi:"zipkin"`
+}
+
+func (MeshConfigIstioTracingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracing)(nil)).Elem()
+}
+
+func (i MeshConfigIstioTracingArgs) ToMeshConfigIstioTracingOutput() MeshConfigIstioTracingOutput {
+	return i.ToMeshConfigIstioTracingOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingArgs) ToMeshConfigIstioTracingOutputWithContext(ctx context.Context) MeshConfigIstioTracingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingOutput)
+}
+
+func (i MeshConfigIstioTracingArgs) ToMeshConfigIstioTracingPtrOutput() MeshConfigIstioTracingPtrOutput {
+	return i.ToMeshConfigIstioTracingPtrOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingArgs) ToMeshConfigIstioTracingPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingOutput).ToMeshConfigIstioTracingPtrOutputWithContext(ctx)
+}
+
+// MeshConfigIstioTracingPtrInput is an input type that accepts MeshConfigIstioTracingArgs, MeshConfigIstioTracingPtr and MeshConfigIstioTracingPtrOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingPtrInput` via:
+//
+//          MeshConfigIstioTracingArgs{...}
+//
+//  or:
+//
+//          nil
+type MeshConfigIstioTracingPtrInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingPtrOutput() MeshConfigIstioTracingPtrOutput
+	ToMeshConfigIstioTracingPtrOutputWithContext(context.Context) MeshConfigIstioTracingPtrOutput
+}
+
+type meshConfigIstioTracingPtrType MeshConfigIstioTracingArgs
+
+func MeshConfigIstioTracingPtr(v *MeshConfigIstioTracingArgs) MeshConfigIstioTracingPtrInput {
+	return (*meshConfigIstioTracingPtrType)(v)
+}
+
+func (*meshConfigIstioTracingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracing)(nil)).Elem()
+}
+
+func (i *meshConfigIstioTracingPtrType) ToMeshConfigIstioTracingPtrOutput() MeshConfigIstioTracingPtrOutput {
+	return i.ToMeshConfigIstioTracingPtrOutputWithContext(context.Background())
+}
+
+func (i *meshConfigIstioTracingPtrType) ToMeshConfigIstioTracingPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingPtrOutput)
+}
+
+type MeshConfigIstioTracingOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracing)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingOutput) ToMeshConfigIstioTracingOutput() MeshConfigIstioTracingOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingOutput) ToMeshConfigIstioTracingOutputWithContext(ctx context.Context) MeshConfigIstioTracingOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingOutput) ToMeshConfigIstioTracingPtrOutput() MeshConfigIstioTracingPtrOutput {
+	return o.ToMeshConfigIstioTracingPtrOutputWithContext(context.Background())
+}
+
+func (o MeshConfigIstioTracingOutput) ToMeshConfigIstioTracingPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MeshConfigIstioTracing) *MeshConfigIstioTracing {
+		return &v
+	}).(MeshConfigIstioTracingPtrOutput)
+}
+
+// APM config.
+func (o MeshConfigIstioTracingOutput) Apm() MeshConfigIstioTracingApmPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracing) *MeshConfigIstioTracingApm { return v.Apm }).(MeshConfigIstioTracingApmPtrOutput)
+}
+
+// Whether enable tracing.
+func (o MeshConfigIstioTracingOutput) Enable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracing) *bool { return v.Enable }).(pulumi.BoolPtrOutput)
+}
+
+// Tracing sampling, 0.0-1.0.
+func (o MeshConfigIstioTracingOutput) Sampling() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracing) *float64 { return v.Sampling }).(pulumi.Float64PtrOutput)
+}
+
+// Third party zipkin config.
+func (o MeshConfigIstioTracingOutput) Zipkin() MeshConfigIstioTracingZipkinPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracing) *MeshConfigIstioTracingZipkin { return v.Zipkin }).(MeshConfigIstioTracingZipkinPtrOutput)
+}
+
+type MeshConfigIstioTracingPtrOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracing)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingPtrOutput) ToMeshConfigIstioTracingPtrOutput() MeshConfigIstioTracingPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingPtrOutput) ToMeshConfigIstioTracingPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingPtrOutput) Elem() MeshConfigIstioTracingOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracing) MeshConfigIstioTracing {
+		if v != nil {
+			return *v
+		}
+		var ret MeshConfigIstioTracing
+		return ret
+	}).(MeshConfigIstioTracingOutput)
+}
+
+// APM config.
+func (o MeshConfigIstioTracingPtrOutput) Apm() MeshConfigIstioTracingApmPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracing) *MeshConfigIstioTracingApm {
+		if v == nil {
+			return nil
+		}
+		return v.Apm
+	}).(MeshConfigIstioTracingApmPtrOutput)
+}
+
+// Whether enable tracing.
+func (o MeshConfigIstioTracingPtrOutput) Enable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracing) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Tracing sampling, 0.0-1.0.
+func (o MeshConfigIstioTracingPtrOutput) Sampling() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracing) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Sampling
+	}).(pulumi.Float64PtrOutput)
+}
+
+// Third party zipkin config.
+func (o MeshConfigIstioTracingPtrOutput) Zipkin() MeshConfigIstioTracingZipkinPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracing) *MeshConfigIstioTracingZipkin {
+		if v == nil {
+			return nil
+		}
+		return v.Zipkin
+	}).(MeshConfigIstioTracingZipkinPtrOutput)
+}
+
+type MeshConfigIstioTracingApm struct {
+	// Whether enable APM.
+	Enable bool `pulumi:"enable"`
+	// Instance id of the APM.
+	InstanceId *string `pulumi:"instanceId"`
+	// Region.
+	Region *string `pulumi:"region"`
+}
+
+// MeshConfigIstioTracingApmInput is an input type that accepts MeshConfigIstioTracingApmArgs and MeshConfigIstioTracingApmOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingApmInput` via:
+//
+//          MeshConfigIstioTracingApmArgs{...}
+type MeshConfigIstioTracingApmInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingApmOutput() MeshConfigIstioTracingApmOutput
+	ToMeshConfigIstioTracingApmOutputWithContext(context.Context) MeshConfigIstioTracingApmOutput
+}
+
+type MeshConfigIstioTracingApmArgs struct {
+	// Whether enable APM.
+	Enable pulumi.BoolInput `pulumi:"enable"`
+	// Instance id of the APM.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+}
+
+func (MeshConfigIstioTracingApmArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracingApm)(nil)).Elem()
+}
+
+func (i MeshConfigIstioTracingApmArgs) ToMeshConfigIstioTracingApmOutput() MeshConfigIstioTracingApmOutput {
+	return i.ToMeshConfigIstioTracingApmOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingApmArgs) ToMeshConfigIstioTracingApmOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingApmOutput)
+}
+
+func (i MeshConfigIstioTracingApmArgs) ToMeshConfigIstioTracingApmPtrOutput() MeshConfigIstioTracingApmPtrOutput {
+	return i.ToMeshConfigIstioTracingApmPtrOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingApmArgs) ToMeshConfigIstioTracingApmPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingApmOutput).ToMeshConfigIstioTracingApmPtrOutputWithContext(ctx)
+}
+
+// MeshConfigIstioTracingApmPtrInput is an input type that accepts MeshConfigIstioTracingApmArgs, MeshConfigIstioTracingApmPtr and MeshConfigIstioTracingApmPtrOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingApmPtrInput` via:
+//
+//          MeshConfigIstioTracingApmArgs{...}
+//
+//  or:
+//
+//          nil
+type MeshConfigIstioTracingApmPtrInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingApmPtrOutput() MeshConfigIstioTracingApmPtrOutput
+	ToMeshConfigIstioTracingApmPtrOutputWithContext(context.Context) MeshConfigIstioTracingApmPtrOutput
+}
+
+type meshConfigIstioTracingApmPtrType MeshConfigIstioTracingApmArgs
+
+func MeshConfigIstioTracingApmPtr(v *MeshConfigIstioTracingApmArgs) MeshConfigIstioTracingApmPtrInput {
+	return (*meshConfigIstioTracingApmPtrType)(v)
+}
+
+func (*meshConfigIstioTracingApmPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracingApm)(nil)).Elem()
+}
+
+func (i *meshConfigIstioTracingApmPtrType) ToMeshConfigIstioTracingApmPtrOutput() MeshConfigIstioTracingApmPtrOutput {
+	return i.ToMeshConfigIstioTracingApmPtrOutputWithContext(context.Background())
+}
+
+func (i *meshConfigIstioTracingApmPtrType) ToMeshConfigIstioTracingApmPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingApmPtrOutput)
+}
+
+type MeshConfigIstioTracingApmOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingApmOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracingApm)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingApmOutput) ToMeshConfigIstioTracingApmOutput() MeshConfigIstioTracingApmOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingApmOutput) ToMeshConfigIstioTracingApmOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingApmOutput) ToMeshConfigIstioTracingApmPtrOutput() MeshConfigIstioTracingApmPtrOutput {
+	return o.ToMeshConfigIstioTracingApmPtrOutputWithContext(context.Background())
+}
+
+func (o MeshConfigIstioTracingApmOutput) ToMeshConfigIstioTracingApmPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MeshConfigIstioTracingApm) *MeshConfigIstioTracingApm {
+		return &v
+	}).(MeshConfigIstioTracingApmPtrOutput)
+}
+
+// Whether enable APM.
+func (o MeshConfigIstioTracingApmOutput) Enable() pulumi.BoolOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracingApm) bool { return v.Enable }).(pulumi.BoolOutput)
+}
+
+// Instance id of the APM.
+func (o MeshConfigIstioTracingApmOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracingApm) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Region.
+func (o MeshConfigIstioTracingApmOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracingApm) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+type MeshConfigIstioTracingApmPtrOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingApmPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracingApm)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingApmPtrOutput) ToMeshConfigIstioTracingApmPtrOutput() MeshConfigIstioTracingApmPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingApmPtrOutput) ToMeshConfigIstioTracingApmPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingApmPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingApmPtrOutput) Elem() MeshConfigIstioTracingApmOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingApm) MeshConfigIstioTracingApm {
+		if v != nil {
+			return *v
+		}
+		var ret MeshConfigIstioTracingApm
+		return ret
+	}).(MeshConfigIstioTracingApmOutput)
+}
+
+// Whether enable APM.
+func (o MeshConfigIstioTracingApmPtrOutput) Enable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingApm) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enable
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Instance id of the APM.
+func (o MeshConfigIstioTracingApmPtrOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingApm) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Region.
+func (o MeshConfigIstioTracingApmPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingApm) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type MeshConfigIstioTracingZipkin struct {
+	// Zipkin address.
+	Address string `pulumi:"address"`
+}
+
+// MeshConfigIstioTracingZipkinInput is an input type that accepts MeshConfigIstioTracingZipkinArgs and MeshConfigIstioTracingZipkinOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingZipkinInput` via:
+//
+//          MeshConfigIstioTracingZipkinArgs{...}
+type MeshConfigIstioTracingZipkinInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingZipkinOutput() MeshConfigIstioTracingZipkinOutput
+	ToMeshConfigIstioTracingZipkinOutputWithContext(context.Context) MeshConfigIstioTracingZipkinOutput
+}
+
+type MeshConfigIstioTracingZipkinArgs struct {
+	// Zipkin address.
+	Address pulumi.StringInput `pulumi:"address"`
+}
+
+func (MeshConfigIstioTracingZipkinArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracingZipkin)(nil)).Elem()
+}
+
+func (i MeshConfigIstioTracingZipkinArgs) ToMeshConfigIstioTracingZipkinOutput() MeshConfigIstioTracingZipkinOutput {
+	return i.ToMeshConfigIstioTracingZipkinOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingZipkinArgs) ToMeshConfigIstioTracingZipkinOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingZipkinOutput)
+}
+
+func (i MeshConfigIstioTracingZipkinArgs) ToMeshConfigIstioTracingZipkinPtrOutput() MeshConfigIstioTracingZipkinPtrOutput {
+	return i.ToMeshConfigIstioTracingZipkinPtrOutputWithContext(context.Background())
+}
+
+func (i MeshConfigIstioTracingZipkinArgs) ToMeshConfigIstioTracingZipkinPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingZipkinOutput).ToMeshConfigIstioTracingZipkinPtrOutputWithContext(ctx)
+}
+
+// MeshConfigIstioTracingZipkinPtrInput is an input type that accepts MeshConfigIstioTracingZipkinArgs, MeshConfigIstioTracingZipkinPtr and MeshConfigIstioTracingZipkinPtrOutput values.
+// You can construct a concrete instance of `MeshConfigIstioTracingZipkinPtrInput` via:
+//
+//          MeshConfigIstioTracingZipkinArgs{...}
+//
+//  or:
+//
+//          nil
+type MeshConfigIstioTracingZipkinPtrInput interface {
+	pulumi.Input
+
+	ToMeshConfigIstioTracingZipkinPtrOutput() MeshConfigIstioTracingZipkinPtrOutput
+	ToMeshConfigIstioTracingZipkinPtrOutputWithContext(context.Context) MeshConfigIstioTracingZipkinPtrOutput
+}
+
+type meshConfigIstioTracingZipkinPtrType MeshConfigIstioTracingZipkinArgs
+
+func MeshConfigIstioTracingZipkinPtr(v *MeshConfigIstioTracingZipkinArgs) MeshConfigIstioTracingZipkinPtrInput {
+	return (*meshConfigIstioTracingZipkinPtrType)(v)
+}
+
+func (*meshConfigIstioTracingZipkinPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracingZipkin)(nil)).Elem()
+}
+
+func (i *meshConfigIstioTracingZipkinPtrType) ToMeshConfigIstioTracingZipkinPtrOutput() MeshConfigIstioTracingZipkinPtrOutput {
+	return i.ToMeshConfigIstioTracingZipkinPtrOutputWithContext(context.Background())
+}
+
+func (i *meshConfigIstioTracingZipkinPtrType) ToMeshConfigIstioTracingZipkinPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigIstioTracingZipkinPtrOutput)
+}
+
+type MeshConfigIstioTracingZipkinOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingZipkinOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigIstioTracingZipkin)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingZipkinOutput) ToMeshConfigIstioTracingZipkinOutput() MeshConfigIstioTracingZipkinOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingZipkinOutput) ToMeshConfigIstioTracingZipkinOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingZipkinOutput) ToMeshConfigIstioTracingZipkinPtrOutput() MeshConfigIstioTracingZipkinPtrOutput {
+	return o.ToMeshConfigIstioTracingZipkinPtrOutputWithContext(context.Background())
+}
+
+func (o MeshConfigIstioTracingZipkinOutput) ToMeshConfigIstioTracingZipkinPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MeshConfigIstioTracingZipkin) *MeshConfigIstioTracingZipkin {
+		return &v
+	}).(MeshConfigIstioTracingZipkinPtrOutput)
+}
+
+// Zipkin address.
+func (o MeshConfigIstioTracingZipkinOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v MeshConfigIstioTracingZipkin) string { return v.Address }).(pulumi.StringOutput)
+}
+
+type MeshConfigIstioTracingZipkinPtrOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigIstioTracingZipkinPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigIstioTracingZipkin)(nil)).Elem()
+}
+
+func (o MeshConfigIstioTracingZipkinPtrOutput) ToMeshConfigIstioTracingZipkinPtrOutput() MeshConfigIstioTracingZipkinPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingZipkinPtrOutput) ToMeshConfigIstioTracingZipkinPtrOutputWithContext(ctx context.Context) MeshConfigIstioTracingZipkinPtrOutput {
+	return o
+}
+
+func (o MeshConfigIstioTracingZipkinPtrOutput) Elem() MeshConfigIstioTracingZipkinOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingZipkin) MeshConfigIstioTracingZipkin {
+		if v != nil {
+			return *v
+		}
+		var ret MeshConfigIstioTracingZipkin
+		return ret
+	}).(MeshConfigIstioTracingZipkinOutput)
+}
+
+// Zipkin address.
+func (o MeshConfigIstioTracingZipkinPtrOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MeshConfigIstioTracingZipkin) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Address
+	}).(pulumi.StringPtrOutput)
 }
 
 type MeshConfigPrometheus struct {
@@ -1576,6 +2314,374 @@ func (o MeshConfigPrometheusCustomPromPtrOutput) VpcId() pulumi.StringPtrOutput 
 		}
 		return v.VpcId
 	}).(pulumi.StringPtrOutput)
+}
+
+type MeshConfigSidecarResources struct {
+	// Sidecar limits.
+	Limits []MeshConfigSidecarResourcesLimit `pulumi:"limits"`
+	// Sidecar requests.
+	Requests []MeshConfigSidecarResourcesRequest `pulumi:"requests"`
+}
+
+// MeshConfigSidecarResourcesInput is an input type that accepts MeshConfigSidecarResourcesArgs and MeshConfigSidecarResourcesOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesInput` via:
+//
+//          MeshConfigSidecarResourcesArgs{...}
+type MeshConfigSidecarResourcesInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesOutput() MeshConfigSidecarResourcesOutput
+	ToMeshConfigSidecarResourcesOutputWithContext(context.Context) MeshConfigSidecarResourcesOutput
+}
+
+type MeshConfigSidecarResourcesArgs struct {
+	// Sidecar limits.
+	Limits MeshConfigSidecarResourcesLimitArrayInput `pulumi:"limits"`
+	// Sidecar requests.
+	Requests MeshConfigSidecarResourcesRequestArrayInput `pulumi:"requests"`
+}
+
+func (MeshConfigSidecarResourcesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResources)(nil)).Elem()
+}
+
+func (i MeshConfigSidecarResourcesArgs) ToMeshConfigSidecarResourcesOutput() MeshConfigSidecarResourcesOutput {
+	return i.ToMeshConfigSidecarResourcesOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesArgs) ToMeshConfigSidecarResourcesOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesOutput)
+}
+
+func (i MeshConfigSidecarResourcesArgs) ToMeshConfigSidecarResourcesPtrOutput() MeshConfigSidecarResourcesPtrOutput {
+	return i.ToMeshConfigSidecarResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesArgs) ToMeshConfigSidecarResourcesPtrOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesOutput).ToMeshConfigSidecarResourcesPtrOutputWithContext(ctx)
+}
+
+// MeshConfigSidecarResourcesPtrInput is an input type that accepts MeshConfigSidecarResourcesArgs, MeshConfigSidecarResourcesPtr and MeshConfigSidecarResourcesPtrOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesPtrInput` via:
+//
+//          MeshConfigSidecarResourcesArgs{...}
+//
+//  or:
+//
+//          nil
+type MeshConfigSidecarResourcesPtrInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesPtrOutput() MeshConfigSidecarResourcesPtrOutput
+	ToMeshConfigSidecarResourcesPtrOutputWithContext(context.Context) MeshConfigSidecarResourcesPtrOutput
+}
+
+type meshConfigSidecarResourcesPtrType MeshConfigSidecarResourcesArgs
+
+func MeshConfigSidecarResourcesPtr(v *MeshConfigSidecarResourcesArgs) MeshConfigSidecarResourcesPtrInput {
+	return (*meshConfigSidecarResourcesPtrType)(v)
+}
+
+func (*meshConfigSidecarResourcesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigSidecarResources)(nil)).Elem()
+}
+
+func (i *meshConfigSidecarResourcesPtrType) ToMeshConfigSidecarResourcesPtrOutput() MeshConfigSidecarResourcesPtrOutput {
+	return i.ToMeshConfigSidecarResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i *meshConfigSidecarResourcesPtrType) ToMeshConfigSidecarResourcesPtrOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesPtrOutput)
+}
+
+type MeshConfigSidecarResourcesOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResources)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesOutput) ToMeshConfigSidecarResourcesOutput() MeshConfigSidecarResourcesOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesOutput) ToMeshConfigSidecarResourcesOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesOutput) ToMeshConfigSidecarResourcesPtrOutput() MeshConfigSidecarResourcesPtrOutput {
+	return o.ToMeshConfigSidecarResourcesPtrOutputWithContext(context.Background())
+}
+
+func (o MeshConfigSidecarResourcesOutput) ToMeshConfigSidecarResourcesPtrOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MeshConfigSidecarResources) *MeshConfigSidecarResources {
+		return &v
+	}).(MeshConfigSidecarResourcesPtrOutput)
+}
+
+// Sidecar limits.
+func (o MeshConfigSidecarResourcesOutput) Limits() MeshConfigSidecarResourcesLimitArrayOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResources) []MeshConfigSidecarResourcesLimit { return v.Limits }).(MeshConfigSidecarResourcesLimitArrayOutput)
+}
+
+// Sidecar requests.
+func (o MeshConfigSidecarResourcesOutput) Requests() MeshConfigSidecarResourcesRequestArrayOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResources) []MeshConfigSidecarResourcesRequest { return v.Requests }).(MeshConfigSidecarResourcesRequestArrayOutput)
+}
+
+type MeshConfigSidecarResourcesPtrOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MeshConfigSidecarResources)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesPtrOutput) ToMeshConfigSidecarResourcesPtrOutput() MeshConfigSidecarResourcesPtrOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesPtrOutput) ToMeshConfigSidecarResourcesPtrOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesPtrOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesPtrOutput) Elem() MeshConfigSidecarResourcesOutput {
+	return o.ApplyT(func(v *MeshConfigSidecarResources) MeshConfigSidecarResources {
+		if v != nil {
+			return *v
+		}
+		var ret MeshConfigSidecarResources
+		return ret
+	}).(MeshConfigSidecarResourcesOutput)
+}
+
+// Sidecar limits.
+func (o MeshConfigSidecarResourcesPtrOutput) Limits() MeshConfigSidecarResourcesLimitArrayOutput {
+	return o.ApplyT(func(v *MeshConfigSidecarResources) []MeshConfigSidecarResourcesLimit {
+		if v == nil {
+			return nil
+		}
+		return v.Limits
+	}).(MeshConfigSidecarResourcesLimitArrayOutput)
+}
+
+// Sidecar requests.
+func (o MeshConfigSidecarResourcesPtrOutput) Requests() MeshConfigSidecarResourcesRequestArrayOutput {
+	return o.ApplyT(func(v *MeshConfigSidecarResources) []MeshConfigSidecarResourcesRequest {
+		if v == nil {
+			return nil
+		}
+		return v.Requests
+	}).(MeshConfigSidecarResourcesRequestArrayOutput)
+}
+
+type MeshConfigSidecarResourcesLimit struct {
+	// Resource type name, `cpu/memory`.
+	Name *string `pulumi:"name"`
+	// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+	Quantity *string `pulumi:"quantity"`
+}
+
+// MeshConfigSidecarResourcesLimitInput is an input type that accepts MeshConfigSidecarResourcesLimitArgs and MeshConfigSidecarResourcesLimitOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesLimitInput` via:
+//
+//          MeshConfigSidecarResourcesLimitArgs{...}
+type MeshConfigSidecarResourcesLimitInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesLimitOutput() MeshConfigSidecarResourcesLimitOutput
+	ToMeshConfigSidecarResourcesLimitOutputWithContext(context.Context) MeshConfigSidecarResourcesLimitOutput
+}
+
+type MeshConfigSidecarResourcesLimitArgs struct {
+	// Resource type name, `cpu/memory`.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+	Quantity pulumi.StringPtrInput `pulumi:"quantity"`
+}
+
+func (MeshConfigSidecarResourcesLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResourcesLimit)(nil)).Elem()
+}
+
+func (i MeshConfigSidecarResourcesLimitArgs) ToMeshConfigSidecarResourcesLimitOutput() MeshConfigSidecarResourcesLimitOutput {
+	return i.ToMeshConfigSidecarResourcesLimitOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesLimitArgs) ToMeshConfigSidecarResourcesLimitOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesLimitOutput)
+}
+
+// MeshConfigSidecarResourcesLimitArrayInput is an input type that accepts MeshConfigSidecarResourcesLimitArray and MeshConfigSidecarResourcesLimitArrayOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesLimitArrayInput` via:
+//
+//          MeshConfigSidecarResourcesLimitArray{ MeshConfigSidecarResourcesLimitArgs{...} }
+type MeshConfigSidecarResourcesLimitArrayInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesLimitArrayOutput() MeshConfigSidecarResourcesLimitArrayOutput
+	ToMeshConfigSidecarResourcesLimitArrayOutputWithContext(context.Context) MeshConfigSidecarResourcesLimitArrayOutput
+}
+
+type MeshConfigSidecarResourcesLimitArray []MeshConfigSidecarResourcesLimitInput
+
+func (MeshConfigSidecarResourcesLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MeshConfigSidecarResourcesLimit)(nil)).Elem()
+}
+
+func (i MeshConfigSidecarResourcesLimitArray) ToMeshConfigSidecarResourcesLimitArrayOutput() MeshConfigSidecarResourcesLimitArrayOutput {
+	return i.ToMeshConfigSidecarResourcesLimitArrayOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesLimitArray) ToMeshConfigSidecarResourcesLimitArrayOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesLimitArrayOutput)
+}
+
+type MeshConfigSidecarResourcesLimitOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResourcesLimit)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesLimitOutput) ToMeshConfigSidecarResourcesLimitOutput() MeshConfigSidecarResourcesLimitOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesLimitOutput) ToMeshConfigSidecarResourcesLimitOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesLimitOutput {
+	return o
+}
+
+// Resource type name, `cpu/memory`.
+func (o MeshConfigSidecarResourcesLimitOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResourcesLimit) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+func (o MeshConfigSidecarResourcesLimitOutput) Quantity() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResourcesLimit) *string { return v.Quantity }).(pulumi.StringPtrOutput)
+}
+
+type MeshConfigSidecarResourcesLimitArrayOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MeshConfigSidecarResourcesLimit)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesLimitArrayOutput) ToMeshConfigSidecarResourcesLimitArrayOutput() MeshConfigSidecarResourcesLimitArrayOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesLimitArrayOutput) ToMeshConfigSidecarResourcesLimitArrayOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesLimitArrayOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesLimitArrayOutput) Index(i pulumi.IntInput) MeshConfigSidecarResourcesLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MeshConfigSidecarResourcesLimit {
+		return vs[0].([]MeshConfigSidecarResourcesLimit)[vs[1].(int)]
+	}).(MeshConfigSidecarResourcesLimitOutput)
+}
+
+type MeshConfigSidecarResourcesRequest struct {
+	// Resource type name, `cpu/memory`.
+	Name *string `pulumi:"name"`
+	// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+	Quantity *string `pulumi:"quantity"`
+}
+
+// MeshConfigSidecarResourcesRequestInput is an input type that accepts MeshConfigSidecarResourcesRequestArgs and MeshConfigSidecarResourcesRequestOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesRequestInput` via:
+//
+//          MeshConfigSidecarResourcesRequestArgs{...}
+type MeshConfigSidecarResourcesRequestInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesRequestOutput() MeshConfigSidecarResourcesRequestOutput
+	ToMeshConfigSidecarResourcesRequestOutputWithContext(context.Context) MeshConfigSidecarResourcesRequestOutput
+}
+
+type MeshConfigSidecarResourcesRequestArgs struct {
+	// Resource type name, `cpu/memory`.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+	Quantity pulumi.StringPtrInput `pulumi:"quantity"`
+}
+
+func (MeshConfigSidecarResourcesRequestArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResourcesRequest)(nil)).Elem()
+}
+
+func (i MeshConfigSidecarResourcesRequestArgs) ToMeshConfigSidecarResourcesRequestOutput() MeshConfigSidecarResourcesRequestOutput {
+	return i.ToMeshConfigSidecarResourcesRequestOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesRequestArgs) ToMeshConfigSidecarResourcesRequestOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesRequestOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesRequestOutput)
+}
+
+// MeshConfigSidecarResourcesRequestArrayInput is an input type that accepts MeshConfigSidecarResourcesRequestArray and MeshConfigSidecarResourcesRequestArrayOutput values.
+// You can construct a concrete instance of `MeshConfigSidecarResourcesRequestArrayInput` via:
+//
+//          MeshConfigSidecarResourcesRequestArray{ MeshConfigSidecarResourcesRequestArgs{...} }
+type MeshConfigSidecarResourcesRequestArrayInput interface {
+	pulumi.Input
+
+	ToMeshConfigSidecarResourcesRequestArrayOutput() MeshConfigSidecarResourcesRequestArrayOutput
+	ToMeshConfigSidecarResourcesRequestArrayOutputWithContext(context.Context) MeshConfigSidecarResourcesRequestArrayOutput
+}
+
+type MeshConfigSidecarResourcesRequestArray []MeshConfigSidecarResourcesRequestInput
+
+func (MeshConfigSidecarResourcesRequestArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MeshConfigSidecarResourcesRequest)(nil)).Elem()
+}
+
+func (i MeshConfigSidecarResourcesRequestArray) ToMeshConfigSidecarResourcesRequestArrayOutput() MeshConfigSidecarResourcesRequestArrayOutput {
+	return i.ToMeshConfigSidecarResourcesRequestArrayOutputWithContext(context.Background())
+}
+
+func (i MeshConfigSidecarResourcesRequestArray) ToMeshConfigSidecarResourcesRequestArrayOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesRequestArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MeshConfigSidecarResourcesRequestArrayOutput)
+}
+
+type MeshConfigSidecarResourcesRequestOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesRequestOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MeshConfigSidecarResourcesRequest)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesRequestOutput) ToMeshConfigSidecarResourcesRequestOutput() MeshConfigSidecarResourcesRequestOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesRequestOutput) ToMeshConfigSidecarResourcesRequestOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesRequestOutput {
+	return o
+}
+
+// Resource type name, `cpu/memory`.
+func (o MeshConfigSidecarResourcesRequestOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResourcesRequest) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Resource quantity, example: cpu-`100m`, memory-`1Gi`.
+func (o MeshConfigSidecarResourcesRequestOutput) Quantity() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MeshConfigSidecarResourcesRequest) *string { return v.Quantity }).(pulumi.StringPtrOutput)
+}
+
+type MeshConfigSidecarResourcesRequestArrayOutput struct{ *pulumi.OutputState }
+
+func (MeshConfigSidecarResourcesRequestArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MeshConfigSidecarResourcesRequest)(nil)).Elem()
+}
+
+func (o MeshConfigSidecarResourcesRequestArrayOutput) ToMeshConfigSidecarResourcesRequestArrayOutput() MeshConfigSidecarResourcesRequestArrayOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesRequestArrayOutput) ToMeshConfigSidecarResourcesRequestArrayOutputWithContext(ctx context.Context) MeshConfigSidecarResourcesRequestArrayOutput {
+	return o
+}
+
+func (o MeshConfigSidecarResourcesRequestArrayOutput) Index(i pulumi.IntInput) MeshConfigSidecarResourcesRequestOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MeshConfigSidecarResourcesRequest {
+		return vs[0].([]MeshConfigSidecarResourcesRequest)[vs[1].(int)]
+	}).(MeshConfigSidecarResourcesRequestOutput)
 }
 
 type MeshConfigTracing struct {
@@ -3560,14 +4666,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentClusterListArrayInput)(nil)).Elem(), ClusterAttachmentClusterListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigInput)(nil)).Elem(), MeshConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigPtrInput)(nil)).Elem(), MeshConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigInjectInput)(nil)).Elem(), MeshConfigInjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigInjectPtrInput)(nil)).Elem(), MeshConfigInjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioInput)(nil)).Elem(), MeshConfigIstioArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioPtrInput)(nil)).Elem(), MeshConfigIstioArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioSmartDnsInput)(nil)).Elem(), MeshConfigIstioSmartDnsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioSmartDnsPtrInput)(nil)).Elem(), MeshConfigIstioSmartDnsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingInput)(nil)).Elem(), MeshConfigIstioTracingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingPtrInput)(nil)).Elem(), MeshConfigIstioTracingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingApmInput)(nil)).Elem(), MeshConfigIstioTracingApmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingApmPtrInput)(nil)).Elem(), MeshConfigIstioTracingApmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingZipkinInput)(nil)).Elem(), MeshConfigIstioTracingZipkinArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigIstioTracingZipkinPtrInput)(nil)).Elem(), MeshConfigIstioTracingZipkinArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigPrometheusInput)(nil)).Elem(), MeshConfigPrometheusArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigPrometheusPtrInput)(nil)).Elem(), MeshConfigPrometheusArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigPrometheusCustomPromInput)(nil)).Elem(), MeshConfigPrometheusCustomPromArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigPrometheusCustomPromPtrInput)(nil)).Elem(), MeshConfigPrometheusCustomPromArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesInput)(nil)).Elem(), MeshConfigSidecarResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesPtrInput)(nil)).Elem(), MeshConfigSidecarResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesLimitInput)(nil)).Elem(), MeshConfigSidecarResourcesLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesLimitArrayInput)(nil)).Elem(), MeshConfigSidecarResourcesLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesRequestInput)(nil)).Elem(), MeshConfigSidecarResourcesRequestArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigSidecarResourcesRequestArrayInput)(nil)).Elem(), MeshConfigSidecarResourcesRequestArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigTracingInput)(nil)).Elem(), MeshConfigTracingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigTracingPtrInput)(nil)).Elem(), MeshConfigTracingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MeshConfigTracingApmInput)(nil)).Elem(), MeshConfigTracingApmArgs{})
@@ -3604,14 +4724,28 @@ func init() {
 	pulumi.RegisterOutputType(ClusterAttachmentClusterListArrayOutput{})
 	pulumi.RegisterOutputType(MeshConfigOutput{})
 	pulumi.RegisterOutputType(MeshConfigPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigInjectOutput{})
+	pulumi.RegisterOutputType(MeshConfigInjectPtrOutput{})
 	pulumi.RegisterOutputType(MeshConfigIstioOutput{})
 	pulumi.RegisterOutputType(MeshConfigIstioPtrOutput{})
 	pulumi.RegisterOutputType(MeshConfigIstioSmartDnsOutput{})
 	pulumi.RegisterOutputType(MeshConfigIstioSmartDnsPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingApmOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingApmPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingZipkinOutput{})
+	pulumi.RegisterOutputType(MeshConfigIstioTracingZipkinPtrOutput{})
 	pulumi.RegisterOutputType(MeshConfigPrometheusOutput{})
 	pulumi.RegisterOutputType(MeshConfigPrometheusPtrOutput{})
 	pulumi.RegisterOutputType(MeshConfigPrometheusCustomPromOutput{})
 	pulumi.RegisterOutputType(MeshConfigPrometheusCustomPromPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesPtrOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesLimitOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesLimitArrayOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesRequestOutput{})
+	pulumi.RegisterOutputType(MeshConfigSidecarResourcesRequestArrayOutput{})
 	pulumi.RegisterOutputType(MeshConfigTracingOutput{})
 	pulumi.RegisterOutputType(MeshConfigTracingPtrOutput{})
 	pulumi.RegisterOutputType(MeshConfigTracingApmOutput{})

@@ -90,8 +90,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
- *
- * Using Spot CVM Instance
+ * ### Using Spot CVM Instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -230,7 +229,7 @@ export class NodePool extends pulumi.CustomResource {
      */
     public /*out*/ readonly nodeCount!: pulumi.Output<number>;
     /**
-     * Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+     * Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
      */
     public readonly nodeOs!: pulumi.Output<string | undefined>;
     /**
@@ -457,7 +456,7 @@ export interface NodePoolState {
      */
     nodeCount?: pulumi.Input<number>;
     /**
-     * Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+     * Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
      */
     nodeOs?: pulumi.Input<string>;
     /**
@@ -567,7 +566,7 @@ export interface NodePoolArgs {
      */
     nodeConfig?: pulumi.Input<inputs.Kubernetes.NodePoolNodeConfig>;
     /**
-     * Operating system of the cluster, the available values include: `tlinux2.4x86_64`, `ubuntu18.04.1x86_64`, `ubuntu16.04.1 LTSx86_64`, `centos7.6.0_x64` and `centos7.2x86_64`. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
+     * Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
      */
     nodeOs?: pulumi.Input<string>;
     /**

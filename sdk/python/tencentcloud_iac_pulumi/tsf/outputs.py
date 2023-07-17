@@ -18,14 +18,25 @@ __all__ = [
     'ClusterOperationInfoAddInstance',
     'ClusterOperationInfoDestroy',
     'ClusterOperationInfoInit',
-    'ContainGroupEnv',
-    'ContainGroupEnvValueFrom',
-    'ContainGroupEnvValueFromFieldRef',
-    'ContainGroupEnvValueFromResourceFieldRef',
-    'ContainGroupHealthCheckSetting',
-    'ContainGroupHealthCheckSettingLivenessProbe',
-    'ContainGroupHealthCheckSettingReadinessProbe',
-    'ContainGroupProtocolPort',
+    'DeployContainerGroupAgentProfileList',
+    'DeployContainerGroupEnv',
+    'DeployContainerGroupEnvValueFrom',
+    'DeployContainerGroupEnvValueFromFieldRef',
+    'DeployContainerGroupEnvValueFromResourceFieldRef',
+    'DeployContainerGroupHealthCheckSettings',
+    'DeployContainerGroupHealthCheckSettingsLivenessProbe',
+    'DeployContainerGroupHealthCheckSettingsReadinessProbe',
+    'DeployContainerGroupSchedulingStrategy',
+    'DeployContainerGroupServiceSetting',
+    'DeployContainerGroupServiceSettingProtocolPort',
+    'DeployContainerGroupVolumeInfoList',
+    'DeployContainerGroupVolumeMountInfoList',
+    'DeployContainerGroupWarmupSetting',
+    'DeployVmGroupAgentProfileList',
+    'DeployVmGroupHealthCheckSettings',
+    'DeployVmGroupHealthCheckSettingsLivenessProbe',
+    'DeployVmGroupHealthCheckSettingsReadinessProbe',
+    'DeployVmGroupWarmupSetting',
     'InstancesAttachmentInstanceAdvancedSettings',
     'LaneLaneGroupList',
     'LaneRuleRuleTagList',
@@ -34,6 +45,15 @@ __all__ = [
     'TaskTaskRule',
     'UnitRuleUnitRuleItemList',
     'UnitRuleUnitRuleItemListUnitRuleTagList',
+    'GetApiDetailResultResult',
+    'GetApiDetailResultDefinitionResult',
+    'GetApiDetailResultDefinitionPropertyResult',
+    'GetApiDetailResultRequestResult',
+    'GetApiDetailResultResponseResult',
+    'GetApiGroupResultResult',
+    'GetApiGroupResultContentResult',
+    'GetApiGroupResultContentBindedGatewayDeployGroupResult',
+    'GetApplicationAttributeResultResult',
     'GetApplicationConfigResultResult',
     'GetApplicationConfigResultContentResult',
     'GetApplicationFileConfigResultResult',
@@ -45,18 +65,56 @@ __all__ = [
     'GetApplicationResultContentServiceConfigListResult',
     'GetApplicationResultContentServiceConfigListHealthCheckResult',
     'GetApplicationResultContentServiceConfigListPortResult',
+    'GetBusinessLogConfigsResultResult',
+    'GetBusinessLogConfigsResultContentResult',
+    'GetBusinessLogConfigsResultContentConfigAssociatedGroupResult',
+    'GetBusinessLogConfigsResultContentConfigSchemaResult',
     'GetClusterResultResult',
     'GetClusterResultContentResult',
     'GetClusterResultContentOperationInfoResult',
     'GetClusterResultContentOperationInfoAddInstanceResult',
     'GetClusterResultContentOperationInfoDestroyResult',
     'GetClusterResultContentOperationInfoInitResult',
+    'GetConfigSummaryResultResult',
+    'GetConfigSummaryResultContentResult',
+    'GetContainerGroupResultResult',
+    'GetContainerGroupResultContentResult',
+    'GetDeliveryConfigByGroupIdResultResult',
+    'GetDeliveryConfigsResultResult',
+    'GetDeliveryConfigsResultContentResult',
+    'GetDeliveryConfigsResultContentGroupResult',
+    'GetDeliveryConfigsResultContentKafkaInfoResult',
+    'GetGatewayAllGroupApisResultResult',
+    'GetGatewayAllGroupApisResultGroupResult',
+    'GetGatewayAllGroupApisResultGroupGroupApiResult',
+    'GetGroupConfigReleaseResultResult',
+    'GetGroupConfigReleaseResultConfigReleaseListResult',
+    'GetGroupConfigReleaseResultFileConfigReleaseListResult',
+    'GetGroupConfigReleaseResultPublicConfigReleaseListResult',
+    'GetGroupGatewaysResultResult',
+    'GetGroupGatewaysResultContentResult',
+    'GetGroupGatewaysResultContentBindedGatewayDeployGroupResult',
+    'GetGroupInstancesResultResult',
+    'GetGroupInstancesResultContentResult',
+    'GetGroupsResultResult',
+    'GetGroupsResultContentResult',
+    'GetMicroserviceApiVersionResultResult',
     'GetMicroserviceResultResult',
     'GetMicroserviceResultContentResult',
+    'GetMsApiListResultResult',
+    'GetMsApiListResultContentResult',
+    'GetPodInstancesResultResult',
+    'GetPodInstancesResultContentResult',
+    'GetPublicConfigSummaryResultResult',
+    'GetPublicConfigSummaryResultContentResult',
+    'GetRepositoryResultResult',
+    'GetRepositoryResultContentResult',
     'GetUnitRulesResultResult',
     'GetUnitRulesResultContentResult',
     'GetUnitRulesResultContentUnitRuleItemListResult',
     'GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListResult',
+    'GetUsableUnitNamespacesResultResult',
+    'GetUsableUnitNamespacesResultContentResult',
 ]
 
 @pulumi.output_type
@@ -543,45 +601,94 @@ class ClusterOperationInfoInit(dict):
 
 
 @pulumi.output_type
-class ContainGroupEnv(dict):
+class DeployContainerGroupAgentProfileList(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "valueFroms":
-            suggest = "value_froms"
+        if key == "agentType":
+            suggest = "agent_type"
+        elif key == "agentVersion":
+            suggest = "agent_version"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupEnv. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupAgentProfileList. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupEnv.__key_warning(key)
+        DeployContainerGroupAgentProfileList.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupEnv.__key_warning(key)
+        DeployContainerGroupAgentProfileList.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 name: Optional[str] = None,
+                 agent_type: Optional[str] = None,
+                 agent_version: Optional[str] = None):
+        """
+        :param str agent_type: Agent type.
+        :param str agent_version: Agent version.
+        """
+        if agent_type is not None:
+            pulumi.set(__self__, "agent_type", agent_type)
+        if agent_version is not None:
+            pulumi.set(__self__, "agent_version", agent_version)
+
+    @property
+    @pulumi.getter(name="agentType")
+    def agent_type(self) -> Optional[str]:
+        """
+        Agent type.
+        """
+        return pulumi.get(self, "agent_type")
+
+    @property
+    @pulumi.getter(name="agentVersion")
+    def agent_version(self) -> Optional[str]:
+        """
+        Agent version.
+        """
+        return pulumi.get(self, "agent_version")
+
+
+@pulumi.output_type
+class DeployContainerGroupEnv(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "valueFrom":
+            suggest = "value_from"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupEnv. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployContainerGroupEnv.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployContainerGroupEnv.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
                  value: Optional[str] = None,
-                 value_froms: Optional[Sequence['outputs.ContainGroupEnvValueFrom']] = None):
+                 value_from: Optional['outputs.DeployContainerGroupEnvValueFrom'] = None):
         """
-        :param str name: environment variable name.
-        :param str value: environment variable value.
-        :param Sequence['ContainGroupEnvValueFromArgs'] value_froms: k8s ValueFrom.
+        :param str name: env param name.
+        :param str value: value of env.
+        :param 'DeployContainerGroupEnvValueFromArgs' value_from: Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if name is not None:
-            pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "name", name)
         if value is not None:
             pulumi.set(__self__, "value", value)
-        if value_froms is not None:
-            pulumi.set(__self__, "value_froms", value_froms)
+        if value_from is not None:
+            pulumi.set(__self__, "value_from", value_from)
 
     @property
     @pulumi.getter
-    def name(self) -> Optional[str]:
+    def name(self) -> str:
         """
-        environment variable name.
+        env param name.
         """
         return pulumi.get(self, "name")
 
@@ -589,71 +696,71 @@ class ContainGroupEnv(dict):
     @pulumi.getter
     def value(self) -> Optional[str]:
         """
-        environment variable value.
+        value of env.
         """
         return pulumi.get(self, "value")
 
     @property
-    @pulumi.getter(name="valueFroms")
-    def value_froms(self) -> Optional[Sequence['outputs.ContainGroupEnvValueFrom']]:
+    @pulumi.getter(name="valueFrom")
+    def value_from(self) -> Optional['outputs.DeployContainerGroupEnvValueFrom']:
         """
-        k8s ValueFrom.
+        Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "value_froms")
+        return pulumi.get(self, "value_from")
 
 
 @pulumi.output_type
-class ContainGroupEnvValueFrom(dict):
+class DeployContainerGroupEnvValueFrom(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "fieldReves":
-            suggest = "field_reves"
-        elif key == "resourceFieldReves":
-            suggest = "resource_field_reves"
+        if key == "fieldRef":
+            suggest = "field_ref"
+        elif key == "resourceFieldRef":
+            suggest = "resource_field_ref"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupEnvValueFrom. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupEnvValueFrom. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupEnvValueFrom.__key_warning(key)
+        DeployContainerGroupEnvValueFrom.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupEnvValueFrom.__key_warning(key)
+        DeployContainerGroupEnvValueFrom.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 field_reves: Optional[Sequence['outputs.ContainGroupEnvValueFromFieldRef']] = None,
-                 resource_field_reves: Optional[Sequence['outputs.ContainGroupEnvValueFromResourceFieldRef']] = None):
+                 field_ref: Optional['outputs.DeployContainerGroupEnvValueFromFieldRef'] = None,
+                 resource_field_ref: Optional['outputs.DeployContainerGroupEnvValueFromResourceFieldRef'] = None):
         """
-        :param Sequence['ContainGroupEnvValueFromFieldRefArgs'] field_reves: FieldRef for k8s env.
-        :param Sequence['ContainGroupEnvValueFromResourceFieldRefArgs'] resource_field_reves: ResourceFieldRef of k8s env.
+        :param 'DeployContainerGroupEnvValueFromFieldRefArgs' field_ref: The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+        :param 'DeployContainerGroupEnvValueFromResourceFieldRefArgs' resource_field_ref: The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if field_reves is not None:
-            pulumi.set(__self__, "field_reves", field_reves)
-        if resource_field_reves is not None:
-            pulumi.set(__self__, "resource_field_reves", resource_field_reves)
+        if field_ref is not None:
+            pulumi.set(__self__, "field_ref", field_ref)
+        if resource_field_ref is not None:
+            pulumi.set(__self__, "resource_field_ref", resource_field_ref)
 
     @property
-    @pulumi.getter(name="fieldReves")
-    def field_reves(self) -> Optional[Sequence['outputs.ContainGroupEnvValueFromFieldRef']]:
+    @pulumi.getter(name="fieldRef")
+    def field_ref(self) -> Optional['outputs.DeployContainerGroupEnvValueFromFieldRef']:
         """
-        FieldRef for k8s env.
+        The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "field_reves")
+        return pulumi.get(self, "field_ref")
 
     @property
-    @pulumi.getter(name="resourceFieldReves")
-    def resource_field_reves(self) -> Optional[Sequence['outputs.ContainGroupEnvValueFromResourceFieldRef']]:
+    @pulumi.getter(name="resourceFieldRef")
+    def resource_field_ref(self) -> Optional['outputs.DeployContainerGroupEnvValueFromResourceFieldRef']:
         """
-        ResourceFieldRef of k8s env.
+        The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "resource_field_reves")
+        return pulumi.get(self, "resource_field_ref")
 
 
 @pulumi.output_type
-class ContainGroupEnvValueFromFieldRef(dict):
+class DeployContainerGroupEnvValueFromFieldRef(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -661,20 +768,20 @@ class ContainGroupEnvValueFromFieldRef(dict):
             suggest = "field_path"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupEnvValueFromFieldRef. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupEnvValueFromFieldRef. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupEnvValueFromFieldRef.__key_warning(key)
+        DeployContainerGroupEnvValueFromFieldRef.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupEnvValueFromFieldRef.__key_warning(key)
+        DeployContainerGroupEnvValueFromFieldRef.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  field_path: Optional[str] = None):
         """
-        :param str field_path: FieldPath of k8s.
+        :param str field_path: The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         if field_path is not None:
             pulumi.set(__self__, "field_path", field_path)
@@ -683,17 +790,17 @@ class ContainGroupEnvValueFromFieldRef(dict):
     @pulumi.getter(name="fieldPath")
     def field_path(self) -> Optional[str]:
         """
-        FieldPath of k8s.
+        The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "field_path")
 
 
 @pulumi.output_type
-class ContainGroupEnvValueFromResourceFieldRef(dict):
+class DeployContainerGroupEnvValueFromResourceFieldRef(dict):
     def __init__(__self__, *,
                  resource: Optional[str] = None):
         """
-        :param str resource: Resource of k8s.
+        :param str resource: The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         if resource is not None:
             pulumi.set(__self__, "resource", resource)
@@ -702,63 +809,63 @@ class ContainGroupEnvValueFromResourceFieldRef(dict):
     @pulumi.getter
     def resource(self) -> Optional[str]:
         """
-        Resource of k8s.
+        The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "resource")
 
 
 @pulumi.output_type
-class ContainGroupHealthCheckSetting(dict):
+class DeployContainerGroupHealthCheckSettings(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "livenessProbes":
-            suggest = "liveness_probes"
-        elif key == "readinessProbes":
-            suggest = "readiness_probes"
+        if key == "livenessProbe":
+            suggest = "liveness_probe"
+        elif key == "readinessProbe":
+            suggest = "readiness_probe"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupHealthCheckSetting. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupHealthCheckSettings. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupHealthCheckSetting.__key_warning(key)
+        DeployContainerGroupHealthCheckSettings.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupHealthCheckSetting.__key_warning(key)
+        DeployContainerGroupHealthCheckSettings.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 liveness_probes: Optional[Sequence['outputs.ContainGroupHealthCheckSettingLivenessProbe']] = None,
-                 readiness_probes: Optional[Sequence['outputs.ContainGroupHealthCheckSettingReadinessProbe']] = None):
+                 liveness_probe: Optional['outputs.DeployContainerGroupHealthCheckSettingsLivenessProbe'] = None,
+                 readiness_probe: Optional['outputs.DeployContainerGroupHealthCheckSettingsReadinessProbe'] = None):
         """
-        :param Sequence['ContainGroupHealthCheckSettingLivenessProbeArgs'] liveness_probes: live health check.
-        :param Sequence['ContainGroupHealthCheckSettingReadinessProbeArgs'] readiness_probes: readiness health check.
+        :param 'DeployContainerGroupHealthCheckSettingsLivenessProbeArgs' liveness_probe: Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+        :param 'DeployContainerGroupHealthCheckSettingsReadinessProbeArgs' readiness_probe: Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if liveness_probes is not None:
-            pulumi.set(__self__, "liveness_probes", liveness_probes)
-        if readiness_probes is not None:
-            pulumi.set(__self__, "readiness_probes", readiness_probes)
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
 
     @property
-    @pulumi.getter(name="livenessProbes")
-    def liveness_probes(self) -> Optional[Sequence['outputs.ContainGroupHealthCheckSettingLivenessProbe']]:
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional['outputs.DeployContainerGroupHealthCheckSettingsLivenessProbe']:
         """
-        live health check.
+        Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "liveness_probes")
+        return pulumi.get(self, "liveness_probe")
 
     @property
-    @pulumi.getter(name="readinessProbes")
-    def readiness_probes(self) -> Optional[Sequence['outputs.ContainGroupHealthCheckSettingReadinessProbe']]:
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional['outputs.DeployContainerGroupHealthCheckSettingsReadinessProbe']:
         """
-        readiness health check.
+        Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "readiness_probes")
+        return pulumi.get(self, "readiness_probe")
 
 
 @pulumi.output_type
-class ContainGroupHealthCheckSettingLivenessProbe(dict):
+class DeployContainerGroupHealthCheckSettingsLivenessProbe(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -776,18 +883,18 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
             suggest = "timeout_seconds"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupHealthCheckSettingLivenessProbe. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupHealthCheckSettingsLivenessProbe. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupHealthCheckSettingLivenessProbe.__key_warning(key)
+        DeployContainerGroupHealthCheckSettingsLivenessProbe.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupHealthCheckSettingLivenessProbe.__key_warning(key)
+        DeployContainerGroupHealthCheckSettingsLivenessProbe.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 action_type: Optional[str] = None,
+                 action_type: str,
                  commands: Optional[Sequence[str]] = None,
                  failure_threshold: Optional[int] = None,
                  initial_delay_seconds: Optional[int] = None,
@@ -799,20 +906,19 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
                  timeout_seconds: Optional[int] = None,
                  type: Optional[str] = None):
         """
-        :param str action_type: health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-        :param Sequence[str] commands: Execute command check mode, the command to execute.
-        :param int failure_threshold: Indicates the number of consecutive health check successes for the backend container from success to failure.
-        :param int initial_delay_seconds: The time for the container to delay starting the health check.
-        :param str path: The request path of the HTTP health check interface.
-        :param int period_seconds: The interval at which health checks are performed.
-        :param int port: service port.
-        :param str scheme: The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-        :param int success_threshold: Indicates the number of consecutive health check successes for the backend container from failure to success.
-        :param int timeout_seconds: The maximum timeout for each health check response.
-        :param str type: TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        :param str action_type: The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] commands: The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int initial_delay_seconds: The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if action_type is not None:
-            pulumi.set(__self__, "action_type", action_type)
+        pulumi.set(__self__, "action_type", action_type)
         if commands is not None:
             pulumi.set(__self__, "commands", commands)
         if failure_threshold is not None:
@@ -836,9 +942,9 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
 
     @property
     @pulumi.getter(name="actionType")
-    def action_type(self) -> Optional[str]:
+    def action_type(self) -> str:
         """
-        health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+        The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "action_type")
 
@@ -846,7 +952,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter
     def commands(self) -> Optional[Sequence[str]]:
         """
-        Execute command check mode, the command to execute.
+        The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "commands")
 
@@ -854,7 +960,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[int]:
         """
-        Indicates the number of consecutive health check successes for the backend container from success to failure.
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "failure_threshold")
 
@@ -862,7 +968,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter(name="initialDelaySeconds")
     def initial_delay_seconds(self) -> Optional[int]:
         """
-        The time for the container to delay starting the health check.
+        The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "initial_delay_seconds")
 
@@ -870,7 +976,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter
     def path(self) -> Optional[str]:
         """
-        The request path of the HTTP health check interface.
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "path")
 
@@ -878,7 +984,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[int]:
         """
-        The interval at which health checks are performed.
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "period_seconds")
 
@@ -886,7 +992,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter
     def port(self) -> Optional[int]:
         """
-        service port.
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "port")
 
@@ -894,7 +1000,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter
     def scheme(self) -> Optional[str]:
         """
-        The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "scheme")
 
@@ -902,7 +1008,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[int]:
         """
-        Indicates the number of consecutive health check successes for the backend container from failure to success.
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "success_threshold")
 
@@ -910,7 +1016,7 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[int]:
         """
-        The maximum timeout for each health check response.
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "timeout_seconds")
 
@@ -918,13 +1024,13 @@ class ContainGroupHealthCheckSettingLivenessProbe(dict):
     @pulumi.getter
     def type(self) -> Optional[str]:
         """
-        TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class ContainGroupHealthCheckSettingReadinessProbe(dict):
+class DeployContainerGroupHealthCheckSettingsReadinessProbe(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -942,18 +1048,18 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
             suggest = "timeout_seconds"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupHealthCheckSettingReadinessProbe. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupHealthCheckSettingsReadinessProbe. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupHealthCheckSettingReadinessProbe.__key_warning(key)
+        DeployContainerGroupHealthCheckSettingsReadinessProbe.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupHealthCheckSettingReadinessProbe.__key_warning(key)
+        DeployContainerGroupHealthCheckSettingsReadinessProbe.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 action_type: Optional[str] = None,
+                 action_type: str,
                  commands: Optional[Sequence[str]] = None,
                  failure_threshold: Optional[int] = None,
                  initial_delay_seconds: Optional[int] = None,
@@ -965,20 +1071,19 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
                  timeout_seconds: Optional[int] = None,
                  type: Optional[str] = None):
         """
-        :param str action_type: health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-        :param Sequence[str] commands: Execute command check mode, the command to execute.
-        :param int failure_threshold: Indicates the number of consecutive health check successes for the backend container from success to failure.
-        :param int initial_delay_seconds: The time for the container to delay starting the health check.
-        :param str path: The request path of the HTTP health check interface.
-        :param int period_seconds: The interval at which health checks are performed.
-        :param int port: service port.
-        :param str scheme: The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-        :param int success_threshold: Indicates the number of consecutive health check successes for the backend container from failure to success.
-        :param int timeout_seconds: The maximum timeout for each health check response.
-        :param str type: TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        :param str action_type: The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] commands: The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int initial_delay_seconds: The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if action_type is not None:
-            pulumi.set(__self__, "action_type", action_type)
+        pulumi.set(__self__, "action_type", action_type)
         if commands is not None:
             pulumi.set(__self__, "commands", commands)
         if failure_threshold is not None:
@@ -1002,9 +1107,9 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
 
     @property
     @pulumi.getter(name="actionType")
-    def action_type(self) -> Optional[str]:
+    def action_type(self) -> str:
         """
-        health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+        The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "action_type")
 
@@ -1012,7 +1117,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter
     def commands(self) -> Optional[Sequence[str]]:
         """
-        Execute command check mode, the command to execute.
+        The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "commands")
 
@@ -1020,7 +1125,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[int]:
         """
-        Indicates the number of consecutive health check successes for the backend container from success to failure.
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "failure_threshold")
 
@@ -1028,7 +1133,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter(name="initialDelaySeconds")
     def initial_delay_seconds(self) -> Optional[int]:
         """
-        The time for the container to delay starting the health check.
+        The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "initial_delay_seconds")
 
@@ -1036,7 +1141,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter
     def path(self) -> Optional[str]:
         """
-        The request path of the HTTP health check interface.
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "path")
 
@@ -1044,7 +1149,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[int]:
         """
-        The interval at which health checks are performed.
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "period_seconds")
 
@@ -1052,7 +1157,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter
     def port(self) -> Optional[int]:
         """
-        service port.
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "port")
 
@@ -1060,7 +1165,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter
     def scheme(self) -> Optional[str]:
         """
-        The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "scheme")
 
@@ -1068,7 +1173,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[int]:
         """
-        Indicates the number of consecutive health check successes for the backend container from failure to success.
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "success_threshold")
 
@@ -1076,7 +1181,7 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[int]:
         """
-        The maximum timeout for each health check response.
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "timeout_seconds")
 
@@ -1084,13 +1189,162 @@ class ContainGroupHealthCheckSettingReadinessProbe(dict):
     @pulumi.getter
     def type(self) -> Optional[str]:
         """
-        TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class ContainGroupProtocolPort(dict):
+class DeployContainerGroupSchedulingStrategy(dict):
+    def __init__(__self__, *,
+                 type: str):
+        """
+        :param str type: NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class DeployContainerGroupServiceSetting(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessType":
+            suggest = "access_type"
+        elif key == "protocolPorts":
+            suggest = "protocol_ports"
+        elif key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "allowDeleteService":
+            suggest = "allow_delete_service"
+        elif key == "disableService":
+            suggest = "disable_service"
+        elif key == "headlessService":
+            suggest = "headless_service"
+        elif key == "openSessionAffinity":
+            suggest = "open_session_affinity"
+        elif key == "sessionAffinityTimeoutSeconds":
+            suggest = "session_affinity_timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupServiceSetting. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployContainerGroupServiceSetting.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployContainerGroupServiceSetting.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 access_type: int,
+                 protocol_ports: Sequence['outputs.DeployContainerGroupServiceSettingProtocolPort'],
+                 subnet_id: str,
+                 allow_delete_service: Optional[bool] = None,
+                 disable_service: Optional[bool] = None,
+                 headless_service: Optional[bool] = None,
+                 open_session_affinity: Optional[bool] = None,
+                 session_affinity_timeout_seconds: Optional[int] = None):
+        """
+        :param int access_type: 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['DeployContainerGroupServiceSettingProtocolPortArgs'] protocol_ports: Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str subnet_id: subnet Id.
+        :param bool allow_delete_service: When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool disable_service: Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool headless_service: Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+        :param bool open_session_affinity: Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int session_affinity_timeout_seconds: Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "access_type", access_type)
+        pulumi.set(__self__, "protocol_ports", protocol_ports)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if allow_delete_service is not None:
+            pulumi.set(__self__, "allow_delete_service", allow_delete_service)
+        if disable_service is not None:
+            pulumi.set(__self__, "disable_service", disable_service)
+        if headless_service is not None:
+            pulumi.set(__self__, "headless_service", headless_service)
+        if open_session_affinity is not None:
+            pulumi.set(__self__, "open_session_affinity", open_session_affinity)
+        if session_affinity_timeout_seconds is not None:
+            pulumi.set(__self__, "session_affinity_timeout_seconds", session_affinity_timeout_seconds)
+
+    @property
+    @pulumi.getter(name="accessType")
+    def access_type(self) -> int:
+        """
+        0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "access_type")
+
+    @property
+    @pulumi.getter(name="protocolPorts")
+    def protocol_ports(self) -> Sequence['outputs.DeployContainerGroupServiceSettingProtocolPort']:
+        """
+        Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "protocol_ports")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet Id.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="allowDeleteService")
+    def allow_delete_service(self) -> Optional[bool]:
+        """
+        When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "allow_delete_service")
+
+    @property
+    @pulumi.getter(name="disableService")
+    def disable_service(self) -> Optional[bool]:
+        """
+        Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "disable_service")
+
+    @property
+    @pulumi.getter(name="headlessService")
+    def headless_service(self) -> Optional[bool]:
+        """
+        Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "headless_service")
+
+    @property
+    @pulumi.getter(name="openSessionAffinity")
+    def open_session_affinity(self) -> Optional[bool]:
+        """
+        Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "open_session_affinity")
+
+    @property
+    @pulumi.getter(name="sessionAffinityTimeoutSeconds")
+    def session_affinity_timeout_seconds(self) -> Optional[int]:
+        """
+        Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "session_affinity_timeout_seconds")
+
+
+@pulumi.output_type
+class DeployContainerGroupServiceSettingProtocolPort(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -1100,14 +1354,14 @@ class ContainGroupProtocolPort(dict):
             suggest = "node_port"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ContainGroupProtocolPort. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupServiceSettingProtocolPort. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ContainGroupProtocolPort.__key_warning(key)
+        DeployContainerGroupServiceSettingProtocolPort.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ContainGroupProtocolPort.__key_warning(key)
+        DeployContainerGroupServiceSettingProtocolPort.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -1116,10 +1370,10 @@ class ContainGroupProtocolPort(dict):
                  target_port: int,
                  node_port: Optional[int] = None):
         """
-        :param int port: service port.
-        :param str protocol: TCP UDP.
+        :param int port: port.
+        :param str protocol: TCP or UDP.
         :param int target_port: container port.
-        :param int node_port: host port.
+        :param int node_port: node port.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "protocol", protocol)
@@ -1131,7 +1385,7 @@ class ContainGroupProtocolPort(dict):
     @pulumi.getter
     def port(self) -> int:
         """
-        service port.
+        port.
         """
         return pulumi.get(self, "port")
 
@@ -1139,7 +1393,7 @@ class ContainGroupProtocolPort(dict):
     @pulumi.getter
     def protocol(self) -> str:
         """
-        TCP UDP.
+        TCP or UDP.
         """
         return pulumi.get(self, "protocol")
 
@@ -1155,9 +1409,725 @@ class ContainGroupProtocolPort(dict):
     @pulumi.getter(name="nodePort")
     def node_port(self) -> Optional[int]:
         """
-        host port.
+        node port.
         """
         return pulumi.get(self, "node_port")
+
+
+@pulumi.output_type
+class DeployContainerGroupVolumeInfoList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "volumeName":
+            suggest = "volume_name"
+        elif key == "volumeType":
+            suggest = "volume_type"
+        elif key == "volumeConfig":
+            suggest = "volume_config"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupVolumeInfoList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployContainerGroupVolumeInfoList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployContainerGroupVolumeInfoList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 volume_name: str,
+                 volume_type: str,
+                 volume_config: Optional[str] = None):
+        """
+        :param str volume_name: volume name.
+        :param str volume_type: volume type.
+        :param str volume_config: volume config.
+        """
+        pulumi.set(__self__, "volume_name", volume_name)
+        pulumi.set(__self__, "volume_type", volume_type)
+        if volume_config is not None:
+            pulumi.set(__self__, "volume_config", volume_config)
+
+    @property
+    @pulumi.getter(name="volumeName")
+    def volume_name(self) -> str:
+        """
+        volume name.
+        """
+        return pulumi.get(self, "volume_name")
+
+    @property
+    @pulumi.getter(name="volumeType")
+    def volume_type(self) -> str:
+        """
+        volume type.
+        """
+        return pulumi.get(self, "volume_type")
+
+    @property
+    @pulumi.getter(name="volumeConfig")
+    def volume_config(self) -> Optional[str]:
+        """
+        volume config.
+        """
+        return pulumi.get(self, "volume_config")
+
+
+@pulumi.output_type
+class DeployContainerGroupVolumeMountInfoList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "volumeMountName":
+            suggest = "volume_mount_name"
+        elif key == "volumeMountPath":
+            suggest = "volume_mount_path"
+        elif key == "readOrWrite":
+            suggest = "read_or_write"
+        elif key == "volumeMountSubPath":
+            suggest = "volume_mount_sub_path"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupVolumeMountInfoList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployContainerGroupVolumeMountInfoList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployContainerGroupVolumeMountInfoList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 volume_mount_name: str,
+                 volume_mount_path: str,
+                 read_or_write: Optional[str] = None,
+                 volume_mount_sub_path: Optional[str] = None):
+        """
+        :param str volume_mount_name: mount volume name.
+        :param str volume_mount_path: mount path.
+        :param str read_or_write: Read and write access mode. 1: Read-only. 2: Read-write.
+        :param str volume_mount_sub_path: mount subPath.
+        """
+        pulumi.set(__self__, "volume_mount_name", volume_mount_name)
+        pulumi.set(__self__, "volume_mount_path", volume_mount_path)
+        if read_or_write is not None:
+            pulumi.set(__self__, "read_or_write", read_or_write)
+        if volume_mount_sub_path is not None:
+            pulumi.set(__self__, "volume_mount_sub_path", volume_mount_sub_path)
+
+    @property
+    @pulumi.getter(name="volumeMountName")
+    def volume_mount_name(self) -> str:
+        """
+        mount volume name.
+        """
+        return pulumi.get(self, "volume_mount_name")
+
+    @property
+    @pulumi.getter(name="volumeMountPath")
+    def volume_mount_path(self) -> str:
+        """
+        mount path.
+        """
+        return pulumi.get(self, "volume_mount_path")
+
+    @property
+    @pulumi.getter(name="readOrWrite")
+    def read_or_write(self) -> Optional[str]:
+        """
+        Read and write access mode. 1: Read-only. 2: Read-write.
+        """
+        return pulumi.get(self, "read_or_write")
+
+    @property
+    @pulumi.getter(name="volumeMountSubPath")
+    def volume_mount_sub_path(self) -> Optional[str]:
+        """
+        mount subPath.
+        """
+        return pulumi.get(self, "volume_mount_sub_path")
+
+
+@pulumi.output_type
+class DeployContainerGroupWarmupSetting(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "enabledProtection":
+            suggest = "enabled_protection"
+        elif key == "warmupTime":
+            suggest = "warmup_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployContainerGroupWarmupSetting. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployContainerGroupWarmupSetting.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployContainerGroupWarmupSetting.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 curvature: Optional[int] = None,
+                 enabled: Optional[bool] = None,
+                 enabled_protection: Optional[bool] = None,
+                 warmup_time: Optional[int] = None):
+        """
+        :param int curvature: Preheating curvature, with a value between 1 and 5.
+        :param bool enabled: Whether to enable preheating.
+        :param bool enabled_protection: Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        :param int warmup_time: warmup time.
+        """
+        if curvature is not None:
+            pulumi.set(__self__, "curvature", curvature)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if enabled_protection is not None:
+            pulumi.set(__self__, "enabled_protection", enabled_protection)
+        if warmup_time is not None:
+            pulumi.set(__self__, "warmup_time", warmup_time)
+
+    @property
+    @pulumi.getter
+    def curvature(self) -> Optional[int]:
+        """
+        Preheating curvature, with a value between 1 and 5.
+        """
+        return pulumi.get(self, "curvature")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        """
+        Whether to enable preheating.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="enabledProtection")
+    def enabled_protection(self) -> Optional[bool]:
+        """
+        Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        """
+        return pulumi.get(self, "enabled_protection")
+
+    @property
+    @pulumi.getter(name="warmupTime")
+    def warmup_time(self) -> Optional[int]:
+        """
+        warmup time.
+        """
+        return pulumi.get(self, "warmup_time")
+
+
+@pulumi.output_type
+class DeployVmGroupAgentProfileList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "agentType":
+            suggest = "agent_type"
+        elif key == "agentVersion":
+            suggest = "agent_version"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployVmGroupAgentProfileList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployVmGroupAgentProfileList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployVmGroupAgentProfileList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 agent_type: Optional[str] = None,
+                 agent_version: Optional[str] = None):
+        """
+        :param str agent_type: Agent type.
+        :param str agent_version: Agent version.
+        """
+        if agent_type is not None:
+            pulumi.set(__self__, "agent_type", agent_type)
+        if agent_version is not None:
+            pulumi.set(__self__, "agent_version", agent_version)
+
+    @property
+    @pulumi.getter(name="agentType")
+    def agent_type(self) -> Optional[str]:
+        """
+        Agent type.
+        """
+        return pulumi.get(self, "agent_type")
+
+    @property
+    @pulumi.getter(name="agentVersion")
+    def agent_version(self) -> Optional[str]:
+        """
+        Agent version.
+        """
+        return pulumi.get(self, "agent_version")
+
+
+@pulumi.output_type
+class DeployVmGroupHealthCheckSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "livenessProbe":
+            suggest = "liveness_probe"
+        elif key == "readinessProbe":
+            suggest = "readiness_probe"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployVmGroupHealthCheckSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployVmGroupHealthCheckSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployVmGroupHealthCheckSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 liveness_probe: Optional['outputs.DeployVmGroupHealthCheckSettingsLivenessProbe'] = None,
+                 readiness_probe: Optional['outputs.DeployVmGroupHealthCheckSettingsReadinessProbe'] = None):
+        """
+        :param 'DeployVmGroupHealthCheckSettingsLivenessProbeArgs' liveness_probe: Survival health check. Note: This field may return null, indicating that no valid value was found.
+        :param 'DeployVmGroupHealthCheckSettingsReadinessProbeArgs' readiness_probe: Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional['outputs.DeployVmGroupHealthCheckSettingsLivenessProbe']:
+        """
+        Survival health check. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional['outputs.DeployVmGroupHealthCheckSettingsReadinessProbe']:
+        """
+        Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+
+@pulumi.output_type
+class DeployVmGroupHealthCheckSettingsLivenessProbe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "actionType":
+            suggest = "action_type"
+        elif key == "failureThreshold":
+            suggest = "failure_threshold"
+        elif key == "initialDelaySeconds":
+            suggest = "initial_delay_seconds"
+        elif key == "periodSeconds":
+            suggest = "period_seconds"
+        elif key == "successThreshold":
+            suggest = "success_threshold"
+        elif key == "timeoutSeconds":
+            suggest = "timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployVmGroupHealthCheckSettingsLivenessProbe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployVmGroupHealthCheckSettingsLivenessProbe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployVmGroupHealthCheckSettingsLivenessProbe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action_type: str,
+                 commands: Optional[Sequence[str]] = None,
+                 failure_threshold: Optional[int] = None,
+                 initial_delay_seconds: Optional[int] = None,
+                 path: Optional[str] = None,
+                 period_seconds: Optional[int] = None,
+                 port: Optional[int] = None,
+                 scheme: Optional[str] = None,
+                 success_threshold: Optional[int] = None,
+                 timeout_seconds: Optional[int] = None,
+                 type: Optional[str] = None):
+        """
+        :param str action_type: Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+        :param Sequence[str] commands: The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int initial_delay_seconds: The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "action_type", action_type)
+        if commands is not None:
+            pulumi.set(__self__, "commands", commands)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="actionType")
+    def action_type(self) -> str:
+        """
+        Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "action_type")
+
+    @property
+    @pulumi.getter
+    def commands(self) -> Optional[Sequence[str]]:
+        """
+        The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "commands")
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[int]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[int]:
+        """
+        The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[str]:
+        """
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[int]:
+        """
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[str]:
+        """
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[int]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[int]:
+        """
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class DeployVmGroupHealthCheckSettingsReadinessProbe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "actionType":
+            suggest = "action_type"
+        elif key == "failureThreshold":
+            suggest = "failure_threshold"
+        elif key == "initialDelaySeconds":
+            suggest = "initial_delay_seconds"
+        elif key == "periodSeconds":
+            suggest = "period_seconds"
+        elif key == "successThreshold":
+            suggest = "success_threshold"
+        elif key == "timeoutSeconds":
+            suggest = "timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployVmGroupHealthCheckSettingsReadinessProbe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployVmGroupHealthCheckSettingsReadinessProbe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployVmGroupHealthCheckSettingsReadinessProbe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action_type: str,
+                 commands: Optional[Sequence[str]] = None,
+                 failure_threshold: Optional[int] = None,
+                 initial_delay_seconds: Optional[int] = None,
+                 path: Optional[str] = None,
+                 period_seconds: Optional[int] = None,
+                 port: Optional[int] = None,
+                 scheme: Optional[str] = None,
+                 success_threshold: Optional[int] = None,
+                 timeout_seconds: Optional[int] = None,
+                 type: Optional[str] = None):
+        """
+        :param str action_type: The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] commands: The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int initial_delay_seconds: The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "action_type", action_type)
+        if commands is not None:
+            pulumi.set(__self__, "commands", commands)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="actionType")
+    def action_type(self) -> str:
+        """
+        The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "action_type")
+
+    @property
+    @pulumi.getter
+    def commands(self) -> Optional[Sequence[str]]:
+        """
+        The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "commands")
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[int]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[int]:
+        """
+        The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[str]:
+        """
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[int]:
+        """
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[str]:
+        """
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[int]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[int]:
+        """
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class DeployVmGroupWarmupSetting(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "enabledProtection":
+            suggest = "enabled_protection"
+        elif key == "warmupTime":
+            suggest = "warmup_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeployVmGroupWarmupSetting. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeployVmGroupWarmupSetting.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeployVmGroupWarmupSetting.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 curvature: Optional[int] = None,
+                 enabled: Optional[bool] = None,
+                 enabled_protection: Optional[bool] = None,
+                 warmup_time: Optional[int] = None):
+        """
+        :param int curvature: Preheating curvature, with a value between 1 and 5.
+        :param bool enabled: Whether to enable preheating.
+        :param bool enabled_protection: Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        :param int warmup_time: warmup time.
+        """
+        if curvature is not None:
+            pulumi.set(__self__, "curvature", curvature)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if enabled_protection is not None:
+            pulumi.set(__self__, "enabled_protection", enabled_protection)
+        if warmup_time is not None:
+            pulumi.set(__self__, "warmup_time", warmup_time)
+
+    @property
+    @pulumi.getter
+    def curvature(self) -> Optional[int]:
+        """
+        Preheating curvature, with a value between 1 and 5.
+        """
+        return pulumi.get(self, "curvature")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        """
+        Whether to enable preheating.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="enabledProtection")
+    def enabled_protection(self) -> Optional[bool]:
+        """
+        Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        """
+        return pulumi.get(self, "enabled_protection")
+
+    @property
+    @pulumi.getter(name="warmupTime")
+    def warmup_time(self) -> Optional[int]:
+        """
+        warmup time.
+        """
+        return pulumi.get(self, "warmup_time")
 
 
 @pulumi.output_type
@@ -1892,6 +2862,630 @@ class UnitRuleUnitRuleItemListUnitRuleTagList(dict):
         Unitization rule item ID.
         """
         return pulumi.get(self, "unit_rule_item_id")
+
+
+@pulumi.output_type
+class GetApiDetailResultResult(dict):
+    def __init__(__self__, *,
+                 can_run: bool,
+                 definitions: Sequence['outputs.GetApiDetailResultDefinitionResult'],
+                 description: str,
+                 request_content_type: str,
+                 requests: Sequence['outputs.GetApiDetailResultRequestResult'],
+                 responses: Sequence['outputs.GetApiDetailResultResponseResult'],
+                 status: int):
+        """
+        :param bool can_run: can debug or not.
+        :param Sequence['GetApiDetailResultDefinitionArgs'] definitions: api data struct.
+        :param str description: param description.
+        :param str request_content_type: api content type.
+        :param Sequence['GetApiDetailResultRequestArgs'] requests: api request description.
+        :param Sequence['GetApiDetailResultResponseArgs'] responses: api response.
+        :param int status: API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "can_run", can_run)
+        pulumi.set(__self__, "definitions", definitions)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "request_content_type", request_content_type)
+        pulumi.set(__self__, "requests", requests)
+        pulumi.set(__self__, "responses", responses)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="canRun")
+    def can_run(self) -> bool:
+        """
+        can debug or not.
+        """
+        return pulumi.get(self, "can_run")
+
+    @property
+    @pulumi.getter
+    def definitions(self) -> Sequence['outputs.GetApiDetailResultDefinitionResult']:
+        """
+        api data struct.
+        """
+        return pulumi.get(self, "definitions")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="requestContentType")
+    def request_content_type(self) -> str:
+        """
+        api content type.
+        """
+        return pulumi.get(self, "request_content_type")
+
+    @property
+    @pulumi.getter
+    def requests(self) -> Sequence['outputs.GetApiDetailResultRequestResult']:
+        """
+        api request description.
+        """
+        return pulumi.get(self, "requests")
+
+    @property
+    @pulumi.getter
+    def responses(self) -> Sequence['outputs.GetApiDetailResultResponseResult']:
+        """
+        api response.
+        """
+        return pulumi.get(self, "responses")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        API status 0: offline 1: online, default 0. Note: This section may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetApiDetailResultDefinitionResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 properties: Sequence['outputs.GetApiDetailResultDefinitionPropertyResult']):
+        """
+        :param str name: param description.
+        :param Sequence['GetApiDetailResultDefinitionPropertyArgs'] properties: object property list.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "properties", properties)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def properties(self) -> Sequence['outputs.GetApiDetailResultDefinitionPropertyResult']:
+        """
+        object property list.
+        """
+        return pulumi.get(self, "properties")
+
+
+@pulumi.output_type
+class GetApiDetailResultDefinitionPropertyResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 name: str,
+                 type: str):
+        """
+        :param str description: param description.
+        :param str name: param description.
+        :param str type: param type.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        param type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetApiDetailResultRequestResult(dict):
+    def __init__(__self__, *,
+                 default_value: str,
+                 description: str,
+                 in_: str,
+                 name: str,
+                 required: bool,
+                 type: str):
+        """
+        :param str default_value: default value.
+        :param str description: param description.
+        :param str in_: param position.
+        :param str name: param description.
+        :param bool required: require or not.
+        :param str type: param type.
+        """
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "in_", in_)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "required", required)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="in")
+    def in_(self) -> str:
+        """
+        param position.
+        """
+        return pulumi.get(self, "in_")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def required(self) -> bool:
+        """
+        require or not.
+        """
+        return pulumi.get(self, "required")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        param type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetApiDetailResultResponseResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 name: str,
+                 type: str):
+        """
+        :param str description: param description.
+        :param str name: param description.
+        :param str type: param type.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        param description.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        param type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetApiGroupResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetApiGroupResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetApiGroupResultContentArgs'] contents: Api group info.
+        :param int total_count: record count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetApiGroupResultContentResult']:
+        """
+        Api group info.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        record count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetApiGroupResultContentResult(dict):
+    def __init__(__self__, *,
+                 acl_mode: str,
+                 api_count: int,
+                 auth_type: str,
+                 binded_gateway_deploy_groups: Sequence['outputs.GetApiGroupResultContentBindedGatewayDeployGroupResult'],
+                 created_time: str,
+                 description: str,
+                 gateway_instance_id: str,
+                 gateway_instance_type: str,
+                 group_context: str,
+                 group_id: str,
+                 group_name: str,
+                 group_type: str,
+                 namespace_name_key: str,
+                 namespace_name_key_position: str,
+                 service_name_key: str,
+                 service_name_key_position: str,
+                 status: str,
+                 updated_time: str):
+        """
+        :param str acl_mode: Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int api_count: api count.
+        :param str auth_type: Authentication type. secret: Secret key authentication; none: No authentication.
+        :param Sequence['GetApiGroupResultContentBindedGatewayDeployGroupArgs'] binded_gateway_deploy_groups: The gateway group bind with the api group list.
+        :param str created_time: Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str description: Description.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str gateway_instance_id: Gateway Instance Id.
+        :param str gateway_instance_type: Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_context: Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_id: Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_name: Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_type: Group type. ms: Microservice group; external: External API group.
+        :param str namespace_name_key: Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str namespace_name_key_position: Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str service_name_key: Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str service_name_key_position: Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str status: Publishing status. drafted: Not published. released: Published.
+        :param str updated_time: Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "acl_mode", acl_mode)
+        pulumi.set(__self__, "api_count", api_count)
+        pulumi.set(__self__, "auth_type", auth_type)
+        pulumi.set(__self__, "binded_gateway_deploy_groups", binded_gateway_deploy_groups)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "gateway_instance_id", gateway_instance_id)
+        pulumi.set(__self__, "gateway_instance_type", gateway_instance_type)
+        pulumi.set(__self__, "group_context", group_context)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "group_type", group_type)
+        pulumi.set(__self__, "namespace_name_key", namespace_name_key)
+        pulumi.set(__self__, "namespace_name_key_position", namespace_name_key_position)
+        pulumi.set(__self__, "service_name_key", service_name_key)
+        pulumi.set(__self__, "service_name_key_position", service_name_key_position)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "updated_time", updated_time)
+
+    @property
+    @pulumi.getter(name="aclMode")
+    def acl_mode(self) -> str:
+        """
+        Number of APIs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "acl_mode")
+
+    @property
+    @pulumi.getter(name="apiCount")
+    def api_count(self) -> int:
+        """
+        api count.
+        """
+        return pulumi.get(self, "api_count")
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> str:
+        """
+        Authentication type. secret: Secret key authentication; none: No authentication.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @property
+    @pulumi.getter(name="bindedGatewayDeployGroups")
+    def binded_gateway_deploy_groups(self) -> Sequence['outputs.GetApiGroupResultContentBindedGatewayDeployGroupResult']:
+        """
+        The gateway group bind with the api group list.
+        """
+        return pulumi.get(self, "binded_gateway_deploy_groups")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Group creation time.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceId")
+    def gateway_instance_id(self) -> str:
+        """
+        Gateway Instance Id.
+        """
+        return pulumi.get(self, "gateway_instance_id")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceType")
+    def gateway_instance_type(self) -> str:
+        """
+        Gateway Instance Type.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "gateway_instance_type")
+
+    @property
+    @pulumi.getter(name="groupContext")
+    def group_context(self) -> str:
+        """
+        Api Group Context.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_context")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Api Group Id.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Api Group Name.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="groupType")
+    def group_type(self) -> str:
+        """
+        Group type. ms: Microservice group; external: External API group.
+        """
+        return pulumi.get(self, "group_type")
+
+    @property
+    @pulumi.getter(name="namespaceNameKey")
+    def namespace_name_key(self) -> str:
+        """
+        Namespace name key.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_name_key")
+
+    @property
+    @pulumi.getter(name="namespaceNameKeyPosition")
+    def namespace_name_key_position(self) -> str:
+        """
+        Namespace parameter location, path, header, or query, default is path. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_name_key_position")
+
+    @property
+    @pulumi.getter(name="serviceNameKey")
+    def service_name_key(self) -> str:
+        """
+        Key value of microservice name parameter.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "service_name_key")
+
+    @property
+    @pulumi.getter(name="serviceNameKeyPosition")
+    def service_name_key_position(self) -> str:
+        """
+        Microservice name parameter location, path, header, or query, default is path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "service_name_key_position")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Publishing status. drafted: Not published. released: Published.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> str:
+        """
+        Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "updated_time")
+
+
+@pulumi.output_type
+class GetApiGroupResultContentBindedGatewayDeployGroupResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 application_type: str,
+                 cluster_type: str,
+                 deploy_group_id: str,
+                 deploy_group_name: str,
+                 group_status: str):
+        """
+        :param str application_id: Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str application_name: Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str application_type: Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_type: Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str deploy_group_id: Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str deploy_group_name: Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_status: Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "application_type", application_type)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "deploy_group_id", deploy_group_id)
+        pulumi.set(__self__, "deploy_group_name", deploy_group_name)
+        pulumi.set(__self__, "group_status", group_status)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="applicationType")
+    def application_type(self) -> str:
+        """
+        Application Name.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_type")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster type, C: container, V: virtual machine.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="deployGroupId")
+    def deploy_group_id(self) -> str:
+        """
+        Gateway deployment group bound to the API group.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "deploy_group_id")
+
+    @property
+    @pulumi.getter(name="deployGroupName")
+    def deploy_group_name(self) -> str:
+        """
+        Deploy group name.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "deploy_group_name")
+
+    @property
+    @pulumi.getter(name="groupStatus")
+    def group_status(self) -> str:
+        """
+        Application category: V: virtual machine application, C: container application. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_status")
+
+
+@pulumi.output_type
+class GetApplicationAttributeResultResult(dict):
+    def __init__(__self__, *,
+                 group_count: int,
+                 instance_count: int,
+                 run_instance_count: int):
+        """
+        :param int group_count: Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int instance_count: Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int run_instance_count: Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "group_count", group_count)
+        pulumi.set(__self__, "instance_count", instance_count)
+        pulumi.set(__self__, "run_instance_count", run_instance_count)
+
+    @property
+    @pulumi.getter(name="groupCount")
+    def group_count(self) -> int:
+        """
+        Number of deployment groups under the application.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_count")
+
+    @property
+    @pulumi.getter(name="instanceCount")
+    def instance_count(self) -> int:
+        """
+        Total number of instances.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "instance_count")
+
+    @property
+    @pulumi.getter(name="runInstanceCount")
+    def run_instance_count(self) -> int:
+        """
+        Number of running instances.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "run_instance_count")
 
 
 @pulumi.output_type
@@ -2720,6 +4314,353 @@ class GetApplicationResultContentServiceConfigListPortResult(dict):
 
 
 @pulumi.output_type
+class GetBusinessLogConfigsResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetBusinessLogConfigsResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetBusinessLogConfigsResultContentArgs'] contents: Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int total_count: Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetBusinessLogConfigsResultContentResult']:
+        """
+        Log configuration item list. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total Count.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetBusinessLogConfigsResultContentResult(dict):
+    def __init__(__self__, *,
+                 config_associated_groups: Sequence['outputs.GetBusinessLogConfigsResultContentConfigAssociatedGroupResult'],
+                 config_create_time: str,
+                 config_desc: str,
+                 config_id: str,
+                 config_name: str,
+                 config_path: str,
+                 config_pipeline: str,
+                 config_schemas: Sequence['outputs.GetBusinessLogConfigsResultContentConfigSchemaResult'],
+                 config_tags: str,
+                 config_update_time: str):
+        """
+        :param Sequence['GetBusinessLogConfigsResultContentConfigAssociatedGroupArgs'] config_associated_groups: the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_create_time: Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_desc: Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_id: ConfigId.
+        :param str config_name: ConfigName.
+        :param str config_path: Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_pipeline: Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetBusinessLogConfigsResultContentConfigSchemaArgs'] config_schemas: ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_tags: configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str config_update_time: Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "config_associated_groups", config_associated_groups)
+        pulumi.set(__self__, "config_create_time", config_create_time)
+        pulumi.set(__self__, "config_desc", config_desc)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_path", config_path)
+        pulumi.set(__self__, "config_pipeline", config_pipeline)
+        pulumi.set(__self__, "config_schemas", config_schemas)
+        pulumi.set(__self__, "config_tags", config_tags)
+        pulumi.set(__self__, "config_update_time", config_update_time)
+
+    @property
+    @pulumi.getter(name="configAssociatedGroups")
+    def config_associated_groups(self) -> Sequence['outputs.GetBusinessLogConfigsResultContentConfigAssociatedGroupResult']:
+        """
+        the associate group of Config.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_associated_groups")
+
+    @property
+    @pulumi.getter(name="configCreateTime")
+    def config_create_time(self) -> str:
+        """
+        Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_create_time")
+
+    @property
+    @pulumi.getter(name="configDesc")
+    def config_desc(self) -> str:
+        """
+        Description of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_desc")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        ConfigId.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        ConfigName.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configPath")
+    def config_path(self) -> str:
+        """
+        Log path of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_path")
+
+    @property
+    @pulumi.getter(name="configPipeline")
+    def config_pipeline(self) -> str:
+        """
+        Pipeline of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_pipeline")
+
+    @property
+    @pulumi.getter(name="configSchemas")
+    def config_schemas(self) -> Sequence['outputs.GetBusinessLogConfigsResultContentConfigSchemaResult']:
+        """
+        ParserSchema of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_schemas")
+
+    @property
+    @pulumi.getter(name="configTags")
+    def config_tags(self) -> str:
+        """
+        configuration Tag.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_tags")
+
+    @property
+    @pulumi.getter(name="configUpdateTime")
+    def config_update_time(self) -> str:
+        """
+        Update time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "config_update_time")
+
+
+@pulumi.output_type
+class GetBusinessLogConfigsResultContentConfigAssociatedGroupResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 application_type: str,
+                 associated_time: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_type: str,
+                 group_id: str,
+                 group_name: str,
+                 namespace_id: str,
+                 namespace_name: str):
+        """
+        :param str application_id: Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str application_name: Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str application_type: Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str associated_time: Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_id: Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_name: Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_type: Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_id: Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str group_name: Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str namespace_id: Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str namespace_name: Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "application_type", application_type)
+        pulumi.set(__self__, "associated_time", associated_time)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application Id of Group. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application Name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="applicationType")
+    def application_type(self) -> str:
+        """
+        Application Type. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "application_type")
+
+    @property
+    @pulumi.getter(name="associatedTime")
+    def associated_time(self) -> str:
+        """
+        Time when the deployment group is associated with the log configuration.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "associated_time")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster type to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Group Id. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group Name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Namespace ID to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Namespace Name to which the deployment group belongs.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_name")
+
+
+@pulumi.output_type
+class GetBusinessLogConfigsResultContentConfigSchemaResult(dict):
+    def __init__(__self__, *,
+                 schema_content: str,
+                 schema_create_time: str,
+                 schema_date_format: str,
+                 schema_multiline_pattern: str,
+                 schema_pattern_layout: str,
+                 schema_type: int):
+        """
+        :param str schema_content: content of schema.
+        :param str schema_create_time: Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str schema_date_format: Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str schema_multiline_pattern: Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str schema_pattern_layout: User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int schema_type: Schema type.
+        """
+        pulumi.set(__self__, "schema_content", schema_content)
+        pulumi.set(__self__, "schema_create_time", schema_create_time)
+        pulumi.set(__self__, "schema_date_format", schema_date_format)
+        pulumi.set(__self__, "schema_multiline_pattern", schema_multiline_pattern)
+        pulumi.set(__self__, "schema_pattern_layout", schema_pattern_layout)
+        pulumi.set(__self__, "schema_type", schema_type)
+
+    @property
+    @pulumi.getter(name="schemaContent")
+    def schema_content(self) -> str:
+        """
+        content of schema.
+        """
+        return pulumi.get(self, "schema_content")
+
+    @property
+    @pulumi.getter(name="schemaCreateTime")
+    def schema_create_time(self) -> str:
+        """
+        Create time of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "schema_create_time")
+
+    @property
+    @pulumi.getter(name="schemaDateFormat")
+    def schema_date_format(self) -> str:
+        """
+        Schema format.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "schema_date_format")
+
+    @property
+    @pulumi.getter(name="schemaMultilinePattern")
+    def schema_multiline_pattern(self) -> str:
+        """
+        Schema pattern of configuration item.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "schema_multiline_pattern")
+
+    @property
+    @pulumi.getter(name="schemaPatternLayout")
+    def schema_pattern_layout(self) -> str:
+        """
+        User-defined parsing rules.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "schema_pattern_layout")
+
+    @property
+    @pulumi.getter(name="schemaType")
+    def schema_type(self) -> int:
+        """
+        Schema type.
+        """
+        return pulumi.get(self, "schema_type")
+
+
+@pulumi.output_type
 class GetClusterResultResult(dict):
     def __init__(__self__, *,
                  contents: Sequence['outputs.GetClusterResultContentResult'],
@@ -3224,6 +5165,2550 @@ class GetClusterResultContentOperationInfoInitResult(dict):
 
 
 @pulumi.output_type
+class GetConfigSummaryResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetConfigSummaryResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetConfigSummaryResultContentArgs'] contents: config list.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetConfigSummaryResultContentResult']:
+        """
+        config list.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetConfigSummaryResultContentResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 config_id: str,
+                 config_name: str,
+                 config_type: str,
+                 config_value: str,
+                 config_version: str,
+                 config_version_count: int,
+                 config_version_desc: str,
+                 creation_time: str,
+                 delete_flag: bool,
+                 last_update_time: str):
+        """
+        :param str application_id: Application ID. If not passed, the query will be for all.
+        :param str application_name: Application Name. Note: This field may return null, indicating that no valid value was found.
+        :param str config_id: Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+        :param str config_name: Configuration name.Note: This field may return null, indicating that no valid value was found.
+        :param str config_type: Config type. Note: This field may return null, indicating that no valid value was found.
+        :param str config_value: Configuration value.Note: This field may return null, indicating that no valid value was found.
+        :param str config_version: Configuration version. Note: This field may return null, indicating that no valid value was found.
+        :param int config_version_count: Configure version count.Note: This field may return null, indicating that no valid value was found.
+        :param str config_version_desc: Configuration version description.Note: This field may return null, indicating that no valid value was found.
+        :param str creation_time: Create time.Note: This field may return null, indicating that no valid value was found.
+        :param bool delete_flag: Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+        :param str last_update_time: Last update time.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_type", config_type)
+        pulumi.set(__self__, "config_value", config_value)
+        pulumi.set(__self__, "config_version", config_version)
+        pulumi.set(__self__, "config_version_count", config_version_count)
+        pulumi.set(__self__, "config_version_desc", config_version_desc)
+        pulumi.set(__self__, "creation_time", creation_time)
+        pulumi.set(__self__, "delete_flag", delete_flag)
+        pulumi.set(__self__, "last_update_time", last_update_time)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application ID. If not passed, the query will be for all.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application Name. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Configuration name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configType")
+    def config_type(self) -> str:
+        """
+        Config type. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_type")
+
+    @property
+    @pulumi.getter(name="configValue")
+    def config_value(self) -> str:
+        """
+        Configuration value.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_value")
+
+    @property
+    @pulumi.getter(name="configVersion")
+    def config_version(self) -> str:
+        """
+        Configuration version. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version")
+
+    @property
+    @pulumi.getter(name="configVersionCount")
+    def config_version_count(self) -> int:
+        """
+        Configure version count.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version_count")
+
+    @property
+    @pulumi.getter(name="configVersionDesc")
+    def config_version_desc(self) -> str:
+        """
+        Configuration version description.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version_desc")
+
+    @property
+    @pulumi.getter(name="creationTime")
+    def creation_time(self) -> str:
+        """
+        Create time.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "creation_time")
+
+    @property
+    @pulumi.getter(name="deleteFlag")
+    def delete_flag(self) -> bool:
+        """
+        Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "delete_flag")
+
+    @property
+    @pulumi.getter(name="lastUpdateTime")
+    def last_update_time(self) -> str:
+        """
+        Last update time.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "last_update_time")
+
+
+@pulumi.output_type
+class GetContainerGroupResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetContainerGroupResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetContainerGroupResultContentArgs'] contents: List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+        :param int total_count: Total count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetContainerGroupResultContentResult']:
+        """
+        List of deployment groups.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetContainerGroupResultContentResult(dict):
+    def __init__(__self__, *,
+                 alias: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cpu_limit: str,
+                 cpu_request: str,
+                 create_time: str,
+                 group_id: str,
+                 group_name: str,
+                 kube_inject_enable: bool,
+                 mem_limit: str,
+                 mem_request: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 repo_name: str,
+                 server: str,
+                 tag_name: str,
+                 updated_time: str):
+        """
+        :param str alias: The Group description.Note: This field may return null, indicating that no valid value was found.
+        :param str cluster_id: Cluster Id.
+        :param str cluster_name: Cluster name.Note: This field may return null, indicating that no valid value was found.
+        :param str cpu_limit: The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+        :param str cpu_request: The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+        :param str create_time: Create time.Note: This field may return null, indicating that no valid value was found.
+        :param str group_id: Group Id.Note: This field may return null, indicating that no valid value was found.
+        :param str group_name: Group name.Note: This field may return null, indicating that no valid value was found.
+        :param bool kube_inject_enable: The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+        :param str mem_limit: The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+        :param str mem_request: The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+        :param str namespace_id: Namespace Id.
+        :param str namespace_name: Namespace name.Note: This field may return null, indicating that no valid value was found.
+        :param str repo_name: Image name.Note: This field may return null, indicating that no valid value was found.
+        :param str server: Image server.Note: This field may return null, indicating that no valid value was found.
+        :param str tag_name: Image version Name.Note: This field may return null, indicating that no valid value was found.
+        :param str updated_time: Update type.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cpu_limit", cpu_limit)
+        pulumi.set(__self__, "cpu_request", cpu_request)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "kube_inject_enable", kube_inject_enable)
+        pulumi.set(__self__, "mem_limit", mem_limit)
+        pulumi.set(__self__, "mem_request", mem_request)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "repo_name", repo_name)
+        pulumi.set(__self__, "server", server)
+        pulumi.set(__self__, "tag_name", tag_name)
+        pulumi.set(__self__, "updated_time", updated_time)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        The Group description.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster Id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="cpuLimit")
+    def cpu_limit(self) -> str:
+        """
+        The maximum amount of CPU, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "cpu_limit")
+
+    @property
+    @pulumi.getter(name="cpuRequest")
+    def cpu_request(self) -> str:
+        """
+        The initial amount of CPU, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "cpu_request")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Group Id.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="kubeInjectEnable")
+    def kube_inject_enable(self) -> bool:
+        """
+        The value of KubeInjectEnable.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "kube_inject_enable")
+
+    @property
+    @pulumi.getter(name="memLimit")
+    def mem_limit(self) -> str:
+        """
+        The maximum amount of memory allocated in MiB, corresponding to K8S limit.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "mem_limit")
+
+    @property
+    @pulumi.getter(name="memRequest")
+    def mem_request(self) -> str:
+        """
+        The initial amount of memory allocated in MiB, corresponding to K8S request.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "mem_request")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Namespace Id.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Namespace name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="repoName")
+    def repo_name(self) -> str:
+        """
+        Image name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "repo_name")
+
+    @property
+    @pulumi.getter
+    def server(self) -> str:
+        """
+        Image server.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "server")
+
+    @property
+    @pulumi.getter(name="tagName")
+    def tag_name(self) -> str:
+        """
+        Image version Name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "tag_name")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> str:
+        """
+        Update type.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "updated_time")
+
+
+@pulumi.output_type
+class GetDeliveryConfigByGroupIdResultResult(dict):
+    def __init__(__self__, *,
+                 config_id: str,
+                 config_name: str):
+        """
+        :param str config_id: Config ID. Note: This field may return null, which means that no valid value was obtained.
+        :param str config_name: Config Name. Note: This field may return null, which means that no valid value was obtained.
+        """
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Config ID. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Config Name. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "config_name")
+
+
+@pulumi.output_type
+class GetDeliveryConfigsResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetDeliveryConfigsResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetDeliveryConfigsResultContentArgs'] contents: content. Note: This field may return null, which means that no valid value was obtained.
+        :param int total_count: total count. Note: This field may return null, which means that no valid value was obtained.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetDeliveryConfigsResultContentResult']:
+        """
+        content. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetDeliveryConfigsResultContentResult(dict):
+    def __init__(__self__, *,
+                 collect_paths: Sequence[str],
+                 config_id: str,
+                 config_name: str,
+                 create_time: str,
+                 custom_rule: str,
+                 enable_auth: bool,
+                 enable_global_line_rule: bool,
+                 groups: Sequence['outputs.GetDeliveryConfigsResultContentGroupResult'],
+                 kafka_address: str,
+                 kafka_infos: Sequence['outputs.GetDeliveryConfigsResultContentKafkaInfoResult'],
+                 kafka_v_ip: str,
+                 kafka_v_port: str,
+                 line_rule: str,
+                 password: str,
+                 topic: str,
+                 username: str):
+        """
+        :param Sequence[str] collect_paths: harvest log path. Note: This field may return null, which means that no valid value was obtained.
+        :param str config_id: config id.
+        :param str config_name: config name.
+        :param str create_time: Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str custom_rule: Custom Line Rule.
+        :param bool enable_auth: whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+        :param bool enable_global_line_rule: Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+        :param Sequence['GetDeliveryConfigsResultContentGroupArgs'] groups: Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str kafka_address: KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+        :param Sequence['GetDeliveryConfigsResultContentKafkaInfoArgs'] kafka_infos: Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+        :param str kafka_v_ip: Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+        :param str kafka_v_port: Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+        :param str line_rule: Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+        :param str password: Password. Note: This field may return null, which means that no valid value was obtained.
+        :param str topic: Topic. Note: This field may return null, which means that no valid value was obtained.
+        :param str username: user Name. Note: This field may return null, which means that no valid value was obtained.
+        """
+        pulumi.set(__self__, "collect_paths", collect_paths)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "custom_rule", custom_rule)
+        pulumi.set(__self__, "enable_auth", enable_auth)
+        pulumi.set(__self__, "enable_global_line_rule", enable_global_line_rule)
+        pulumi.set(__self__, "groups", groups)
+        pulumi.set(__self__, "kafka_address", kafka_address)
+        pulumi.set(__self__, "kafka_infos", kafka_infos)
+        pulumi.set(__self__, "kafka_v_ip", kafka_v_ip)
+        pulumi.set(__self__, "kafka_v_port", kafka_v_port)
+        pulumi.set(__self__, "line_rule", line_rule)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "topic", topic)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter(name="collectPaths")
+    def collect_paths(self) -> Sequence[str]:
+        """
+        harvest log path. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "collect_paths")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        config id.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        config name.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="customRule")
+    def custom_rule(self) -> str:
+        """
+        Custom Line Rule.
+        """
+        return pulumi.get(self, "custom_rule")
+
+    @property
+    @pulumi.getter(name="enableAuth")
+    def enable_auth(self) -> bool:
+        """
+        whether use auth for kafka. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "enable_auth")
+
+    @property
+    @pulumi.getter(name="enableGlobalLineRule")
+    def enable_global_line_rule(self) -> bool:
+        """
+        Indicates whether a single row rule should be applied.Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "enable_global_line_rule")
+
+    @property
+    @pulumi.getter
+    def groups(self) -> Sequence['outputs.GetDeliveryConfigsResultContentGroupResult']:
+        """
+        Associated deployment group information.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "groups")
+
+    @property
+    @pulumi.getter(name="kafkaAddress")
+    def kafka_address(self) -> str:
+        """
+        KafkaAddress refers to the address of a Kafka server.Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "kafka_address")
+
+    @property
+    @pulumi.getter(name="kafkaInfos")
+    def kafka_infos(self) -> Sequence['outputs.GetDeliveryConfigsResultContentKafkaInfoResult']:
+        """
+        Kafka Infos. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "kafka_infos")
+
+    @property
+    @pulumi.getter(name="kafkaVIp")
+    def kafka_v_ip(self) -> str:
+        """
+        Kafka VIP. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "kafka_v_ip")
+
+    @property
+    @pulumi.getter(name="kafkaVPort")
+    def kafka_v_port(self) -> str:
+        """
+        Kafka VPort. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "kafka_v_port")
+
+    @property
+    @pulumi.getter(name="lineRule")
+    def line_rule(self) -> str:
+        """
+        Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "line_rule")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        """
+        Password. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def topic(self) -> str:
+        """
+        Topic. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "topic")
+
+    @property
+    @pulumi.getter
+    def username(self) -> str:
+        """
+        user Name. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class GetDeliveryConfigsResultContentGroupResult(dict):
+    def __init__(__self__, *,
+                 associate_time: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_type: str,
+                 group_id: str,
+                 group_name: str,
+                 namespace_name: str):
+        """
+        :param str associate_time: Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_id: Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_name: Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str cluster_type: Cluster type.
+        :param str group_id: Group Id.
+        :param str group_name: Group Name.
+        :param str namespace_name: Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "associate_time", associate_time)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+
+    @property
+    @pulumi.getter(name="associateTime")
+    def associate_time(self) -> str:
+        """
+        Associate Time. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "associate_time")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster Name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster type.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group Name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Namespace Name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_name")
+
+
+@pulumi.output_type
+class GetDeliveryConfigsResultContentKafkaInfoResult(dict):
+    def __init__(__self__, *,
+                 custom_rule: str,
+                 line_rule: str,
+                 paths: Sequence[str],
+                 topic: str):
+        """
+        :param str custom_rule: Custom Line Rule.
+        :param str line_rule: Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+        :param Sequence[str] paths: harvest log path. Note: This field may return null, which means that no valid value was obtained.
+        :param str topic: Topic. Note: This field may return null, which means that no valid value was obtained.
+        """
+        pulumi.set(__self__, "custom_rule", custom_rule)
+        pulumi.set(__self__, "line_rule", line_rule)
+        pulumi.set(__self__, "paths", paths)
+        pulumi.set(__self__, "topic", topic)
+
+    @property
+    @pulumi.getter(name="customRule")
+    def custom_rule(self) -> str:
+        """
+        Custom Line Rule.
+        """
+        return pulumi.get(self, "custom_rule")
+
+    @property
+    @pulumi.getter(name="lineRule")
+    def line_rule(self) -> str:
+        """
+        Line Rule for log. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "line_rule")
+
+    @property
+    @pulumi.getter
+    def paths(self) -> Sequence[str]:
+        """
+        harvest log path. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "paths")
+
+    @property
+    @pulumi.getter
+    def topic(self) -> str:
+        """
+        Topic. Note: This field may return null, which means that no valid value was obtained.
+        """
+        return pulumi.get(self, "topic")
+
+
+@pulumi.output_type
+class GetGatewayAllGroupApisResultResult(dict):
+    def __init__(__self__, *,
+                 gateway_deploy_group_id: str,
+                 gateway_deploy_group_name: str,
+                 group_num: int,
+                 groups: Sequence['outputs.GetGatewayAllGroupApisResultGroupResult']):
+        """
+        :param str gateway_deploy_group_id: gateway group Id.
+        :param str gateway_deploy_group_name: Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+        :param int group_num: Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+        :param Sequence['GetGatewayAllGroupApisResultGroupArgs'] groups: Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "gateway_deploy_group_id", gateway_deploy_group_id)
+        pulumi.set(__self__, "gateway_deploy_group_name", gateway_deploy_group_name)
+        pulumi.set(__self__, "group_num", group_num)
+        pulumi.set(__self__, "groups", groups)
+
+    @property
+    @pulumi.getter(name="gatewayDeployGroupId")
+    def gateway_deploy_group_id(self) -> str:
+        """
+        gateway group Id.
+        """
+        return pulumi.get(self, "gateway_deploy_group_id")
+
+    @property
+    @pulumi.getter(name="gatewayDeployGroupName")
+    def gateway_deploy_group_name(self) -> str:
+        """
+        Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "gateway_deploy_group_name")
+
+    @property
+    @pulumi.getter(name="groupNum")
+    def group_num(self) -> int:
+        """
+        Gateway deployment api group number.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_num")
+
+    @property
+    @pulumi.getter
+    def groups(self) -> Sequence['outputs.GetGatewayAllGroupApisResultGroupResult']:
+        """
+        Gateway deployment  api group list.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "groups")
+
+
+@pulumi.output_type
+class GetGatewayAllGroupApisResultGroupResult(dict):
+    def __init__(__self__, *,
+                 gateway_instance_id: str,
+                 gateway_instance_type: str,
+                 group_api_count: int,
+                 group_apis: Sequence['outputs.GetGatewayAllGroupApisResultGroupGroupApiResult'],
+                 group_id: str,
+                 group_name: str):
+        """
+        :param str gateway_instance_id: gateway instance id.Note: This field may return null, which means no valid value was found.
+        :param str gateway_instance_type: Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+        :param int group_api_count: Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+        :param Sequence['GetGatewayAllGroupApisResultGroupGroupApiArgs'] group_apis: List of APIs under the group.Note: This field may return null, which means no valid value was found.
+        :param str group_id: api group id.Note: This field may return null, which means no valid value was found.
+        :param str group_name: api group name.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "gateway_instance_id", gateway_instance_id)
+        pulumi.set(__self__, "gateway_instance_type", gateway_instance_type)
+        pulumi.set(__self__, "group_api_count", group_api_count)
+        pulumi.set(__self__, "group_apis", group_apis)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+
+    @property
+    @pulumi.getter(name="gatewayInstanceId")
+    def gateway_instance_id(self) -> str:
+        """
+        gateway instance id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "gateway_instance_id")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceType")
+    def gateway_instance_type(self) -> str:
+        """
+        Type of the gateway instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "gateway_instance_type")
+
+    @property
+    @pulumi.getter(name="groupApiCount")
+    def group_api_count(self) -> int:
+        """
+        Number of APIs under the group. Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_api_count")
+
+    @property
+    @pulumi.getter(name="groupApis")
+    def group_apis(self) -> Sequence['outputs.GetGatewayAllGroupApisResultGroupGroupApiResult']:
+        """
+        List of APIs under the group.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_apis")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        api group id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        api group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+
+@pulumi.output_type
+class GetGatewayAllGroupApisResultGroupGroupApiResult(dict):
+    def __init__(__self__, *,
+                 api_id: str,
+                 method: str,
+                 microservice_name: str,
+                 namespace_name: str,
+                 path: str):
+        """
+        :param str api_id: API ID.
+        :param str method: API method.
+        :param str microservice_name: API service name.
+        :param str namespace_name: namespace name.
+        :param str path: API path.
+        """
+        pulumi.set(__self__, "api_id", api_id)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "microservice_name", microservice_name)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter(name="apiId")
+    def api_id(self) -> str:
+        """
+        API ID.
+        """
+        return pulumi.get(self, "api_id")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        API method.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter(name="microserviceName")
+    def microservice_name(self) -> str:
+        """
+        API service name.
+        """
+        return pulumi.get(self, "microservice_name")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        namespace name.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        API path.
+        """
+        return pulumi.get(self, "path")
+
+
+@pulumi.output_type
+class GetGroupConfigReleaseResultResult(dict):
+    def __init__(__self__, *,
+                 config_release_lists: Sequence['outputs.GetGroupConfigReleaseResultConfigReleaseListResult'],
+                 file_config_release_lists: Sequence['outputs.GetGroupConfigReleaseResultFileConfigReleaseListResult'],
+                 package_id: str,
+                 package_name: str,
+                 package_version: str,
+                 public_config_release_lists: Sequence['outputs.GetGroupConfigReleaseResultPublicConfigReleaseListResult'],
+                 repo_name: str,
+                 tag_name: str):
+        """
+        :param Sequence['GetGroupConfigReleaseResultConfigReleaseListArgs'] config_release_lists: Configuration item release list.Note: This field may return null, which means no valid value was found.
+        :param Sequence['GetGroupConfigReleaseResultFileConfigReleaseListArgs'] file_config_release_lists: File configuration item release list.Note: This field may return null, which means no valid value was found.
+        :param str package_id: Package Id.Note: This field may return null, which means no valid value was found.
+        :param str package_name: Package name.Note: This field may return null, which means no valid value was found.
+        :param str package_version: Package version.Note: This field may return null, which means no valid value was found.
+        :param Sequence['GetGroupConfigReleaseResultPublicConfigReleaseListArgs'] public_config_release_lists: Release public config list.
+        :param str repo_name: image name.Note: This field may return null, which means no valid value was found.
+        :param str tag_name: image tag name.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "config_release_lists", config_release_lists)
+        pulumi.set(__self__, "file_config_release_lists", file_config_release_lists)
+        pulumi.set(__self__, "package_id", package_id)
+        pulumi.set(__self__, "package_name", package_name)
+        pulumi.set(__self__, "package_version", package_version)
+        pulumi.set(__self__, "public_config_release_lists", public_config_release_lists)
+        pulumi.set(__self__, "repo_name", repo_name)
+        pulumi.set(__self__, "tag_name", tag_name)
+
+    @property
+    @pulumi.getter(name="configReleaseLists")
+    def config_release_lists(self) -> Sequence['outputs.GetGroupConfigReleaseResultConfigReleaseListResult']:
+        """
+        Configuration item release list.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_release_lists")
+
+    @property
+    @pulumi.getter(name="fileConfigReleaseLists")
+    def file_config_release_lists(self) -> Sequence['outputs.GetGroupConfigReleaseResultFileConfigReleaseListResult']:
+        """
+        File configuration item release list.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "file_config_release_lists")
+
+    @property
+    @pulumi.getter(name="packageId")
+    def package_id(self) -> str:
+        """
+        Package Id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "package_id")
+
+    @property
+    @pulumi.getter(name="packageName")
+    def package_name(self) -> str:
+        """
+        Package name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "package_name")
+
+    @property
+    @pulumi.getter(name="packageVersion")
+    def package_version(self) -> str:
+        """
+        Package version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "package_version")
+
+    @property
+    @pulumi.getter(name="publicConfigReleaseLists")
+    def public_config_release_lists(self) -> Sequence['outputs.GetGroupConfigReleaseResultPublicConfigReleaseListResult']:
+        """
+        Release public config list.
+        """
+        return pulumi.get(self, "public_config_release_lists")
+
+    @property
+    @pulumi.getter(name="repoName")
+    def repo_name(self) -> str:
+        """
+        image name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "repo_name")
+
+    @property
+    @pulumi.getter(name="tagName")
+    def tag_name(self) -> str:
+        """
+        image tag name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "tag_name")
+
+
+@pulumi.output_type
+class GetGroupConfigReleaseResultConfigReleaseListResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 config_id: str,
+                 config_name: str,
+                 config_release_id: str,
+                 config_version: str,
+                 group_id: str,
+                 group_name: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 release_desc: str,
+                 release_time: str):
+        """
+        :param str application_id: Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+        :param str cluster_id: Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        :param str cluster_name: Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        :param str config_id: Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        :param str config_name: Configuration item name.Note: This field may return null, which means no valid value was found.
+        :param str config_release_id: Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        :param str config_version: Configuration version.Note: This field may return null, which means no valid value was found.
+        :param str group_id: groupId.
+        :param str group_name: Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        :param str namespace_id: Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        :param str namespace_name: Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        :param str release_desc: Configuration item release description.Note: This field may return null, which means no valid value was found.
+        :param str release_time: Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_release_id", config_release_id)
+        pulumi.set(__self__, "config_version", config_version)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "release_desc", release_desc)
+        pulumi.set(__self__, "release_time", release_time)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Configuration item name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configReleaseId")
+    def config_release_id(self) -> str:
+        """
+        Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_release_id")
+
+    @property
+    @pulumi.getter(name="configVersion")
+    def config_version(self) -> str:
+        """
+        Configuration version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_version")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        groupId.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="releaseDesc")
+    def release_desc(self) -> str:
+        """
+        Configuration item release description.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_desc")
+
+    @property
+    @pulumi.getter(name="releaseTime")
+    def release_time(self) -> str:
+        """
+        Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_time")
+
+
+@pulumi.output_type
+class GetGroupConfigReleaseResultFileConfigReleaseListResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 config_id: str,
+                 config_name: str,
+                 config_release_id: str,
+                 config_version: str,
+                 group_id: str,
+                 group_name: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 release_desc: str,
+                 release_time: str):
+        """
+        :param str cluster_id: Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        :param str cluster_name: Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        :param str config_id: Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        :param str config_name: Configuration item name.Note: This field may return null, which means no valid value was found.
+        :param str config_release_id: Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        :param str config_version: Configuration version.Note: This field may return null, which means no valid value was found.
+        :param str group_id: groupId.
+        :param str group_name: Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        :param str namespace_id: Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        :param str namespace_name: Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        :param str release_desc: Configuration item release description.Note: This field may return null, which means no valid value was found.
+        :param str release_time: Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_release_id", config_release_id)
+        pulumi.set(__self__, "config_version", config_version)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "release_desc", release_desc)
+        pulumi.set(__self__, "release_time", release_time)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Configuration item name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configReleaseId")
+    def config_release_id(self) -> str:
+        """
+        Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_release_id")
+
+    @property
+    @pulumi.getter(name="configVersion")
+    def config_version(self) -> str:
+        """
+        Configuration version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_version")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        groupId.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="releaseDesc")
+    def release_desc(self) -> str:
+        """
+        Configuration item release description.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_desc")
+
+    @property
+    @pulumi.getter(name="releaseTime")
+    def release_time(self) -> str:
+        """
+        Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_time")
+
+
+@pulumi.output_type
+class GetGroupConfigReleaseResultPublicConfigReleaseListResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 config_id: str,
+                 config_name: str,
+                 config_release_id: str,
+                 config_version: str,
+                 group_id: str,
+                 group_name: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 release_desc: str,
+                 release_time: str):
+        """
+        :param str application_id: Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+        :param str cluster_id: Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        :param str cluster_name: Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        :param str config_id: Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        :param str config_name: Configuration item name.Note: This field may return null, which means no valid value was found.
+        :param str config_release_id: Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        :param str config_version: Configuration version.Note: This field may return null, which means no valid value was found.
+        :param str group_id: groupId.
+        :param str group_name: Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        :param str namespace_id: Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        :param str namespace_name: Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        :param str release_desc: Configuration item release description.Note: This field may return null, which means no valid value was found.
+        :param str release_time: Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_release_id", config_release_id)
+        pulumi.set(__self__, "config_version", config_version)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "release_desc", release_desc)
+        pulumi.set(__self__, "release_time", release_time)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Configuration item release application ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Configuration item release cluster ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Configuration item release cluster name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration item  ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Configuration item name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configReleaseId")
+    def config_release_id(self) -> str:
+        """
+        Configuration item release ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_release_id")
+
+    @property
+    @pulumi.getter(name="configVersion")
+    def config_version(self) -> str:
+        """
+        Configuration version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "config_version")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        groupId.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Configuration item release group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Configuration item release namespace ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Configuration item release namespace name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="releaseDesc")
+    def release_desc(self) -> str:
+        """
+        Configuration item release description.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_desc")
+
+    @property
+    @pulumi.getter(name="releaseTime")
+    def release_time(self) -> str:
+        """
+        Configuration item release time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "release_time")
+
+
+@pulumi.output_type
+class GetGroupGatewaysResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetGroupGatewaysResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetGroupGatewaysResultContentArgs'] contents: api group Info.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetGroupGatewaysResultContentResult']:
+        """
+        api group Info.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetGroupGatewaysResultContentResult(dict):
+    def __init__(__self__, *,
+                 acl_mode: str,
+                 api_count: int,
+                 auth_type: str,
+                 binded_gateway_deploy_groups: Sequence['outputs.GetGroupGatewaysResultContentBindedGatewayDeployGroupResult'],
+                 created_time: str,
+                 description: str,
+                 gateway_instance_id: str,
+                 gateway_instance_type: str,
+                 group_context: str,
+                 group_id: str,
+                 group_name: str,
+                 group_type: str,
+                 namespace_name_key: str,
+                 namespace_name_key_position: str,
+                 service_name_key: str,
+                 service_name_key_position: str,
+                 status: str,
+                 updated_time: str):
+        """
+        :param str acl_mode: ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+        :param int api_count: Number of APIs.Note: This field may return null, which means no valid value was found.
+        :param str auth_type: Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+        :param Sequence['GetGroupGatewaysResultContentBindedGatewayDeployGroupArgs'] binded_gateway_deploy_groups: Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+        :param str created_time: Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+        :param str description: Description.Note: This field may return null, which means no valid value was found.
+        :param str gateway_instance_id: Gateway instance ID.Note: This field may return null, which means no valid value was found.
+        :param str gateway_instance_type: Gateway instance type.Note: This field may return null, which means no valid value was found.
+        :param str group_context: api group context.Note: This field may return null, which means no valid value was found.
+        :param str group_id: api group id.Note: This field may return null, which means no valid value was found.
+        :param str group_name: api group name.Note: This field may return null, which means no valid value was found.
+        :param str group_type: Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+        :param str namespace_name_key: Namespace parameter key.Note: This field may return null, which means no valid value was found.
+        :param str namespace_name_key_position: Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+        :param str service_name_key: Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+        :param str service_name_key_position: Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+        :param str status: Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+        :param str updated_time: Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "acl_mode", acl_mode)
+        pulumi.set(__self__, "api_count", api_count)
+        pulumi.set(__self__, "auth_type", auth_type)
+        pulumi.set(__self__, "binded_gateway_deploy_groups", binded_gateway_deploy_groups)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "gateway_instance_id", gateway_instance_id)
+        pulumi.set(__self__, "gateway_instance_type", gateway_instance_type)
+        pulumi.set(__self__, "group_context", group_context)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "group_type", group_type)
+        pulumi.set(__self__, "namespace_name_key", namespace_name_key)
+        pulumi.set(__self__, "namespace_name_key_position", namespace_name_key_position)
+        pulumi.set(__self__, "service_name_key", service_name_key)
+        pulumi.set(__self__, "service_name_key_position", service_name_key_position)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "updated_time", updated_time)
+
+    @property
+    @pulumi.getter(name="aclMode")
+    def acl_mode(self) -> str:
+        """
+        ACL type for accessing the group.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "acl_mode")
+
+    @property
+    @pulumi.getter(name="apiCount")
+    def api_count(self) -> int:
+        """
+        Number of APIs.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "api_count")
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> str:
+        """
+        Authentication type. secret: key authentication; none: no authentication.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @property
+    @pulumi.getter(name="bindedGatewayDeployGroups")
+    def binded_gateway_deploy_groups(self) -> Sequence['outputs.GetGroupGatewaysResultContentBindedGatewayDeployGroupResult']:
+        """
+        Gateway deployment group bound to the API group.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "binded_gateway_deploy_groups")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Group creation time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceId")
+    def gateway_instance_id(self) -> str:
+        """
+        Gateway instance ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "gateway_instance_id")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceType")
+    def gateway_instance_type(self) -> str:
+        """
+        Gateway instance type.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "gateway_instance_type")
+
+    @property
+    @pulumi.getter(name="groupContext")
+    def group_context(self) -> str:
+        """
+        api group context.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_context")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        api group id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        api group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="groupType")
+    def group_type(self) -> str:
+        """
+        Group type. ms: microservice group; external: external API group.This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_type")
+
+    @property
+    @pulumi.getter(name="namespaceNameKey")
+    def namespace_name_key(self) -> str:
+        """
+        Namespace parameter key.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name_key")
+
+    @property
+    @pulumi.getter(name="namespaceNameKeyPosition")
+    def namespace_name_key_position(self) -> str:
+        """
+        Namespace parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name_key_position")
+
+    @property
+    @pulumi.getter(name="serviceNameKey")
+    def service_name_key(self) -> str:
+        """
+        Microservice name parameter key.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "service_name_key")
+
+    @property
+    @pulumi.getter(name="serviceNameKeyPosition")
+    def service_name_key_position(self) -> str:
+        """
+        Microservice name parameter location, path, header, or query. The default is path.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "service_name_key_position")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Release status. drafted: not released. released: released.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> str:
+        """
+        Group update time, such as: 2019-06-20 15:51:28.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "updated_time")
+
+
+@pulumi.output_type
+class GetGroupGatewaysResultContentBindedGatewayDeployGroupResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 application_type: str,
+                 cluster_type: str,
+                 deploy_group_id: str,
+                 deploy_group_name: str,
+                 group_status: str):
+        """
+        :param str application_id: application ID.Note: This field may return null, which means no valid value was found.
+        :param str application_name: application name.Note: This field may return null, which means no valid value was found.
+        :param str application_type: Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+        :param str cluster_type: Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+        :param str deploy_group_id: Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+        :param str deploy_group_name: Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+        :param str group_status: Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "application_type", application_type)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "deploy_group_id", deploy_group_id)
+        pulumi.set(__self__, "deploy_group_name", deploy_group_name)
+        pulumi.set(__self__, "group_status", group_status)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        application ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        application name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="applicationType")
+    def application_type(self) -> str:
+        """
+        Application category: V: virtual machine application, C: container application.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_type")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster type, with possible values: C: container, V: virtual machine.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="deployGroupId")
+    def deploy_group_id(self) -> str:
+        """
+        Gateway deployment group ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "deploy_group_id")
+
+    @property
+    @pulumi.getter(name="deployGroupName")
+    def deploy_group_name(self) -> str:
+        """
+        Gateway deployment group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "deploy_group_name")
+
+    @property
+    @pulumi.getter(name="groupStatus")
+    def group_status(self) -> str:
+        """
+        Application status of the deployment group, with possible values: Running, Waiting, Paused, Updating, RollingBack, Abnormal, Unknown.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_status")
+
+
+@pulumi.output_type
+class GetGroupInstancesResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetGroupInstancesResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetGroupInstancesResultContentArgs'] contents: List of machine instances.Note: This field may return null, which means no valid value was found.
+        :param int total_count: Total number of machine instances.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetGroupInstancesResultContentResult']:
+        """
+        List of machine instances.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total number of machine instances.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetGroupInstancesResultContentResult(dict):
+    def __init__(__self__, *,
+                 agent_version: str,
+                 application_id: str,
+                 application_name: str,
+                 application_resource_type: str,
+                 application_type: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_type: str,
+                 count_in_tsf: int,
+                 group_id: str,
+                 group_name: str,
+                 instance_available_status: str,
+                 instance_charge_type: str,
+                 instance_created_time: str,
+                 instance_desc: str,
+                 instance_expired_time: str,
+                 instance_id: str,
+                 instance_import_mode: str,
+                 instance_limit_cpu: float,
+                 instance_limit_mem: float,
+                 instance_name: str,
+                 instance_pkg_version: str,
+                 instance_status: str,
+                 instance_total_cpu: float,
+                 instance_total_mem: float,
+                 instance_used_cpu: float,
+                 instance_used_mem: float,
+                 instance_zone_id: str,
+                 lan_ip: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 node_instance_id: str,
+                 operation_state: int,
+                 reason: str,
+                 restrict_state: str,
+                 service_instance_status: str,
+                 service_sidecar_status: str,
+                 update_time: str,
+                 wan_ip: str):
+        """
+        :param str agent_version: Agent version.Note: This field may return null, which means no valid value was found.
+        :param str application_id: Application id.Note: This field may return null, which means no valid value was found.
+        :param str application_name: Application name. Note: This field may return null, which means no valid value was found.
+        :param str application_resource_type: application resource id.Note: This field may return null, which means no valid value was found.
+        :param str application_type: Application id.Note: This field may return null, which means no valid value was found.
+        :param str cluster_id: Cluster id.Note: This field may return null, which means no valid value was found.
+        :param str cluster_name: Cluster name. Note: This field may return null, which means no valid value was found.
+        :param str cluster_type: Cluster type.Note: This field may return null, which means no valid value was found.
+        :param int count_in_tsf: Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+        :param str group_id: group id.
+        :param str group_name: Group name.Note: This field may return null, which means no valid value was found.
+        :param str instance_available_status: VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+        :param str instance_charge_type: machine instance charge type.Note: This field may return null, which means no valid value was found.
+        :param str instance_created_time: Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+        :param str instance_desc: Description.Note: This field may return null, which means no valid value was found.
+        :param str instance_expired_time: Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+        :param str instance_id: Machine instance ID.Note: This field may return null, which means no valid value was found.
+        :param str instance_import_mode: InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+        :param float instance_limit_cpu: Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+        :param float instance_limit_mem: Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+        :param str instance_name: Machine name.Note: This field may return null, which means no valid value was found.
+        :param str instance_pkg_version: instance pkg version.Note: This field may return null, which means no valid value was found.
+        :param str instance_status: VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+        :param float instance_total_cpu: Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+        :param float instance_total_mem: Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+        :param float instance_used_cpu: CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+        :param float instance_used_mem: Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+        :param str instance_zone_id: Instance zone id.Note: This field may return null, which means no valid value was found.
+        :param str lan_ip: Private IP address.Note: This field may return null, which means no valid value was found.
+        :param str namespace_id: Namespace id.Note: This field may return null, which means no valid value was found.
+        :param str namespace_name: Namespace name.Note: This field may return null, which means no valid value was found.
+        :param str node_instance_id: Container host instance ID.Note: This field may return null, which means no valid value was found.
+        :param int operation_state: Execution status of the instance.Note: This field may return null, which means no valid value was found.
+        :param str reason: Health checking reason.Note: This field may return null, which means no valid value was found.
+        :param str restrict_state: Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+        :param str service_instance_status: Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+        :param str service_sidecar_status: Sidecar status.Note: This field may return null, which means no valid value was found.
+        :param str update_time: Update time.Note: This field may return null, which means no valid value was found.
+        :param str wan_ip: Public IP address.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "agent_version", agent_version)
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "application_resource_type", application_resource_type)
+        pulumi.set(__self__, "application_type", application_type)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "count_in_tsf", count_in_tsf)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "instance_available_status", instance_available_status)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_created_time", instance_created_time)
+        pulumi.set(__self__, "instance_desc", instance_desc)
+        pulumi.set(__self__, "instance_expired_time", instance_expired_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_import_mode", instance_import_mode)
+        pulumi.set(__self__, "instance_limit_cpu", instance_limit_cpu)
+        pulumi.set(__self__, "instance_limit_mem", instance_limit_mem)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_pkg_version", instance_pkg_version)
+        pulumi.set(__self__, "instance_status", instance_status)
+        pulumi.set(__self__, "instance_total_cpu", instance_total_cpu)
+        pulumi.set(__self__, "instance_total_mem", instance_total_mem)
+        pulumi.set(__self__, "instance_used_cpu", instance_used_cpu)
+        pulumi.set(__self__, "instance_used_mem", instance_used_mem)
+        pulumi.set(__self__, "instance_zone_id", instance_zone_id)
+        pulumi.set(__self__, "lan_ip", lan_ip)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "node_instance_id", node_instance_id)
+        pulumi.set(__self__, "operation_state", operation_state)
+        pulumi.set(__self__, "reason", reason)
+        pulumi.set(__self__, "restrict_state", restrict_state)
+        pulumi.set(__self__, "service_instance_status", service_instance_status)
+        pulumi.set(__self__, "service_sidecar_status", service_sidecar_status)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "wan_ip", wan_ip)
+
+    @property
+    @pulumi.getter(name="agentVersion")
+    def agent_version(self) -> str:
+        """
+        Agent version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "agent_version")
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application name. Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="applicationResourceType")
+    def application_resource_type(self) -> str:
+        """
+        application resource id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_resource_type")
+
+    @property
+    @pulumi.getter(name="applicationType")
+    def application_type(self) -> str:
+        """
+        Application id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "application_type")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name. Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster type.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="countInTsf")
+    def count_in_tsf(self) -> int:
+        """
+        Indicates whether this instance has been added to the TSF.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "count_in_tsf")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        group id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="instanceAvailableStatus")
+    def instance_available_status(self) -> str:
+        """
+        VM availability status. For virtual machines, it indicates whether the virtual machine can be used as a resource. For containers, it indicates whether the virtual machine can be used to deploy pods.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_available_status")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        machine instance charge type.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceCreatedTime")
+    def instance_created_time(self) -> str:
+        """
+        Creation time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_created_time")
+
+    @property
+    @pulumi.getter(name="instanceDesc")
+    def instance_desc(self) -> str:
+        """
+        Description.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_desc")
+
+    @property
+    @pulumi.getter(name="instanceExpiredTime")
+    def instance_expired_time(self) -> str:
+        """
+        Expire time of the machine instance in CVM.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_expired_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Machine instance ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceImportMode")
+    def instance_import_mode(self) -> str:
+        """
+        InstanceImportMode import mode.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_import_mode")
+
+    @property
+    @pulumi.getter(name="instanceLimitCpu")
+    def instance_limit_cpu(self) -> float:
+        """
+        Limit CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_limit_cpu")
+
+    @property
+    @pulumi.getter(name="instanceLimitMem")
+    def instance_limit_mem(self) -> float:
+        """
+        Limit memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_limit_mem")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Machine name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instancePkgVersion")
+    def instance_pkg_version(self) -> str:
+        """
+        instance pkg version.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_pkg_version")
+
+    @property
+    @pulumi.getter(name="instanceStatus")
+    def instance_status(self) -> str:
+        """
+        VM status. For virtual machines, it indicates the status of the virtual machine. For containers, it indicates the status of the virtual machine where the pod is located.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_status")
+
+    @property
+    @pulumi.getter(name="instanceTotalCpu")
+    def instance_total_cpu(self) -> float:
+        """
+        Total CPU information of the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_total_cpu")
+
+    @property
+    @pulumi.getter(name="instanceTotalMem")
+    def instance_total_mem(self) -> float:
+        """
+        Total memory information of the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_total_mem")
+
+    @property
+    @pulumi.getter(name="instanceUsedCpu")
+    def instance_used_cpu(self) -> float:
+        """
+        CPU information used by the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_used_cpu")
+
+    @property
+    @pulumi.getter(name="instanceUsedMem")
+    def instance_used_mem(self) -> float:
+        """
+        Memory information used by the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_used_mem")
+
+    @property
+    @pulumi.getter(name="instanceZoneId")
+    def instance_zone_id(self) -> str:
+        """
+        Instance zone id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_zone_id")
+
+    @property
+    @pulumi.getter(name="lanIp")
+    def lan_ip(self) -> str:
+        """
+        Private IP address.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "lan_ip")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        Namespace id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Namespace name.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="nodeInstanceId")
+    def node_instance_id(self) -> str:
+        """
+        Container host instance ID.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "node_instance_id")
+
+    @property
+    @pulumi.getter(name="operationState")
+    def operation_state(self) -> int:
+        """
+        Execution status of the instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "operation_state")
+
+    @property
+    @pulumi.getter
+    def reason(self) -> str:
+        """
+        Health checking reason.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "reason")
+
+    @property
+    @pulumi.getter(name="restrictState")
+    def restrict_state(self) -> str:
+        """
+        Business status of the machine instance.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "restrict_state")
+
+    @property
+    @pulumi.getter(name="serviceInstanceStatus")
+    def service_instance_status(self) -> str:
+        """
+        Status of service instances under the service. For virtual machines, it indicates whether the application is available and the agent status. For containers, it indicates the status of the pod.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "service_instance_status")
+
+    @property
+    @pulumi.getter(name="serviceSidecarStatus")
+    def service_sidecar_status(self) -> str:
+        """
+        Sidecar status.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "service_sidecar_status")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Update time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="wanIp")
+    def wan_ip(self) -> str:
+        """
+        Public IP address.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "wan_ip")
+
+
+@pulumi.output_type
+class GetGroupsResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetGroupsResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetGroupsResultContentArgs'] contents: Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+        :param int total_count: Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetGroupsResultContentResult']:
+        """
+        Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetGroupsResultContentResult(dict):
+    def __init__(__self__, *,
+                 alias: str,
+                 application_id: str,
+                 application_name: str,
+                 application_type: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 create_time: str,
+                 deploy_desc: str,
+                 group_desc: str,
+                 group_id: str,
+                 group_name: str,
+                 group_resource_type: str,
+                 microservice_type: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 startup_parameters: str,
+                 update_time: str,
+                 updated_time: int):
+        """
+        :param str alias: Group alias. Note: This field may return null, indicating that no valid value was found.
+        :param str application_id: applicationId.
+        :param str application_name: Application name. Note: This field may return null, indicating that no valid value was found.
+        :param str application_type: Application type. Note: This field may return null, indicating that no valid value was found.
+        :param str cluster_id: clusterId.
+        :param str cluster_name: Cluster name. Note: This field may return null, indicating that no valid value was found.
+        :param str create_time: Create Time. Note: This field may return null, indicating that no valid value was found.
+        :param str deploy_desc: Group description. Note: This field may return null, indicating that no valid value was found.
+        :param str group_desc: Group description. Note: This field may return null, indicating that no valid value was found.
+        :param str group_id: Group ID. Note: This field may return null, indicating that no valid value was found.
+        :param str group_name: Group ID. Note: This field may return null, indicating that no valid value was found.
+        :param str group_resource_type: Group resource type. Note: This field may return null, indicating that no valid value was found.
+        :param str microservice_type: Microservice type. Note: This field may return null, indicating that no valid value was found.
+        :param str namespace_id: namespace Id.
+        :param str namespace_name: Namespace name. Note: This field may return null, indicating that no valid value was found.
+        :param str startup_parameters: Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+        :param str update_time: Group update time. Note: This field may return null, indicating that no valid value was found.
+        :param int updated_time: Update time. Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "application_type", application_type)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "deploy_desc", deploy_desc)
+        pulumi.set(__self__, "group_desc", group_desc)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "group_resource_type", group_resource_type)
+        pulumi.set(__self__, "microservice_type", microservice_type)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "startup_parameters", startup_parameters)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "updated_time", updated_time)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        Group alias. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        applicationId.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application name. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="applicationType")
+    def application_type(self) -> str:
+        """
+        Application type. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "application_type")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        clusterId.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create Time. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="deployDesc")
+    def deploy_desc(self) -> str:
+        """
+        Group description. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "deploy_desc")
+
+    @property
+    @pulumi.getter(name="groupDesc")
+    def group_desc(self) -> str:
+        """
+        Group description. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_desc")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Group ID. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group ID. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="groupResourceType")
+    def group_resource_type(self) -> str:
+        """
+        Group resource type. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "group_resource_type")
+
+    @property
+    @pulumi.getter(name="microserviceType")
+    def microservice_type(self) -> str:
+        """
+        Microservice type. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "microservice_type")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        namespace Id.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Namespace name. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="startupParameters")
+    def startup_parameters(self) -> str:
+        """
+        Group start up Parameters. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "startup_parameters")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Group update time. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> int:
+        """
+        Update time. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "updated_time")
+
+
+@pulumi.output_type
+class GetMicroserviceApiVersionResultResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 pkg_version: str):
+        """
+        :param str application_id: Application ID.
+        :param str application_name: Application Name.
+        :param str pkg_version: application pkg version.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "pkg_version", pkg_version)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application ID.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application Name.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="pkgVersion")
+    def pkg_version(self) -> str:
+        """
+        application pkg version.
+        """
+        return pulumi.get(self, "pkg_version")
+
+
+@pulumi.output_type
 class GetMicroserviceResultResult(dict):
     def __init__(__self__, *,
                  contents: Sequence['outputs.GetMicroserviceResultContentResult'],
@@ -3345,6 +7830,579 @@ class GetMicroserviceResultContentResult(dict):
         last update time.  Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetMsApiListResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetMsApiListResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetMsApiListResultContentArgs'] contents: api list.
+        :param int total_count: Quantity.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetMsApiListResultContentResult']:
+        """
+        api list.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Quantity.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetMsApiListResultContentResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 method: str,
+                 path: str,
+                 status: int):
+        """
+        :param str description: Method description. Note: This field may return null, indicating that no valid value was found.
+        :param str method: api method.
+        :param str path: api path.
+        :param int status: API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Method description. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        api method.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        api path.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        API status. 0: offline, 1: online.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetPodInstancesResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetPodInstancesResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetPodInstancesResultContentArgs'] contents: Content list.Note: This field may return null, which means no valid value was found.
+        :param int total_count: Total number of records.Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetPodInstancesResultContentResult']:
+        """
+        Content list.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total number of records.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetPodInstancesResultContentResult(dict):
+    def __init__(__self__, *,
+                 created_at: str,
+                 instance_available_status: str,
+                 instance_status: str,
+                 ip: str,
+                 node_instance_id: str,
+                 node_ip: str,
+                 pod_id: str,
+                 pod_name: str,
+                 ready_count: int,
+                 reason: str,
+                 restart_count: int,
+                 runtime: str,
+                 service_instance_status: str,
+                 status: str):
+        """
+        :param str created_at: Instance start time.Note: This field may return null, which means no valid value was found.
+        :param str instance_available_status: Instance available status.Note: This field may return null, which means no valid value was found.
+        :param str instance_status: Instance status.Note: This field may return null, which means no valid value was found.
+        :param str ip: Instance ip.Note: This field may return null, which means no valid value was found.
+        :param str node_instance_id: Instance node id.Note: This field may return null, which means no valid value was found.
+        :param str node_ip: Instance node ip.Note: This field may return null, which means no valid value was found.
+        :param str pod_id: Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+        :param str pod_name: Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+        :param int ready_count: Instance ready count.Note: This field may return null, which means no valid value was found.
+        :param str reason: Instance reason for current status.Note: This field may return null, which means no valid value was found.
+        :param int restart_count: Instance restart count.Note: This field may return null, which means no valid value was found.
+        :param str runtime: Instance run time.Note: This field may return null, which means no valid value was found.
+        :param str service_instance_status: Instance serve status.Note: This field may return null, which means no valid value was found.
+        :param str status: Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+        """
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "instance_available_status", instance_available_status)
+        pulumi.set(__self__, "instance_status", instance_status)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "node_instance_id", node_instance_id)
+        pulumi.set(__self__, "node_ip", node_ip)
+        pulumi.set(__self__, "pod_id", pod_id)
+        pulumi.set(__self__, "pod_name", pod_name)
+        pulumi.set(__self__, "ready_count", ready_count)
+        pulumi.set(__self__, "reason", reason)
+        pulumi.set(__self__, "restart_count", restart_count)
+        pulumi.set(__self__, "runtime", runtime)
+        pulumi.set(__self__, "service_instance_status", service_instance_status)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        Instance start time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter(name="instanceAvailableStatus")
+    def instance_available_status(self) -> str:
+        """
+        Instance available status.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_available_status")
+
+    @property
+    @pulumi.getter(name="instanceStatus")
+    def instance_status(self) -> str:
+        """
+        Instance status.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "instance_status")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Instance ip.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="nodeInstanceId")
+    def node_instance_id(self) -> str:
+        """
+        Instance node id.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "node_instance_id")
+
+    @property
+    @pulumi.getter(name="nodeIp")
+    def node_ip(self) -> str:
+        """
+        Instance node ip.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "node_ip")
+
+    @property
+    @pulumi.getter(name="podId")
+    def pod_id(self) -> str:
+        """
+        Instance id (corresponding to the pod instance id in Kubernetes).Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "pod_id")
+
+    @property
+    @pulumi.getter(name="podName")
+    def pod_name(self) -> str:
+        """
+        Instance name (corresponding to the pod name in Kubernetes).Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "pod_name")
+
+    @property
+    @pulumi.getter(name="readyCount")
+    def ready_count(self) -> int:
+        """
+        Instance ready count.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "ready_count")
+
+    @property
+    @pulumi.getter
+    def reason(self) -> str:
+        """
+        Instance reason for current status.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "reason")
+
+    @property
+    @pulumi.getter(name="restartCount")
+    def restart_count(self) -> int:
+        """
+        Instance restart count.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "restart_count")
+
+    @property
+    @pulumi.getter
+    def runtime(self) -> str:
+        """
+        Instance run time.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "runtime")
+
+    @property
+    @pulumi.getter(name="serviceInstanceStatus")
+    def service_instance_status(self) -> str:
+        """
+        Instance serve status.Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "service_instance_status")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Instance status. Please refer to the definition of instance and container status below. Starting (pod not ready): Starting; Running: Running; Abnormal: Abnormal; Stopped: Stopped;Note: This field may return null, which means no valid value was found.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetPublicConfigSummaryResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetPublicConfigSummaryResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetPublicConfigSummaryResultContentArgs'] contents: config list.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetPublicConfigSummaryResultContentResult']:
+        """
+        config list.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetPublicConfigSummaryResultContentResult(dict):
+    def __init__(__self__, *,
+                 application_id: str,
+                 application_name: str,
+                 config_id: str,
+                 config_name: str,
+                 config_type: str,
+                 config_value: str,
+                 config_version: str,
+                 config_version_count: int,
+                 config_version_desc: str,
+                 creation_time: str,
+                 delete_flag: bool,
+                 last_update_time: str):
+        """
+        :param str application_id: Application ID.Note: This field may return null, indicating that no valid value was found.
+        :param str application_name: Application Name. Note: This field may return null, indicating that no valid value was found.
+        :param str config_id: Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+        :param str config_name: Configuration name.Note: This field may return null, indicating that no valid value was found.
+        :param str config_type: Config type. Note: This field may return null, indicating that no valid value was found.
+        :param str config_value: Configuration value.Note: This field may return null, indicating that no valid value was found.
+        :param str config_version: Configuration version. Note: This field may return null, indicating that no valid value was found.
+        :param int config_version_count: Configure version count.Note: This field may return null, indicating that no valid value was found.
+        :param str config_version_desc: Configuration version description.Note: This field may return null, indicating that no valid value was found.
+        :param str creation_time: Create time.Note: This field may return null, indicating that no valid value was found.
+        :param bool delete_flag: Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+        :param str last_update_time: Last update time.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "application_id", application_id)
+        pulumi.set(__self__, "application_name", application_name)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "config_name", config_name)
+        pulumi.set(__self__, "config_type", config_type)
+        pulumi.set(__self__, "config_value", config_value)
+        pulumi.set(__self__, "config_version", config_version)
+        pulumi.set(__self__, "config_version_count", config_version_count)
+        pulumi.set(__self__, "config_version_desc", config_version_desc)
+        pulumi.set(__self__, "creation_time", creation_time)
+        pulumi.set(__self__, "delete_flag", delete_flag)
+        pulumi.set(__self__, "last_update_time", last_update_time)
+
+    @property
+    @pulumi.getter(name="applicationId")
+    def application_id(self) -> str:
+        """
+        Application ID.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "application_id")
+
+    @property
+    @pulumi.getter(name="applicationName")
+    def application_name(self) -> str:
+        """
+        Application Name. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "application_name")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration item ID.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="configName")
+    def config_name(self) -> str:
+        """
+        Configuration name.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_name")
+
+    @property
+    @pulumi.getter(name="configType")
+    def config_type(self) -> str:
+        """
+        Config type. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_type")
+
+    @property
+    @pulumi.getter(name="configValue")
+    def config_value(self) -> str:
+        """
+        Configuration value.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_value")
+
+    @property
+    @pulumi.getter(name="configVersion")
+    def config_version(self) -> str:
+        """
+        Configuration version. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version")
+
+    @property
+    @pulumi.getter(name="configVersionCount")
+    def config_version_count(self) -> int:
+        """
+        Configure version count.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version_count")
+
+    @property
+    @pulumi.getter(name="configVersionDesc")
+    def config_version_desc(self) -> str:
+        """
+        Configuration version description.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "config_version_desc")
+
+    @property
+    @pulumi.getter(name="creationTime")
+    def creation_time(self) -> str:
+        """
+        Create time.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "creation_time")
+
+    @property
+    @pulumi.getter(name="deleteFlag")
+    def delete_flag(self) -> bool:
+        """
+        Deletion flag, true: deletable; false: not deletable.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "delete_flag")
+
+    @property
+    @pulumi.getter(name="lastUpdateTime")
+    def last_update_time(self) -> str:
+        """
+        Last update time.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "last_update_time")
+
+
+@pulumi.output_type
+class GetRepositoryResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetRepositoryResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetRepositoryResultContentArgs'] contents: Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int total_count: Total Repository.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetRepositoryResultContentResult']:
+        """
+        Repository information list. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total Repository.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetRepositoryResultContentResult(dict):
+    def __init__(__self__, *,
+                 bucket_name: str,
+                 bucket_region: str,
+                 create_time: str,
+                 directory: str,
+                 is_used: bool,
+                 repository_desc: str,
+                 repository_id: str,
+                 repository_name: str,
+                 repository_type: str):
+        """
+        :param str bucket_name: Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str bucket_region: Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str create_time: CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str directory: Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+        :param bool is_used: Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str repository_desc: Repository description (default warehouse: default, private warehouse: private).
+        :param str repository_id: repository Id.
+        :param str repository_name: Repository Name.
+        :param str repository_type: Repository type (default Repository: default, private Repository: private).
+        """
+        pulumi.set(__self__, "bucket_name", bucket_name)
+        pulumi.set(__self__, "bucket_region", bucket_region)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "directory", directory)
+        pulumi.set(__self__, "is_used", is_used)
+        pulumi.set(__self__, "repository_desc", repository_desc)
+        pulumi.set(__self__, "repository_id", repository_id)
+        pulumi.set(__self__, "repository_name", repository_name)
+        pulumi.set(__self__, "repository_type", repository_type)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> str:
+        """
+        Repository bucket name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "bucket_name")
+
+    @property
+    @pulumi.getter(name="bucketRegion")
+    def bucket_region(self) -> str:
+        """
+        Repository region. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "bucket_region")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        CreationTime. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def directory(self) -> str:
+        """
+        Repository Directory. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "directory")
+
+    @property
+    @pulumi.getter(name="isUsed")
+    def is_used(self) -> bool:
+        """
+        Whether the repository is being used. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "is_used")
+
+    @property
+    @pulumi.getter(name="repositoryDesc")
+    def repository_desc(self) -> str:
+        """
+        Repository description (default warehouse: default, private warehouse: private).
+        """
+        return pulumi.get(self, "repository_desc")
+
+    @property
+    @pulumi.getter(name="repositoryId")
+    def repository_id(self) -> str:
+        """
+        repository Id.
+        """
+        return pulumi.get(self, "repository_id")
+
+    @property
+    @pulumi.getter(name="repositoryName")
+    def repository_name(self) -> str:
+        """
+        Repository Name.
+        """
+        return pulumi.get(self, "repository_name")
+
+    @property
+    @pulumi.getter(name="repositoryType")
+    def repository_type(self) -> str:
+        """
+        Repository type (default Repository: default, private Repository: private).
+        """
+        return pulumi.get(self, "repository_type")
 
 
 @pulumi.output_type
@@ -3648,5 +8706,107 @@ class GetUnitRulesResultContentUnitRuleItemListUnitRuleTagListResult(dict):
         Unitization rule item ID.
         """
         return pulumi.get(self, "unit_rule_item_id")
+
+
+@pulumi.output_type
+class GetUsableUnitNamespacesResultResult(dict):
+    def __init__(__self__, *,
+                 contents: Sequence['outputs.GetUsableUnitNamespacesResultContentResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetUsableUnitNamespacesResultContentArgs'] contents: namespace list.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence['outputs.GetUsableUnitNamespacesResultContentResult']:
+        """
+        namespace list.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetUsableUnitNamespacesResultContentResult(dict):
+    def __init__(__self__, *,
+                 created_time: str,
+                 gateway_instance_id: str,
+                 id: str,
+                 namespace_id: str,
+                 namespace_name: str,
+                 updated_time: str):
+        """
+        :param str created_time: Create time. Note: This field may return null, indicating that no valid value was found.
+        :param str gateway_instance_id: Gateway instance id Note: This field may return null, indicating that no valid value was found.
+        :param str id: Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+        :param str namespace_id: namespace id.
+        :param str namespace_name: namespace name.
+        :param str updated_time: Update time. Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "gateway_instance_id", gateway_instance_id)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "updated_time", updated_time)
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Create time. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="gatewayInstanceId")
+    def gateway_instance_id(self) -> str:
+        """
+        Gateway instance id Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "gateway_instance_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Unit namespace ID. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> str:
+        """
+        namespace id.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        namespace name.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="updatedTime")
+    def updated_time(self) -> str:
+        """
+        Update time. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "updated_time")
 
 

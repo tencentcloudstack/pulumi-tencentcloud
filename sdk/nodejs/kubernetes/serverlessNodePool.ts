@@ -9,28 +9,92 @@ import * as utilities from "../utilities";
  * Provide a resource to create serverless node pool of cluster.
  *
  * ## Example Usage
+ * ### Add serverless node pool to a cluster
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpc = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZone,
+ * });
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const sg = tencentcloud.Security.getGroups({
+ *     name: "default",
+ * });
+ * const sgId = sg.then(sg => sg.securityGroups?[0]?.securityGroupId);
+ * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
+ *     vpcId: vpcId,
+ *     clusterCidr: exampleClusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "tf_example_cluster",
+ *     clusterDesc: "tf example cluster",
+ *     clusterMaxServiceNum: 32,
+ *     clusterVersion: "1.18.4",
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ * });
+ * const exampleServerlessNodePool = new tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool", {
+ *     clusterId: exampleCluster.id,
+ *     serverlessNodes: [
+ *         {
+ *             displayName: "tf_example_serverless_node1",
+ *             subnetId: subnetId,
+ *         },
+ *         {
+ *             displayName: "tf_example_serverless_node2",
+ *             subnetId: subnetId,
+ *         },
+ *     ],
+ *     securityGroupIds: [sgId],
+ *     labels: {
+ *         label1: "value1",
+ *         label2: "value2",
+ *     },
+ * });
+ * ```
+ * ### Adding taints to the virtual nodes under this node pool
+ *
+ * The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const exampleServerlessNodePool = new tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool", {
+ * const example = new tencentcloud.kubernetes.ServerlessNodePool("example", {
  *     clusterId: tencentcloud_kubernetes_cluster.example.id,
  *     serverlessNodes: [
  *         {
- *             displayName: "serverless_node1",
- *             subnetId: "subnet-xxx",
+ *             displayName: "tf_example_serverless_node1",
+ *             subnetId: local.subnet_id,
  *         },
  *         {
- *             displayName: "serverless_node2",
- *             subnetId: "subnet-xxx",
+ *             displayName: "tf_example_serverless_node2",
+ *             subnetId: local.subnet_id,
  *         },
  *     ],
- *     securityGroupIds: ["sg-xxx"],
+ *     securityGroupIds: [local.sg_id],
  *     labels: {
- *         example1: "test1",
- *         example2: "test2",
+ *         label1: "value1",
+ *         label2: "value2",
  *     },
+ *     taints: [
+ *         {
+ *             key: "key1",
+ *             value: "value1",
+ *             effect: "NoSchedule",
+ *         },
+ *         {
+ *             key: "key1",
+ *             value: "value1",
+ *             effect: "NoExecute",
+ *         },
+ *     ],
  * });
  * ```
  *

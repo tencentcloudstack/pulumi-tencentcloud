@@ -63,6 +63,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// cls config can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cls/config:Config config config_id
+// ```
 type Config struct {
 	pulumi.CustomResourceState
 

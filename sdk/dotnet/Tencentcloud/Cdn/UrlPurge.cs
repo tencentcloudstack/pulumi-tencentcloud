@@ -34,8 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// }
     /// ```
-    /// 
-    /// argument to request new purge task with same urls
+    /// ### argument to request new purge task with same urls
     /// 
     /// ```csharp
     /// using Pulumi;

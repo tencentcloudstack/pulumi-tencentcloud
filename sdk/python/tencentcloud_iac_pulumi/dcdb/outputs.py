@@ -26,16 +26,34 @@ __all__ = [
     'GetDatabaseObjectsViewResult',
     'GetDatabaseTablesColResult',
     'GetDatabasesListResult',
+    'GetInstanceNodeInfoNodesInfoResult',
     'GetInstancesListResult',
     'GetInstancesListResourceTagResult',
     'GetInstancesListShardDetailResult',
+    'GetLogFilesFileResult',
+    'GetOrdersDealResult',
     'GetParametersListResult',
     'GetParametersListConstraintResult',
     'GetParametersListConstraintRangeResult',
+    'GetProjectSecurityGroupsGroupResult',
+    'GetProjectSecurityGroupsGroupInboundResult',
+    'GetProjectSecurityGroupsGroupOutboundResult',
+    'GetProjectsProjectResult',
+    'GetSaleInfoRegionListResult',
+    'GetSaleInfoRegionListAvailableChoiceResult',
+    'GetSaleInfoRegionListAvailableChoiceMasterZoneResult',
+    'GetSaleInfoRegionListAvailableChoiceSlaveZoneResult',
+    'GetSaleInfoRegionListZoneListResult',
     'GetSecurityGroupsListResult',
     'GetSecurityGroupsListInboundResult',
     'GetSecurityGroupsListOutboundResult',
+    'GetShardSpecSpecConfigResult',
+    'GetShardSpecSpecConfigSpecConfigInfoResult',
     'GetShardsListResult',
+    'GetSlowLogsDataResult',
+    'GetUpgradePriceAddShardConfigResult',
+    'GetUpgradePriceExpandShardConfigResult',
+    'GetUpgradePriceSplitShardConfigResult',
 ]
 
 @pulumi.output_type
@@ -596,6 +614,46 @@ class GetDatabasesListResult(dict):
 
 
 @pulumi.output_type
+class GetInstanceNodeInfoNodesInfoResult(dict):
+    def __init__(__self__, *,
+                 node_id: str,
+                 role: str,
+                 shard_id: str):
+        """
+        :param str node_id: Node ID.
+        :param str role: Node role. Valid values: `master`, `slave`.
+        :param str shard_id: Instance shard ID.
+        """
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "shard_id", shard_id)
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        """
+        Node role. Valid values: `master`, `slave`.
+        """
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="shardId")
+    def shard_id(self) -> str:
+        """
+        Instance shard ID.
+        """
+        return pulumi.get(self, "shard_id")
+
+
+@pulumi.output_type
 class GetInstancesListResult(dict):
     def __init__(__self__, *,
                  app_id: int,
@@ -1101,6 +1159,130 @@ class GetInstancesListShardDetailResult(dict):
 
 
 @pulumi.output_type
+class GetLogFilesFileResult(dict):
+    def __init__(__self__, *,
+                 file_name: str,
+                 length: int,
+                 mtime: int,
+                 uri: str):
+        """
+        :param str file_name: Filename.
+        :param int length: File length.
+        :param int mtime: Last modified time of log.
+        :param str uri: Uniform resource identifier (URI) used during log download.
+        """
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "length", length)
+        pulumi.set(__self__, "mtime", mtime)
+        pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Filename.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter
+    def length(self) -> int:
+        """
+        File length.
+        """
+        return pulumi.get(self, "length")
+
+    @property
+    @pulumi.getter
+    def mtime(self) -> int:
+        """
+        Last modified time of log.
+        """
+        return pulumi.get(self, "mtime")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> str:
+        """
+        Uniform resource identifier (URI) used during log download.
+        """
+        return pulumi.get(self, "uri")
+
+
+@pulumi.output_type
+class GetOrdersDealResult(dict):
+    def __init__(__self__, *,
+                 count: int,
+                 deal_name: str,
+                 flow_id: int,
+                 instance_ids: Sequence[str],
+                 owner_uin: str,
+                 pay_mode: int):
+        """
+        :param int count: Number of items.
+        :param str deal_name: Order number.
+        :param int flow_id: ID of the associated process, which can be used to query the process execution status.
+        :param Sequence[str] instance_ids: The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str owner_uin: Account.
+        :param int pay_mode: Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+        """
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "deal_name", deal_name)
+        pulumi.set(__self__, "flow_id", flow_id)
+        pulumi.set(__self__, "instance_ids", instance_ids)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "pay_mode", pay_mode)
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        Number of items.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="dealName")
+    def deal_name(self) -> str:
+        """
+        Order number.
+        """
+        return pulumi.get(self, "deal_name")
+
+    @property
+    @pulumi.getter(name="flowId")
+    def flow_id(self) -> int:
+        """
+        ID of the associated process, which can be used to query the process execution status.
+        """
+        return pulumi.get(self, "flow_id")
+
+    @property
+    @pulumi.getter(name="instanceIds")
+    def instance_ids(self) -> Sequence[str]:
+        """
+        The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "instance_ids")
+
+    @property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> str:
+        """
+        Account.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> int:
+        """
+        Payment mode. Valid values: 0 (postpaid), 1 (prepaid).
+        """
+        return pulumi.get(self, "pay_mode")
+
+
+@pulumi.output_type
 class GetParametersListResult(dict):
     def __init__(__self__, *,
                  constraints: Sequence['outputs.GetParametersListConstraintResult'],
@@ -1251,6 +1433,564 @@ class GetParametersListConstraintRangeResult(dict):
         min value.
         """
         return pulumi.get(self, "min")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsGroupResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 inbounds: Sequence['outputs.GetProjectSecurityGroupsGroupInboundResult'],
+                 outbounds: Sequence['outputs.GetProjectSecurityGroupsGroupOutboundResult'],
+                 project_id: int,
+                 security_group_id: str,
+                 security_group_name: str,
+                 security_group_remark: str):
+        """
+        :param str create_time: Creation time in the format of yyyy-mm-dd hh:mm:ss.
+        :param Sequence['GetProjectSecurityGroupsGroupInboundArgs'] inbounds: Inbound rule.
+        :param Sequence['GetProjectSecurityGroupsGroupOutboundArgs'] outbounds: Outbound rule.
+        :param int project_id: Project ID.
+        :param str security_group_id: Security group ID.
+        :param str security_group_name: Security group name.
+        :param str security_group_remark: Security group remarks.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "inbounds", inbounds)
+        pulumi.set(__self__, "outbounds", outbounds)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "security_group_name", security_group_name)
+        pulumi.set(__self__, "security_group_remark", security_group_remark)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of yyyy-mm-dd hh:mm:ss.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def inbounds(self) -> Sequence['outputs.GetProjectSecurityGroupsGroupInboundResult']:
+        """
+        Inbound rule.
+        """
+        return pulumi.get(self, "inbounds")
+
+    @property
+    @pulumi.getter
+    def outbounds(self) -> Sequence['outputs.GetProjectSecurityGroupsGroupOutboundResult']:
+        """
+        Outbound rule.
+        """
+        return pulumi.get(self, "outbounds")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        """
+        Security group ID.
+        """
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="securityGroupName")
+    def security_group_name(self) -> str:
+        """
+        Security group name.
+        """
+        return pulumi.get(self, "security_group_name")
+
+    @property
+    @pulumi.getter(name="securityGroupRemark")
+    def security_group_remark(self) -> str:
+        """
+        Security group remarks.
+        """
+        return pulumi.get(self, "security_group_remark")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsGroupInboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, which can be `ACCEPT` or `DROP`.
+        :param str cidr_ip: Source IP or source IP range, such as 192.168.0.0/16.
+        :param str ip_protocol: Network protocol. UDP and TCP are supported.
+        :param str port_range: Port.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, which can be `ACCEPT` or `DROP`.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Source IP or source IP range, such as 192.168.0.0/16.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol. UDP and TCP are supported.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        Port.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetProjectSecurityGroupsGroupOutboundResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 cidr_ip: str,
+                 ip_protocol: str,
+                 port_range: str):
+        """
+        :param str action: Policy, which can be `ACCEPT` or `DROP`.
+        :param str cidr_ip: Source IP or source IP range, such as 192.168.0.0/16.
+        :param str ip_protocol: Network protocol. UDP and TCP are supported.
+        :param str port_range: Port.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "cidr_ip", cidr_ip)
+        pulumi.set(__self__, "ip_protocol", ip_protocol)
+        pulumi.set(__self__, "port_range", port_range)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Policy, which can be `ACCEPT` or `DROP`.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrIp")
+    def cidr_ip(self) -> str:
+        """
+        Source IP or source IP range, such as 192.168.0.0/16.
+        """
+        return pulumi.get(self, "cidr_ip")
+
+    @property
+    @pulumi.getter(name="ipProtocol")
+    def ip_protocol(self) -> str:
+        """
+        Network protocol. UDP and TCP are supported.
+        """
+        return pulumi.get(self, "ip_protocol")
+
+    @property
+    @pulumi.getter(name="portRange")
+    def port_range(self) -> str:
+        """
+        Port.
+        """
+        return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetProjectsProjectResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 create_time: str,
+                 creator_uin: int,
+                 info: str,
+                 is_default: int,
+                 name: str,
+                 owner_uin: int,
+                 project_id: int,
+                 src_app_id: int,
+                 src_plat: str,
+                 status: int):
+        """
+        :param int app_id: Application ID.
+        :param str create_time: Creation time.
+        :param int creator_uin: Creator UIN.
+        :param str info: Description.
+        :param int is_default: Whether it is the default project. Valid values: `1` (yes), `0` (no).
+        :param str name: Project name.
+        :param int owner_uin: The UIN of the resource owner (root account).
+        :param int project_id: Project ID.
+        :param int src_app_id: Source APPID.
+        :param str src_plat: Source platform.
+        :param int status: Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "creator_uin", creator_uin)
+        pulumi.set(__self__, "info", info)
+        pulumi.set(__self__, "is_default", is_default)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "src_app_id", src_app_id)
+        pulumi.set(__self__, "src_plat", src_plat)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        Application ID.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="creatorUin")
+    def creator_uin(self) -> int:
+        """
+        Creator UIN.
+        """
+        return pulumi.get(self, "creator_uin")
+
+    @property
+    @pulumi.getter
+    def info(self) -> str:
+        """
+        Description.
+        """
+        return pulumi.get(self, "info")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> int:
+        """
+        Whether it is the default project. Valid values: `1` (yes), `0` (no).
+        """
+        return pulumi.get(self, "is_default")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Project name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> int:
+        """
+        The UIN of the resource owner (root account).
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="srcAppId")
+    def src_app_id(self) -> int:
+        """
+        Source APPID.
+        """
+        return pulumi.get(self, "src_app_id")
+
+    @property
+    @pulumi.getter(name="srcPlat")
+    def src_plat(self) -> str:
+        """
+        Source platform.
+        """
+        return pulumi.get(self, "src_plat")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetSaleInfoRegionListResult(dict):
+    def __init__(__self__, *,
+                 available_choices: Sequence['outputs.GetSaleInfoRegionListAvailableChoiceResult'],
+                 region: str,
+                 region_id: int,
+                 region_name: str,
+                 zone_lists: Sequence['outputs.GetSaleInfoRegionListZoneListResult']):
+        """
+        :param Sequence['GetSaleInfoRegionListAvailableChoiceArgs'] available_choices: available zone choice.
+        :param str region: region name(en).
+        :param int region_id: region id.
+        :param str region_name: region name(zh).
+        :param Sequence['GetSaleInfoRegionListZoneListArgs'] zone_lists: list of az zone.
+        """
+        pulumi.set(__self__, "available_choices", available_choices)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "zone_lists", zone_lists)
+
+    @property
+    @pulumi.getter(name="availableChoices")
+    def available_choices(self) -> Sequence['outputs.GetSaleInfoRegionListAvailableChoiceResult']:
+        """
+        available zone choice.
+        """
+        return pulumi.get(self, "available_choices")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region name(en).
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        region id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        region name(zh).
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="zoneLists")
+    def zone_lists(self) -> Sequence['outputs.GetSaleInfoRegionListZoneListResult']:
+        """
+        list of az zone.
+        """
+        return pulumi.get(self, "zone_lists")
+
+
+@pulumi.output_type
+class GetSaleInfoRegionListAvailableChoiceResult(dict):
+    def __init__(__self__, *,
+                 master_zones: Sequence['outputs.GetSaleInfoRegionListAvailableChoiceMasterZoneResult'],
+                 slave_zones: Sequence['outputs.GetSaleInfoRegionListAvailableChoiceSlaveZoneResult']):
+        """
+        :param Sequence['GetSaleInfoRegionListAvailableChoiceMasterZoneArgs'] master_zones: master zone.
+        :param Sequence['GetSaleInfoRegionListAvailableChoiceSlaveZoneArgs'] slave_zones: slave zones.
+        """
+        pulumi.set(__self__, "master_zones", master_zones)
+        pulumi.set(__self__, "slave_zones", slave_zones)
+
+    @property
+    @pulumi.getter(name="masterZones")
+    def master_zones(self) -> Sequence['outputs.GetSaleInfoRegionListAvailableChoiceMasterZoneResult']:
+        """
+        master zone.
+        """
+        return pulumi.get(self, "master_zones")
+
+    @property
+    @pulumi.getter(name="slaveZones")
+    def slave_zones(self) -> Sequence['outputs.GetSaleInfoRegionListAvailableChoiceSlaveZoneResult']:
+        """
+        slave zones.
+        """
+        return pulumi.get(self, "slave_zones")
+
+
+@pulumi.output_type
+class GetSaleInfoRegionListAvailableChoiceMasterZoneResult(dict):
+    def __init__(__self__, *,
+                 on_sale: bool,
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str):
+        """
+        :param bool on_sale: is zone on sale.
+        :param str zone: zone name(en).
+        :param int zone_id: zone id.
+        :param str zone_name: zone name(zh).
+        """
+        pulumi.set(__self__, "on_sale", on_sale)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="onSale")
+    def on_sale(self) -> bool:
+        """
+        is zone on sale.
+        """
+        return pulumi.get(self, "on_sale")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        zone name(en).
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        zone id.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        zone name(zh).
+        """
+        return pulumi.get(self, "zone_name")
+
+
+@pulumi.output_type
+class GetSaleInfoRegionListAvailableChoiceSlaveZoneResult(dict):
+    def __init__(__self__, *,
+                 on_sale: bool,
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str):
+        """
+        :param bool on_sale: is zone on sale.
+        :param str zone: zone name(en).
+        :param int zone_id: zone id.
+        :param str zone_name: zone name(zh).
+        """
+        pulumi.set(__self__, "on_sale", on_sale)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="onSale")
+    def on_sale(self) -> bool:
+        """
+        is zone on sale.
+        """
+        return pulumi.get(self, "on_sale")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        zone name(en).
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        zone id.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        zone name(zh).
+        """
+        return pulumi.get(self, "zone_name")
+
+
+@pulumi.output_type
+class GetSaleInfoRegionListZoneListResult(dict):
+    def __init__(__self__, *,
+                 on_sale: bool,
+                 zone: str,
+                 zone_id: int,
+                 zone_name: str):
+        """
+        :param bool on_sale: is zone on sale.
+        :param str zone: zone name(en).
+        :param int zone_id: zone id.
+        :param str zone_name: zone name(zh).
+        """
+        pulumi.set(__self__, "on_sale", on_sale)
+        pulumi.set(__self__, "zone", zone)
+        pulumi.set(__self__, "zone_id", zone_id)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="onSale")
+    def on_sale(self) -> bool:
+        """
+        is zone on sale.
+        """
+        return pulumi.get(self, "on_sale")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        zone name(en).
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> int:
+        """
+        zone id.
+        """
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> str:
+        """
+        zone name(zh).
+        """
+        return pulumi.get(self, "zone_name")
 
 
 @pulumi.output_type
@@ -1426,6 +2166,130 @@ class GetSecurityGroupsListOutboundResult(dict):
         port range.
         """
         return pulumi.get(self, "port_range")
+
+
+@pulumi.output_type
+class GetShardSpecSpecConfigResult(dict):
+    def __init__(__self__, *,
+                 machine: str,
+                 spec_config_infos: Sequence['outputs.GetShardSpecSpecConfigSpecConfigInfoResult']):
+        """
+        :param str machine: machine type.
+        :param Sequence['GetShardSpecSpecConfigSpecConfigInfoArgs'] spec_config_infos: list of machine specifications.
+        """
+        pulumi.set(__self__, "machine", machine)
+        pulumi.set(__self__, "spec_config_infos", spec_config_infos)
+
+    @property
+    @pulumi.getter
+    def machine(self) -> str:
+        """
+        machine type.
+        """
+        return pulumi.get(self, "machine")
+
+    @property
+    @pulumi.getter(name="specConfigInfos")
+    def spec_config_infos(self) -> Sequence['outputs.GetShardSpecSpecConfigSpecConfigInfoResult']:
+        """
+        list of machine specifications.
+        """
+        return pulumi.get(self, "spec_config_infos")
+
+
+@pulumi.output_type
+class GetShardSpecSpecConfigSpecConfigInfoResult(dict):
+    def __init__(__self__, *,
+                 cpu: int,
+                 max_storage: int,
+                 memory: int,
+                 min_storage: int,
+                 node_count: int,
+                 pid: int,
+                 qps: int,
+                 suit_info: str):
+        """
+        :param int cpu: CPU cores.
+        :param int max_storage: maximum storage size, inGB.
+        :param int memory: memory, in GB.
+        :param int min_storage: minimum storage size, in GB.
+        :param int node_count: node count.
+        :param int pid: product price id.
+        :param int qps: maximum QPS.
+        :param str suit_info: recommended usage scenarios.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "max_storage", max_storage)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "min_storage", min_storage)
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "pid", pid)
+        pulumi.set(__self__, "qps", qps)
+        pulumi.set(__self__, "suit_info", suit_info)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        CPU cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="maxStorage")
+    def max_storage(self) -> int:
+        """
+        maximum storage size, inGB.
+        """
+        return pulumi.get(self, "max_storage")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        memory, in GB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="minStorage")
+    def min_storage(self) -> int:
+        """
+        minimum storage size, in GB.
+        """
+        return pulumi.get(self, "min_storage")
+
+    @property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> int:
+        """
+        node count.
+        """
+        return pulumi.get(self, "node_count")
+
+    @property
+    @pulumi.getter
+    def pid(self) -> int:
+        """
+        product price id.
+        """
+        return pulumi.get(self, "pid")
+
+    @property
+    @pulumi.getter
+    def qps(self) -> int:
+        """
+        maximum QPS.
+        """
+        return pulumi.get(self, "qps")
+
+    @property
+    @pulumi.getter(name="suitInfo")
+    def suit_info(self) -> str:
+        """
+        recommended usage scenarios.
+        """
+        return pulumi.get(self, "suit_info")
 
 
 @pulumi.output_type
@@ -1686,5 +2550,364 @@ class GetShardsListResult(dict):
         zone.
         """
         return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetSlowLogsDataResult(dict):
+    def __init__(__self__, *,
+                 check_sum: str,
+                 db: str,
+                 example_sql: str,
+                 finger_print: str,
+                 host: str,
+                 lock_time_avg: str,
+                 lock_time_max: str,
+                 lock_time_min: str,
+                 lock_time_sum: str,
+                 query_count: str,
+                 query_time_avg: str,
+                 query_time_max: str,
+                 query_time_min: str,
+                 query_time_sum: str,
+                 rows_examined_sum: str,
+                 rows_sent_sum: str,
+                 ts_max: str,
+                 ts_min: str,
+                 user: str):
+        """
+        :param str check_sum: Statement checksum for querying details.
+        :param str db: Specific name of the database to be queried.
+        :param str example_sql: Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+        :param str finger_print: Abstracted SQL statement.
+        :param str host: Host address of account.
+        :param str lock_time_avg: Average lock time.
+        :param str lock_time_max: Maximum lock time.
+        :param str lock_time_min: Minimum lock time.
+        :param str lock_time_sum: Total statement lock time.
+        :param str query_count: Total number of statement queries.
+        :param str query_time_avg: Average query time.
+        :param str query_time_max: Maximum query time.
+        :param str query_time_min: Minimum query time.
+        :param str query_time_sum: Total statement query time.
+        :param str rows_examined_sum: Number of scanned rows.
+        :param str rows_sent_sum: Number of sent rows.
+        :param str ts_max: Last execution time.
+        :param str ts_min: First execution time.
+        :param str user: Account.
+        """
+        pulumi.set(__self__, "check_sum", check_sum)
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "example_sql", example_sql)
+        pulumi.set(__self__, "finger_print", finger_print)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "lock_time_avg", lock_time_avg)
+        pulumi.set(__self__, "lock_time_max", lock_time_max)
+        pulumi.set(__self__, "lock_time_min", lock_time_min)
+        pulumi.set(__self__, "lock_time_sum", lock_time_sum)
+        pulumi.set(__self__, "query_count", query_count)
+        pulumi.set(__self__, "query_time_avg", query_time_avg)
+        pulumi.set(__self__, "query_time_max", query_time_max)
+        pulumi.set(__self__, "query_time_min", query_time_min)
+        pulumi.set(__self__, "query_time_sum", query_time_sum)
+        pulumi.set(__self__, "rows_examined_sum", rows_examined_sum)
+        pulumi.set(__self__, "rows_sent_sum", rows_sent_sum)
+        pulumi.set(__self__, "ts_max", ts_max)
+        pulumi.set(__self__, "ts_min", ts_min)
+        pulumi.set(__self__, "user", user)
+
+    @property
+    @pulumi.getter(name="checkSum")
+    def check_sum(self) -> str:
+        """
+        Statement checksum for querying details.
+        """
+        return pulumi.get(self, "check_sum")
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        Specific name of the database to be queried.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter(name="exampleSql")
+    def example_sql(self) -> str:
+        """
+        Sample SQLNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "example_sql")
+
+    @property
+    @pulumi.getter(name="fingerPrint")
+    def finger_print(self) -> str:
+        """
+        Abstracted SQL statement.
+        """
+        return pulumi.get(self, "finger_print")
+
+    @property
+    @pulumi.getter
+    def host(self) -> str:
+        """
+        Host address of account.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="lockTimeAvg")
+    def lock_time_avg(self) -> str:
+        """
+        Average lock time.
+        """
+        return pulumi.get(self, "lock_time_avg")
+
+    @property
+    @pulumi.getter(name="lockTimeMax")
+    def lock_time_max(self) -> str:
+        """
+        Maximum lock time.
+        """
+        return pulumi.get(self, "lock_time_max")
+
+    @property
+    @pulumi.getter(name="lockTimeMin")
+    def lock_time_min(self) -> str:
+        """
+        Minimum lock time.
+        """
+        return pulumi.get(self, "lock_time_min")
+
+    @property
+    @pulumi.getter(name="lockTimeSum")
+    def lock_time_sum(self) -> str:
+        """
+        Total statement lock time.
+        """
+        return pulumi.get(self, "lock_time_sum")
+
+    @property
+    @pulumi.getter(name="queryCount")
+    def query_count(self) -> str:
+        """
+        Total number of statement queries.
+        """
+        return pulumi.get(self, "query_count")
+
+    @property
+    @pulumi.getter(name="queryTimeAvg")
+    def query_time_avg(self) -> str:
+        """
+        Average query time.
+        """
+        return pulumi.get(self, "query_time_avg")
+
+    @property
+    @pulumi.getter(name="queryTimeMax")
+    def query_time_max(self) -> str:
+        """
+        Maximum query time.
+        """
+        return pulumi.get(self, "query_time_max")
+
+    @property
+    @pulumi.getter(name="queryTimeMin")
+    def query_time_min(self) -> str:
+        """
+        Minimum query time.
+        """
+        return pulumi.get(self, "query_time_min")
+
+    @property
+    @pulumi.getter(name="queryTimeSum")
+    def query_time_sum(self) -> str:
+        """
+        Total statement query time.
+        """
+        return pulumi.get(self, "query_time_sum")
+
+    @property
+    @pulumi.getter(name="rowsExaminedSum")
+    def rows_examined_sum(self) -> str:
+        """
+        Number of scanned rows.
+        """
+        return pulumi.get(self, "rows_examined_sum")
+
+    @property
+    @pulumi.getter(name="rowsSentSum")
+    def rows_sent_sum(self) -> str:
+        """
+        Number of sent rows.
+        """
+        return pulumi.get(self, "rows_sent_sum")
+
+    @property
+    @pulumi.getter(name="tsMax")
+    def ts_max(self) -> str:
+        """
+        Last execution time.
+        """
+        return pulumi.get(self, "ts_max")
+
+    @property
+    @pulumi.getter(name="tsMin")
+    def ts_min(self) -> str:
+        """
+        First execution time.
+        """
+        return pulumi.get(self, "ts_min")
+
+    @property
+    @pulumi.getter
+    def user(self) -> str:
+        """
+        Account.
+        """
+        return pulumi.get(self, "user")
+
+
+@pulumi.output_type
+class GetUpgradePriceAddShardConfigResult(dict):
+    def __init__(__self__, *,
+                 shard_count: int,
+                 shard_memory: int,
+                 shard_storage: int):
+        """
+        :param int shard_count: The number of new shards.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        """
+        pulumi.set(__self__, "shard_count", shard_count)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+
+    @property
+    @pulumi.getter(name="shardCount")
+    def shard_count(self) -> int:
+        """
+        The number of new shards.
+        """
+        return pulumi.get(self, "shard_count")
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+
+@pulumi.output_type
+class GetUpgradePriceExpandShardConfigResult(dict):
+    def __init__(__self__, *,
+                 shard_instance_ids: Sequence[str],
+                 shard_memory: int,
+                 shard_storage: int,
+                 shard_node_count: Optional[int] = None):
+        """
+        :param Sequence[str] shard_instance_ids: List of shard ID.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        :param int shard_node_count: Shard node count.
+        """
+        pulumi.set(__self__, "shard_instance_ids", shard_instance_ids)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+        if shard_node_count is not None:
+            pulumi.set(__self__, "shard_node_count", shard_node_count)
+
+    @property
+    @pulumi.getter(name="shardInstanceIds")
+    def shard_instance_ids(self) -> Sequence[str]:
+        """
+        List of shard ID.
+        """
+        return pulumi.get(self, "shard_instance_ids")
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+    @property
+    @pulumi.getter(name="shardNodeCount")
+    def shard_node_count(self) -> Optional[int]:
+        """
+        Shard node count.
+        """
+        return pulumi.get(self, "shard_node_count")
+
+
+@pulumi.output_type
+class GetUpgradePriceSplitShardConfigResult(dict):
+    def __init__(__self__, *,
+                 shard_instance_ids: Sequence[str],
+                 shard_memory: int,
+                 shard_storage: int,
+                 split_rate: int):
+        """
+        :param Sequence[str] shard_instance_ids: List of shard ID.
+        :param int shard_memory: Shard memory size in GB.
+        :param int shard_storage: Shard storage capacity in GB.
+        :param int split_rate: Data split ratio, fixed at 50%.
+        """
+        pulumi.set(__self__, "shard_instance_ids", shard_instance_ids)
+        pulumi.set(__self__, "shard_memory", shard_memory)
+        pulumi.set(__self__, "shard_storage", shard_storage)
+        pulumi.set(__self__, "split_rate", split_rate)
+
+    @property
+    @pulumi.getter(name="shardInstanceIds")
+    def shard_instance_ids(self) -> Sequence[str]:
+        """
+        List of shard ID.
+        """
+        return pulumi.get(self, "shard_instance_ids")
+
+    @property
+    @pulumi.getter(name="shardMemory")
+    def shard_memory(self) -> int:
+        """
+        Shard memory size in GB.
+        """
+        return pulumi.get(self, "shard_memory")
+
+    @property
+    @pulumi.getter(name="shardStorage")
+    def shard_storage(self) -> int:
+        """
+        Shard storage capacity in GB.
+        """
+        return pulumi.get(self, "shard_storage")
+
+    @property
+    @pulumi.getter(name="splitRate")
+    def split_rate(self) -> int:
+        """
+        Data split ratio, fixed at 50%.
+        """
+        return pulumi.get(self, "split_rate")
 
 

@@ -9,9 +9,72 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'GetDcRouteNatDirectConnectGatewayRouteSetResult',
     'GetGatewaySnatsSnatListResult',
     'GetGatewaysNatResult',
 ]
+
+@pulumi.output_type
+class GetDcRouteNatDirectConnectGatewayRouteSetResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 destination_cidr_block: str,
+                 gateway_id: str,
+                 gateway_type: str,
+                 update_time: str):
+        """
+        :param str create_time: Create time of route.
+        :param str destination_cidr_block: IPv4 CIDR of subnet.
+        :param str gateway_id: Id of next-hop gateway.
+        :param str gateway_type: Type of next-hop gateway, valid values: DIRECTCONNECT.
+        :param str update_time: Update time of route.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
+        pulumi.set(__self__, "gateway_id", gateway_id)
+        pulumi.set(__self__, "gateway_type", gateway_type)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of route.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="destinationCidrBlock")
+    def destination_cidr_block(self) -> str:
+        """
+        IPv4 CIDR of subnet.
+        """
+        return pulumi.get(self, "destination_cidr_block")
+
+    @property
+    @pulumi.getter(name="gatewayId")
+    def gateway_id(self) -> str:
+        """
+        Id of next-hop gateway.
+        """
+        return pulumi.get(self, "gateway_id")
+
+    @property
+    @pulumi.getter(name="gatewayType")
+    def gateway_type(self) -> str:
+        """
+        Type of next-hop gateway, valid values: DIRECTCONNECT.
+        """
+        return pulumi.get(self, "gateway_type")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Update time of route.
+        """
+        return pulumi.get(self, "update_time")
+
 
 @pulumi.output_type
 class GetGatewaySnatsSnatListResult(dict):

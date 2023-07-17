@@ -416,6 +416,1370 @@ func (o ParameterTemplateModifyParamEntrySetArrayOutput) Index(i pulumi.IntInput
 	}).(ParameterTemplateModifyParamEntrySetOutput)
 }
 
+type GetBackupDownloadUrlsBackupDownloadRestriction struct {
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	IpRestrictionEffect *string `pulumi:"ipRestrictionEffect"`
+	// Whether it is allowed to download IP list of the backup files.
+	IpSets []string `pulumi:"ipSets"`
+	// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType *string `pulumi:"restrictionType"`
+	// Whether it is allowed to download the VPC ID list of the backup files.
+	VpcIdSets []string `pulumi:"vpcIdSets"`
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	VpcRestrictionEffect *string `pulumi:"vpcRestrictionEffect"`
+}
+
+// GetBackupDownloadUrlsBackupDownloadRestrictionInput is an input type that accepts GetBackupDownloadUrlsBackupDownloadRestrictionArgs and GetBackupDownloadUrlsBackupDownloadRestrictionOutput values.
+// You can construct a concrete instance of `GetBackupDownloadUrlsBackupDownloadRestrictionInput` via:
+//
+//          GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
+type GetBackupDownloadUrlsBackupDownloadRestrictionInput interface {
+	pulumi.Input
+
+	ToGetBackupDownloadUrlsBackupDownloadRestrictionOutput() GetBackupDownloadUrlsBackupDownloadRestrictionOutput
+	ToGetBackupDownloadUrlsBackupDownloadRestrictionOutputWithContext(context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionOutput
+}
+
+type GetBackupDownloadUrlsBackupDownloadRestrictionArgs struct {
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	IpRestrictionEffect pulumi.StringPtrInput `pulumi:"ipRestrictionEffect"`
+	// Whether it is allowed to download IP list of the backup files.
+	IpSets pulumi.StringArrayInput `pulumi:"ipSets"`
+	// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType pulumi.StringPtrInput `pulumi:"restrictionType"`
+	// Whether it is allowed to download the VPC ID list of the backup files.
+	VpcIdSets pulumi.StringArrayInput `pulumi:"vpcIdSets"`
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	VpcRestrictionEffect pulumi.StringPtrInput `pulumi:"vpcRestrictionEffect"`
+}
+
+func (GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestriction)(nil)).Elem()
+}
+
+func (i GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ToGetBackupDownloadUrlsBackupDownloadRestrictionOutput() GetBackupDownloadUrlsBackupDownloadRestrictionOutput {
+	return i.ToGetBackupDownloadUrlsBackupDownloadRestrictionOutputWithContext(context.Background())
+}
+
+func (i GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ToGetBackupDownloadUrlsBackupDownloadRestrictionOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupDownloadUrlsBackupDownloadRestrictionOutput)
+}
+
+func (i GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput() GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return i.ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(context.Background())
+}
+
+func (i GetBackupDownloadUrlsBackupDownloadRestrictionArgs) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupDownloadUrlsBackupDownloadRestrictionOutput).ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(ctx)
+}
+
+// GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput is an input type that accepts GetBackupDownloadUrlsBackupDownloadRestrictionArgs, GetBackupDownloadUrlsBackupDownloadRestrictionPtr and GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput values.
+// You can construct a concrete instance of `GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput` via:
+//
+//          GetBackupDownloadUrlsBackupDownloadRestrictionArgs{...}
+//
+//  or:
+//
+//          nil
+type GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput interface {
+	pulumi.Input
+
+	ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput() GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput
+	ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput
+}
+
+type getBackupDownloadUrlsBackupDownloadRestrictionPtrType GetBackupDownloadUrlsBackupDownloadRestrictionArgs
+
+func GetBackupDownloadUrlsBackupDownloadRestrictionPtr(v *GetBackupDownloadUrlsBackupDownloadRestrictionArgs) GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput {
+	return (*getBackupDownloadUrlsBackupDownloadRestrictionPtrType)(v)
+}
+
+func (*getBackupDownloadUrlsBackupDownloadRestrictionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetBackupDownloadUrlsBackupDownloadRestriction)(nil)).Elem()
+}
+
+func (i *getBackupDownloadUrlsBackupDownloadRestrictionPtrType) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput() GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return i.ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(context.Background())
+}
+
+func (i *getBackupDownloadUrlsBackupDownloadRestrictionPtrType) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput)
+}
+
+type GetBackupDownloadUrlsBackupDownloadRestrictionOutput struct{ *pulumi.OutputState }
+
+func (GetBackupDownloadUrlsBackupDownloadRestrictionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestriction)(nil)).Elem()
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionOutput() GetBackupDownloadUrlsBackupDownloadRestrictionOutput {
+	return o
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionOutput {
+	return o
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput() GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return o.ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(context.Background())
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetBackupDownloadUrlsBackupDownloadRestriction) *GetBackupDownloadUrlsBackupDownloadRestriction {
+		return &v
+	}).(GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput)
+}
+
+// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) IpRestrictionEffect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBackupDownloadUrlsBackupDownloadRestriction) *string { return v.IpRestrictionEffect }).(pulumi.StringPtrOutput)
+}
+
+// Whether it is allowed to download IP list of the backup files.
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) IpSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBackupDownloadUrlsBackupDownloadRestriction) []string { return v.IpSets }).(pulumi.StringArrayOutput)
+}
+
+// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) RestrictionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBackupDownloadUrlsBackupDownloadRestriction) *string { return v.RestrictionType }).(pulumi.StringPtrOutput)
+}
+
+// Whether it is allowed to download the VPC ID list of the backup files.
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) VpcIdSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBackupDownloadUrlsBackupDownloadRestriction) []string { return v.VpcIdSets }).(pulumi.StringArrayOutput)
+}
+
+// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionOutput) VpcRestrictionEffect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBackupDownloadUrlsBackupDownloadRestriction) *string { return v.VpcRestrictionEffect }).(pulumi.StringPtrOutput)
+}
+
+type GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput struct{ *pulumi.OutputState }
+
+func (GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetBackupDownloadUrlsBackupDownloadRestriction)(nil)).Elem()
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput() GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return o
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) ToGetBackupDownloadUrlsBackupDownloadRestrictionPtrOutputWithContext(ctx context.Context) GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput {
+	return o
+}
+
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) Elem() GetBackupDownloadUrlsBackupDownloadRestrictionOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) GetBackupDownloadUrlsBackupDownloadRestriction {
+		if v != nil {
+			return *v
+		}
+		var ret GetBackupDownloadUrlsBackupDownloadRestriction
+		return ret
+	}).(GetBackupDownloadUrlsBackupDownloadRestrictionOutput)
+}
+
+// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) IpRestrictionEffect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IpRestrictionEffect
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether it is allowed to download IP list of the backup files.
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) IpSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) []string {
+		if v == nil {
+			return nil
+		}
+		return v.IpSets
+	}).(pulumi.StringArrayOutput)
+}
+
+// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) RestrictionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RestrictionType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether it is allowed to download the VPC ID list of the backup files.
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) VpcIdSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) []string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcIdSets
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+func (o GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput) VpcRestrictionEffect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetBackupDownloadUrlsBackupDownloadRestriction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcRestrictionEffect
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetBaseBackupsBaseBackupSet struct {
+	// Backup method, including physical and logical.
+	BackupMethod string `pulumi:"backupMethod"`
+	// Backup mode, including automatic and manual.
+	BackupMode string `pulumi:"backupMode"`
+	// Instance ID.
+	DbInstanceId string `pulumi:"dbInstanceId"`
+	// Backup expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Backup end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Unique ID of a backup file.
+	Id string `pulumi:"id"`
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Backup set size in bytes.
+	Size int `pulumi:"size"`
+	// Backup start time.
+	StartTime string `pulumi:"startTime"`
+	// Backup task status.
+	State string `pulumi:"state"`
+}
+
+// GetBaseBackupsBaseBackupSetInput is an input type that accepts GetBaseBackupsBaseBackupSetArgs and GetBaseBackupsBaseBackupSetOutput values.
+// You can construct a concrete instance of `GetBaseBackupsBaseBackupSetInput` via:
+//
+//          GetBaseBackupsBaseBackupSetArgs{...}
+type GetBaseBackupsBaseBackupSetInput interface {
+	pulumi.Input
+
+	ToGetBaseBackupsBaseBackupSetOutput() GetBaseBackupsBaseBackupSetOutput
+	ToGetBaseBackupsBaseBackupSetOutputWithContext(context.Context) GetBaseBackupsBaseBackupSetOutput
+}
+
+type GetBaseBackupsBaseBackupSetArgs struct {
+	// Backup method, including physical and logical.
+	BackupMethod pulumi.StringInput `pulumi:"backupMethod"`
+	// Backup mode, including automatic and manual.
+	BackupMode pulumi.StringInput `pulumi:"backupMode"`
+	// Instance ID.
+	DbInstanceId pulumi.StringInput `pulumi:"dbInstanceId"`
+	// Backup expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Backup end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Unique ID of a backup file.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Backup set size in bytes.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Backup start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Backup task status.
+	State pulumi.StringInput `pulumi:"state"`
+}
+
+func (GetBaseBackupsBaseBackupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBaseBackupsBaseBackupSet)(nil)).Elem()
+}
+
+func (i GetBaseBackupsBaseBackupSetArgs) ToGetBaseBackupsBaseBackupSetOutput() GetBaseBackupsBaseBackupSetOutput {
+	return i.ToGetBaseBackupsBaseBackupSetOutputWithContext(context.Background())
+}
+
+func (i GetBaseBackupsBaseBackupSetArgs) ToGetBaseBackupsBaseBackupSetOutputWithContext(ctx context.Context) GetBaseBackupsBaseBackupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBaseBackupsBaseBackupSetOutput)
+}
+
+// GetBaseBackupsBaseBackupSetArrayInput is an input type that accepts GetBaseBackupsBaseBackupSetArray and GetBaseBackupsBaseBackupSetArrayOutput values.
+// You can construct a concrete instance of `GetBaseBackupsBaseBackupSetArrayInput` via:
+//
+//          GetBaseBackupsBaseBackupSetArray{ GetBaseBackupsBaseBackupSetArgs{...} }
+type GetBaseBackupsBaseBackupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBaseBackupsBaseBackupSetArrayOutput() GetBaseBackupsBaseBackupSetArrayOutput
+	ToGetBaseBackupsBaseBackupSetArrayOutputWithContext(context.Context) GetBaseBackupsBaseBackupSetArrayOutput
+}
+
+type GetBaseBackupsBaseBackupSetArray []GetBaseBackupsBaseBackupSetInput
+
+func (GetBaseBackupsBaseBackupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBaseBackupsBaseBackupSet)(nil)).Elem()
+}
+
+func (i GetBaseBackupsBaseBackupSetArray) ToGetBaseBackupsBaseBackupSetArrayOutput() GetBaseBackupsBaseBackupSetArrayOutput {
+	return i.ToGetBaseBackupsBaseBackupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBaseBackupsBaseBackupSetArray) ToGetBaseBackupsBaseBackupSetArrayOutputWithContext(ctx context.Context) GetBaseBackupsBaseBackupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBaseBackupsBaseBackupSetArrayOutput)
+}
+
+type GetBaseBackupsBaseBackupSetOutput struct{ *pulumi.OutputState }
+
+func (GetBaseBackupsBaseBackupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBaseBackupsBaseBackupSet)(nil)).Elem()
+}
+
+func (o GetBaseBackupsBaseBackupSetOutput) ToGetBaseBackupsBaseBackupSetOutput() GetBaseBackupsBaseBackupSetOutput {
+	return o
+}
+
+func (o GetBaseBackupsBaseBackupSetOutput) ToGetBaseBackupsBaseBackupSetOutputWithContext(ctx context.Context) GetBaseBackupsBaseBackupSetOutput {
+	return o
+}
+
+// Backup method, including physical and logical.
+func (o GetBaseBackupsBaseBackupSetOutput) BackupMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.BackupMethod }).(pulumi.StringOutput)
+}
+
+// Backup mode, including automatic and manual.
+func (o GetBaseBackupsBaseBackupSetOutput) BackupMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.BackupMode }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetBaseBackupsBaseBackupSetOutput) DbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.DbInstanceId }).(pulumi.StringOutput)
+}
+
+// Backup expiration time.
+func (o GetBaseBackupsBaseBackupSetOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Backup end time.
+func (o GetBaseBackupsBaseBackupSetOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Unique ID of a backup file.
+func (o GetBaseBackupsBaseBackupSetOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Filter name.
+func (o GetBaseBackupsBaseBackupSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Backup set size in bytes.
+func (o GetBaseBackupsBaseBackupSetOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Backup start time.
+func (o GetBaseBackupsBaseBackupSetOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Backup task status.
+func (o GetBaseBackupsBaseBackupSetOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBaseBackupsBaseBackupSet) string { return v.State }).(pulumi.StringOutput)
+}
+
+type GetBaseBackupsBaseBackupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBaseBackupsBaseBackupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBaseBackupsBaseBackupSet)(nil)).Elem()
+}
+
+func (o GetBaseBackupsBaseBackupSetArrayOutput) ToGetBaseBackupsBaseBackupSetArrayOutput() GetBaseBackupsBaseBackupSetArrayOutput {
+	return o
+}
+
+func (o GetBaseBackupsBaseBackupSetArrayOutput) ToGetBaseBackupsBaseBackupSetArrayOutputWithContext(ctx context.Context) GetBaseBackupsBaseBackupSetArrayOutput {
+	return o
+}
+
+func (o GetBaseBackupsBaseBackupSetArrayOutput) Index(i pulumi.IntInput) GetBaseBackupsBaseBackupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBaseBackupsBaseBackupSet {
+		return vs[0].([]GetBaseBackupsBaseBackupSet)[vs[1].(int)]
+	}).(GetBaseBackupsBaseBackupSetOutput)
+}
+
+type GetBaseBackupsFilter struct {
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// One or more filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetBaseBackupsFilterInput is an input type that accepts GetBaseBackupsFilterArgs and GetBaseBackupsFilterOutput values.
+// You can construct a concrete instance of `GetBaseBackupsFilterInput` via:
+//
+//          GetBaseBackupsFilterArgs{...}
+type GetBaseBackupsFilterInput interface {
+	pulumi.Input
+
+	ToGetBaseBackupsFilterOutput() GetBaseBackupsFilterOutput
+	ToGetBaseBackupsFilterOutputWithContext(context.Context) GetBaseBackupsFilterOutput
+}
+
+type GetBaseBackupsFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// One or more filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetBaseBackupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBaseBackupsFilter)(nil)).Elem()
+}
+
+func (i GetBaseBackupsFilterArgs) ToGetBaseBackupsFilterOutput() GetBaseBackupsFilterOutput {
+	return i.ToGetBaseBackupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetBaseBackupsFilterArgs) ToGetBaseBackupsFilterOutputWithContext(ctx context.Context) GetBaseBackupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBaseBackupsFilterOutput)
+}
+
+// GetBaseBackupsFilterArrayInput is an input type that accepts GetBaseBackupsFilterArray and GetBaseBackupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetBaseBackupsFilterArrayInput` via:
+//
+//          GetBaseBackupsFilterArray{ GetBaseBackupsFilterArgs{...} }
+type GetBaseBackupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetBaseBackupsFilterArrayOutput() GetBaseBackupsFilterArrayOutput
+	ToGetBaseBackupsFilterArrayOutputWithContext(context.Context) GetBaseBackupsFilterArrayOutput
+}
+
+type GetBaseBackupsFilterArray []GetBaseBackupsFilterInput
+
+func (GetBaseBackupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBaseBackupsFilter)(nil)).Elem()
+}
+
+func (i GetBaseBackupsFilterArray) ToGetBaseBackupsFilterArrayOutput() GetBaseBackupsFilterArrayOutput {
+	return i.ToGetBaseBackupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetBaseBackupsFilterArray) ToGetBaseBackupsFilterArrayOutputWithContext(ctx context.Context) GetBaseBackupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBaseBackupsFilterArrayOutput)
+}
+
+type GetBaseBackupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetBaseBackupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBaseBackupsFilter)(nil)).Elem()
+}
+
+func (o GetBaseBackupsFilterOutput) ToGetBaseBackupsFilterOutput() GetBaseBackupsFilterOutput {
+	return o
+}
+
+func (o GetBaseBackupsFilterOutput) ToGetBaseBackupsFilterOutputWithContext(ctx context.Context) GetBaseBackupsFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetBaseBackupsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBaseBackupsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// One or more filter values.
+func (o GetBaseBackupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBaseBackupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetBaseBackupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBaseBackupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBaseBackupsFilter)(nil)).Elem()
+}
+
+func (o GetBaseBackupsFilterArrayOutput) ToGetBaseBackupsFilterArrayOutput() GetBaseBackupsFilterArrayOutput {
+	return o
+}
+
+func (o GetBaseBackupsFilterArrayOutput) ToGetBaseBackupsFilterArrayOutputWithContext(ctx context.Context) GetBaseBackupsFilterArrayOutput {
+	return o
+}
+
+func (o GetBaseBackupsFilterArrayOutput) Index(i pulumi.IntInput) GetBaseBackupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBaseBackupsFilter {
+		return vs[0].([]GetBaseBackupsFilter)[vs[1].(int)]
+	}).(GetBaseBackupsFilterOutput)
+}
+
+type GetDbInstanceClassesClassInfoSet struct {
+	// Number of CPU cores.
+	Cpu int `pulumi:"cpu"`
+	// Maximum storage capacity in GB supported by this specification.
+	MaxStorage int `pulumi:"maxStorage"`
+	// Memory size in MB.
+	Memory int `pulumi:"memory"`
+	// Minimum storage capacity in GB supported by this specification.
+	MinStorage int `pulumi:"minStorage"`
+	// Estimated QPS for this specification.
+	Qps int `pulumi:"qps"`
+	// Specification ID.
+	SpecCode string `pulumi:"specCode"`
+}
+
+// GetDbInstanceClassesClassInfoSetInput is an input type that accepts GetDbInstanceClassesClassInfoSetArgs and GetDbInstanceClassesClassInfoSetOutput values.
+// You can construct a concrete instance of `GetDbInstanceClassesClassInfoSetInput` via:
+//
+//          GetDbInstanceClassesClassInfoSetArgs{...}
+type GetDbInstanceClassesClassInfoSetInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceClassesClassInfoSetOutput() GetDbInstanceClassesClassInfoSetOutput
+	ToGetDbInstanceClassesClassInfoSetOutputWithContext(context.Context) GetDbInstanceClassesClassInfoSetOutput
+}
+
+type GetDbInstanceClassesClassInfoSetArgs struct {
+	// Number of CPU cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Maximum storage capacity in GB supported by this specification.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// Memory size in MB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Minimum storage capacity in GB supported by this specification.
+	MinStorage pulumi.IntInput `pulumi:"minStorage"`
+	// Estimated QPS for this specification.
+	Qps pulumi.IntInput `pulumi:"qps"`
+	// Specification ID.
+	SpecCode pulumi.StringInput `pulumi:"specCode"`
+}
+
+func (GetDbInstanceClassesClassInfoSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceClassesClassInfoSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceClassesClassInfoSetArgs) ToGetDbInstanceClassesClassInfoSetOutput() GetDbInstanceClassesClassInfoSetOutput {
+	return i.ToGetDbInstanceClassesClassInfoSetOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceClassesClassInfoSetArgs) ToGetDbInstanceClassesClassInfoSetOutputWithContext(ctx context.Context) GetDbInstanceClassesClassInfoSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceClassesClassInfoSetOutput)
+}
+
+// GetDbInstanceClassesClassInfoSetArrayInput is an input type that accepts GetDbInstanceClassesClassInfoSetArray and GetDbInstanceClassesClassInfoSetArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceClassesClassInfoSetArrayInput` via:
+//
+//          GetDbInstanceClassesClassInfoSetArray{ GetDbInstanceClassesClassInfoSetArgs{...} }
+type GetDbInstanceClassesClassInfoSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceClassesClassInfoSetArrayOutput() GetDbInstanceClassesClassInfoSetArrayOutput
+	ToGetDbInstanceClassesClassInfoSetArrayOutputWithContext(context.Context) GetDbInstanceClassesClassInfoSetArrayOutput
+}
+
+type GetDbInstanceClassesClassInfoSetArray []GetDbInstanceClassesClassInfoSetInput
+
+func (GetDbInstanceClassesClassInfoSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceClassesClassInfoSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceClassesClassInfoSetArray) ToGetDbInstanceClassesClassInfoSetArrayOutput() GetDbInstanceClassesClassInfoSetArrayOutput {
+	return i.ToGetDbInstanceClassesClassInfoSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceClassesClassInfoSetArray) ToGetDbInstanceClassesClassInfoSetArrayOutputWithContext(ctx context.Context) GetDbInstanceClassesClassInfoSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceClassesClassInfoSetArrayOutput)
+}
+
+type GetDbInstanceClassesClassInfoSetOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceClassesClassInfoSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceClassesClassInfoSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceClassesClassInfoSetOutput) ToGetDbInstanceClassesClassInfoSetOutput() GetDbInstanceClassesClassInfoSetOutput {
+	return o
+}
+
+func (o GetDbInstanceClassesClassInfoSetOutput) ToGetDbInstanceClassesClassInfoSetOutputWithContext(ctx context.Context) GetDbInstanceClassesClassInfoSetOutput {
+	return o
+}
+
+// Number of CPU cores.
+func (o GetDbInstanceClassesClassInfoSetOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Maximum storage capacity in GB supported by this specification.
+func (o GetDbInstanceClassesClassInfoSetOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) int { return v.MaxStorage }).(pulumi.IntOutput)
+}
+
+// Memory size in MB.
+func (o GetDbInstanceClassesClassInfoSetOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Minimum storage capacity in GB supported by this specification.
+func (o GetDbInstanceClassesClassInfoSetOutput) MinStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) int { return v.MinStorage }).(pulumi.IntOutput)
+}
+
+// Estimated QPS for this specification.
+func (o GetDbInstanceClassesClassInfoSetOutput) Qps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) int { return v.Qps }).(pulumi.IntOutput)
+}
+
+// Specification ID.
+func (o GetDbInstanceClassesClassInfoSetOutput) SpecCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesClassInfoSet) string { return v.SpecCode }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceClassesClassInfoSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceClassesClassInfoSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceClassesClassInfoSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceClassesClassInfoSetArrayOutput) ToGetDbInstanceClassesClassInfoSetArrayOutput() GetDbInstanceClassesClassInfoSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceClassesClassInfoSetArrayOutput) ToGetDbInstanceClassesClassInfoSetArrayOutputWithContext(ctx context.Context) GetDbInstanceClassesClassInfoSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceClassesClassInfoSetArrayOutput) Index(i pulumi.IntInput) GetDbInstanceClassesClassInfoSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceClassesClassInfoSet {
+		return vs[0].([]GetDbInstanceClassesClassInfoSet)[vs[1].(int)]
+	}).(GetDbInstanceClassesClassInfoSetOutput)
+}
+
+type GetDbInstanceVersionsVersionSet struct {
+	// List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+	AvailableUpgradeTargets []string `pulumi:"availableUpgradeTargets"`
+	// Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssqlCompatible` (MSSQL compatible-TencentDB for PostgreSQL).
+	DbEngine string `pulumi:"dbEngine"`
+	// Database kernel version, such as v12.4_r1.3.
+	DbKernelVersion string `pulumi:"dbKernelVersion"`
+	// Database major version, such as 12.
+	DbMajorVersion string `pulumi:"dbMajorVersion"`
+	// Database version, such as 12.4.
+	DbVersion string `pulumi:"dbVersion"`
+	// Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+	Status string `pulumi:"status"`
+	// List of features supported by the database kernel, such as:TDE: Supports data encryption.
+	SupportedFeatureNames []string `pulumi:"supportedFeatureNames"`
+}
+
+// GetDbInstanceVersionsVersionSetInput is an input type that accepts GetDbInstanceVersionsVersionSetArgs and GetDbInstanceVersionsVersionSetOutput values.
+// You can construct a concrete instance of `GetDbInstanceVersionsVersionSetInput` via:
+//
+//          GetDbInstanceVersionsVersionSetArgs{...}
+type GetDbInstanceVersionsVersionSetInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceVersionsVersionSetOutput() GetDbInstanceVersionsVersionSetOutput
+	ToGetDbInstanceVersionsVersionSetOutputWithContext(context.Context) GetDbInstanceVersionsVersionSetOutput
+}
+
+type GetDbInstanceVersionsVersionSetArgs struct {
+	// List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+	AvailableUpgradeTargets pulumi.StringArrayInput `pulumi:"availableUpgradeTargets"`
+	// Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssqlCompatible` (MSSQL compatible-TencentDB for PostgreSQL).
+	DbEngine pulumi.StringInput `pulumi:"dbEngine"`
+	// Database kernel version, such as v12.4_r1.3.
+	DbKernelVersion pulumi.StringInput `pulumi:"dbKernelVersion"`
+	// Database major version, such as 12.
+	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
+	// Database version, such as 12.4.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+	Status pulumi.StringInput `pulumi:"status"`
+	// List of features supported by the database kernel, such as:TDE: Supports data encryption.
+	SupportedFeatureNames pulumi.StringArrayInput `pulumi:"supportedFeatureNames"`
+}
+
+func (GetDbInstanceVersionsVersionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceVersionsVersionSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceVersionsVersionSetArgs) ToGetDbInstanceVersionsVersionSetOutput() GetDbInstanceVersionsVersionSetOutput {
+	return i.ToGetDbInstanceVersionsVersionSetOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceVersionsVersionSetArgs) ToGetDbInstanceVersionsVersionSetOutputWithContext(ctx context.Context) GetDbInstanceVersionsVersionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceVersionsVersionSetOutput)
+}
+
+// GetDbInstanceVersionsVersionSetArrayInput is an input type that accepts GetDbInstanceVersionsVersionSetArray and GetDbInstanceVersionsVersionSetArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceVersionsVersionSetArrayInput` via:
+//
+//          GetDbInstanceVersionsVersionSetArray{ GetDbInstanceVersionsVersionSetArgs{...} }
+type GetDbInstanceVersionsVersionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceVersionsVersionSetArrayOutput() GetDbInstanceVersionsVersionSetArrayOutput
+	ToGetDbInstanceVersionsVersionSetArrayOutputWithContext(context.Context) GetDbInstanceVersionsVersionSetArrayOutput
+}
+
+type GetDbInstanceVersionsVersionSetArray []GetDbInstanceVersionsVersionSetInput
+
+func (GetDbInstanceVersionsVersionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceVersionsVersionSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceVersionsVersionSetArray) ToGetDbInstanceVersionsVersionSetArrayOutput() GetDbInstanceVersionsVersionSetArrayOutput {
+	return i.ToGetDbInstanceVersionsVersionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceVersionsVersionSetArray) ToGetDbInstanceVersionsVersionSetArrayOutputWithContext(ctx context.Context) GetDbInstanceVersionsVersionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceVersionsVersionSetArrayOutput)
+}
+
+type GetDbInstanceVersionsVersionSetOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceVersionsVersionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceVersionsVersionSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceVersionsVersionSetOutput) ToGetDbInstanceVersionsVersionSetOutput() GetDbInstanceVersionsVersionSetOutput {
+	return o
+}
+
+func (o GetDbInstanceVersionsVersionSetOutput) ToGetDbInstanceVersionsVersionSetOutputWithContext(ctx context.Context) GetDbInstanceVersionsVersionSetOutput {
+	return o
+}
+
+// List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+func (o GetDbInstanceVersionsVersionSetOutput) AvailableUpgradeTargets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) []string { return v.AvailableUpgradeTargets }).(pulumi.StringArrayOutput)
+}
+
+// Database engines. Valid values:1. `postgresql` (TencentDB for PostgreSQL)2. `mssqlCompatible` (MSSQL compatible-TencentDB for PostgreSQL).
+func (o GetDbInstanceVersionsVersionSetOutput) DbEngine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) string { return v.DbEngine }).(pulumi.StringOutput)
+}
+
+// Database kernel version, such as v12.4_r1.3.
+func (o GetDbInstanceVersionsVersionSetOutput) DbKernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) string { return v.DbKernelVersion }).(pulumi.StringOutput)
+}
+
+// Database major version, such as 12.
+func (o GetDbInstanceVersionsVersionSetOutput) DbMajorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) string { return v.DbMajorVersion }).(pulumi.StringOutput)
+}
+
+// Database version, such as 12.4.
+func (o GetDbInstanceVersionsVersionSetOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) string { return v.DbVersion }).(pulumi.StringOutput)
+}
+
+// Database version status. Valid values:`AVAILABLE`.`DEPRECATED`.
+func (o GetDbInstanceVersionsVersionSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// List of features supported by the database kernel, such as:TDE: Supports data encryption.
+func (o GetDbInstanceVersionsVersionSetOutput) SupportedFeatureNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsVersionSet) []string { return v.SupportedFeatureNames }).(pulumi.StringArrayOutput)
+}
+
+type GetDbInstanceVersionsVersionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceVersionsVersionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceVersionsVersionSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceVersionsVersionSetArrayOutput) ToGetDbInstanceVersionsVersionSetArrayOutput() GetDbInstanceVersionsVersionSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceVersionsVersionSetArrayOutput) ToGetDbInstanceVersionsVersionSetArrayOutputWithContext(ctx context.Context) GetDbInstanceVersionsVersionSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceVersionsVersionSetArrayOutput) Index(i pulumi.IntInput) GetDbInstanceVersionsVersionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceVersionsVersionSet {
+		return vs[0].([]GetDbInstanceVersionsVersionSet)[vs[1].(int)]
+	}).(GetDbInstanceVersionsVersionSetOutput)
+}
+
+type GetDefaultParametersParamInfoSet struct {
+	// Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	Advanced bool `pulumi:"advanced"`
+	// Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationCn string `pulumi:"classificationCn"`
+	// Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationEn string `pulumi:"classificationEn"`
+	// Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+	CurrentValue string `pulumi:"currentValue"`
+	// Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+	DefaultValue string `pulumi:"defaultValue"`
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues []string `pulumi:"enumValues"`
+	// Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+	Id int `pulumi:"id"`
+	// The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+	LastModifyTime string `pulumi:"lastModifyTime"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max float64 `pulumi:"max"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min float64 `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name string `pulumi:"name"`
+	// Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	NeedReboot bool `pulumi:"needReboot"`
+	// Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionCh string `pulumi:"paramDescriptionCh"`
+	// Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionEn string `pulumi:"paramDescriptionEn"`
+	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutilEnum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutilEnum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamValueType string `pulumi:"paramValueType"`
+	// Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	SpecRelated bool `pulumi:"specRelated"`
+	// Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+	SpecRelationSets []GetDefaultParametersParamInfoSetSpecRelationSet `pulumi:"specRelationSets"`
+	// Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+	StandbyRelated int `pulumi:"standbyRelated"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit string `pulumi:"unit"`
+	// Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+	VersionRelationSets []GetDefaultParametersParamInfoSetVersionRelationSet `pulumi:"versionRelationSets"`
+}
+
+// GetDefaultParametersParamInfoSetInput is an input type that accepts GetDefaultParametersParamInfoSetArgs and GetDefaultParametersParamInfoSetOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetInput` via:
+//
+//          GetDefaultParametersParamInfoSetArgs{...}
+type GetDefaultParametersParamInfoSetInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetOutput() GetDefaultParametersParamInfoSetOutput
+	ToGetDefaultParametersParamInfoSetOutputWithContext(context.Context) GetDefaultParametersParamInfoSetOutput
+}
+
+type GetDefaultParametersParamInfoSetArgs struct {
+	// Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	Advanced pulumi.BoolInput `pulumi:"advanced"`
+	// Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationCn pulumi.StringInput `pulumi:"classificationCn"`
+	// Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationEn pulumi.StringInput `pulumi:"classificationEn"`
+	// Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+	Id pulumi.IntInput `pulumi:"id"`
+	// The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+	LastModifyTime pulumi.StringInput `pulumi:"lastModifyTime"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max pulumi.Float64Input `pulumi:"max"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min pulumi.Float64Input `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	NeedReboot pulumi.BoolInput `pulumi:"needReboot"`
+	// Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionCh pulumi.StringInput `pulumi:"paramDescriptionCh"`
+	// Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionEn pulumi.StringInput `pulumi:"paramDescriptionEn"`
+	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutilEnum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutilEnum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamValueType pulumi.StringInput `pulumi:"paramValueType"`
+	// Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+	SpecRelated pulumi.BoolInput `pulumi:"specRelated"`
+	// Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+	SpecRelationSets GetDefaultParametersParamInfoSetSpecRelationSetArrayInput `pulumi:"specRelationSets"`
+	// Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+	StandbyRelated pulumi.IntInput `pulumi:"standbyRelated"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+	VersionRelationSets GetDefaultParametersParamInfoSetVersionRelationSetArrayInput `pulumi:"versionRelationSets"`
+}
+
+func (GetDefaultParametersParamInfoSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetArgs) ToGetDefaultParametersParamInfoSetOutput() GetDefaultParametersParamInfoSetOutput {
+	return i.ToGetDefaultParametersParamInfoSetOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetArgs) ToGetDefaultParametersParamInfoSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetOutput)
+}
+
+// GetDefaultParametersParamInfoSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetArray and GetDefaultParametersParamInfoSetArrayOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetArrayInput` via:
+//
+//          GetDefaultParametersParamInfoSetArray{ GetDefaultParametersParamInfoSetArgs{...} }
+type GetDefaultParametersParamInfoSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetArrayOutput() GetDefaultParametersParamInfoSetArrayOutput
+	ToGetDefaultParametersParamInfoSetArrayOutputWithContext(context.Context) GetDefaultParametersParamInfoSetArrayOutput
+}
+
+type GetDefaultParametersParamInfoSetArray []GetDefaultParametersParamInfoSetInput
+
+func (GetDefaultParametersParamInfoSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetArray) ToGetDefaultParametersParamInfoSetArrayOutput() GetDefaultParametersParamInfoSetArrayOutput {
+	return i.ToGetDefaultParametersParamInfoSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetArray) ToGetDefaultParametersParamInfoSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetArrayOutput)
+}
+
+type GetDefaultParametersParamInfoSetOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetOutput) ToGetDefaultParametersParamInfoSetOutput() GetDefaultParametersParamInfoSetOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetOutput) ToGetDefaultParametersParamInfoSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetOutput {
+	return o
+}
+
+// Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Advanced() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) bool { return v.Advanced }).(pulumi.BoolOutput)
+}
+
+// Parameter category in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) ClassificationCn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.ClassificationCn }).(pulumi.StringOutput)
+}
+
+// Parameter category in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) ClassificationEn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.ClassificationEn }).(pulumi.StringOutput)
+}
+
+// Current value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// Default value of the parameter, which is returned as a stringNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// Parameter IDNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// The last modified time of the parameterNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) LastModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.LastModifyTime }).(pulumi.StringOutput)
+}
+
+// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Max() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) float64 { return v.Max }).(pulumi.Float64Output)
+}
+
+// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Min() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) float64 { return v.Min }).(pulumi.Float64Output)
+}
+
+// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) NeedReboot() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) bool { return v.NeedReboot }).(pulumi.BoolOutput)
+}
+
+// Parameter description in ChineseNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) ParamDescriptionCh() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.ParamDescriptionCh }).(pulumi.StringOutput)
+}
+
+// Parameter description in EnglishNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) ParamDescriptionEn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.ParamDescriptionEn }).(pulumi.StringOutput)
+}
+
+// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutilEnum` (this type of parameter can be set to multiple enumerated values).For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. For a `bool` parameter, the valid values include `true` and `false`; For an `enum` or `mutilEnum` parameter, the `EnumValue` field represents the valid values.Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) ParamValueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.ParamValueType }).(pulumi.StringOutput)
+}
+
+// Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) SpecRelated() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) bool { return v.SpecRelated }).(pulumi.BoolOutput)
+}
+
+// Associated parameter specification information, which refers to the detailed parameter information of the specifications.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) SpecRelationSets() GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) []GetDefaultParametersParamInfoSetSpecRelationSet {
+		return v.SpecRelationSets
+	}).(GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput)
+}
+
+// Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) StandbyRelated() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) int { return v.StandbyRelated }).(pulumi.IntOutput)
+}
+
+// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Associated parameter version information, which refers to the detailed parameter information of the kernel version.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetOutput) VersionRelationSets() GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSet) []GetDefaultParametersParamInfoSetVersionRelationSet {
+		return v.VersionRelationSets
+	}).(GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput)
+}
+
+type GetDefaultParametersParamInfoSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetArrayOutput) ToGetDefaultParametersParamInfoSetArrayOutput() GetDefaultParametersParamInfoSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetArrayOutput) ToGetDefaultParametersParamInfoSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetArrayOutput) Index(i pulumi.IntInput) GetDefaultParametersParamInfoSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDefaultParametersParamInfoSet {
+		return vs[0].([]GetDefaultParametersParamInfoSet)[vs[1].(int)]
+	}).(GetDefaultParametersParamInfoSetOutput)
+}
+
+type GetDefaultParametersParamInfoSetSpecRelationSet struct {
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues []string `pulumi:"enumValues"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max float64 `pulumi:"max"`
+	// The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+	Memory string `pulumi:"memory"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min float64 `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name string `pulumi:"name"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit string `pulumi:"unit"`
+	// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+	Value string `pulumi:"value"`
+}
+
+// GetDefaultParametersParamInfoSetSpecRelationSetInput is an input type that accepts GetDefaultParametersParamInfoSetSpecRelationSetArgs and GetDefaultParametersParamInfoSetSpecRelationSetOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetSpecRelationSetInput` via:
+//
+//          GetDefaultParametersParamInfoSetSpecRelationSetArgs{...}
+type GetDefaultParametersParamInfoSetSpecRelationSetInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetSpecRelationSetOutput() GetDefaultParametersParamInfoSetSpecRelationSetOutput
+	ToGetDefaultParametersParamInfoSetSpecRelationSetOutputWithContext(context.Context) GetDefaultParametersParamInfoSetSpecRelationSetOutput
+}
+
+type GetDefaultParametersParamInfoSetSpecRelationSetArgs struct {
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max pulumi.Float64Input `pulumi:"max"`
+	// The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+	Memory pulumi.StringInput `pulumi:"memory"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min pulumi.Float64Input `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDefaultParametersParamInfoSetSpecRelationSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetSpecRelationSetArgs) ToGetDefaultParametersParamInfoSetSpecRelationSetOutput() GetDefaultParametersParamInfoSetSpecRelationSetOutput {
+	return i.ToGetDefaultParametersParamInfoSetSpecRelationSetOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetSpecRelationSetArgs) ToGetDefaultParametersParamInfoSetSpecRelationSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetSpecRelationSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetSpecRelationSetOutput)
+}
+
+// GetDefaultParametersParamInfoSetSpecRelationSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetSpecRelationSetArray and GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetSpecRelationSetArrayInput` via:
+//
+//          GetDefaultParametersParamInfoSetSpecRelationSetArray{ GetDefaultParametersParamInfoSetSpecRelationSetArgs{...} }
+type GetDefaultParametersParamInfoSetSpecRelationSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutput() GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput
+	ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutputWithContext(context.Context) GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput
+}
+
+type GetDefaultParametersParamInfoSetSpecRelationSetArray []GetDefaultParametersParamInfoSetSpecRelationSetInput
+
+func (GetDefaultParametersParamInfoSetSpecRelationSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSetSpecRelationSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetSpecRelationSetArray) ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutput() GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput {
+	return i.ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetSpecRelationSetArray) ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput)
+}
+
+type GetDefaultParametersParamInfoSetSpecRelationSetOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetSpecRelationSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) ToGetDefaultParametersParamInfoSetSpecRelationSetOutput() GetDefaultParametersParamInfoSetSpecRelationSetOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) ToGetDefaultParametersParamInfoSetSpecRelationSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetSpecRelationSetOutput {
+	return o
+}
+
+// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Max() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) float64 { return v.Max }).(pulumi.Float64Output)
+}
+
+// The specification that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Memory() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) string { return v.Memory }).(pulumi.StringOutput)
+}
+
+// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Min() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) float64 { return v.Min }).(pulumi.Float64Output)
+}
+
+// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetSpecRelationSetOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetSpecRelationSet) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSetSpecRelationSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput) ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutput() GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput) ToGetDefaultParametersParamInfoSetSpecRelationSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput) Index(i pulumi.IntInput) GetDefaultParametersParamInfoSetSpecRelationSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDefaultParametersParamInfoSetSpecRelationSet {
+		return vs[0].([]GetDefaultParametersParamInfoSetSpecRelationSet)[vs[1].(int)]
+	}).(GetDefaultParametersParamInfoSetSpecRelationSetOutput)
+}
+
+type GetDefaultParametersParamInfoSetVersionRelationSet struct {
+	// The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+	DbKernelVersion string `pulumi:"dbKernelVersion"`
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues []string `pulumi:"enumValues"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max float64 `pulumi:"max"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min float64 `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name string `pulumi:"name"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit string `pulumi:"unit"`
+	// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+	Value string `pulumi:"value"`
+}
+
+// GetDefaultParametersParamInfoSetVersionRelationSetInput is an input type that accepts GetDefaultParametersParamInfoSetVersionRelationSetArgs and GetDefaultParametersParamInfoSetVersionRelationSetOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetVersionRelationSetInput` via:
+//
+//          GetDefaultParametersParamInfoSetVersionRelationSetArgs{...}
+type GetDefaultParametersParamInfoSetVersionRelationSetInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetVersionRelationSetOutput() GetDefaultParametersParamInfoSetVersionRelationSetOutput
+	ToGetDefaultParametersParamInfoSetVersionRelationSetOutputWithContext(context.Context) GetDefaultParametersParamInfoSetVersionRelationSetOutput
+}
+
+type GetDefaultParametersParamInfoSetVersionRelationSetArgs struct {
+	// The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+	DbKernelVersion pulumi.StringInput `pulumi:"dbKernelVersion"`
+	// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+	EnumValues pulumi.StringArrayInput `pulumi:"enumValues"`
+	// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Max pulumi.Float64Input `pulumi:"max"`
+	// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+	Min pulumi.Float64Input `pulumi:"min"`
+	// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDefaultParametersParamInfoSetVersionRelationSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetVersionRelationSetArgs) ToGetDefaultParametersParamInfoSetVersionRelationSetOutput() GetDefaultParametersParamInfoSetVersionRelationSetOutput {
+	return i.ToGetDefaultParametersParamInfoSetVersionRelationSetOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetVersionRelationSetArgs) ToGetDefaultParametersParamInfoSetVersionRelationSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetVersionRelationSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetVersionRelationSetOutput)
+}
+
+// GetDefaultParametersParamInfoSetVersionRelationSetArrayInput is an input type that accepts GetDefaultParametersParamInfoSetVersionRelationSetArray and GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput values.
+// You can construct a concrete instance of `GetDefaultParametersParamInfoSetVersionRelationSetArrayInput` via:
+//
+//          GetDefaultParametersParamInfoSetVersionRelationSetArray{ GetDefaultParametersParamInfoSetVersionRelationSetArgs{...} }
+type GetDefaultParametersParamInfoSetVersionRelationSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutput() GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput
+	ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutputWithContext(context.Context) GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput
+}
+
+type GetDefaultParametersParamInfoSetVersionRelationSetArray []GetDefaultParametersParamInfoSetVersionRelationSetInput
+
+func (GetDefaultParametersParamInfoSetVersionRelationSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSetVersionRelationSet)(nil)).Elem()
+}
+
+func (i GetDefaultParametersParamInfoSetVersionRelationSetArray) ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutput() GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput {
+	return i.ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDefaultParametersParamInfoSetVersionRelationSetArray) ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput)
+}
+
+type GetDefaultParametersParamInfoSetVersionRelationSetOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetVersionRelationSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) ToGetDefaultParametersParamInfoSetVersionRelationSetOutput() GetDefaultParametersParamInfoSetVersionRelationSetOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) ToGetDefaultParametersParamInfoSetVersionRelationSetOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetVersionRelationSetOutput {
+	return o
+}
+
+// The kernel version that corresponds to the parameter informationNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) DbKernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) string { return v.DbKernelVersion }).(pulumi.StringOutput)
+}
+
+// Value range of the enum parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) EnumValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) []string { return v.EnumValues }).(pulumi.StringArrayOutput)
+}
+
+// The maximum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) Max() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) float64 { return v.Max }).(pulumi.Float64Output)
+}
+
+// The minimum value of the `integer` or `real` parameterNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) Min() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) float64 { return v.Min }).(pulumi.Float64Output)
+}
+
+// Parameter nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Unit of the parameter value. If the parameter has no unit, this field will return null.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Default parameter value under the kernel version and specification of the instanceNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetDefaultParametersParamInfoSetVersionRelationSetOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDefaultParametersParamInfoSetVersionRelationSet) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDefaultParametersParamInfoSetVersionRelationSet)(nil)).Elem()
+}
+
+func (o GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput) ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutput() GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput) ToGetDefaultParametersParamInfoSetVersionRelationSetArrayOutputWithContext(ctx context.Context) GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput {
+	return o
+}
+
+func (o GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput) Index(i pulumi.IntInput) GetDefaultParametersParamInfoSetVersionRelationSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDefaultParametersParamInfoSetVersionRelationSet {
+		return vs[0].([]GetDefaultParametersParamInfoSetVersionRelationSet)[vs[1].(int)]
+	}).(GetDefaultParametersParamInfoSetVersionRelationSetOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Auto renew flag.
 	AutoRenewFlag int `pulumi:"autoRenewFlag"`
@@ -684,6 +2048,290 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	}).(GetInstancesInstanceListOutput)
 }
 
+type GetLogBackupsFilter struct {
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// One or more filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetLogBackupsFilterInput is an input type that accepts GetLogBackupsFilterArgs and GetLogBackupsFilterOutput values.
+// You can construct a concrete instance of `GetLogBackupsFilterInput` via:
+//
+//          GetLogBackupsFilterArgs{...}
+type GetLogBackupsFilterInput interface {
+	pulumi.Input
+
+	ToGetLogBackupsFilterOutput() GetLogBackupsFilterOutput
+	ToGetLogBackupsFilterOutputWithContext(context.Context) GetLogBackupsFilterOutput
+}
+
+type GetLogBackupsFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// One or more filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetLogBackupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogBackupsFilter)(nil)).Elem()
+}
+
+func (i GetLogBackupsFilterArgs) ToGetLogBackupsFilterOutput() GetLogBackupsFilterOutput {
+	return i.ToGetLogBackupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetLogBackupsFilterArgs) ToGetLogBackupsFilterOutputWithContext(ctx context.Context) GetLogBackupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogBackupsFilterOutput)
+}
+
+// GetLogBackupsFilterArrayInput is an input type that accepts GetLogBackupsFilterArray and GetLogBackupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetLogBackupsFilterArrayInput` via:
+//
+//          GetLogBackupsFilterArray{ GetLogBackupsFilterArgs{...} }
+type GetLogBackupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetLogBackupsFilterArrayOutput() GetLogBackupsFilterArrayOutput
+	ToGetLogBackupsFilterArrayOutputWithContext(context.Context) GetLogBackupsFilterArrayOutput
+}
+
+type GetLogBackupsFilterArray []GetLogBackupsFilterInput
+
+func (GetLogBackupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogBackupsFilter)(nil)).Elem()
+}
+
+func (i GetLogBackupsFilterArray) ToGetLogBackupsFilterArrayOutput() GetLogBackupsFilterArrayOutput {
+	return i.ToGetLogBackupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogBackupsFilterArray) ToGetLogBackupsFilterArrayOutputWithContext(ctx context.Context) GetLogBackupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogBackupsFilterArrayOutput)
+}
+
+type GetLogBackupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetLogBackupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogBackupsFilter)(nil)).Elem()
+}
+
+func (o GetLogBackupsFilterOutput) ToGetLogBackupsFilterOutput() GetLogBackupsFilterOutput {
+	return o
+}
+
+func (o GetLogBackupsFilterOutput) ToGetLogBackupsFilterOutputWithContext(ctx context.Context) GetLogBackupsFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetLogBackupsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetLogBackupsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// One or more filter values.
+func (o GetLogBackupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLogBackupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetLogBackupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogBackupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogBackupsFilter)(nil)).Elem()
+}
+
+func (o GetLogBackupsFilterArrayOutput) ToGetLogBackupsFilterArrayOutput() GetLogBackupsFilterArrayOutput {
+	return o
+}
+
+func (o GetLogBackupsFilterArrayOutput) ToGetLogBackupsFilterArrayOutputWithContext(ctx context.Context) GetLogBackupsFilterArrayOutput {
+	return o
+}
+
+func (o GetLogBackupsFilterArrayOutput) Index(i pulumi.IntInput) GetLogBackupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogBackupsFilter {
+		return vs[0].([]GetLogBackupsFilter)[vs[1].(int)]
+	}).(GetLogBackupsFilterOutput)
+}
+
+type GetLogBackupsLogBackupSet struct {
+	// Backup method, including physical and logical.
+	BackupMethod string `pulumi:"backupMethod"`
+	// Backup mode, including automatic and manual.
+	BackupMode string `pulumi:"backupMode"`
+	// Instance ID.
+	DbInstanceId string `pulumi:"dbInstanceId"`
+	// Backup expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Backup end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Unique ID of a backup file.
+	Id string `pulumi:"id"`
+	// Filter name.
+	Name string `pulumi:"name"`
+	// Backup set size in bytes.
+	Size int `pulumi:"size"`
+	// Backup start time.
+	StartTime string `pulumi:"startTime"`
+	// Backup task status.
+	State string `pulumi:"state"`
+}
+
+// GetLogBackupsLogBackupSetInput is an input type that accepts GetLogBackupsLogBackupSetArgs and GetLogBackupsLogBackupSetOutput values.
+// You can construct a concrete instance of `GetLogBackupsLogBackupSetInput` via:
+//
+//          GetLogBackupsLogBackupSetArgs{...}
+type GetLogBackupsLogBackupSetInput interface {
+	pulumi.Input
+
+	ToGetLogBackupsLogBackupSetOutput() GetLogBackupsLogBackupSetOutput
+	ToGetLogBackupsLogBackupSetOutputWithContext(context.Context) GetLogBackupsLogBackupSetOutput
+}
+
+type GetLogBackupsLogBackupSetArgs struct {
+	// Backup method, including physical and logical.
+	BackupMethod pulumi.StringInput `pulumi:"backupMethod"`
+	// Backup mode, including automatic and manual.
+	BackupMode pulumi.StringInput `pulumi:"backupMode"`
+	// Instance ID.
+	DbInstanceId pulumi.StringInput `pulumi:"dbInstanceId"`
+	// Backup expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Backup end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Unique ID of a backup file.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Backup set size in bytes.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Backup start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Backup task status.
+	State pulumi.StringInput `pulumi:"state"`
+}
+
+func (GetLogBackupsLogBackupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogBackupsLogBackupSet)(nil)).Elem()
+}
+
+func (i GetLogBackupsLogBackupSetArgs) ToGetLogBackupsLogBackupSetOutput() GetLogBackupsLogBackupSetOutput {
+	return i.ToGetLogBackupsLogBackupSetOutputWithContext(context.Background())
+}
+
+func (i GetLogBackupsLogBackupSetArgs) ToGetLogBackupsLogBackupSetOutputWithContext(ctx context.Context) GetLogBackupsLogBackupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogBackupsLogBackupSetOutput)
+}
+
+// GetLogBackupsLogBackupSetArrayInput is an input type that accepts GetLogBackupsLogBackupSetArray and GetLogBackupsLogBackupSetArrayOutput values.
+// You can construct a concrete instance of `GetLogBackupsLogBackupSetArrayInput` via:
+//
+//          GetLogBackupsLogBackupSetArray{ GetLogBackupsLogBackupSetArgs{...} }
+type GetLogBackupsLogBackupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLogBackupsLogBackupSetArrayOutput() GetLogBackupsLogBackupSetArrayOutput
+	ToGetLogBackupsLogBackupSetArrayOutputWithContext(context.Context) GetLogBackupsLogBackupSetArrayOutput
+}
+
+type GetLogBackupsLogBackupSetArray []GetLogBackupsLogBackupSetInput
+
+func (GetLogBackupsLogBackupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogBackupsLogBackupSet)(nil)).Elem()
+}
+
+func (i GetLogBackupsLogBackupSetArray) ToGetLogBackupsLogBackupSetArrayOutput() GetLogBackupsLogBackupSetArrayOutput {
+	return i.ToGetLogBackupsLogBackupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogBackupsLogBackupSetArray) ToGetLogBackupsLogBackupSetArrayOutputWithContext(ctx context.Context) GetLogBackupsLogBackupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogBackupsLogBackupSetArrayOutput)
+}
+
+type GetLogBackupsLogBackupSetOutput struct{ *pulumi.OutputState }
+
+func (GetLogBackupsLogBackupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogBackupsLogBackupSet)(nil)).Elem()
+}
+
+func (o GetLogBackupsLogBackupSetOutput) ToGetLogBackupsLogBackupSetOutput() GetLogBackupsLogBackupSetOutput {
+	return o
+}
+
+func (o GetLogBackupsLogBackupSetOutput) ToGetLogBackupsLogBackupSetOutputWithContext(ctx context.Context) GetLogBackupsLogBackupSetOutput {
+	return o
+}
+
+// Backup method, including physical and logical.
+func (o GetLogBackupsLogBackupSetOutput) BackupMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.BackupMethod }).(pulumi.StringOutput)
+}
+
+// Backup mode, including automatic and manual.
+func (o GetLogBackupsLogBackupSetOutput) BackupMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.BackupMode }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetLogBackupsLogBackupSetOutput) DbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.DbInstanceId }).(pulumi.StringOutput)
+}
+
+// Backup expiration time.
+func (o GetLogBackupsLogBackupSetOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Backup end time.
+func (o GetLogBackupsLogBackupSetOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Unique ID of a backup file.
+func (o GetLogBackupsLogBackupSetOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Filter name.
+func (o GetLogBackupsLogBackupSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Backup set size in bytes.
+func (o GetLogBackupsLogBackupSetOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Backup start time.
+func (o GetLogBackupsLogBackupSetOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Backup task status.
+func (o GetLogBackupsLogBackupSetOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogBackupsLogBackupSet) string { return v.State }).(pulumi.StringOutput)
+}
+
+type GetLogBackupsLogBackupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogBackupsLogBackupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogBackupsLogBackupSet)(nil)).Elem()
+}
+
+func (o GetLogBackupsLogBackupSetArrayOutput) ToGetLogBackupsLogBackupSetArrayOutput() GetLogBackupsLogBackupSetArrayOutput {
+	return o
+}
+
+func (o GetLogBackupsLogBackupSetArrayOutput) ToGetLogBackupsLogBackupSetArrayOutputWithContext(ctx context.Context) GetLogBackupsLogBackupSetArrayOutput {
+	return o
+}
+
+func (o GetLogBackupsLogBackupSetArrayOutput) Index(i pulumi.IntInput) GetLogBackupsLogBackupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogBackupsLogBackupSet {
+		return vs[0].([]GetLogBackupsLogBackupSet)[vs[1].(int)]
+	}).(GetLogBackupsLogBackupSetOutput)
+}
+
 type GetParameterTemplatesFilter struct {
 	// Filter name.
 	Name *string `pulumi:"name"`
@@ -921,6 +2569,1826 @@ func (o GetParameterTemplatesListArrayOutput) Index(i pulumi.IntInput) GetParame
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetParameterTemplatesList {
 		return vs[0].([]GetParameterTemplatesList)[vs[1].(int)]
 	}).(GetParameterTemplatesListOutput)
+}
+
+type GetReadonlyGroupsFilter struct {
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// One or more filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetReadonlyGroupsFilterInput is an input type that accepts GetReadonlyGroupsFilterArgs and GetReadonlyGroupsFilterOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsFilterInput` via:
+//
+//          GetReadonlyGroupsFilterArgs{...}
+type GetReadonlyGroupsFilterInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsFilterOutput() GetReadonlyGroupsFilterOutput
+	ToGetReadonlyGroupsFilterOutputWithContext(context.Context) GetReadonlyGroupsFilterOutput
+}
+
+type GetReadonlyGroupsFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// One or more filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetReadonlyGroupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsFilter)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsFilterArgs) ToGetReadonlyGroupsFilterOutput() GetReadonlyGroupsFilterOutput {
+	return i.ToGetReadonlyGroupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsFilterArgs) ToGetReadonlyGroupsFilterOutputWithContext(ctx context.Context) GetReadonlyGroupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsFilterOutput)
+}
+
+// GetReadonlyGroupsFilterArrayInput is an input type that accepts GetReadonlyGroupsFilterArray and GetReadonlyGroupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsFilterArrayInput` via:
+//
+//          GetReadonlyGroupsFilterArray{ GetReadonlyGroupsFilterArgs{...} }
+type GetReadonlyGroupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsFilterArrayOutput() GetReadonlyGroupsFilterArrayOutput
+	ToGetReadonlyGroupsFilterArrayOutputWithContext(context.Context) GetReadonlyGroupsFilterArrayOutput
+}
+
+type GetReadonlyGroupsFilterArray []GetReadonlyGroupsFilterInput
+
+func (GetReadonlyGroupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsFilter)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsFilterArray) ToGetReadonlyGroupsFilterArrayOutput() GetReadonlyGroupsFilterArrayOutput {
+	return i.ToGetReadonlyGroupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsFilterArray) ToGetReadonlyGroupsFilterArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsFilterArrayOutput)
+}
+
+type GetReadonlyGroupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsFilter)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsFilterOutput) ToGetReadonlyGroupsFilterOutput() GetReadonlyGroupsFilterOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsFilterOutput) ToGetReadonlyGroupsFilterOutputWithContext(ctx context.Context) GetReadonlyGroupsFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetReadonlyGroupsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// One or more filter values.
+func (o GetReadonlyGroupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetReadonlyGroupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsFilter)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsFilterArrayOutput) ToGetReadonlyGroupsFilterArrayOutput() GetReadonlyGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsFilterArrayOutput) ToGetReadonlyGroupsFilterArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsFilterArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsFilter {
+		return vs[0].([]GetReadonlyGroupsFilter)[vs[1].(int)]
+	}).(GetReadonlyGroupsFilterOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupList struct {
+	// instance network connection information.
+	DbInstanceNetInfos []GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo `pulumi:"dbInstanceNetInfos"`
+	// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+	MasterDbInstanceId string `pulumi:"masterDbInstanceId"`
+	// delay time size threshold.
+	MaxReplayLag float64 `pulumi:"maxReplayLag"`
+	// delay space size threshold.
+	MaxReplayLatency int `pulumi:"maxReplayLatency"`
+	// Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+	MinDelayEliminateReserve int `pulumi:"minDelayEliminateReserve"`
+	// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+	NetworkAccessLists []GetReadonlyGroupsReadOnlyGroupListNetworkAccessList `pulumi:"networkAccessLists"`
+	// project ID.
+	ProjectId int `pulumi:"projectId"`
+	// instance details.
+	ReadOnlyDbInstanceLists []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList `pulumi:"readOnlyDbInstanceLists"`
+	// read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyGroupId string `pulumi:"readOnlyGroupId"`
+	// read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyGroupName string `pulumi:"readOnlyGroupName"`
+	// automatic load balancing switch.
+	Rebalance int `pulumi:"rebalance"`
+	// region id.
+	Region string `pulumi:"region"`
+	// delay time switch.
+	ReplayLagEliminate int `pulumi:"replayLagEliminate"`
+	// delay size switch.
+	ReplayLatencyEliminate int `pulumi:"replayLatencyEliminate"`
+	// state.
+	Status string `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+	// region id.
+	Zone string `pulumi:"zone"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListArgs and GetReadonlyGroupsReadOnlyGroupListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListOutput() GetReadonlyGroupsReadOnlyGroupListOutput
+	ToGetReadonlyGroupsReadOnlyGroupListOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListArgs struct {
+	// instance network connection information.
+	DbInstanceNetInfos GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput `pulumi:"dbInstanceNetInfos"`
+	// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+	MasterDbInstanceId pulumi.StringInput `pulumi:"masterDbInstanceId"`
+	// delay time size threshold.
+	MaxReplayLag pulumi.Float64Input `pulumi:"maxReplayLag"`
+	// delay space size threshold.
+	MaxReplayLatency pulumi.IntInput `pulumi:"maxReplayLatency"`
+	// Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+	MinDelayEliminateReserve pulumi.IntInput `pulumi:"minDelayEliminateReserve"`
+	// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+	NetworkAccessLists GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput `pulumi:"networkAccessLists"`
+	// project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// instance details.
+	ReadOnlyDbInstanceLists GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput `pulumi:"readOnlyDbInstanceLists"`
+	// read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyGroupId pulumi.StringInput `pulumi:"readOnlyGroupId"`
+	// read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyGroupName pulumi.StringInput `pulumi:"readOnlyGroupName"`
+	// automatic load balancing switch.
+	Rebalance pulumi.IntInput `pulumi:"rebalance"`
+	// region id.
+	Region pulumi.StringInput `pulumi:"region"`
+	// delay time switch.
+	ReplayLagEliminate pulumi.IntInput `pulumi:"replayLagEliminate"`
+	// delay size switch.
+	ReplayLatencyEliminate pulumi.IntInput `pulumi:"replayLatencyEliminate"`
+	// state.
+	Status pulumi.StringInput `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// region id.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListArgs) ToGetReadonlyGroupsReadOnlyGroupListOutput() GetReadonlyGroupsReadOnlyGroupListOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListArgs) ToGetReadonlyGroupsReadOnlyGroupListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListArray and GetReadonlyGroupsReadOnlyGroupListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListArray{ GetReadonlyGroupsReadOnlyGroupListArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListArrayOutput() GetReadonlyGroupsReadOnlyGroupListArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListArray []GetReadonlyGroupsReadOnlyGroupListInput
+
+func (GetReadonlyGroupsReadOnlyGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListArray) ToGetReadonlyGroupsReadOnlyGroupListArrayOutput() GetReadonlyGroupsReadOnlyGroupListArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListArray) ToGetReadonlyGroupsReadOnlyGroupListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ToGetReadonlyGroupsReadOnlyGroupListOutput() GetReadonlyGroupsReadOnlyGroupListOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ToGetReadonlyGroupsReadOnlyGroupListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListOutput {
+	return o
+}
+
+// instance network connection information.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) DbInstanceNetInfos() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) []GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo {
+		return v.DbInstanceNetInfos
+	}).(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput)
+}
+
+// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) MasterDbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.MasterDbInstanceId }).(pulumi.StringOutput)
+}
+
+// delay time size threshold.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) MaxReplayLag() pulumi.Float64Output {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) float64 { return v.MaxReplayLag }).(pulumi.Float64Output)
+}
+
+// delay space size threshold.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) MaxReplayLatency() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.MaxReplayLatency }).(pulumi.IntOutput)
+}
+
+// Minimum Number of Reserved InstancesNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) MinDelayEliminateReserve() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.MinDelayEliminateReserve }).(pulumi.IntOutput)
+}
+
+// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) NetworkAccessLists() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) []GetReadonlyGroupsReadOnlyGroupListNetworkAccessList {
+		return v.NetworkAccessLists
+	}).(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput)
+}
+
+// project ID.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// instance details.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ReadOnlyDbInstanceLists() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList {
+		return v.ReadOnlyDbInstanceLists
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput)
+}
+
+// read-only group idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ReadOnlyGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.ReadOnlyGroupId }).(pulumi.StringOutput)
+}
+
+// read-only group nameNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ReadOnlyGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.ReadOnlyGroupName }).(pulumi.StringOutput)
+}
+
+// automatic load balancing switch.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) Rebalance() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.Rebalance }).(pulumi.IntOutput)
+}
+
+// region id.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// delay time switch.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ReplayLagEliminate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.ReplayLagEliminate }).(pulumi.IntOutput)
+}
+
+// delay size switch.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) ReplayLatencyEliminate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) int { return v.ReplayLatencyEliminate }).(pulumi.IntOutput)
+}
+
+// state.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// region id.
+func (o GetReadonlyGroupsReadOnlyGroupListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListArrayOutput() GetReadonlyGroupsReadOnlyGroupListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupList {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupList)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo struct {
+	// DNS domain name.
+	Address string `pulumi:"address"`
+	// IP address.
+	Ip string `pulumi:"ip"`
+	// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+	NetType string `pulumi:"netType"`
+	// connection port address.
+	Port int `pulumi:"port"`
+	// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+	ProtocolType string `pulumi:"protocolType"`
+	// state.
+	Status string `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs and GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput
+	ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs struct {
+	// DNS domain name.
+	Address pulumi.StringInput `pulumi:"address"`
+	// IP address.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+	NetType pulumi.StringInput `pulumi:"netType"`
+	// connection port address.
+	Port pulumi.IntInput `pulumi:"port"`
+	// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+	ProtocolType pulumi.StringInput `pulumi:"protocolType"`
+	// state.
+	Status pulumi.StringInput `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray and GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray []GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput
+
+func (GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput {
+	return o
+}
+
+// DNS domain name.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// IP address.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) NetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.NetType }).(pulumi.StringOutput)
+}
+
+// connection port address.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) ProtocolType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.ProtocolType }).(pulumi.StringOutput)
+}
+
+// state.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfo)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessList struct {
+	// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceType int `pulumi:"resourceType"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip string `pulumi:"vip"`
+	// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip6 string `pulumi:"vip6"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+	// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+	VpcStatus int `pulumi:"vpcStatus"`
+	// access portNote: This field may return null, indicating that no valid value can be obtained.
+	Vport int `pulumi:"vport"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs and GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput
+	ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs struct {
+	// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceType pulumi.IntInput `pulumi:"resourceType"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip6 pulumi.StringInput `pulumi:"vip6"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+	VpcStatus pulumi.IntInput `pulumi:"vpcStatus"`
+	// access portNote: This field may return null, indicating that no valid value can be obtained.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray and GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray []GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput
+
+func (GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput {
+	return o
+}
+
+// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) ResourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) int { return v.ResourceType }).(pulumi.IntOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) Vip6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) string { return v.Vip6 }).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) VpcStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) int { return v.VpcStatus }).(pulumi.IntOutput)
+}
+
+// access portNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListNetworkAccessList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListNetworkAccessList {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListNetworkAccessList)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList struct {
+	// user&#39;s AppId.
+	AppId int `pulumi:"appId"`
+	// auto-renew, 1: auto-renew, 0: no auto-renew.
+	AutoRenew int `pulumi:"autoRenew"`
+	// instance creation time.
+	CreateTime string `pulumi:"createTime"`
+	// instance DB character set.
+	DbCharset string `pulumi:"dbCharset"`
+	// Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssqlCompatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+	DbEngine string `pulumi:"dbEngine"`
+	// Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+	DbEngineConfig string `pulumi:"dbEngineConfig"`
+	// sales specification ID.
+	DbInstanceClass string `pulumi:"dbInstanceClass"`
+	// the number of CPUs allocated by the instance.
+	DbInstanceCpu int `pulumi:"dbInstanceCpu"`
+	// instance ID.
+	DbInstanceId string `pulumi:"dbInstanceId"`
+	// the memory size allocated by the instance, unit: GB.
+	DbInstanceMemory int `pulumi:"dbInstanceMemory"`
+	// instance name.
+	DbInstanceName string `pulumi:"dbInstanceName"`
+	// instance network connection information.
+	DbInstanceNetInfos []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo `pulumi:"dbInstanceNetInfos"`
+	// Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+	DbInstanceStatus string `pulumi:"dbInstanceStatus"`
+	// the size of the storage space allocated by the instance, unit: GB.
+	DbInstanceStorage int `pulumi:"dbInstanceStorage"`
+	// instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+	DbInstanceType string `pulumi:"dbInstanceType"`
+	// instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+	DbInstanceVersion string `pulumi:"dbInstanceVersion"`
+	// Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+	DbKernelVersion string `pulumi:"dbKernelVersion"`
+	// PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+	DbMajorVersion string `pulumi:"dbMajorVersion"`
+	// Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+	DbNodeSets []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet `pulumi:"dbNodeSets"`
+	// PostgreSQL version.
+	DbVersion string `pulumi:"dbVersion"`
+	// instance expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+	IsSupportTDE int `pulumi:"isSupportTDE"`
+	// instance isolation time.
+	IsolatedTime string `pulumi:"isolatedTime"`
+	// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+	MasterDbInstanceId string `pulumi:"masterDbInstanceId"`
+	// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+	NetworkAccessLists []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList `pulumi:"networkAccessLists"`
+	// offline timeNote: This field may return null, indicating that no valid value can be obtained.
+	OfflineTime string `pulumi:"offlineTime"`
+	// billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+	PayType string `pulumi:"payType"`
+	// project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyInstanceNum int `pulumi:"readOnlyInstanceNum"`
+	// region id.
+	Region string `pulumi:"region"`
+	// Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+	StatusInReadonlyGroup string `pulumi:"statusInReadonlyGroup"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// Whether the instance supports Ipv6, 1: support, 0: not support.
+	SupportIpv6 int `pulumi:"supportIpv6"`
+	// Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+	TagLists []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList `pulumi:"tagLists"`
+	// machine type.
+	Type string `pulumi:"type"`
+	// Uid of the instance.
+	Uid int `pulumi:"uid"`
+	// The time when the instance performed the last update.
+	UpdateTime string `pulumi:"updateTime"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+	// region id.
+	Zone string `pulumi:"zone"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs struct {
+	// user&#39;s AppId.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// auto-renew, 1: auto-renew, 0: no auto-renew.
+	AutoRenew pulumi.IntInput `pulumi:"autoRenew"`
+	// instance creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// instance DB character set.
+	DbCharset pulumi.StringInput `pulumi:"dbCharset"`
+	// Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssqlCompatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+	DbEngine pulumi.StringInput `pulumi:"dbEngine"`
+	// Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+	DbEngineConfig pulumi.StringInput `pulumi:"dbEngineConfig"`
+	// sales specification ID.
+	DbInstanceClass pulumi.StringInput `pulumi:"dbInstanceClass"`
+	// the number of CPUs allocated by the instance.
+	DbInstanceCpu pulumi.IntInput `pulumi:"dbInstanceCpu"`
+	// instance ID.
+	DbInstanceId pulumi.StringInput `pulumi:"dbInstanceId"`
+	// the memory size allocated by the instance, unit: GB.
+	DbInstanceMemory pulumi.IntInput `pulumi:"dbInstanceMemory"`
+	// instance name.
+	DbInstanceName pulumi.StringInput `pulumi:"dbInstanceName"`
+	// instance network connection information.
+	DbInstanceNetInfos GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput `pulumi:"dbInstanceNetInfos"`
+	// Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+	DbInstanceStatus pulumi.StringInput `pulumi:"dbInstanceStatus"`
+	// the size of the storage space allocated by the instance, unit: GB.
+	DbInstanceStorage pulumi.IntInput `pulumi:"dbInstanceStorage"`
+	// instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+	DbInstanceType pulumi.StringInput `pulumi:"dbInstanceType"`
+	// instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+	DbInstanceVersion pulumi.StringInput `pulumi:"dbInstanceVersion"`
+	// Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+	DbKernelVersion pulumi.StringInput `pulumi:"dbKernelVersion"`
+	// PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
+	// Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+	DbNodeSets GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput `pulumi:"dbNodeSets"`
+	// PostgreSQL version.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// instance expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+	IsSupportTDE pulumi.IntInput `pulumi:"isSupportTDE"`
+	// instance isolation time.
+	IsolatedTime pulumi.StringInput `pulumi:"isolatedTime"`
+	// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+	MasterDbInstanceId pulumi.StringInput `pulumi:"masterDbInstanceId"`
+	// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+	NetworkAccessLists GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput `pulumi:"networkAccessLists"`
+	// offline timeNote: This field may return null, indicating that no valid value can be obtained.
+	OfflineTime pulumi.StringInput `pulumi:"offlineTime"`
+	// billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+	PayType pulumi.StringInput `pulumi:"payType"`
+	// project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+	ReadOnlyInstanceNum pulumi.IntInput `pulumi:"readOnlyInstanceNum"`
+	// region id.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+	StatusInReadonlyGroup pulumi.StringInput `pulumi:"statusInReadonlyGroup"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Whether the instance supports Ipv6, 1: support, 0: not support.
+	SupportIpv6 pulumi.IntInput `pulumi:"supportIpv6"`
+	// Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+	TagLists GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput `pulumi:"tagLists"`
+	// machine type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Uid of the instance.
+	Uid pulumi.IntInput `pulumi:"uid"`
+	// The time when the instance performed the last update.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// region id.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput {
+	return o
+}
+
+// user&#39;s AppId.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// auto-renew, 1: auto-renew, 0: no auto-renew.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) AutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.AutoRenew }).(pulumi.IntOutput)
+}
+
+// instance creation time.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// instance DB character set.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbCharset() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbCharset }).(pulumi.StringOutput)
+}
+
+// Database engine that supports:1. postgresql (cloud database PostgreSQL);2. mssqlCompatible (MSSQL compatible - cloud database PostgreSQL);Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbEngine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbEngine }).(pulumi.StringOutput)
+}
+
+// Configuration information for the database engineNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbEngineConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbEngineConfig }).(pulumi.StringOutput)
+}
+
+// sales specification ID.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceClass }).(pulumi.StringOutput)
+}
+
+// the number of CPUs allocated by the instance.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceCpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.DbInstanceCpu }).(pulumi.IntOutput)
+}
+
+// instance ID.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceId }).(pulumi.StringOutput)
+}
+
+// the memory size allocated by the instance, unit: GB.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.DbInstanceMemory }).(pulumi.IntOutput)
+}
+
+// instance name.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceName }).(pulumi.StringOutput)
+}
+
+// instance network connection information.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceNetInfos() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo {
+		return v.DbInstanceNetInfos
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput)
+}
+
+// Instance status, respectively: applying (applying), init (to be initialized), initing (initializing), running (running), limited run (limited run), isolated (isolated), recycling (recycling ), recycled (recycled), job running (task execution), offline (offline), migrating (migration), expanding (expanding), waitSwitch (waiting for switching), switching (switching), readonly (read-only ), restarting (restarting), network changing (network changing), upgrading (kernel version upgrade).
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceStatus }).(pulumi.StringOutput)
+}
+
+// the size of the storage space allocated by the instance, unit: GB.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.DbInstanceStorage }).(pulumi.IntOutput)
+}
+
+// instance type, the types are: 1. primary (primary instance); 2. readonly (read-only instance); 3. guard (disaster recovery instance); 4. temp (temporary instance).
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceType }).(pulumi.StringOutput)
+}
+
+// instance version, currently only supports standard (dual machine high availability version, one master and one slave).
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbInstanceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbInstanceVersion }).(pulumi.StringOutput)
+}
+
+// Database kernel versionNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbKernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbKernelVersion }).(pulumi.StringOutput)
+}
+
+// PostgreSQL major versionNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbMajorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbMajorVersion }).(pulumi.StringOutput)
+}
+
+// Instance node informationNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbNodeSets() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet {
+		return v.DbNodeSets
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput)
+}
+
+// PostgreSQL version.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.DbVersion }).(pulumi.StringOutput)
+}
+
+// instance expiration time.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Whether the instance supports TDE data encryption 0: not supported, 1: supportedNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) IsSupportTDE() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.IsSupportTDE }).(pulumi.IntOutput)
+}
+
+// instance isolation time.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) IsolatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.IsolatedTime }).(pulumi.StringOutput)
+}
+
+// Master instance information, only returned when the instance is read-onlyNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) MasterDbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.MasterDbInstanceId }).(pulumi.StringOutput)
+}
+
+// Instance network information list (this field is obsolete)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) NetworkAccessLists() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList {
+		return v.NetworkAccessLists
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput)
+}
+
+// offline timeNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) OfflineTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.OfflineTime }).(pulumi.StringOutput)
+}
+
+// billing mode, 1. prepaid (subscription, prepaid); 2. postpaid (billing by volume, postpaid).
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) PayType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.PayType }).(pulumi.StringOutput)
+}
+
+// project ID.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Number of read-only instancesNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) ReadOnlyInstanceNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.ReadOnlyInstanceNum }).(pulumi.IntOutput)
+}
+
+// region id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Status of the read-only instance in the read-only groupNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) StatusInReadonlyGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string {
+		return v.StatusInReadonlyGroup
+	}).(pulumi.StringOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Whether the instance supports Ipv6, 1: support, 0: not support.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) SupportIpv6() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.SupportIpv6 }).(pulumi.IntOutput)
+}
+
+// Label information bound to the instanceNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) TagLists() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList {
+		return v.TagLists
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput)
+}
+
+// machine type.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Uid of the instance.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) Uid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) int { return v.Uid }).(pulumi.IntOutput)
+}
+
+// The time when the instance performed the last update.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// region id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceList)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo struct {
+	// DNS domain name.
+	Address string `pulumi:"address"`
+	// IP address.
+	Ip string `pulumi:"ip"`
+	// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+	NetType string `pulumi:"netType"`
+	// connection port address.
+	Port int `pulumi:"port"`
+	// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+	ProtocolType string `pulumi:"protocolType"`
+	// state.
+	Status string `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs struct {
+	// DNS domain name.
+	Address pulumi.StringInput `pulumi:"address"`
+	// IP address.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+	NetType pulumi.StringInput `pulumi:"netType"`
+	// connection port address.
+	Port pulumi.IntInput `pulumi:"port"`
+	// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+	ProtocolType pulumi.StringInput `pulumi:"protocolType"`
+	// state.
+	Status pulumi.StringInput `pulumi:"status"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput {
+	return o
+}
+
+// DNS domain name.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.Address
+	}).(pulumi.StringOutput)
+}
+
+// IP address.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// network type, 1. inner (intranet address of the basic network); 2. private (intranet address of the private network); 3. public (extranet address of the basic network or private network);.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) NetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.NetType
+	}).(pulumi.StringOutput)
+}
+
+// connection port address.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// The protocol type for connecting to the database, currently supported: postgresql, mssql (MSSQL compatible syntax)Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) ProtocolType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.ProtocolType
+	}).(pulumi.StringOutput)
+}
+
+// state.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.Status
+	}).(pulumi.StringOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.SubnetId
+	}).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo) string {
+		return v.VpcId
+	}).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfo)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet struct {
+	// Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+	Role string `pulumi:"role"`
+	// region id.
+	Zone string `pulumi:"zone"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs struct {
+	// Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+	Role pulumi.StringInput `pulumi:"role"`
+	// region id.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput {
+	return o
+}
+
+// Node type, the value can be:Primary, representing the primary node;Standby, stands for standby node.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// region id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSet)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList struct {
+	// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceType int `pulumi:"resourceType"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId string `pulumi:"subnetId"`
+	// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip string `pulumi:"vip"`
+	// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip6 string `pulumi:"vip6"`
+	// virtual network id.
+	VpcId string `pulumi:"vpcId"`
+	// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+	VpcStatus int `pulumi:"vpcStatus"`
+	// access portNote: This field may return null, indicating that no valid value can be obtained.
+	Vport int `pulumi:"vport"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs struct {
+	// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+	ResourceType pulumi.IntInput `pulumi:"resourceType"`
+	// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+	Vip6 pulumi.StringInput `pulumi:"vip6"`
+	// virtual network id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+	VpcStatus pulumi.IntInput `pulumi:"vpcStatus"`
+	// access portNote: This field may return null, indicating that no valid value can be obtained.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput {
+	return o
+}
+
+// Network resource id, instance id or RO group idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) string {
+		return v.ResourceId
+	}).(pulumi.StringOutput)
+}
+
+// Resource type, 1-instance 2-RO groupNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) ResourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) int {
+		return v.ResourceType
+	}).(pulumi.IntOutput)
+}
+
+// subnet-idNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) string {
+		return v.SubnetId
+	}).(pulumi.StringOutput)
+}
+
+// IPV4 addressNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// IPV6 addressNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) Vip6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) string {
+		return v.Vip6
+	}).(pulumi.StringOutput)
+}
+
+// virtual network id.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) string {
+		return v.VpcId
+	}).(pulumi.StringOutput)
+}
+
+// Network status, 1-applying, 2-using, 3-deleting, 4-deletedNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) VpcStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) int {
+		return v.VpcStatus
+	}).(pulumi.IntOutput)
+}
+
+// access portNote: This field may return null, indicating that no valid value can be obtained.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessList)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList struct {
+	// label key.
+	TagKey string `pulumi:"tagKey"`
+	// tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...}
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs struct {
+	// label key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput)
+}
+
+// GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput is an input type that accepts GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray and GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput values.
+// You can construct a concrete instance of `GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput` via:
+//
+//          GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray{ GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{...} }
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput interface {
+	pulumi.Input
+
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput
+	ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutputWithContext(context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray []GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList)(nil)).Elem()
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput {
+	return i.ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutputWithContext(context.Background())
+}
+
+func (i GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput {
+	return o
+}
+
+// label key.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// tag value.
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList)(nil)).Elem()
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput() GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput) ToGetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutputWithContext(ctx context.Context) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput {
+	return o
+}
+
+func (o GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput) Index(i pulumi.IntInput) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList {
+		return vs[0].([]GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagList)[vs[1].(int)]
+	}).(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput)
+}
+
+type GetRegionsRegionSet struct {
+	// Region abbreviation.
+	Region string `pulumi:"region"`
+	// Region number.
+	RegionId int `pulumi:"regionId"`
+	// Region name.
+	RegionName string `pulumi:"regionName"`
+	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+	RegionState string `pulumi:"regionState"`
+	// Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+	SupportInternational int `pulumi:"supportInternational"`
+}
+
+// GetRegionsRegionSetInput is an input type that accepts GetRegionsRegionSetArgs and GetRegionsRegionSetOutput values.
+// You can construct a concrete instance of `GetRegionsRegionSetInput` via:
+//
+//          GetRegionsRegionSetArgs{...}
+type GetRegionsRegionSetInput interface {
+	pulumi.Input
+
+	ToGetRegionsRegionSetOutput() GetRegionsRegionSetOutput
+	ToGetRegionsRegionSetOutputWithContext(context.Context) GetRegionsRegionSetOutput
+}
+
+type GetRegionsRegionSetArgs struct {
+	// Region abbreviation.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region number.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Region name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+	RegionState pulumi.StringInput `pulumi:"regionState"`
+	// Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+	SupportInternational pulumi.IntInput `pulumi:"supportInternational"`
+}
+
+func (GetRegionsRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionsRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionsRegionSetArgs) ToGetRegionsRegionSetOutput() GetRegionsRegionSetOutput {
+	return i.ToGetRegionsRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetRegionsRegionSetArgs) ToGetRegionsRegionSetOutputWithContext(ctx context.Context) GetRegionsRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionsRegionSetOutput)
+}
+
+// GetRegionsRegionSetArrayInput is an input type that accepts GetRegionsRegionSetArray and GetRegionsRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetRegionsRegionSetArrayInput` via:
+//
+//          GetRegionsRegionSetArray{ GetRegionsRegionSetArgs{...} }
+type GetRegionsRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRegionsRegionSetArrayOutput() GetRegionsRegionSetArrayOutput
+	ToGetRegionsRegionSetArrayOutputWithContext(context.Context) GetRegionsRegionSetArrayOutput
+}
+
+type GetRegionsRegionSetArray []GetRegionsRegionSetInput
+
+func (GetRegionsRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionsRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionsRegionSetArray) ToGetRegionsRegionSetArrayOutput() GetRegionsRegionSetArrayOutput {
+	return i.ToGetRegionsRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRegionsRegionSetArray) ToGetRegionsRegionSetArrayOutputWithContext(ctx context.Context) GetRegionsRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionsRegionSetArrayOutput)
+}
+
+type GetRegionsRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetRegionsRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionsRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionsRegionSetOutput) ToGetRegionsRegionSetOutput() GetRegionsRegionSetOutput {
+	return o
+}
+
+func (o GetRegionsRegionSetOutput) ToGetRegionsRegionSetOutputWithContext(ctx context.Context) GetRegionsRegionSetOutput {
+	return o
+}
+
+// Region abbreviation.
+func (o GetRegionsRegionSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegionSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region number.
+func (o GetRegionsRegionSetOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRegionsRegionSet) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// Region name.
+func (o GetRegionsRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available.
+func (o GetRegionsRegionSetOutput) RegionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegionSet) string { return v.RegionState }).(pulumi.StringOutput)
+}
+
+// Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetRegionsRegionSetOutput) SupportInternational() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRegionsRegionSet) int { return v.SupportInternational }).(pulumi.IntOutput)
+}
+
+type GetRegionsRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionsRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionsRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionsRegionSetArrayOutput) ToGetRegionsRegionSetArrayOutput() GetRegionsRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionsRegionSetArrayOutput) ToGetRegionsRegionSetArrayOutputWithContext(ctx context.Context) GetRegionsRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionsRegionSetArrayOutput) Index(i pulumi.IntInput) GetRegionsRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionsRegionSet {
+		return vs[0].([]GetRegionsRegionSet)[vs[1].(int)]
+	}).(GetRegionsRegionSetOutput)
 }
 
 type GetSpecinfosList struct {
@@ -1225,6 +4693,148 @@ func (o GetXlogsListArrayOutput) Index(i pulumi.IntInput) GetXlogsListOutput {
 	}).(GetXlogsListOutput)
 }
 
+type GetZonesZoneSet struct {
+	// AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+	StandbyZoneSets []string `pulumi:"standbyZoneSets"`
+	// AZ abbreviation.
+	Zone string `pulumi:"zone"`
+	// AZ number.
+	ZoneId int `pulumi:"zoneId"`
+	// AZ name.
+	ZoneName string `pulumi:"zoneName"`
+	// Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+	ZoneState string `pulumi:"zoneState"`
+	// Whether the AZ supports IPv6 address access.
+	ZoneSupportIpv6 int `pulumi:"zoneSupportIpv6"`
+}
+
+// GetZonesZoneSetInput is an input type that accepts GetZonesZoneSetArgs and GetZonesZoneSetOutput values.
+// You can construct a concrete instance of `GetZonesZoneSetInput` via:
+//
+//          GetZonesZoneSetArgs{...}
+type GetZonesZoneSetInput interface {
+	pulumi.Input
+
+	ToGetZonesZoneSetOutput() GetZonesZoneSetOutput
+	ToGetZonesZoneSetOutputWithContext(context.Context) GetZonesZoneSetOutput
+}
+
+type GetZonesZoneSetArgs struct {
+	// AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+	StandbyZoneSets pulumi.StringArrayInput `pulumi:"standbyZoneSets"`
+	// AZ abbreviation.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// AZ number.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// AZ name.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+	// Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+	ZoneState pulumi.StringInput `pulumi:"zoneState"`
+	// Whether the AZ supports IPv6 address access.
+	ZoneSupportIpv6 pulumi.IntInput `pulumi:"zoneSupportIpv6"`
+}
+
+func (GetZonesZoneSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZonesZoneSet)(nil)).Elem()
+}
+
+func (i GetZonesZoneSetArgs) ToGetZonesZoneSetOutput() GetZonesZoneSetOutput {
+	return i.ToGetZonesZoneSetOutputWithContext(context.Background())
+}
+
+func (i GetZonesZoneSetArgs) ToGetZonesZoneSetOutputWithContext(ctx context.Context) GetZonesZoneSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZonesZoneSetOutput)
+}
+
+// GetZonesZoneSetArrayInput is an input type that accepts GetZonesZoneSetArray and GetZonesZoneSetArrayOutput values.
+// You can construct a concrete instance of `GetZonesZoneSetArrayInput` via:
+//
+//          GetZonesZoneSetArray{ GetZonesZoneSetArgs{...} }
+type GetZonesZoneSetArrayInput interface {
+	pulumi.Input
+
+	ToGetZonesZoneSetArrayOutput() GetZonesZoneSetArrayOutput
+	ToGetZonesZoneSetArrayOutputWithContext(context.Context) GetZonesZoneSetArrayOutput
+}
+
+type GetZonesZoneSetArray []GetZonesZoneSetInput
+
+func (GetZonesZoneSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZonesZoneSet)(nil)).Elem()
+}
+
+func (i GetZonesZoneSetArray) ToGetZonesZoneSetArrayOutput() GetZonesZoneSetArrayOutput {
+	return i.ToGetZonesZoneSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetZonesZoneSetArray) ToGetZonesZoneSetArrayOutputWithContext(ctx context.Context) GetZonesZoneSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZonesZoneSetArrayOutput)
+}
+
+type GetZonesZoneSetOutput struct{ *pulumi.OutputState }
+
+func (GetZonesZoneSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZonesZoneSet)(nil)).Elem()
+}
+
+func (o GetZonesZoneSetOutput) ToGetZonesZoneSetOutput() GetZonesZoneSetOutput {
+	return o
+}
+
+func (o GetZonesZoneSetOutput) ToGetZonesZoneSetOutputWithContext(ctx context.Context) GetZonesZoneSetOutput {
+	return o
+}
+
+// AZs that can be used as standby when this AZ is primaryNote: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetZonesZoneSetOutput) StandbyZoneSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) []string { return v.StandbyZoneSets }).(pulumi.StringArrayOutput)
+}
+
+// AZ abbreviation.
+func (o GetZonesZoneSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// AZ number.
+func (o GetZonesZoneSetOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// AZ name.
+func (o GetZonesZoneSetOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+// Availability status. Valid values:`UNAVAILABLE`.`AVAILABLE`.`SELLOUT`.`SUPPORTMODIFYONLY` (supports configuration adjustment).
+func (o GetZonesZoneSetOutput) ZoneState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) string { return v.ZoneState }).(pulumi.StringOutput)
+}
+
+// Whether the AZ supports IPv6 address access.
+func (o GetZonesZoneSetOutput) ZoneSupportIpv6() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZonesZoneSet) int { return v.ZoneSupportIpv6 }).(pulumi.IntOutput)
+}
+
+type GetZonesZoneSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetZonesZoneSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZonesZoneSet)(nil)).Elem()
+}
+
+func (o GetZonesZoneSetArrayOutput) ToGetZonesZoneSetArrayOutput() GetZonesZoneSetArrayOutput {
+	return o
+}
+
+func (o GetZonesZoneSetArrayOutput) ToGetZonesZoneSetArrayOutputWithContext(ctx context.Context) GetZonesZoneSetArrayOutput {
+	return o
+}
+
+func (o GetZonesZoneSetArrayOutput) Index(i pulumi.IntInput) GetZonesZoneSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZonesZoneSet {
+		return vs[0].([]GetZonesZoneSet)[vs[1].(int)]
+	}).(GetZonesZoneSetOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanInput)(nil)).Elem(), InstanceBackupPlanArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanPtrInput)(nil)).Elem(), InstanceBackupPlanArgs{})
@@ -1232,30 +4842,114 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetArrayInput)(nil)).Elem(), InstanceDbNodeSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsBaseBackupSetInput)(nil)).Elem(), GetBaseBackupsBaseBackupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsBaseBackupSetArrayInput)(nil)).Elem(), GetBaseBackupsBaseBackupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsFilterInput)(nil)).Elem(), GetBaseBackupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsFilterArrayInput)(nil)).Elem(), GetBaseBackupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceClassesClassInfoSetInput)(nil)).Elem(), GetDbInstanceClassesClassInfoSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceClassesClassInfoSetArrayInput)(nil)).Elem(), GetDbInstanceClassesClassInfoSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetArrayInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetSpecRelationSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetSpecRelationSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetVersionRelationSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetVersionRelationSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogBackupsFilterInput)(nil)).Elem(), GetLogBackupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogBackupsFilterArrayInput)(nil)).Elem(), GetLogBackupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogBackupsLogBackupSetInput)(nil)).Elem(), GetLogBackupsLogBackupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogBackupsLogBackupSetArrayInput)(nil)).Elem(), GetLogBackupsLogBackupSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesFilterInput)(nil)).Elem(), GetParameterTemplatesFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesFilterArrayInput)(nil)).Elem(), GetParameterTemplatesFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesListInput)(nil)).Elem(), GetParameterTemplatesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetParameterTemplatesListArrayInput)(nil)).Elem(), GetParameterTemplatesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsFilterInput)(nil)).Elem(), GetReadonlyGroupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsFilterArrayInput)(nil)).Elem(), GetReadonlyGroupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListNetworkAccessListInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayInput)(nil)).Elem(), GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionsRegionSetInput)(nil)).Elem(), GetRegionsRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionsRegionSetArrayInput)(nil)).Elem(), GetRegionsRegionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecinfosListInput)(nil)).Elem(), GetSpecinfosListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecinfosListArrayInput)(nil)).Elem(), GetSpecinfosListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXlogsListInput)(nil)).Elem(), GetXlogsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXlogsListArrayInput)(nil)).Elem(), GetXlogsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneSetInput)(nil)).Elem(), GetZonesZoneSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneSetArrayInput)(nil)).Elem(), GetZonesZoneSetArray{})
 	pulumi.RegisterOutputType(InstanceBackupPlanOutput{})
 	pulumi.RegisterOutputType(InstanceBackupPlanPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetArrayOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionOutput{})
+	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput{})
+	pulumi.RegisterOutputType(GetBaseBackupsBaseBackupSetOutput{})
+	pulumi.RegisterOutputType(GetBaseBackupsBaseBackupSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBaseBackupsFilterOutput{})
+	pulumi.RegisterOutputType(GetBaseBackupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceClassesClassInfoSetOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceClassesClassInfoSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetSpecRelationSetOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetVersionRelationSetOutput{})
+	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetLogBackupsFilterOutput{})
+	pulumi.RegisterOutputType(GetLogBackupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetLogBackupsLogBackupSetOutput{})
+	pulumi.RegisterOutputType(GetLogBackupsLogBackupSetArrayOutput{})
 	pulumi.RegisterOutputType(GetParameterTemplatesFilterOutput{})
 	pulumi.RegisterOutputType(GetParameterTemplatesFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetParameterTemplatesListOutput{})
 	pulumi.RegisterOutputType(GetParameterTemplatesListArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsFilterOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListDbInstanceNetInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListNetworkAccessListArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbInstanceNetInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListDbNodeSetArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListNetworkAccessListArrayOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListOutput{})
+	pulumi.RegisterOutputType(GetReadonlyGroupsReadOnlyGroupListReadOnlyDbInstanceListTagListArrayOutput{})
+	pulumi.RegisterOutputType(GetRegionsRegionSetOutput{})
+	pulumi.RegisterOutputType(GetRegionsRegionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetSpecinfosListOutput{})
 	pulumi.RegisterOutputType(GetSpecinfosListArrayOutput{})
 	pulumi.RegisterOutputType(GetXlogsListOutput{})
 	pulumi.RegisterOutputType(GetXlogsListArrayOutput{})
+	pulumi.RegisterOutputType(GetZonesZoneSetOutput{})
+	pulumi.RegisterOutputType(GetZonesZoneSetArrayOutput{})
 }

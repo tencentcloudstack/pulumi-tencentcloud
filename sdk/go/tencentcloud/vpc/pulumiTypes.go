@@ -166,6 +166,1109 @@ func (o FlowLogFlowLogStoragePtrOutput) StorageTopic() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type Ipv6EniAddressIpv6Address struct {
+	// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+	Address string `pulumi:"address"`
+	// `EIP` instance `ID`, such as:`eip-hxlqja90`.
+	AddressId *string `pulumi:"addressId"`
+	// Description.
+	Description *string `pulumi:"description"`
+	// Whether the public network IP is blocked.
+	IsWanIpBlocked *bool `pulumi:"isWanIpBlocked"`
+	// Whether to master `IP`.
+	Primary *bool `pulumi:"primary"`
+	// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+	State *string `pulumi:"state"`
+}
+
+// Ipv6EniAddressIpv6AddressInput is an input type that accepts Ipv6EniAddressIpv6AddressArgs and Ipv6EniAddressIpv6AddressOutput values.
+// You can construct a concrete instance of `Ipv6EniAddressIpv6AddressInput` via:
+//
+//          Ipv6EniAddressIpv6AddressArgs{...}
+type Ipv6EniAddressIpv6AddressInput interface {
+	pulumi.Input
+
+	ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput
+	ToIpv6EniAddressIpv6AddressOutputWithContext(context.Context) Ipv6EniAddressIpv6AddressOutput
+}
+
+type Ipv6EniAddressIpv6AddressArgs struct {
+	// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+	Address pulumi.StringInput `pulumi:"address"`
+	// `EIP` instance `ID`, such as:`eip-hxlqja90`.
+	AddressId pulumi.StringPtrInput `pulumi:"addressId"`
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Whether the public network IP is blocked.
+	IsWanIpBlocked pulumi.BoolPtrInput `pulumi:"isWanIpBlocked"`
+	// Whether to master `IP`.
+	Primary pulumi.BoolPtrInput `pulumi:"primary"`
+	// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+	State pulumi.StringPtrInput `pulumi:"state"`
+}
+
+func (Ipv6EniAddressIpv6AddressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Ipv6EniAddressIpv6Address)(nil)).Elem()
+}
+
+func (i Ipv6EniAddressIpv6AddressArgs) ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput {
+	return i.ToIpv6EniAddressIpv6AddressOutputWithContext(context.Background())
+}
+
+func (i Ipv6EniAddressIpv6AddressArgs) ToIpv6EniAddressIpv6AddressOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(Ipv6EniAddressIpv6AddressOutput)
+}
+
+// Ipv6EniAddressIpv6AddressArrayInput is an input type that accepts Ipv6EniAddressIpv6AddressArray and Ipv6EniAddressIpv6AddressArrayOutput values.
+// You can construct a concrete instance of `Ipv6EniAddressIpv6AddressArrayInput` via:
+//
+//          Ipv6EniAddressIpv6AddressArray{ Ipv6EniAddressIpv6AddressArgs{...} }
+type Ipv6EniAddressIpv6AddressArrayInput interface {
+	pulumi.Input
+
+	ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput
+	ToIpv6EniAddressIpv6AddressArrayOutputWithContext(context.Context) Ipv6EniAddressIpv6AddressArrayOutput
+}
+
+type Ipv6EniAddressIpv6AddressArray []Ipv6EniAddressIpv6AddressInput
+
+func (Ipv6EniAddressIpv6AddressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]Ipv6EniAddressIpv6Address)(nil)).Elem()
+}
+
+func (i Ipv6EniAddressIpv6AddressArray) ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput {
+	return i.ToIpv6EniAddressIpv6AddressArrayOutputWithContext(context.Background())
+}
+
+func (i Ipv6EniAddressIpv6AddressArray) ToIpv6EniAddressIpv6AddressArrayOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(Ipv6EniAddressIpv6AddressArrayOutput)
+}
+
+type Ipv6EniAddressIpv6AddressOutput struct{ *pulumi.OutputState }
+
+func (Ipv6EniAddressIpv6AddressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Ipv6EniAddressIpv6Address)(nil)).Elem()
+}
+
+func (o Ipv6EniAddressIpv6AddressOutput) ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput {
+	return o
+}
+
+func (o Ipv6EniAddressIpv6AddressOutput) ToIpv6EniAddressIpv6AddressOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressOutput {
+	return o
+}
+
+// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+func (o Ipv6EniAddressIpv6AddressOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// `EIP` instance `ID`, such as:`eip-hxlqja90`.
+func (o Ipv6EniAddressIpv6AddressOutput) AddressId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.AddressId }).(pulumi.StringPtrOutput)
+}
+
+// Description.
+func (o Ipv6EniAddressIpv6AddressOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Whether the public network IP is blocked.
+func (o Ipv6EniAddressIpv6AddressOutput) IsWanIpBlocked() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *bool { return v.IsWanIpBlocked }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to master `IP`.
+func (o Ipv6EniAddressIpv6AddressOutput) Primary() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
+}
+
+// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+func (o Ipv6EniAddressIpv6AddressOutput) State() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.State }).(pulumi.StringPtrOutput)
+}
+
+type Ipv6EniAddressIpv6AddressArrayOutput struct{ *pulumi.OutputState }
+
+func (Ipv6EniAddressIpv6AddressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]Ipv6EniAddressIpv6Address)(nil)).Elem()
+}
+
+func (o Ipv6EniAddressIpv6AddressArrayOutput) ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput {
+	return o
+}
+
+func (o Ipv6EniAddressIpv6AddressArrayOutput) ToIpv6EniAddressIpv6AddressArrayOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressArrayOutput {
+	return o
+}
+
+func (o Ipv6EniAddressIpv6AddressArrayOutput) Index(i pulumi.IntInput) Ipv6EniAddressIpv6AddressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Ipv6EniAddressIpv6Address {
+		return vs[0].([]Ipv6EniAddressIpv6Address)[vs[1].(int)]
+	}).(Ipv6EniAddressIpv6AddressOutput)
+}
+
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks struct {
+	// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+	Ipv6CidrBlock string `pulumi:"ipv6CidrBlock"`
+	// Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput is an input type that accepts Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs and Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput values.
+// You can construct a concrete instance of `Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput` via:
+//
+//          Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput interface {
+	pulumi.Input
+
+	ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput
+	ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutputWithContext(context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput
+}
+
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs struct {
+	// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+	Ipv6CidrBlock pulumi.StringInput `pulumi:"ipv6CidrBlock"`
+	// Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks)(nil)).Elem()
+}
+
+func (i Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput {
+	return i.ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutputWithContext(context.Background())
+}
+
+func (i Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput)
+}
+
+func (i Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return i.ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(context.Background())
+}
+
+func (i Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput).ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(ctx)
+}
+
+// Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput is an input type that accepts Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs, Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtr and Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput values.
+// You can construct a concrete instance of `Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput` via:
+//
+//          Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
+//
+//  or:
+//
+//          nil
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput interface {
+	pulumi.Input
+
+	ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput
+	ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput
+}
+
+type ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrType Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs
+
+func Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtr(v *Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput {
+	return (*ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrType)(v)
+}
+
+func (*ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks)(nil)).Elem()
+}
+
+func (i *ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrType) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return i.ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(context.Background())
+}
+
+func (i *ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrType) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput)
+}
+
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput struct{ *pulumi.OutputState }
+
+func (Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks)(nil)).Elem()
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput {
+	return o
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput {
+	return o
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return o.ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(context.Background())
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) *Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
+		return &v
+	}).(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput)
+}
+
+// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) Ipv6CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) string { return v.Ipv6CidrBlock }).(pulumi.StringOutput)
+}
+
+// Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput struct{ *pulumi.OutputState }
+
+func (Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks)(nil)).Elem()
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return o
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) ToIpv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutputWithContext(ctx context.Context) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput {
+	return o
+}
+
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) Elem() Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput {
+	return o.ApplyT(func(v *Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
+		if v != nil {
+			return *v
+		}
+		var ret Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks
+		return ret
+	}).(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput)
+}
+
+// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Ipv6CidrBlock
+	}).(pulumi.StringPtrOutput)
+}
+
+// Subnet instance `ID`. Such as:`subnet-pxir56ns`.
+func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSet struct {
+	Egresses  []NetworkAclQuintupleNetworkAclQuintupleSetEgress  `pulumi:"egresses"`
+	Ingresses []NetworkAclQuintupleNetworkAclQuintupleSetIngress `pulumi:"ingresses"`
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetArgs and NetworkAclQuintupleNetworkAclQuintupleSetOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
+type NetworkAclQuintupleNetworkAclQuintupleSetInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetOutput() NetworkAclQuintupleNetworkAclQuintupleSetOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetOutput
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetArgs struct {
+	Egresses  NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput  `pulumi:"egresses"`
+	Ingresses NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput `pulumi:"ingresses"`
+}
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSet)(nil)).Elem()
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetOutput() NetworkAclQuintupleNetworkAclQuintupleSetOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetOutput)
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutput() NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetOutput).ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(ctx)
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetPtrInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetArgs, NetworkAclQuintupleNetworkAclQuintupleSetPtr and NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetPtrInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
+//
+//  or:
+//
+//          nil
+type NetworkAclQuintupleNetworkAclQuintupleSetPtrInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutput() NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput
+}
+
+type networkAclQuintupleNetworkAclQuintupleSetPtrType NetworkAclQuintupleNetworkAclQuintupleSetArgs
+
+func NetworkAclQuintupleNetworkAclQuintupleSetPtr(v *NetworkAclQuintupleNetworkAclQuintupleSetArgs) NetworkAclQuintupleNetworkAclQuintupleSetPtrInput {
+	return (*networkAclQuintupleNetworkAclQuintupleSetPtrType)(v)
+}
+
+func (*networkAclQuintupleNetworkAclQuintupleSetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NetworkAclQuintupleNetworkAclQuintupleSet)(nil)).Elem()
+}
+
+func (i *networkAclQuintupleNetworkAclQuintupleSetPtrType) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutput() NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(context.Background())
+}
+
+func (i *networkAclQuintupleNetworkAclQuintupleSetPtrType) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSet)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetOutput() NetworkAclQuintupleNetworkAclQuintupleSetOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutput() NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return o.ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(context.Background())
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NetworkAclQuintupleNetworkAclQuintupleSet) *NetworkAclQuintupleNetworkAclQuintupleSet {
+		return &v
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) Egresses() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+		return v.Egresses
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) Ingresses() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+		return v.Ingresses
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NetworkAclQuintupleNetworkAclQuintupleSet)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutput() NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetPtrOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Elem() NetworkAclQuintupleNetworkAclQuintupleSetOutput {
+	return o.ApplyT(func(v *NetworkAclQuintupleNetworkAclQuintupleSet) NetworkAclQuintupleNetworkAclQuintupleSet {
+		if v != nil {
+			return *v
+		}
+		var ret NetworkAclQuintupleNetworkAclQuintupleSet
+		return ret
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Egresses() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return o.ApplyT(func(v *NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+		if v == nil {
+			return nil
+		}
+		return v.Egresses
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Ingresses() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return o.ApplyT(func(v *NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+		if v == nil {
+			return nil
+		}
+		return v.Ingresses
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetEgress struct {
+	Action                     *string `pulumi:"action"`
+	CreateTime                 *string `pulumi:"createTime"`
+	Description                *string `pulumi:"description"`
+	DestinationCidr            *string `pulumi:"destinationCidr"`
+	DestinationPort            *string `pulumi:"destinationPort"`
+	NetworkAclDirection        *string `pulumi:"networkAclDirection"`
+	NetworkAclQuintupleEntryId *string `pulumi:"networkAclQuintupleEntryId"`
+	Priority                   *int    `pulumi:"priority"`
+	Protocol                   *string `pulumi:"protocol"`
+	SourceCidr                 *string `pulumi:"sourceCidr"`
+	SourcePort                 *string `pulumi:"sourcePort"`
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetEgressInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs and NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetEgressInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...}
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs struct {
+	Action                     pulumi.StringPtrInput `pulumi:"action"`
+	CreateTime                 pulumi.StringPtrInput `pulumi:"createTime"`
+	Description                pulumi.StringPtrInput `pulumi:"description"`
+	DestinationCidr            pulumi.StringPtrInput `pulumi:"destinationCidr"`
+	DestinationPort            pulumi.StringPtrInput `pulumi:"destinationPort"`
+	NetworkAclDirection        pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	NetworkAclQuintupleEntryId pulumi.StringPtrInput `pulumi:"networkAclQuintupleEntryId"`
+	Priority                   pulumi.IntPtrInput    `pulumi:"priority"`
+	Protocol                   pulumi.StringPtrInput `pulumi:"protocol"`
+	SourceCidr                 pulumi.StringPtrInput `pulumi:"sourceCidr"`
+	SourcePort                 pulumi.StringPtrInput `pulumi:"sourcePort"`
+}
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetEgress)(nil)).Elem()
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput)
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetEgressArray and NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetEgressArray{ NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...} }
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressArray []NetworkAclQuintupleNetworkAclQuintupleSetEgressInput
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetEgressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkAclQuintupleNetworkAclQuintupleSetEgress)(nil)).Elem()
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetEgressArray) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetEgressArray) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetEgress)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) DestinationCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.DestinationCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) DestinationPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) NetworkAclDirection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.NetworkAclDirection }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) NetworkAclQuintupleEntryId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.NetworkAclQuintupleEntryId }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) SourceCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.SourceCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) SourcePort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkAclQuintupleNetworkAclQuintupleSetEgress)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput) Index(i pulumi.IntInput) NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+		return vs[0].([]NetworkAclQuintupleNetworkAclQuintupleSetEgress)[vs[1].(int)]
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetIngress struct {
+	Action                     *string `pulumi:"action"`
+	CreateTime                 *string `pulumi:"createTime"`
+	Description                *string `pulumi:"description"`
+	DestinationCidr            *string `pulumi:"destinationCidr"`
+	DestinationPort            *string `pulumi:"destinationPort"`
+	NetworkAclDirection        *string `pulumi:"networkAclDirection"`
+	NetworkAclQuintupleEntryId *string `pulumi:"networkAclQuintupleEntryId"`
+	Priority                   *int    `pulumi:"priority"`
+	Protocol                   *string `pulumi:"protocol"`
+	SourceCidr                 *string `pulumi:"sourceCidr"`
+	SourcePort                 *string `pulumi:"sourcePort"`
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetIngressInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs and NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetIngressInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...}
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs struct {
+	Action                     pulumi.StringPtrInput `pulumi:"action"`
+	CreateTime                 pulumi.StringPtrInput `pulumi:"createTime"`
+	Description                pulumi.StringPtrInput `pulumi:"description"`
+	DestinationCidr            pulumi.StringPtrInput `pulumi:"destinationCidr"`
+	DestinationPort            pulumi.StringPtrInput `pulumi:"destinationPort"`
+	NetworkAclDirection        pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	NetworkAclQuintupleEntryId pulumi.StringPtrInput `pulumi:"networkAclQuintupleEntryId"`
+	Priority                   pulumi.IntPtrInput    `pulumi:"priority"`
+	Protocol                   pulumi.StringPtrInput `pulumi:"protocol"`
+	SourceCidr                 pulumi.StringPtrInput `pulumi:"sourceCidr"`
+	SourcePort                 pulumi.StringPtrInput `pulumi:"sourcePort"`
+}
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngress)(nil)).Elem()
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput)
+}
+
+// NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetIngressArray and NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput values.
+// You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput` via:
+//
+//          NetworkAclQuintupleNetworkAclQuintupleSetIngressArray{ NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...} }
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput interface {
+	pulumi.Input
+
+	ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput
+	ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutputWithContext(context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressArray []NetworkAclQuintupleNetworkAclQuintupleSetIngressInput
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetIngressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkAclQuintupleNetworkAclQuintupleSetIngress)(nil)).Elem()
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetIngressArray) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return i.ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutputWithContext(context.Background())
+}
+
+func (i NetworkAclQuintupleNetworkAclQuintupleSetIngressArray) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngress)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) DestinationCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.DestinationCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) DestinationPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) NetworkAclDirection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.NetworkAclDirection }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) NetworkAclQuintupleEntryId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.NetworkAclQuintupleEntryId }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) SourceCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.SourceCidr }).(pulumi.StringPtrOutput)
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) SourcePort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
+}
+
+type NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkAclQuintupleNetworkAclQuintupleSetIngress)(nil)).Elem()
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput) ToNetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutputWithContext(ctx context.Context) NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
+	return o
+}
+
+func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput) Index(i pulumi.IntInput) NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+		return vs[0].([]NetworkAclQuintupleNetworkAclQuintupleSetIngress)[vs[1].(int)]
+	}).(NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput)
+}
+
+type SnapshotPolicyAttachmentInstance struct {
+	// InstanceId.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName *string `pulumi:"instanceName"`
+	// The region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type, currently supports set: `securitygroup`.
+	InstanceType string `pulumi:"instanceType"`
+	// Snapshot policy Id.
+	SnapshotPolicyId *string `pulumi:"snapshotPolicyId"`
+}
+
+// SnapshotPolicyAttachmentInstanceInput is an input type that accepts SnapshotPolicyAttachmentInstanceArgs and SnapshotPolicyAttachmentInstanceOutput values.
+// You can construct a concrete instance of `SnapshotPolicyAttachmentInstanceInput` via:
+//
+//          SnapshotPolicyAttachmentInstanceArgs{...}
+type SnapshotPolicyAttachmentInstanceInput interface {
+	pulumi.Input
+
+	ToSnapshotPolicyAttachmentInstanceOutput() SnapshotPolicyAttachmentInstanceOutput
+	ToSnapshotPolicyAttachmentInstanceOutputWithContext(context.Context) SnapshotPolicyAttachmentInstanceOutput
+}
+
+type SnapshotPolicyAttachmentInstanceArgs struct {
+	// InstanceId.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+	// The region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type, currently supports set: `securitygroup`.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Snapshot policy Id.
+	SnapshotPolicyId pulumi.StringPtrInput `pulumi:"snapshotPolicyId"`
+}
+
+func (SnapshotPolicyAttachmentInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SnapshotPolicyAttachmentInstance)(nil)).Elem()
+}
+
+func (i SnapshotPolicyAttachmentInstanceArgs) ToSnapshotPolicyAttachmentInstanceOutput() SnapshotPolicyAttachmentInstanceOutput {
+	return i.ToSnapshotPolicyAttachmentInstanceOutputWithContext(context.Background())
+}
+
+func (i SnapshotPolicyAttachmentInstanceArgs) ToSnapshotPolicyAttachmentInstanceOutputWithContext(ctx context.Context) SnapshotPolicyAttachmentInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SnapshotPolicyAttachmentInstanceOutput)
+}
+
+// SnapshotPolicyAttachmentInstanceArrayInput is an input type that accepts SnapshotPolicyAttachmentInstanceArray and SnapshotPolicyAttachmentInstanceArrayOutput values.
+// You can construct a concrete instance of `SnapshotPolicyAttachmentInstanceArrayInput` via:
+//
+//          SnapshotPolicyAttachmentInstanceArray{ SnapshotPolicyAttachmentInstanceArgs{...} }
+type SnapshotPolicyAttachmentInstanceArrayInput interface {
+	pulumi.Input
+
+	ToSnapshotPolicyAttachmentInstanceArrayOutput() SnapshotPolicyAttachmentInstanceArrayOutput
+	ToSnapshotPolicyAttachmentInstanceArrayOutputWithContext(context.Context) SnapshotPolicyAttachmentInstanceArrayOutput
+}
+
+type SnapshotPolicyAttachmentInstanceArray []SnapshotPolicyAttachmentInstanceInput
+
+func (SnapshotPolicyAttachmentInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SnapshotPolicyAttachmentInstance)(nil)).Elem()
+}
+
+func (i SnapshotPolicyAttachmentInstanceArray) ToSnapshotPolicyAttachmentInstanceArrayOutput() SnapshotPolicyAttachmentInstanceArrayOutput {
+	return i.ToSnapshotPolicyAttachmentInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i SnapshotPolicyAttachmentInstanceArray) ToSnapshotPolicyAttachmentInstanceArrayOutputWithContext(ctx context.Context) SnapshotPolicyAttachmentInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SnapshotPolicyAttachmentInstanceArrayOutput)
+}
+
+type SnapshotPolicyAttachmentInstanceOutput struct{ *pulumi.OutputState }
+
+func (SnapshotPolicyAttachmentInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SnapshotPolicyAttachmentInstance)(nil)).Elem()
+}
+
+func (o SnapshotPolicyAttachmentInstanceOutput) ToSnapshotPolicyAttachmentInstanceOutput() SnapshotPolicyAttachmentInstanceOutput {
+	return o
+}
+
+func (o SnapshotPolicyAttachmentInstanceOutput) ToSnapshotPolicyAttachmentInstanceOutputWithContext(ctx context.Context) SnapshotPolicyAttachmentInstanceOutput {
+	return o
+}
+
+// InstanceId.
+func (o SnapshotPolicyAttachmentInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v SnapshotPolicyAttachmentInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o SnapshotPolicyAttachmentInstanceOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SnapshotPolicyAttachmentInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// The region where the instance is located.
+func (o SnapshotPolicyAttachmentInstanceOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v SnapshotPolicyAttachmentInstance) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type, currently supports set: `securitygroup`.
+func (o SnapshotPolicyAttachmentInstanceOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v SnapshotPolicyAttachmentInstance) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Snapshot policy Id.
+func (o SnapshotPolicyAttachmentInstanceOutput) SnapshotPolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SnapshotPolicyAttachmentInstance) *string { return v.SnapshotPolicyId }).(pulumi.StringPtrOutput)
+}
+
+type SnapshotPolicyAttachmentInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (SnapshotPolicyAttachmentInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SnapshotPolicyAttachmentInstance)(nil)).Elem()
+}
+
+func (o SnapshotPolicyAttachmentInstanceArrayOutput) ToSnapshotPolicyAttachmentInstanceArrayOutput() SnapshotPolicyAttachmentInstanceArrayOutput {
+	return o
+}
+
+func (o SnapshotPolicyAttachmentInstanceArrayOutput) ToSnapshotPolicyAttachmentInstanceArrayOutputWithContext(ctx context.Context) SnapshotPolicyAttachmentInstanceArrayOutput {
+	return o
+}
+
+func (o SnapshotPolicyAttachmentInstanceArrayOutput) Index(i pulumi.IntInput) SnapshotPolicyAttachmentInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SnapshotPolicyAttachmentInstance {
+		return vs[0].([]SnapshotPolicyAttachmentInstance)[vs[1].(int)]
+	}).(SnapshotPolicyAttachmentInstanceOutput)
+}
+
+type SnapshotPolicyBackupPolicy struct {
+	// Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+	BackupDay string `pulumi:"backupDay"`
+	// Backup time point, format:HH:mm:ss.
+	BackupTime string `pulumi:"backupTime"`
+}
+
+// SnapshotPolicyBackupPolicyInput is an input type that accepts SnapshotPolicyBackupPolicyArgs and SnapshotPolicyBackupPolicyOutput values.
+// You can construct a concrete instance of `SnapshotPolicyBackupPolicyInput` via:
+//
+//          SnapshotPolicyBackupPolicyArgs{...}
+type SnapshotPolicyBackupPolicyInput interface {
+	pulumi.Input
+
+	ToSnapshotPolicyBackupPolicyOutput() SnapshotPolicyBackupPolicyOutput
+	ToSnapshotPolicyBackupPolicyOutputWithContext(context.Context) SnapshotPolicyBackupPolicyOutput
+}
+
+type SnapshotPolicyBackupPolicyArgs struct {
+	// Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+	BackupDay pulumi.StringInput `pulumi:"backupDay"`
+	// Backup time point, format:HH:mm:ss.
+	BackupTime pulumi.StringInput `pulumi:"backupTime"`
+}
+
+func (SnapshotPolicyBackupPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SnapshotPolicyBackupPolicy)(nil)).Elem()
+}
+
+func (i SnapshotPolicyBackupPolicyArgs) ToSnapshotPolicyBackupPolicyOutput() SnapshotPolicyBackupPolicyOutput {
+	return i.ToSnapshotPolicyBackupPolicyOutputWithContext(context.Background())
+}
+
+func (i SnapshotPolicyBackupPolicyArgs) ToSnapshotPolicyBackupPolicyOutputWithContext(ctx context.Context) SnapshotPolicyBackupPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SnapshotPolicyBackupPolicyOutput)
+}
+
+// SnapshotPolicyBackupPolicyArrayInput is an input type that accepts SnapshotPolicyBackupPolicyArray and SnapshotPolicyBackupPolicyArrayOutput values.
+// You can construct a concrete instance of `SnapshotPolicyBackupPolicyArrayInput` via:
+//
+//          SnapshotPolicyBackupPolicyArray{ SnapshotPolicyBackupPolicyArgs{...} }
+type SnapshotPolicyBackupPolicyArrayInput interface {
+	pulumi.Input
+
+	ToSnapshotPolicyBackupPolicyArrayOutput() SnapshotPolicyBackupPolicyArrayOutput
+	ToSnapshotPolicyBackupPolicyArrayOutputWithContext(context.Context) SnapshotPolicyBackupPolicyArrayOutput
+}
+
+type SnapshotPolicyBackupPolicyArray []SnapshotPolicyBackupPolicyInput
+
+func (SnapshotPolicyBackupPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SnapshotPolicyBackupPolicy)(nil)).Elem()
+}
+
+func (i SnapshotPolicyBackupPolicyArray) ToSnapshotPolicyBackupPolicyArrayOutput() SnapshotPolicyBackupPolicyArrayOutput {
+	return i.ToSnapshotPolicyBackupPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i SnapshotPolicyBackupPolicyArray) ToSnapshotPolicyBackupPolicyArrayOutputWithContext(ctx context.Context) SnapshotPolicyBackupPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SnapshotPolicyBackupPolicyArrayOutput)
+}
+
+type SnapshotPolicyBackupPolicyOutput struct{ *pulumi.OutputState }
+
+func (SnapshotPolicyBackupPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SnapshotPolicyBackupPolicy)(nil)).Elem()
+}
+
+func (o SnapshotPolicyBackupPolicyOutput) ToSnapshotPolicyBackupPolicyOutput() SnapshotPolicyBackupPolicyOutput {
+	return o
+}
+
+func (o SnapshotPolicyBackupPolicyOutput) ToSnapshotPolicyBackupPolicyOutputWithContext(ctx context.Context) SnapshotPolicyBackupPolicyOutput {
+	return o
+}
+
+// Backup cycle time, the value can be monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+func (o SnapshotPolicyBackupPolicyOutput) BackupDay() pulumi.StringOutput {
+	return o.ApplyT(func(v SnapshotPolicyBackupPolicy) string { return v.BackupDay }).(pulumi.StringOutput)
+}
+
+// Backup time point, format:HH:mm:ss.
+func (o SnapshotPolicyBackupPolicyOutput) BackupTime() pulumi.StringOutput {
+	return o.ApplyT(func(v SnapshotPolicyBackupPolicy) string { return v.BackupTime }).(pulumi.StringOutput)
+}
+
+type SnapshotPolicyBackupPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (SnapshotPolicyBackupPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SnapshotPolicyBackupPolicy)(nil)).Elem()
+}
+
+func (o SnapshotPolicyBackupPolicyArrayOutput) ToSnapshotPolicyBackupPolicyArrayOutput() SnapshotPolicyBackupPolicyArrayOutput {
+	return o
+}
+
+func (o SnapshotPolicyBackupPolicyArrayOutput) ToSnapshotPolicyBackupPolicyArrayOutputWithContext(ctx context.Context) SnapshotPolicyBackupPolicyArrayOutput {
+	return o
+}
+
+func (o SnapshotPolicyBackupPolicyArrayOutput) Index(i pulumi.IntInput) SnapshotPolicyBackupPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SnapshotPolicyBackupPolicy {
+		return vs[0].([]SnapshotPolicyBackupPolicy)[vs[1].(int)]
+	}).(SnapshotPolicyBackupPolicyOutput)
+}
+
+type GetAccountAttributesAccountAttributeSet struct {
+	// Attribute name.
+	AttributeName string `pulumi:"attributeName"`
+	// Attribute values.
+	AttributeValues []string `pulumi:"attributeValues"`
+}
+
+// GetAccountAttributesAccountAttributeSetInput is an input type that accepts GetAccountAttributesAccountAttributeSetArgs and GetAccountAttributesAccountAttributeSetOutput values.
+// You can construct a concrete instance of `GetAccountAttributesAccountAttributeSetInput` via:
+//
+//          GetAccountAttributesAccountAttributeSetArgs{...}
+type GetAccountAttributesAccountAttributeSetInput interface {
+	pulumi.Input
+
+	ToGetAccountAttributesAccountAttributeSetOutput() GetAccountAttributesAccountAttributeSetOutput
+	ToGetAccountAttributesAccountAttributeSetOutputWithContext(context.Context) GetAccountAttributesAccountAttributeSetOutput
+}
+
+type GetAccountAttributesAccountAttributeSetArgs struct {
+	// Attribute name.
+	AttributeName pulumi.StringInput `pulumi:"attributeName"`
+	// Attribute values.
+	AttributeValues pulumi.StringArrayInput `pulumi:"attributeValues"`
+}
+
+func (GetAccountAttributesAccountAttributeSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountAttributesAccountAttributeSet)(nil)).Elem()
+}
+
+func (i GetAccountAttributesAccountAttributeSetArgs) ToGetAccountAttributesAccountAttributeSetOutput() GetAccountAttributesAccountAttributeSetOutput {
+	return i.ToGetAccountAttributesAccountAttributeSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountAttributesAccountAttributeSetArgs) ToGetAccountAttributesAccountAttributeSetOutputWithContext(ctx context.Context) GetAccountAttributesAccountAttributeSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountAttributesAccountAttributeSetOutput)
+}
+
+// GetAccountAttributesAccountAttributeSetArrayInput is an input type that accepts GetAccountAttributesAccountAttributeSetArray and GetAccountAttributesAccountAttributeSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountAttributesAccountAttributeSetArrayInput` via:
+//
+//          GetAccountAttributesAccountAttributeSetArray{ GetAccountAttributesAccountAttributeSetArgs{...} }
+type GetAccountAttributesAccountAttributeSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountAttributesAccountAttributeSetArrayOutput() GetAccountAttributesAccountAttributeSetArrayOutput
+	ToGetAccountAttributesAccountAttributeSetArrayOutputWithContext(context.Context) GetAccountAttributesAccountAttributeSetArrayOutput
+}
+
+type GetAccountAttributesAccountAttributeSetArray []GetAccountAttributesAccountAttributeSetInput
+
+func (GetAccountAttributesAccountAttributeSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountAttributesAccountAttributeSet)(nil)).Elem()
+}
+
+func (i GetAccountAttributesAccountAttributeSetArray) ToGetAccountAttributesAccountAttributeSetArrayOutput() GetAccountAttributesAccountAttributeSetArrayOutput {
+	return i.ToGetAccountAttributesAccountAttributeSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountAttributesAccountAttributeSetArray) ToGetAccountAttributesAccountAttributeSetArrayOutputWithContext(ctx context.Context) GetAccountAttributesAccountAttributeSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountAttributesAccountAttributeSetArrayOutput)
+}
+
+type GetAccountAttributesAccountAttributeSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountAttributesAccountAttributeSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountAttributesAccountAttributeSet)(nil)).Elem()
+}
+
+func (o GetAccountAttributesAccountAttributeSetOutput) ToGetAccountAttributesAccountAttributeSetOutput() GetAccountAttributesAccountAttributeSetOutput {
+	return o
+}
+
+func (o GetAccountAttributesAccountAttributeSetOutput) ToGetAccountAttributesAccountAttributeSetOutputWithContext(ctx context.Context) GetAccountAttributesAccountAttributeSetOutput {
+	return o
+}
+
+// Attribute name.
+func (o GetAccountAttributesAccountAttributeSetOutput) AttributeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountAttributesAccountAttributeSet) string { return v.AttributeName }).(pulumi.StringOutput)
+}
+
+// Attribute values.
+func (o GetAccountAttributesAccountAttributeSetOutput) AttributeValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccountAttributesAccountAttributeSet) []string { return v.AttributeValues }).(pulumi.StringArrayOutput)
+}
+
+type GetAccountAttributesAccountAttributeSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountAttributesAccountAttributeSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountAttributesAccountAttributeSet)(nil)).Elem()
+}
+
+func (o GetAccountAttributesAccountAttributeSetArrayOutput) ToGetAccountAttributesAccountAttributeSetArrayOutput() GetAccountAttributesAccountAttributeSetArrayOutput {
+	return o
+}
+
+func (o GetAccountAttributesAccountAttributeSetArrayOutput) ToGetAccountAttributesAccountAttributeSetArrayOutputWithContext(ctx context.Context) GetAccountAttributesAccountAttributeSetArrayOutput {
+	return o
+}
+
+func (o GetAccountAttributesAccountAttributeSetArrayOutput) Index(i pulumi.IntInput) GetAccountAttributesAccountAttributeSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountAttributesAccountAttributeSet {
+		return vs[0].([]GetAccountAttributesAccountAttributeSet)[vs[1].(int)]
+	}).(GetAccountAttributesAccountAttributeSetOutput)
+}
+
 type GetAclsAclList struct {
 	// Creation time.
 	CreateTime string `pulumi:"createTime"`
@@ -716,6 +1819,989 @@ func (o GetAclsAclListSubnetArrayOutput) Index(i pulumi.IntInput) GetAclsAclList
 	}).(GetAclsAclListSubnetOutput)
 }
 
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet struct {
+	// Current billing amount in Mbps.
+	BandwidthUsage float64 `pulumi:"bandwidthUsage"`
+}
+
+// GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput is an input type that accepts GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs and GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput values.
+// You can construct a concrete instance of `GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput` via:
+//
+//          GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...}
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput interface {
+	pulumi.Input
+
+	ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput
+	ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutputWithContext(context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput
+}
+
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs struct {
+	// Current billing amount in Mbps.
+	BandwidthUsage pulumi.Float64Input `pulumi:"bandwidthUsage"`
+}
+
+func (GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet)(nil)).Elem()
+}
+
+func (i GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput {
+	return i.ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutputWithContext(context.Background())
+}
+
+func (i GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutputWithContext(ctx context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput)
+}
+
+// GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput is an input type that accepts GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray and GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput values.
+// You can construct a concrete instance of `GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput` via:
+//
+//          GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray{ GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...} }
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput
+	ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutputWithContext(context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput
+}
+
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray []GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput
+
+func (GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet)(nil)).Elem()
+}
+
+func (i GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput {
+	return i.ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutputWithContext(ctx context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput)
+}
+
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput struct{ *pulumi.OutputState }
+
+func (GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet)(nil)).Elem()
+}
+
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput {
+	return o
+}
+
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutputWithContext(ctx context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput {
+	return o
+}
+
+// Current billing amount in Mbps.
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput) BandwidthUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet) float64 { return v.BandwidthUsage }).(pulumi.Float64Output)
+}
+
+type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet)(nil)).Elem()
+}
+
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput() GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput {
+	return o
+}
+
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput) ToGetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutputWithContext(ctx context.Context) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput {
+	return o
+}
+
+func (o GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput) Index(i pulumi.IntInput) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet {
+		return vs[0].([]GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet)[vs[1].(int)]
+	}).(GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput)
+}
+
+type GetBandwidthPackageQuotaQuotaSet struct {
+	// current amount.
+	QuotaCurrent int `pulumi:"quotaCurrent"`
+	// Quota type.
+	QuotaId string `pulumi:"quotaId"`
+	// quota amount.
+	QuotaLimit int `pulumi:"quotaLimit"`
+}
+
+// GetBandwidthPackageQuotaQuotaSetInput is an input type that accepts GetBandwidthPackageQuotaQuotaSetArgs and GetBandwidthPackageQuotaQuotaSetOutput values.
+// You can construct a concrete instance of `GetBandwidthPackageQuotaQuotaSetInput` via:
+//
+//          GetBandwidthPackageQuotaQuotaSetArgs{...}
+type GetBandwidthPackageQuotaQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetBandwidthPackageQuotaQuotaSetOutput() GetBandwidthPackageQuotaQuotaSetOutput
+	ToGetBandwidthPackageQuotaQuotaSetOutputWithContext(context.Context) GetBandwidthPackageQuotaQuotaSetOutput
+}
+
+type GetBandwidthPackageQuotaQuotaSetArgs struct {
+	// current amount.
+	QuotaCurrent pulumi.IntInput `pulumi:"quotaCurrent"`
+	// Quota type.
+	QuotaId pulumi.StringInput `pulumi:"quotaId"`
+	// quota amount.
+	QuotaLimit pulumi.IntInput `pulumi:"quotaLimit"`
+}
+
+func (GetBandwidthPackageQuotaQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthPackageQuotaQuotaSet)(nil)).Elem()
+}
+
+func (i GetBandwidthPackageQuotaQuotaSetArgs) ToGetBandwidthPackageQuotaQuotaSetOutput() GetBandwidthPackageQuotaQuotaSetOutput {
+	return i.ToGetBandwidthPackageQuotaQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetBandwidthPackageQuotaQuotaSetArgs) ToGetBandwidthPackageQuotaQuotaSetOutputWithContext(ctx context.Context) GetBandwidthPackageQuotaQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthPackageQuotaQuotaSetOutput)
+}
+
+// GetBandwidthPackageQuotaQuotaSetArrayInput is an input type that accepts GetBandwidthPackageQuotaQuotaSetArray and GetBandwidthPackageQuotaQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetBandwidthPackageQuotaQuotaSetArrayInput` via:
+//
+//          GetBandwidthPackageQuotaQuotaSetArray{ GetBandwidthPackageQuotaQuotaSetArgs{...} }
+type GetBandwidthPackageQuotaQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBandwidthPackageQuotaQuotaSetArrayOutput() GetBandwidthPackageQuotaQuotaSetArrayOutput
+	ToGetBandwidthPackageQuotaQuotaSetArrayOutputWithContext(context.Context) GetBandwidthPackageQuotaQuotaSetArrayOutput
+}
+
+type GetBandwidthPackageQuotaQuotaSetArray []GetBandwidthPackageQuotaQuotaSetInput
+
+func (GetBandwidthPackageQuotaQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthPackageQuotaQuotaSet)(nil)).Elem()
+}
+
+func (i GetBandwidthPackageQuotaQuotaSetArray) ToGetBandwidthPackageQuotaQuotaSetArrayOutput() GetBandwidthPackageQuotaQuotaSetArrayOutput {
+	return i.ToGetBandwidthPackageQuotaQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBandwidthPackageQuotaQuotaSetArray) ToGetBandwidthPackageQuotaQuotaSetArrayOutputWithContext(ctx context.Context) GetBandwidthPackageQuotaQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBandwidthPackageQuotaQuotaSetArrayOutput)
+}
+
+type GetBandwidthPackageQuotaQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetBandwidthPackageQuotaQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBandwidthPackageQuotaQuotaSet)(nil)).Elem()
+}
+
+func (o GetBandwidthPackageQuotaQuotaSetOutput) ToGetBandwidthPackageQuotaQuotaSetOutput() GetBandwidthPackageQuotaQuotaSetOutput {
+	return o
+}
+
+func (o GetBandwidthPackageQuotaQuotaSetOutput) ToGetBandwidthPackageQuotaQuotaSetOutputWithContext(ctx context.Context) GetBandwidthPackageQuotaQuotaSetOutput {
+	return o
+}
+
+// current amount.
+func (o GetBandwidthPackageQuotaQuotaSetOutput) QuotaCurrent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBandwidthPackageQuotaQuotaSet) int { return v.QuotaCurrent }).(pulumi.IntOutput)
+}
+
+// Quota type.
+func (o GetBandwidthPackageQuotaQuotaSetOutput) QuotaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBandwidthPackageQuotaQuotaSet) string { return v.QuotaId }).(pulumi.StringOutput)
+}
+
+// quota amount.
+func (o GetBandwidthPackageQuotaQuotaSetOutput) QuotaLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBandwidthPackageQuotaQuotaSet) int { return v.QuotaLimit }).(pulumi.IntOutput)
+}
+
+type GetBandwidthPackageQuotaQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBandwidthPackageQuotaQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBandwidthPackageQuotaQuotaSet)(nil)).Elem()
+}
+
+func (o GetBandwidthPackageQuotaQuotaSetArrayOutput) ToGetBandwidthPackageQuotaQuotaSetArrayOutput() GetBandwidthPackageQuotaQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetBandwidthPackageQuotaQuotaSetArrayOutput) ToGetBandwidthPackageQuotaQuotaSetArrayOutputWithContext(ctx context.Context) GetBandwidthPackageQuotaQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetBandwidthPackageQuotaQuotaSetArrayOutput) Index(i pulumi.IntInput) GetBandwidthPackageQuotaQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBandwidthPackageQuotaQuotaSet {
+		return vs[0].([]GetBandwidthPackageQuotaQuotaSet)[vs[1].(int)]
+	}).(GetBandwidthPackageQuotaQuotaSetOutput)
+}
+
+type GetClassicLinkInstancesClassicLinkInstanceSet struct {
+	// The unique ID of the CVM instance.
+	InstanceId string `pulumi:"instanceId"`
+	// VPC instance ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetClassicLinkInstancesClassicLinkInstanceSetInput is an input type that accepts GetClassicLinkInstancesClassicLinkInstanceSetArgs and GetClassicLinkInstancesClassicLinkInstanceSetOutput values.
+// You can construct a concrete instance of `GetClassicLinkInstancesClassicLinkInstanceSetInput` via:
+//
+//          GetClassicLinkInstancesClassicLinkInstanceSetArgs{...}
+type GetClassicLinkInstancesClassicLinkInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetClassicLinkInstancesClassicLinkInstanceSetOutput() GetClassicLinkInstancesClassicLinkInstanceSetOutput
+	ToGetClassicLinkInstancesClassicLinkInstanceSetOutputWithContext(context.Context) GetClassicLinkInstancesClassicLinkInstanceSetOutput
+}
+
+type GetClassicLinkInstancesClassicLinkInstanceSetArgs struct {
+	// The unique ID of the CVM instance.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// VPC instance ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetClassicLinkInstancesClassicLinkInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClassicLinkInstancesClassicLinkInstanceSet)(nil)).Elem()
+}
+
+func (i GetClassicLinkInstancesClassicLinkInstanceSetArgs) ToGetClassicLinkInstancesClassicLinkInstanceSetOutput() GetClassicLinkInstancesClassicLinkInstanceSetOutput {
+	return i.ToGetClassicLinkInstancesClassicLinkInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetClassicLinkInstancesClassicLinkInstanceSetArgs) ToGetClassicLinkInstancesClassicLinkInstanceSetOutputWithContext(ctx context.Context) GetClassicLinkInstancesClassicLinkInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClassicLinkInstancesClassicLinkInstanceSetOutput)
+}
+
+// GetClassicLinkInstancesClassicLinkInstanceSetArrayInput is an input type that accepts GetClassicLinkInstancesClassicLinkInstanceSetArray and GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetClassicLinkInstancesClassicLinkInstanceSetArrayInput` via:
+//
+//          GetClassicLinkInstancesClassicLinkInstanceSetArray{ GetClassicLinkInstancesClassicLinkInstanceSetArgs{...} }
+type GetClassicLinkInstancesClassicLinkInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutput() GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput
+	ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutputWithContext(context.Context) GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput
+}
+
+type GetClassicLinkInstancesClassicLinkInstanceSetArray []GetClassicLinkInstancesClassicLinkInstanceSetInput
+
+func (GetClassicLinkInstancesClassicLinkInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClassicLinkInstancesClassicLinkInstanceSet)(nil)).Elem()
+}
+
+func (i GetClassicLinkInstancesClassicLinkInstanceSetArray) ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutput() GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput {
+	return i.ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetClassicLinkInstancesClassicLinkInstanceSetArray) ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutputWithContext(ctx context.Context) GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput)
+}
+
+type GetClassicLinkInstancesClassicLinkInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetClassicLinkInstancesClassicLinkInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClassicLinkInstancesClassicLinkInstanceSet)(nil)).Elem()
+}
+
+func (o GetClassicLinkInstancesClassicLinkInstanceSetOutput) ToGetClassicLinkInstancesClassicLinkInstanceSetOutput() GetClassicLinkInstancesClassicLinkInstanceSetOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesClassicLinkInstanceSetOutput) ToGetClassicLinkInstancesClassicLinkInstanceSetOutputWithContext(ctx context.Context) GetClassicLinkInstancesClassicLinkInstanceSetOutput {
+	return o
+}
+
+// The unique ID of the CVM instance.
+func (o GetClassicLinkInstancesClassicLinkInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClassicLinkInstancesClassicLinkInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// VPC instance ID.
+func (o GetClassicLinkInstancesClassicLinkInstanceSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClassicLinkInstancesClassicLinkInstanceSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClassicLinkInstancesClassicLinkInstanceSet)(nil)).Elem()
+}
+
+func (o GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput) ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutput() GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput) ToGetClassicLinkInstancesClassicLinkInstanceSetArrayOutputWithContext(ctx context.Context) GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput) Index(i pulumi.IntInput) GetClassicLinkInstancesClassicLinkInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClassicLinkInstancesClassicLinkInstanceSet {
+		return vs[0].([]GetClassicLinkInstancesClassicLinkInstanceSet)[vs[1].(int)]
+	}).(GetClassicLinkInstancesClassicLinkInstanceSetOutput)
+}
+
+type GetClassicLinkInstancesFilter struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name string `pulumi:"name"`
+	// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+	Values []string `pulumi:"values"`
+}
+
+// GetClassicLinkInstancesFilterInput is an input type that accepts GetClassicLinkInstancesFilterArgs and GetClassicLinkInstancesFilterOutput values.
+// You can construct a concrete instance of `GetClassicLinkInstancesFilterInput` via:
+//
+//          GetClassicLinkInstancesFilterArgs{...}
+type GetClassicLinkInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetClassicLinkInstancesFilterOutput() GetClassicLinkInstancesFilterOutput
+	ToGetClassicLinkInstancesFilterOutputWithContext(context.Context) GetClassicLinkInstancesFilterOutput
+}
+
+type GetClassicLinkInstancesFilterArgs struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetClassicLinkInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClassicLinkInstancesFilter)(nil)).Elem()
+}
+
+func (i GetClassicLinkInstancesFilterArgs) ToGetClassicLinkInstancesFilterOutput() GetClassicLinkInstancesFilterOutput {
+	return i.ToGetClassicLinkInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetClassicLinkInstancesFilterArgs) ToGetClassicLinkInstancesFilterOutputWithContext(ctx context.Context) GetClassicLinkInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClassicLinkInstancesFilterOutput)
+}
+
+// GetClassicLinkInstancesFilterArrayInput is an input type that accepts GetClassicLinkInstancesFilterArray and GetClassicLinkInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetClassicLinkInstancesFilterArrayInput` via:
+//
+//          GetClassicLinkInstancesFilterArray{ GetClassicLinkInstancesFilterArgs{...} }
+type GetClassicLinkInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetClassicLinkInstancesFilterArrayOutput() GetClassicLinkInstancesFilterArrayOutput
+	ToGetClassicLinkInstancesFilterArrayOutputWithContext(context.Context) GetClassicLinkInstancesFilterArrayOutput
+}
+
+type GetClassicLinkInstancesFilterArray []GetClassicLinkInstancesFilterInput
+
+func (GetClassicLinkInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClassicLinkInstancesFilter)(nil)).Elem()
+}
+
+func (i GetClassicLinkInstancesFilterArray) ToGetClassicLinkInstancesFilterArrayOutput() GetClassicLinkInstancesFilterArrayOutput {
+	return i.ToGetClassicLinkInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetClassicLinkInstancesFilterArray) ToGetClassicLinkInstancesFilterArrayOutputWithContext(ctx context.Context) GetClassicLinkInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClassicLinkInstancesFilterArrayOutput)
+}
+
+type GetClassicLinkInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetClassicLinkInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClassicLinkInstancesFilter)(nil)).Elem()
+}
+
+func (o GetClassicLinkInstancesFilterOutput) ToGetClassicLinkInstancesFilterOutput() GetClassicLinkInstancesFilterOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesFilterOutput) ToGetClassicLinkInstancesFilterOutputWithContext(ctx context.Context) GetClassicLinkInstancesFilterOutput {
+	return o
+}
+
+// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+func (o GetClassicLinkInstancesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClassicLinkInstancesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+func (o GetClassicLinkInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClassicLinkInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetClassicLinkInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClassicLinkInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClassicLinkInstancesFilter)(nil)).Elem()
+}
+
+func (o GetClassicLinkInstancesFilterArrayOutput) ToGetClassicLinkInstancesFilterArrayOutput() GetClassicLinkInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesFilterArrayOutput) ToGetClassicLinkInstancesFilterArrayOutputWithContext(ctx context.Context) GetClassicLinkInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetClassicLinkInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetClassicLinkInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClassicLinkInstancesFilter {
+		return vs[0].([]GetClassicLinkInstancesFilter)[vs[1].(int)]
+	}).(GetClassicLinkInstancesFilterOutput)
+}
+
+type GetCvmInstancesFilter struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name string `pulumi:"name"`
+	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+	Values []string `pulumi:"values"`
+}
+
+// GetCvmInstancesFilterInput is an input type that accepts GetCvmInstancesFilterArgs and GetCvmInstancesFilterOutput values.
+// You can construct a concrete instance of `GetCvmInstancesFilterInput` via:
+//
+//          GetCvmInstancesFilterArgs{...}
+type GetCvmInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetCvmInstancesFilterOutput() GetCvmInstancesFilterOutput
+	ToGetCvmInstancesFilterOutputWithContext(context.Context) GetCvmInstancesFilterOutput
+}
+
+type GetCvmInstancesFilterArgs struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetCvmInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmInstancesFilter)(nil)).Elem()
+}
+
+func (i GetCvmInstancesFilterArgs) ToGetCvmInstancesFilterOutput() GetCvmInstancesFilterOutput {
+	return i.ToGetCvmInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetCvmInstancesFilterArgs) ToGetCvmInstancesFilterOutputWithContext(ctx context.Context) GetCvmInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmInstancesFilterOutput)
+}
+
+// GetCvmInstancesFilterArrayInput is an input type that accepts GetCvmInstancesFilterArray and GetCvmInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetCvmInstancesFilterArrayInput` via:
+//
+//          GetCvmInstancesFilterArray{ GetCvmInstancesFilterArgs{...} }
+type GetCvmInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetCvmInstancesFilterArrayOutput() GetCvmInstancesFilterArrayOutput
+	ToGetCvmInstancesFilterArrayOutputWithContext(context.Context) GetCvmInstancesFilterArrayOutput
+}
+
+type GetCvmInstancesFilterArray []GetCvmInstancesFilterInput
+
+func (GetCvmInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmInstancesFilter)(nil)).Elem()
+}
+
+func (i GetCvmInstancesFilterArray) ToGetCvmInstancesFilterArrayOutput() GetCvmInstancesFilterArrayOutput {
+	return i.ToGetCvmInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetCvmInstancesFilterArray) ToGetCvmInstancesFilterArrayOutputWithContext(ctx context.Context) GetCvmInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmInstancesFilterArrayOutput)
+}
+
+type GetCvmInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetCvmInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmInstancesFilter)(nil)).Elem()
+}
+
+func (o GetCvmInstancesFilterOutput) ToGetCvmInstancesFilterOutput() GetCvmInstancesFilterOutput {
+	return o
+}
+
+func (o GetCvmInstancesFilterOutput) ToGetCvmInstancesFilterOutputWithContext(ctx context.Context) GetCvmInstancesFilterOutput {
+	return o
+}
+
+// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+func (o GetCvmInstancesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+func (o GetCvmInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCvmInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetCvmInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCvmInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmInstancesFilter)(nil)).Elem()
+}
+
+func (o GetCvmInstancesFilterArrayOutput) ToGetCvmInstancesFilterArrayOutput() GetCvmInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetCvmInstancesFilterArrayOutput) ToGetCvmInstancesFilterArrayOutputWithContext(ctx context.Context) GetCvmInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetCvmInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetCvmInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCvmInstancesFilter {
+		return vs[0].([]GetCvmInstancesFilter)[vs[1].(int)]
+	}).(GetCvmInstancesFilterOutput)
+}
+
+type GetCvmInstancesInstanceSet struct {
+	// Number of CPU cores in an instance (in core).
+	Cpu int `pulumi:"cpu"`
+	// The creation time.
+	CreatedTime string `pulumi:"createdTime"`
+	// Private IP quoata for instance ENIs (including primary ENIs).
+	EniIpLimit int `pulumi:"eniIpLimit"`
+	// Instance ENI quota (including primary ENIs).
+	EniLimit int `pulumi:"eniLimit"`
+	// The number of ENIs (including primary ENIs) bound to a instance.
+	InstanceEniCount int `pulumi:"instanceEniCount"`
+	// CVM instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// CVM Name.
+	InstanceName string `pulumi:"instanceName"`
+	// CVM status.
+	InstanceState string `pulumi:"instanceState"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Instance's memory capacity. Unit: GB.
+	Memory int `pulumi:"memory"`
+	// Subnet instance ID.
+	SubnetId string `pulumi:"subnetId"`
+	// VPC instance ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetCvmInstancesInstanceSetInput is an input type that accepts GetCvmInstancesInstanceSetArgs and GetCvmInstancesInstanceSetOutput values.
+// You can construct a concrete instance of `GetCvmInstancesInstanceSetInput` via:
+//
+//          GetCvmInstancesInstanceSetArgs{...}
+type GetCvmInstancesInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetCvmInstancesInstanceSetOutput() GetCvmInstancesInstanceSetOutput
+	ToGetCvmInstancesInstanceSetOutputWithContext(context.Context) GetCvmInstancesInstanceSetOutput
+}
+
+type GetCvmInstancesInstanceSetArgs struct {
+	// Number of CPU cores in an instance (in core).
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// The creation time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Private IP quoata for instance ENIs (including primary ENIs).
+	EniIpLimit pulumi.IntInput `pulumi:"eniIpLimit"`
+	// Instance ENI quota (including primary ENIs).
+	EniLimit pulumi.IntInput `pulumi:"eniLimit"`
+	// The number of ENIs (including primary ENIs) bound to a instance.
+	InstanceEniCount pulumi.IntInput `pulumi:"instanceEniCount"`
+	// CVM instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// CVM Name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// CVM status.
+	InstanceState pulumi.StringInput `pulumi:"instanceState"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Instance's memory capacity. Unit: GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Subnet instance ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// VPC instance ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetCvmInstancesInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetCvmInstancesInstanceSetArgs) ToGetCvmInstancesInstanceSetOutput() GetCvmInstancesInstanceSetOutput {
+	return i.ToGetCvmInstancesInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetCvmInstancesInstanceSetArgs) ToGetCvmInstancesInstanceSetOutputWithContext(ctx context.Context) GetCvmInstancesInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmInstancesInstanceSetOutput)
+}
+
+// GetCvmInstancesInstanceSetArrayInput is an input type that accepts GetCvmInstancesInstanceSetArray and GetCvmInstancesInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetCvmInstancesInstanceSetArrayInput` via:
+//
+//          GetCvmInstancesInstanceSetArray{ GetCvmInstancesInstanceSetArgs{...} }
+type GetCvmInstancesInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCvmInstancesInstanceSetArrayOutput() GetCvmInstancesInstanceSetArrayOutput
+	ToGetCvmInstancesInstanceSetArrayOutputWithContext(context.Context) GetCvmInstancesInstanceSetArrayOutput
+}
+
+type GetCvmInstancesInstanceSetArray []GetCvmInstancesInstanceSetInput
+
+func (GetCvmInstancesInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetCvmInstancesInstanceSetArray) ToGetCvmInstancesInstanceSetArrayOutput() GetCvmInstancesInstanceSetArrayOutput {
+	return i.ToGetCvmInstancesInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCvmInstancesInstanceSetArray) ToGetCvmInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetCvmInstancesInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmInstancesInstanceSetArrayOutput)
+}
+
+type GetCvmInstancesInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetCvmInstancesInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetCvmInstancesInstanceSetOutput) ToGetCvmInstancesInstanceSetOutput() GetCvmInstancesInstanceSetOutput {
+	return o
+}
+
+func (o GetCvmInstancesInstanceSetOutput) ToGetCvmInstancesInstanceSetOutputWithContext(ctx context.Context) GetCvmInstancesInstanceSetOutput {
+	return o
+}
+
+// Number of CPU cores in an instance (in core).
+func (o GetCvmInstancesInstanceSetOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// The creation time.
+func (o GetCvmInstancesInstanceSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Private IP quoata for instance ENIs (including primary ENIs).
+func (o GetCvmInstancesInstanceSetOutput) EniIpLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) int { return v.EniIpLimit }).(pulumi.IntOutput)
+}
+
+// Instance ENI quota (including primary ENIs).
+func (o GetCvmInstancesInstanceSetOutput) EniLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) int { return v.EniLimit }).(pulumi.IntOutput)
+}
+
+// The number of ENIs (including primary ENIs) bound to a instance.
+func (o GetCvmInstancesInstanceSetOutput) InstanceEniCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) int { return v.InstanceEniCount }).(pulumi.IntOutput)
+}
+
+// CVM instance ID.
+func (o GetCvmInstancesInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// CVM Name.
+func (o GetCvmInstancesInstanceSetOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// CVM status.
+func (o GetCvmInstancesInstanceSetOutput) InstanceState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.InstanceState }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetCvmInstancesInstanceSetOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Instance's memory capacity. Unit: GB.
+func (o GetCvmInstancesInstanceSetOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Subnet instance ID.
+func (o GetCvmInstancesInstanceSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// VPC instance ID.
+func (o GetCvmInstancesInstanceSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmInstancesInstanceSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetCvmInstancesInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCvmInstancesInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetCvmInstancesInstanceSetArrayOutput) ToGetCvmInstancesInstanceSetArrayOutput() GetCvmInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetCvmInstancesInstanceSetArrayOutput) ToGetCvmInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetCvmInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetCvmInstancesInstanceSetArrayOutput) Index(i pulumi.IntInput) GetCvmInstancesInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCvmInstancesInstanceSet {
+		return vs[0].([]GetCvmInstancesInstanceSet)[vs[1].(int)]
+	}).(GetCvmInstancesInstanceSetOutput)
+}
+
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet struct {
+	// Inbound packets.
+	InPkg int `pulumi:"inPkg"`
+	// Inbound traffic, in Byte.
+	InTraffic int `pulumi:"inTraffic"`
+	// Outbound packets.
+	OutPkg int `pulumi:"outPkg"`
+	// Outbound traffic, in Byte.
+	OutTraffic int `pulumi:"outTraffic"`
+	// Origin `IP`.
+	PrivateIpAddress string `pulumi:"privateIpAddress"`
+}
+
+// GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput is an input type that accepts GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs and GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput values.
+// You can construct a concrete instance of `GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput` via:
+//
+//          GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...}
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput interface {
+	pulumi.Input
+
+	ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput
+	ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutputWithContext(context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput
+}
+
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs struct {
+	// Inbound packets.
+	InPkg pulumi.IntInput `pulumi:"inPkg"`
+	// Inbound traffic, in Byte.
+	InTraffic pulumi.IntInput `pulumi:"inTraffic"`
+	// Outbound packets.
+	OutPkg pulumi.IntInput `pulumi:"outPkg"`
+	// Outbound traffic, in Byte.
+	OutTraffic pulumi.IntInput `pulumi:"outTraffic"`
+	// Origin `IP`.
+	PrivateIpAddress pulumi.StringInput `pulumi:"privateIpAddress"`
+}
+
+func (GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet)(nil)).Elem()
+}
+
+func (i GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput {
+	return i.ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutputWithContext(context.Background())
+}
+
+func (i GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutputWithContext(ctx context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput)
+}
+
+// GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput is an input type that accepts GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray and GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput values.
+// You can construct a concrete instance of `GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput` via:
+//
+//          GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray{ GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...} }
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput
+	ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutputWithContext(context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput
+}
+
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray []GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput
+
+func (GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet)(nil)).Elem()
+}
+
+func (i GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput {
+	return i.ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutputWithContext(ctx context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput)
+}
+
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet)(nil)).Elem()
+}
+
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput {
+	return o
+}
+
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutputWithContext(ctx context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput {
+	return o
+}
+
+// Inbound packets.
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) InPkg() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet) int { return v.InPkg }).(pulumi.IntOutput)
+}
+
+// Inbound traffic, in Byte.
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) InTraffic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet) int { return v.InTraffic }).(pulumi.IntOutput)
+}
+
+// Outbound packets.
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) OutPkg() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet) int { return v.OutPkg }).(pulumi.IntOutput)
+}
+
+// Outbound traffic, in Byte.
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) OutTraffic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet) int { return v.OutTraffic }).(pulumi.IntOutput)
+}
+
+// Origin `IP`.
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput) PrivateIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet) string { return v.PrivateIpAddress }).(pulumi.StringOutput)
+}
+
+type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet)(nil)).Elem()
+}
+
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput() GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput {
+	return o
+}
+
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput) ToGetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutputWithContext(ctx context.Context) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput {
+	return o
+}
+
+func (o GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput) Index(i pulumi.IntInput) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet {
+		return vs[0].([]GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet)[vs[1].(int)]
+	}).(GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput)
+}
+
+type GetGatewayFlowQosGatewayQosSet struct {
+	// bandwidth value.
+	Bandwidth int `pulumi:"bandwidth"`
+	// create time.
+	CreateTime string `pulumi:"createTime"`
+	// cvm ip address.
+	IpAddress string `pulumi:"ipAddress"`
+	// vpc id.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetGatewayFlowQosGatewayQosSetInput is an input type that accepts GetGatewayFlowQosGatewayQosSetArgs and GetGatewayFlowQosGatewayQosSetOutput values.
+// You can construct a concrete instance of `GetGatewayFlowQosGatewayQosSetInput` via:
+//
+//          GetGatewayFlowQosGatewayQosSetArgs{...}
+type GetGatewayFlowQosGatewayQosSetInput interface {
+	pulumi.Input
+
+	ToGetGatewayFlowQosGatewayQosSetOutput() GetGatewayFlowQosGatewayQosSetOutput
+	ToGetGatewayFlowQosGatewayQosSetOutputWithContext(context.Context) GetGatewayFlowQosGatewayQosSetOutput
+}
+
+type GetGatewayFlowQosGatewayQosSetArgs struct {
+	// bandwidth value.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// cvm ip address.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// vpc id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetGatewayFlowQosGatewayQosSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayFlowQosGatewayQosSet)(nil)).Elem()
+}
+
+func (i GetGatewayFlowQosGatewayQosSetArgs) ToGetGatewayFlowQosGatewayQosSetOutput() GetGatewayFlowQosGatewayQosSetOutput {
+	return i.ToGetGatewayFlowQosGatewayQosSetOutputWithContext(context.Background())
+}
+
+func (i GetGatewayFlowQosGatewayQosSetArgs) ToGetGatewayFlowQosGatewayQosSetOutputWithContext(ctx context.Context) GetGatewayFlowQosGatewayQosSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayFlowQosGatewayQosSetOutput)
+}
+
+// GetGatewayFlowQosGatewayQosSetArrayInput is an input type that accepts GetGatewayFlowQosGatewayQosSetArray and GetGatewayFlowQosGatewayQosSetArrayOutput values.
+// You can construct a concrete instance of `GetGatewayFlowQosGatewayQosSetArrayInput` via:
+//
+//          GetGatewayFlowQosGatewayQosSetArray{ GetGatewayFlowQosGatewayQosSetArgs{...} }
+type GetGatewayFlowQosGatewayQosSetArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayFlowQosGatewayQosSetArrayOutput() GetGatewayFlowQosGatewayQosSetArrayOutput
+	ToGetGatewayFlowQosGatewayQosSetArrayOutputWithContext(context.Context) GetGatewayFlowQosGatewayQosSetArrayOutput
+}
+
+type GetGatewayFlowQosGatewayQosSetArray []GetGatewayFlowQosGatewayQosSetInput
+
+func (GetGatewayFlowQosGatewayQosSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayFlowQosGatewayQosSet)(nil)).Elem()
+}
+
+func (i GetGatewayFlowQosGatewayQosSetArray) ToGetGatewayFlowQosGatewayQosSetArrayOutput() GetGatewayFlowQosGatewayQosSetArrayOutput {
+	return i.ToGetGatewayFlowQosGatewayQosSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayFlowQosGatewayQosSetArray) ToGetGatewayFlowQosGatewayQosSetArrayOutputWithContext(ctx context.Context) GetGatewayFlowQosGatewayQosSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayFlowQosGatewayQosSetArrayOutput)
+}
+
+type GetGatewayFlowQosGatewayQosSetOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayFlowQosGatewayQosSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayFlowQosGatewayQosSet)(nil)).Elem()
+}
+
+func (o GetGatewayFlowQosGatewayQosSetOutput) ToGetGatewayFlowQosGatewayQosSetOutput() GetGatewayFlowQosGatewayQosSetOutput {
+	return o
+}
+
+func (o GetGatewayFlowQosGatewayQosSetOutput) ToGetGatewayFlowQosGatewayQosSetOutputWithContext(ctx context.Context) GetGatewayFlowQosGatewayQosSetOutput {
+	return o
+}
+
+// bandwidth value.
+func (o GetGatewayFlowQosGatewayQosSetOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayFlowQosGatewayQosSet) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// create time.
+func (o GetGatewayFlowQosGatewayQosSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayFlowQosGatewayQosSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// cvm ip address.
+func (o GetGatewayFlowQosGatewayQosSetOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayFlowQosGatewayQosSet) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// vpc id.
+func (o GetGatewayFlowQosGatewayQosSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayFlowQosGatewayQosSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetGatewayFlowQosGatewayQosSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayFlowQosGatewayQosSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayFlowQosGatewayQosSet)(nil)).Elem()
+}
+
+func (o GetGatewayFlowQosGatewayQosSetArrayOutput) ToGetGatewayFlowQosGatewayQosSetArrayOutput() GetGatewayFlowQosGatewayQosSetArrayOutput {
+	return o
+}
+
+func (o GetGatewayFlowQosGatewayQosSetArrayOutput) ToGetGatewayFlowQosGatewayQosSetArrayOutputWithContext(ctx context.Context) GetGatewayFlowQosGatewayQosSetArrayOutput {
+	return o
+}
+
+func (o GetGatewayFlowQosGatewayQosSetArrayOutput) Index(i pulumi.IntInput) GetGatewayFlowQosGatewayQosSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayFlowQosGatewayQosSet {
+		return vs[0].([]GetGatewayFlowQosGatewayQosSet)[vs[1].(int)]
+	}).(GetGatewayFlowQosGatewayQosSetOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Filter VPC with this CIDR.
 	CidrBlock string `pulumi:"cidrBlock"`
@@ -883,6 +2969,1610 @@ func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstanc
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
 		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
 	}).(GetInstancesInstanceListOutput)
+}
+
+type GetLimitsVpcLimitSet struct {
+	// type of vpc limit.
+	LimitType string `pulumi:"limitType"`
+	// value of vpc limit.
+	LimitValue int `pulumi:"limitValue"`
+}
+
+// GetLimitsVpcLimitSetInput is an input type that accepts GetLimitsVpcLimitSetArgs and GetLimitsVpcLimitSetOutput values.
+// You can construct a concrete instance of `GetLimitsVpcLimitSetInput` via:
+//
+//          GetLimitsVpcLimitSetArgs{...}
+type GetLimitsVpcLimitSetInput interface {
+	pulumi.Input
+
+	ToGetLimitsVpcLimitSetOutput() GetLimitsVpcLimitSetOutput
+	ToGetLimitsVpcLimitSetOutputWithContext(context.Context) GetLimitsVpcLimitSetOutput
+}
+
+type GetLimitsVpcLimitSetArgs struct {
+	// type of vpc limit.
+	LimitType pulumi.StringInput `pulumi:"limitType"`
+	// value of vpc limit.
+	LimitValue pulumi.IntInput `pulumi:"limitValue"`
+}
+
+func (GetLimitsVpcLimitSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLimitsVpcLimitSet)(nil)).Elem()
+}
+
+func (i GetLimitsVpcLimitSetArgs) ToGetLimitsVpcLimitSetOutput() GetLimitsVpcLimitSetOutput {
+	return i.ToGetLimitsVpcLimitSetOutputWithContext(context.Background())
+}
+
+func (i GetLimitsVpcLimitSetArgs) ToGetLimitsVpcLimitSetOutputWithContext(ctx context.Context) GetLimitsVpcLimitSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLimitsVpcLimitSetOutput)
+}
+
+// GetLimitsVpcLimitSetArrayInput is an input type that accepts GetLimitsVpcLimitSetArray and GetLimitsVpcLimitSetArrayOutput values.
+// You can construct a concrete instance of `GetLimitsVpcLimitSetArrayInput` via:
+//
+//          GetLimitsVpcLimitSetArray{ GetLimitsVpcLimitSetArgs{...} }
+type GetLimitsVpcLimitSetArrayInput interface {
+	pulumi.Input
+
+	ToGetLimitsVpcLimitSetArrayOutput() GetLimitsVpcLimitSetArrayOutput
+	ToGetLimitsVpcLimitSetArrayOutputWithContext(context.Context) GetLimitsVpcLimitSetArrayOutput
+}
+
+type GetLimitsVpcLimitSetArray []GetLimitsVpcLimitSetInput
+
+func (GetLimitsVpcLimitSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLimitsVpcLimitSet)(nil)).Elem()
+}
+
+func (i GetLimitsVpcLimitSetArray) ToGetLimitsVpcLimitSetArrayOutput() GetLimitsVpcLimitSetArrayOutput {
+	return i.ToGetLimitsVpcLimitSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetLimitsVpcLimitSetArray) ToGetLimitsVpcLimitSetArrayOutputWithContext(ctx context.Context) GetLimitsVpcLimitSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLimitsVpcLimitSetArrayOutput)
+}
+
+type GetLimitsVpcLimitSetOutput struct{ *pulumi.OutputState }
+
+func (GetLimitsVpcLimitSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLimitsVpcLimitSet)(nil)).Elem()
+}
+
+func (o GetLimitsVpcLimitSetOutput) ToGetLimitsVpcLimitSetOutput() GetLimitsVpcLimitSetOutput {
+	return o
+}
+
+func (o GetLimitsVpcLimitSetOutput) ToGetLimitsVpcLimitSetOutputWithContext(ctx context.Context) GetLimitsVpcLimitSetOutput {
+	return o
+}
+
+// type of vpc limit.
+func (o GetLimitsVpcLimitSetOutput) LimitType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLimitsVpcLimitSet) string { return v.LimitType }).(pulumi.StringOutput)
+}
+
+// value of vpc limit.
+func (o GetLimitsVpcLimitSetOutput) LimitValue() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLimitsVpcLimitSet) int { return v.LimitValue }).(pulumi.IntOutput)
+}
+
+type GetLimitsVpcLimitSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLimitsVpcLimitSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLimitsVpcLimitSet)(nil)).Elem()
+}
+
+func (o GetLimitsVpcLimitSetArrayOutput) ToGetLimitsVpcLimitSetArrayOutput() GetLimitsVpcLimitSetArrayOutput {
+	return o
+}
+
+func (o GetLimitsVpcLimitSetArrayOutput) ToGetLimitsVpcLimitSetArrayOutputWithContext(ctx context.Context) GetLimitsVpcLimitSetArrayOutput {
+	return o
+}
+
+func (o GetLimitsVpcLimitSetArrayOutput) Index(i pulumi.IntInput) GetLimitsVpcLimitSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLimitsVpcLimitSet {
+		return vs[0].([]GetLimitsVpcLimitSet)[vs[1].(int)]
+	}).(GetLimitsVpcLimitSetOutput)
+}
+
+type GetNetDetectStateCheckNetDetectIpStateSet struct {
+	// The latency. Unit: ms.
+	Delay int `pulumi:"delay"`
+	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+	DetectDestinationIp string `pulumi:"detectDestinationIp"`
+	// The packet loss rate.
+	PacketLossRate int `pulumi:"packetLossRate"`
+	// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+	State int `pulumi:"state"`
+}
+
+// GetNetDetectStateCheckNetDetectIpStateSetInput is an input type that accepts GetNetDetectStateCheckNetDetectIpStateSetArgs and GetNetDetectStateCheckNetDetectIpStateSetOutput values.
+// You can construct a concrete instance of `GetNetDetectStateCheckNetDetectIpStateSetInput` via:
+//
+//          GetNetDetectStateCheckNetDetectIpStateSetArgs{...}
+type GetNetDetectStateCheckNetDetectIpStateSetInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStateCheckNetDetectIpStateSetOutput() GetNetDetectStateCheckNetDetectIpStateSetOutput
+	ToGetNetDetectStateCheckNetDetectIpStateSetOutputWithContext(context.Context) GetNetDetectStateCheckNetDetectIpStateSetOutput
+}
+
+type GetNetDetectStateCheckNetDetectIpStateSetArgs struct {
+	// The latency. Unit: ms.
+	Delay pulumi.IntInput `pulumi:"delay"`
+	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+	DetectDestinationIp pulumi.StringInput `pulumi:"detectDestinationIp"`
+	// The packet loss rate.
+	PacketLossRate pulumi.IntInput `pulumi:"packetLossRate"`
+	// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+	State pulumi.IntInput `pulumi:"state"`
+}
+
+func (GetNetDetectStateCheckNetDetectIpStateSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStateCheckNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStateCheckNetDetectIpStateSetArgs) ToGetNetDetectStateCheckNetDetectIpStateSetOutput() GetNetDetectStateCheckNetDetectIpStateSetOutput {
+	return i.ToGetNetDetectStateCheckNetDetectIpStateSetOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStateCheckNetDetectIpStateSetArgs) ToGetNetDetectStateCheckNetDetectIpStateSetOutputWithContext(ctx context.Context) GetNetDetectStateCheckNetDetectIpStateSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStateCheckNetDetectIpStateSetOutput)
+}
+
+// GetNetDetectStateCheckNetDetectIpStateSetArrayInput is an input type that accepts GetNetDetectStateCheckNetDetectIpStateSetArray and GetNetDetectStateCheckNetDetectIpStateSetArrayOutput values.
+// You can construct a concrete instance of `GetNetDetectStateCheckNetDetectIpStateSetArrayInput` via:
+//
+//          GetNetDetectStateCheckNetDetectIpStateSetArray{ GetNetDetectStateCheckNetDetectIpStateSetArgs{...} }
+type GetNetDetectStateCheckNetDetectIpStateSetArrayInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutput() GetNetDetectStateCheckNetDetectIpStateSetArrayOutput
+	ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutputWithContext(context.Context) GetNetDetectStateCheckNetDetectIpStateSetArrayOutput
+}
+
+type GetNetDetectStateCheckNetDetectIpStateSetArray []GetNetDetectStateCheckNetDetectIpStateSetInput
+
+func (GetNetDetectStateCheckNetDetectIpStateSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStateCheckNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStateCheckNetDetectIpStateSetArray) ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutput() GetNetDetectStateCheckNetDetectIpStateSetArrayOutput {
+	return i.ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStateCheckNetDetectIpStateSetArray) ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStateCheckNetDetectIpStateSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStateCheckNetDetectIpStateSetArrayOutput)
+}
+
+type GetNetDetectStateCheckNetDetectIpStateSetOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStateCheckNetDetectIpStateSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStateCheckNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) ToGetNetDetectStateCheckNetDetectIpStateSetOutput() GetNetDetectStateCheckNetDetectIpStateSetOutput {
+	return o
+}
+
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) ToGetNetDetectStateCheckNetDetectIpStateSetOutputWithContext(ctx context.Context) GetNetDetectStateCheckNetDetectIpStateSetOutput {
+	return o
+}
+
+// The latency. Unit: ms.
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) Delay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStateCheckNetDetectIpStateSet) int { return v.Delay }).(pulumi.IntOutput)
+}
+
+// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) DetectDestinationIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetDetectStateCheckNetDetectIpStateSet) string { return v.DetectDestinationIp }).(pulumi.StringOutput)
+}
+
+// The packet loss rate.
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) PacketLossRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStateCheckNetDetectIpStateSet) int { return v.PacketLossRate }).(pulumi.IntOutput)
+}
+
+// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+func (o GetNetDetectStateCheckNetDetectIpStateSetOutput) State() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStateCheckNetDetectIpStateSet) int { return v.State }).(pulumi.IntOutput)
+}
+
+type GetNetDetectStateCheckNetDetectIpStateSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStateCheckNetDetectIpStateSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStateCheckNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStateCheckNetDetectIpStateSetArrayOutput) ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutput() GetNetDetectStateCheckNetDetectIpStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStateCheckNetDetectIpStateSetArrayOutput) ToGetNetDetectStateCheckNetDetectIpStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStateCheckNetDetectIpStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStateCheckNetDetectIpStateSetArrayOutput) Index(i pulumi.IntInput) GetNetDetectStateCheckNetDetectIpStateSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetDetectStateCheckNetDetectIpStateSet {
+		return vs[0].([]GetNetDetectStateCheckNetDetectIpStateSet)[vs[1].(int)]
+	}).(GetNetDetectStateCheckNetDetectIpStateSetOutput)
+}
+
+type GetNetDetectStatesFilter struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name string `pulumi:"name"`
+	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+	Values []string `pulumi:"values"`
+}
+
+// GetNetDetectStatesFilterInput is an input type that accepts GetNetDetectStatesFilterArgs and GetNetDetectStatesFilterOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesFilterInput` via:
+//
+//          GetNetDetectStatesFilterArgs{...}
+type GetNetDetectStatesFilterInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesFilterOutput() GetNetDetectStatesFilterOutput
+	ToGetNetDetectStatesFilterOutputWithContext(context.Context) GetNetDetectStatesFilterOutput
+}
+
+type GetNetDetectStatesFilterArgs struct {
+	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetNetDetectStatesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesFilter)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesFilterArgs) ToGetNetDetectStatesFilterOutput() GetNetDetectStatesFilterOutput {
+	return i.ToGetNetDetectStatesFilterOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesFilterArgs) ToGetNetDetectStatesFilterOutputWithContext(ctx context.Context) GetNetDetectStatesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesFilterOutput)
+}
+
+// GetNetDetectStatesFilterArrayInput is an input type that accepts GetNetDetectStatesFilterArray and GetNetDetectStatesFilterArrayOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesFilterArrayInput` via:
+//
+//          GetNetDetectStatesFilterArray{ GetNetDetectStatesFilterArgs{...} }
+type GetNetDetectStatesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesFilterArrayOutput() GetNetDetectStatesFilterArrayOutput
+	ToGetNetDetectStatesFilterArrayOutputWithContext(context.Context) GetNetDetectStatesFilterArrayOutput
+}
+
+type GetNetDetectStatesFilterArray []GetNetDetectStatesFilterInput
+
+func (GetNetDetectStatesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesFilter)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesFilterArray) ToGetNetDetectStatesFilterArrayOutput() GetNetDetectStatesFilterArrayOutput {
+	return i.ToGetNetDetectStatesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesFilterArray) ToGetNetDetectStatesFilterArrayOutputWithContext(ctx context.Context) GetNetDetectStatesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesFilterArrayOutput)
+}
+
+type GetNetDetectStatesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesFilter)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesFilterOutput) ToGetNetDetectStatesFilterOutput() GetNetDetectStatesFilterOutput {
+	return o
+}
+
+func (o GetNetDetectStatesFilterOutput) ToGetNetDetectStatesFilterOutputWithContext(ctx context.Context) GetNetDetectStatesFilterOutput {
+	return o
+}
+
+// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
+func (o GetNetDetectStatesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetDetectStatesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
+func (o GetNetDetectStatesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNetDetectStatesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetNetDetectStatesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesFilter)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesFilterArrayOutput) ToGetNetDetectStatesFilterArrayOutput() GetNetDetectStatesFilterArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesFilterArrayOutput) ToGetNetDetectStatesFilterArrayOutputWithContext(ctx context.Context) GetNetDetectStatesFilterArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesFilterArrayOutput) Index(i pulumi.IntInput) GetNetDetectStatesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetDetectStatesFilter {
+		return vs[0].([]GetNetDetectStatesFilter)[vs[1].(int)]
+	}).(GetNetDetectStatesFilterOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSet struct {
+	// The ID of a network detection instance, such as netd-12345678.
+	NetDetectId string `pulumi:"netDetectId"`
+	// The array of network detection destination IP verification results.
+	NetDetectIpStateSets []GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet `pulumi:"netDetectIpStateSets"`
+}
+
+// GetNetDetectStatesNetDetectStateSetInput is an input type that accepts GetNetDetectStatesNetDetectStateSetArgs and GetNetDetectStatesNetDetectStateSetOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetInput` via:
+//
+//          GetNetDetectStatesNetDetectStateSetArgs{...}
+type GetNetDetectStatesNetDetectStateSetInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesNetDetectStateSetOutput() GetNetDetectStatesNetDetectStateSetOutput
+	ToGetNetDetectStatesNetDetectStateSetOutputWithContext(context.Context) GetNetDetectStatesNetDetectStateSetOutput
+}
+
+type GetNetDetectStatesNetDetectStateSetArgs struct {
+	// The ID of a network detection instance, such as netd-12345678.
+	NetDetectId pulumi.StringInput `pulumi:"netDetectId"`
+	// The array of network detection destination IP verification results.
+	NetDetectIpStateSets GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput `pulumi:"netDetectIpStateSets"`
+}
+
+func (GetNetDetectStatesNetDetectStateSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesNetDetectStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesNetDetectStateSetArgs) ToGetNetDetectStatesNetDetectStateSetOutput() GetNetDetectStatesNetDetectStateSetOutput {
+	return i.ToGetNetDetectStatesNetDetectStateSetOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesNetDetectStateSetArgs) ToGetNetDetectStatesNetDetectStateSetOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesNetDetectStateSetOutput)
+}
+
+// GetNetDetectStatesNetDetectStateSetArrayInput is an input type that accepts GetNetDetectStatesNetDetectStateSetArray and GetNetDetectStatesNetDetectStateSetArrayOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetArrayInput` via:
+//
+//          GetNetDetectStatesNetDetectStateSetArray{ GetNetDetectStatesNetDetectStateSetArgs{...} }
+type GetNetDetectStatesNetDetectStateSetArrayInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesNetDetectStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetArrayOutput
+	ToGetNetDetectStatesNetDetectStateSetArrayOutputWithContext(context.Context) GetNetDetectStatesNetDetectStateSetArrayOutput
+}
+
+type GetNetDetectStatesNetDetectStateSetArray []GetNetDetectStatesNetDetectStateSetInput
+
+func (GetNetDetectStatesNetDetectStateSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesNetDetectStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesNetDetectStateSetArray) ToGetNetDetectStatesNetDetectStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetArrayOutput {
+	return i.ToGetNetDetectStatesNetDetectStateSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesNetDetectStateSetArray) ToGetNetDetectStatesNetDetectStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesNetDetectStateSetArrayOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSetOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesNetDetectStateSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesNetDetectStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesNetDetectStateSetOutput) ToGetNetDetectStatesNetDetectStateSetOutput() GetNetDetectStatesNetDetectStateSetOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetOutput) ToGetNetDetectStatesNetDetectStateSetOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetOutput {
+	return o
+}
+
+// The ID of a network detection instance, such as netd-12345678.
+func (o GetNetDetectStatesNetDetectStateSetOutput) NetDetectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSet) string { return v.NetDetectId }).(pulumi.StringOutput)
+}
+
+// The array of network detection destination IP verification results.
+func (o GetNetDetectStatesNetDetectStateSetOutput) NetDetectIpStateSets() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSet) []GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet {
+		return v.NetDetectIpStateSets
+	}).(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesNetDetectStateSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesNetDetectStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesNetDetectStateSetArrayOutput) ToGetNetDetectStatesNetDetectStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetArrayOutput) ToGetNetDetectStatesNetDetectStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetArrayOutput) Index(i pulumi.IntInput) GetNetDetectStatesNetDetectStateSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetDetectStatesNetDetectStateSet {
+		return vs[0].([]GetNetDetectStatesNetDetectStateSet)[vs[1].(int)]
+	}).(GetNetDetectStatesNetDetectStateSetOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet struct {
+	// The latency. Unit: ms.
+	Delay int `pulumi:"delay"`
+	// The destination IPv4 address of network detection.
+	DetectDestinationIp string `pulumi:"detectDestinationIp"`
+	// The packet loss rate.
+	PacketLossRate int `pulumi:"packetLossRate"`
+	// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+	State int `pulumi:"state"`
+}
+
+// GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput is an input type that accepts GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs and GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput` via:
+//
+//          GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...}
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput
+	ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutputWithContext(context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput
+}
+
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs struct {
+	// The latency. Unit: ms.
+	Delay pulumi.IntInput `pulumi:"delay"`
+	// The destination IPv4 address of network detection.
+	DetectDestinationIp pulumi.StringInput `pulumi:"detectDestinationIp"`
+	// The packet loss rate.
+	PacketLossRate pulumi.IntInput `pulumi:"packetLossRate"`
+	// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+	State pulumi.IntInput `pulumi:"state"`
+}
+
+func (GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput {
+	return i.ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput)
+}
+
+// GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput is an input type that accepts GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray and GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput values.
+// You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput` via:
+//
+//          GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray{ GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...} }
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput interface {
+	pulumi.Input
+
+	ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput
+	ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutputWithContext(context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput
+}
+
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray []GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput
+
+func (GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (i GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput {
+	return i.ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput {
+	return o
+}
+
+// The latency. Unit: ms.
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) Delay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet) int { return v.Delay }).(pulumi.IntOutput)
+}
+
+// The destination IPv4 address of network detection.
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) DetectDestinationIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet) string { return v.DetectDestinationIp }).(pulumi.StringOutput)
+}
+
+// The packet loss rate.
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) PacketLossRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet) int { return v.PacketLossRate }).(pulumi.IntOutput)
+}
+
+// The detection result.0: successful;-1: no packet loss occurred during routing;-2: packet loss occurred when outbound traffic is blocked by the ACL;-3: packet loss occurred when inbound traffic is blocked by the ACL;-4: other errors.
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput) State() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet) int { return v.State }).(pulumi.IntOutput)
+}
+
+type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet)(nil)).Elem()
+}
+
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput() GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput) ToGetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutputWithContext(ctx context.Context) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput {
+	return o
+}
+
+func (o GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput) Index(i pulumi.IntInput) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet {
+		return vs[0].([]GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet)[vs[1].(int)]
+	}).(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput)
+}
+
+type GetPrivateIpAddressesVpcPrivateIpAddressSet struct {
+	// The `CIDR` belonging to the subnet.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// `IP` application time.
+	CreatedTime string `pulumi:"createdTime"`
+	// `VPC` private `IP`.
+	PrivateIpAddress string `pulumi:"privateIpAddress"`
+	// Private `IP` type.
+	PrivateIpAddressType string `pulumi:"privateIpAddressType"`
+}
+
+// GetPrivateIpAddressesVpcPrivateIpAddressSetInput is an input type that accepts GetPrivateIpAddressesVpcPrivateIpAddressSetArgs and GetPrivateIpAddressesVpcPrivateIpAddressSetOutput values.
+// You can construct a concrete instance of `GetPrivateIpAddressesVpcPrivateIpAddressSetInput` via:
+//
+//          GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...}
+type GetPrivateIpAddressesVpcPrivateIpAddressSetInput interface {
+	pulumi.Input
+
+	ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetOutput
+	ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutputWithContext(context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetOutput
+}
+
+type GetPrivateIpAddressesVpcPrivateIpAddressSetArgs struct {
+	// The `CIDR` belonging to the subnet.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// `IP` application time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// `VPC` private `IP`.
+	PrivateIpAddress pulumi.StringInput `pulumi:"privateIpAddress"`
+	// Private `IP` type.
+	PrivateIpAddressType pulumi.StringInput `pulumi:"privateIpAddressType"`
+}
+
+func (GetPrivateIpAddressesVpcPrivateIpAddressSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPrivateIpAddressesVpcPrivateIpAddressSet)(nil)).Elem()
+}
+
+func (i GetPrivateIpAddressesVpcPrivateIpAddressSetArgs) ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetOutput {
+	return i.ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutputWithContext(context.Background())
+}
+
+func (i GetPrivateIpAddressesVpcPrivateIpAddressSetArgs) ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutputWithContext(ctx context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateIpAddressesVpcPrivateIpAddressSetOutput)
+}
+
+// GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput is an input type that accepts GetPrivateIpAddressesVpcPrivateIpAddressSetArray and GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput values.
+// You can construct a concrete instance of `GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput` via:
+//
+//          GetPrivateIpAddressesVpcPrivateIpAddressSetArray{ GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...} }
+type GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput interface {
+	pulumi.Input
+
+	ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput
+	ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutputWithContext(context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput
+}
+
+type GetPrivateIpAddressesVpcPrivateIpAddressSetArray []GetPrivateIpAddressesVpcPrivateIpAddressSetInput
+
+func (GetPrivateIpAddressesVpcPrivateIpAddressSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPrivateIpAddressesVpcPrivateIpAddressSet)(nil)).Elem()
+}
+
+func (i GetPrivateIpAddressesVpcPrivateIpAddressSetArray) ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput {
+	return i.ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetPrivateIpAddressesVpcPrivateIpAddressSetArray) ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutputWithContext(ctx context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput)
+}
+
+type GetPrivateIpAddressesVpcPrivateIpAddressSetOutput struct{ *pulumi.OutputState }
+
+func (GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPrivateIpAddressesVpcPrivateIpAddressSet)(nil)).Elem()
+}
+
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetOutput {
+	return o
+}
+
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) ToGetPrivateIpAddressesVpcPrivateIpAddressSetOutputWithContext(ctx context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetOutput {
+	return o
+}
+
+// The `CIDR` belonging to the subnet.
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPrivateIpAddressesVpcPrivateIpAddressSet) string { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// `IP` application time.
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPrivateIpAddressesVpcPrivateIpAddressSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// `VPC` private `IP`.
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) PrivateIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPrivateIpAddressesVpcPrivateIpAddressSet) string { return v.PrivateIpAddress }).(pulumi.StringOutput)
+}
+
+// Private `IP` type.
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetOutput) PrivateIpAddressType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPrivateIpAddressesVpcPrivateIpAddressSet) string { return v.PrivateIpAddressType }).(pulumi.StringOutput)
+}
+
+type GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPrivateIpAddressesVpcPrivateIpAddressSet)(nil)).Elem()
+}
+
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput) ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput() GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput {
+	return o
+}
+
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput) ToGetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutputWithContext(ctx context.Context) GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput {
+	return o
+}
+
+func (o GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput) Index(i pulumi.IntInput) GetPrivateIpAddressesVpcPrivateIpAddressSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPrivateIpAddressesVpcPrivateIpAddressSet {
+		return vs[0].([]GetPrivateIpAddressesVpcPrivateIpAddressSet)[vs[1].(int)]
+	}).(GetPrivateIpAddressesVpcPrivateIpAddressSetOutput)
+}
+
+type GetProductQuotaProductQuotaSet struct {
+	// Current Quota.
+	QuotaCurrent int `pulumi:"quotaCurrent"`
+	// Quota Id.
+	QuotaId string `pulumi:"quotaId"`
+	// Quota limit.
+	QuotaLimit int `pulumi:"quotaLimit"`
+	// Quota name.
+	QuotaName string `pulumi:"quotaName"`
+	// Quota region.
+	QuotaRegion bool `pulumi:"quotaRegion"`
+}
+
+// GetProductQuotaProductQuotaSetInput is an input type that accepts GetProductQuotaProductQuotaSetArgs and GetProductQuotaProductQuotaSetOutput values.
+// You can construct a concrete instance of `GetProductQuotaProductQuotaSetInput` via:
+//
+//          GetProductQuotaProductQuotaSetArgs{...}
+type GetProductQuotaProductQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetProductQuotaProductQuotaSetOutput() GetProductQuotaProductQuotaSetOutput
+	ToGetProductQuotaProductQuotaSetOutputWithContext(context.Context) GetProductQuotaProductQuotaSetOutput
+}
+
+type GetProductQuotaProductQuotaSetArgs struct {
+	// Current Quota.
+	QuotaCurrent pulumi.IntInput `pulumi:"quotaCurrent"`
+	// Quota Id.
+	QuotaId pulumi.StringInput `pulumi:"quotaId"`
+	// Quota limit.
+	QuotaLimit pulumi.IntInput `pulumi:"quotaLimit"`
+	// Quota name.
+	QuotaName pulumi.StringInput `pulumi:"quotaName"`
+	// Quota region.
+	QuotaRegion pulumi.BoolInput `pulumi:"quotaRegion"`
+}
+
+func (GetProductQuotaProductQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductQuotaProductQuotaSet)(nil)).Elem()
+}
+
+func (i GetProductQuotaProductQuotaSetArgs) ToGetProductQuotaProductQuotaSetOutput() GetProductQuotaProductQuotaSetOutput {
+	return i.ToGetProductQuotaProductQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetProductQuotaProductQuotaSetArgs) ToGetProductQuotaProductQuotaSetOutputWithContext(ctx context.Context) GetProductQuotaProductQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductQuotaProductQuotaSetOutput)
+}
+
+// GetProductQuotaProductQuotaSetArrayInput is an input type that accepts GetProductQuotaProductQuotaSetArray and GetProductQuotaProductQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetProductQuotaProductQuotaSetArrayInput` via:
+//
+//          GetProductQuotaProductQuotaSetArray{ GetProductQuotaProductQuotaSetArgs{...} }
+type GetProductQuotaProductQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProductQuotaProductQuotaSetArrayOutput() GetProductQuotaProductQuotaSetArrayOutput
+	ToGetProductQuotaProductQuotaSetArrayOutputWithContext(context.Context) GetProductQuotaProductQuotaSetArrayOutput
+}
+
+type GetProductQuotaProductQuotaSetArray []GetProductQuotaProductQuotaSetInput
+
+func (GetProductQuotaProductQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductQuotaProductQuotaSet)(nil)).Elem()
+}
+
+func (i GetProductQuotaProductQuotaSetArray) ToGetProductQuotaProductQuotaSetArrayOutput() GetProductQuotaProductQuotaSetArrayOutput {
+	return i.ToGetProductQuotaProductQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProductQuotaProductQuotaSetArray) ToGetProductQuotaProductQuotaSetArrayOutputWithContext(ctx context.Context) GetProductQuotaProductQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductQuotaProductQuotaSetArrayOutput)
+}
+
+type GetProductQuotaProductQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetProductQuotaProductQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductQuotaProductQuotaSet)(nil)).Elem()
+}
+
+func (o GetProductQuotaProductQuotaSetOutput) ToGetProductQuotaProductQuotaSetOutput() GetProductQuotaProductQuotaSetOutput {
+	return o
+}
+
+func (o GetProductQuotaProductQuotaSetOutput) ToGetProductQuotaProductQuotaSetOutputWithContext(ctx context.Context) GetProductQuotaProductQuotaSetOutput {
+	return o
+}
+
+// Current Quota.
+func (o GetProductQuotaProductQuotaSetOutput) QuotaCurrent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductQuotaProductQuotaSet) int { return v.QuotaCurrent }).(pulumi.IntOutput)
+}
+
+// Quota Id.
+func (o GetProductQuotaProductQuotaSetOutput) QuotaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductQuotaProductQuotaSet) string { return v.QuotaId }).(pulumi.StringOutput)
+}
+
+// Quota limit.
+func (o GetProductQuotaProductQuotaSetOutput) QuotaLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductQuotaProductQuotaSet) int { return v.QuotaLimit }).(pulumi.IntOutput)
+}
+
+// Quota name.
+func (o GetProductQuotaProductQuotaSetOutput) QuotaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductQuotaProductQuotaSet) string { return v.QuotaName }).(pulumi.StringOutput)
+}
+
+// Quota region.
+func (o GetProductQuotaProductQuotaSetOutput) QuotaRegion() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetProductQuotaProductQuotaSet) bool { return v.QuotaRegion }).(pulumi.BoolOutput)
+}
+
+type GetProductQuotaProductQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProductQuotaProductQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductQuotaProductQuotaSet)(nil)).Elem()
+}
+
+func (o GetProductQuotaProductQuotaSetArrayOutput) ToGetProductQuotaProductQuotaSetArrayOutput() GetProductQuotaProductQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetProductQuotaProductQuotaSetArrayOutput) ToGetProductQuotaProductQuotaSetArrayOutputWithContext(ctx context.Context) GetProductQuotaProductQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetProductQuotaProductQuotaSetArrayOutput) Index(i pulumi.IntInput) GetProductQuotaProductQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductQuotaProductQuotaSet {
+		return vs[0].([]GetProductQuotaProductQuotaSet)[vs[1].(int)]
+	}).(GetProductQuotaProductQuotaSetOutput)
+}
+
+type GetResourceDashboardResourceDashboardSet struct {
+	// Relational database.
+	Cdb int `pulumi:"cdb"`
+	// Cloud file storage - CFS.
+	Cfs int `pulumi:"cfs"`
+	// Cloud Kafka (CKafka).
+	Ckafka int `pulumi:"ckafka"`
+	// Classic link.
+	ClassicLink int `pulumi:"classicLink"`
+	// TencentDB for Memcached.
+	Cmem int `pulumi:"cmem"`
+	// Cnas.
+	Cnas int `pulumi:"cnas"`
+	// Cloud time series database.
+	CtsDb int `pulumi:"ctsDb"`
+	// Cloud Virtual Machine.
+	Cvm int `pulumi:"cvm"`
+	// An enterprise-grade TencentDB - CynosDB for MySQL.
+	CynosDbMysql int `pulumi:"cynosDbMysql"`
+	// Enterprise TencentDB - CynosDB for Postgres.
+	CynosDbPostgres int `pulumi:"cynosDbPostgres"`
+	// Cloud database audit.
+	DbAudit int `pulumi:"dbAudit"`
+	// A distributed cloud database - TencentDB for TDSQL.
+	Dcdb int `pulumi:"dcdb"`
+	// Direct Connect gateway.
+	Dcg int `pulumi:"dcg"`
+	// ElasticSearch Service.
+	ElasticSearch int `pulumi:"elasticSearch"`
+	// EMR cluster.
+	Emr int `pulumi:"emr"`
+	// Flow log.
+	FlowLog int `pulumi:"flowLog"`
+	// Snova data warehouse.
+	Greenplumn int `pulumi:"greenplumn"`
+	// Grocery.
+	Grocery int `pulumi:"grocery"`
+	// Data encryption service.
+	Hsm int `pulumi:"hsm"`
+	// Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+	Ip int `pulumi:"ip"`
+	// Itop.
+	Itop int `pulumi:"itop"`
+	// Load balancer.
+	Lb int `pulumi:"lb"`
+	// TencentDB for MariaDB (TDSQL).
+	MariaDb int `pulumi:"mariaDb"`
+	// TencentDB for MongoDB.
+	MongoDb int `pulumi:"mongoDb"`
+	// Network attached storage.
+	Nas int `pulumi:"nas"`
+	// NAT gateway.
+	Nat int `pulumi:"nat"`
+	// Network ACL.
+	NetworkAcl int `pulumi:"networkAcl"`
+	// Network probing.
+	NetworkDetect int `pulumi:"networkDetect"`
+	// Oracle.
+	Oracle int `pulumi:"oracle"`
+	// Peering connection.
+	Pcx int `pulumi:"pcx"`
+	// TencentDB for PostgreSQL.
+	Postgres int `pulumi:"postgres"`
+	// TencentDB for Redis.
+	Redis int `pulumi:"redis"`
+	// Route table.
+	RouteTable int `pulumi:"routeTable"`
+	// SEAL.
+	Seal int `pulumi:"seal"`
+	// TencentDB for SQL Server.
+	SqlServer int `pulumi:"sqlServer"`
+	// Subnets.
+	Subnet int `pulumi:"subnet"`
+	// Subnet instance ID, such as subnet-bthucmmy.
+	SubnetId string `pulumi:"subnetId"`
+	// Blockchain service.
+	TBaas int `pulumi:"tBaas"`
+	// Game storage - Tcaplus.
+	Tcaplus int `pulumi:"tcaplus"`
+	// HTAP database - TiDB.
+	TiDb int `pulumi:"tiDb"`
+	// VPC instance ID, such as `vpc-bq4bzxpj`.
+	VpcId string `pulumi:"vpcId"`
+	// VPN gateway.
+	Vpngw int `pulumi:"vpngw"`
+}
+
+// GetResourceDashboardResourceDashboardSetInput is an input type that accepts GetResourceDashboardResourceDashboardSetArgs and GetResourceDashboardResourceDashboardSetOutput values.
+// You can construct a concrete instance of `GetResourceDashboardResourceDashboardSetInput` via:
+//
+//          GetResourceDashboardResourceDashboardSetArgs{...}
+type GetResourceDashboardResourceDashboardSetInput interface {
+	pulumi.Input
+
+	ToGetResourceDashboardResourceDashboardSetOutput() GetResourceDashboardResourceDashboardSetOutput
+	ToGetResourceDashboardResourceDashboardSetOutputWithContext(context.Context) GetResourceDashboardResourceDashboardSetOutput
+}
+
+type GetResourceDashboardResourceDashboardSetArgs struct {
+	// Relational database.
+	Cdb pulumi.IntInput `pulumi:"cdb"`
+	// Cloud file storage - CFS.
+	Cfs pulumi.IntInput `pulumi:"cfs"`
+	// Cloud Kafka (CKafka).
+	Ckafka pulumi.IntInput `pulumi:"ckafka"`
+	// Classic link.
+	ClassicLink pulumi.IntInput `pulumi:"classicLink"`
+	// TencentDB for Memcached.
+	Cmem pulumi.IntInput `pulumi:"cmem"`
+	// Cnas.
+	Cnas pulumi.IntInput `pulumi:"cnas"`
+	// Cloud time series database.
+	CtsDb pulumi.IntInput `pulumi:"ctsDb"`
+	// Cloud Virtual Machine.
+	Cvm pulumi.IntInput `pulumi:"cvm"`
+	// An enterprise-grade TencentDB - CynosDB for MySQL.
+	CynosDbMysql pulumi.IntInput `pulumi:"cynosDbMysql"`
+	// Enterprise TencentDB - CynosDB for Postgres.
+	CynosDbPostgres pulumi.IntInput `pulumi:"cynosDbPostgres"`
+	// Cloud database audit.
+	DbAudit pulumi.IntInput `pulumi:"dbAudit"`
+	// A distributed cloud database - TencentDB for TDSQL.
+	Dcdb pulumi.IntInput `pulumi:"dcdb"`
+	// Direct Connect gateway.
+	Dcg pulumi.IntInput `pulumi:"dcg"`
+	// ElasticSearch Service.
+	ElasticSearch pulumi.IntInput `pulumi:"elasticSearch"`
+	// EMR cluster.
+	Emr pulumi.IntInput `pulumi:"emr"`
+	// Flow log.
+	FlowLog pulumi.IntInput `pulumi:"flowLog"`
+	// Snova data warehouse.
+	Greenplumn pulumi.IntInput `pulumi:"greenplumn"`
+	// Grocery.
+	Grocery pulumi.IntInput `pulumi:"grocery"`
+	// Data encryption service.
+	Hsm pulumi.IntInput `pulumi:"hsm"`
+	// Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+	Ip pulumi.IntInput `pulumi:"ip"`
+	// Itop.
+	Itop pulumi.IntInput `pulumi:"itop"`
+	// Load balancer.
+	Lb pulumi.IntInput `pulumi:"lb"`
+	// TencentDB for MariaDB (TDSQL).
+	MariaDb pulumi.IntInput `pulumi:"mariaDb"`
+	// TencentDB for MongoDB.
+	MongoDb pulumi.IntInput `pulumi:"mongoDb"`
+	// Network attached storage.
+	Nas pulumi.IntInput `pulumi:"nas"`
+	// NAT gateway.
+	Nat pulumi.IntInput `pulumi:"nat"`
+	// Network ACL.
+	NetworkAcl pulumi.IntInput `pulumi:"networkAcl"`
+	// Network probing.
+	NetworkDetect pulumi.IntInput `pulumi:"networkDetect"`
+	// Oracle.
+	Oracle pulumi.IntInput `pulumi:"oracle"`
+	// Peering connection.
+	Pcx pulumi.IntInput `pulumi:"pcx"`
+	// TencentDB for PostgreSQL.
+	Postgres pulumi.IntInput `pulumi:"postgres"`
+	// TencentDB for Redis.
+	Redis pulumi.IntInput `pulumi:"redis"`
+	// Route table.
+	RouteTable pulumi.IntInput `pulumi:"routeTable"`
+	// SEAL.
+	Seal pulumi.IntInput `pulumi:"seal"`
+	// TencentDB for SQL Server.
+	SqlServer pulumi.IntInput `pulumi:"sqlServer"`
+	// Subnets.
+	Subnet pulumi.IntInput `pulumi:"subnet"`
+	// Subnet instance ID, such as subnet-bthucmmy.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Blockchain service.
+	TBaas pulumi.IntInput `pulumi:"tBaas"`
+	// Game storage - Tcaplus.
+	Tcaplus pulumi.IntInput `pulumi:"tcaplus"`
+	// HTAP database - TiDB.
+	TiDb pulumi.IntInput `pulumi:"tiDb"`
+	// VPC instance ID, such as `vpc-bq4bzxpj`.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// VPN gateway.
+	Vpngw pulumi.IntInput `pulumi:"vpngw"`
+}
+
+func (GetResourceDashboardResourceDashboardSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourceDashboardResourceDashboardSet)(nil)).Elem()
+}
+
+func (i GetResourceDashboardResourceDashboardSetArgs) ToGetResourceDashboardResourceDashboardSetOutput() GetResourceDashboardResourceDashboardSetOutput {
+	return i.ToGetResourceDashboardResourceDashboardSetOutputWithContext(context.Background())
+}
+
+func (i GetResourceDashboardResourceDashboardSetArgs) ToGetResourceDashboardResourceDashboardSetOutputWithContext(ctx context.Context) GetResourceDashboardResourceDashboardSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourceDashboardResourceDashboardSetOutput)
+}
+
+// GetResourceDashboardResourceDashboardSetArrayInput is an input type that accepts GetResourceDashboardResourceDashboardSetArray and GetResourceDashboardResourceDashboardSetArrayOutput values.
+// You can construct a concrete instance of `GetResourceDashboardResourceDashboardSetArrayInput` via:
+//
+//          GetResourceDashboardResourceDashboardSetArray{ GetResourceDashboardResourceDashboardSetArgs{...} }
+type GetResourceDashboardResourceDashboardSetArrayInput interface {
+	pulumi.Input
+
+	ToGetResourceDashboardResourceDashboardSetArrayOutput() GetResourceDashboardResourceDashboardSetArrayOutput
+	ToGetResourceDashboardResourceDashboardSetArrayOutputWithContext(context.Context) GetResourceDashboardResourceDashboardSetArrayOutput
+}
+
+type GetResourceDashboardResourceDashboardSetArray []GetResourceDashboardResourceDashboardSetInput
+
+func (GetResourceDashboardResourceDashboardSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourceDashboardResourceDashboardSet)(nil)).Elem()
+}
+
+func (i GetResourceDashboardResourceDashboardSetArray) ToGetResourceDashboardResourceDashboardSetArrayOutput() GetResourceDashboardResourceDashboardSetArrayOutput {
+	return i.ToGetResourceDashboardResourceDashboardSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourceDashboardResourceDashboardSetArray) ToGetResourceDashboardResourceDashboardSetArrayOutputWithContext(ctx context.Context) GetResourceDashboardResourceDashboardSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourceDashboardResourceDashboardSetArrayOutput)
+}
+
+type GetResourceDashboardResourceDashboardSetOutput struct{ *pulumi.OutputState }
+
+func (GetResourceDashboardResourceDashboardSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourceDashboardResourceDashboardSet)(nil)).Elem()
+}
+
+func (o GetResourceDashboardResourceDashboardSetOutput) ToGetResourceDashboardResourceDashboardSetOutput() GetResourceDashboardResourceDashboardSetOutput {
+	return o
+}
+
+func (o GetResourceDashboardResourceDashboardSetOutput) ToGetResourceDashboardResourceDashboardSetOutputWithContext(ctx context.Context) GetResourceDashboardResourceDashboardSetOutput {
+	return o
+}
+
+// Relational database.
+func (o GetResourceDashboardResourceDashboardSetOutput) Cdb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Cdb }).(pulumi.IntOutput)
+}
+
+// Cloud file storage - CFS.
+func (o GetResourceDashboardResourceDashboardSetOutput) Cfs() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Cfs }).(pulumi.IntOutput)
+}
+
+// Cloud Kafka (CKafka).
+func (o GetResourceDashboardResourceDashboardSetOutput) Ckafka() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Ckafka }).(pulumi.IntOutput)
+}
+
+// Classic link.
+func (o GetResourceDashboardResourceDashboardSetOutput) ClassicLink() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.ClassicLink }).(pulumi.IntOutput)
+}
+
+// TencentDB for Memcached.
+func (o GetResourceDashboardResourceDashboardSetOutput) Cmem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Cmem }).(pulumi.IntOutput)
+}
+
+// Cnas.
+func (o GetResourceDashboardResourceDashboardSetOutput) Cnas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Cnas }).(pulumi.IntOutput)
+}
+
+// Cloud time series database.
+func (o GetResourceDashboardResourceDashboardSetOutput) CtsDb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.CtsDb }).(pulumi.IntOutput)
+}
+
+// Cloud Virtual Machine.
+func (o GetResourceDashboardResourceDashboardSetOutput) Cvm() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Cvm }).(pulumi.IntOutput)
+}
+
+// An enterprise-grade TencentDB - CynosDB for MySQL.
+func (o GetResourceDashboardResourceDashboardSetOutput) CynosDbMysql() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.CynosDbMysql }).(pulumi.IntOutput)
+}
+
+// Enterprise TencentDB - CynosDB for Postgres.
+func (o GetResourceDashboardResourceDashboardSetOutput) CynosDbPostgres() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.CynosDbPostgres }).(pulumi.IntOutput)
+}
+
+// Cloud database audit.
+func (o GetResourceDashboardResourceDashboardSetOutput) DbAudit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.DbAudit }).(pulumi.IntOutput)
+}
+
+// A distributed cloud database - TencentDB for TDSQL.
+func (o GetResourceDashboardResourceDashboardSetOutput) Dcdb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Dcdb }).(pulumi.IntOutput)
+}
+
+// Direct Connect gateway.
+func (o GetResourceDashboardResourceDashboardSetOutput) Dcg() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Dcg }).(pulumi.IntOutput)
+}
+
+// ElasticSearch Service.
+func (o GetResourceDashboardResourceDashboardSetOutput) ElasticSearch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.ElasticSearch }).(pulumi.IntOutput)
+}
+
+// EMR cluster.
+func (o GetResourceDashboardResourceDashboardSetOutput) Emr() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Emr }).(pulumi.IntOutput)
+}
+
+// Flow log.
+func (o GetResourceDashboardResourceDashboardSetOutput) FlowLog() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.FlowLog }).(pulumi.IntOutput)
+}
+
+// Snova data warehouse.
+func (o GetResourceDashboardResourceDashboardSetOutput) Greenplumn() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Greenplumn }).(pulumi.IntOutput)
+}
+
+// Grocery.
+func (o GetResourceDashboardResourceDashboardSetOutput) Grocery() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Grocery }).(pulumi.IntOutput)
+}
+
+// Data encryption service.
+func (o GetResourceDashboardResourceDashboardSetOutput) Hsm() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Hsm }).(pulumi.IntOutput)
+}
+
+// Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
+func (o GetResourceDashboardResourceDashboardSetOutput) Ip() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Ip }).(pulumi.IntOutput)
+}
+
+// Itop.
+func (o GetResourceDashboardResourceDashboardSetOutput) Itop() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Itop }).(pulumi.IntOutput)
+}
+
+// Load balancer.
+func (o GetResourceDashboardResourceDashboardSetOutput) Lb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Lb }).(pulumi.IntOutput)
+}
+
+// TencentDB for MariaDB (TDSQL).
+func (o GetResourceDashboardResourceDashboardSetOutput) MariaDb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.MariaDb }).(pulumi.IntOutput)
+}
+
+// TencentDB for MongoDB.
+func (o GetResourceDashboardResourceDashboardSetOutput) MongoDb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.MongoDb }).(pulumi.IntOutput)
+}
+
+// Network attached storage.
+func (o GetResourceDashboardResourceDashboardSetOutput) Nas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Nas }).(pulumi.IntOutput)
+}
+
+// NAT gateway.
+func (o GetResourceDashboardResourceDashboardSetOutput) Nat() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Nat }).(pulumi.IntOutput)
+}
+
+// Network ACL.
+func (o GetResourceDashboardResourceDashboardSetOutput) NetworkAcl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.NetworkAcl }).(pulumi.IntOutput)
+}
+
+// Network probing.
+func (o GetResourceDashboardResourceDashboardSetOutput) NetworkDetect() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.NetworkDetect }).(pulumi.IntOutput)
+}
+
+// Oracle.
+func (o GetResourceDashboardResourceDashboardSetOutput) Oracle() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Oracle }).(pulumi.IntOutput)
+}
+
+// Peering connection.
+func (o GetResourceDashboardResourceDashboardSetOutput) Pcx() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Pcx }).(pulumi.IntOutput)
+}
+
+// TencentDB for PostgreSQL.
+func (o GetResourceDashboardResourceDashboardSetOutput) Postgres() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Postgres }).(pulumi.IntOutput)
+}
+
+// TencentDB for Redis.
+func (o GetResourceDashboardResourceDashboardSetOutput) Redis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Redis }).(pulumi.IntOutput)
+}
+
+// Route table.
+func (o GetResourceDashboardResourceDashboardSetOutput) RouteTable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.RouteTable }).(pulumi.IntOutput)
+}
+
+// SEAL.
+func (o GetResourceDashboardResourceDashboardSetOutput) Seal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Seal }).(pulumi.IntOutput)
+}
+
+// TencentDB for SQL Server.
+func (o GetResourceDashboardResourceDashboardSetOutput) SqlServer() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.SqlServer }).(pulumi.IntOutput)
+}
+
+// Subnets.
+func (o GetResourceDashboardResourceDashboardSetOutput) Subnet() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Subnet }).(pulumi.IntOutput)
+}
+
+// Subnet instance ID, such as subnet-bthucmmy.
+func (o GetResourceDashboardResourceDashboardSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Blockchain service.
+func (o GetResourceDashboardResourceDashboardSetOutput) TBaas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.TBaas }).(pulumi.IntOutput)
+}
+
+// Game storage - Tcaplus.
+func (o GetResourceDashboardResourceDashboardSetOutput) Tcaplus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Tcaplus }).(pulumi.IntOutput)
+}
+
+// HTAP database - TiDB.
+func (o GetResourceDashboardResourceDashboardSetOutput) TiDb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.TiDb }).(pulumi.IntOutput)
+}
+
+// VPC instance ID, such as `vpc-bq4bzxpj`.
+func (o GetResourceDashboardResourceDashboardSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// VPN gateway.
+func (o GetResourceDashboardResourceDashboardSetOutput) Vpngw() pulumi.IntOutput {
+	return o.ApplyT(func(v GetResourceDashboardResourceDashboardSet) int { return v.Vpngw }).(pulumi.IntOutput)
+}
+
+type GetResourceDashboardResourceDashboardSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourceDashboardResourceDashboardSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourceDashboardResourceDashboardSet)(nil)).Elem()
+}
+
+func (o GetResourceDashboardResourceDashboardSetArrayOutput) ToGetResourceDashboardResourceDashboardSetArrayOutput() GetResourceDashboardResourceDashboardSetArrayOutput {
+	return o
+}
+
+func (o GetResourceDashboardResourceDashboardSetArrayOutput) ToGetResourceDashboardResourceDashboardSetArrayOutputWithContext(ctx context.Context) GetResourceDashboardResourceDashboardSetArrayOutput {
+	return o
+}
+
+func (o GetResourceDashboardResourceDashboardSetArrayOutput) Index(i pulumi.IntInput) GetResourceDashboardResourceDashboardSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourceDashboardResourceDashboardSet {
+		return vs[0].([]GetResourceDashboardResourceDashboardSet)[vs[1].(int)]
+	}).(GetResourceDashboardResourceDashboardSetOutput)
+}
+
+type GetRouteConflictsRouteConflictSet struct {
+	// route conflict list.
+	ConflictSets []GetRouteConflictsRouteConflictSetConflictSet `pulumi:"conflictSets"`
+	// destination cidr block.
+	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
+	// Routing table instance ID, for example:rtb-azd4dt1c.
+	RouteTableId string `pulumi:"routeTableId"`
+}
+
+// GetRouteConflictsRouteConflictSetInput is an input type that accepts GetRouteConflictsRouteConflictSetArgs and GetRouteConflictsRouteConflictSetOutput values.
+// You can construct a concrete instance of `GetRouteConflictsRouteConflictSetInput` via:
+//
+//          GetRouteConflictsRouteConflictSetArgs{...}
+type GetRouteConflictsRouteConflictSetInput interface {
+	pulumi.Input
+
+	ToGetRouteConflictsRouteConflictSetOutput() GetRouteConflictsRouteConflictSetOutput
+	ToGetRouteConflictsRouteConflictSetOutputWithContext(context.Context) GetRouteConflictsRouteConflictSetOutput
+}
+
+type GetRouteConflictsRouteConflictSetArgs struct {
+	// route conflict list.
+	ConflictSets GetRouteConflictsRouteConflictSetConflictSetArrayInput `pulumi:"conflictSets"`
+	// destination cidr block.
+	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
+	// Routing table instance ID, for example:rtb-azd4dt1c.
+	RouteTableId pulumi.StringInput `pulumi:"routeTableId"`
+}
+
+func (GetRouteConflictsRouteConflictSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteConflictsRouteConflictSet)(nil)).Elem()
+}
+
+func (i GetRouteConflictsRouteConflictSetArgs) ToGetRouteConflictsRouteConflictSetOutput() GetRouteConflictsRouteConflictSetOutput {
+	return i.ToGetRouteConflictsRouteConflictSetOutputWithContext(context.Background())
+}
+
+func (i GetRouteConflictsRouteConflictSetArgs) ToGetRouteConflictsRouteConflictSetOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteConflictsRouteConflictSetOutput)
+}
+
+// GetRouteConflictsRouteConflictSetArrayInput is an input type that accepts GetRouteConflictsRouteConflictSetArray and GetRouteConflictsRouteConflictSetArrayOutput values.
+// You can construct a concrete instance of `GetRouteConflictsRouteConflictSetArrayInput` via:
+//
+//          GetRouteConflictsRouteConflictSetArray{ GetRouteConflictsRouteConflictSetArgs{...} }
+type GetRouteConflictsRouteConflictSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRouteConflictsRouteConflictSetArrayOutput() GetRouteConflictsRouteConflictSetArrayOutput
+	ToGetRouteConflictsRouteConflictSetArrayOutputWithContext(context.Context) GetRouteConflictsRouteConflictSetArrayOutput
+}
+
+type GetRouteConflictsRouteConflictSetArray []GetRouteConflictsRouteConflictSetInput
+
+func (GetRouteConflictsRouteConflictSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteConflictsRouteConflictSet)(nil)).Elem()
+}
+
+func (i GetRouteConflictsRouteConflictSetArray) ToGetRouteConflictsRouteConflictSetArrayOutput() GetRouteConflictsRouteConflictSetArrayOutput {
+	return i.ToGetRouteConflictsRouteConflictSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRouteConflictsRouteConflictSetArray) ToGetRouteConflictsRouteConflictSetArrayOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteConflictsRouteConflictSetArrayOutput)
+}
+
+type GetRouteConflictsRouteConflictSetOutput struct{ *pulumi.OutputState }
+
+func (GetRouteConflictsRouteConflictSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteConflictsRouteConflictSet)(nil)).Elem()
+}
+
+func (o GetRouteConflictsRouteConflictSetOutput) ToGetRouteConflictsRouteConflictSetOutput() GetRouteConflictsRouteConflictSetOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetOutput) ToGetRouteConflictsRouteConflictSetOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetOutput {
+	return o
+}
+
+// route conflict list.
+func (o GetRouteConflictsRouteConflictSetOutput) ConflictSets() GetRouteConflictsRouteConflictSetConflictSetArrayOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSet) []GetRouteConflictsRouteConflictSetConflictSet {
+		return v.ConflictSets
+	}).(GetRouteConflictsRouteConflictSetConflictSetArrayOutput)
+}
+
+// destination cidr block.
+func (o GetRouteConflictsRouteConflictSetOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSet) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+}
+
+// Routing table instance ID, for example:rtb-azd4dt1c.
+func (o GetRouteConflictsRouteConflictSetOutput) RouteTableId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSet) string { return v.RouteTableId }).(pulumi.StringOutput)
+}
+
+type GetRouteConflictsRouteConflictSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRouteConflictsRouteConflictSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteConflictsRouteConflictSet)(nil)).Elem()
+}
+
+func (o GetRouteConflictsRouteConflictSetArrayOutput) ToGetRouteConflictsRouteConflictSetArrayOutput() GetRouteConflictsRouteConflictSetArrayOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetArrayOutput) ToGetRouteConflictsRouteConflictSetArrayOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetArrayOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetArrayOutput) Index(i pulumi.IntInput) GetRouteConflictsRouteConflictSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRouteConflictsRouteConflictSet {
+		return vs[0].([]GetRouteConflictsRouteConflictSet)[vs[1].(int)]
+	}).(GetRouteConflictsRouteConflictSetOutput)
+}
+
+type GetRouteConflictsRouteConflictSetConflictSet struct {
+	// create time.
+	CreatedTime string `pulumi:"createdTime"`
+	// destination cidr block.
+	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
+	// Destination of Ipv6 Cidr Block.
+	DestinationIpv6CidrBlock string `pulumi:"destinationIpv6CidrBlock"`
+	// if enabled.
+	Enabled bool `pulumi:"enabled"`
+	// next hop id.
+	GatewayId string `pulumi:"gatewayId"`
+	// next gateway type.
+	GatewayType string `pulumi:"gatewayType"`
+	// if published To ccn.
+	PublishedToVbc bool `pulumi:"publishedToVbc"`
+	// route description.
+	RouteDescription string `pulumi:"routeDescription"`
+	// route id.
+	RouteId int `pulumi:"routeId"`
+	// unique policy id.
+	RouteItemId string `pulumi:"routeItemId"`
+	// Routing table instance ID, for example:rtb-azd4dt1c.
+	RouteTableId string `pulumi:"routeTableId"`
+	// routr type.
+	RouteType string `pulumi:"routeType"`
+}
+
+// GetRouteConflictsRouteConflictSetConflictSetInput is an input type that accepts GetRouteConflictsRouteConflictSetConflictSetArgs and GetRouteConflictsRouteConflictSetConflictSetOutput values.
+// You can construct a concrete instance of `GetRouteConflictsRouteConflictSetConflictSetInput` via:
+//
+//          GetRouteConflictsRouteConflictSetConflictSetArgs{...}
+type GetRouteConflictsRouteConflictSetConflictSetInput interface {
+	pulumi.Input
+
+	ToGetRouteConflictsRouteConflictSetConflictSetOutput() GetRouteConflictsRouteConflictSetConflictSetOutput
+	ToGetRouteConflictsRouteConflictSetConflictSetOutputWithContext(context.Context) GetRouteConflictsRouteConflictSetConflictSetOutput
+}
+
+type GetRouteConflictsRouteConflictSetConflictSetArgs struct {
+	// create time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// destination cidr block.
+	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
+	// Destination of Ipv6 Cidr Block.
+	DestinationIpv6CidrBlock pulumi.StringInput `pulumi:"destinationIpv6CidrBlock"`
+	// if enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// next hop id.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// next gateway type.
+	GatewayType pulumi.StringInput `pulumi:"gatewayType"`
+	// if published To ccn.
+	PublishedToVbc pulumi.BoolInput `pulumi:"publishedToVbc"`
+	// route description.
+	RouteDescription pulumi.StringInput `pulumi:"routeDescription"`
+	// route id.
+	RouteId pulumi.IntInput `pulumi:"routeId"`
+	// unique policy id.
+	RouteItemId pulumi.StringInput `pulumi:"routeItemId"`
+	// Routing table instance ID, for example:rtb-azd4dt1c.
+	RouteTableId pulumi.StringInput `pulumi:"routeTableId"`
+	// routr type.
+	RouteType pulumi.StringInput `pulumi:"routeType"`
+}
+
+func (GetRouteConflictsRouteConflictSetConflictSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteConflictsRouteConflictSetConflictSet)(nil)).Elem()
+}
+
+func (i GetRouteConflictsRouteConflictSetConflictSetArgs) ToGetRouteConflictsRouteConflictSetConflictSetOutput() GetRouteConflictsRouteConflictSetConflictSetOutput {
+	return i.ToGetRouteConflictsRouteConflictSetConflictSetOutputWithContext(context.Background())
+}
+
+func (i GetRouteConflictsRouteConflictSetConflictSetArgs) ToGetRouteConflictsRouteConflictSetConflictSetOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetConflictSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteConflictsRouteConflictSetConflictSetOutput)
+}
+
+// GetRouteConflictsRouteConflictSetConflictSetArrayInput is an input type that accepts GetRouteConflictsRouteConflictSetConflictSetArray and GetRouteConflictsRouteConflictSetConflictSetArrayOutput values.
+// You can construct a concrete instance of `GetRouteConflictsRouteConflictSetConflictSetArrayInput` via:
+//
+//          GetRouteConflictsRouteConflictSetConflictSetArray{ GetRouteConflictsRouteConflictSetConflictSetArgs{...} }
+type GetRouteConflictsRouteConflictSetConflictSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRouteConflictsRouteConflictSetConflictSetArrayOutput() GetRouteConflictsRouteConflictSetConflictSetArrayOutput
+	ToGetRouteConflictsRouteConflictSetConflictSetArrayOutputWithContext(context.Context) GetRouteConflictsRouteConflictSetConflictSetArrayOutput
+}
+
+type GetRouteConflictsRouteConflictSetConflictSetArray []GetRouteConflictsRouteConflictSetConflictSetInput
+
+func (GetRouteConflictsRouteConflictSetConflictSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteConflictsRouteConflictSetConflictSet)(nil)).Elem()
+}
+
+func (i GetRouteConflictsRouteConflictSetConflictSetArray) ToGetRouteConflictsRouteConflictSetConflictSetArrayOutput() GetRouteConflictsRouteConflictSetConflictSetArrayOutput {
+	return i.ToGetRouteConflictsRouteConflictSetConflictSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRouteConflictsRouteConflictSetConflictSetArray) ToGetRouteConflictsRouteConflictSetConflictSetArrayOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetConflictSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteConflictsRouteConflictSetConflictSetArrayOutput)
+}
+
+type GetRouteConflictsRouteConflictSetConflictSetOutput struct{ *pulumi.OutputState }
+
+func (GetRouteConflictsRouteConflictSetConflictSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteConflictsRouteConflictSetConflictSet)(nil)).Elem()
+}
+
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) ToGetRouteConflictsRouteConflictSetConflictSetOutput() GetRouteConflictsRouteConflictSetConflictSetOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) ToGetRouteConflictsRouteConflictSetConflictSetOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetConflictSetOutput {
+	return o
+}
+
+// create time.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// destination cidr block.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+}
+
+// Destination of Ipv6 Cidr Block.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) DestinationIpv6CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.DestinationIpv6CidrBlock }).(pulumi.StringOutput)
+}
+
+// if enabled.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// next hop id.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// next gateway type.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) GatewayType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.GatewayType }).(pulumi.StringOutput)
+}
+
+// if published To ccn.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) PublishedToVbc() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) bool { return v.PublishedToVbc }).(pulumi.BoolOutput)
+}
+
+// route description.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) RouteDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.RouteDescription }).(pulumi.StringOutput)
+}
+
+// route id.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) RouteId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) int { return v.RouteId }).(pulumi.IntOutput)
+}
+
+// unique policy id.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) RouteItemId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.RouteItemId }).(pulumi.StringOutput)
+}
+
+// Routing table instance ID, for example:rtb-azd4dt1c.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) RouteTableId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.RouteTableId }).(pulumi.StringOutput)
+}
+
+// routr type.
+func (o GetRouteConflictsRouteConflictSetConflictSetOutput) RouteType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteConflictsRouteConflictSetConflictSet) string { return v.RouteType }).(pulumi.StringOutput)
+}
+
+type GetRouteConflictsRouteConflictSetConflictSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRouteConflictsRouteConflictSetConflictSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteConflictsRouteConflictSetConflictSet)(nil)).Elem()
+}
+
+func (o GetRouteConflictsRouteConflictSetConflictSetArrayOutput) ToGetRouteConflictsRouteConflictSetConflictSetArrayOutput() GetRouteConflictsRouteConflictSetConflictSetArrayOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetConflictSetArrayOutput) ToGetRouteConflictsRouteConflictSetConflictSetArrayOutputWithContext(ctx context.Context) GetRouteConflictsRouteConflictSetConflictSetArrayOutput {
+	return o
+}
+
+func (o GetRouteConflictsRouteConflictSetConflictSetArrayOutput) Index(i pulumi.IntInput) GetRouteConflictsRouteConflictSetConflictSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRouteConflictsRouteConflictSetConflictSet {
+		return vs[0].([]GetRouteConflictsRouteConflictSetConflictSet)[vs[1].(int)]
+	}).(GetRouteConflictsRouteConflictSetConflictSetOutput)
 }
 
 type GetRouteTablesInstanceList struct {
@@ -1180,6 +4870,1458 @@ func (o GetRouteTablesInstanceListRouteEntryInfoArrayOutput) Index(i pulumi.IntI
 	}).(GetRouteTablesInstanceListRouteEntryInfoOutput)
 }
 
+type GetSecurityGroupLimitsSecurityGroupLimitSet struct {
+	// number of instances associated sg.
+	InstanceSecurityGroupLimit int `pulumi:"instanceSecurityGroupLimit"`
+	// number of sg can be referred.
+	ReferredSecurityGroupLimit int `pulumi:"referredSecurityGroupLimit"`
+	// number of sg extended policy.
+	SecurityGroupExtendedPolicyLimit int `pulumi:"securityGroupExtendedPolicyLimit"`
+	// number of sg associated instances.
+	SecurityGroupInstanceLimit int `pulumi:"securityGroupInstanceLimit"`
+	// number of sg can be created.
+	SecurityGroupLimit int `pulumi:"securityGroupLimit"`
+	// number of sg polciy can be created.
+	SecurityGroupPolicyLimit int `pulumi:"securityGroupPolicyLimit"`
+	// number of eni and cvm can be referred.
+	SecurityGroupReferredCvmAndEniLimit int `pulumi:"securityGroupReferredCvmAndEniLimit"`
+	// number of svc can be referred.
+	SecurityGroupReferredSvcLimit int `pulumi:"securityGroupReferredSvcLimit"`
+}
+
+// GetSecurityGroupLimitsSecurityGroupLimitSetInput is an input type that accepts GetSecurityGroupLimitsSecurityGroupLimitSetArgs and GetSecurityGroupLimitsSecurityGroupLimitSetOutput values.
+// You can construct a concrete instance of `GetSecurityGroupLimitsSecurityGroupLimitSetInput` via:
+//
+//          GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...}
+type GetSecurityGroupLimitsSecurityGroupLimitSetInput interface {
+	pulumi.Input
+
+	ToGetSecurityGroupLimitsSecurityGroupLimitSetOutput() GetSecurityGroupLimitsSecurityGroupLimitSetOutput
+	ToGetSecurityGroupLimitsSecurityGroupLimitSetOutputWithContext(context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetOutput
+}
+
+type GetSecurityGroupLimitsSecurityGroupLimitSetArgs struct {
+	// number of instances associated sg.
+	InstanceSecurityGroupLimit pulumi.IntInput `pulumi:"instanceSecurityGroupLimit"`
+	// number of sg can be referred.
+	ReferredSecurityGroupLimit pulumi.IntInput `pulumi:"referredSecurityGroupLimit"`
+	// number of sg extended policy.
+	SecurityGroupExtendedPolicyLimit pulumi.IntInput `pulumi:"securityGroupExtendedPolicyLimit"`
+	// number of sg associated instances.
+	SecurityGroupInstanceLimit pulumi.IntInput `pulumi:"securityGroupInstanceLimit"`
+	// number of sg can be created.
+	SecurityGroupLimit pulumi.IntInput `pulumi:"securityGroupLimit"`
+	// number of sg polciy can be created.
+	SecurityGroupPolicyLimit pulumi.IntInput `pulumi:"securityGroupPolicyLimit"`
+	// number of eni and cvm can be referred.
+	SecurityGroupReferredCvmAndEniLimit pulumi.IntInput `pulumi:"securityGroupReferredCvmAndEniLimit"`
+	// number of svc can be referred.
+	SecurityGroupReferredSvcLimit pulumi.IntInput `pulumi:"securityGroupReferredSvcLimit"`
+}
+
+func (GetSecurityGroupLimitsSecurityGroupLimitSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityGroupLimitsSecurityGroupLimitSet)(nil)).Elem()
+}
+
+func (i GetSecurityGroupLimitsSecurityGroupLimitSetArgs) ToGetSecurityGroupLimitsSecurityGroupLimitSetOutput() GetSecurityGroupLimitsSecurityGroupLimitSetOutput {
+	return i.ToGetSecurityGroupLimitsSecurityGroupLimitSetOutputWithContext(context.Background())
+}
+
+func (i GetSecurityGroupLimitsSecurityGroupLimitSetArgs) ToGetSecurityGroupLimitsSecurityGroupLimitSetOutputWithContext(ctx context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityGroupLimitsSecurityGroupLimitSetOutput)
+}
+
+// GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput is an input type that accepts GetSecurityGroupLimitsSecurityGroupLimitSetArray and GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput values.
+// You can construct a concrete instance of `GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput` via:
+//
+//          GetSecurityGroupLimitsSecurityGroupLimitSetArray{ GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...} }
+type GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput() GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput
+	ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutputWithContext(context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput
+}
+
+type GetSecurityGroupLimitsSecurityGroupLimitSetArray []GetSecurityGroupLimitsSecurityGroupLimitSetInput
+
+func (GetSecurityGroupLimitsSecurityGroupLimitSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityGroupLimitsSecurityGroupLimitSet)(nil)).Elem()
+}
+
+func (i GetSecurityGroupLimitsSecurityGroupLimitSetArray) ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput() GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput {
+	return i.ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSecurityGroupLimitsSecurityGroupLimitSetArray) ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutputWithContext(ctx context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput)
+}
+
+type GetSecurityGroupLimitsSecurityGroupLimitSetOutput struct{ *pulumi.OutputState }
+
+func (GetSecurityGroupLimitsSecurityGroupLimitSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityGroupLimitsSecurityGroupLimitSet)(nil)).Elem()
+}
+
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) ToGetSecurityGroupLimitsSecurityGroupLimitSetOutput() GetSecurityGroupLimitsSecurityGroupLimitSetOutput {
+	return o
+}
+
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) ToGetSecurityGroupLimitsSecurityGroupLimitSetOutputWithContext(ctx context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetOutput {
+	return o
+}
+
+// number of instances associated sg.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) InstanceSecurityGroupLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.InstanceSecurityGroupLimit }).(pulumi.IntOutput)
+}
+
+// number of sg can be referred.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) ReferredSecurityGroupLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.ReferredSecurityGroupLimit }).(pulumi.IntOutput)
+}
+
+// number of sg extended policy.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupExtendedPolicyLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupExtendedPolicyLimit }).(pulumi.IntOutput)
+}
+
+// number of sg associated instances.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupInstanceLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupInstanceLimit }).(pulumi.IntOutput)
+}
+
+// number of sg can be created.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupLimit }).(pulumi.IntOutput)
+}
+
+// number of sg polciy can be created.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupPolicyLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupPolicyLimit }).(pulumi.IntOutput)
+}
+
+// number of eni and cvm can be referred.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupReferredCvmAndEniLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupReferredCvmAndEniLimit }).(pulumi.IntOutput)
+}
+
+// number of svc can be referred.
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetOutput) SecurityGroupReferredSvcLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecurityGroupLimitsSecurityGroupLimitSet) int { return v.SecurityGroupReferredSvcLimit }).(pulumi.IntOutput)
+}
+
+type GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityGroupLimitsSecurityGroupLimitSet)(nil)).Elem()
+}
+
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput) ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput() GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput {
+	return o
+}
+
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput) ToGetSecurityGroupLimitsSecurityGroupLimitSetArrayOutputWithContext(ctx context.Context) GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput {
+	return o
+}
+
+func (o GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput) Index(i pulumi.IntInput) GetSecurityGroupLimitsSecurityGroupLimitSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecurityGroupLimitsSecurityGroupLimitSet {
+		return vs[0].([]GetSecurityGroupLimitsSecurityGroupLimitSet)[vs[1].(int)]
+	}).(GetSecurityGroupLimitsSecurityGroupLimitSetOutput)
+}
+
+type GetSecurityGroupReferencesReferredSecurityGroupSet struct {
+	// IDs of all referred security group instances.
+	ReferredSecurityGroupIds []string `pulumi:"referredSecurityGroupIds"`
+	// Security group instance ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+}
+
+// GetSecurityGroupReferencesReferredSecurityGroupSetInput is an input type that accepts GetSecurityGroupReferencesReferredSecurityGroupSetArgs and GetSecurityGroupReferencesReferredSecurityGroupSetOutput values.
+// You can construct a concrete instance of `GetSecurityGroupReferencesReferredSecurityGroupSetInput` via:
+//
+//          GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...}
+type GetSecurityGroupReferencesReferredSecurityGroupSetInput interface {
+	pulumi.Input
+
+	ToGetSecurityGroupReferencesReferredSecurityGroupSetOutput() GetSecurityGroupReferencesReferredSecurityGroupSetOutput
+	ToGetSecurityGroupReferencesReferredSecurityGroupSetOutputWithContext(context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetOutput
+}
+
+type GetSecurityGroupReferencesReferredSecurityGroupSetArgs struct {
+	// IDs of all referred security group instances.
+	ReferredSecurityGroupIds pulumi.StringArrayInput `pulumi:"referredSecurityGroupIds"`
+	// Security group instance ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+}
+
+func (GetSecurityGroupReferencesReferredSecurityGroupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityGroupReferencesReferredSecurityGroupSet)(nil)).Elem()
+}
+
+func (i GetSecurityGroupReferencesReferredSecurityGroupSetArgs) ToGetSecurityGroupReferencesReferredSecurityGroupSetOutput() GetSecurityGroupReferencesReferredSecurityGroupSetOutput {
+	return i.ToGetSecurityGroupReferencesReferredSecurityGroupSetOutputWithContext(context.Background())
+}
+
+func (i GetSecurityGroupReferencesReferredSecurityGroupSetArgs) ToGetSecurityGroupReferencesReferredSecurityGroupSetOutputWithContext(ctx context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityGroupReferencesReferredSecurityGroupSetOutput)
+}
+
+// GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput is an input type that accepts GetSecurityGroupReferencesReferredSecurityGroupSetArray and GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput values.
+// You can construct a concrete instance of `GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput` via:
+//
+//          GetSecurityGroupReferencesReferredSecurityGroupSetArray{ GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...} }
+type GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput() GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput
+	ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutputWithContext(context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput
+}
+
+type GetSecurityGroupReferencesReferredSecurityGroupSetArray []GetSecurityGroupReferencesReferredSecurityGroupSetInput
+
+func (GetSecurityGroupReferencesReferredSecurityGroupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityGroupReferencesReferredSecurityGroupSet)(nil)).Elem()
+}
+
+func (i GetSecurityGroupReferencesReferredSecurityGroupSetArray) ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput() GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput {
+	return i.ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSecurityGroupReferencesReferredSecurityGroupSetArray) ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutputWithContext(ctx context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput)
+}
+
+type GetSecurityGroupReferencesReferredSecurityGroupSetOutput struct{ *pulumi.OutputState }
+
+func (GetSecurityGroupReferencesReferredSecurityGroupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityGroupReferencesReferredSecurityGroupSet)(nil)).Elem()
+}
+
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetOutput) ToGetSecurityGroupReferencesReferredSecurityGroupSetOutput() GetSecurityGroupReferencesReferredSecurityGroupSetOutput {
+	return o
+}
+
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetOutput) ToGetSecurityGroupReferencesReferredSecurityGroupSetOutputWithContext(ctx context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetOutput {
+	return o
+}
+
+// IDs of all referred security group instances.
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetOutput) ReferredSecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSecurityGroupReferencesReferredSecurityGroupSet) []string { return v.ReferredSecurityGroupIds }).(pulumi.StringArrayOutput)
+}
+
+// Security group instance ID.
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityGroupReferencesReferredSecurityGroupSet) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+type GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityGroupReferencesReferredSecurityGroupSet)(nil)).Elem()
+}
+
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput) ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput() GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput {
+	return o
+}
+
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput) ToGetSecurityGroupReferencesReferredSecurityGroupSetArrayOutputWithContext(ctx context.Context) GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput {
+	return o
+}
+
+func (o GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput) Index(i pulumi.IntInput) GetSecurityGroupReferencesReferredSecurityGroupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecurityGroupReferencesReferredSecurityGroupSet {
+		return vs[0].([]GetSecurityGroupReferencesReferredSecurityGroupSet)[vs[1].(int)]
+	}).(GetSecurityGroupReferencesReferredSecurityGroupSetOutput)
+}
+
+type GetSgSnapshotFileContentBackupData struct {
+	// ACCEPT or DROP.
+	Action string `pulumi:"action"`
+	// IP address ID or IP address group ID.
+	AddressTemplates []GetSgSnapshotFileContentBackupDataAddressTemplate `pulumi:"addressTemplates"`
+	// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// The CIDR block or IPv6 (mutually exclusive).
+	Ipv6CidrBlock string `pulumi:"ipv6CidrBlock"`
+	// The last modification time of the security group.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Security group policy description.
+	PolicyDescription string `pulumi:"policyDescription"`
+	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+	PolicyIndex int `pulumi:"policyIndex"`
+	// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+	Port string `pulumi:"port"`
+	// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+	Protocol string `pulumi:"protocol"`
+	// Security group ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+	ServiceTemplates []GetSgSnapshotFileContentBackupDataServiceTemplate `pulumi:"serviceTemplates"`
+}
+
+// GetSgSnapshotFileContentBackupDataInput is an input type that accepts GetSgSnapshotFileContentBackupDataArgs and GetSgSnapshotFileContentBackupDataOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataArgs{...}
+type GetSgSnapshotFileContentBackupDataInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataOutput() GetSgSnapshotFileContentBackupDataOutput
+	ToGetSgSnapshotFileContentBackupDataOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataOutput
+}
+
+type GetSgSnapshotFileContentBackupDataArgs struct {
+	// ACCEPT or DROP.
+	Action pulumi.StringInput `pulumi:"action"`
+	// IP address ID or IP address group ID.
+	AddressTemplates GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput `pulumi:"addressTemplates"`
+	// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// The CIDR block or IPv6 (mutually exclusive).
+	Ipv6CidrBlock pulumi.StringInput `pulumi:"ipv6CidrBlock"`
+	// The last modification time of the security group.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Security group policy description.
+	PolicyDescription pulumi.StringInput `pulumi:"policyDescription"`
+	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+	PolicyIndex pulumi.IntInput `pulumi:"policyIndex"`
+	// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Security group ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+	ServiceTemplates GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput `pulumi:"serviceTemplates"`
+}
+
+func (GetSgSnapshotFileContentBackupDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupData)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataArgs) ToGetSgSnapshotFileContentBackupDataOutput() GetSgSnapshotFileContentBackupDataOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataArgs) ToGetSgSnapshotFileContentBackupDataOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataOutput)
+}
+
+// GetSgSnapshotFileContentBackupDataArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataArray and GetSgSnapshotFileContentBackupDataArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataArrayInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataArray{ GetSgSnapshotFileContentBackupDataArgs{...} }
+type GetSgSnapshotFileContentBackupDataArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataArrayOutput() GetSgSnapshotFileContentBackupDataArrayOutput
+	ToGetSgSnapshotFileContentBackupDataArrayOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataArrayOutput
+}
+
+type GetSgSnapshotFileContentBackupDataArray []GetSgSnapshotFileContentBackupDataInput
+
+func (GetSgSnapshotFileContentBackupDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupData)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataArray) ToGetSgSnapshotFileContentBackupDataArrayOutput() GetSgSnapshotFileContentBackupDataArrayOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataArray) ToGetSgSnapshotFileContentBackupDataArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataArrayOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupData)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataOutput) ToGetSgSnapshotFileContentBackupDataOutput() GetSgSnapshotFileContentBackupDataOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataOutput) ToGetSgSnapshotFileContentBackupDataOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataOutput {
+	return o
+}
+
+// ACCEPT or DROP.
+func (o GetSgSnapshotFileContentBackupDataOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// IP address ID or IP address group ID.
+func (o GetSgSnapshotFileContentBackupDataOutput) AddressTemplates() GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) []GetSgSnapshotFileContentBackupDataAddressTemplate {
+		return v.AddressTemplates
+	}).(GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput)
+}
+
+// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+func (o GetSgSnapshotFileContentBackupDataOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// The CIDR block or IPv6 (mutually exclusive).
+func (o GetSgSnapshotFileContentBackupDataOutput) Ipv6CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.Ipv6CidrBlock }).(pulumi.StringOutput)
+}
+
+// The last modification time of the security group.
+func (o GetSgSnapshotFileContentBackupDataOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Security group policy description.
+func (o GetSgSnapshotFileContentBackupDataOutput) PolicyDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.PolicyDescription }).(pulumi.StringOutput)
+}
+
+// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+func (o GetSgSnapshotFileContentBackupDataOutput) PolicyIndex() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) int { return v.PolicyIndex }).(pulumi.IntOutput)
+}
+
+// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+func (o GetSgSnapshotFileContentBackupDataOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.Port }).(pulumi.StringOutput)
+}
+
+// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+func (o GetSgSnapshotFileContentBackupDataOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Security group ID.
+func (o GetSgSnapshotFileContentBackupDataOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+func (o GetSgSnapshotFileContentBackupDataOutput) ServiceTemplates() GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupData) []GetSgSnapshotFileContentBackupDataServiceTemplate {
+		return v.ServiceTemplates
+	}).(GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupData)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataArrayOutput) ToGetSgSnapshotFileContentBackupDataArrayOutput() GetSgSnapshotFileContentBackupDataArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataArrayOutput) ToGetSgSnapshotFileContentBackupDataArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentBackupDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentBackupData {
+		return vs[0].([]GetSgSnapshotFileContentBackupData)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentBackupDataOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataAddressTemplate struct {
+	// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+	AddressGroupId string `pulumi:"addressGroupId"`
+	// The ID of the IP address, such as `ipm-2uw6ujo6`.
+	AddressId string `pulumi:"addressId"`
+}
+
+// GetSgSnapshotFileContentBackupDataAddressTemplateInput is an input type that accepts GetSgSnapshotFileContentBackupDataAddressTemplateArgs and GetSgSnapshotFileContentBackupDataAddressTemplateOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataAddressTemplateInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...}
+type GetSgSnapshotFileContentBackupDataAddressTemplateInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataAddressTemplateOutput() GetSgSnapshotFileContentBackupDataAddressTemplateOutput
+	ToGetSgSnapshotFileContentBackupDataAddressTemplateOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateOutput
+}
+
+type GetSgSnapshotFileContentBackupDataAddressTemplateArgs struct {
+	// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+	AddressGroupId pulumi.StringInput `pulumi:"addressGroupId"`
+	// The ID of the IP address, such as `ipm-2uw6ujo6`.
+	AddressId pulumi.StringInput `pulumi:"addressId"`
+}
+
+func (GetSgSnapshotFileContentBackupDataAddressTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupDataAddressTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataAddressTemplateArgs) ToGetSgSnapshotFileContentBackupDataAddressTemplateOutput() GetSgSnapshotFileContentBackupDataAddressTemplateOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataAddressTemplateOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataAddressTemplateArgs) ToGetSgSnapshotFileContentBackupDataAddressTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataAddressTemplateOutput)
+}
+
+// GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataAddressTemplateArray and GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataAddressTemplateArray{ GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...} }
+type GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput() GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput
+	ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput
+}
+
+type GetSgSnapshotFileContentBackupDataAddressTemplateArray []GetSgSnapshotFileContentBackupDataAddressTemplateInput
+
+func (GetSgSnapshotFileContentBackupDataAddressTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupDataAddressTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataAddressTemplateArray) ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput() GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataAddressTemplateArray) ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataAddressTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataAddressTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupDataAddressTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateOutput) ToGetSgSnapshotFileContentBackupDataAddressTemplateOutput() GetSgSnapshotFileContentBackupDataAddressTemplateOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateOutput) ToGetSgSnapshotFileContentBackupDataAddressTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateOutput {
+	return o
+}
+
+// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateOutput) AddressGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupDataAddressTemplate) string { return v.AddressGroupId }).(pulumi.StringOutput)
+}
+
+// The ID of the IP address, such as `ipm-2uw6ujo6`.
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateOutput) AddressId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupDataAddressTemplate) string { return v.AddressId }).(pulumi.StringOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupDataAddressTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput) ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput() GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput) ToGetSgSnapshotFileContentBackupDataAddressTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentBackupDataAddressTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentBackupDataAddressTemplate {
+		return vs[0].([]GetSgSnapshotFileContentBackupDataAddressTemplate)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentBackupDataAddressTemplateOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataServiceTemplate struct {
+	// Protocol port group ID, such as `ppmg-f5n1f8da`.
+	ServiceGroupId string `pulumi:"serviceGroupId"`
+	// Protocol port ID, such as `ppm-f5n1f8da`.
+	ServiceId string `pulumi:"serviceId"`
+}
+
+// GetSgSnapshotFileContentBackupDataServiceTemplateInput is an input type that accepts GetSgSnapshotFileContentBackupDataServiceTemplateArgs and GetSgSnapshotFileContentBackupDataServiceTemplateOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataServiceTemplateInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...}
+type GetSgSnapshotFileContentBackupDataServiceTemplateInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataServiceTemplateOutput() GetSgSnapshotFileContentBackupDataServiceTemplateOutput
+	ToGetSgSnapshotFileContentBackupDataServiceTemplateOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateOutput
+}
+
+type GetSgSnapshotFileContentBackupDataServiceTemplateArgs struct {
+	// Protocol port group ID, such as `ppmg-f5n1f8da`.
+	ServiceGroupId pulumi.StringInput `pulumi:"serviceGroupId"`
+	// Protocol port ID, such as `ppm-f5n1f8da`.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+}
+
+func (GetSgSnapshotFileContentBackupDataServiceTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupDataServiceTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataServiceTemplateArgs) ToGetSgSnapshotFileContentBackupDataServiceTemplateOutput() GetSgSnapshotFileContentBackupDataServiceTemplateOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataServiceTemplateOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataServiceTemplateArgs) ToGetSgSnapshotFileContentBackupDataServiceTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataServiceTemplateOutput)
+}
+
+// GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataServiceTemplateArray and GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput` via:
+//
+//          GetSgSnapshotFileContentBackupDataServiceTemplateArray{ GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...} }
+type GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput() GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput
+	ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutputWithContext(context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput
+}
+
+type GetSgSnapshotFileContentBackupDataServiceTemplateArray []GetSgSnapshotFileContentBackupDataServiceTemplateInput
+
+func (GetSgSnapshotFileContentBackupDataServiceTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupDataServiceTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentBackupDataServiceTemplateArray) ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput() GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput {
+	return i.ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentBackupDataServiceTemplateArray) ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataServiceTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataServiceTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentBackupDataServiceTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateOutput) ToGetSgSnapshotFileContentBackupDataServiceTemplateOutput() GetSgSnapshotFileContentBackupDataServiceTemplateOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateOutput) ToGetSgSnapshotFileContentBackupDataServiceTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateOutput {
+	return o
+}
+
+// Protocol port group ID, such as `ppmg-f5n1f8da`.
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateOutput) ServiceGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupDataServiceTemplate) string { return v.ServiceGroupId }).(pulumi.StringOutput)
+}
+
+// Protocol port ID, such as `ppm-f5n1f8da`.
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentBackupDataServiceTemplate) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+type GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentBackupDataServiceTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput) ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput() GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput) ToGetSgSnapshotFileContentBackupDataServiceTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentBackupDataServiceTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentBackupDataServiceTemplate {
+		return vs[0].([]GetSgSnapshotFileContentBackupDataServiceTemplate)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentBackupDataServiceTemplateOutput)
+}
+
+type GetSgSnapshotFileContentOriginalData struct {
+	// ACCEPT or DROP.
+	Action string `pulumi:"action"`
+	// IP address ID or IP address group ID.
+	AddressTemplates []GetSgSnapshotFileContentOriginalDataAddressTemplate `pulumi:"addressTemplates"`
+	// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+	CidrBlock string `pulumi:"cidrBlock"`
+	// The CIDR block or IPv6 (mutually exclusive).
+	Ipv6CidrBlock string `pulumi:"ipv6CidrBlock"`
+	// The last modification time of the security group.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Security group policy description.
+	PolicyDescription string `pulumi:"policyDescription"`
+	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+	PolicyIndex int `pulumi:"policyIndex"`
+	// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+	Port string `pulumi:"port"`
+	// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+	Protocol string `pulumi:"protocol"`
+	// Security group ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+	ServiceTemplates []GetSgSnapshotFileContentOriginalDataServiceTemplate `pulumi:"serviceTemplates"`
+}
+
+// GetSgSnapshotFileContentOriginalDataInput is an input type that accepts GetSgSnapshotFileContentOriginalDataArgs and GetSgSnapshotFileContentOriginalDataOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataArgs{...}
+type GetSgSnapshotFileContentOriginalDataInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataOutput() GetSgSnapshotFileContentOriginalDataOutput
+	ToGetSgSnapshotFileContentOriginalDataOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataArgs struct {
+	// ACCEPT or DROP.
+	Action pulumi.StringInput `pulumi:"action"`
+	// IP address ID or IP address group ID.
+	AddressTemplates GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput `pulumi:"addressTemplates"`
+	// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
+	// The CIDR block or IPv6 (mutually exclusive).
+	Ipv6CidrBlock pulumi.StringInput `pulumi:"ipv6CidrBlock"`
+	// The last modification time of the security group.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Security group policy description.
+	PolicyDescription pulumi.StringInput `pulumi:"policyDescription"`
+	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+	PolicyIndex pulumi.IntInput `pulumi:"policyIndex"`
+	// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Security group ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+	ServiceTemplates GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput `pulumi:"serviceTemplates"`
+}
+
+func (GetSgSnapshotFileContentOriginalDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalData)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataArgs) ToGetSgSnapshotFileContentOriginalDataOutput() GetSgSnapshotFileContentOriginalDataOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataArgs) ToGetSgSnapshotFileContentOriginalDataOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataOutput)
+}
+
+// GetSgSnapshotFileContentOriginalDataArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataArray and GetSgSnapshotFileContentOriginalDataArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataArrayInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataArray{ GetSgSnapshotFileContentOriginalDataArgs{...} }
+type GetSgSnapshotFileContentOriginalDataArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataArrayOutput() GetSgSnapshotFileContentOriginalDataArrayOutput
+	ToGetSgSnapshotFileContentOriginalDataArrayOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataArrayOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataArray []GetSgSnapshotFileContentOriginalDataInput
+
+func (GetSgSnapshotFileContentOriginalDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalData)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataArray) ToGetSgSnapshotFileContentOriginalDataArrayOutput() GetSgSnapshotFileContentOriginalDataArrayOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataArray) ToGetSgSnapshotFileContentOriginalDataArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataArrayOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalData)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataOutput) ToGetSgSnapshotFileContentOriginalDataOutput() GetSgSnapshotFileContentOriginalDataOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataOutput) ToGetSgSnapshotFileContentOriginalDataOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataOutput {
+	return o
+}
+
+// ACCEPT or DROP.
+func (o GetSgSnapshotFileContentOriginalDataOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// IP address ID or IP address group ID.
+func (o GetSgSnapshotFileContentOriginalDataOutput) AddressTemplates() GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) []GetSgSnapshotFileContentOriginalDataAddressTemplate {
+		return v.AddressTemplates
+	}).(GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput)
+}
+
+// Either `CidrBlock` or ` Ipv6CidrBlock can be specified. Note that if  `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
+func (o GetSgSnapshotFileContentOriginalDataOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// The CIDR block or IPv6 (mutually exclusive).
+func (o GetSgSnapshotFileContentOriginalDataOutput) Ipv6CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.Ipv6CidrBlock }).(pulumi.StringOutput)
+}
+
+// The last modification time of the security group.
+func (o GetSgSnapshotFileContentOriginalDataOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Security group policy description.
+func (o GetSgSnapshotFileContentOriginalDataOutput) PolicyDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.PolicyDescription }).(pulumi.StringOutput)
+}
+
+// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
+func (o GetSgSnapshotFileContentOriginalDataOutput) PolicyIndex() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) int { return v.PolicyIndex }).(pulumi.IntOutput)
+}
+
+// Port (`all`, a single port, or a port range).Note: If the `Protocol` value is set to `ALL`, the `Port` value also needs to be set to `all`.
+func (o GetSgSnapshotFileContentOriginalDataOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.Port }).(pulumi.StringOutput)
+}
+
+// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
+func (o GetSgSnapshotFileContentOriginalDataOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Security group ID.
+func (o GetSgSnapshotFileContentOriginalDataOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
+func (o GetSgSnapshotFileContentOriginalDataOutput) ServiceTemplates() GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalData) []GetSgSnapshotFileContentOriginalDataServiceTemplate {
+		return v.ServiceTemplates
+	}).(GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalData)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataArrayOutput) ToGetSgSnapshotFileContentOriginalDataArrayOutput() GetSgSnapshotFileContentOriginalDataArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataArrayOutput) ToGetSgSnapshotFileContentOriginalDataArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentOriginalDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentOriginalData {
+		return vs[0].([]GetSgSnapshotFileContentOriginalData)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentOriginalDataOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataAddressTemplate struct {
+	// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+	AddressGroupId string `pulumi:"addressGroupId"`
+	// The ID of the IP address, such as `ipm-2uw6ujo6`.
+	AddressId string `pulumi:"addressId"`
+}
+
+// GetSgSnapshotFileContentOriginalDataAddressTemplateInput is an input type that accepts GetSgSnapshotFileContentOriginalDataAddressTemplateArgs and GetSgSnapshotFileContentOriginalDataAddressTemplateOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataAddressTemplateInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...}
+type GetSgSnapshotFileContentOriginalDataAddressTemplateInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateOutput
+	ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataAddressTemplateArgs struct {
+	// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+	AddressGroupId pulumi.StringInput `pulumi:"addressGroupId"`
+	// The ID of the IP address, such as `ipm-2uw6ujo6`.
+	AddressId pulumi.StringInput `pulumi:"addressId"`
+}
+
+func (GetSgSnapshotFileContentOriginalDataAddressTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataAddressTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataAddressTemplateArgs) ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataAddressTemplateArgs) ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataAddressTemplateOutput)
+}
+
+// GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataAddressTemplateArray and GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataAddressTemplateArray{ GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...} }
+type GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput
+	ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataAddressTemplateArray []GetSgSnapshotFileContentOriginalDataAddressTemplateInput
+
+func (GetSgSnapshotFileContentOriginalDataAddressTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalDataAddressTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataAddressTemplateArray) ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataAddressTemplateArray) ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataAddressTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataAddressTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataAddressTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateOutput) ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateOutput) ToGetSgSnapshotFileContentOriginalDataAddressTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateOutput {
+	return o
+}
+
+// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateOutput) AddressGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalDataAddressTemplate) string { return v.AddressGroupId }).(pulumi.StringOutput)
+}
+
+// The ID of the IP address, such as `ipm-2uw6ujo6`.
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateOutput) AddressId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalDataAddressTemplate) string { return v.AddressId }).(pulumi.StringOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalDataAddressTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput) ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput) ToGetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentOriginalDataAddressTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentOriginalDataAddressTemplate {
+		return vs[0].([]GetSgSnapshotFileContentOriginalDataAddressTemplate)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentOriginalDataAddressTemplateOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataServiceTemplate struct {
+	// Protocol port group ID, such as `ppmg-f5n1f8da`.
+	ServiceGroupId string `pulumi:"serviceGroupId"`
+	// Protocol port ID, such as `ppm-f5n1f8da`.
+	ServiceId string `pulumi:"serviceId"`
+}
+
+// GetSgSnapshotFileContentOriginalDataServiceTemplateInput is an input type that accepts GetSgSnapshotFileContentOriginalDataServiceTemplateArgs and GetSgSnapshotFileContentOriginalDataServiceTemplateOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataServiceTemplateInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...}
+type GetSgSnapshotFileContentOriginalDataServiceTemplateInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateOutput
+	ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataServiceTemplateArgs struct {
+	// Protocol port group ID, such as `ppmg-f5n1f8da`.
+	ServiceGroupId pulumi.StringInput `pulumi:"serviceGroupId"`
+	// Protocol port ID, such as `ppm-f5n1f8da`.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+}
+
+func (GetSgSnapshotFileContentOriginalDataServiceTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataServiceTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataServiceTemplateArgs) ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataServiceTemplateArgs) ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataServiceTemplateOutput)
+}
+
+// GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataServiceTemplateArray and GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput values.
+// You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput` via:
+//
+//          GetSgSnapshotFileContentOriginalDataServiceTemplateArray{ GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...} }
+type GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput
+	ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutputWithContext(context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput
+}
+
+type GetSgSnapshotFileContentOriginalDataServiceTemplateArray []GetSgSnapshotFileContentOriginalDataServiceTemplateInput
+
+func (GetSgSnapshotFileContentOriginalDataServiceTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalDataServiceTemplate)(nil)).Elem()
+}
+
+func (i GetSgSnapshotFileContentOriginalDataServiceTemplateArray) ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput {
+	return i.ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetSgSnapshotFileContentOriginalDataServiceTemplateArray) ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataServiceTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataServiceTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataServiceTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateOutput) ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateOutput) ToGetSgSnapshotFileContentOriginalDataServiceTemplateOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateOutput {
+	return o
+}
+
+// Protocol port group ID, such as `ppmg-f5n1f8da`.
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateOutput) ServiceGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalDataServiceTemplate) string { return v.ServiceGroupId }).(pulumi.StringOutput)
+}
+
+// Protocol port ID, such as `ppm-f5n1f8da`.
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSgSnapshotFileContentOriginalDataServiceTemplate) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+type GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSgSnapshotFileContentOriginalDataServiceTemplate)(nil)).Elem()
+}
+
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput) ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput() GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput) ToGetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutputWithContext(ctx context.Context) GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput {
+	return o
+}
+
+func (o GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput) Index(i pulumi.IntInput) GetSgSnapshotFileContentOriginalDataServiceTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSgSnapshotFileContentOriginalDataServiceTemplate {
+		return vs[0].([]GetSgSnapshotFileContentOriginalDataServiceTemplate)[vs[1].(int)]
+	}).(GetSgSnapshotFileContentOriginalDataServiceTemplateOutput)
+}
+
+type GetSnapshotFilesSnapshotFileSet struct {
+	// backup time.
+	BackupTime string `pulumi:"backupTime"`
+	// InstanceId.
+	InstanceId string `pulumi:"instanceId"`
+	// Uin of operator.
+	Operator string `pulumi:"operator"`
+	// snap shot file id.
+	SnapshotFileId string `pulumi:"snapshotFileId"`
+	// Snapshot Policy Id.
+	SnapshotPolicyId string `pulumi:"snapshotPolicyId"`
+}
+
+// GetSnapshotFilesSnapshotFileSetInput is an input type that accepts GetSnapshotFilesSnapshotFileSetArgs and GetSnapshotFilesSnapshotFileSetOutput values.
+// You can construct a concrete instance of `GetSnapshotFilesSnapshotFileSetInput` via:
+//
+//          GetSnapshotFilesSnapshotFileSetArgs{...}
+type GetSnapshotFilesSnapshotFileSetInput interface {
+	pulumi.Input
+
+	ToGetSnapshotFilesSnapshotFileSetOutput() GetSnapshotFilesSnapshotFileSetOutput
+	ToGetSnapshotFilesSnapshotFileSetOutputWithContext(context.Context) GetSnapshotFilesSnapshotFileSetOutput
+}
+
+type GetSnapshotFilesSnapshotFileSetArgs struct {
+	// backup time.
+	BackupTime pulumi.StringInput `pulumi:"backupTime"`
+	// InstanceId.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Uin of operator.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// snap shot file id.
+	SnapshotFileId pulumi.StringInput `pulumi:"snapshotFileId"`
+	// Snapshot Policy Id.
+	SnapshotPolicyId pulumi.StringInput `pulumi:"snapshotPolicyId"`
+}
+
+func (GetSnapshotFilesSnapshotFileSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSnapshotFilesSnapshotFileSet)(nil)).Elem()
+}
+
+func (i GetSnapshotFilesSnapshotFileSetArgs) ToGetSnapshotFilesSnapshotFileSetOutput() GetSnapshotFilesSnapshotFileSetOutput {
+	return i.ToGetSnapshotFilesSnapshotFileSetOutputWithContext(context.Background())
+}
+
+func (i GetSnapshotFilesSnapshotFileSetArgs) ToGetSnapshotFilesSnapshotFileSetOutputWithContext(ctx context.Context) GetSnapshotFilesSnapshotFileSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSnapshotFilesSnapshotFileSetOutput)
+}
+
+// GetSnapshotFilesSnapshotFileSetArrayInput is an input type that accepts GetSnapshotFilesSnapshotFileSetArray and GetSnapshotFilesSnapshotFileSetArrayOutput values.
+// You can construct a concrete instance of `GetSnapshotFilesSnapshotFileSetArrayInput` via:
+//
+//          GetSnapshotFilesSnapshotFileSetArray{ GetSnapshotFilesSnapshotFileSetArgs{...} }
+type GetSnapshotFilesSnapshotFileSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSnapshotFilesSnapshotFileSetArrayOutput() GetSnapshotFilesSnapshotFileSetArrayOutput
+	ToGetSnapshotFilesSnapshotFileSetArrayOutputWithContext(context.Context) GetSnapshotFilesSnapshotFileSetArrayOutput
+}
+
+type GetSnapshotFilesSnapshotFileSetArray []GetSnapshotFilesSnapshotFileSetInput
+
+func (GetSnapshotFilesSnapshotFileSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSnapshotFilesSnapshotFileSet)(nil)).Elem()
+}
+
+func (i GetSnapshotFilesSnapshotFileSetArray) ToGetSnapshotFilesSnapshotFileSetArrayOutput() GetSnapshotFilesSnapshotFileSetArrayOutput {
+	return i.ToGetSnapshotFilesSnapshotFileSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSnapshotFilesSnapshotFileSetArray) ToGetSnapshotFilesSnapshotFileSetArrayOutputWithContext(ctx context.Context) GetSnapshotFilesSnapshotFileSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSnapshotFilesSnapshotFileSetArrayOutput)
+}
+
+type GetSnapshotFilesSnapshotFileSetOutput struct{ *pulumi.OutputState }
+
+func (GetSnapshotFilesSnapshotFileSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSnapshotFilesSnapshotFileSet)(nil)).Elem()
+}
+
+func (o GetSnapshotFilesSnapshotFileSetOutput) ToGetSnapshotFilesSnapshotFileSetOutput() GetSnapshotFilesSnapshotFileSetOutput {
+	return o
+}
+
+func (o GetSnapshotFilesSnapshotFileSetOutput) ToGetSnapshotFilesSnapshotFileSetOutputWithContext(ctx context.Context) GetSnapshotFilesSnapshotFileSetOutput {
+	return o
+}
+
+// backup time.
+func (o GetSnapshotFilesSnapshotFileSetOutput) BackupTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSnapshotFilesSnapshotFileSet) string { return v.BackupTime }).(pulumi.StringOutput)
+}
+
+// InstanceId.
+func (o GetSnapshotFilesSnapshotFileSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSnapshotFilesSnapshotFileSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Uin of operator.
+func (o GetSnapshotFilesSnapshotFileSetOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSnapshotFilesSnapshotFileSet) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// snap shot file id.
+func (o GetSnapshotFilesSnapshotFileSetOutput) SnapshotFileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSnapshotFilesSnapshotFileSet) string { return v.SnapshotFileId }).(pulumi.StringOutput)
+}
+
+// Snapshot Policy Id.
+func (o GetSnapshotFilesSnapshotFileSetOutput) SnapshotPolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSnapshotFilesSnapshotFileSet) string { return v.SnapshotPolicyId }).(pulumi.StringOutput)
+}
+
+type GetSnapshotFilesSnapshotFileSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSnapshotFilesSnapshotFileSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSnapshotFilesSnapshotFileSet)(nil)).Elem()
+}
+
+func (o GetSnapshotFilesSnapshotFileSetArrayOutput) ToGetSnapshotFilesSnapshotFileSetArrayOutput() GetSnapshotFilesSnapshotFileSetArrayOutput {
+	return o
+}
+
+func (o GetSnapshotFilesSnapshotFileSetArrayOutput) ToGetSnapshotFilesSnapshotFileSetArrayOutputWithContext(ctx context.Context) GetSnapshotFilesSnapshotFileSetArrayOutput {
+	return o
+}
+
+func (o GetSnapshotFilesSnapshotFileSetArrayOutput) Index(i pulumi.IntInput) GetSnapshotFilesSnapshotFileSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSnapshotFilesSnapshotFileSet {
+		return vs[0].([]GetSnapshotFilesSnapshotFileSet)[vs[1].(int)]
+	}).(GetSnapshotFilesSnapshotFileSetOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSet struct {
+	// The total number of used IP addresses.
+	Ip int `pulumi:"ip"`
+	// Information of associated resources.
+	ResourceStatisticsItemSets []GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet `pulumi:"resourceStatisticsItemSets"`
+	// Subnet instance ID, such as `subnet-bthucmmy`.
+	SubnetId string `pulumi:"subnetId"`
+	// VPC instance ID, such as vpc-f1xjkw1b.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetSubnetResourceDashboardResourceStatisticsSetInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetArgs and GetSubnetResourceDashboardResourceStatisticsSetOutput values.
+// You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetInput` via:
+//
+//          GetSubnetResourceDashboardResourceStatisticsSetArgs{...}
+type GetSubnetResourceDashboardResourceStatisticsSetInput interface {
+	pulumi.Input
+
+	ToGetSubnetResourceDashboardResourceStatisticsSetOutput() GetSubnetResourceDashboardResourceStatisticsSetOutput
+	ToGetSubnetResourceDashboardResourceStatisticsSetOutputWithContext(context.Context) GetSubnetResourceDashboardResourceStatisticsSetOutput
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetArgs struct {
+	// The total number of used IP addresses.
+	Ip pulumi.IntInput `pulumi:"ip"`
+	// Information of associated resources.
+	ResourceStatisticsItemSets GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput `pulumi:"resourceStatisticsItemSets"`
+	// Subnet instance ID, such as `subnet-bthucmmy`.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// VPC instance ID, such as vpc-f1xjkw1b.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetSubnetResourceDashboardResourceStatisticsSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSet)(nil)).Elem()
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetArgs) ToGetSubnetResourceDashboardResourceStatisticsSetOutput() GetSubnetResourceDashboardResourceStatisticsSetOutput {
+	return i.ToGetSubnetResourceDashboardResourceStatisticsSetOutputWithContext(context.Background())
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetArgs) ToGetSubnetResourceDashboardResourceStatisticsSetOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubnetResourceDashboardResourceStatisticsSetOutput)
+}
+
+// GetSubnetResourceDashboardResourceStatisticsSetArrayInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetArray and GetSubnetResourceDashboardResourceStatisticsSetArrayOutput values.
+// You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetArrayInput` via:
+//
+//          GetSubnetResourceDashboardResourceStatisticsSetArray{ GetSubnetResourceDashboardResourceStatisticsSetArgs{...} }
+type GetSubnetResourceDashboardResourceStatisticsSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetArrayOutput
+	ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutputWithContext(context.Context) GetSubnetResourceDashboardResourceStatisticsSetArrayOutput
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetArray []GetSubnetResourceDashboardResourceStatisticsSetInput
+
+func (GetSubnetResourceDashboardResourceStatisticsSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubnetResourceDashboardResourceStatisticsSet)(nil)).Elem()
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetArray) ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetArrayOutput {
+	return i.ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetArray) ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubnetResourceDashboardResourceStatisticsSetArrayOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetOutput struct{ *pulumi.OutputState }
+
+func (GetSubnetResourceDashboardResourceStatisticsSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSet)(nil)).Elem()
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) ToGetSubnetResourceDashboardResourceStatisticsSetOutput() GetSubnetResourceDashboardResourceStatisticsSetOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) ToGetSubnetResourceDashboardResourceStatisticsSetOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetOutput {
+	return o
+}
+
+// The total number of used IP addresses.
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) Ip() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSet) int { return v.Ip }).(pulumi.IntOutput)
+}
+
+// Information of associated resources.
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) ResourceStatisticsItemSets() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSet) []GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet {
+		return v.ResourceStatisticsItemSets
+	}).(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput)
+}
+
+// Subnet instance ID, such as `subnet-bthucmmy`.
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// VPC instance ID, such as vpc-f1xjkw1b.
+func (o GetSubnetResourceDashboardResourceStatisticsSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSubnetResourceDashboardResourceStatisticsSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubnetResourceDashboardResourceStatisticsSet)(nil)).Elem()
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetArrayOutput) ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetArrayOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetArrayOutput) ToGetSubnetResourceDashboardResourceStatisticsSetArrayOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetArrayOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetArrayOutput) Index(i pulumi.IntInput) GetSubnetResourceDashboardResourceStatisticsSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSubnetResourceDashboardResourceStatisticsSet {
+		return vs[0].([]GetSubnetResourceDashboardResourceStatisticsSet)[vs[1].(int)]
+	}).(GetSubnetResourceDashboardResourceStatisticsSetOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet struct {
+	// Number of resources.
+	ResourceCount int `pulumi:"resourceCount"`
+	// Resource name.
+	ResourceName string `pulumi:"resourceName"`
+	// Resource type, such as CVM, ENI.
+	ResourceType string `pulumi:"resourceType"`
+}
+
+// GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs and GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput values.
+// You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput` via:
+//
+//          GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...}
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput interface {
+	pulumi.Input
+
+	ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput
+	ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutputWithContext(context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs struct {
+	// Number of resources.
+	ResourceCount pulumi.IntInput `pulumi:"resourceCount"`
+	// Resource name.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// Resource type, such as CVM, ENI.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+}
+
+func (GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet)(nil)).Elem()
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput {
+	return i.ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutputWithContext(context.Background())
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput)
+}
+
+// GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray and GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput values.
+// You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput` via:
+//
+//          GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray{ GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...} }
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput
+	ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutputWithContext(context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray []GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput
+
+func (GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet)(nil)).Elem()
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput {
+	return i.ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput struct{ *pulumi.OutputState }
+
+func (GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet)(nil)).Elem()
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput {
+	return o
+}
+
+// Number of resources.
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ResourceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet) int {
+		return v.ResourceCount
+	}).(pulumi.IntOutput)
+}
+
+// Resource name.
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet) string {
+		return v.ResourceName
+	}).(pulumi.StringOutput)
+}
+
+// Resource type, such as CVM, ENI.
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet) string {
+		return v.ResourceType
+	}).(pulumi.StringOutput)
+}
+
+type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet)(nil)).Elem()
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput() GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput) ToGetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutputWithContext(ctx context.Context) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput {
+	return o
+}
+
+func (o GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput) Index(i pulumi.IntInput) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet {
+		return vs[0].([]GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet)[vs[1].(int)]
+	}).(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput)
+}
+
 type GetSubnetsInstanceList struct {
 	// Zone of the subnet to be queried.
 	AvailabilityZone string `pulumi:"availabilityZone"`
@@ -1367,9 +6509,282 @@ func (o GetSubnetsInstanceListArrayOutput) Index(i pulumi.IntInput) GetSubnetsIn
 	}).(GetSubnetsInstanceListOutput)
 }
 
+type GetTemplateLimitsTemplateLimit struct {
+	// address template group member limit.
+	AddressTemplateGroupMemberLimit int `pulumi:"addressTemplateGroupMemberLimit"`
+	// address template member limit.
+	AddressTemplateMemberLimit int `pulumi:"addressTemplateMemberLimit"`
+	// service template group member limit.
+	ServiceTemplateGroupMemberLimit int `pulumi:"serviceTemplateGroupMemberLimit"`
+	// service template member limit.
+	ServiceTemplateMemberLimit int `pulumi:"serviceTemplateMemberLimit"`
+}
+
+// GetTemplateLimitsTemplateLimitInput is an input type that accepts GetTemplateLimitsTemplateLimitArgs and GetTemplateLimitsTemplateLimitOutput values.
+// You can construct a concrete instance of `GetTemplateLimitsTemplateLimitInput` via:
+//
+//          GetTemplateLimitsTemplateLimitArgs{...}
+type GetTemplateLimitsTemplateLimitInput interface {
+	pulumi.Input
+
+	ToGetTemplateLimitsTemplateLimitOutput() GetTemplateLimitsTemplateLimitOutput
+	ToGetTemplateLimitsTemplateLimitOutputWithContext(context.Context) GetTemplateLimitsTemplateLimitOutput
+}
+
+type GetTemplateLimitsTemplateLimitArgs struct {
+	// address template group member limit.
+	AddressTemplateGroupMemberLimit pulumi.IntInput `pulumi:"addressTemplateGroupMemberLimit"`
+	// address template member limit.
+	AddressTemplateMemberLimit pulumi.IntInput `pulumi:"addressTemplateMemberLimit"`
+	// service template group member limit.
+	ServiceTemplateGroupMemberLimit pulumi.IntInput `pulumi:"serviceTemplateGroupMemberLimit"`
+	// service template member limit.
+	ServiceTemplateMemberLimit pulumi.IntInput `pulumi:"serviceTemplateMemberLimit"`
+}
+
+func (GetTemplateLimitsTemplateLimitArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplateLimitsTemplateLimit)(nil)).Elem()
+}
+
+func (i GetTemplateLimitsTemplateLimitArgs) ToGetTemplateLimitsTemplateLimitOutput() GetTemplateLimitsTemplateLimitOutput {
+	return i.ToGetTemplateLimitsTemplateLimitOutputWithContext(context.Background())
+}
+
+func (i GetTemplateLimitsTemplateLimitArgs) ToGetTemplateLimitsTemplateLimitOutputWithContext(ctx context.Context) GetTemplateLimitsTemplateLimitOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplateLimitsTemplateLimitOutput)
+}
+
+// GetTemplateLimitsTemplateLimitArrayInput is an input type that accepts GetTemplateLimitsTemplateLimitArray and GetTemplateLimitsTemplateLimitArrayOutput values.
+// You can construct a concrete instance of `GetTemplateLimitsTemplateLimitArrayInput` via:
+//
+//          GetTemplateLimitsTemplateLimitArray{ GetTemplateLimitsTemplateLimitArgs{...} }
+type GetTemplateLimitsTemplateLimitArrayInput interface {
+	pulumi.Input
+
+	ToGetTemplateLimitsTemplateLimitArrayOutput() GetTemplateLimitsTemplateLimitArrayOutput
+	ToGetTemplateLimitsTemplateLimitArrayOutputWithContext(context.Context) GetTemplateLimitsTemplateLimitArrayOutput
+}
+
+type GetTemplateLimitsTemplateLimitArray []GetTemplateLimitsTemplateLimitInput
+
+func (GetTemplateLimitsTemplateLimitArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplateLimitsTemplateLimit)(nil)).Elem()
+}
+
+func (i GetTemplateLimitsTemplateLimitArray) ToGetTemplateLimitsTemplateLimitArrayOutput() GetTemplateLimitsTemplateLimitArrayOutput {
+	return i.ToGetTemplateLimitsTemplateLimitArrayOutputWithContext(context.Background())
+}
+
+func (i GetTemplateLimitsTemplateLimitArray) ToGetTemplateLimitsTemplateLimitArrayOutputWithContext(ctx context.Context) GetTemplateLimitsTemplateLimitArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTemplateLimitsTemplateLimitArrayOutput)
+}
+
+type GetTemplateLimitsTemplateLimitOutput struct{ *pulumi.OutputState }
+
+func (GetTemplateLimitsTemplateLimitOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTemplateLimitsTemplateLimit)(nil)).Elem()
+}
+
+func (o GetTemplateLimitsTemplateLimitOutput) ToGetTemplateLimitsTemplateLimitOutput() GetTemplateLimitsTemplateLimitOutput {
+	return o
+}
+
+func (o GetTemplateLimitsTemplateLimitOutput) ToGetTemplateLimitsTemplateLimitOutputWithContext(ctx context.Context) GetTemplateLimitsTemplateLimitOutput {
+	return o
+}
+
+// address template group member limit.
+func (o GetTemplateLimitsTemplateLimitOutput) AddressTemplateGroupMemberLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTemplateLimitsTemplateLimit) int { return v.AddressTemplateGroupMemberLimit }).(pulumi.IntOutput)
+}
+
+// address template member limit.
+func (o GetTemplateLimitsTemplateLimitOutput) AddressTemplateMemberLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTemplateLimitsTemplateLimit) int { return v.AddressTemplateMemberLimit }).(pulumi.IntOutput)
+}
+
+// service template group member limit.
+func (o GetTemplateLimitsTemplateLimitOutput) ServiceTemplateGroupMemberLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTemplateLimitsTemplateLimit) int { return v.ServiceTemplateGroupMemberLimit }).(pulumi.IntOutput)
+}
+
+// service template member limit.
+func (o GetTemplateLimitsTemplateLimitOutput) ServiceTemplateMemberLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTemplateLimitsTemplateLimit) int { return v.ServiceTemplateMemberLimit }).(pulumi.IntOutput)
+}
+
+type GetTemplateLimitsTemplateLimitArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTemplateLimitsTemplateLimitArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTemplateLimitsTemplateLimit)(nil)).Elem()
+}
+
+func (o GetTemplateLimitsTemplateLimitArrayOutput) ToGetTemplateLimitsTemplateLimitArrayOutput() GetTemplateLimitsTemplateLimitArrayOutput {
+	return o
+}
+
+func (o GetTemplateLimitsTemplateLimitArrayOutput) ToGetTemplateLimitsTemplateLimitArrayOutputWithContext(ctx context.Context) GetTemplateLimitsTemplateLimitArrayOutput {
+	return o
+}
+
+func (o GetTemplateLimitsTemplateLimitArrayOutput) Index(i pulumi.IntInput) GetTemplateLimitsTemplateLimitOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTemplateLimitsTemplateLimit {
+		return vs[0].([]GetTemplateLimitsTemplateLimit)[vs[1].(int)]
+	}).(GetTemplateLimitsTemplateLimitOutput)
+}
+
+type GetUsedIpAddressIpAddressState struct {
+	// IP address.
+	IpAddress string `pulumi:"ipAddress"`
+	// Resource ID.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource type.
+	ResourceType string `pulumi:"resourceType"`
+	// Subnet instance ID.
+	SubnetId string `pulumi:"subnetId"`
+	// VPC instance ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetUsedIpAddressIpAddressStateInput is an input type that accepts GetUsedIpAddressIpAddressStateArgs and GetUsedIpAddressIpAddressStateOutput values.
+// You can construct a concrete instance of `GetUsedIpAddressIpAddressStateInput` via:
+//
+//          GetUsedIpAddressIpAddressStateArgs{...}
+type GetUsedIpAddressIpAddressStateInput interface {
+	pulumi.Input
+
+	ToGetUsedIpAddressIpAddressStateOutput() GetUsedIpAddressIpAddressStateOutput
+	ToGetUsedIpAddressIpAddressStateOutputWithContext(context.Context) GetUsedIpAddressIpAddressStateOutput
+}
+
+type GetUsedIpAddressIpAddressStateArgs struct {
+	// IP address.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// Resource ID.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource type.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Subnet instance ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// VPC instance ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetUsedIpAddressIpAddressStateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsedIpAddressIpAddressState)(nil)).Elem()
+}
+
+func (i GetUsedIpAddressIpAddressStateArgs) ToGetUsedIpAddressIpAddressStateOutput() GetUsedIpAddressIpAddressStateOutput {
+	return i.ToGetUsedIpAddressIpAddressStateOutputWithContext(context.Background())
+}
+
+func (i GetUsedIpAddressIpAddressStateArgs) ToGetUsedIpAddressIpAddressStateOutputWithContext(ctx context.Context) GetUsedIpAddressIpAddressStateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsedIpAddressIpAddressStateOutput)
+}
+
+// GetUsedIpAddressIpAddressStateArrayInput is an input type that accepts GetUsedIpAddressIpAddressStateArray and GetUsedIpAddressIpAddressStateArrayOutput values.
+// You can construct a concrete instance of `GetUsedIpAddressIpAddressStateArrayInput` via:
+//
+//          GetUsedIpAddressIpAddressStateArray{ GetUsedIpAddressIpAddressStateArgs{...} }
+type GetUsedIpAddressIpAddressStateArrayInput interface {
+	pulumi.Input
+
+	ToGetUsedIpAddressIpAddressStateArrayOutput() GetUsedIpAddressIpAddressStateArrayOutput
+	ToGetUsedIpAddressIpAddressStateArrayOutputWithContext(context.Context) GetUsedIpAddressIpAddressStateArrayOutput
+}
+
+type GetUsedIpAddressIpAddressStateArray []GetUsedIpAddressIpAddressStateInput
+
+func (GetUsedIpAddressIpAddressStateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsedIpAddressIpAddressState)(nil)).Elem()
+}
+
+func (i GetUsedIpAddressIpAddressStateArray) ToGetUsedIpAddressIpAddressStateArrayOutput() GetUsedIpAddressIpAddressStateArrayOutput {
+	return i.ToGetUsedIpAddressIpAddressStateArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsedIpAddressIpAddressStateArray) ToGetUsedIpAddressIpAddressStateArrayOutputWithContext(ctx context.Context) GetUsedIpAddressIpAddressStateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsedIpAddressIpAddressStateArrayOutput)
+}
+
+type GetUsedIpAddressIpAddressStateOutput struct{ *pulumi.OutputState }
+
+func (GetUsedIpAddressIpAddressStateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsedIpAddressIpAddressState)(nil)).Elem()
+}
+
+func (o GetUsedIpAddressIpAddressStateOutput) ToGetUsedIpAddressIpAddressStateOutput() GetUsedIpAddressIpAddressStateOutput {
+	return o
+}
+
+func (o GetUsedIpAddressIpAddressStateOutput) ToGetUsedIpAddressIpAddressStateOutputWithContext(ctx context.Context) GetUsedIpAddressIpAddressStateOutput {
+	return o
+}
+
+// IP address.
+func (o GetUsedIpAddressIpAddressStateOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsedIpAddressIpAddressState) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// Resource ID.
+func (o GetUsedIpAddressIpAddressStateOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsedIpAddressIpAddressState) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource type.
+func (o GetUsedIpAddressIpAddressStateOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsedIpAddressIpAddressState) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Subnet instance ID.
+func (o GetUsedIpAddressIpAddressStateOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsedIpAddressIpAddressState) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// VPC instance ID.
+func (o GetUsedIpAddressIpAddressStateOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsedIpAddressIpAddressState) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetUsedIpAddressIpAddressStateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsedIpAddressIpAddressStateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsedIpAddressIpAddressState)(nil)).Elem()
+}
+
+func (o GetUsedIpAddressIpAddressStateArrayOutput) ToGetUsedIpAddressIpAddressStateArrayOutput() GetUsedIpAddressIpAddressStateArrayOutput {
+	return o
+}
+
+func (o GetUsedIpAddressIpAddressStateArrayOutput) ToGetUsedIpAddressIpAddressStateArrayOutputWithContext(ctx context.Context) GetUsedIpAddressIpAddressStateArrayOutput {
+	return o
+}
+
+func (o GetUsedIpAddressIpAddressStateArrayOutput) Index(i pulumi.IntInput) GetUsedIpAddressIpAddressStateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsedIpAddressIpAddressState {
+		return vs[0].([]GetUsedIpAddressIpAddressState)[vs[1].(int)]
+	}).(GetUsedIpAddressIpAddressStateOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStorageInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStoragePtrInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6EniAddressIpv6AddressInput)(nil)).Elem(), Ipv6EniAddressIpv6AddressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6EniAddressIpv6AddressArrayInput)(nil)).Elem(), Ipv6EniAddressIpv6AddressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput)(nil)).Elem(), Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput)(nil)).Elem(), Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetPtrInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetEgressInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetEgressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngressInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetIngressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyAttachmentInstanceInput)(nil)).Elem(), SnapshotPolicyAttachmentInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyAttachmentInstanceArrayInput)(nil)).Elem(), SnapshotPolicyAttachmentInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyBackupPolicyInput)(nil)).Elem(), SnapshotPolicyBackupPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyBackupPolicyArrayInput)(nil)).Elem(), SnapshotPolicyBackupPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountAttributesAccountAttributeSetInput)(nil)).Elem(), GetAccountAttributesAccountAttributeSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountAttributesAccountAttributeSetArrayInput)(nil)).Elem(), GetAccountAttributesAccountAttributeSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListInput)(nil)).Elem(), GetAclsAclListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListArrayInput)(nil)).Elem(), GetAclsAclListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListEgressInput)(nil)).Elem(), GetAclsAclListEgressArgs{})
@@ -1378,16 +6793,94 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListIngressArrayInput)(nil)).Elem(), GetAclsAclListIngressArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListSubnetInput)(nil)).Elem(), GetAclsAclListSubnetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListSubnetArrayInput)(nil)).Elem(), GetAclsAclListSubnetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput)(nil)).Elem(), GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput)(nil)).Elem(), GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthPackageQuotaQuotaSetInput)(nil)).Elem(), GetBandwidthPackageQuotaQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthPackageQuotaQuotaSetArrayInput)(nil)).Elem(), GetBandwidthPackageQuotaQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClassicLinkInstancesClassicLinkInstanceSetInput)(nil)).Elem(), GetClassicLinkInstancesClassicLinkInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClassicLinkInstancesClassicLinkInstanceSetArrayInput)(nil)).Elem(), GetClassicLinkInstancesClassicLinkInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClassicLinkInstancesFilterInput)(nil)).Elem(), GetClassicLinkInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClassicLinkInstancesFilterArrayInput)(nil)).Elem(), GetClassicLinkInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmInstancesFilterInput)(nil)).Elem(), GetCvmInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmInstancesFilterArrayInput)(nil)).Elem(), GetCvmInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmInstancesInstanceSetInput)(nil)).Elem(), GetCvmInstancesInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmInstancesInstanceSetArrayInput)(nil)).Elem(), GetCvmInstancesInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput)(nil)).Elem(), GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput)(nil)).Elem(), GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayFlowQosGatewayQosSetInput)(nil)).Elem(), GetGatewayFlowQosGatewayQosSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayFlowQosGatewayQosSetArrayInput)(nil)).Elem(), GetGatewayFlowQosGatewayQosSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLimitsVpcLimitSetInput)(nil)).Elem(), GetLimitsVpcLimitSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLimitsVpcLimitSetArrayInput)(nil)).Elem(), GetLimitsVpcLimitSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStateCheckNetDetectIpStateSetInput)(nil)).Elem(), GetNetDetectStateCheckNetDetectIpStateSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStateCheckNetDetectIpStateSetArrayInput)(nil)).Elem(), GetNetDetectStateCheckNetDetectIpStateSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesFilterInput)(nil)).Elem(), GetNetDetectStatesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesFilterArrayInput)(nil)).Elem(), GetNetDetectStatesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetInput)(nil)).Elem(), GetNetDetectStatesNetDetectStateSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetArrayInput)(nil)).Elem(), GetNetDetectStatesNetDetectStateSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput)(nil)).Elem(), GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput)(nil)).Elem(), GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateIpAddressesVpcPrivateIpAddressSetInput)(nil)).Elem(), GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput)(nil)).Elem(), GetPrivateIpAddressesVpcPrivateIpAddressSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductQuotaProductQuotaSetInput)(nil)).Elem(), GetProductQuotaProductQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductQuotaProductQuotaSetArrayInput)(nil)).Elem(), GetProductQuotaProductQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceDashboardResourceDashboardSetInput)(nil)).Elem(), GetResourceDashboardResourceDashboardSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceDashboardResourceDashboardSetArrayInput)(nil)).Elem(), GetResourceDashboardResourceDashboardSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteConflictsRouteConflictSetInput)(nil)).Elem(), GetRouteConflictsRouteConflictSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteConflictsRouteConflictSetArrayInput)(nil)).Elem(), GetRouteConflictsRouteConflictSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteConflictsRouteConflictSetConflictSetInput)(nil)).Elem(), GetRouteConflictsRouteConflictSetConflictSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteConflictsRouteConflictSetConflictSetArrayInput)(nil)).Elem(), GetRouteConflictsRouteConflictSetConflictSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTablesInstanceListInput)(nil)).Elem(), GetRouteTablesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTablesInstanceListArrayInput)(nil)).Elem(), GetRouteTablesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTablesInstanceListRouteEntryInfoInput)(nil)).Elem(), GetRouteTablesInstanceListRouteEntryInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTablesInstanceListRouteEntryInfoArrayInput)(nil)).Elem(), GetRouteTablesInstanceListRouteEntryInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupLimitsSecurityGroupLimitSetInput)(nil)).Elem(), GetSecurityGroupLimitsSecurityGroupLimitSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput)(nil)).Elem(), GetSecurityGroupLimitsSecurityGroupLimitSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupReferencesReferredSecurityGroupSetInput)(nil)).Elem(), GetSecurityGroupReferencesReferredSecurityGroupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput)(nil)).Elem(), GetSecurityGroupReferencesReferredSecurityGroupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataArrayInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataAddressTemplateInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataAddressTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataAddressTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataServiceTemplateInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataServiceTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput)(nil)).Elem(), GetSgSnapshotFileContentBackupDataServiceTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataArrayInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataAddressTemplateInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataAddressTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataServiceTemplateInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput)(nil)).Elem(), GetSgSnapshotFileContentOriginalDataServiceTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSnapshotFilesSnapshotFileSetInput)(nil)).Elem(), GetSnapshotFilesSnapshotFileSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSnapshotFilesSnapshotFileSetArrayInput)(nil)).Elem(), GetSnapshotFilesSnapshotFileSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetInput)(nil)).Elem(), GetSubnetResourceDashboardResourceStatisticsSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetArrayInput)(nil)).Elem(), GetSubnetResourceDashboardResourceStatisticsSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput)(nil)).Elem(), GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput)(nil)).Elem(), GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetsInstanceListInput)(nil)).Elem(), GetSubnetsInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSubnetsInstanceListArrayInput)(nil)).Elem(), GetSubnetsInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplateLimitsTemplateLimitInput)(nil)).Elem(), GetTemplateLimitsTemplateLimitArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTemplateLimitsTemplateLimitArrayInput)(nil)).Elem(), GetTemplateLimitsTemplateLimitArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsedIpAddressIpAddressStateInput)(nil)).Elem(), GetUsedIpAddressIpAddressStateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsedIpAddressIpAddressStateArrayInput)(nil)).Elem(), GetUsedIpAddressIpAddressStateArray{})
 	pulumi.RegisterOutputType(FlowLogFlowLogStorageOutput{})
 	pulumi.RegisterOutputType(FlowLogFlowLogStoragePtrOutput{})
+	pulumi.RegisterOutputType(Ipv6EniAddressIpv6AddressOutput{})
+	pulumi.RegisterOutputType(Ipv6EniAddressIpv6AddressArrayOutput{})
+	pulumi.RegisterOutputType(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput{})
+	pulumi.RegisterOutputType(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput{})
+	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput{})
+	pulumi.RegisterOutputType(SnapshotPolicyAttachmentInstanceOutput{})
+	pulumi.RegisterOutputType(SnapshotPolicyAttachmentInstanceArrayOutput{})
+	pulumi.RegisterOutputType(SnapshotPolicyBackupPolicyOutput{})
+	pulumi.RegisterOutputType(SnapshotPolicyBackupPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountAttributesAccountAttributeSetOutput{})
+	pulumi.RegisterOutputType(GetAccountAttributesAccountAttributeSetArrayOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListArrayOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListEgressOutput{})
@@ -1396,12 +6889,74 @@ func init() {
 	pulumi.RegisterOutputType(GetAclsAclListIngressArrayOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListSubnetOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListSubnetArrayOutput{})
+	pulumi.RegisterOutputType(GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput{})
+	pulumi.RegisterOutputType(GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBandwidthPackageQuotaQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetBandwidthPackageQuotaQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClassicLinkInstancesClassicLinkInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClassicLinkInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetClassicLinkInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetCvmInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetCvmInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetCvmInstancesInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetCvmInstancesInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput{})
+	pulumi.RegisterOutputType(GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayFlowQosGatewayQosSetOutput{})
+	pulumi.RegisterOutputType(GetGatewayFlowQosGatewayQosSetArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetLimitsVpcLimitSetOutput{})
+	pulumi.RegisterOutputType(GetLimitsVpcLimitSetArrayOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStateCheckNetDetectIpStateSetOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStateCheckNetDetectIpStateSetArrayOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesFilterOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesNetDetectStateSetOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesNetDetectStateSetArrayOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput{})
+	pulumi.RegisterOutputType(GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput{})
+	pulumi.RegisterOutputType(GetPrivateIpAddressesVpcPrivateIpAddressSetOutput{})
+	pulumi.RegisterOutputType(GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProductQuotaProductQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetProductQuotaProductQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetResourceDashboardResourceDashboardSetOutput{})
+	pulumi.RegisterOutputType(GetResourceDashboardResourceDashboardSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRouteConflictsRouteConflictSetOutput{})
+	pulumi.RegisterOutputType(GetRouteConflictsRouteConflictSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRouteConflictsRouteConflictSetConflictSetOutput{})
+	pulumi.RegisterOutputType(GetRouteConflictsRouteConflictSetConflictSetArrayOutput{})
 	pulumi.RegisterOutputType(GetRouteTablesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetRouteTablesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetRouteTablesInstanceListRouteEntryInfoOutput{})
 	pulumi.RegisterOutputType(GetRouteTablesInstanceListRouteEntryInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetSecurityGroupLimitsSecurityGroupLimitSetOutput{})
+	pulumi.RegisterOutputType(GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput{})
+	pulumi.RegisterOutputType(GetSecurityGroupReferencesReferredSecurityGroupSetOutput{})
+	pulumi.RegisterOutputType(GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataAddressTemplateOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataServiceTemplateOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataAddressTemplateOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataServiceTemplateOutput{})
+	pulumi.RegisterOutputType(GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetSnapshotFilesSnapshotFileSetOutput{})
+	pulumi.RegisterOutputType(GetSnapshotFilesSnapshotFileSetArrayOutput{})
+	pulumi.RegisterOutputType(GetSubnetResourceDashboardResourceStatisticsSetOutput{})
+	pulumi.RegisterOutputType(GetSubnetResourceDashboardResourceStatisticsSetArrayOutput{})
+	pulumi.RegisterOutputType(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput{})
+	pulumi.RegisterOutputType(GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput{})
 	pulumi.RegisterOutputType(GetSubnetsInstanceListOutput{})
 	pulumi.RegisterOutputType(GetSubnetsInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetTemplateLimitsTemplateLimitOutput{})
+	pulumi.RegisterOutputType(GetTemplateLimitsTemplateLimitArrayOutput{})
+	pulumi.RegisterOutputType(GetUsedIpAddressIpAddressStateOutput{})
+	pulumi.RegisterOutputType(GetUsedIpAddressIpAddressStateArrayOutput{})
 }

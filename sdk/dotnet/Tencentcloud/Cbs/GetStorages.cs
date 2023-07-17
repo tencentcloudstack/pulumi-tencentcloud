@@ -36,8 +36,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// }
         /// ```
-        /// 
-        /// The following snippet shows the new supported query params
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### The following snippet shows the new supported query params
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -111,8 +112,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// }
         /// ```
-        /// 
-        /// The following snippet shows the new supported query params
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### The following snippet shows the new supported query params
         /// 
         /// ```csharp
         /// using Pulumi;

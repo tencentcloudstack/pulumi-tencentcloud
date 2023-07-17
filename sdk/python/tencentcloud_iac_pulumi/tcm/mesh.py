@@ -237,8 +237,13 @@ class Mesh(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        basic = tencentcloud.tcm.Mesh("basic",
+        mesh = tencentcloud.tcm.Mesh("mesh",
             config=tencentcloud.tcm.MeshConfigArgs(
+                inject=tencentcloud.tcm.MeshConfigInjectArgs(
+                    exclude_ip_ranges=["172.16.0.0/16"],
+                    hold_application_until_proxy_starts=True,
+                    hold_proxy_until_application_ends=True,
+                ),
                 istio=tencentcloud.tcm.MeshConfigIstioArgs(
                     disable_http_retry=True,
                     disable_policy_checks=True,
@@ -248,13 +253,53 @@ class Mesh(pulumi.CustomResource):
                         istio_meta_dns_auto_allocate=True,
                         istio_meta_dns_capture=True,
                     ),
+                    tracing=tencentcloud.tcm.MeshConfigIstioTracingArgs(
+                        enable=False,
+                    ),
+                ),
+                prometheus=tencentcloud.tcm.MeshConfigPrometheusArgs(
+                    custom_prom=tencentcloud.tcm.MeshConfigPrometheusCustomPromArgs(
+                        auth_type="none",
+                        url="https://10.0.0.1:1000",
+                        vpc_id="vpc-j9yhbzpn",
+                    ),
+                ),
+                sidecar_resources=tencentcloud.tcm.MeshConfigSidecarResourcesArgs(
+                    limits=[
+                        tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
+                            name="cpu",
+                            quantity="2",
+                        ),
+                        tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
+                            name="memory",
+                            quantity="1Gi",
+                        ),
+                    ],
+                    requests=[
+                        tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
+                            name="cpu",
+                            quantity="100m",
+                        ),
+                        tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
+                            name="memory",
+                            quantity="128Mi",
+                        ),
+                    ],
+                ),
+                tracing=tencentcloud.tcm.MeshConfigTracingArgs(
+                    apm=tencentcloud.tcm.MeshConfigTracingApmArgs(
+                        enable=True,
+                        region="ap-guangzhou",
+                    ),
+                    enable=True,
+                    sampling=1,
                 ),
             ),
             display_name="test_mesh",
             mesh_version="1.12.5",
             tag_lists=[tencentcloud.tcm.MeshTagListArgs(
                 key="key",
-                passthrough=True,
+                passthrough=False,
                 value="value",
             )],
             type="HOSTED")
@@ -292,8 +337,13 @@ class Mesh(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        basic = tencentcloud.tcm.Mesh("basic",
+        mesh = tencentcloud.tcm.Mesh("mesh",
             config=tencentcloud.tcm.MeshConfigArgs(
+                inject=tencentcloud.tcm.MeshConfigInjectArgs(
+                    exclude_ip_ranges=["172.16.0.0/16"],
+                    hold_application_until_proxy_starts=True,
+                    hold_proxy_until_application_ends=True,
+                ),
                 istio=tencentcloud.tcm.MeshConfigIstioArgs(
                     disable_http_retry=True,
                     disable_policy_checks=True,
@@ -303,13 +353,53 @@ class Mesh(pulumi.CustomResource):
                         istio_meta_dns_auto_allocate=True,
                         istio_meta_dns_capture=True,
                     ),
+                    tracing=tencentcloud.tcm.MeshConfigIstioTracingArgs(
+                        enable=False,
+                    ),
+                ),
+                prometheus=tencentcloud.tcm.MeshConfigPrometheusArgs(
+                    custom_prom=tencentcloud.tcm.MeshConfigPrometheusCustomPromArgs(
+                        auth_type="none",
+                        url="https://10.0.0.1:1000",
+                        vpc_id="vpc-j9yhbzpn",
+                    ),
+                ),
+                sidecar_resources=tencentcloud.tcm.MeshConfigSidecarResourcesArgs(
+                    limits=[
+                        tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
+                            name="cpu",
+                            quantity="2",
+                        ),
+                        tencentcloud.tcm.MeshConfigSidecarResourcesLimitArgs(
+                            name="memory",
+                            quantity="1Gi",
+                        ),
+                    ],
+                    requests=[
+                        tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
+                            name="cpu",
+                            quantity="100m",
+                        ),
+                        tencentcloud.tcm.MeshConfigSidecarResourcesRequestArgs(
+                            name="memory",
+                            quantity="128Mi",
+                        ),
+                    ],
+                ),
+                tracing=tencentcloud.tcm.MeshConfigTracingArgs(
+                    apm=tencentcloud.tcm.MeshConfigTracingApmArgs(
+                        enable=True,
+                        region="ap-guangzhou",
+                    ),
+                    enable=True,
+                    sampling=1,
                 ),
             ),
             display_name="test_mesh",
             mesh_version="1.12.5",
             tag_lists=[tencentcloud.tcm.MeshTagListArgs(
                 key="key",
-                passthrough=True,
+                passthrough=False,
                 value="value",
             )],
             type="HOSTED")

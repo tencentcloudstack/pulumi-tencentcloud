@@ -15,7 +15,8 @@ import * as utilities from "../utilities";
  *
  * const defaultAccount = new tencentcloud.Mysql.Account("default", {
  *     description: "My test account",
- *     mysqlId: "my-test-database",
+ *     maxUserConnections: 10,
+ *     mysqlId: "terraform-test-local-database",
  *     password: "********",
  * });
  * ```
@@ -65,6 +66,10 @@ export class Account extends pulumi.CustomResource {
      */
     public readonly host!: pulumi.Output<string | undefined>;
     /**
+     * The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+     */
+    public readonly maxUserConnections!: pulumi.Output<number>;
+    /**
      * Instance ID to which the account belongs.
      */
     public readonly mysqlId!: pulumi.Output<string>;
@@ -92,6 +97,7 @@ export class Account extends pulumi.CustomResource {
             const state = argsOrState as AccountState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
+            resourceInputs["maxUserConnections"] = state ? state.maxUserConnections : undefined;
             resourceInputs["mysqlId"] = state ? state.mysqlId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
@@ -105,6 +111,7 @@ export class Account extends pulumi.CustomResource {
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
+            resourceInputs["maxUserConnections"] = args ? args.maxUserConnections : undefined;
             resourceInputs["mysqlId"] = args ? args.mysqlId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
@@ -126,6 +133,10 @@ export interface AccountState {
      * Account host, default is `%`.
      */
     host?: pulumi.Input<string>;
+    /**
+     * The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+     */
+    maxUserConnections?: pulumi.Input<number>;
     /**
      * Instance ID to which the account belongs.
      */
@@ -152,6 +163,10 @@ export interface AccountArgs {
      * Account host, default is `%`.
      */
     host?: pulumi.Input<string>;
+    /**
+     * The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
+     */
+    maxUserConnections?: pulumi.Input<number>;
     /**
      * Instance ID to which the account belongs.
      */

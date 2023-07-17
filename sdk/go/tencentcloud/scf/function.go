@@ -39,8 +39,7 @@ import (
 // 	})
 // }
 // ```
-//
-// Using CFS config
+// ### Using CFS config
 //
 // ```go
 // package main
@@ -117,6 +116,8 @@ type Function struct {
 	Environment pulumi.MapOutput `pulumi:"environment"`
 	// SCF function code error code.
 	ErrNo pulumi.IntOutput `pulumi:"errNo"`
+	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+	FuncType pulumi.StringOutput `pulumi:"funcType"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringOutput `pulumi:"handler"`
 	// SCF function domain name.
@@ -231,6 +232,8 @@ type functionState struct {
 	Environment map[string]interface{} `pulumi:"environment"`
 	// SCF function code error code.
 	ErrNo *int `pulumi:"errNo"`
+	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+	FuncType *string `pulumi:"funcType"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler *string `pulumi:"handler"`
 	// SCF function domain name.
@@ -310,6 +313,8 @@ type FunctionState struct {
 	Environment pulumi.MapInput
 	// SCF function code error code.
 	ErrNo pulumi.IntPtrInput
+	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+	FuncType pulumi.StringPtrInput
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringPtrInput
 	// SCF function domain name.
@@ -381,6 +386,8 @@ type functionArgs struct {
 	EnablePublicNet *bool `pulumi:"enablePublicNet"`
 	// Environment of the SCF function.
 	Environment map[string]interface{} `pulumi:"environment"`
+	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+	FuncType *string `pulumi:"funcType"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler string `pulumi:"handler"`
 	// Image of the SCF function, conflict with ``.
@@ -435,6 +442,8 @@ type FunctionArgs struct {
 	EnablePublicNet pulumi.BoolPtrInput
 	// Environment of the SCF function.
 	Environment pulumi.MapInput
+	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+	FuncType pulumi.StringPtrInput
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 	Handler pulumi.StringInput
 	// Image of the SCF function, conflict with ``.
@@ -632,6 +641,11 @@ func (o FunctionOutput) Environment() pulumi.MapOutput {
 // SCF function code error code.
 func (o FunctionOutput) ErrNo() pulumi.IntOutput {
 	return o.ApplyT(func(v *Function) pulumi.IntOutput { return v.ErrNo }).(pulumi.IntOutput)
+}
+
+// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
+func (o FunctionOutput) FuncType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.FuncType }).(pulumi.StringOutput)
 }
 
 // Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.

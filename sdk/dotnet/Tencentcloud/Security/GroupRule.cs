@@ -16,8 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// &gt; **NOTE:** Single security rule is hardly ordered, use tencentcloud.Security.GroupLiteRule instead.
     /// 
     /// ## Example Usage
-    /// 
-    /// Source is CIDR ip
+    /// ### Source is CIDR ip
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -46,8 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// 
     /// }
     /// ```
-    /// 
-    /// Source is a security group id
+    /// ### Source is a security group id
     /// 
     /// ```csharp
     /// using Pulumi;

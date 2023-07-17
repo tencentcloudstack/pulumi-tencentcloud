@@ -121,6 +121,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<string?> DcnRegion { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Output("extranetAccess")]
+        public Output<bool?> ExtranetAccess { get; private set; } = null!;
+
+        /// <summary>
         /// &amp;amp;quot;parameter list. The optional values of this interface are:&amp;amp;quot;&amp;amp;quot;character_set_server (character set, must be passed),&amp;amp;quot;&amp;amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;amp;quot;&amp;amp;quot;innodb_page_size (innodb data page, default 16K),&amp;amp;quot;&amp;amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;amp;quot;.
         /// </summary>
         [Output("initParams")]
@@ -193,6 +199,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<string?> SubnetId { get; private set; } = null!;
 
         /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Output("vip")]
+        public Output<string> Vip { get; private set; } = null!;
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Output("vipv6")]
+        public Output<string> Vipv6 { get; private set; } = null!;
+
+        /// <summary>
         /// Voucher ID list, currently only supports specifying one voucher.
         /// </summary>
         [Output("voucherIds")]
@@ -203,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// </summary>
         [Output("vpcId")]
         public Output<string?> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Intranet port.
+        /// </summary>
+        [Output("vport")]
+        public Output<int> Vport { get; private set; } = null!;
 
         /// <summary>
         /// &amp;amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;amp;quot;&amp;amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;amp;quot;.
@@ -286,6 +310,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// </summary>
         [Input("dcnRegion")]
         public Input<string>? DcnRegion { get; set; }
+
+        /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Input("extranetAccess")]
+        public Input<bool>? ExtranetAccess { get; set; }
 
         [Input("initParams")]
         private InputList<Inputs.DbInstanceInitParamArgs>? _initParams;
@@ -377,6 +407,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
 
+        /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Input("vipv6")]
+        public Input<string>? Vipv6 { get; set; }
+
         [Input("voucherIds")]
         private InputList<string>? _voucherIds;
 
@@ -443,6 +485,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// </summary>
         [Input("dcnRegion")]
         public Input<string>? DcnRegion { get; set; }
+
+        /// <summary>
+        /// Whether to open the extranet access.
+        /// </summary>
+        [Input("extranetAccess")]
+        public Input<bool>? ExtranetAccess { get; set; }
 
         [Input("initParams")]
         private InputList<Inputs.DbInstanceInitParamGetArgs>? _initParams;
@@ -534,6 +582,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
 
+        /// <summary>
+        /// The field is required to specify VIP.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
+        /// <summary>
+        /// The field is required to specify VIPv6.
+        /// </summary>
+        [Input("vipv6")]
+        public Input<string>? Vipv6 { get; set; }
+
         [Input("voucherIds")]
         private InputList<string>? _voucherIds;
 
@@ -551,6 +611,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Intranet port.
+        /// </summary>
+        [Input("vport")]
+        public Input<int>? Vport { get; set; }
 
         [Input("zones")]
         private InputList<string>? _zones;

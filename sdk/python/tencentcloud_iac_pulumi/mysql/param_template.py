@@ -19,6 +19,8 @@ class ParamTemplateArgs:
                  engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 param_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ParamTemplateParamListArgs']]]] = None,
+                 template_id: Optional[pulumi.Input[int]] = None,
                  template_type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ParamTemplate resource.
@@ -26,6 +28,8 @@ class ParamTemplateArgs:
         :param pulumi.Input[str] engine_type: The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.
         :param pulumi.Input[str] engine_version: The version of MySQL.
         :param pulumi.Input[str] name: The name of parameter template.
+        :param pulumi.Input[Sequence[pulumi.Input['ParamTemplateParamListArgs']]] param_lists: parameter list.
+        :param pulumi.Input[int] template_id: The ID of source parameter template.
         :param pulumi.Input[str] template_type: The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
         """
         if description is not None:
@@ -36,6 +40,10 @@ class ParamTemplateArgs:
             pulumi.set(__self__, "engine_version", engine_version)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if param_lists is not None:
+            pulumi.set(__self__, "param_lists", param_lists)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
         if template_type is not None:
             pulumi.set(__self__, "template_type", template_type)
 
@@ -86,6 +94,30 @@ class ParamTemplateArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="paramLists")
+    def param_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ParamTemplateParamListArgs']]]]:
+        """
+        parameter list.
+        """
+        return pulumi.get(self, "param_lists")
+
+    @param_lists.setter
+    def param_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ParamTemplateParamListArgs']]]]):
+        pulumi.set(self, "param_lists", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of source parameter template.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "template_id", value)
 
     @property
     @pulumi.getter(name="templateType")
@@ -229,6 +261,8 @@ class ParamTemplate(pulumi.CustomResource):
                  engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 param_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ParamTemplateParamListArgs']]]]] = None,
+                 template_id: Optional[pulumi.Input[int]] = None,
                  template_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -244,6 +278,20 @@ class ParamTemplate(pulumi.CustomResource):
             description="terraform-test",
             engine_type="InnoDB",
             engine_version="8.0",
+            param_lists=[
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="1",
+                    name="auto_increment_increment",
+                ),
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="1",
+                    name="auto_increment_offset",
+                ),
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="ON",
+                    name="automatic_sp_privileges",
+                ),
+            ],
             template_type="HIGH_STABILITY")
         ```
 
@@ -261,6 +309,8 @@ class ParamTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] engine_type: The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.
         :param pulumi.Input[str] engine_version: The version of MySQL.
         :param pulumi.Input[str] name: The name of parameter template.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ParamTemplateParamListArgs']]]] param_lists: parameter list.
+        :param pulumi.Input[int] template_id: The ID of source parameter template.
         :param pulumi.Input[str] template_type: The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
         """
         ...
@@ -282,6 +332,20 @@ class ParamTemplate(pulumi.CustomResource):
             description="terraform-test",
             engine_type="InnoDB",
             engine_version="8.0",
+            param_lists=[
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="1",
+                    name="auto_increment_increment",
+                ),
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="1",
+                    name="auto_increment_offset",
+                ),
+                tencentcloud.mysql.ParamTemplateParamListArgs(
+                    current_value="ON",
+                    name="automatic_sp_privileges",
+                ),
+            ],
             template_type="HIGH_STABILITY")
         ```
 
@@ -312,6 +376,8 @@ class ParamTemplate(pulumi.CustomResource):
                  engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 param_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ParamTemplateParamListArgs']]]]] = None,
+                 template_id: Optional[pulumi.Input[int]] = None,
                  template_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -331,9 +397,9 @@ class ParamTemplate(pulumi.CustomResource):
             __props__.__dict__["engine_type"] = engine_type
             __props__.__dict__["engine_version"] = engine_version
             __props__.__dict__["name"] = name
+            __props__.__dict__["param_lists"] = param_lists
+            __props__.__dict__["template_id"] = template_id
             __props__.__dict__["template_type"] = template_type
-            __props__.__dict__["param_lists"] = None
-            __props__.__dict__["template_id"] = None
         super(ParamTemplate, __self__).__init__(
             'tencentcloud:Mysql/paramTemplate:ParamTemplate',
             resource_name,

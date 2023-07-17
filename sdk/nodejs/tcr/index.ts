@@ -8,10 +8,15 @@ import * as utilities from "../utilities";
 export * from "./createImageSignatureOperation";
 export * from "./customizedDomain";
 export * from "./deleteImageOperation";
+export * from "./getImageManifests";
 export * from "./getImages";
 export * from "./getInstances";
 export * from "./getNamespaces";
+export * from "./getReplicationInstanceCreateTasks";
+export * from "./getReplicationInstanceSyncStatus";
 export * from "./getRepositories";
+export * from "./getTagRetentionExecutionTasks";
+export * from "./getTagRetentionExecutions";
 export * from "./getTokens";
 export * from "./getVpcAttachments";
 export * from "./getWebhookTriggerLogs";
@@ -20,6 +25,8 @@ export * from "./instance";
 export * from "./manageReplicationOperation";
 export * from "./namespace";
 export * from "./repository";
+export * from "./serviceAccount";
+export * from "./tagRetentionExecutionConfig";
 export * from "./tagRetentionRule";
 export * from "./token";
 export * from "./vpcAttachment";
@@ -34,6 +41,8 @@ import { Instance } from "./instance";
 import { ManageReplicationOperation } from "./manageReplicationOperation";
 import { Namespace } from "./namespace";
 import { Repository } from "./repository";
+import { ServiceAccount } from "./serviceAccount";
+import { TagRetentionExecutionConfig } from "./tagRetentionExecutionConfig";
 import { TagRetentionRule } from "./tagRetentionRule";
 import { Token } from "./token";
 import { VpcAttachment } from "./vpcAttachment";
@@ -59,6 +68,10 @@ const _module = {
                 return new Namespace(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/repository:Repository":
                 return new Repository(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/serviceAccount:ServiceAccount":
+                return new ServiceAccount(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/tagRetentionExecutionConfig:TagRetentionExecutionConfig":
+                return new TagRetentionExecutionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/tagRetentionRule:TagRetentionRule":
                 return new TagRetentionRule(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/token:Token":
@@ -80,6 +93,8 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/manageReplicationOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/repository", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/serviceAccount", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/tagRetentionExecutionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/tagRetentionRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/token", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/vpcAttachment", _module)

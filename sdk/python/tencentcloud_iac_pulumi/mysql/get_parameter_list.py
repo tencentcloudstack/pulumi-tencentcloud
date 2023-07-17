@@ -97,7 +97,7 @@ def get_parameter_list(engine_version: Optional[str] = None,
     import pulumi_tencentcloud as tencentcloud
 
     mysql = tencentcloud.Mysql.get_parameter_list(engine_version="5.5",
-        mysql_id="my-test-database",
+        mysql_id="terraform-test-local-database",
         result_output_file="mytestpath")
     ```
 
@@ -141,7 +141,7 @@ def get_parameter_list_output(engine_version: Optional[pulumi.Input[Optional[str
     import pulumi_tencentcloud as tencentcloud
 
     mysql = tencentcloud.Mysql.get_parameter_list(engine_version="5.5",
-        mysql_id="my-test-database",
+        mysql_id="terraform-test-local-database",
         result_output_file="mytestpath")
     ```
 

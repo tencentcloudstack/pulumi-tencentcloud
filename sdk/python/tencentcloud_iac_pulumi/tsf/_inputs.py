@@ -17,14 +17,25 @@ __all__ = [
     'ClusterOperationInfoAddInstanceArgs',
     'ClusterOperationInfoDestroyArgs',
     'ClusterOperationInfoInitArgs',
-    'ContainGroupEnvArgs',
-    'ContainGroupEnvValueFromArgs',
-    'ContainGroupEnvValueFromFieldRefArgs',
-    'ContainGroupEnvValueFromResourceFieldRefArgs',
-    'ContainGroupHealthCheckSettingArgs',
-    'ContainGroupHealthCheckSettingLivenessProbeArgs',
-    'ContainGroupHealthCheckSettingReadinessProbeArgs',
-    'ContainGroupProtocolPortArgs',
+    'DeployContainerGroupAgentProfileListArgs',
+    'DeployContainerGroupEnvArgs',
+    'DeployContainerGroupEnvValueFromArgs',
+    'DeployContainerGroupEnvValueFromFieldRefArgs',
+    'DeployContainerGroupEnvValueFromResourceFieldRefArgs',
+    'DeployContainerGroupHealthCheckSettingsArgs',
+    'DeployContainerGroupHealthCheckSettingsLivenessProbeArgs',
+    'DeployContainerGroupHealthCheckSettingsReadinessProbeArgs',
+    'DeployContainerGroupSchedulingStrategyArgs',
+    'DeployContainerGroupServiceSettingArgs',
+    'DeployContainerGroupServiceSettingProtocolPortArgs',
+    'DeployContainerGroupVolumeInfoListArgs',
+    'DeployContainerGroupVolumeMountInfoListArgs',
+    'DeployContainerGroupWarmupSettingArgs',
+    'DeployVmGroupAgentProfileListArgs',
+    'DeployVmGroupHealthCheckSettingsArgs',
+    'DeployVmGroupHealthCheckSettingsLivenessProbeArgs',
+    'DeployVmGroupHealthCheckSettingsReadinessProbeArgs',
+    'DeployVmGroupWarmupSettingArgs',
     'InstancesAttachmentInstanceAdvancedSettingsArgs',
     'LaneLaneGroupListArgs',
     'LaneRuleRuleTagListArgs',
@@ -488,40 +499,78 @@ class ClusterOperationInfoInitArgs:
 
 
 @pulumi.input_type
-class ContainGroupEnvArgs:
+class DeployContainerGroupAgentProfileListArgs:
     def __init__(__self__, *,
-                 name: Optional[pulumi.Input[str]] = None,
+                 agent_type: Optional[pulumi.Input[str]] = None,
+                 agent_version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] agent_type: Agent type.
+        :param pulumi.Input[str] agent_version: Agent version.
+        """
+        if agent_type is not None:
+            pulumi.set(__self__, "agent_type", agent_type)
+        if agent_version is not None:
+            pulumi.set(__self__, "agent_version", agent_version)
+
+    @property
+    @pulumi.getter(name="agentType")
+    def agent_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Agent type.
+        """
+        return pulumi.get(self, "agent_type")
+
+    @agent_type.setter
+    def agent_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "agent_type", value)
+
+    @property
+    @pulumi.getter(name="agentVersion")
+    def agent_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        Agent version.
+        """
+        return pulumi.get(self, "agent_version")
+
+    @agent_version.setter
+    def agent_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "agent_version", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupEnvArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
                  value: Optional[pulumi.Input[str]] = None,
-                 value_froms: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromArgs']]]] = None):
+                 value_from: Optional[pulumi.Input['DeployContainerGroupEnvValueFromArgs']] = None):
         """
-        :param pulumi.Input[str] name: environment variable name.
-        :param pulumi.Input[str] value: environment variable value.
-        :param pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromArgs']]] value_froms: k8s ValueFrom.
+        :param pulumi.Input[str] name: env param name.
+        :param pulumi.Input[str] value: value of env.
+        :param pulumi.Input['DeployContainerGroupEnvValueFromArgs'] value_from: Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if name is not None:
-            pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "name", name)
         if value is not None:
             pulumi.set(__self__, "value", value)
-        if value_froms is not None:
-            pulumi.set(__self__, "value_froms", value_froms)
+        if value_from is not None:
+            pulumi.set(__self__, "value_from", value_from)
 
     @property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[str]]:
+    def name(self) -> pulumi.Input[str]:
         """
-        environment variable name.
+        env param name.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[str]]):
+    def name(self, value: pulumi.Input[str]):
         pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
         """
-        environment variable value.
+        value of env.
         """
         return pulumi.get(self, "value")
 
@@ -530,63 +579,63 @@ class ContainGroupEnvArgs:
         pulumi.set(self, "value", value)
 
     @property
-    @pulumi.getter(name="valueFroms")
-    def value_froms(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromArgs']]]]:
+    @pulumi.getter(name="valueFrom")
+    def value_from(self) -> Optional[pulumi.Input['DeployContainerGroupEnvValueFromArgs']]:
         """
-        k8s ValueFrom.
+        Kubernetes ValueFrom configuration. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "value_froms")
+        return pulumi.get(self, "value_from")
 
-    @value_froms.setter
-    def value_froms(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromArgs']]]]):
-        pulumi.set(self, "value_froms", value)
+    @value_from.setter
+    def value_from(self, value: Optional[pulumi.Input['DeployContainerGroupEnvValueFromArgs']]):
+        pulumi.set(self, "value_from", value)
 
 
 @pulumi.input_type
-class ContainGroupEnvValueFromArgs:
+class DeployContainerGroupEnvValueFromArgs:
     def __init__(__self__, *,
-                 field_reves: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromFieldRefArgs']]]] = None,
-                 resource_field_reves: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromResourceFieldRefArgs']]]] = None):
+                 field_ref: Optional[pulumi.Input['DeployContainerGroupEnvValueFromFieldRefArgs']] = None,
+                 resource_field_ref: Optional[pulumi.Input['DeployContainerGroupEnvValueFromResourceFieldRefArgs']] = None):
         """
-        :param pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromFieldRefArgs']]] field_reves: FieldRef for k8s env.
-        :param pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromResourceFieldRefArgs']]] resource_field_reves: ResourceFieldRef of k8s env.
+        :param pulumi.Input['DeployContainerGroupEnvValueFromFieldRefArgs'] field_ref: The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['DeployContainerGroupEnvValueFromResourceFieldRefArgs'] resource_field_ref: The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if field_reves is not None:
-            pulumi.set(__self__, "field_reves", field_reves)
-        if resource_field_reves is not None:
-            pulumi.set(__self__, "resource_field_reves", resource_field_reves)
+        if field_ref is not None:
+            pulumi.set(__self__, "field_ref", field_ref)
+        if resource_field_ref is not None:
+            pulumi.set(__self__, "resource_field_ref", resource_field_ref)
 
     @property
-    @pulumi.getter(name="fieldReves")
-    def field_reves(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromFieldRefArgs']]]]:
+    @pulumi.getter(name="fieldRef")
+    def field_ref(self) -> Optional[pulumi.Input['DeployContainerGroupEnvValueFromFieldRefArgs']]:
         """
-        FieldRef for k8s env.
+        The FieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "field_reves")
+        return pulumi.get(self, "field_ref")
 
-    @field_reves.setter
-    def field_reves(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromFieldRefArgs']]]]):
-        pulumi.set(self, "field_reves", value)
+    @field_ref.setter
+    def field_ref(self, value: Optional[pulumi.Input['DeployContainerGroupEnvValueFromFieldRefArgs']]):
+        pulumi.set(self, "field_ref", value)
 
     @property
-    @pulumi.getter(name="resourceFieldReves")
-    def resource_field_reves(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromResourceFieldRefArgs']]]]:
+    @pulumi.getter(name="resourceFieldRef")
+    def resource_field_ref(self) -> Optional[pulumi.Input['DeployContainerGroupEnvValueFromResourceFieldRefArgs']]:
         """
-        ResourceFieldRef of k8s env.
+        The ResourceFieldRef configuration of Kubernetes env. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "resource_field_reves")
+        return pulumi.get(self, "resource_field_ref")
 
-    @resource_field_reves.setter
-    def resource_field_reves(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupEnvValueFromResourceFieldRefArgs']]]]):
-        pulumi.set(self, "resource_field_reves", value)
+    @resource_field_ref.setter
+    def resource_field_ref(self, value: Optional[pulumi.Input['DeployContainerGroupEnvValueFromResourceFieldRefArgs']]):
+        pulumi.set(self, "resource_field_ref", value)
 
 
 @pulumi.input_type
-class ContainGroupEnvValueFromFieldRefArgs:
+class DeployContainerGroupEnvValueFromFieldRefArgs:
     def __init__(__self__, *,
                  field_path: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] field_path: FieldPath of k8s.
+        :param pulumi.Input[str] field_path: The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         if field_path is not None:
             pulumi.set(__self__, "field_path", field_path)
@@ -595,7 +644,7 @@ class ContainGroupEnvValueFromFieldRefArgs:
     @pulumi.getter(name="fieldPath")
     def field_path(self) -> Optional[pulumi.Input[str]]:
         """
-        FieldPath of k8s.
+        The FieldPath configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "field_path")
 
@@ -605,11 +654,11 @@ class ContainGroupEnvValueFromFieldRefArgs:
 
 
 @pulumi.input_type
-class ContainGroupEnvValueFromResourceFieldRefArgs:
+class DeployContainerGroupEnvValueFromResourceFieldRefArgs:
     def __init__(__self__, *,
                  resource: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] resource: Resource of k8s.
+        :param pulumi.Input[str] resource: The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         if resource is not None:
             pulumi.set(__self__, "resource", resource)
@@ -618,7 +667,7 @@ class ContainGroupEnvValueFromResourceFieldRefArgs:
     @pulumi.getter
     def resource(self) -> Optional[pulumi.Input[str]]:
         """
-        Resource of k8s.
+        The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "resource")
 
@@ -628,48 +677,48 @@ class ContainGroupEnvValueFromResourceFieldRefArgs:
 
 
 @pulumi.input_type
-class ContainGroupHealthCheckSettingArgs:
+class DeployContainerGroupHealthCheckSettingsArgs:
     def __init__(__self__, *,
-                 liveness_probes: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingLivenessProbeArgs']]]] = None,
-                 readiness_probes: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingReadinessProbeArgs']]]] = None):
+                 liveness_probe: Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsLivenessProbeArgs']] = None,
+                 readiness_probe: Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsReadinessProbeArgs']] = None):
         """
-        :param pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingLivenessProbeArgs']]] liveness_probes: live health check.
-        :param pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingReadinessProbeArgs']]] readiness_probes: readiness health check.
+        :param pulumi.Input['DeployContainerGroupHealthCheckSettingsLivenessProbeArgs'] liveness_probe: Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['DeployContainerGroupHealthCheckSettingsReadinessProbeArgs'] readiness_probe: Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if liveness_probes is not None:
-            pulumi.set(__self__, "liveness_probes", liveness_probes)
-        if readiness_probes is not None:
-            pulumi.set(__self__, "readiness_probes", readiness_probes)
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
 
     @property
-    @pulumi.getter(name="livenessProbes")
-    def liveness_probes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingLivenessProbeArgs']]]]:
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsLivenessProbeArgs']]:
         """
-        live health check.
+        Liveness probe. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "liveness_probes")
+        return pulumi.get(self, "liveness_probe")
 
-    @liveness_probes.setter
-    def liveness_probes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingLivenessProbeArgs']]]]):
-        pulumi.set(self, "liveness_probes", value)
+    @liveness_probe.setter
+    def liveness_probe(self, value: Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsLivenessProbeArgs']]):
+        pulumi.set(self, "liveness_probe", value)
 
     @property
-    @pulumi.getter(name="readinessProbes")
-    def readiness_probes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingReadinessProbeArgs']]]]:
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsReadinessProbeArgs']]:
         """
-        readiness health check.
+        Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        return pulumi.get(self, "readiness_probes")
+        return pulumi.get(self, "readiness_probe")
 
-    @readiness_probes.setter
-    def readiness_probes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainGroupHealthCheckSettingReadinessProbeArgs']]]]):
-        pulumi.set(self, "readiness_probes", value)
+    @readiness_probe.setter
+    def readiness_probe(self, value: Optional[pulumi.Input['DeployContainerGroupHealthCheckSettingsReadinessProbeArgs']]):
+        pulumi.set(self, "readiness_probe", value)
 
 
 @pulumi.input_type
-class ContainGroupHealthCheckSettingLivenessProbeArgs:
+class DeployContainerGroupHealthCheckSettingsLivenessProbeArgs:
     def __init__(__self__, *,
-                 action_type: Optional[pulumi.Input[str]] = None,
+                 action_type: pulumi.Input[str],
                  commands: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  failure_threshold: Optional[pulumi.Input[int]] = None,
                  initial_delay_seconds: Optional[pulumi.Input[int]] = None,
@@ -681,20 +730,19 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
                  timeout_seconds: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] action_type: health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: Execute command check mode, the command to execute.
-        :param pulumi.Input[int] failure_threshold: Indicates the number of consecutive health check successes for the backend container from success to failure.
-        :param pulumi.Input[int] initial_delay_seconds: The time for the container to delay starting the health check.
-        :param pulumi.Input[str] path: The request path of the HTTP health check interface.
-        :param pulumi.Input[int] period_seconds: The interval at which health checks are performed.
-        :param pulumi.Input[int] port: service port.
-        :param pulumi.Input[str] scheme: The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-        :param pulumi.Input[int] success_threshold: Indicates the number of consecutive health check successes for the backend container from failure to success.
-        :param pulumi.Input[int] timeout_seconds: The maximum timeout for each health check response.
-        :param pulumi.Input[str] type: TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        :param pulumi.Input[str] action_type: The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] initial_delay_seconds: The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if action_type is not None:
-            pulumi.set(__self__, "action_type", action_type)
+        pulumi.set(__self__, "action_type", action_type)
         if commands is not None:
             pulumi.set(__self__, "commands", commands)
         if failure_threshold is not None:
@@ -718,21 +766,21 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
 
     @property
     @pulumi.getter(name="actionType")
-    def action_type(self) -> Optional[pulumi.Input[str]]:
+    def action_type(self) -> pulumi.Input[str]:
         """
-        health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+        The health check method. HTTP: checks through an HTTP interface; CMD: checks by executing a command; TCP: checks by establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "action_type")
 
     @action_type.setter
-    def action_type(self, value: Optional[pulumi.Input[str]]):
+    def action_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "action_type", value)
 
     @property
     @pulumi.getter
     def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Execute command check mode, the command to execute.
+        The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "commands")
 
@@ -744,7 +792,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        Indicates the number of consecutive health check successes for the backend container from success to failure.
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "failure_threshold")
 
@@ -756,7 +804,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter(name="initialDelaySeconds")
     def initial_delay_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The time for the container to delay starting the health check.
+        The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "initial_delay_seconds")
 
@@ -768,7 +816,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
         """
-        The request path of the HTTP health check interface.
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "path")
 
@@ -780,7 +828,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The interval at which health checks are performed.
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "period_seconds")
 
@@ -792,7 +840,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        service port.
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "port")
 
@@ -804,7 +852,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter
     def scheme(self) -> Optional[pulumi.Input[str]]:
         """
-        The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "scheme")
 
@@ -816,7 +864,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        Indicates the number of consecutive health check successes for the backend container from failure to success.
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "success_threshold")
 
@@ -828,7 +876,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum timeout for each health check response.
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "timeout_seconds")
 
@@ -840,7 +888,7 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "type")
 
@@ -850,9 +898,9 @@ class ContainGroupHealthCheckSettingLivenessProbeArgs:
 
 
 @pulumi.input_type
-class ContainGroupHealthCheckSettingReadinessProbeArgs:
+class DeployContainerGroupHealthCheckSettingsReadinessProbeArgs:
     def __init__(__self__, *,
-                 action_type: Optional[pulumi.Input[str]] = None,
+                 action_type: pulumi.Input[str],
                  commands: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  failure_threshold: Optional[pulumi.Input[int]] = None,
                  initial_delay_seconds: Optional[pulumi.Input[int]] = None,
@@ -864,20 +912,19 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
                  timeout_seconds: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] action_type: health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: Execute command check mode, the command to execute.
-        :param pulumi.Input[int] failure_threshold: Indicates the number of consecutive health check successes for the backend container from success to failure.
-        :param pulumi.Input[int] initial_delay_seconds: The time for the container to delay starting the health check.
-        :param pulumi.Input[str] path: The request path of the HTTP health check interface.
-        :param pulumi.Input[int] period_seconds: The interval at which health checks are performed.
-        :param pulumi.Input[int] port: service port.
-        :param pulumi.Input[str] scheme: The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
-        :param pulumi.Input[int] success_threshold: Indicates the number of consecutive health check successes for the backend container from failure to success.
-        :param pulumi.Input[int] timeout_seconds: The maximum timeout for each health check response.
-        :param pulumi.Input[str] type: TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        :param pulumi.Input[str] action_type: The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] initial_delay_seconds: The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
-        if action_type is not None:
-            pulumi.set(__self__, "action_type", action_type)
+        pulumi.set(__self__, "action_type", action_type)
         if commands is not None:
             pulumi.set(__self__, "commands", commands)
         if failure_threshold is not None:
@@ -901,21 +948,21 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
 
     @property
     @pulumi.getter(name="actionType")
-    def action_type(self) -> Optional[pulumi.Input[str]]:
+    def action_type(self) -> pulumi.Input[str]:
         """
-        health check method. HTTP: check by HTTP interface; CMD: check by executing command; TCP: check by establishing TCP connection.
+        The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "action_type")
 
     @action_type.setter
-    def action_type(self, value: Optional[pulumi.Input[str]]):
+    def action_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "action_type", value)
 
     @property
     @pulumi.getter
     def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Execute command check mode, the command to execute.
+        The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "commands")
 
@@ -927,7 +974,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        Indicates the number of consecutive health check successes for the backend container from success to failure.
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "failure_threshold")
 
@@ -939,7 +986,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter(name="initialDelaySeconds")
     def initial_delay_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The time for the container to delay starting the health check.
+        The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "initial_delay_seconds")
 
@@ -951,7 +998,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
         """
-        The request path of the HTTP health check interface.
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "path")
 
@@ -963,7 +1010,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The interval at which health checks are performed.
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "period_seconds")
 
@@ -975,7 +1022,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        service port.
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "port")
 
@@ -987,7 +1034,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter
     def scheme(self) -> Optional[pulumi.Input[str]]:
         """
-        The inspection protocol used by the HTTP health check method. HTTP and HTTPS are supported.
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "scheme")
 
@@ -999,7 +1046,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[pulumi.Input[int]]:
         """
-        Indicates the number of consecutive health check successes for the backend container from failure to success.
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "success_threshold")
 
@@ -1011,7 +1058,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum timeout for each health check response.
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "timeout_seconds")
 
@@ -1023,7 +1070,7 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        TSF_DEFAULT: tsf default readiness probe. K8S_NATIVE: k8s native probe. If not filled, it defaults to k8s native probe.
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "type")
 
@@ -1033,17 +1080,171 @@ class ContainGroupHealthCheckSettingReadinessProbeArgs:
 
 
 @pulumi.input_type
-class ContainGroupProtocolPortArgs:
+class DeployContainerGroupSchedulingStrategyArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] type: NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        NONE: Do not use scheduling strategy; CROSS_AZ: Deploy across availability zones. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupServiceSettingArgs:
+    def __init__(__self__, *,
+                 access_type: pulumi.Input[int],
+                 protocol_ports: pulumi.Input[Sequence[pulumi.Input['DeployContainerGroupServiceSettingProtocolPortArgs']]],
+                 subnet_id: pulumi.Input[str],
+                 allow_delete_service: Optional[pulumi.Input[bool]] = None,
+                 disable_service: Optional[pulumi.Input[bool]] = None,
+                 headless_service: Optional[pulumi.Input[bool]] = None,
+                 open_session_affinity: Optional[pulumi.Input[bool]] = None,
+                 session_affinity_timeout_seconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] access_type: 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['DeployContainerGroupServiceSettingProtocolPortArgs']]] protocol_ports: Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] subnet_id: subnet Id.
+        :param pulumi.Input[bool] allow_delete_service: When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[bool] disable_service: Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[bool] headless_service: Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[bool] open_session_affinity: Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] session_affinity_timeout_seconds: Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "access_type", access_type)
+        pulumi.set(__self__, "protocol_ports", protocol_ports)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if allow_delete_service is not None:
+            pulumi.set(__self__, "allow_delete_service", allow_delete_service)
+        if disable_service is not None:
+            pulumi.set(__self__, "disable_service", disable_service)
+        if headless_service is not None:
+            pulumi.set(__self__, "headless_service", headless_service)
+        if open_session_affinity is not None:
+            pulumi.set(__self__, "open_session_affinity", open_session_affinity)
+        if session_affinity_timeout_seconds is not None:
+            pulumi.set(__self__, "session_affinity_timeout_seconds", session_affinity_timeout_seconds)
+
+    @property
+    @pulumi.getter(name="accessType")
+    def access_type(self) -> pulumi.Input[int]:
+        """
+        0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "access_type")
+
+    @access_type.setter
+    def access_type(self, value: pulumi.Input[int]):
+        pulumi.set(self, "access_type", value)
+
+    @property
+    @pulumi.getter(name="protocolPorts")
+    def protocol_ports(self) -> pulumi.Input[Sequence[pulumi.Input['DeployContainerGroupServiceSettingProtocolPortArgs']]]:
+        """
+        Container port mapping. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "protocol_ports")
+
+    @protocol_ports.setter
+    def protocol_ports(self, value: pulumi.Input[Sequence[pulumi.Input['DeployContainerGroupServiceSettingProtocolPortArgs']]]):
+        pulumi.set(self, "protocol_ports", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        subnet Id.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="allowDeleteService")
+    def allow_delete_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When set to true and DisableService is also true, the previously created service will be deleted. Please use with caution. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "allow_delete_service")
+
+    @allow_delete_service.setter
+    def allow_delete_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_delete_service", value)
+
+    @property
+    @pulumi.getter(name="disableService")
+    def disable_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to create a Kubernetes service. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "disable_service")
+
+    @disable_service.setter
+    def disable_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_service", value)
+
+    @property
+    @pulumi.getter(name="headlessService")
+    def headless_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the service is of headless type. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "headless_service")
+
+    @headless_service.setter
+    def headless_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "headless_service", value)
+
+    @property
+    @pulumi.getter(name="openSessionAffinity")
+    def open_session_affinity(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable session affinity. true means enabled, false means disabled. The default value is false. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "open_session_affinity")
+
+    @open_session_affinity.setter
+    def open_session_affinity(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "open_session_affinity", value)
+
+    @property
+    @pulumi.getter(name="sessionAffinityTimeoutSeconds")
+    def session_affinity_timeout_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Session affinity session time. The default value is 10800. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "session_affinity_timeout_seconds")
+
+    @session_affinity_timeout_seconds.setter
+    def session_affinity_timeout_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "session_affinity_timeout_seconds", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupServiceSettingProtocolPortArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[int],
                  protocol: pulumi.Input[str],
                  target_port: pulumi.Input[int],
                  node_port: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[int] port: service port.
-        :param pulumi.Input[str] protocol: TCP UDP.
+        :param pulumi.Input[int] port: port.
+        :param pulumi.Input[str] protocol: TCP or UDP.
         :param pulumi.Input[int] target_port: container port.
-        :param pulumi.Input[int] node_port: host port.
+        :param pulumi.Input[int] node_port: node port.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "protocol", protocol)
@@ -1055,7 +1256,7 @@ class ContainGroupProtocolPortArgs:
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
         """
-        service port.
+        port.
         """
         return pulumi.get(self, "port")
 
@@ -1067,7 +1268,7 @@ class ContainGroupProtocolPortArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        TCP UDP.
+        TCP or UDP.
         """
         return pulumi.get(self, "protocol")
 
@@ -1091,13 +1292,719 @@ class ContainGroupProtocolPortArgs:
     @pulumi.getter(name="nodePort")
     def node_port(self) -> Optional[pulumi.Input[int]]:
         """
-        host port.
+        node port.
         """
         return pulumi.get(self, "node_port")
 
     @node_port.setter
     def node_port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "node_port", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupVolumeInfoListArgs:
+    def __init__(__self__, *,
+                 volume_name: pulumi.Input[str],
+                 volume_type: pulumi.Input[str],
+                 volume_config: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] volume_name: volume name.
+        :param pulumi.Input[str] volume_type: volume type.
+        :param pulumi.Input[str] volume_config: volume config.
+        """
+        pulumi.set(__self__, "volume_name", volume_name)
+        pulumi.set(__self__, "volume_type", volume_type)
+        if volume_config is not None:
+            pulumi.set(__self__, "volume_config", volume_config)
+
+    @property
+    @pulumi.getter(name="volumeName")
+    def volume_name(self) -> pulumi.Input[str]:
+        """
+        volume name.
+        """
+        return pulumi.get(self, "volume_name")
+
+    @volume_name.setter
+    def volume_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "volume_name", value)
+
+    @property
+    @pulumi.getter(name="volumeType")
+    def volume_type(self) -> pulumi.Input[str]:
+        """
+        volume type.
+        """
+        return pulumi.get(self, "volume_type")
+
+    @volume_type.setter
+    def volume_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "volume_type", value)
+
+    @property
+    @pulumi.getter(name="volumeConfig")
+    def volume_config(self) -> Optional[pulumi.Input[str]]:
+        """
+        volume config.
+        """
+        return pulumi.get(self, "volume_config")
+
+    @volume_config.setter
+    def volume_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "volume_config", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupVolumeMountInfoListArgs:
+    def __init__(__self__, *,
+                 volume_mount_name: pulumi.Input[str],
+                 volume_mount_path: pulumi.Input[str],
+                 read_or_write: Optional[pulumi.Input[str]] = None,
+                 volume_mount_sub_path: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] volume_mount_name: mount volume name.
+        :param pulumi.Input[str] volume_mount_path: mount path.
+        :param pulumi.Input[str] read_or_write: Read and write access mode. 1: Read-only. 2: Read-write.
+        :param pulumi.Input[str] volume_mount_sub_path: mount subPath.
+        """
+        pulumi.set(__self__, "volume_mount_name", volume_mount_name)
+        pulumi.set(__self__, "volume_mount_path", volume_mount_path)
+        if read_or_write is not None:
+            pulumi.set(__self__, "read_or_write", read_or_write)
+        if volume_mount_sub_path is not None:
+            pulumi.set(__self__, "volume_mount_sub_path", volume_mount_sub_path)
+
+    @property
+    @pulumi.getter(name="volumeMountName")
+    def volume_mount_name(self) -> pulumi.Input[str]:
+        """
+        mount volume name.
+        """
+        return pulumi.get(self, "volume_mount_name")
+
+    @volume_mount_name.setter
+    def volume_mount_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "volume_mount_name", value)
+
+    @property
+    @pulumi.getter(name="volumeMountPath")
+    def volume_mount_path(self) -> pulumi.Input[str]:
+        """
+        mount path.
+        """
+        return pulumi.get(self, "volume_mount_path")
+
+    @volume_mount_path.setter
+    def volume_mount_path(self, value: pulumi.Input[str]):
+        pulumi.set(self, "volume_mount_path", value)
+
+    @property
+    @pulumi.getter(name="readOrWrite")
+    def read_or_write(self) -> Optional[pulumi.Input[str]]:
+        """
+        Read and write access mode. 1: Read-only. 2: Read-write.
+        """
+        return pulumi.get(self, "read_or_write")
+
+    @read_or_write.setter
+    def read_or_write(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "read_or_write", value)
+
+    @property
+    @pulumi.getter(name="volumeMountSubPath")
+    def volume_mount_sub_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        mount subPath.
+        """
+        return pulumi.get(self, "volume_mount_sub_path")
+
+    @volume_mount_sub_path.setter
+    def volume_mount_sub_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "volume_mount_sub_path", value)
+
+
+@pulumi.input_type
+class DeployContainerGroupWarmupSettingArgs:
+    def __init__(__self__, *,
+                 curvature: Optional[pulumi.Input[int]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 enabled_protection: Optional[pulumi.Input[bool]] = None,
+                 warmup_time: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] curvature: Preheating curvature, with a value between 1 and 5.
+        :param pulumi.Input[bool] enabled: Whether to enable preheating.
+        :param pulumi.Input[bool] enabled_protection: Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        :param pulumi.Input[int] warmup_time: warmup time.
+        """
+        if curvature is not None:
+            pulumi.set(__self__, "curvature", curvature)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if enabled_protection is not None:
+            pulumi.set(__self__, "enabled_protection", enabled_protection)
+        if warmup_time is not None:
+            pulumi.set(__self__, "warmup_time", warmup_time)
+
+    @property
+    @pulumi.getter
+    def curvature(self) -> Optional[pulumi.Input[int]]:
+        """
+        Preheating curvature, with a value between 1 and 5.
+        """
+        return pulumi.get(self, "curvature")
+
+    @curvature.setter
+    def curvature(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "curvature", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable preheating.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="enabledProtection")
+    def enabled_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        """
+        return pulumi.get(self, "enabled_protection")
+
+    @enabled_protection.setter
+    def enabled_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled_protection", value)
+
+    @property
+    @pulumi.getter(name="warmupTime")
+    def warmup_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        warmup time.
+        """
+        return pulumi.get(self, "warmup_time")
+
+    @warmup_time.setter
+    def warmup_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "warmup_time", value)
+
+
+@pulumi.input_type
+class DeployVmGroupAgentProfileListArgs:
+    def __init__(__self__, *,
+                 agent_type: Optional[pulumi.Input[str]] = None,
+                 agent_version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] agent_type: Agent type.
+        :param pulumi.Input[str] agent_version: Agent version.
+        """
+        if agent_type is not None:
+            pulumi.set(__self__, "agent_type", agent_type)
+        if agent_version is not None:
+            pulumi.set(__self__, "agent_version", agent_version)
+
+    @property
+    @pulumi.getter(name="agentType")
+    def agent_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Agent type.
+        """
+        return pulumi.get(self, "agent_type")
+
+    @agent_type.setter
+    def agent_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "agent_type", value)
+
+    @property
+    @pulumi.getter(name="agentVersion")
+    def agent_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        Agent version.
+        """
+        return pulumi.get(self, "agent_version")
+
+    @agent_version.setter
+    def agent_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "agent_version", value)
+
+
+@pulumi.input_type
+class DeployVmGroupHealthCheckSettingsArgs:
+    def __init__(__self__, *,
+                 liveness_probe: Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsLivenessProbeArgs']] = None,
+                 readiness_probe: Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsReadinessProbeArgs']] = None):
+        """
+        :param pulumi.Input['DeployVmGroupHealthCheckSettingsLivenessProbeArgs'] liveness_probe: Survival health check. Note: This field may return null, indicating that no valid value was found.
+        :param pulumi.Input['DeployVmGroupHealthCheckSettingsReadinessProbeArgs'] readiness_probe: Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsLivenessProbeArgs']]:
+        """
+        Survival health check. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @liveness_probe.setter
+    def liveness_probe(self, value: Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsLivenessProbeArgs']]):
+        pulumi.set(self, "liveness_probe", value)
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsReadinessProbeArgs']]:
+        """
+        Readiness health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+    @readiness_probe.setter
+    def readiness_probe(self, value: Optional[pulumi.Input['DeployVmGroupHealthCheckSettingsReadinessProbeArgs']]):
+        pulumi.set(self, "readiness_probe", value)
+
+
+@pulumi.input_type
+class DeployVmGroupHealthCheckSettingsLivenessProbeArgs:
+    def __init__(__self__, *,
+                 action_type: pulumi.Input[str],
+                 commands: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 failure_threshold: Optional[pulumi.Input[int]] = None,
+                 initial_delay_seconds: Optional[pulumi.Input[int]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 period_seconds: Optional[pulumi.Input[int]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 scheme: Optional[pulumi.Input[str]] = None,
+                 success_threshold: Optional[pulumi.Input[int]] = None,
+                 timeout_seconds: Optional[pulumi.Input[int]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action_type: Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] initial_delay_seconds: The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "action_type", action_type)
+        if commands is not None:
+            pulumi.set(__self__, "commands", commands)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="actionType")
+    def action_type(self) -> pulumi.Input[str]:
+        """
+        Health check method. HTTP: check through HTTP interface; CMD: check through executing command; TCP: check through establishing TCP connection. Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "action_type")
+
+    @action_type.setter
+    def action_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action_type", value)
+
+    @property
+    @pulumi.getter
+    def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The command to be executed for command health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "commands")
+
+    @commands.setter
+    def commands(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "commands", value)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @failure_threshold.setter
+    def failure_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "failure_threshold", value)
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The time delay for the container to start the health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @initial_delay_seconds.setter
+    def initial_delay_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_delay_seconds", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @period_seconds.setter
+    def period_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period_seconds", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[pulumi.Input[str]]:
+        """
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "scheme")
+
+    @scheme.setter
+    def scheme(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scheme", value)
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @success_threshold.setter
+    def success_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "success_threshold", value)
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+    @timeout_seconds.setter
+    def timeout_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "timeout_seconds", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DeployVmGroupHealthCheckSettingsReadinessProbeArgs:
+    def __init__(__self__, *,
+                 action_type: pulumi.Input[str],
+                 commands: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 failure_threshold: Optional[pulumi.Input[int]] = None,
+                 initial_delay_seconds: Optional[pulumi.Input[int]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 period_seconds: Optional[pulumi.Input[int]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 scheme: Optional[pulumi.Input[str]] = None,
+                 success_threshold: Optional[pulumi.Input[int]] = None,
+                 timeout_seconds: Optional[pulumi.Input[int]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action_type: The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] failure_threshold: The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] initial_delay_seconds: The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] path: The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] period_seconds: The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] port: The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] scheme: The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] success_threshold: The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] timeout_seconds: The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "action_type", action_type)
+        if commands is not None:
+            pulumi.set(__self__, "commands", commands)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="actionType")
+    def action_type(self) -> pulumi.Input[str]:
+        """
+        The health check method. HTTP indicates checking through an HTTP interface, CMD indicates checking through executing a command, and TCP indicates checking through establishing a TCP connection. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "action_type")
+
+    @action_type.setter
+    def action_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action_type", value)
+
+    @property
+    @pulumi.getter
+    def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The command to be executed for command check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "commands")
+
+    @commands.setter
+    def commands(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "commands", value)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from success to failure. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @failure_threshold.setter
+    def failure_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "failure_threshold", value)
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The time to delay the start of the container health check. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @initial_delay_seconds.setter
+    def initial_delay_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_delay_seconds", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The request path for HTTP health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The time interval for performing health checks. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @period_seconds.setter
+    def period_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period_seconds", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        The port used for health checks, ranging from 1 to 65535. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[pulumi.Input[str]]:
+        """
+        The protocol used for HTTP health checks. HTTP and HTTPS are supported. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "scheme")
+
+    @scheme.setter
+    def scheme(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scheme", value)
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of consecutive successful health checks required for the backend container to transition from failure to success. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @success_threshold.setter
+    def success_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "success_threshold", value)
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum timeout period for each health check response. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+    @timeout_seconds.setter
+    def timeout_seconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "timeout_seconds", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of readiness probe. TSF_DEFAULT represents the default readiness probe of TSF, while K8S_NATIVE represents the native readiness probe of Kubernetes. If this field is not specified, the native readiness probe of Kubernetes is used by default. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class DeployVmGroupWarmupSettingArgs:
+    def __init__(__self__, *,
+                 curvature: Optional[pulumi.Input[int]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 enabled_protection: Optional[pulumi.Input[bool]] = None,
+                 warmup_time: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] curvature: Preheating curvature, with a value between 1 and 5.
+        :param pulumi.Input[bool] enabled: Whether to enable preheating.
+        :param pulumi.Input[bool] enabled_protection: Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        :param pulumi.Input[int] warmup_time: warmup time.
+        """
+        if curvature is not None:
+            pulumi.set(__self__, "curvature", curvature)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if enabled_protection is not None:
+            pulumi.set(__self__, "enabled_protection", enabled_protection)
+        if warmup_time is not None:
+            pulumi.set(__self__, "warmup_time", warmup_time)
+
+    @property
+    @pulumi.getter
+    def curvature(self) -> Optional[pulumi.Input[int]]:
+        """
+        Preheating curvature, with a value between 1 and 5.
+        """
+        return pulumi.get(self, "curvature")
+
+    @curvature.setter
+    def curvature(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "curvature", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable preheating.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="enabledProtection")
+    def enabled_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable preheating protection. If protection is enabled and more than 50% of nodes are in preheating state, preheating will be aborted.
+        """
+        return pulumi.get(self, "enabled_protection")
+
+    @enabled_protection.setter
+    def enabled_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled_protection", value)
+
+    @property
+    @pulumi.getter(name="warmupTime")
+    def warmup_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        warmup time.
+        """
+        return pulumi.get(self, "warmup_time")
+
+    @warmup_time.setter
+    def warmup_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "warmup_time", value)
 
 
 @pulumi.input_type

@@ -137,6 +137,14 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
+     * Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+     */
+    public readonly isUpdateBundleIdAutoVoucher!: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+     */
+    public readonly isolateDataDisk!: pulumi.Output<boolean | undefined>;
+    /**
      * Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
      */
     public readonly loginConfiguration!: pulumi.Output<outputs.Lighthouse.InstanceLoginConfiguration | undefined>;
@@ -144,6 +152,12 @@ export class Instance extends pulumi.CustomResource {
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
     public readonly period!: pulumi.Output<number>;
+    /**
+     * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+     *
+     * @deprecated It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
+     */
+    public readonly permitDefaultKeyPairLogin!: pulumi.Output<string>;
     /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
@@ -172,8 +186,11 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["containers"] = state ? state.containers : undefined;
             resourceInputs["dryRun"] = state ? state.dryRun : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
+            resourceInputs["isUpdateBundleIdAutoVoucher"] = state ? state.isUpdateBundleIdAutoVoucher : undefined;
+            resourceInputs["isolateDataDisk"] = state ? state.isolateDataDisk : undefined;
             resourceInputs["loginConfiguration"] = state ? state.loginConfiguration : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
+            resourceInputs["permitDefaultKeyPairLogin"] = state ? state.permitDefaultKeyPairLogin : undefined;
             resourceInputs["renewFlag"] = state ? state.renewFlag : undefined;
             resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
@@ -199,8 +216,11 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["containers"] = args ? args.containers : undefined;
             resourceInputs["dryRun"] = args ? args.dryRun : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["isUpdateBundleIdAutoVoucher"] = args ? args.isUpdateBundleIdAutoVoucher : undefined;
+            resourceInputs["isolateDataDisk"] = args ? args.isolateDataDisk : undefined;
             resourceInputs["loginConfiguration"] = args ? args.loginConfiguration : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
+            resourceInputs["permitDefaultKeyPairLogin"] = args ? args.permitDefaultKeyPairLogin : undefined;
             resourceInputs["renewFlag"] = args ? args.renewFlag : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
         }
@@ -238,6 +258,14 @@ export interface InstanceState {
      */
     instanceName?: pulumi.Input<string>;
     /**
+     * Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+     */
+    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean>;
+    /**
+     * Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+     */
+    isolateDataDisk?: pulumi.Input<boolean>;
+    /**
      * Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
      */
     loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration>;
@@ -245,6 +273,12 @@ export interface InstanceState {
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
     period?: pulumi.Input<number>;
+    /**
+     * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+     *
+     * @deprecated It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
+     */
+    permitDefaultKeyPairLogin?: pulumi.Input<string>;
     /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
@@ -284,6 +318,14 @@ export interface InstanceArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
+     * Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
+     */
+    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean>;
+    /**
+     * Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
+     */
+    isolateDataDisk?: pulumi.Input<boolean>;
+    /**
      * Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
      */
     loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration>;
@@ -291,6 +333,12 @@ export interface InstanceArgs {
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
     period: pulumi.Input<number>;
+    /**
+     * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+     *
+     * @deprecated It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
+     */
+    permitDefaultKeyPairLogin?: pulumi.Input<string>;
     /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */

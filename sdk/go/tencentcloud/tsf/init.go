@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Application{}
 	case "tencentcloud:Tsf/applicationConfig:ApplicationConfig":
 		r = &ApplicationConfig{}
+	case "tencentcloud:Tsf/applicationFileConfig:ApplicationFileConfig":
+		r = &ApplicationFileConfig{}
 	case "tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease":
 		r = &ApplicationFileConfigRelease{}
 	case "tencentcloud:Tsf/applicationPublicConfig:ApplicationPublicConfig":
@@ -37,12 +39,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationPublicConfigRelease{}
 	case "tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig":
 		r = &ApplicationReleaseConfig{}
+	case "tencentcloud:Tsf/bindApiGroup:BindApiGroup":
+		r = &BindApiGroup{}
 	case "tencentcloud:Tsf/cluster:Cluster":
 		r = &Cluster{}
 	case "tencentcloud:Tsf/configTemplate:ConfigTemplate":
 		r = &ConfigTemplate{}
-	case "tencentcloud:Tsf/containGroup:ContainGroup":
-		r = &ContainGroup{}
+	case "tencentcloud:Tsf/deployContainerGroup:DeployContainerGroup":
+		r = &DeployContainerGroup{}
+	case "tencentcloud:Tsf/deployVmGroup:DeployVmGroup":
+		r = &DeployVmGroup{}
+	case "tencentcloud:Tsf/enableUnitRule:EnableUnitRule":
+		r = &EnableUnitRule{}
 	case "tencentcloud:Tsf/group:Group":
 		r = &Group{}
 	case "tencentcloud:Tsf/instancesAttachment:InstancesAttachment":
@@ -55,12 +63,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Microservice{}
 	case "tencentcloud:Tsf/namespace:Namespace":
 		r = &Namespace{}
+	case "tencentcloud:Tsf/operateContainerGroup:OperateContainerGroup":
+		r = &OperateContainerGroup{}
+	case "tencentcloud:Tsf/operateGroup:OperateGroup":
+		r = &OperateGroup{}
 	case "tencentcloud:Tsf/pathRewrite:PathRewrite":
 		r = &PathRewrite{}
+	case "tencentcloud:Tsf/releaseApiGroup:ReleaseApiGroup":
+		r = &ReleaseApiGroup{}
 	case "tencentcloud:Tsf/repository:Repository":
 		r = &Repository{}
 	case "tencentcloud:Tsf/task:Task":
 		r = &Task{}
+	case "tencentcloud:Tsf/unitNamespace:UnitNamespace":
+		r = &UnitNamespace{}
 	case "tencentcloud:Tsf/unitRule:UnitRule":
 		r = &UnitRule{}
 	default:
@@ -98,6 +114,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tsf/applicationFileConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tsf/applicationFileConfigRelease",
 		&module{version},
 	)
@@ -118,6 +139,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tsf/bindApiGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tsf/cluster",
 		&module{version},
 	)
@@ -128,7 +154,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tsf/containGroup",
+		"Tsf/deployContainerGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tsf/deployVmGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tsf/enableUnitRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -163,7 +199,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Tsf/operateContainerGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tsf/operateGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Tsf/pathRewrite",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tsf/releaseApiGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -174,6 +225,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tsf/task",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tsf/unitNamespace",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

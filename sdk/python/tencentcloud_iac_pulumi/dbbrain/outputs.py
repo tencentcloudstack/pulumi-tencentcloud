@@ -13,11 +13,17 @@ __all__ = [
     'ModifyDiagDbInstanceOperationInstanceConfs',
     'SqlFilterSessionToken',
     'TdsqlAuditLogFilter',
+    'GetDiagDbInstancesItemResult',
+    'GetDiagDbInstancesItemInstanceConfResult',
     'GetDiagEventsListResult',
     'GetDiagHistoryEventResult',
     'GetHealthScoresDataResult',
     'GetHealthScoresDataIssueTypeResult',
     'GetHealthScoresDataIssueTypeEventResult',
+    'GetMysqlProcessListProcessListResult',
+    'GetNoPrimaryKeyTablesNoPrimaryKeyTableResult',
+    'GetRedisTopBigKeysTopKeyResult',
+    'GetRedisTopKeyPrefixListItemResult',
     'GetSecurityAuditLogExportTasksListResult',
     'GetSlowLogTimeSeriesStatsSeriesDataResult',
     'GetSlowLogTimeSeriesStatsSeriesDataSeriesResult',
@@ -25,7 +31,16 @@ __all__ = [
     'GetSlowLogTopSqlsRowResult',
     'GetSlowLogTopSqlsSchemaListResult',
     'GetSlowLogUserHostStatsItemResult',
+    'GetSlowLogsRowResult',
     'GetSqlFiltersListResult',
+    'GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesResult',
+    'GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataResult',
+    'GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesResult',
+    'GetTopSpaceSchemasTopSpaceSchemaResult',
+    'GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesResult',
+    'GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataResult',
+    'GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesResult',
+    'GetTopSpaceTablesTopSpaceTableResult',
 ]
 
 @pulumi.output_type
@@ -207,6 +222,394 @@ class TdsqlAuditLogFilter(dict):
         Username.
         """
         return pulumi.get(self, "users")
+
+
+@pulumi.output_type
+class GetDiagDbInstancesItemResult(dict):
+    def __init__(__self__, *,
+                 audit_policy_status: str,
+                 audit_running_status: str,
+                 cpu: int,
+                 create_time: str,
+                 deadline_time: str,
+                 deploy_mode: str,
+                 engine_version: str,
+                 event_count: int,
+                 group_id: str,
+                 group_name: str,
+                 health_score: int,
+                 init_flag: int,
+                 instance_confs: Sequence['outputs.GetDiagDbInstancesItemInstanceConfResult'],
+                 instance_id: str,
+                 instance_name: str,
+                 instance_type: int,
+                 internal_vip: str,
+                 internal_vport: int,
+                 is_supported: bool,
+                 memory: int,
+                 product: str,
+                 region: str,
+                 sec_audit_status: str,
+                 source: str,
+                 status: int,
+                 task_status: int,
+                 uniq_subnet_id: str,
+                 uniq_vpc_id: str,
+                 vip: str,
+                 volume: int,
+                 vport: int):
+        """
+        :param str audit_policy_status: Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+        :param str audit_running_status: Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+        :param int cpu: number of cores.
+        :param str create_time: create time.
+        :param str deadline_time: resource expiration time.
+        :param str deploy_mode: cdb type.
+        :param str engine_version: database version.
+        :param int event_count: the number of abnormal events.
+        :param str group_id: group ID.
+        :param str group_name: group name.
+        :param int health_score: health score.
+        :param int init_flag: cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+        :param Sequence['GetDiagDbInstancesItemInstanceConfArgs'] instance_confs: status of instance inspection/overview.
+        :param str instance_id: instance id.
+        :param str instance_name: instance name.
+        :param int instance_type: instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+        :param str internal_vip: Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+        :param int internal_vport: Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+        :param bool is_supported: whether it is an instance supported by DBbrain, always pass `true`.
+        :param int memory: memory, in MB.
+        :param str product: service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+        :param str region: region.
+        :param str sec_audit_status: enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+        :param str source: access source.
+        :param int status: Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+        :param int task_status: task status.
+        :param str uniq_subnet_id: subnet uniform ID.
+        :param str uniq_vpc_id: the unified ID of the private network.
+        :param str vip: intranet address.
+        :param int volume: hard disk storage, in GB.
+        :param int vport: intranet port.
+        """
+        pulumi.set(__self__, "audit_policy_status", audit_policy_status)
+        pulumi.set(__self__, "audit_running_status", audit_running_status)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "deadline_time", deadline_time)
+        pulumi.set(__self__, "deploy_mode", deploy_mode)
+        pulumi.set(__self__, "engine_version", engine_version)
+        pulumi.set(__self__, "event_count", event_count)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "health_score", health_score)
+        pulumi.set(__self__, "init_flag", init_flag)
+        pulumi.set(__self__, "instance_confs", instance_confs)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "internal_vip", internal_vip)
+        pulumi.set(__self__, "internal_vport", internal_vport)
+        pulumi.set(__self__, "is_supported", is_supported)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "product", product)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "sec_audit_status", sec_audit_status)
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "task_status", task_status)
+        pulumi.set(__self__, "uniq_subnet_id", uniq_subnet_id)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "volume", volume)
+        pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter(name="auditPolicyStatus")
+    def audit_policy_status(self) -> str:
+        """
+        Instance audit log enable status. `ALL_AUDIT`: full audit is enabled; `RULE_AUDIT`: rule audit is enabled; `UNBOUND`: audit is not enabled.
+        """
+        return pulumi.get(self, "audit_policy_status")
+
+    @property
+    @pulumi.getter(name="auditRunningStatus")
+    def audit_running_status(self) -> str:
+        """
+        Instance audit log running status. `normal`: running; `paused`: arrears suspended.
+        """
+        return pulumi.get(self, "audit_running_status")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        number of cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="deadlineTime")
+    def deadline_time(self) -> str:
+        """
+        resource expiration time.
+        """
+        return pulumi.get(self, "deadline_time")
+
+    @property
+    @pulumi.getter(name="deployMode")
+    def deploy_mode(self) -> str:
+        """
+        cdb type.
+        """
+        return pulumi.get(self, "deploy_mode")
+
+    @property
+    @pulumi.getter(name="engineVersion")
+    def engine_version(self) -> str:
+        """
+        database version.
+        """
+        return pulumi.get(self, "engine_version")
+
+    @property
+    @pulumi.getter(name="eventCount")
+    def event_count(self) -> int:
+        """
+        the number of abnormal events.
+        """
+        return pulumi.get(self, "event_count")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        group ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        group name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="healthScore")
+    def health_score(self) -> int:
+        """
+        health score.
+        """
+        return pulumi.get(self, "health_score")
+
+    @property
+    @pulumi.getter(name="initFlag")
+    def init_flag(self) -> int:
+        """
+        cdb instance initialization flag: `0`: not initialized; `1`: initialized.
+        """
+        return pulumi.get(self, "init_flag")
+
+    @property
+    @pulumi.getter(name="instanceConfs")
+    def instance_confs(self) -> Sequence['outputs.GetDiagDbInstancesItemInstanceConfResult']:
+        """
+        status of instance inspection/overview.
+        """
+        return pulumi.get(self, "instance_confs")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> int:
+        """
+        instance type. `1`: MASTER; `2`: DR, `3`: RO, `4`: SDR.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="internalVip")
+    def internal_vip(self) -> str:
+        """
+        Intranet VIPNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "internal_vip")
+
+    @property
+    @pulumi.getter(name="internalVport")
+    def internal_vport(self) -> int:
+        """
+        Intranet portNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "internal_vport")
+
+    @property
+    @pulumi.getter(name="isSupported")
+    def is_supported(self) -> bool:
+        """
+        whether it is an instance supported by DBbrain, always pass `true`.
+        """
+        return pulumi.get(self, "is_supported")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        memory, in MB.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def product(self) -> str:
+        """
+        service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
+        """
+        return pulumi.get(self, "product")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="secAuditStatus")
+    def sec_audit_status(self) -> str:
+        """
+        enabled status of the instance security audit log. `ON`: security audit is enabled; `OFF`: security audit is not enabled.
+        """
+        return pulumi.get(self, "sec_audit_status")
+
+    @property
+    @pulumi.getter
+    def source(self) -> str:
+        """
+        access source.
+        """
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Instance status: `0`: Shipping; `1`: Running normally; `4`: Destroying; `5`: Isolating.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> int:
+        """
+        task status.
+        """
+        return pulumi.get(self, "task_status")
+
+    @property
+    @pulumi.getter(name="uniqSubnetId")
+    def uniq_subnet_id(self) -> str:
+        """
+        subnet uniform ID.
+        """
+        return pulumi.get(self, "uniq_subnet_id")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> str:
+        """
+        the unified ID of the private network.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> str:
+        """
+        intranet address.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def volume(self) -> int:
+        """
+        hard disk storage, in GB.
+        """
+        return pulumi.get(self, "volume")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> int:
+        """
+        intranet port.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetDiagDbInstancesItemInstanceConfResult(dict):
+    def __init__(__self__, *,
+                 daily_inspection: str,
+                 key_delimiters: Sequence[str],
+                 overview_display: str):
+        """
+        :param str daily_inspection: database inspection switch, Yes/No.
+        :param Sequence[str] key_delimiters: Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str overview_display: instance overview switch, Yes/No.
+        """
+        pulumi.set(__self__, "daily_inspection", daily_inspection)
+        pulumi.set(__self__, "key_delimiters", key_delimiters)
+        pulumi.set(__self__, "overview_display", overview_display)
+
+    @property
+    @pulumi.getter(name="dailyInspection")
+    def daily_inspection(self) -> str:
+        """
+        database inspection switch, Yes/No.
+        """
+        return pulumi.get(self, "daily_inspection")
+
+    @property
+    @pulumi.getter(name="keyDelimiters")
+    def key_delimiters(self) -> Sequence[str]:
+        """
+        Custom separator for redis large key analysis, only used by `redis`. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "key_delimiters")
+
+    @property
+    @pulumi.getter(name="overviewDisplay")
+    def overview_display(self) -> str:
+        """
+        instance overview switch, Yes/No.
+        """
+        return pulumi.get(self, "overview_display")
 
 
 @pulumi.output_type
@@ -638,6 +1041,320 @@ class GetHealthScoresDataIssueTypeEventResult(dict):
         Starting time.
         """
         return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetMysqlProcessListProcessListResult(dict):
+    def __init__(__self__, *,
+                 command: str,
+                 db: str,
+                 host: str,
+                 id: str,
+                 info: str,
+                 state: str,
+                 time: str,
+                 user: str):
+        """
+        :param str command: The execution type of the thread, used to filter the thread list.
+        :param str db: The threads operations database, used to filter the thread list.
+        :param str host: The operating host address of the thread, used to filter the thread list.
+        :param str id: thread ID, used to filter the thread list.
+        :param str info: The threads operation statement is used to filter the thread list.
+        :param str state: The operational state of the thread, used to filter the thread list.
+        :param str time: The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+        :param str user: The operating account name of the thread, used to filter the thread list.
+        """
+        pulumi.set(__self__, "command", command)
+        pulumi.set(__self__, "db", db)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "info", info)
+        pulumi.set(__self__, "state", state)
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "user", user)
+
+    @property
+    @pulumi.getter
+    def command(self) -> str:
+        """
+        The execution type of the thread, used to filter the thread list.
+        """
+        return pulumi.get(self, "command")
+
+    @property
+    @pulumi.getter
+    def db(self) -> str:
+        """
+        The threads operations database, used to filter the thread list.
+        """
+        return pulumi.get(self, "db")
+
+    @property
+    @pulumi.getter
+    def host(self) -> str:
+        """
+        The operating host address of the thread, used to filter the thread list.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        thread ID, used to filter the thread list.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def info(self) -> str:
+        """
+        The threads operation statement is used to filter the thread list.
+        """
+        return pulumi.get(self, "info")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        The operational state of the thread, used to filter the thread list.
+        """
+        return pulumi.get(self, "state")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        """
+        The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
+        """
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter
+    def user(self) -> str:
+        """
+        The operating account name of the thread, used to filter the thread list.
+        """
+        return pulumi.get(self, "user")
+
+
+@pulumi.output_type
+class GetNoPrimaryKeyTablesNoPrimaryKeyTableResult(dict):
+    def __init__(__self__, *,
+                 engine: str,
+                 table_name: str,
+                 table_rows: int,
+                 table_schema: str,
+                 total_length: float):
+        """
+        :param str engine: Storage engine for database tables.
+        :param str table_name: tableName.
+        :param int table_rows: rows.
+        :param str table_schema: library name.
+        :param float total_length: Total space used (MB).
+        """
+        pulumi.set(__self__, "engine", engine)
+        pulumi.set(__self__, "table_name", table_name)
+        pulumi.set(__self__, "table_rows", table_rows)
+        pulumi.set(__self__, "table_schema", table_schema)
+        pulumi.set(__self__, "total_length", total_length)
+
+    @property
+    @pulumi.getter
+    def engine(self) -> str:
+        """
+        Storage engine for database tables.
+        """
+        return pulumi.get(self, "engine")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        tableName.
+        """
+        return pulumi.get(self, "table_name")
+
+    @property
+    @pulumi.getter(name="tableRows")
+    def table_rows(self) -> int:
+        """
+        rows.
+        """
+        return pulumi.get(self, "table_rows")
+
+    @property
+    @pulumi.getter(name="tableSchema")
+    def table_schema(self) -> str:
+        """
+        library name.
+        """
+        return pulumi.get(self, "table_schema")
+
+    @property
+    @pulumi.getter(name="totalLength")
+    def total_length(self) -> float:
+        """
+        Total space used (MB).
+        """
+        return pulumi.get(self, "total_length")
+
+
+@pulumi.output_type
+class GetRedisTopBigKeysTopKeyResult(dict):
+    def __init__(__self__, *,
+                 encoding: str,
+                 expire_time: int,
+                 item_count: int,
+                 key: str,
+                 length: int,
+                 max_element_size: int,
+                 type: str):
+        """
+        :param str encoding: key encoding method.
+        :param int expire_time: Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+        :param int item_count: number of elements.
+        :param str key: key name.
+        :param int length: Key memory size, unit Byte.
+        :param int max_element_size: Maximum element length.
+        :param str type: key type.
+        """
+        pulumi.set(__self__, "encoding", encoding)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "item_count", item_count)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "length", length)
+        pulumi.set(__self__, "max_element_size", max_element_size)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def encoding(self) -> str:
+        """
+        key encoding method.
+        """
+        return pulumi.get(self, "encoding")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> int:
+        """
+        Key expiration timestamp (in milliseconds), 0 means no expiration time is set.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="itemCount")
+    def item_count(self) -> int:
+        """
+        number of elements.
+        """
+        return pulumi.get(self, "item_count")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        key name.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def length(self) -> int:
+        """
+        Key memory size, unit Byte.
+        """
+        return pulumi.get(self, "length")
+
+    @property
+    @pulumi.getter(name="maxElementSize")
+    def max_element_size(self) -> int:
+        """
+        Maximum element length.
+        """
+        return pulumi.get(self, "max_element_size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        key type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetRedisTopKeyPrefixListItemResult(dict):
+    def __init__(__self__, *,
+                 ave_element_size: int,
+                 count: int,
+                 item_count: int,
+                 key_pre_index: str,
+                 length: int,
+                 max_element_size: int):
+        """
+        :param int ave_element_size: Average element length.
+        :param int count: The number of keys.
+        :param int item_count: number of elements.
+        :param str key_pre_index: key prefix.
+        :param int length: Total occupied memory (Byte).
+        :param int max_element_size: Maximum element length.
+        """
+        pulumi.set(__self__, "ave_element_size", ave_element_size)
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "item_count", item_count)
+        pulumi.set(__self__, "key_pre_index", key_pre_index)
+        pulumi.set(__self__, "length", length)
+        pulumi.set(__self__, "max_element_size", max_element_size)
+
+    @property
+    @pulumi.getter(name="aveElementSize")
+    def ave_element_size(self) -> int:
+        """
+        Average element length.
+        """
+        return pulumi.get(self, "ave_element_size")
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        The number of keys.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="itemCount")
+    def item_count(self) -> int:
+        """
+        number of elements.
+        """
+        return pulumi.get(self, "item_count")
+
+    @property
+    @pulumi.getter(name="keyPreIndex")
+    def key_pre_index(self) -> str:
+        """
+        key prefix.
+        """
+        return pulumi.get(self, "key_pre_index")
+
+    @property
+    @pulumi.getter
+    def length(self) -> int:
+        """
+        Total occupied memory (Byte).
+        """
+        return pulumi.get(self, "length")
+
+    @property
+    @pulumi.getter(name="maxElementSize")
+    def max_element_size(self) -> int:
+        """
+        Maximum element length.
+        """
+        return pulumi.get(self, "max_element_size")
 
 
 @pulumi.output_type
@@ -1196,6 +1913,112 @@ class GetSlowLogUserHostStatsItemResult(dict):
 
 
 @pulumi.output_type
+class GetSlowLogsRowResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 lock_time: int,
+                 query_time: int,
+                 rows_examined: int,
+                 rows_sent: int,
+                 sql_text: str,
+                 timestamp: str,
+                 user_host: str,
+                 user_name: str):
+        """
+        :param str database: database.
+        :param int lock_time: lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+        :param int query_time: Execution time, in seconds.
+        :param int rows_examined: scan linesNote: This field may return null, indicating that no valid value can be obtained.
+        :param int rows_sent: Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+        :param str sql_text: sql statement.
+        :param str timestamp: Slow log start time.
+        :param str user_host: Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+        :param str user_name: User sourceNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "lock_time", lock_time)
+        pulumi.set(__self__, "query_time", query_time)
+        pulumi.set(__self__, "rows_examined", rows_examined)
+        pulumi.set(__self__, "rows_sent", rows_sent)
+        pulumi.set(__self__, "sql_text", sql_text)
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "user_host", user_host)
+        pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        database.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter(name="lockTime")
+    def lock_time(self) -> int:
+        """
+        lock time, in secondsNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "lock_time")
+
+    @property
+    @pulumi.getter(name="queryTime")
+    def query_time(self) -> int:
+        """
+        Execution time, in seconds.
+        """
+        return pulumi.get(self, "query_time")
+
+    @property
+    @pulumi.getter(name="rowsExamined")
+    def rows_examined(self) -> int:
+        """
+        scan linesNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "rows_examined")
+
+    @property
+    @pulumi.getter(name="rowsSent")
+    def rows_sent(self) -> int:
+        """
+        Return the number of rowsNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "rows_sent")
+
+    @property
+    @pulumi.getter(name="sqlText")
+    def sql_text(self) -> str:
+        """
+        sql statement.
+        """
+        return pulumi.get(self, "sql_text")
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> str:
+        """
+        Slow log start time.
+        """
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter(name="userHost")
+    def user_host(self) -> str:
+        """
+        Ip sourceNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "user_host")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> str:
+        """
+        User sourceNote: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "user_name")
+
+
+@pulumi.output_type
 class GetSqlFiltersListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
@@ -1321,5 +2144,435 @@ class GetSqlFiltersListResult(dict):
         task status, optional value is RUNNING, FINISHED, TERMINATED.
         """
         return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesResult(dict):
+    def __init__(__self__, *,
+                 series_datas: Sequence['outputs.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataResult'],
+                 table_schema: str):
+        """
+        :param Sequence['GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataArgs'] series_datas: Spatial index data in unit time interval.
+        :param str table_schema: databases name.
+        """
+        pulumi.set(__self__, "series_datas", series_datas)
+        pulumi.set(__self__, "table_schema", table_schema)
+
+    @property
+    @pulumi.getter(name="seriesDatas")
+    def series_datas(self) -> Sequence['outputs.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataResult']:
+        """
+        Spatial index data in unit time interval.
+        """
+        return pulumi.get(self, "series_datas")
+
+    @property
+    @pulumi.getter(name="tableSchema")
+    def table_schema(self) -> str:
+        """
+        databases name.
+        """
+        return pulumi.get(self, "table_schema")
+
+
+@pulumi.output_type
+class GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataResult(dict):
+    def __init__(__self__, *,
+                 series: Sequence['outputs.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesResult'],
+                 timestamps: Sequence[int]):
+        """
+        :param Sequence['GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesArgs'] series: Monitor metrics.
+        :param Sequence[int] timestamps: The timestamp corresponding to the monitoring indicator.
+        """
+        pulumi.set(__self__, "series", series)
+        pulumi.set(__self__, "timestamps", timestamps)
+
+    @property
+    @pulumi.getter
+    def series(self) -> Sequence['outputs.GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesResult']:
+        """
+        Monitor metrics.
+        """
+        return pulumi.get(self, "series")
+
+    @property
+    @pulumi.getter
+    def timestamps(self) -> Sequence[int]:
+        """
+        The timestamp corresponding to the monitoring indicator.
+        """
+        return pulumi.get(self, "timestamps")
+
+
+@pulumi.output_type
+class GetTopSpaceSchemaTimeSeriesTopSpaceSchemaTimeSeriesSeriesDataSeriesResult(dict):
+    def __init__(__self__, *,
+                 metric: str,
+                 unit: str,
+                 values: Sequence[float]):
+        """
+        :param str metric: Indicator name.
+        :param str unit: Indicator unit.
+        :param Sequence[float] values: Index value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "metric", metric)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def metric(self) -> str:
+        """
+        Indicator name.
+        """
+        return pulumi.get(self, "metric")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Indicator unit.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[float]:
+        """
+        Index value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetTopSpaceSchemasTopSpaceSchemaResult(dict):
+    def __init__(__self__, *,
+                 data_free: float,
+                 data_length: float,
+                 frag_ratio: float,
+                 index_length: float,
+                 physical_file_size: float,
+                 table_rows: int,
+                 table_schema: str,
+                 total_length: float):
+        """
+        :param float data_free: Fragmentation space (MB).
+        :param float data_length: data space (MB).
+        :param float frag_ratio: Fragmentation rate (%).
+        :param float index_length: Index space (MB).
+        :param float physical_file_size: The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int table_rows: Number of lines.
+        :param str table_schema: library name.
+        :param float total_length: Total space used (MB).
+        """
+        pulumi.set(__self__, "data_free", data_free)
+        pulumi.set(__self__, "data_length", data_length)
+        pulumi.set(__self__, "frag_ratio", frag_ratio)
+        pulumi.set(__self__, "index_length", index_length)
+        pulumi.set(__self__, "physical_file_size", physical_file_size)
+        pulumi.set(__self__, "table_rows", table_rows)
+        pulumi.set(__self__, "table_schema", table_schema)
+        pulumi.set(__self__, "total_length", total_length)
+
+    @property
+    @pulumi.getter(name="dataFree")
+    def data_free(self) -> float:
+        """
+        Fragmentation space (MB).
+        """
+        return pulumi.get(self, "data_free")
+
+    @property
+    @pulumi.getter(name="dataLength")
+    def data_length(self) -> float:
+        """
+        data space (MB).
+        """
+        return pulumi.get(self, "data_length")
+
+    @property
+    @pulumi.getter(name="fragRatio")
+    def frag_ratio(self) -> float:
+        """
+        Fragmentation rate (%).
+        """
+        return pulumi.get(self, "frag_ratio")
+
+    @property
+    @pulumi.getter(name="indexLength")
+    def index_length(self) -> float:
+        """
+        Index space (MB).
+        """
+        return pulumi.get(self, "index_length")
+
+    @property
+    @pulumi.getter(name="physicalFileSize")
+    def physical_file_size(self) -> float:
+        """
+        The sum (MB) of the independent physical file sizes corresponding to all tables in the library. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "physical_file_size")
+
+    @property
+    @pulumi.getter(name="tableRows")
+    def table_rows(self) -> int:
+        """
+        Number of lines.
+        """
+        return pulumi.get(self, "table_rows")
+
+    @property
+    @pulumi.getter(name="tableSchema")
+    def table_schema(self) -> str:
+        """
+        library name.
+        """
+        return pulumi.get(self, "table_schema")
+
+    @property
+    @pulumi.getter(name="totalLength")
+    def total_length(self) -> float:
+        """
+        Total space used (MB).
+        """
+        return pulumi.get(self, "total_length")
+
+
+@pulumi.output_type
+class GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesResult(dict):
+    def __init__(__self__, *,
+                 engine: str,
+                 series_datas: Sequence['outputs.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataResult'],
+                 table_name: str,
+                 table_schema: str):
+        """
+        :param str engine: Storage engine for database tables.
+        :param Sequence['GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataArgs'] series_datas: Spatial index data in unit time interval.
+        :param str table_name: table name.
+        :param str table_schema: databases name.
+        """
+        pulumi.set(__self__, "engine", engine)
+        pulumi.set(__self__, "series_datas", series_datas)
+        pulumi.set(__self__, "table_name", table_name)
+        pulumi.set(__self__, "table_schema", table_schema)
+
+    @property
+    @pulumi.getter
+    def engine(self) -> str:
+        """
+        Storage engine for database tables.
+        """
+        return pulumi.get(self, "engine")
+
+    @property
+    @pulumi.getter(name="seriesDatas")
+    def series_datas(self) -> Sequence['outputs.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataResult']:
+        """
+        Spatial index data in unit time interval.
+        """
+        return pulumi.get(self, "series_datas")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @property
+    @pulumi.getter(name="tableSchema")
+    def table_schema(self) -> str:
+        """
+        databases name.
+        """
+        return pulumi.get(self, "table_schema")
+
+
+@pulumi.output_type
+class GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataResult(dict):
+    def __init__(__self__, *,
+                 series: Sequence['outputs.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesResult'],
+                 timestamps: Sequence[int]):
+        """
+        :param Sequence['GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesArgs'] series: Monitor metrics.
+        :param Sequence[int] timestamps: The timestamp corresponding to the monitoring indicator.
+        """
+        pulumi.set(__self__, "series", series)
+        pulumi.set(__self__, "timestamps", timestamps)
+
+    @property
+    @pulumi.getter
+    def series(self) -> Sequence['outputs.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesResult']:
+        """
+        Monitor metrics.
+        """
+        return pulumi.get(self, "series")
+
+    @property
+    @pulumi.getter
+    def timestamps(self) -> Sequence[int]:
+        """
+        The timestamp corresponding to the monitoring indicator.
+        """
+        return pulumi.get(self, "timestamps")
+
+
+@pulumi.output_type
+class GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeriesSeriesDataSeriesResult(dict):
+    def __init__(__self__, *,
+                 metric: str,
+                 unit: str,
+                 values: Sequence[float]):
+        """
+        :param str metric: Indicator name.
+        :param str unit: Indicator unit.
+        :param Sequence[float] values: Index value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "metric", metric)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def metric(self) -> str:
+        """
+        Indicator name.
+        """
+        return pulumi.get(self, "metric")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Indicator unit.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[float]:
+        """
+        Index value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetTopSpaceTablesTopSpaceTableResult(dict):
+    def __init__(__self__, *,
+                 data_free: float,
+                 data_length: float,
+                 engine: str,
+                 frag_ratio: float,
+                 index_length: float,
+                 physical_file_size: float,
+                 table_name: str,
+                 table_rows: int,
+                 table_schema: str,
+                 total_length: float):
+        """
+        :param float data_free: Fragmentation space (MB).
+        :param float data_length: data space (MB).
+        :param str engine: Storage engine for database tables.
+        :param float frag_ratio: Fragmentation rate (%).
+        :param float index_length: Index space (MB).
+        :param float physical_file_size: The independent physical file size (MB) corresponding to the table.
+        :param str table_name: table name.
+        :param int table_rows: Number of lines.
+        :param str table_schema: database name.
+        :param float total_length: Total space used (MB).
+        """
+        pulumi.set(__self__, "data_free", data_free)
+        pulumi.set(__self__, "data_length", data_length)
+        pulumi.set(__self__, "engine", engine)
+        pulumi.set(__self__, "frag_ratio", frag_ratio)
+        pulumi.set(__self__, "index_length", index_length)
+        pulumi.set(__self__, "physical_file_size", physical_file_size)
+        pulumi.set(__self__, "table_name", table_name)
+        pulumi.set(__self__, "table_rows", table_rows)
+        pulumi.set(__self__, "table_schema", table_schema)
+        pulumi.set(__self__, "total_length", total_length)
+
+    @property
+    @pulumi.getter(name="dataFree")
+    def data_free(self) -> float:
+        """
+        Fragmentation space (MB).
+        """
+        return pulumi.get(self, "data_free")
+
+    @property
+    @pulumi.getter(name="dataLength")
+    def data_length(self) -> float:
+        """
+        data space (MB).
+        """
+        return pulumi.get(self, "data_length")
+
+    @property
+    @pulumi.getter
+    def engine(self) -> str:
+        """
+        Storage engine for database tables.
+        """
+        return pulumi.get(self, "engine")
+
+    @property
+    @pulumi.getter(name="fragRatio")
+    def frag_ratio(self) -> float:
+        """
+        Fragmentation rate (%).
+        """
+        return pulumi.get(self, "frag_ratio")
+
+    @property
+    @pulumi.getter(name="indexLength")
+    def index_length(self) -> float:
+        """
+        Index space (MB).
+        """
+        return pulumi.get(self, "index_length")
+
+    @property
+    @pulumi.getter(name="physicalFileSize")
+    def physical_file_size(self) -> float:
+        """
+        The independent physical file size (MB) corresponding to the table.
+        """
+        return pulumi.get(self, "physical_file_size")
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @property
+    @pulumi.getter(name="tableRows")
+    def table_rows(self) -> int:
+        """
+        Number of lines.
+        """
+        return pulumi.get(self, "table_rows")
+
+    @property
+    @pulumi.getter(name="tableSchema")
+    def table_schema(self) -> str:
+        """
+        database name.
+        """
+        return pulumi.get(self, "table_schema")
+
+    @property
+    @pulumi.getter(name="totalLength")
+    def total_length(self) -> float:
+        """
+        Total space used (MB).
+        """
+        return pulumi.get(self, "total_length")
 
 
