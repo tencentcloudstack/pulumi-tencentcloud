@@ -37,11 +37,11 @@ jobs:
         tag: v0.0.32
     - name: Set PreRelease Version
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
-#    - name: Run GoReleaser
-#      uses: goreleaser/goreleaser-action@v4
-#      with:
-#        args: release --timeout 60m --clean
-#        version: latest
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@v4
+      with:
+        args: release --timeout 60m --clean
+        version: latest
       env:
         GITHUB_TOKEN: ${{ secrets.PULUMI_GITHUB_TOKEN }}
     strategy:
