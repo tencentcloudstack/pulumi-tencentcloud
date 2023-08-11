@@ -19,19 +19,20 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := Vpc.GetInstances(ctx, nil, nil)
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
-// 			VpcId: pulumi.String(_default.InstanceLists[0].VpcId),
+// 		_, err = Vpc.NewAcl(ctx, "example", &Vpc.AclArgs{
+// 			VpcId: vpc.ID(),
 // 			Ingresses: pulumi.StringArray{
 // 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
 // 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),

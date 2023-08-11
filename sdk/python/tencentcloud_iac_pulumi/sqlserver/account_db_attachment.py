@@ -167,12 +167,50 @@ class AccountDbAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.AccountDbAttachment("foo",
-            instance_id="mssql-3cdq7kx5",
-            account_name=tencentcloud_sqlserver_account["example"]["name"],
-            db_name=tencentcloud_sqlserver_db["example"]["name"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        example_account = tencentcloud.sqlserver.Account("exampleAccount",
+            instance_id=example_basic_instance.id,
+            password="Qwer@234",
+            remark="test-remark")
+        example_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("exampleAccountDbAttachment",
+            instance_id=example_basic_instance.id,
+            account_name=example_account.name,
+            db_name=example_db.name,
             privilege="ReadWrite")
         ```
 
@@ -181,7 +219,7 @@ class AccountDbAttachment(pulumi.CustomResource):
         SQL Server account DB attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment example mssql-3cdq7kx5#tf_example_account#tf_example_db
         ```
 
         :param str resource_name: The name of the resource.
@@ -204,12 +242,50 @@ class AccountDbAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.AccountDbAttachment("foo",
-            instance_id="mssql-3cdq7kx5",
-            account_name=tencentcloud_sqlserver_account["example"]["name"],
-            db_name=tencentcloud_sqlserver_db["example"]["name"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        example_account = tencentcloud.sqlserver.Account("exampleAccount",
+            instance_id=example_basic_instance.id,
+            password="Qwer@234",
+            remark="test-remark")
+        example_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("exampleAccountDbAttachment",
+            instance_id=example_basic_instance.id,
+            account_name=example_account.name,
+            db_name=example_db.name,
             privilege="ReadWrite")
         ```
 
@@ -218,7 +294,7 @@ class AccountDbAttachment(pulumi.CustomResource):
         SQL Server account DB attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+         $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment example mssql-3cdq7kx5#tf_example_account#tf_example_db
         ```
 
         :param str resource_name: The name of the resource.

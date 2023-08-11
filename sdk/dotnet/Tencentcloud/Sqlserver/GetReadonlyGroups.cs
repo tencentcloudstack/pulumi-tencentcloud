@@ -27,9 +27,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var master = Output.Create(Tencentcloud.Sqlserver.GetReadonlyGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetReadonlyGroupsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbs.InvokeAsync(new Tencentcloud.Sqlserver.GetDbsArgs
         ///         {
-        ///             MasterInstanceId = "mssql-3cdq7kx5",
+        ///             InstanceId = "mssql-ds1xhnt9",
         ///         }));
         ///     }
         /// 
@@ -56,9 +56,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var master = Output.Create(Tencentcloud.Sqlserver.GetReadonlyGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetReadonlyGroupsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbs.InvokeAsync(new Tencentcloud.Sqlserver.GetDbsArgs
         ///         {
-        ///             MasterInstanceId = "mssql-3cdq7kx5",
+        ///             InstanceId = "mssql-ds1xhnt9",
         ///         }));
         ///     }
         /// 

@@ -26,8 +26,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-// 			MysqlId:          pulumi.StringRef("terraform-test-local-database"),
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
+// 			MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
 // 		}, nil)
 // 		if err != nil {
 // 			return err

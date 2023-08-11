@@ -168,19 +168,28 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance",
-            zone="ap-guangzhou-6",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("exampleBusinessIntelligenceInstance",
+            zone=zones.zones[4].name,
             memory=4,
-            storage=20,
+            storage=100,
             cpu=2,
             machine_type="CLOUD_PREMIUM",
             project_id=0,
-            subnet_id="subnet-dwj7ipnc",
-            vpc_id="vpc-4owdpnwr",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
             db_version="201603",
-            security_group_lists=[],
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -192,12 +201,12 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
             ],
             start_time="00:00",
             span=6,
-            instance_name="create_db_name")
-        business_intelligence_file = tencentcloud.sqlserver.BusinessIntelligenceFile("businessIntelligenceFile",
-            instance_id=business_intelligence_instance.id,
-            file_url="https://keep-sqlserver-1308919341.cos.ap-guangzhou.myqcloud.com/test.xlsx",
+            instance_name="tf_example")
+        example_business_intelligence_file = tencentcloud.sqlserver.BusinessIntelligenceFile("exampleBusinessIntelligenceFile",
+            instance_id=example_business_intelligence_instance.id,
+            file_url="https://tf-example-1208515315.cos.ap-guangzhou.myqcloud.com/sqlserver_business_intelligence_file.txt",
             file_type="FLAT",
-            remark="test case.")
+            remark="desc.")
         ```
 
         ## Import
@@ -205,7 +214,7 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
         sqlserver business_intelligence_file can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile business_intelligence_file business_intelligence_file_id
+         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile example mssqlbi-fo2dwujt#test.xlsx
         ```
 
         :param str resource_name: The name of the resource.
@@ -228,19 +237,28 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance",
-            zone="ap-guangzhou-6",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("exampleBusinessIntelligenceInstance",
+            zone=zones.zones[4].name,
             memory=4,
-            storage=20,
+            storage=100,
             cpu=2,
             machine_type="CLOUD_PREMIUM",
             project_id=0,
-            subnet_id="subnet-dwj7ipnc",
-            vpc_id="vpc-4owdpnwr",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
             db_version="201603",
-            security_group_lists=[],
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -252,12 +270,12 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
             ],
             start_time="00:00",
             span=6,
-            instance_name="create_db_name")
-        business_intelligence_file = tencentcloud.sqlserver.BusinessIntelligenceFile("businessIntelligenceFile",
-            instance_id=business_intelligence_instance.id,
-            file_url="https://keep-sqlserver-1308919341.cos.ap-guangzhou.myqcloud.com/test.xlsx",
+            instance_name="tf_example")
+        example_business_intelligence_file = tencentcloud.sqlserver.BusinessIntelligenceFile("exampleBusinessIntelligenceFile",
+            instance_id=example_business_intelligence_instance.id,
+            file_url="https://tf-example-1208515315.cos.ap-guangzhou.myqcloud.com/sqlserver_business_intelligence_file.txt",
             file_type="FLAT",
-            remark="test case.")
+            remark="desc.")
         ```
 
         ## Import
@@ -265,7 +283,7 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
         sqlserver business_intelligence_file can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile business_intelligence_file business_intelligence_file_id
+         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile example mssqlbi-fo2dwujt#test.xlsx
         ```
 
         :param str resource_name: The name of the resource.

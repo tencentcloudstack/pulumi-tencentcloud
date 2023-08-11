@@ -200,7 +200,7 @@ class Policy(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.cam.Policy("foo",
-            description="test",
+            description="tf_test",
             document=\"\"\"{
           "version": "2.0",
           "statement": [
@@ -252,7 +252,7 @@ class Policy(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         foo = tencentcloud.cam.Policy("foo",
-            description="test",
+            description="tf_test",
             document=\"\"\"{
           "version": "2.0",
           "statement": [

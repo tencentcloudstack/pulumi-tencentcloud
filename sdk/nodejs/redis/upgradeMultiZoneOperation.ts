@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  *
  * const upgradeMultiZoneOperation = new tencentcloud.Redis.UpgradeMultiZoneOperation("upgrade_multi_zone_operation", {
  *     instanceId: "crs-c1nl9rpv",
- *     upgradeProxyAndRedisServer: false,
+ *     upgradeProxyAndRedisServer: true,
  * });
  * ```
  */

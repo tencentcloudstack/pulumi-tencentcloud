@@ -10,17 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
-    /// <summary>
-    /// Provides a resource to create a teo load_balancing
-    /// 
-    /// ## Import
-    /// 
-    /// teo load_balancing can be imported using the zone_id#loadBalancing_id, e.g.
-    /// 
-    /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/loadBalancing:LoadBalancing load_balancing zone-297z8rf93cfw#lb-2a93c649-3719-11ed-b9c1-5254005a52aa
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/loadBalancing:LoadBalancing")]
     public partial class LoadBalancing : Pulumi.CustomResource
     {

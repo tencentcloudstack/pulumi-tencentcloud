@@ -167,11 +167,21 @@ class RolePolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.RolePolicyAttachment("foo",
-            role_id=tencentcloud_cam_role["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_role_basic = config.get("camRoleBasic")
+        if cam_role_basic is None:
+            cam_role_basic = "keep-cam-role"
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        roles = tencentcloud.Cam.get_roles(name=cam_role_basic)
+        role_policy_attachment_basic = tencentcloud.cam.RolePolicyAttachment("rolePolicyAttachmentBasic",
+            role_id=roles.role_lists[0].role_id,
+            policy_id=policy.policy_lists[0].policy_id)
         ```
 
         ## Import
@@ -200,11 +210,21 @@ class RolePolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.RolePolicyAttachment("foo",
-            role_id=tencentcloud_cam_role["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_role_basic = config.get("camRoleBasic")
+        if cam_role_basic is None:
+            cam_role_basic = "keep-cam-role"
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        roles = tencentcloud.Cam.get_roles(name=cam_role_basic)
+        role_policy_attachment_basic = tencentcloud.cam.RolePolicyAttachment("rolePolicyAttachmentBasic",
+            role_id=roles.role_lists[0].role_id,
+            policy_id=policy.policy_lists[0].policy_id)
         ```
 
         ## Import

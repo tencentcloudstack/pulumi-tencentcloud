@@ -12,23 +12,49 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const tmpAlertRule = new tencentcloud.Monitor.TmpAlertRule("tmpAlertRule", {
- *     annotations: [{
- *         key: "hello2",
- *         value: "world2",
- *     }],
- *     duration: "4m",
- *     expr: "up{service=\"rig-prometheus-agent\"}>0",
- *     instanceId: "prom-c89b3b3u",
- *     labels: [{
- *         key: "hello1",
- *         value: "world1",
- *     }],
- *     receivers: ["notice-l9ziyxw6"],
- *     ruleName: "test123",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooTmpInstance = new tencentcloud.monitor.TmpInstance("fooTmpInstance", {
+ *     instanceName: "tf-tmp-instance",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataRetentionTime: 30,
+ *     zone: availabilityZone,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const fooTmpCvmAgent = new tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", {instanceId: fooTmpInstance.id});
+ * const fooTmpAlertRule = new tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule", {
+ *     duration: "2m",
+ *     expr: "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
+ *     instanceId: fooTmpInstance.id,
+ *     receivers: ["notice-f2svbu3w"],
+ *     ruleName: "MySQL 连接数过多",
  *     ruleState: 2,
+ *     type: "MySQL/MySQL 连接数过多",
+ *     annotations: [
+ *         {
+ *             key: "description",
+ *             value: `MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。`,
+ *         },
+ *         {
+ *             key: "summary",
+ *             value: `MySQL 连接数过多(>80%)`,
+ *         },
+ *     ],
+ *     labels: [{
+ *         key: "severity",
+ *         value: "warning",
+ *     }],
  * });
  * ```
  *

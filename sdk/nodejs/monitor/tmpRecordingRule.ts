@@ -11,17 +11,35 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const recordingRule = new tencentcloud.Monitor.TmpRecordingRule("recordingRule", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.monitor.TmpInstance("foo", {
+ *     instanceName: "tf-tmp-instance",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataRetentionTime: 30,
+ *     zone: availabilityZone,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const recordingRule = new tencentcloud.monitor.TmpRecordingRule("recordingRule", {
+ *     instanceId: foo.id,
+ *     ruleState: 2,
  *     group: `---
  * name: example-test
  * rules:
  *   - record: job:http_inprogress_requests:sum
  *     expr: sum by (job) (http_inprogress_requests)
  * `,
- *     instanceId: "prom-c89b3b3u",
- *     ruleState: 2,
  * });
  * ```
  *

@@ -12,14 +12,206 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tempAttachment = new tencentcloud.Monitor.TmpTkeTemplateAttachment("temp_attachment", {
- *     targets: {
- *         instanceId: "prom-xxx",
- *         region: "ap-xxx",
+ * const config = new pulumi.Config();
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA1.MEDIUM2";
+ * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+ * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpcOne = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneFirst,
+ * });
+ * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
+ * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
+ * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneSecond,
+ * });
+ * const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.vpcId);
+ * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.subnetId);
+ * const sg = new tencentcloud.security.Group("sg", {});
+ * const sgId = sg.id;
+ * const default = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "Final",
+ * });
+ * const imageId = _default.then(_default => _default.imageId);
+ * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
+ *     securityGroupId: sg.id,
+ *     ingresses: [
+ *         "ACCEPT#10.0.0.0/16#ALL#ALL",
+ *         "ACCEPT#172.16.0.0/22#ALL#ALL",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+ * });
+ * const example = new tencentcloud.kubernetes.Cluster("example", {
+ *     vpcId: firstVpcId,
+ *     clusterCidr: exampleClusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "tf_example_cluster",
+ *     clusterDesc: "example for tke cluster",
+ *     clusterMaxServiceNum: 32,
+ *     clusterInternet: false,
+ *     clusterInternetSecurityGroup: sgId,
+ *     clusterVersion: "1.22.5",
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ *     workerConfigs: [
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneFirst,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: firstSubnetId,
+ *             imgId: imageId,
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             password: "ZZXXccvv1212",
+ *         },
+ *         {
+ *             count: 1,
+ *             availabilityZone: availabilityZoneSecond,
+ *             instanceType: defaultInstanceType,
+ *             systemDiskType: "CLOUD_SSD",
+ *             systemDiskSize: 60,
+ *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *             internetMaxBandwidthOut: 100,
+ *             publicIpAssigned: true,
+ *             subnetId: secondSubnetId,
+ *             dataDisks: [{
+ *                 diskType: "CLOUD_PREMIUM",
+ *                 diskSize: 50,
+ *             }],
+ *             enhancedSecurityService: false,
+ *             enhancedMonitorService: false,
+ *             userData: "dGVzdA==",
+ *             camRoleName: "CVM_QcsRole",
+ *             password: "ZZXXccvv1212",
+ *         },
+ *     ],
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
  *     },
- *     templateId: "temp-xxx",
+ * });
+ * const zone = config.get("zone") || "ap-guangzhou";
+ * const clusterType = config.get("clusterType") || "tke";
+ * const fooTmpInstance = new tencentcloud.monitor.TmpInstance("fooTmpInstance", {
+ *     instanceName: "tf-tmp-instance",
+ *     vpcId: firstVpcId,
+ *     subnetId: firstSubnetId,
+ *     dataRetentionTime: 30,
+ *     zone: availabilityZoneSecond,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * // tmp tke bind
+ * const fooTmpTkeClusterAgent = new tencentcloud.monitor.TmpTkeClusterAgent("fooTmpTkeClusterAgent", {
+ *     instanceId: fooTmpInstance.id,
+ *     agents: {
+ *         region: zone,
+ *         clusterType: clusterType,
+ *         clusterId: example.id,
+ *         enableExternal: false,
+ *     },
+ * });
+ * // create monitor template
+ * const fooTmpTkeTemplate = new tencentcloud.monitor.TmpTkeTemplate("fooTmpTkeTemplate", {template: {
+ *     name: "tf-template",
+ *     level: "cluster",
+ *     describe: "template",
+ *     serviceMonitors: [{
+ *         name: "tf-ServiceMonitor",
+ *         config: `apiVersion: monitoring.coreos.com/v1
+ * kind: ServiceMonitor
+ * metadata:
+ *   name: example-service-monitor
+ *   namespace: monitoring
+ *   labels:
+ *     k8s-app: example-service
+ * spec:
+ *   selector:
+ *     matchLabels:
+ *       k8s-app: example-service
+ *   namespaceSelector:
+ *     matchNames:
+ *       - default
+ *   endpoints:
+ *   - port: http-metrics
+ *     interval: 30s
+ *     path: /metrics
+ *     scheme: http
+ *     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tlsConfig:
+ *       insecureSkipVerify: true
+ * `,
+ *     }],
+ *     podMonitors: [
+ *         {
+ *             name: "tf-PodMonitors",
+ *             config: `apiVersion: monitoring.coreos.com/v1
+ * kind: PodMonitor
+ * metadata:
+ *   name: example-pod-monitor
+ *   namespace: monitoring
+ *   labels:
+ *     k8s-app: example-pod
+ * spec:
+ *   selector:
+ *     matchLabels:
+ *       k8s-app: example-pod
+ *   namespaceSelector:
+ *     matchNames:
+ *       - default
+ *   podMetricsEndpoints:
+ *   - port: http-metrics
+ *     interval: 30s
+ *     path: /metrics
+ *     scheme: http
+ *     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tlsConfig:
+ *       insecureSkipVerify: true
+ * `,
+ *         },
+ *         {
+ *             name: "tf-RawJobs",
+ *             config: `scrape_configs:
+ *   - job_name: 'example-job'
+ *     scrape_interval: 30s
+ *     static_configs:
+ *       - targets: ['example-service.default.svc.cluster.local:8080']
+ *     metrics_path: /metrics
+ *     scheme: http
+ *     bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tls_config:
+ *       insecure_skip_verify: true
+ * `,
+ *         },
+ *     ],
+ * }});
+ * const tempAttachment = new tencentcloud.monitor.TmpTkeTemplateAttachment("tempAttachment", {
+ *     templateId: fooTmpTkeTemplate.id,
+ *     targets: {
+ *         clusterType: clusterType,
+ *         clusterId: example.id,
+ *         region: zone,
+ *         instanceId: fooTmpInstance.id,
+ *     },
+ * }, {
+ *     dependsOn: [fooTmpTkeClusterAgent],
  * });
  * ```
  */

@@ -28,7 +28,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cam.NewPolicy(ctx, "foo", &Cam.PolicyArgs{
-// 			Description: pulumi.String("test"),
+// 			Description: pulumi.String("tf_test"),
 // 			Document:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"resource\": [\n", "        \"*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
 // 		})
 // 		if err != nil {

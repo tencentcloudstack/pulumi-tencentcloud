@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.20.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.24.1
 	github.com/pulumi/pulumi/pkg/v3 v3.33.1
-	github.com/tencentcloudstack/terraform-provider-tencentcloud v1.81.14
+	github.com/tencentcloudstack/terraform-provider-tencentcloud v1.81.20
 )
 
 require (
@@ -186,14 +186,15 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cbs v1.0.591 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdb v1.0.699 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.539 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdwch v1.0.698 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cfs v1.0.627 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/chdfs v1.0.600 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/ciam v1.0.695 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/ckafka v1.0.667 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/ckafka v1.0.706 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/clb v1.0.693 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cloudaudit v1.0.544 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cls v1.0.663 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.699 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cls v1.0.711 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.715 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cvm v1.0.624 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cwp v1.0.589 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cynosdb v1.0.692 // indirect
@@ -204,6 +205,7 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.0.539 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/domain v1.0.414 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dts v1.0.628 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/eb v1.0.715 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/emr v1.0.287 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/es v1.0.699 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/gaap v1.0.514 // indirect
@@ -233,14 +235,14 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tcm v1.0.547 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tcr v1.0.696 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdcpg v1.0.533 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdmq v1.0.691 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tdmq v1.0.713 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tem v1.0.578 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo v1.0.529 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tke v1.0.691 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tse v1.0.650 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tse v1.0.701 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/tsf v1.0.674 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/vod v1.0.199 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/vpc v1.0.669 // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/vpc v1.0.706 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/wss v1.0.199 // indirect
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.42-0.20230629101357-7edd77448a0f // indirect
 	github.com/terraform-providers/terraform-provider-archive v1.3.0 // indirect

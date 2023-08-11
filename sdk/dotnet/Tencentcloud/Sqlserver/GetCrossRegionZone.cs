@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var crossRegionZone = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));
@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var crossRegionZone = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetCrossRegionZone.InvokeAsync(new Tencentcloud.Sqlserver.GetCrossRegionZoneArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));

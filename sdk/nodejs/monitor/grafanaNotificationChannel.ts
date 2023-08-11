@@ -11,14 +11,76 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const grafanaNotificationChannel = new tencentcloud.Monitor.GrafanaNotificationChannel("grafanaNotificationChannel", {
- *     channelName: "create-channel",
- *     extraOrgIds: [],
- *     instanceId: "grafana-50nj6v00",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooGrafanaInstance = new tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance", {
+ *     instanceName: "test-grafana",
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     tags: {
+ *         createdBy: "test",
+ *     },
+ * });
+ * const fooAlarmNotice = new tencentcloud.monitor.AlarmNotice("fooAlarmNotice", {
+ *     noticeType: "ALL",
+ *     noticeLanguage: "zh-CN",
+ *     userNotices: [{
+ *         receiverType: "USER",
+ *         startTime: 0,
+ *         endTime: 1,
+ *         noticeWays: [
+ *             "SMS",
+ *             "EMAIL",
+ *         ],
+ *         userIds: [10001],
+ *         groupIds: [],
+ *         phoneOrders: [10001],
+ *         phoneCircleTimes: 2,
+ *         phoneCircleInterval: 50,
+ *         phoneInnerInterval: 60,
+ *         needPhoneArriveNotice: 1,
+ *         phoneCallType: "CIRCLE",
+ *         weekdays: [
+ *             1,
+ *             2,
+ *             3,
+ *             4,
+ *             5,
+ *             6,
+ *             7,
+ *         ],
+ *     }],
+ *     urlNotices: [{
+ *         url: "https://www.mytest.com/validate",
+ *         endTime: 0,
+ *         startTime: 1,
+ *         weekdays: [
+ *             1,
+ *             2,
+ *             3,
+ *             4,
+ *             5,
+ *             6,
+ *             7,
+ *         ],
+ *     }],
+ * });
+ * const grafanaNotificationChannel = new tencentcloud.monitor.GrafanaNotificationChannel("grafanaNotificationChannel", {
+ *     instanceId: fooGrafanaInstance.id,
+ *     channelName: "tf-channel",
  *     orgId: 1,
- *     receivers: ["Consumer-6vkna7pevq"],
+ *     receivers: [fooAlarmNotice.ampConsumerId],
+ *     extraOrgIds: ["1"],
  * });
  * ```
  */

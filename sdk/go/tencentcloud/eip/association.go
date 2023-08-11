@@ -17,52 +17,6 @@ import (
 //
 // ## Example Usage
 //
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAssociation(ctx, "foo", &Eip.AssociationArgs{
-// 			EipId:      pulumi.String("eip-xxxxxx"),
-// 			InstanceId: pulumi.String("ins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### or
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAssociation(ctx, "bar", &Eip.AssociationArgs{
-// 			EipId:              pulumi.String("eip-xxxxxx"),
-// 			NetworkInterfaceId: pulumi.String("eni-xxxxxx"),
-// 			PrivateIp:          pulumi.String("10.0.1.22"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // Eip association can be imported using the id, e.g.

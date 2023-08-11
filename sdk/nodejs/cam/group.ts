@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Cam.Group("foo", {
- *     remark: "test",
+ *     remark: "tf_group_remark",
  * });
  * ```
  *

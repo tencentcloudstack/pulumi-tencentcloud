@@ -24,8 +24,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var @group = new Tencentcloud.Monitor.AlarmPolicy("group", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         var fooAlarmNotice = new Tencentcloud.Monitor.AlarmNotice("fooAlarmNotice", new Tencentcloud.Monitor.AlarmNoticeArgs
     ///         {
+    ///             NoticeType = "ALL",
+    ///             NoticeLanguage = "zh-CN",
+    ///             UserNotices = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
+    ///                 {
+    ///                     ReceiverType = "USER",
+    ///                     StartTime = 0,
+    ///                     EndTime = 1,
+    ///                     NoticeWays = 
+    ///                     {
+    ///                         "SMS",
+    ///                         "EMAIL",
+    ///                     },
+    ///                     UserIds = 
+    ///                     {
+    ///                         10001,
+    ///                     },
+    ///                     GroupIds = {},
+    ///                     PhoneOrders = 
+    ///                     {
+    ///                         10001,
+    ///                     },
+    ///                     PhoneCircleTimes = 2,
+    ///                     PhoneCircleInterval = 50,
+    ///                     PhoneInnerInterval = 60,
+    ///                     NeedPhoneArriveNotice = 1,
+    ///                     PhoneCallType = "CIRCLE",
+    ///                     Weekdays = 
+    ///                     {
+    ///                         1,
+    ///                         2,
+    ///                         3,
+    ///                         4,
+    ///                         5,
+    ///                         6,
+    ///                         7,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             UrlNotices = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
+    ///                 {
+    ///                     Url = "https://www.mytest.com/validate",
+    ///                     EndTime = 0,
+    ///                     StartTime = 1,
+    ///                     Weekdays = 
+    ///                     {
+    ///                         1,
+    ///                         2,
+    ///                         3,
+    ///                         4,
+    ///                         5,
+    ///                         6,
+    ///                         7,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///         var fooAlarmPolicy = new Tencentcloud.Monitor.AlarmPolicy("fooAlarmPolicy", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         {
+    ///             PolicyName = "tf-policy",
+    ///             MonitorType = "MT_QCE",
+    ///             Enable = 1,
+    ///             ProjectId = 0,
+    ///             Namespace = "cvm_device",
     ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
     ///             {
     ///                 IsUnionRule = 1,
@@ -33,17 +100,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///                 {
     ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
     ///                     {
-    ///                         ContinuePeriod = 1,
-    ///                         IsPowerNotice = 0,
     ///                         MetricName = "CpuUsage",
-    ///                         NoticeFrequency = 3600,
-    ///                         Operator = "ge",
     ///                         Period = 60,
+    ///                         Operator = "ge",
     ///                         Value = "89.9",
+    ///                         ContinuePeriod = 1,
+    ///                         NoticeFrequency = 3600,
+    ///                         IsPowerNotice = 0,
     ///                     },
     ///                 },
     ///             },
-    ///             Enable = 1,
     ///             EventConditions = 
     ///             {
     ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
@@ -55,20 +121,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///                     MetricName = "guest_reboot",
     ///                 },
     ///             },
-    ///             MonitorType = "MT_QCE",
-    ///             Namespace = "cvm_device",
     ///             NoticeIds = 
     ///             {
-    ///                 "notice-l9ziyxw6",
+    ///                 fooAlarmNotice.Id,
     ///             },
-    ///             PolicyName = "hello",
-    ///             ProjectId = 1244035,
     ///             TriggerTasks = 
     ///             {
     ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyTriggerTaskArgs
     ///                 {
-    ///                     TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
     ///                     Type = "AS",
+    ///                     TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
     ///                 },
     ///             },
     ///         });

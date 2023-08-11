@@ -18,11 +18,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Outputs
         /// Publish the database.
         /// </summary>
         public readonly string PublishDatabase;
+        /// <summary>
+        /// Subscribe the database.
+        /// </summary>
+        public readonly string SubscribeDatabase;
 
         [OutputConstructor]
-        private PublishSubscribeDatabaseTuple(string publishDatabase)
+        private PublishSubscribeDatabaseTuple(
+            string publishDatabase,
+
+            string subscribeDatabase)
         {
             PublishDatabase = publishDatabase;
+            SubscribeDatabase = subscribeDatabase;
         }
     }
 }

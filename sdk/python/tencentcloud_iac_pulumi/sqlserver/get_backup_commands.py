@@ -116,10 +116,9 @@ def get_backup_commands(backup_file_type: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    backup_command = tencentcloud.Sqlserver.get_backup_commands(backup_file_type="FULL",
+    example = tencentcloud.Sqlserver.get_backup_commands(backup_file_type="FULL",
         data_base_name="keep-publish-instance",
-        is_recovery="NO",
-        local_path="")
+        is_recovery="NO")
     ```
 
 
@@ -169,10 +168,9 @@ def get_backup_commands_output(backup_file_type: Optional[pulumi.Input[str]] = N
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    backup_command = tencentcloud.Sqlserver.get_backup_commands(backup_file_type="FULL",
+    example = tencentcloud.Sqlserver.get_backup_commands(backup_file_type="FULL",
         data_base_name="keep-publish-instance",
-        is_recovery="NO",
-        local_path="")
+        is_recovery="NO")
     ```
 
 

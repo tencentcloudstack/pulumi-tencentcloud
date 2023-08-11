@@ -17,28 +17,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var emrrrr = new Tencentcloud.Emr.Cluster("emrrrr", new Tencentcloud.Emr.ClusterArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var cvm4c8m = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
+    ///         {
+    ///             ExcludeSoldOut = true,
+    ///             CpuCoreCount = 4,
+    ///             MemorySize = 8,
+    ///             Filters = 
+    ///             {
+    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
+    ///                 {
+    ///                     Name = "instance-charge-type",
+    ///                     Values = 
+    ///                     {
+    ///                         "POSTPAID_BY_HOUR",
+    ///                     },
+    ///                 },
+    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
+    ///                 {
+    ///                     Name = "zone",
+    ///                     Values = 
+    ///                     {
+    ///                         availabilityZone,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         }));
+    ///         var emrVpc = new Tencentcloud.Vpc.Instance("emrVpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var emrSubnet = new Tencentcloud.Subnet.Instance("emrSubnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             VpcId = emrVpc.Id,
+    ///             CidrBlock = "10.0.20.0/28",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var emrSg = new Tencentcloud.Security.Group("emrSg", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "emr sg",
+    ///             ProjectId = 0,
+    ///         });
+    ///         var emrCluster = new Tencentcloud.Emr.Cluster("emrCluster", new Tencentcloud.Emr.ClusterArgs
     ///         {
     ///             ProductId = 4,
     ///             DisplayStrategy = "clusterList",
     ///             VpcSettings = 
     ///             {
-    ///                 { "vpc_id", "vpc-fuwly8x5" },
-    ///                 { "subnet_id", "subnet-d830wfso" },
+    ///                 { "vpc_id", emrVpc.Id },
+    ///                 { "subnet_id", emrSubnet.Id },
     ///             },
     ///             Softwares = 
     ///             {
-    ///                 "hadoop-2.8.4",
-    ///                 "zookeeper-3.4.9",
+    ///                 "zookeeper-3.6.1",
     ///             },
     ///             SupportHa = 0,
-    ///             InstanceName = "emr-test",
+    ///             InstanceName = "emr-cluster-test",
     ///             ResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecArgs
     ///             {
     ///                 MasterResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecMasterResourceSpecArgs
@@ -47,8 +90,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///                     Cpu = 4,
     ///                     DiskSize = 100,
     ///                     DiskType = "CLOUD_PREMIUM",
-    ///                     Spec = "CVM.S2",
+    ///                     Spec = cvm4c8m.Apply(cvm4c8m =&gt; $"CVM.{cvm4c8m.InstanceTypes?[0]?.Family}"),
     ///                     StorageType = 5,
+    ///                     RootSize = 50,
     ///                 },
     ///                 CoreResourceSpec = new Tencentcloud.Emr.Inputs.ClusterResourceSpecCoreResourceSpecArgs
     ///                 {
@@ -56,8 +100,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///                     Cpu = 4,
     ///                     DiskSize = 100,
     ///                     DiskType = "CLOUD_PREMIUM",
-    ///                     Spec = "CVM.S2",
+    ///                     Spec = cvm4c8m.Apply(cvm4c8m =&gt; $"CVM.{cvm4c8m.InstanceTypes?[0]?.Family}"),
     ///                     StorageType = 5,
+    ///                     RootSize = 50,
     ///                 },
     ///                 MasterCount = 1,
     ///                 CoreCount = 2,
@@ -66,14 +111,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///             {
     ///                 { "password", "Tencent@cloud123" },
     ///             },
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///             PayMode = 1,
+    ///             TimeSpan = 3600,
+    ///             TimeUnit = "s",
+    ///             PayMode = 0,
     ///             Placement = 
     ///             {
-    ///                 { "zone", "ap-guangzhou-3" },
+    ///                 { "zone", availabilityZone },
     ///                 { "project_id", 0 },
     ///             },
+    ///             SgId = emrSg.Id,
     ///         });
     ///     }
     /// 
@@ -175,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// </summary>
         [Output("supportHa")]
         public Output<int> SupportHa { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
@@ -347,6 +399,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("supportHa", required: true)]
         public Input<int> SupportHa { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
         /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
@@ -489,6 +553,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// </summary>
         [Input("supportHa")]
         public Input<int>? SupportHa { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.

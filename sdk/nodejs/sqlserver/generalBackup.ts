@@ -11,11 +11,50 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const generalBackup = new tencentcloud.Sqlserver.GeneralBackup("general_backup", {
- *     backupName: "create_sqlserver_backup_name",
- *     instanceId: "mssql-qelbzgwf",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleGeneralBackup = new tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup", {
+ *     instanceId: exampleDb.instanceId,
+ *     backupName: "tf_example_backup",
  *     strategy: 0,
  * });
  * ```
@@ -25,7 +64,7 @@ import * as utilities from "../utilities";
  * sqlserver general_backups can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/generalBackup:GeneralBackup general_backups general_backups_id
+ *  $ pulumi import tencentcloud:Sqlserver/generalBackup:GeneralBackup example mssql-qelbzgwf#3512621#5293#2020-07-31 14:28:51#2020-07-31 15:10:27#autoed_instance_58037_20200728011545.bak.tar
  * ```
  */
 export class GeneralBackup extends pulumi.CustomResource {

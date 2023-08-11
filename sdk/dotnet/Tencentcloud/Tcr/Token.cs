@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr long term token.
     /// 
     /// ## Example Usage
+    /// ### Create a token for tcr instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,10 +24,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tcr.Token("foo", new Tencentcloud.Tcr.TokenArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             Description = "test",
-    ///             InstanceId = "cls-cda1iex1",
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleToken = new Tencentcloud.Tcr.Token("exampleToken", new Tencentcloud.Tcr.TokenArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             Description = "example for the tcr token",
     ///         });
     ///     }
     /// 
@@ -38,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr token can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/token:Token foo cls-cda1iex1#namespace#buv3h3j96j2d1rk1cllg
+    ///  $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/token:Token")]

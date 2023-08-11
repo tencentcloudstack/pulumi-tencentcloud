@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetWafRuleGroupsWafRuleGroupResult
     {
-        /// <summary>
-        /// Description of rule type in this group.
-        /// </summary>
         public readonly string RuleTypeDesc;
-        /// <summary>
-        /// Type id of rules in this group.
-        /// </summary>
         public readonly int RuleTypeId;
-        /// <summary>
-        /// Type name of rules in this group.
-        /// </summary>
         public readonly string RuleTypeName;
-        /// <summary>
-        /// Rules detail.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetWafRuleGroupsWafRuleGroupRuleResult> Rules;
 
         [OutputConstructor]

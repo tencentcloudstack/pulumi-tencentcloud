@@ -11,6 +11,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM policy.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewPolicyByName(ctx, "foo", &Cam.PolicyByNameArgs{
+// 			Description: pulumi.String("tf_test"),
+// 			Document:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"resource\": [\n", "        \"*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM policy can be imported using the name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+// ```
 type PolicyByName struct {
 	pulumi.CustomResourceState
 
@@ -25,7 +60,7 @@ type PolicyByName struct {
 	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM policy.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
 	Type pulumi.IntOutput `pulumi:"type"`
 	// The last update time of the CAM policy.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -75,7 +110,7 @@ type policyByNameState struct {
 	Document *string `pulumi:"document"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
-	// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
 	Type *int `pulumi:"type"`
 	// The last update time of the CAM policy.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -93,7 +128,7 @@ type PolicyByNameState struct {
 	Document pulumi.StringPtrInput
 	// Name of CAM policy.
 	Name pulumi.StringPtrInput
-	// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
 	Type pulumi.IntPtrInput
 	// The last update time of the CAM policy.
 	UpdateTime pulumi.StringPtrInput
@@ -238,7 +273,7 @@ func (o PolicyByNameOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
 func (o PolicyByNameOutput) Type() pulumi.IntOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.IntOutput { return v.Type }).(pulumi.IntOutput)
 }

@@ -14,6 +14,7 @@ import (
 // Provide a resource to create a VPC.
 //
 // ## Example Usage
+// ### Create a basic VPC
 //
 // ```go
 // package main
@@ -25,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+// 		_, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
 // 			CidrBlock: pulumi.String("10.0.0.0/16"),
 // 			DnsServers: pulumi.StringArray{
 // 				pulumi.String("119.29.29.29"),
@@ -55,7 +56,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+// 		_, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
 // 			AssistantCidrs: pulumi.StringArray{
 // 				pulumi.String("172.16.0.0/24"),
 // 			},

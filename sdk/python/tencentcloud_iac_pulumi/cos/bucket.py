@@ -783,32 +783,42 @@ class Bucket(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="private",
-            bucket="mycos-1258798060")
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        private_sbucket = tencentcloud.cos.Bucket("privateSbucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private")
         ```
         ### Creation of multiple available zone bucket
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mycos = tencentcloud.cos.Bucket("mycos",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        multi_zone_bucket = tencentcloud.cos.Bucket("multiZoneBucket",
+            bucket=f"multi-zone-bucket-{app_id}",
             acl="private",
-            bucket="mycos-1258798060",
-            force_clean=True,
             multi_az=True,
-            versioning_enable=True)
+            versioning_enable=True,
+            force_clean=True)
         ```
         ### Using verbose acl
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        with_acl_body = tencentcloud.cos.Bucket("withAclBody",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_acl = tencentcloud.cos.Bucket("bucketWithAcl",
+            bucket=f"bucketwith-acl-{app_id}",
             acl_body=\"\"\"<AccessControlPolicy>
         	<Owner>
         		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
@@ -869,166 +879,98 @@ class Bucket(pulumi.CustomResource):
         		</Grant>
         	</AccessControlList>
         </AccessControlPolicy>
-
-        \"\"\",
-            bucket="mycos-1258798060")
+        \"\"\")
         ```
         ### Static Website
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            bucket="mycos-1258798060",
-            website=tencentcloud.cos.BucketWebsiteArgs(
-                index_document="index.html",
-                error_document="error.html",
-            ))
-        pulumi.export("endpointTest", mycos.website.endpoint)
-        ```
-        ### Using CORS
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="public-read-write",
-            bucket="mycos-1258798060",
-            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
-                allowed_headers=["*"],
-                allowed_methods=[
-                    "PUT",
-                    "POST",
-                ],
-                allowed_origins=["http://*.abc.com"],
-                expose_headers=["Etag"],
-                max_age_seconds=300,
-            )])
-        ```
-        ### Using object lifecycle
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="public-read-write",
-            bucket="mycos-1258798060",
-            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
-                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
-                    days=90,
-                ),
-                filter_prefix="path1/",
-                transitions=[tencentcloud.cos.BucketLifecycleRuleTransitionArgs(
-                    date="2019-06-01",
-                    storage_class="STANDARD_IA",
-                )],
-            )])
-        ```
-        ### Using custom origin domain settings
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        with_origin = tencentcloud.cos.Bucket("withOrigin",
-            acl="private",
-            bucket="mycos-1258798060",
-            origin_domain_rules=[tencentcloud.cos.BucketOriginDomainRuleArgs(
-                domain="abc.example.com",
-                status="ENABLE",
-                type="REST",
-            )])
-        ```
-        ### Using origin-pull settings
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        with_origin = tencentcloud.cos.Bucket("withOrigin",
-            acl="private",
-            bucket="mycos-1258798060",
-            origin_pull_rules=[tencentcloud.cos.BucketOriginPullRuleArgs(
-                custom_http_headers={
-                    "x-custom-header": "custom_value",
-                },
-                follow_http_headers=[
-                    "origin",
-                    "host",
-                ],
-                follow_query_string=True,
-                follow_redirection=True,
-                host="abc.example.com",
-                prefix="/",
-                priority=1,
-                protocol="FOLLOW",
-                sync_back_to_source=False,
-            )])
-        ```
-        ### Using replication
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        replica1 = tencentcloud.cos.Bucket("replica1",
-            acl="private",
-            bucket="tf-replica-foo-1234567890",
-            versioning_enable=True)
-        with_replication = tencentcloud.cos.Bucket("withReplication",
-            acl="private",
-            bucket="tf-bucket-replica-1234567890",
-            replica_role="qcs::cam::uin/100000000001:uin/100000000001",
-            replica_rules=[tencentcloud.cos.BucketReplicaRuleArgs(
-                destination_bucket=replica1.bucket.apply(lambda bucket: f"qcs::cos:%s::{bucket}"),
-                id="test-rep1",
-                prefix="dist",
-                status="Enabled",
-            )],
-            versioning_enable=True)
-        ```
-        ### Setting log status
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cos_log_grant_role = tencentcloud.cam.Role("cosLogGrantRole",
-            document=\"\"\"{
-          "version": "2.0",
-          "statement": [
-            {
-              "action": [
-                "name/sts:AssumeRole"
-              ],
-              "effect": "allow",
-              "principal": {
-                "service": [
-                  "cls.cloud.tencent.com"
-                ]
-              }
-            }
-          ]
-        }
-        \"\"\",
-            description="cos log enable grant")
-        cos_access = tencentcloud.Cam.get_policies(name="QcloudCOSAccessForCLSRole")
-        cos_log_grant_role_policy_attachment = tencentcloud.cam.RolePolicyAttachment("cosLogGrantRolePolicyAttachment",
-            role_id=cos_log_grant_role.id,
-            policy_id=cos_access.policy_lists[0].policy_id)
-        mylog = tencentcloud.cos.Bucket("mylog",
-            bucket="mylog-1258798060",
-            acl="private")
-        mycos = tencentcloud.cos.Bucket("mycos",
-            bucket="mycos-1258798060",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_static_website = tencentcloud.cos.Bucket("bucketWithStaticWebsite",
+            bucket=f"bucket-with-static-website-{app_id}",
+            website=tencentcloud.cos.BucketWebsiteArgs(
+                index_document="index.html",
+                error_document="error.html",
+            ))
+        pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
+        ```
+        ### Using CORS
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
+            bucket=f"bucket-with-cors-{app_id}",
+            acl="public-read-write",
+            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
+                allowed_origins=["http://*.abc.com"],
+                allowed_methods=[
+                    "PUT",
+                    "POST",
+                ],
+                allowed_headers=["*"],
+                max_age_seconds=300,
+                expose_headers=["Etag"],
+            )])
+        ```
+        ### Using object lifecycle
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_lifecycle = tencentcloud.cos.Bucket("bucketWithLifecycle",
+            bucket=f"bucket-with-lifecycle-{app_id}",
+            acl="public-read-write",
+            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
+                filter_prefix="path1/",
+                transitions=[tencentcloud.cos.BucketLifecycleRuleTransitionArgs(
+                    days=30,
+                    storage_class="STANDARD_IA",
+                )],
+                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
+                    days=90,
+                ),
+            )])
+        ```
+        ### Using replication
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        uin = info.uin
+        owner_uin = info.owner_uin
+        region = "ap-guangzhou"
+        bucket_replicate = tencentcloud.cos.Bucket("bucketReplicate",
+            bucket=f"bucket-replicate-{app_id}",
             acl="private",
-            log_enable=True,
-            log_target_bucket="mylog-1258798060",
-            log_prefix="MyLogPrefix")
+            versioning_enable=True)
+        bucket_with_replication = tencentcloud.cos.Bucket("bucketWithReplication",
+            bucket=f"bucket-with-replication-{app_id}",
+            acl="private",
+            versioning_enable=True,
+            replica_role=f"qcs::cam::uin/{owner_uin}:uin/{uin}",
+            replica_rules=[tencentcloud.cos.BucketReplicaRuleArgs(
+                id="test-rep1",
+                status="Enabled",
+                prefix="dist",
+                destination_bucket=bucket_replicate.bucket.apply(lambda bucket: f"qcs::cos:{region}::{bucket}"),
+            )])
         ```
 
         ## Import
@@ -1078,32 +1020,42 @@ class Bucket(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="private",
-            bucket="mycos-1258798060")
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        private_sbucket = tencentcloud.cos.Bucket("privateSbucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private")
         ```
         ### Creation of multiple available zone bucket
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mycos = tencentcloud.cos.Bucket("mycos",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        multi_zone_bucket = tencentcloud.cos.Bucket("multiZoneBucket",
+            bucket=f"multi-zone-bucket-{app_id}",
             acl="private",
-            bucket="mycos-1258798060",
-            force_clean=True,
             multi_az=True,
-            versioning_enable=True)
+            versioning_enable=True,
+            force_clean=True)
         ```
         ### Using verbose acl
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        with_acl_body = tencentcloud.cos.Bucket("withAclBody",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_acl = tencentcloud.cos.Bucket("bucketWithAcl",
+            bucket=f"bucketwith-acl-{app_id}",
             acl_body=\"\"\"<AccessControlPolicy>
         	<Owner>
         		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
@@ -1164,166 +1116,98 @@ class Bucket(pulumi.CustomResource):
         		</Grant>
         	</AccessControlList>
         </AccessControlPolicy>
-
-        \"\"\",
-            bucket="mycos-1258798060")
+        \"\"\")
         ```
         ### Static Website
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            bucket="mycos-1258798060",
-            website=tencentcloud.cos.BucketWebsiteArgs(
-                index_document="index.html",
-                error_document="error.html",
-            ))
-        pulumi.export("endpointTest", mycos.website.endpoint)
-        ```
-        ### Using CORS
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="public-read-write",
-            bucket="mycos-1258798060",
-            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
-                allowed_headers=["*"],
-                allowed_methods=[
-                    "PUT",
-                    "POST",
-                ],
-                allowed_origins=["http://*.abc.com"],
-                expose_headers=["Etag"],
-                max_age_seconds=300,
-            )])
-        ```
-        ### Using object lifecycle
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        mycos = tencentcloud.cos.Bucket("mycos",
-            acl="public-read-write",
-            bucket="mycos-1258798060",
-            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
-                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
-                    days=90,
-                ),
-                filter_prefix="path1/",
-                transitions=[tencentcloud.cos.BucketLifecycleRuleTransitionArgs(
-                    date="2019-06-01",
-                    storage_class="STANDARD_IA",
-                )],
-            )])
-        ```
-        ### Using custom origin domain settings
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        with_origin = tencentcloud.cos.Bucket("withOrigin",
-            acl="private",
-            bucket="mycos-1258798060",
-            origin_domain_rules=[tencentcloud.cos.BucketOriginDomainRuleArgs(
-                domain="abc.example.com",
-                status="ENABLE",
-                type="REST",
-            )])
-        ```
-        ### Using origin-pull settings
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        with_origin = tencentcloud.cos.Bucket("withOrigin",
-            acl="private",
-            bucket="mycos-1258798060",
-            origin_pull_rules=[tencentcloud.cos.BucketOriginPullRuleArgs(
-                custom_http_headers={
-                    "x-custom-header": "custom_value",
-                },
-                follow_http_headers=[
-                    "origin",
-                    "host",
-                ],
-                follow_query_string=True,
-                follow_redirection=True,
-                host="abc.example.com",
-                prefix="/",
-                priority=1,
-                protocol="FOLLOW",
-                sync_back_to_source=False,
-            )])
-        ```
-        ### Using replication
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        replica1 = tencentcloud.cos.Bucket("replica1",
-            acl="private",
-            bucket="tf-replica-foo-1234567890",
-            versioning_enable=True)
-        with_replication = tencentcloud.cos.Bucket("withReplication",
-            acl="private",
-            bucket="tf-bucket-replica-1234567890",
-            replica_role="qcs::cam::uin/100000000001:uin/100000000001",
-            replica_rules=[tencentcloud.cos.BucketReplicaRuleArgs(
-                destination_bucket=replica1.bucket.apply(lambda bucket: f"qcs::cos:%s::{bucket}"),
-                id="test-rep1",
-                prefix="dist",
-                status="Enabled",
-            )],
-            versioning_enable=True)
-        ```
-        ### Setting log status
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cos_log_grant_role = tencentcloud.cam.Role("cosLogGrantRole",
-            document=\"\"\"{
-          "version": "2.0",
-          "statement": [
-            {
-              "action": [
-                "name/sts:AssumeRole"
-              ],
-              "effect": "allow",
-              "principal": {
-                "service": [
-                  "cls.cloud.tencent.com"
-                ]
-              }
-            }
-          ]
-        }
-        \"\"\",
-            description="cos log enable grant")
-        cos_access = tencentcloud.Cam.get_policies(name="QcloudCOSAccessForCLSRole")
-        cos_log_grant_role_policy_attachment = tencentcloud.cam.RolePolicyAttachment("cosLogGrantRolePolicyAttachment",
-            role_id=cos_log_grant_role.id,
-            policy_id=cos_access.policy_lists[0].policy_id)
-        mylog = tencentcloud.cos.Bucket("mylog",
-            bucket="mylog-1258798060",
-            acl="private")
-        mycos = tencentcloud.cos.Bucket("mycos",
-            bucket="mycos-1258798060",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_static_website = tencentcloud.cos.Bucket("bucketWithStaticWebsite",
+            bucket=f"bucket-with-static-website-{app_id}",
+            website=tencentcloud.cos.BucketWebsiteArgs(
+                index_document="index.html",
+                error_document="error.html",
+            ))
+        pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
+        ```
+        ### Using CORS
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
+            bucket=f"bucket-with-cors-{app_id}",
+            acl="public-read-write",
+            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
+                allowed_origins=["http://*.abc.com"],
+                allowed_methods=[
+                    "PUT",
+                    "POST",
+                ],
+                allowed_headers=["*"],
+                max_age_seconds=300,
+                expose_headers=["Etag"],
+            )])
+        ```
+        ### Using object lifecycle
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_lifecycle = tencentcloud.cos.Bucket("bucketWithLifecycle",
+            bucket=f"bucket-with-lifecycle-{app_id}",
+            acl="public-read-write",
+            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
+                filter_prefix="path1/",
+                transitions=[tencentcloud.cos.BucketLifecycleRuleTransitionArgs(
+                    days=30,
+                    storage_class="STANDARD_IA",
+                )],
+                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
+                    days=90,
+                ),
+            )])
+        ```
+        ### Using replication
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        uin = info.uin
+        owner_uin = info.owner_uin
+        region = "ap-guangzhou"
+        bucket_replicate = tencentcloud.cos.Bucket("bucketReplicate",
+            bucket=f"bucket-replicate-{app_id}",
             acl="private",
-            log_enable=True,
-            log_target_bucket="mylog-1258798060",
-            log_prefix="MyLogPrefix")
+            versioning_enable=True)
+        bucket_with_replication = tencentcloud.cos.Bucket("bucketWithReplication",
+            bucket=f"bucket-with-replication-{app_id}",
+            acl="private",
+            versioning_enable=True,
+            replica_role=f"qcs::cam::uin/{owner_uin}:uin/{uin}",
+            replica_rules=[tencentcloud.cos.BucketReplicaRuleArgs(
+                id="test-rep1",
+                status="Enabled",
+                prefix="dist",
+                destination_bucket=bucket_replicate.bucket.apply(lambda bucket: f"qcs::cos:{region}::{bucket}"),
+            )])
         ```
 
         ## Import

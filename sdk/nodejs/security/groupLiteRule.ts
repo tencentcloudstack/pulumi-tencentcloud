@@ -7,7 +7,7 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create security group some lite rules quickly.
  *
- * > **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple tencentcloud.Security.GroupRule resources, otherwise it may cause problems.
+ * > **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple tencentcloudSecurityGroupRule resources, otherwise it may cause problems.
  *
  * ## Import
  *

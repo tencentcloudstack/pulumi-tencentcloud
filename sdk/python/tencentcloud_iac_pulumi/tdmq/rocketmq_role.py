@@ -186,13 +186,13 @@ class RocketmqRole(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        role = tencentcloud.tdmq.RocketmqRole("role",
-            role_name="test_rocketmq_role",
-            remark="test rocketmq role",
-            cluster_id=cluster.cluster_id)
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_role = tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            role_name="tf_example",
+            remark="remark.")
         ```
 
         ## Import
@@ -224,13 +224,13 @@ class RocketmqRole(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        role = tencentcloud.tdmq.RocketmqRole("role",
-            role_name="test_rocketmq_role",
-            remark="test rocketmq role",
-            cluster_id=cluster.cluster_id)
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_role = tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            role_name="tf_example",
+            remark="remark.")
         ```
 
         ## Import

@@ -13,34 +13,6 @@ import (
 
 // Provides a resource to create a vpc ipv6SubnetCidrBlock
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewIpv6SubnetCidrBlock(ctx, "ipv6SubnetCidrBlock", &Vpc.Ipv6SubnetCidrBlockArgs{
-// 			Ipv6SubnetCidrBlocks: &vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{
-// 				Ipv6CidrBlock: pulumi.String("2402:4e00:1019:6a7b::/64"),
-// 				SubnetId:      pulumi.String("subnet-plg028y8"),
-// 			},
-// 			VpcId: pulumi.String("vpc-7w3kgnpl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // vpc ipv6_subnet_cidr_block can be imported using the id, e.g.

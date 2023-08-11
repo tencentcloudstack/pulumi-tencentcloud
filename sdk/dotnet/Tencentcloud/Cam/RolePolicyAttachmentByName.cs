@@ -10,12 +10,54 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM role policy attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var camPolicyBasic = config.Get("camPolicyBasic") ?? "keep-cam-policy";
+    ///         var camRoleBasic = config.Get("camRoleBasic") ?? "keep-cam-role";
+    ///         var policy = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
+    ///         {
+    ///             Name = camPolicyBasic,
+    ///         }));
+    ///         var roles = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
+    ///         {
+    ///             Name = camRoleBasic,
+    ///         }));
+    ///         var rolePolicyAttachmentBasic = new Tencentcloud.Cam.RolePolicyAttachmentByName("rolePolicyAttachmentBasic", new Tencentcloud.Cam.RolePolicyAttachmentByNameArgs
+    ///         {
+    ///             RoleName = camRoleBasic,
+    ///             PolicyName = camPolicyBasic,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM role policy attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName")]
     public partial class RolePolicyAttachmentByName : Pulumi.CustomResource
     {
         /// <summary>
-        /// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Output("createMode")]
         public Output<int> CreateMode { get; private set; } = null!;
@@ -111,8 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     public sealed class RolePolicyAttachmentByNameState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Input("createMode")]
         public Input<int>? CreateMode { get; set; }

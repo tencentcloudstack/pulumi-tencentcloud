@@ -22,15 +22,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var cluster = Output.Create(Tencentcloud.Tdmq.GetRocketmqCluster.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqClusterArgs
+        ///         var exampleRocketmqCluster = Output.Create(Tencentcloud.Tdmq.GetRocketmqCluster.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqClusterArgs
         ///         {
-        ///             NameKeyword = "test_rocketmq",
+        ///             NameKeyword = exampleTdmq / rocketmqClusterRocketmqCluster.ClusterName,
         ///         }));
+        ///         var exampleTdmq_rocketmqClusterRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         {
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
         ///     }
         /// 
         /// }
@@ -51,15 +57,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var cluster = Output.Create(Tencentcloud.Tdmq.GetRocketmqCluster.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqClusterArgs
+        ///         var exampleRocketmqCluster = Output.Create(Tencentcloud.Tdmq.GetRocketmqCluster.InvokeAsync(new Tencentcloud.Tdmq.GetRocketmqClusterArgs
         ///         {
-        ///             NameKeyword = "test_rocketmq",
+        ///             NameKeyword = exampleTdmq / rocketmqClusterRocketmqCluster.ClusterName,
         ///         }));
+        ///         var exampleTdmq_rocketmqClusterRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         {
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
         ///     }
         /// 
         /// }

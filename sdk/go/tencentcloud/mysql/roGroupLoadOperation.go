@@ -19,14 +19,99 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRoGroupLoadOperation(ctx, "roGroupLoadOperation", &Mysql.RoGroupLoadOperationArgs{
-// 			RoGroupId: pulumi.String("cdbrg-bdlvcfpj"),
+// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "cdb",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleInstance, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+// 			MysqlId: pulumi.StringRef(exampleMysql / instanceInstance.Id),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zones.Zones[1].Name),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+// 			Description: pulumi.String("mysql test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewInstance(ctx, "exampleMysql/instanceInstance", &Mysql.InstanceArgs{
+// 			InternetService:  pulumi.Int(1),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			ChargeType:       pulumi.String("POSTPAID"),
+// 			RootPassword:     pulumi.String("PassWord123"),
+// 			SlaveDeployMode:  pulumi.Int(0),
+// 			AvailabilityZone: pulumi.String(zones.Zones[1].Name),
+// 			SlaveSyncMode:    pulumi.Int(1),
+// 			InstanceName:     pulumi.String("tf-example-mysql"),
+// 			MemSize:          pulumi.Int(4000),
+// 			VolumeSize:       pulumi.Int(200),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			SecurityGroups: pulumi.StringArray{
+// 				securityGroup.ID(),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			Parameters: pulumi.AnyMap{
+// 				"character_set_server": pulumi.Any("utf8"),
+// 				"max_connections":      pulumi.Any("1000"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Mysql.ReadonlyInstanceArgs{
+// 			MasterInstanceId: exampleMysql / instanceInstance.Id,
+// 			InstanceName:     pulumi.String("tf-mysql"),
+// 			MemSize:          pulumi.Int(2000),
+// 			VolumeSize:       pulumi.Int(200),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			SecurityGroups: pulumi.StringArray{
+// 				securityGroup.ID(),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"createBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewRoGroupLoadOperation(ctx, "roGroupLoadOperation", &Mysql.RoGroupLoadOperationArgs{
+// 			RoGroupId: pulumi.String(exampleInstance.InstanceLists[0].RoGroups[0].GroupId),
 // 		})
 // 		if err != nil {
 // 			return err

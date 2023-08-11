@@ -24,13 +24,42 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewBandwidthPackage(ctx, "bandwidthPackage", &Vpc.BandwidthPackageArgs{
-// 			BandwidthPackageName: pulumi.String("test-001"),
+// 		_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+// 			BandwidthPackageName: pulumi.String("tf-example"),
 // 			ChargeType:           pulumi.String("TOP5_POSTPAID_BY_MONTH"),
 // 			NetworkType:          pulumi.String("BGP"),
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("terraform"),
 // 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### PrePaid Bandwidth Package
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpc.NewBandwidthPackage(ctx, "bandwidthPackage", &Vpc.BandwidthPackageArgs{
+// 			BandwidthPackageName: pulumi.String("test-001"),
+// 			ChargeType:           pulumi.String("FIXED_PREPAID_BY_MONTH"),
+// 			InternetMaxBandwidth: pulumi.Int(100),
+// 			NetworkType:          pulumi.String("BGP"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 			TimeSpan: pulumi.Int(3),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -52,7 +81,7 @@ type BandwidthPackage struct {
 
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrOutput `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrOutput `pulumi:"internetMaxBandwidth"`
@@ -60,6 +89,8 @@ type BandwidthPackage struct {
 	NetworkType pulumi.StringPtrOutput `pulumi:"networkType"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
+	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
 }
 
 // NewBandwidthPackage registers a new resource with the given unique name, arguments, and options.
@@ -94,7 +125,7 @@ func GetBandwidthPackage(ctx *pulumi.Context,
 type bandwidthPackageState struct {
 	// Bandwidth package name.
 	BandwidthPackageName *string `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType *string `pulumi:"chargeType"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth *int `pulumi:"internetMaxBandwidth"`
@@ -102,12 +133,14 @@ type bandwidthPackageState struct {
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+	TimeSpan *int `pulumi:"timeSpan"`
 }
 
 type BandwidthPackageState struct {
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrInput
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrInput
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrInput
@@ -115,6 +148,8 @@ type BandwidthPackageState struct {
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+	TimeSpan pulumi.IntPtrInput
 }
 
 func (BandwidthPackageState) ElementType() reflect.Type {
@@ -124,7 +159,7 @@ func (BandwidthPackageState) ElementType() reflect.Type {
 type bandwidthPackageArgs struct {
 	// Bandwidth package name.
 	BandwidthPackageName *string `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType *string `pulumi:"chargeType"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth *int `pulumi:"internetMaxBandwidth"`
@@ -132,13 +167,15 @@ type bandwidthPackageArgs struct {
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+	TimeSpan *int `pulumi:"timeSpan"`
 }
 
 // The set of arguments for constructing a BandwidthPackage resource.
 type BandwidthPackageArgs struct {
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrInput
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrInput
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrInput
@@ -146,6 +183,8 @@ type BandwidthPackageArgs struct {
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+	TimeSpan pulumi.IntPtrInput
 }
 
 func (BandwidthPackageArgs) ElementType() reflect.Type {
@@ -240,7 +279,7 @@ func (o BandwidthPackageOutput) BandwidthPackageName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringPtrOutput { return v.BandwidthPackageName }).(pulumi.StringPtrOutput)
 }
 
-// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 func (o BandwidthPackageOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
@@ -258,6 +297,11 @@ func (o BandwidthPackageOutput) NetworkType() pulumi.StringPtrOutput {
 // Tag description list.
 func (o BandwidthPackageOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
+}
+
+// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+func (o BandwidthPackageOutput) TimeSpan() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BandwidthPackage) pulumi.IntPtrOutput { return v.TimeSpan }).(pulumi.IntPtrOutput)
 }
 
 type BandwidthPackageArrayOutput struct{ *pulumi.OutputState }

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dbCharsets = pulumi.output(tencentcloud.Sqlserver.getDbCharsets({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getDbCharsets({
  *     instanceId: "mssql-qelbzgwf",
  * }));
  * ```

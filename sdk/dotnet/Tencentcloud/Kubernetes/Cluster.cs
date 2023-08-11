@@ -19,6 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
     /// 
     /// ## Example Usage
+    /// ### Create a basic cluster with two worker nodes
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -30,29 +31,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     public MyStack()
     ///     {
     ///         var config = new Config();
+    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
     ///         var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
     ///         var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
-    ///         var clusterCidr = config.Get("clusterCidr") ?? "10.31.0.0/16";
-    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
-    ///         var vpcFirst = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///         var vpcOne = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
     ///         {
     ///             IsDefault = true,
     ///             AvailabilityZone = availabilityZoneFirst,
     ///         }));
-    ///         var vpcSecond = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         var firstVpcId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.VpcId);
+    ///         var firstSubnetId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.SubnetId);
+    ///         var vpcTwo = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
     ///         {
     ///             IsDefault = true,
     ///             AvailabilityZone = availabilityZoneSecond,
     ///         }));
-    ///         var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         var secondVpcId = vpcTwo.Apply(vpcTwo =&gt; vpcTwo.InstanceLists?[0]?.VpcId);
+    ///         var secondSubnetId = vpcTwo.Apply(vpcTwo =&gt; vpcTwo.InstanceLists?[0]?.SubnetId);
+    ///         var sg = new Tencentcloud.Security.Group("sg", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             VpcId = vpcFirst.Apply(vpcFirst =&gt; vpcFirst.InstanceLists?[0]?.VpcId),
-    ///             ClusterCidr = clusterCidr,
+    ///         });
+    ///         var sgId = sg.Id;
+    ///         var @default = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             ImageNameRegex = "Final",
+    ///         }));
+    ///         var imageId = @default.Apply(@default =&gt; @default.ImageId);
+    ///         var sgRule = new Tencentcloud.Security.GroupLiteRule("sgRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = sg.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#10.0.0.0/16#ALL#ALL",
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var example = new Tencentcloud.Kubernetes.Cluster("example", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = firstVpcId,
+    ///             ClusterCidr = exampleClusterCidr,
     ///             ClusterMaxPodNum = 32,
-    ///             ClusterName = "test",
-    ///             ClusterDesc = "test cluster desc",
+    ///             ClusterName = "tf_example_cluster",
+    ///             ClusterDesc = "example for tke cluster",
     ///             ClusterMaxServiceNum = 32,
-    ///             ClusterInternet = true,
+    ///             ClusterInternet = false,
+    ///             ClusterInternetSecurityGroup = sgId,
+    ///             ClusterVersion = "1.22.5",
     ///             ClusterDeployType = "MANAGED_CLUSTER",
     ///             WorkerConfigs = 
     ///             {
@@ -66,8 +100,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
     ///                     InternetMaxBandwidthOut = 100,
     ///                     PublicIpAssigned = true,
-    ///                     SubnetId = vpcFirst.Apply(vpcFirst =&gt; vpcFirst.InstanceLists?[0]?.SubnetId),
-    ///                     ImgId = "img-rkiynh11",
+    ///                     SubnetId = firstSubnetId,
+    ///                     ImgId = imageId,
     ///                     DataDisks = 
     ///                     {
     ///                         new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
@@ -79,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     EnhancedSecurityService = false,
     ///                     EnhancedMonitorService = false,
     ///                     UserData = "dGVzdA==",
-    ///                     KeyIds = "skey-11112222",
+    ///                     Password = "ZZXXccvv1212",
     ///                 },
     ///                 new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
     ///                 {
@@ -91,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
     ///                     InternetMaxBandwidthOut = 100,
     ///                     PublicIpAssigned = true,
-    ///                     SubnetId = vpcSecond.Apply(vpcSecond =&gt; vpcSecond.InstanceLists?[0]?.SubnetId),
+    ///                     SubnetId = secondSubnetId,
     ///                     DataDisks = 
     ///                     {
     ///                         new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
@@ -103,7 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     EnhancedSecurityService = false,
     ///                     EnhancedMonitorService = false,
     ///                     UserData = "dGVzdA==",
-    ///                     KeyIds = "skey-11112222",
+    ///                     KeyIds = 
+    ///                     {
+    ///                         "skey-11112222",
+    ///                     },
     ///                     CamRoleName = "CVM_QcsRole",
     ///                 },
     ///             },
@@ -129,29 +166,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     public MyStack()
     ///     {
     ///         var config = new Config();
+    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
     ///         var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
     ///         var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
-    ///         var clusterCidr = config.Get("clusterCidr") ?? "10.31.0.0/16";
-    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
-    ///         var vpcFirst = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///         var vpcOne = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
     ///         {
     ///             IsDefault = true,
     ///             AvailabilityZone = availabilityZoneFirst,
     ///         }));
-    ///         var vpcSecond = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         var firstVpcId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.VpcId);
+    ///         var firstSubnetId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.SubnetId);
+    ///         var vpcTwo = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
     ///         {
     ///             IsDefault = true,
     ///             AvailabilityZone = availabilityZoneSecond,
     ///         }));
-    ///         var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         var secondVpcId = vpcTwo.Apply(vpcTwo =&gt; vpcTwo.InstanceLists?[0]?.VpcId);
+    ///         var secondSubnetId = vpcTwo.Apply(vpcTwo =&gt; vpcTwo.InstanceLists?[0]?.SubnetId);
+    ///         var sg = new Tencentcloud.Security.Group("sg", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             VpcId = vpcFirst.Apply(vpcFirst =&gt; vpcFirst.InstanceLists?[0]?.VpcId),
-    ///             ClusterCidr = clusterCidr,
+    ///         });
+    ///         var sgId = sg.Id;
+    ///         var @default = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             ImageNameRegex = "Final",
+    ///         }));
+    ///         var imageId = @default.Apply(@default =&gt; @default.ImageId);
+    ///         var sgRule = new Tencentcloud.Security.GroupLiteRule("sgRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = sg.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#10.0.0.0/16#ALL#ALL",
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var example = new Tencentcloud.Kubernetes.Cluster("example", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = firstVpcId,
+    ///             ClusterCidr = exampleClusterCidr,
     ///             ClusterMaxPodNum = 32,
-    ///             ClusterName = "test",
-    ///             ClusterDesc = "test cluster desc",
+    ///             ClusterName = "tf_example_cluster",
+    ///             ClusterDesc = "example for tke cluster",
     ///             ClusterMaxServiceNum = 32,
-    ///             ClusterInternet = true,
+    ///             ClusterInternet = false,
+    ///             ClusterInternetSecurityGroup = sgId,
+    ///             ClusterVersion = "1.22.5",
     ///             ClusterDeployType = "MANAGED_CLUSTER",
     ///             WorkerConfigs = 
     ///             {
@@ -165,19 +235,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
     ///                     InternetMaxBandwidthOut = 100,
     ///                     PublicIpAssigned = true,
-    ///                     SubnetId = vpcFirst.Apply(vpcFirst =&gt; vpcFirst.InstanceLists?[0]?.SubnetId),
+    ///                     SubnetId = firstSubnetId,
+    ///                     ImgId = imageId,
     ///                     DataDisks = 
     ///                     {
     ///                         new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
     ///                         {
     ///                             DiskType = "CLOUD_PREMIUM",
     ///                             DiskSize = 50,
+    ///                             Encrypt = false,
     ///                         },
     ///                     },
     ///                     EnhancedSecurityService = false,
     ///                     EnhancedMonitorService = false,
     ///                     UserData = "dGVzdA==",
-    ///                     KeyIds = "skey-11112222",
+    ///                     DisasterRecoverGroupIds = {},
+    ///                     SecurityGroupIds = {},
+    ///                     KeyIds = {},
+    ///                     Password = "ZZXXccvv1212",
     ///                 },
     ///                 new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
     ///                 {
@@ -189,7 +264,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
     ///                     InternetMaxBandwidthOut = 100,
     ///                     PublicIpAssigned = true,
-    ///                     SubnetId = vpcSecond.Apply(vpcSecond =&gt; vpcSecond.InstanceLists?[0]?.SubnetId),
+    ///                     SubnetId = secondSubnetId,
     ///                     DataDisks = 
     ///                     {
     ///                         new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
@@ -201,8 +276,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                     EnhancedSecurityService = false,
     ///                     EnhancedMonitorService = false,
     ///                     UserData = "dGVzdA==",
+    ///                     DisasterRecoverGroupIds = {},
+    ///                     SecurityGroupIds = {},
+    ///                     KeyIds = {},
     ///                     CamRoleName = "CVM_QcsRole",
-    ///                     KeyIds = "skey-11112222",
+    ///                     Password = "ZZXXccvv1212",
     ///                 },
     ///             },
     ///             Labels = 
@@ -378,13 +456,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///             {
     ///                 Enabled = true,
     ///                 LogSetId = "",
-    ///                 LogSetTopic = "",
+    ///                 TopicId = "",
     ///             },
     ///             EventPersistence = new Tencentcloud.Kubernetes.Inputs.ClusterEventPersistenceArgs
     ///             {
     ///                 Enabled = true,
     ///                 LogSetId = "",
-    ///                 LogSetTopic = "",
+    ///                 TopicId = "",
     ///             },
     ///             LogAgent = new Tencentcloud.Kubernetes.Inputs.ClusterLogAgentArgs
     ///             {

@@ -10,29 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Use this data source to query detailed information of teo securityPolicyRegions
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.GetSecurityPolicyRegions(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetSecurityPolicyRegions(ctx *pulumi.Context, args *GetSecurityPolicyRegionsArgs, opts ...pulumi.InvokeOption) (*GetSecurityPolicyRegionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetSecurityPolicyRegionsResult
@@ -45,13 +22,11 @@ func GetSecurityPolicyRegions(ctx *pulumi.Context, args *GetSecurityPolicyRegion
 
 // A collection of arguments for invoking getSecurityPolicyRegions.
 type GetSecurityPolicyRegionsArgs struct {
-	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 }
 
 // A collection of values returned by getSecurityPolicyRegions.
 type GetSecurityPolicyRegionsResult struct {
-	// Region info.
 	GeoIps []GetSecurityPolicyRegionsGeoIp `pulumi:"geoIps"`
 	// The provider-assigned unique ID for this managed resource.
 	Id               string  `pulumi:"id"`
@@ -73,7 +48,6 @@ func GetSecurityPolicyRegionsOutput(ctx *pulumi.Context, args GetSecurityPolicyR
 
 // A collection of arguments for invoking getSecurityPolicyRegions.
 type GetSecurityPolicyRegionsOutputArgs struct {
-	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 }
 
@@ -96,7 +70,6 @@ func (o GetSecurityPolicyRegionsResultOutput) ToGetSecurityPolicyRegionsResultOu
 	return o
 }
 
-// Region info.
 func (o GetSecurityPolicyRegionsResultOutput) GeoIps() GetSecurityPolicyRegionsGeoIpArrayOutput {
 	return o.ApplyT(func(v GetSecurityPolicyRegionsResult) []GetSecurityPolicyRegionsGeoIp { return v.GeoIps }).(GetSecurityPolicyRegionsGeoIpArrayOutput)
 }

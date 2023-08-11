@@ -10,6 +10,52 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM policy.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.PolicyByName("foo", new Tencentcloud.Cam.PolicyByNameArgs
+    ///         {
+    ///             Description = "tf_test",
+    ///             Document = @"{
+    ///   ""version"": ""2.0"",
+    ///   ""statement"": [
+    ///     {
+    ///       ""action"": [
+    ///         ""name/sts:AssumeRole""
+    ///       ],
+    ///       ""effect"": ""allow"",
+    ///       ""resource"": [
+    ///         ""*""
+    ///       ]
+    ///     }
+    ///   ]
+    /// }
+    /// 
+    /// ",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM policy can be imported using the name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/policyByName:PolicyByName")]
     public partial class PolicyByName : Pulumi.CustomResource
     {
@@ -41,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         /// </summary>
         [Output("type")]
         public Output<int> Type { get; private set; } = null!;
@@ -155,7 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         /// </summary>
         [Input("type")]
         public Input<int>? Type { get; set; }

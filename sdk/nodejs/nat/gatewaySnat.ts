@@ -7,6 +7,96 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a NAT Gateway SNat rule.
  *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "nat",
+ * });
+ * const image = tencentcloud.Images.getInstance({
+ *     osName: "centos",
+ * });
+ * const instanceTypes = zones.then(zones => tencentcloud.Instance.getTypes({
+ *     filters: [
+ *         {
+ *             name: "zone",
+ *             values: [zones.zones?[0]?.name],
+ *         },
+ *         {
+ *             name: "instance-family",
+ *             values: ["S5"],
+ *         },
+ *     ],
+ *     cpuCoreCount: 2,
+ *     excludeSoldOut: true,
+ * }));
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // Create route_table and entry
+ * const routeTable = new tencentcloud.route.Table("routeTable", {vpcId: vpc.id});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     routeTableId: routeTable.id,
+ * });
+ * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
+ * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+ * // Create NAT Gateway
+ * const myNat = new tencentcloud.nat.Gateway("myNat", {
+ *     vpcId: vpc.id,
+ *     maxConcurrent: 3000000,
+ *     bandwidth: 500,
+ *     assignedEipSets: [
+ *         eipExample1.publicIp,
+ *         eipExample2.publicIp,
+ *     ],
+ * });
+ * const routeEntry = new tencentcloud.route.TableEntry("routeEntry", {
+ *     routeTableId: routeTable.id,
+ *     destinationCidrBlock: "10.0.0.0/8",
+ *     nextType: "NAT",
+ *     nextHub: myNat.id,
+ * });
+ * // Subnet Nat gateway snat
+ * const subnetSnat = new tencentcloud.nat.GatewaySnat("subnetSnat", {
+ *     natGatewayId: myNat.id,
+ *     resourceType: "SUBNET",
+ *     subnetId: subnet.id,
+ *     subnetCidrBlock: subnet.cidrBlock,
+ *     description: "terraform test",
+ *     publicIpAddrs: [
+ *         eipExample1.publicIp,
+ *         eipExample2.publicIp,
+ *     ],
+ * });
+ * // Create instance
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?[0]?.instanceType),
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * // NetWorkInterface Nat gateway snat
+ * const myInstanceSnat = new tencentcloud.nat.GatewaySnat("myInstanceSnat", {
+ *     natGatewayId: myNat.id,
+ *     resourceType: "NETWORKINTERFACE",
+ *     instanceId: example.id,
+ *     instancePrivateIpAddr: example.privateIp,
+ *     description: "terraform test",
+ *     publicIpAddrs: [eipExample1.publicIp],
+ * });
+ * ```
+ *
  * ## Import
  *
  * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat

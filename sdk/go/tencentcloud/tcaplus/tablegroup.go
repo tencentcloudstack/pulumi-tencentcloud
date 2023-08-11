@@ -14,31 +14,49 @@ import (
 // Use this resource to create TcaplusDB table group.
 //
 // ## Example Usage
+// ### Create a tcaplusdb table group
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpcId := vpc.InstanceLists[0].VpcId
+// 		subnetId := vpc.InstanceLists[0].SubnetId
+// 		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
 // 			IdlType:               pulumi.String("PROTO"),
-// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
-// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
-// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
-// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+// 			VpcId:                 pulumi.String(vpcId),
+// 			SubnetId:              pulumi.String(subnetId),
+// 			Password:              pulumi.String("your_pw_123111"),
 // 			OldPasswordExpireLast: pulumi.Int(3600),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
-// 			ClusterId:      test.ID(),
-// 			TablegroupName: pulumi.String("tf_test_group_name"),
+// 		_, err = Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
+// 			ClusterId:      exampleCluster.ID(),
+// 			TablegroupName: pulumi.String("tf_example_group_name"),
 // 		})
 // 		if err != nil {
 // 			return err

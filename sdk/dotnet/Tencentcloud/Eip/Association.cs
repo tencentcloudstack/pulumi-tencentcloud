@@ -17,44 +17,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// ## Example Usage
     /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = new Tencentcloud.Eip.Association("foo", new Tencentcloud.Eip.AssociationArgs
-    ///         {
-    ///             EipId = "eip-xxxxxx",
-    ///             InstanceId = "ins-xxxxxx",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### or
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var bar = new Tencentcloud.Eip.Association("bar", new Tencentcloud.Eip.AssociationArgs
-    ///         {
-    ///             EipId = "eip-xxxxxx",
-    ///             NetworkInterfaceId = "eni-xxxxxx",
-    ///             PrivateIp = "10.0.1.22",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// Eip association can be imported using the id, e.g.

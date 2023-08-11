@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provide a resource to create a VPC.
     /// 
     /// ## Example Usage
+    /// ### Create a basic VPC
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
     ///             CidrBlock = "10.0.0.0/16",
     ///             DnsServers = 
@@ -51,7 +52,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
     ///             AssistantCidrs = 
     ///             {

@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigRateLimitConfig
     {
-        /// <summary>
-        /// Intelligent client filter.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigRateLimitConfigIntelligence? Intelligence;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
-        /// <summary>
-        /// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigRateLimitConfigTemplate? Template;
-        /// <summary>
-        /// Custom configuration.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigRateLimitConfigUserRule> UserRules;
 
         [OutputConstructor]

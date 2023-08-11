@@ -8,15 +8,61 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc resumeSnapshotInstance
  *
  * ## Example Usage
+ * ### Basic example
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const resumeSnapshotInstance = new tencentcloud.Vpc.ResumeSnapshotInstance("resume_snapshot_instance", {
- *     instanceId: "policy-1t6cob",
- *     snapshotFileId: "ssfile-test",
+ *     instanceId: "ntrgm89v",
+ *     snapshotFileId: "ssfile-emtabuwu2z",
  *     snapshotPolicyId: "sspolicy-1t6cobbv",
+ * });
+ * ```
+ * ### Complete example
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleSnapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
+ *     businessType: "securitygroup",
+ *     instanceId: "sg-902tl7t7",
+ *     startDate: "2022-10-10 00:00:00",
+ *     endDate: "2023-10-30 00:00:00",
+ * });
+ * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
+ *     bucket: "tf-example-1308919341",
+ *     acl: "private",
+ * });
+ * const exampleSnapshotPolicy = new tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy", {
+ *     snapshotPolicyName: "tf-example",
+ *     backupType: "time",
+ *     cosBucket: exampleBucket.bucket,
+ *     cosRegion: "ap-guangzhou",
+ *     createNewCos: false,
+ *     keepTime: 2,
+ *     backupPolicies: [
+ *         {
+ *             backupDay: "monday",
+ *             backupTime: "00:00:00",
+ *         },
+ *         {
+ *             backupDay: "tuesday",
+ *             backupTime: "01:00:00",
+ *         },
+ *         {
+ *             backupDay: "wednesday",
+ *             backupTime: "02:00:00",
+ *         },
+ *     ],
+ * });
+ * const exampleResumeSnapshotInstance = new tencentcloud.vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance", {
+ *     snapshotPolicyId: exampleSnapshotPolicy.id,
+ *     snapshotFileId: exampleSnapshotFiles.then(exampleSnapshotFiles => exampleSnapshotFiles.snapshotFileSets?[0]?.snapshotFileId),
+ *     instanceId: "policy-1t6cob",
  * });
  * ```
  */

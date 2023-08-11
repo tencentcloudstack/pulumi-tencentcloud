@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a redis backupDownloadRestriction
 //
 // ## Example Usage
+// ### Modify the network information and address of the current region backup file download
 //
 // ```go
 // package main
@@ -26,7 +27,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewBackupDownloadRestriction(ctx, "backupDownloadRestriction", &Redis.BackupDownloadRestrictionArgs{
+// 		_, err := Redis.NewBackupDownloadRestriction(ctx, "foo", &Redis.BackupDownloadRestrictionArgs{
 // 			LimitType:           pulumi.String("Customize"),
 // 			VpcComparisonSymbol: pulumi.String("In"),
 // 			IpComparisonSymbol:  pulumi.String("In"),
@@ -53,10 +54,10 @@ import (
 //
 // ## Import
 //
-// redis backup_download_restriction can be imported using the id, e.g.
+// redis backup_download_restriction can be imported using the region, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction backup_download_restriction_id
+//  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
 // ```
 type BackupDownloadRestriction struct {
 	pulumi.CustomResourceState

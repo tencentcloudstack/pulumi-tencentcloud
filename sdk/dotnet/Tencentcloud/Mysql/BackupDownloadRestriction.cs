@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// {
     ///     public MyStack()
     ///     {
-    ///         var backupDownloadRestriction = new Tencentcloud.Mysql.BackupDownloadRestriction("backupDownloadRestriction", new Tencentcloud.Mysql.BackupDownloadRestrictionArgs
+    ///         var example = new Tencentcloud.Mysql.BackupDownloadRestriction("example", new Tencentcloud.Mysql.BackupDownloadRestrictionArgs
     ///         {
     ///             IpComparisonSymbol = "In",
     ///             LimitIps = 

@@ -299,18 +299,32 @@ class VpcAttachment(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+        Use this resource to attach tcr instance with the vpc and subnet network.
 
         ## Example Usage
+        ### Attach a tcr instance with vpc resource
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=var["availability_zone"])
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example = tencentcloud.tcr.Instance("example",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        tcr_id = example.id
+        sg = tencentcloud.Security.get_groups(name="default")
         foo = tencentcloud.tcr.VpcAttachment("foo",
-            instance_id="cls-satg5125",
-            subnet_id="subnet-1uwh63so",
-            vpc_id="vpc-asg3sfa3")
+            instance_id=tcr_id,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id)
         ```
 
         ## Import
@@ -318,7 +332,7 @@ class VpcAttachment(pulumi.CustomResource):
         tcr vpc attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -338,18 +352,32 @@ class VpcAttachment(pulumi.CustomResource):
                  args: VpcAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+        Use this resource to attach tcr instance with the vpc and subnet network.
 
         ## Example Usage
+        ### Attach a tcr instance with vpc resource
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=var["availability_zone"])
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example = tencentcloud.tcr.Instance("example",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        tcr_id = example.id
+        sg = tencentcloud.Security.get_groups(name="default")
         foo = tencentcloud.tcr.VpcAttachment("foo",
-            instance_id="cls-satg5125",
-            subnet_id="subnet-1uwh63so",
-            vpc_id="vpc-asg3sfa3")
+            instance_id=tcr_id,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id)
         ```
 
         ## Import
@@ -357,7 +385,7 @@ class VpcAttachment(pulumi.CustomResource):
         tcr vpc attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+         $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
         ```
 
         :param str resource_name: The name of the resource.

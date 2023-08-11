@@ -12,21 +12,31 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const businessIntelligenceInstance = new tencentcloud.Sqlserver.BusinessIntelligenceInstance("business_intelligence_instance", {
- *     cpu: 2,
- *     dbVersion: "201603",
- *     instanceName: "create_db_name",
- *     machineType: "CLOUD_PREMIUM",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const example = new tencentcloud.sqlserver.BusinessIntelligenceInstance("example", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
  *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
  *     projectId: 0,
- *     securityGroupLists: [],
- *     span: 6,
- *     startTime: "00:00",
- *     storage: 20,
- *     subnetId: "subnet-dwj7ipnc",
- *     vpcId: "vpc-4owdpnwr",
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "201603",
+ *     securityGroupLists: [securityGroup.id],
  *     weeklies: [
  *         1,
  *         2,
@@ -36,7 +46,9 @@ import * as utilities from "../utilities";
  *         6,
  *         7,
  *     ],
- *     zone: "ap-guangzhou-6",
+ *     startTime: "00:00",
+ *     span: 6,
+ *     instanceName: "tf_example",
  * });
  * ```
  *
@@ -45,7 +57,7 @@ import * as utilities from "../utilities";
  * sqlserver business_intelligence_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance business_intelligence_instance business_intelligence_instance_id
+ *  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
  * ```
  */
 export class BusinessIntelligenceInstance extends pulumi.CustomResource {

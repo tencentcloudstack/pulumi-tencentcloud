@@ -6,24 +6,25 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr webhookTrigger
+ * Provides a resource to create a tcr webhook trigger
  *
  * ## Example Usage
+ * ### Create a tcr webhook trigger instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mytcrWebhooktrigger = new tencentcloud.tcr.Instance("mytcrWebhooktrigger", {
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "basic",
  *     deleteBucket: true,
  *     tags: {
  *         test: "test",
  *     },
  * });
- * const myNs = new tencentcloud.tcr.Namespace("myNs", {
- *     instanceId: mytcrWebhooktrigger.id,
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
  *     isPublic: true,
  *     isAutoScan: true,
  *     isPreventVul: true,
@@ -32,15 +33,15 @@ import * as utilities from "../utilities";
  *         cveId: "cve-xxxxx",
  *     }],
  * });
- * const idTest = tencentcloud.Tcr.getNamespacesOutput({
- *     instanceId: myNs.instanceId,
+ * const exampleNamespaces = tencentcloud.Tcr.getNamespacesOutput({
+ *     instanceId: exampleNamespace.instanceId,
  * });
- * const nsId = idTest.apply(idTest => idTest.namespaceLists?[0]?.id);
- * const myTrigger = new tencentcloud.tcr.WebhookTrigger("myTrigger", {
- *     registryId: mytcrWebhooktrigger.id,
- *     namespace: myNs.name,
+ * const nsId = exampleNamespaces.apply(exampleNamespaces => exampleNamespaces.namespaceLists?[0]?.id);
+ * const exampleWebhookTrigger = new tencentcloud.tcr.WebhookTrigger("exampleWebhookTrigger", {
+ *     registryId: exampleInstance.id,
+ *     namespace: exampleNamespace.name,
  *     trigger: {
- *         name: `trigger-%s`,
+ *         name: "trigger-example",
  *         targets: [{
  *             address: "http://example.org/post",
  *             headers: [{
@@ -51,7 +52,7 @@ import * as utilities from "../utilities";
  *         eventTypes: ["pushImage"],
  *         condition: ".*",
  *         enabled: true,
- *         description: "this is trigger description",
+ *         description: "example for trigger description",
  *         namespaceId: nsId,
  *     },
  *     tags: {
@@ -65,7 +66,7 @@ import * as utilities from "../utilities";
  * tcr webhook_trigger can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger webhook_trigger webhook_trigger_id
+ *  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
  * ```
  */
 export class WebhookTrigger extends pulumi.CustomResource {

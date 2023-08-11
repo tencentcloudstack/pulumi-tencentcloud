@@ -13,15 +13,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// Bot label, valid values: `evil_bot`, `suspect_bot`, `good_bot`, `normal`.
-        /// </summary>
         [Input("label")]
         public Input<string>? Label { get; set; }
 

@@ -275,6 +275,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<ImmutableArray<string>> ClbVips { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable delete protection.
+        /// </summary>
+        [Output("deleteProtect")]
+        public Output<bool?> DeleteProtect { get; private set; } = null!;
+
+        /// <summary>
         /// Domain name of the CLB instance.
         /// </summary>
         [Output("domain")]
@@ -466,6 +472,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ClbName { get; set; } = null!;
 
         /// <summary>
+        /// Whether to enable delete protection.
+        /// </summary>
+        [Input("deleteProtect")]
+        public Input<bool>? DeleteProtect { get; set; }
+
+        /// <summary>
         /// If create dynamic vip CLB instance, `true` or `false`.
         /// </summary>
         [Input("dynamicVip")]
@@ -633,6 +645,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             get => _clbVips ?? (_clbVips = new InputList<string>());
             set => _clbVips = value;
         }
+
+        /// <summary>
+        /// Whether to enable delete protection.
+        /// </summary>
+        [Input("deleteProtect")]
+        public Input<bool>? DeleteProtect { get; set; }
 
         /// <summary>
         /// Domain name of the CLB instance.

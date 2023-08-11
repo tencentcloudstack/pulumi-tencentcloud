@@ -13,15 +13,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
-        /// <summary>
-        /// Valid values: `block`, `allow`.
-        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 

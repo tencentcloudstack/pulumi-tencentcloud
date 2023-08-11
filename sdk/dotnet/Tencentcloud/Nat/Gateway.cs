@@ -14,41 +14,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// Provides a resource to create a NAT gateway.
     /// 
     /// ## Example Usage
+    /// ### Create a NAT gateway.
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync(new Tencentcloud.Vpc.GetInstancesArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             Name = "Default-VPC",
-    ///         }));
-    ///         // Create EIP
-    ///         var eipDevDnat = new Tencentcloud.Eip.Instance("eipDevDnat", new Tencentcloud.Eip.InstanceArgs
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1", new Tencentcloud.Eip.InstanceArgs
     ///         {
     ///         });
-    ///         var newEip = new Tencentcloud.Eip.Instance("newEip", new Tencentcloud.Eip.InstanceArgs
+    ///         var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2", new Tencentcloud.Eip.InstanceArgs
     ///         {
     ///         });
-    ///         var myNat = new Tencentcloud.Nat.Gateway("myNat", new Tencentcloud.Nat.GatewayArgs
+    ///         var example = new Tencentcloud.Nat.Gateway("example", new Tencentcloud.Nat.GatewayArgs
     ///         {
-    ///             VpcId = foo.Apply(foo =&gt; foo.InstanceLists?[0]?.VpcId),
-    ///             MaxConcurrent = 10000000,
-    ///             Bandwidth = 1000,
-    ///             Zone = "ap-guangzhou-3",
+    ///             VpcId = vpc.Id,
+    ///             Bandwidth = 100,
+    ///             MaxConcurrent = 1000000,
     ///             AssignedEipSets = 
     ///             {
-    ///                 eipDevDnat.PublicIp,
-    ///                 newEip.PublicIp,
+    ///                 eipExample1.PublicIp,
+    ///                 eipExample2.PublicIp,
     ///             },
     ///             Tags = 
     ///             {
-    ///                 { "tf", "test" },
+    ///                 { "tf_tag_key", "tf_tag_value" },
     ///             },
     ///         });
     ///     }

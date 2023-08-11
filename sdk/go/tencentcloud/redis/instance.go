@@ -18,6 +18,7 @@ import (
 // > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 //
 // ## Example Usage
+// ### Create a base version of redis
 //
 // ```go
 // package main
@@ -26,15 +27,33 @@ import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, nil, nil)
+// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+// 			TypeId: pulumi.IntRef(7),
+// 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Redis.NewInstance(ctx, "redisInstanceTest2", &Redis.InstanceArgs{
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
 // 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
 // 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
 // 			Password:         pulumi.String("test12345789"),
@@ -42,6 +61,175 @@ import (
 // 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
 // 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
 // 			Port:             pulumi.Int(6379),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Buy a month of prepaid instances
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+// 			TypeId: pulumi.IntRef(7),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+// 			SecurityGroupId: fooGroup.ID(),
+// 			Ingresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+// 			},
+// 			Egresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+// 			Password:         pulumi.String("test12345789"),
+// 			MemSize:          pulumi.Int(8192),
+// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+// 			Port:             pulumi.Int(6379),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			SecurityGroups: pulumi.StringArray{
+// 				fooGroup.ID(),
+// 			},
+// 			ChargeType:    pulumi.String("PREPAID"),
+// 			PrepaidPeriod: pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Create a multi-AZ instance
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+// 			TypeId: pulumi.IntRef(7),
+// 			Region: pulumi.StringRef("ap-guangzhou"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		cfg := config.New(ctx, "")
+// 		replicaZoneIds := []float64{
+// 			100004,
+// 			100006,
+// 		}
+// 		if param := cfg.GetBool("replicaZoneIds"); param != nil {
+// 			replicaZoneIds = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+// 			SecurityGroupId: fooGroup.ID(),
+// 			Ingresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+// 			},
+// 			Egresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+// 			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
+// 			Password:         pulumi.String("test12345789"),
+// 			MemSize:          pulumi.Int(8192),
+// 			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
+// 			RedisReplicasNum: pulumi.Int(2),
+// 			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
+// 			Port:             pulumi.Int(6379),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			SecurityGroups: pulumi.StringArray{
+// 				fooGroup.ID(),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -95,7 +283,7 @@ type Instance struct {
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrOutput `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrOutput `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntOutput `pulumi:"redisShardNum"`
@@ -191,7 +379,7 @@ type instanceState struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum *int `pulumi:"redisShardNum"`
@@ -252,7 +440,7 @@ type InstanceState struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntPtrInput
@@ -313,7 +501,7 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum *int `pulumi:"redisShardNum"`
@@ -369,7 +557,7 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 	RedisReplicasNum pulumi.IntPtrInput
 	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
 	RedisShardNum pulumi.IntPtrInput
@@ -565,7 +753,7 @@ func (o InstanceOutput) Recycle() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Recycle }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
 func (o InstanceOutput) RedisReplicasNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RedisReplicasNum }).(pulumi.IntPtrOutput)
 }

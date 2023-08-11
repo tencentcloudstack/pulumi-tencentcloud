@@ -930,41 +930,47 @@ class ScalingConfig(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
-            configuration_name="launch-configuration",
-            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
-                disk_size=50,
-                disk_type="CLOUD_PREMIUM",
-            )],
-            enhanced_monitor_service=False,
-            enhanced_security_service=False,
-            image_id="img-9qabwvbn",
-            instance_tags={
-                "tag": "as",
-            },
+        example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="example-launch-configuration",
+            image_id=example_instance.images[0].image_id,
             instance_types=["SA1.SMALL1"],
+            project_id=0,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
+                disk_type="CLOUD_PREMIUM",
+                disk_size=50,
+            )],
             internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
             internet_max_bandwidth_out=10,
-            password="test123#",
-            project_id=0,
             public_ip_assigned=True,
-            system_disk_size=50,
-            system_disk_type="CLOUD_PREMIUM",
-            user_data="dGVzdA==")
+            password="Test@123#",
+            enhanced_security_service=False,
+            enhanced_monitor_service=False,
+            user_data="dGVzdA==",
+            instance_tags={
+                "tag": "example",
+            })
         ```
-        ### Using SPOT charge type
+        ### charge type
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+        example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
             configuration_name="launch-configuration",
-            image_id="img-9qabwvbn",
-            instance_charge_type="SPOTPAID",
+            image_id=example_instance.images[0].image_id,
             instance_types=["SA1.SMALL1"],
+            instance_charge_type="SPOTPAID",
             spot_instance_type="one-time",
             spot_max_price="1000")
         ```
@@ -1021,41 +1027,47 @@ class ScalingConfig(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
-            configuration_name="launch-configuration",
-            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
-                disk_size=50,
-                disk_type="CLOUD_PREMIUM",
-            )],
-            enhanced_monitor_service=False,
-            enhanced_security_service=False,
-            image_id="img-9qabwvbn",
-            instance_tags={
-                "tag": "as",
-            },
+        example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="example-launch-configuration",
+            image_id=example_instance.images[0].image_id,
             instance_types=["SA1.SMALL1"],
+            project_id=0,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            data_disks=[tencentcloud.as..ScalingConfigDataDiskArgs(
+                disk_type="CLOUD_PREMIUM",
+                disk_size=50,
+            )],
             internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
             internet_max_bandwidth_out=10,
-            password="test123#",
-            project_id=0,
             public_ip_assigned=True,
-            system_disk_size=50,
-            system_disk_type="CLOUD_PREMIUM",
-            user_data="dGVzdA==")
+            password="Test@123#",
+            enhanced_security_service=False,
+            enhanced_monitor_service=False,
+            user_data="dGVzdA==",
+            instance_tags={
+                "tag": "example",
+            })
         ```
-        ### Using SPOT charge type
+        ### charge type
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        launch_configuration = tencentcloud.as_.ScalingConfig("launchConfiguration",
+        example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
             configuration_name="launch-configuration",
-            image_id="img-9qabwvbn",
-            instance_charge_type="SPOTPAID",
+            image_id=example_instance.images[0].image_id,
             instance_types=["SA1.SMALL1"],
+            instance_charge_type="SPOTPAID",
             spot_instance_type="one-time",
             spot_max_price="1000")
         ```

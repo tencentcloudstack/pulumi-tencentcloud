@@ -105,7 +105,7 @@ type Connection struct {
 	IkeLocalIdentity pulumi.StringPtrOutput `pulumi:"ikeLocalIdentity"`
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrOutput `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrOutput `pulumi:"ikeProtoEncryAlgorithm"`
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrOutput `pulumi:"ikeRemoteAddress"`
@@ -115,9 +115,9 @@ type Connection struct {
 	IkeRemoteIdentity pulumi.StringPtrOutput `pulumi:"ikeRemoteIdentity"`
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrOutput `pulumi:"ikeSaLifetimeSeconds"`
-	// Version of the IKE operation specification. Default value is `IKEV1`.
+	// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrOutput `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecIntegrityAlgorithm"`
@@ -223,7 +223,7 @@ type connectionState struct {
 	IkeLocalIdentity *string `pulumi:"ikeLocalIdentity"`
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm *string `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm *string `pulumi:"ikeProtoEncryAlgorithm"`
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress *string `pulumi:"ikeRemoteAddress"`
@@ -233,9 +233,9 @@ type connectionState struct {
 	IkeRemoteIdentity *string `pulumi:"ikeRemoteIdentity"`
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds *int `pulumi:"ikeSaLifetimeSeconds"`
-	// Version of the IKE operation specification. Default value is `IKEV1`.
+	// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 	IkeVersion *string `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
@@ -300,7 +300,7 @@ type ConnectionState struct {
 	IkeLocalIdentity pulumi.StringPtrInput
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrInput
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrInput
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrInput
@@ -310,9 +310,9 @@ type ConnectionState struct {
 	IkeRemoteIdentity pulumi.StringPtrInput
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrInput
-	// Version of the IKE operation specification. Default value is `IKEV1`.
+	// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrInput
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
@@ -377,7 +377,7 @@ type connectionArgs struct {
 	IkeLocalIdentity *string `pulumi:"ikeLocalIdentity"`
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm *string `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm *string `pulumi:"ikeProtoEncryAlgorithm"`
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress *string `pulumi:"ikeRemoteAddress"`
@@ -387,9 +387,9 @@ type connectionArgs struct {
 	IkeRemoteIdentity *string `pulumi:"ikeRemoteIdentity"`
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds *int `pulumi:"ikeSaLifetimeSeconds"`
-	// Version of the IKE operation specification. Default value is `IKEV1`.
+	// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 	IkeVersion *string `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
@@ -441,7 +441,7 @@ type ConnectionArgs struct {
 	IkeLocalIdentity pulumi.StringPtrInput
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrInput
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrInput
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrInput
@@ -451,9 +451,9 @@ type ConnectionArgs struct {
 	IkeRemoteIdentity pulumi.StringPtrInput
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrInput
-	// Version of the IKE operation specification. Default value is `IKEV1`.
+	// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrInput
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
@@ -639,7 +639,7 @@ func (o ConnectionOutput) IkeProtoAuthenAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeProtoAuthenAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 func (o ConnectionOutput) IkeProtoEncryAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeProtoEncryAlgorithm }).(pulumi.StringPtrOutput)
 }
@@ -664,12 +664,12 @@ func (o ConnectionOutput) IkeSaLifetimeSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.IntPtrOutput { return v.IkeSaLifetimeSeconds }).(pulumi.IntPtrOutput)
 }
 
-// Version of the IKE operation specification. Default value is `IKEV1`.
+// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
 func (o ConnectionOutput) IkeVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeVersion }).(pulumi.StringPtrOutput)
 }
 
-// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
 func (o ConnectionOutput) IpsecEncryptAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecEncryptAlgorithm }).(pulumi.StringPtrOutput)
 }

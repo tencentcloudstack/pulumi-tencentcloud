@@ -12,34 +12,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     /// <summary>
     /// Provides a resource to create a vpc ipv6_eni_address
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var ipv6EniAddress = new Tencentcloud.Vpc.Ipv6EniAddress("ipv6EniAddress", new Tencentcloud.Vpc.Ipv6EniAddressArgs
-    ///         {
-    ///             Ipv6Addresses = 
-    ///             {
-    ///                 new Tencentcloud.Vpc.Inputs.Ipv6EniAddressIpv6AddressArgs
-    ///                 {
-    ///                     Address = "2402:4e00:1019:6a7b:0:994e:7cd7:fb46",
-    ///                     Description = "test123",
-    ///                 },
-    ///             },
-    ///             NetworkInterfaceId = "eni-pzl7fz37",
-    ///             VpcId = "vpc-7w3kgnpl",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/ipv6EniAddress:Ipv6EniAddress")]
     public partial class Ipv6EniAddress : Pulumi.CustomResource

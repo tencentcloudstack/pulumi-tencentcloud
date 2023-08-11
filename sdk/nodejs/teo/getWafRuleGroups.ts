@@ -5,21 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Use this data source to query detailed information of teo wafRuleGroups
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const wafRuleGroups = pulumi.output(tencentcloud.Teo.getWafRuleGroups({
- *     entity: "",
- *     zoneId: "",
- * }));
- * ```
- */
 export function getWafRuleGroups(args: GetWafRuleGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetWafRuleGroupsResult> {
     if (!opts) {
         opts = {}
@@ -37,17 +22,8 @@ export function getWafRuleGroups(args: GetWafRuleGroupsArgs, opts?: pulumi.Invok
  * A collection of arguments for invoking getWafRuleGroups.
  */
 export interface GetWafRuleGroupsArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: string;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: string;
-    /**
-     * Site ID.
-     */
     zoneId: string;
 }
 
@@ -61,9 +37,6 @@ export interface GetWafRuleGroupsResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
-    /**
-     * List of WAF rule groups.
-     */
     readonly wafRuleGroups: outputs.Teo.GetWafRuleGroupsWafRuleGroup[];
     readonly zoneId: string;
 }
@@ -76,16 +49,7 @@ export function getWafRuleGroupsOutput(args: GetWafRuleGroupsOutputArgs, opts?: 
  * A collection of arguments for invoking getWafRuleGroups.
  */
 export interface GetWafRuleGroupsOutputArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: pulumi.Input<string>;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: pulumi.Input<string>;
-    /**
-     * Site ID.
-     */
     zoneId: pulumi.Input<string>;
 }

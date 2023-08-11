@@ -252,9 +252,9 @@ class RocketmqCluster(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test rocket mq")
+        example = tencentcloud.tdmq.RocketmqCluster("example",
+            cluster_name="tf_example",
+            remark="remark.")
         ```
 
         ## Import
@@ -285,9 +285,9 @@ class RocketmqCluster(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test rocket mq")
+        example = tencentcloud.tdmq.RocketmqCluster("example",
+            cluster_name="tf_example",
+            remark="remark.")
         ```
 
         ## Import

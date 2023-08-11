@@ -12,32 +12,6 @@ import (
 )
 
 // Provides a resource to create a as removeInstances
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewRemoveInstances(ctx, "removeInstances", &As.RemoveInstancesArgs{
-// 			AutoScalingGroupId: pulumi.Any(tencentcloud_as_scaling_group.Scaling_group.Id),
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String("ins-xxxxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type RemoveInstances struct {
 	pulumi.CustomResourceState
 

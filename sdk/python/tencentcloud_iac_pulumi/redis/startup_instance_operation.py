@@ -68,12 +68,13 @@ class StartupInstanceOperation(pulumi.CustomResource):
         Provides a resource to create a redis startup_instance_operation
 
         ## Example Usage
+        ### Recover the redis instance that has been isolated
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        startup_instance_operation = tencentcloud.redis.StartupInstanceOperation("startupInstanceOperation", instance_id="crs-c1nl9rpv")
+        foo = tencentcloud.redis.StartupInstanceOperation("foo", instance_id="crs-c1nl9rpv")
         ```
 
         :param str resource_name: The name of the resource.
@@ -90,12 +91,13 @@ class StartupInstanceOperation(pulumi.CustomResource):
         Provides a resource to create a redis startup_instance_operation
 
         ## Example Usage
+        ### Recover the redis instance that has been isolated
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        startup_instance_operation = tencentcloud.redis.StartupInstanceOperation("startupInstanceOperation", instance_id="crs-c1nl9rpv")
+        foo = tencentcloud.redis.StartupInstanceOperation("foo", instance_id="crs-c1nl9rpv")
         ```
 
         :param str resource_name: The name of the resource.

@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = new tencentcloud.Monitor.AlarmNotice("example", {
+ * const foo = new tencentcloud.Monitor.AlarmNotice("foo", {
  *     noticeLanguage: "zh-CN",
  *     noticeType: "ALL",
  *     urlNotices: [{
@@ -97,6 +97,10 @@ export class AlarmNotice extends pulumi.CustomResource {
     }
 
     /**
+     * Amp consumer ID.
+     */
+    public /*out*/ readonly ampConsumerId!: pulumi.Output<string>;
+    /**
      * A maximum of one alarm notification can be pushed to the CLS service.
      */
     public readonly clsNotices!: pulumi.Output<outputs.Monitor.AlarmNoticeClsNotice[] | undefined>;
@@ -150,6 +154,7 @@ export class AlarmNotice extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as AlarmNoticeState | undefined;
+            resourceInputs["ampConsumerId"] = state ? state.ampConsumerId : undefined;
             resourceInputs["clsNotices"] = state ? state.clsNotices : undefined;
             resourceInputs["isPreset"] = state ? state.isPreset : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -174,6 +179,7 @@ export class AlarmNotice extends pulumi.CustomResource {
             resourceInputs["noticeType"] = args ? args.noticeType : undefined;
             resourceInputs["urlNotices"] = args ? args.urlNotices : undefined;
             resourceInputs["userNotices"] = args ? args.userNotices : undefined;
+            resourceInputs["ampConsumerId"] = undefined /*out*/;
             resourceInputs["isPreset"] = undefined /*out*/;
             resourceInputs["policyIds"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
@@ -188,6 +194,10 @@ export class AlarmNotice extends pulumi.CustomResource {
  * Input properties used for looking up and filtering AlarmNotice resources.
  */
 export interface AlarmNoticeState {
+    /**
+     * Amp consumer ID.
+     */
+    ampConsumerId?: pulumi.Input<string>;
     /**
      * A maximum of one alarm notification can be pushed to the CLS service.
      */

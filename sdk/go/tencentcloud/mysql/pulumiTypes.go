@@ -3076,6 +3076,8 @@ type GetInstanceInstanceList struct {
 	PayType int `pulumi:"payType"`
 	// Project ID to which the current instance belongs.
 	ProjectId int `pulumi:"projectId"`
+	// read-only instance group.
+	RoGroups []GetInstanceInstanceListRoGroup `pulumi:"roGroups"`
 	// ID list of read-only type associated with the current instance.
 	RoInstanceIds []string `pulumi:"roInstanceIds"`
 	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
@@ -3146,6 +3148,8 @@ type GetInstanceInstanceListArgs struct {
 	PayType pulumi.IntInput `pulumi:"payType"`
 	// Project ID to which the current instance belongs.
 	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// read-only instance group.
+	RoGroups GetInstanceInstanceListRoGroupArrayInput `pulumi:"roGroups"`
 	// ID list of read-only type associated with the current instance.
 	RoInstanceIds pulumi.StringArrayInput `pulumi:"roInstanceIds"`
 	// Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
@@ -3318,6 +3322,11 @@ func (o GetInstanceInstanceListOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
+// read-only instance group.
+func (o GetInstanceInstanceListOutput) RoGroups() GetInstanceInstanceListRoGroupArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) []GetInstanceInstanceListRoGroup { return v.RoGroups }).(GetInstanceInstanceListRoGroupArrayOutput)
+}
+
 // ID list of read-only type associated with the current instance.
 func (o GetInstanceInstanceListOutput) RoInstanceIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) []string { return v.RoInstanceIds }).(pulumi.StringArrayOutput)
@@ -3371,6 +3380,112 @@ func (o GetInstanceInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstance
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceInstanceList {
 		return vs[0].([]GetInstanceInstanceList)[vs[1].(int)]
 	}).(GetInstanceInstanceListOutput)
+}
+
+type GetInstanceInstanceListRoGroup struct {
+	// Group ID, such as `cdbrg-pz7vg37p`.
+	GroupId string `pulumi:"groupId"`
+	// ID list of read-only type associated with the current instance.
+	InstanceIds []string `pulumi:"instanceIds"`
+}
+
+// GetInstanceInstanceListRoGroupInput is an input type that accepts GetInstanceInstanceListRoGroupArgs and GetInstanceInstanceListRoGroupOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListRoGroupInput` via:
+//
+//          GetInstanceInstanceListRoGroupArgs{...}
+type GetInstanceInstanceListRoGroupInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListRoGroupOutput() GetInstanceInstanceListRoGroupOutput
+	ToGetInstanceInstanceListRoGroupOutputWithContext(context.Context) GetInstanceInstanceListRoGroupOutput
+}
+
+type GetInstanceInstanceListRoGroupArgs struct {
+	// Group ID, such as `cdbrg-pz7vg37p`.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// ID list of read-only type associated with the current instance.
+	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+}
+
+func (GetInstanceInstanceListRoGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceListRoGroup)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListRoGroupArgs) ToGetInstanceInstanceListRoGroupOutput() GetInstanceInstanceListRoGroupOutput {
+	return i.ToGetInstanceInstanceListRoGroupOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListRoGroupArgs) ToGetInstanceInstanceListRoGroupOutputWithContext(ctx context.Context) GetInstanceInstanceListRoGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListRoGroupOutput)
+}
+
+// GetInstanceInstanceListRoGroupArrayInput is an input type that accepts GetInstanceInstanceListRoGroupArray and GetInstanceInstanceListRoGroupArrayOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListRoGroupArrayInput` via:
+//
+//          GetInstanceInstanceListRoGroupArray{ GetInstanceInstanceListRoGroupArgs{...} }
+type GetInstanceInstanceListRoGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListRoGroupArrayOutput() GetInstanceInstanceListRoGroupArrayOutput
+	ToGetInstanceInstanceListRoGroupArrayOutputWithContext(context.Context) GetInstanceInstanceListRoGroupArrayOutput
+}
+
+type GetInstanceInstanceListRoGroupArray []GetInstanceInstanceListRoGroupInput
+
+func (GetInstanceInstanceListRoGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceListRoGroup)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListRoGroupArray) ToGetInstanceInstanceListRoGroupArrayOutput() GetInstanceInstanceListRoGroupArrayOutput {
+	return i.ToGetInstanceInstanceListRoGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListRoGroupArray) ToGetInstanceInstanceListRoGroupArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListRoGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListRoGroupArrayOutput)
+}
+
+type GetInstanceInstanceListRoGroupOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListRoGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceListRoGroup)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListRoGroupOutput) ToGetInstanceInstanceListRoGroupOutput() GetInstanceInstanceListRoGroupOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListRoGroupOutput) ToGetInstanceInstanceListRoGroupOutputWithContext(ctx context.Context) GetInstanceInstanceListRoGroupOutput {
+	return o
+}
+
+// Group ID, such as `cdbrg-pz7vg37p`.
+func (o GetInstanceInstanceListRoGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceListRoGroup) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// ID list of read-only type associated with the current instance.
+func (o GetInstanceInstanceListRoGroupOutput) InstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceListRoGroup) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
+}
+
+type GetInstanceInstanceListRoGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListRoGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceListRoGroup)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListRoGroupArrayOutput) ToGetInstanceInstanceListRoGroupArrayOutput() GetInstanceInstanceListRoGroupArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListRoGroupArrayOutput) ToGetInstanceInstanceListRoGroupArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListRoGroupArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListRoGroupArrayOutput) Index(i pulumi.IntInput) GetInstanceInstanceListRoGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceInstanceListRoGroup {
+		return vs[0].([]GetInstanceInstanceListRoGroup)[vs[1].(int)]
+	}).(GetInstanceInstanceListRoGroupOutput)
 }
 
 type GetInstanceParamRecordItem struct {
@@ -5495,7 +5610,12 @@ func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigList
 }
 
 type GetZoneConfigListSell struct {
+	// Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
 	CdbType string `pulumi:"cdbType"`
+	// Number of CPU cores.
+	Cpu int `pulumi:"cpu"`
+	// Application Scenario Description.
+	Info string `pulumi:"info"`
 	// Maximum disk size (in GB).
 	MaxVolumeSize int `pulumi:"maxVolumeSize"`
 	// Memory size (in MB).
@@ -5520,7 +5640,12 @@ type GetZoneConfigListSellInput interface {
 }
 
 type GetZoneConfigListSellArgs struct {
+	// Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
 	CdbType pulumi.StringInput `pulumi:"cdbType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Application Scenario Description.
+	Info pulumi.StringInput `pulumi:"info"`
 	// Maximum disk size (in GB).
 	MaxVolumeSize pulumi.IntInput `pulumi:"maxVolumeSize"`
 	// Memory size (in MB).
@@ -5584,8 +5709,19 @@ func (o GetZoneConfigListSellOutput) ToGetZoneConfigListSellOutputWithContext(ct
 	return o
 }
 
+// Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
 func (o GetZoneConfigListSellOutput) CdbType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneConfigListSell) string { return v.CdbType }).(pulumi.StringOutput)
+}
+
+// Number of CPU cores.
+func (o GetZoneConfigListSellOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Application Scenario Description.
+func (o GetZoneConfigListSellOutput) Info() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigListSell) string { return v.Info }).(pulumi.StringOutput)
 }
 
 // Maximum disk size (in GB).
@@ -5678,6 +5814,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetErrorLogItemArrayInput)(nil)).Elem(), GetErrorLogItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListInput)(nil)).Elem(), GetInstanceInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListArrayInput)(nil)).Elem(), GetInstanceInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListRoGroupInput)(nil)).Elem(), GetInstanceInstanceListRoGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListRoGroupArrayInput)(nil)).Elem(), GetInstanceInstanceListRoGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamRecordItemInput)(nil)).Elem(), GetInstanceParamRecordItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamRecordItemArrayInput)(nil)).Elem(), GetInstanceParamRecordItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceRebootTimeItemInput)(nil)).Elem(), GetInstanceRebootTimeItemArgs{})
@@ -5754,6 +5892,8 @@ func init() {
 	pulumi.RegisterOutputType(GetErrorLogItemArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstanceInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListRoGroupOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListRoGroupArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceParamRecordItemOutput{})
 	pulumi.RegisterOutputType(GetInstanceParamRecordItemArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceRebootTimeItemOutput{})

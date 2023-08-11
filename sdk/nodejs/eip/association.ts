@@ -11,28 +11,6 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = new tencentcloud.Eip.Association("foo", {
- *     eipId: "eip-xxxxxx",
- *     instanceId: "ins-xxxxxx",
- * });
- * ```
- * ### or
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const bar = new tencentcloud.Eip.Association("bar", {
- *     eipId: "eip-xxxxxx",
- *     networkInterfaceId: "eni-xxxxxx",
- *     privateIp: "10.0.1.22",
- * });
- * ```
- *
  * ## Import
  *
  * Eip association can be imported using the id, e.g.

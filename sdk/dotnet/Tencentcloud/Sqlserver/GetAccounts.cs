@@ -18,6 +18,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {{% examples %}}
         /// ## Example Usage
         /// {{% example %}}
+        /// ### Pull instance account list
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -27,14 +28,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
+        ///         {
+        ///             InstanceId = "mssql-3cdq7kx5",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Pull instance account list Filter by name
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
         ///         {
         ///             InstanceId = "mssql-3cdq7kx5",
         ///             Name = "myaccount",
-        ///         }));
-        ///         var foo = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
-        ///         {
-        ///             InstanceId = "mssql-3cdq7kx5",
         ///         }));
         ///     }
         /// 
@@ -52,6 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {{% examples %}}
         /// ## Example Usage
         /// {{% example %}}
+        /// ### Pull instance account list
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -61,14 +79,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
+        ///         {
+        ///             InstanceId = "mssql-3cdq7kx5",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Pull instance account list Filter by name
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
         ///         {
         ///             InstanceId = "mssql-3cdq7kx5",
         ///             Name = "myaccount",
-        ///         }));
-        ///         var foo = Output.Create(Tencentcloud.Sqlserver.GetAccounts.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountsArgs
-        ///         {
-        ///             InstanceId = "mssql-3cdq7kx5",
         ///         }));
         ///     }
         /// 

@@ -12,16 +12,34 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const ssoAccount = new tencentcloud.Monitor.GrafanaSsoAccount("ssoAccount", {
- *     instanceId: "grafana-50nj6v00",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.monitor.GrafanaInstance("foo", {
+ *     instanceName: "test-grafana",
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     tags: {
+ *         createdBy: "test",
+ *     },
+ * });
+ * const ssoAccount = new tencentcloud.monitor.GrafanaSsoAccount("ssoAccount", {
+ *     instanceId: foo.id,
+ *     userId: "111",
  *     notes: "desc12222",
  *     roles: [{
  *         organization: "Main Org.",
  *         role: "Admin",
  *     }],
- *     userId: "111",
  * });
  * ```
  *

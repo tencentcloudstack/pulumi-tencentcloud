@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewTrafficPackage(ctx, "trafficPackage", &Vpc.TrafficPackageArgs{
+// 		_, err := Vpc.NewTrafficPackage(ctx, "example", &Vpc.TrafficPackageArgs{
 // 			TrafficAmount: pulumi.Int(10),
 // 		})
 // 		if err != nil {

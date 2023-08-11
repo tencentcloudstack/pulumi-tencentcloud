@@ -8,12 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mysql rollbackStop
  *
  * ## Example Usage
+ * ### Revoke the ongoing rollback task of the instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const rollbackStop = new tencentcloud.Mysql.RollbackStop("rollback_stop", {
+ * const example = new tencentcloud.Mysql.RollbackStop("example", {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```

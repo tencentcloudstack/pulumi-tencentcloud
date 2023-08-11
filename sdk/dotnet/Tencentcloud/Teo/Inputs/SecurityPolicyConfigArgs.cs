@@ -13,51 +13,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// ACL configuration.
-        /// </summary>
         [Input("aclConfig")]
         public Input<Inputs.SecurityPolicyConfigAclConfigArgs>? AclConfig { get; set; }
 
-        /// <summary>
-        /// Bot Configuration.
-        /// </summary>
         [Input("botConfig")]
         public Input<Inputs.SecurityPolicyConfigBotConfigArgs>? BotConfig { get; set; }
 
-        /// <summary>
-        /// Custom drop page configuration.
-        /// </summary>
         [Input("dropPageConfig")]
         public Input<Inputs.SecurityPolicyConfigDropPageConfigArgs>? DropPageConfig { get; set; }
 
-        /// <summary>
-        /// Exception rule configuration.
-        /// </summary>
         [Input("exceptConfig")]
         public Input<Inputs.SecurityPolicyConfigExceptConfigArgs>? ExceptConfig { get; set; }
 
-        /// <summary>
-        /// Basic access control.
-        /// </summary>
         [Input("ipTableConfig")]
         public Input<Inputs.SecurityPolicyConfigIpTableConfigArgs>? IpTableConfig { get; set; }
 
-        /// <summary>
-        /// RateLimit Configuration.
-        /// </summary>
         [Input("rateLimitConfig")]
         public Input<Inputs.SecurityPolicyConfigRateLimitConfigArgs>? RateLimitConfig { get; set; }
 
-        /// <summary>
-        /// Main switch of 7-layer security.
-        /// </summary>
         [Input("switchConfig")]
         public Input<Inputs.SecurityPolicyConfigSwitchConfigArgs>? SwitchConfig { get; set; }
 
-        /// <summary>
-        /// WAF (Web Application Firewall) Configuration.
-        /// </summary>
         [Input("wafConfig")]
         public Input<Inputs.SecurityPolicyConfigWafConfigArgs>? WafConfig { get; set; }
 

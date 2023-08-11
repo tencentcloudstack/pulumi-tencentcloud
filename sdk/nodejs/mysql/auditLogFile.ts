@@ -12,18 +12,67 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const auditLogFile = new tencentcloud.Mysql.AuditLogFile("audit_log_file", {
- *     endTime: "2023-03-29 20:14:00",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * const exampleAuditLogFile = new tencentcloud.mysql.AuditLogFile("exampleAuditLogFile", {
+ *     instanceId: exampleInstance.id,
+ *     startTime: "2023-07-01 00:00:00",
+ *     endTime: "2023-10-01 00:00:00",
+ *     order: "ASC",
+ *     orderBy: "timestamp",
+ * });
+ * ```
+ * ### Add filter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mysql.AuditLogFile("example", {
+ *     instanceId: tencentcloud_mysql_instance.example.id,
+ *     startTime: "2023-07-01 00:00:00",
+ *     endTime: "2023-10-01 00:00:00",
+ *     order: "ASC",
+ *     orderBy: "timestamp",
  *     filter: {
  *         hosts: ["30.50.207.46"],
  *         users: ["keep_dbbrain"],
  *     },
- *     instanceId: "cdb-fitq5t9h",
- *     order: "ASC",
- *     orderBy: "timestamp",
- *     startTime: "2023-03-28 20:14:00",
  * });
  * ```
  */

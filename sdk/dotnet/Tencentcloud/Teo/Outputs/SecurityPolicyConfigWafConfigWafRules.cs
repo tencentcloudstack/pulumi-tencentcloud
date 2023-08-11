@@ -14,17 +14,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigWafConfigWafRules
     {
-        /// <summary>
-        /// Block mode rules list. See details in data source `waf_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> BlockRuleIds;
-        /// <summary>
-        /// Observe rules list. See details in data source `waf_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> ObserveRuleIds;
-        /// <summary>
-        /// Whether to host the rules&amp;#39; configuration.- `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string Switch;
 
         [OutputConstructor]

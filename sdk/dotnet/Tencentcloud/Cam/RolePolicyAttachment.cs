@@ -17,16 +17,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.RolePolicyAttachment("foo", new Tencentcloud.Cam.RolePolicyAttachmentArgs
+    ///         var config = new Config();
+    ///         var camPolicyBasic = config.Get("camPolicyBasic") ?? "keep-cam-policy";
+    ///         var camRoleBasic = config.Get("camRoleBasic") ?? "keep-cam-role";
+    ///         var policy = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
     ///         {
-    ///             RoleId = tencentcloud_cam_role.Foo.Id,
-    ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
+    ///             Name = camPolicyBasic,
+    ///         }));
+    ///         var roles = Output.Create(Tencentcloud.Cam.GetRoles.InvokeAsync(new Tencentcloud.Cam.GetRolesArgs
+    ///         {
+    ///             Name = camRoleBasic,
+    ///         }));
+    ///         var rolePolicyAttachmentBasic = new Tencentcloud.Cam.RolePolicyAttachment("rolePolicyAttachmentBasic", new Tencentcloud.Cam.RolePolicyAttachmentArgs
+    ///         {
+    ///             RoleId = roles.Apply(roles =&gt; roles.RoleLists?[0]?.RoleId),
+    ///             PolicyId = policy.Apply(policy =&gt; policy.PolicyLists?[0]?.PolicyId),
     ///         });
     ///     }
     /// 

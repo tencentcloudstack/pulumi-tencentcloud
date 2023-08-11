@@ -99,29 +99,6 @@ class AclAttachment(pulumi.CustomResource):
         """
         Provide a resource to attach an existing subnet to Network ACL.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        id_instances = tencentcloud.Vpc.get_instances()
-        foo = tencentcloud.vpc.Acl("foo",
-            vpc_id=id_instances.instance_lists[0].vpc_id,
-            ingresses=[
-                "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP",
-            ],
-            egresses=[
-                "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP",
-            ])
-        attachment = tencentcloud.vpc.AclAttachment("attachment",
-            acl_id=foo.id,
-            subnet_id=id_instances.instance_lists[0].subnet_ids[0])
-        ```
-
         ## Import
 
         Acl attachment can be imported using the id, e.g.
@@ -143,29 +120,6 @@ class AclAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to attach an existing subnet to Network ACL.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tencentcloud as tencentcloud
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        id_instances = tencentcloud.Vpc.get_instances()
-        foo = tencentcloud.vpc.Acl("foo",
-            vpc_id=id_instances.instance_lists[0].vpc_id,
-            ingresses=[
-                "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP",
-            ],
-            egresses=[
-                "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP",
-            ])
-        attachment = tencentcloud.vpc.AclAttachment("attachment",
-            acl_id=foo.id,
-            subnet_id=id_instances.instance_lists[0].subnet_ids[0])
-        ```
 
         ## Import
 

@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewDeployGroup(ctx, "deployGroup", &Mysql.DeployGroupArgs{
-// 			DeployGroupName: pulumi.String("terrform-deploy"),
-// 			Description:     pulumi.String("deploy test"),
+// 		_, err := Mysql.NewDeployGroup(ctx, "example", &Mysql.DeployGroupArgs{
+// 			DeployGroupName: pulumi.String("tf-example"),
+// 			Description:     pulumi.String("desc."),
 // 			DevClasses: pulumi.StringArray{
 // 				pulumi.String("TS85"),
 // 			},

@@ -17,20 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Sqlserver.Instance("foo", new Tencentcloud.Sqlserver.InstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             AvailabilityZone = @var.Availability_zone,
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var example = new Tencentcloud.Sqlserver.Instance("example", new Tencentcloud.Sqlserver.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = "vpc-409mvdvv",
-    ///             SubnetId = "subnet-nf9n81ps",
-    ///             ProjectId = 123,
-    ///             Memory = 2,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             ProjectId = 0,
+    ///             Memory = 16,
     ///             Storage = 100,
     ///         });
     ///     }
@@ -43,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// SQL Server instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+    ///  $ pulumi import tencentcloud:Sqlserver/instance:Instance example mssql-3cdq7kx5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/instance:Instance")]

@@ -8,17 +8,18 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sms template
  *
  * ## Example Usage
+ * ### Create a sms template
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const template = new tencentcloud.Sms.Template("template", {
- *     international: 0,
- *     remark: "terraform test",
- *     smsType: 0,
- *     templateContent: "Template Content",
- *     templateName: "Template By Terraform",
+ *     international: 0, // Mainland China SMS
+ *     remark: "terraform example",
+ *     smsType: 0, // regular SMS
+ *     templateContent: "example for sms template",
+ *     templateName: "tf_example_sms_template",
  * });
  * ```
  */

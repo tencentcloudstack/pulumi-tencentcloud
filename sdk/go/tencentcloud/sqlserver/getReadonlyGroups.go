@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetReadonlyGroups(ctx, &sqlserver.GetReadonlyGroupsArgs{
-// 			MasterInstanceId: pulumi.StringRef("mssql-3cdq7kx5"),
+// 		_, err := Sqlserver.GetDbs(ctx, &sqlserver.GetDbsArgs{
+// 			InstanceId: "mssql-ds1xhnt9",
 // 		}, nil)
 // 		if err != nil {
 // 			return err

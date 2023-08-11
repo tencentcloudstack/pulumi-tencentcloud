@@ -17,22 +17,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var schedule = new Tencentcloud.As.Schedule("schedule", new Tencentcloud.As.ScheduleArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             DesiredCapacity = 0,
-    ///             EndTime = "2019-12-01T00:00:00+08:00",
+    ///             Product = "as",
+    ///         }));
+    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             OsName = "TencentOS Server 3.2 (Final)",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///         });
+    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
+    ///         {
+    ///             ConfigurationName = "tf-example",
+    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
+    ///             InstanceTypes = 
+    ///             {
+    ///                 "SA1.SMALL1",
+    ///                 "SA2.SMALL1",
+    ///                 "SA2.SMALL2",
+    ///                 "SA2.SMALL4",
+    ///             },
+    ///             InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+    ///             {
+    ///                 InstanceName = "test-ins-name",
+    ///             },
+    ///         });
+    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
+    ///         {
+    ///             ScalingGroupName = "tf-example",
+    ///             ConfigurationId = exampleScalingConfig.Id,
+    ///             MaxSize = 1,
+    ///             MinSize = 0,
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 subnet.Id,
+    ///             },
+    ///         });
+    ///         var exampleSchedule = new Tencentcloud.As.Schedule("exampleSchedule", new Tencentcloud.As.ScheduleArgs
+    ///         {
+    ///             ScalingGroupId = exampleScalingGroup.Id,
+    ///             ScheduleActionName = "tf-as-schedule",
     ///             MaxSize = 10,
     ///             MinSize = 0,
-    ///             Recurrence = "0 0 * * *",
-    ///             ScalingGroupId = "sg-12af45",
-    ///             ScheduleActionName = "tf-as-schedule",
+    ///             DesiredCapacity = 0,
     ///             StartTime = "2019-01-01T00:00:00+08:00",
+    ///             EndTime = "2019-12-01T00:00:00+08:00",
+    ///             Recurrence = "0 0 * * *",
     ///         });
     ///     }
     /// 

@@ -13,21 +13,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigIpTableConfigRuleGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Actions to take. Valid values: `drop`, `trans`, `monitor`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// Matching content.
-        /// </summary>
         [Input("matchContent")]
         public Input<string>? MatchContent { get; set; }
 
-        /// <summary>
-        /// Matching type. Valid values: `ip`, `area`.
-        /// </summary>
         [Input("matchFrom")]
         public Input<string>? MatchFrom { get; set; }
 

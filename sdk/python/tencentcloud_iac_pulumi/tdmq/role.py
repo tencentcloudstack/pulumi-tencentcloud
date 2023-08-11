@@ -137,25 +137,16 @@ class Role(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
-            msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
-            partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
-        bar_role = tencentcloud.tdmq.Role("barRole",
-            cluster_id=foo.id,
-            remark="this is description world",
-            role_name="example")
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_role = tencentcloud.tdmq.Role("exampleRole",
+            role_name="tf_example",
+            cluster_id=example_instance.id,
+            remark="remark.")
         ```
 
         ## Import
@@ -187,25 +178,16 @@ class Role(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
-            msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
-            partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
-        bar_role = tencentcloud.tdmq.Role("barRole",
-            cluster_id=foo.id,
-            remark="this is description world",
-            role_name="example")
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_role = tencentcloud.tdmq.Role("exampleRole",
+            role_name="tf_example",
+            cluster_id=example_instance.id,
+            remark="remark.")
         ```
 
         ## Import

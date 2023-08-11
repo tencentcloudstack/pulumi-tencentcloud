@@ -103,10 +103,39 @@ class ScaleInInstances(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=4,
+            min_size=1,
+            desired_capacity=2,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
         scale_in_instances = tencentcloud.as_.ScaleInInstances("scaleInInstances",
-            auto_scaling_group_id="asg-519acdug",
+            auto_scaling_group_id=example_scaling_group.id,
             scale_in_number=1)
         ```
 
@@ -136,10 +165,39 @@ class ScaleInInstances(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=4,
+            min_size=1,
+            desired_capacity=2,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
         scale_in_instances = tencentcloud.as_.ScaleInInstances("scaleInInstances",
-            auto_scaling_group_id="asg-519acdug",
+            auto_scaling_group_id=example_scaling_group.id,
             scale_in_number=1)
         ```
 

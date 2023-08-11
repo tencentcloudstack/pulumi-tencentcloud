@@ -16,23 +16,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// &gt; **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
     /// 
     /// ## Example Usage
+    /// ### Create a new tcaplus cluster instance
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var test = new Tencentcloud.Tcaplus.Cluster("test", new Tencentcloud.Tcaplus.ClusterArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
     ///         {
-    ///             ClusterName = "tf_tcaplus_cluster_test",
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZone,
+    ///         }));
+    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
+    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
+    ///         var example = new Tencentcloud.Tcaplus.Cluster("example", new Tencentcloud.Tcaplus.ClusterArgs
+    ///         {
     ///             IdlType = "PROTO",
+    ///             ClusterName = "tf_example_tcaplus_cluster",
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
+    ///             Password = "your_pw_123111",
     ///             OldPasswordExpireLast = 3600,
-    ///             Password = "1qaA2k1wgvfa3ZZZ",
-    ///             SubnetId = "subnet-akwgvfa3",
-    ///             VpcId = "vpc-7k6gzox6",
     ///         });
     ///     }
     /// 
@@ -44,7 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// tcaplus cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+    ///  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/cluster:Cluster")]

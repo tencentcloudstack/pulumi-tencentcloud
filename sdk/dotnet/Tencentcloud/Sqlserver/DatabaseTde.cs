@@ -14,6 +14,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver database_tde
     /// 
     /// ## Example Usage
+    /// ### Open database tde encryption
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             ProjectId = 0,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
+    ///             MaintenanceWeekSets = 
+    ///             {
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///             },
+    ///             MaintenanceStartTime = "09:00",
+    ///             MaintenanceTimeSpan = 3,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
+    ///         {
+    ///             InstanceId = exampleBasicInstance.Id,
+    ///             Charset = "Chinese_PRC_BIN",
+    ///             Remark = "test-remark",
+    ///         });
+    ///         var exampleDatabaseTde = new Tencentcloud.Sqlserver.DatabaseTde("exampleDatabaseTde", new Tencentcloud.Sqlserver.DatabaseTdeArgs
+    ///         {
+    ///             InstanceId = exampleBasicInstance.Id,
+    ///             DbNames = 
+    ///             {
+    ///                 exampleDb.Name,
+    ///             },
+    ///             Encryption = "enable",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Close database tde encryption
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,15 +101,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// {
     ///     public MyStack()
     ///     {
-    ///         var databaseTde = new Tencentcloud.Sqlserver.DatabaseTde("databaseTde", new Tencentcloud.Sqlserver.DatabaseTdeArgs
+    ///         var example = new Tencentcloud.Sqlserver.DatabaseTde("example", new Tencentcloud.Sqlserver.DatabaseTdeArgs
     ///         {
+    ///             InstanceId = tencentcloud_sqlserver_instance.Example.Id,
     ///             DbNames = 
     ///             {
-    ///                 "keep_tde_db",
-    ///                 "keep_tde_db2",
+    ///                 tencentcloud_sqlserver_db.Example.Name,
     ///             },
-    ///             Encryption = "enable",
-    ///             InstanceId = "mssql-qelbzgwf",
+    ///             Encryption = "disable",
     ///         });
     ///     }
     /// 
@@ -43,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver database_tde can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde database_tde database_tde_id
+    ///  $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde example mssql-farjz9tz#tf_example_db
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/databaseTde:DatabaseTde")]

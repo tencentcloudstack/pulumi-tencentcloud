@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mysqlserver = pulumi.output(tencentcloud.Sqlserver.getZoneConfig());
+ * const example = pulumi.output(tencentcloud.Sqlserver.getZoneConfig());
  * ```
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {

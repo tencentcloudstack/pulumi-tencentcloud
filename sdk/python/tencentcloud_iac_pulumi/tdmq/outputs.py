@@ -10,7 +10,9 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'NamespaceRetentionPolicy',
     'RocketmqClusterVpc',
+    'RocketmqVipInstanceVpcInfo',
     'GetProInstanceDetailClusterInfoResult',
     'GetProInstanceDetailClusterInfoNodeDistributionResult',
     'GetProInstanceDetailClusterSpecInfoResult',
@@ -39,6 +41,56 @@ __all__ = [
     'GetVipInstanceInstanceConfigNodeDistributionResult',
     'GetVipInstanceInstanceConfigTopicDistributionResult',
 ]
+
+@pulumi.output_type
+class NamespaceRetentionPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "sizeInMb":
+            suggest = "size_in_mb"
+        elif key == "timeInMinutes":
+            suggest = "time_in_minutes"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NamespaceRetentionPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NamespaceRetentionPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NamespaceRetentionPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 size_in_mb: Optional[int] = None,
+                 time_in_minutes: Optional[int] = None):
+        """
+        :param int size_in_mb: the size of message to retain.
+        :param int time_in_minutes: the time of message to retain.
+        """
+        if size_in_mb is not None:
+            pulumi.set(__self__, "size_in_mb", size_in_mb)
+        if time_in_minutes is not None:
+            pulumi.set(__self__, "time_in_minutes", time_in_minutes)
+
+    @property
+    @pulumi.getter(name="sizeInMb")
+    def size_in_mb(self) -> Optional[int]:
+        """
+        the size of message to retain.
+        """
+        return pulumi.get(self, "size_in_mb")
+
+    @property
+    @pulumi.getter(name="timeInMinutes")
+    def time_in_minutes(self) -> Optional[int]:
+        """
+        the time of message to retain.
+        """
+        return pulumi.get(self, "time_in_minutes")
+
 
 @pulumi.output_type
 class RocketmqClusterVpc(dict):
@@ -86,6 +138,54 @@ class RocketmqClusterVpc(dict):
     def vpc_id(self) -> Optional[str]:
         """
         Vpc ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class RocketmqVipInstanceVpcInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RocketmqVipInstanceVpcInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RocketmqVipInstanceVpcInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RocketmqVipInstanceVpcInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str subnet_id: Subnet ID.
+        :param str vpc_id: VPC ID.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC ID.
         """
         return pulumi.get(self, "vpc_id")
 

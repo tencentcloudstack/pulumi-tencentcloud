@@ -19,15 +19,38 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRolePolicyAttachment(ctx, "foo", &Cam.RolePolicyAttachmentArgs{
-// 			RoleId:   pulumi.Any(tencentcloud_cam_role.Foo.Id),
-// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+// 		cfg := config.New(ctx, "")
+// 		camPolicyBasic := "keep-cam-policy"
+// 		if param := cfg.Get("camPolicyBasic"); param != "" {
+// 			camPolicyBasic = param
+// 		}
+// 		camRoleBasic := "keep-cam-role"
+// 		if param := cfg.Get("camRoleBasic"); param != "" {
+// 			camRoleBasic = param
+// 		}
+// 		policy, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+// 			Name: pulumi.StringRef(camPolicyBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		roles, err := Cam.GetRoles(ctx, &cam.GetRolesArgs{
+// 			Name: pulumi.StringRef(camRoleBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.NewRolePolicyAttachment(ctx, "rolePolicyAttachmentBasic", &Cam.RolePolicyAttachmentArgs{
+// 			RoleId:   pulumi.String(roles.RoleLists[0].RoleId),
+// 			PolicyId: pulumi.String(policy.PolicyLists[0].PolicyId),
 // 		})
 // 		if err != nil {
 // 			return err

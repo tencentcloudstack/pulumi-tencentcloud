@@ -5,18 +5,25 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr customizedDomain
+ * Provides a resource to create a tcr customized domain
  *
  * ## Example Usage
+ * ### Create a tcr customized domain
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const myDomain = new tencentcloud.tcr.CustomizedDomain("myDomain", {
- *     registryId: local.tcr_id,
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleCustomizedDomain = new tencentcloud.tcr.CustomizedDomain("exampleCustomizedDomain", {
+ *     registryId: exampleInstance.id,
  *     domainName: "www.test.com",
- *     certificateId: `%s`,
+ *     certificateId: "your_cert_id",
  *     tags: {
  *         createdBy: "terraform",
  *     },

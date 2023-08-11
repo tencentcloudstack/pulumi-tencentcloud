@@ -22,45 +22,26 @@ import (
 // import (
 // 	"fmt"
 //
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
-// 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf-cam-role"),
-// 			},
-// 		})
+// 		info, err := User.GetInfo(ctx, nil, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### Create with SAML provider
-//
-// ```go
-// package main
-//
-// import (
-// 	"fmt"
-//
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewRole(ctx, "boo", &Cam.RoleArgs{
-// 			ConsoleLogin: pulumi.Bool(true),
+// 		uin := info.Uin
+// 		_, err = Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
+// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\n", "          \"qcs::cam::uin/", uin, ":uin/", uin, "\"\n", "        ]\n", "      }\n", "    }\n", "  ]\n", "}\n")),
 // 			Description:  pulumi.String("test"),
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\", \"name/sts:AssumeRoleWithWebIdentity\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"federated\": [\"qcs::cam::uin/<your-account-id>:saml-provider/<your-name>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
+// 			ConsoleLogin: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf-cam-role"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err

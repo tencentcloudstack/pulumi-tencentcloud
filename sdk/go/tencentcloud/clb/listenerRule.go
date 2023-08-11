@@ -74,7 +74,7 @@ type ListenerRule struct {
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
 	// Domain name of the listener rule.
 	Domain pulumi.StringOutput `pulumi:"domain"`
-	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringOutput `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
@@ -164,7 +164,7 @@ type listenerRuleState struct {
 	ClbId *string `pulumi:"clbId"`
 	// Domain name of the listener rule.
 	Domain *string `pulumi:"domain"`
-	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType *string `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
@@ -213,7 +213,7 @@ type ListenerRuleState struct {
 	ClbId pulumi.StringPtrInput
 	// Domain name of the listener rule.
 	Domain pulumi.StringPtrInput
-	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckHealthNum pulumi.IntPtrInput
@@ -266,7 +266,7 @@ type listenerRuleArgs struct {
 	ClbId string `pulumi:"clbId"`
 	// Domain name of the listener rule.
 	Domain string `pulumi:"domain"`
-	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType *string `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
@@ -314,7 +314,7 @@ type ListenerRuleArgs struct {
 	ClbId pulumi.StringInput
 	// Domain name of the listener rule.
 	Domain pulumi.StringInput
-	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckHealthNum pulumi.IntPtrInput
@@ -462,7 +462,7 @@ func (o ListenerRuleOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
-// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 func (o ListenerRuleOutput) ForwardType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.ForwardType }).(pulumi.StringOutput)
 }

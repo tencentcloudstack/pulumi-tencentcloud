@@ -12,19 +12,81 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const template = new tencentcloud.Monitor.TmpTkeTemplate("template", {
- *     template: {
- *         describe: "template",
- *         level: "cluster",
- *         name: "test",
- *         serviceMonitors: [{
- *             config: "xxxxx",
- *             name: "test",
- *         }],
- *     },
- * });
+ * const foo = new tencentcloud.monitor.TmpTkeTemplate("foo", {template: {
+ *     name: "tf-template",
+ *     level: "cluster",
+ *     describe: "template",
+ *     serviceMonitors: [{
+ *         name: "tf-ServiceMonitor",
+ *         config: `apiVersion: monitoring.coreos.com/v1
+ * kind: ServiceMonitor
+ * metadata:
+ *   name: example-service-monitor
+ *   namespace: monitoring
+ *   labels:
+ *     k8s-app: example-service
+ * spec:
+ *   selector:
+ *     matchLabels:
+ *       k8s-app: example-service
+ *   namespaceSelector:
+ *     matchNames:
+ *       - default
+ *   endpoints:
+ *   - port: http-metrics
+ *     interval: 30s
+ *     path: /metrics
+ *     scheme: http
+ *     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tlsConfig:
+ *       insecureSkipVerify: true
+ * `,
+ *     }],
+ *     podMonitors: [
+ *         {
+ *             name: "tf-PodMonitors",
+ *             config: `apiVersion: monitoring.coreos.com/v1
+ * kind: PodMonitor
+ * metadata:
+ *   name: example-pod-monitor
+ *   namespace: monitoring
+ *   labels:
+ *     k8s-app: example-pod
+ * spec:
+ *   selector:
+ *     matchLabels:
+ *       k8s-app: example-pod
+ *   namespaceSelector:
+ *     matchNames:
+ *       - default
+ *   podMetricsEndpoints:
+ *   - port: http-metrics
+ *     interval: 30s
+ *     path: /metrics
+ *     scheme: http
+ *     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tlsConfig:
+ *       insecureSkipVerify: true
+ * `,
+ *         },
+ *         {
+ *             name: "tf-RawJobs",
+ *             config: `scrape_configs:
+ *   - job_name: 'example-job'
+ *     scrape_interval: 30s
+ *     static_configs:
+ *       - targets: ['example-service.default.svc.cluster.local:8080']
+ *     metrics_path: /metrics
+ *     scheme: http
+ *     bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+ *     tls_config:
+ *       insecure_skip_verify: true
+ * `,
+ *         },
+ *     ],
+ * }});
  * ```
  */
 export class TmpTkeTemplate extends pulumi.CustomResource {

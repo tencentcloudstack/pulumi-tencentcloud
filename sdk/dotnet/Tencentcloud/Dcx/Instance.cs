@@ -44,6 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     ///             Bandwidth = 900,
     ///             DcId = dcId,
     ///             DcgId = dcgId,
+    ///             DcOwnerAccount = "xxxxxxxx",
     ///             NetworkType = "VPC",
     ///             RouteType = "STATIC",
     ///             Vlan = 301,
@@ -100,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public Output<string> DcId { get; private set; } = null!;
 
         /// <summary>
+        /// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        /// </summary>
+        [Output("dcOwnerAccount")]
+        public Output<string> DcOwnerAccount { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the DC Gateway. Currently only new in the console.
         /// </summary>
         [Output("dcgId")]
@@ -151,7 +158,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         /// ID of the VPC or BMVPC.
         /// </summary>
         [Output("vpcId")]
-        public Output<string> VpcId { get; private set; } = null!;
+        public Output<string?> VpcId { get; private set; } = null!;
 
 
         /// <summary>
@@ -231,6 +238,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public Input<string> DcId { get; set; } = null!;
 
         /// <summary>
+        /// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        /// </summary>
+        [Input("dcOwnerAccount")]
+        public Input<string>? DcOwnerAccount { get; set; }
+
+        /// <summary>
         /// ID of the DC Gateway. Currently only new in the console.
         /// </summary>
         [Input("dcgId", required: true)]
@@ -281,8 +294,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         /// <summary>
         /// ID of the VPC or BMVPC.
         /// </summary>
-        [Input("vpcId", required: true)]
-        public Input<string> VpcId { get; set; } = null!;
+        [Input("vpcId")]
+        public Input<string>? VpcId { get; set; }
 
         public InstanceArgs()
         {
@@ -326,6 +339,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         /// </summary>
         [Input("dcId")]
         public Input<string>? DcId { get; set; }
+
+        /// <summary>
+        /// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        /// </summary>
+        [Input("dcOwnerAccount")]
+        public Input<string>? DcOwnerAccount { get; set; }
 
         /// <summary>
         /// ID of the DC Gateway. Currently only new in the console.

@@ -956,23 +956,24 @@ class LaunchTemplate(pulumi.CustomResource):
                  virtual_private_cloud: Optional[pulumi.Input[pulumi.InputType['LaunchTemplateVirtualPrivateCloudArgs']]] = None,
                  __props__=None):
         """
-        Provides a resource to create a cvm launch_template
+        Provides a resource to create a cvm launch template
 
         ## Example Usage
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        my_favorite_image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="Final")
         demo = tencentcloud.cvm.LaunchTemplate("demo",
-            image_id="img-xxxxxxxxx",
             launch_template_name="test",
             placement=tencentcloud.cvm.LaunchTemplatePlacementArgs(
-                host_ids=[],
-                host_ips=[],
-                project_id=0,
                 zone="ap-guangzhou-6",
-            ))
+                project_id=0,
+            ),
+            image_id=my_favorite_image.images[0].image_id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -1013,23 +1014,24 @@ class LaunchTemplate(pulumi.CustomResource):
                  args: LaunchTemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a cvm launch_template
+        Provides a resource to create a cvm launch template
 
         ## Example Usage
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        my_favorite_image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="Final")
         demo = tencentcloud.cvm.LaunchTemplate("demo",
-            image_id="img-xxxxxxxxx",
             launch_template_name="test",
             placement=tencentcloud.cvm.LaunchTemplatePlacementArgs(
-                host_ids=[],
-                host_ips=[],
-                project_id=0,
                 zone="ap-guangzhou-6",
-            ))
+                project_id=0,
+            ),
+            image_id=my_favorite_image.images[0].image_id)
         ```
 
         :param str resource_name: The name of the resource.

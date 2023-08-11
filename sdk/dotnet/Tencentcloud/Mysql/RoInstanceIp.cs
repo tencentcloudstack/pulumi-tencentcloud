@@ -17,17 +17,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var roInstanceIp = new Tencentcloud.Mysql.RoInstanceIp("roInstanceIp", new Tencentcloud.Mysql.RoInstanceIpArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var example = new Tencentcloud.Mysql.RoInstanceIp("example", new Tencentcloud.Mysql.RoInstanceIpArgs
     ///         {
     ///             InstanceId = "cdbro-bdlvcfpj",
-    ///             UniqSubnetId = "subnet-dwj7ipnc",
-    ///             UniqVpcId = "vpc-4owdpnwr",
+    ///             UniqSubnetId = subnet.Id,
+    ///             UniqVpcId = vpc.Id,
     ///         });
     ///     }
     /// 

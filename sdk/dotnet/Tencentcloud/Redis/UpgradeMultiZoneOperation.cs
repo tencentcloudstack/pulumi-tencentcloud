@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         var upgradeMultiZoneOperation = new Tencentcloud.Redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation", new Tencentcloud.Redis.UpgradeMultiZoneOperationArgs
     ///         {
     ///             InstanceId = "crs-c1nl9rpv",
-    ///             UpgradeProxyAndRedisServer = "",
+    ///             UpgradeProxyAndRedisServer = true,
     ///         });
     ///     }
     /// 

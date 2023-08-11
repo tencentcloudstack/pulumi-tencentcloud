@@ -7,30 +7,6 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mysql rollback
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const rollback = new tencentcloud.Mysql.Rollback("rollback", {
- *     databases: [{
- *         databaseName: "tf_ci_test_bak",
- *         newDatabaseName: "tf_ci_test_bak_5",
- *     }],
- *     instanceId: "cdb-fitq5t9h",
- *     rollbackTime: "2023-05-31 23:13:35",
- *     strategy: "full",
- *     tables: [{
- *         database: "tf_ci_test_bak",
- *         tables: [{
- *             newTableName: "test_bak",
- *             tableName: "test",
- *         }],
- *     }],
- * });
- * ```
  */
 export class Rollback extends pulumi.CustomResource {
     /**

@@ -13,36 +13,64 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const emrrrr = new tencentcloud.emr.Cluster("emrrrr", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const cvm4c8m = tencentcloud.Instance.getTypes({
+ *     excludeSoldOut: true,
+ *     cpuCoreCount: 4,
+ *     memorySize: 8,
+ *     filters: [
+ *         {
+ *             name: "instance-charge-type",
+ *             values: ["POSTPAID_BY_HOUR"],
+ *         },
+ *         {
+ *             name: "zone",
+ *             values: [availabilityZone],
+ *         },
+ *     ],
+ * });
+ * const emrVpc = new tencentcloud.vpc.Instance("emrVpc", {cidrBlock: "10.0.0.0/16"});
+ * const emrSubnet = new tencentcloud.subnet.Instance("emrSubnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: emrVpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * const emrSg = new tencentcloud.security.Group("emrSg", {
+ *     description: "emr sg",
+ *     projectId: 0,
+ * });
+ * const emrCluster = new tencentcloud.emr.Cluster("emrCluster", {
  *     productId: 4,
  *     displayStrategy: "clusterList",
  *     vpcSettings: {
- *         vpc_id: "vpc-fuwly8x5",
- *         subnet_id: "subnet-d830wfso",
+ *         vpc_id: emrVpc.id,
+ *         subnet_id: emrSubnet.id,
  *     },
- *     softwares: [
- *         "hadoop-2.8.4",
- *         "zookeeper-3.4.9",
- *     ],
+ *     softwares: ["zookeeper-3.6.1"],
  *     supportHa: 0,
- *     instanceName: "emr-test",
+ *     instanceName: "emr-cluster-test",
  *     resourceSpec: {
  *         masterResourceSpec: {
  *             memSize: 8192,
  *             cpu: 4,
  *             diskSize: 100,
  *             diskType: "CLOUD_PREMIUM",
- *             spec: "CVM.S2",
+ *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?[0]?.family}`),
  *             storageType: 5,
+ *             rootSize: 50,
  *         },
  *         coreResourceSpec: {
  *             memSize: 8192,
  *             cpu: 4,
  *             diskSize: 100,
  *             diskType: "CLOUD_PREMIUM",
- *             spec: "CVM.S2",
+ *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?[0]?.family}`),
  *             storageType: 5,
+ *             rootSize: 50,
  *         },
  *         masterCount: 1,
  *         coreCount: 2,
@@ -50,13 +78,14 @@ import * as utilities from "../utilities";
  *     loginSettings: {
  *         password: "Tencent@cloud123",
  *     },
- *     timeSpan: 1,
- *     timeUnit: "m",
- *     payMode: 1,
+ *     timeSpan: 3600,
+ *     timeUnit: "s",
+ *     payMode: 0,
  *     placement: {
- *         zone: "ap-guangzhou-3",
+ *         zone: availabilityZone,
  *         project_id: 0,
  *     },
+ *     sgId: emrSg.id,
  * });
  * ```
  */
@@ -156,6 +185,10 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly supportHa!: pulumi.Output<number>;
     /**
+     * Tag description list.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any}>;
+    /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
@@ -195,6 +228,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["sgId"] = state ? state.sgId : undefined;
             resourceInputs["softwares"] = state ? state.softwares : undefined;
             resourceInputs["supportHa"] = state ? state.supportHa : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["timeSpan"] = state ? state.timeSpan : undefined;
             resourceInputs["timeUnit"] = state ? state.timeUnit : undefined;
             resourceInputs["vpcSettings"] = state ? state.vpcSettings : undefined;
@@ -245,6 +279,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["sgId"] = args ? args.sgId : undefined;
             resourceInputs["softwares"] = args ? args.softwares : undefined;
             resourceInputs["supportHa"] = args ? args.supportHa : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["timeSpan"] = args ? args.timeSpan : undefined;
             resourceInputs["timeUnit"] = args ? args.timeUnit : undefined;
             resourceInputs["vpcSettings"] = args ? args.vpcSettings : undefined;
@@ -327,6 +362,10 @@ export interface ClusterState {
      */
     supportHa?: pulumi.Input<number>;
     /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
+    /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
@@ -408,6 +447,10 @@ export interface ClusterArgs {
      * The flag whether the instance support high availability.(0=>not support, 1=>support).
      */
     supportHa: pulumi.Input<number>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.

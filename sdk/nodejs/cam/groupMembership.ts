@@ -12,13 +12,27 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.cam.GroupMembership("foo", {
- *     groupId: tencentcloud_cam_group.foo.id,
- *     userNames: [
- *         tencentcloud_cam_user.foo.name,
- *         tencentcloud_cam_user.bar.name,
- *     ],
+ * const config = new pulumi.Config();
+ * const camGroupBasic = config.get("camGroupBasic") || "keep-cam-group";
+ * const groups = tencentcloud.Cam.getGroups({
+ *     name: camGroupBasic,
+ * });
+ * const foo = new tencentcloud.cam.User("foo", {
+ *     remark: "tf_user_remark",
+ *     consoleLogin: true,
+ *     useApi: true,
+ *     needResetPassword: true,
+ *     password: "Gail@1234",
+ *     phoneNum: "12345678910",
+ *     countryCode: "86",
+ *     email: "1234@qq.com",
+ *     forceDelete: true,
+ * });
+ * const groupMembershipBasic = new tencentcloud.cam.GroupMembership("groupMembershipBasic", {
+ *     groupId: groups.then(groups => groups.groupLists?[0]?.groupId),
+ *     userNames: [foo.id],
  * });
  * ```
  *

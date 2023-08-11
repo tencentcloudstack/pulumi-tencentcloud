@@ -109,16 +109,6 @@ def get_account_db_attachments(account_name: Optional[str] = None,
     """
     Use this data source to query the list of SQL Server account DB privileges.
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    test = tencentcloud.Sqlserver.get_account_db_attachments(instance_id=tencentcloud_sqlserver_instance["test"]["id"],
-        account_name=tencentcloud_sqlserver_account_db_attachment["test"]["account_name"])
-    ```
-
 
     :param str account_name: Name of the SQL Server account to be queried.
     :param str db_name: Name of the DB to be queried.
@@ -155,16 +145,6 @@ def get_account_db_attachments_output(account_name: Optional[pulumi.Input[Option
                                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAccountDbAttachmentsResult]:
     """
     Use this data source to query the list of SQL Server account DB privileges.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    test = tencentcloud.Sqlserver.get_account_db_attachments(instance_id=tencentcloud_sqlserver_instance["test"]["id"],
-        account_name=tencentcloud_sqlserver_account_db_attachment["test"]["account_name"])
-    ```
 
 
     :param str account_name: Name of the SQL Server account to be queried.

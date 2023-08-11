@@ -11,7 +11,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr manageReplicationOperation
+// Provides a resource to start a tcr instance replication operation
+//
+// ## Example Usage
 type ManageReplicationOperation struct {
 	pulumi.CustomResourceState
 

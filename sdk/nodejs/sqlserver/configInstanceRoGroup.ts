@@ -8,33 +8,12 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a sqlserver configInstanceRoGroup
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const configInstanceRoGroup = new tencentcloud.Sqlserver.ConfigInstanceRoGroup("config_instance_ro_group", {
- *     autoWeight: 0,
- *     instanceId: "mssql-ds1xhnt9",
- *     isOfflineDelay: 1,
- *     minReadOnlyInGroup: 1,
- *     readOnlyGroupId: "mssqlrg-cbya44fb",
- *     readOnlyGroupName: "keep-ro-group-customize",
- *     readOnlyMaxDelayTime: 10,
- *     weightPairs: [{
- *         readOnlyInstanceId: "mssqlro-o6dv2ugx",
- *         readOnlyWeight: 50,
- *     }],
- * });
- * ```
- *
  * ## Import
  *
  * sqlserver config_instance_ro_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup config_instance_ro_group config_instance_ro_group_id
+ *  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
  * ```
  */
 export class ConfigInstanceRoGroup extends pulumi.CustomResource {

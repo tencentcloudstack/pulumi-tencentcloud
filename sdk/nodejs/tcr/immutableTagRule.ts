@@ -6,23 +6,94 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr immutableTagRule
+ * Provides a resource to create a tcr immutable tag rule.
  *
  * ## Example Usage
+ * ### Create a immutable tag rule with specified tags and exclude specified repositories
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const myRule = new tencentcloud.Tcr.ImmutableTagRule("my_rule", {
- *     namespaceName: "%s",
- *     registryId: "%s",
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     deleteBucket: true,
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * const exampleImmutableTagRule = new tencentcloud.tcr.ImmutableTagRule("exampleImmutableTagRule", {
+ *     registryId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
  *     rule: {
- *         disabled: false,
- *         repositoryDecoration: "repoMatches",
- *         repositoryPattern: "**",
- *         tagDecoration: "matches",
+ *         repositoryPattern: "deprecated_repo",
  *         tagPattern: "**",
+ *         repositoryDecoration: "repoExcludes",
+ *         tagDecoration: "matches",
+ *         disabled: false,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### With specified repositories and exclude specified version tag
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tcr.ImmutableTagRule("example", {
+ *     registryId: tencentcloud_tcr_instance.example.id,
+ *     namespaceName: tencentcloud_tcr_namespace.example.name,
+ *     rule: {
+ *         repositoryPattern: "**",
+ *         tagPattern: "v1",
+ *         repositoryDecoration: "repoMatches",
+ *         tagDecoration: "excludes",
+ *         disabled: false,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### Disabled the specified rule
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleRuleA = new tencentcloud.tcr.ImmutableTagRule("exampleRuleA", {
+ *     registryId: tencentcloud_tcr_instance.example.id,
+ *     namespaceName: tencentcloud_tcr_namespace.example.name,
+ *     rule: {
+ *         repositoryPattern: "deprecated_repo",
+ *         tagPattern: "**",
+ *         repositoryDecoration: "repoExcludes",
+ *         tagDecoration: "matches",
+ *         disabled: false,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleRuleB = new tencentcloud.tcr.ImmutableTagRule("exampleRuleB", {
+ *     registryId: tencentcloud_tcr_instance.example.id,
+ *     namespaceName: tencentcloud_tcr_namespace.example.name,
+ *     rule: {
+ *         repositoryPattern: "**",
+ *         tagPattern: "v1",
+ *         repositoryDecoration: "repoMatches",
+ *         tagDecoration: "excludes",
+ *         disabled: true,
  *     },
  *     tags: {
  *         createdBy: "terraform",

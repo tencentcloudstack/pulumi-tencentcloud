@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigAclConfigUserRuleCondition
     {
-        /// <summary>
-        /// Content to match.
-        /// </summary>
         public readonly string MatchContent;
-        /// <summary>
-        /// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        /// </summary>
         public readonly string MatchFrom;
-        /// <summary>
-        /// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        /// </summary>
         public readonly string MatchParam;
-        /// <summary>
-        /// Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        /// </summary>
         public readonly string Operator;
 
         [OutputConstructor]

@@ -23,43 +23,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
     ///         {
-    ///             ClusterName = "example",
-    ///             Remark = "this is description.",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
     ///         });
-    ///         var barNamespace = new Tencentcloud.Tdmq.Namespace("barNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironName = "example",
+    ///             EnvironName = "tf_example",
     ///             MsgTtl = 300,
-    ///             Remark = "this is description.",
+    ///             ClusterId = exampleInstance.Id,
+    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///             {
+    ///                 TimeInMinutes = 60,
+    ///                 SizeInMb = 10,
+    ///             },
+    ///             Remark = "remark.",
     ///         });
-    ///         var barTopic = new Tencentcloud.Tdmq.Topic("barTopic", new Tencentcloud.Tdmq.TopicArgs
+    ///         var exampleRole = new Tencentcloud.Tdmq.Role("exampleRole", new Tencentcloud.Tdmq.RoleArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironId = barNamespace.Id,
-    ///             Partitions = 6,
-    ///             Remark = "this is description.",
-    ///             TopicName = "example",
-    ///             TopicType = 0,
+    ///             RoleName = "tf_example",
+    ///             ClusterId = exampleInstance.Id,
+    ///             Remark = "remark.",
     ///         });
-    ///         var barRole = new Tencentcloud.Tdmq.Role("barRole", new Tencentcloud.Tdmq.RoleArgs
+    ///         var exampleNamespaceRoleAttachment = new Tencentcloud.Tdmq.NamespaceRoleAttachment("exampleNamespaceRoleAttachment", new Tencentcloud.Tdmq.NamespaceRoleAttachmentArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             Remark = "this is description world",
-    ///             RoleName = "example",
-    ///         });
-    ///         var barNamespaceRoleAttachment = new Tencentcloud.Tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment", new Tencentcloud.Tdmq.NamespaceRoleAttachmentArgs
-    ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironId = barNamespace.Id,
+    ///             EnvironId = exampleNamespace.EnvironName,
+    ///             RoleName = exampleRole.RoleName,
     ///             Permissions = 
     ///             {
     ///                 "produce",
     ///                 "consume",
     ///             },
-    ///             RoleName = barRole.RoleName,
+    ///             ClusterId = exampleInstance.Id,
     ///         });
     ///     }
     /// 

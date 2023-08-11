@@ -25,30 +25,28 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cluster, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq"),
-// 			Remark:      pulumi.String("test recket mq"),
+// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		namespace, err := Tdmq.NewRocketmqNamespace(ctx, "namespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     cluster.ClusterId,
-// 			NamespaceName: pulumi.String("test_namespace"),
-// 			Ttl:           pulumi.Int(65000),
-// 			RetentionTime: pulumi.Int(65000),
-// 			Remark:        pulumi.String("test namespace"),
+// 		exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+// 			ClusterId:     exampleRocketmqCluster.ClusterId,
+// 			NamespaceName: pulumi.String("tf_example"),
+// 			Remark:        pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewRocketmqGroup(ctx, "group", &Tdmq.RocketmqGroupArgs{
-// 			GroupName:       pulumi.String("test_rocketmq_group"),
-// 			Namespace:       namespace.NamespaceName,
+// 		_, err = Tdmq.NewRocketmqGroup(ctx, "exampleRocketmqGroup", &Tdmq.RocketmqGroupArgs{
+// 			GroupName:       pulumi.String("tf_example"),
+// 			ClusterId:       exampleRocketmqCluster.ClusterId,
+// 			Namespace:       exampleRocketmqNamespace.NamespaceName,
 // 			ReadEnable:      pulumi.Bool(true),
 // 			BroadcastEnable: pulumi.Bool(true),
-// 			ClusterId:       cluster.ClusterId,
-// 			Remark:          pulumi.String("test rocketmq group"),
+// 			Remark:          pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err

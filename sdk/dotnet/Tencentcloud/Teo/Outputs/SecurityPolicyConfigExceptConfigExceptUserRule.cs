@@ -14,30 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigExceptConfigExceptUserRule
     {
-        /// <summary>
-        /// Action to take. Valid values: `skip`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition> ExceptUserRuleConditions;
-        /// <summary>
-        /// Scope of the rule in effect.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope? ExceptUserRuleScope;
         public readonly int? RuleId;
-        /// <summary>
-        /// Rule name.
-        /// </summary>
         public readonly string? RuleName;
-        /// <summary>
-        /// Priority of the rule. Valid value range: 0-100.
-        /// </summary>
         public readonly int? RulePriority;
-        /// <summary>
-        /// Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-        /// </summary>
         public readonly string? RuleStatus;
         public readonly string? UpdateTime;
 

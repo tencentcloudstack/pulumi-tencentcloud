@@ -18,30 +18,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var uin = info.Apply(info =&gt; info.Uin);
     ///         var foo = new Tencentcloud.Cam.Role("foo", new Tencentcloud.Cam.RoleArgs
     ///         {
-    ///             ConsoleLogin = true,
-    ///             Description = "test",
-    ///             Document = @"{
+    ///             Document = Output.Tuple(uin, uin).Apply(values =&gt;
+    ///             {
+    ///                 var uin = values.Item1;
+    ///                 var uin1 = values.Item2;
+    ///                 return @$"{{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
-    ///     {
-    ///       ""action"": [""name/sts:AssumeRole""],
+    ///     {{
+    ///       ""action"": [
+    ///         ""name/sts:AssumeRole""
+    ///       ],
     ///       ""effect"": ""allow"",
-    ///       ""principal"": {
-    ///         ""qcs"": [""qcs::cam::uin/&lt;your-account-id&gt;:uin/&lt;your-account-id&gt;""]
-    ///       }
-    ///     }
+    ///       ""principal"": {{
+    ///         ""qcs"": [
+    ///           ""qcs::cam::uin/{uin}:uin/{uin1}""
+    ///         ]
+    ///       }}
+    ///     }}
     ///   ]
-    /// }
-    /// 
-    /// ",
+    /// }}
+    /// ";
+    ///             }),
+    ///             Description = "test",
+    ///             ConsoleLogin = true,
     ///             Tags = 
     ///             {
     ///                 { "test", "tf-cam-role" },
@@ -55,30 +66,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var config = new Config();
+    ///         var saml-provider = config.Get("saml-provider") ?? "example";
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var uin = info.Apply(info =&gt; info.Uin);
+    ///         var samlProvider = saml_provider;
     ///         var boo = new Tencentcloud.Cam.Role("boo", new Tencentcloud.Cam.RoleArgs
     ///         {
-    ///             ConsoleLogin = true,
-    ///             Description = "test",
-    ///             Document = @"{
+    ///             Document = uin.Apply(uin =&gt; @$"{{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
-    ///     {
-    ///       ""action"": [""name/sts:AssumeRole"", ""name/sts:AssumeRoleWithWebIdentity""],
+    ///     {{
+    ///       ""action"": [
+    ///         ""name/sts:AssumeRole""
+    ///       ],
     ///       ""effect"": ""allow"",
-    ///       ""principal"": {
-    ///         ""federated"": [""qcs::cam::uin/&lt;your-account-id&gt;:saml-provider/&lt;your-name&gt;""]
-    ///       }
-    ///     }
+    ///       ""principal"": {{
+    ///         ""qcs"": [
+    ///           ""qcs::cam::uin/{uin}:saml-provider/{samlProvider}""
+    ///         ]
+    ///       }}
+    ///     }}
     ///   ]
-    /// }
-    /// 
-    /// ",
+    /// }}
+    /// "),
+    ///             Description = "tf_test",
+    ///             ConsoleLogin = true,
     ///         });
     ///     }
     /// 

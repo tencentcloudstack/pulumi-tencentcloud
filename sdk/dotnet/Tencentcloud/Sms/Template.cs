@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     /// Provides a resource to create a sms template
     /// 
     /// ## Example Usage
+    /// ### Create a sms template
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -26,10 +27,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     ///         var template = new Tencentcloud.Sms.Template("template", new Tencentcloud.Sms.TemplateArgs
     ///         {
     ///             International = 0,
-    ///             Remark = "terraform test",
+    ///             Remark = "terraform example",
     ///             SmsType = 0,
-    ///             TemplateContent = "Template Content",
-    ///             TemplateName = "Template By Terraform",
+    ///             TemplateContent = "example for sms template",
+    ///             TemplateName = "tf_example_sms_template",
     ///         });
     ///     }
     /// 

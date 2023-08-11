@@ -23,11 +23,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var localGateway = new Tencentcloud.Vpc.LocalGateway("localGateway", new Tencentcloud.Vpc.LocalGatewayArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var example = new Tencentcloud.Vpc.LocalGateway("example", new Tencentcloud.Vpc.LocalGatewayArgs
+    ///         {
+    ///             LocalGatewayName = "tf-example",
+    ///             VpcId = vpc.Id,
     ///             CdcId = "cluster-j9gyu1iy",
-    ///             LocalGatewayName = "local-gw-test",
-    ///             VpcId = "vpc-lh4nqig9",
     ///         });
     ///     }
     /// 

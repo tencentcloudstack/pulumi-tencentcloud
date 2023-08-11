@@ -97,14 +97,22 @@ def get_accounts(instance_id: Optional[str] = None,
     Use this data source to query the list of SQL Server accounts.
 
     ## Example Usage
+    ### Pull instance account list
 
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    name = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5",
+    example = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5")
+    ```
+    ### Pull instance account list Filter by name
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5",
         name="myaccount")
-    foo = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5")
     ```
 
 
@@ -141,14 +149,22 @@ def get_accounts_output(instance_id: Optional[pulumi.Input[str]] = None,
     Use this data source to query the list of SQL Server accounts.
 
     ## Example Usage
+    ### Pull instance account list
 
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    name = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5",
+    example = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5")
+    ```
+    ### Pull instance account list Filter by name
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5",
         name="myaccount")
-    foo = tencentcloud.Sqlserver.get_accounts(instance_id="mssql-3cdq7kx5")
     ```
 
 

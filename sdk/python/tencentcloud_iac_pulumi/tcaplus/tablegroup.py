@@ -148,21 +148,31 @@ class Tablegroup(pulumi.CustomResource):
         Use this resource to create TcaplusDB table group.
 
         ## Example Usage
+        ### Create a tcaplusdb table group
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
             idl_type="PROTO",
-            cluster_name="tf_tcaplus_cluster_test",
-            vpc_id="vpc-7k6gzox6",
-            subnet_id="subnet-akwgvfa3",
-            password="1qaA2k1wgvfa3ZZZ",
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
             old_password_expire_last=3600)
-        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
-            cluster_id=test.id,
-            tablegroup_name="tf_test_group_name")
+        example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
+            cluster_id=example_cluster.id,
+            tablegroup_name="tf_example_group_name")
         ```
 
         :param str resource_name: The name of the resource.
@@ -180,21 +190,31 @@ class Tablegroup(pulumi.CustomResource):
         Use this resource to create TcaplusDB table group.
 
         ## Example Usage
+        ### Create a tcaplusdb table group
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
             idl_type="PROTO",
-            cluster_name="tf_tcaplus_cluster_test",
-            vpc_id="vpc-7k6gzox6",
-            subnet_id="subnet-akwgvfa3",
-            password="1qaA2k1wgvfa3ZZZ",
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
             old_password_expire_last=3600)
-        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
-            cluster_id=test.id,
-            tablegroup_name="tf_test_group_name")
+        example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
+            cluster_id=example_cluster.id,
+            tablegroup_name="tf_example_group_name")
         ```
 
         :param str resource_name: The name of the resource.

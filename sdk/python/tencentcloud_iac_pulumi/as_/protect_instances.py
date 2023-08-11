@@ -135,12 +135,79 @@ class ProtectInstances(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        protect_instances = tencentcloud.as_.ProtectInstances("protectInstances",
-            auto_scaling_group_id=tencentcloud_as_scaling_group["scaling_group"]["id"],
-            instance_ids=["ins-xxxxx"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        instance_types = tencentcloud.Instance.get_types(filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[zones.zones[0].name],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-family",
+                    values=["S5"],
+                ),
+            ],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone=zones.zones[0].name,
+            image_id=image.images[0].image_id,
+            instance_type=instance_types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        # Attachment Instance
+        attachment = tencentcloud.as_.Attachment("attachment",
+            scaling_group_id=example_scaling_group.id,
+            instance_ids=[example_instance.id])
+        # Set protect
+        protect = tencentcloud.as_.ProtectInstances("protect",
+            auto_scaling_group_id=example_scaling_group.id,
+            instance_ids=attachment.instance_ids,
             protected_from_scale_in=True)
+        ```
+        ### Or close protect
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        protect = tencentcloud.as_.ProtectInstances("protect",
+            auto_scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            instance_ids=tencentcloud_as_attachment["attachment"]["instance_ids"],
+            protected_from_scale_in=False)
         ```
 
         :param str resource_name: The name of the resource.
@@ -162,12 +229,79 @@ class ProtectInstances(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        protect_instances = tencentcloud.as_.ProtectInstances("protectInstances",
-            auto_scaling_group_id=tencentcloud_as_scaling_group["scaling_group"]["id"],
-            instance_ids=["ins-xxxxx"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        instance_types = tencentcloud.Instance.get_types(filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[zones.zones[0].name],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-family",
+                    values=["S5"],
+                ),
+            ],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_instance = tencentcloud.instance.Instance("exampleInstance",
+            instance_name="tf_example",
+            availability_zone=zones.zones[0].name,
+            image_id=image.images[0].image_id,
+            instance_type=instance_types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        # Attachment Instance
+        attachment = tencentcloud.as_.Attachment("attachment",
+            scaling_group_id=example_scaling_group.id,
+            instance_ids=[example_instance.id])
+        # Set protect
+        protect = tencentcloud.as_.ProtectInstances("protect",
+            auto_scaling_group_id=example_scaling_group.id,
+            instance_ids=attachment.instance_ids,
             protected_from_scale_in=True)
+        ```
+        ### Or close protect
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        protect = tencentcloud.as_.ProtectInstances("protect",
+            auto_scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            instance_ids=tencentcloud_as_attachment["attachment"]["instance_ids"],
+            protected_from_scale_in=False)
         ```
 
         :param str resource_name: The name of the resource.

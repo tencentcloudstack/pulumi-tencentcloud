@@ -14,6 +14,7 @@ import (
 // Use this resource to create tcr long term token.
 //
 // ## Example Usage
+// ### Create a token for tcr instance
 //
 // ```go
 // package main
@@ -25,9 +26,19 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewToken(ctx, "foo", &Tcr.TokenArgs{
-// 			Description: pulumi.String("test"),
-// 			InstanceId:  pulumi.String("cls-cda1iex1"),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewToken(ctx, "exampleToken", &Tcr.TokenArgs{
+// 			InstanceId:  exampleInstance.ID(),
+// 			Description: pulumi.String("example for the tcr token"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -42,7 +53,7 @@ import (
 // tcr token can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/token:Token foo cls-cda1iex1#namespace#buv3h3j96j2d1rk1cllg
+//  $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
 // ```
 type Token struct {
 	pulumi.CustomResourceState

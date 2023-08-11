@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// Provide a resource to create a KMS key.
     /// 
     /// ## Example Usage
+    /// ### Create and enable a instance.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,15 +24,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Kms.Key("foo", new Tencentcloud.Kms.KeyArgs
+    ///         var example = new Tencentcloud.Kms.Key("example", new Tencentcloud.Kms.KeyArgs
     ///         {
-    ///             Alias = "test",
-    ///             Description = "describe key test message.",
-    ///             KeyRotationEnabled = true,
+    ///             Alias = "tf-example-kms-key",
+    ///             Description = "example of kms key",
     ///             IsEnabled = true,
+    ///             KeyRotationEnabled = false,
     ///             Tags = 
     ///             {
-    ///                 { "test-tag", "key-test" },
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Specify the Key Usage as an asymmetry method.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example2 = new Tencentcloud.Kms.Key("example2", new Tencentcloud.Kms.KeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-key",
+    ///             Description = "example of kms key",
+    ///             IsEnabled = false,
+    ///             KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Disable the kms key instance.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example3 = new Tencentcloud.Kms.Key("example3", new Tencentcloud.Kms.KeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-key",
+    ///             Description = "example of kms key",
+    ///             IsEnabled = false,
+    ///             KeyRotationEnabled = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "test-tag", "unit-test" },
     ///             },
     ///         });
     ///     }

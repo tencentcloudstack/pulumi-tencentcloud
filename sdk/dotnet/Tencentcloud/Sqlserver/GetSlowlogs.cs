@@ -27,11 +27,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var slowlogs = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
         ///         {
-        ///             EndTime = "2023-05-18 00:00:00",
+        ///             EndTime = "2023-08-07 00:00:00",
         ///             InstanceId = "mssql-qelbzgwf",
-        ///             StartTime = "2020-05-01 00:00:00",
+        ///             StartTime = "2023-08-01 00:00:00",
         ///         }));
         ///     }
         /// 
@@ -58,11 +58,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var slowlogs = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetSlowlogs.InvokeAsync(new Tencentcloud.Sqlserver.GetSlowlogsArgs
         ///         {
-        ///             EndTime = "2023-05-18 00:00:00",
+        ///             EndTime = "2023-08-07 00:00:00",
         ///             InstanceId = "mssql-qelbzgwf",
-        ///             StartTime = "2020-05-01 00:00:00",
+        ///             StartTime = "2023-08-01 00:00:00",
         ///         }));
         ///     }
         /// 

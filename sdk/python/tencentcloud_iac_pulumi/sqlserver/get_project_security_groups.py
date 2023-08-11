@@ -89,7 +89,7 @@ def get_project_security_groups(project_id: Optional[int] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    project_security_groups = tencentcloud.Sqlserver.get_project_security_groups(project_id=0)
+    example = tencentcloud.Sqlserver.get_project_security_groups(project_id=0)
     ```
 
 
@@ -127,7 +127,7 @@ def get_project_security_groups_output(project_id: Optional[pulumi.Input[int]] =
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    project_security_groups = tencentcloud.Sqlserver.get_project_security_groups(project_id=0)
+    example = tencentcloud.Sqlserver.get_project_security_groups(project_id=0)
     ```
 
 

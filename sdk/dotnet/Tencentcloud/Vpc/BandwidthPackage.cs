@@ -23,15 +23,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var bandwidthPackage = new Tencentcloud.Vpc.BandwidthPackage("bandwidthPackage", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
     ///         {
-    ///             BandwidthPackageName = "test-001",
+    ///             BandwidthPackageName = "tf-example",
     ///             ChargeType = "TOP5_POSTPAID_BY_MONTH",
     ///             NetworkType = "BGP",
     ///             Tags = 
     ///             {
     ///                 { "createdBy", "terraform" },
     ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### PrePaid Bandwidth Package
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var bandwidthPackage = new Tencentcloud.Vpc.BandwidthPackage("bandwidthPackage", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         {
+    ///             BandwidthPackageName = "test-001",
+    ///             ChargeType = "FIXED_PREPAID_BY_MONTH",
+    ///             InternetMaxBandwidth = 100,
+    ///             NetworkType = "BGP",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///             TimeSpan = 3,
     ///         });
     ///     }
     /// 
@@ -56,7 +82,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<string?> BandwidthPackageName { get; private set; } = null!;
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -78,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        /// </summary>
+        [Output("timeSpan")]
+        public Output<int?> TimeSpan { get; private set; } = null!;
 
 
         /// <summary>
@@ -133,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? BandwidthPackageName { get; set; }
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -161,6 +193,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
             get => _tags ?? (_tags = new InputMap<object>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        /// </summary>
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
 
         public BandwidthPackageArgs()
         {
@@ -176,7 +214,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? BandwidthPackageName { get; set; }
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -204,6 +242,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
             get => _tags ?? (_tags = new InputMap<object>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        /// </summary>
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
 
         public BandwidthPackageState()
         {

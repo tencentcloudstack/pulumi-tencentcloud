@@ -20,14 +20,65 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpManageGrafanaAttachment(ctx, "manageGrafanaAttachment", &Monitor.TmpManageGrafanaAttachmentArgs{
-// 			GrafanaId:  pulumi.String("grafana-xxxxxx"),
-// 			InstanceId: pulumi.String("prom-xxxxxxxx"),
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-4"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
+// 			InstanceName:      pulumi.String("tf-tmp-instance"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          subnet.ID(),
+// 			DataRetentionTime: pulumi.Int(30),
+// 			Zone:              pulumi.String(availabilityZone),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooGrafanaInstance, err := Monitor.NewGrafanaInstance(ctx, "fooGrafanaInstance", &Monitor.GrafanaInstanceArgs{
+// 			InstanceName: pulumi.String("tf-grafana"),
+// 			VpcId:        vpc.ID(),
+// 			SubnetIds: pulumi.StringArray{
+// 				subnet.ID(),
+// 			},
+// 			GrafanaInitPassword: pulumi.String("1234567890"),
+// 			EnableInternet:      pulumi.Bool(false),
+// 			IsDestroy:           pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewTmpManageGrafanaAttachment(ctx, "fooTmpManageGrafanaAttachment", &Monitor.TmpManageGrafanaAttachmentArgs{
+// 			GrafanaId:  fooGrafanaInstance.ID(),
+// 			InstanceId: fooTmpInstance.ID(),
 // 		})
 // 		if err != nil {
 // 			return err

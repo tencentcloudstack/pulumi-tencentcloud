@@ -12,63 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     public static class GetBotManagedRules
     {
-        /// <summary>
-        /// Use this data source to query detailed information of teo botManagedRules
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var botManagedRules = Output.Create(Tencentcloud.Teo.GetBotManagedRules.InvokeAsync(new Tencentcloud.Teo.GetBotManagedRulesArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetBotManagedRulesResult> InvokeAsync(GetBotManagedRulesArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetBotManagedRulesResult>("tencentcloud:Teo/getBotManagedRules:getBotManagedRules", args ?? new GetBotManagedRulesArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of teo botManagedRules
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var botManagedRules = Output.Create(Tencentcloud.Teo.GetBotManagedRules.InvokeAsync(new Tencentcloud.Teo.GetBotManagedRulesArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetBotManagedRulesResult> Invoke(GetBotManagedRulesInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetBotManagedRulesResult>("tencentcloud:Teo/getBotManagedRules:getBotManagedRules", args ?? new GetBotManagedRulesInvokeArgs(), options.WithDefaults());
     }
@@ -76,21 +22,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetBotManagedRulesArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public string Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public string ZoneId { get; set; } = null!;
 
@@ -101,21 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetBotManagedRulesInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public Input<string> Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
 
@@ -134,9 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
-        /// <summary>
-        /// Managed rules list.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetBotManagedRulesRuleResult> Rules;
         public readonly string ZoneId;
 

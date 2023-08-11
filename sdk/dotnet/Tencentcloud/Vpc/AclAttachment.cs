@@ -13,42 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// <summary>
     /// Provide a resource to attach an existing subnet to Network ACL.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var idInstances = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync());
-    ///         var foo = new Tencentcloud.Vpc.Acl("foo", new Tencentcloud.Vpc.AclArgs
-    ///         {
-    ///             VpcId = idInstances.Apply(idInstances =&gt; idInstances.InstanceLists?[0]?.VpcId),
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
-    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#800#TCP",
-    ///                 "ACCEPT#192.168.1.0/24#800-900#TCP",
-    ///             },
-    ///         });
-    ///         var attachment = new Tencentcloud.Vpc.AclAttachment("attachment", new Tencentcloud.Vpc.AclAttachmentArgs
-    ///         {
-    ///             AclId = foo.Id,
-    ///             SubnetId = idInstances.Apply(idInstances =&gt; idInstances.InstanceLists?[0]?.SubnetIds?[0]),
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// Acl attachment can be imported using the id, e.g.

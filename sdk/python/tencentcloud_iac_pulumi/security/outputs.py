@@ -9,112 +9,10 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'GroupRuleAddressTemplate',
-    'GroupRuleProtocolTemplate',
     'GroupRuleSetEgress',
     'GroupRuleSetIngress',
     'GetGroupsSecurityGroupResult',
 ]
-
-@pulumi.output_type
-class GroupRuleAddressTemplate(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "groupId":
-            suggest = "group_id"
-        elif key == "templateId":
-            suggest = "template_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in GroupRuleAddressTemplate. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        GroupRuleAddressTemplate.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        GroupRuleAddressTemplate.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 group_id: Optional[str] = None,
-                 template_id: Optional[str] = None):
-        """
-        :param str group_id: Address template group ID, conflicts with `template_id`.
-        :param str template_id: Address template ID, conflicts with `group_id`.
-        """
-        if group_id is not None:
-            pulumi.set(__self__, "group_id", group_id)
-        if template_id is not None:
-            pulumi.set(__self__, "template_id", template_id)
-
-    @property
-    @pulumi.getter(name="groupId")
-    def group_id(self) -> Optional[str]:
-        """
-        Address template group ID, conflicts with `template_id`.
-        """
-        return pulumi.get(self, "group_id")
-
-    @property
-    @pulumi.getter(name="templateId")
-    def template_id(self) -> Optional[str]:
-        """
-        Address template ID, conflicts with `group_id`.
-        """
-        return pulumi.get(self, "template_id")
-
-
-@pulumi.output_type
-class GroupRuleProtocolTemplate(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "groupId":
-            suggest = "group_id"
-        elif key == "templateId":
-            suggest = "template_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in GroupRuleProtocolTemplate. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        GroupRuleProtocolTemplate.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        GroupRuleProtocolTemplate.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 group_id: Optional[str] = None,
-                 template_id: Optional[str] = None):
-        """
-        :param str group_id: Address template group ID, conflicts with `template_id`.
-        :param str template_id: Address template ID, conflicts with `group_id`.
-        """
-        if group_id is not None:
-            pulumi.set(__self__, "group_id", group_id)
-        if template_id is not None:
-            pulumi.set(__self__, "template_id", template_id)
-
-    @property
-    @pulumi.getter(name="groupId")
-    def group_id(self) -> Optional[str]:
-        """
-        Address template group ID, conflicts with `template_id`.
-        """
-        return pulumi.get(self, "group_id")
-
-    @property
-    @pulumi.getter(name="templateId")
-    def template_id(self) -> Optional[str]:
-        """
-        Address template ID, conflicts with `group_id`.
-        """
-        return pulumi.get(self, "template_id")
-
 
 @pulumi.output_type
 class GroupRuleSetEgress(dict):
@@ -129,6 +27,8 @@ class GroupRuleSetEgress(dict):
             suggest = "cidr_block"
         elif key == "ipv6CidrBlock":
             suggest = "ipv6_cidr_block"
+        elif key == "policyIndex":
+            suggest = "policy_index"
         elif key == "serviceTemplateGroup":
             suggest = "service_template_group"
         elif key == "serviceTemplateId":
@@ -154,6 +54,7 @@ class GroupRuleSetEgress(dict):
                  cidr_block: Optional[str] = None,
                  description: Optional[str] = None,
                  ipv6_cidr_block: Optional[str] = None,
+                 policy_index: Optional[int] = None,
                  port: Optional[str] = None,
                  protocol: Optional[str] = None,
                  service_template_group: Optional[str] = None,
@@ -183,6 +84,8 @@ class GroupRuleSetEgress(dict):
             pulumi.set(__self__, "description", description)
         if ipv6_cidr_block is not None:
             pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -241,6 +144,11 @@ class GroupRuleSetEgress(dict):
         An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
         """
         return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[int]:
+        return pulumi.get(self, "policy_index")
 
     @property
     @pulumi.getter
@@ -296,6 +204,8 @@ class GroupRuleSetIngress(dict):
             suggest = "cidr_block"
         elif key == "ipv6CidrBlock":
             suggest = "ipv6_cidr_block"
+        elif key == "policyIndex":
+            suggest = "policy_index"
         elif key == "serviceTemplateGroup":
             suggest = "service_template_group"
         elif key == "serviceTemplateId":
@@ -321,6 +231,7 @@ class GroupRuleSetIngress(dict):
                  cidr_block: Optional[str] = None,
                  description: Optional[str] = None,
                  ipv6_cidr_block: Optional[str] = None,
+                 policy_index: Optional[int] = None,
                  port: Optional[str] = None,
                  protocol: Optional[str] = None,
                  service_template_group: Optional[str] = None,
@@ -350,6 +261,8 @@ class GroupRuleSetIngress(dict):
             pulumi.set(__self__, "description", description)
         if ipv6_cidr_block is not None:
             pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -408,6 +321,11 @@ class GroupRuleSetIngress(dict):
         An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
         """
         return pulumi.get(self, "ipv6_cidr_block")
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[int]:
+        return pulumi.get(self, "policy_index")
 
     @property
     @pulumi.getter

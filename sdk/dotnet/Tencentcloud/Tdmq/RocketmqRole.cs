@@ -23,16 +23,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test recket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var role = new Tencentcloud.Tdmq.RocketmqRole("role", new Tencentcloud.Tdmq.RocketmqRoleArgs
+    ///         var exampleRocketmqRole = new Tencentcloud.Tdmq.RocketmqRole("exampleRocketmqRole", new Tencentcloud.Tdmq.RocketmqRoleArgs
     ///         {
-    ///             RoleName = "test_rocketmq_role",
-    ///             Remark = "test rocketmq role",
-    ///             ClusterId = cluster.ClusterId,
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             RoleName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 

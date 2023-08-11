@@ -14,19 +14,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis read_only
     /// 
     /// ## Example Usage
+    /// ### Set instance input mode
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = fooGroup.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
+    ///                 "DROP#8.8.8.8#80,90#UDP",
+    ///                 "DROP#0.0.0.0/0#80-90#TCP",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
+    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 fooGroup.Id,
+    ///             },
+    ///         });
     ///         var readOnly = new Tencentcloud.Redis.ReadOnly("readOnly", new Tencentcloud.Redis.ReadOnlyArgs
     ///         {
+    ///             InstanceId = fooInstance.Id,
     ///             InputMode = "0",
-    ///             InstanceId = "crs-c1nl9rpv",
     ///         });
     ///     }
     /// 

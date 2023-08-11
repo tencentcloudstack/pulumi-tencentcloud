@@ -11,25 +11,32 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tdmq.Instance("foo", {
- *     clusterName: "example",
- *     remark: "this is description.",
+ * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
- * const barNamespace = new tencentcloud.Tdmq.Namespace("bar", {
- *     clusterId: foo.id,
- *     environName: "example",
+ * const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+ *     environName: "tf_example",
  *     msgTtl: 300,
- *     remark: "this is description.",
+ *     clusterId: exampleInstance.id,
+ *     retentionPolicy: {
+ *         timeInMinutes: 60,
+ *         sizeInMb: 10,
+ *     },
+ *     remark: "remark.",
  * });
- * const barTopic = new tencentcloud.Tdmq.Topic("bar", {
- *     clusterId: foo.id,
- *     environId: barNamespace.id,
+ * const exampleTopic = new tencentcloud.tdmq.Topic("exampleTopic", {
+ *     environId: exampleNamespace.environName,
+ *     clusterId: exampleInstance.id,
+ *     topicName: "tf-example-topic",
  *     partitions: 6,
- *     remark: "this is description.",
- *     topicName: "example",
- *     topicType: 0,
+ *     pulsarTopicType: 3,
+ *     remark: "remark.",
  * });
  * ```
  *

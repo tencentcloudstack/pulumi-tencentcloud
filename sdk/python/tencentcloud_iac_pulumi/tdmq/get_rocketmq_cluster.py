@@ -105,8 +105,12 @@ def get_rocketmq_cluster(cluster_id_lists: Optional[Sequence[str]] = None,
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    cluster = tencentcloud.Tdmq.get_rocketmq_cluster(name_keyword="test_rocketmq")
+    example_rocketmq_cluster = tencentcloud.Tdmq.get_rocketmq_cluster(name_keyword=example_tdmq / rocketmq_cluster_rocketmq_cluster["clusterName"])
+    example_tdmq_rocketmq_cluster_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
     ```
 
 
@@ -151,8 +155,12 @@ def get_rocketmq_cluster_output(cluster_id_lists: Optional[pulumi.Input[Optional
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    cluster = tencentcloud.Tdmq.get_rocketmq_cluster(name_keyword="test_rocketmq")
+    example_rocketmq_cluster = tencentcloud.Tdmq.get_rocketmq_cluster(name_keyword=example_tdmq / rocketmq_cluster_rocketmq_cluster["clusterName"])
+    example_tdmq_rocketmq_cluster_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
     ```
 
 

@@ -10,7 +10,7 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpcId`. One instance can only belong to one VPC.
  *
- * > **NOTE:** At present, 'PREPAID' instance cannot be deleted and must wait it to be outdated and released automatically.
+ * > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
  *
  * ## Import
  *
@@ -139,7 +139,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceType!: pulumi.Output<string>;
     /**
-     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
      */
     public readonly internetChargeType!: pulumi.Output<string>;
     /**
@@ -453,7 +453,7 @@ export interface InstanceState {
      */
     instanceType?: pulumi.Input<string>;
     /**
-     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -637,7 +637,7 @@ export interface InstanceArgs {
      */
     instanceType?: pulumi.Input<string>;
     /**
-     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+     * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
      */
     internetChargeType?: pulumi.Input<string>;
     /**

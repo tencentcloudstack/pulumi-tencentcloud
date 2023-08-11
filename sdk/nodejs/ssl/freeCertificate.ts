@@ -11,18 +11,19 @@ import * as utilities from "../utilities";
  * > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
  *
  * ## Example Usage
+ * ### only support type 2. 2=TrustAsia TLS RSA CA.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Ssl.FreeCertificate("foo", {
- *     alias: "my_free_cert",
- *     contactEmail: "foo@example.com",
- *     contactPhone: "12345678901",
+ * const example = new tencentcloud.Ssl.FreeCertificate("example", {
+ *     alias: "example_free_cert",
+ *     contactEmail: "test@example.com",
+ *     contactPhone: "18352458901",
  *     csrEncryptAlgo: "RSA",
  *     csrKeyParameter: "2048",
- *     csrKeyPassword: "xxxxxxxx",
+ *     csrKeyPassword: "csr_pwd",
  *     domain: "example.com",
  *     dvAuthMethod: "DNS_AUTO",
  *     packageType: "2",

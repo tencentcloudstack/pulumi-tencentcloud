@@ -8,22 +8,32 @@ import * as utilities from "../utilities";
  * Use this resource to create TcaplusDB table group.
  *
  * ## Example Usage
+ * ### Create a tcaplusdb table group
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = new tencentcloud.tcaplus.Cluster("test", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const vpc = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZone,
+ * });
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
  *     idlType: "PROTO",
- *     clusterName: "tf_tcaplus_cluster_test",
- *     vpcId: "vpc-7k6gzox6",
- *     subnetId: "subnet-akwgvfa3",
- *     password: "1qaA2k1wgvfa3ZZZ",
+ *     clusterName: "tf_example_tcaplus_cluster",
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     password: "your_pw_123111",
  *     oldPasswordExpireLast: 3600,
  * });
- * const tablegroup = new tencentcloud.tcaplus.Tablegroup("tablegroup", {
- *     clusterId: test.id,
- *     tablegroupName: "tf_test_group_name",
+ * const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("exampleTablegroup", {
+ *     clusterId: exampleCluster.id,
+ *     tablegroupName: "tf_example_group_name",
  * });
  * ```
  */

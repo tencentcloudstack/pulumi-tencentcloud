@@ -708,32 +708,90 @@ class ScalingGroup(pulumi.CustomResource):
         Provides a resource to create a group of AS (Auto scaling) instances.
 
         ## Example Usage
+        ### Create a basic Scaling Group
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        ```
+        ### Create a complete Scaling Group
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
-            configuration_id="asc-oqio4yyj",
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="INTERNAL",
+            clb_name="clb-example",
+            project_id=0,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            tags={
+                "test": "tf",
+            })
+        example_listener = tencentcloud.clb.Listener("exampleListener",
+            clb_id=example_instance.id,
+            listener_name="listener-example",
+            port=80,
+            protocol="HTTP")
+        example_listener_rule = tencentcloud.clb.ListenerRule("exampleListenerRule",
+            listener_id=example_listener.listener_id,
+            clb_id=example_instance.id,
+            domain="foo.net",
+            url="/bar")
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=tencentcloud_as_scaling_config["example"]["id"],
+            max_size=1,
+            min_size=0,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_ids=[tencentcloud_subnet["subnet"]["id"]],
+            project_id=0,
             default_cooldown=400,
             desired_capacity=1,
+            termination_policies=["NEWEST_INSTANCE"],
+            retry_policy="INCREMENTAL_INTERVALS",
             forward_balancer_ids=[tencentcloud.as..ScalingGroupForwardBalancerIdArgs(
-                listener_id="lbl-81wr497k",
-                load_balancer_id="lb-hk693b1l",
-                rule_id="loc-kiodx943",
+                load_balancer_id=example_instance.id,
+                listener_id=example_listener.listener_id,
+                rule_id=example_listener_rule.rule_id,
                 target_attributes=[tencentcloud.as..ScalingGroupForwardBalancerIdTargetAttributeArgs(
                     port=80,
                     weight=90,
                 )],
             )],
-            max_size=1,
-            min_size=0,
-            project_id=0,
-            retry_policy="INCREMENTAL_INTERVALS",
-            scaling_group_name="tf-as-scaling-group",
-            subnet_ids=["subnet-mc3egos"],
-            termination_policies="NEWEST_INSTANCE",
-            vpc_id="vpc-3efmz0z")
+            tags={
+                "createBy": "tfExample",
+            })
         ```
 
         ## Import
@@ -776,32 +834,90 @@ class ScalingGroup(pulumi.CustomResource):
         Provides a resource to create a group of AS (Auto scaling) instances.
 
         ## Example Usage
+        ### Create a basic Scaling Group
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        ```
+        ### Create a complete Scaling Group
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
-            configuration_id="asc-oqio4yyj",
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="INTERNAL",
+            clb_name="clb-example",
+            project_id=0,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            tags={
+                "test": "tf",
+            })
+        example_listener = tencentcloud.clb.Listener("exampleListener",
+            clb_id=example_instance.id,
+            listener_name="listener-example",
+            port=80,
+            protocol="HTTP")
+        example_listener_rule = tencentcloud.clb.ListenerRule("exampleListenerRule",
+            listener_id=example_listener.listener_id,
+            clb_id=example_instance.id,
+            domain="foo.net",
+            url="/bar")
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=tencentcloud_as_scaling_config["example"]["id"],
+            max_size=1,
+            min_size=0,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_ids=[tencentcloud_subnet["subnet"]["id"]],
+            project_id=0,
             default_cooldown=400,
             desired_capacity=1,
+            termination_policies=["NEWEST_INSTANCE"],
+            retry_policy="INCREMENTAL_INTERVALS",
             forward_balancer_ids=[tencentcloud.as..ScalingGroupForwardBalancerIdArgs(
-                listener_id="lbl-81wr497k",
-                load_balancer_id="lb-hk693b1l",
-                rule_id="loc-kiodx943",
+                load_balancer_id=example_instance.id,
+                listener_id=example_listener.listener_id,
+                rule_id=example_listener_rule.rule_id,
                 target_attributes=[tencentcloud.as..ScalingGroupForwardBalancerIdTargetAttributeArgs(
                     port=80,
                     weight=90,
                 )],
             )],
-            max_size=1,
-            min_size=0,
-            project_id=0,
-            retry_policy="INCREMENTAL_INTERVALS",
-            scaling_group_name="tf-as-scaling-group",
-            subnet_ids=["subnet-mc3egos"],
-            termination_policies="NEWEST_INSTANCE",
-            vpc_id="vpc-3efmz0z")
+            tags={
+                "createBy": "tfExample",
+            })
         ```
 
         ## Import

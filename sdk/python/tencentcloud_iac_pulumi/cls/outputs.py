@@ -39,6 +39,7 @@ __all__ = [
     'CosShipperContentCsv',
     'CosShipperContentJson',
     'CosShipperFilterRule',
+    'DataTransformDstResource',
     'IndexRule',
     'IndexRuleFullText',
     'IndexRuleKeyValue',
@@ -47,7 +48,10 @@ __all__ = [
     'IndexRuleTag',
     'IndexRuleTagKeyValue',
     'IndexRuleTagKeyValueValue',
+    'KafkaRechargeLogRechargeRule',
+    'KafkaRechargeProtocol',
     'MachineGroupMachineGroupType',
+    'ScheduledSqlDstResource',
     'GetMachineGroupConfigsConfigResult',
     'GetMachineGroupConfigsConfigExcludePathResult',
     'GetMachineGroupConfigsConfigExtractRuleResult',
@@ -2203,6 +2207,52 @@ class CosShipperFilterRule(dict):
 
 
 @pulumi.output_type
+class DataTransformDstResource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "topicId":
+            suggest = "topic_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DataTransformDstResource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DataTransformDstResource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DataTransformDstResource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 alias: str,
+                 topic_id: str):
+        """
+        :param str alias: alias.
+        :param str topic_id: dst topic id.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        alias.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        dst topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+
+@pulumi.output_type
 class IndexRule(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -2628,6 +2678,289 @@ class IndexRuleTagKeyValueValue(dict):
 
 
 @pulumi.output_type
+class KafkaRechargeLogRechargeRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "defaultTimeSwitch":
+            suggest = "default_time_switch"
+        elif key == "encodingFormat":
+            suggest = "encoding_format"
+        elif key == "rechargeType":
+            suggest = "recharge_type"
+        elif key == "defaultTimeSrc":
+            suggest = "default_time_src"
+        elif key == "logRegex":
+            suggest = "log_regex"
+        elif key == "timeFormat":
+            suggest = "time_format"
+        elif key == "timeKey":
+            suggest = "time_key"
+        elif key == "timeRegex":
+            suggest = "time_regex"
+        elif key == "timeZone":
+            suggest = "time_zone"
+        elif key == "unMatchLogKey":
+            suggest = "un_match_log_key"
+        elif key == "unMatchLogSwitch":
+            suggest = "un_match_log_switch"
+        elif key == "unMatchLogTimeSrc":
+            suggest = "un_match_log_time_src"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KafkaRechargeLogRechargeRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KafkaRechargeLogRechargeRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KafkaRechargeLogRechargeRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 default_time_switch: bool,
+                 encoding_format: int,
+                 recharge_type: str,
+                 default_time_src: Optional[int] = None,
+                 keys: Optional[Sequence[str]] = None,
+                 log_regex: Optional[str] = None,
+                 metadatas: Optional[Sequence[str]] = None,
+                 time_format: Optional[str] = None,
+                 time_key: Optional[str] = None,
+                 time_regex: Optional[str] = None,
+                 time_zone: Optional[str] = None,
+                 un_match_log_key: Optional[str] = None,
+                 un_match_log_switch: Optional[bool] = None,
+                 un_match_log_time_src: Optional[int] = None):
+        """
+        :param bool default_time_switch: user default time.
+        :param int encoding_format: encoding format.
+        :param str recharge_type: recharge type.
+        :param int default_time_src: default time from.
+        :param Sequence[str] keys: log key list.
+        :param str log_regex: log regex.
+        :param Sequence[str] metadatas: metadata.
+        :param str time_format: time format.
+        :param str time_key: time key.
+        :param str time_regex: time regex.
+        :param str time_zone: time zone.
+        :param str un_match_log_key: parse failed log key.
+        :param bool un_match_log_switch: is push parse failed log.
+        :param int un_match_log_time_src: parse failed log time from.
+        """
+        pulumi.set(__self__, "default_time_switch", default_time_switch)
+        pulumi.set(__self__, "encoding_format", encoding_format)
+        pulumi.set(__self__, "recharge_type", recharge_type)
+        if default_time_src is not None:
+            pulumi.set(__self__, "default_time_src", default_time_src)
+        if keys is not None:
+            pulumi.set(__self__, "keys", keys)
+        if log_regex is not None:
+            pulumi.set(__self__, "log_regex", log_regex)
+        if metadatas is not None:
+            pulumi.set(__self__, "metadatas", metadatas)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+        if time_key is not None:
+            pulumi.set(__self__, "time_key", time_key)
+        if time_regex is not None:
+            pulumi.set(__self__, "time_regex", time_regex)
+        if time_zone is not None:
+            pulumi.set(__self__, "time_zone", time_zone)
+        if un_match_log_key is not None:
+            pulumi.set(__self__, "un_match_log_key", un_match_log_key)
+        if un_match_log_switch is not None:
+            pulumi.set(__self__, "un_match_log_switch", un_match_log_switch)
+        if un_match_log_time_src is not None:
+            pulumi.set(__self__, "un_match_log_time_src", un_match_log_time_src)
+
+    @property
+    @pulumi.getter(name="defaultTimeSwitch")
+    def default_time_switch(self) -> bool:
+        """
+        user default time.
+        """
+        return pulumi.get(self, "default_time_switch")
+
+    @property
+    @pulumi.getter(name="encodingFormat")
+    def encoding_format(self) -> int:
+        """
+        encoding format.
+        """
+        return pulumi.get(self, "encoding_format")
+
+    @property
+    @pulumi.getter(name="rechargeType")
+    def recharge_type(self) -> str:
+        """
+        recharge type.
+        """
+        return pulumi.get(self, "recharge_type")
+
+    @property
+    @pulumi.getter(name="defaultTimeSrc")
+    def default_time_src(self) -> Optional[int]:
+        """
+        default time from.
+        """
+        return pulumi.get(self, "default_time_src")
+
+    @property
+    @pulumi.getter
+    def keys(self) -> Optional[Sequence[str]]:
+        """
+        log key list.
+        """
+        return pulumi.get(self, "keys")
+
+    @property
+    @pulumi.getter(name="logRegex")
+    def log_regex(self) -> Optional[str]:
+        """
+        log regex.
+        """
+        return pulumi.get(self, "log_regex")
+
+    @property
+    @pulumi.getter
+    def metadatas(self) -> Optional[Sequence[str]]:
+        """
+        metadata.
+        """
+        return pulumi.get(self, "metadatas")
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[str]:
+        """
+        time format.
+        """
+        return pulumi.get(self, "time_format")
+
+    @property
+    @pulumi.getter(name="timeKey")
+    def time_key(self) -> Optional[str]:
+        """
+        time key.
+        """
+        return pulumi.get(self, "time_key")
+
+    @property
+    @pulumi.getter(name="timeRegex")
+    def time_regex(self) -> Optional[str]:
+        """
+        time regex.
+        """
+        return pulumi.get(self, "time_regex")
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> Optional[str]:
+        """
+        time zone.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @property
+    @pulumi.getter(name="unMatchLogKey")
+    def un_match_log_key(self) -> Optional[str]:
+        """
+        parse failed log key.
+        """
+        return pulumi.get(self, "un_match_log_key")
+
+    @property
+    @pulumi.getter(name="unMatchLogSwitch")
+    def un_match_log_switch(self) -> Optional[bool]:
+        """
+        is push parse failed log.
+        """
+        return pulumi.get(self, "un_match_log_switch")
+
+    @property
+    @pulumi.getter(name="unMatchLogTimeSrc")
+    def un_match_log_time_src(self) -> Optional[int]:
+        """
+        parse failed log time from.
+        """
+        return pulumi.get(self, "un_match_log_time_src")
+
+
+@pulumi.output_type
+class KafkaRechargeProtocol(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "userName":
+            suggest = "user_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KafkaRechargeProtocol. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KafkaRechargeProtocol.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KafkaRechargeProtocol.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 mechanism: Optional[str] = None,
+                 password: Optional[str] = None,
+                 protocol: Optional[str] = None,
+                 user_name: Optional[str] = None):
+        """
+        :param str mechanism: encryption type.
+        :param str password: user password.
+        :param str protocol: protocol type.
+        :param str user_name: username.
+        """
+        if mechanism is not None:
+            pulumi.set(__self__, "mechanism", mechanism)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def mechanism(self) -> Optional[str]:
+        """
+        encryption type.
+        """
+        return pulumi.get(self, "mechanism")
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        """
+        user password.
+        """
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        protocol type.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[str]:
+        """
+        username.
+        """
+        return pulumi.get(self, "user_name")
+
+
+@pulumi.output_type
 class MachineGroupMachineGroupType(dict):
     def __init__(__self__, *,
                  type: str,
@@ -2654,6 +2987,81 @@ class MachineGroupMachineGroupType(dict):
         Machine description list.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class ScheduledSqlDstResource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "topicId":
+            suggest = "topic_id"
+        elif key == "bizType":
+            suggest = "biz_type"
+        elif key == "metricName":
+            suggest = "metric_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ScheduledSqlDstResource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ScheduledSqlDstResource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ScheduledSqlDstResource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 topic_id: str,
+                 biz_type: Optional[int] = None,
+                 metric_name: Optional[str] = None,
+                 region: Optional[str] = None):
+        """
+        :param str topic_id: dst topic id.
+        :param int biz_type: topic type.
+        :param str metric_name: metric name.
+        :param str region: topic region.
+        """
+        pulumi.set(__self__, "topic_id", topic_id)
+        if biz_type is not None:
+            pulumi.set(__self__, "biz_type", biz_type)
+        if metric_name is not None:
+            pulumi.set(__self__, "metric_name", metric_name)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        dst topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @property
+    @pulumi.getter(name="bizType")
+    def biz_type(self) -> Optional[int]:
+        """
+        topic type.
+        """
+        return pulumi.get(self, "biz_type")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> Optional[str]:
+        """
+        metric name.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        """
+        topic region.
+        """
+        return pulumi.get(self, "region")
 
 
 @pulumi.output_type

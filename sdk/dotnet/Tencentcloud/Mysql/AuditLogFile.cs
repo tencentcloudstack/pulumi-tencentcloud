@@ -17,15 +17,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var auditLogFile = new Tencentcloud.Mysql.AuditLogFile("auditLogFile", new Tencentcloud.Mysql.AuditLogFileArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             EndTime = "2023-03-29 20:14:00",
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "mysql test",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///         });
+    ///         var exampleAuditLogFile = new Tencentcloud.Mysql.AuditLogFile("exampleAuditLogFile", new Tencentcloud.Mysql.AuditLogFileArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             StartTime = "2023-07-01 00:00:00",
+    ///             EndTime = "2023-10-01 00:00:00",
+    ///             Order = "ASC",
+    ///             OrderBy = "timestamp",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Add filter
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Mysql.AuditLogFile("example", new Tencentcloud.Mysql.AuditLogFileArgs
+    ///         {
+    ///             InstanceId = tencentcloud_mysql_instance.Example.Id,
+    ///             StartTime = "2023-07-01 00:00:00",
+    ///             EndTime = "2023-10-01 00:00:00",
+    ///             Order = "ASC",
+    ///             OrderBy = "timestamp",
     ///             Filter = new Tencentcloud.Mysql.Inputs.AuditLogFileFilterArgs
     ///             {
     ///                 Hosts = 
@@ -37,10 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     ///                     "keep_dbbrain",
     ///                 },
     ///             },
-    ///             InstanceId = "cdb-fitq5t9h",
-    ///             Order = "ASC",
-    ///             OrderBy = "timestamp",
-    ///             StartTime = "2023-03-28 20:14:00",
     ///         });
     ///     }
     /// 

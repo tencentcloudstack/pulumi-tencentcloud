@@ -11,15 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a teo loadBalancing
-//
-// ## Import
-//
-// teo load_balancing can be imported using the zone_id#loadBalancing_id, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Teo/loadBalancing:LoadBalancing load_balancing zone-297z8rf93cfw#lb-2a93c649-3719-11ed-b9c1-5254005a52aa
-// ```
 type LoadBalancing struct {
 	pulumi.CustomResourceState
 
@@ -37,7 +28,7 @@ type LoadBalancing struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Indicates DNS TTL time when `Type` is dns_only.
 	Ttl pulumi.IntOutput `pulumi:"ttl"`
-	// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+	// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 	Type pulumi.StringOutput `pulumi:"type"`
 	// Last modification date.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -101,7 +92,7 @@ type loadBalancingState struct {
 	Status *string `pulumi:"status"`
 	// Indicates DNS TTL time when `Type` is dns_only.
 	Ttl *int `pulumi:"ttl"`
-	// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+	// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 	Type *string `pulumi:"type"`
 	// Last modification date.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -124,7 +115,7 @@ type LoadBalancingState struct {
 	Status pulumi.StringPtrInput
 	// Indicates DNS TTL time when `Type` is dns_only.
 	Ttl pulumi.IntPtrInput
-	// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+	// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 	Type pulumi.StringPtrInput
 	// Last modification date.
 	UpdateTime pulumi.StringPtrInput
@@ -147,7 +138,7 @@ type loadBalancingArgs struct {
 	Status *string `pulumi:"status"`
 	// Indicates DNS TTL time when `Type` is dns_only.
 	Ttl *int `pulumi:"ttl"`
-	// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+	// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 	Type string `pulumi:"type"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
@@ -165,7 +156,7 @@ type LoadBalancingArgs struct {
 	Status pulumi.StringPtrInput
 	// Indicates DNS TTL time when `Type` is dns_only.
 	Ttl pulumi.IntPtrInput
-	// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+	// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 	Type pulumi.StringInput
 	// Site ID.
 	ZoneId pulumi.StringInput
@@ -293,7 +284,7 @@ func (o LoadBalancingOutput) Ttl() pulumi.IntOutput {
 	return o.ApplyT(func(v *LoadBalancing) pulumi.IntOutput { return v.Ttl }).(pulumi.IntOutput)
 }
 
-// Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+// Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
 func (o LoadBalancingOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *LoadBalancing) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

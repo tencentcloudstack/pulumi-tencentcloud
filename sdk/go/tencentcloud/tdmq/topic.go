@@ -19,35 +19,43 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("example"),
-// 			Remark:      pulumi.String("this is description."),
+// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		barNamespace, err := Tdmq.NewNamespace(ctx, "barNamespace", &Tdmq.NamespaceArgs{
-// 			ClusterId:   foo.ID(),
-// 			EnvironName: pulumi.String("example"),
+// 		exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+// 			EnvironName: pulumi.String("tf_example"),
 // 			MsgTtl:      pulumi.Int(300),
-// 			Remark:      pulumi.String("this is description."),
+// 			ClusterId:   exampleInstance.ID(),
+// 			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
+// 				TimeInMinutes: pulumi.Int(60),
+// 				SizeInMb:      pulumi.Int(10),
+// 			},
+// 			Remark: pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewTopic(ctx, "barTopic", &Tdmq.TopicArgs{
-// 			ClusterId:  foo.ID(),
-// 			EnvironId:  barNamespace.ID(),
-// 			Partitions: pulumi.Int(6),
-// 			Remark:     pulumi.String("this is description."),
-// 			TopicName:  pulumi.String("example"),
-// 			TopicType:  pulumi.Int(0),
+// 		_, err = Tdmq.NewTopic(ctx, "exampleTopic", &Tdmq.TopicArgs{
+// 			EnvironId:       exampleNamespace.EnvironName,
+// 			ClusterId:       exampleInstance.ID(),
+// 			TopicName:       pulumi.String("tf-example-topic"),
+// 			Partitions:      pulumi.Int(6),
+// 			PulsarTopicType: pulumi.Int(3),
+// 			Remark:          pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err

@@ -25,13 +25,29 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetEnvironmentAttributes(ctx, &tdmq.GetEnvironmentAttributesArgs{
-// 			ClusterId:     pulumi.StringRef("pulsar-9n95ax58b9vn"),
-// 			EnvironmentId: "keep-ns",
-// 		}, nil)
+// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
+// 		exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+// 			EnvironName: pulumi.String("tf_example"),
+// 			MsgTtl:      pulumi.Int(300),
+// 			ClusterId:   exampleInstance.ID(),
+// 			Remark:      pulumi.String("remark."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = Tdmq.GetEnvironmentAttributesOutput(ctx, tdmq.GetEnvironmentAttributesOutputArgs{
+// 			EnvironmentId: exampleNamespace.EnvironName,
+// 			ClusterId:     exampleInstance.ID(),
+// 		}, nil)
 // 		return nil
 // 	})
 // }

@@ -164,23 +164,89 @@ class ImmutableTagRule(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr immutable_tag_rule
+        Provides a resource to create a tcr immutable tag rule.
 
         ## Example Usage
+        ### Create a immutable tag rule with specified tags and exclude specified repositories
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_rule = tencentcloud.tcr.ImmutableTagRule("myRule",
-            namespace_name="%s",
-            registry_id="%s",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            delete_bucket=True)
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_immutable_tag_rule = tencentcloud.tcr.ImmutableTagRule("exampleImmutableTagRule",
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
-                disabled=False,
-                repository_decoration="repoMatches",
-                repository_pattern="**",
-                tag_decoration="matches",
+                repository_pattern="deprecated_repo",
                 tag_pattern="**",
+                repository_decoration="repoExcludes",
+                tag_decoration="matches",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### With specified repositories and exclude specified version tag
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.tcr.ImmutableTagRule("example",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="**",
+                tag_pattern="v1",
+                repository_decoration="repoMatches",
+                tag_decoration="excludes",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Disabled the specified rule
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_rule_a = tencentcloud.tcr.ImmutableTagRule("exampleRuleA",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="deprecated_repo",
+                tag_pattern="**",
+                repository_decoration="repoExcludes",
+                tag_decoration="matches",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        example_rule_b = tencentcloud.tcr.ImmutableTagRule("exampleRuleB",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="**",
+                tag_pattern="v1",
+                repository_decoration="repoMatches",
+                tag_decoration="excludes",
+                disabled=True,
             ),
             tags={
                 "createdBy": "terraform",
@@ -209,23 +275,89 @@ class ImmutableTagRule(pulumi.CustomResource):
                  args: ImmutableTagRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr immutable_tag_rule
+        Provides a resource to create a tcr immutable tag rule.
 
         ## Example Usage
+        ### Create a immutable tag rule with specified tags and exclude specified repositories
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_rule = tencentcloud.tcr.ImmutableTagRule("myRule",
-            namespace_name="%s",
-            registry_id="%s",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            delete_bucket=True)
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_immutable_tag_rule = tencentcloud.tcr.ImmutableTagRule("exampleImmutableTagRule",
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
-                disabled=False,
-                repository_decoration="repoMatches",
-                repository_pattern="**",
-                tag_decoration="matches",
+                repository_pattern="deprecated_repo",
                 tag_pattern="**",
+                repository_decoration="repoExcludes",
+                tag_decoration="matches",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### With specified repositories and exclude specified version tag
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.tcr.ImmutableTagRule("example",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="**",
+                tag_pattern="v1",
+                repository_decoration="repoMatches",
+                tag_decoration="excludes",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Disabled the specified rule
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_rule_a = tencentcloud.tcr.ImmutableTagRule("exampleRuleA",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="deprecated_repo",
+                tag_pattern="**",
+                repository_decoration="repoExcludes",
+                tag_decoration="matches",
+                disabled=False,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        example_rule_b = tencentcloud.tcr.ImmutableTagRule("exampleRuleB",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            namespace_name=tencentcloud_tcr_namespace["example"]["name"],
+            rule=tencentcloud.tcr.ImmutableTagRuleRuleArgs(
+                repository_pattern="**",
+                tag_pattern="v1",
+                repository_decoration="repoMatches",
+                tag_decoration="excludes",
+                disabled=True,
             ),
             tags={
                 "createdBy": "terraform",

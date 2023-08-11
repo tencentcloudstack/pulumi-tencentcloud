@@ -24,8 +24,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAccessGroup(ctx, "foo", &Cfs.AccessGroupArgs{
-// 			Description: pulumi.String("test"),
+// 		_, err := Cfs.NewAccessGroup(ctx, "example", &Cfs.AccessGroupArgs{
+// 			Description: pulumi.String("desc."),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -40,7 +40,7 @@ import (
 // CFS access group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+//  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
 // ```
 type AccessGroup struct {
 	pulumi.CustomResourceState

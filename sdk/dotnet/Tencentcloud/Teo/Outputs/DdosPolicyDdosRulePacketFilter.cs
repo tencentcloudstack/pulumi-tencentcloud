@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRulePacketFilter
     {
-        /// <summary>
-        /// DDoS feature filtering configuration detail.
-        /// </summary>
         public readonly ImmutableArray<Outputs.DdosPolicyDdosRulePacketFilterPacketFilter> PacketFilters;
-        /// <summary>
-        /// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

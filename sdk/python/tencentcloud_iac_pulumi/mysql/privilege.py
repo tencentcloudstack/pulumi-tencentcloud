@@ -269,23 +269,47 @@ class Privilege(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.Instance("default",
-            mem_size=1000,
-            volume_size=25,
-            instance_name="guagua",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
             engine_version="5.7",
-            root_password="0153Y474",
-            availability_zone="ap-guangzhou-3",
-            internet_service=1)
-        mysql_account2 = tencentcloud.mysql.Account("mysqlAccount2",
-            mysql_id=default.id,
-            password="test1234",
-            description="test from terraform")
-        tttt = tencentcloud.mysql.Privilege("tttt",
-            mysql_id=default.id,
-            account_name=mysql_account2.name,
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_account = tencentcloud.mysql.Account("exampleAccount",
+            mysql_id=example_instance.id,
+            password="Qwer@234",
+            description="desc.",
+            max_user_connections=10)
+        example_privilege = tencentcloud.mysql.Privilege("examplePrivilege",
+            mysql_id=example_instance.id,
+            account_name=example_account.name,
             globals=["TRIGGER"],
             databases=[
                 tencentcloud.mysql.PrivilegeDatabaseArgs(
@@ -361,23 +385,47 @@ class Privilege(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.Instance("default",
-            mem_size=1000,
-            volume_size=25,
-            instance_name="guagua",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
             engine_version="5.7",
-            root_password="0153Y474",
-            availability_zone="ap-guangzhou-3",
-            internet_service=1)
-        mysql_account2 = tencentcloud.mysql.Account("mysqlAccount2",
-            mysql_id=default.id,
-            password="test1234",
-            description="test from terraform")
-        tttt = tencentcloud.mysql.Privilege("tttt",
-            mysql_id=default.id,
-            account_name=mysql_account2.name,
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_account = tencentcloud.mysql.Account("exampleAccount",
+            mysql_id=example_instance.id,
+            password="Qwer@234",
+            description="desc.",
+            max_user_connections=10)
+        example_privilege = tencentcloud.mysql.Privilege("examplePrivilege",
+            mysql_id=example_instance.id,
+            account_name=example_account.name,
             globals=["TRIGGER"],
             databases=[
                 tencentcloud.mysql.PrivilegeDatabaseArgs(

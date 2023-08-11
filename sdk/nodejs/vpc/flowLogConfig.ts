@@ -8,14 +8,15 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc flowLogConfig
  *
  * ## Example Usage
+ * ### If enable FlowLogs
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const flowLogConfig = new tencentcloud.Vpc.FlowLogConfig("flow_log_config", {
- *     enable: false,
- *     flowLogId: "fl-geg2keoj",
+ * const config = new tencentcloud.vpc.FlowLogConfig("config", {
+ *     flowLogId: tencentcloud_vpc_flow_log.example.id,
+ *     enable: true,
  * });
  * ```
  *

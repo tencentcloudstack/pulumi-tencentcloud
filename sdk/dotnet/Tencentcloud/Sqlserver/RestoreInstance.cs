@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver restore_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance restore_instance_id
+    ///  $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/restoreInstance:RestoreInstance")]

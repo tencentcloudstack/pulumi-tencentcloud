@@ -14,6 +14,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver config_database_cdc
     /// 
     /// ## Example Usage
+    /// ### Turn off database data change capture (CDC)
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             ProjectId = 0,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
+    ///             MaintenanceWeekSets = 
+    ///             {
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///             },
+    ///             MaintenanceStartTime = "09:00",
+    ///             MaintenanceTimeSpan = 3,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
+    ///         {
+    ///             InstanceId = exampleBasicInstance.Id,
+    ///             Charset = "Chinese_PRC_BIN",
+    ///             Remark = "test-remark",
+    ///         });
+    ///         var exampleConfigDatabaseCdc = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("exampleConfigDatabaseCdc", new Tencentcloud.Sqlserver.ConfigDatabaseCdcArgs
+    ///         {
+    ///             InstanceId = exampleBasicInstance.Id,
+    ///             DbName = exampleDb.Name,
+    ///             ModifyType = "disable",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Enable Database Data Change Capture (CDC)
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,11 +98,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// {
     ///     public MyStack()
     ///     {
-    ///         var configDatabaseCdc = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("configDatabaseCdc", new Tencentcloud.Sqlserver.ConfigDatabaseCdcArgs
+    ///         var example = new Tencentcloud.Sqlserver.ConfigDatabaseCdc("example", new Tencentcloud.Sqlserver.ConfigDatabaseCdcArgs
     ///         {
-    ///             DbName = "keep_pubsub_db2",
-    ///             InstanceId = "mssql-qelbzgwf",
-    ///             ModifyType = "disable",
+    ///             InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
+    ///             DbName = tencentcloud_sqlserver_db.Example.Name,
+    ///             ModifyType = "enable",
     ///         });
     ///     }
     /// 
@@ -39,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver config_database_cdc can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc config_database_cdc config_database_cdc_id
+    ///  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc")]

@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetZoneDdosPolicyShieldAreaApplicationResult
     {
-        /// <summary>
-        /// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string AccelerateType;
-        /// <summary>
-        /// Subdomain.
-        /// </summary>
         public readonly string Host;
-        /// <summary>
-        /// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string SecurityType;
-        /// <summary>
-        /// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string Status;
 
         [OutputConstructor]

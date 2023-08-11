@@ -134,21 +134,6 @@ class Ipv6EniAddress(pulumi.CustomResource):
         """
         Provides a resource to create a vpc ipv6_eni_address
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ipv6_eni_address = tencentcloud.vpc.Ipv6EniAddress("ipv6EniAddress",
-            ipv6_addresses=[tencentcloud.vpc.Ipv6EniAddressIpv6AddressArgs(
-                address="2402:4e00:1019:6a7b:0:994e:7cd7:fb46",
-                description="test123",
-            )],
-            network_interface_id="eni-pzl7fz37",
-            vpc_id="vpc-7w3kgnpl")
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Ipv6EniAddressIpv6AddressArgs']]]] ipv6_addresses: The specified `IPv6` address list, up to 10 can be specified at a time. Combined with the input parameter `Ipv6AddressCount` to calculate the quota. Mandatory one with Ipv6AddressCount.
@@ -163,21 +148,6 @@ class Ipv6EniAddress(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a vpc ipv6_eni_address
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ipv6_eni_address = tencentcloud.vpc.Ipv6EniAddress("ipv6EniAddress",
-            ipv6_addresses=[tencentcloud.vpc.Ipv6EniAddressIpv6AddressArgs(
-                address="2402:4e00:1019:6a7b:0:994e:7cd7:fb46",
-                description="test123",
-            )],
-            network_interface_id="eni-pzl7fz37",
-            vpc_id="vpc-7w3kgnpl")
-        ```
 
         :param str resource_name: The name of the resource.
         :param Ipv6EniAddressArgs args: The arguments to use to populate this resource's properties.

@@ -32,6 +32,7 @@ export * from "./getUsers";
 export * from "./getZone";
 export * from "./instance";
 export * from "./renewInstance";
+export * from "./route";
 export * from "./topic";
 export * from "./user";
 
@@ -45,6 +46,7 @@ import { DatahubTask } from "./datahubTask";
 import { DatahubTopic } from "./datahubTopic";
 import { Instance } from "./instance";
 import { RenewInstance } from "./renewInstance";
+import { Route } from "./route";
 import { Topic } from "./topic";
 import { User } from "./user";
 
@@ -70,6 +72,8 @@ const _module = {
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/renewInstance:RenewInstance":
                 return new RenewInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Ckafka/route:Route":
+                return new Route(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             case "tencentcloud:Ckafka/user:User":
@@ -88,5 +92,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/datahubTask", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/datahubTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/renewInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/route", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ckafka/user", _module)

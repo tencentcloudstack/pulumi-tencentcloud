@@ -469,20 +469,67 @@ class AlarmPolicy(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        group = tencentcloud.monitor.AlarmPolicy("group",
+        foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
+            notice_type="ALL",
+            notice_language="zh-CN",
+            user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
+                receiver_type="USER",
+                start_time=0,
+                end_time=1,
+                notice_ways=[
+                    "SMS",
+                    "EMAIL",
+                ],
+                user_ids=[10001],
+                group_ids=[],
+                phone_orders=[10001],
+                phone_circle_times=2,
+                phone_circle_interval=50,
+                phone_inner_interval=60,
+                need_phone_arrive_notice=1,
+                phone_call_type="CIRCLE",
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )],
+            url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
+                url="https://www.mytest.com/validate",
+                end_time=0,
+                start_time=1,
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )])
+        foo_alarm_policy = tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy",
+            policy_name="tf-policy",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=0,
+            namespace="cvm_device",
             conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
                 is_union_rule=1,
                 rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                    continue_period=1,
-                    is_power_notice=0,
                     metric_name="CpuUsage",
-                    notice_frequency=3600,
-                    operator="ge",
                     period=60,
+                    operator="ge",
                     value="89.9",
+                    continue_period=1,
+                    notice_frequency=3600,
+                    is_power_notice=0,
                 )],
             ),
-            enable=1,
             event_conditions=[
                 tencentcloud.monitor.AlarmPolicyEventConditionArgs(
                     metric_name="ping_unreachable",
@@ -491,14 +538,10 @@ class AlarmPolicy(pulumi.CustomResource):
                     metric_name="guest_reboot",
                 ),
             ],
-            monitor_type="MT_QCE",
-            namespace="cvm_device",
-            notice_ids=["notice-l9ziyxw6"],
-            policy_name="hello",
-            project_id=1244035,
+            notice_ids=[foo_alarm_notice.id],
             trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
-                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
                 type="AS",
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
             )])
         ```
         ### k8s_cluster alarm policy
@@ -694,20 +737,67 @@ class AlarmPolicy(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        group = tencentcloud.monitor.AlarmPolicy("group",
+        foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
+            notice_type="ALL",
+            notice_language="zh-CN",
+            user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
+                receiver_type="USER",
+                start_time=0,
+                end_time=1,
+                notice_ways=[
+                    "SMS",
+                    "EMAIL",
+                ],
+                user_ids=[10001],
+                group_ids=[],
+                phone_orders=[10001],
+                phone_circle_times=2,
+                phone_circle_interval=50,
+                phone_inner_interval=60,
+                need_phone_arrive_notice=1,
+                phone_call_type="CIRCLE",
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )],
+            url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
+                url="https://www.mytest.com/validate",
+                end_time=0,
+                start_time=1,
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )])
+        foo_alarm_policy = tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy",
+            policy_name="tf-policy",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=0,
+            namespace="cvm_device",
             conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
                 is_union_rule=1,
                 rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                    continue_period=1,
-                    is_power_notice=0,
                     metric_name="CpuUsage",
-                    notice_frequency=3600,
-                    operator="ge",
                     period=60,
+                    operator="ge",
                     value="89.9",
+                    continue_period=1,
+                    notice_frequency=3600,
+                    is_power_notice=0,
                 )],
             ),
-            enable=1,
             event_conditions=[
                 tencentcloud.monitor.AlarmPolicyEventConditionArgs(
                     metric_name="ping_unreachable",
@@ -716,14 +806,10 @@ class AlarmPolicy(pulumi.CustomResource):
                     metric_name="guest_reboot",
                 ),
             ],
-            monitor_type="MT_QCE",
-            namespace="cvm_device",
-            notice_ids=["notice-l9ziyxw6"],
-            policy_name="hello",
-            project_id=1244035,
+            notice_ids=[foo_alarm_notice.id],
             trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
-                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
                 type="AS",
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
             )])
         ```
         ### k8s_cluster alarm policy

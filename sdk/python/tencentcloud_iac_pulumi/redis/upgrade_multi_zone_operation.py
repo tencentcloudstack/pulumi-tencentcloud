@@ -108,7 +108,7 @@ class UpgradeMultiZoneOperation(pulumi.CustomResource):
 
         upgrade_multi_zone_operation = tencentcloud.redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation",
             instance_id="crs-c1nl9rpv",
-            upgrade_proxy_and_redis_server="")
+            upgrade_proxy_and_redis_server=True)
         ```
 
         :param str resource_name: The name of the resource.
@@ -133,7 +133,7 @@ class UpgradeMultiZoneOperation(pulumi.CustomResource):
 
         upgrade_multi_zone_operation = tencentcloud.redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation",
             instance_id="crs-c1nl9rpv",
-            upgrade_proxy_and_redis_server="")
+            upgrade_proxy_and_redis_server=True)
         ```
 
         :param str resource_name: The name of the resource.

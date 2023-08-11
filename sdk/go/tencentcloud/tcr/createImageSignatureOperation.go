@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr imageSignatureOperation
+// Provides a resource to operate a tcr image signature.
 //
 // ## Example Usage
 //
@@ -19,17 +19,51 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewCreateImageSignatureOperation(ctx, "imageSignatureOperation", &Tcr.CreateImageSignatureOperationArgs{
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleRepository, err := Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
+// 			InstanceId:    exampleInstance.ID(),
+// 			NamespaceName: exampleNamespace.Name,
+// 			BriefDesc:     pulumi.String("111"),
+// 			Description:   pulumi.String("111111111111111111111111111111111111"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewCreateImageSignatureOperation(ctx, "exampleCreateImageSignatureOperation", &Tcr.CreateImageSignatureOperationArgs{
+// 			RegistryId:     exampleInstance.ID(),
+// 			NamespaceName:  exampleNamespace.Name,
+// 			RepositoryName: exampleRepository.Name,
 // 			ImageVersion:   pulumi.String("v1"),
-// 			NamespaceName:  pulumi.String("ns"),
-// 			RegistryId:     pulumi.String("tcr-xxx"),
-// 			RepositoryName: pulumi.String("repo"),
 // 		})
 // 		if err != nil {
 // 			return err

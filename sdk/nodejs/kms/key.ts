@@ -8,18 +8,48 @@ import * as utilities from "../utilities";
  * Provide a resource to create a KMS key.
  *
  * ## Example Usage
+ * ### Create and enable a instance.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.kms.Key("foo", {
- *     alias: "test",
- *     description: "describe key test message.",
- *     keyRotationEnabled: true,
+ * const example = new tencentcloud.Kms.Key("example", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
  *     isEnabled: true,
+ *     keyRotationEnabled: false,
  *     tags: {
- *         "test-tag": "key-test",
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### Specify the Key Usage as an asymmetry method.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example2 = new tencentcloud.Kms.Key("example2", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     isEnabled: false,
+ *     keyUsage: "ASYMMETRIC_DECRYPT_RSA_2048",
+ * });
+ * ```
+ * ### Disable the kms key instance.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example3 = new tencentcloud.Kms.Key("example3", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     isEnabled: false,
+ *     keyRotationEnabled: false,
+ *     tags: {
+ *         "test-tag": "unit-test",
  *     },
  * });
  * ```

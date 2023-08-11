@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq"),
-// 			Remark:      pulumi.String("test rocket mq"),
+// 		_, err := Tdmq.NewRocketmqCluster(ctx, "example", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err

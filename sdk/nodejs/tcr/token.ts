@@ -8,14 +8,22 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr long term token.
  *
  * ## Example Usage
+ * ### Create a token for tcr instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tcr.Token("foo", {
- *     description: "test",
- *     instanceId: "cls-cda1iex1",
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "basic",
+ *     deleteBucket: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleToken = new tencentcloud.tcr.Token("exampleToken", {
+ *     instanceId: exampleInstance.id,
+ *     description: "example for the tcr token",
  * });
  * ```
  *
@@ -24,7 +32,7 @@ import * as utilities from "../utilities";
  * tcr token can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/token:Token foo cls-cda1iex1#namespace#buv3h3j96j2d1rk1cllg
+ *  $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
  * ```
  */
 export class Token extends pulumi.CustomResource {

@@ -27,22 +27,81 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmPolicy(ctx, "group", &Monitor.AlarmPolicyArgs{
+// 		fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
+// 			NoticeType:     pulumi.String("ALL"),
+// 			NoticeLanguage: pulumi.String("zh-CN"),
+// 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
+// 				&monitor.AlarmNoticeUserNoticeArgs{
+// 					ReceiverType: pulumi.String("USER"),
+// 					StartTime:    pulumi.Int(0),
+// 					EndTime:      pulumi.Int(1),
+// 					NoticeWays: pulumi.StringArray{
+// 						pulumi.String("SMS"),
+// 						pulumi.String("EMAIL"),
+// 					},
+// 					UserIds: pulumi.IntArray{
+// 						pulumi.Int(10001),
+// 					},
+// 					GroupIds: pulumi.IntArray{},
+// 					PhoneOrders: pulumi.IntArray{
+// 						pulumi.Int(10001),
+// 					},
+// 					PhoneCircleTimes:      pulumi.Int(2),
+// 					PhoneCircleInterval:   pulumi.Int(50),
+// 					PhoneInnerInterval:    pulumi.Int(60),
+// 					NeedPhoneArriveNotice: pulumi.Int(1),
+// 					PhoneCallType:         pulumi.String("CIRCLE"),
+// 					Weekdays: pulumi.IntArray{
+// 						pulumi.Int(1),
+// 						pulumi.Int(2),
+// 						pulumi.Int(3),
+// 						pulumi.Int(4),
+// 						pulumi.Int(5),
+// 						pulumi.Int(6),
+// 						pulumi.Int(7),
+// 					},
+// 				},
+// 			},
+// 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+// 				&monitor.AlarmNoticeUrlNoticeArgs{
+// 					Url:       pulumi.String("https://www.mytest.com/validate"),
+// 					EndTime:   pulumi.Int(0),
+// 					StartTime: pulumi.Int(1),
+// 					Weekdays: pulumi.IntArray{
+// 						pulumi.Int(1),
+// 						pulumi.Int(2),
+// 						pulumi.Int(3),
+// 						pulumi.Int(4),
+// 						pulumi.Int(5),
+// 						pulumi.Int(6),
+// 						pulumi.Int(7),
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewAlarmPolicy(ctx, "fooAlarmPolicy", &Monitor.AlarmPolicyArgs{
+// 			PolicyName:  pulumi.String("tf-policy"),
+// 			MonitorType: pulumi.String("MT_QCE"),
+// 			Enable:      pulumi.Int(1),
+// 			ProjectId:   pulumi.Int(0),
+// 			Namespace:   pulumi.String("cvm_device"),
 // 			Conditions: &monitor.AlarmPolicyConditionsArgs{
 // 				IsUnionRule: pulumi.Int(1),
 // 				Rules: monitor.AlarmPolicyConditionsRuleArray{
 // 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(1),
-// 						IsPowerNotice:   pulumi.Int(0),
 // 						MetricName:      pulumi.String("CpuUsage"),
-// 						NoticeFrequency: pulumi.Int(3600),
-// 						Operator:        pulumi.String("ge"),
 // 						Period:          pulumi.Int(60),
+// 						Operator:        pulumi.String("ge"),
 // 						Value:           pulumi.String("89.9"),
+// 						ContinuePeriod:  pulumi.Int(1),
+// 						NoticeFrequency: pulumi.Int(3600),
+// 						IsPowerNotice:   pulumi.Int(0),
 // 					},
 // 				},
 // 			},
-// 			Enable: pulumi.Int(1),
 // 			EventConditions: monitor.AlarmPolicyEventConditionArray{
 // 				&monitor.AlarmPolicyEventConditionArgs{
 // 					MetricName: pulumi.String("ping_unreachable"),
@@ -51,17 +110,13 @@ import (
 // 					MetricName: pulumi.String("guest_reboot"),
 // 				},
 // 			},
-// 			MonitorType: pulumi.String("MT_QCE"),
-// 			Namespace:   pulumi.String("cvm_device"),
 // 			NoticeIds: pulumi.StringArray{
-// 				pulumi.String("notice-l9ziyxw6"),
+// 				fooAlarmNotice.ID(),
 // 			},
-// 			PolicyName: pulumi.String("hello"),
-// 			ProjectId:  pulumi.Int(1244035),
 // 			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
 // 				&monitor.AlarmPolicyTriggerTaskArgs{
-// 					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
 // 					Type:       pulumi.String("AS"),
+// 					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
 // 				},
 // 			},
 // 		})

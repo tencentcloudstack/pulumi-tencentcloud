@@ -19,34 +19,82 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
+//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpAlertRule(ctx, "tmpAlertRule", &Monitor.TmpAlertRuleArgs{
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-4"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
+// 			InstanceName:      pulumi.String("tf-tmp-instance"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          subnet.ID(),
+// 			DataRetentionTime: pulumi.Int(30),
+// 			Zone:              pulumi.String(availabilityZone),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
+// 			InstanceId: fooTmpInstance.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewTmpAlertRule(ctx, "fooTmpAlertRule", &Monitor.TmpAlertRuleArgs{
+// 			Duration:   pulumi.String("2m"),
+// 			Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
+// 			InstanceId: fooTmpInstance.ID(),
+// 			Receivers: pulumi.StringArray{
+// 				pulumi.String("notice-f2svbu3w"),
+// 			},
+// 			RuleName:  pulumi.String("MySQL 连接数过多"),
+// 			RuleState: pulumi.Int(2),
+// 			Type:      pulumi.String("MySQL/MySQL 连接数过多"),
 // 			Annotations: monitor.TmpAlertRuleAnnotationArray{
 // 				&monitor.TmpAlertRuleAnnotationArgs{
-// 					Key:   pulumi.String("hello2"),
-// 					Value: pulumi.String("world2"),
+// 					Key:   pulumi.String("description"),
+// 					Value: pulumi.String(fmt.Sprintf("%v%v%v%v%v", "MySQL 连接数过多, 实例: {{", "$", "labels.instance}}，当前值: {{ ", "$", "value | humanizePercentage }}。")),
+// 				},
+// 				&monitor.TmpAlertRuleAnnotationArgs{
+// 					Key:   pulumi.String("summary"),
+// 					Value: pulumi.String(fmt.Sprintf("%v%v%v", "MySQL 连接数过多(>80", "%", ")")),
 // 				},
 // 			},
-// 			Duration:   pulumi.String("4m"),
-// 			Expr:       pulumi.String("up{service=\"rig-prometheus-agent\"}>0"),
-// 			InstanceId: pulumi.String("prom-c89b3b3u"),
 // 			Labels: monitor.TmpAlertRuleLabelArray{
 // 				&monitor.TmpAlertRuleLabelArgs{
-// 					Key:   pulumi.String("hello1"),
-// 					Value: pulumi.String("world1"),
+// 					Key:   pulumi.String("severity"),
+// 					Value: pulumi.String("warning"),
 // 				},
 // 			},
-// 			Receivers: pulumi.StringArray{
-// 				pulumi.String("notice-l9ziyxw6"),
-// 			},
-// 			RuleName:  pulumi.String("test123"),
-// 			RuleState: pulumi.Int(2),
 // 		})
 // 		if err != nil {
 // 			return err

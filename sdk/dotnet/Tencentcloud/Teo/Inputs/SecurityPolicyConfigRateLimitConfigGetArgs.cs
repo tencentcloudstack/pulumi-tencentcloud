@@ -13,30 +13,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigRateLimitConfigGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Intelligent client filter.
-        /// </summary>
         [Input("intelligence")]
         public Input<Inputs.SecurityPolicyConfigRateLimitConfigIntelligenceGetArgs>? Intelligence { get; set; }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 
-        /// <summary>
-        /// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         [Input("template")]
         public Input<Inputs.SecurityPolicyConfigRateLimitConfigTemplateGetArgs>? Template { get; set; }
 
         [Input("userRules")]
         private InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleGetArgs>? _userRules;
-
-        /// <summary>
-        /// Custom configuration.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleGetArgs> UserRules
         {
             get => _userRules ?? (_userRules = new InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleGetArgs>());

@@ -23,15 +23,107 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
+    ///         {
+    ///             InstanceName = "test-grafana",
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 subnet.Id,
+    ///             },
+    ///             GrafanaInitPassword = "1234567890",
+    ///             EnableInternet = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "test" },
+    ///             },
+    ///         });
+    ///         var fooAlarmNotice = new Tencentcloud.Monitor.AlarmNotice("fooAlarmNotice", new Tencentcloud.Monitor.AlarmNoticeArgs
+    ///         {
+    ///             NoticeType = "ALL",
+    ///             NoticeLanguage = "zh-CN",
+    ///             UserNotices = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
+    ///                 {
+    ///                     ReceiverType = "USER",
+    ///                     StartTime = 0,
+    ///                     EndTime = 1,
+    ///                     NoticeWays = 
+    ///                     {
+    ///                         "SMS",
+    ///                         "EMAIL",
+    ///                     },
+    ///                     UserIds = 
+    ///                     {
+    ///                         10001,
+    ///                     },
+    ///                     GroupIds = {},
+    ///                     PhoneOrders = 
+    ///                     {
+    ///                         10001,
+    ///                     },
+    ///                     PhoneCircleTimes = 2,
+    ///                     PhoneCircleInterval = 50,
+    ///                     PhoneInnerInterval = 60,
+    ///                     NeedPhoneArriveNotice = 1,
+    ///                     PhoneCallType = "CIRCLE",
+    ///                     Weekdays = 
+    ///                     {
+    ///                         1,
+    ///                         2,
+    ///                         3,
+    ///                         4,
+    ///                         5,
+    ///                         6,
+    ///                         7,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             UrlNotices = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
+    ///                 {
+    ///                     Url = "https://www.mytest.com/validate",
+    ///                     EndTime = 0,
+    ///                     StartTime = 1,
+    ///                     Weekdays = 
+    ///                     {
+    ///                         1,
+    ///                         2,
+    ///                         3,
+    ///                         4,
+    ///                         5,
+    ///                         6,
+    ///                         7,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
     ///         var grafanaNotificationChannel = new Tencentcloud.Monitor.GrafanaNotificationChannel("grafanaNotificationChannel", new Tencentcloud.Monitor.GrafanaNotificationChannelArgs
     ///         {
-    ///             ChannelName = "create-channel",
-    ///             ExtraOrgIds = {},
-    ///             InstanceId = "grafana-50nj6v00",
+    ///             InstanceId = fooGrafanaInstance.Id,
+    ///             ChannelName = "tf-channel",
     ///             OrgId = 1,
     ///             Receivers = 
     ///             {
-    ///                 "Consumer-6vkna7pevq",
+    ///                 fooAlarmNotice.AmpConsumerId,
+    ///             },
+    ///             ExtraOrgIds = 
+    ///             {
+    ///                 "1",
     ///             },
     ///         });
     ///     }

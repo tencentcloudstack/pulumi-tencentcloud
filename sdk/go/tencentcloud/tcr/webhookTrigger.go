@@ -11,16 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr webhookTrigger
+// Provides a resource to create a tcr webhook trigger
 //
 // ## Example Usage
+// ### Create a tcr webhook trigger instance
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
-//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
@@ -28,7 +27,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		mytcrWebhooktrigger, err := Tcr.NewInstance(ctx, "mytcrWebhooktrigger", &Tcr.InstanceArgs{
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
 // 			InstanceType: pulumi.String("basic"),
 // 			DeleteBucket: pulumi.Bool(true),
 // 			Tags: pulumi.AnyMap{
@@ -38,8 +37,8 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		myNs, err := Tcr.NewNamespace(ctx, "myNs", &Tcr.NamespaceArgs{
-// 			InstanceId:   mytcrWebhooktrigger.ID(),
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
 // 			IsPublic:     pulumi.Bool(true),
 // 			IsAutoScan:   pulumi.Bool(true),
 // 			IsPreventVul: pulumi.Bool(true),
@@ -53,14 +52,14 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		idTest := Tcr.GetNamespacesOutput(ctx, tcr.GetNamespacesOutputArgs{
-// 			InstanceId: myNs.InstanceId,
+// 		exampleNamespaces := Tcr.GetNamespacesOutput(ctx, tcr.GetNamespacesOutputArgs{
+// 			InstanceId: exampleNamespace.InstanceId,
 // 		}, nil)
-// 		_, err = Tcr.NewWebhookTrigger(ctx, "myTrigger", &Tcr.WebhookTriggerArgs{
-// 			RegistryId: mytcrWebhooktrigger.ID(),
-// 			Namespace:  myNs.Name,
+// 		_, err = Tcr.NewWebhookTrigger(ctx, "exampleWebhookTrigger", &Tcr.WebhookTriggerArgs{
+// 			RegistryId: exampleInstance.ID(),
+// 			Namespace:  exampleNamespace.Name,
 // 			Trigger: &tcr.WebhookTriggerTriggerArgs{
-// 				Name: pulumi.String(fmt.Sprintf("%v%v%v", "trigger-", "%", "s")),
+// 				Name: pulumi.String("trigger-example"),
 // 				Targets: tcr.WebhookTriggerTriggerTargetArray{
 // 					&tcr.WebhookTriggerTriggerTargetArgs{
 // 						Address: pulumi.String("http://example.org/post"),
@@ -79,7 +78,7 @@ import (
 // 				},
 // 				Condition:   pulumi.String(".*"),
 // 				Enabled:     pulumi.Bool(true),
-// 				Description: pulumi.String("this is trigger description"),
+// 				Description: pulumi.String("example for trigger description"),
 // 				NamespaceId: pulumi.Int(nsId),
 // 			},
 // 			Tags: pulumi.AnyMap{
@@ -99,7 +98,7 @@ import (
 // tcr webhook_trigger can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger webhook_trigger webhook_trigger_id
+//  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
 // ```
 type WebhookTrigger struct {
 	pulumi.CustomResourceState

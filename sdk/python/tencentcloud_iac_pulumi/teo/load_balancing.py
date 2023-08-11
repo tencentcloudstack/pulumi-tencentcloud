@@ -308,16 +308,7 @@ class LoadBalancing(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo load_balancing
-
-        ## Import
-
-        teo load_balancing can be imported using the zone_id#loadBalancing_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/loadBalancing:LoadBalancing load_balancing zone-297z8rf93cfw#lb-2a93c649-3719-11ed-b9c1-5254005a52aa
-        ```
-
+        Create a LoadBalancing resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_origin_group_id: ID of the backup origin group to use.
@@ -335,16 +326,7 @@ class LoadBalancing(pulumi.CustomResource):
                  args: LoadBalancingArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo load_balancing
-
-        ## Import
-
-        teo load_balancing can be imported using the zone_id#loadBalancing_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/loadBalancing:LoadBalancing load_balancing zone-297z8rf93cfw#lb-2a93c649-3719-11ed-b9c1-5254005a52aa
-        ```
-
+        Create a LoadBalancing resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param LoadBalancingArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

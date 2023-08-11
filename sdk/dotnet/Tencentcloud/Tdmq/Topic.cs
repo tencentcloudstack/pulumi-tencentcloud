@@ -23,26 +23,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
     ///         {
-    ///             ClusterName = "example",
-    ///             Remark = "this is description.",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
     ///         });
-    ///         var barNamespace = new Tencentcloud.Tdmq.Namespace("barNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironName = "example",
+    ///             EnvironName = "tf_example",
     ///             MsgTtl = 300,
-    ///             Remark = "this is description.",
+    ///             ClusterId = exampleInstance.Id,
+    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///             {
+    ///                 TimeInMinutes = 60,
+    ///                 SizeInMb = 10,
+    ///             },
+    ///             Remark = "remark.",
     ///         });
-    ///         var barTopic = new Tencentcloud.Tdmq.Topic("barTopic", new Tencentcloud.Tdmq.TopicArgs
+    ///         var exampleTopic = new Tencentcloud.Tdmq.Topic("exampleTopic", new Tencentcloud.Tdmq.TopicArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironId = barNamespace.Id,
+    ///             EnvironId = exampleNamespace.EnvironName,
+    ///             ClusterId = exampleInstance.Id,
+    ///             TopicName = "tf-example-topic",
     ///             Partitions = 6,
-    ///             Remark = "this is description.",
-    ///             TopicName = "example",
-    ///             TopicType = 0,
+    ///             PulsarTopicType = 3,
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 

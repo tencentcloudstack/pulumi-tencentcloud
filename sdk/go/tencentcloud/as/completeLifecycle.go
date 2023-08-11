@@ -12,31 +12,6 @@ import (
 )
 
 // Provides a resource to create a as completeLifecycle
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewCompleteLifecycle(ctx, "completeLifecycle", &As.CompleteLifecycleArgs{
-// 			InstanceId:            pulumi.String("ins-xxxxxxxx"),
-// 			LifecycleActionResult: pulumi.String("CONTINUE"),
-// 			LifecycleHookId:       pulumi.String("ash-xxxxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type CompleteLifecycle struct {
 	pulumi.CustomResourceState
 

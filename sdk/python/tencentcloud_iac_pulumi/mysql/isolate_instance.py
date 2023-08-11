@@ -13,22 +13,21 @@ __all__ = ['IsolateInstanceArgs', 'IsolateInstance']
 @pulumi.input_type
 class IsolateInstanceArgs:
     def __init__(__self__, *,
-                 instance_id: pulumi.Input[str]):
+                 instance_id: pulumi.Input[str],
+                 operate: pulumi.Input[str]):
         """
         The set of arguments for constructing a IsolateInstance resource.
-        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-               page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-               value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] operate: Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
         """
         pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "operate", operate)
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Input[str]:
         """
-        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        value of the field InstanceId in the output parameter.
+        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         """
         return pulumi.get(self, "instance_id")
 
@@ -36,21 +35,35 @@ class IsolateInstanceArgs:
     def instance_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "instance_id", value)
 
+    @property
+    @pulumi.getter
+    def operate(self) -> pulumi.Input[str]:
+        """
+        Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operate", value)
+
 
 @pulumi.input_type
 class _IsolateInstanceState:
     def __init__(__self__, *,
                  instance_id: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[str]] = None):
+                 operate: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering IsolateInstance resources.
-        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-               page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-               value of the field InstanceId in the output parameter.
-        :param pulumi.Input[str] status: Instance status.
+        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] operate: Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        :param pulumi.Input[int] status: Instance status.
         """
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
+        if operate is not None:
+            pulumi.set(__self__, "operate", operate)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
@@ -58,9 +71,7 @@ class _IsolateInstanceState:
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        value of the field InstanceId in the output parameter.
+        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         """
         return pulumi.get(self, "instance_id")
 
@@ -70,14 +81,26 @@ class _IsolateInstanceState:
 
     @property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[str]]:
+    def operate(self) -> Optional[pulumi.Input[str]]:
+        """
+        Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operate", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[int]]:
         """
         Instance status.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[str]]):
+    def status(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "status", value)
 
 
@@ -87,14 +110,57 @@ class IsolateInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a IsolateInstance resource with the given unique name, props, and options.
+        Provides a resource to create a mysql isolate_instance
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_isolate_instance = tencentcloud.mysql.IsolateInstance("exampleIsolateInstance",
+            instance_id=example_instance.id,
+            operate="recover")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-               page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-               value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] operate: Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
         """
         ...
     @overload
@@ -103,7 +169,50 @@ class IsolateInstance(pulumi.CustomResource):
                  args: IsolateInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a IsolateInstance resource with the given unique name, props, and options.
+        Provides a resource to create a mysql isolate_instance
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_isolate_instance = tencentcloud.mysql.IsolateInstance("exampleIsolateInstance",
+            instance_id=example_instance.id,
+            operate="recover")
+        ```
+
         :param str resource_name: The name of the resource.
         :param IsolateInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -120,6 +229,7 @@ class IsolateInstance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -137,6 +247,9 @@ class IsolateInstance(pulumi.CustomResource):
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
+            if operate is None and not opts.urn:
+                raise TypeError("Missing required property 'operate'")
+            __props__.__dict__["operate"] = operate
             __props__.__dict__["status"] = None
         super(IsolateInstance, __self__).__init__(
             'tencentcloud:Mysql/isolateInstance:IsolateInstance',
@@ -149,7 +262,8 @@ class IsolateInstance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None) -> 'IsolateInstance':
+            operate: Optional[pulumi.Input[str]] = None,
+            status: Optional[pulumi.Input[int]] = None) -> 'IsolateInstance':
         """
         Get an existing IsolateInstance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -157,16 +271,16 @@ class IsolateInstance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-               page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-               value of the field InstanceId in the output parameter.
-        :param pulumi.Input[str] status: Instance status.
+        :param pulumi.Input[str] instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
+        :param pulumi.Input[str] operate: Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        :param pulumi.Input[int] status: Instance status.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _IsolateInstanceState.__new__(_IsolateInstanceState)
 
         __props__.__dict__["instance_id"] = instance_id
+        __props__.__dict__["operate"] = operate
         __props__.__dict__["status"] = status
         return IsolateInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -174,15 +288,21 @@ class IsolateInstance(pulumi.CustomResource):
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> pulumi.Output[str]:
         """
-        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        value of the field InstanceId in the output parameter.
+        Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter
-    def status(self) -> pulumi.Output[str]:
+    def operate(self) -> pulumi.Output[str]:
+        """
+        Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        """
+        return pulumi.get(self, "operate")
+
+    @property
+    @pulumi.getter
+    def status(self) -> pulumi.Output[int]:
         """
         Instance status.
         """

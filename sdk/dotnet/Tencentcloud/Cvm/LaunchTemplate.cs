@@ -11,29 +11,36 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     /// <summary>
-    /// Provides a resource to create a cvm launch_template
+    /// Provides a resource to create a cvm launch template
     /// 
     /// ## Example Usage
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var myFavoriteImage = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             ImageNameRegex = "Final",
+    ///         }));
     ///         var demo = new Tencentcloud.Cvm.LaunchTemplate("demo", new Tencentcloud.Cvm.LaunchTemplateArgs
     ///         {
-    ///             ImageId = "img-xxxxxxxxx",
     ///             LaunchTemplateName = "test",
     ///             Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplatePlacementArgs
     ///             {
-    ///                 HostIds = {},
-    ///                 HostIps = {},
-    ///                 ProjectId = 0,
     ///                 Zone = "ap-guangzhou-6",
+    ///                 ProjectId = 0,
     ///             },
+    ///             ImageId = myFavoriteImage.Apply(myFavoriteImage =&gt; myFavoriteImage.Images?[0]?.ImageId),
     ///         });
     ///     }
     /// 

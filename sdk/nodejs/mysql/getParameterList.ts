@@ -40,7 +40,7 @@ export function getParameterList(args?: GetParameterListArgs, opts?: pulumi.Invo
  */
 export interface GetParameterListArgs {
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
      */
     engineVersion?: string;
     /**
@@ -79,7 +79,7 @@ export function getParameterListOutput(args?: GetParameterListOutputArgs, opts?:
  */
 export interface GetParameterListOutputArgs {
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
      */
     engineVersion?: pulumi.Input<string>;
     /**

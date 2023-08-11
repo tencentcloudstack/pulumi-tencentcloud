@@ -15,7 +15,7 @@ import (
 //
 // > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpcId`. One instance can only belong to one VPC.
 //
-// > **NOTE:** At present, 'PREPAID' instance cannot be deleted and must wait it to be outdated and released automatically.
+// > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 //
 // ## Import
 //
@@ -73,7 +73,7 @@ type Instance struct {
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
 	// The type of the instance.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntOutput `pulumi:"internetMaxBandwidthOut"`
@@ -209,7 +209,7 @@ type instanceState struct {
 	InstanceStatus *string `pulumi:"instanceStatus"`
 	// The type of the instance.
 	InstanceType *string `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -310,7 +310,7 @@ type InstanceState struct {
 	InstanceStatus pulumi.StringPtrInput
 	// The type of the instance.
 	InstanceType pulumi.StringPtrInput
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringPtrInput
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -409,7 +409,7 @@ type instanceArgs struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// The type of the instance.
 	InstanceType *string `pulumi:"instanceType"`
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -503,7 +503,7 @@ type InstanceArgs struct {
 	InstanceName pulumi.StringPtrInput
 	// The type of the instance.
 	InstanceType pulumi.StringPtrInput
-	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 	InternetChargeType pulumi.StringPtrInput
 	// Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -754,7 +754,7 @@ func (o InstanceOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
 func (o InstanceOutput) InternetChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InternetChargeType }).(pulumi.StringOutput)
 }

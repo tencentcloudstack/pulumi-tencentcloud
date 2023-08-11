@@ -99,19 +99,39 @@ class Template(pulumi.CustomResource):
                  template_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a ses template
+        Provides a resource to create a ses template.
 
         ## Example Usage
+        ### Create a ses html template
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        template = tencentcloud.ses.Template("template",
+        example = tencentcloud.ses.Template("example",
             template_content=tencentcloud.ses.TemplateTemplateContentArgs(
-                text="This is the content of the test",
+                html=\"\"\"<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>mail title</title>
+        </head>
+        <body>
+        <div class="container">
+          <h1>Welcome to our service! </h1>
+          <p>Dear user,</p>
+          <p>Thank you for using Tencent Cloud:</p>
+          <p><a href="https://cloud.tencent.com/document/product/1653">https://cloud.tencent.com/document/product/1653</a></p>
+          <p>If you did not request this email, please ignore it. </p>
+          <p><strong>from the iac team</strong></p>
+        </div>
+        </body>
+        </html>
+
+        \"\"\",
             ),
-            template_name="sesTemplateName")
+            template_name="tf_example_ses_temp")
         ```
 
         ## Import
@@ -119,7 +139,7 @@ class Template(pulumi.CustomResource):
         ses template can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Ses/template:Template template template_id
+         $ pulumi import tencentcloud:Ses/template:Template example template_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -134,19 +154,39 @@ class Template(pulumi.CustomResource):
                  args: TemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a ses template
+        Provides a resource to create a ses template.
 
         ## Example Usage
+        ### Create a ses html template
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        template = tencentcloud.ses.Template("template",
+        example = tencentcloud.ses.Template("example",
             template_content=tencentcloud.ses.TemplateTemplateContentArgs(
-                text="This is the content of the test",
+                html=\"\"\"<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>mail title</title>
+        </head>
+        <body>
+        <div class="container">
+          <h1>Welcome to our service! </h1>
+          <p>Dear user,</p>
+          <p>Thank you for using Tencent Cloud:</p>
+          <p><a href="https://cloud.tencent.com/document/product/1653">https://cloud.tencent.com/document/product/1653</a></p>
+          <p>If you did not request this email, please ignore it. </p>
+          <p><strong>from the iac team</strong></p>
+        </div>
+        </body>
+        </html>
+
+        \"\"\",
             ),
-            template_name="sesTemplateName")
+            template_name="tf_example_ses_temp")
         ```
 
         ## Import
@@ -154,7 +194,7 @@ class Template(pulumi.CustomResource):
         ses template can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Ses/template:Template template template_id
+         $ pulumi import tencentcloud:Ses/template:Template example template_id
         ```
 
         :param str resource_name: The name of the resource.

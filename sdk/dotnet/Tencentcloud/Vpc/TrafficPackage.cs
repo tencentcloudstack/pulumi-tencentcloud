@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var trafficPackage = new Tencentcloud.Vpc.TrafficPackage("trafficPackage", new Tencentcloud.Vpc.TrafficPackageArgs
+    ///         var example = new Tencentcloud.Vpc.TrafficPackage("example", new Tencentcloud.Vpc.TrafficPackageArgs
     ///         {
     ///             TrafficAmount = 10,
     ///         });

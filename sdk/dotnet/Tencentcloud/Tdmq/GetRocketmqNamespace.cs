@@ -28,23 +28,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// {
         ///     public MyStack()
         ///     {
-        ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
         ///         {
-        ///             ClusterName = "test_rocketmq_namespace_sdatasource",
-        ///             Remark = "test recket mq",
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
         ///         });
-        ///         var namespacedata = new Tencentcloud.Tdmq.RocketmqNamespace("namespacedata", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+        ///         var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
         ///         {
-        ///             ClusterId = cluster.ClusterId,
-        ///             NamespaceName = "test_namespace_datasource",
-        ///             Ttl = 65000,
-        ///             RetentionTime = 65000,
-        ///             Remark = "test namespace",
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
         ///         });
-        ///         var @namespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
+        ///         var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
         ///         {
-        ///             ClusterId = cluster.ClusterId,
-        ///             NameKeyword = namespacedata.NamespaceName,
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceName = "tf_example",
+        ///             Remark = "remark.",
         ///         });
         ///     }
         /// 
@@ -72,23 +70,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// {
         ///     public MyStack()
         ///     {
-        ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
         ///         {
-        ///             ClusterName = "test_rocketmq_namespace_sdatasource",
-        ///             Remark = "test recket mq",
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
         ///         });
-        ///         var namespacedata = new Tencentcloud.Tdmq.RocketmqNamespace("namespacedata", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+        ///         var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
         ///         {
-        ///             ClusterId = cluster.ClusterId,
-        ///             NamespaceName = "test_namespace_datasource",
-        ///             Ttl = 65000,
-        ///             RetentionTime = 65000,
-        ///             Remark = "test namespace",
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
         ///         });
-        ///         var @namespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new Tencentcloud.Tdmq.GetRocketmqNamespaceInvokeArgs
+        ///         var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
         ///         {
-        ///             ClusterId = cluster.ClusterId,
-        ///             NameKeyword = namespacedata.NamespaceName,
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceName = "tf_example",
+        ///             Remark = "remark.",
         ///         });
         ///     }
         /// 

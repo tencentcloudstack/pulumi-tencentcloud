@@ -5,21 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Use this data source to query detailed information of teo botManagedRules
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const botManagedRules = pulumi.output(tencentcloud.Teo.getBotManagedRules({
- *     entity: "",
- *     zoneId: "",
- * }));
- * ```
- */
 export function getBotManagedRules(args: GetBotManagedRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetBotManagedRulesResult> {
     if (!opts) {
         opts = {}
@@ -37,17 +22,8 @@ export function getBotManagedRules(args: GetBotManagedRulesArgs, opts?: pulumi.I
  * A collection of arguments for invoking getBotManagedRules.
  */
 export interface GetBotManagedRulesArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: string;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: string;
-    /**
-     * Site ID.
-     */
     zoneId: string;
 }
 
@@ -61,9 +37,6 @@ export interface GetBotManagedRulesResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
-    /**
-     * Managed rules list.
-     */
     readonly rules: outputs.Teo.GetBotManagedRulesRule[];
     readonly zoneId: string;
 }
@@ -76,16 +49,7 @@ export function getBotManagedRulesOutput(args: GetBotManagedRulesOutputArgs, opt
  * A collection of arguments for invoking getBotManagedRules.
  */
 export interface GetBotManagedRulesOutputArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: pulumi.Input<string>;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: pulumi.Input<string>;
-    /**
-     * Site ID.
-     */
     zoneId: pulumi.Input<string>;
 }

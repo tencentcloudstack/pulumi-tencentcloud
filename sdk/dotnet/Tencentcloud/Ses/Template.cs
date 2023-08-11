@@ -11,9 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
 {
     /// <summary>
-    /// Provides a resource to create a ses template
+    /// Provides a resource to create a ses template.
     /// 
     /// ## Example Usage
+    /// ### Create a ses html template
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,13 +24,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// {
     ///     public MyStack()
     ///     {
-    ///         var template = new Tencentcloud.Ses.Template("template", new Tencentcloud.Ses.TemplateArgs
+    ///         var example = new Tencentcloud.Ses.Template("example", new Tencentcloud.Ses.TemplateArgs
     ///         {
     ///             TemplateContent = new Tencentcloud.Ses.Inputs.TemplateTemplateContentArgs
     ///             {
-    ///                 Text = "This is the content of the test",
+    ///                 Html = @"&lt;!DOCTYPE html&gt;
+    /// &lt;html lang=""en""&gt;
+    /// &lt;head&gt;
+    ///   &lt;meta charset=""UTF-8""&gt;
+    ///   &lt;meta name=""viewport"" content=""width=device-width, initial-scale=1.0""&gt;
+    ///   &lt;title&gt;mail title&lt;/title&gt;
+    /// &lt;/head&gt;
+    /// &lt;body&gt;
+    /// &lt;div class=""container""&gt;
+    ///   &lt;h1&gt;Welcome to our service! &lt;/h1&gt;
+    ///   &lt;p&gt;Dear user,&lt;/p&gt;
+    ///   &lt;p&gt;Thank you for using Tencent Cloud:&lt;/p&gt;
+    ///   &lt;p&gt;&lt;a href=""https://cloud.tencent.com/document/product/1653""&gt;https://cloud.tencent.com/document/product/1653&lt;/a&gt;&lt;/p&gt;
+    ///   &lt;p&gt;If you did not request this email, please ignore it. &lt;/p&gt;
+    ///   &lt;p&gt;&lt;strong&gt;from the iac team&lt;/strong&gt;&lt;/p&gt;
+    /// &lt;/div&gt;
+    /// &lt;/body&gt;
+    /// &lt;/html&gt;
+    /// 
+    /// ",
     ///             },
-    ///             TemplateName = "sesTemplateName",
+    ///             TemplateName = "tf_example_ses_temp",
     ///         });
     ///     }
     /// 
@@ -41,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// ses template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ses/template:Template template template_id
+    ///  $ pulumi import tencentcloud:Ses/template:Template example template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/template:Template")]

@@ -48,6 +48,8 @@ if typing.TYPE_CHECKING:
     ckafka = __ckafka
     import tencentcloud_iac_pulumi.clb as __clb
     clb = __clb
+    import tencentcloud_iac_pulumi.clickhouse as __clickhouse
+    clickhouse = __clickhouse
     import tencentcloud_iac_pulumi.cls as __cls
     cls = __cls
     import tencentcloud_iac_pulumi.config as __config
@@ -80,6 +82,8 @@ if typing.TYPE_CHECKING:
     domains = __domains
     import tencentcloud_iac_pulumi.dts as __dts
     dts = __dts
+    import tencentcloud_iac_pulumi.eb as __eb
+    eb = __eb
     import tencentcloud_iac_pulumi.eip as __eip
     eip = __eip
     import tencentcloud_iac_pulumi.eips as __eips
@@ -170,6 +174,8 @@ if typing.TYPE_CHECKING:
     sts = __sts
     import tencentcloud_iac_pulumi.subnet as __subnet
     subnet = __subnet
+    import tencentcloud_iac_pulumi.tag as __tag
+    tag = __tag
     import tencentcloud_iac_pulumi.tat as __tat
     tat = __tat
     import tencentcloud_iac_pulumi.tcaplus as __tcaplus
@@ -220,6 +226,7 @@ else:
     ciam = _utilities.lazy_import('tencentcloud_iac_pulumi.ciam')
     ckafka = _utilities.lazy_import('tencentcloud_iac_pulumi.ckafka')
     clb = _utilities.lazy_import('tencentcloud_iac_pulumi.clb')
+    clickhouse = _utilities.lazy_import('tencentcloud_iac_pulumi.clickhouse')
     cls = _utilities.lazy_import('tencentcloud_iac_pulumi.cls')
     config = _utilities.lazy_import('tencentcloud_iac_pulumi.config')
     cos = _utilities.lazy_import('tencentcloud_iac_pulumi.cos')
@@ -236,6 +243,7 @@ else:
     dnspod = _utilities.lazy_import('tencentcloud_iac_pulumi.dnspod')
     domains = _utilities.lazy_import('tencentcloud_iac_pulumi.domains')
     dts = _utilities.lazy_import('tencentcloud_iac_pulumi.dts')
+    eb = _utilities.lazy_import('tencentcloud_iac_pulumi.eb')
     eip = _utilities.lazy_import('tencentcloud_iac_pulumi.eip')
     eips = _utilities.lazy_import('tencentcloud_iac_pulumi.eips')
     elasticsearch = _utilities.lazy_import('tencentcloud_iac_pulumi.elasticsearch')
@@ -281,6 +289,7 @@ else:
     ssm = _utilities.lazy_import('tencentcloud_iac_pulumi.ssm')
     sts = _utilities.lazy_import('tencentcloud_iac_pulumi.sts')
     subnet = _utilities.lazy_import('tencentcloud_iac_pulumi.subnet')
+    tag = _utilities.lazy_import('tencentcloud_iac_pulumi.tag')
     tat = _utilities.lazy_import('tencentcloud_iac_pulumi.tat')
     tcaplus = _utilities.lazy_import('tencentcloud_iac_pulumi.tcaplus')
     tcm = _utilities.lazy_import('tencentcloud_iac_pulumi.tcm')
@@ -1238,6 +1247,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ckafka/route",
+  "fqn": "tencentcloud_iac_pulumi.ckafka",
+  "classes": {
+   "tencentcloud:Ckafka/route:Route": "Route"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ckafka/topic",
   "fqn": "tencentcloud_iac_pulumi.ckafka",
   "classes": {
@@ -1390,6 +1407,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Clickhouse/instance",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cls/alarm",
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
@@ -1454,6 +1479,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cls/dataTransform",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/dataTransform:DataTransform": "DataTransform"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cls/export",
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
@@ -1470,6 +1503,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cls/kafkaRecharge",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/kafkaRecharge:KafkaRecharge": "KafkaRecharge"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cls/logset",
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
@@ -1482,6 +1523,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
    "tencentcloud:Cls/machineGroup:MachineGroup": "MachineGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cls/scheduledSql",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/scheduledSql:ScheduledSql": "ScheduledSql"
   }
  },
  {
@@ -2482,6 +2531,46 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.dts",
   "classes": {
    "tencentcloud:Dts/syncJobStopOperation:SyncJobStopOperation": "SyncJobStopOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Eb/eventBus",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/eventBus:EventBus": "EventBus"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Eb/eventRule",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/eventRule:EventRule": "EventRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Eb/eventTarget",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/eventTarget:EventTarget": "EventTarget"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Eb/eventTransform",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/eventTransform:EventTransform": "EventTransform"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Eb/putEvents",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/putEvents:PutEvents": "PutEvents"
   }
  },
  {
@@ -4310,14 +4399,6 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
-  "mod": "Security/groupRule",
-  "fqn": "tencentcloud_iac_pulumi.security",
-  "classes": {
-   "tencentcloud:Security/groupRule:GroupRule": "GroupRule"
-  }
- },
- {
-  "pkg": "tencentcloud",
   "mod": "Security/groupRuleSet",
   "fqn": "tencentcloud_iac_pulumi.security",
   "classes": {
@@ -4678,6 +4759,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ssm/productSecret",
+  "fqn": "tencentcloud_iac_pulumi.ssm",
+  "classes": {
+   "tencentcloud:Ssm/productSecret:ProductSecret": "ProductSecret"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ssm/secret",
   "fqn": "tencentcloud_iac_pulumi.ssm",
   "classes": {
@@ -4706,6 +4795,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.subnet",
   "classes": {
    "tencentcloud:Subnet/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tag/attachment",
+  "fqn": "tencentcloud_iac_pulumi.tag",
+  "classes": {
+   "tencentcloud:Tag/attachment:Attachment": "Attachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tag/instance",
+  "fqn": "tencentcloud_iac_pulumi.tag",
+  "classes": {
+   "tencentcloud:Tag/instance:Instance": "Instance"
   }
  },
  {
@@ -5006,6 +5111,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Tdmq/rabbitmqVipInstance",
+  "fqn": "tencentcloud_iac_pulumi.tdmq",
+  "classes": {
+   "tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance": "RabbitmqVipInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Tdmq/rabbitmqVirtualHost",
   "fqn": "tencentcloud_iac_pulumi.tdmq",
   "classes": {
@@ -5058,6 +5171,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.tdmq",
   "classes": {
    "tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic": "RocketmqTopic"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tdmq/rocketmqVipInstance",
+  "fqn": "tencentcloud_iac_pulumi.tdmq",
+  "classes": {
+   "tencentcloud:Tdmq/rocketmqVipInstance:RocketmqVipInstance": "RocketmqVipInstance"
   }
  },
  {
@@ -5258,6 +5379,46 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.teo",
   "classes": {
    "tencentcloud:Teo/zoneSetting:ZoneSetting": "ZoneSetting"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwCanaryRule",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule": "CngwCanaryRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwRoute",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwRoute:CngwRoute": "CngwRoute"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwRouteRateLimit",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit": "CngwRouteRateLimit"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwService",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwService:CngwService": "CngwService"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwServiceRateLimit",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit": "CngwServiceRateLimit"
   }
  },
  {

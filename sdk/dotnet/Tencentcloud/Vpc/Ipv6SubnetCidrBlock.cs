@@ -13,30 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// <summary>
     /// Provides a resource to create a vpc ipv6_subnet_cidr_block
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var ipv6SubnetCidrBlock = new Tencentcloud.Vpc.Ipv6SubnetCidrBlock("ipv6SubnetCidrBlock", new Tencentcloud.Vpc.Ipv6SubnetCidrBlockArgs
-    ///         {
-    ///             Ipv6SubnetCidrBlocks = new Tencentcloud.Vpc.Inputs.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs
-    ///             {
-    ///                 Ipv6CidrBlock = "2402:4e00:1019:6a7b::/64",
-    ///                 SubnetId = "subnet-plg028y8",
-    ///             },
-    ///             VpcId = "vpc-7w3kgnpl",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// vpc ipv6_subnet_cidr_block can be imported using the id, e.g.

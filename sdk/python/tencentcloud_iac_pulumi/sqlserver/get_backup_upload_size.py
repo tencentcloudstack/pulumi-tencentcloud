@@ -106,7 +106,7 @@ def get_backup_upload_size(backup_migration_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    backup_upload_size = tencentcloud.Sqlserver.get_backup_upload_size(backup_migration_id="mssql-backup-migration-9tj0sxnz",
+    example = tencentcloud.Sqlserver.get_backup_upload_size(backup_migration_id="mssql-backup-migration-9tj0sxnz",
         instance_id="mssql-4gmc5805")
     ```
 
@@ -153,7 +153,7 @@ def get_backup_upload_size_output(backup_migration_id: Optional[pulumi.Input[str
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    backup_upload_size = tencentcloud.Sqlserver.get_backup_upload_size(backup_migration_id="mssql-backup-migration-9tj0sxnz",
+    example = tencentcloud.Sqlserver.get_backup_upload_size(backup_migration_id="mssql-backup-migration-9tj0sxnz",
         instance_id="mssql-4gmc5805")
     ```
 

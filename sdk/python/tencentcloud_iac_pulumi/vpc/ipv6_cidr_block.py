@@ -89,10 +89,8 @@ class Ipv6CidrBlock(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cidr_block = tencentcloud.vpc.Instance("cidr-block",
-            cidr_block="10.0.0.0/16",
-            is_multicast=False)
-        ipv6_cidr_block = tencentcloud.vpc.Ipv6CidrBlock("ipv6CidrBlock", vpc_id=cidr_block.id)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.Ipv6CidrBlock("example", vpc_id=vpc.id)
         ```
 
         ## Import
@@ -122,10 +120,8 @@ class Ipv6CidrBlock(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cidr_block = tencentcloud.vpc.Instance("cidr-block",
-            cidr_block="10.0.0.0/16",
-            is_multicast=False)
-        ipv6_cidr_block = tencentcloud.vpc.Ipv6CidrBlock("ipv6CidrBlock", vpc_id=cidr_block.id)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.Ipv6CidrBlock("example", vpc_id=vpc.id)
         ```
 
         ## Import

@@ -32,10 +32,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///             NeedResetPassword = true,
     ///             Password = "Gail@1234",
     ///             PhoneNum = "12345678910",
-    ///             Remark = "test",
+    ///             Remark = "tf_user_test",
     ///             Tags = 
     ///             {
-    ///                 { "test", "tf-cam-user" },
+    ///                 { "test", "tf_cam_user" },
     ///             },
     ///             UseApi = true,
     ///         });

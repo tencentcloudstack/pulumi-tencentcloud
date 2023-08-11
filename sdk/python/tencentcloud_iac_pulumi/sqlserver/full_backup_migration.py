@@ -98,6 +98,7 @@ class FullBackupMigrationArgs:
 class _FullBackupMigrationState:
     def __init__(__self__, *,
                  backup_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 backup_migration_id: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  migration_name: Optional[pulumi.Input[str]] = None,
                  recovery_type: Optional[pulumi.Input[str]] = None,
@@ -105,6 +106,7 @@ class _FullBackupMigrationState:
         """
         Input properties used for looking up and filtering FullBackupMigration resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_files: If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+        :param pulumi.Input[str] backup_migration_id: Backup import task ID.
         :param pulumi.Input[str] instance_id: ID of imported target instance.
         :param pulumi.Input[str] migration_name: Task name.
         :param pulumi.Input[str] recovery_type: Migration task restoration type. FULL: full backup restoration, FULL_LOG: full backup and transaction log restoration, FULL_DIFF: full backup and differential backup restoration.
@@ -112,6 +114,8 @@ class _FullBackupMigrationState:
         """
         if backup_files is not None:
             pulumi.set(__self__, "backup_files", backup_files)
+        if backup_migration_id is not None:
+            pulumi.set(__self__, "backup_migration_id", backup_migration_id)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if migration_name is not None:
@@ -132,6 +136,18 @@ class _FullBackupMigrationState:
     @backup_files.setter
     def backup_files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "backup_files", value)
+
+    @property
+    @pulumi.getter(name="backupMigrationId")
+    def backup_migration_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Backup import task ID.
+        """
+        return pulumi.get(self, "backup_migration_id")
+
+    @backup_migration_id.setter
+    def backup_migration_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "backup_migration_id", value)
 
     @property
     @pulumi.getter(name="instanceId")
@@ -200,14 +216,56 @@ class FullBackupMigration(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_migration = tencentcloud.sqlserver.FullBackupMigration("myMigration",
-            backup_files=[],
-            instance_id="mssql-qelbzgwf",
-            migration_name="migration_test",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        example_general_backup = tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup",
+            instance_id=example_db.instance_id,
+            backup_name="tf_example_backup",
+            strategy=0)
+        example_backups = tencentcloud.Sqlserver.get_backups_output(instance_id=example_db.instance_id,
+            backup_name=example_general_backup.backup_name,
+            start_time="2023-07-25 00:00:00",
+            end_time="2023-08-04 00:00:00")
+        example_full_backup_migration = tencentcloud.sqlserver.FullBackupMigration("exampleFullBackupMigration",
+            instance_id=example_general_backup.instance_id,
             recovery_type="FULL",
-            upload_type="COS_URL")
+            upload_type="COS_URL",
+            migration_name="migration_test",
+            backup_files=[example_backups.lists[0].internet_url])
         ```
 
         ## Import
@@ -215,7 +273,7 @@ class FullBackupMigration(pulumi.CustomResource):
         sqlserver full_backup_migration can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration full_backup_migration full_backup_migration_id
+         $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
         ```
 
         :param str resource_name: The name of the resource.
@@ -239,14 +297,56 @@ class FullBackupMigration(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_migration = tencentcloud.sqlserver.FullBackupMigration("myMigration",
-            backup_files=[],
-            instance_id="mssql-qelbzgwf",
-            migration_name="migration_test",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        example_general_backup = tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup",
+            instance_id=example_db.instance_id,
+            backup_name="tf_example_backup",
+            strategy=0)
+        example_backups = tencentcloud.Sqlserver.get_backups_output(instance_id=example_db.instance_id,
+            backup_name=example_general_backup.backup_name,
+            start_time="2023-07-25 00:00:00",
+            end_time="2023-08-04 00:00:00")
+        example_full_backup_migration = tencentcloud.sqlserver.FullBackupMigration("exampleFullBackupMigration",
+            instance_id=example_general_backup.instance_id,
             recovery_type="FULL",
-            upload_type="COS_URL")
+            upload_type="COS_URL",
+            migration_name="migration_test",
+            backup_files=[example_backups.lists[0].internet_url])
         ```
 
         ## Import
@@ -254,7 +354,7 @@ class FullBackupMigration(pulumi.CustomResource):
         sqlserver full_backup_migration can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration full_backup_migration full_backup_migration_id
+         $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
         ```
 
         :param str resource_name: The name of the resource.
@@ -304,6 +404,7 @@ class FullBackupMigration(pulumi.CustomResource):
             if upload_type is None and not opts.urn:
                 raise TypeError("Missing required property 'upload_type'")
             __props__.__dict__["upload_type"] = upload_type
+            __props__.__dict__["backup_migration_id"] = None
         super(FullBackupMigration, __self__).__init__(
             'tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration',
             resource_name,
@@ -315,6 +416,7 @@ class FullBackupMigration(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             backup_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            backup_migration_id: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             migration_name: Optional[pulumi.Input[str]] = None,
             recovery_type: Optional[pulumi.Input[str]] = None,
@@ -327,6 +429,7 @@ class FullBackupMigration(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_files: If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+        :param pulumi.Input[str] backup_migration_id: Backup import task ID.
         :param pulumi.Input[str] instance_id: ID of imported target instance.
         :param pulumi.Input[str] migration_name: Task name.
         :param pulumi.Input[str] recovery_type: Migration task restoration type. FULL: full backup restoration, FULL_LOG: full backup and transaction log restoration, FULL_DIFF: full backup and differential backup restoration.
@@ -337,6 +440,7 @@ class FullBackupMigration(pulumi.CustomResource):
         __props__ = _FullBackupMigrationState.__new__(_FullBackupMigrationState)
 
         __props__.__dict__["backup_files"] = backup_files
+        __props__.__dict__["backup_migration_id"] = backup_migration_id
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["migration_name"] = migration_name
         __props__.__dict__["recovery_type"] = recovery_type
@@ -350,6 +454,14 @@ class FullBackupMigration(pulumi.CustomResource):
         If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
         """
         return pulumi.get(self, "backup_files")
+
+    @property
+    @pulumi.getter(name="backupMigrationId")
+    def backup_migration_id(self) -> pulumi.Output[str]:
+        """
+        Backup import task ID.
+        """
+        return pulumi.get(self, "backup_migration_id")
 
     @property
     @pulumi.getter(name="instanceId")

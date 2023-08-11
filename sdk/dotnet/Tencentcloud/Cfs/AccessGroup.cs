@@ -23,9 +23,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.AccessGroup("foo", new Tencentcloud.Cfs.AccessGroupArgs
+    ///         var example = new Tencentcloud.Cfs.AccessGroup("example", new Tencentcloud.Cfs.AccessGroupArgs
     ///         {
-    ///             Description = "test",
+    ///             Description = "desc.",
     ///         });
     ///     }
     /// 
@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// CFS access group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+    ///  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/accessGroup:AccessGroup")]

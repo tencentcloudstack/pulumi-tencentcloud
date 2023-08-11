@@ -23,10 +23,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var snapshotPolicyConfig = new Tencentcloud.Vpc.SnapshotPolicyConfig("snapshotPolicyConfig", new Tencentcloud.Vpc.SnapshotPolicyConfigArgs
+    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = "tf-example-1308919341",
+    ///             Acl = "private",
+    ///         });
+    ///         var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
+    ///         {
+    ///             SnapshotPolicyName = "tf-example",
+    ///             BackupType = "time",
+    ///             CosBucket = exampleBucket.CosBucket,
+    ///             CosRegion = "ap-guangzhou",
+    ///             CreateNewCos = false,
+    ///             KeepTime = 2,
+    ///             BackupPolicies = 
+    ///             {
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "monday",
+    ///                     BackupTime = "00:00:00",
+    ///                 },
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "tuesday",
+    ///                     BackupTime = "01:00:00",
+    ///                 },
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "wednesday",
+    ///                     BackupTime = "02:00:00",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var config = new Tencentcloud.Vpc.SnapshotPolicyConfig("config", new Tencentcloud.Vpc.SnapshotPolicyConfigArgs
+    ///         {
+    ///             SnapshotPolicyId = exampleSnapshotPolicy.Id,
     ///             Enable = false,
-    ///             SnapshotPolicyId = "sspolicy-1t6cobbv",
     ///         });
     ///     }
     /// 

@@ -134,16 +134,6 @@ class DdosPolicyDdosRuleArgs:
                  speed_limit: Optional[pulumi.Input['DdosPolicyDdosRuleSpeedLimitArgs']] = None,
                  status_info: Optional[pulumi.Input['DdosPolicyDdosRuleStatusInfoArgs']] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input['DdosPolicyDdosRuleAclArgs'] acl: DDoS ACL rule configuration.
-        :param pulumi.Input['DdosPolicyDdosRuleAllowBlockArgs'] allow_block: DDoS black-white list.
-        :param pulumi.Input['DdosPolicyDdosRuleAntiPlyArgs'] anti_ply: DDoS protocol and connection protection.
-        :param pulumi.Input['DdosPolicyDdosRuleGeoIpArgs'] geo_ip: DDoS Protection by Geo Info.
-        :param pulumi.Input['DdosPolicyDdosRulePacketFilterArgs'] packet_filter: DDoS feature filtering configuration.
-        :param pulumi.Input['DdosPolicyDdosRuleSpeedLimitArgs'] speed_limit: DDoS access origin site speed limit configuration.
-        :param pulumi.Input['DdosPolicyDdosRuleStatusInfoArgs'] status_info: DDoS protection level.
-        :param pulumi.Input[str] switch: DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-        """
         if acl is not None:
             pulumi.set(__self__, "acl", acl)
         if allow_block is not None:
@@ -164,9 +154,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter
     def acl(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleAclArgs']]:
-        """
-        DDoS ACL rule configuration.
-        """
         return pulumi.get(self, "acl")
 
     @acl.setter
@@ -176,9 +163,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="allowBlock")
     def allow_block(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleAllowBlockArgs']]:
-        """
-        DDoS black-white list.
-        """
         return pulumi.get(self, "allow_block")
 
     @allow_block.setter
@@ -188,9 +172,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="antiPly")
     def anti_ply(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleAntiPlyArgs']]:
-        """
-        DDoS protocol and connection protection.
-        """
         return pulumi.get(self, "anti_ply")
 
     @anti_ply.setter
@@ -200,9 +181,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="geoIp")
     def geo_ip(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleGeoIpArgs']]:
-        """
-        DDoS Protection by Geo Info.
-        """
         return pulumi.get(self, "geo_ip")
 
     @geo_ip.setter
@@ -212,9 +190,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="packetFilter")
     def packet_filter(self) -> Optional[pulumi.Input['DdosPolicyDdosRulePacketFilterArgs']]:
-        """
-        DDoS feature filtering configuration.
-        """
         return pulumi.get(self, "packet_filter")
 
     @packet_filter.setter
@@ -224,9 +199,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="speedLimit")
     def speed_limit(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleSpeedLimitArgs']]:
-        """
-        DDoS access origin site speed limit configuration.
-        """
         return pulumi.get(self, "speed_limit")
 
     @speed_limit.setter
@@ -236,9 +208,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter(name="statusInfo")
     def status_info(self) -> Optional[pulumi.Input['DdosPolicyDdosRuleStatusInfoArgs']]:
-        """
-        DDoS protection level.
-        """
         return pulumi.get(self, "status_info")
 
     @status_info.setter
@@ -248,9 +217,6 @@ class DdosPolicyDdosRuleArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -263,10 +229,6 @@ class DdosPolicyDdosRuleAclArgs:
     def __init__(__self__, *,
                  acls: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAclAclArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAclAclArgs']]] acls: DDoS ACL rule configuration detail.
-        :param pulumi.Input[str] switch: - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-        """
         if acls is not None:
             pulumi.set(__self__, "acls", acls)
         if switch is not None:
@@ -275,9 +237,6 @@ class DdosPolicyDdosRuleAclArgs:
     @property
     @pulumi.getter
     def acls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAclAclArgs']]]]:
-        """
-        DDoS ACL rule configuration detail.
-        """
         return pulumi.get(self, "acls")
 
     @acls.setter
@@ -287,9 +246,6 @@ class DdosPolicyDdosRuleAclArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -306,14 +262,6 @@ class DdosPolicyDdosRuleAclAclArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  sport_end: Optional[pulumi.Input[int]] = None,
                  sport_start: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `drop`, `transmit`, `forward`.
-        :param pulumi.Input[int] dport_end: End of the dest port range. Valid value range: 0-65535.
-        :param pulumi.Input[int] dport_start: Start of the dest port range. Valid value range: 0-65535.
-        :param pulumi.Input[str] protocol: Valid values: `tcp`, `udp`, `all`.
-        :param pulumi.Input[int] sport_end: End of the source port range. Valid value range: 0-65535.
-        :param pulumi.Input[int] sport_start: Start of the source port range. Valid value range: 0-65535.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if dport_end is not None:
@@ -330,9 +278,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `drop`, `transmit`, `forward`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -342,9 +287,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter(name="dportEnd")
     def dport_end(self) -> Optional[pulumi.Input[int]]:
-        """
-        End of the dest port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "dport_end")
 
     @dport_end.setter
@@ -354,9 +296,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter(name="dportStart")
     def dport_start(self) -> Optional[pulumi.Input[int]]:
-        """
-        Start of the dest port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "dport_start")
 
     @dport_start.setter
@@ -366,9 +305,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
-        """
-        Valid values: `tcp`, `udp`, `all`.
-        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -378,9 +314,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter(name="sportEnd")
     def sport_end(self) -> Optional[pulumi.Input[int]]:
-        """
-        End of the source port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "sport_end")
 
     @sport_end.setter
@@ -390,9 +323,6 @@ class DdosPolicyDdosRuleAclAclArgs:
     @property
     @pulumi.getter(name="sportStart")
     def sport_start(self) -> Optional[pulumi.Input[int]]:
-        """
-        Start of the source port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "sport_start")
 
     @sport_start.setter
@@ -405,10 +335,6 @@ class DdosPolicyDdosRuleAllowBlockArgs:
     def __init__(__self__, *,
                  allow_block_ips: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs']]] allow_block_ips: DDoS black-white list detail.
-        :param pulumi.Input[str] switch: - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-        """
         if allow_block_ips is not None:
             pulumi.set(__self__, "allow_block_ips", allow_block_ips)
         if switch is not None:
@@ -417,9 +343,6 @@ class DdosPolicyDdosRuleAllowBlockArgs:
     @property
     @pulumi.getter(name="allowBlockIps")
     def allow_block_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs']]]]:
-        """
-        DDoS black-white list detail.
-        """
         return pulumi.get(self, "allow_block_ips")
 
     @allow_block_ips.setter
@@ -429,9 +352,6 @@ class DdosPolicyDdosRuleAllowBlockArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -445,10 +365,6 @@ class DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs:
                  type: pulumi.Input[str],
                  ip: Optional[pulumi.Input[str]] = None,
                  update_time: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[str] type: Valid values: `block`, `allow`.
-        :param pulumi.Input[str] ip: Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-        """
         pulumi.set(__self__, "type", type)
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
@@ -458,9 +374,6 @@ class DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
-        """
-        Valid values: `block`, `allow`.
-        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -470,9 +383,6 @@ class DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs:
     @property
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
-        """
-        Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -506,22 +416,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
                  source_connect_limit: pulumi.Input[int],
                  source_create_limit: pulumi.Input[int],
                  udp_shard: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[int] abnormal_connect_num: Abnormal connections threshold. Valid value range: 0-4294967295.
-        :param pulumi.Input[int] abnormal_syn_num: Abnormal syn packet number threshold. Valid value range: 0-65535.
-        :param pulumi.Input[int] abnormal_syn_ratio: Abnormal syn packet ratio threshold. Valid value range: 0-100.
-        :param pulumi.Input[int] connect_timeout: Connection timeout detection per second. Valid value range: 0-65535.
-        :param pulumi.Input[int] destination_connect_limit: Limitation of connections to dest port. Valid value range: 0-4294967295.
-        :param pulumi.Input[int] destination_create_limit: Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-        :param pulumi.Input[str] drop_icmp: Block ICMP protocol. Valid values: `on`, `off`.
-        :param pulumi.Input[str] drop_other: Block other protocols. Valid values: `on`, `off`.
-        :param pulumi.Input[str] drop_tcp: Block TCP protocol. Valid values: `on`, `off`.
-        :param pulumi.Input[str] drop_udp: Block UDP protocol. Valid values: `on`, `off`.
-        :param pulumi.Input[str] empty_connect_protect: Empty connection protection switch. Valid values: `on`, `off`.
-        :param pulumi.Input[int] source_connect_limit: Limitation of connections to origin site. Valid value range: 0-4294967295.
-        :param pulumi.Input[int] source_create_limit: Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-        :param pulumi.Input[str] udp_shard: UDP shard protection switch. Valid values: `on`, `off`.
-        """
         pulumi.set(__self__, "abnormal_connect_num", abnormal_connect_num)
         pulumi.set(__self__, "abnormal_syn_num", abnormal_syn_num)
         pulumi.set(__self__, "abnormal_syn_ratio", abnormal_syn_ratio)
@@ -541,9 +435,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="abnormalConnectNum")
     def abnormal_connect_num(self) -> pulumi.Input[int]:
-        """
-        Abnormal connections threshold. Valid value range: 0-4294967295.
-        """
         return pulumi.get(self, "abnormal_connect_num")
 
     @abnormal_connect_num.setter
@@ -553,9 +444,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="abnormalSynNum")
     def abnormal_syn_num(self) -> pulumi.Input[int]:
-        """
-        Abnormal syn packet number threshold. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "abnormal_syn_num")
 
     @abnormal_syn_num.setter
@@ -565,9 +453,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="abnormalSynRatio")
     def abnormal_syn_ratio(self) -> pulumi.Input[int]:
-        """
-        Abnormal syn packet ratio threshold. Valid value range: 0-100.
-        """
         return pulumi.get(self, "abnormal_syn_ratio")
 
     @abnormal_syn_ratio.setter
@@ -577,9 +462,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> pulumi.Input[int]:
-        """
-        Connection timeout detection per second. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
@@ -589,9 +471,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="destinationConnectLimit")
     def destination_connect_limit(self) -> pulumi.Input[int]:
-        """
-        Limitation of connections to dest port. Valid value range: 0-4294967295.
-        """
         return pulumi.get(self, "destination_connect_limit")
 
     @destination_connect_limit.setter
@@ -601,9 +480,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="destinationCreateLimit")
     def destination_create_limit(self) -> pulumi.Input[int]:
-        """
-        Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-        """
         return pulumi.get(self, "destination_create_limit")
 
     @destination_create_limit.setter
@@ -613,9 +489,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="dropIcmp")
     def drop_icmp(self) -> pulumi.Input[str]:
-        """
-        Block ICMP protocol. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "drop_icmp")
 
     @drop_icmp.setter
@@ -625,9 +498,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="dropOther")
     def drop_other(self) -> pulumi.Input[str]:
-        """
-        Block other protocols. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "drop_other")
 
     @drop_other.setter
@@ -637,9 +507,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="dropTcp")
     def drop_tcp(self) -> pulumi.Input[str]:
-        """
-        Block TCP protocol. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "drop_tcp")
 
     @drop_tcp.setter
@@ -649,9 +516,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="dropUdp")
     def drop_udp(self) -> pulumi.Input[str]:
-        """
-        Block UDP protocol. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "drop_udp")
 
     @drop_udp.setter
@@ -661,9 +525,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="emptyConnectProtect")
     def empty_connect_protect(self) -> pulumi.Input[str]:
-        """
-        Empty connection protection switch. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "empty_connect_protect")
 
     @empty_connect_protect.setter
@@ -673,9 +534,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="sourceConnectLimit")
     def source_connect_limit(self) -> pulumi.Input[int]:
-        """
-        Limitation of connections to origin site. Valid value range: 0-4294967295.
-        """
         return pulumi.get(self, "source_connect_limit")
 
     @source_connect_limit.setter
@@ -685,9 +543,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="sourceCreateLimit")
     def source_create_limit(self) -> pulumi.Input[int]:
-        """
-        Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-        """
         return pulumi.get(self, "source_create_limit")
 
     @source_create_limit.setter
@@ -697,9 +552,6 @@ class DdosPolicyDdosRuleAntiPlyArgs:
     @property
     @pulumi.getter(name="udpShard")
     def udp_shard(self) -> Optional[pulumi.Input[str]]:
-        """
-        UDP shard protection switch. Valid values: `on`, `off`.
-        """
         return pulumi.get(self, "udp_shard")
 
     @udp_shard.setter
@@ -712,10 +564,6 @@ class DdosPolicyDdosRuleGeoIpArgs:
     def __init__(__self__, *,
                  region_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] region_ids: Region ID. See details in data source `security_policy_regions`.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if region_ids is not None:
             pulumi.set(__self__, "region_ids", region_ids)
         if switch is not None:
@@ -724,9 +572,6 @@ class DdosPolicyDdosRuleGeoIpArgs:
     @property
     @pulumi.getter(name="regionIds")
     def region_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Region ID. See details in data source `security_policy_regions`.
-        """
         return pulumi.get(self, "region_ids")
 
     @region_ids.setter
@@ -736,9 +581,6 @@ class DdosPolicyDdosRuleGeoIpArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -751,10 +593,6 @@ class DdosPolicyDdosRulePacketFilterArgs:
     def __init__(__self__, *,
                  packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRulePacketFilterPacketFilterArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRulePacketFilterPacketFilterArgs']]] packet_filters: DDoS feature filtering configuration detail.
-        :param pulumi.Input[str] switch: - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-        """
         if packet_filters is not None:
             pulumi.set(__self__, "packet_filters", packet_filters)
         if switch is not None:
@@ -763,9 +601,6 @@ class DdosPolicyDdosRulePacketFilterArgs:
     @property
     @pulumi.getter(name="packetFilters")
     def packet_filters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyDdosRulePacketFilterPacketFilterArgs']]]]:
-        """
-        DDoS feature filtering configuration detail.
-        """
         return pulumi.get(self, "packet_filters")
 
     @packet_filters.setter
@@ -775,9 +610,6 @@ class DdosPolicyDdosRulePacketFilterArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -809,29 +641,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
                  sport_start: Optional[pulumi.Input[int]] = None,
                  str: Optional[pulumi.Input[str]] = None,
                  str2: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `drop`, `transmit`, `drop_block`, `forward`.
-        :param pulumi.Input[int] depth: Packet character depth to check of feature 1. Valid value range: 1-1500.
-        :param pulumi.Input[int] depth2: Packet character depth to check of feature 2. Valid value range: 1-1500.
-        :param pulumi.Input[int] dport_end: End of the dest port range. Valid value range: 0-65535.
-        :param pulumi.Input[int] dport_start: Start of the dest port range. Valid value range: 0-65535.
-        :param pulumi.Input[int] is_not: Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-        :param pulumi.Input[int] is_not2: Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-        :param pulumi.Input[str] match_begin: Packet layer for matching begin of feature 1. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        :param pulumi.Input[str] match_begin2: Packet layer for matching begin of feature 2. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        :param pulumi.Input[str] match_logic: Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-        :param pulumi.Input[str] match_type: Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        :param pulumi.Input[str] match_type2: Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        :param pulumi.Input[int] offset: Offset of feature 1. Valid value range: 1-1500.
-        :param pulumi.Input[int] offset2: Offset of feature 2. Valid value range: 1-1500.
-        :param pulumi.Input[int] packet_max: Max packet size. Valid value range: 0-1500.
-        :param pulumi.Input[int] packet_min: Min packet size. Valid value range: 0-1500.
-        :param pulumi.Input[str] protocol: Valid value: `tcp`, `udp`, `icmp`, `all`.
-        :param pulumi.Input[int] sport_end: End of the source port range. Valid value range: 0-65535.
-        :param pulumi.Input[int] sport_start: Start of the source port range. Valid value range: 0-65535.
-        :param pulumi.Input[str] str: Regex expression or string to match.
-        :param pulumi.Input[str] str2: Regex expression or string to match.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if depth is not None:
@@ -878,9 +687,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `drop`, `transmit`, `drop_block`, `forward`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -890,9 +696,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def depth(self) -> Optional[pulumi.Input[int]]:
-        """
-        Packet character depth to check of feature 1. Valid value range: 1-1500.
-        """
         return pulumi.get(self, "depth")
 
     @depth.setter
@@ -902,9 +705,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def depth2(self) -> Optional[pulumi.Input[int]]:
-        """
-        Packet character depth to check of feature 2. Valid value range: 1-1500.
-        """
         return pulumi.get(self, "depth2")
 
     @depth2.setter
@@ -914,9 +714,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="dportEnd")
     def dport_end(self) -> Optional[pulumi.Input[int]]:
-        """
-        End of the dest port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "dport_end")
 
     @dport_end.setter
@@ -926,9 +723,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="dportStart")
     def dport_start(self) -> Optional[pulumi.Input[int]]:
-        """
-        Start of the dest port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "dport_start")
 
     @dport_start.setter
@@ -938,9 +732,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="isNot")
     def is_not(self) -> Optional[pulumi.Input[int]]:
-        """
-        Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-        """
         return pulumi.get(self, "is_not")
 
     @is_not.setter
@@ -950,9 +741,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="isNot2")
     def is_not2(self) -> Optional[pulumi.Input[int]]:
-        """
-        Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-        """
         return pulumi.get(self, "is_not2")
 
     @is_not2.setter
@@ -962,9 +750,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="matchBegin")
     def match_begin(self) -> Optional[pulumi.Input[str]]:
-        """
-        Packet layer for matching begin of feature 1. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        """
         return pulumi.get(self, "match_begin")
 
     @match_begin.setter
@@ -974,9 +759,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="matchBegin2")
     def match_begin2(self) -> Optional[pulumi.Input[str]]:
-        """
-        Packet layer for matching begin of feature 2. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        """
         return pulumi.get(self, "match_begin2")
 
     @match_begin2.setter
@@ -986,9 +768,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="matchLogic")
     def match_logic(self) -> Optional[pulumi.Input[str]]:
-        """
-        Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-        """
         return pulumi.get(self, "match_logic")
 
     @match_logic.setter
@@ -998,9 +777,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="matchType")
     def match_type(self) -> Optional[pulumi.Input[str]]:
-        """
-        Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        """
         return pulumi.get(self, "match_type")
 
     @match_type.setter
@@ -1010,9 +786,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="matchType2")
     def match_type2(self) -> Optional[pulumi.Input[str]]:
-        """
-        Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        """
         return pulumi.get(self, "match_type2")
 
     @match_type2.setter
@@ -1022,9 +795,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def offset(self) -> Optional[pulumi.Input[int]]:
-        """
-        Offset of feature 1. Valid value range: 1-1500.
-        """
         return pulumi.get(self, "offset")
 
     @offset.setter
@@ -1034,9 +804,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def offset2(self) -> Optional[pulumi.Input[int]]:
-        """
-        Offset of feature 2. Valid value range: 1-1500.
-        """
         return pulumi.get(self, "offset2")
 
     @offset2.setter
@@ -1046,9 +813,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="packetMax")
     def packet_max(self) -> Optional[pulumi.Input[int]]:
-        """
-        Max packet size. Valid value range: 0-1500.
-        """
         return pulumi.get(self, "packet_max")
 
     @packet_max.setter
@@ -1058,9 +822,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="packetMin")
     def packet_min(self) -> Optional[pulumi.Input[int]]:
-        """
-        Min packet size. Valid value range: 0-1500.
-        """
         return pulumi.get(self, "packet_min")
 
     @packet_min.setter
@@ -1070,9 +831,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
-        """
-        Valid value: `tcp`, `udp`, `icmp`, `all`.
-        """
         return pulumi.get(self, "protocol")
 
     @protocol.setter
@@ -1082,9 +840,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="sportEnd")
     def sport_end(self) -> Optional[pulumi.Input[int]]:
-        """
-        End of the source port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "sport_end")
 
     @sport_end.setter
@@ -1094,9 +849,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter(name="sportStart")
     def sport_start(self) -> Optional[pulumi.Input[int]]:
-        """
-        Start of the source port range. Valid value range: 0-65535.
-        """
         return pulumi.get(self, "sport_start")
 
     @sport_start.setter
@@ -1106,9 +858,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def str(self) -> Optional[pulumi.Input[str]]:
-        """
-        Regex expression or string to match.
-        """
         return pulumi.get(self, "str")
 
     @str.setter
@@ -1118,9 +867,6 @@ class DdosPolicyDdosRulePacketFilterPacketFilterArgs:
     @property
     @pulumi.getter
     def str2(self) -> Optional[pulumi.Input[str]]:
-        """
-        Regex expression or string to match.
-        """
         return pulumi.get(self, "str2")
 
     @str2.setter
@@ -1133,10 +879,6 @@ class DdosPolicyDdosRuleSpeedLimitArgs:
     def __init__(__self__, *,
                  flux_limit: Optional[pulumi.Input[str]] = None,
                  package_limit: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] flux_limit: Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        :param pulumi.Input[str] package_limit: Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        """
         if flux_limit is not None:
             pulumi.set(__self__, "flux_limit", flux_limit)
         if package_limit is not None:
@@ -1145,9 +887,6 @@ class DdosPolicyDdosRuleSpeedLimitArgs:
     @property
     @pulumi.getter(name="fluxLimit")
     def flux_limit(self) -> Optional[pulumi.Input[str]]:
-        """
-        Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        """
         return pulumi.get(self, "flux_limit")
 
     @flux_limit.setter
@@ -1157,9 +896,6 @@ class DdosPolicyDdosRuleSpeedLimitArgs:
     @property
     @pulumi.getter(name="packageLimit")
     def package_limit(self) -> Optional[pulumi.Input[str]]:
-        """
-        Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        """
         return pulumi.get(self, "package_limit")
 
     @package_limit.setter
@@ -1171,17 +907,11 @@ class DdosPolicyDdosRuleSpeedLimitArgs:
 class DdosPolicyDdosRuleStatusInfoArgs:
     def __init__(__self__, *,
                  ply_level: pulumi.Input[str]):
-        """
-        :param pulumi.Input[str] ply_level: Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-        """
         pulumi.set(__self__, "ply_level", ply_level)
 
     @property
     @pulumi.getter(name="plyLevel")
     def ply_level(self) -> pulumi.Input[str]:
-        """
-        Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-        """
         return pulumi.get(self, "ply_level")
 
     @ply_level.setter
@@ -2456,16 +2186,6 @@ class SecurityPolicyConfigArgs:
                  rate_limit_config: Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigArgs']] = None,
                  switch_config: Optional[pulumi.Input['SecurityPolicyConfigSwitchConfigArgs']] = None,
                  waf_config: Optional[pulumi.Input['SecurityPolicyConfigWafConfigArgs']] = None):
-        """
-        :param pulumi.Input['SecurityPolicyConfigAclConfigArgs'] acl_config: ACL configuration.
-        :param pulumi.Input['SecurityPolicyConfigBotConfigArgs'] bot_config: Bot Configuration.
-        :param pulumi.Input['SecurityPolicyConfigDropPageConfigArgs'] drop_page_config: Custom drop page configuration.
-        :param pulumi.Input['SecurityPolicyConfigExceptConfigArgs'] except_config: Exception rule configuration.
-        :param pulumi.Input['SecurityPolicyConfigIpTableConfigArgs'] ip_table_config: Basic access control.
-        :param pulumi.Input['SecurityPolicyConfigRateLimitConfigArgs'] rate_limit_config: RateLimit Configuration.
-        :param pulumi.Input['SecurityPolicyConfigSwitchConfigArgs'] switch_config: Main switch of 7-layer security.
-        :param pulumi.Input['SecurityPolicyConfigWafConfigArgs'] waf_config: WAF (Web Application Firewall) Configuration.
-        """
         if acl_config is not None:
             pulumi.set(__self__, "acl_config", acl_config)
         if bot_config is not None:
@@ -2486,9 +2206,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="aclConfig")
     def acl_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigAclConfigArgs']]:
-        """
-        ACL configuration.
-        """
         return pulumi.get(self, "acl_config")
 
     @acl_config.setter
@@ -2498,9 +2215,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="botConfig")
     def bot_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigBotConfigArgs']]:
-        """
-        Bot Configuration.
-        """
         return pulumi.get(self, "bot_config")
 
     @bot_config.setter
@@ -2510,9 +2224,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="dropPageConfig")
     def drop_page_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigDropPageConfigArgs']]:
-        """
-        Custom drop page configuration.
-        """
         return pulumi.get(self, "drop_page_config")
 
     @drop_page_config.setter
@@ -2522,9 +2233,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="exceptConfig")
     def except_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigExceptConfigArgs']]:
-        """
-        Exception rule configuration.
-        """
         return pulumi.get(self, "except_config")
 
     @except_config.setter
@@ -2534,9 +2242,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="ipTableConfig")
     def ip_table_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigIpTableConfigArgs']]:
-        """
-        Basic access control.
-        """
         return pulumi.get(self, "ip_table_config")
 
     @ip_table_config.setter
@@ -2546,9 +2251,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="rateLimitConfig")
     def rate_limit_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigArgs']]:
-        """
-        RateLimit Configuration.
-        """
         return pulumi.get(self, "rate_limit_config")
 
     @rate_limit_config.setter
@@ -2558,9 +2260,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="switchConfig")
     def switch_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigSwitchConfigArgs']]:
-        """
-        Main switch of 7-layer security.
-        """
         return pulumi.get(self, "switch_config")
 
     @switch_config.setter
@@ -2570,9 +2269,6 @@ class SecurityPolicyConfigArgs:
     @property
     @pulumi.getter(name="wafConfig")
     def waf_config(self) -> Optional[pulumi.Input['SecurityPolicyConfigWafConfigArgs']]:
-        """
-        WAF (Web Application Firewall) Configuration.
-        """
         return pulumi.get(self, "waf_config")
 
     @waf_config.setter
@@ -2585,10 +2281,6 @@ class SecurityPolicyConfigAclConfigArgs:
     def __init__(__self__, *,
                  switch: pulumi.Input[str],
                  user_rules: Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigAclConfigUserRuleArgs']]]] = None):
-        """
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigAclConfigUserRuleArgs']]] user_rules: Custom configuration.
-        """
         pulumi.set(__self__, "switch", switch)
         if user_rules is not None:
             pulumi.set(__self__, "user_rules", user_rules)
@@ -2596,9 +2288,6 @@ class SecurityPolicyConfigAclConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -2608,9 +2297,6 @@ class SecurityPolicyConfigAclConfigArgs:
     @property
     @pulumi.getter(name="userRules")
     def user_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigAclConfigUserRuleArgs']]]]:
-        """
-        Custom configuration.
-        """
         return pulumi.get(self, "user_rules")
 
     @user_rules.setter
@@ -2634,19 +2320,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
                  response_code: Optional[pulumi.Input[int]] = None,
                  rule_id: Optional[pulumi.Input[int]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Valid values: `monitor`, `drop`.
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigAclConfigUserRuleConditionArgs']]] conditions: Conditions of the rule.
-        :param pulumi.Input[str] rule_name: Rule Name.
-        :param pulumi.Input[int] rule_priority: Priority of the rule. Valid value range: 1-100.
-        :param pulumi.Input[str] rule_status: Status of the rule. Valid values: `on`, `off`, `hour`.
-        :param pulumi.Input[str] name: Name of the custom response page.
-        :param pulumi.Input[int] page_id: ID of the custom response page.
-        :param pulumi.Input[int] punish_time: Punish time, Valid value range: 0-2 days.
-        :param pulumi.Input[str] punish_time_unit: Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        :param pulumi.Input[str] redirect_url: Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-        :param pulumi.Input[int] response_code: Response code to use when redirecting.
-        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "conditions", conditions)
         pulumi.set(__self__, "rule_name", rule_name)
@@ -2672,9 +2345,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
-        """
-        Valid values: `monitor`, `drop`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -2684,9 +2354,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter
     def conditions(self) -> pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigAclConfigUserRuleConditionArgs']]]:
-        """
-        Conditions of the rule.
-        """
         return pulumi.get(self, "conditions")
 
     @conditions.setter
@@ -2696,9 +2363,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> pulumi.Input[str]:
-        """
-        Rule Name.
-        """
         return pulumi.get(self, "rule_name")
 
     @rule_name.setter
@@ -2708,9 +2372,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="rulePriority")
     def rule_priority(self) -> pulumi.Input[int]:
-        """
-        Priority of the rule. Valid value range: 1-100.
-        """
         return pulumi.get(self, "rule_priority")
 
     @rule_priority.setter
@@ -2720,9 +2381,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="ruleStatus")
     def rule_status(self) -> pulumi.Input[str]:
-        """
-        Status of the rule. Valid values: `on`, `off`, `hour`.
-        """
         return pulumi.get(self, "rule_status")
 
     @rule_status.setter
@@ -2732,9 +2390,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        Name of the custom response page.
-        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -2744,9 +2399,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="pageId")
     def page_id(self) -> Optional[pulumi.Input[int]]:
-        """
-        ID of the custom response page.
-        """
         return pulumi.get(self, "page_id")
 
     @page_id.setter
@@ -2756,9 +2408,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="punishTime")
     def punish_time(self) -> Optional[pulumi.Input[int]]:
-        """
-        Punish time, Valid value range: 0-2 days.
-        """
         return pulumi.get(self, "punish_time")
 
     @punish_time.setter
@@ -2768,9 +2417,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="punishTimeUnit")
     def punish_time_unit(self) -> Optional[pulumi.Input[str]]:
-        """
-        Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        """
         return pulumi.get(self, "punish_time_unit")
 
     @punish_time_unit.setter
@@ -2780,9 +2426,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> Optional[pulumi.Input[str]]:
-        """
-        Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-        """
         return pulumi.get(self, "redirect_url")
 
     @redirect_url.setter
@@ -2792,9 +2435,6 @@ class SecurityPolicyConfigAclConfigUserRuleArgs:
     @property
     @pulumi.getter(name="responseCode")
     def response_code(self) -> Optional[pulumi.Input[int]]:
-        """
-        Response code to use when redirecting.
-        """
         return pulumi.get(self, "response_code")
 
     @response_code.setter
@@ -2827,12 +2467,6 @@ class SecurityPolicyConfigAclConfigUserRuleConditionArgs:
                  match_from: pulumi.Input[str],
                  match_param: pulumi.Input[str],
                  operator: pulumi.Input[str]):
-        """
-        :param pulumi.Input[str] match_content: Content to match.
-        :param pulumi.Input[str] match_from: Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        :param pulumi.Input[str] match_param: Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        :param pulumi.Input[str] operator: Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         pulumi.set(__self__, "match_content", match_content)
         pulumi.set(__self__, "match_from", match_from)
         pulumi.set(__self__, "match_param", match_param)
@@ -2841,9 +2475,6 @@ class SecurityPolicyConfigAclConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchContent")
     def match_content(self) -> pulumi.Input[str]:
-        """
-        Content to match.
-        """
         return pulumi.get(self, "match_content")
 
     @match_content.setter
@@ -2853,9 +2484,6 @@ class SecurityPolicyConfigAclConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchFrom")
     def match_from(self) -> pulumi.Input[str]:
-        """
-        Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        """
         return pulumi.get(self, "match_from")
 
     @match_from.setter
@@ -2865,9 +2493,6 @@ class SecurityPolicyConfigAclConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchParam")
     def match_param(self) -> pulumi.Input[str]:
-        """
-        Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        """
         return pulumi.get(self, "match_param")
 
     @match_param.setter
@@ -2877,9 +2502,6 @@ class SecurityPolicyConfigAclConfigUserRuleConditionArgs:
     @property
     @pulumi.getter
     def operator(self) -> pulumi.Input[str]:
-        """
-        Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -2894,12 +2516,6 @@ class SecurityPolicyConfigBotConfigArgs:
                  managed_rule: Optional[pulumi.Input['SecurityPolicyConfigBotConfigManagedRuleArgs']] = None,
                  portrait_rule: Optional[pulumi.Input['SecurityPolicyConfigBotConfigPortraitRuleArgs']] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input['SecurityPolicyConfigBotConfigIntelligenceRuleArgs'] intelligence_rule: Bot intelligent rule configuration.
-        :param pulumi.Input['SecurityPolicyConfigBotConfigManagedRuleArgs'] managed_rule: Preset rules.
-        :param pulumi.Input['SecurityPolicyConfigBotConfigPortraitRuleArgs'] portrait_rule: Portrait rule.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if intelligence_rule is not None:
             pulumi.set(__self__, "intelligence_rule", intelligence_rule)
         if managed_rule is not None:
@@ -2912,9 +2528,6 @@ class SecurityPolicyConfigBotConfigArgs:
     @property
     @pulumi.getter(name="intelligenceRule")
     def intelligence_rule(self) -> Optional[pulumi.Input['SecurityPolicyConfigBotConfigIntelligenceRuleArgs']]:
-        """
-        Bot intelligent rule configuration.
-        """
         return pulumi.get(self, "intelligence_rule")
 
     @intelligence_rule.setter
@@ -2924,9 +2537,6 @@ class SecurityPolicyConfigBotConfigArgs:
     @property
     @pulumi.getter(name="managedRule")
     def managed_rule(self) -> Optional[pulumi.Input['SecurityPolicyConfigBotConfigManagedRuleArgs']]:
-        """
-        Preset rules.
-        """
         return pulumi.get(self, "managed_rule")
 
     @managed_rule.setter
@@ -2936,9 +2546,6 @@ class SecurityPolicyConfigBotConfigArgs:
     @property
     @pulumi.getter(name="portraitRule")
     def portrait_rule(self) -> Optional[pulumi.Input['SecurityPolicyConfigBotConfigPortraitRuleArgs']]:
-        """
-        Portrait rule.
-        """
         return pulumi.get(self, "portrait_rule")
 
     @portrait_rule.setter
@@ -2948,9 +2555,6 @@ class SecurityPolicyConfigBotConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -2963,10 +2567,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleArgs:
     def __init__(__self__, *,
                  items: Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs']]] items: Configuration detail.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if items is not None:
             pulumi.set(__self__, "items", items)
         if switch is not None:
@@ -2975,9 +2575,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleArgs:
     @property
     @pulumi.getter
     def items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs']]]]:
-        """
-        Configuration detail.
-        """
         return pulumi.get(self, "items")
 
     @items.setter
@@ -2987,9 +2584,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3002,10 +2596,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs:
     def __init__(__self__, *,
                  action: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-        :param pulumi.Input[str] label: Bot label, valid values: `evil_bot`, `suspect_bot`, `good_bot`, `normal`.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if label is not None:
@@ -3014,9 +2604,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -3026,9 +2613,6 @@ class SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs:
     @property
     @pulumi.getter
     def label(self) -> Optional[pulumi.Input[str]]:
-        """
-        Bot label, valid values: `evil_bot`, `suspect_bot`, `good_bot`, `normal`.
-        """
         return pulumi.get(self, "label")
 
     @label.setter
@@ -3052,20 +2636,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
                  response_code: Optional[pulumi.Input[int]] = None,
                  rule_id: Optional[pulumi.Input[int]] = None,
                  trans_managed_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] alg_managed_ids: Rules to enable when action is `alg`. See details in data source `bot_managed_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] cap_managed_ids: Rules to enable when action is `captcha`. See details in data source `bot_managed_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] drop_managed_ids: Rules to enable when action is `drop`. See details in data source `bot_managed_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] mon_managed_ids: Rules to enable when action is `monitor`. See details in data source `bot_managed_rules`.
-        :param pulumi.Input[str] name: Name of the custom response page.
-        :param pulumi.Input[int] page_id: ID of the custom response page.
-        :param pulumi.Input[int] punish_time: Punish time.
-        :param pulumi.Input[str] punish_time_unit: Time unit of the punish time.
-        :param pulumi.Input[str] redirect_url: Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-        :param pulumi.Input[int] response_code: Response code to use when redirecting.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] trans_managed_ids: Rules to enable when action is `trans`. See details in data source `bot_managed_rules`.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if alg_managed_ids is not None:
@@ -3096,9 +2666,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -3108,9 +2675,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="algManagedIds")
     def alg_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `alg`. See details in data source `bot_managed_rules`.
-        """
         return pulumi.get(self, "alg_managed_ids")
 
     @alg_managed_ids.setter
@@ -3120,9 +2684,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="capManagedIds")
     def cap_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `captcha`. See details in data source `bot_managed_rules`.
-        """
         return pulumi.get(self, "cap_managed_ids")
 
     @cap_managed_ids.setter
@@ -3132,9 +2693,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="dropManagedIds")
     def drop_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `drop`. See details in data source `bot_managed_rules`.
-        """
         return pulumi.get(self, "drop_managed_ids")
 
     @drop_managed_ids.setter
@@ -3144,9 +2702,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="monManagedIds")
     def mon_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `monitor`. See details in data source `bot_managed_rules`.
-        """
         return pulumi.get(self, "mon_managed_ids")
 
     @mon_managed_ids.setter
@@ -3156,9 +2711,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        Name of the custom response page.
-        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -3168,9 +2720,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="pageId")
     def page_id(self) -> Optional[pulumi.Input[int]]:
-        """
-        ID of the custom response page.
-        """
         return pulumi.get(self, "page_id")
 
     @page_id.setter
@@ -3180,9 +2729,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="punishTime")
     def punish_time(self) -> Optional[pulumi.Input[int]]:
-        """
-        Punish time.
-        """
         return pulumi.get(self, "punish_time")
 
     @punish_time.setter
@@ -3192,9 +2738,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="punishTimeUnit")
     def punish_time_unit(self) -> Optional[pulumi.Input[str]]:
-        """
-        Time unit of the punish time.
-        """
         return pulumi.get(self, "punish_time_unit")
 
     @punish_time_unit.setter
@@ -3204,9 +2747,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> Optional[pulumi.Input[str]]:
-        """
-        Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-        """
         return pulumi.get(self, "redirect_url")
 
     @redirect_url.setter
@@ -3216,9 +2756,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="responseCode")
     def response_code(self) -> Optional[pulumi.Input[int]]:
-        """
-        Response code to use when redirecting.
-        """
         return pulumi.get(self, "response_code")
 
     @response_code.setter
@@ -3237,9 +2774,6 @@ class SecurityPolicyConfigBotConfigManagedRuleArgs:
     @property
     @pulumi.getter(name="transManagedIds")
     def trans_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `trans`. See details in data source `bot_managed_rules`.
-        """
         return pulumi.get(self, "trans_managed_ids")
 
     @trans_managed_ids.setter
@@ -3256,13 +2790,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
                  mon_managed_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  rule_id: Optional[pulumi.Input[int]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] alg_managed_ids: Rules to enable when action is `alg`. See details in data source `bot_portrait_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] cap_managed_ids: Rules to enable when action is `captcha`. See details in data source `bot_portrait_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] drop_managed_ids: Rules to enable when action is `drop`. See details in data source `bot_portrait_rules`.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] mon_managed_ids: Rules to enable when action is `monitor`. See details in data source `bot_portrait_rules`.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if alg_managed_ids is not None:
             pulumi.set(__self__, "alg_managed_ids", alg_managed_ids)
         if cap_managed_ids is not None:
@@ -3279,9 +2806,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
     @property
     @pulumi.getter(name="algManagedIds")
     def alg_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `alg`. See details in data source `bot_portrait_rules`.
-        """
         return pulumi.get(self, "alg_managed_ids")
 
     @alg_managed_ids.setter
@@ -3291,9 +2815,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
     @property
     @pulumi.getter(name="capManagedIds")
     def cap_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `captcha`. See details in data source `bot_portrait_rules`.
-        """
         return pulumi.get(self, "cap_managed_ids")
 
     @cap_managed_ids.setter
@@ -3303,9 +2824,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
     @property
     @pulumi.getter(name="dropManagedIds")
     def drop_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `drop`. See details in data source `bot_portrait_rules`.
-        """
         return pulumi.get(self, "drop_managed_ids")
 
     @drop_managed_ids.setter
@@ -3315,9 +2833,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
     @property
     @pulumi.getter(name="monManagedIds")
     def mon_managed_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Rules to enable when action is `monitor`. See details in data source `bot_portrait_rules`.
-        """
         return pulumi.get(self, "mon_managed_ids")
 
     @mon_managed_ids.setter
@@ -3336,9 +2851,6 @@ class SecurityPolicyConfigBotConfigPortraitRuleArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3352,11 +2864,6 @@ class SecurityPolicyConfigDropPageConfigArgs:
                  acl_drop_page_detail: Optional[pulumi.Input['SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs']] = None,
                  switch: Optional[pulumi.Input[str]] = None,
                  waf_drop_page_detail: Optional[pulumi.Input['SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs']] = None):
-        """
-        :param pulumi.Input['SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs'] acl_drop_page_detail: Custom error page of ACL rules.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        :param pulumi.Input['SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs'] waf_drop_page_detail: Custom error page of WAF rules.
-        """
         if acl_drop_page_detail is not None:
             pulumi.set(__self__, "acl_drop_page_detail", acl_drop_page_detail)
         if switch is not None:
@@ -3367,9 +2874,6 @@ class SecurityPolicyConfigDropPageConfigArgs:
     @property
     @pulumi.getter(name="aclDropPageDetail")
     def acl_drop_page_detail(self) -> Optional[pulumi.Input['SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs']]:
-        """
-        Custom error page of ACL rules.
-        """
         return pulumi.get(self, "acl_drop_page_detail")
 
     @acl_drop_page_detail.setter
@@ -3379,9 +2883,6 @@ class SecurityPolicyConfigDropPageConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3391,9 +2892,6 @@ class SecurityPolicyConfigDropPageConfigArgs:
     @property
     @pulumi.getter(name="wafDropPageDetail")
     def waf_drop_page_detail(self) -> Optional[pulumi.Input['SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs']]:
-        """
-        Custom error page of WAF rules.
-        """
         return pulumi.get(self, "waf_drop_page_detail")
 
     @waf_drop_page_detail.setter
@@ -3408,12 +2906,6 @@ class SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs:
                  page_id: Optional[pulumi.Input[int]] = None,
                  status_code: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] name: File name or URL.
-        :param pulumi.Input[int] page_id: ID of the custom error page. when set to 0, use system default error page.
-        :param pulumi.Input[int] status_code: HTTP status code to use. Valid range: 100-600.
-        :param pulumi.Input[str] type: Type of the custom error page. Valid values: `file`, `url`.
-        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if page_id is not None:
@@ -3426,9 +2918,6 @@ class SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        File name or URL.
-        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -3438,9 +2927,6 @@ class SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs:
     @property
     @pulumi.getter(name="pageId")
     def page_id(self) -> Optional[pulumi.Input[int]]:
-        """
-        ID of the custom error page. when set to 0, use system default error page.
-        """
         return pulumi.get(self, "page_id")
 
     @page_id.setter
@@ -3450,9 +2936,6 @@ class SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs:
     @property
     @pulumi.getter(name="statusCode")
     def status_code(self) -> Optional[pulumi.Input[int]]:
-        """
-        HTTP status code to use. Valid range: 100-600.
-        """
         return pulumi.get(self, "status_code")
 
     @status_code.setter
@@ -3462,9 +2945,6 @@ class SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
-        """
-        Type of the custom error page. Valid values: `file`, `url`.
-        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -3479,12 +2959,6 @@ class SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs:
                  page_id: Optional[pulumi.Input[int]] = None,
                  status_code: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] name: File name or URL.
-        :param pulumi.Input[int] page_id: ID of the custom error page. when set to 0, use system default error page.
-        :param pulumi.Input[int] status_code: HTTP status code to use. Valid range: 100-600.
-        :param pulumi.Input[str] type: Type of the custom error page. Valid values: `file`, `url`.
-        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if page_id is not None:
@@ -3497,9 +2971,6 @@ class SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        File name or URL.
-        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -3509,9 +2980,6 @@ class SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs:
     @property
     @pulumi.getter(name="pageId")
     def page_id(self) -> Optional[pulumi.Input[int]]:
-        """
-        ID of the custom error page. when set to 0, use system default error page.
-        """
         return pulumi.get(self, "page_id")
 
     @page_id.setter
@@ -3521,9 +2989,6 @@ class SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs:
     @property
     @pulumi.getter(name="statusCode")
     def status_code(self) -> Optional[pulumi.Input[int]]:
-        """
-        HTTP status code to use. Valid range: 100-600.
-        """
         return pulumi.get(self, "status_code")
 
     @status_code.setter
@@ -3533,9 +2998,6 @@ class SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
-        """
-        Type of the custom error page. Valid values: `file`, `url`.
-        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -3548,10 +3010,6 @@ class SecurityPolicyConfigExceptConfigArgs:
     def __init__(__self__, *,
                  except_user_rules: Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleArgs']]] except_user_rules: Exception rules.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if except_user_rules is not None:
             pulumi.set(__self__, "except_user_rules", except_user_rules)
         if switch is not None:
@@ -3560,9 +3018,6 @@ class SecurityPolicyConfigExceptConfigArgs:
     @property
     @pulumi.getter(name="exceptUserRules")
     def except_user_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleArgs']]]]:
-        """
-        Exception rules.
-        """
         return pulumi.get(self, "except_user_rules")
 
     @except_user_rules.setter
@@ -3572,9 +3027,6 @@ class SecurityPolicyConfigExceptConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3593,14 +3045,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
                  rule_priority: Optional[pulumi.Input[int]] = None,
                  rule_status: Optional[pulumi.Input[str]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `skip`.
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs']]] except_user_rule_conditions: Conditions of the rule.
-        :param pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs'] except_user_rule_scope: Scope of the rule in effect.
-        :param pulumi.Input[str] rule_name: Rule name.
-        :param pulumi.Input[int] rule_priority: Priority of the rule. Valid value range: 0-100.
-        :param pulumi.Input[str] rule_status: Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if except_user_rule_conditions is not None:
@@ -3621,9 +3065,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `skip`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -3633,9 +3074,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter(name="exceptUserRuleConditions")
     def except_user_rule_conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs']]]]:
-        """
-        Conditions of the rule.
-        """
         return pulumi.get(self, "except_user_rule_conditions")
 
     @except_user_rule_conditions.setter
@@ -3645,9 +3083,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter(name="exceptUserRuleScope")
     def except_user_rule_scope(self) -> Optional[pulumi.Input['SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs']]:
-        """
-        Scope of the rule in effect.
-        """
         return pulumi.get(self, "except_user_rule_scope")
 
     @except_user_rule_scope.setter
@@ -3666,9 +3101,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> Optional[pulumi.Input[str]]:
-        """
-        Rule name.
-        """
         return pulumi.get(self, "rule_name")
 
     @rule_name.setter
@@ -3678,9 +3110,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter(name="rulePriority")
     def rule_priority(self) -> Optional[pulumi.Input[int]]:
-        """
-        Priority of the rule. Valid value range: 0-100.
-        """
         return pulumi.get(self, "rule_priority")
 
     @rule_priority.setter
@@ -3690,9 +3119,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleArgs:
     @property
     @pulumi.getter(name="ruleStatus")
     def rule_status(self) -> Optional[pulumi.Input[str]]:
-        """
-        Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-        """
         return pulumi.get(self, "rule_status")
 
     @rule_status.setter
@@ -3716,12 +3142,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
                  match_from: Optional[pulumi.Input[str]] = None,
                  match_param: Optional[pulumi.Input[str]] = None,
                  operator: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] match_content: Content to match.
-        :param pulumi.Input[str] match_from: Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        :param pulumi.Input[str] match_param: Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        :param pulumi.Input[str] operator: Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         if match_content is not None:
             pulumi.set(__self__, "match_content", match_content)
         if match_from is not None:
@@ -3734,9 +3154,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchContent")
     def match_content(self) -> Optional[pulumi.Input[str]]:
-        """
-        Content to match.
-        """
         return pulumi.get(self, "match_content")
 
     @match_content.setter
@@ -3746,9 +3163,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchFrom")
     def match_from(self) -> Optional[pulumi.Input[str]]:
-        """
-        Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        """
         return pulumi.get(self, "match_from")
 
     @match_from.setter
@@ -3758,9 +3172,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchParam")
     def match_param(self) -> Optional[pulumi.Input[str]]:
-        """
-        Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        """
         return pulumi.get(self, "match_param")
 
     @match_param.setter
@@ -3770,9 +3181,6 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
     @property
     @pulumi.getter
     def operator(self) -> Optional[pulumi.Input[str]]:
-        """
-        Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -3784,18 +3192,12 @@ class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs:
 class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs:
     def __init__(__self__, *,
                  modules: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] modules: Modules in which the rule take effect. Valid values: `waf`.
-        """
         if modules is not None:
             pulumi.set(__self__, "modules", modules)
 
     @property
     @pulumi.getter
     def modules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        """
-        Modules in which the rule take effect. Valid values: `waf`.
-        """
         return pulumi.get(self, "modules")
 
     @modules.setter
@@ -3808,10 +3210,6 @@ class SecurityPolicyConfigIpTableConfigArgs:
     def __init__(__self__, *,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigIpTableConfigRuleArgs']]]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigIpTableConfigRuleArgs']]] rules: Rules list.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if rules is not None:
             pulumi.set(__self__, "rules", rules)
         if switch is not None:
@@ -3820,9 +3218,6 @@ class SecurityPolicyConfigIpTableConfigArgs:
     @property
     @pulumi.getter
     def rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigIpTableConfigRuleArgs']]]]:
-        """
-        Rules list.
-        """
         return pulumi.get(self, "rules")
 
     @rules.setter
@@ -3832,9 +3227,6 @@ class SecurityPolicyConfigIpTableConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3850,11 +3242,6 @@ class SecurityPolicyConfigIpTableConfigRuleArgs:
                  match_from: Optional[pulumi.Input[str]] = None,
                  rule_id: Optional[pulumi.Input[int]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Actions to take. Valid values: `drop`, `trans`, `monitor`.
-        :param pulumi.Input[str] match_content: Matching content.
-        :param pulumi.Input[str] match_from: Matching type. Valid values: `ip`, `area`.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if match_content is not None:
@@ -3869,9 +3256,6 @@ class SecurityPolicyConfigIpTableConfigRuleArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Actions to take. Valid values: `drop`, `trans`, `monitor`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -3881,9 +3265,6 @@ class SecurityPolicyConfigIpTableConfigRuleArgs:
     @property
     @pulumi.getter(name="matchContent")
     def match_content(self) -> Optional[pulumi.Input[str]]:
-        """
-        Matching content.
-        """
         return pulumi.get(self, "match_content")
 
     @match_content.setter
@@ -3893,9 +3274,6 @@ class SecurityPolicyConfigIpTableConfigRuleArgs:
     @property
     @pulumi.getter(name="matchFrom")
     def match_from(self) -> Optional[pulumi.Input[str]]:
-        """
-        Matching type. Valid values: `ip`, `area`.
-        """
         return pulumi.get(self, "match_from")
 
     @match_from.setter
@@ -3928,12 +3306,6 @@ class SecurityPolicyConfigRateLimitConfigArgs:
                  switch: Optional[pulumi.Input[str]] = None,
                  template: Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateArgs']] = None,
                  user_rules: Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigRateLimitConfigUserRuleArgs']]]] = None):
-        """
-        :param pulumi.Input['SecurityPolicyConfigRateLimitConfigIntelligenceArgs'] intelligence: Intelligent client filter.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        :param pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateArgs'] template: Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigRateLimitConfigUserRuleArgs']]] user_rules: Custom configuration.
-        """
         if intelligence is not None:
             pulumi.set(__self__, "intelligence", intelligence)
         if switch is not None:
@@ -3946,9 +3318,6 @@ class SecurityPolicyConfigRateLimitConfigArgs:
     @property
     @pulumi.getter
     def intelligence(self) -> Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigIntelligenceArgs']]:
-        """
-        Intelligent client filter.
-        """
         return pulumi.get(self, "intelligence")
 
     @intelligence.setter
@@ -3958,9 +3327,6 @@ class SecurityPolicyConfigRateLimitConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -3970,9 +3336,6 @@ class SecurityPolicyConfigRateLimitConfigArgs:
     @property
     @pulumi.getter
     def template(self) -> Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateArgs']]:
-        """
-        Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         return pulumi.get(self, "template")
 
     @template.setter
@@ -3982,9 +3345,6 @@ class SecurityPolicyConfigRateLimitConfigArgs:
     @property
     @pulumi.getter(name="userRules")
     def user_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigRateLimitConfigUserRuleArgs']]]]:
-        """
-        Custom configuration.
-        """
         return pulumi.get(self, "user_rules")
 
     @user_rules.setter
@@ -3997,10 +3357,6 @@ class SecurityPolicyConfigRateLimitConfigIntelligenceArgs:
     def __init__(__self__, *,
                  action: Optional[pulumi.Input[str]] = None,
                  switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take. Valid values: `monitor`, `alg`.
-        :param pulumi.Input[str] switch: - `on`: Enable.- `off`: Disable.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if switch is not None:
@@ -4009,9 +3365,6 @@ class SecurityPolicyConfigRateLimitConfigIntelligenceArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take. Valid values: `monitor`, `alg`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -4021,9 +3374,6 @@ class SecurityPolicyConfigRateLimitConfigIntelligenceArgs:
     @property
     @pulumi.getter
     def switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -4036,10 +3386,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateArgs:
     def __init__(__self__, *,
                  detail: Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateDetailArgs']] = None,
                  mode: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateDetailArgs'] detail: Detail of the template.
-        :param pulumi.Input[str] mode: Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         if detail is not None:
             pulumi.set(__self__, "detail", detail)
         if mode is not None:
@@ -4048,9 +3394,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateArgs:
     @property
     @pulumi.getter
     def detail(self) -> Optional[pulumi.Input['SecurityPolicyConfigRateLimitConfigTemplateDetailArgs']]:
-        """
-        Detail of the template.
-        """
         return pulumi.get(self, "detail")
 
     @detail.setter
@@ -4060,9 +3403,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateArgs:
     @property
     @pulumi.getter
     def mode(self) -> Optional[pulumi.Input[str]]:
-        """
-        Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -4079,14 +3419,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
                  period: Optional[pulumi.Input[int]] = None,
                  punish_time: Optional[pulumi.Input[int]] = None,
                  threshold: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[str] action: Action to take.
-        :param pulumi.Input[int] id: Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[str] mode: Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[int] period: Period.
-        :param pulumi.Input[int] punish_time: Punish time.
-        :param pulumi.Input[int] threshold: Threshold.
-        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if id is not None:
@@ -4103,9 +3435,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter
     def action(self) -> Optional[pulumi.Input[str]]:
-        """
-        Action to take.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -4115,9 +3444,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[int]]:
-        """
-        Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -4127,9 +3453,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter
     def mode(self) -> Optional[pulumi.Input[str]]:
-        """
-        Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -4139,9 +3462,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
-        """
-        Period.
-        """
         return pulumi.get(self, "period")
 
     @period.setter
@@ -4151,9 +3471,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter(name="punishTime")
     def punish_time(self) -> Optional[pulumi.Input[int]]:
-        """
-        Punish time.
-        """
         return pulumi.get(self, "punish_time")
 
     @punish_time.setter
@@ -4163,9 +3480,6 @@ class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs:
     @property
     @pulumi.getter
     def threshold(self) -> Optional[pulumi.Input[int]]:
-        """
-        Threshold.
-        """
         return pulumi.get(self, "threshold")
 
     @threshold.setter
@@ -4188,18 +3502,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
                  rule_id: Optional[pulumi.Input[int]] = None,
                  rule_status: Optional[pulumi.Input[str]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] action: Valid values: `monitor`, `drop`.
-        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs']]] conditions: Conditions of the rule.
-        :param pulumi.Input[int] period: Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-        :param pulumi.Input[int] punish_time: Punish time, Valid value range: 0-2 days.
-        :param pulumi.Input[str] punish_time_unit: Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        :param pulumi.Input[str] rule_name: Rule Name.
-        :param pulumi.Input[int] rule_priority: Priority of the rule. Valid value range: 1-100.
-        :param pulumi.Input[int] threshold: Threshold of the rate limit. Valid value range: 0-4294967294.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] freq_fields: Filter words.
-        :param pulumi.Input[str] rule_status: Status of the rule. Valid values: `on`, `off`, `hour`.
-        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "conditions", conditions)
         pulumi.set(__self__, "period", period)
@@ -4220,9 +3522,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter
     def action(self) -> pulumi.Input[str]:
-        """
-        Valid values: `monitor`, `drop`.
-        """
         return pulumi.get(self, "action")
 
     @action.setter
@@ -4232,9 +3531,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter
     def conditions(self) -> pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs']]]:
-        """
-        Conditions of the rule.
-        """
         return pulumi.get(self, "conditions")
 
     @conditions.setter
@@ -4244,9 +3540,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter
     def period(self) -> pulumi.Input[int]:
-        """
-        Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-        """
         return pulumi.get(self, "period")
 
     @period.setter
@@ -4256,9 +3549,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="punishTime")
     def punish_time(self) -> pulumi.Input[int]:
-        """
-        Punish time, Valid value range: 0-2 days.
-        """
         return pulumi.get(self, "punish_time")
 
     @punish_time.setter
@@ -4268,9 +3558,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="punishTimeUnit")
     def punish_time_unit(self) -> pulumi.Input[str]:
-        """
-        Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        """
         return pulumi.get(self, "punish_time_unit")
 
     @punish_time_unit.setter
@@ -4280,9 +3567,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> pulumi.Input[str]:
-        """
-        Rule Name.
-        """
         return pulumi.get(self, "rule_name")
 
     @rule_name.setter
@@ -4292,9 +3576,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="rulePriority")
     def rule_priority(self) -> pulumi.Input[int]:
-        """
-        Priority of the rule. Valid value range: 1-100.
-        """
         return pulumi.get(self, "rule_priority")
 
     @rule_priority.setter
@@ -4304,9 +3585,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter
     def threshold(self) -> pulumi.Input[int]:
-        """
-        Threshold of the rate limit. Valid value range: 0-4294967294.
-        """
         return pulumi.get(self, "threshold")
 
     @threshold.setter
@@ -4316,9 +3594,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="freqFields")
     def freq_fields(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        """
-        Filter words.
-        """
         return pulumi.get(self, "freq_fields")
 
     @freq_fields.setter
@@ -4337,9 +3612,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleArgs:
     @property
     @pulumi.getter(name="ruleStatus")
     def rule_status(self) -> Optional[pulumi.Input[str]]:
-        """
-        Status of the rule. Valid values: `on`, `off`, `hour`.
-        """
         return pulumi.get(self, "rule_status")
 
     @rule_status.setter
@@ -4363,12 +3635,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
                  match_from: pulumi.Input[str],
                  match_param: pulumi.Input[str],
                  operator: pulumi.Input[str]):
-        """
-        :param pulumi.Input[str] match_content: Content to match.
-        :param pulumi.Input[str] match_from: Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        :param pulumi.Input[str] match_param: Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        :param pulumi.Input[str] operator: Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         pulumi.set(__self__, "match_content", match_content)
         pulumi.set(__self__, "match_from", match_from)
         pulumi.set(__self__, "match_param", match_param)
@@ -4377,9 +3643,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchContent")
     def match_content(self) -> pulumi.Input[str]:
-        """
-        Content to match.
-        """
         return pulumi.get(self, "match_content")
 
     @match_content.setter
@@ -4389,9 +3652,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchFrom")
     def match_from(self) -> pulumi.Input[str]:
-        """
-        Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sip_proto`: Network protocol of the request.
-        """
         return pulumi.get(self, "match_from")
 
     @match_from.setter
@@ -4401,9 +3661,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
     @property
     @pulumi.getter(name="matchParam")
     def match_param(self) -> pulumi.Input[str]:
-        """
-        Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-        """
         return pulumi.get(self, "match_param")
 
     @match_param.setter
@@ -4413,9 +3670,6 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
     @property
     @pulumi.getter
     def operator(self) -> pulumi.Input[str]:
-        """
-        Valid values:- `equal`: string equal.- `not_equal`: string not equal.- `include`: string include.- `not_include`: string not include.- `match`: ip match.- `not_match`: ip not match.- `include_area`: area include.- `is_empty`: field existed but empty.- `not_exists`: field is not existed.- `regexp`: regex match.- `len_gt`: value greater than.- `len_lt`: value less than.- `len_eq`: value equal.- `match_prefix`: string prefix match.- `match_suffix`: string suffix match.- `wildcard`: wildcard match.
-        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -4427,18 +3681,12 @@ class SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs:
 class SecurityPolicyConfigSwitchConfigArgs:
     def __init__(__self__, *,
                  web_switch: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] web_switch: - `on`: Enable.- `off`: Disable.
-        """
         if web_switch is not None:
             pulumi.set(__self__, "web_switch", web_switch)
 
     @property
     @pulumi.getter(name="webSwitch")
     def web_switch(self) -> Optional[pulumi.Input[str]]:
-        """
-        - `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "web_switch")
 
     @web_switch.setter
@@ -4454,13 +3702,6 @@ class SecurityPolicyConfigWafConfigArgs:
                  switch: pulumi.Input[str],
                  waf_rules: pulumi.Input['SecurityPolicyConfigWafConfigWafRulesArgs'],
                  ai_rule: Optional[pulumi.Input['SecurityPolicyConfigWafConfigAiRuleArgs']] = None):
-        """
-        :param pulumi.Input[str] level: Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-        :param pulumi.Input[str] mode: Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-        :param pulumi.Input[str] switch: Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-        :param pulumi.Input['SecurityPolicyConfigWafConfigWafRulesArgs'] waf_rules: WAF Rules Configuration.
-        :param pulumi.Input['SecurityPolicyConfigWafConfigAiRuleArgs'] ai_rule: AI based rules configuration.
-        """
         pulumi.set(__self__, "level", level)
         pulumi.set(__self__, "mode", mode)
         pulumi.set(__self__, "switch", switch)
@@ -4471,9 +3712,6 @@ class SecurityPolicyConfigWafConfigArgs:
     @property
     @pulumi.getter
     def level(self) -> pulumi.Input[str]:
-        """
-        Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-        """
         return pulumi.get(self, "level")
 
     @level.setter
@@ -4483,9 +3721,6 @@ class SecurityPolicyConfigWafConfigArgs:
     @property
     @pulumi.getter
     def mode(self) -> pulumi.Input[str]:
-        """
-        Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -4495,9 +3730,6 @@ class SecurityPolicyConfigWafConfigArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
-        """
-        Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -4507,9 +3739,6 @@ class SecurityPolicyConfigWafConfigArgs:
     @property
     @pulumi.getter(name="wafRules")
     def waf_rules(self) -> pulumi.Input['SecurityPolicyConfigWafConfigWafRulesArgs']:
-        """
-        WAF Rules Configuration.
-        """
         return pulumi.get(self, "waf_rules")
 
     @waf_rules.setter
@@ -4519,9 +3748,6 @@ class SecurityPolicyConfigWafConfigArgs:
     @property
     @pulumi.getter(name="aiRule")
     def ai_rule(self) -> Optional[pulumi.Input['SecurityPolicyConfigWafConfigAiRuleArgs']]:
-        """
-        AI based rules configuration.
-        """
         return pulumi.get(self, "ai_rule")
 
     @ai_rule.setter
@@ -4533,18 +3759,12 @@ class SecurityPolicyConfigWafConfigArgs:
 class SecurityPolicyConfigWafConfigAiRuleArgs:
     def __init__(__self__, *,
                  mode: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] mode: Valid values:- `smart_status_close`: disabled.- `smart_status_open`: blocked.- `smart_status_observe`: observed.
-        """
         if mode is not None:
             pulumi.set(__self__, "mode", mode)
 
     @property
     @pulumi.getter
     def mode(self) -> Optional[pulumi.Input[str]]:
-        """
-        Valid values:- `smart_status_close`: disabled.- `smart_status_open`: blocked.- `smart_status_observe`: observed.
-        """
         return pulumi.get(self, "mode")
 
     @mode.setter
@@ -4558,11 +3778,6 @@ class SecurityPolicyConfigWafConfigWafRulesArgs:
                  block_rule_ids: pulumi.Input[Sequence[pulumi.Input[int]]],
                  switch: pulumi.Input[str],
                  observe_rule_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] block_rule_ids: Block mode rules list. See details in data source `waf_managed_rules`.
-        :param pulumi.Input[str] switch: Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-        :param pulumi.Input[Sequence[pulumi.Input[int]]] observe_rule_ids: Observe rules list. See details in data source `waf_managed_rules`.
-        """
         pulumi.set(__self__, "block_rule_ids", block_rule_ids)
         pulumi.set(__self__, "switch", switch)
         if observe_rule_ids is not None:
@@ -4571,9 +3786,6 @@ class SecurityPolicyConfigWafConfigWafRulesArgs:
     @property
     @pulumi.getter(name="blockRuleIds")
     def block_rule_ids(self) -> pulumi.Input[Sequence[pulumi.Input[int]]]:
-        """
-        Block mode rules list. See details in data source `waf_managed_rules`.
-        """
         return pulumi.get(self, "block_rule_ids")
 
     @block_rule_ids.setter
@@ -4583,9 +3795,6 @@ class SecurityPolicyConfigWafConfigWafRulesArgs:
     @property
     @pulumi.getter
     def switch(self) -> pulumi.Input[str]:
-        """
-        Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-        """
         return pulumi.get(self, "switch")
 
     @switch.setter
@@ -4595,9 +3804,6 @@ class SecurityPolicyConfigWafConfigWafRulesArgs:
     @property
     @pulumi.getter(name="observeRuleIds")
     def observe_rule_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        """
-        Observe rules list. See details in data source `waf_managed_rules`.
-        """
         return pulumi.get(self, "observe_rule_ids")
 
     @observe_rule_ids.setter

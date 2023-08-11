@@ -13,22 +13,70 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const group = new tencentcloud.Monitor.AlarmPolicy("group", {
+ * const fooAlarmNotice = new tencentcloud.monitor.AlarmNotice("fooAlarmNotice", {
+ *     noticeType: "ALL",
+ *     noticeLanguage: "zh-CN",
+ *     userNotices: [{
+ *         receiverType: "USER",
+ *         startTime: 0,
+ *         endTime: 1,
+ *         noticeWays: [
+ *             "SMS",
+ *             "EMAIL",
+ *         ],
+ *         userIds: [10001],
+ *         groupIds: [],
+ *         phoneOrders: [10001],
+ *         phoneCircleTimes: 2,
+ *         phoneCircleInterval: 50,
+ *         phoneInnerInterval: 60,
+ *         needPhoneArriveNotice: 1,
+ *         phoneCallType: "CIRCLE",
+ *         weekdays: [
+ *             1,
+ *             2,
+ *             3,
+ *             4,
+ *             5,
+ *             6,
+ *             7,
+ *         ],
+ *     }],
+ *     urlNotices: [{
+ *         url: "https://www.mytest.com/validate",
+ *         endTime: 0,
+ *         startTime: 1,
+ *         weekdays: [
+ *             1,
+ *             2,
+ *             3,
+ *             4,
+ *             5,
+ *             6,
+ *             7,
+ *         ],
+ *     }],
+ * });
+ * const fooAlarmPolicy = new tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy", {
+ *     policyName: "tf-policy",
+ *     monitorType: "MT_QCE",
+ *     enable: 1,
+ *     projectId: 0,
+ *     namespace: "cvm_device",
  *     conditions: {
  *         isUnionRule: 1,
  *         rules: [{
- *             continuePeriod: 1,
- *             isPowerNotice: 0,
  *             metricName: "CpuUsage",
- *             noticeFrequency: 3600,
- *             operator: "ge",
  *             period: 60,
+ *             operator: "ge",
  *             value: "89.9",
+ *             continuePeriod: 1,
+ *             noticeFrequency: 3600,
+ *             isPowerNotice: 0,
  *         }],
  *     },
- *     enable: 1,
  *     eventConditions: [
  *         {
  *             metricName: "ping_unreachable",
@@ -37,14 +85,10 @@ import * as utilities from "../utilities";
  *             metricName: "guest_reboot",
  *         },
  *     ],
- *     monitorType: "MT_QCE",
- *     namespace: "cvm_device",
- *     noticeIds: ["notice-l9ziyxw6"],
- *     policyName: "hello",
- *     projectId: 1244035,
+ *     noticeIds: [fooAlarmNotice.id],
  *     triggerTasks: [{
- *         taskConfig: "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
  *         type: "AS",
+ *         taskConfig: "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
  *     }],
  * });
  * ```

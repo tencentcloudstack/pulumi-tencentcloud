@@ -17,29 +17,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "vpc",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
     ///             CidrBlock = "10.0.0.0/16",
     ///         });
-    ///         var fooSubnet_instanceInstance = new Tencentcloud.Subnet.Instance("fooSubnet/instanceInstance", new Tencentcloud.Subnet.InstanceArgs
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
     ///         {
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             VpcId = fooInstance.Id,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
     ///             CidrBlock = "10.0.0.0/16",
     ///             IsMulticast = false,
     ///         });
-    ///         var fooEni_instanceInstance = new Tencentcloud.Eni.Instance("fooEni/instanceInstance", new Tencentcloud.Eni.InstanceArgs
+    ///         var example1 = new Tencentcloud.Security.Group("example1", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             VpcId = fooInstance.Id,
-    ///             SubnetId = fooSubnet / instanceInstance.Id,
-    ///             Description = "eni desc",
+    ///             Description = "sg desc.",
+    ///             ProjectId = 0,
+    ///             Tags = 
+    ///             {
+    ///                 { "example", "test" },
+    ///             },
+    ///         });
+    ///         var example2 = new Tencentcloud.Security.Group("example2", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "sg desc.",
+    ///             ProjectId = 0,
+    ///             Tags = 
+    ///             {
+    ///                 { "example", "test" },
+    ///             },
+    ///         });
+    ///         var example = new Tencentcloud.Eni.Instance("example", new Tencentcloud.Eni.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             Description = "eni desc.",
     ///             Ipv4Count = 1,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 example1.Id,
+    ///                 example2.Id,
+    ///             },
     ///         });
     ///     }
     /// 

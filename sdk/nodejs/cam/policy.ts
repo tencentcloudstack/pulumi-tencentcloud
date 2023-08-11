@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const foo = new tencentcloud.Cam.Policy("foo", {
- *     description: "test",
+ *     description: "tf_test",
  *     document: `{
  *   "version": "2.0",
  *   "statement": [

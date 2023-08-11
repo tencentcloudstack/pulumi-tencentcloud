@@ -8,17 +8,51 @@ import * as utilities from "../utilities";
  * Provide a resource to create a KMS external key.
  *
  * ## Example Usage
+ * ### Create a basic instance.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Kms.ExternalKey("foo", {
- *     alias: "test",
- *     description: "describe key test message.",
+ * const example = new tencentcloud.Kms.ExternalKey("example", {
+ *     alias: "tf-example-kms-externalkey",
+ *     description: "example of kms external key",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### Specify the encryption algorithm and public key.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.Kms.ExternalKey("example", {
+ *     alias: "tf-example-kms-externalkey",
+ *     description: "example of kms external key",
  *     isEnabled: true,
- *     keyMaterialBase64: "MTIzMTIzMTIzMTIzMTIzQQ==",
- *     validTo: 2147443200,
+ *     keyMaterialBase64: "your_public_key_base64_encoded",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ *     wrappingAlgorithm: "RSAES_PKCS1_V1_5",
+ * });
+ * ```
+ * ### Disable the external kms key.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.Kms.ExternalKey("example", {
+ *     alias: "tf-example-kms-externalkey",
+ *     description: "example of kms external key",
+ *     isEnabled: false,
+ *     keyMaterialBase64: "your_public_key_base64_encoded",
+ *     tags: {
+ *         "test-tag": "unit-test",
+ *     },
  *     wrappingAlgorithm: "RSAES_PKCS1_V1_5",
  * });
  * ```
@@ -28,7 +62,7 @@ import * as utilities from "../utilities";
  * KMS external keys can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+ *  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
  * ```
  */
 export class ExternalKey extends pulumi.CustomResource {

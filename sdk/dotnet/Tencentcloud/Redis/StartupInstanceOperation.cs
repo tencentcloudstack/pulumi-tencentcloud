@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis startup_instance_operation
     /// 
     /// ## Example Usage
+    /// ### Recover the redis instance that has been isolated
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// {
     ///     public MyStack()
     ///     {
-    ///         var startupInstanceOperation = new Tencentcloud.Redis.StartupInstanceOperation("startupInstanceOperation", new Tencentcloud.Redis.StartupInstanceOperationArgs
+    ///         var foo = new Tencentcloud.Redis.StartupInstanceOperation("foo", new Tencentcloud.Redis.StartupInstanceOperationArgs
     ///         {
     ///             InstanceId = "crs-c1nl9rpv",
     ///         });

@@ -37,14 +37,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CosRecharge{}
 	case "tencentcloud:Cls/cosShipper:CosShipper":
 		r = &CosShipper{}
+	case "tencentcloud:Cls/dataTransform:DataTransform":
+		r = &DataTransform{}
 	case "tencentcloud:Cls/export:Export":
 		r = &Export{}
 	case "tencentcloud:Cls/index:Index":
 		r = &Index{}
+	case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
+		r = &KafkaRecharge{}
 	case "tencentcloud:Cls/logset:Logset":
 		r = &Logset{}
 	case "tencentcloud:Cls/machineGroup:MachineGroup":
 		r = &MachineGroup{}
+	case "tencentcloud:Cls/scheduledSql:ScheduledSql":
+		r = &ScheduledSql{}
 	case "tencentcloud:Cls/topic:Topic":
 		r = &Topic{}
 	default:
@@ -102,6 +108,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/dataTransform",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/export",
 		&module{version},
 	)
@@ -112,12 +123,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/kafkaRecharge",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/logset",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/machineGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/scheduledSql",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

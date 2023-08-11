@@ -13,35 +13,44 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = new tencentcloud.Cos.Bucket("mycos", {
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const privateSbucket = new tencentcloud.cos.Bucket("privateSbucket", {
+ *     bucket: appId.then(appId => `private-bucket-${appId}`),
  *     acl: "private",
- *     bucket: "mycos-1258798060",
  * });
  * ```
  * ### Creation of multiple available zone bucket
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = new tencentcloud.Cos.Bucket("mycos", {
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const multiZoneBucket = new tencentcloud.cos.Bucket("multiZoneBucket", {
+ *     bucket: appId.then(appId => `multi-zone-bucket-${appId}`),
  *     acl: "private",
- *     bucket: "mycos-1258798060",
- *     forceClean: true,
  *     multiAz: true,
  *     versioningEnable: true,
+ *     forceClean: true,
  * });
  * ```
  * ### Using verbose acl
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const withAclBody = new tencentcloud.Cos.Bucket("with_acl_body", {
- *     // NOTE: Specify the acl_body by the priority sequence of permission and user type with the following sequence: `CanonicalUser with READ`, `CanonicalUser with WRITE`, `CanonicalUser with FULL_CONTROL`, `CanonicalUser with WRITE_ACP`, `CanonicalUser with READ_ACP`, then specify the `Group` of permissions same as `CanonicalUser`.
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const bucketWithAcl = new tencentcloud.cos.Bucket("bucketWithAcl", {
+ *     bucket: appId.then(appId => `bucketwith-acl-${appId}`),
  *     aclBody: `<AccessControlPolicy>
  * 	<Owner>
  * 		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>
@@ -103,7 +112,6 @@ import * as utilities from "../utilities";
  * 	</AccessControlList>
  * </AccessControlPolicy>
  * `,
- *     bucket: "mycos-1258798060",
  * });
  * ```
  * ### Static Website
@@ -111,34 +119,40 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = new tencentcloud.cos.Bucket("mycos", {
- *     bucket: "mycos-1258798060",
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const bucketWithStaticWebsite = new tencentcloud.cos.Bucket("bucketWithStaticWebsite", {
+ *     bucket: appId.then(appId => `bucket-with-static-website-${appId}`),
  *     website: {
  *         indexDocument: "index.html",
  *         errorDocument: "error.html",
  *     },
  * });
- * export const endpointTest = mycos.website.apply(website => website?.endpoint);
+ * export const endpointTest = bucketWithStaticWebsite.website.apply(website => website?.endpoint);
  * ```
  * ### Using CORS
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = new tencentcloud.Cos.Bucket("mycos", {
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const bucketWithCors = new tencentcloud.cos.Bucket("bucketWithCors", {
+ *     bucket: appId.then(appId => `bucket-with-cors-${appId}`),
  *     acl: "public-read-write",
- *     bucket: "mycos-1258798060",
  *     corsRules: [{
- *         allowedHeaders: ["*"],
+ *         allowedOrigins: ["http://*.abc.com"],
  *         allowedMethods: [
  *             "PUT",
  *             "POST",
  *         ],
- *         allowedOrigins: ["http://*.abc.com"],
- *         exposeHeaders: ["Etag"],
+ *         allowedHeaders: ["*"],
  *         maxAgeSeconds: 300,
+ *         exposeHeaders: ["Etag"],
  *     }],
  * });
  * ```
@@ -146,63 +160,23 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mycos = new tencentcloud.Cos.Bucket("mycos", {
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const bucketWithLifecycle = new tencentcloud.cos.Bucket("bucketWithLifecycle", {
+ *     bucket: appId.then(appId => `bucket-with-lifecycle-${appId}`),
  *     acl: "public-read-write",
- *     bucket: "mycos-1258798060",
  *     lifecycleRules: [{
+ *         filterPrefix: "path1/",
+ *         transitions: [{
+ *             days: 30,
+ *             storageClass: "STANDARD_IA",
+ *         }],
  *         expiration: {
  *             days: 90,
  *         },
- *         filterPrefix: "path1/",
- *         transitions: [{
- *             date: "2019-06-01",
- *             storageClass: "STANDARD_IA",
- *         }],
- *     }],
- * });
- * ```
- * ### Using custom origin domain settings
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const withOrigin = new tencentcloud.Cos.Bucket("with_origin", {
- *     acl: "private",
- *     bucket: "mycos-1258798060",
- *     originDomainRules: [{
- *         domain: "abc.example.com",
- *         status: "ENABLE",
- *         type: "REST",
- *     }],
- * });
- * ```
- * ### Using origin-pull settings
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const withOrigin = new tencentcloud.Cos.Bucket("with_origin", {
- *     acl: "private",
- *     bucket: "mycos-1258798060",
- *     originPullRules: [{
- *         customHttpHeaders: {
- *             "x-custom-header": "custom_value",
- *         },
- *         followHttpHeaders: [
- *             "origin",
- *             "host",
- *         ],
- *         followQueryString: true,
- *         followRedirection: true,
- *         host: "abc.example.com",
- *         prefix: "/",
- *         priority: 1,
- *         protocol: "FOLLOW", // "HTTP" "HTTPS"
- *         syncBackToSource: false,
  *     }],
  * });
  * ```
@@ -210,70 +184,30 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const replica1 = new tencentcloud.Cos.Bucket("replica1", {
- *     acl: "private",
- *     bucket: "tf-replica-foo-1234567890",
- *     versioningEnable: true,
- * });
- * const withReplication = new tencentcloud.Cos.Bucket("with_replication", {
- *     acl: "private",
- *     bucket: "tf-bucket-replica-1234567890",
- *     replicaRole: "qcs::cam::uin/100000000001:uin/100000000001",
- *     replicaRules: [{
- *         destinationBucket: pulumi.interpolate`qcs::cos:%s::${replica1.bucket}`,
- *         id: "test-rep1",
- *         prefix: "dist",
- *         status: "Enabled",
- *     }],
- *     versioningEnable: true,
- * });
- * ```
- * ### Setting log status
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cosLogGrantRole = new tencentcloud.cam.Role("cosLogGrantRole", {
- *     document: `{
- *   "version": "2.0",
- *   "statement": [
- *     {
- *       "action": [
- *         "name/sts:AssumeRole"
- *       ],
- *       "effect": "allow",
- *       "principal": {
- *         "service": [
- *           "cls.cloud.tencent.com"
- *         ]
- *       }
- *     }
- *   ]
- * }
- * `,
- *     description: "cos log enable grant",
- * });
- * const cosAccess = tencentcloud.Cam.getPolicies({
- *     name: "QcloudCOSAccessForCLSRole",
- * });
- * const cosLogGrantRolePolicyAttachment = new tencentcloud.cam.RolePolicyAttachment("cosLogGrantRolePolicyAttachment", {
- *     roleId: cosLogGrantRole.id,
- *     policyId: cosAccess.then(cosAccess => cosAccess.policyLists?[0]?.policyId),
- * });
- * const mylog = new tencentcloud.cos.Bucket("mylog", {
- *     bucket: "mylog-1258798060",
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * const uin = info.then(info => info.uin);
+ * const ownerUin = info.then(info => info.ownerUin);
+ * const region = "ap-guangzhou";
+ * const bucketReplicate = new tencentcloud.cos.Bucket("bucketReplicate", {
+ *     bucket: appId.then(appId => `bucket-replicate-${appId}`),
  *     acl: "private",
+ *     versioningEnable: true,
  * });
- * const mycos = new tencentcloud.cos.Bucket("mycos", {
- *     bucket: "mycos-1258798060",
+ * const bucketWithReplication = new tencentcloud.cos.Bucket("bucketWithReplication", {
+ *     bucket: appId.then(appId => `bucket-with-replication-${appId}`),
  *     acl: "private",
- *     logEnable: true,
- *     logTargetBucket: "mylog-1258798060",
- *     logPrefix: "MyLogPrefix",
+ *     versioningEnable: true,
+ *     replicaRole: Promise.all([ownerUin, uin]).then(([ownerUin, uin]) => `qcs::cam::uin/${ownerUin}:uin/${uin}`),
+ *     replicaRules: [{
+ *         id: "test-rep1",
+ *         status: "Enabled",
+ *         prefix: "dist",
+ *         destinationBucket: pulumi.interpolate`qcs::cos:${region}::${bucketReplicate.bucket}`,
+ *     }],
  * });
  * ```
  *

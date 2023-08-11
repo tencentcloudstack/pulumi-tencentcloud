@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigDropPageConfigAclDropPageDetail
     {
-        /// <summary>
-        /// File name or URL.
-        /// </summary>
         public readonly string? Name;
-        /// <summary>
-        /// ID of the custom error page. when set to 0, use system default error page.
-        /// </summary>
         public readonly int? PageId;
-        /// <summary>
-        /// HTTP status code to use. Valid range: 100-600.
-        /// </summary>
         public readonly int? StatusCode;
-        /// <summary>
-        /// Type of the custom error page. Valid values: `file`, `url`.
-        /// </summary>
         public readonly string? Type;
 
         [OutputConstructor]

@@ -75,14 +75,78 @@ class TmpTkeTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        template = tencentcloud.monitor.TmpTkeTemplate("template", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
-            describe="template",
+        foo = tencentcloud.monitor.TmpTkeTemplate("foo", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
+            name="tf-template",
             level="cluster",
-            name="test",
+            describe="template",
             service_monitors=[tencentcloud.monitor.TmpTkeTemplateTemplateServiceMonitorArgs(
-                config="xxxxx",
-                name="test",
+                name="tf-ServiceMonitor",
+                config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: ServiceMonitor
+        metadata:
+          name: example-service-monitor
+          namespace: monitoring
+          labels:
+            k8s-app: example-service
+        spec:
+          selector:
+            matchLabels:
+              k8s-app: example-service
+          namespaceSelector:
+            matchNames:
+              - default
+          endpoints:
+          - port: http-metrics
+            interval: 30s
+            path: /metrics
+            scheme: http
+            bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tlsConfig:
+              insecureSkipVerify: true
+        \"\"\",
             )],
+            pod_monitors=[
+                tencentcloud.monitor.TmpTkeTemplateTemplatePodMonitorArgs(
+                    name="tf-PodMonitors",
+                    config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: PodMonitor
+        metadata:
+          name: example-pod-monitor
+          namespace: monitoring
+          labels:
+            k8s-app: example-pod
+        spec:
+          selector:
+            matchLabels:
+              k8s-app: example-pod
+          namespaceSelector:
+            matchNames:
+              - default
+          podMetricsEndpoints:
+          - port: http-metrics
+            interval: 30s
+            path: /metrics
+            scheme: http
+            bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tlsConfig:
+              insecureSkipVerify: true
+        \"\"\",
+                ),
+                tencentcloud.monitor.TmpTkeTemplateTemplatePodMonitorArgs(
+                    name="tf-RawJobs",
+                    config=\"\"\"scrape_configs:
+          - job_name: 'example-job'
+            scrape_interval: 30s
+            static_configs:
+              - targets: ['example-service.default.svc.cluster.local:8080']
+            metrics_path: /metrics
+            scheme: http
+            bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tls_config:
+              insecure_skip_verify: true
+        \"\"\",
+                ),
+            ],
         ))
         ```
 
@@ -105,14 +169,78 @@ class TmpTkeTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        template = tencentcloud.monitor.TmpTkeTemplate("template", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
-            describe="template",
+        foo = tencentcloud.monitor.TmpTkeTemplate("foo", template=tencentcloud.monitor.TmpTkeTemplateTemplateArgs(
+            name="tf-template",
             level="cluster",
-            name="test",
+            describe="template",
             service_monitors=[tencentcloud.monitor.TmpTkeTemplateTemplateServiceMonitorArgs(
-                config="xxxxx",
-                name="test",
+                name="tf-ServiceMonitor",
+                config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: ServiceMonitor
+        metadata:
+          name: example-service-monitor
+          namespace: monitoring
+          labels:
+            k8s-app: example-service
+        spec:
+          selector:
+            matchLabels:
+              k8s-app: example-service
+          namespaceSelector:
+            matchNames:
+              - default
+          endpoints:
+          - port: http-metrics
+            interval: 30s
+            path: /metrics
+            scheme: http
+            bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tlsConfig:
+              insecureSkipVerify: true
+        \"\"\",
             )],
+            pod_monitors=[
+                tencentcloud.monitor.TmpTkeTemplateTemplatePodMonitorArgs(
+                    name="tf-PodMonitors",
+                    config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: PodMonitor
+        metadata:
+          name: example-pod-monitor
+          namespace: monitoring
+          labels:
+            k8s-app: example-pod
+        spec:
+          selector:
+            matchLabels:
+              k8s-app: example-pod
+          namespaceSelector:
+            matchNames:
+              - default
+          podMetricsEndpoints:
+          - port: http-metrics
+            interval: 30s
+            path: /metrics
+            scheme: http
+            bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tlsConfig:
+              insecureSkipVerify: true
+        \"\"\",
+                ),
+                tencentcloud.monitor.TmpTkeTemplateTemplatePodMonitorArgs(
+                    name="tf-RawJobs",
+                    config=\"\"\"scrape_configs:
+          - job_name: 'example-job'
+            scrape_interval: 30s
+            static_configs:
+              - targets: ['example-service.default.svc.cluster.local:8080']
+            metrics_path: /metrics
+            scheme: http
+            bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+            tls_config:
+              insecure_skip_verify: true
+        \"\"\",
+                ),
+            ],
         ))
         ```
 

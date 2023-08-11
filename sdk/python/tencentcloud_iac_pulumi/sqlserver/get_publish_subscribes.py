@@ -156,16 +156,91 @@ def get_publish_subscribes(instance_id: Optional[str] = None,
 
     ```python
     import pulumi
+    import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
-    example = tencentcloud.sqlserver.PublishSubscribe("example",
-        publish_instance_id=tencentcloud_sqlserver_instance["publish_instance"]["id"],
-        subscribe_instance_id=tencentcloud_sqlserver_instance["subscribe_instance"]["id"],
+    zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+    subnet = tencentcloud.subnet.Instance("subnet",
+        availability_zone=zones.zones[4].name,
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        is_multicast=False)
+    security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+    example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance",
+        zone=zones.zones[4].name,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_HSSD",
+        instance_charge_type="POSTPAID",
+        project_id=0,
+        subnet_id=subnet.id,
+        vpc_id=vpc.id,
+        db_version="2008R2",
+        security_group_lists=[security_group.id],
+        weeklies=[
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        ],
+        start_time="00:00",
+        span=6,
+        resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+            tag_key="test",
+            tag_value="test",
+        )],
+        collation="Chinese_PRC_CI_AS",
+        time_zone="China Standard Time")
+    example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance",
+        zone=zones.zones[4].name,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_HSSD",
+        instance_charge_type="POSTPAID",
+        project_id=0,
+        subnet_id=subnet.id,
+        vpc_id=vpc.id,
+        db_version="2008R2",
+        security_group_lists=[security_group.id],
+        weeklies=[
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        ],
+        start_time="00:00",
+        span=6,
+        resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+            tag_key="test",
+            tag_value="test",
+        )],
+        collation="Chinese_PRC_CI_AS",
+        time_zone="China Standard Time")
+    example_pub_db = tencentcloud.sqlserver.Db("examplePubDb",
+        instance_id=example_pub_general_cloud_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_sub_db = tencentcloud.sqlserver.Db("exampleSubDb",
+        instance_id=example_sub_general_cloud_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_publish_subscribe = tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe",
+        publish_instance_id=example_pub_general_cloud_instance.id,
+        subscribe_instance_id=example_sub_general_cloud_instance.id,
         publish_subscribe_name="example",
         delete_subscribe_db=False,
         database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
-            publish_database=tencentcloud_sqlserver_db["test_publish_subscribe"]["name"],
+            publish_database=example_pub_db.name,
+            subscribe_database=example_sub_db.name,
         )])
+    example_publish_subscribes = tencentcloud.Sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
     ```
 
 
@@ -225,16 +300,91 @@ def get_publish_subscribes_output(instance_id: Optional[pulumi.Input[str]] = Non
 
     ```python
     import pulumi
+    import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
-    example = tencentcloud.sqlserver.PublishSubscribe("example",
-        publish_instance_id=tencentcloud_sqlserver_instance["publish_instance"]["id"],
-        subscribe_instance_id=tencentcloud_sqlserver_instance["subscribe_instance"]["id"],
+    zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+    subnet = tencentcloud.subnet.Instance("subnet",
+        availability_zone=zones.zones[4].name,
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        is_multicast=False)
+    security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+    example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance",
+        zone=zones.zones[4].name,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_HSSD",
+        instance_charge_type="POSTPAID",
+        project_id=0,
+        subnet_id=subnet.id,
+        vpc_id=vpc.id,
+        db_version="2008R2",
+        security_group_lists=[security_group.id],
+        weeklies=[
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        ],
+        start_time="00:00",
+        span=6,
+        resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+            tag_key="test",
+            tag_value="test",
+        )],
+        collation="Chinese_PRC_CI_AS",
+        time_zone="China Standard Time")
+    example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance",
+        zone=zones.zones[4].name,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_HSSD",
+        instance_charge_type="POSTPAID",
+        project_id=0,
+        subnet_id=subnet.id,
+        vpc_id=vpc.id,
+        db_version="2008R2",
+        security_group_lists=[security_group.id],
+        weeklies=[
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        ],
+        start_time="00:00",
+        span=6,
+        resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+            tag_key="test",
+            tag_value="test",
+        )],
+        collation="Chinese_PRC_CI_AS",
+        time_zone="China Standard Time")
+    example_pub_db = tencentcloud.sqlserver.Db("examplePubDb",
+        instance_id=example_pub_general_cloud_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_sub_db = tencentcloud.sqlserver.Db("exampleSubDb",
+        instance_id=example_sub_general_cloud_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_publish_subscribe = tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe",
+        publish_instance_id=example_pub_general_cloud_instance.id,
+        subscribe_instance_id=example_sub_general_cloud_instance.id,
         publish_subscribe_name="example",
         delete_subscribe_db=False,
         database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
-            publish_database=tencentcloud_sqlserver_db["test_publish_subscribe"]["name"],
+            publish_database=example_pub_db.name,
+            subscribe_database=example_sub_db.name,
         )])
+    example_publish_subscribes = tencentcloud.Sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
     ```
 
 

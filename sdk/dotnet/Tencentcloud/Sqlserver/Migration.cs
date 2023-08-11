@@ -17,38 +17,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var srcAccount = new Tencentcloud.Sqlserver.Account("srcAccount", new Tencentcloud.Sqlserver.AccountArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             InstanceId = local.Sqlserver_id,
-    ///             Password = "password",
-    ///             IsAdmin = true,
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
     ///         });
-    ///         var srcAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("srcAccountDbAttachment", new Tencentcloud.Sqlserver.AccountDbAttachmentArgs
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
     ///         {
-    ///             InstanceId = local.Sqlserver_id,
-    ///             AccountName = srcAccount.Name,
-    ///             DbName = local.Sqlserver_db,
-    ///             Privilege = "ReadWrite",
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
     ///         });
-    ///         var dstInstance = new Tencentcloud.Sqlserver.Instance("dstInstance", new Tencentcloud.Sqlserver.InstanceArgs
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             AvailabilityZone = @var.Default_az,
+    ///             Description = "desc.",
+    ///         });
+    ///         var srcExample = new Tencentcloud.Sqlserver.BasicInstance("srcExample", new Tencentcloud.Sqlserver.BasicInstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = local.Vpc_id,
-    ///             SubnetId = local.Subnet_id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 local.Sg_id,
-    ///             },
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
     ///             ProjectId = 0,
-    ///             Memory = 2,
-    ///             Storage = 10,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
     ///             MaintenanceWeekSets = 
     ///             {
     ///                 1,
@@ -57,22 +62,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     ///             },
     ///             MaintenanceStartTime = "09:00",
     ///             MaintenanceTimeSpan = 3,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
     ///             Tags = 
     ///             {
     ///                 { "test", "test" },
     ///             },
     ///         });
-    ///         var dstAccount = new Tencentcloud.Sqlserver.Account("dstAccount", new Tencentcloud.Sqlserver.AccountArgs
+    ///         var dstExample = new Tencentcloud.Sqlserver.BasicInstance("dstExample", new Tencentcloud.Sqlserver.BasicInstanceArgs
     ///         {
-    ///             InstanceId = dstInstance.Id,
-    ///             Password = "password",
-    ///             IsAdmin = true,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             ProjectId = 0,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
+    ///             MaintenanceWeekSets = 
+    ///             {
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///             },
+    ///             MaintenanceStartTime = "09:00",
+    ///             MaintenanceTimeSpan = 3,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var srcDb = new Tencentcloud.Sqlserver.Db("srcDb", new Tencentcloud.Sqlserver.DbArgs
+    ///         {
+    ///             InstanceId = srcExample.Id,
+    ///             Charset = "Chinese_PRC_BIN",
+    ///             Remark = "testACC-remark",
     ///         });
     ///         var dstDb = new Tencentcloud.Sqlserver.Db("dstDb", new Tencentcloud.Sqlserver.DbArgs
     ///         {
-    ///             InstanceId = dstInstance.Id,
+    ///             InstanceId = dstExample.Id,
     ///             Charset = "Chinese_PRC_BIN",
     ///             Remark = "testACC-remark",
+    ///         });
+    ///         var srcAccount = new Tencentcloud.Sqlserver.Account("srcAccount", new Tencentcloud.Sqlserver.AccountArgs
+    ///         {
+    ///             InstanceId = srcExample.Id,
+    ///             Password = "Qwer@234",
+    ///             IsAdmin = true,
+    ///         });
+    ///         var dstAccount = new Tencentcloud.Sqlserver.Account("dstAccount", new Tencentcloud.Sqlserver.AccountArgs
+    ///         {
+    ///             InstanceId = dstExample.Id,
+    ///             Password = "Qwer@234",
+    ///             IsAdmin = true,
+    ///         });
+    ///         var srcAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("srcAccountDbAttachment", new Tencentcloud.Sqlserver.AccountDbAttachmentArgs
+    ///         {
+    ///             InstanceId = srcExample.Id,
+    ///             AccountName = srcAccount.Name,
+    ///             DbName = srcDb.Name,
+    ///             Privilege = "ReadWrite",
+    ///         });
+    ///         var dstAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("dstAccountDbAttachment", new Tencentcloud.Sqlserver.AccountDbAttachmentArgs
+    ///         {
+    ///             InstanceId = dstExample.Id,
+    ///             AccountName = dstAccount.Name,
+    ///             DbName = dstDb.Name,
+    ///             Privilege = "ReadWrite",
     ///         });
     ///         var migration = new Tencentcloud.Sqlserver.Migration("migration", new Tencentcloud.Sqlserver.MigrationArgs
     ///         {
@@ -81,13 +144,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     ///             SourceType = 1,
     ///             Source = new Tencentcloud.Sqlserver.Inputs.MigrationSourceArgs
     ///             {
-    ///                 InstanceId = local.Sqlserver_id,
+    ///                 InstanceId = srcExample.Id,
     ///                 UserName = srcAccount.Name,
     ///                 Password = srcAccount.Password,
     ///             },
     ///             Target = new Tencentcloud.Sqlserver.Inputs.MigrationTargetArgs
     ///             {
-    ///                 InstanceId = dstInstance.Id,
+    ///                 InstanceId = dstExample.Id,
     ///                 UserName = dstAccount.Name,
     ///                 Password = dstAccount.Password,
     ///             },
@@ -95,7 +158,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     ///             {
     ///                 new Tencentcloud.Sqlserver.Inputs.MigrationMigrateDbSetArgs
     ///                 {
-    ///                     DbName = local.Sqlserver_db,
+    ///                     DbName = srcDb.Name,
     ///                 },
     ///             },
     ///         });

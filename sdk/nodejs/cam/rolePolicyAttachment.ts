@@ -12,10 +12,20 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.cam.RolePolicyAttachment("foo", {
- *     roleId: tencentcloud_cam_role.foo.id,
- *     policyId: tencentcloud_cam_policy.foo.id,
+ * const config = new pulumi.Config();
+ * const camPolicyBasic = config.get("camPolicyBasic") || "keep-cam-policy";
+ * const camRoleBasic = config.get("camRoleBasic") || "keep-cam-role";
+ * const policy = tencentcloud.Cam.getPolicies({
+ *     name: camPolicyBasic,
+ * });
+ * const roles = tencentcloud.Cam.getRoles({
+ *     name: camRoleBasic,
+ * });
+ * const rolePolicyAttachmentBasic = new tencentcloud.cam.RolePolicyAttachment("rolePolicyAttachmentBasic", {
+ *     roleId: roles.then(roles => roles.roleLists?[0]?.roleId),
+ *     policyId: policy.then(policy => policy.policyLists?[0]?.policyId),
  * });
  * ```
  *

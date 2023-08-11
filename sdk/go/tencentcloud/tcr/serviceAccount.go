@@ -11,16 +11,117 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr serviceAccount
+// Provides a resource to create a tcr service account.
 //
 // ## Example Usage
+// ### Create custom account with specified duration days
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("tf_example_cve_id"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewServiceAccount(ctx, "exampleServiceAccount", &Tcr.ServiceAccountArgs{
+// 			RegistryId: exampleInstance.ID(),
+// 			Permissions: tcr.ServiceAccountPermissionArray{
+// 				&tcr.ServiceAccountPermissionArgs{
+// 					Resource: exampleNamespace.Name,
+// 					Actions: pulumi.StringArray{
+// 						pulumi.String("tcr:PushRepository"),
+// 						pulumi.String("tcr:PullRepository"),
+// 					},
+// 				},
+// 			},
+// 			Description: pulumi.String("tf example for tcr custom account"),
+// 			Duration:    pulumi.Int(10),
+// 			Disable:     pulumi.Bool(false),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### With specified expiration time
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewServiceAccount(ctx, "example", &Tcr.ServiceAccountArgs{
+// 			RegistryId: pulumi.Any(tencentcloud_tcr_instance.Example.Id),
+// 			Permissions: tcr.ServiceAccountPermissionArray{
+// 				&tcr.ServiceAccountPermissionArgs{
+// 					Resource: pulumi.Any(tencentcloud_tcr_namespace.Example.Name),
+// 					Actions: pulumi.StringArray{
+// 						pulumi.String("tcr:PushRepository"),
+// 						pulumi.String("tcr:PullRepository"),
+// 					},
+// 				},
+// 			},
+// 			Description: pulumi.String("tf example for tcr custom account"),
+// 			ExpiresAt:   pulumi.Int(1676897989000),
+// 			Disable:     pulumi.Bool(false),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
 // tcr service_account can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#name
+//  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
 // ```
 type ServiceAccount struct {
 	pulumi.CustomResourceState

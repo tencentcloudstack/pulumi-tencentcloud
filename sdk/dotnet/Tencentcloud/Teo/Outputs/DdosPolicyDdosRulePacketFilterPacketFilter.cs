@@ -14,89 +14,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRulePacketFilterPacketFilter
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `transmit`, `drop_block`, `forward`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Packet character depth to check of feature 1. Valid value range: 1-1500.
-        /// </summary>
         public readonly int? Depth;
-        /// <summary>
-        /// Packet character depth to check of feature 2. Valid value range: 1-1500.
-        /// </summary>
         public readonly int? Depth2;
-        /// <summary>
-        /// End of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? DportEnd;
-        /// <summary>
-        /// Start of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? DportStart;
-        /// <summary>
-        /// Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-        /// </summary>
         public readonly int? IsNot;
-        /// <summary>
-        /// Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-        /// </summary>
         public readonly int? IsNot2;
-        /// <summary>
-        /// Packet layer for matching begin of feature 1. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        /// </summary>
         public readonly string? MatchBegin;
-        /// <summary>
-        /// Packet layer for matching begin of feature 2. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        /// </summary>
         public readonly string? MatchBegin2;
-        /// <summary>
-        /// Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-        /// </summary>
         public readonly string? MatchLogic;
-        /// <summary>
-        /// Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        /// </summary>
         public readonly string? MatchType;
-        /// <summary>
-        /// Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        /// </summary>
         public readonly string? MatchType2;
-        /// <summary>
-        /// Offset of feature 1. Valid value range: 1-1500.
-        /// </summary>
         public readonly int? Offset;
-        /// <summary>
-        /// Offset of feature 2. Valid value range: 1-1500.
-        /// </summary>
         public readonly int? Offset2;
-        /// <summary>
-        /// Max packet size. Valid value range: 0-1500.
-        /// </summary>
         public readonly int? PacketMax;
-        /// <summary>
-        /// Min packet size. Valid value range: 0-1500.
-        /// </summary>
         public readonly int? PacketMin;
-        /// <summary>
-        /// Valid value: `tcp`, `udp`, `icmp`, `all`.
-        /// </summary>
         public readonly string? Protocol;
-        /// <summary>
-        /// End of the source port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? SportEnd;
-        /// <summary>
-        /// Start of the source port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? SportStart;
-        /// <summary>
-        /// Regex expression or string to match.
-        /// </summary>
         public readonly string? Str;
-        /// <summary>
-        /// Regex expression or string to match.
-        /// </summary>
         public readonly string? Str2;
 
         [OutputConstructor]

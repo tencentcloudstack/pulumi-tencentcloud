@@ -14,37 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRule
     {
-        /// <summary>
-        /// DDoS ACL rule configuration.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleAcl? Acl;
-        /// <summary>
-        /// DDoS black-white list.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleAllowBlock? AllowBlock;
-        /// <summary>
-        /// DDoS protocol and connection protection.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleAntiPly? AntiPly;
-        /// <summary>
-        /// DDoS Protection by Geo Info.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleGeoIp? GeoIp;
-        /// <summary>
-        /// DDoS feature filtering configuration.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRulePacketFilter? PacketFilter;
-        /// <summary>
-        /// DDoS access origin site speed limit configuration.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleSpeedLimit? SpeedLimit;
-        /// <summary>
-        /// DDoS protection level.
-        /// </summary>
         public readonly Outputs.DdosPolicyDdosRuleStatusInfo? StatusInfo;
-        /// <summary>
-        /// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

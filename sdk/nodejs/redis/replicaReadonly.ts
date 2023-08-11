@@ -11,12 +11,48 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const replicaReadonly = new tencentcloud.Redis.ReplicaReadonly("replica_readonly", {
- *     instanceId: "crs-c1nl9rpv",
- *     operate: "enable",
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
+ * const fooGroupLiteRule = new tencentcloud.security.GroupLiteRule("fooGroupLiteRule", {
+ *     securityGroupId: fooGroup.id,
+ *     ingresses: [
+ *         "ACCEPT#192.168.1.0/24#80#TCP",
+ *         "DROP#8.8.8.8#80,90#UDP",
+ *         "DROP#0.0.0.0/0#80-90#TCP",
+ *     ],
+ *     egresses: [
+ *         "ACCEPT#192.168.0.0/16#ALL#TCP",
+ *         "ACCEPT#10.0.0.0/8#ALL#ICMP",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ * });
+ * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     securityGroups: [fooGroup.id],
+ * });
+ * const replicaReadonly = new tencentcloud.redis.ReplicaReadonly("replicaReadonly", {
+ *     instanceId: fooInstance.id,
  *     readonlyPolicies: ["master"],
+ *     operate: "enable",
  * });
  * ```
  */

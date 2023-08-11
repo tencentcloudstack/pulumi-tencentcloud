@@ -13,27 +13,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigDropPageConfigWafDropPageDetailGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// File name or URL.
-        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// ID of the custom error page. when set to 0, use system default error page.
-        /// </summary>
         [Input("pageId")]
         public Input<int>? PageId { get; set; }
 
-        /// <summary>
-        /// HTTP status code to use. Valid range: 100-600.
-        /// </summary>
         [Input("statusCode")]
         public Input<int>? StatusCode { get; set; }
 
-        /// <summary>
-        /// Type of the custom error page. Valid values: `file`, `url`.
-        /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 

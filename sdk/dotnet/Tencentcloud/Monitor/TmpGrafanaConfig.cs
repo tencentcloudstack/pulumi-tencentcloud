@@ -25,7 +25,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var tmpGrafanaConfig = new Tencentcloud.Monitor.TmpGrafanaConfig("tmpGrafanaConfig", new Tencentcloud.Monitor.TmpGrafanaConfigArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
+    ///         {
+    ///             InstanceName = "tf-grafana",
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 subnet.Id,
+    ///             },
+    ///             GrafanaInitPassword = "1234567890",
+    ///             EnableInternet = false,
+    ///             IsDestroy = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "test" },
+    ///             },
+    ///         });
+    ///         var fooTmpGrafanaConfig = new Tencentcloud.Monitor.TmpGrafanaConfig("fooTmpGrafanaConfig", new Tencentcloud.Monitor.TmpGrafanaConfigArgs
     ///         {
     ///             Config = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///             {
@@ -36,7 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///                     { "serve_from_sub_path", true },
     ///                 } },
     ///             }),
-    ///             InstanceId = "grafana-29phe08q",
+    ///             InstanceId = fooGrafanaInstance.Id,
     ///         });
     ///     }
     /// 

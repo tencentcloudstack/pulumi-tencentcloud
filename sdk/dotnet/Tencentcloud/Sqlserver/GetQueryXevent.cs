@@ -27,12 +27,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var queryXevent = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
         ///         {
-        ///             EndTime = "2023-07-01 00:00:00",
+        ///             EndTime = "2023-08-10 00:00:00",
         ///             EventType = "blocked",
         ///             InstanceId = "mssql-gyg9xycl",
-        ///             StartTime = "2023-06-27 00:00:00",
+        ///             StartTime = "2023-08-01 00:00:00",
         ///         }));
         ///     }
         /// 
@@ -59,12 +59,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var queryXevent = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
         ///         {
-        ///             EndTime = "2023-07-01 00:00:00",
+        ///             EndTime = "2023-08-10 00:00:00",
         ///             EventType = "blocked",
         ///             InstanceId = "mssql-gyg9xycl",
-        ///             StartTime = "2023-06-27 00:00:00",
+        ///             StartTime = "2023-08-01 00:00:00",
         ///         }));
         ///     }
         /// 

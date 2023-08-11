@@ -132,15 +132,56 @@ class ResumeSnapshotInstance(pulumi.CustomResource):
         Provides a resource to create a vpc resume_snapshot_instance
 
         ## Example Usage
+        ### Basic example
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         resume_snapshot_instance = tencentcloud.vpc.ResumeSnapshotInstance("resumeSnapshotInstance",
-            instance_id="policy-1t6cob",
-            snapshot_file_id="ssfile-test",
+            instance_id="ntrgm89v",
+            snapshot_file_id="ssfile-emtabuwu2z",
             snapshot_policy_id="sspolicy-1t6cobbv")
+        ```
+        ### Complete example
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_snapshot_files = tencentcloud.Vpc.get_snapshot_files(business_type="securitygroup",
+            instance_id="sg-902tl7t7",
+            start_date="2022-10-10 00:00:00",
+            end_date="2023-10-30 00:00:00")
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        example_resume_snapshot_instance = tencentcloud.vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance",
+            snapshot_policy_id=example_snapshot_policy.id,
+            snapshot_file_id=example_snapshot_files.snapshot_file_sets[0].snapshot_file_id,
+            instance_id="policy-1t6cob")
         ```
 
         :param str resource_name: The name of the resource.
@@ -159,15 +200,56 @@ class ResumeSnapshotInstance(pulumi.CustomResource):
         Provides a resource to create a vpc resume_snapshot_instance
 
         ## Example Usage
+        ### Basic example
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         resume_snapshot_instance = tencentcloud.vpc.ResumeSnapshotInstance("resumeSnapshotInstance",
-            instance_id="policy-1t6cob",
-            snapshot_file_id="ssfile-test",
+            instance_id="ntrgm89v",
+            snapshot_file_id="ssfile-emtabuwu2z",
             snapshot_policy_id="sspolicy-1t6cobbv")
+        ```
+        ### Complete example
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_snapshot_files = tencentcloud.Vpc.get_snapshot_files(business_type="securitygroup",
+            instance_id="sg-902tl7t7",
+            start_date="2022-10-10 00:00:00",
+            end_date="2023-10-30 00:00:00")
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        example_resume_snapshot_instance = tencentcloud.vpc.ResumeSnapshotInstance("exampleResumeSnapshotInstance",
+            snapshot_policy_id=example_snapshot_policy.id,
+            snapshot_file_id=example_snapshot_files.snapshot_file_sets[0].snapshot_file_id,
+            instance_id="policy-1t6cob")
         ```
 
         :param str resource_name: The name of the resource.

@@ -135,17 +135,47 @@ class Notification(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_group = tencentcloud.cam.Group("exampleGroup", remark="desc.")
         as_notification = tencentcloud.as_.Notification("asNotification",
+            scaling_group_id=example_scaling_group.id,
             notification_types=[
+                "SCALE_OUT_SUCCESSFUL",
                 "SCALE_OUT_FAILED",
-                "SCALE_IN_SUCCESSFUL",
                 "SCALE_IN_FAILED",
+                "REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL",
                 "REPLACE_UNHEALTHY_INSTANCE_FAILED",
             ],
-            notification_user_group_ids=["76955"],
-            scaling_group_id="sg-12af45")
+            notification_user_group_ids=[example_group.id])
         ```
 
         :param str resource_name: The name of the resource.
@@ -167,17 +197,47 @@ class Notification(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_group = tencentcloud.cam.Group("exampleGroup", remark="desc.")
         as_notification = tencentcloud.as_.Notification("asNotification",
+            scaling_group_id=example_scaling_group.id,
             notification_types=[
+                "SCALE_OUT_SUCCESSFUL",
                 "SCALE_OUT_FAILED",
-                "SCALE_IN_SUCCESSFUL",
                 "SCALE_IN_FAILED",
+                "REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL",
                 "REPLACE_UNHEALTHY_INSTANCE_FAILED",
             ],
-            notification_user_group_ids=["76955"],
-            scaling_group_id="sg-12af45")
+            notification_user_group_ids=[example_group.id])
         ```
 
         :param str resource_name: The name of the resource.

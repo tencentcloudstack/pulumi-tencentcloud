@@ -19,6 +19,7 @@ class InstanceArgs:
                  network_type: pulumi.Input[str],
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
+                 delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
@@ -43,6 +44,7 @@ class InstanceArgs:
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -68,6 +70,8 @@ class InstanceArgs:
             pulumi.set(__self__, "address_ip_version", address_ip_version)
         if bandwidth_package_id is not None:
             pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
+        if delete_protect is not None:
+            pulumi.set(__self__, "delete_protect", delete_protect)
         if dynamic_vip is not None:
             pulumi.set(__self__, "dynamic_vip", dynamic_vip)
         if internet_bandwidth_max_out is not None:
@@ -152,6 +156,18 @@ class InstanceArgs:
     @bandwidth_package_id.setter
     def bandwidth_package_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "bandwidth_package_id", value)
+
+    @property
+    @pulumi.getter(name="deleteProtect")
+    def delete_protect(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable delete protection.
+        """
+        return pulumi.get(self, "delete_protect")
+
+    @delete_protect.setter
+    def delete_protect(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protect", value)
 
     @property
     @pulumi.getter(name="dynamicVip")
@@ -377,6 +393,7 @@ class _InstanceState:
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
                  clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 delete_protect: Optional[pulumi.Input[bool]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
@@ -404,6 +421,7 @@ class _InstanceState:
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
+        :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[str] domain: Domain name of the CLB instance.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -434,6 +452,8 @@ class _InstanceState:
             pulumi.set(__self__, "clb_name", clb_name)
         if clb_vips is not None:
             pulumi.set(__self__, "clb_vips", clb_vips)
+        if delete_protect is not None:
+            pulumi.set(__self__, "delete_protect", delete_protect)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if dynamic_vip is not None:
@@ -524,6 +544,18 @@ class _InstanceState:
     @clb_vips.setter
     def clb_vips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "clb_vips", value)
+
+    @property
+    @pulumi.getter(name="deleteProtect")
+    def delete_protect(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable delete protection.
+        """
+        return pulumi.get(self, "delete_protect")
+
+    @delete_protect.setter
+    def delete_protect(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protect", value)
 
     @property
     @pulumi.getter
@@ -786,6 +818,7 @@ class Instance(pulumi.CustomResource):
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
+                 delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
@@ -953,6 +986,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
+        :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -1139,6 +1173,7 @@ class Instance(pulumi.CustomResource):
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
+                 delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
@@ -1177,6 +1212,7 @@ class Instance(pulumi.CustomResource):
             if clb_name is None and not opts.urn:
                 raise TypeError("Missing required property 'clb_name'")
             __props__.__dict__["clb_name"] = clb_name
+            __props__.__dict__["delete_protect"] = delete_protect
             __props__.__dict__["dynamic_vip"] = dynamic_vip
             __props__.__dict__["internet_bandwidth_max_out"] = internet_bandwidth_max_out
             __props__.__dict__["internet_charge_type"] = internet_charge_type
@@ -1215,6 +1251,7 @@ class Instance(pulumi.CustomResource):
             bandwidth_package_id: Optional[pulumi.Input[str]] = None,
             clb_name: Optional[pulumi.Input[str]] = None,
             clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            delete_protect: Optional[pulumi.Input[bool]] = None,
             domain: Optional[pulumi.Input[str]] = None,
             dynamic_vip: Optional[pulumi.Input[bool]] = None,
             internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
@@ -1247,6 +1284,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
+        :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[str] domain: Domain name of the CLB instance.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -1277,6 +1315,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["bandwidth_package_id"] = bandwidth_package_id
         __props__.__dict__["clb_name"] = clb_name
         __props__.__dict__["clb_vips"] = clb_vips
+        __props__.__dict__["delete_protect"] = delete_protect
         __props__.__dict__["domain"] = domain
         __props__.__dict__["dynamic_vip"] = dynamic_vip
         __props__.__dict__["internet_bandwidth_max_out"] = internet_bandwidth_max_out
@@ -1331,6 +1370,14 @@ class Instance(pulumi.CustomResource):
         The virtual service address table of the CLB.
         """
         return pulumi.get(self, "clb_vips")
+
+    @property
+    @pulumi.getter(name="deleteProtect")
+    def delete_protect(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to enable delete protection.
+        """
+        return pulumi.get(self, "delete_protect")
 
     @property
     @pulumi.getter

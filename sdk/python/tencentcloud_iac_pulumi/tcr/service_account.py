@@ -313,16 +313,75 @@ class ServiceAccount(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr service_account
+        Provides a resource to create a tcr service account.
 
         ## Example Usage
+        ### Create custom account with specified duration days
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="tf_example_cve_id",
+            )])
+        example_service_account = tencentcloud.tcr.ServiceAccount("exampleServiceAccount",
+            registry_id=example_instance.id,
+            permissions=[tencentcloud.tcr.ServiceAccountPermissionArgs(
+                resource=example_namespace.name,
+                actions=[
+                    "tcr:PushRepository",
+                    "tcr:PullRepository",
+                ],
+            )],
+            description="tf example for tcr custom account",
+            duration=10,
+            disable=False,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### With specified expiration time
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.tcr.ServiceAccount("example",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            permissions=[tencentcloud.tcr.ServiceAccountPermissionArgs(
+                resource=tencentcloud_tcr_namespace["example"]["name"],
+                actions=[
+                    "tcr:PushRepository",
+                    "tcr:PullRepository",
+                ],
+            )],
+            description="tf example for tcr custom account",
+            expires_at=1676897989000,
+            disable=False,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
         tcr service_account can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#name
+         $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
         ```
 
         :param str resource_name: The name of the resource.
@@ -343,16 +402,75 @@ class ServiceAccount(pulumi.CustomResource):
                  args: ServiceAccountArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr service_account
+        Provides a resource to create a tcr service account.
 
         ## Example Usage
+        ### Create custom account with specified duration days
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="tf_example_cve_id",
+            )])
+        example_service_account = tencentcloud.tcr.ServiceAccount("exampleServiceAccount",
+            registry_id=example_instance.id,
+            permissions=[tencentcloud.tcr.ServiceAccountPermissionArgs(
+                resource=example_namespace.name,
+                actions=[
+                    "tcr:PushRepository",
+                    "tcr:PullRepository",
+                ],
+            )],
+            description="tf example for tcr custom account",
+            duration=10,
+            disable=False,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### With specified expiration time
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.tcr.ServiceAccount("example",
+            registry_id=tencentcloud_tcr_instance["example"]["id"],
+            permissions=[tencentcloud.tcr.ServiceAccountPermissionArgs(
+                resource=tencentcloud_tcr_namespace["example"]["name"],
+                actions=[
+                    "tcr:PushRepository",
+                    "tcr:PullRepository",
+                ],
+            )],
+            description="tf example for tcr custom account",
+            expires_at=1676897989000,
+            disable=False,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
         tcr service_account can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#name
+         $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
         ```
 
         :param str resource_name: The name of the resource.

@@ -23,10 +23,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var tmpScrapeJob = new Tencentcloud.Monitor.TmpScrapeJob("tmpScrapeJob", new Tencentcloud.Monitor.TmpScrapeJobArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             InstanceId = "prom-dko9d0nu",
-    ///             AgentId = "agent-6a7g40k2",
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
+    ///         {
+    ///             InstanceName = "tf-tmp-instance",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             DataRetentionTime = 30,
+    ///             Zone = availabilityZone,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
+    ///         {
+    ///             InstanceId = fooTmpInstance.Id,
+    ///         });
+    ///         var fooTmpScrapeJob = new Tencentcloud.Monitor.TmpScrapeJob("fooTmpScrapeJob", new Tencentcloud.Monitor.TmpScrapeJobArgs
+    ///         {
+    ///             InstanceId = fooTmpInstance.Id,
+    ///             AgentId = fooTmpCvmAgent.AgentId,
     ///             Config = @"job_name: demo-config
     /// honor_timestamps: true
     /// metrics_path: /metrics

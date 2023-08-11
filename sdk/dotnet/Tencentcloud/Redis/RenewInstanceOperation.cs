@@ -14,25 +14,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis renew_instance_operation
     /// 
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var renewInstanceOperation = new Tencentcloud.Redis.RenewInstanceOperation("renewInstanceOperation", new Tencentcloud.Redis.RenewInstanceOperationArgs
-    ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             ModifyPayMode = "prepaid",
-    ///             Period = 1,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/renewInstanceOperation:RenewInstanceOperation")]
     public partial class RenewInstanceOperation : Pulumi.CustomResource

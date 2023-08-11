@@ -11,12 +11,13 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const localGateway = new tencentcloud.Vpc.LocalGateway("local_gateway", {
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const example = new tencentcloud.vpc.LocalGateway("example", {
+ *     localGatewayName: "tf-example",
+ *     vpcId: vpc.id,
  *     cdcId: "cluster-j9gyu1iy",
- *     localGatewayName: "local-gw-test",
- *     vpcId: "vpc-lh4nqig9",
  * });
  * ```
  *

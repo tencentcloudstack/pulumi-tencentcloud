@@ -10,25 +10,74 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
 {
+    /// <summary>
+    /// Provides a resource to create a redis connection_config
+    /// 
+    /// ## Example Usage
+    /// ### Modify the maximum number of connections and maximum network throughput of an instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///         });
+    ///         var connectionConfig = new Tencentcloud.Redis.ConnectionConfig("connectionConfig", new Tencentcloud.Redis.ConnectionConfigArgs
+    ///         {
+    ///             InstanceId = "crs-fhm9fnv1",
+    ///             ClientLimit = 20000,
+    ///             AddBandwidth = 30,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Redis connectionConfig can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Redis/connectionConfig:ConnectionConfig connection_config instance_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/connectionConfig:ConnectionConfig")]
     public partial class ConnectionConfig : Pulumi.CustomResource
     {
         /// <summary>
-        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
-        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
-        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
-        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
-        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
-        /// shards in the standard architecture = 1.
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
         /// </summary>
         [Output("addBandwidth")]
         public Output<int> AddBandwidth { get; private set; } = null!;
-
-        /// <summary>
-        /// Additional bandwidth, greater than 0, in MB.
-        /// </summary>
-        [Output("bandwidth")]
-        public Output<int?> Bandwidth { get; private set; } = null!;
 
         /// <summary>
         /// standard bandwidth. Refers to the bandwidth allocated by the system to each node when an instance is purchased.
@@ -37,9 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int> BaseBandwidth { get; private set; } = null!;
 
         /// <summary>
-        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper
-        /// limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 × (the
-        /// number of read replicas +3).
+        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 * (the number of read replicas +3).
         /// </summary>
         [Output("clientLimit")]
         public Output<int?> ClientLimit { get; private set; } = null!;
@@ -63,9 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int> MinAddBandwidth { get; private set; } = null!;
 
         /// <summary>
-        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards *
-        /// (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in
-        /// Mb/s.
+        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards * (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in Mb/s.
         /// </summary>
         [Output("totalBandwidth")]
         public Output<int> TotalBandwidth { get; private set; } = null!;
@@ -118,26 +163,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     public sealed class ConnectionConfigArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
-        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
-        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
-        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
-        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
-        /// shards in the standard architecture = 1.
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
         /// </summary>
         [Input("addBandwidth")]
         public Input<int>? AddBandwidth { get; set; }
 
         /// <summary>
-        /// Additional bandwidth, greater than 0, in MB.
-        /// </summary>
-        [Input("bandwidth")]
-        public Input<int>? Bandwidth { get; set; }
-
-        /// <summary>
-        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper
-        /// limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 × (the
-        /// number of read replicas +3).
+        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 * (the number of read replicas +3).
         /// </summary>
         [Input("clientLimit")]
         public Input<int>? ClientLimit { get; set; }
@@ -156,21 +188,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     public sealed class ConnectionConfigState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can
-        /// increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional
-        /// bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ),
-        /// the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth
-        /// of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of
-        /// shards in the standard architecture = 1.
+        /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
         /// </summary>
         [Input("addBandwidth")]
         public Input<int>? AddBandwidth { get; set; }
-
-        /// <summary>
-        /// Additional bandwidth, greater than 0, in MB.
-        /// </summary>
-        [Input("bandwidth")]
-        public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
         /// standard bandwidth. Refers to the bandwidth allocated by the system to each node when an instance is purchased.
@@ -179,9 +200,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? BaseBandwidth { get; set; }
 
         /// <summary>
-        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper
-        /// limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 × (the
-        /// number of read replicas +3).
+        /// The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 * (the number of read replicas +3).
         /// </summary>
         [Input("clientLimit")]
         public Input<int>? ClientLimit { get; set; }
@@ -205,9 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? MinAddBandwidth { get; set; }
 
         /// <summary>
-        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards *
-        /// (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in
-        /// Mb/s.
+        /// Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards * (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in Mb/s.
         /// </summary>
         [Input("totalBandwidth")]
         public Input<int>? TotalBandwidth { get; set; }

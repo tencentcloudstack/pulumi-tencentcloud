@@ -10,6 +10,139 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type ProductSecretPrivilegesList struct {
+	// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
+	ColumnName *string `pulumi:"columnName"`
+	// This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+	Database *string `pulumi:"database"`
+	// Permission name. Valid values: `GlobalPrivileges`, `DatabasePrivileges`, `TablePrivileges`, `ColumnPrivileges`. When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter; When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters; When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+	PrivilegeName string `pulumi:"privilegeName"`
+	// Permission list. For the `Mysql` service, optional permission values are: 1. Valid values of `GlobalPrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, PROCESS, DROP,REFERENCES,INDEX,ALTER,SHOW DATABASES,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 2. Valid values of `DatabasePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 3. Valid values of `TablePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW, TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 4. Valid values of `ColumnPrivileges`: SELECT,INSERT,UPDATE,REFERENCES.Note: if this parameter is not passed in, it means to clear the permission.
+	Privileges []string `pulumi:"privileges"`
+	// This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+	TableName *string `pulumi:"tableName"`
+}
+
+// ProductSecretPrivilegesListInput is an input type that accepts ProductSecretPrivilegesListArgs and ProductSecretPrivilegesListOutput values.
+// You can construct a concrete instance of `ProductSecretPrivilegesListInput` via:
+//
+//          ProductSecretPrivilegesListArgs{...}
+type ProductSecretPrivilegesListInput interface {
+	pulumi.Input
+
+	ToProductSecretPrivilegesListOutput() ProductSecretPrivilegesListOutput
+	ToProductSecretPrivilegesListOutputWithContext(context.Context) ProductSecretPrivilegesListOutput
+}
+
+type ProductSecretPrivilegesListArgs struct {
+	// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+	Database pulumi.StringPtrInput `pulumi:"database"`
+	// Permission name. Valid values: `GlobalPrivileges`, `DatabasePrivileges`, `TablePrivileges`, `ColumnPrivileges`. When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter; When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters; When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+	PrivilegeName pulumi.StringInput `pulumi:"privilegeName"`
+	// Permission list. For the `Mysql` service, optional permission values are: 1. Valid values of `GlobalPrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, PROCESS, DROP,REFERENCES,INDEX,ALTER,SHOW DATABASES,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 2. Valid values of `DatabasePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 3. Valid values of `TablePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW, TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 4. Valid values of `ColumnPrivileges`: SELECT,INSERT,UPDATE,REFERENCES.Note: if this parameter is not passed in, it means to clear the permission.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (ProductSecretPrivilegesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProductSecretPrivilegesList)(nil)).Elem()
+}
+
+func (i ProductSecretPrivilegesListArgs) ToProductSecretPrivilegesListOutput() ProductSecretPrivilegesListOutput {
+	return i.ToProductSecretPrivilegesListOutputWithContext(context.Background())
+}
+
+func (i ProductSecretPrivilegesListArgs) ToProductSecretPrivilegesListOutputWithContext(ctx context.Context) ProductSecretPrivilegesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProductSecretPrivilegesListOutput)
+}
+
+// ProductSecretPrivilegesListArrayInput is an input type that accepts ProductSecretPrivilegesListArray and ProductSecretPrivilegesListArrayOutput values.
+// You can construct a concrete instance of `ProductSecretPrivilegesListArrayInput` via:
+//
+//          ProductSecretPrivilegesListArray{ ProductSecretPrivilegesListArgs{...} }
+type ProductSecretPrivilegesListArrayInput interface {
+	pulumi.Input
+
+	ToProductSecretPrivilegesListArrayOutput() ProductSecretPrivilegesListArrayOutput
+	ToProductSecretPrivilegesListArrayOutputWithContext(context.Context) ProductSecretPrivilegesListArrayOutput
+}
+
+type ProductSecretPrivilegesListArray []ProductSecretPrivilegesListInput
+
+func (ProductSecretPrivilegesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProductSecretPrivilegesList)(nil)).Elem()
+}
+
+func (i ProductSecretPrivilegesListArray) ToProductSecretPrivilegesListArrayOutput() ProductSecretPrivilegesListArrayOutput {
+	return i.ToProductSecretPrivilegesListArrayOutputWithContext(context.Background())
+}
+
+func (i ProductSecretPrivilegesListArray) ToProductSecretPrivilegesListArrayOutputWithContext(ctx context.Context) ProductSecretPrivilegesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProductSecretPrivilegesListArrayOutput)
+}
+
+type ProductSecretPrivilegesListOutput struct{ *pulumi.OutputState }
+
+func (ProductSecretPrivilegesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProductSecretPrivilegesList)(nil)).Elem()
+}
+
+func (o ProductSecretPrivilegesListOutput) ToProductSecretPrivilegesListOutput() ProductSecretPrivilegesListOutput {
+	return o
+}
+
+func (o ProductSecretPrivilegesListOutput) ToProductSecretPrivilegesListOutputWithContext(ctx context.Context) ProductSecretPrivilegesListOutput {
+	return o
+}
+
+// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
+func (o ProductSecretPrivilegesListOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProductSecretPrivilegesList) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+func (o ProductSecretPrivilegesListOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProductSecretPrivilegesList) *string { return v.Database }).(pulumi.StringPtrOutput)
+}
+
+// Permission name. Valid values: `GlobalPrivileges`, `DatabasePrivileges`, `TablePrivileges`, `ColumnPrivileges`. When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter; When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters; When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+func (o ProductSecretPrivilegesListOutput) PrivilegeName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProductSecretPrivilegesList) string { return v.PrivilegeName }).(pulumi.StringOutput)
+}
+
+// Permission list. For the `Mysql` service, optional permission values are: 1. Valid values of `GlobalPrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, PROCESS, DROP,REFERENCES,INDEX,ALTER,SHOW DATABASES,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 2. Valid values of `DatabasePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 3. Valid values of `TablePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW, TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 4. Valid values of `ColumnPrivileges`: SELECT,INSERT,UPDATE,REFERENCES.Note: if this parameter is not passed in, it means to clear the permission.
+func (o ProductSecretPrivilegesListOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProductSecretPrivilegesList) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+func (o ProductSecretPrivilegesListOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProductSecretPrivilegesList) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+type ProductSecretPrivilegesListArrayOutput struct{ *pulumi.OutputState }
+
+func (ProductSecretPrivilegesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProductSecretPrivilegesList)(nil)).Elem()
+}
+
+func (o ProductSecretPrivilegesListArrayOutput) ToProductSecretPrivilegesListArrayOutput() ProductSecretPrivilegesListArrayOutput {
+	return o
+}
+
+func (o ProductSecretPrivilegesListArrayOutput) ToProductSecretPrivilegesListArrayOutputWithContext(ctx context.Context) ProductSecretPrivilegesListArrayOutput {
+	return o
+}
+
+func (o ProductSecretPrivilegesListArrayOutput) Index(i pulumi.IntInput) ProductSecretPrivilegesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductSecretPrivilegesList {
+		return vs[0].([]ProductSecretPrivilegesList)[vs[1].(int)]
+	}).(ProductSecretPrivilegesListOutput)
+}
+
 type GetSecretVersionsSecretVersionList struct {
 	// The base64-encoded binary secret.
 	SecretBinary string `pulumi:"secretBinary"`
@@ -277,10 +410,14 @@ func (o GetSecretsSecretListArrayOutput) Index(i pulumi.IntInput) GetSecretsSecr
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ProductSecretPrivilegesListInput)(nil)).Elem(), ProductSecretPrivilegesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProductSecretPrivilegesListArrayInput)(nil)).Elem(), ProductSecretPrivilegesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretVersionsSecretVersionListInput)(nil)).Elem(), GetSecretVersionsSecretVersionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretVersionsSecretVersionListArrayInput)(nil)).Elem(), GetSecretVersionsSecretVersionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretsSecretListInput)(nil)).Elem(), GetSecretsSecretListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretsSecretListArrayInput)(nil)).Elem(), GetSecretsSecretListArray{})
+	pulumi.RegisterOutputType(ProductSecretPrivilegesListOutput{})
+	pulumi.RegisterOutputType(ProductSecretPrivilegesListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecretVersionsSecretVersionListOutput{})
 	pulumi.RegisterOutputType(GetSecretVersionsSecretVersionListArrayOutput{})
 	pulumi.RegisterOutputType(GetSecretsSecretListOutput{})

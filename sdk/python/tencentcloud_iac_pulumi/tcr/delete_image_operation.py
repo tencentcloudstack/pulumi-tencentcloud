@@ -161,19 +161,34 @@ class DeleteImageOperation(pulumi.CustomResource):
                  repository_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr delete_image_operation
+        Provides a resource to delete the specified tcr image.
 
         ## Example Usage
+        ### To delete the specified image
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        delete_image_operation = tencentcloud.tcr.DeleteImageOperation("deleteImageOperation",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_delete_image_operation = tencentcloud.tcr.DeleteImageOperation("exampleDeleteImageOperation",
+            registry_id=example_instance.id,
+            repository_name="repo",
             image_version="v1",
-            namespace_name="ns",
-            registry_id="tcr-xxx",
-            repository_name="repo")
+            namespace_name=example_namespace.name)
         ```
 
         :param str resource_name: The name of the resource.
@@ -190,19 +205,34 @@ class DeleteImageOperation(pulumi.CustomResource):
                  args: DeleteImageOperationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr delete_image_operation
+        Provides a resource to delete the specified tcr image.
 
         ## Example Usage
+        ### To delete the specified image
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        delete_image_operation = tencentcloud.tcr.DeleteImageOperation("deleteImageOperation",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_delete_image_operation = tencentcloud.tcr.DeleteImageOperation("exampleDeleteImageOperation",
+            registry_id=example_instance.id,
+            repository_name="repo",
             image_version="v1",
-            namespace_name="ns",
-            registry_id="tcr-xxx",
-            repository_name="repo")
+            namespace_name=example_namespace.name)
         ```
 
         :param str resource_name: The name of the resource.

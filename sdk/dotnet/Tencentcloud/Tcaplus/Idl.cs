@@ -14,34 +14,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// Use this resource to create TcaplusDB IDL file.
     /// 
     /// ## Example Usage
+    /// ### Create a tcaplus database idl file
+    /// 
+    /// The file will be with a specified cluster and tablegroup.
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var test = new Tencentcloud.Tcaplus.Cluster("test", new Tencentcloud.Tcaplus.ClusterArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZone,
+    ///         }));
+    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
+    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
+    ///         var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new Tencentcloud.Tcaplus.ClusterArgs
     ///         {
     ///             IdlType = "PROTO",
-    ///             ClusterName = "tf_tcaplus_cluster_test",
-    ///             VpcId = "vpc-7k6gzox6",
-    ///             SubnetId = "subnet-akwgvfa3",
-    ///             Password = "1qaA2k1wgvfa3ZZZ",
+    ///             ClusterName = "tf_example_tcaplus_cluster",
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
+    ///             Password = "your_pw_123111",
     ///             OldPasswordExpireLast = 3600,
     ///         });
-    ///         var tablegroup = new Tencentcloud.Tcaplus.Tablegroup("tablegroup", new Tencentcloud.Tcaplus.TablegroupArgs
+    ///         var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new Tencentcloud.Tcaplus.TablegroupArgs
     ///         {
-    ///             ClusterId = test.Id,
-    ///             TablegroupName = "tf_test_group_name",
+    ///             ClusterId = exampleCluster.Id,
+    ///             TablegroupName = "tf_example_group_name",
     ///         });
     ///         var main = new Tencentcloud.Tcaplus.Idl("main", new Tencentcloud.Tcaplus.IdlArgs
     ///         {
-    ///             ClusterId = test.Id,
-    ///             TablegroupId = tablegroup.Id,
-    ///             FileName = "tf_idl_test",
+    ///             ClusterId = exampleCluster.Id,
+    ///             TablegroupId = exampleTablegroup.Id,
+    ///             FileName = "tf_example_tcaplus_idl",
     ///             FileType = "PROTO",
     ///             FileExtType = "proto",
     ///             FileContent = @"    syntax = ""proto2"";

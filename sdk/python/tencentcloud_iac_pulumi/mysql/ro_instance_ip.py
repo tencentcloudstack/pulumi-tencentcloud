@@ -169,12 +169,20 @@ class RoInstanceIp(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_instance_ip = tencentcloud.mysql.RoInstanceIp("roInstanceIp",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example = tencentcloud.mysql.RoInstanceIp("example",
             instance_id="cdbro-bdlvcfpj",
-            uniq_subnet_id="subnet-dwj7ipnc",
-            uniq_vpc_id="vpc-4owdpnwr")
+            uniq_subnet_id=subnet.id,
+            uniq_vpc_id=vpc.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -196,12 +204,20 @@ class RoInstanceIp(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_instance_ip = tencentcloud.mysql.RoInstanceIp("roInstanceIp",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example = tencentcloud.mysql.RoInstanceIp("example",
             instance_id="cdbro-bdlvcfpj",
-            uniq_subnet_id="subnet-dwj7ipnc",
-            uniq_vpc_id="vpc-4owdpnwr")
+            uniq_subnet_id=subnet.id,
+            uniq_vpc_id=vpc.id)
         ```
 
         :param str resource_name: The name of the resource.

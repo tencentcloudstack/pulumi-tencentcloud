@@ -169,27 +169,25 @@ class RocketmqEnvironmentRole(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        role = tencentcloud.tdmq.RocketmqRole("role",
-            role_name="test_rocketmq_role",
-            remark="test rocketmq role",
-            cluster_id=cluster.cluster_id)
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
-        environment_role = tencentcloud.tdmq.RocketmqEnvironmentRole("environmentRole",
-            environment_name=namespace.namespace_name,
-            role_name=role.role_name,
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_role = tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole",
+            role_name="tf_example_role",
+            remark="remark.",
+            cluster_id=example_rocketmq_cluster.cluster_id)
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
+        example_rocketmq_environment_role = tencentcloud.tdmq.RocketmqEnvironmentRole("exampleRocketmqEnvironmentRole",
+            environment_name=example_rocketmq_namespace.namespace_name,
+            role_name=example_rocketmq_role.role_name,
             permissions=[
                 "produce",
                 "consume",
             ],
-            cluster_id=cluster.cluster_id)
+            cluster_id=example_rocketmq_cluster.cluster_id)
         ```
 
         ## Import
@@ -222,27 +220,25 @@ class RocketmqEnvironmentRole(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        role = tencentcloud.tdmq.RocketmqRole("role",
-            role_name="test_rocketmq_role",
-            remark="test rocketmq role",
-            cluster_id=cluster.cluster_id)
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
-        environment_role = tencentcloud.tdmq.RocketmqEnvironmentRole("environmentRole",
-            environment_name=namespace.namespace_name,
-            role_name=role.role_name,
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_role = tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole",
+            role_name="tf_example_role",
+            remark="remark.",
+            cluster_id=example_rocketmq_cluster.cluster_id)
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
+        example_rocketmq_environment_role = tencentcloud.tdmq.RocketmqEnvironmentRole("exampleRocketmqEnvironmentRole",
+            environment_name=example_rocketmq_namespace.namespace_name,
+            role_name=example_rocketmq_role.role_name,
             permissions=[
                 "produce",
                 "consume",
             ],
-            cluster_id=cluster.cluster_id)
+            cluster_id=example_rocketmq_cluster.cluster_id)
         ```
 
         ## Import

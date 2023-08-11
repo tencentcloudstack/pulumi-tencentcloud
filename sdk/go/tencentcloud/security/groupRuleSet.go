@@ -23,52 +23,97 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		sglab1Group, err := Security.NewGroup(ctx, "sglab1Group", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg_1"),
+// 		baseGroup, err := Security.NewGroup(ctx, "baseGroup", &Security.GroupArgs{
+// 			Description: pulumi.String("Testing Rule Set Security"),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Security.NewGroupRuleSet(ctx, "sglab1GroupRuleSet", &Security.GroupRuleSetArgs{
-// 			SecurityGroupId: sglab1Group.ID(),
+// 		relative, err := Security.NewGroup(ctx, "relative", &Security.GroupArgs{
+// 			Description: pulumi.String("Used for attach security policy"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTemplate, err := Address.NewTemplate(ctx, "fooTemplate", &Address.TemplateArgs{
+// 			Addresses: pulumi.StringArray{
+// 				pulumi.String("10.0.0.1"),
+// 				pulumi.String("10.0.1.0/24"),
+// 				pulumi.String("10.0.0.1-10.0.0.100"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTemplateGroup, err := Address.NewTemplateGroup(ctx, "fooTemplateGroup", &Address.TemplateGroupArgs{
+// 			TemplateIds: pulumi.StringArray{
+// 				fooTemplate.ID(),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupRuleSet(ctx, "baseGroupRuleSet", &Security.GroupRuleSetArgs{
+// 			SecurityGroupId: baseGroup.ID(),
 // 			Ingresses: security.GroupRuleSetIngressArray{
 // 				&security.GroupRuleSetIngressArgs{
-// 					CidrBlock:   pulumi.String("10.0.0.0/16"),
-// 					Protocol:    pulumi.String("TCP"),
-// 					Port:        pulumi.String("80"),
 // 					Action:      pulumi.String("ACCEPT"),
-// 					Description: pulumi.String("favourite sg rule_1"),
+// 					CidrBlock:   pulumi.String("10.0.0.0/22"),
+// 					Protocol:    pulumi.String("TCP"),
+// 					Port:        pulumi.String("80-90"),
+// 					Description: pulumi.String("A:Allow Ips and 80-90"),
 // 				},
 // 				&security.GroupRuleSetIngressArgs{
+// 					Action:      pulumi.String("ACCEPT"),
+// 					CidrBlock:   pulumi.String("10.0.2.1"),
+// 					Protocol:    pulumi.String("UDP"),
+// 					Port:        pulumi.String("8080"),
+// 					Description: pulumi.String("B:Allow UDP 8080"),
+// 				},
+// 				&security.GroupRuleSetIngressArgs{
+// 					Action:      pulumi.String("ACCEPT"),
+// 					CidrBlock:   pulumi.String("10.0.2.1"),
+// 					Protocol:    pulumi.String("UDP"),
+// 					Port:        pulumi.String("8080"),
+// 					Description: pulumi.String("C:Allow UDP 8080"),
+// 				},
+// 				&security.GroupRuleSetIngressArgs{
+// 					Action:      pulumi.String("ACCEPT"),
+// 					CidrBlock:   pulumi.String("172.18.1.2"),
+// 					Protocol:    pulumi.String("ALL"),
+// 					Port:        pulumi.String("ALL"),
+// 					Description: pulumi.String("D:Allow ALL"),
+// 				},
+// 				&security.GroupRuleSetIngressArgs{
+// 					Action:           pulumi.String("DROP"),
 // 					Protocol:         pulumi.String("TCP"),
 // 					Port:             pulumi.String("80"),
-// 					Action:           pulumi.String("ACCEPT"),
-// 					SourceSecurityId: pulumi.Any(tencentcloud_security_group.Sglab_3.Id),
-// 					Description:      pulumi.String("favourite sg rule_2"),
+// 					SourceSecurityId: relative.ID(),
+// 					Description:      pulumi.String("E:Block relative"),
 // 				},
 // 			},
 // 			Egresses: security.GroupRuleSetEgressArray{
 // 				&security.GroupRuleSetEgressArgs{
-// 					Action:            pulumi.String("ACCEPT"),
-// 					AddressTemplateId: pulumi.String("ipm-xxxxxxxx"),
-// 					Description:       pulumi.String("Allow address template"),
-// 				},
-// 				&security.GroupRuleSetEgressArgs{
-// 					Action:               pulumi.String("ACCEPT"),
-// 					ServiceTemplateGroup: pulumi.String("ppmg-xxxxxxxx"),
-// 					Description:          pulumi.String("Allow protocol template"),
-// 				},
-// 				&security.GroupRuleSetEgressArgs{
-// 					CidrBlock:   pulumi.String("10.0.0.0/16"),
-// 					Protocol:    pulumi.String("TCP"),
-// 					Port:        pulumi.String("80"),
 // 					Action:      pulumi.String("DROP"),
-// 					Description: pulumi.String("favourite sg egress rule"),
+// 					CidrBlock:   pulumi.String("10.0.0.0/16"),
+// 					Protocol:    pulumi.String("ICMP"),
+// 					Description: pulumi.String("A:Block ping3"),
+// 				},
+// 				&security.GroupRuleSetEgressArgs{
+// 					Action:            pulumi.String("DROP"),
+// 					AddressTemplateId: fooTemplate.ID(),
+// 					Description:       pulumi.String("B:Allow template"),
+// 				},
+// 				&security.GroupRuleSetEgressArgs{
+// 					Action:               pulumi.String("DROP"),
+// 					AddressTemplateGroup: fooTemplateGroup.ID(),
+// 					Description:          pulumi.String("C:DROP template group"),
 // 				},
 // 			},
 // 		})

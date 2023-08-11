@@ -6,16 +6,79 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr serviceAccount
+ * Provides a resource to create a tcr service account.
  *
  * ## Example Usage
+ * ### Create custom account with specified duration days
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "basic",
+ *     deleteBucket: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "tf_example_cve_id",
+ *     }],
+ * });
+ * const exampleServiceAccount = new tencentcloud.tcr.ServiceAccount("exampleServiceAccount", {
+ *     registryId: exampleInstance.id,
+ *     permissions: [{
+ *         resource: exampleNamespace.name,
+ *         actions: [
+ *             "tcr:PushRepository",
+ *             "tcr:PullRepository",
+ *         ],
+ *     }],
+ *     description: "tf example for tcr custom account",
+ *     duration: 10,
+ *     disable: false,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### With specified expiration time
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tcr.ServiceAccount("example", {
+ *     registryId: tencentcloud_tcr_instance.example.id,
+ *     permissions: [{
+ *         resource: tencentcloud_tcr_namespace.example.name,
+ *         actions: [
+ *             "tcr:PushRepository",
+ *             "tcr:PullRepository",
+ *         ],
+ *     }],
+ *     description: "tf example for tcr custom account",
+ *     expiresAt: 1676897989000,
+ *     disable: false,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
  *
  * ## Import
  *
  * tcr service_account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#name
+ *  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
  * ```
  */
 export class ServiceAccount extends pulumi.CustomResource {

@@ -13,6 +13,7 @@ import (
 // Provides an EIP resource.
 //
 // ## Example Usage
+// ### Paid by the bandwidth package
 //
 // ```go
 // package main
@@ -36,6 +37,34 @@ import (
 // 	})
 // }
 // ```
+// ### AntiDDos Eip
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+// 			AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
+// 			BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
+// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			Type: pulumi.String("AntiDDoSEIP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
@@ -47,6 +76,8 @@ import (
 type Instance struct {
 	pulumi.CustomResourceState
 
+	// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+	AntiDdosPackageId pulumi.StringOutput `pulumi:"antiDdosPackageId"`
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrOutput `pulumi:"anycastZone"`
 	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
@@ -73,7 +104,7 @@ type Instance struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// The tags of eip.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
 }
 
@@ -107,6 +138,8 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
+	// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+	AntiDdosPackageId *string `pulumi:"antiDdosPackageId"`
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone *string `pulumi:"anycastZone"`
 	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
@@ -133,11 +166,13 @@ type instanceState struct {
 	Status *string `pulumi:"status"`
 	// The tags of eip.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
 type InstanceState struct {
+	// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+	AntiDdosPackageId pulumi.StringPtrInput
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrInput
 	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
@@ -164,7 +199,7 @@ type InstanceState struct {
 	Status pulumi.StringPtrInput
 	// The tags of eip.
 	Tags pulumi.MapInput
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -173,6 +208,8 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
+	// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+	AntiDdosPackageId *string `pulumi:"antiDdosPackageId"`
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone *string `pulumi:"anycastZone"`
 	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
@@ -195,12 +232,14 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// The tags of eip.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
+	// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+	AntiDdosPackageId pulumi.StringPtrInput
 	// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 	AnycastZone pulumi.StringPtrInput
 	// It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
@@ -223,7 +262,7 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// The tags of eip.
 	Tags pulumi.MapInput
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -314,6 +353,11 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
+// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+func (o InstanceOutput) AntiDdosPackageId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AntiDdosPackageId }).(pulumi.StringOutput)
+}
+
 // The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
 func (o InstanceOutput) AnycastZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AnycastZone }).(pulumi.StringPtrOutput)
@@ -376,7 +420,7 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
 func (o InstanceOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }

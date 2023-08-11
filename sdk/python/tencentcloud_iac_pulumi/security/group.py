@@ -168,14 +168,26 @@ class Group(pulumi.CustomResource):
         Provides a resource to create security group.
 
         ## Example Usage
+        ### Create a basic security group
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sglab = tencentcloud.security.Group("sglab",
-            description="favourite sg",
-            project_id=0)
+        example = tencentcloud.security.Group("example", description="sg test")
+        ```
+        ### Create a complete security group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.security.Group("example",
+            description="sg test",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
         ```
 
         ## Import
@@ -203,14 +215,26 @@ class Group(pulumi.CustomResource):
         Provides a resource to create security group.
 
         ## Example Usage
+        ### Create a basic security group
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sglab = tencentcloud.security.Group("sglab",
-            description="favourite sg",
-            project_id=0)
+        example = tencentcloud.security.Group("example", description="sg test")
+        ```
+        ### Create a complete security group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.security.Group("example",
+            description="sg test",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
         ```
 
         ## Import

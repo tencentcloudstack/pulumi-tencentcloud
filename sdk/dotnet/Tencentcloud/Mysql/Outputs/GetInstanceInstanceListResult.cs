@@ -99,6 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
         /// </summary>
         public readonly int ProjectId;
         /// <summary>
+        /// read-only instance group.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInstanceInstanceListRoGroupResult> RoGroups;
+        /// <summary>
         /// ID list of read-only type associated with the current instance.
         /// </summary>
         public readonly ImmutableArray<string> RoInstanceIds;
@@ -171,6 +175,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
 
             int projectId,
 
+            ImmutableArray<Outputs.GetInstanceInstanceListRoGroupResult> roGroups,
+
             ImmutableArray<string> roInstanceIds,
 
             int slaveSyncMode,
@@ -206,6 +212,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
             MysqlId = mysqlId;
             PayType = payType;
             ProjectId = projectId;
+            RoGroups = roGroups;
             RoInstanceIds = roInstanceIds;
             SlaveSyncMode = slaveSyncMode;
             Status = status;

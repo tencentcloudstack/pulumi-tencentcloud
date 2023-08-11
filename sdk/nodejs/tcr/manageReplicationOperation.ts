@@ -6,7 +6,9 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr manageReplicationOperation
+ * Provides a resource to start a tcr instance replication operation
+ *
+ * ## Example Usage
  */
 export class ManageReplicationOperation extends pulumi.CustomResource {
     /**

@@ -8,34 +8,46 @@ import * as utilities from "../utilities";
  * Use this resource to create TcaplusDB table.
  *
  * ## Example Usage
+ * ### Create a tcaplus database table
+ *
+ * The tcaplus database table should be pre-defined in the idl file.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = new tencentcloud.tcaplus.Cluster("test", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const vpc = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZone,
+ * });
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
  *     idlType: "PROTO",
- *     clusterName: "tf_tcaplus_cluster_test",
- *     vpcId: "vpc-7k6gzox6",
- *     subnetId: "subnet-akwgvfa3",
- *     password: "1qaA2k1wgvfa3ZZZ",
+ *     clusterName: "tf_example_tcaplus_cluster",
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     password: "your_pw_123111",
  *     oldPasswordExpireLast: 3600,
  * });
- * const tablegroup = new tencentcloud.tcaplus.Tablegroup("tablegroup", {
- *     clusterId: test.id,
- *     tablegroupName: "tf_test_group_name",
+ * const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("exampleTablegroup", {
+ *     clusterId: exampleCluster.id,
+ *     tablegroupName: "tf_example_group_name",
  * });
- * const main = new tencentcloud.tcaplus.Idl("main", {
- *     clusterId: test.id,
- *     tablegroupId: tablegroup.id,
- *     fileName: "tf_idl_test_2",
+ * const exampleIdl = new tencentcloud.tcaplus.Idl("exampleIdl", {
+ *     clusterId: exampleCluster.id,
+ *     tablegroupId: exampleTablegroup.id,
+ *     fileName: "tf_example_tcaplus_idl",
  *     fileType: "PROTO",
  *     fileExtType: "proto",
  *     fileContent: `    syntax = "proto2";
  *     package myTcaplusTable;
  *     import "tcaplusservice.optionv1.proto";
- *     message tb_online {
- *        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+ *     message example_table { # refer the table name
+ *         option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
  *         required int64 uin = 1;
  *         required string name = 2;
  *         required int32 region = 3;
@@ -58,13 +70,13 @@ import * as utilities from "../utilities";
  *     }
  * `,
  * });
- * const table = new tencentcloud.tcaplus.Table("table", {
- *     clusterId: test.id,
- *     tablegroupId: tablegroup.id,
- *     tableName: "tb_online",
+ * const exampleTable = new tencentcloud.tcaplus.Table("exampleTable", {
+ *     clusterId: exampleCluster.id,
+ *     tablegroupId: exampleTablegroup.id,
+ *     tableName: "example_table",
  *     tableType: "GENERIC",
  *     description: "test",
- *     idlId: main.id,
+ *     idlId: exampleIdl.id,
  *     tableIdlType: "PROTO",
  *     reservedReadCu: 1000,
  *     reservedWriteCu: 20,

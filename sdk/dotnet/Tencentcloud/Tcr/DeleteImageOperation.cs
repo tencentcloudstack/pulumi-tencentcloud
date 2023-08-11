@@ -11,9 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr delete_image_operation
+    /// Provides a resource to delete the specified tcr image.
     /// 
     /// ## Example Usage
+    /// ### To delete the specified image
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,12 +24,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var deleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("deleteImageOperation", new Tencentcloud.Tcr.DeleteImageOperationArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             ImageVersion = "v1",
-    ///             NamespaceName = "ns",
-    ///             RegistryId = "tcr-xxx",
+    ///             InstanceType = "premium",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "cve-xxxxx",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleDeleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("exampleDeleteImageOperation", new Tencentcloud.Tcr.DeleteImageOperationArgs
+    ///         {
+    ///             RegistryId = exampleInstance.Id,
     ///             RepositoryName = "repo",
+    ///             ImageVersion = "v1",
+    ///             NamespaceName = exampleNamespace.Name,
     ///         });
     ///     }
     /// 

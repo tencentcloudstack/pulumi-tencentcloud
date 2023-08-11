@@ -14,23 +14,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Use this resource to create a backup config of redis.
     /// 
     /// ## Example Usage
+    /// ### Set configuration for automatic backups
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var redislab = new Tencentcloud.Redis.BackupConfig("redislab", new Tencentcloud.Redis.BackupConfigArgs
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
     ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///         });
+    ///         var fooBackupConfig = new Tencentcloud.Redis.BackupConfig("fooBackupConfig", new Tencentcloud.Redis.BackupConfigArgs
+    ///         {
+    ///             RedisId = fooInstance.Id,
+    ///             BackupTime = "04:00-05:00",
     ///             BackupPeriods = 
     ///             {
     ///                 "Monday",
     ///             },
-    ///             BackupTime = "04:00-05:00",
-    ///             RedisId = "crs-7yl0q0dd",
     ///         });
     ///     }
     /// 
@@ -44,7 +72,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// backup config can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+    ///  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupConfig:BackupConfig")]

@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a cvm launchTemplate
+// Provides a resource to create a cvm launch template
 //
 // ## Example Usage
 //
@@ -20,21 +20,30 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewLaunchTemplate(ctx, "demo", &Cvm.LaunchTemplateArgs{
-// 			ImageId:            pulumi.String("img-xxxxxxxxx"),
+// 		myFavoriteImage, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// 			ImageTypes: []string{
+// 				"PUBLIC_IMAGE",
+// 			},
+// 			ImageNameRegex: pulumi.StringRef("Final"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cvm.NewLaunchTemplate(ctx, "demo", &Cvm.LaunchTemplateArgs{
 // 			LaunchTemplateName: pulumi.String("test"),
 // 			Placement: &cvm.LaunchTemplatePlacementArgs{
-// 				HostIds:   pulumi.StringArray{},
-// 				HostIps:   pulumi.StringArray{},
-// 				ProjectId: pulumi.Int(0),
 // 				Zone:      pulumi.String("ap-guangzhou-6"),
+// 				ProjectId: pulumi.Int(0),
 // 			},
+// 			ImageId: pulumi.String(myFavoriteImage.Images[0].ImageId),
 // 		})
 // 		if err != nil {
 // 			return err

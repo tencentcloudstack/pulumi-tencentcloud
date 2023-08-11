@@ -49,7 +49,7 @@ func GetParameterList(ctx *pulumi.Context, args *GetParameterListArgs, opts ...p
 
 // A collection of arguments for invoking getParameterList.
 type GetParameterListArgs struct {
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Instance ID.
 	MysqlId *string `pulumi:"mysqlId"`
@@ -83,7 +83,7 @@ func GetParameterListOutput(ctx *pulumi.Context, args GetParameterListOutputArgs
 
 // A collection of arguments for invoking getParameterList.
 type GetParameterListOutputArgs struct {
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
 	EngineVersion pulumi.StringPtrInput `pulumi:"engineVersion"`
 	// Instance ID.
 	MysqlId pulumi.StringPtrInput `pulumi:"mysqlId"`

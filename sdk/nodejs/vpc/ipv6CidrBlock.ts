@@ -13,11 +13,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cidr_block = new tencentcloud.vpc.Instance("cidr-block", {
- *     cidrBlock: "10.0.0.0/16",
- *     isMulticast: false,
- * });
- * const ipv6CidrBlock = new tencentcloud.vpc.Ipv6CidrBlock("ipv6CidrBlock", {vpcId: cidr_block.id});
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const example = new tencentcloud.vpc.Ipv6CidrBlock("example", {vpcId: vpc.id});
  * ```
  *
  * ## Import

@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigBotConfigIntelligenceRule
     {
-        /// <summary>
-        /// Configuration detail.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigBotConfigIntelligenceRuleItem> Items;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

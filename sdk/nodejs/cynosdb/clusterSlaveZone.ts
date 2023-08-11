@@ -79,17 +79,6 @@ import * as utilities from "../utilities";
  *     slaveZone: newAvailabilityZone,
  * });
  * ```
- * ### Update the slave zone with specified value.
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- *
- * const clusterSlaveZone = new tencentcloud.cynosdb.ClusterSlaveZone("clusterSlaveZone", {
- *     clusterId: tencentcloud_cynosdb_cluster.instance.id,
- *     slaveZone: _var.availability_zone,
- * });
- * ```
  *
  * ## Import
  *

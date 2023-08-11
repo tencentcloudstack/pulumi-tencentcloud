@@ -183,19 +183,34 @@ class GrafanaIntegration(pulumi.CustomResource):
         Provides a resource to create a monitor grafanaIntegration
 
         ## Example Usage
+        ### Create a grafan instance and integrate the configuration
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
         grafana_integration = tencentcloud.monitor.GrafanaIntegration("grafanaIntegration",
-            content="{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
-            instance_id="grafana-50nj6v00",
-            kind="tencentcloud-monitor-app")
-        grafana_integration_update = tencentcloud.monitor.GrafanaIntegration("grafanaIntegrationUpdate",
-            content="{\"id\":\"integration-9st6kqz6\",\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"name\":\"uint-test3\",\"authProvider\":{\"secretId\":\"ROLE\",\"useRole\":true,\"__anyOf\":\"使用服务角色\"}},\"grafanaSpec\":{\"organizationIds\":[]}}}",
-            instance_id="grafana-50nj6v00",
-            kind="tencentcloud-monitor-app")
+            instance_id=foo.id,
+            kind="tencentcloud-monitor-app",
+            content="{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}")
         ```
 
         :param str resource_name: The name of the resource.
@@ -215,19 +230,34 @@ class GrafanaIntegration(pulumi.CustomResource):
         Provides a resource to create a monitor grafanaIntegration
 
         ## Example Usage
+        ### Create a grafan instance and integrate the configuration
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
         grafana_integration = tencentcloud.monitor.GrafanaIntegration("grafanaIntegration",
-            content="{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
-            instance_id="grafana-50nj6v00",
-            kind="tencentcloud-monitor-app")
-        grafana_integration_update = tencentcloud.monitor.GrafanaIntegration("grafanaIntegrationUpdate",
-            content="{\"id\":\"integration-9st6kqz6\",\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"name\":\"uint-test3\",\"authProvider\":{\"secretId\":\"ROLE\",\"useRole\":true,\"__anyOf\":\"使用服务角色\"}},\"grafanaSpec\":{\"organizationIds\":[]}}}",
-            instance_id="grafana-50nj6v00",
-            kind="tencentcloud-monitor-app")
+            instance_id=foo.id,
+            kind="tencentcloud-monitor-app",
+            content="{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}")
         ```
 
         :param str resource_name: The name of the resource.

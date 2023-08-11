@@ -43,7 +43,7 @@ class ListenerArgs:
         The set of arguments for constructing a Listener resource.
         :param pulumi.Input[str] clb_id: ID of the CLB.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
-        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] certificate_ca_id: ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
@@ -146,7 +146,7 @@ class ListenerArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         """
         return pulumi.get(self, "protocol")
 
@@ -485,7 +485,7 @@ class _ListenerState:
         :param pulumi.Input[str] listener_id: ID of this CLB listener.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
-        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
@@ -814,7 +814,7 @@ class _ListenerState:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         """
         return pulumi.get(self, "protocol")
 
@@ -1083,7 +1083,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
-        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
@@ -1406,7 +1406,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] listener_id: ID of this CLB listener.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
-        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
@@ -1625,7 +1625,7 @@ class Listener(pulumi.CustomResource):
     @pulumi.getter
     def protocol(self) -> pulumi.Output[str]:
         """
-        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         """
         return pulumi.get(self, "protocol")
 

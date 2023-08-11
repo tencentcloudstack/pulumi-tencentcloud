@@ -13,32 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnat
     /// <summary>
     /// Provides a resource to create a NAT forwarding.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = new Tencentcloud.Dnat.Instance("foo", new Tencentcloud.Dnat.InstanceArgs
-    ///         {
-    ///             Description = "test",
-    ///             ElasticIp = "139.199.232.238",
-    ///             ElasticPort = "80",
-    ///             NatId = "nat-2515tdg",
-    ///             PrivateIp = "10.0.0.1",
-    ///             PrivatePort = "22",
-    ///             Protocol = "tcp",
-    ///             VpcId = "vpc-asg3sfa3",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// NAT forwarding can be imported using the id, e.g.

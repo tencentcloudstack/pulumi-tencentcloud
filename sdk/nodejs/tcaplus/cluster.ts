@@ -10,18 +10,28 @@ import * as utilities from "../utilities";
  * > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
  *
  * ## Example Usage
+ * ### Create a new tcaplus cluster instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = new tencentcloud.Tcaplus.Cluster("test", {
- *     clusterName: "tf_tcaplus_cluster_test",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const vpc = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZone,
+ * });
+ * const vpcId = vpc.then(vpc => vpc.instanceLists?[0]?.vpcId);
+ * const subnetId = vpc.then(vpc => vpc.instanceLists?[0]?.subnetId);
+ * const example = new tencentcloud.tcaplus.Cluster("example", {
  *     idlType: "PROTO",
+ *     clusterName: "tf_example_tcaplus_cluster",
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     password: "your_pw_123111",
  *     oldPasswordExpireLast: 3600,
- *     password: "1qaA2k1wgvfa3ZZZ",
- *     subnetId: "subnet-akwgvfa3",
- *     vpcId: "vpc-7k6gzox6",
  * });
  * ```
  *
@@ -30,7 +40,7 @@ import * as utilities from "../utilities";
  * tcaplus cluster can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+ *  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
  * ```
  */
 export class Cluster extends pulumi.CustomResource {

@@ -184,13 +184,44 @@ class BackupPolicy(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.BackupPolicy("default",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_backup_policy = tencentcloud.mysql.BackupPolicy("exampleBackupPolicy",
+            mysql_id=example_instance.id,
+            retention_period=7,
             backup_model="physical",
-            backup_time="02:00-06:00",
-            mysql_id="cdb-dnqksd9f",
-            retention_period=7)
+            backup_time="01:00-05:00")
         ```
 
         :param str resource_name: The name of the resource.
@@ -211,13 +242,44 @@ class BackupPolicy(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.BackupPolicy("default",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_backup_policy = tencentcloud.mysql.BackupPolicy("exampleBackupPolicy",
+            mysql_id=example_instance.id,
+            retention_period=7,
             backup_model="physical",
-            backup_time="02:00-06:00",
-            mysql_id="cdb-dnqksd9f",
-            retention_period=7)
+            backup_time="01:00-05:00")
         ```
 
         :param str resource_name: The name of the resource.

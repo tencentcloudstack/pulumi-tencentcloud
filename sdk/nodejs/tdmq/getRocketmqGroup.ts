@@ -7,6 +7,37 @@ import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of tdmqRocketmq group
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ * });
+ * const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceName: "tf_example",
+ *     remark: "remark.",
+ * });
+ * const exampleRocketmqGroup = tencentcloud.Tdmq.getRocketmqGroupOutput({
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceId: exampleRocketmqNamespace.namespaceName,
+ *     filterGroup: exampleTdmq / rocketmqGroupRocketmqGroup.groupName,
+ * });
+ * const exampleTdmq_rocketmqGroupRocketmqGroup = new tencentcloud.tdmq.RocketmqGroup("exampleTdmq/rocketmqGroupRocketmqGroup", {
+ *     groupName: "tf_example",
+ *     namespace: exampleRocketmqNamespace.namespaceName,
+ *     readEnable: true,
+ *     broadcastEnable: true,
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     remark: "remark.",
+ * });
+ * ```
  */
 export function getRocketmqGroup(args: GetRocketmqGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqGroupResult> {
     if (!opts) {

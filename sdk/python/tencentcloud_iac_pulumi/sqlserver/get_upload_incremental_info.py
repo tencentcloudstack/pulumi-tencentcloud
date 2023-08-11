@@ -189,7 +189,7 @@ def get_upload_incremental_info(backup_migration_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    upload_incremental_info = tencentcloud.Sqlserver.get_upload_incremental_info(backup_migration_id="mssql-backup-migration-83t5u3tv",
+    example = tencentcloud.Sqlserver.get_upload_incremental_info(backup_migration_id="mssql-backup-migration-83t5u3tv",
         incremental_migration_id="mssql-incremental-migration-h36gkdxn",
         instance_id="mssql-4tgeyeeh")
     ```
@@ -244,7 +244,7 @@ def get_upload_incremental_info_output(backup_migration_id: Optional[pulumi.Inpu
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    upload_incremental_info = tencentcloud.Sqlserver.get_upload_incremental_info(backup_migration_id="mssql-backup-migration-83t5u3tv",
+    example = tencentcloud.Sqlserver.get_upload_incremental_info(backup_migration_id="mssql-backup-migration-83t5u3tv",
         incremental_migration_id="mssql-incremental-migration-h36gkdxn",
         instance_id="mssql-4tgeyeeh")
     ```

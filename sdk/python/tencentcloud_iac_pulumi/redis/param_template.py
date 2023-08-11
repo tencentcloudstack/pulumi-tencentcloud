@@ -238,13 +238,16 @@ class ParamTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
-            description="This is an copied redis param template from xxx.",
+        foo = tencentcloud.redis.ParamTemplate("foo",
+            description="This is an example redis param template.",
+            product_type=6,
             params_overrides=[tencentcloud.redis.ParamTemplateParamsOverrideArgs(
                 key="timeout",
                 value="7200",
-            )],
-            template_id="xxx")
+            )])
+        param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
+            description="This is an copied redis param template from tf-template.",
+            template_id=foo.id)
         ```
 
         ## Import
@@ -292,13 +295,16 @@ class ParamTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
-            description="This is an copied redis param template from xxx.",
+        foo = tencentcloud.redis.ParamTemplate("foo",
+            description="This is an example redis param template.",
+            product_type=6,
             params_overrides=[tencentcloud.redis.ParamTemplateParamsOverrideArgs(
                 key="timeout",
                 value="7200",
-            )],
-            template_id="xxx")
+            )])
+        param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
+            description="This is an copied redis param template from tf-template.",
+            template_id=foo.id)
         ```
 
         ## Import

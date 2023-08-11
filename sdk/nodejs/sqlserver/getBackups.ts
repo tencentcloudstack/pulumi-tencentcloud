@@ -28,6 +28,7 @@ export function getBackups(args: GetBackupsArgs, opts?: pulumi.InvokeOptions): P
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getBackups:getBackups", {
+        "backupName": args.backupName,
         "endTime": args.endTime,
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -39,6 +40,7 @@ export function getBackups(args: GetBackupsArgs, opts?: pulumi.InvokeOptions): P
  * A collection of arguments for invoking getBackups.
  */
 export interface GetBackupsArgs {
+    backupName?: string;
     /**
      * End time of the instance list, like yyyy-MM-dd HH:mm:ss.
      */
@@ -61,6 +63,7 @@ export interface GetBackupsArgs {
  * A collection of values returned by getBackups.
  */
 export interface GetBackupsResult {
+    readonly backupName?: string;
     /**
      * End time of the backup.
      */
@@ -92,6 +95,7 @@ export function getBackupsOutput(args: GetBackupsOutputArgs, opts?: pulumi.Invok
  * A collection of arguments for invoking getBackups.
  */
 export interface GetBackupsOutputArgs {
+    backupName?: pulumi.Input<string>;
     /**
      * End time of the instance list, like yyyy-MM-dd HH:mm:ss.
      */

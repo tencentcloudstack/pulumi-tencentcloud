@@ -13,48 +13,12 @@ import (
 
 // Provides a resource to create a sqlserver configInstanceRoGroup
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewConfigInstanceRoGroup(ctx, "configInstanceRoGroup", &Sqlserver.ConfigInstanceRoGroupArgs{
-// 			AutoWeight:           pulumi.Int(0),
-// 			InstanceId:           pulumi.String("mssql-ds1xhnt9"),
-// 			IsOfflineDelay:       pulumi.Int(1),
-// 			MinReadOnlyInGroup:   pulumi.Int(1),
-// 			ReadOnlyGroupId:      pulumi.String("mssqlrg-cbya44fb"),
-// 			ReadOnlyGroupName:    pulumi.String("keep-ro-group-customize"),
-// 			ReadOnlyMaxDelayTime: pulumi.Int(10),
-// 			WeightPairs: sqlserver.ConfigInstanceRoGroupWeightPairArray{
-// 				&sqlserver.ConfigInstanceRoGroupWeightPairArgs{
-// 					ReadOnlyInstanceId: pulumi.String("mssqlro-o6dv2ugx"),
-// 					ReadOnlyWeight:     pulumi.Int(50),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // sqlserver config_instance_ro_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup config_instance_ro_group config_instance_ro_group_id
+//  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
 // ```
 type ConfigInstanceRoGroup struct {
 	pulumi.CustomResourceState

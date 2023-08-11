@@ -102,6 +102,7 @@ class ReplaceCertForLbs(pulumi.CustomResource):
         Provides a resource to create a clb replace_cert_for_lbs
 
         ## Example Usage
+        ### Replace Server Cert By Cert ID
 
         ```python
         import pulumi
@@ -109,10 +110,48 @@ class ReplaceCertForLbs(pulumi.CustomResource):
 
         replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
             certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
-                cert_ca_content="XXXXX",
-                cert_ca_name="test",
+                cert_id="6vcK02GC",
             ),
             old_certificate_id="zjUMifFK")
+        ```
+        ### Replace Server Cert By Cert Content
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.Ssl.get_certificates(name="keep-ssl-ca")
+        replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
+            old_certificate_id=foo.certificates[0].id,
+            certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
+                cert_name="tf-test-cert",
+                cert_content=\"\"\"-----BEGIN CERTIFICATE-----
+        xxxxxxxxxxxxxxxxxxxxxxxxxxx
+        -----END CERTIFICATE-----
+        EOT,
+            certKey     = <<-EOT
+        -----BEGIN RSA PRIVATE KEY-----
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        -----END RSA PRIVATE KEY-----
+        \"\"\",
+            ))
+        ```
+        ### Replace Client Cert By Cert Content
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
+            old_certificate_id="zjUMifFK",
+            certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
+                cert_ca_name="tf-test-cert",
+                cert_ca_content=\"\"\"-----BEGIN CERTIFICATE-----
+        xxxxxxxxContentxxxxxxxxxxxxxx
+        -----END CERTIFICATE-----
+        \"\"\",
+            ))
         ```
 
         ```python
@@ -134,6 +173,7 @@ class ReplaceCertForLbs(pulumi.CustomResource):
         Provides a resource to create a clb replace_cert_for_lbs
 
         ## Example Usage
+        ### Replace Server Cert By Cert ID
 
         ```python
         import pulumi
@@ -141,10 +181,48 @@ class ReplaceCertForLbs(pulumi.CustomResource):
 
         replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
             certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
-                cert_ca_content="XXXXX",
-                cert_ca_name="test",
+                cert_id="6vcK02GC",
             ),
             old_certificate_id="zjUMifFK")
+        ```
+        ### Replace Server Cert By Cert Content
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.Ssl.get_certificates(name="keep-ssl-ca")
+        replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
+            old_certificate_id=foo.certificates[0].id,
+            certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
+                cert_name="tf-test-cert",
+                cert_content=\"\"\"-----BEGIN CERTIFICATE-----
+        xxxxxxxxxxxxxxxxxxxxxxxxxxx
+        -----END CERTIFICATE-----
+        EOT,
+            certKey     = <<-EOT
+        -----BEGIN RSA PRIVATE KEY-----
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        -----END RSA PRIVATE KEY-----
+        \"\"\",
+            ))
+        ```
+        ### Replace Client Cert By Cert Content
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        replace_cert_for_lbs = tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs",
+            old_certificate_id="zjUMifFK",
+            certificate=tencentcloud.clb.ReplaceCertForLbsCertificateArgs(
+                cert_ca_name="tf-test-cert",
+                cert_ca_content=\"\"\"-----BEGIN CERTIFICATE-----
+        xxxxxxxxContentxxxxxxxxxxxxxx
+        -----END CERTIFICATE-----
+        \"\"\",
+            ))
         ```
 
         ```python

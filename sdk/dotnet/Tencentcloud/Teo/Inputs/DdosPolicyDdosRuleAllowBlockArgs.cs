@@ -15,19 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("allowBlockIps")]
         private InputList<Inputs.DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs>? _allowBlockIps;
-
-        /// <summary>
-        /// DDoS black-white list detail.
-        /// </summary>
         public InputList<Inputs.DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs> AllowBlockIps
         {
             get => _allowBlockIps ?? (_allowBlockIps = new InputList<Inputs.DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs>());
             set => _allowBlockIps = value;
         }
 
-        /// <summary>
-        /// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

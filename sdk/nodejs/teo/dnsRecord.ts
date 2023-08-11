@@ -4,31 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const dnsRecord = new tencentcloud.Teo.DnsRecord("dns_record", {
- *     content: "150.109.8.2",
- *     mode: "proxied",
- *     priority: 1,
- *     ttl: 1,
- *     type: "A",
- *     zoneId: "zone-297z8rf93cfw",
- * });
- * ```
- *
- * ## Import
- *
- * teo dns_record can be imported using the zone_id#dns_record_id, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord dns_record zone-297z8rf93cfw#record-297z9ei9b9oc
- * ```
- */
 export class DnsRecord extends pulumi.CustomResource {
     /**
      * Get an existing DnsRecord resource's state with the given name, ID, and optional extra
@@ -82,7 +57,8 @@ export class DnsRecord extends pulumi.CustomResource {
      */
     public /*out*/ readonly locked!: pulumi.Output<boolean>;
     /**
-     * Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+     * Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+     * and accelerated.
      */
     public readonly mode!: pulumi.Output<string>;
     /**
@@ -204,7 +180,8 @@ export interface DnsRecordState {
      */
     locked?: pulumi.Input<boolean>;
     /**
-     * Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+     * Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+     * and accelerated.
      */
     mode?: pulumi.Input<string>;
     /**
@@ -246,7 +223,8 @@ export interface DnsRecordArgs {
      */
     content: pulumi.Input<string>;
     /**
-     * Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+     * Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+     * and accelerated.
      */
     mode: pulumi.Input<string>;
     /**

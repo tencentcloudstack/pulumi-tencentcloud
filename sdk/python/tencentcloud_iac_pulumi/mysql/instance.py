@@ -1148,37 +1148,76 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
 
+        > **NOTE:** The value of parameter `parameters` can be used with _mysql.get_parameter_list to obtain.
+
         ## Example Usage
+        ### Create a single node instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+        ### Create a double node instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.Instance("default",
-            availability_zone="ap-guangzhou-4",
-            charge_type="POSTPAID",
-            engine_version="5.7",
-            first_slave_zone="ap-guangzhou-4",
-            instance_name="myTestMysql",
+        example = tencentcloud.mysql.Instance("example",
             internet_service=1,
-            intranet_port=3306,
-            mem_size=128000,
-            parameters={
-                "character_set_server": "UTF8",
-                "max_connections": "1000",
-            },
-            project_id=201901010001,
-            root_password="********",
-            second_slave_zone="ap-guangzhou-4",
-            security_groups=["sg-ot8eclwz"],
-            slave_deploy_mode=0,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=1,
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][0]["name"],
+            first_slave_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][1]["name"],
             slave_sync_mode=1,
-            subnet_id="subnet-9uivyb1g",
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            intranet_port=3306,
+            security_groups=[tencentcloud_security_group["security_group"]["id"]],
             tags={
                 "name": "test",
             },
-            volume_size=250,
-            vpc_id="vpc-12mt3l31")
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
         ```
 
         ## Import
@@ -1186,7 +1225,7 @@ class Instance(pulumi.CustomResource):
         MySQL instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
         ```
 
         :param str resource_name: The name of the resource.
@@ -1233,37 +1272,76 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
 
+        > **NOTE:** The value of parameter `parameters` can be used with _mysql.get_parameter_list to obtain.
+
         ## Example Usage
+        ### Create a single node instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+        ### Create a double node instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.mysql.Instance("default",
-            availability_zone="ap-guangzhou-4",
-            charge_type="POSTPAID",
-            engine_version="5.7",
-            first_slave_zone="ap-guangzhou-4",
-            instance_name="myTestMysql",
+        example = tencentcloud.mysql.Instance("example",
             internet_service=1,
-            intranet_port=3306,
-            mem_size=128000,
-            parameters={
-                "character_set_server": "UTF8",
-                "max_connections": "1000",
-            },
-            project_id=201901010001,
-            root_password="********",
-            second_slave_zone="ap-guangzhou-4",
-            security_groups=["sg-ot8eclwz"],
-            slave_deploy_mode=0,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=1,
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][0]["name"],
+            first_slave_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][1]["name"],
             slave_sync_mode=1,
-            subnet_id="subnet-9uivyb1g",
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            intranet_port=3306,
+            security_groups=[tencentcloud_security_group["security_group"]["id"]],
             tags={
                 "name": "test",
             },
-            volume_size=250,
-            vpc_id="vpc-12mt3l31")
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
         ```
 
         ## Import
@@ -1271,7 +1349,7 @@ class Instance(pulumi.CustomResource):
         MySQL instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+         $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
         ```
 
         :param str resource_name: The name of the resource.

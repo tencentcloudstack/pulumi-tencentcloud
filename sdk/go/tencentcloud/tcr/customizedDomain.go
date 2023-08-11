@@ -11,26 +11,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr customizedDomain
+// Provides a resource to create a tcr customized domain
 //
 // ## Example Usage
+// ### Create a tcr customized domain
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
-//
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewCustomizedDomain(ctx, "myDomain", &Tcr.CustomizedDomainArgs{
-// 			RegistryId:    pulumi.Any(local.Tcr_id),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewCustomizedDomain(ctx, "exampleCustomizedDomain", &Tcr.CustomizedDomainArgs{
+// 			RegistryId:    exampleInstance.ID(),
 // 			DomainName:    pulumi.String("www.test.com"),
-// 			CertificateId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+// 			CertificateId: pulumi.String("your_cert_id"),
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("terraform"),
 // 			},

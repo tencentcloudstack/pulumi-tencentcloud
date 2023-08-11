@@ -17,32 +17,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var @default = new Tencentcloud.Mysql.Instance("default", new Tencentcloud.Mysql.InstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             MemSize = 1000,
-    ///             VolumeSize = 25,
-    ///             InstanceName = "guagua",
-    ///             EngineVersion = "5.7",
-    ///             RootPassword = "0153Y474",
-    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "mysql test",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
     ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
     ///         });
-    ///         var mysqlAccount2 = new Tencentcloud.Mysql.Account("mysqlAccount2", new Tencentcloud.Mysql.AccountArgs
+    ///         var exampleAccount = new Tencentcloud.Mysql.Account("exampleAccount", new Tencentcloud.Mysql.AccountArgs
     ///         {
-    ///             MysqlId = @default.Id,
-    ///             Password = "test1234",
-    ///             Description = "test from terraform",
+    ///             MysqlId = exampleInstance.Id,
+    ///             Password = "Qwer@234",
+    ///             Description = "desc.",
+    ///             MaxUserConnections = 10,
     ///         });
-    ///         var tttt = new Tencentcloud.Mysql.Privilege("tttt", new Tencentcloud.Mysql.PrivilegeArgs
+    ///         var examplePrivilege = new Tencentcloud.Mysql.Privilege("examplePrivilege", new Tencentcloud.Mysql.PrivilegeArgs
     ///         {
-    ///             MysqlId = @default.Id,
-    ///             AccountName = mysqlAccount2.Name,
+    ///             MysqlId = exampleInstance.Id,
+    ///             AccountName = exampleAccount.Name,
     ///             Globals = 
     ///             {
     ///                 "TRIGGER",

@@ -263,16 +263,29 @@ class Repository(pulumi.CustomResource):
         Use this resource to create tcr repository.
 
         ## Example Usage
+        ### Create a tcr repository instance
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.Tcr.get_instances(name="test")
-        foo = tencentcloud.tcr.Repository("foo",
-            instance_id=test.instance_lists[0].id,
-            namespace_name="exampleNamespace")
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            delete_bucket=True)
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_repository = tencentcloud.tcr.Repository("exampleRepository",
+            instance_id=example_instance.id,
+            namespace_name=example_namespace.name,
+            brief_desc="111",
+            description="111111111111111111111111111111111111")
         ```
 
         ## Import
@@ -280,7 +293,7 @@ class Repository(pulumi.CustomResource):
         tcr repository can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+         $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
         ```
 
         :param str resource_name: The name of the resource.
@@ -301,16 +314,29 @@ class Repository(pulumi.CustomResource):
         Use this resource to create tcr repository.
 
         ## Example Usage
+        ### Create a tcr repository instance
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.Tcr.get_instances(name="test")
-        foo = tencentcloud.tcr.Repository("foo",
-            instance_id=test.instance_lists[0].id,
-            namespace_name="exampleNamespace")
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            delete_bucket=True)
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
+            is_auto_scan=True,
+            is_prevent_vul=True,
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
+        example_repository = tencentcloud.tcr.Repository("exampleRepository",
+            instance_id=example_instance.id,
+            namespace_name=example_namespace.name,
+            brief_desc="111",
+            description="111111111111111111111111111111111111")
         ```
 
         ## Import
@@ -318,7 +344,7 @@ class Repository(pulumi.CustomResource):
         tcr repository can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+         $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
         ```
 
         :param str resource_name: The name of the resource.

@@ -58,8 +58,7 @@ class _RolePolicyAttachmentByNameState:
                  role_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering RolePolicyAttachmentByName resources.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: The create time of the CAM role policy attachment.
         :param pulumi.Input[str] policy_name: Name of the policy.
         :param pulumi.Input[str] policy_type: Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
@@ -80,8 +79,7 @@ class _RolePolicyAttachmentByNameState:
     @pulumi.getter(name="createMode")
     def create_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 
@@ -147,7 +145,37 @@ class RolePolicyAttachmentByName(pulumi.CustomResource):
                  role_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a RolePolicyAttachmentByName resource with the given unique name, props, and options.
+        Provides a resource to create a CAM role policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_role_basic = config.get("camRoleBasic")
+        if cam_role_basic is None:
+            cam_role_basic = "keep-cam-role"
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        roles = tencentcloud.Cam.get_roles(name=cam_role_basic)
+        role_policy_attachment_basic = tencentcloud.cam.RolePolicyAttachmentByName("rolePolicyAttachmentBasic",
+            role_name=cam_role_basic,
+            policy_name=cam_policy_basic)
+        ```
+
+        ## Import
+
+        CAM role policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] policy_name: Name of the policy.
@@ -160,7 +188,37 @@ class RolePolicyAttachmentByName(pulumi.CustomResource):
                  args: RolePolicyAttachmentByNameArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a RolePolicyAttachmentByName resource with the given unique name, props, and options.
+        Provides a resource to create a CAM role policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_role_basic = config.get("camRoleBasic")
+        if cam_role_basic is None:
+            cam_role_basic = "keep-cam-role"
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        roles = tencentcloud.Cam.get_roles(name=cam_role_basic)
+        role_policy_attachment_basic = tencentcloud.cam.RolePolicyAttachmentByName("rolePolicyAttachmentBasic",
+            role_name=cam_role_basic,
+            policy_name=cam_policy_basic)
+        ```
+
+        ## Import
+
+        CAM role policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+        ```
+
         :param str resource_name: The name of the resource.
         :param RolePolicyAttachmentByNameArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -223,8 +281,7 @@ class RolePolicyAttachmentByName(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: The create time of the CAM role policy attachment.
         :param pulumi.Input[str] policy_name: Name of the policy.
         :param pulumi.Input[str] policy_type: Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
@@ -245,8 +302,7 @@ class RolePolicyAttachmentByName(pulumi.CustomResource):
     @pulumi.getter(name="createMode")
     def create_mode(self) -> pulumi.Output[int]:
         """
-        Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 

@@ -11,16 +11,114 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr service_account
+    /// Provides a resource to create a tcr service account.
     /// 
     /// ## Example Usage
+    /// ### Create custom account with specified duration days
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "tf_example_cve_id",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleServiceAccount = new Tencentcloud.Tcr.ServiceAccount("exampleServiceAccount", new Tencentcloud.Tcr.ServiceAccountArgs
+    ///         {
+    ///             RegistryId = exampleInstance.Id,
+    ///             Permissions = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
+    ///                 {
+    ///                     Resource = exampleNamespace.Name,
+    ///                     Actions = 
+    ///                     {
+    ///                         "tcr:PushRepository",
+    ///                         "tcr:PullRepository",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Description = "tf example for tcr custom account",
+    ///             Duration = 10,
+    ///             Disable = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### With specified expiration time
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Tcr.ServiceAccount("example", new Tencentcloud.Tcr.ServiceAccountArgs
+    ///         {
+    ///             RegistryId = tencentcloud_tcr_instance.Example.Id,
+    ///             Permissions = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.ServiceAccountPermissionArgs
+    ///                 {
+    ///                     Resource = tencentcloud_tcr_namespace.Example.Name,
+    ///                     Actions = 
+    ///                     {
+    ///                         "tcr:PushRepository",
+    ///                         "tcr:PullRepository",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Description = "tf example for tcr custom account",
+    ///             ExpiresAt = 1676897989000,
+    ///             Disable = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
     /// tcr service_account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#name
+    ///  $ pulumi import tencentcloud:Tcr/serviceAccount:ServiceAccount service_account registry_id#account_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/serviceAccount:ServiceAccount")]

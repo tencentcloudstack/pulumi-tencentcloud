@@ -159,42 +159,69 @@ class GroupRuleSet(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sglab1_group = tencentcloud.security.Group("sglab1Group", description="favourite sg_1")
-        sglab1_group_rule_set = tencentcloud.security.GroupRuleSet("sglab1GroupRuleSet",
-            security_group_id=sglab1_group.id,
+        base_group = tencentcloud.security.Group("baseGroup", description="Testing Rule Set Security")
+        relative = tencentcloud.security.Group("relative", description="Used for attach security policy")
+        foo_template = tencentcloud.address.Template("fooTemplate", addresses=[
+            "10.0.0.1",
+            "10.0.1.0/24",
+            "10.0.0.1-10.0.0.100",
+        ])
+        foo_template_group = tencentcloud.address.TemplateGroup("fooTemplateGroup", template_ids=[foo_template.id])
+        base_group_rule_set = tencentcloud.security.GroupRuleSet("baseGroupRuleSet",
+            security_group_id=base_group.id,
             ingresses=[
                 tencentcloud.security.GroupRuleSetIngressArgs(
-                    cidr_block="10.0.0.0/16",
-                    protocol="TCP",
-                    port="80",
                     action="ACCEPT",
-                    description="favourite sg rule_1",
+                    cidr_block="10.0.0.0/22",
+                    protocol="TCP",
+                    port="80-90",
+                    description="A:Allow Ips and 80-90",
                 ),
                 tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="10.0.2.1",
+                    protocol="UDP",
+                    port="8080",
+                    description="B:Allow UDP 8080",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="10.0.2.1",
+                    protocol="UDP",
+                    port="8080",
+                    description="C:Allow UDP 8080",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="172.18.1.2",
+                    protocol="ALL",
+                    port="ALL",
+                    description="D:Allow ALL",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="DROP",
                     protocol="TCP",
                     port="80",
-                    action="ACCEPT",
-                    source_security_id=tencentcloud_security_group["sglab_3"]["id"],
-                    description="favourite sg rule_2",
+                    source_security_id=relative.id,
+                    description="E:Block relative",
                 ),
             ],
             egresses=[
                 tencentcloud.security.GroupRuleSetEgressArgs(
-                    action="ACCEPT",
-                    address_template_id="ipm-xxxxxxxx",
-                    description="Allow address template",
-                ),
-                tencentcloud.security.GroupRuleSetEgressArgs(
-                    action="ACCEPT",
-                    service_template_group="ppmg-xxxxxxxx",
-                    description="Allow protocol template",
-                ),
-                tencentcloud.security.GroupRuleSetEgressArgs(
-                    cidr_block="10.0.0.0/16",
-                    protocol="TCP",
-                    port="80",
                     action="DROP",
-                    description="favourite sg egress rule",
+                    cidr_block="10.0.0.0/16",
+                    protocol="ICMP",
+                    description="A:Block ping3",
+                ),
+                tencentcloud.security.GroupRuleSetEgressArgs(
+                    action="DROP",
+                    address_template_id=foo_template.id,
+                    description="B:Allow template",
+                ),
+                tencentcloud.security.GroupRuleSetEgressArgs(
+                    action="DROP",
+                    address_template_group=foo_template_group.id,
+                    description="C:DROP template group",
                 ),
             ])
         ```
@@ -230,42 +257,69 @@ class GroupRuleSet(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sglab1_group = tencentcloud.security.Group("sglab1Group", description="favourite sg_1")
-        sglab1_group_rule_set = tencentcloud.security.GroupRuleSet("sglab1GroupRuleSet",
-            security_group_id=sglab1_group.id,
+        base_group = tencentcloud.security.Group("baseGroup", description="Testing Rule Set Security")
+        relative = tencentcloud.security.Group("relative", description="Used for attach security policy")
+        foo_template = tencentcloud.address.Template("fooTemplate", addresses=[
+            "10.0.0.1",
+            "10.0.1.0/24",
+            "10.0.0.1-10.0.0.100",
+        ])
+        foo_template_group = tencentcloud.address.TemplateGroup("fooTemplateGroup", template_ids=[foo_template.id])
+        base_group_rule_set = tencentcloud.security.GroupRuleSet("baseGroupRuleSet",
+            security_group_id=base_group.id,
             ingresses=[
                 tencentcloud.security.GroupRuleSetIngressArgs(
-                    cidr_block="10.0.0.0/16",
-                    protocol="TCP",
-                    port="80",
                     action="ACCEPT",
-                    description="favourite sg rule_1",
+                    cidr_block="10.0.0.0/22",
+                    protocol="TCP",
+                    port="80-90",
+                    description="A:Allow Ips and 80-90",
                 ),
                 tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="10.0.2.1",
+                    protocol="UDP",
+                    port="8080",
+                    description="B:Allow UDP 8080",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="10.0.2.1",
+                    protocol="UDP",
+                    port="8080",
+                    description="C:Allow UDP 8080",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="ACCEPT",
+                    cidr_block="172.18.1.2",
+                    protocol="ALL",
+                    port="ALL",
+                    description="D:Allow ALL",
+                ),
+                tencentcloud.security.GroupRuleSetIngressArgs(
+                    action="DROP",
                     protocol="TCP",
                     port="80",
-                    action="ACCEPT",
-                    source_security_id=tencentcloud_security_group["sglab_3"]["id"],
-                    description="favourite sg rule_2",
+                    source_security_id=relative.id,
+                    description="E:Block relative",
                 ),
             ],
             egresses=[
                 tencentcloud.security.GroupRuleSetEgressArgs(
-                    action="ACCEPT",
-                    address_template_id="ipm-xxxxxxxx",
-                    description="Allow address template",
-                ),
-                tencentcloud.security.GroupRuleSetEgressArgs(
-                    action="ACCEPT",
-                    service_template_group="ppmg-xxxxxxxx",
-                    description="Allow protocol template",
-                ),
-                tencentcloud.security.GroupRuleSetEgressArgs(
-                    cidr_block="10.0.0.0/16",
-                    protocol="TCP",
-                    port="80",
                     action="DROP",
-                    description="favourite sg egress rule",
+                    cidr_block="10.0.0.0/16",
+                    protocol="ICMP",
+                    description="A:Block ping3",
+                ),
+                tencentcloud.security.GroupRuleSetEgressArgs(
+                    action="DROP",
+                    address_template_id=foo_template.id,
+                    description="B:Allow template",
+                ),
+                tencentcloud.security.GroupRuleSetEgressArgs(
+                    action="DROP",
+                    address_template_group=foo_template_group.id,
+                    description="C:DROP template group",
                 ),
             ])
         ```

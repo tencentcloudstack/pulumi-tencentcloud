@@ -35,9 +35,6 @@ class GetSecurityPolicyRegionsResult:
     @property
     @pulumi.getter(name="geoIps")
     def geo_ips(self) -> Sequence['outputs.GetSecurityPolicyRegionsGeoIpResult']:
-        """
-        Region info.
-        """
         return pulumi.get(self, "geo_ips")
 
     @property
@@ -68,19 +65,7 @@ class AwaitableGetSecurityPolicyRegionsResult(GetSecurityPolicyRegionsResult):
 def get_security_policy_regions(result_output_file: Optional[str] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSecurityPolicyRegionsResult:
     """
-    Use this data source to query detailed information of teo securityPolicyRegions
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    security_policy_regions = tencentcloud.Teo.get_security_policy_regions()
-    ```
-
-
-    :param str result_output_file: Used to save results.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['resultOutputFile'] = result_output_file
@@ -102,18 +87,6 @@ def get_security_policy_regions(result_output_file: Optional[str] = None,
 def get_security_policy_regions_output(result_output_file: Optional[pulumi.Input[Optional[str]]] = None,
                                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSecurityPolicyRegionsResult]:
     """
-    Use this data source to query detailed information of teo securityPolicyRegions
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    security_policy_regions = tencentcloud.Teo.get_security_policy_regions()
-    ```
-
-
-    :param str result_output_file: Used to save results.
+    Use this data source to access information about an existing resource.
     """
     ...

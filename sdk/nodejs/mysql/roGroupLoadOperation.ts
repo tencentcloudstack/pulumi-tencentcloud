@@ -11,11 +11,60 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const roGroupLoadOperation = new tencentcloud.Mysql.RoGroupLoadOperation("ro_group_load_operation", {
- *     roGroupId: "cdbrg-bdlvcfpj",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
  * });
+ * const exampleInstance = tencentcloud.Mysql.getInstance({
+ *     mysqlId: exampleMysql / instanceInstance.id,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[1]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const exampleMysql_instanceInstance = new tencentcloud.mysql.Instance("exampleMysql/instanceInstance", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[1]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * const exampleReadonlyInstance = new tencentcloud.mysql.ReadonlyInstance("exampleReadonlyInstance", {
+ *     masterInstanceId: exampleMysql / instanceInstance.id,
+ *     instanceName: "tf-mysql",
+ *     memSize: 2000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ * });
+ * const roGroupLoadOperation = new tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", {roGroupId: exampleInstance.then(exampleInstance => exampleInstance.instanceLists?[0]?.roGroups?[0]?.groupId)});
  * ```
  */
 export class RoGroupLoadOperation extends pulumi.CustomResource {

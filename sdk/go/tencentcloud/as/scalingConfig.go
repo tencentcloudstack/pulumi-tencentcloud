@@ -22,37 +22,48 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
-// 			ConfigurationName: pulumi.String("launch-configuration"),
-// 			DataDisks: as.ScalingConfigDataDiskArray{
-// 				&as.ScalingConfigDataDiskArgs{
-// 					DiskSize: pulumi.Int(50),
-// 					DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				},
+// 		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// 			ImageTypes: []string{
+// 				"PUBLIC_IMAGE",
 // 			},
-// 			EnhancedMonitorService:  pulumi.Bool(false),
-// 			EnhancedSecurityService: pulumi.Bool(false),
-// 			ImageId:                 pulumi.String("img-9qabwvbn"),
-// 			InstanceTags: pulumi.AnyMap{
-// 				"tag": pulumi.Any("as"),
-// 			},
+// 			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+// 			ConfigurationName: pulumi.String("example-launch-configuration"),
+// 			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
 // 			InstanceTypes: pulumi.StringArray{
 // 				pulumi.String("SA1.SMALL1"),
 // 			},
+// 			ProjectId:      pulumi.Int(0),
+// 			SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+// 			SystemDiskSize: pulumi.Int(50),
+// 			DataDisks: as.ScalingConfigDataDiskArray{
+// 				&as.ScalingConfigDataDiskArgs{
+// 					DiskType: pulumi.String("CLOUD_PREMIUM"),
+// 					DiskSize: pulumi.Int(50),
+// 				},
+// 			},
 // 			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
 // 			InternetMaxBandwidthOut: pulumi.Int(10),
-// 			Password:                pulumi.String("test123#"),
-// 			ProjectId:               pulumi.Int(0),
 // 			PublicIpAssigned:        pulumi.Bool(true),
-// 			SystemDiskSize:          pulumi.Int(50),
-// 			SystemDiskType:          pulumi.String("CLOUD_PREMIUM"),
+// 			Password:                pulumi.String("Test@123#"),
+// 			EnhancedSecurityService: pulumi.Bool(false),
+// 			EnhancedMonitorService:  pulumi.Bool(false),
 // 			UserData:                pulumi.String("dGVzdA=="),
+// 			InstanceTags: pulumi.AnyMap{
+// 				"tag": pulumi.Any("example"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -61,27 +72,38 @@ import (
 // 	})
 // }
 // ```
-// ### Using SPOT charge type
+// ### charge type
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewScalingConfig(ctx, "launchConfiguration", &As.ScalingConfigArgs{
-// 			ConfigurationName:  pulumi.String("launch-configuration"),
-// 			ImageId:            pulumi.String("img-9qabwvbn"),
-// 			InstanceChargeType: pulumi.String("SPOTPAID"),
+// 		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+// 			ImageTypes: []string{
+// 				"PUBLIC_IMAGE",
+// 			},
+// 			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+// 			ConfigurationName: pulumi.String("launch-configuration"),
+// 			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
 // 			InstanceTypes: pulumi.StringArray{
 // 				pulumi.String("SA1.SMALL1"),
 // 			},
-// 			SpotInstanceType: pulumi.String("one-time"),
-// 			SpotMaxPrice:     pulumi.String("1000"),
+// 			InstanceChargeType: pulumi.String("SPOTPAID"),
+// 			SpotInstanceType:   pulumi.String("one-time"),
+// 			SpotMaxPrice:       pulumi.String("1000"),
 // 		})
 // 		if err != nil {
 // 			return err

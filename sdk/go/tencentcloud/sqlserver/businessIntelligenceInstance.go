@@ -19,25 +19,57 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewBusinessIntelligenceInstance(ctx, "businessIntelligenceInstance", &Sqlserver.BusinessIntelligenceInstanceArgs{
-// 			Cpu:                pulumi.Int(2),
-// 			DbVersion:          pulumi.String("201603"),
-// 			InstanceName:       pulumi.String("create_db_name"),
-// 			MachineType:        pulumi.String("CLOUD_PREMIUM"),
-// 			Memory:             pulumi.Int(4),
-// 			ProjectId:          pulumi.Int(0),
-// 			SecurityGroupLists: pulumi.StringArray{},
-// 			Span:               pulumi.Int(6),
-// 			StartTime:          pulumi.String("00:00"),
-// 			Storage:            pulumi.Int(20),
-// 			SubnetId:           pulumi.String("subnet-dwj7ipnc"),
-// 			VpcId:              pulumi.String("vpc-4owdpnwr"),
+// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "sqlserver",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+// 			Description: pulumi.String("desc."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Sqlserver.NewBusinessIntelligenceInstance(ctx, "example", &Sqlserver.BusinessIntelligenceInstanceArgs{
+// 			Zone:        pulumi.String(zones.Zones[4].Name),
+// 			Memory:      pulumi.Int(4),
+// 			Storage:     pulumi.Int(100),
+// 			Cpu:         pulumi.Int(2),
+// 			MachineType: pulumi.String("CLOUD_PREMIUM"),
+// 			ProjectId:   pulumi.Int(0),
+// 			SubnetId:    subnet.ID(),
+// 			VpcId:       vpc.ID(),
+// 			DbVersion:   pulumi.String("201603"),
+// 			SecurityGroupLists: pulumi.StringArray{
+// 				securityGroup.ID(),
+// 			},
 // 			Weeklies: pulumi.IntArray{
 // 				pulumi.Int(1),
 // 				pulumi.Int(2),
@@ -47,7 +79,9 @@ import (
 // 				pulumi.Int(6),
 // 				pulumi.Int(7),
 // 			},
-// 			Zone: pulumi.String("ap-guangzhou-6"),
+// 			StartTime:    pulumi.String("00:00"),
+// 			Span:         pulumi.Int(6),
+// 			InstanceName: pulumi.String("tf_example"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -62,7 +96,7 @@ import (
 // sqlserver business_intelligence_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance business_intelligence_instance business_intelligence_instance_id
+//  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
 // ```
 type BusinessIntelligenceInstance struct {
 	pulumi.CustomResourceState

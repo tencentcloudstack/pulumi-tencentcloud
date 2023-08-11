@@ -315,18 +315,46 @@ class Key(pulumi.CustomResource):
         Provide a resource to create a KMS key.
 
         ## Example Usage
+        ### Create and enable a instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.kms.Key("foo",
-            alias="test",
-            description="describe key test message.",
-            key_rotation_enabled=True,
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
             is_enabled=True,
+            key_rotation_enabled=False,
             tags={
-                "test-tag": "key-test",
+                "createdBy": "terraform",
+            })
+        ```
+        ### Specify the Key Usage as an asymmetry method.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example2 = tencentcloud.kms.Key("example2",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            is_enabled=False,
+            key_usage="ASYMMETRIC_DECRYPT_RSA_2048")
+        ```
+        ### Disable the kms key instance.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example3 = tencentcloud.kms.Key("example3",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            is_enabled=False,
+            key_rotation_enabled=False,
+            tags={
+                "test-tag": "unit-test",
             })
         ```
 
@@ -359,18 +387,46 @@ class Key(pulumi.CustomResource):
         Provide a resource to create a KMS key.
 
         ## Example Usage
+        ### Create and enable a instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.kms.Key("foo",
-            alias="test",
-            description="describe key test message.",
-            key_rotation_enabled=True,
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
             is_enabled=True,
+            key_rotation_enabled=False,
             tags={
-                "test-tag": "key-test",
+                "createdBy": "terraform",
+            })
+        ```
+        ### Specify the Key Usage as an asymmetry method.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example2 = tencentcloud.kms.Key("example2",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            is_enabled=False,
+            key_usage="ASYMMETRIC_DECRYPT_RSA_2048")
+        ```
+        ### Disable the kms key instance.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example3 = tencentcloud.kms.Key("example3",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            is_enabled=False,
+            key_rotation_enabled=False,
+            tags={
+                "test-tag": "unit-test",
             })
         ```
 

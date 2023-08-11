@@ -6,21 +6,6 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a vpc bandwidthPackageAttachment
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const bandwidthPackageAttachment = new tencentcloud.Vpc.BandwidthPackageAttachment("bandwidth_package_attachment", {
- *     bandwidthPackageId: "bwp-atmf0p9g",
- *     networkType: "BGP",
- *     protocol: "",
- *     resourceId: "lb-dv1ai6ma",
- *     resourceType: "LoadBalance",
- * });
- * ```
  */
 export class BandwidthPackageAttachment extends pulumi.CustomResource {
     /**

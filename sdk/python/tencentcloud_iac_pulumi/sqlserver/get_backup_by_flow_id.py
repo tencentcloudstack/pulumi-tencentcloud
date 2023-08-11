@@ -216,12 +216,45 @@ def get_backup_by_flow_id(flow_id: Optional[str] = None,
     import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
-    general_backup = tencentcloud.sqlserver.GeneralBackup("generalBackup",
-        strategy=0,
-        instance_id="mssql-qelbzgwf",
-        backup_name="create_sqlserver_backup_name")
-    backup_by_flow_id = tencentcloud.Sqlserver.get_backup_by_flow_id_output(instance_id=general_backup.instance_id,
-        flow_id=general_backup.flow_id)
+    zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+    subnet = tencentcloud.subnet.Instance("subnet",
+        availability_zone=zones.zones[4].name,
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        is_multicast=False)
+    security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+    example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+        availability_zone=zones.zones[4].name,
+        charge_type="POSTPAID_BY_HOUR",
+        vpc_id=vpc.id,
+        subnet_id=subnet.id,
+        project_id=0,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_PREMIUM",
+        maintenance_week_sets=[
+            1,
+            2,
+            3,
+        ],
+        maintenance_start_time="09:00",
+        maintenance_time_span=3,
+        security_groups=[security_group.id],
+        tags={
+            "test": "test",
+        })
+    example_db = tencentcloud.sqlserver.Db("exampleDb",
+        instance_id=example_basic_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_general_backup = tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup",
+        instance_id=example_db.id,
+        backup_name="tf_example_backup",
+        strategy=0)
+    example_backup_by_flow_id = tencentcloud.Sqlserver.get_backup_by_flow_id_output(instance_id=example_general_backup.instance_id,
+        flow_id=example_general_backup.flow_id)
     ```
 
 
@@ -274,12 +307,45 @@ def get_backup_by_flow_id_output(flow_id: Optional[pulumi.Input[str]] = None,
     import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
-    general_backup = tencentcloud.sqlserver.GeneralBackup("generalBackup",
-        strategy=0,
-        instance_id="mssql-qelbzgwf",
-        backup_name="create_sqlserver_backup_name")
-    backup_by_flow_id = tencentcloud.Sqlserver.get_backup_by_flow_id_output(instance_id=general_backup.instance_id,
-        flow_id=general_backup.flow_id)
+    zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+    subnet = tencentcloud.subnet.Instance("subnet",
+        availability_zone=zones.zones[4].name,
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        is_multicast=False)
+    security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+    example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+        availability_zone=zones.zones[4].name,
+        charge_type="POSTPAID_BY_HOUR",
+        vpc_id=vpc.id,
+        subnet_id=subnet.id,
+        project_id=0,
+        memory=4,
+        storage=100,
+        cpu=2,
+        machine_type="CLOUD_PREMIUM",
+        maintenance_week_sets=[
+            1,
+            2,
+            3,
+        ],
+        maintenance_start_time="09:00",
+        maintenance_time_span=3,
+        security_groups=[security_group.id],
+        tags={
+            "test": "test",
+        })
+    example_db = tencentcloud.sqlserver.Db("exampleDb",
+        instance_id=example_basic_instance.id,
+        charset="Chinese_PRC_BIN",
+        remark="test-remark")
+    example_general_backup = tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup",
+        instance_id=example_db.id,
+        backup_name="tf_example_backup",
+        strategy=0)
+    example_backup_by_flow_id = tencentcloud.Sqlserver.get_backup_by_flow_id_output(instance_id=example_general_backup.instance_id,
+        flow_id=example_general_backup.flow_id)
     ```
 
 

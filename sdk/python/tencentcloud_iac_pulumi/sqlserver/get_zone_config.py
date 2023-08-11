@@ -76,7 +76,7 @@ def get_zone_config(result_output_file: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    mysqlserver = tencentcloud.Sqlserver.get_zone_config()
+    example = tencentcloud.Sqlserver.get_zone_config()
     ```
 
 
@@ -110,7 +110,7 @@ def get_zone_config_output(result_output_file: Optional[pulumi.Input[Optional[st
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    mysqlserver = tencentcloud.Sqlserver.get_zone_config()
+    example = tencentcloud.Sqlserver.get_zone_config()
     ```
 
 

@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleSpeedLimit
     {
-        /// <summary>
-        /// Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        /// </summary>
         public readonly string? FluxLimit;
-        /// <summary>
-        /// Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-        /// </summary>
         public readonly string? PackageLimit;
 
         [OutputConstructor]

@@ -16,6 +16,8 @@ class GrafanaInstanceArgs:
                  instance_name: pulumi.Input[str],
                  enable_internet: Optional[pulumi.Input[bool]] = None,
                  grafana_init_password: Optional[pulumi.Input[str]] = None,
+                 is_destroy: Optional[pulumi.Input[bool]] = None,
+                 is_distroy: Optional[pulumi.Input[bool]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
@@ -24,6 +26,8 @@ class GrafanaInstanceArgs:
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[bool] enable_internet: Control whether grafana could be accessed by internet.
         :param pulumi.Input[str] grafana_init_password: Grafana server admin password.
+        :param pulumi.Input[bool] is_destroy: Whether to clean up completely, the default is false.
+        :param pulumi.Input[bool] is_distroy: It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: Subnet Id array.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] vpc_id: Vpc Id.
@@ -33,6 +37,13 @@ class GrafanaInstanceArgs:
             pulumi.set(__self__, "enable_internet", enable_internet)
         if grafana_init_password is not None:
             pulumi.set(__self__, "grafana_init_password", grafana_init_password)
+        if is_destroy is not None:
+            pulumi.set(__self__, "is_destroy", is_destroy)
+        if is_distroy is not None:
+            warnings.warn("""It has been deprecated from version 1.81.16.""", DeprecationWarning)
+            pulumi.log.warn("""is_distroy is deprecated: It has been deprecated from version 1.81.16.""")
+        if is_distroy is not None:
+            pulumi.set(__self__, "is_distroy", is_distroy)
         if subnet_ids is not None:
             pulumi.set(__self__, "subnet_ids", subnet_ids)
         if tags is not None:
@@ -75,6 +86,30 @@ class GrafanaInstanceArgs:
     @grafana_init_password.setter
     def grafana_init_password(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "grafana_init_password", value)
+
+    @property
+    @pulumi.getter(name="isDestroy")
+    def is_destroy(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_destroy")
+
+    @is_destroy.setter
+    def is_destroy(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_destroy", value)
+
+    @property
+    @pulumi.getter(name="isDistroy")
+    def is_distroy(self) -> Optional[pulumi.Input[bool]]:
+        """
+        It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_distroy")
+
+    @is_distroy.setter
+    def is_distroy(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_distroy", value)
 
     @property
     @pulumi.getter(name="subnetIds")
@@ -123,6 +158,8 @@ class _GrafanaInstanceState:
                  instance_status: Optional[pulumi.Input[int]] = None,
                  internal_url: Optional[pulumi.Input[str]] = None,
                  internet_url: Optional[pulumi.Input[str]] = None,
+                 is_destroy: Optional[pulumi.Input[bool]] = None,
+                 is_distroy: Optional[pulumi.Input[bool]] = None,
                  root_url: Optional[pulumi.Input[str]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -136,6 +173,8 @@ class _GrafanaInstanceState:
         :param pulumi.Input[int] instance_status: Grafana instance status, 1: Creating, 2: Running, 6: Stopped.
         :param pulumi.Input[str] internal_url: Grafana public address.
         :param pulumi.Input[str] internet_url: Grafana intranet address.
+        :param pulumi.Input[bool] is_destroy: Whether to clean up completely, the default is false.
+        :param pulumi.Input[bool] is_distroy: It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
         :param pulumi.Input[str] root_url: Grafana external url which could be accessed by user.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: Subnet Id array.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -155,6 +194,13 @@ class _GrafanaInstanceState:
             pulumi.set(__self__, "internal_url", internal_url)
         if internet_url is not None:
             pulumi.set(__self__, "internet_url", internet_url)
+        if is_destroy is not None:
+            pulumi.set(__self__, "is_destroy", is_destroy)
+        if is_distroy is not None:
+            warnings.warn("""It has been deprecated from version 1.81.16.""", DeprecationWarning)
+            pulumi.log.warn("""is_distroy is deprecated: It has been deprecated from version 1.81.16.""")
+        if is_distroy is not None:
+            pulumi.set(__self__, "is_distroy", is_distroy)
         if root_url is not None:
             pulumi.set(__self__, "root_url", root_url)
         if subnet_ids is not None:
@@ -249,6 +295,30 @@ class _GrafanaInstanceState:
         pulumi.set(self, "internet_url", value)
 
     @property
+    @pulumi.getter(name="isDestroy")
+    def is_destroy(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_destroy")
+
+    @is_destroy.setter
+    def is_destroy(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_destroy", value)
+
+    @property
+    @pulumi.getter(name="isDistroy")
+    def is_distroy(self) -> Optional[pulumi.Input[bool]]:
+        """
+        It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_distroy")
+
+    @is_distroy.setter
+    def is_distroy(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_distroy", value)
+
+    @property
     @pulumi.getter(name="rootUrl")
     def root_url(self) -> Optional[pulumi.Input[str]]:
         """
@@ -305,6 +375,8 @@ class GrafanaInstance(pulumi.CustomResource):
                  enable_internet: Optional[pulumi.Input[bool]] = None,
                  grafana_init_password: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 is_destroy: Optional[pulumi.Input[bool]] = None,
+                 is_distroy: Optional[pulumi.Input[bool]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -318,15 +390,25 @@ class GrafanaInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        grafana_instance = tencentcloud.monitor.GrafanaInstance("grafanaInstance",
-            enable_internet=False,
-            grafana_init_password="1234567890",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
             instance_name="test-grafana",
-            subnet_ids=["subnet-rdkj0agk"],
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            is_destroy=True,
             tags={
                 "createdBy": "test",
-            },
-            vpc_id="vpc-2hfyray3")
+            })
         ```
 
         ## Import
@@ -334,7 +416,7 @@ class GrafanaInstance(pulumi.CustomResource):
         monitor grafanaInstance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance grafanaInstance grafanaInstance_id
+         $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -342,6 +424,8 @@ class GrafanaInstance(pulumi.CustomResource):
         :param pulumi.Input[bool] enable_internet: Control whether grafana could be accessed by internet.
         :param pulumi.Input[str] grafana_init_password: Grafana server admin password.
         :param pulumi.Input[str] instance_name: Instance name.
+        :param pulumi.Input[bool] is_destroy: Whether to clean up completely, the default is false.
+        :param pulumi.Input[bool] is_distroy: It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: Subnet Id array.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] vpc_id: Vpc Id.
@@ -361,15 +445,25 @@ class GrafanaInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        grafana_instance = tencentcloud.monitor.GrafanaInstance("grafanaInstance",
-            enable_internet=False,
-            grafana_init_password="1234567890",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
             instance_name="test-grafana",
-            subnet_ids=["subnet-rdkj0agk"],
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            is_destroy=True,
             tags={
                 "createdBy": "test",
-            },
-            vpc_id="vpc-2hfyray3")
+            })
         ```
 
         ## Import
@@ -377,7 +471,7 @@ class GrafanaInstance(pulumi.CustomResource):
         monitor grafanaInstance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance grafanaInstance grafanaInstance_id
+         $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -398,6 +492,8 @@ class GrafanaInstance(pulumi.CustomResource):
                  enable_internet: Optional[pulumi.Input[bool]] = None,
                  grafana_init_password: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 is_destroy: Optional[pulumi.Input[bool]] = None,
+                 is_distroy: Optional[pulumi.Input[bool]] = None,
                  subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -420,6 +516,11 @@ class GrafanaInstance(pulumi.CustomResource):
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
+            __props__.__dict__["is_destroy"] = is_destroy
+            if is_distroy is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.16.""", DeprecationWarning)
+                pulumi.log.warn("""is_distroy is deprecated: It has been deprecated from version 1.81.16.""")
+            __props__.__dict__["is_distroy"] = is_distroy
             __props__.__dict__["subnet_ids"] = subnet_ids
             __props__.__dict__["tags"] = tags
             __props__.__dict__["vpc_id"] = vpc_id
@@ -445,6 +546,8 @@ class GrafanaInstance(pulumi.CustomResource):
             instance_status: Optional[pulumi.Input[int]] = None,
             internal_url: Optional[pulumi.Input[str]] = None,
             internet_url: Optional[pulumi.Input[str]] = None,
+            is_destroy: Optional[pulumi.Input[bool]] = None,
+            is_distroy: Optional[pulumi.Input[bool]] = None,
             root_url: Optional[pulumi.Input[str]] = None,
             subnet_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -463,6 +566,8 @@ class GrafanaInstance(pulumi.CustomResource):
         :param pulumi.Input[int] instance_status: Grafana instance status, 1: Creating, 2: Running, 6: Stopped.
         :param pulumi.Input[str] internal_url: Grafana public address.
         :param pulumi.Input[str] internet_url: Grafana intranet address.
+        :param pulumi.Input[bool] is_destroy: Whether to clean up completely, the default is false.
+        :param pulumi.Input[bool] is_distroy: It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
         :param pulumi.Input[str] root_url: Grafana external url which could be accessed by user.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: Subnet Id array.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -479,6 +584,8 @@ class GrafanaInstance(pulumi.CustomResource):
         __props__.__dict__["instance_status"] = instance_status
         __props__.__dict__["internal_url"] = internal_url
         __props__.__dict__["internet_url"] = internet_url
+        __props__.__dict__["is_destroy"] = is_destroy
+        __props__.__dict__["is_distroy"] = is_distroy
         __props__.__dict__["root_url"] = root_url
         __props__.__dict__["subnet_ids"] = subnet_ids
         __props__.__dict__["tags"] = tags
@@ -540,6 +647,22 @@ class GrafanaInstance(pulumi.CustomResource):
         Grafana intranet address.
         """
         return pulumi.get(self, "internet_url")
+
+    @property
+    @pulumi.getter(name="isDestroy")
+    def is_destroy(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_destroy")
+
+    @property
+    @pulumi.getter(name="isDistroy")
+    def is_distroy(self) -> pulumi.Output[Optional[bool]]:
+        """
+        It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        """
+        return pulumi.get(self, "is_distroy")
 
     @property
     @pulumi.getter(name="rootUrl")

@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a vpc resumeSnapshotInstance
 //
 // ## Example Usage
+// ### Basic example
 //
 // ```go
 // package main
@@ -26,9 +27,76 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Vpc.NewResumeSnapshotInstance(ctx, "resumeSnapshotInstance", &Vpc.ResumeSnapshotInstanceArgs{
-// 			InstanceId:       pulumi.String("policy-1t6cob"),
-// 			SnapshotFileId:   pulumi.String("ssfile-test"),
+// 			InstanceId:       pulumi.String("ntrgm89v"),
+// 			SnapshotFileId:   pulumi.String("ssfile-emtabuwu2z"),
 // 			SnapshotPolicyId: pulumi.String("sspolicy-1t6cobbv"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Complete example
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleSnapshotFiles, err := Vpc.GetSnapshotFiles(ctx, &vpc.GetSnapshotFilesArgs{
+// 			BusinessType: "securitygroup",
+// 			InstanceId:   "sg-902tl7t7",
+// 			StartDate:    "2022-10-10 00:00:00",
+// 			EndDate:      "2023-10-30 00:00:00",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("tf-example-1308919341"),
+// 			Acl:    pulumi.String("private"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+// 			SnapshotPolicyName: pulumi.String("tf-example"),
+// 			BackupType:         pulumi.String("time"),
+// 			CosBucket:          exampleBucket.Bucket,
+// 			CosRegion:          pulumi.String("ap-guangzhou"),
+// 			CreateNewCos:       pulumi.Bool(false),
+// 			KeepTime:           pulumi.Int(2),
+// 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("monday"),
+// 					BackupTime: pulumi.String("00:00:00"),
+// 				},
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("tuesday"),
+// 					BackupTime: pulumi.String("01:00:00"),
+// 				},
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("wednesday"),
+// 					BackupTime: pulumi.String("02:00:00"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewResumeSnapshotInstance(ctx, "exampleResumeSnapshotInstance", &Vpc.ResumeSnapshotInstanceArgs{
+// 			SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+// 			SnapshotFileId:   pulumi.String(exampleSnapshotFiles.SnapshotFileSets[0].SnapshotFileId),
+// 			InstanceId:       pulumi.String("policy-1t6cob"),
 // 		})
 // 		if err != nil {
 // 			return err

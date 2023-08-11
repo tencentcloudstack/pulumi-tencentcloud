@@ -476,9 +476,9 @@ class User(pulumi.CustomResource):
             need_reset_password=True,
             password="Gail@1234",
             phone_num="12345678910",
-            remark="test",
+            remark="tf_user_test",
             tags={
-                "test": "tf-cam-user",
+                "test": "tf_cam_user",
             },
             use_api=True)
         ```
@@ -528,9 +528,9 @@ class User(pulumi.CustomResource):
             need_reset_password=True,
             password="Gail@1234",
             phone_num="12345678910",
-            remark="test",
+            remark="tf_user_test",
             tags={
-                "test": "tf-cam-user",
+                "test": "tf_cam_user",
             },
             use_api=True)
         ```

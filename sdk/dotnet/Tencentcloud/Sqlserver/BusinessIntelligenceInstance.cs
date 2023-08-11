@@ -17,26 +17,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var businessIntelligenceInstance = new Tencentcloud.Sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance", new Tencentcloud.Sqlserver.BusinessIntelligenceInstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             Cpu = 2,
-    ///             DbVersion = "201603",
-    ///             InstanceName = "create_db_name",
-    ///             MachineType = "CLOUD_PREMIUM",
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var example = new Tencentcloud.Sqlserver.BusinessIntelligenceInstance("example", new Tencentcloud.Sqlserver.BusinessIntelligenceInstanceArgs
+    ///         {
+    ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
     ///             ProjectId = 0,
-    ///             SecurityGroupLists = {},
-    ///             Span = 6,
-    ///             StartTime = "00:00",
-    ///             Storage = 20,
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             VpcId = "vpc-4owdpnwr",
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///             DbVersion = "201603",
+    ///             SecurityGroupLists = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
     ///             Weeklies = 
     ///             {
     ///                 1,
@@ -47,7 +68,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     ///                 6,
     ///                 7,
     ///             },
-    ///             Zone = "ap-guangzhou-6",
+    ///             StartTime = "00:00",
+    ///             Span = 6,
+    ///             InstanceName = "tf_example",
     ///         });
     ///     }
     /// 
@@ -59,7 +82,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver business_intelligence_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance business_intelligence_instance business_intelligence_instance_id
+    ///  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance")]

@@ -16,6 +16,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// &gt; **NOTE:** Once certificat created, it cannot be removed within 1 hours.
     /// 
     /// ## Example Usage
+    /// ### only support type 2. 2=TrustAsia TLS RSA CA.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -25,14 +26,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Ssl.FreeCertificate("foo", new Tencentcloud.Ssl.FreeCertificateArgs
+    ///         var example = new Tencentcloud.Ssl.FreeCertificate("example", new Tencentcloud.Ssl.FreeCertificateArgs
     ///         {
-    ///             Alias = "my_free_cert",
-    ///             ContactEmail = "foo@example.com",
-    ///             ContactPhone = "12345678901",
+    ///             Alias = "example_free_cert",
+    ///             ContactEmail = "test@example.com",
+    ///             ContactPhone = "18352458901",
     ///             CsrEncryptAlgo = "RSA",
     ///             CsrKeyParameter = "2048",
-    ///             CsrKeyPassword = "xxxxxxxx",
+    ///             CsrKeyPassword = "csr_pwd",
     ///             Domain = "example.com",
     ///             DvAuthMethod = "DNS_AUTO",
     ///             PackageType = "2",

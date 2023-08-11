@@ -143,14 +143,27 @@ class GroupMembership(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.GroupMembership("foo",
-            group_id=tencentcloud_cam_group["foo"]["id"],
-            user_names=[
-                tencentcloud_cam_user["foo"]["name"],
-                tencentcloud_cam_user["bar"]["name"],
-            ])
+        config = pulumi.Config()
+        cam_group_basic = config.get("camGroupBasic")
+        if cam_group_basic is None:
+            cam_group_basic = "keep-cam-group"
+        groups = tencentcloud.Cam.get_groups(name=cam_group_basic)
+        foo = tencentcloud.cam.User("foo",
+            remark="tf_user_remark",
+            console_login=True,
+            use_api=True,
+            need_reset_password=True,
+            password="Gail@1234",
+            phone_num="12345678910",
+            country_code="86",
+            email="1234@qq.com",
+            force_delete=True)
+        group_membership_basic = tencentcloud.cam.GroupMembership("groupMembershipBasic",
+            group_id=groups.group_lists[0].group_id,
+            user_names=[foo.id])
         ```
 
         ## Import
@@ -180,14 +193,27 @@ class GroupMembership(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.GroupMembership("foo",
-            group_id=tencentcloud_cam_group["foo"]["id"],
-            user_names=[
-                tencentcloud_cam_user["foo"]["name"],
-                tencentcloud_cam_user["bar"]["name"],
-            ])
+        config = pulumi.Config()
+        cam_group_basic = config.get("camGroupBasic")
+        if cam_group_basic is None:
+            cam_group_basic = "keep-cam-group"
+        groups = tencentcloud.Cam.get_groups(name=cam_group_basic)
+        foo = tencentcloud.cam.User("foo",
+            remark="tf_user_remark",
+            console_login=True,
+            use_api=True,
+            need_reset_password=True,
+            password="Gail@1234",
+            phone_num="12345678910",
+            country_code="86",
+            email="1234@qq.com",
+            force_delete=True)
+        group_membership_basic = tencentcloud.cam.GroupMembership("groupMembershipBasic",
+            group_id=groups.group_lists[0].group_id,
+            user_names=[foo.id])
         ```
 
         ## Import

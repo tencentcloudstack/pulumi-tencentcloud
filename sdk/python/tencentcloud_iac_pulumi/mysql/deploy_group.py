@@ -172,9 +172,9 @@ class DeployGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        deploy_group = tencentcloud.mysql.DeployGroup("deployGroup",
-            deploy_group_name="terrform-deploy",
-            description="deploy test",
+        example = tencentcloud.mysql.DeployGroup("example",
+            deploy_group_name="tf-example",
+            description="desc.",
             dev_classes=["TS85"],
             limit_num=1)
         ```
@@ -209,9 +209,9 @@ class DeployGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        deploy_group = tencentcloud.mysql.DeployGroup("deployGroup",
-            deploy_group_name="terrform-deploy",
-            description="deploy test",
+        example = tencentcloud.mysql.DeployGroup("example",
+            deploy_group_name="tf-example",
+            description="desc.",
             dev_classes=["TS85"],
             limit_num=1)
         ```

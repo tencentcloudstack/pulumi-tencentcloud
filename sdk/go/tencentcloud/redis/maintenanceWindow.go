@@ -19,16 +19,53 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewMaintenanceWindow(ctx, "maintenanceWindow", &Redis.MaintenanceWindowArgs{
-// 			EndTime:    pulumi.String("19:00"),
-// 			InstanceId: pulumi.String("crs-c1nl9rpv"),
+// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+// 			TypeId: pulumi.IntRef(7),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+// 			Password:         pulumi.String("test12345789"),
+// 			MemSize:          pulumi.Int(8192),
+// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+// 			Port:             pulumi.Int(6379),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewMaintenanceWindow(ctx, "fooMaintenanceWindow", &Redis.MaintenanceWindowArgs{
+// 			InstanceId: fooInstance.ID(),
 // 			StartTime:  pulumi.String("17:00"),
+// 			EndTime:    pulumi.String("19:00"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -43,7 +80,7 @@ import (
 // redis maintenance_window can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow maintenance_window maintenance_window_id
+//  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
 // ```
 type MaintenanceWindow struct {
 	pulumi.CustomResourceState

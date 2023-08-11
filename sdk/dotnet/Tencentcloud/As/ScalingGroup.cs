@@ -14,6 +14,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// Provides a resource to create a group of AS (Auto scaling) instances.
     /// 
     /// ## Example Usage
+    /// ### Create a basic Scaling Group
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "as",
+    ///         }));
+    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             OsName = "TencentOS Server 3.2 (Final)",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///         });
+    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
+    ///         {
+    ///             ConfigurationName = "tf-example",
+    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
+    ///             InstanceTypes = 
+    ///             {
+    ///                 "SA1.SMALL1",
+    ///                 "SA2.SMALL1",
+    ///                 "SA2.SMALL2",
+    ///                 "SA2.SMALL4",
+    ///             },
+    ///             InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+    ///             {
+    ///                 InstanceName = "test-ins-name",
+    ///             },
+    ///         });
+    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
+    ///         {
+    ///             ScalingGroupName = "tf-example",
+    ///             ConfigurationId = exampleScalingConfig.Id,
+    ///             MaxSize = 1,
+    ///             MinSize = 0,
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 subnet.Id,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a complete Scaling Group
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,18 +89,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// {
     ///     public MyStack()
     ///     {
-    ///         var scalingGroup = new Tencentcloud.As.ScalingGroup("scalingGroup", new Tencentcloud.As.ScalingGroupArgs
+    ///         var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new Tencentcloud.Clb.InstanceArgs
     ///         {
-    ///             ConfigurationId = "asc-oqio4yyj",
+    ///             NetworkType = "INTERNAL",
+    ///             ClbName = "clb-example",
+    ///             ProjectId = 0,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             SubnetId = tencentcloud_subnet.Subnet.Id,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///         var exampleListener = new Tencentcloud.Clb.Listener("exampleListener", new Tencentcloud.Clb.ListenerArgs
+    ///         {
+    ///             ClbId = exampleInstance.Id,
+    ///             ListenerName = "listener-example",
+    ///             Port = 80,
+    ///             Protocol = "HTTP",
+    ///         });
+    ///         var exampleListenerRule = new Tencentcloud.Clb.ListenerRule("exampleListenerRule", new Tencentcloud.Clb.ListenerRuleArgs
+    ///         {
+    ///             ListenerId = exampleListener.ListenerId,
+    ///             ClbId = exampleInstance.Id,
+    ///             Domain = "foo.net",
+    ///             Url = "/bar",
+    ///         });
+    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
+    ///         {
+    ///             ScalingGroupName = "tf-example",
+    ///             ConfigurationId = tencentcloud_as_scaling_config.Example.Id,
+    ///             MaxSize = 1,
+    ///             MinSize = 0,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 tencentcloud_subnet.Subnet.Id,
+    ///             },
+    ///             ProjectId = 0,
     ///             DefaultCooldown = 400,
     ///             DesiredCapacity = 1,
+    ///             TerminationPolicies = 
+    ///             {
+    ///                 "NEWEST_INSTANCE",
+    ///             },
+    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
     ///             ForwardBalancerIds = 
     ///             {
     ///                 new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdArgs
     ///                 {
-    ///                     ListenerId = "lbl-81wr497k",
-    ///                     LoadBalancerId = "lb-hk693b1l",
-    ///                     RuleId = "loc-kiodx943",
+    ///                     LoadBalancerId = exampleInstance.Id,
+    ///                     ListenerId = exampleListener.ListenerId,
+    ///                     RuleId = exampleListenerRule.RuleId,
     ///                     TargetAttributes = 
     ///                     {
     ///                         new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdTargetAttributeArgs
@@ -45,17 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///                     },
     ///                 },
     ///             },
-    ///             MaxSize = 1,
-    ///             MinSize = 0,
-    ///             ProjectId = 0,
-    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
-    ///             ScalingGroupName = "tf-as-scaling-group",
-    ///             SubnetIds = 
+    ///             Tags = 
     ///             {
-    ///                 "subnet-mc3egos",
+    ///                 { "createBy", "tfExample" },
     ///             },
-    ///             TerminationPolicies = "NEWEST_INSTANCE",
-    ///             VpcId = "vpc-3efmz0z",
     ///         });
     ///     }
     /// 

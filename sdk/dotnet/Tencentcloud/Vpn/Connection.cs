@@ -166,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string?> IkeProtoAuthenAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Output("ikeProtoEncryAlgorithm")]
         public Output<string?> IkeProtoEncryAlgorithm { get; private set; } = null!;
@@ -196,13 +196,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<int?> IkeSaLifetimeSeconds { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the IKE operation specification. Default value is `IKEV1`.
+        /// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         /// </summary>
         [Output("ikeVersion")]
         public Output<string?> IkeVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Output("ipsecEncryptAlgorithm")]
         public Output<string?> IpsecEncryptAlgorithm { get; private set; } = null!;
@@ -423,7 +423,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? IkeProtoAuthenAlgorithm { get; set; }
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ikeProtoEncryAlgorithm")]
         public Input<string>? IkeProtoEncryAlgorithm { get; set; }
@@ -453,13 +453,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<int>? IkeSaLifetimeSeconds { get; set; }
 
         /// <summary>
-        /// Version of the IKE operation specification. Default value is `IKEV1`.
+        /// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         /// </summary>
         [Input("ikeVersion")]
         public Input<string>? IkeVersion { get; set; }
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ipsecEncryptAlgorithm")]
         public Input<string>? IpsecEncryptAlgorithm { get; set; }
@@ -634,7 +634,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? IkeProtoAuthenAlgorithm { get; set; }
 
         /// <summary>
-        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ikeProtoEncryAlgorithm")]
         public Input<string>? IkeProtoEncryAlgorithm { get; set; }
@@ -664,13 +664,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<int>? IkeSaLifetimeSeconds { get; set; }
 
         /// <summary>
-        /// Version of the IKE operation specification. Default value is `IKEV1`.
+        /// Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         /// </summary>
         [Input("ikeVersion")]
         public Input<string>? IkeVersion { get; set; }
 
         /// <summary>
-        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        /// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         /// </summary>
         [Input("ipsecEncryptAlgorithm")]
         public Input<string>? IpsecEncryptAlgorithm { get; set; }

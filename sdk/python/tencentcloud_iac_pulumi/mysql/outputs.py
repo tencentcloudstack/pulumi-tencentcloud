@@ -32,6 +32,7 @@ __all__ = [
     'GetDefaultParamsParamListResult',
     'GetErrorLogItemResult',
     'GetInstanceInstanceListResult',
+    'GetInstanceInstanceListRoGroupResult',
     'GetInstanceParamRecordItemResult',
     'GetInstanceRebootTimeItemResult',
     'GetParameterListParameterListResult',
@@ -1633,6 +1634,7 @@ class GetInstanceInstanceListResult(dict):
                  mysql_id: str,
                  pay_type: int,
                  project_id: int,
+                 ro_groups: Sequence['outputs.GetInstanceInstanceListRoGroupResult'],
                  ro_instance_ids: Sequence[str],
                  slave_sync_mode: int,
                  status: int,
@@ -1662,6 +1664,7 @@ class GetInstanceInstanceListResult(dict):
         :param str mysql_id: Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
         :param int pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
         :param int project_id: Project ID to which the current instance belongs.
+        :param Sequence['GetInstanceInstanceListRoGroupArgs'] ro_groups: read-only instance group.
         :param Sequence[str] ro_instance_ids: ID list of read-only type associated with the current instance.
         :param int slave_sync_mode: Data replication mode. `0` - Async replication; `1` - Semisync replication; `2` - Strongsync replication.
         :param int status: Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
@@ -1691,6 +1694,7 @@ class GetInstanceInstanceListResult(dict):
         pulumi.set(__self__, "mysql_id", mysql_id)
         pulumi.set(__self__, "pay_type", pay_type)
         pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "ro_groups", ro_groups)
         pulumi.set(__self__, "ro_instance_ids", ro_instance_ids)
         pulumi.set(__self__, "slave_sync_mode", slave_sync_mode)
         pulumi.set(__self__, "status", status)
@@ -1868,6 +1872,14 @@ class GetInstanceInstanceListResult(dict):
         return pulumi.get(self, "project_id")
 
     @property
+    @pulumi.getter(name="roGroups")
+    def ro_groups(self) -> Sequence['outputs.GetInstanceInstanceListRoGroupResult']:
+        """
+        read-only instance group.
+        """
+        return pulumi.get(self, "ro_groups")
+
+    @property
     @pulumi.getter(name="roInstanceIds")
     def ro_instance_ids(self) -> Sequence[str]:
         """
@@ -1922,6 +1934,35 @@ class GetInstanceInstanceListResult(dict):
         Information of available zone.
         """
         return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetInstanceInstanceListRoGroupResult(dict):
+    def __init__(__self__, *,
+                 group_id: str,
+                 instance_ids: Sequence[str]):
+        """
+        :param str group_id: Group ID, such as `cdbrg-pz7vg37p`.
+        :param Sequence[str] instance_ids: ID list of read-only type associated with the current instance.
+        """
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "instance_ids", instance_ids)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Group ID, such as `cdbrg-pz7vg37p`.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="instanceIds")
+    def instance_ids(self) -> Sequence[str]:
+        """
+        ID list of read-only type associated with the current instance.
+        """
+        return pulumi.get(self, "instance_ids")
 
 
 @pulumi.output_type
@@ -3005,12 +3046,17 @@ class GetZoneConfigListResult(dict):
 class GetZoneConfigListSellResult(dict):
     def __init__(__self__, *,
                  cdb_type: str,
+                 cpu: int,
+                 info: str,
                  max_volume_size: int,
                  mem_size: int,
                  min_volume_size: int,
                  qps: int,
                  volume_step: int):
         """
+        :param str cdb_type: Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
+        :param int cpu: Number of CPU cores.
+        :param str info: Application Scenario Description.
         :param int max_volume_size: Maximum disk size (in GB).
         :param int mem_size: Memory size (in MB).
         :param int min_volume_size: Minimum disk size (in GB).
@@ -3018,6 +3064,8 @@ class GetZoneConfigListSellResult(dict):
         :param int volume_step: Disk increment (in GB).
         """
         pulumi.set(__self__, "cdb_type", cdb_type)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "info", info)
         pulumi.set(__self__, "max_volume_size", max_volume_size)
         pulumi.set(__self__, "mem_size", mem_size)
         pulumi.set(__self__, "min_volume_size", min_volume_size)
@@ -3027,7 +3075,26 @@ class GetZoneConfigListSellResult(dict):
     @property
     @pulumi.getter(name="cdbType")
     def cdb_type(self) -> str:
+        """
+        Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
+        """
         return pulumi.get(self, "cdb_type")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of CPU cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def info(self) -> str:
+        """
+        Application Scenario Description.
+        """
+        return pulumi.get(self, "info")
 
     @property
     @pulumi.getter(name="maxVolumeSize")

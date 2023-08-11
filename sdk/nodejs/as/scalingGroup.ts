@@ -9,32 +9,100 @@ import * as utilities from "../utilities";
  * Provides a resource to create a group of AS (Auto scaling) instances.
  *
  * ## Example Usage
+ * ### Create a basic Scaling Group
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const scalingGroup = new tencentcloud.As.ScalingGroup("scaling_group", {
- *     configurationId: "asc-oqio4yyj",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "as",
+ * });
+ * const image = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+ *     configurationName: "tf-example",
+ *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     instanceTypes: [
+ *         "SA1.SMALL1",
+ *         "SA2.SMALL1",
+ *         "SA2.SMALL2",
+ *         "SA2.SMALL4",
+ *     ],
+ *     instanceNameSettings: {
+ *         instanceName: "test-ins-name",
+ *     },
+ * });
+ * const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+ *     scalingGroupName: "tf-example",
+ *     configurationId: exampleScalingConfig.id,
+ *     maxSize: 1,
+ *     minSize: 0,
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ * });
+ * ```
+ * ### Create a complete Scaling Group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
+ *     networkType: "INTERNAL",
+ *     clbName: "clb-example",
+ *     projectId: 0,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     subnetId: tencentcloud_subnet.subnet.id,
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * const exampleListener = new tencentcloud.clb.Listener("exampleListener", {
+ *     clbId: exampleInstance.id,
+ *     listenerName: "listener-example",
+ *     port: 80,
+ *     protocol: "HTTP",
+ * });
+ * const exampleListenerRule = new tencentcloud.clb.ListenerRule("exampleListenerRule", {
+ *     listenerId: exampleListener.listenerId,
+ *     clbId: exampleInstance.id,
+ *     domain: "foo.net",
+ *     url: "/bar",
+ * });
+ * const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+ *     scalingGroupName: "tf-example",
+ *     configurationId: tencentcloud_as_scaling_config.example.id,
+ *     maxSize: 1,
+ *     minSize: 0,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     subnetIds: [tencentcloud_subnet.subnet.id],
+ *     projectId: 0,
  *     defaultCooldown: 400,
  *     desiredCapacity: 1,
+ *     terminationPolicies: ["NEWEST_INSTANCE"],
+ *     retryPolicy: "INCREMENTAL_INTERVALS",
  *     forwardBalancerIds: [{
- *         listenerId: "lbl-81wr497k",
- *         loadBalancerId: "lb-hk693b1l",
- *         ruleId: "loc-kiodx943",
+ *         loadBalancerId: exampleInstance.id,
+ *         listenerId: exampleListener.listenerId,
+ *         ruleId: exampleListenerRule.ruleId,
  *         targetAttributes: [{
  *             port: 80,
  *             weight: 90,
  *         }],
  *     }],
- *     maxSize: 1,
- *     minSize: 0,
- *     projectId: 0,
- *     retryPolicy: "INCREMENTAL_INTERVALS",
- *     scalingGroupName: "tf-as-scaling-group",
- *     subnetIds: ["subnet-mc3egos"],
- *     terminationPolicies: "NEWEST_INSTANCE",
- *     vpcId: "vpc-3efmz0z",
+ *     tags: {
+ *         createBy: "tfExample",
+ *     },
  * });
  * ```
  *

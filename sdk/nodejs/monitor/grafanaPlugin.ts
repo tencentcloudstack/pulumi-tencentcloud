@@ -11,10 +11,28 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const grafanaPlugin = new tencentcloud.Monitor.GrafanaPlugin("grafanaPlugin", {
- *     instanceId: "grafana-50nj6v00",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.monitor.GrafanaInstance("foo", {
+ *     instanceName: "test-grafana",
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     tags: {
+ *         createdBy: "test",
+ *     },
+ * });
+ * const grafanaPlugin = new tencentcloud.monitor.GrafanaPlugin("grafanaPlugin", {
+ *     instanceId: foo.id,
  *     pluginId: "grafana-piechart-panel",
  *     version: "1.6.2",
  * });

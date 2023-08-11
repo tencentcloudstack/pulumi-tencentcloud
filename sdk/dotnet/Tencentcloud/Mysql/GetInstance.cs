@@ -27,10 +27,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// {
         ///     public MyStack()
         ///     {
-        ///         var database = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
+        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
         ///         {
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
+        ///             MysqlId = "cdb-fitq5t9h",
         ///         }));
         ///     }
         /// 
@@ -57,10 +56,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// {
         ///     public MyStack()
         ///     {
-        ///         var database = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
+        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
         ///         {
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
+        ///             MysqlId = "cdb-fitq5t9h",
         ///         }));
         ///     }
         /// 

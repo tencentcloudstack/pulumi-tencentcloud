@@ -13,14 +13,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cluster = new tencentcloud.tdmq.RocketmqCluster("cluster", {
- *     clusterName: "test_rocketmq",
- *     remark: "test recket mq",
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
  * });
- * const role = new tencentcloud.tdmq.RocketmqRole("role", {
- *     roleName: "test_rocketmq_role",
- *     remark: "test rocketmq role",
- *     clusterId: cluster.clusterId,
+ * const exampleRocketmqRole = new tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     roleName: "tf_example",
+ *     remark: "remark.",
  * });
  * ```
  *

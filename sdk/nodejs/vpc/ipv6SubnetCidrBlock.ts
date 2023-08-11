@@ -8,21 +8,6 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a vpc ipv6SubnetCidrBlock
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const ipv6SubnetCidrBlock = new tencentcloud.Vpc.Ipv6SubnetCidrBlock("ipv6_subnet_cidr_block", {
- *     ipv6SubnetCidrBlocks: {
- *         ipv6CidrBlock: "2402:4e00:1019:6a7b::/64",
- *         subnetId: "subnet-plg028y8",
- *     },
- *     vpcId: "vpc-7w3kgnpl",
- * });
- * ```
- *
  * ## Import
  *
  * vpc ipv6_subnet_cidr_block can be imported using the id, e.g.

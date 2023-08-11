@@ -25,17 +25,17 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cluster, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq"),
-// 			Remark:      pulumi.String("test recket mq"),
+// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewRocketmqRole(ctx, "role", &Tdmq.RocketmqRoleArgs{
-// 			RoleName:  pulumi.String("test_rocketmq_role"),
-// 			Remark:    pulumi.String("test rocketmq role"),
-// 			ClusterId: cluster.ClusterId,
+// 		_, err = Tdmq.NewRocketmqRole(ctx, "exampleRocketmqRole", &Tdmq.RocketmqRoleArgs{
+// 			ClusterId: exampleRocketmqCluster.ClusterId,
+// 			RoleName:  pulumi.String("tf_example"),
+// 			Remark:    pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err

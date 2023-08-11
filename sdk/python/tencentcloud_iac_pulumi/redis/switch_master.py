@@ -104,11 +104,52 @@ class SwitchMaster(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7,
+            region="ap-guangzhou")
+        config = pulumi.Config()
+        replica_zone_ids = config.get_object("replicaZoneIds")
+        if replica_zone_ids is None:
+            replica_zone_ids = [
+                100004,
+                100006,
+            ]
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[2].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[2].zone,
+            type_id=zone.lists[2].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[2].redis_shard_nums[0],
+            redis_replicas_num=2,
+            replica_zone_ids=replica_zone_ids,
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
+        foo_instance_zone_info = tencentcloud.Redis.get_instance_zone_info_output(instance_id=foo_instance.id)
         switch_master = tencentcloud.redis.SwitchMaster("switchMaster",
-            group_id=29369,
-            instance_id="crs-kfdkirid")
+            instance_id=foo_instance.id,
+            group_id=foo_instance_zone_info.replica_groups[1].group_id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -129,11 +170,52 @@ class SwitchMaster(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7,
+            region="ap-guangzhou")
+        config = pulumi.Config()
+        replica_zone_ids = config.get_object("replicaZoneIds")
+        if replica_zone_ids is None:
+            replica_zone_ids = [
+                100004,
+                100006,
+            ]
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[2].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[2].zone,
+            type_id=zone.lists[2].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[2].redis_shard_nums[0],
+            redis_replicas_num=2,
+            replica_zone_ids=replica_zone_ids,
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
+        foo_instance_zone_info = tencentcloud.Redis.get_instance_zone_info_output(instance_id=foo_instance.id)
         switch_master = tencentcloud.redis.SwitchMaster("switchMaster",
-            group_id=29369,
-            instance_id="crs-kfdkirid")
+            instance_id=foo_instance.id,
+            group_id=foo_instance_zone_info.replica_groups[1].group_id)
         ```
 
         :param str resource_name: The name of the resource.

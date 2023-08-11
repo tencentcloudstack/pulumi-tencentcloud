@@ -8,15 +8,36 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc refreshNatDcRoute
  *
  * ## Example Usage
+ * ### is True
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const refreshNatDcRoute = new tencentcloud.Nat.RefreshNatDcRoute("refresh_nat_dc_route", {
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const eipExample = new tencentcloud.eip.Instance("eipExample", {});
+ * const nat = new tencentcloud.nat.Gateway("nat", {
+ *     vpcId: vpc.id,
+ *     maxConcurrent: 3000000,
+ *     bandwidth: 500,
+ *     assignedEipSets: [eipExample.publicIp],
+ * });
+ * const refreshNatDcRoute = new tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute", {
+ *     natGatewayId: nat.id,
+ *     vpcId: vpc.id,
  *     dryRun: true,
- *     natGatewayId: "nat-gnxkey2e",
- *     vpcId: "vpc-pyyv5k3v",
+ * });
+ * ```
+ * ### is False
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const refreshNatDcRoute = new tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute", {
+ *     natGatewayId: tencentcloud_nat_gateway.nat.id,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     dryRun: false,
  * });
  * ```
  *

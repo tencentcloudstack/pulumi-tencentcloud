@@ -530,21 +530,28 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance",
-            cpu=2,
-            db_version="201603",
-            instance_name="create_db_name",
-            machine_type="CLOUD_PREMIUM",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.BusinessIntelligenceInstance("example",
+            zone=zones.zones[4].name,
             memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
             project_id=0,
-            security_group_lists=[],
-            span=6,
-            start_time="00:00",
-            storage=20,
-            subnet_id="subnet-dwj7ipnc",
-            vpc_id="vpc-4owdpnwr",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            db_version="201603",
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -554,7 +561,9 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
                 6,
                 7,
             ],
-            zone="ap-guangzhou-6")
+            start_time="00:00",
+            span=6,
+            instance_name="tf_example")
         ```
 
         ## Import
@@ -562,7 +571,7 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
         sqlserver business_intelligence_instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance business_intelligence_instance business_intelligence_instance_id
+         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
         ```
 
         :param str resource_name: The name of the resource.
@@ -596,21 +605,28 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        business_intelligence_instance = tencentcloud.sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance",
-            cpu=2,
-            db_version="201603",
-            instance_name="create_db_name",
-            machine_type="CLOUD_PREMIUM",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.BusinessIntelligenceInstance("example",
+            zone=zones.zones[4].name,
             memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
             project_id=0,
-            security_group_lists=[],
-            span=6,
-            start_time="00:00",
-            storage=20,
-            subnet_id="subnet-dwj7ipnc",
-            vpc_id="vpc-4owdpnwr",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            db_version="201603",
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -620,7 +636,9 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
                 6,
                 7,
             ],
-            zone="ap-guangzhou-6")
+            start_time="00:00",
+            span=6,
+            instance_name="tf_example")
         ```
 
         ## Import
@@ -628,7 +646,7 @@ class BusinessIntelligenceInstance(pulumi.CustomResource):
         sqlserver business_intelligence_instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance business_intelligence_instance business_intelligence_instance_id
+         $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
         ```
 
         :param str resource_name: The name of the resource.

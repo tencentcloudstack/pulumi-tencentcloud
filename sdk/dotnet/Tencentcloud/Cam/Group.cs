@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///     {
     ///         var foo = new Tencentcloud.Cam.Group("foo", new Tencentcloud.Cam.GroupArgs
     ///         {
-    ///             Remark = "test",
+    ///             Remark = "tf_group_remark",
     ///         });
     ///     }
     /// 

@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupUploadSize = pulumi.output(tencentcloud.Sqlserver.getBackupUploadSize({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getBackupUploadSize({
  *     backupMigrationId: "mssql-backup-migration-9tj0sxnz",
  *     instanceId: "mssql-4gmc5805",
  * }));

@@ -294,18 +294,20 @@ class Sign(pulumi.CustomResource):
         Provides a resource to create a sms sign
 
         ## Example Usage
+        ### Create a sms sign instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sign = tencentcloud.sms.Sign("sign",
+        example = tencentcloud.sms.Sign("example",
             document_type=4,
             international=0,
-            proof_image="dGhpcyBpcyBhIGV4YW1wbGU=",
-            sign_name="terraform",
+            proof_image="your_proof_image",
+            sign_name="tf_example_sms_sign",
             sign_purpose=0,
             sign_type=1)
+        # 1：APP,  DocumentType can be chosen（0，1，2，3，4）
         ```
 
         :param str resource_name: The name of the resource.
@@ -329,18 +331,20 @@ class Sign(pulumi.CustomResource):
         Provides a resource to create a sms sign
 
         ## Example Usage
+        ### Create a sms sign instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sign = tencentcloud.sms.Sign("sign",
+        example = tencentcloud.sms.Sign("example",
             document_type=4,
             international=0,
-            proof_image="dGhpcyBpcyBhIGV4YW1wbGU=",
-            sign_name="terraform",
+            proof_image="your_proof_image",
+            sign_name="tf_example_sms_sign",
             sign_purpose=0,
             sign_type=1)
+        # 1：APP,  DocumentType can be chosen（0，1，2，3，4）
         ```
 
         :param str resource_name: The name of the resource.

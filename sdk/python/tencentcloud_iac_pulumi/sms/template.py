@@ -196,6 +196,7 @@ class Template(pulumi.CustomResource):
         Provides a resource to create a sms template
 
         ## Example Usage
+        ### Create a sms template
 
         ```python
         import pulumi
@@ -203,10 +204,10 @@ class Template(pulumi.CustomResource):
 
         template = tencentcloud.sms.Template("template",
             international=0,
-            remark="terraform test",
+            remark="terraform example",
             sms_type=0,
-            template_content="Template Content",
-            template_name="Template By Terraform")
+            template_content="example for sms template",
+            template_name="tf_example_sms_template")
         ```
 
         :param str resource_name: The name of the resource.
@@ -227,6 +228,7 @@ class Template(pulumi.CustomResource):
         Provides a resource to create a sms template
 
         ## Example Usage
+        ### Create a sms template
 
         ```python
         import pulumi
@@ -234,10 +236,10 @@ class Template(pulumi.CustomResource):
 
         template = tencentcloud.sms.Template("template",
             international=0,
-            remark="terraform test",
+            remark="terraform example",
             sms_type=0,
-            template_content="Template Content",
-            template_name="Template By Terraform")
+            template_content="example for sms template",
+            template_name="tf_example_sms_template")
         ```
 
         :param str resource_name: The name of the resource.

@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigBotConfigIntelligenceRuleItem
     {
-        /// <summary>
-        /// Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Bot label, valid values: `evil_bot`, `suspect_bot`, `good_bot`, `normal`.
-        /// </summary>
         public readonly string? Label;
 
         [OutputConstructor]

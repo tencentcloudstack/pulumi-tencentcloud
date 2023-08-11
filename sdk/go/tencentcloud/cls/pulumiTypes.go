@@ -5171,6 +5171,112 @@ func (o CosShipperFilterRuleArrayOutput) Index(i pulumi.IntInput) CosShipperFilt
 	}).(CosShipperFilterRuleOutput)
 }
 
+type DataTransformDstResource struct {
+	// alias.
+	Alias string `pulumi:"alias"`
+	// dst topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// DataTransformDstResourceInput is an input type that accepts DataTransformDstResourceArgs and DataTransformDstResourceOutput values.
+// You can construct a concrete instance of `DataTransformDstResourceInput` via:
+//
+//          DataTransformDstResourceArgs{...}
+type DataTransformDstResourceInput interface {
+	pulumi.Input
+
+	ToDataTransformDstResourceOutput() DataTransformDstResourceOutput
+	ToDataTransformDstResourceOutputWithContext(context.Context) DataTransformDstResourceOutput
+}
+
+type DataTransformDstResourceArgs struct {
+	// alias.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// dst topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (DataTransformDstResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformDstResource)(nil)).Elem()
+}
+
+func (i DataTransformDstResourceArgs) ToDataTransformDstResourceOutput() DataTransformDstResourceOutput {
+	return i.ToDataTransformDstResourceOutputWithContext(context.Background())
+}
+
+func (i DataTransformDstResourceArgs) ToDataTransformDstResourceOutputWithContext(ctx context.Context) DataTransformDstResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformDstResourceOutput)
+}
+
+// DataTransformDstResourceArrayInput is an input type that accepts DataTransformDstResourceArray and DataTransformDstResourceArrayOutput values.
+// You can construct a concrete instance of `DataTransformDstResourceArrayInput` via:
+//
+//          DataTransformDstResourceArray{ DataTransformDstResourceArgs{...} }
+type DataTransformDstResourceArrayInput interface {
+	pulumi.Input
+
+	ToDataTransformDstResourceArrayOutput() DataTransformDstResourceArrayOutput
+	ToDataTransformDstResourceArrayOutputWithContext(context.Context) DataTransformDstResourceArrayOutput
+}
+
+type DataTransformDstResourceArray []DataTransformDstResourceInput
+
+func (DataTransformDstResourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformDstResource)(nil)).Elem()
+}
+
+func (i DataTransformDstResourceArray) ToDataTransformDstResourceArrayOutput() DataTransformDstResourceArrayOutput {
+	return i.ToDataTransformDstResourceArrayOutputWithContext(context.Background())
+}
+
+func (i DataTransformDstResourceArray) ToDataTransformDstResourceArrayOutputWithContext(ctx context.Context) DataTransformDstResourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformDstResourceArrayOutput)
+}
+
+type DataTransformDstResourceOutput struct{ *pulumi.OutputState }
+
+func (DataTransformDstResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformDstResource)(nil)).Elem()
+}
+
+func (o DataTransformDstResourceOutput) ToDataTransformDstResourceOutput() DataTransformDstResourceOutput {
+	return o
+}
+
+func (o DataTransformDstResourceOutput) ToDataTransformDstResourceOutputWithContext(ctx context.Context) DataTransformDstResourceOutput {
+	return o
+}
+
+// alias.
+func (o DataTransformDstResourceOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDstResource) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// dst topic id.
+func (o DataTransformDstResourceOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDstResource) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type DataTransformDstResourceArrayOutput struct{ *pulumi.OutputState }
+
+func (DataTransformDstResourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformDstResource)(nil)).Elem()
+}
+
+func (o DataTransformDstResourceArrayOutput) ToDataTransformDstResourceArrayOutput() DataTransformDstResourceArrayOutput {
+	return o
+}
+
+func (o DataTransformDstResourceArrayOutput) ToDataTransformDstResourceArrayOutputWithContext(ctx context.Context) DataTransformDstResourceArrayOutput {
+	return o
+}
+
+func (o DataTransformDstResourceArrayOutput) Index(i pulumi.IntInput) DataTransformDstResourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataTransformDstResource {
+		return vs[0].([]DataTransformDstResource)[vs[1].(int)]
+	}).(DataTransformDstResourceOutput)
+}
+
 type IndexRule struct {
 	// Full-Text index configuration.
 	FullText *IndexRuleFullText `pulumi:"fullText"`
@@ -6433,6 +6539,584 @@ func (o IndexRuleTagKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type KafkaRechargeLogRechargeRule struct {
+	// default time from.
+	DefaultTimeSrc *int `pulumi:"defaultTimeSrc"`
+	// user default time.
+	DefaultTimeSwitch bool `pulumi:"defaultTimeSwitch"`
+	// encoding format.
+	EncodingFormat int `pulumi:"encodingFormat"`
+	// log key list.
+	Keys []string `pulumi:"keys"`
+	// log regex.
+	LogRegex *string `pulumi:"logRegex"`
+	// metadata.
+	Metadatas []string `pulumi:"metadatas"`
+	// recharge type.
+	RechargeType string `pulumi:"rechargeType"`
+	// time format.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// time key.
+	TimeKey *string `pulumi:"timeKey"`
+	// time regex.
+	TimeRegex *string `pulumi:"timeRegex"`
+	// time zone.
+	TimeZone *string `pulumi:"timeZone"`
+	// parse failed log key.
+	UnMatchLogKey *string `pulumi:"unMatchLogKey"`
+	// is push parse failed log.
+	UnMatchLogSwitch *bool `pulumi:"unMatchLogSwitch"`
+	// parse failed log time from.
+	UnMatchLogTimeSrc *int `pulumi:"unMatchLogTimeSrc"`
+}
+
+// KafkaRechargeLogRechargeRuleInput is an input type that accepts KafkaRechargeLogRechargeRuleArgs and KafkaRechargeLogRechargeRuleOutput values.
+// You can construct a concrete instance of `KafkaRechargeLogRechargeRuleInput` via:
+//
+//          KafkaRechargeLogRechargeRuleArgs{...}
+type KafkaRechargeLogRechargeRuleInput interface {
+	pulumi.Input
+
+	ToKafkaRechargeLogRechargeRuleOutput() KafkaRechargeLogRechargeRuleOutput
+	ToKafkaRechargeLogRechargeRuleOutputWithContext(context.Context) KafkaRechargeLogRechargeRuleOutput
+}
+
+type KafkaRechargeLogRechargeRuleArgs struct {
+	// default time from.
+	DefaultTimeSrc pulumi.IntPtrInput `pulumi:"defaultTimeSrc"`
+	// user default time.
+	DefaultTimeSwitch pulumi.BoolInput `pulumi:"defaultTimeSwitch"`
+	// encoding format.
+	EncodingFormat pulumi.IntInput `pulumi:"encodingFormat"`
+	// log key list.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// log regex.
+	LogRegex pulumi.StringPtrInput `pulumi:"logRegex"`
+	// metadata.
+	Metadatas pulumi.StringArrayInput `pulumi:"metadatas"`
+	// recharge type.
+	RechargeType pulumi.StringInput `pulumi:"rechargeType"`
+	// time format.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// time key.
+	TimeKey pulumi.StringPtrInput `pulumi:"timeKey"`
+	// time regex.
+	TimeRegex pulumi.StringPtrInput `pulumi:"timeRegex"`
+	// time zone.
+	TimeZone pulumi.StringPtrInput `pulumi:"timeZone"`
+	// parse failed log key.
+	UnMatchLogKey pulumi.StringPtrInput `pulumi:"unMatchLogKey"`
+	// is push parse failed log.
+	UnMatchLogSwitch pulumi.BoolPtrInput `pulumi:"unMatchLogSwitch"`
+	// parse failed log time from.
+	UnMatchLogTimeSrc pulumi.IntPtrInput `pulumi:"unMatchLogTimeSrc"`
+}
+
+func (KafkaRechargeLogRechargeRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaRechargeLogRechargeRule)(nil)).Elem()
+}
+
+func (i KafkaRechargeLogRechargeRuleArgs) ToKafkaRechargeLogRechargeRuleOutput() KafkaRechargeLogRechargeRuleOutput {
+	return i.ToKafkaRechargeLogRechargeRuleOutputWithContext(context.Background())
+}
+
+func (i KafkaRechargeLogRechargeRuleArgs) ToKafkaRechargeLogRechargeRuleOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeLogRechargeRuleOutput)
+}
+
+func (i KafkaRechargeLogRechargeRuleArgs) ToKafkaRechargeLogRechargeRulePtrOutput() KafkaRechargeLogRechargeRulePtrOutput {
+	return i.ToKafkaRechargeLogRechargeRulePtrOutputWithContext(context.Background())
+}
+
+func (i KafkaRechargeLogRechargeRuleArgs) ToKafkaRechargeLogRechargeRulePtrOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeLogRechargeRuleOutput).ToKafkaRechargeLogRechargeRulePtrOutputWithContext(ctx)
+}
+
+// KafkaRechargeLogRechargeRulePtrInput is an input type that accepts KafkaRechargeLogRechargeRuleArgs, KafkaRechargeLogRechargeRulePtr and KafkaRechargeLogRechargeRulePtrOutput values.
+// You can construct a concrete instance of `KafkaRechargeLogRechargeRulePtrInput` via:
+//
+//          KafkaRechargeLogRechargeRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type KafkaRechargeLogRechargeRulePtrInput interface {
+	pulumi.Input
+
+	ToKafkaRechargeLogRechargeRulePtrOutput() KafkaRechargeLogRechargeRulePtrOutput
+	ToKafkaRechargeLogRechargeRulePtrOutputWithContext(context.Context) KafkaRechargeLogRechargeRulePtrOutput
+}
+
+type kafkaRechargeLogRechargeRulePtrType KafkaRechargeLogRechargeRuleArgs
+
+func KafkaRechargeLogRechargeRulePtr(v *KafkaRechargeLogRechargeRuleArgs) KafkaRechargeLogRechargeRulePtrInput {
+	return (*kafkaRechargeLogRechargeRulePtrType)(v)
+}
+
+func (*kafkaRechargeLogRechargeRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaRechargeLogRechargeRule)(nil)).Elem()
+}
+
+func (i *kafkaRechargeLogRechargeRulePtrType) ToKafkaRechargeLogRechargeRulePtrOutput() KafkaRechargeLogRechargeRulePtrOutput {
+	return i.ToKafkaRechargeLogRechargeRulePtrOutputWithContext(context.Background())
+}
+
+func (i *kafkaRechargeLogRechargeRulePtrType) ToKafkaRechargeLogRechargeRulePtrOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeLogRechargeRulePtrOutput)
+}
+
+type KafkaRechargeLogRechargeRuleOutput struct{ *pulumi.OutputState }
+
+func (KafkaRechargeLogRechargeRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaRechargeLogRechargeRule)(nil)).Elem()
+}
+
+func (o KafkaRechargeLogRechargeRuleOutput) ToKafkaRechargeLogRechargeRuleOutput() KafkaRechargeLogRechargeRuleOutput {
+	return o
+}
+
+func (o KafkaRechargeLogRechargeRuleOutput) ToKafkaRechargeLogRechargeRuleOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRuleOutput {
+	return o
+}
+
+func (o KafkaRechargeLogRechargeRuleOutput) ToKafkaRechargeLogRechargeRulePtrOutput() KafkaRechargeLogRechargeRulePtrOutput {
+	return o.ToKafkaRechargeLogRechargeRulePtrOutputWithContext(context.Background())
+}
+
+func (o KafkaRechargeLogRechargeRuleOutput) ToKafkaRechargeLogRechargeRulePtrOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KafkaRechargeLogRechargeRule) *KafkaRechargeLogRechargeRule {
+		return &v
+	}).(KafkaRechargeLogRechargeRulePtrOutput)
+}
+
+// default time from.
+func (o KafkaRechargeLogRechargeRuleOutput) DefaultTimeSrc() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *int { return v.DefaultTimeSrc }).(pulumi.IntPtrOutput)
+}
+
+// user default time.
+func (o KafkaRechargeLogRechargeRuleOutput) DefaultTimeSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) bool { return v.DefaultTimeSwitch }).(pulumi.BoolOutput)
+}
+
+// encoding format.
+func (o KafkaRechargeLogRechargeRuleOutput) EncodingFormat() pulumi.IntOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) int { return v.EncodingFormat }).(pulumi.IntOutput)
+}
+
+// log key list.
+func (o KafkaRechargeLogRechargeRuleOutput) Keys() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) []string { return v.Keys }).(pulumi.StringArrayOutput)
+}
+
+// log regex.
+func (o KafkaRechargeLogRechargeRuleOutput) LogRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.LogRegex }).(pulumi.StringPtrOutput)
+}
+
+// metadata.
+func (o KafkaRechargeLogRechargeRuleOutput) Metadatas() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) []string { return v.Metadatas }).(pulumi.StringArrayOutput)
+}
+
+// recharge type.
+func (o KafkaRechargeLogRechargeRuleOutput) RechargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) string { return v.RechargeType }).(pulumi.StringOutput)
+}
+
+// time format.
+func (o KafkaRechargeLogRechargeRuleOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+}
+
+// time key.
+func (o KafkaRechargeLogRechargeRuleOutput) TimeKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.TimeKey }).(pulumi.StringPtrOutput)
+}
+
+// time regex.
+func (o KafkaRechargeLogRechargeRuleOutput) TimeRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.TimeRegex }).(pulumi.StringPtrOutput)
+}
+
+// time zone.
+func (o KafkaRechargeLogRechargeRuleOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.TimeZone }).(pulumi.StringPtrOutput)
+}
+
+// parse failed log key.
+func (o KafkaRechargeLogRechargeRuleOutput) UnMatchLogKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *string { return v.UnMatchLogKey }).(pulumi.StringPtrOutput)
+}
+
+// is push parse failed log.
+func (o KafkaRechargeLogRechargeRuleOutput) UnMatchLogSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *bool { return v.UnMatchLogSwitch }).(pulumi.BoolPtrOutput)
+}
+
+// parse failed log time from.
+func (o KafkaRechargeLogRechargeRuleOutput) UnMatchLogTimeSrc() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeLogRechargeRule) *int { return v.UnMatchLogTimeSrc }).(pulumi.IntPtrOutput)
+}
+
+type KafkaRechargeLogRechargeRulePtrOutput struct{ *pulumi.OutputState }
+
+func (KafkaRechargeLogRechargeRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaRechargeLogRechargeRule)(nil)).Elem()
+}
+
+func (o KafkaRechargeLogRechargeRulePtrOutput) ToKafkaRechargeLogRechargeRulePtrOutput() KafkaRechargeLogRechargeRulePtrOutput {
+	return o
+}
+
+func (o KafkaRechargeLogRechargeRulePtrOutput) ToKafkaRechargeLogRechargeRulePtrOutputWithContext(ctx context.Context) KafkaRechargeLogRechargeRulePtrOutput {
+	return o
+}
+
+func (o KafkaRechargeLogRechargeRulePtrOutput) Elem() KafkaRechargeLogRechargeRuleOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) KafkaRechargeLogRechargeRule {
+		if v != nil {
+			return *v
+		}
+		var ret KafkaRechargeLogRechargeRule
+		return ret
+	}).(KafkaRechargeLogRechargeRuleOutput)
+}
+
+// default time from.
+func (o KafkaRechargeLogRechargeRulePtrOutput) DefaultTimeSrc() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DefaultTimeSrc
+	}).(pulumi.IntPtrOutput)
+}
+
+// user default time.
+func (o KafkaRechargeLogRechargeRulePtrOutput) DefaultTimeSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.DefaultTimeSwitch
+	}).(pulumi.BoolPtrOutput)
+}
+
+// encoding format.
+func (o KafkaRechargeLogRechargeRulePtrOutput) EncodingFormat() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.EncodingFormat
+	}).(pulumi.IntPtrOutput)
+}
+
+// log key list.
+func (o KafkaRechargeLogRechargeRulePtrOutput) Keys() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Keys
+	}).(pulumi.StringArrayOutput)
+}
+
+// log regex.
+func (o KafkaRechargeLogRechargeRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LogRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// metadata.
+func (o KafkaRechargeLogRechargeRulePtrOutput) Metadatas() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Metadatas
+	}).(pulumi.StringArrayOutput)
+}
+
+// recharge type.
+func (o KafkaRechargeLogRechargeRulePtrOutput) RechargeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RechargeType
+	}).(pulumi.StringPtrOutput)
+}
+
+// time format.
+func (o KafkaRechargeLogRechargeRulePtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// time key.
+func (o KafkaRechargeLogRechargeRulePtrOutput) TimeKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// time regex.
+func (o KafkaRechargeLogRechargeRulePtrOutput) TimeRegex() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeRegex
+	}).(pulumi.StringPtrOutput)
+}
+
+// time zone.
+func (o KafkaRechargeLogRechargeRulePtrOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeZone
+	}).(pulumi.StringPtrOutput)
+}
+
+// parse failed log key.
+func (o KafkaRechargeLogRechargeRulePtrOutput) UnMatchLogKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UnMatchLogKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// is push parse failed log.
+func (o KafkaRechargeLogRechargeRulePtrOutput) UnMatchLogSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UnMatchLogSwitch
+	}).(pulumi.BoolPtrOutput)
+}
+
+// parse failed log time from.
+func (o KafkaRechargeLogRechargeRulePtrOutput) UnMatchLogTimeSrc() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeLogRechargeRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.UnMatchLogTimeSrc
+	}).(pulumi.IntPtrOutput)
+}
+
+type KafkaRechargeProtocol struct {
+	// encryption type.
+	Mechanism *string `pulumi:"mechanism"`
+	// user password.
+	Password *string `pulumi:"password"`
+	// protocol type.
+	Protocol *string `pulumi:"protocol"`
+	// username.
+	UserName *string `pulumi:"userName"`
+}
+
+// KafkaRechargeProtocolInput is an input type that accepts KafkaRechargeProtocolArgs and KafkaRechargeProtocolOutput values.
+// You can construct a concrete instance of `KafkaRechargeProtocolInput` via:
+//
+//          KafkaRechargeProtocolArgs{...}
+type KafkaRechargeProtocolInput interface {
+	pulumi.Input
+
+	ToKafkaRechargeProtocolOutput() KafkaRechargeProtocolOutput
+	ToKafkaRechargeProtocolOutputWithContext(context.Context) KafkaRechargeProtocolOutput
+}
+
+type KafkaRechargeProtocolArgs struct {
+	// encryption type.
+	Mechanism pulumi.StringPtrInput `pulumi:"mechanism"`
+	// user password.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// protocol type.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// username.
+	UserName pulumi.StringPtrInput `pulumi:"userName"`
+}
+
+func (KafkaRechargeProtocolArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaRechargeProtocol)(nil)).Elem()
+}
+
+func (i KafkaRechargeProtocolArgs) ToKafkaRechargeProtocolOutput() KafkaRechargeProtocolOutput {
+	return i.ToKafkaRechargeProtocolOutputWithContext(context.Background())
+}
+
+func (i KafkaRechargeProtocolArgs) ToKafkaRechargeProtocolOutputWithContext(ctx context.Context) KafkaRechargeProtocolOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeProtocolOutput)
+}
+
+func (i KafkaRechargeProtocolArgs) ToKafkaRechargeProtocolPtrOutput() KafkaRechargeProtocolPtrOutput {
+	return i.ToKafkaRechargeProtocolPtrOutputWithContext(context.Background())
+}
+
+func (i KafkaRechargeProtocolArgs) ToKafkaRechargeProtocolPtrOutputWithContext(ctx context.Context) KafkaRechargeProtocolPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeProtocolOutput).ToKafkaRechargeProtocolPtrOutputWithContext(ctx)
+}
+
+// KafkaRechargeProtocolPtrInput is an input type that accepts KafkaRechargeProtocolArgs, KafkaRechargeProtocolPtr and KafkaRechargeProtocolPtrOutput values.
+// You can construct a concrete instance of `KafkaRechargeProtocolPtrInput` via:
+//
+//          KafkaRechargeProtocolArgs{...}
+//
+//  or:
+//
+//          nil
+type KafkaRechargeProtocolPtrInput interface {
+	pulumi.Input
+
+	ToKafkaRechargeProtocolPtrOutput() KafkaRechargeProtocolPtrOutput
+	ToKafkaRechargeProtocolPtrOutputWithContext(context.Context) KafkaRechargeProtocolPtrOutput
+}
+
+type kafkaRechargeProtocolPtrType KafkaRechargeProtocolArgs
+
+func KafkaRechargeProtocolPtr(v *KafkaRechargeProtocolArgs) KafkaRechargeProtocolPtrInput {
+	return (*kafkaRechargeProtocolPtrType)(v)
+}
+
+func (*kafkaRechargeProtocolPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaRechargeProtocol)(nil)).Elem()
+}
+
+func (i *kafkaRechargeProtocolPtrType) ToKafkaRechargeProtocolPtrOutput() KafkaRechargeProtocolPtrOutput {
+	return i.ToKafkaRechargeProtocolPtrOutputWithContext(context.Background())
+}
+
+func (i *kafkaRechargeProtocolPtrType) ToKafkaRechargeProtocolPtrOutputWithContext(ctx context.Context) KafkaRechargeProtocolPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaRechargeProtocolPtrOutput)
+}
+
+type KafkaRechargeProtocolOutput struct{ *pulumi.OutputState }
+
+func (KafkaRechargeProtocolOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaRechargeProtocol)(nil)).Elem()
+}
+
+func (o KafkaRechargeProtocolOutput) ToKafkaRechargeProtocolOutput() KafkaRechargeProtocolOutput {
+	return o
+}
+
+func (o KafkaRechargeProtocolOutput) ToKafkaRechargeProtocolOutputWithContext(ctx context.Context) KafkaRechargeProtocolOutput {
+	return o
+}
+
+func (o KafkaRechargeProtocolOutput) ToKafkaRechargeProtocolPtrOutput() KafkaRechargeProtocolPtrOutput {
+	return o.ToKafkaRechargeProtocolPtrOutputWithContext(context.Background())
+}
+
+func (o KafkaRechargeProtocolOutput) ToKafkaRechargeProtocolPtrOutputWithContext(ctx context.Context) KafkaRechargeProtocolPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KafkaRechargeProtocol) *KafkaRechargeProtocol {
+		return &v
+	}).(KafkaRechargeProtocolPtrOutput)
+}
+
+// encryption type.
+func (o KafkaRechargeProtocolOutput) Mechanism() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeProtocol) *string { return v.Mechanism }).(pulumi.StringPtrOutput)
+}
+
+// user password.
+func (o KafkaRechargeProtocolOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeProtocol) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// protocol type.
+func (o KafkaRechargeProtocolOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeProtocol) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// username.
+func (o KafkaRechargeProtocolOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v KafkaRechargeProtocol) *string { return v.UserName }).(pulumi.StringPtrOutput)
+}
+
+type KafkaRechargeProtocolPtrOutput struct{ *pulumi.OutputState }
+
+func (KafkaRechargeProtocolPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaRechargeProtocol)(nil)).Elem()
+}
+
+func (o KafkaRechargeProtocolPtrOutput) ToKafkaRechargeProtocolPtrOutput() KafkaRechargeProtocolPtrOutput {
+	return o
+}
+
+func (o KafkaRechargeProtocolPtrOutput) ToKafkaRechargeProtocolPtrOutputWithContext(ctx context.Context) KafkaRechargeProtocolPtrOutput {
+	return o
+}
+
+func (o KafkaRechargeProtocolPtrOutput) Elem() KafkaRechargeProtocolOutput {
+	return o.ApplyT(func(v *KafkaRechargeProtocol) KafkaRechargeProtocol {
+		if v != nil {
+			return *v
+		}
+		var ret KafkaRechargeProtocol
+		return ret
+	}).(KafkaRechargeProtocolOutput)
+}
+
+// encryption type.
+func (o KafkaRechargeProtocolPtrOutput) Mechanism() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeProtocol) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mechanism
+	}).(pulumi.StringPtrOutput)
+}
+
+// user password.
+func (o KafkaRechargeProtocolPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeProtocol) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// protocol type.
+func (o KafkaRechargeProtocolPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeProtocol) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// username.
+func (o KafkaRechargeProtocolPtrOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KafkaRechargeProtocol) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserName
+	}).(pulumi.StringPtrOutput)
+}
+
 type MachineGroupMachineGroupType struct {
 	// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
 	Type string `pulumi:"type"`
@@ -6587,6 +7271,200 @@ func (o MachineGroupMachineGroupTypePtrOutput) Values() pulumi.StringArrayOutput
 		}
 		return v.Values
 	}).(pulumi.StringArrayOutput)
+}
+
+type ScheduledSqlDstResource struct {
+	// topic type.
+	BizType *int `pulumi:"bizType"`
+	// metric name.
+	MetricName *string `pulumi:"metricName"`
+	// topic region.
+	Region *string `pulumi:"region"`
+	// dst topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// ScheduledSqlDstResourceInput is an input type that accepts ScheduledSqlDstResourceArgs and ScheduledSqlDstResourceOutput values.
+// You can construct a concrete instance of `ScheduledSqlDstResourceInput` via:
+//
+//          ScheduledSqlDstResourceArgs{...}
+type ScheduledSqlDstResourceInput interface {
+	pulumi.Input
+
+	ToScheduledSqlDstResourceOutput() ScheduledSqlDstResourceOutput
+	ToScheduledSqlDstResourceOutputWithContext(context.Context) ScheduledSqlDstResourceOutput
+}
+
+type ScheduledSqlDstResourceArgs struct {
+	// topic type.
+	BizType pulumi.IntPtrInput `pulumi:"bizType"`
+	// metric name.
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// topic region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// dst topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (ScheduledSqlDstResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScheduledSqlDstResource)(nil)).Elem()
+}
+
+func (i ScheduledSqlDstResourceArgs) ToScheduledSqlDstResourceOutput() ScheduledSqlDstResourceOutput {
+	return i.ToScheduledSqlDstResourceOutputWithContext(context.Background())
+}
+
+func (i ScheduledSqlDstResourceArgs) ToScheduledSqlDstResourceOutputWithContext(ctx context.Context) ScheduledSqlDstResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScheduledSqlDstResourceOutput)
+}
+
+func (i ScheduledSqlDstResourceArgs) ToScheduledSqlDstResourcePtrOutput() ScheduledSqlDstResourcePtrOutput {
+	return i.ToScheduledSqlDstResourcePtrOutputWithContext(context.Background())
+}
+
+func (i ScheduledSqlDstResourceArgs) ToScheduledSqlDstResourcePtrOutputWithContext(ctx context.Context) ScheduledSqlDstResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScheduledSqlDstResourceOutput).ToScheduledSqlDstResourcePtrOutputWithContext(ctx)
+}
+
+// ScheduledSqlDstResourcePtrInput is an input type that accepts ScheduledSqlDstResourceArgs, ScheduledSqlDstResourcePtr and ScheduledSqlDstResourcePtrOutput values.
+// You can construct a concrete instance of `ScheduledSqlDstResourcePtrInput` via:
+//
+//          ScheduledSqlDstResourceArgs{...}
+//
+//  or:
+//
+//          nil
+type ScheduledSqlDstResourcePtrInput interface {
+	pulumi.Input
+
+	ToScheduledSqlDstResourcePtrOutput() ScheduledSqlDstResourcePtrOutput
+	ToScheduledSqlDstResourcePtrOutputWithContext(context.Context) ScheduledSqlDstResourcePtrOutput
+}
+
+type scheduledSqlDstResourcePtrType ScheduledSqlDstResourceArgs
+
+func ScheduledSqlDstResourcePtr(v *ScheduledSqlDstResourceArgs) ScheduledSqlDstResourcePtrInput {
+	return (*scheduledSqlDstResourcePtrType)(v)
+}
+
+func (*scheduledSqlDstResourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScheduledSqlDstResource)(nil)).Elem()
+}
+
+func (i *scheduledSqlDstResourcePtrType) ToScheduledSqlDstResourcePtrOutput() ScheduledSqlDstResourcePtrOutput {
+	return i.ToScheduledSqlDstResourcePtrOutputWithContext(context.Background())
+}
+
+func (i *scheduledSqlDstResourcePtrType) ToScheduledSqlDstResourcePtrOutputWithContext(ctx context.Context) ScheduledSqlDstResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScheduledSqlDstResourcePtrOutput)
+}
+
+type ScheduledSqlDstResourceOutput struct{ *pulumi.OutputState }
+
+func (ScheduledSqlDstResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScheduledSqlDstResource)(nil)).Elem()
+}
+
+func (o ScheduledSqlDstResourceOutput) ToScheduledSqlDstResourceOutput() ScheduledSqlDstResourceOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourceOutput) ToScheduledSqlDstResourceOutputWithContext(ctx context.Context) ScheduledSqlDstResourceOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourceOutput) ToScheduledSqlDstResourcePtrOutput() ScheduledSqlDstResourcePtrOutput {
+	return o.ToScheduledSqlDstResourcePtrOutputWithContext(context.Background())
+}
+
+func (o ScheduledSqlDstResourceOutput) ToScheduledSqlDstResourcePtrOutputWithContext(ctx context.Context) ScheduledSqlDstResourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ScheduledSqlDstResource) *ScheduledSqlDstResource {
+		return &v
+	}).(ScheduledSqlDstResourcePtrOutput)
+}
+
+// topic type.
+func (o ScheduledSqlDstResourceOutput) BizType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) *int { return v.BizType }).(pulumi.IntPtrOutput)
+}
+
+// metric name.
+func (o ScheduledSqlDstResourceOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// topic region.
+func (o ScheduledSqlDstResourceOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// dst topic id.
+func (o ScheduledSqlDstResourceOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type ScheduledSqlDstResourcePtrOutput struct{ *pulumi.OutputState }
+
+func (ScheduledSqlDstResourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScheduledSqlDstResource)(nil)).Elem()
+}
+
+func (o ScheduledSqlDstResourcePtrOutput) ToScheduledSqlDstResourcePtrOutput() ScheduledSqlDstResourcePtrOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourcePtrOutput) ToScheduledSqlDstResourcePtrOutputWithContext(ctx context.Context) ScheduledSqlDstResourcePtrOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourcePtrOutput) Elem() ScheduledSqlDstResourceOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) ScheduledSqlDstResource {
+		if v != nil {
+			return *v
+		}
+		var ret ScheduledSqlDstResource
+		return ret
+	}).(ScheduledSqlDstResourceOutput)
+}
+
+// topic type.
+func (o ScheduledSqlDstResourcePtrOutput) BizType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BizType
+	}).(pulumi.IntPtrOutput)
+}
+
+// metric name.
+func (o ScheduledSqlDstResourcePtrOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetricName
+	}).(pulumi.StringPtrOutput)
+}
+
+// topic region.
+func (o ScheduledSqlDstResourcePtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// dst topic id.
+func (o ScheduledSqlDstResourcePtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
 }
 
 type GetMachineGroupConfigsConfig struct {
@@ -7736,6 +8614,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentJsonPtrInput)(nil)).Elem(), CosShipperContentJsonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleInput)(nil)).Elem(), CosShipperFilterRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleArrayInput)(nil)).Elem(), CosShipperFilterRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceInput)(nil)).Elem(), DataTransformDstResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceArrayInput)(nil)).Elem(), DataTransformDstResourceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleInput)(nil)).Elem(), IndexRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRulePtrInput)(nil)).Elem(), IndexRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleFullTextInput)(nil)).Elem(), IndexRuleFullTextArgs{})
@@ -7752,8 +8632,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueArrayInput)(nil)).Elem(), IndexRuleTagKeyValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRuleInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRulePtrInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolPtrInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourcePtrInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigInput)(nil)).Elem(), GetMachineGroupConfigsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePathInput)(nil)).Elem(), GetMachineGroupConfigsConfigExcludePathArgs{})
@@ -7826,6 +8712,8 @@ func init() {
 	pulumi.RegisterOutputType(CosShipperContentJsonPtrOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleArrayOutput{})
+	pulumi.RegisterOutputType(DataTransformDstResourceOutput{})
+	pulumi.RegisterOutputType(DataTransformDstResourceArrayOutput{})
 	pulumi.RegisterOutputType(IndexRuleOutput{})
 	pulumi.RegisterOutputType(IndexRulePtrOutput{})
 	pulumi.RegisterOutputType(IndexRuleFullTextOutput{})
@@ -7842,8 +8730,14 @@ func init() {
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueArrayOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueValuePtrOutput{})
+	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRuleOutput{})
+	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRulePtrOutput{})
+	pulumi.RegisterOutputType(KafkaRechargeProtocolOutput{})
+	pulumi.RegisterOutputType(KafkaRechargeProtocolPtrOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
+	pulumi.RegisterOutputType(ScheduledSqlDstResourceOutput{})
+	pulumi.RegisterOutputType(ScheduledSqlDstResourcePtrOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExcludePathOutput{})

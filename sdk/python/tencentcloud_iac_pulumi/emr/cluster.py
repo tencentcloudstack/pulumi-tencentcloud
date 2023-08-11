@@ -29,7 +29,8 @@ class ClusterArgs:
                  extend_fs_field: Optional[pulumi.Input[str]] = None,
                  need_master_wan: Optional[pulumi.Input[str]] = None,
                  resource_spec: Optional[pulumi.Input['ClusterResourceSpecArgs']] = None,
-                 sg_id: Optional[pulumi.Input[str]] = None):
+                 sg_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Cluster resource.
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
@@ -63,6 +64,7 @@ class ClusterArgs:
                By default, the cluster Master node internet is enabled.
         :param pulumi.Input['ClusterResourceSpecArgs'] resource_spec: Resource specification of EMR instance.
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "display_strategy", display_strategy)
         pulumi.set(__self__, "instance_name", instance_name)
@@ -83,6 +85,8 @@ class ClusterArgs:
             pulumi.set(__self__, "resource_spec", resource_spec)
         if sg_id is not None:
             pulumi.set(__self__, "sg_id", sg_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="displayStrategy")
@@ -280,6 +284,18 @@ class ClusterArgs:
     def sg_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "sg_id", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _ClusterState:
@@ -297,6 +313,7 @@ class _ClusterState:
                  sg_id: Optional[pulumi.Input[str]] = None,
                  softwares: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  support_ha: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  time_span: Optional[pulumi.Input[int]] = None,
                  time_unit: Optional[pulumi.Input[str]] = None,
                  vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None):
@@ -330,6 +347,7 @@ class _ClusterState:
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
                When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
@@ -361,6 +379,8 @@ class _ClusterState:
             pulumi.set(__self__, "softwares", softwares)
         if support_ha is not None:
             pulumi.set(__self__, "support_ha", support_ha)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if time_span is not None:
             pulumi.set(__self__, "time_span", time_span)
         if time_unit is not None:
@@ -540,6 +560,18 @@ class _ClusterState:
         pulumi.set(self, "support_ha", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="timeSpan")
     def time_span(self) -> Optional[pulumi.Input[int]]:
         """
@@ -594,6 +626,7 @@ class Cluster(pulumi.CustomResource):
                  sg_id: Optional[pulumi.Input[str]] = None,
                  softwares: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  support_ha: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  time_span: Optional[pulumi.Input[int]] = None,
                  time_unit: Optional[pulumi.Input[str]] = None,
                  vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -605,37 +638,63 @@ class Cluster(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        emrrrr = tencentcloud.emr.Cluster("emrrrr",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        cvm4c8m = tencentcloud.Instance.get_types(exclude_sold_out=True,
+            cpu_core_count=4,
+            memory_size=8,
+            filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-charge-type",
+                    values=["POSTPAID_BY_HOUR"],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[availability_zone],
+                ),
+            ])
+        emr_vpc = tencentcloud.vpc.Instance("emrVpc", cidr_block="10.0.0.0/16")
+        emr_subnet = tencentcloud.subnet.Instance("emrSubnet",
+            availability_zone=availability_zone,
+            vpc_id=emr_vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        emr_sg = tencentcloud.security.Group("emrSg",
+            description="emr sg",
+            project_id=0)
+        emr_cluster = tencentcloud.emr.Cluster("emrCluster",
             product_id=4,
             display_strategy="clusterList",
             vpc_settings={
-                "vpc_id": "vpc-fuwly8x5",
-                "subnet_id": "subnet-d830wfso",
+                "vpc_id": emr_vpc.id,
+                "subnet_id": emr_subnet.id,
             },
-            softwares=[
-                "hadoop-2.8.4",
-                "zookeeper-3.4.9",
-            ],
+            softwares=["zookeeper-3.6.1"],
             support_ha=0,
-            instance_name="emr-test",
+            instance_name="emr-cluster-test",
             resource_spec=tencentcloud.emr.ClusterResourceSpecArgs(
                 master_resource_spec=tencentcloud.emr.ClusterResourceSpecMasterResourceSpecArgs(
                     mem_size=8192,
                     cpu=4,
                     disk_size=100,
                     disk_type="CLOUD_PREMIUM",
-                    spec="CVM.S2",
+                    spec=f"CVM.{cvm4c8m.instance_types[0].family}",
                     storage_type=5,
+                    root_size=50,
                 ),
                 core_resource_spec=tencentcloud.emr.ClusterResourceSpecCoreResourceSpecArgs(
                     mem_size=8192,
                     cpu=4,
                     disk_size=100,
                     disk_type="CLOUD_PREMIUM",
-                    spec="CVM.S2",
+                    spec=f"CVM.{cvm4c8m.instance_types[0].family}",
                     storage_type=5,
+                    root_size=50,
                 ),
                 master_count=1,
                 core_count=2,
@@ -643,13 +702,14 @@ class Cluster(pulumi.CustomResource):
             login_settings={
                 "password": "Tencent@cloud123",
             },
-            time_span=1,
-            time_unit="m",
-            pay_mode=1,
+            time_span=3600,
+            time_unit="s",
+            pay_mode=0,
             placement={
-                "zone": "ap-guangzhou-3",
+                "zone": availability_zone,
                 "project_id": 0,
-            })
+            },
+            sg_id=emr_sg.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -681,6 +741,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
                When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
@@ -699,37 +760,63 @@ class Cluster(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        emrrrr = tencentcloud.emr.Cluster("emrrrr",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        cvm4c8m = tencentcloud.Instance.get_types(exclude_sold_out=True,
+            cpu_core_count=4,
+            memory_size=8,
+            filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-charge-type",
+                    values=["POSTPAID_BY_HOUR"],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[availability_zone],
+                ),
+            ])
+        emr_vpc = tencentcloud.vpc.Instance("emrVpc", cidr_block="10.0.0.0/16")
+        emr_subnet = tencentcloud.subnet.Instance("emrSubnet",
+            availability_zone=availability_zone,
+            vpc_id=emr_vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        emr_sg = tencentcloud.security.Group("emrSg",
+            description="emr sg",
+            project_id=0)
+        emr_cluster = tencentcloud.emr.Cluster("emrCluster",
             product_id=4,
             display_strategy="clusterList",
             vpc_settings={
-                "vpc_id": "vpc-fuwly8x5",
-                "subnet_id": "subnet-d830wfso",
+                "vpc_id": emr_vpc.id,
+                "subnet_id": emr_subnet.id,
             },
-            softwares=[
-                "hadoop-2.8.4",
-                "zookeeper-3.4.9",
-            ],
+            softwares=["zookeeper-3.6.1"],
             support_ha=0,
-            instance_name="emr-test",
+            instance_name="emr-cluster-test",
             resource_spec=tencentcloud.emr.ClusterResourceSpecArgs(
                 master_resource_spec=tencentcloud.emr.ClusterResourceSpecMasterResourceSpecArgs(
                     mem_size=8192,
                     cpu=4,
                     disk_size=100,
                     disk_type="CLOUD_PREMIUM",
-                    spec="CVM.S2",
+                    spec=f"CVM.{cvm4c8m.instance_types[0].family}",
                     storage_type=5,
+                    root_size=50,
                 ),
                 core_resource_spec=tencentcloud.emr.ClusterResourceSpecCoreResourceSpecArgs(
                     mem_size=8192,
                     cpu=4,
                     disk_size=100,
                     disk_type="CLOUD_PREMIUM",
-                    spec="CVM.S2",
+                    spec=f"CVM.{cvm4c8m.instance_types[0].family}",
                     storage_type=5,
+                    root_size=50,
                 ),
                 master_count=1,
                 core_count=2,
@@ -737,13 +824,14 @@ class Cluster(pulumi.CustomResource):
             login_settings={
                 "password": "Tencent@cloud123",
             },
-            time_span=1,
-            time_unit="m",
-            pay_mode=1,
+            time_span=3600,
+            time_unit="s",
+            pay_mode=0,
             placement={
-                "zone": "ap-guangzhou-3",
+                "zone": availability_zone,
                 "project_id": 0,
-            })
+            },
+            sg_id=emr_sg.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -773,6 +861,7 @@ class Cluster(pulumi.CustomResource):
                  sg_id: Optional[pulumi.Input[str]] = None,
                  softwares: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  support_ha: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  time_span: Optional[pulumi.Input[int]] = None,
                  time_unit: Optional[pulumi.Input[str]] = None,
                  vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -818,6 +907,7 @@ class Cluster(pulumi.CustomResource):
             if support_ha is None and not opts.urn:
                 raise TypeError("Missing required property 'support_ha'")
             __props__.__dict__["support_ha"] = support_ha
+            __props__.__dict__["tags"] = tags
             if time_span is None and not opts.urn:
                 raise TypeError("Missing required property 'time_span'")
             __props__.__dict__["time_span"] = time_span
@@ -851,6 +941,7 @@ class Cluster(pulumi.CustomResource):
             sg_id: Optional[pulumi.Input[str]] = None,
             softwares: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             support_ha: Optional[pulumi.Input[int]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             time_span: Optional[pulumi.Input[int]] = None,
             time_unit: Optional[pulumi.Input[str]] = None,
             vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Cluster':
@@ -889,6 +980,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
                When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
@@ -911,6 +1003,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["sg_id"] = sg_id
         __props__.__dict__["softwares"] = softwares
         __props__.__dict__["support_ha"] = support_ha
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["time_span"] = time_span
         __props__.__dict__["time_unit"] = time_unit
         __props__.__dict__["vpc_settings"] = vpc_settings
@@ -1034,6 +1127,14 @@ class Cluster(pulumi.CustomResource):
         The flag whether the instance support high availability.(0=>not support, 1=>support).
         """
         return pulumi.get(self, "support_ha")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Mapping[str, Any]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="timeSpan")

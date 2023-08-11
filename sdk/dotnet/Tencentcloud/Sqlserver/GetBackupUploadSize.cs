@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var backupUploadSize = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
         ///         {
         ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
         ///             InstanceId = "mssql-4gmc5805",
@@ -57,7 +57,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var backupUploadSize = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
         ///         {
         ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
         ///             InstanceId = "mssql-4gmc5805",

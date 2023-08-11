@@ -12,63 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     public static class GetWafRuleGroups
     {
-        /// <summary>
-        /// Use this data source to query detailed information of teo wafRuleGroups
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var wafRuleGroups = Output.Create(Tencentcloud.Teo.GetWafRuleGroups.InvokeAsync(new Tencentcloud.Teo.GetWafRuleGroupsArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetWafRuleGroupsResult> InvokeAsync(GetWafRuleGroupsArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetWafRuleGroupsResult>("tencentcloud:Teo/getWafRuleGroups:getWafRuleGroups", args ?? new GetWafRuleGroupsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of teo wafRuleGroups
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var wafRuleGroups = Output.Create(Tencentcloud.Teo.GetWafRuleGroups.InvokeAsync(new Tencentcloud.Teo.GetWafRuleGroupsArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetWafRuleGroupsResult> Invoke(GetWafRuleGroupsInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetWafRuleGroupsResult>("tencentcloud:Teo/getWafRuleGroups:getWafRuleGroups", args ?? new GetWafRuleGroupsInvokeArgs(), options.WithDefaults());
     }
@@ -76,21 +22,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetWafRuleGroupsArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public string Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public string ZoneId { get; set; } = null!;
 
@@ -101,21 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetWafRuleGroupsInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public Input<string> Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
 
@@ -134,9 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
-        /// <summary>
-        /// List of WAF rule groups.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetWafRuleGroupsWafRuleGroupResult> TeoWafRuleGroups;
         public readonly string ZoneId;
 

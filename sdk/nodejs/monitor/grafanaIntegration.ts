@@ -8,20 +8,34 @@ import * as utilities from "../utilities";
  * Provides a resource to create a monitor grafanaIntegration
  *
  * ## Example Usage
+ * ### Create a grafan instance and integrate the configuration
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const grafanaIntegration = new tencentcloud.Monitor.GrafanaIntegration("grafanaIntegration", {
- *     content: "{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
- *     instanceId: "grafana-50nj6v00",
- *     kind: "tencentcloud-monitor-app",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
  * });
- * const grafanaIntegrationUpdate = new tencentcloud.Monitor.GrafanaIntegration("grafanaIntegration_update", {
- *     content: "{\"id\":\"integration-9st6kqz6\",\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"name\":\"uint-test3\",\"authProvider\":{\"secretId\":\"ROLE\",\"useRole\":true,\"__anyOf\":\"使用服务角色\"}},\"grafanaSpec\":{\"organizationIds\":[]}}}",
- *     instanceId: "grafana-50nj6v00",
+ * const foo = new tencentcloud.monitor.GrafanaInstance("foo", {
+ *     instanceName: "test-grafana",
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     tags: {
+ *         createdBy: "test",
+ *     },
+ * });
+ * const grafanaIntegration = new tencentcloud.monitor.GrafanaIntegration("grafanaIntegration", {
+ *     instanceId: foo.id,
  *     kind: "tencentcloud-monitor-app",
+ *     content: "{\"kind\":\"tencentcloud-monitor-app\",\"spec\":{\"dataSourceSpec\":{\"authProvider\":{\"__anyOf\":\"使用密钥\",\"useRole\":true,\"secretId\":\"arunma@tencent.com\",\"secretKey\":\"12345678\"},\"name\":\"uint-test\"},\"grafanaSpec\":{\"organizationIds\":[]}}}",
  * });
  * ```
  */

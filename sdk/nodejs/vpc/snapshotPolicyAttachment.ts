@@ -12,24 +12,43 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const snapshotPolicyAttachment = new tencentcloud.Vpc.SnapshotPolicyAttachment("snapshot_policy_attachment", {
- *     instances: [
+ * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
+ *     bucket: "tf-example-1308919341",
+ *     acl: "private",
+ * });
+ * const exampleSnapshotPolicy = new tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy", {
+ *     snapshotPolicyName: "tf-example",
+ *     backupType: "time",
+ *     cosBucket: exampleBucket.bucket,
+ *     cosRegion: "ap-guangzhou",
+ *     createNewCos: false,
+ *     keepTime: 2,
+ *     backupPolicies: [
  *         {
- *             instanceId: "sg-r8ibzbd9",
- *             instanceName: "cm-eks-cls-eizsc1iw-security-group",
- *             instanceRegion: "ap-guangzhou",
- *             instanceType: "securitygroup",
+ *             backupDay: "monday",
+ *             backupTime: "00:00:00",
  *         },
  *         {
- *             instanceId: "sg-k3tn70lh",
- *             instanceName: "keep-ci-temp-test-sg",
- *             instanceRegion: "ap-guangzhou",
- *             instanceType: "securitygroup",
+ *             backupDay: "tuesday",
+ *             backupTime: "01:00:00",
+ *         },
+ *         {
+ *             backupDay: "wednesday",
+ *             backupTime: "02:00:00",
  *         },
  *     ],
- *     snapshotPolicyId: "sspolicy-1t6cobbv",
+ * });
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {description: "desc."});
+ * const attachment = new tencentcloud.vpc.SnapshotPolicyAttachment("attachment", {
+ *     snapshotPolicyId: exampleSnapshotPolicy.id,
+ *     instances: [{
+ *         instanceType: "securitygroup",
+ *         instanceId: exampleGroup.id,
+ *         instanceName: "tf-example",
+ *         instanceRegion: "ap-guangzhou",
+ *     }],
  * });
  * ```
  *

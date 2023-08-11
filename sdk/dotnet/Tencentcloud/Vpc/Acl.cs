@@ -17,17 +17,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var @default = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync());
-    ///         var foo = new Tencentcloud.Vpc.Acl("foo", new Tencentcloud.Vpc.AclArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             VpcId = @default.Apply(@default =&gt; @default.InstanceLists?[0]?.VpcId),
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var example = new Tencentcloud.Vpc.Acl("example", new Tencentcloud.Vpc.AclArgs
+    ///         {
+    ///             VpcId = vpc.Id,
     ///             Ingresses = 
     ///             {
     ///                 "ACCEPT#192.168.1.0/24#800#TCP",

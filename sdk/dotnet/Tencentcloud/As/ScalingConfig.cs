@@ -19,66 +19,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var launchConfiguration = new Tencentcloud.As.ScalingConfig("launchConfiguration", new Tencentcloud.As.ScalingConfigArgs
+    ///         var exampleInstance = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
     ///         {
-    ///             ConfigurationName = "launch-configuration",
-    ///             DataDisks = 
+    ///             ImageTypes = 
     ///             {
-    ///                 new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
-    ///                 {
-    ///                     DiskSize = 50,
-    ///                     DiskType = "CLOUD_PREMIUM",
-    ///                 },
+    ///                 "PUBLIC_IMAGE",
     ///             },
-    ///             EnhancedMonitorService = false,
-    ///             EnhancedSecurityService = false,
-    ///             ImageId = "img-9qabwvbn",
-    ///             InstanceTags = 
-    ///             {
-    ///                 { "tag", "as" },
-    ///             },
+    ///             OsName = "TencentOS Server 3.2 (Final)",
+    ///         }));
+    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
+    ///         {
+    ///             ConfigurationName = "example-launch-configuration",
+    ///             ImageId = exampleInstance.Apply(exampleInstance =&gt; exampleInstance.Images?[0]?.ImageId),
     ///             InstanceTypes = 
     ///             {
     ///                 "SA1.SMALL1",
     ///             },
+    ///             ProjectId = 0,
+    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             SystemDiskSize = 50,
+    ///             DataDisks = 
+    ///             {
+    ///                 new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+    ///                 {
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
+    ///                 },
+    ///             },
     ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
     ///             InternetMaxBandwidthOut = 10,
-    ///             Password = "test123#",
-    ///             ProjectId = 0,
     ///             PublicIpAssigned = true,
-    ///             SystemDiskSize = 50,
-    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             Password = "Test@123#",
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
     ///             UserData = "dGVzdA==",
+    ///             InstanceTags = 
+    ///             {
+    ///                 { "tag", "example" },
+    ///             },
     ///         });
     ///     }
     /// 
     /// }
     /// ```
-    /// ### Using SPOT charge type
+    /// ### charge type
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var launchConfiguration = new Tencentcloud.As.ScalingConfig("launchConfiguration", new Tencentcloud.As.ScalingConfigArgs
+    ///         var exampleInstance = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
+    ///         {
+    ///             ImageTypes = 
+    ///             {
+    ///                 "PUBLIC_IMAGE",
+    ///             },
+    ///             OsName = "TencentOS Server 3.2 (Final)",
+    ///         }));
+    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
     ///         {
     ///             ConfigurationName = "launch-configuration",
-    ///             ImageId = "img-9qabwvbn",
-    ///             InstanceChargeType = "SPOTPAID",
+    ///             ImageId = exampleInstance.Apply(exampleInstance =&gt; exampleInstance.Images?[0]?.ImageId),
     ///             InstanceTypes = 
     ///             {
     ///                 "SA1.SMALL1",
     ///             },
+    ///             InstanceChargeType = "SPOTPAID",
     ///             SpotInstanceType = "one-time",
     ///             SpotMaxPrice = "1000",
     ///         });

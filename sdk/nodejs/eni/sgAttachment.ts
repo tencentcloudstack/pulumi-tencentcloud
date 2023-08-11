@@ -11,13 +11,44 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const eniSgAttachment = new tencentcloud.Eni.SgAttachment("eni_sg_attachment", {
- *     networkInterfaceIds: "eni-p0hkgx8p",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "vpc",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const example1 = new tencentcloud.security.Group("example1", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const example2 = new tencentcloud.security.Group("example2", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const example = new tencentcloud.eni.Instance("example", {
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     description: "eni desc.",
+ *     ipv4Count: 1,
+ * });
+ * const eniSgAttachment = new tencentcloud.eni.SgAttachment("eniSgAttachment", {
+ *     networkInterfaceIds: [example.id],
  *     securityGroupIds: [
- *         "sg-902tl7t7",
- *         "sg-edmur627",
+ *         example1.id,
+ *         example2.id,
  *     ],
  * });
  * ```

@@ -8,15 +8,67 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver configDatabaseCdc
  *
  * ## Example Usage
+ * ### Turn off database data change capture (CDC)
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const configDatabaseCdc = new tencentcloud.Sqlserver.ConfigDatabaseCdc("config_database_cdc", {
- *     dbName: "keep_pubsub_db2",
- *     instanceId: "mssql-qelbzgwf",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleConfigDatabaseCdc = new tencentcloud.sqlserver.ConfigDatabaseCdc("exampleConfigDatabaseCdc", {
+ *     instanceId: exampleBasicInstance.id,
+ *     dbName: exampleDb.name,
  *     modifyType: "disable",
+ * });
+ * ```
+ * ### Enable Database Data Change Capture (CDC)
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.sqlserver.ConfigDatabaseCdc("example", {
+ *     instanceId: tencentcloud_sqlserver_basic_instance.example.id,
+ *     dbName: tencentcloud_sqlserver_db.example.name,
+ *     modifyType: "enable",
  * });
  * ```
  *
@@ -25,7 +77,7 @@ import * as utilities from "../utilities";
  * sqlserver config_database_cdc can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc config_database_cdc config_database_cdc_id
+ *  $ pulumi import tencentcloud:Sqlserver/configDatabaseCdc:ConfigDatabaseCdc example mssql-i9ma6oy7#tf_example_db
  * ```
  */
 export class ConfigDatabaseCdc extends pulumi.CustomResource {

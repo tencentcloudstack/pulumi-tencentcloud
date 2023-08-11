@@ -89,7 +89,7 @@ def get_instance_param_records(instance_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    instance_param_records = tencentcloud.Sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
     ```
 
 
@@ -127,7 +127,7 @@ def get_instance_param_records_output(instance_id: Optional[pulumi.Input[str]] =
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    instance_param_records = tencentcloud.Sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
     ```
 
 

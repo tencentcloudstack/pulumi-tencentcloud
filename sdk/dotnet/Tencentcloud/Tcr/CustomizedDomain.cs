@@ -11,9 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr customized_domain
+    /// Provides a resource to create a tcr customized domain
     /// 
     /// ## Example Usage
+    /// ### Create a tcr customized domain
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,11 +24,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var myDomain = new Tencentcloud.Tcr.CustomizedDomain("myDomain", new Tencentcloud.Tcr.CustomizedDomainArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             RegistryId = local.Tcr_id,
+    ///             InstanceType = "premium",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleCustomizedDomain = new Tencentcloud.Tcr.CustomizedDomain("exampleCustomizedDomain", new Tencentcloud.Tcr.CustomizedDomainArgs
+    ///         {
+    ///             RegistryId = exampleInstance.Id,
     ///             DomainName = "www.test.com",
-    ///             CertificateId = "%s",
+    ///             CertificateId = "your_cert_id",
     ///             Tags = 
     ///             {
     ///                 { "createdBy", "terraform" },

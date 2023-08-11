@@ -89,7 +89,7 @@ class _PolicyByNameState:
                terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
                Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
         :param pulumi.Input[str] name: Name of CAM policy.
-        :param pulumi.Input[int] type: Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        :param pulumi.Input[int] type: Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         :param pulumi.Input[str] update_time: The last update time of the CAM policy.
         """
         if create_time is not None:
@@ -160,7 +160,7 @@ class _PolicyByNameState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         """
         return pulumi.get(self, "type")
 
@@ -191,7 +191,42 @@ class PolicyByName(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a PolicyByName resource with the given unique name, props, and options.
+        Provides a resource to create a CAM policy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cam.PolicyByName("foo",
+            description="tf_test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": [
+                "name/sts:AssumeRole"
+              ],
+              "effect": "allow",
+              "resource": [
+                "*"
+              ]
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        CAM policy can be imported using the name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description of the CAM policy.
@@ -208,7 +243,42 @@ class PolicyByName(pulumi.CustomResource):
                  args: PolicyByNameArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a PolicyByName resource with the given unique name, props, and options.
+        Provides a resource to create a CAM policy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cam.PolicyByName("foo",
+            description="tf_test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": [
+                "name/sts:AssumeRole"
+              ],
+              "effect": "allow",
+              "resource": [
+                "*"
+              ]
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        CAM policy can be imported using the name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+        ```
+
         :param str resource_name: The name of the resource.
         :param PolicyByNameArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -279,7 +349,7 @@ class PolicyByName(pulumi.CustomResource):
                terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
                Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
         :param pulumi.Input[str] name: Name of CAM policy.
-        :param pulumi.Input[int] type: Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        :param pulumi.Input[int] type: Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         :param pulumi.Input[str] update_time: The last update time of the CAM policy.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -333,7 +403,7 @@ class PolicyByName(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[int]:
         """
-        Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+        Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
         """
         return pulumi.get(self, "type")
 

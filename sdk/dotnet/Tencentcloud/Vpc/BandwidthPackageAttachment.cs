@@ -12,29 +12,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     /// <summary>
     /// Provides a resource to create a vpc bandwidth_package_attachment
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var bandwidthPackageAttachment = new Tencentcloud.Vpc.BandwidthPackageAttachment("bandwidthPackageAttachment", new Tencentcloud.Vpc.BandwidthPackageAttachmentArgs
-    ///         {
-    ///             BandwidthPackageId = "bwp-atmf0p9g",
-    ///             NetworkType = "BGP",
-    ///             Protocol = "",
-    ///             ResourceId = "lb-dv1ai6ma",
-    ///             ResourceType = "LoadBalance",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment")]
     public partial class BandwidthPackageAttachment : Pulumi.CustomResource

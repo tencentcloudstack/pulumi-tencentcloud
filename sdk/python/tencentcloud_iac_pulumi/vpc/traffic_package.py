@@ -121,7 +121,7 @@ class TrafficPackage(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        traffic_package = tencentcloud.vpc.TrafficPackage("trafficPackage", traffic_amount=10)
+        example = tencentcloud.vpc.TrafficPackage("example", traffic_amount=10)
         ```
 
         ## Import
@@ -151,7 +151,7 @@ class TrafficPackage(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        traffic_package = tencentcloud.vpc.TrafficPackage("trafficPackage", traffic_amount=10)
+        example = tencentcloud.vpc.TrafficPackage("example", traffic_amount=10)
         ```
 
         ## Import

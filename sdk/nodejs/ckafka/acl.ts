@@ -62,7 +62,7 @@ export class Acl extends pulumi.CustomResource {
     }
 
     /**
-     * IP address allowed to access. The default value is `*`, which means that any host can access.
+     * The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
      */
     public readonly host!: pulumi.Output<string | undefined>;
     /**
@@ -78,7 +78,7 @@ export class Acl extends pulumi.CustomResource {
      */
     public readonly permissionType!: pulumi.Output<string | undefined>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
      */
     public readonly principal!: pulumi.Output<string | undefined>;
     /**
@@ -139,7 +139,7 @@ export class Acl extends pulumi.CustomResource {
  */
 export interface AclState {
     /**
-     * IP address allowed to access. The default value is `*`, which means that any host can access.
+     * The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
      */
     host?: pulumi.Input<string>;
     /**
@@ -155,7 +155,7 @@ export interface AclState {
      */
     permissionType?: pulumi.Input<string>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
      */
     principal?: pulumi.Input<string>;
     /**
@@ -173,7 +173,7 @@ export interface AclState {
  */
 export interface AclArgs {
     /**
-     * IP address allowed to access. The default value is `*`, which means that any host can access.
+     * The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
      */
     host?: pulumi.Input<string>;
     /**
@@ -189,7 +189,7 @@ export interface AclArgs {
      */
     permissionType?: pulumi.Input<string>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
      */
     principal?: pulumi.Input<string>;
     /**

@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetBotManagedRulesRuleResult
     {
-        /// <summary>
-        /// Description of the rule.
-        /// </summary>
         public readonly string Description;
-        /// <summary>
-        /// Rule ID.
-        /// </summary>
         public readonly int RuleId;
-        /// <summary>
-        /// Type of the rule.
-        /// </summary>
         public readonly string RuleTypeName;
-        /// <summary>
-        /// Status of the rule.
-        /// </summary>
         public readonly string Status;
 
         [OutputConstructor]

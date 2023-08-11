@@ -27701,6 +27701,218 @@ func (o InstanceTagArrayOutput) Index(i pulumi.IntInput) InstanceTagOutput {
 	}).(InstanceTagOutput)
 }
 
+type RouteBrokerVipList struct {
+	// Virtual IP.
+	Vip *string `pulumi:"vip"`
+	// Virtual port.
+	Vport *string `pulumi:"vport"`
+}
+
+// RouteBrokerVipListInput is an input type that accepts RouteBrokerVipListArgs and RouteBrokerVipListOutput values.
+// You can construct a concrete instance of `RouteBrokerVipListInput` via:
+//
+//          RouteBrokerVipListArgs{...}
+type RouteBrokerVipListInput interface {
+	pulumi.Input
+
+	ToRouteBrokerVipListOutput() RouteBrokerVipListOutput
+	ToRouteBrokerVipListOutputWithContext(context.Context) RouteBrokerVipListOutput
+}
+
+type RouteBrokerVipListArgs struct {
+	// Virtual IP.
+	Vip pulumi.StringPtrInput `pulumi:"vip"`
+	// Virtual port.
+	Vport pulumi.StringPtrInput `pulumi:"vport"`
+}
+
+func (RouteBrokerVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteBrokerVipList)(nil)).Elem()
+}
+
+func (i RouteBrokerVipListArgs) ToRouteBrokerVipListOutput() RouteBrokerVipListOutput {
+	return i.ToRouteBrokerVipListOutputWithContext(context.Background())
+}
+
+func (i RouteBrokerVipListArgs) ToRouteBrokerVipListOutputWithContext(ctx context.Context) RouteBrokerVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteBrokerVipListOutput)
+}
+
+// RouteBrokerVipListArrayInput is an input type that accepts RouteBrokerVipListArray and RouteBrokerVipListArrayOutput values.
+// You can construct a concrete instance of `RouteBrokerVipListArrayInput` via:
+//
+//          RouteBrokerVipListArray{ RouteBrokerVipListArgs{...} }
+type RouteBrokerVipListArrayInput interface {
+	pulumi.Input
+
+	ToRouteBrokerVipListArrayOutput() RouteBrokerVipListArrayOutput
+	ToRouteBrokerVipListArrayOutputWithContext(context.Context) RouteBrokerVipListArrayOutput
+}
+
+type RouteBrokerVipListArray []RouteBrokerVipListInput
+
+func (RouteBrokerVipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteBrokerVipList)(nil)).Elem()
+}
+
+func (i RouteBrokerVipListArray) ToRouteBrokerVipListArrayOutput() RouteBrokerVipListArrayOutput {
+	return i.ToRouteBrokerVipListArrayOutputWithContext(context.Background())
+}
+
+func (i RouteBrokerVipListArray) ToRouteBrokerVipListArrayOutputWithContext(ctx context.Context) RouteBrokerVipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteBrokerVipListArrayOutput)
+}
+
+type RouteBrokerVipListOutput struct{ *pulumi.OutputState }
+
+func (RouteBrokerVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteBrokerVipList)(nil)).Elem()
+}
+
+func (o RouteBrokerVipListOutput) ToRouteBrokerVipListOutput() RouteBrokerVipListOutput {
+	return o
+}
+
+func (o RouteBrokerVipListOutput) ToRouteBrokerVipListOutputWithContext(ctx context.Context) RouteBrokerVipListOutput {
+	return o
+}
+
+// Virtual IP.
+func (o RouteBrokerVipListOutput) Vip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RouteBrokerVipList) *string { return v.Vip }).(pulumi.StringPtrOutput)
+}
+
+// Virtual port.
+func (o RouteBrokerVipListOutput) Vport() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RouteBrokerVipList) *string { return v.Vport }).(pulumi.StringPtrOutput)
+}
+
+type RouteBrokerVipListArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteBrokerVipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteBrokerVipList)(nil)).Elem()
+}
+
+func (o RouteBrokerVipListArrayOutput) ToRouteBrokerVipListArrayOutput() RouteBrokerVipListArrayOutput {
+	return o
+}
+
+func (o RouteBrokerVipListArrayOutput) ToRouteBrokerVipListArrayOutputWithContext(ctx context.Context) RouteBrokerVipListArrayOutput {
+	return o
+}
+
+func (o RouteBrokerVipListArrayOutput) Index(i pulumi.IntInput) RouteBrokerVipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteBrokerVipList {
+		return vs[0].([]RouteBrokerVipList)[vs[1].(int)]
+	}).(RouteBrokerVipListOutput)
+}
+
+type RouteVipList struct {
+	// Virtual IP.
+	Vip *string `pulumi:"vip"`
+	// Virtual port.
+	Vport *string `pulumi:"vport"`
+}
+
+// RouteVipListInput is an input type that accepts RouteVipListArgs and RouteVipListOutput values.
+// You can construct a concrete instance of `RouteVipListInput` via:
+//
+//          RouteVipListArgs{...}
+type RouteVipListInput interface {
+	pulumi.Input
+
+	ToRouteVipListOutput() RouteVipListOutput
+	ToRouteVipListOutputWithContext(context.Context) RouteVipListOutput
+}
+
+type RouteVipListArgs struct {
+	// Virtual IP.
+	Vip pulumi.StringPtrInput `pulumi:"vip"`
+	// Virtual port.
+	Vport pulumi.StringPtrInput `pulumi:"vport"`
+}
+
+func (RouteVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteVipList)(nil)).Elem()
+}
+
+func (i RouteVipListArgs) ToRouteVipListOutput() RouteVipListOutput {
+	return i.ToRouteVipListOutputWithContext(context.Background())
+}
+
+func (i RouteVipListArgs) ToRouteVipListOutputWithContext(ctx context.Context) RouteVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteVipListOutput)
+}
+
+// RouteVipListArrayInput is an input type that accepts RouteVipListArray and RouteVipListArrayOutput values.
+// You can construct a concrete instance of `RouteVipListArrayInput` via:
+//
+//          RouteVipListArray{ RouteVipListArgs{...} }
+type RouteVipListArrayInput interface {
+	pulumi.Input
+
+	ToRouteVipListArrayOutput() RouteVipListArrayOutput
+	ToRouteVipListArrayOutputWithContext(context.Context) RouteVipListArrayOutput
+}
+
+type RouteVipListArray []RouteVipListInput
+
+func (RouteVipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteVipList)(nil)).Elem()
+}
+
+func (i RouteVipListArray) ToRouteVipListArrayOutput() RouteVipListArrayOutput {
+	return i.ToRouteVipListArrayOutputWithContext(context.Background())
+}
+
+func (i RouteVipListArray) ToRouteVipListArrayOutputWithContext(ctx context.Context) RouteVipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteVipListArrayOutput)
+}
+
+type RouteVipListOutput struct{ *pulumi.OutputState }
+
+func (RouteVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteVipList)(nil)).Elem()
+}
+
+func (o RouteVipListOutput) ToRouteVipListOutput() RouteVipListOutput {
+	return o
+}
+
+func (o RouteVipListOutput) ToRouteVipListOutputWithContext(ctx context.Context) RouteVipListOutput {
+	return o
+}
+
+// Virtual IP.
+func (o RouteVipListOutput) Vip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RouteVipList) *string { return v.Vip }).(pulumi.StringPtrOutput)
+}
+
+// Virtual port.
+func (o RouteVipListOutput) Vport() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RouteVipList) *string { return v.Vport }).(pulumi.StringPtrOutput)
+}
+
+type RouteVipListArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteVipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteVipList)(nil)).Elem()
+}
+
+func (o RouteVipListArrayOutput) ToRouteVipListArrayOutput() RouteVipListArrayOutput {
+	return o
+}
+
+func (o RouteVipListArrayOutput) ToRouteVipListArrayOutputWithContext(ctx context.Context) RouteVipListArrayOutput {
+	return o
+}
+
+func (o RouteVipListArrayOutput) Index(i pulumi.IntInput) RouteVipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteVipList {
+		return vs[0].([]RouteVipList)[vs[1].(int)]
+	}).(RouteVipListOutput)
+}
+
 type GetAclsAclList struct {
 	// Host substr used for querying.
 	Host string `pulumi:"host"`
@@ -44705,6 +44917,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDynamicRetentionConfigPtrInput)(nil)).Elem(), InstanceDynamicRetentionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTagInput)(nil)).Elem(), InstanceTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTagArrayInput)(nil)).Elem(), InstanceTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteBrokerVipListInput)(nil)).Elem(), RouteBrokerVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteBrokerVipListArrayInput)(nil)).Elem(), RouteBrokerVipListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteVipListInput)(nil)).Elem(), RouteVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteVipListArrayInput)(nil)).Elem(), RouteVipListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListInput)(nil)).Elem(), GetAclsAclListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAclsAclListArrayInput)(nil)).Elem(), GetAclsAclListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectResourceResultInput)(nil)).Elem(), GetConnectResourceResultArgs{})
@@ -45154,6 +45370,10 @@ func init() {
 	pulumi.RegisterOutputType(InstanceDynamicRetentionConfigPtrOutput{})
 	pulumi.RegisterOutputType(InstanceTagOutput{})
 	pulumi.RegisterOutputType(InstanceTagArrayOutput{})
+	pulumi.RegisterOutputType(RouteBrokerVipListOutput{})
+	pulumi.RegisterOutputType(RouteBrokerVipListArrayOutput{})
+	pulumi.RegisterOutputType(RouteVipListOutput{})
+	pulumi.RegisterOutputType(RouteVipListArrayOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListOutput{})
 	pulumi.RegisterOutputType(GetAclsAclListArrayOutput{})
 	pulumi.RegisterOutputType(GetConnectResourceResultOutput{})

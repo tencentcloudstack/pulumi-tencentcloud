@@ -229,18 +229,67 @@ class Account(pulumi.CustomResource):
         Provides a resource to create a redis account
 
         ## Example Usage
+        ### Create an account with read and write permissions
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
         account = tencentcloud.redis.Account("account",
+            instance_id=foo.id,
             account_name="account_test",
             account_password="test1234",
-            instance_id="crs-xxxxxx",
-            privilege="rw",
+            remark="master",
             readonly_policies=["master"],
-            remark="master")
+            privilege="rw")
+        ```
+        ### Create an account with read-only permissions
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        account = tencentcloud.redis.Account("account",
+            instance_id=foo.id,
+            account_name="account_test",
+            account_password="test1234",
+            remark="master",
+            readonly_policies=["master"],
+            privilege="r")
         ```
 
         ## Import
@@ -270,18 +319,67 @@ class Account(pulumi.CustomResource):
         Provides a resource to create a redis account
 
         ## Example Usage
+        ### Create an account with read and write permissions
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
         account = tencentcloud.redis.Account("account",
+            instance_id=foo.id,
             account_name="account_test",
             account_password="test1234",
-            instance_id="crs-xxxxxx",
-            privilege="rw",
+            remark="master",
             readonly_policies=["master"],
-            remark="master")
+            privilege="rw")
+        ```
+        ### Create an account with read-only permissions
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        account = tencentcloud.redis.Account("account",
+            instance_id=foo.id,
+            account_name="account_test",
+            account_password="test1234",
+            remark="master",
+            readonly_policies=["master"],
+            privilege="r")
         ```
 
         ## Import

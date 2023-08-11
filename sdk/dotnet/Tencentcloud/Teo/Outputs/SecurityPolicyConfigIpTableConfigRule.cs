@@ -14,17 +14,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigIpTableConfigRule
     {
-        /// <summary>
-        /// Actions to take. Valid values: `drop`, `trans`, `monitor`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Matching content.
-        /// </summary>
         public readonly string? MatchContent;
-        /// <summary>
-        /// Matching type. Valid values: `ip`, `area`.
-        /// </summary>
         public readonly string? MatchFrom;
         public readonly int? RuleId;
         public readonly string? UpdateTime;

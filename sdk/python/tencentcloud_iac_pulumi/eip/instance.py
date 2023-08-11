@@ -13,6 +13,7 @@ __all__ = ['InstanceArgs', 'Instance']
 @pulumi.input_type
 class InstanceArgs:
     def __init__(__self__, *,
+                 anti_ddos_package_id: Optional[pulumi.Input[str]] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
@@ -26,6 +27,7 @@ class InstanceArgs:
                  type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
+        :param pulumi.Input[str] anti_ddos_package_id: ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
@@ -36,8 +38,10 @@ class InstanceArgs:
         :param pulumi.Input[str] name: The name of eip.
         :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
+        if anti_ddos_package_id is not None:
+            pulumi.set(__self__, "anti_ddos_package_id", anti_ddos_package_id)
         if anycast_zone is not None:
             pulumi.set(__self__, "anycast_zone", anycast_zone)
         if applicable_for_clb is not None:
@@ -63,6 +67,18 @@ class InstanceArgs:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
             pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="antiDdosPackageId")
+    def anti_ddos_package_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        """
+        return pulumi.get(self, "anti_ddos_package_id")
+
+    @anti_ddos_package_id.setter
+    def anti_ddos_package_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "anti_ddos_package_id", value)
 
     @property
     @pulumi.getter(name="anycastZone")
@@ -188,7 +204,7 @@ class InstanceArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 
@@ -200,6 +216,7 @@ class InstanceArgs:
 @pulumi.input_type
 class _InstanceState:
     def __init__(__self__, *,
+                 anti_ddos_package_id: Optional[pulumi.Input[str]] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
@@ -215,6 +232,7 @@ class _InstanceState:
                  type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
+        :param pulumi.Input[str] anti_ddos_package_id: ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
@@ -227,8 +245,10 @@ class _InstanceState:
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
+        if anti_ddos_package_id is not None:
+            pulumi.set(__self__, "anti_ddos_package_id", anti_ddos_package_id)
         if anycast_zone is not None:
             pulumi.set(__self__, "anycast_zone", anycast_zone)
         if applicable_for_clb is not None:
@@ -258,6 +278,18 @@ class _InstanceState:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
             pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="antiDdosPackageId")
+    def anti_ddos_package_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        """
+        return pulumi.get(self, "anti_ddos_package_id")
+
+    @anti_ddos_package_id.setter
+    def anti_ddos_package_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "anti_ddos_package_id", value)
 
     @property
     @pulumi.getter(name="anycastZone")
@@ -407,7 +439,7 @@ class _InstanceState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 
@@ -421,6 +453,7 @@ class Instance(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 anti_ddos_package_id: Optional[pulumi.Input[str]] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
@@ -437,6 +470,7 @@ class Instance(pulumi.CustomResource):
         Provides an EIP resource.
 
         ## Example Usage
+        ### Paid by the bandwidth package
 
         ```python
         import pulumi
@@ -446,6 +480,21 @@ class Instance(pulumi.CustomResource):
             bandwidth_package_id="bwp-jtvzuky6",
             internet_charge_type="BANDWIDTH_PACKAGE",
             type="EIP")
+        ```
+        ### AntiDDos Eip
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.eip.Instance("foo",
+            anti_ddos_package_id="xxxxxxxx",
+            bandwidth_package_id="bwp-4ocyia9s",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            tags={
+                "test": "test",
+            },
+            type="AntiDDoSEIP")
         ```
 
         ## Import
@@ -458,6 +507,7 @@ class Instance(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] anti_ddos_package_id: ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
@@ -468,7 +518,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of eip.
         :param pulumi.Input[int] prepaid_period: Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internet_charge_type` is `BANDWIDTH_PREPAID_BY_MONTH`.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
         ...
     @overload
@@ -480,6 +530,7 @@ class Instance(pulumi.CustomResource):
         Provides an EIP resource.
 
         ## Example Usage
+        ### Paid by the bandwidth package
 
         ```python
         import pulumi
@@ -489,6 +540,21 @@ class Instance(pulumi.CustomResource):
             bandwidth_package_id="bwp-jtvzuky6",
             internet_charge_type="BANDWIDTH_PACKAGE",
             type="EIP")
+        ```
+        ### AntiDDos Eip
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.eip.Instance("foo",
+            anti_ddos_package_id="xxxxxxxx",
+            bandwidth_package_id="bwp-4ocyia9s",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            tags={
+                "test": "test",
+            },
+            type="AntiDDoSEIP")
         ```
 
         ## Import
@@ -514,6 +580,7 @@ class Instance(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 anti_ddos_package_id: Optional[pulumi.Input[str]] = None,
                  anycast_zone: Optional[pulumi.Input[str]] = None,
                  applicable_for_clb: Optional[pulumi.Input[bool]] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
@@ -539,6 +606,7 @@ class Instance(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = InstanceArgs.__new__(InstanceArgs)
 
+            __props__.__dict__["anti_ddos_package_id"] = anti_ddos_package_id
             __props__.__dict__["anycast_zone"] = anycast_zone
             if applicable_for_clb is not None and not opts.urn:
                 warnings.warn("""It has been deprecated from version 1.27.0.""", DeprecationWarning)
@@ -565,6 +633,7 @@ class Instance(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            anti_ddos_package_id: Optional[pulumi.Input[str]] = None,
             anycast_zone: Optional[pulumi.Input[str]] = None,
             applicable_for_clb: Optional[pulumi.Input[bool]] = None,
             auto_renew_flag: Optional[pulumi.Input[int]] = None,
@@ -585,6 +654,7 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] anti_ddos_package_id: ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
         :param pulumi.Input[str] anycast_zone: The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         :param pulumi.Input[bool] applicable_for_clb: It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
@@ -597,12 +667,13 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] public_ip: The elastic IP address.
         :param pulumi.Input[str] status: The EIP current status.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of eip.
-        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        :param pulumi.Input[str] type: The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _InstanceState.__new__(_InstanceState)
 
+        __props__.__dict__["anti_ddos_package_id"] = anti_ddos_package_id
         __props__.__dict__["anycast_zone"] = anycast_zone
         __props__.__dict__["applicable_for_clb"] = applicable_for_clb
         __props__.__dict__["auto_renew_flag"] = auto_renew_flag
@@ -617,6 +688,14 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         __props__.__dict__["type"] = type
         return Instance(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="antiDdosPackageId")
+    def anti_ddos_package_id(self) -> pulumi.Output[str]:
+        """
+        ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        """
+        return pulumi.get(self, "anti_ddos_package_id")
 
     @property
     @pulumi.getter(name="anycastZone")
@@ -718,7 +797,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[Optional[str]]:
         """
-        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         """
         return pulumi.get(self, "type")
 

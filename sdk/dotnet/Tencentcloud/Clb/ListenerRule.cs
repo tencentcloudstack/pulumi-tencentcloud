@@ -92,7 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Output("forwardType")]
         public Output<string> ForwardType { get; private set; } = null!;
@@ -277,7 +277,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> Domain { get; set; } = null!;
 
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Input("forwardType")]
         public Input<string>? ForwardType { get; set; }
@@ -416,7 +416,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? Domain { get; set; }
 
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Input("forwardType")]
         public Input<string>? ForwardType { get; set; }

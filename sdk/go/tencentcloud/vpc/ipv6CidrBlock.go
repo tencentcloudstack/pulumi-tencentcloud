@@ -25,15 +25,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewInstance(ctx, "cidr-block", &Vpc.InstanceArgs{
-// 			CidrBlock:   pulumi.String("10.0.0.0/16"),
-// 			IsMulticast: pulumi.Bool(false),
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Vpc.NewIpv6CidrBlock(ctx, "ipv6CidrBlock", &Vpc.Ipv6CidrBlockArgs{
-// 			VpcId: cidr_block.ID(),
+// 		_, err = Vpc.NewIpv6CidrBlock(ctx, "example", &Vpc.Ipv6CidrBlockArgs{
+// 			VpcId: vpc.ID(),
 // 		})
 // 		if err != nil {
 // 			return err

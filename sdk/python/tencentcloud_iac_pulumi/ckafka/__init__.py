@@ -32,6 +32,7 @@ from .get_users import *
 from .get_zone import *
 from .instance import *
 from .renew_instance import *
+from .route import *
 from .topic import *
 from .user import *
 from ._inputs import *

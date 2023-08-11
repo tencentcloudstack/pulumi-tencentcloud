@@ -7,22 +7,6 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a vpc ipv6EniAddress
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const ipv6EniAddress = new tencentcloud.Vpc.Ipv6EniAddress("ipv6_eni_address", {
- *     ipv6Addresses: [{
- *         address: "2402:4e00:1019:6a7b:0:994e:7cd7:fb46",
- *         description: "test123",
- *     }],
- *     networkInterfaceId: "eni-pzl7fz37",
- *     vpcId: "vpc-7w3kgnpl",
- * });
- * ```
  */
 export class Ipv6EniAddress extends pulumi.CustomResource {
     /**

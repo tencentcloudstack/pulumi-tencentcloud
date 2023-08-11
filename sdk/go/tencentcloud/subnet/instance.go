@@ -13,45 +13,6 @@ import (
 
 // Provide a resource to create a VPC subnet.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			VpcId:            foo.ID(),
-// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // Vpc subnet instance can be imported, e.g.

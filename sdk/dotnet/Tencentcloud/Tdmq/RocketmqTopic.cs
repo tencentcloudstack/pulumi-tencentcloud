@@ -23,26 +23,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test recket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var @namespace = new Tencentcloud.Tdmq.RocketmqNamespace("namespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
     ///         {
-    ///             ClusterId = cluster.ClusterId,
-    ///             NamespaceName = "test_namespace",
-    ///             Ttl = 65000,
-    ///             RetentionTime = 65000,
-    ///             Remark = "test namespace",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             NamespaceName = "tf_example_namespace",
+    ///             Remark = "remark.",
     ///         });
-    ///         var topic = new Tencentcloud.Tdmq.RocketmqTopic("topic", new Tencentcloud.Tdmq.RocketmqTopicArgs
+    ///         var exampleRocketmqTopic = new Tencentcloud.Tdmq.RocketmqTopic("exampleRocketmqTopic", new Tencentcloud.Tdmq.RocketmqTopicArgs
     ///         {
-    ///             TopicName = "test_rocketmq_topic",
-    ///             NamespaceName = @namespace.NamespaceName,
+    ///             TopicName = "tf_example",
+    ///             NamespaceName = exampleRocketmqNamespace.NamespaceName,
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
     ///             Type = "Normal",
-    ///             ClusterId = cluster.ClusterId,
-    ///             Remark = "test rocketmq topic",
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 

@@ -9,37 +9,80 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
  *
+ * > **NOTE:** The value of parameter `parameters` can be used with tencentcloud.Mysql.getParameterList to obtain.
+ *
  * ## Example Usage
+ * ### Create a single node instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const defaultInstance = new tencentcloud.Mysql.Instance("default", {
- *     availabilityZone: "ap-guangzhou-4",
- *     chargeType: "POSTPAID",
- *     engineVersion: "5.7",
- *     firstSlaveZone: "ap-guangzhou-4",
- *     instanceName: "myTestMysql",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const example = new tencentcloud.mysql.Instance("example", {
  *     internetService: 1,
- *     intranetPort: 3306,
- *     memSize: 128000,
- *     parameters: {
- *         character_set_server: "UTF8",
- *         max_connections: "1000",
- *     },
- *     projectId: 201901010001,
- *     rootPassword: "********",
- *     secondSlaveZone: "ap-guangzhou-4",
- *     securityGroups: ["sg-ot8eclwz"],
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
  *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
  *     slaveSyncMode: 1,
- *     subnetId: "subnet-9uivyb1g",
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
  *     tags: {
  *         name: "test",
  *     },
- *     volumeSize: 250,
- *     vpcId: "vpc-12mt3l31",
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * ```
+ * ### Create a double node instance
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mysql.Instance("example", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 1,
+ *     availabilityZone: data.tencentcloud_availability_zones_by_product.zones.zones[0].name,
+ *     firstSlaveZone: data.tencentcloud_availability_zones_by_product.zones.zones[1].name,
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     subnetId: tencentcloud_subnet.subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [tencentcloud_security_group.security_group.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
  * });
  * ```
  *
@@ -48,7 +91,7 @@ import * as utilities from "../utilities";
  * MySQL instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+ *  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
  * ```
  */
 export class Instance extends pulumi.CustomResource {

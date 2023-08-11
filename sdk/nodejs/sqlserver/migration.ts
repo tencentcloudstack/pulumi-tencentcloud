@@ -13,27 +13,29 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const srcAccount = new tencentcloud.sqlserver.Account("srcAccount", {
- *     instanceId: local.sqlserver_id,
- *     password: "password",
- *     isAdmin: true,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
  * });
- * const srcAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment", {
- *     instanceId: local.sqlserver_id,
- *     accountName: srcAccount.name,
- *     dbName: local.sqlserver_db,
- *     privilege: "ReadWrite",
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
  * });
- * const dstInstance = new tencentcloud.sqlserver.Instance("dstInstance", {
- *     availabilityZone: _var.default_az,
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const srcExample = new tencentcloud.sqlserver.BasicInstance("srcExample", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
- *     vpcId: local.vpc_id,
- *     subnetId: local.subnet_id,
- *     securityGroups: [local.sg_id],
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
  *     projectId: 0,
- *     memory: 2,
- *     storage: 10,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
  *     maintenanceWeekSets: [
  *         1,
  *         2,
@@ -41,36 +43,81 @@ import * as utilities from "../utilities";
  *     ],
  *     maintenanceStartTime: "09:00",
  *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
  *     tags: {
  *         test: "test",
  *     },
  * });
- * const dstAccount = new tencentcloud.sqlserver.Account("dstAccount", {
- *     instanceId: dstInstance.id,
- *     password: "password",
- *     isAdmin: true,
+ * const dstExample = new tencentcloud.sqlserver.BasicInstance("dstExample", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
  * });
- * const dstDb = new tencentcloud.sqlserver.Db("dstDb", {
- *     instanceId: dstInstance.id,
+ * const srcDb = new tencentcloud.sqlserver.Db("srcDb", {
+ *     instanceId: srcExample.id,
  *     charset: "Chinese_PRC_BIN",
  *     remark: "testACC-remark",
+ * });
+ * const dstDb = new tencentcloud.sqlserver.Db("dstDb", {
+ *     instanceId: dstExample.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "testACC-remark",
+ * });
+ * const srcAccount = new tencentcloud.sqlserver.Account("srcAccount", {
+ *     instanceId: srcExample.id,
+ *     password: "Qwer@234",
+ *     isAdmin: true,
+ * });
+ * const dstAccount = new tencentcloud.sqlserver.Account("dstAccount", {
+ *     instanceId: dstExample.id,
+ *     password: "Qwer@234",
+ *     isAdmin: true,
+ * });
+ * const srcAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment", {
+ *     instanceId: srcExample.id,
+ *     accountName: srcAccount.name,
+ *     dbName: srcDb.name,
+ *     privilege: "ReadWrite",
+ * });
+ * const dstAccountDbAttachment = new tencentcloud.sqlserver.AccountDbAttachment("dstAccountDbAttachment", {
+ *     instanceId: dstExample.id,
+ *     accountName: dstAccount.name,
+ *     dbName: dstDb.name,
+ *     privilege: "ReadWrite",
  * });
  * const migration = new tencentcloud.sqlserver.Migration("migration", {
  *     migrateName: "tf_test_migration",
  *     migrateType: 1,
  *     sourceType: 1,
  *     source: {
- *         instanceId: local.sqlserver_id,
+ *         instanceId: srcExample.id,
  *         userName: srcAccount.name,
  *         password: srcAccount.password,
  *     },
  *     target: {
- *         instanceId: dstInstance.id,
+ *         instanceId: dstExample.id,
  *         userName: dstAccount.name,
  *         password: dstAccount.password,
  *     },
  *     migrateDbSets: [{
- *         dbName: local.sqlserver_db,
+ *         dbName: srcDb.name,
  *     }],
  * });
  * ```

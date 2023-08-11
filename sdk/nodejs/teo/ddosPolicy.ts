@@ -5,68 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a teo ddosPolicy
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const ddosPolicy = new tencentcloud.Teo.DdosPolicy("ddos_policy", {
- *     ddosRule: {
- *         acl: {
- *             switch: "on",
- *         },
- *         allowBlock: {
- *             switch: "on",
- *         },
- *         antiPly: {
- *             abnormalConnectNum: 0,
- *             abnormalSynNum: 0,
- *             abnormalSynRatio: 0,
- *             connectTimeout: 0,
- *             destinationConnectLimit: 0,
- *             destinationCreateLimit: 0,
- *             dropIcmp: "off",
- *             dropOther: "off",
- *             dropTcp: "off",
- *             dropUdp: "off",
- *             emptyConnectProtect: "off",
- *             sourceConnectLimit: 0,
- *             sourceCreateLimit: 0,
- *             udpShard: "off",
- *         },
- *         geoIp: {
- *             regionIds: [],
- *             switch: "on",
- *         },
- *         packetFilter: {
- *             switch: "on",
- *         },
- *         speedLimit: {
- *             fluxLimit: "0 bps",
- *             packageLimit: "0 pps",
- *         },
- *         statusInfo: {
- *             plyLevel: "middle",
- *         },
- *         switch: "on",
- *     },
- *     policyId: 1278,
- *     zoneId: "zone-2983wizgxqvm",
- * });
- * ```
- *
- * ## Import
- *
- * teo ddos_policy can be imported using the id#ddosPolicy_id, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Teo/ddosPolicy:DdosPolicy ddos_policy zone-2a1u0y616jz6#11587
- * ```
- */
 export class DdosPolicy extends pulumi.CustomResource {
     /**
      * Get an existing DdosPolicy resource's state with the given name, ID, and optional extra

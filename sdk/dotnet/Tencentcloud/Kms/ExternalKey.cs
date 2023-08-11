@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// Provide a resource to create a KMS external key.
     /// 
     /// ## Example Usage
+    /// ### Create a basic instance.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,13 +24,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Kms.ExternalKey("foo", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
     ///         {
-    ///             Alias = "test",
-    ///             Description = "describe key test message.",
+    ///             Alias = "tf-example-kms-externalkey",
+    ///             Description = "example of kms external key",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Specify the encryption algorithm and public key.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-externalkey",
+    ///             Description = "example of kms external key",
     ///             IsEnabled = true,
-    ///             KeyMaterialBase64 = "MTIzMTIzMTIzMTIzMTIzQQ==",
-    ///             ValidTo = 2147443200,
+    ///             KeyMaterialBase64 = "your_public_key_base64_encoded",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///             WrappingAlgorithm = "RSAES_PKCS1_V1_5",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Disable the external kms key.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Kms.ExternalKey("example", new Tencentcloud.Kms.ExternalKeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-externalkey",
+    ///             Description = "example of kms external key",
+    ///             IsEnabled = false,
+    ///             KeyMaterialBase64 = "your_public_key_base64_encoded",
+    ///             Tags = 
+    ///             {
+    ///                 { "test-tag", "unit-test" },
+    ///             },
     ///             WrappingAlgorithm = "RSAES_PKCS1_V1_5",
     ///         });
     ///     }
@@ -42,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// KMS external keys can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+    ///  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/externalKey:ExternalKey")]

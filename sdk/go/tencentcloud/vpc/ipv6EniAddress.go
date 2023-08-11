@@ -12,37 +12,6 @@ import (
 )
 
 // Provides a resource to create a vpc ipv6EniAddress
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewIpv6EniAddress(ctx, "ipv6EniAddress", &Vpc.Ipv6EniAddressArgs{
-// 			Ipv6Addresses: vpc.Ipv6EniAddressIpv6AddressArray{
-// 				&vpc.Ipv6EniAddressIpv6AddressArgs{
-// 					Address:     pulumi.String("2402:4e00:1019:6a7b:0:994e:7cd7:fb46"),
-// 					Description: pulumi.String("test123"),
-// 				},
-// 			},
-// 			NetworkInterfaceId: pulumi.String("eni-pzl7fz37"),
-// 			VpcId:              pulumi.String("vpc-7w3kgnpl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type Ipv6EniAddress struct {
 	pulumi.CustomResourceState
 

@@ -22,7 +22,10 @@ class InstanceArgs:
                  memory: pulumi.Input[int],
                  volume: pulumi.Input[int],
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 hidden_zone: Optional[pulumi.Input[str]] = None,
+                 node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -39,7 +42,14 @@ class InstanceArgs:
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_lists: A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+               - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+               - Version 4.2 and above are not supported.
+               - Read-only disaster recovery instances are not supported.
+               - Basic network cannot be selected.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
@@ -56,8 +66,14 @@ class InstanceArgs:
         pulumi.set(__self__, "volume", volume)
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if availability_zone_lists is not None:
+            pulumi.set(__self__, "availability_zone_lists", availability_zone_lists)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if hidden_zone is not None:
+            pulumi.set(__self__, "hidden_zone", hidden_zone)
+        if node_num is not None:
+            pulumi.set(__self__, "node_num", node_num)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if prepaid_period is not None:
@@ -158,6 +174,22 @@ class InstanceArgs:
         pulumi.set(self, "auto_renew_flag", value)
 
     @property
+    @pulumi.getter(name="availabilityZoneLists")
+    def availability_zone_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        - Version 4.2 and above are not supported.
+        - Read-only disaster recovery instances are not supported.
+        - Basic network cannot be selected.
+        """
+        return pulumi.get(self, "availability_zone_lists")
+
+    @availability_zone_lists.setter
+    def availability_zone_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "availability_zone_lists", value)
+
+    @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -168,6 +200,30 @@ class InstanceArgs:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="hiddenZone")
+    def hidden_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        """
+        return pulumi.get(self, "hidden_zone")
+
+    @hidden_zone.setter
+    def hidden_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hidden_zone", value)
+
+    @property
+    @pulumi.getter(name="nodeNum")
+    def node_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of nodes in each replica set. Default value: 3.
+        """
+        return pulumi.get(self, "node_num")
+
+    @node_num.setter
+    def node_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "node_num", value)
 
     @property
     @pulumi.getter
@@ -258,13 +314,16 @@ class InstanceArgs:
 class _InstanceState:
     def __init__(__self__, *,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
+                 hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -280,13 +339,20 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_lists: A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+               - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+               - Version 4.2 and above are not supported.
+               - Read-only disaster recovery instances are not supported.
+               - Basic network cannot be selected.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
         :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
+        :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
@@ -302,6 +368,8 @@ class _InstanceState:
         """
         if auto_renew_flag is not None:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        if availability_zone_lists is not None:
+            pulumi.set(__self__, "availability_zone_lists", availability_zone_lists)
         if available_zone is not None:
             pulumi.set(__self__, "available_zone", available_zone)
         if charge_type is not None:
@@ -310,12 +378,16 @@ class _InstanceState:
             pulumi.set(__self__, "create_time", create_time)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
+        if hidden_zone is not None:
+            pulumi.set(__self__, "hidden_zone", hidden_zone)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if machine_type is not None:
             pulumi.set(__self__, "machine_type", machine_type)
         if memory is not None:
             pulumi.set(__self__, "memory", memory)
+        if node_num is not None:
+            pulumi.set(__self__, "node_num", node_num)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if prepaid_period is not None:
@@ -352,6 +424,22 @@ class _InstanceState:
     @auto_renew_flag.setter
     def auto_renew_flag(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "auto_renew_flag", value)
+
+    @property
+    @pulumi.getter(name="availabilityZoneLists")
+    def availability_zone_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        - Version 4.2 and above are not supported.
+        - Read-only disaster recovery instances are not supported.
+        - Basic network cannot be selected.
+        """
+        return pulumi.get(self, "availability_zone_lists")
+
+    @availability_zone_lists.setter
+    def availability_zone_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "availability_zone_lists", value)
 
     @property
     @pulumi.getter(name="availableZone")
@@ -402,6 +490,18 @@ class _InstanceState:
         pulumi.set(self, "engine_version", value)
 
     @property
+    @pulumi.getter(name="hiddenZone")
+    def hidden_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        """
+        return pulumi.get(self, "hidden_zone")
+
+    @hidden_zone.setter
+    def hidden_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hidden_zone", value)
+
+    @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -436,6 +536,18 @@ class _InstanceState:
     @memory.setter
     def memory(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "memory", value)
+
+    @property
+    @pulumi.getter(name="nodeNum")
+    def node_num(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of nodes in each replica set. Default value: 3.
+        """
+        return pulumi.get(self, "node_num")
+
+    @node_num.setter
+    def node_num(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "node_num", value)
 
     @property
     @pulumi.getter
@@ -588,12 +700,15 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
+                 hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -614,15 +729,15 @@ class Instance(pulumi.CustomResource):
 
         mongodb = tencentcloud.mongodb.Instance("mongodb",
             available_zone="ap-guangzhou-2",
-            engine_version="MONGO_3_WT",
+            engine_version="MONGO_36_WT",
             instance_name="mongodb",
-            machine_type="GIO",
+            machine_type="HIO10G",
             memory=4,
             password="password1234",
             project_id=0,
-            subnet_id="subnet-lk0svi3p",
+            subnet_id="subnet-xxxxxx",
             volume=100,
-            vpc_id="vpc-mz3efvbw")
+            vpc_id="vpc-xxxxxx")
         ```
 
         ## Import
@@ -636,12 +751,19 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_lists: A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+               - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+               - Version 4.2 and above are not supported.
+               - Read-only disaster recovery instances are not supported.
+               - Basic network cannot be selected.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
+        :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
@@ -668,15 +790,15 @@ class Instance(pulumi.CustomResource):
 
         mongodb = tencentcloud.mongodb.Instance("mongodb",
             available_zone="ap-guangzhou-2",
-            engine_version="MONGO_3_WT",
+            engine_version="MONGO_36_WT",
             instance_name="mongodb",
-            machine_type="GIO",
+            machine_type="HIO10G",
             memory=4,
             password="password1234",
             project_id=0,
-            subnet_id="subnet-lk0svi3p",
+            subnet_id="subnet-xxxxxx",
             volume=100,
-            vpc_id="vpc-mz3efvbw")
+            vpc_id="vpc-xxxxxx")
         ```
 
         ## Import
@@ -703,12 +825,15 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
+                 availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  available_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
+                 hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
+                 node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -732,6 +857,7 @@ class Instance(pulumi.CustomResource):
             __props__ = InstanceArgs.__new__(InstanceArgs)
 
             __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+            __props__.__dict__["availability_zone_lists"] = availability_zone_lists
             if available_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'available_zone'")
             __props__.__dict__["available_zone"] = available_zone
@@ -739,6 +865,7 @@ class Instance(pulumi.CustomResource):
             if engine_version is None and not opts.urn:
                 raise TypeError("Missing required property 'engine_version'")
             __props__.__dict__["engine_version"] = engine_version
+            __props__.__dict__["hidden_zone"] = hidden_zone
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
@@ -748,6 +875,7 @@ class Instance(pulumi.CustomResource):
             if memory is None and not opts.urn:
                 raise TypeError("Missing required property 'memory'")
             __props__.__dict__["memory"] = memory
+            __props__.__dict__["node_num"] = node_num
             __props__.__dict__["password"] = password
             __props__.__dict__["prepaid_period"] = prepaid_period
             __props__.__dict__["project_id"] = project_id
@@ -774,13 +902,16 @@ class Instance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             auto_renew_flag: Optional[pulumi.Input[int]] = None,
+            availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             available_zone: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             engine_version: Optional[pulumi.Input[str]] = None,
+            hidden_zone: Optional[pulumi.Input[str]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             machine_type: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
+            node_num: Optional[pulumi.Input[int]] = None,
             password: Optional[pulumi.Input[str]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
@@ -801,13 +932,20 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_lists: A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+               - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+               - Version 4.2 and above are not supported.
+               - Read-only disaster recovery instances are not supported.
+               - Basic network cannot be selected.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
         :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
+        :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
@@ -826,13 +964,16 @@ class Instance(pulumi.CustomResource):
         __props__ = _InstanceState.__new__(_InstanceState)
 
         __props__.__dict__["auto_renew_flag"] = auto_renew_flag
+        __props__.__dict__["availability_zone_lists"] = availability_zone_lists
         __props__.__dict__["available_zone"] = available_zone
         __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["engine_version"] = engine_version
+        __props__.__dict__["hidden_zone"] = hidden_zone
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["machine_type"] = machine_type
         __props__.__dict__["memory"] = memory
+        __props__.__dict__["node_num"] = node_num
         __props__.__dict__["password"] = password
         __props__.__dict__["prepaid_period"] = prepaid_period
         __props__.__dict__["project_id"] = project_id
@@ -854,6 +995,18 @@ class Instance(pulumi.CustomResource):
         Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="availabilityZoneLists")
+    def availability_zone_lists(self) -> pulumi.Output[Sequence[str]]:
+        """
+        A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        - Version 4.2 and above are not supported.
+        - Read-only disaster recovery instances are not supported.
+        - Basic network cannot be selected.
+        """
+        return pulumi.get(self, "availability_zone_lists")
 
     @property
     @pulumi.getter(name="availableZone")
@@ -888,6 +1041,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "engine_version")
 
     @property
+    @pulumi.getter(name="hiddenZone")
+    def hidden_zone(self) -> pulumi.Output[str]:
+        """
+        The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        """
+        return pulumi.get(self, "hidden_zone")
+
+    @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Output[str]:
         """
@@ -910,6 +1071,14 @@ class Instance(pulumi.CustomResource):
         Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         """
         return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="nodeNum")
+    def node_num(self) -> pulumi.Output[int]:
+        """
+        The number of nodes in each replica set. Default value: 3.
+        """
+        return pulumi.get(self, "node_num")
 
     @property
     @pulumi.getter

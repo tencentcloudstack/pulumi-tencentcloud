@@ -642,18 +642,19 @@ class FreeCertificate(pulumi.CustomResource):
         > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 
         ## Example Usage
+        ### only support type 2. 2=TrustAsia TLS RSA CA.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssl.FreeCertificate("foo",
-            alias="my_free_cert",
-            contact_email="foo@example.com",
-            contact_phone="12345678901",
+        example = tencentcloud.ssl.FreeCertificate("example",
+            alias="example_free_cert",
+            contact_email="test@example.com",
+            contact_phone="18352458901",
             csr_encrypt_algo="RSA",
             csr_key_parameter="2048",
-            csr_key_password="xxxxxxxx",
+            csr_key_password="csr_pwd",
             domain="example.com",
             dv_auth_method="DNS_AUTO",
             package_type="2",
@@ -695,18 +696,19 @@ class FreeCertificate(pulumi.CustomResource):
         > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 
         ## Example Usage
+        ### only support type 2. 2=TrustAsia TLS RSA CA.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssl.FreeCertificate("foo",
-            alias="my_free_cert",
-            contact_email="foo@example.com",
-            contact_phone="12345678901",
+        example = tencentcloud.ssl.FreeCertificate("example",
+            alias="example_free_cert",
+            contact_email="test@example.com",
+            contact_phone="18352458901",
             csr_encrypt_algo="RSA",
             csr_key_parameter="2048",
-            csr_key_password="xxxxxxxx",
+            csr_key_password="csr_pwd",
             domain="example.com",
             dv_auth_method="DNS_AUTO",
             package_type="2",

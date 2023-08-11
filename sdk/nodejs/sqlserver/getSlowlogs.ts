@@ -14,10 +14,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const slowlogs = pulumi.output(tencentcloud.Sqlserver.getSlowlogs({
- *     endTime: "2023-05-18 00:00:00",
+ * const example = pulumi.output(tencentcloud.Sqlserver.getSlowlogs({
+ *     endTime: "2023-08-07 00:00:00",
  *     instanceId: "mssql-qelbzgwf",
- *     startTime: "2020-05-01 00:00:00",
+ *     startTime: "2023-08-01 00:00:00",
  * }));
  * ```
  */

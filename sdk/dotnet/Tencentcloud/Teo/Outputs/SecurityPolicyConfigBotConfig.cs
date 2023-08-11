@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigBotConfig
     {
-        /// <summary>
-        /// Bot intelligent rule configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigBotConfigIntelligenceRule? IntelligenceRule;
-        /// <summary>
-        /// Preset rules.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigBotConfigManagedRule? ManagedRule;
-        /// <summary>
-        /// Portrait rule.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigBotConfigPortraitRule? PortraitRule;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

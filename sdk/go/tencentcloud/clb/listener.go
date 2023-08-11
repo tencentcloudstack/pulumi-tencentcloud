@@ -304,7 +304,7 @@ type Listener struct {
 	ListenerName pulumi.StringOutput `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
-	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol pulumi.StringOutput `pulumi:"protocol"`
 	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrOutput `pulumi:"scheduler"`
@@ -399,7 +399,7 @@ type listenerState struct {
 	ListenerName *string `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port *int `pulumi:"port"`
-	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol *string `pulumi:"protocol"`
 	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
@@ -456,7 +456,7 @@ type ListenerState struct {
 	ListenerName pulumi.StringPtrInput
 	// Port of the CLB listener.
 	Port pulumi.IntPtrInput
-	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol pulumi.StringPtrInput
 	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
@@ -515,7 +515,7 @@ type listenerArgs struct {
 	ListenerName string `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port *int `pulumi:"port"`
-	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol string `pulumi:"protocol"`
 	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
@@ -571,7 +571,7 @@ type ListenerArgs struct {
 	ListenerName pulumi.StringInput
 	// Port of the CLB listener.
 	Port pulumi.IntPtrInput
-	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol pulumi.StringInput
 	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
@@ -780,7 +780,7 @@ func (o ListenerOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 func (o ListenerOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
 }

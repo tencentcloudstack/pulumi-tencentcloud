@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// Provides a resource to create security group.
     /// 
     /// ## Example Usage
+    /// ### Create a basic security group
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,10 +24,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// {
     ///     public MyStack()
     ///     {
-    ///         var sglab = new Tencentcloud.Security.Group("sglab", new Tencentcloud.Security.GroupArgs
+    ///         var example = new Tencentcloud.Security.Group("example", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             Description = "favourite sg",
+    ///             Description = "sg test",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a complete security group
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Security.Group("example", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "sg test",
     ///             ProjectId = 0,
+    ///             Tags = 
+    ///             {
+    ///                 { "example", "test" },
+    ///             },
     ///         });
     ///     }
     /// 

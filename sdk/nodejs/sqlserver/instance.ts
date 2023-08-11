@@ -12,14 +12,25 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.sqlserver.Instance("foo", {
- *     availabilityZone: _var.availability_zone,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const example = new tencentcloud.sqlserver.Instance("example", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
- *     vpcId: "vpc-409mvdvv",
- *     subnetId: "subnet-nf9n81ps",
- *     projectId: 123,
- *     memory: 2,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 16,
  *     storage: 100,
  * });
  * ```
@@ -29,7 +40,7 @@ import * as utilities from "../utilities";
  * SQL Server instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+ *  $ pulumi import tencentcloud:Sqlserver/instance:Instance example mssql-3cdq7kx5
  * ```
  */
 export class Instance extends pulumi.CustomResource {

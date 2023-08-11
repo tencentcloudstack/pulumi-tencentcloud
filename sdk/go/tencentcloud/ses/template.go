@@ -11,14 +11,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a ses template
+// Provides a resource to create a ses template.
 //
 // ## Example Usage
+// ### Create a ses html template
 //
 // ```go
 // package main
 //
 // import (
+// 	"fmt"
+//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
@@ -26,11 +29,11 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewTemplate(ctx, "template", &Ses.TemplateArgs{
+// 		_, err := Ses.NewTemplate(ctx, "example", &Ses.TemplateArgs{
 // 			TemplateContent: &ses.TemplateTemplateContentArgs{
-// 				Text: pulumi.String("This is the content of the test"),
+// 				Html: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "<!DOCTYPE html>\n", "<html lang=\"en\">\n", "<head>\n", "  <meta charset=\"UTF-8\">\n", "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n", "  <title>mail title</title>\n", "</head>\n", "<body>\n", "<div class=\"container\">\n", "  <h1>Welcome to our service! </h1>\n", "  <p>Dear user,</p>\n", "  <p>Thank you for using Tencent Cloud:</p>\n", "  <p><a href=\"https://cloud.tencent.com/document/product/1653\">https://cloud.tencent.com/document/product/1653</a></p>\n", "  <p>If you did not request this email, please ignore it. </p>\n", "  <p><strong>from the iac team</strong></p>\n", "</div>\n", "</body>\n", "</html>\n", "\n")),
 // 			},
-// 			TemplateName: pulumi.String("sesTemplateName"),
+// 			TemplateName: pulumi.String("tf_example_ses_temp"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -45,7 +48,7 @@ import (
 // ses template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ses/template:Template template template_id
+//  $ pulumi import tencentcloud:Ses/template:Template example template_id
 // ```
 type Template struct {
 	pulumi.CustomResourceState

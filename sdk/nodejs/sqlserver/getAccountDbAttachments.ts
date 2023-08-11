@@ -7,18 +7,6 @@ import * as utilities from "../utilities";
 
 /**
  * Use this data source to query the list of SQL Server account DB privileges.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const test = tencentcloud.Sqlserver.getAccountDbAttachments({
- *     instanceId: tencentcloud_sqlserver_instance.test.id,
- *     accountName: tencentcloud_sqlserver_account_db_attachment.test.account_name,
- * });
- * ```
  */
 export function getAccountDbAttachments(args: GetAccountDbAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountDbAttachmentsResult> {
     if (!opts) {

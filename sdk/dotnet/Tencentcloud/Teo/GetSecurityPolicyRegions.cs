@@ -12,55 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     public static class GetSecurityPolicyRegions
     {
-        /// <summary>
-        /// Use this data source to query detailed information of teo securityPolicyRegions
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var securityPolicyRegions = Output.Create(Tencentcloud.Teo.GetSecurityPolicyRegions.InvokeAsync());
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetSecurityPolicyRegionsResult> InvokeAsync(GetSecurityPolicyRegionsArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityPolicyRegionsResult>("tencentcloud:Teo/getSecurityPolicyRegions:getSecurityPolicyRegions", args ?? new GetSecurityPolicyRegionsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of teo securityPolicyRegions
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var securityPolicyRegions = Output.Create(Tencentcloud.Teo.GetSecurityPolicyRegions.InvokeAsync());
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetSecurityPolicyRegionsResult> Invoke(GetSecurityPolicyRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetSecurityPolicyRegionsResult>("tencentcloud:Teo/getSecurityPolicyRegions:getSecurityPolicyRegions", args ?? new GetSecurityPolicyRegionsInvokeArgs(), options.WithDefaults());
     }
@@ -68,9 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetSecurityPolicyRegionsArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
@@ -81,9 +32,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetSecurityPolicyRegionsInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
@@ -96,9 +44,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     [OutputType]
     public sealed class GetSecurityPolicyRegionsResult
     {
-        /// <summary>
-        /// Region info.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetSecurityPolicyRegionsGeoIpResult> GeoIps;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.

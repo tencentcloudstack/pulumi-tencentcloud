@@ -5,19 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr deleteImageOperation
+ * Provides a resource to delete the specified tcr image.
  *
  * ## Example Usage
+ * ### To delete the specified image
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const deleteImageOperation = new tencentcloud.Tcr.DeleteImageOperation("delete_image_operation", {
- *     imageVersion: "v1",
- *     namespaceName: "ns",
- *     registryId: "tcr-xxx",
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * const exampleDeleteImageOperation = new tencentcloud.tcr.DeleteImageOperation("exampleDeleteImageOperation", {
+ *     registryId: exampleInstance.id,
  *     repositoryName: "repo",
+ *     imageVersion: "v1",
+ *     namespaceName: exampleNamespace.name,
  * });
  * ```
  */

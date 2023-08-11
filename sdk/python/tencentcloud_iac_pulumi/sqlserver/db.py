@@ -202,10 +202,40 @@ class Db(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.sqlserver.Db("example",
-            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
             charset="Chinese_PRC_BIN",
             remark="test-remark")
         ```
@@ -215,7 +245,7 @@ class Db(pulumi.CustomResource):
         SQL Server DB can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+         $ pulumi import tencentcloud:Sqlserver/db:Db example mssql-3cdq7kx5#tf_example_db
         ```
 
         :param str resource_name: The name of the resource.
@@ -238,10 +268,40 @@ class Db(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.sqlserver.Db("example",
-            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_db = tencentcloud.sqlserver.Db("exampleDb",
+            instance_id=example_basic_instance.id,
             charset="Chinese_PRC_BIN",
             remark="test-remark")
         ```
@@ -251,7 +311,7 @@ class Db(pulumi.CustomResource):
         SQL Server DB can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+         $ pulumi import tencentcloud:Sqlserver/db:Db example mssql-3cdq7kx5#tf_example_db
         ```
 
         :param str resource_name: The name of the resource.

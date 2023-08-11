@@ -12,33 +12,6 @@ import (
 )
 
 // Provides a resource to create a as stopInstances
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewStopInstances(ctx, "stopInstances", &As.StopInstancesArgs{
-// 			AutoScalingGroupId: pulumi.Any(tencentcloud_as_scaling_group.Scaling_group.Id),
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String("ins-xxxx"),
-// 			},
-// 			StoppedMode: pulumi.String("STOP_CHARGING"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type StopInstances struct {
 	pulumi.CustomResourceState
 

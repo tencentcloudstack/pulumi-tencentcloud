@@ -14,46 +14,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigRateLimitConfigUserRule
     {
-        /// <summary>
-        /// Valid values: `monitor`, `drop`.
-        /// </summary>
         public readonly string Action;
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigRateLimitConfigUserRuleCondition> Conditions;
-        /// <summary>
-        /// Filter words.
-        /// </summary>
         public readonly ImmutableArray<string> FreqFields;
-        /// <summary>
-        /// Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-        /// </summary>
         public readonly int Period;
-        /// <summary>
-        /// Punish time, Valid value range: 0-2 days.
-        /// </summary>
         public readonly int PunishTime;
-        /// <summary>
-        /// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        /// </summary>
         public readonly string PunishTimeUnit;
         public readonly int? RuleId;
-        /// <summary>
-        /// Rule Name.
-        /// </summary>
         public readonly string RuleName;
-        /// <summary>
-        /// Priority of the rule. Valid value range: 1-100.
-        /// </summary>
         public readonly int RulePriority;
-        /// <summary>
-        /// Status of the rule. Valid values: `on`, `off`, `hour`.
-        /// </summary>
         public readonly string? RuleStatus;
-        /// <summary>
-        /// Threshold of the rate limit. Valid value range: 0-4294967294.
-        /// </summary>
         public readonly int Threshold;
         public readonly string? UpdateTime;
 

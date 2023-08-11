@@ -13,9 +13,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const deployGroup = new tencentcloud.Mysql.DeployGroup("deploy_group", {
- *     deployGroupName: "terrform-deploy",
- *     description: "deploy test",
+ * const example = new tencentcloud.Mysql.DeployGroup("example", {
+ *     deployGroupName: "tf-example",
+ *     description: "desc.",
  *     devClasses: ["TS85"],
  *     limitNum: 1,
  * });

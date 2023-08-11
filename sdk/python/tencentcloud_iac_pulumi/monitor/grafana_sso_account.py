@@ -173,14 +173,32 @@ class GrafanaSsoAccount(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
         sso_account = tencentcloud.monitor.GrafanaSsoAccount("ssoAccount",
-            instance_id="grafana-50nj6v00",
+            instance_id=foo.id,
+            user_id="111",
             notes="desc12222",
             roles=[tencentcloud.monitor.GrafanaSsoAccountRoleArgs(
                 organization="Main Org.",
                 role="Admin",
-            )],
-            user_id="111")
+            )])
         ```
 
         ## Import
@@ -213,14 +231,32 @@ class GrafanaSsoAccount(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.GrafanaInstance("foo",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
         sso_account = tencentcloud.monitor.GrafanaSsoAccount("ssoAccount",
-            instance_id="grafana-50nj6v00",
+            instance_id=foo.id,
+            user_id="111",
             notes="desc12222",
             roles=[tencentcloud.monitor.GrafanaSsoAccountRoleArgs(
                 organization="Main Org.",
                 role="Admin",
-            )],
-            user_id="111")
+            )])
         ```
 
         ## Import

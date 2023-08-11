@@ -13,27 +13,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigBotConfigGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Bot intelligent rule configuration.
-        /// </summary>
         [Input("intelligenceRule")]
         public Input<Inputs.SecurityPolicyConfigBotConfigIntelligenceRuleGetArgs>? IntelligenceRule { get; set; }
 
-        /// <summary>
-        /// Preset rules.
-        /// </summary>
         [Input("managedRule")]
         public Input<Inputs.SecurityPolicyConfigBotConfigManagedRuleGetArgs>? ManagedRule { get; set; }
 
-        /// <summary>
-        /// Portrait rule.
-        /// </summary>
         [Input("portraitRule")]
         public Input<Inputs.SecurityPolicyConfigBotConfigPortraitRuleGetArgs>? PortraitRule { get; set; }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

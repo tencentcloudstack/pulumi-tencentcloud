@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const rollbackTime = pulumi.output(tencentcloud.Sqlserver.getRollbackTime({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getRollbackTime({
  *     dbs: ["keep_pubsub_db"],
  *     instanceId: "mssql-qelbzgwf",
  * }));

@@ -8,17 +8,6 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis renewInstanceOperation
  *
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const renewInstanceOperation = new tencentcloud.Redis.RenewInstanceOperation("renew_instance_operation", {
- *     instanceId: "crs-c1nl9rpv",
- *     modifyPayMode: "prepaid",
- *     period: 1,
- * });
- * ```
  */
 export class RenewInstanceOperation extends pulumi.CustomResource {
     /**

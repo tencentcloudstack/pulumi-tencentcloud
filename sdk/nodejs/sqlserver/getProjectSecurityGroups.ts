@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const projectSecurityGroups = pulumi.output(tencentcloud.Sqlserver.getProjectSecurityGroups({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getProjectSecurityGroups({
  *     projectId: 0,
  * }));
  * ```

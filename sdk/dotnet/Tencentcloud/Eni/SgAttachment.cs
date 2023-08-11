@@ -17,19 +17,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "vpc",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var example1 = new Tencentcloud.Security.Group("example1", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "sg desc.",
+    ///             ProjectId = 0,
+    ///             Tags = 
+    ///             {
+    ///                 { "example", "test" },
+    ///             },
+    ///         });
+    ///         var example2 = new Tencentcloud.Security.Group("example2", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "sg desc.",
+    ///             ProjectId = 0,
+    ///             Tags = 
+    ///             {
+    ///                 { "example", "test" },
+    ///             },
+    ///         });
+    ///         var example = new Tencentcloud.Eni.Instance("example", new Tencentcloud.Eni.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             Description = "eni desc.",
+    ///             Ipv4Count = 1,
+    ///         });
     ///         var eniSgAttachment = new Tencentcloud.Eni.SgAttachment("eniSgAttachment", new Tencentcloud.Eni.SgAttachmentArgs
     ///         {
-    ///             NetworkInterfaceIds = "eni-p0hkgx8p",
+    ///             NetworkInterfaceIds = 
+    ///             {
+    ///                 example.Id,
+    ///             },
     ///             SecurityGroupIds = 
     ///             {
-    ///                 "sg-902tl7t7",
-    ///                 "sg-edmur627",
+    ///                 example1.Id,
+    ///                 example2.Id,
     ///             },
     ///         });
     ///     }

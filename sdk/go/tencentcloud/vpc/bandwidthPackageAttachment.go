@@ -12,33 +12,6 @@ import (
 )
 
 // Provides a resource to create a vpc bandwidthPackageAttachment
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewBandwidthPackageAttachment(ctx, "bandwidthPackageAttachment", &Vpc.BandwidthPackageAttachmentArgs{
-// 			BandwidthPackageId: pulumi.String("bwp-atmf0p9g"),
-// 			NetworkType:        pulumi.String("BGP"),
-// 			Protocol:           pulumi.String(""),
-// 			ResourceId:         pulumi.String("lb-dv1ai6ma"),
-// 			ResourceType:       pulumi.String("LoadBalance"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type BandwidthPackageAttachment struct {
 	pulumi.CustomResourceState
 

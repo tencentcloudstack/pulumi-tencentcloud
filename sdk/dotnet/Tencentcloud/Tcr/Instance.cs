@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr instance.
     /// 
     /// ## Example Usage
+    /// ### Create a basic tcr instance.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,19 +24,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
     ///         {
     ///             InstanceType = "basic",
     ///             Tags = 
     ///             {
-    ///                 { "test", "tf" },
+    ///                 { "createdBy", "terraform" },
     ///             },
     ///         });
     ///     }
     /// 
     /// }
     /// ```
-    /// ### Using public network access whitelist
+    /// ### Create instance with the public network access whitelist.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -45,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
     ///         {
     ///             InstanceType = "basic",
     ///             OpenPublicOperation = true,
@@ -65,7 +66,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// }
     /// ```
-    /// ### Create with Replications
+    /// ### Create instance with Replications.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -97,7 +98,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///             { "ap-taipei", 39 },
     ///             { "ap-jakarta", 72 },
     ///         };
-    ///         var foo = new Tencentcloud.Tcr.Instance("foo", new Tencentcloud.Tcr.InstanceArgs
+    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
     ///         {
     ///             InstanceType = "premium",
     ///             Replications = 
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+    ///  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/instance:Instance")]

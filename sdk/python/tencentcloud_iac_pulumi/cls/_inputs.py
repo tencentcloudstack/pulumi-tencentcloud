@@ -38,6 +38,7 @@ __all__ = [
     'CosShipperContentCsvArgs',
     'CosShipperContentJsonArgs',
     'CosShipperFilterRuleArgs',
+    'DataTransformDstResourceArgs',
     'IndexRuleArgs',
     'IndexRuleFullTextArgs',
     'IndexRuleKeyValueArgs',
@@ -46,7 +47,10 @@ __all__ = [
     'IndexRuleTagArgs',
     'IndexRuleTagKeyValueArgs',
     'IndexRuleTagKeyValueValueArgs',
+    'KafkaRechargeLogRechargeRuleArgs',
+    'KafkaRechargeProtocolArgs',
     'MachineGroupMachineGroupTypeArgs',
+    'ScheduledSqlDstResourceArgs',
 ]
 
 @pulumi.input_type
@@ -2395,6 +2399,43 @@ class CosShipperFilterRuleArgs:
 
 
 @pulumi.input_type
+class DataTransformDstResourceArgs:
+    def __init__(__self__, *,
+                 alias: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] alias: alias.
+        :param pulumi.Input[str] topic_id: dst topic id.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> pulumi.Input[str]:
+        """
+        alias.
+        """
+        return pulumi.get(self, "alias")
+
+    @alias.setter
+    def alias(self, value: pulumi.Input[str]):
+        pulumi.set(self, "alias", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        dst topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
 class IndexRuleArgs:
     def __init__(__self__, *,
                  full_text: Optional[pulumi.Input['IndexRuleFullTextArgs']] = None,
@@ -2794,6 +2835,305 @@ class IndexRuleTagKeyValueValueArgs:
 
 
 @pulumi.input_type
+class KafkaRechargeLogRechargeRuleArgs:
+    def __init__(__self__, *,
+                 default_time_switch: pulumi.Input[bool],
+                 encoding_format: pulumi.Input[int],
+                 recharge_type: pulumi.Input[str],
+                 default_time_src: Optional[pulumi.Input[int]] = None,
+                 keys: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 log_regex: Optional[pulumi.Input[str]] = None,
+                 metadatas: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 time_format: Optional[pulumi.Input[str]] = None,
+                 time_key: Optional[pulumi.Input[str]] = None,
+                 time_regex: Optional[pulumi.Input[str]] = None,
+                 time_zone: Optional[pulumi.Input[str]] = None,
+                 un_match_log_key: Optional[pulumi.Input[str]] = None,
+                 un_match_log_switch: Optional[pulumi.Input[bool]] = None,
+                 un_match_log_time_src: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[bool] default_time_switch: user default time.
+        :param pulumi.Input[int] encoding_format: encoding format.
+        :param pulumi.Input[str] recharge_type: recharge type.
+        :param pulumi.Input[int] default_time_src: default time from.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] keys: log key list.
+        :param pulumi.Input[str] log_regex: log regex.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] metadatas: metadata.
+        :param pulumi.Input[str] time_format: time format.
+        :param pulumi.Input[str] time_key: time key.
+        :param pulumi.Input[str] time_regex: time regex.
+        :param pulumi.Input[str] time_zone: time zone.
+        :param pulumi.Input[str] un_match_log_key: parse failed log key.
+        :param pulumi.Input[bool] un_match_log_switch: is push parse failed log.
+        :param pulumi.Input[int] un_match_log_time_src: parse failed log time from.
+        """
+        pulumi.set(__self__, "default_time_switch", default_time_switch)
+        pulumi.set(__self__, "encoding_format", encoding_format)
+        pulumi.set(__self__, "recharge_type", recharge_type)
+        if default_time_src is not None:
+            pulumi.set(__self__, "default_time_src", default_time_src)
+        if keys is not None:
+            pulumi.set(__self__, "keys", keys)
+        if log_regex is not None:
+            pulumi.set(__self__, "log_regex", log_regex)
+        if metadatas is not None:
+            pulumi.set(__self__, "metadatas", metadatas)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+        if time_key is not None:
+            pulumi.set(__self__, "time_key", time_key)
+        if time_regex is not None:
+            pulumi.set(__self__, "time_regex", time_regex)
+        if time_zone is not None:
+            pulumi.set(__self__, "time_zone", time_zone)
+        if un_match_log_key is not None:
+            pulumi.set(__self__, "un_match_log_key", un_match_log_key)
+        if un_match_log_switch is not None:
+            pulumi.set(__self__, "un_match_log_switch", un_match_log_switch)
+        if un_match_log_time_src is not None:
+            pulumi.set(__self__, "un_match_log_time_src", un_match_log_time_src)
+
+    @property
+    @pulumi.getter(name="defaultTimeSwitch")
+    def default_time_switch(self) -> pulumi.Input[bool]:
+        """
+        user default time.
+        """
+        return pulumi.get(self, "default_time_switch")
+
+    @default_time_switch.setter
+    def default_time_switch(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "default_time_switch", value)
+
+    @property
+    @pulumi.getter(name="encodingFormat")
+    def encoding_format(self) -> pulumi.Input[int]:
+        """
+        encoding format.
+        """
+        return pulumi.get(self, "encoding_format")
+
+    @encoding_format.setter
+    def encoding_format(self, value: pulumi.Input[int]):
+        pulumi.set(self, "encoding_format", value)
+
+    @property
+    @pulumi.getter(name="rechargeType")
+    def recharge_type(self) -> pulumi.Input[str]:
+        """
+        recharge type.
+        """
+        return pulumi.get(self, "recharge_type")
+
+    @recharge_type.setter
+    def recharge_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "recharge_type", value)
+
+    @property
+    @pulumi.getter(name="defaultTimeSrc")
+    def default_time_src(self) -> Optional[pulumi.Input[int]]:
+        """
+        default time from.
+        """
+        return pulumi.get(self, "default_time_src")
+
+    @default_time_src.setter
+    def default_time_src(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "default_time_src", value)
+
+    @property
+    @pulumi.getter
+    def keys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        log key list.
+        """
+        return pulumi.get(self, "keys")
+
+    @keys.setter
+    def keys(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "keys", value)
+
+    @property
+    @pulumi.getter(name="logRegex")
+    def log_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        log regex.
+        """
+        return pulumi.get(self, "log_regex")
+
+    @log_regex.setter
+    def log_regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "log_regex", value)
+
+    @property
+    @pulumi.getter
+    def metadatas(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        metadata.
+        """
+        return pulumi.get(self, "metadatas")
+
+    @metadatas.setter
+    def metadatas(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "metadatas", value)
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        time format.
+        """
+        return pulumi.get(self, "time_format")
+
+    @time_format.setter
+    def time_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_format", value)
+
+    @property
+    @pulumi.getter(name="timeKey")
+    def time_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        time key.
+        """
+        return pulumi.get(self, "time_key")
+
+    @time_key.setter
+    def time_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_key", value)
+
+    @property
+    @pulumi.getter(name="timeRegex")
+    def time_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        time regex.
+        """
+        return pulumi.get(self, "time_regex")
+
+    @time_regex.setter
+    def time_regex(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_regex", value)
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        time zone.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @time_zone.setter
+    def time_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_zone", value)
+
+    @property
+    @pulumi.getter(name="unMatchLogKey")
+    def un_match_log_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        parse failed log key.
+        """
+        return pulumi.get(self, "un_match_log_key")
+
+    @un_match_log_key.setter
+    def un_match_log_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "un_match_log_key", value)
+
+    @property
+    @pulumi.getter(name="unMatchLogSwitch")
+    def un_match_log_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        is push parse failed log.
+        """
+        return pulumi.get(self, "un_match_log_switch")
+
+    @un_match_log_switch.setter
+    def un_match_log_switch(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "un_match_log_switch", value)
+
+    @property
+    @pulumi.getter(name="unMatchLogTimeSrc")
+    def un_match_log_time_src(self) -> Optional[pulumi.Input[int]]:
+        """
+        parse failed log time from.
+        """
+        return pulumi.get(self, "un_match_log_time_src")
+
+    @un_match_log_time_src.setter
+    def un_match_log_time_src(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "un_match_log_time_src", value)
+
+
+@pulumi.input_type
+class KafkaRechargeProtocolArgs:
+    def __init__(__self__, *,
+                 mechanism: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None,
+                 user_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] mechanism: encryption type.
+        :param pulumi.Input[str] password: user password.
+        :param pulumi.Input[str] protocol: protocol type.
+        :param pulumi.Input[str] user_name: username.
+        """
+        if mechanism is not None:
+            pulumi.set(__self__, "mechanism", mechanism)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if user_name is not None:
+            pulumi.set(__self__, "user_name", user_name)
+
+    @property
+    @pulumi.getter
+    def mechanism(self) -> Optional[pulumi.Input[str]]:
+        """
+        encryption type.
+        """
+        return pulumi.get(self, "mechanism")
+
+    @mechanism.setter
+    def mechanism(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mechanism", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        user password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        protocol type.
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="userName")
+    def user_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        username.
+        """
+        return pulumi.get(self, "user_name")
+
+    @user_name.setter
+    def user_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_name", value)
+
+
+@pulumi.input_type
 class MachineGroupMachineGroupTypeArgs:
     def __init__(__self__, *,
                  type: pulumi.Input[str],
@@ -2828,5 +3168,75 @@ class MachineGroupMachineGroupTypeArgs:
     @values.setter
     def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class ScheduledSqlDstResourceArgs:
+    def __init__(__self__, *,
+                 topic_id: pulumi.Input[str],
+                 biz_type: Optional[pulumi.Input[int]] = None,
+                 metric_name: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] topic_id: dst topic id.
+        :param pulumi.Input[int] biz_type: topic type.
+        :param pulumi.Input[str] metric_name: metric name.
+        :param pulumi.Input[str] region: topic region.
+        """
+        pulumi.set(__self__, "topic_id", topic_id)
+        if biz_type is not None:
+            pulumi.set(__self__, "biz_type", biz_type)
+        if metric_name is not None:
+            pulumi.set(__self__, "metric_name", metric_name)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        dst topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="bizType")
+    def biz_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        topic type.
+        """
+        return pulumi.get(self, "biz_type")
+
+    @biz_type.setter
+    def biz_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "biz_type", value)
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        metric name.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @metric_name.setter
+    def metric_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "metric_name", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        topic region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
 
 

@@ -466,11 +466,14 @@ class MigrationTargetArgs:
 @pulumi.input_type
 class PublishSubscribeDatabaseTupleArgs:
     def __init__(__self__, *,
-                 publish_database: pulumi.Input[str]):
+                 publish_database: pulumi.Input[str],
+                 subscribe_database: pulumi.Input[str]):
         """
         :param pulumi.Input[str] publish_database: Publish the database.
+        :param pulumi.Input[str] subscribe_database: Subscribe the database.
         """
         pulumi.set(__self__, "publish_database", publish_database)
+        pulumi.set(__self__, "subscribe_database", subscribe_database)
 
     @property
     @pulumi.getter(name="publishDatabase")
@@ -483,6 +486,18 @@ class PublishSubscribeDatabaseTupleArgs:
     @publish_database.setter
     def publish_database(self, value: pulumi.Input[str]):
         pulumi.set(self, "publish_database", value)
+
+    @property
+    @pulumi.getter(name="subscribeDatabase")
+    def subscribe_database(self) -> pulumi.Input[str]:
+        """
+        Subscribe the database.
+        """
+        return pulumi.get(self, "subscribe_database")
+
+    @subscribe_database.setter
+    def subscribe_database(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subscribe_database", value)
 
 
 @pulumi.input_type

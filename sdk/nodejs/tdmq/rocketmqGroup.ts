@@ -13,24 +13,22 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cluster = new tencentcloud.tdmq.RocketmqCluster("cluster", {
- *     clusterName: "test_rocketmq",
- *     remark: "test recket mq",
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
  * });
- * const namespace = new tencentcloud.tdmq.RocketmqNamespace("namespace", {
- *     clusterId: cluster.clusterId,
- *     namespaceName: "test_namespace",
- *     ttl: 65000,
- *     retentionTime: 65000,
- *     remark: "test namespace",
+ * const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceName: "tf_example",
+ *     remark: "remark.",
  * });
- * const group = new tencentcloud.tdmq.RocketmqGroup("group", {
- *     groupName: "test_rocketmq_group",
- *     namespace: namespace.namespaceName,
+ * const exampleRocketmqGroup = new tencentcloud.tdmq.RocketmqGroup("exampleRocketmqGroup", {
+ *     groupName: "tf_example",
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespace: exampleRocketmqNamespace.namespaceName,
  *     readEnable: true,
  *     broadcastEnable: true,
- *     clusterId: cluster.clusterId,
- *     remark: "test rocketmq group",
+ *     remark: "remark.",
  * });
  * ```
  *

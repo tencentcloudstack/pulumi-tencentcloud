@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr image_signature_operation
+    /// Provides a resource to operate a tcr image signature.
     /// 
     /// ## Example Usage
     /// 
@@ -23,12 +23,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var imageSignatureOperation = new Tencentcloud.Tcr.CreateImageSignatureOperation("imageSignatureOperation", new Tencentcloud.Tcr.CreateImageSignatureOperationArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
+    ///             InstanceType = "premium",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "cve-xxxxx",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new Tencentcloud.Tcr.RepositoryArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             NamespaceName = exampleNamespace.Name,
+    ///             BriefDesc = "111",
+    ///             Description = "111111111111111111111111111111111111",
+    ///         });
+    ///         var exampleCreateImageSignatureOperation = new Tencentcloud.Tcr.CreateImageSignatureOperation("exampleCreateImageSignatureOperation", new Tencentcloud.Tcr.CreateImageSignatureOperationArgs
+    ///         {
+    ///             RegistryId = exampleInstance.Id,
+    ///             NamespaceName = exampleNamespace.Name,
+    ///             RepositoryName = exampleRepository.Name,
     ///             ImageVersion = "v1",
-    ///             NamespaceName = "ns",
-    ///             RegistryId = "tcr-xxx",
-    ///             RepositoryName = "repo",
     ///         });
     ///     }
     /// 

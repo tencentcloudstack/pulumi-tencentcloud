@@ -14,9 +14,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cluster = new tencentcloud.Tdmq.RocketmqCluster("cluster", {
- *     clusterName: "test_rocketmq",
- *     remark: "test rocket mq",
+ * const example = new tencentcloud.Tdmq.RocketmqCluster("example", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
  * });
  * ```
  *

@@ -11,12 +11,33 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const maintenanceWindow = new tencentcloud.Redis.MaintenanceWindow("maintenance_window", {
- *     endTime: "19:00",
- *     instanceId: "crs-c1nl9rpv",
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * const fooMaintenanceWindow = new tencentcloud.redis.MaintenanceWindow("fooMaintenanceWindow", {
+ *     instanceId: fooInstance.id,
  *     startTime: "17:00",
+ *     endTime: "19:00",
  * });
  * ```
  *
@@ -25,7 +46,7 @@ import * as utilities from "../utilities";
  * redis maintenance_window can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow maintenance_window maintenance_window_id
+ *  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
  * ```
  */
 export class MaintenanceWindow extends pulumi.CustomResource {

@@ -9,17 +9,25 @@ import * as utilities from "../utilities";
  * Use this data source to query the list of SQL Server accounts.
  *
  * ## Example Usage
+ * ### Pull instance account list
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const name = pulumi.output(tencentcloud.Sqlserver.getAccounts({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getAccounts({
+ *     instanceId: "mssql-3cdq7kx5",
+ * }));
+ * ```
+ * ### Pull instance account list Filter by name
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = pulumi.output(tencentcloud.Sqlserver.getAccounts({
  *     instanceId: "mssql-3cdq7kx5",
  *     name: "myaccount",
- * }));
- * const foo = pulumi.output(tencentcloud.Sqlserver.getAccounts({
- *     instanceId: "mssql-3cdq7kx5",
  * }));
  * ```
  */

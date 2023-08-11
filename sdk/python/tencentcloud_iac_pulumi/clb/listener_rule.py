@@ -44,7 +44,7 @@ class ListenerRuleArgs:
         :param pulumi.Input[str] certificate_ca_id: ID of the client certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
-        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
@@ -189,7 +189,7 @@ class ListenerRuleArgs:
     @pulumi.getter(name="forwardType")
     def forward_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         """
         return pulumi.get(self, "forward_type")
 
@@ -399,7 +399,7 @@ class _ListenerRuleState:
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
         :param pulumi.Input[str] domain: Domain name of the listener rule.
-        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
@@ -529,7 +529,7 @@ class _ListenerRuleState:
     @pulumi.getter(name="forwardType")
     def forward_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         """
         return pulumi.get(self, "forward_type")
 
@@ -816,7 +816,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
         :param pulumi.Input[str] domain: Domain name of the listener rule.
-        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
@@ -1006,7 +1006,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
         :param pulumi.Input[str] domain: Domain name of the listener rule.
-        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
         :param pulumi.Input[str] health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of `HTTP` and `HTTPS` protocol.
@@ -1098,7 +1098,7 @@ class ListenerRule(pulumi.CustomResource):
     @pulumi.getter(name="forwardType")
     def forward_type(self) -> pulumi.Output[str]:
         """
-        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+        Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         """
         return pulumi.get(self, "forward_type")
 

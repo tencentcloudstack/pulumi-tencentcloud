@@ -15,19 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("packetFilters")]
         private InputList<Inputs.DdosPolicyDdosRulePacketFilterPacketFilterGetArgs>? _packetFilters;
-
-        /// <summary>
-        /// DDoS feature filtering configuration detail.
-        /// </summary>
         public InputList<Inputs.DdosPolicyDdosRulePacketFilterPacketFilterGetArgs> PacketFilters
         {
             get => _packetFilters ?? (_packetFilters = new InputList<Inputs.DdosPolicyDdosRulePacketFilterPacketFilterGetArgs>());
             set => _packetFilters = value;
         }
 
-        /// <summary>
-        /// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

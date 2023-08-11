@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupDownloadRestriction = new tencentcloud.Mysql.BackupDownloadRestriction("backup_download_restriction", {
+ * const example = new tencentcloud.Mysql.BackupDownloadRestriction("example", {
  *     ipComparisonSymbol: "In",
  *     limitIps: ["127.0.0.1"],
  *     limitType: "Customize",

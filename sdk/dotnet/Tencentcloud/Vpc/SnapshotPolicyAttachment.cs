@@ -23,26 +23,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var snapshotPolicyAttachment = new Tencentcloud.Vpc.SnapshotPolicyAttachment("snapshotPolicyAttachment", new Tencentcloud.Vpc.SnapshotPolicyAttachmentArgs
+    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = "tf-example-1308919341",
+    ///             Acl = "private",
+    ///         });
+    ///         var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
+    ///         {
+    ///             SnapshotPolicyName = "tf-example",
+    ///             BackupType = "time",
+    ///             CosBucket = exampleBucket.CosBucket,
+    ///             CosRegion = "ap-guangzhou",
+    ///             CreateNewCos = false,
+    ///             KeepTime = 2,
+    ///             BackupPolicies = 
+    ///             {
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "monday",
+    ///                     BackupTime = "00:00:00",
+    ///                 },
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "tuesday",
+    ///                     BackupTime = "01:00:00",
+    ///                 },
+    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
+    ///                 {
+    ///                     BackupDay = "wednesday",
+    ///                     BackupTime = "02:00:00",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var attachment = new Tencentcloud.Vpc.SnapshotPolicyAttachment("attachment", new Tencentcloud.Vpc.SnapshotPolicyAttachmentArgs
+    ///         {
+    ///             SnapshotPolicyId = exampleSnapshotPolicy.Id,
     ///             Instances = 
     ///             {
     ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyAttachmentInstanceArgs
     ///                 {
-    ///                     InstanceId = "sg-r8ibzbd9",
-    ///                     InstanceName = "cm-eks-cls-eizsc1iw-security-group",
-    ///                     InstanceRegion = "ap-guangzhou",
     ///                     InstanceType = "securitygroup",
-    ///                 },
-    ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyAttachmentInstanceArgs
-    ///                 {
-    ///                     InstanceId = "sg-k3tn70lh",
-    ///                     InstanceName = "keep-ci-temp-test-sg",
+    ///                     InstanceId = exampleGroup.Id,
+    ///                     InstanceName = "tf-example",
     ///                     InstanceRegion = "ap-guangzhou",
-    ///                     InstanceType = "securitygroup",
     ///                 },
     ///             },
-    ///             SnapshotPolicyId = "sspolicy-1t6cobbv",
     ///         });
     ///     }
     /// 

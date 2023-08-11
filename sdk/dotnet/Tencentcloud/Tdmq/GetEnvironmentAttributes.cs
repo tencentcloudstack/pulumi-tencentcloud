@@ -22,16 +22,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var environmentAttributes = Output.Create(Tencentcloud.Tdmq.GetEnvironmentAttributes.InvokeAsync(new Tencentcloud.Tdmq.GetEnvironmentAttributesArgs
+        ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
         ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             EnvironmentId = "keep-ns",
-        ///         }));
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+        ///         {
+        ///             EnvironName = "tf_example",
+        ///             MsgTtl = 300,
+        ///             ClusterId = exampleInstance.Id,
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new Tencentcloud.Tdmq.GetEnvironmentAttributesInvokeArgs
+        ///         {
+        ///             EnvironmentId = exampleNamespace.EnvironName,
+        ///             ClusterId = exampleInstance.Id,
+        ///         });
         ///     }
         /// 
         /// }
@@ -52,16 +69,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var environmentAttributes = Output.Create(Tencentcloud.Tdmq.GetEnvironmentAttributes.InvokeAsync(new Tencentcloud.Tdmq.GetEnvironmentAttributesArgs
+        ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
         ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             EnvironmentId = "keep-ns",
-        ///         }));
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+        ///         {
+        ///             EnvironName = "tf_example",
+        ///             MsgTtl = 300,
+        ///             ClusterId = exampleInstance.Id,
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new Tencentcloud.Tdmq.GetEnvironmentAttributesInvokeArgs
+        ///         {
+        ///             EnvironmentId = exampleNamespace.EnvironName,
+        ///             ClusterId = exampleInstance.Id,
+        ///         });
         ///     }
         /// 
         /// }

@@ -15,36 +15,37 @@ class InstanceArgs:
     def __init__(__self__, *,
                  dc_id: pulumi.Input[str],
                  dcg_id: pulumi.Input[str],
-                 vpc_id: pulumi.Input[str],
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  bgp_asn: Optional[pulumi.Input[int]] = None,
                  bgp_auth_key: Optional[pulumi.Input[str]] = None,
                  customer_address: Optional[pulumi.Input[str]] = None,
+                 dc_owner_account: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
                  tencent_address: Optional[pulumi.Input[str]] = None,
-                 vlan: Optional[pulumi.Input[int]] = None):
+                 vlan: Optional[pulumi.Input[int]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] dc_id: ID of the DC to be queried, application deployment offline.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
-        :param pulumi.Input[str] vpc_id: ID of the VPC or BMVPC.
         :param pulumi.Input[int] bandwidth: Bandwidth of the DC.
         :param pulumi.Input[int] bgp_asn: BGP ASN of the user. A required field within BGP.
         :param pulumi.Input[str] bgp_auth_key: BGP key of the user.
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
+        :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
         :param pulumi.Input[str] tencent_address: Interconnect IP of the DC within Tencent.
         :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
+        :param pulumi.Input[str] vpc_id: ID of the VPC or BMVPC.
         """
         pulumi.set(__self__, "dc_id", dc_id)
         pulumi.set(__self__, "dcg_id", dcg_id)
-        pulumi.set(__self__, "vpc_id", vpc_id)
         if bandwidth is not None:
             pulumi.set(__self__, "bandwidth", bandwidth)
         if bgp_asn is not None:
@@ -53,6 +54,8 @@ class InstanceArgs:
             pulumi.set(__self__, "bgp_auth_key", bgp_auth_key)
         if customer_address is not None:
             pulumi.set(__self__, "customer_address", customer_address)
+        if dc_owner_account is not None:
+            pulumi.set(__self__, "dc_owner_account", dc_owner_account)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if network_type is not None:
@@ -65,6 +68,8 @@ class InstanceArgs:
             pulumi.set(__self__, "tencent_address", tencent_address)
         if vlan is not None:
             pulumi.set(__self__, "vlan", vlan)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="dcId")
@@ -89,18 +94,6 @@ class InstanceArgs:
     @dcg_id.setter
     def dcg_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "dcg_id", value)
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Input[str]:
-        """
-        ID of the VPC or BMVPC.
-        """
-        return pulumi.get(self, "vpc_id")
-
-    @vpc_id.setter
-    def vpc_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "vpc_id", value)
 
     @property
     @pulumi.getter
@@ -149,6 +142,18 @@ class InstanceArgs:
     @customer_address.setter
     def customer_address(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "customer_address", value)
+
+    @property
+    @pulumi.getter(name="dcOwnerAccount")
+    def dc_owner_account(self) -> Optional[pulumi.Input[str]]:
+        """
+        Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        """
+        return pulumi.get(self, "dc_owner_account")
+
+    @dc_owner_account.setter
+    def dc_owner_account(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dc_owner_account", value)
 
     @property
     @pulumi.getter
@@ -222,6 +227,18 @@ class InstanceArgs:
     def vlan(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "vlan", value)
 
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the VPC or BMVPC.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
 
 @pulumi.input_type
 class _InstanceState:
@@ -232,6 +249,7 @@ class _InstanceState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  customer_address: Optional[pulumi.Input[str]] = None,
                  dc_id: Optional[pulumi.Input[str]] = None,
+                 dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
@@ -249,6 +267,7 @@ class _InstanceState:
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
         :param pulumi.Input[str] dc_id: ID of the DC to be queried, application deployment offline.
+        :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
@@ -271,6 +290,8 @@ class _InstanceState:
             pulumi.set(__self__, "customer_address", customer_address)
         if dc_id is not None:
             pulumi.set(__self__, "dc_id", dc_id)
+        if dc_owner_account is not None:
+            pulumi.set(__self__, "dc_owner_account", dc_owner_account)
         if dcg_id is not None:
             pulumi.set(__self__, "dcg_id", dcg_id)
         if name is not None:
@@ -361,6 +382,18 @@ class _InstanceState:
     @dc_id.setter
     def dc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "dc_id", value)
+
+    @property
+    @pulumi.getter(name="dcOwnerAccount")
+    def dc_owner_account(self) -> Optional[pulumi.Input[str]]:
+        """
+        Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        """
+        return pulumi.get(self, "dc_owner_account")
+
+    @dc_owner_account.setter
+    def dc_owner_account(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dc_owner_account", value)
 
     @property
     @pulumi.getter(name="dcgId")
@@ -481,6 +514,7 @@ class Instance(pulumi.CustomResource):
                  bgp_auth_key: Optional[pulumi.Input[str]] = None,
                  customer_address: Optional[pulumi.Input[str]] = None,
                  dc_id: Optional[pulumi.Input[str]] = None,
+                 dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
@@ -523,6 +557,7 @@ class Instance(pulumi.CustomResource):
             bandwidth=900,
             dc_id=dc_id,
             dcg_id=dcg_id,
+            dc_owner_account="xxxxxxxx",
             network_type="VPC",
             route_type="STATIC",
             vlan=301,
@@ -539,6 +574,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] bgp_auth_key: BGP key of the user.
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
         :param pulumi.Input[str] dc_id: ID of the DC to be queried, application deployment offline.
+        :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
@@ -587,6 +623,7 @@ class Instance(pulumi.CustomResource):
             bandwidth=900,
             dc_id=dc_id,
             dcg_id=dcg_id,
+            dc_owner_account="xxxxxxxx",
             network_type="VPC",
             route_type="STATIC",
             vlan=301,
@@ -616,6 +653,7 @@ class Instance(pulumi.CustomResource):
                  bgp_auth_key: Optional[pulumi.Input[str]] = None,
                  customer_address: Optional[pulumi.Input[str]] = None,
                  dc_id: Optional[pulumi.Input[str]] = None,
+                 dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
@@ -645,6 +683,7 @@ class Instance(pulumi.CustomResource):
             if dc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'dc_id'")
             __props__.__dict__["dc_id"] = dc_id
+            __props__.__dict__["dc_owner_account"] = dc_owner_account
             if dcg_id is None and not opts.urn:
                 raise TypeError("Missing required property 'dcg_id'")
             __props__.__dict__["dcg_id"] = dcg_id
@@ -654,8 +693,6 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["route_type"] = route_type
             __props__.__dict__["tencent_address"] = tencent_address
             __props__.__dict__["vlan"] = vlan
-            if vpc_id is None and not opts.urn:
-                raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["state"] = None
@@ -675,6 +712,7 @@ class Instance(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             customer_address: Optional[pulumi.Input[str]] = None,
             dc_id: Optional[pulumi.Input[str]] = None,
+            dc_owner_account: Optional[pulumi.Input[str]] = None,
             dcg_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             network_type: Optional[pulumi.Input[str]] = None,
@@ -697,6 +735,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
         :param pulumi.Input[str] dc_id: ID of the DC to be queried, application deployment offline.
+        :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
@@ -717,6 +756,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["customer_address"] = customer_address
         __props__.__dict__["dc_id"] = dc_id
+        __props__.__dict__["dc_owner_account"] = dc_owner_account
         __props__.__dict__["dcg_id"] = dcg_id
         __props__.__dict__["name"] = name
         __props__.__dict__["network_type"] = network_type
@@ -775,6 +815,14 @@ class Instance(pulumi.CustomResource):
         ID of the DC to be queried, application deployment offline.
         """
         return pulumi.get(self, "dc_id")
+
+    @property
+    @pulumi.getter(name="dcOwnerAccount")
+    def dc_owner_account(self) -> pulumi.Output[str]:
+        """
+        Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+        """
+        return pulumi.get(self, "dc_owner_account")
 
     @property
     @pulumi.getter(name="dcgId")
@@ -842,7 +890,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> pulumi.Output[str]:
+    def vpc_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the VPC or BMVPC.
         """

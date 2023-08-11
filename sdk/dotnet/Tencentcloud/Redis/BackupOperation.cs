@@ -14,19 +14,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis backup_operation
     /// 
     /// ## Example Usage
+    /// ### Manually back up the Redis instance, and the backup data is kept for 7 days
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var foo = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync());
     ///         var backupOperation = new Tencentcloud.Redis.BackupOperation("backupOperation", new Tencentcloud.Redis.BackupOperationArgs
     ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             Remark = "",
+    ///             InstanceId = foo.Apply(foo =&gt; foo.InstanceLists?[0]?.MysqlId),
+    ///             Remark = "manually back",
     ///             StorageDays = 7,
     ///         });
     ///     }

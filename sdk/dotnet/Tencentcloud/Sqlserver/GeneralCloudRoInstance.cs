@@ -18,35 +18,93 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var generalCloudRoInstance = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("generalCloudRoInstance", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             Collation = "Chinese_PRC_CI_AS",
-    ///             Cpu = 2,
-    ///             InstanceChargeType = "POSTPAID",
-    ///             InstanceId = "mssql-gyg9xycl",
-    ///             MachineType = "CLOUD_BSSD",
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("exampleGeneralCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+    ///         {
+    ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_HSSD",
+    ///             InstanceChargeType = "POSTPAID",
+    ///             ProjectId = 0,
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///             DbVersion = "2008R2",
+    ///             SecurityGroupLists = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Weeklies = 
+    ///             {
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///                 5,
+    ///                 6,
+    ///                 7,
+    ///             },
+    ///             StartTime = "00:00",
+    ///             Span = 6,
+    ///             ResourceTags = 
+    ///             {
+    ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+    ///                 {
+    ///                     TagKey = "test",
+    ///                     TagValue = "test",
+    ///                 },
+    ///             },
+    ///             Collation = "Chinese_PRC_CI_AS",
+    ///             TimeZone = "China Standard Time",
+    ///         });
+    ///         var exampleGeneralCloudRoInstance = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("exampleGeneralCloudRoInstance", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
+    ///         {
+    ///             InstanceId = exampleGeneralCloudInstance.Id,
+    ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             ReadOnlyGroupType = 1,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_BSSD",
+    ///             InstanceChargeType = "POSTPAID",
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///             SecurityGroupLists = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Collation = "Chinese_PRC_CI_AS",
+    ///             TimeZone = "China Standard Time",
     ///             ResourceTags = 
     ///             {
     ///                 { "test-key1", "test-value1" },
     ///                 { "test-key2", "test-value2" },
     ///             },
-    ///             SecurityGroupLists = 
-    ///             {
-    ///                 "sg-7kpsbxdb",
-    ///             },
-    ///             Storage = 100,
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             TimeZone = "China Standard Time",
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             Zone = "ap-guangzhou-6",
     ///         });
     ///     }
     /// 
@@ -62,33 +120,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// {
     ///     public MyStack()
     ///     {
-    ///         var generalCloudRoInstance = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("generalCloudRoInstance", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
+    ///         var example = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("example", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
     ///         {
-    ///             Collation = "Chinese_PRC_CI_AS",
-    ///             Cpu = 2,
-    ///             InstanceChargeType = "POSTPAID",
-    ///             InstanceId = "mssql-gyg9xycl",
-    ///             MachineType = "CLOUD_BSSD",
-    ///             Memory = 4,
+    ///             InstanceId = tencentcloud_sqlserver_general_cloud_instance.Example.Id,
+    ///             Zone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[4].Name,
+    ///             ReadOnlyGroupType = 2,
+    ///             ReadOnlyGroupName = "test-ro-group",
     ///             ReadOnlyGroupIsOfflineDelay = 1,
     ///             ReadOnlyGroupMaxDelayTime = 10,
     ///             ReadOnlyGroupMinInGroup = 1,
-    ///             ReadOnlyGroupName = "test-ro-group",
-    ///             ReadOnlyGroupType = 2,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_BSSD",
+    ///             InstanceChargeType = "POSTPAID",
+    ///             SubnetId = tencentcloud_subnet.Subnet.Id,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             SecurityGroupLists = 
+    ///             {
+    ///                 tencentcloud_security_group.Security_group.Id,
+    ///             },
+    ///             Collation = "Chinese_PRC_CI_AS",
+    ///             TimeZone = "China Standard Time",
     ///             ResourceTags = 
     ///             {
     ///                 { "test-key1", "test-value1" },
     ///                 { "test-key2", "test-value2" },
     ///             },
-    ///             SecurityGroupLists = 
-    ///             {
-    ///                 "sg-7kpsbxdb",
-    ///             },
-    ///             Storage = 100,
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             TimeZone = "China Standard Time",
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             Zone = "ap-guangzhou-6",
     ///         });
     ///     }
     /// 
@@ -104,30 +162,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// {
     ///     public MyStack()
     ///     {
-    ///         var generalCloudRoInstance = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("generalCloudRoInstance", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
+    ///         var example = new Tencentcloud.Sqlserver.GeneralCloudRoInstance("example", new Tencentcloud.Sqlserver.GeneralCloudRoInstanceArgs
     ///         {
-    ///             Collation = "Chinese_PRC_CI_AS",
-    ///             Cpu = 2,
-    ///             InstanceChargeType = "POSTPAID",
-    ///             InstanceId = "mssql-gyg9xycl",
-    ///             MachineType = "CLOUD_BSSD",
-    ///             Memory = 4,
-    ///             ReadOnlyGroupId = "mssqlrg-clboghrj",
+    ///             InstanceId = tencentcloud_sqlserver_general_cloud_instance.Example.Id,
+    ///             Zone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[4].Name,
     ///             ReadOnlyGroupType = 3,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_BSSD",
+    ///             ReadOnlyGroupId = "mssqlrg-clboghrj",
+    ///             InstanceChargeType = "POSTPAID",
+    ///             SubnetId = tencentcloud_subnet.Subnet.Id,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             SecurityGroupLists = 
+    ///             {
+    ///                 tencentcloud_security_group.Security_group.Id,
+    ///             },
+    ///             Collation = "Chinese_PRC_CI_AS",
+    ///             TimeZone = "China Standard Time",
     ///             ResourceTags = 
     ///             {
     ///                 { "test-key1", "test-value1" },
     ///                 { "test-key2", "test-value2" },
     ///             },
-    ///             SecurityGroupLists = 
-    ///             {
-    ///                 "sg-7kpsbxdb",
-    ///             },
-    ///             Storage = 100,
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             TimeZone = "China Standard Time",
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             Zone = "ap-guangzhou-6",
     ///         });
     ///     }
     /// 

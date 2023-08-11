@@ -316,7 +316,16 @@ class SnapshotPolicy(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy = tencentcloud.vpc.SnapshotPolicy("snapshotPolicy",
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
             backup_policies=[
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="monday",
@@ -324,19 +333,13 @@ class SnapshotPolicy(pulumi.CustomResource):
                 ),
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="tuesday",
-                    backup_time="02:03:03",
+                    backup_time="01:00:00",
                 ),
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="wednesday",
-                    backup_time="04:13:23",
+                    backup_time="02:00:00",
                 ),
-            ],
-            backup_type="time",
-            cos_bucket="cos-lock-1308919341",
-            cos_region="ap-guangzhou",
-            create_new_cos=False,
-            keep_time=2,
-            snapshot_policy_name="terraform-test")
+            ])
         ```
 
         ## Import
@@ -372,7 +375,16 @@ class SnapshotPolicy(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy = tencentcloud.vpc.SnapshotPolicy("snapshotPolicy",
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
             backup_policies=[
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="monday",
@@ -380,19 +392,13 @@ class SnapshotPolicy(pulumi.CustomResource):
                 ),
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="tuesday",
-                    backup_time="02:03:03",
+                    backup_time="01:00:00",
                 ),
                 tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
                     backup_day="wednesday",
-                    backup_time="04:13:23",
+                    backup_time="02:00:00",
                 ),
-            ],
-            backup_type="time",
-            cos_bucket="cos-lock-1308919341",
-            cos_region="ap-guangzhou",
-            create_new_cos=False,
-            keep_time=2,
-            snapshot_policy_name="terraform-test")
+            ])
         ```
 
         ## Import

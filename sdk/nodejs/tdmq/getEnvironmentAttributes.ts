@@ -11,12 +11,26 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const environmentAttributes = pulumi.output(tencentcloud.Tdmq.getEnvironmentAttributes({
- *     clusterId: "pulsar-9n95ax58b9vn",
- *     environmentId: "keep-ns",
- * }));
+ * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+ *     environName: "tf_example",
+ *     msgTtl: 300,
+ *     clusterId: exampleInstance.id,
+ *     remark: "remark.",
+ * });
+ * const exampleEnvironmentAttributes = tencentcloud.Tdmq.getEnvironmentAttributesOutput({
+ *     environmentId: exampleNamespace.environName,
+ *     clusterId: exampleInstance.id,
+ * });
  * ```
  */
 export function getEnvironmentAttributes(args: GetEnvironmentAttributesArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentAttributesResult> {

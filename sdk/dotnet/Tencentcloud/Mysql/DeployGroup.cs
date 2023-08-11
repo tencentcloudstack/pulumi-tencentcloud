@@ -23,10 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// {
     ///     public MyStack()
     ///     {
-    ///         var deployGroup = new Tencentcloud.Mysql.DeployGroup("deployGroup", new Tencentcloud.Mysql.DeployGroupArgs
+    ///         var example = new Tencentcloud.Mysql.DeployGroup("example", new Tencentcloud.Mysql.DeployGroupArgs
     ///         {
-    ///             DeployGroupName = "terrform-deploy",
-    ///             Description = "deploy test",
+    ///             DeployGroupName = "tf-example",
+    ///             Description = "desc.",
     ///             DevClasses = 
     ///             {
     ///                 "TS85",

@@ -135,12 +135,29 @@ class MaintenanceWindow(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        maintenance_window = tencentcloud.redis.MaintenanceWindow("maintenanceWindow",
-            end_time="19:00",
-            instance_id="crs-c1nl9rpv",
-            start_time="17:00")
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[0].zone,
+            cidr_block="10.0.1.0/24")
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        foo_maintenance_window = tencentcloud.redis.MaintenanceWindow("fooMaintenanceWindow",
+            instance_id=foo_instance.id,
+            start_time="17:00",
+            end_time="19:00")
         ```
 
         ## Import
@@ -148,7 +165,7 @@ class MaintenanceWindow(pulumi.CustomResource):
         redis maintenance_window can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow maintenance_window maintenance_window_id
+         $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -170,12 +187,29 @@ class MaintenanceWindow(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        maintenance_window = tencentcloud.redis.MaintenanceWindow("maintenanceWindow",
-            end_time="19:00",
-            instance_id="crs-c1nl9rpv",
-            start_time="17:00")
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[0].zone,
+            cidr_block="10.0.1.0/24")
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        foo_maintenance_window = tencentcloud.redis.MaintenanceWindow("fooMaintenanceWindow",
+            instance_id=foo_instance.id,
+            start_time="17:00",
+            end_time="19:00")
         ```
 
         ## Import
@@ -183,7 +217,7 @@ class MaintenanceWindow(pulumi.CustomResource):
         redis maintenance_window can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow maintenance_window maintenance_window_id
+         $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
         ```
 
         :param str resource_name: The name of the resource.

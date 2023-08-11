@@ -12,10 +12,39 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.cam.UserPolicyAttachment("foo", {
- *     userId: tencentcloud_cam_user.foo.id,
- *     policyId: tencentcloud_cam_policy.foo.id,
+ * const config = new pulumi.Config();
+ * const camUserBasic = config.get("camUserBasic") || "keep-cam-user";
+ * const policyBasic = new tencentcloud.cam.Policy("policyBasic", {
+ *     document: JSON.stringify({
+ *         version: "2.0",
+ *         statement: [
+ *             {
+ *                 action: ["cos:*"],
+ *                 resource: ["*"],
+ *                 effect: "allow",
+ *             },
+ *             {
+ *                 effect: "allow",
+ *                 action: [
+ *                     "monitor:*",
+ *                     "cam:ListUsersForGroup",
+ *                     "cam:ListGroups",
+ *                     "cam:GetGroup",
+ *                 ],
+ *                 resource: ["*"],
+ *             },
+ *         ],
+ *     }),
+ *     description: "tf_test",
+ * });
+ * const users = tencentcloud.Cam.getUsers({
+ *     name: camUserBasic,
+ * });
+ * const userPolicyAttachmentBasic = new tencentcloud.cam.UserPolicyAttachment("userPolicyAttachmentBasic", {
+ *     userName: users.then(users => users.userLists?[0]?.userId),
+ *     policyId: policyBasic.id,
  * });
  * ```
  *

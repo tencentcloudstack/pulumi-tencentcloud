@@ -59,9 +59,6 @@ class GetWafRuleGroupsResult:
     @property
     @pulumi.getter(name="wafRuleGroups")
     def waf_rule_groups(self) -> Sequence['outputs.GetWafRuleGroupsWafRuleGroupResult']:
-        """
-        List of WAF rule groups.
-        """
         return pulumi.get(self, "waf_rule_groups")
 
     @property
@@ -88,22 +85,7 @@ def get_waf_rule_groups(entity: Optional[str] = None,
                         zone_id: Optional[str] = None,
                         opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetWafRuleGroupsResult:
     """
-    Use this data source to query detailed information of teo wafRuleGroups
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    waf_rule_groups = tencentcloud.Teo.get_waf_rule_groups(entity="",
-        zone_id="")
-    ```
-
-
-    :param str entity: Subdomain or application name.
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['entity'] = entity
@@ -131,21 +113,6 @@ def get_waf_rule_groups_output(entity: Optional[pulumi.Input[str]] = None,
                                zone_id: Optional[pulumi.Input[str]] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetWafRuleGroupsResult]:
     """
-    Use this data source to query detailed information of teo wafRuleGroups
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    waf_rule_groups = tencentcloud.Teo.get_waf_rule_groups(entity="",
-        zone_id="")
-    ```
-
-
-    :param str entity: Subdomain or application name.
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     ...

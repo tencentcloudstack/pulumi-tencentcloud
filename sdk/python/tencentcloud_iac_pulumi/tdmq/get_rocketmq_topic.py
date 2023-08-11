@@ -110,6 +110,31 @@ def get_rocketmq_topic(cluster_id: Optional[str] = None,
     """
     Use this data source to query detailed information of tdmqRocketmq topic
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
+
+    example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
+    example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_name="tf_example",
+        remark="remark.")
+    example_rocketmq_topic = tencentcloud.Tdmq.get_rocketmq_topic_output(cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_id=example_rocketmq_namespace.namespace_name,
+        filter_name=example_tdmq / rocketmq_topic_rocketmq_topic["topicName"])
+    example_tdmq_rocketmq_topic_rocketmq_topic = tencentcloud.tdmq.RocketmqTopic("exampleTdmq/rocketmqTopicRocketmqTopic",
+        topic_name="tf_example",
+        namespace_name=example_rocketmq_namespace.namespace_name,
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        type="Normal",
+        remark="remark.")
+    ```
+
 
     :param str cluster_id: Cluster ID.
     :param str filter_name: Search by topic name. Fuzzy query is supported.
@@ -150,6 +175,31 @@ def get_rocketmq_topic_output(cluster_id: Optional[pulumi.Input[str]] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetRocketmqTopicResult]:
     """
     Use this data source to query detailed information of tdmqRocketmq topic
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
+
+    example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
+    example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_name="tf_example",
+        remark="remark.")
+    example_rocketmq_topic = tencentcloud.Tdmq.get_rocketmq_topic_output(cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_id=example_rocketmq_namespace.namespace_name,
+        filter_name=example_tdmq / rocketmq_topic_rocketmq_topic["topicName"])
+    example_tdmq_rocketmq_topic_rocketmq_topic = tencentcloud.tdmq.RocketmqTopic("exampleTdmq/rocketmqTopicRocketmqTopic",
+        topic_name="tf_example",
+        namespace_name=example_rocketmq_namespace.namespace_name,
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        type="Normal",
+        remark="remark.")
+    ```
 
 
     :param str cluster_id: Cluster ID.

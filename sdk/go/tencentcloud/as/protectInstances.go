@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a as protectInstances
 //
 // ## Example Usage
+// ### Or close protect
 //
 // ```go
 // package main
@@ -25,12 +26,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewProtectInstances(ctx, "protectInstances", &As.ProtectInstancesArgs{
-// 			AutoScalingGroupId: pulumi.Any(tencentcloud_as_scaling_group.Scaling_group.Id),
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String("ins-xxxxx"),
-// 			},
-// 			ProtectedFromScaleIn: pulumi.Bool(true),
+// 		_, err := As.NewProtectInstances(ctx, "protect", &As.ProtectInstancesArgs{
+// 			AutoScalingGroupId:   pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+// 			InstanceIds:          pulumi.Any(tencentcloud_as_attachment.Attachment.Instance_ids),
+// 			ProtectedFromScaleIn: pulumi.Bool(false),
 // 		})
 // 		if err != nil {
 // 			return err

@@ -11,17 +11,25 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const tmpInstance = new tencentcloud.Monitor.TmpInstance("tmpInstance", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.monitor.TmpInstance("foo", {
+ *     instanceName: "tf-tmp-instance",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
  *     dataRetentionTime: 30,
- *     instanceName: "demo",
- *     subnetId: "subnet-rdkj0agk",
+ *     zone: availabilityZone,
  *     tags: {
  *         createdBy: "terraform",
  *     },
- *     vpcId: "vpc-2hfyray3",
- *     zone: "ap-guangzhou-3",
  * });
  * ```
  *

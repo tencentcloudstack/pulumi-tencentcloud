@@ -12,83 +12,124 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const generalCloudRoInstance = new tencentcloud.Sqlserver.GeneralCloudRoInstance("general_cloud_ro_instance", {
- *     collation: "Chinese_PRC_CI_AS",
- *     cpu: 2,
- *     instanceChargeType: "POSTPAID",
- *     instanceId: "mssql-gyg9xycl",
- *     machineType: "CLOUD_BSSD",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleGeneralCloudInstance", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
  *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_HSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     projectId: 0,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "2008R2",
+ *     securityGroupLists: [securityGroup.id],
+ *     weeklies: [
+ *         1,
+ *         2,
+ *         3,
+ *         5,
+ *         6,
+ *         7,
+ *     ],
+ *     startTime: "00:00",
+ *     span: 6,
+ *     resourceTags: [{
+ *         tagKey: "test",
+ *         tagValue: "test",
+ *     }],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
+ * });
+ * const exampleGeneralCloudRoInstance = new tencentcloud.sqlserver.GeneralCloudRoInstance("exampleGeneralCloudRoInstance", {
+ *     instanceId: exampleGeneralCloudInstance.id,
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
  *     readOnlyGroupType: 1,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_BSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     securityGroupLists: [securityGroup.id],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
  *     resourceTags: {
  *         "test-key1": "test-value1",
  *         "test-key2": "test-value2",
  *     },
- *     securityGroupLists: ["sg-7kpsbxdb"],
- *     storage: 100,
- *     subnetId: "subnet-dwj7ipnc",
- *     timeZone: "China Standard Time",
- *     vpcId: "vpc-4owdpnwr",
- *     zone: "ap-guangzhou-6",
  * });
  * ```
  * ### If readOnlyGroupType value is 2 - Ship after creating a read-only group, all instances are under this read-only group:
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const generalCloudRoInstance = new tencentcloud.Sqlserver.GeneralCloudRoInstance("general_cloud_ro_instance", {
- *     collation: "Chinese_PRC_CI_AS",
- *     cpu: 2,
- *     instanceChargeType: "POSTPAID",
- *     instanceId: "mssql-gyg9xycl",
- *     machineType: "CLOUD_BSSD",
- *     memory: 4,
+ * const example = new tencentcloud.sqlserver.GeneralCloudRoInstance("example", {
+ *     instanceId: tencentcloud_sqlserver_general_cloud_instance.example.id,
+ *     zone: data.tencentcloud_availability_zones_by_product.zones.zones[4].name,
+ *     readOnlyGroupType: 2,
+ *     readOnlyGroupName: "test-ro-group",
  *     readOnlyGroupIsOfflineDelay: 1,
  *     readOnlyGroupMaxDelayTime: 10,
  *     readOnlyGroupMinInGroup: 1,
- *     readOnlyGroupName: "test-ro-group",
- *     readOnlyGroupType: 2,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_BSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     subnetId: tencentcloud_subnet.subnet.id,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     securityGroupLists: [tencentcloud_security_group.security_group.id],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
  *     resourceTags: {
  *         "test-key1": "test-value1",
  *         "test-key2": "test-value2",
  *     },
- *     securityGroupLists: ["sg-7kpsbxdb"],
- *     storage: 100,
- *     subnetId: "subnet-dwj7ipnc",
- *     timeZone: "China Standard Time",
- *     vpcId: "vpc-4owdpnwr",
- *     zone: "ap-guangzhou-6",
  * });
  * ```
  * ### If readOnlyGroupType value is 3 - All instances shipped are in the existing Some read-only groups below:
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const generalCloudRoInstance = new tencentcloud.Sqlserver.GeneralCloudRoInstance("general_cloud_ro_instance", {
- *     collation: "Chinese_PRC_CI_AS",
- *     cpu: 2,
- *     instanceChargeType: "POSTPAID",
- *     instanceId: "mssql-gyg9xycl",
- *     machineType: "CLOUD_BSSD",
- *     memory: 4,
- *     readOnlyGroupId: "mssqlrg-clboghrj",
+ * const example = new tencentcloud.sqlserver.GeneralCloudRoInstance("example", {
+ *     instanceId: tencentcloud_sqlserver_general_cloud_instance.example.id,
+ *     zone: data.tencentcloud_availability_zones_by_product.zones.zones[4].name,
  *     readOnlyGroupType: 3,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_BSSD",
+ *     readOnlyGroupId: "mssqlrg-clboghrj",
+ *     instanceChargeType: "POSTPAID",
+ *     subnetId: tencentcloud_subnet.subnet.id,
+ *     vpcId: tencentcloud_vpc.vpc.id,
+ *     securityGroupLists: [tencentcloud_security_group.security_group.id],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
  *     resourceTags: {
  *         "test-key1": "test-value1",
  *         "test-key2": "test-value2",
  *     },
- *     securityGroupLists: ["sg-7kpsbxdb"],
- *     storage: 100,
- *     subnetId: "subnet-dwj7ipnc",
- *     timeZone: "China Standard Time",
- *     vpcId: "vpc-4owdpnwr",
- *     zone: "ap-guangzhou-6",
  * });
  * ```
  */

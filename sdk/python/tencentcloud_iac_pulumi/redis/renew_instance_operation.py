@@ -134,16 +134,6 @@ class RenewInstanceOperation(pulumi.CustomResource):
 
         ## Example Usage
 
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        renew_instance_operation = tencentcloud.redis.RenewInstanceOperation("renewInstanceOperation",
-            instance_id="crs-c1nl9rpv",
-            modify_pay_mode="prepaid",
-            period=1)
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] instance_id: The ID of instance.
@@ -160,16 +150,6 @@ class RenewInstanceOperation(pulumi.CustomResource):
         Provides a resource to create a redis renew_instance_operation
 
         ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        renew_instance_operation = tencentcloud.redis.RenewInstanceOperation("renewInstanceOperation",
-            instance_id="crs-c1nl9rpv",
-            modify_pay_mode="prepaid",
-            period=1)
-        ```
 
         :param str resource_name: The name of the resource.
         :param RenewInstanceOperationArgs args: The arguments to use to populate this resource's properties.

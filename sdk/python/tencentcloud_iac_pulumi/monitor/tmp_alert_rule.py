@@ -336,21 +336,47 @@ class TmpAlertRule(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("tmpAlertRule",
-            annotations=[tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
-                key="hello2",
-                value="world2",
-            )],
-            duration="4m",
-            expr="up{service=\"rig-prometheus-agent\"}>0",
-            instance_id="prom-c89b3b3u",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", instance_id=foo_tmp_instance.id)
+        foo_tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule",
+            duration="2m",
+            expr="avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
+            instance_id=foo_tmp_instance.id,
+            receivers=["notice-f2svbu3w"],
+            rule_name="MySQL 连接数过多",
+            rule_state=2,
+            type="MySQL/MySQL 连接数过多",
+            annotations=[
+                tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
+                    key="description",
+                    value="MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
+                ),
+                tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
+                    key="summary",
+                    value="MySQL 连接数过多(>80%)",
+                ),
+            ],
             labels=[tencentcloud.monitor.TmpAlertRuleLabelArgs(
-                key="hello1",
-                value="world1",
-            )],
-            receivers=["notice-l9ziyxw6"],
-            rule_name="test123",
-            rule_state=2)
+                key="severity",
+                value="warning",
+            )])
         ```
 
         ## Import
@@ -388,21 +414,47 @@ class TmpAlertRule(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("tmpAlertRule",
-            annotations=[tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
-                key="hello2",
-                value="world2",
-            )],
-            duration="4m",
-            expr="up{service=\"rig-prometheus-agent\"}>0",
-            instance_id="prom-c89b3b3u",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", instance_id=foo_tmp_instance.id)
+        foo_tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule",
+            duration="2m",
+            expr="avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
+            instance_id=foo_tmp_instance.id,
+            receivers=["notice-f2svbu3w"],
+            rule_name="MySQL 连接数过多",
+            rule_state=2,
+            type="MySQL/MySQL 连接数过多",
+            annotations=[
+                tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
+                    key="description",
+                    value="MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
+                ),
+                tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
+                    key="summary",
+                    value="MySQL 连接数过多(>80%)",
+                ),
+            ],
             labels=[tencentcloud.monitor.TmpAlertRuleLabelArgs(
-                key="hello1",
-                value="world1",
-            )],
-            receivers=["notice-l9ziyxw6"],
-            rule_name="test123",
-            rule_state=2)
+                key="severity",
+                value="warning",
+            )])
         ```
 
         ## Import

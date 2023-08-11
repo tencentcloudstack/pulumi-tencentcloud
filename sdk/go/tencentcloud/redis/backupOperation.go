@@ -14,20 +14,27 @@ import (
 // Provides a resource to create a redis backupOperation
 //
 // ## Example Usage
+// ### Manually back up the Redis instance, and the backup data is kept for 7 days
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewBackupOperation(ctx, "backupOperation", &Redis.BackupOperationArgs{
-// 			InstanceId:  pulumi.String("crs-c1nl9rpv"),
-// 			Remark:      pulumi.String(""),
+// 		foo, err := Mysql.GetInstance(ctx, nil, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewBackupOperation(ctx, "backupOperation", &Redis.BackupOperationArgs{
+// 			InstanceId:  pulumi.String(foo.InstanceLists[0].MysqlId),
+// 			Remark:      pulumi.String("manually back"),
 // 			StorageDays: pulumi.Int(7),
 // 		})
 // 		if err != nil {

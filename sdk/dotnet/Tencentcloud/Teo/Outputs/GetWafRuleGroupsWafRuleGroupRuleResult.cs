@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetWafRuleGroupsWafRuleGroupRuleResult
     {
-        /// <summary>
-        /// Description of the rule.
-        /// </summary>
         public readonly string Description;
-        /// <summary>
-        /// WAF managed rule id.
-        /// </summary>
         public readonly int RuleId;
-        /// <summary>
-        /// System default level of the rule.
-        /// </summary>
         public readonly string RuleLevelDesc;
-        /// <summary>
-        /// Tags of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly ImmutableArray<string> RuleTags;
 
         [OutputConstructor]

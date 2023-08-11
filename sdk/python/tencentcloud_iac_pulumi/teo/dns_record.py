@@ -24,7 +24,8 @@ class DnsRecordArgs:
         """
         The set of arguments for constructing a DnsRecord resource.
         :param pulumi.Input[str] content: DNS record Content.
-        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+               and accelerated.
         :param pulumi.Input[str] type: DNS record Type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `NS`, `CAA`, `SRV`.
         :param pulumi.Input[str] zone_id: Site ID.
         :param pulumi.Input[str] name: DNS record Name.
@@ -61,7 +62,8 @@ class DnsRecordArgs:
     @pulumi.getter
     def mode(self) -> pulumi.Input[str]:
         """
-        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        and accelerated.
         """
         return pulumi.get(self, "mode")
 
@@ -167,7 +169,8 @@ class _DnsRecordState:
         :param pulumi.Input[str] dns_record_id: DNS record ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] domain_statuses: Whether this domain enable load balancing, security, or l4 proxy capability. Valid values: `lb`, `security`, `l4`.
         :param pulumi.Input[bool] locked: Whether the DNS record is locked.
-        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+               and accelerated.
         :param pulumi.Input[str] modified_on: Last modification date.
         :param pulumi.Input[str] name: DNS record Name.
         :param pulumi.Input[int] priority: Priority of the record. Valid value range: 1-50, the smaller value, the higher priority.
@@ -281,7 +284,8 @@ class _DnsRecordState:
     @pulumi.getter
     def mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        and accelerated.
         """
         return pulumi.get(self, "mode")
 
@@ -389,33 +393,12 @@ class DnsRecord(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dns_record = tencentcloud.teo.DnsRecord("dnsRecord",
-            content="150.109.8.2",
-            mode="proxied",
-            priority=1,
-            ttl=1,
-            type="A",
-            zone_id="zone-297z8rf93cfw")
-        ```
-
-        ## Import
-
-        teo dns_record can be imported using the zone_id#dns_record_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord dns_record zone-297z8rf93cfw#record-297z9ei9b9oc
-        ```
-
+        Create a DnsRecord resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] content: DNS record Content.
-        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+               and accelerated.
         :param pulumi.Input[str] name: DNS record Name.
         :param pulumi.Input[int] priority: Priority of the record. Valid value range: 1-50, the smaller value, the higher priority.
         :param pulumi.Input[str] status: Resolution status. Valid values: `active`, `pending`.
@@ -430,29 +413,7 @@ class DnsRecord(pulumi.CustomResource):
                  args: DnsRecordArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dns_record = tencentcloud.teo.DnsRecord("dnsRecord",
-            content="150.109.8.2",
-            mode="proxied",
-            priority=1,
-            ttl=1,
-            type="A",
-            zone_id="zone-297z8rf93cfw")
-        ```
-
-        ## Import
-
-        teo dns_record can be imported using the zone_id#dns_record_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord dns_record zone-297z8rf93cfw#record-297z9ei9b9oc
-        ```
-
+        Create a DnsRecord resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param DnsRecordArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -549,7 +510,8 @@ class DnsRecord(pulumi.CustomResource):
         :param pulumi.Input[str] dns_record_id: DNS record ID.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] domain_statuses: Whether this domain enable load balancing, security, or l4 proxy capability. Valid values: `lb`, `security`, `l4`.
         :param pulumi.Input[bool] locked: Whether the DNS record is locked.
-        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        :param pulumi.Input[str] mode: Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+               and accelerated.
         :param pulumi.Input[str] modified_on: Last modification date.
         :param pulumi.Input[str] name: DNS record Name.
         :param pulumi.Input[int] priority: Priority of the record. Valid value range: 1-50, the smaller value, the higher priority.
@@ -630,7 +592,8 @@ class DnsRecord(pulumi.CustomResource):
     @pulumi.getter
     def mode(self) -> pulumi.Output[str]:
         """
-        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        and accelerated.
         """
         return pulumi.get(self, "mode")
 

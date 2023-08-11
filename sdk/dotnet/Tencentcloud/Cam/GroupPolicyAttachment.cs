@@ -17,16 +17,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.GroupPolicyAttachment("foo", new Tencentcloud.Cam.GroupPolicyAttachmentArgs
+    ///         var config = new Config();
+    ///         var camPolicyBasic = config.Get("camPolicyBasic") ?? "keep-cam-policy";
+    ///         var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
+    ///         var groups = Output.Create(Tencentcloud.Cam.GetGroups.InvokeAsync(new Tencentcloud.Cam.GetGroupsArgs
     ///         {
-    ///             GroupId = tencentcloud_cam_group.Foo.Id,
-    ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
+    ///             Name = camGroupBasic,
+    ///         }));
+    ///         var policy = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
+    ///         {
+    ///             Name = camPolicyBasic,
+    ///         }));
+    ///         var groupPolicyAttachmentBasic = new Tencentcloud.Cam.GroupPolicyAttachment("groupPolicyAttachmentBasic", new Tencentcloud.Cam.GroupPolicyAttachmentArgs
+    ///         {
+    ///             GroupId = groups.Apply(groups =&gt; groups.GroupLists?[0]?.GroupId),
+    ///             PolicyId = policy.Apply(policy =&gt; policy.PolicyLists?[0]?.PolicyId),
     ///         });
     ///     }
     /// 

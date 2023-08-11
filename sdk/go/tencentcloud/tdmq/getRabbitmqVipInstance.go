@@ -10,9 +10,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func GetRabbitmqVipInstance(ctx *pulumi.Context, args *GetRabbitmqVipInstanceArgs, opts ...pulumi.InvokeOption) (*GetRabbitmqVipInstanceResult, error) {
+func LookupRabbitmqVipInstance(ctx *pulumi.Context, args *LookupRabbitmqVipInstanceArgs, opts ...pulumi.InvokeOption) (*LookupRabbitmqVipInstanceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
-	var rv GetRabbitmqVipInstanceResult
+	var rv LookupRabbitmqVipInstanceResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args, &rv, opts...)
 	if err != nil {
 		return nil, err
@@ -21,13 +21,13 @@ func GetRabbitmqVipInstance(ctx *pulumi.Context, args *GetRabbitmqVipInstanceArg
 }
 
 // A collection of arguments for invoking getRabbitmqVipInstance.
-type GetRabbitmqVipInstanceArgs struct {
+type LookupRabbitmqVipInstanceArgs struct {
 	Filters          []GetRabbitmqVipInstanceFilter `pulumi:"filters"`
 	ResultOutputFile *string                        `pulumi:"resultOutputFile"`
 }
 
 // A collection of values returned by getRabbitmqVipInstance.
-type GetRabbitmqVipInstanceResult struct {
+type LookupRabbitmqVipInstanceResult struct {
 	Filters []GetRabbitmqVipInstanceFilter `pulumi:"filters"`
 	// The provider-assigned unique ID for this managed resource.
 	Id               string                           `pulumi:"id"`
@@ -35,61 +35,61 @@ type GetRabbitmqVipInstanceResult struct {
 	ResultOutputFile *string                          `pulumi:"resultOutputFile"`
 }
 
-func GetRabbitmqVipInstanceOutput(ctx *pulumi.Context, args GetRabbitmqVipInstanceOutputArgs, opts ...pulumi.InvokeOption) GetRabbitmqVipInstanceResultOutput {
+func LookupRabbitmqVipInstanceOutput(ctx *pulumi.Context, args LookupRabbitmqVipInstanceOutputArgs, opts ...pulumi.InvokeOption) LookupRabbitmqVipInstanceResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetRabbitmqVipInstanceResult, error) {
-			args := v.(GetRabbitmqVipInstanceArgs)
-			r, err := GetRabbitmqVipInstance(ctx, &args, opts...)
-			var s GetRabbitmqVipInstanceResult
+		ApplyT(func(v interface{}) (LookupRabbitmqVipInstanceResult, error) {
+			args := v.(LookupRabbitmqVipInstanceArgs)
+			r, err := LookupRabbitmqVipInstance(ctx, &args, opts...)
+			var s LookupRabbitmqVipInstanceResult
 			if r != nil {
 				s = *r
 			}
 			return s, err
-		}).(GetRabbitmqVipInstanceResultOutput)
+		}).(LookupRabbitmqVipInstanceResultOutput)
 }
 
 // A collection of arguments for invoking getRabbitmqVipInstance.
-type GetRabbitmqVipInstanceOutputArgs struct {
+type LookupRabbitmqVipInstanceOutputArgs struct {
 	Filters          GetRabbitmqVipInstanceFilterArrayInput `pulumi:"filters"`
 	ResultOutputFile pulumi.StringPtrInput                  `pulumi:"resultOutputFile"`
 }
 
-func (GetRabbitmqVipInstanceOutputArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetRabbitmqVipInstanceArgs)(nil)).Elem()
+func (LookupRabbitmqVipInstanceOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupRabbitmqVipInstanceArgs)(nil)).Elem()
 }
 
 // A collection of values returned by getRabbitmqVipInstance.
-type GetRabbitmqVipInstanceResultOutput struct{ *pulumi.OutputState }
+type LookupRabbitmqVipInstanceResultOutput struct{ *pulumi.OutputState }
 
-func (GetRabbitmqVipInstanceResultOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetRabbitmqVipInstanceResult)(nil)).Elem()
+func (LookupRabbitmqVipInstanceResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupRabbitmqVipInstanceResult)(nil)).Elem()
 }
 
-func (o GetRabbitmqVipInstanceResultOutput) ToGetRabbitmqVipInstanceResultOutput() GetRabbitmqVipInstanceResultOutput {
+func (o LookupRabbitmqVipInstanceResultOutput) ToLookupRabbitmqVipInstanceResultOutput() LookupRabbitmqVipInstanceResultOutput {
 	return o
 }
 
-func (o GetRabbitmqVipInstanceResultOutput) ToGetRabbitmqVipInstanceResultOutputWithContext(ctx context.Context) GetRabbitmqVipInstanceResultOutput {
+func (o LookupRabbitmqVipInstanceResultOutput) ToLookupRabbitmqVipInstanceResultOutputWithContext(ctx context.Context) LookupRabbitmqVipInstanceResultOutput {
 	return o
 }
 
-func (o GetRabbitmqVipInstanceResultOutput) Filters() GetRabbitmqVipInstanceFilterArrayOutput {
-	return o.ApplyT(func(v GetRabbitmqVipInstanceResult) []GetRabbitmqVipInstanceFilter { return v.Filters }).(GetRabbitmqVipInstanceFilterArrayOutput)
+func (o LookupRabbitmqVipInstanceResultOutput) Filters() GetRabbitmqVipInstanceFilterArrayOutput {
+	return o.ApplyT(func(v LookupRabbitmqVipInstanceResult) []GetRabbitmqVipInstanceFilter { return v.Filters }).(GetRabbitmqVipInstanceFilterArrayOutput)
 }
 
 // The provider-assigned unique ID for this managed resource.
-func (o GetRabbitmqVipInstanceResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v GetRabbitmqVipInstanceResult) string { return v.Id }).(pulumi.StringOutput)
+func (o LookupRabbitmqVipInstanceResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupRabbitmqVipInstanceResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o GetRabbitmqVipInstanceResultOutput) Instances() GetRabbitmqVipInstanceInstanceArrayOutput {
-	return o.ApplyT(func(v GetRabbitmqVipInstanceResult) []GetRabbitmqVipInstanceInstance { return v.Instances }).(GetRabbitmqVipInstanceInstanceArrayOutput)
+func (o LookupRabbitmqVipInstanceResultOutput) Instances() GetRabbitmqVipInstanceInstanceArrayOutput {
+	return o.ApplyT(func(v LookupRabbitmqVipInstanceResult) []GetRabbitmqVipInstanceInstance { return v.Instances }).(GetRabbitmqVipInstanceInstanceArrayOutput)
 }
 
-func (o GetRabbitmqVipInstanceResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetRabbitmqVipInstanceResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+func (o LookupRabbitmqVipInstanceResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupRabbitmqVipInstanceResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
 func init() {
-	pulumi.RegisterOutputType(GetRabbitmqVipInstanceResultOutput{})
+	pulumi.RegisterOutputType(LookupRabbitmqVipInstanceResultOutput{})
 }

@@ -101,6 +101,10 @@ export class Proxy extends pulumi.CustomResource {
      */
     public readonly proxyZones!: pulumi.Output<outputs.Cynosdb.ProxyProxyZone[]>;
     /**
+     * Read only instance list.
+     */
+    public /*out*/ readonly roInstances!: pulumi.Output<outputs.Cynosdb.ProxyRoInstance[]>;
+    /**
      * Security Group ID Array.
      */
     public readonly securityGroupIds!: pulumi.Output<string[] | undefined>;
@@ -136,6 +140,7 @@ export class Proxy extends pulumi.CustomResource {
             resourceInputs["proxyCount"] = state ? state.proxyCount : undefined;
             resourceInputs["proxyGroupId"] = state ? state.proxyGroupId : undefined;
             resourceInputs["proxyZones"] = state ? state.proxyZones : undefined;
+            resourceInputs["roInstances"] = state ? state.roInstances : undefined;
             resourceInputs["securityGroupIds"] = state ? state.securityGroupIds : undefined;
             resourceInputs["uniqueSubnetId"] = state ? state.uniqueSubnetId : undefined;
             resourceInputs["uniqueVpcId"] = state ? state.uniqueVpcId : undefined;
@@ -163,6 +168,7 @@ export class Proxy extends pulumi.CustomResource {
             resourceInputs["uniqueSubnetId"] = args ? args.uniqueSubnetId : undefined;
             resourceInputs["uniqueVpcId"] = args ? args.uniqueVpcId : undefined;
             resourceInputs["proxyGroupId"] = undefined /*out*/;
+            resourceInputs["roInstances"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Proxy.__pulumiType, name, resourceInputs, opts);
@@ -213,6 +219,10 @@ export interface ProxyState {
      * Database node information.
      */
     proxyZones?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyProxyZone>[]>;
+    /**
+     * Read only instance list.
+     */
+    roInstances?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyRoInstance>[]>;
     /**
      * Security Group ID Array.
      */

@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a redis startupInstanceOperation
 //
 // ## Example Usage
+// ### Recover the redis instance that has been isolated
 //
 // ```go
 // package main
@@ -25,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewStartupInstanceOperation(ctx, "startupInstanceOperation", &Redis.StartupInstanceOperationArgs{
+// 		_, err := Redis.NewStartupInstanceOperation(ctx, "foo", &Redis.StartupInstanceOperationArgs{
 // 			InstanceId: pulumi.String("crs-c1nl9rpv"),
 // 		})
 // 		if err != nil {

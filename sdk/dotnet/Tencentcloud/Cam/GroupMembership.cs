@@ -17,19 +17,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.GroupMembership("foo", new Tencentcloud.Cam.GroupMembershipArgs
+    ///         var config = new Config();
+    ///         var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
+    ///         var groups = Output.Create(Tencentcloud.Cam.GetGroups.InvokeAsync(new Tencentcloud.Cam.GetGroupsArgs
     ///         {
-    ///             GroupId = tencentcloud_cam_group.Foo.Id,
+    ///             Name = camGroupBasic,
+    ///         }));
+    ///         var foo = new Tencentcloud.Cam.User("foo", new Tencentcloud.Cam.UserArgs
+    ///         {
+    ///             Remark = "tf_user_remark",
+    ///             ConsoleLogin = true,
+    ///             UseApi = true,
+    ///             NeedResetPassword = true,
+    ///             Password = "Gail@1234",
+    ///             PhoneNum = "12345678910",
+    ///             CountryCode = "86",
+    ///             Email = "1234@qq.com",
+    ///             ForceDelete = true,
+    ///         });
+    ///         var groupMembershipBasic = new Tencentcloud.Cam.GroupMembership("groupMembershipBasic", new Tencentcloud.Cam.GroupMembershipArgs
+    ///         {
+    ///             GroupId = groups.Apply(groups =&gt; groups.GroupLists?[0]?.GroupId),
     ///             UserNames = 
     ///             {
-    ///                 tencentcloud_cam_user.Foo.Name,
-    ///                 tencentcloud_cam_user.Bar.Name,
+    ///                 foo.Id,
     ///             },
     ///         });
     ///     }

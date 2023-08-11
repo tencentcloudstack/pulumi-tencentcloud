@@ -79,7 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     public sealed class GetParameterListArgs : Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
         /// </summary>
         [Input("engineVersion")]
         public string? EngineVersion { get; set; }
@@ -104,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     public sealed class GetParameterListInvokeArgs : Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
